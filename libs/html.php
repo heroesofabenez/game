@@ -1,30 +1,5 @@
 <?php
 if(MASTER_ID !== "HEROES_OF_ABENEZ") exit;
-class Menu extends Object {
-  static protected $pages = array();
-  static protected $page;
-  static function Init($pages, $page = "") {
-    if(is_array($pages)) { self::$pages = $pages; }
-    if(is_string($page)) { self::$page = $page; }
-  }
-
-  static function Build() {
-    global $page;
-    $content = "<div id=\"menu\">\n<ul>\n";
-    foreach(self::$pages as $item) {
-      $text = $item["text"];
-      $link = $item["link"];
-      $content .= "<li><a href=\"$link\">$text</a></li>\n";
-    }
-    $content .= "</ul>\n</div>\n";
-    $page->addContent($content);
-  }
-
-  static function Destroy() {
-    self::$pages = array();
-    self::$page = "";
-  }
-}
 class Element extends Object {
   protected $name;
   protected $content;
