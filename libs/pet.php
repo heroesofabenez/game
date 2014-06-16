@@ -6,8 +6,7 @@ class Pet extends Object {
   private $name;
   private $bonus_stat;
   private $bonus_value;
-  private $bonus_duration;
-  function __construct($id, $type, $name = "", $bonus_stat, $bonus_value, $bonus_duration) {
+  function __construct($id, $type, $name = "", $bonus_stat, $bonus_value) {
     $this->id = $id;
     $this->type = $type;
     $this->name = $name;
@@ -18,9 +17,12 @@ class Pet extends Object {
   
   function deployParams() {
     return array(
+      "id" => "pet" . $this->id . "bonusEffect",
       "stat" => $this->bonus_stat,
       "value" => $this->bonus_value,
-      "duration" => $this->bonus_duration
+      "duration" => $this->bonus_duration,
+      "type" => "buff",
+      "duration" => "combat"
     );
   }
 }

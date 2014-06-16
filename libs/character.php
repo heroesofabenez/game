@@ -16,6 +16,8 @@ class Character extends Object {
   private $base_constitution;
   private $intelligence;
   private $base_intelligence;
+  private $charisma;
+  private $base_charisma;
   private $description;
   private $guild = null;
   private $guild_rank = null;
@@ -34,7 +36,7 @@ class Character extends Object {
       if(!isset($stats[$value])) { $missing_stats++; }
     }
     if($missing_stats > 0) {
-      exit("Not passed all needed stats for method Character::__construct.");
+      exit("Not passed all needed elements for parameter stats for method Character::__construct.");
     }
     $missing_stats = "";
     foreach($stats as $key => $value) {
@@ -49,6 +51,7 @@ case "strength":
 case "dexterity":
 case "constitution":
 case "constitution":
+case "charisma":
   if(!is_int($value)) {
     exit("Invalid value for \$stats[\"$key\"] passed to method Character::__construct. Expected integer.");
   } else {
@@ -88,8 +91,6 @@ case "constitution":
     } else {
       $this->active_pet = $petId;
       $petBonus = $pet->deployParams();
-      $petBonus["id"] = "pet" . $petId . "bonusEffect";
-      $petBonus["type"] = "buff";
       $this->addEffect($petBonus);
     }
   }
