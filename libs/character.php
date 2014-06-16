@@ -31,14 +31,9 @@ class Character extends Object {
     if(!is_array($pets)) { exit("Invalid value for parameter pets passed to method Character::__construct. Expected array."); }
     $required_stats = array("id", "name", "gender", "occupation", "level", "experience", "strength", "dexterity", "constitution", "intelligence");
     $all_stats = $required_stats + array("specialization", "description", "guild", "guild_rank");
-    $missing_stats = 0;
     foreach($required_stats as $value) {
-      if(!isset($stats[$value])) { $missing_stats++; }
+      if(!isset($stats[$value])) exit("Not passed all needed elements for parameter stats for method Character::__construct.");
     }
-    if($missing_stats > 0) {
-      exit("Not passed all needed elements for parameter stats for method Character::__construct.");
-    }
-    $missing_stats = "";
     foreach($stats as $key => $value) {
       if(in_array($key, $all_stats)) {
 switch($key) {
@@ -70,10 +65,30 @@ case "charisma":
     $key = $value = $pet = "";
   }
   
-  function addEffect($effect = array()) { }
-  /*$id, $type, $stat, $value, $source, $duration*/
+  function addEffect($effect = array()) {
+    $neededParams = array ("id", "type", "stat", "value", "source", "duration");
+    $types = array("buff");
+    $stats = array("strength", "dexterity", "constitution", "intelligence", "charisma");
+    $sources = array("pet", "skill");
+    foreach($neededParams as $param) {
+      if(!isset($effect[$param])) exit("Not passed all needed elements for parameter effect for method Character::addEffect.");
+    }
+    if(!is_int($effect["value"])) exit("Invalid value for \$effect[\"value\"] passed to method Character::addEffect. Expected integer.");
+    if(!in_array($effect["sources"]), $sources) exit("Invalid value for \$effect[\"sources\"] passed to method Character::addEffect.");
+    if(!in_array($effect["stat"]), $stats) exit("Invalid value for \$effect[\"stat\"] passed to method Character::addEffect.");
+    if(!in_array($effect["type"]), $types) exit("Invalid value for \$effect[\"type\"] passed to method Character::addEffect.");
+    $this->effects[] = $effect;
+  }
   
-  function removeEffect($effectId) {  }
+  function removeEffect($effectId) {
+    for ($ = 0; $i <= $coun($this->effects); $i++) {
+    	if($this->effects[$i]["id"] == $effectId) {
+        unset($this->effects[$i]);
+        return true;
+      }
+    }
+    return false;
+  }
   
   function equipItem($item) {  }
   
@@ -103,6 +118,6 @@ case "charisma":
     }
   }
   
-  function recalculateStats() { }
+  function recalculateStats($in_combat = false) { }
 }
 ?>

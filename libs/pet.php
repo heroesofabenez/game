@@ -12,16 +12,15 @@ class Pet extends Object {
     $this->name = $name;
     $this->bonus_stat = $bonus_stat;
     $this->bonus_value = $bonus_value;
-    $this->bonus_duration = $bonus_duration;
   }
   
   function deployParams() {
     return array(
       "id" => "pet" . $this->id . "bonusEffect",
+      "type" => "buff",
       "stat" => $this->bonus_stat,
       "value" => $this->bonus_value,
-      "duration" => $this->bonus_duration,
-      "type" => "buff",
+      "source" => "pet",
       "duration" => "combat"
     );
   }
