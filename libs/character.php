@@ -58,7 +58,7 @@ case "charisma":
       } else { continue; }
     }
     foreach($pets as $pet) {
-      if ($pet instanceof Pet) {
+      if($pet instanceof Pet) {
         $this->pets[] = $pet;
       }
     }
@@ -67,30 +67,47 @@ case "charisma":
   
   function addEffect($effect = array()) {
     $neededParams = array ("id", "type", "stat", "value", "source", "duration");
-    $types = array("buff");
+    $types = array("buff", "debuff");
     $stats = array("strength", "dexterity", "constitution", "intelligence", "charisma");
-    $sources = array("pet", "skill");
+    $sources = array("pet", "skill", "equipment");
+    $durations = array("combat", "forever");
     foreach($neededParams as $param) {
       if(!isset($effect[$param])) exit("Not passed all needed elements for parameter effect for method Character::addEffect.");
     }
     if(!is_int($effect["value"])) exit("Invalid value for \$effect[\"value\"] passed to method Character::addEffect. Expected integer.");
     if(!in_array($effect["sources"]), $sources) exit("Invalid value for \$effect[\"sources\"] passed to method Character::addEffect.");
-    if(!in_array($effect["stat"]), $stats) exit("Invalid value for \$effect[\"stat\"] passed to method Character::addEffect.");
-    if(!in_array($effect["type"]), $types) exit("Invalid value for \$effect[\"type\"] passed to method Character::addEffect.");
+    if(!in_array($effect["stat"], $stats)) exit("Invalid value for \$effect[\"stat\"] passed to method Character::addEffect.");
+    if(!in_array($effect["type"], $types)) exit("Invalid value for \$effect[\"type\"] passed to method Character::addEffect.");
+    if(!in_array($effect["duration"], $durations) or $effect["duration"] < 0) exit("Invalid value for \$effect[\"duration\"] passed to method Character::addEffect.");
     $this->effects[] = $effect;
+    $this->recalculateStats();
   }
   
   function removeEffect($effectId) {
-    for ($ = 0; $i <= $coun($this->effects); $i++) {
+    for($ = 0; $i <= $coun($this->effects); $i++) {
     	if($this->effects[$i]["id"] == $effectId) {
         unset($this->effects[$i]);
+        $this->recalculateStats();
         return true;
       }
     }
     return false;
   }
   
-  function equipItem($item) {  }
+  function getItem($itemid) {
+    if(isset($this->equipment[$itemid])) { return $this->equipment[$itemid]; }
+    else { return false; }
+  }
+  
+  function equipItem($item) {
+    $item = $this->getItem($itemId)
+    if(!$pet) {
+      exit;
+    } else {
+      /*$itemBonus = $item->deployParams();
+      $this->addEffect($itemBonus);*/
+    }
+  }
   
   function unequipItem($itemId) {  }
   
@@ -118,6 +135,46 @@ case "charisma":
     }
   }
   
-  function recalculateStats($in_combat = false) { }
+  function recalculateStats() {
+    $strength = $this->base_strength;
+    $dexterity = $this->base_dexterity;
+    $constitution = $this->base_constitution;
+    $intellingence = $this->base_intelligence;
+    $charisma = $this->base_charisma;
+    $debuffs = array();
+    $i = 0;
+    foreach($this->effects as $effect) {
+      $stat = $effect->stat;
+      $type = $effect->type;
+      $duration = $effect->duration;
+      if(is_int($duration) and $duration < 0) {
+        unset($this->effects[$i]);
+        continue;
+      }
+switch($effect->source) {
+case "pet":
+case "skill":
+  $bonus_value = $$stat / 100 * $value;
+	break;
+case "equipment":
+  $bonus_value = $effect->value;
+  break;
+}
+      if($type == "buff") { $$stat += $bonus_value; }
+      elseif($type == "debuff") { $debuffs[$stat] += $value; }
+      $stat = $type = $duration = $bonus_value = "";
+      $i++;
+    }
+    foreach($debuffs as $stat => $value) {
+      if($value > 60) $value = 60;
+      $bonus_value = $$stat / 100 * $value;
+      $$stat -= $bonus_value;
+    }
+    $this->strength = $strength;
+    $this->dexterity = $dexterity;
+    $this->constitution = $constitution;
+    $this->intellingence = $intelligence;
+    $this->charisma = $charisma;
+  }
 }
 ?>
