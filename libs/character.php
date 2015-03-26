@@ -18,6 +18,12 @@ class Character extends Object {
   private $base_intelligence;
   private $charisma;
   private $base_charisma;
+  private $max_hitpoints;
+  private $hitpoints;
+  private $damage;
+  private $hit;
+  private $dodge;
+  private $initiative;
   private $description;
   private $guild = null;
   private $guild_rank = null;
@@ -84,7 +90,7 @@ case "charisma":
   }
   
   function removeEffect($effectId) {
-    for($ = 0; $i <= $coun($this->effects); $i++) {
+    for($ = 0; $i <= count($this->effects); $i++) {
     	if($this->effects[$i]["id"] == $effectId) {
         unset($this->effects[$i]);
         $this->recalculateStats();
@@ -99,17 +105,25 @@ case "charisma":
     else { return false; }
   }
   
-  function equipItem($item) {
+  function equipItem($itemId) {
     $item = $this->getItem($itemId)
-    if(!$pet) {
+    if(!$item) {
       exit;
     } else {
-      /*$itemBonus = $item->deployParams();
-      $this->addEffect($itemBonus);*/
+      $itemBonus = $item->deployParams();
+      $this->addEffect($itemBonus);
     }
   }
   
-  function unequipItem($itemId) {  }
+  function unequipItem($itemId) {
+  $item = $this->getItem($itemId)
+    if(!$item) {
+      exit;
+    } else {
+      $itemBonus = $item->deployParams();
+      $this->removeEffect($itemBonus->id);
+    }
+  }
   
   function getPet($petId) {
     if(isset($this->pets[$petId]) and is_a($this->pets[$petId], "Pet")) { return $this->pets[$petId]; }
@@ -122,15 +136,11 @@ case "charisma":
       exit;
     } else {
       $this->active_pet = $petId;
-      $petBonus = $pet->deployParams();
-      $this->addEffect($petBonus);
     }
   }
   
   function dismissPet() {
     if(is_int($this->active_pet)) {
-      $petBonusEffectId = "pet" . $this->active_pet . "bonusEffect";
-      $this->removeEffect($petBonusEffectId);
       $this->active_pet = null;
     }
   }
@@ -166,7 +176,7 @@ case "equipment":
       $i++;
     }
     foreach($debuffs as $stat => $value) {
-      if($value > 60) $value = 60;
+      if($value > 80) $value = 80;
       $bonus_value = $$stat / 100 * $value;
       $$stat -= $bonus_value;
     }
