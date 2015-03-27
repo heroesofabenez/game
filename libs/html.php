@@ -110,15 +110,13 @@ class Container extends Object {
 
 class Paragraph extends Element{
   function __construct($content = "") {
-    $name = "p";
-    parent::__construct($name, $content);
+    parent::__construct("p", $content);
   }
 }
 
 class RowBreak extends Element{
  function __construct() {
-    $name = "br";
-    parent::__construct($name);
+    parent::__construct("br");
   }
   
   function render() {
@@ -203,19 +201,23 @@ class Table extends Container {
   }
   
   function render() {
-    $return = "<table>\n<tr>";
+    $return = "<table>\n
+<tr>";
     foreach($this->collsNames as $name) {
       $return .= "<td>$name</td>";
     }
-    $return .= "</tr>\n";
+    $return .= "</tr>\n
+";
     foreach($this->rows as $row) {
       $return .= "<tr>";
       foreach($row as $coll) {
         $return .= "<td>$coll</td>";
       }
-      $return .= "</tr>\n";
+      $return .= "</tr>\n
+";
     }
-    $return .= "</table>\n";
+    $return .= "</table>\n
+";
     return $return;
   }
 }
@@ -403,13 +405,16 @@ class Page extends Object {
 <head>
   <title>$this->title</title>";
     foreach($this->styles as $style) {
-      $page .= "  <link rel=\"stylesheet\" type=\"text/css\" href=\""."$style"."\">\n";
+      $page .= "  <link rel=\"stylesheet\" type=\"text/css\" href=\""."$style"."\">\n
+";
     }
     foreach($this->scripts as $script) {
-      $page .= "  <script src=\"$script\"></script>\n";
+      $page .= "  <script src=\"$script\"></script>\n
+";
     }
     foreach($this->channels as $title=>$url) {
-    $page .= "  <link rel=\"alternate\" type=\"application/rss+xml\" title=\"$title\" href=\"$url\">\n";
+    $page .= "  <link rel=\"alternate\" type=\"application/rss+xml\" title=\"$title\" href=\"$url\">\n
+";
     }
     $page .= "
 </head>
