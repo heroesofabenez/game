@@ -19,7 +19,14 @@ class CombatBase extends Object {
   private $team1 = array();
   private $team2 = array();
   private $round;
-  function __construct($team1, $team2) { }
+  function __construct($team1, $team2) {
+    if(!is_a($team1, "Team")) { exit("Invalid value for parameter team1 passed to method CombatBase:__construct. Expected Team."); }
+    if(!is_a($team2, "Team")) { exit("Invalid value for parameter team2 passed to method CombatBase:__construct. Expected Team."); }
+    $this->round = 0;
+    $this->team1 = $team1;
+    $this->team2 = $team2;
+  }
+  
   function execute() { }
 }
 ?>

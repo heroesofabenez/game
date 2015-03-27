@@ -21,9 +21,13 @@ class Character extends Object {
   private $max_hitpoints;
   private $hitpoints;
   private $damage;
+  private $base_damage;
   private $hit;
+  private $base_hit;
   private $dodge;
+  private $base_dodge;
   private $initiative;
+  private $base_initiative;
   private $description;
   private $guild = null;
   private $guild_rank = null;
@@ -53,6 +57,10 @@ case "dexterity":
 case "constitution":
 case "constitution":
 case "charisma":
+case "damage":
+case "hit":
+case "dodge":
+case "initiative":
   if(!is_int($value)) {
     exit("Invalid value for \$stats[\"$key\"] passed to method Character::__construct. Expected integer.");
   } else {
@@ -151,6 +159,10 @@ case "charisma":
     $constitution = $this->base_constitution;
     $intellingence = $this->base_intelligence;
     $charisma = $this->base_charisma;
+    $damage = $this->base_damage;
+    $hit = $this->base_hit;
+    $dodge = $this->base_dodge;
+    $initiative = $this->base_initiative;
     $debuffs = array();
     $i = 0;
     foreach($this->effects as $effect) {
@@ -185,6 +197,10 @@ case "equipment":
     $this->constitution = $constitution;
     $this->intellingence = $intelligence;
     $this->charisma = $charisma;
+    $this->damage = $damage;
+    $this->hit = $hit;
+    $this->dodge = $dodge;
+    $this->initiative = $initiative;
   }
 }
 ?>
