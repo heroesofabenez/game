@@ -27,6 +27,22 @@ class CombatBase extends Object {
     $this->team2 = $team2;
   }
   
+  function start_round() {
+    $this->round++;
+    foreach($this->team1) as &$character) {
+    	foreach($character->effects as &$effect) {
+     	  if(is_int($effect->duration)) { $effect->duration--; }
+     }
+     $character->recalculateStats();
+    }
+    foreach($this->team2) as &$character) {
+    	foreach($character->effects as &$effect) {
+     	  if(is_int($effect->duration)) { $effect->duration--; }
+     }
+     $character->recalculateStats();
+    }
+  }
+  
   function execute() { }
 }
 ?>
