@@ -49,8 +49,7 @@ class Character extends Nette\Object {
 switch($key) {
 case "name":
 case "description":
-  if(!is_string($value)) { exit("Invalid value for \$stats[\"$key\"] passed to method Character::__construct. Expected string."); }
-  else ( $this->$key = $value; )
+  if(!is_string($value)) exit("Invalid value for \$stats[\"$key\"] passed to method Character::__construct. Expected string."); else $this->$key = $value;
   break;
 case "strength":
 case "dexterity":
@@ -65,7 +64,8 @@ case "initiative":
     exit("Invalid value for \$stats[\"$key\"] passed to method Character::__construct. Expected integer.");
   } else {
     $this->$key = $value;
-    $this->base_$key = $value;
+    $key = "base_$key";
+    $this->$key = $value;
   } 
   break;
 }
@@ -89,7 +89,7 @@ case "initiative":
       if(!isset($effect[$param])) exit("Not passed all needed elements for parameter effect for method Character::addEffect.");
     }
     if(!is_int($effect["value"])) exit("Invalid value for \$effect[\"value\"] passed to method Character::addEffect. Expected integer.");
-    if(!in_array($effect["sources"]), $sources) exit("Invalid value for \$effect[\"sources\"] passed to method Character::addEffect.");
+    if(!in_array($effect["sources"], $sources)) exit("Invalid value for \$effect[\"sources\"] passed to method Character::addEffect.");
     if(!in_array($effect["stat"], $stats)) exit("Invalid value for \$effect[\"stat\"] passed to method Character::addEffect.");
     if(!in_array($effect["type"], $types)) exit("Invalid value for \$effect[\"type\"] passed to method Character::addEffect.");
     if(!in_array($effect["duration"], $durations) or $effect["duration"] < 0) exit("Invalid value for \$effect[\"duration\"] passed to method Character::addEffect.");
@@ -98,7 +98,7 @@ case "initiative":
   }
   
   function removeEffect($effectId) {
-    for($ = 0; $i <= count($this->effects); $i++) {
+    for($i = 0; $i <= count($this->effects); $i++) {
     	if($this->effects[$i]["id"] == $effectId) {
         unset($this->effects[$i]);
         $this->recalculateStats();
@@ -114,7 +114,7 @@ case "initiative":
   }
   
   function equipItem($itemId) {
-    $item = $this->getItem($itemId)
+    $item = $this->getItem($itemId);
     if(!$item) {
       exit;
     } else {
@@ -124,7 +124,7 @@ case "initiative":
   }
   
   function unequipItem($itemId) {
-  $item = $this->getItem($itemId)
+  $item = $this->getItem($itemId);
     if(!$item) {
       exit;
     } else {
@@ -139,7 +139,7 @@ case "initiative":
   }
   
   function deployPet($petId) {
-    $pet = $this->getPet($petId)
+    $pet = $this->getPet($petId);
     if(!$pet) {
       exit;
     } else {
