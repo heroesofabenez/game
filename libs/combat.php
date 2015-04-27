@@ -6,7 +6,7 @@ class Team extends Nette\Object {
   private $members = array();
   function __construct($name) {
     if(!is_string($name)) { exit("Invalid value for parameter name passed to method Team::__construct. Expected string."); }
-    else ( $this->$name = $name; )
+    else { $this->$name = $name; }
   }
   
   function addMember($member) {
@@ -29,13 +29,13 @@ class CombatBase extends Nette\Object {
   
   function start_round() {
     $this->round++;
-    foreach($this->team1) as &$character) {
+    foreach($this->team1 as &$character) {
     	foreach($character->effects as &$effect) {
      	  if(is_int($effect->duration)) { $effect->duration--; }
      }
      $character->recalculateStats();
     }
-    foreach($this->team2) as &$character) {
+    foreach($this->team2 as &$character) {
     	foreach($character->effects as &$effect) {
      	  if(is_int($effect->duration)) { $effect->duration--; }
      }
