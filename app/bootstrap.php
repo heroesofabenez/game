@@ -5,7 +5,7 @@ use Tracy\Debugger;
 use Nette\Database\Connection;
 Debugger::enable(Debugger::DEVELOPMENT);
 
-$libraries = array("config_ini", "html", "user", "character", "pet"/*, "rpgclub",/);
+$libraries = array("config_ini", "html", "user", "character", "pet"/*, "rpgclub",*/);
 foreach($libraries as $lib) {
   require LIBS_DIR . "/$lib.php";
 }
