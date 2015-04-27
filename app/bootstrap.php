@@ -1,7 +1,8 @@
 <?php
 if(MASTER_ID !== "HEROES_OF_ABENEZ") { exit; }
 require LIBS_DIR . '/Nette/nette.phar';
-Debug::enable(DEBUG::DEVELOPMENT);
+use Tracy\Debugger;
+Debugger::enable(Debugger::DEVELOPMENT);
 
 $libraries = array("config_ini", "db", "html", "user", "character", "pet"/*, "rpgclub", "base_facebook", "facebook"*/);
 foreach($libraries as $lib) {

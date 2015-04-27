@@ -1,6 +1,6 @@
 <?php
 if(MASTER_ID !== "HEROES_OF_ABENEZ") exit;
-class GUser extends Nette\Object implements NS\IAuthenticator{
+class GUser extends Nette\Object implements Nette\Security\IAuthenticator{
   public $id;
   public $user;
   public $role;
@@ -44,7 +44,8 @@ class GUser extends Nette\Object implements NS\IAuthenticator{
     $_SESSION["uid"] = false;
     $_SESSION["username"] = false;
     $_SESSION["login"] = false;
-    $_SESSION["identity"] = false;global $conn;
+    $_SESSION["identity"] = false;
+    global $conn;
     $conn->query("DELETE FROM logins WHERE user = $this->id AND ip = '{$_SERVER["REMOTE_ADDR"]}'");
     $conn->query("UPDATE users SET lastactivity=CURRENT_TIMESTAMP WHERE id=$this->id");
   }
