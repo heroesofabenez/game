@@ -2,8 +2,9 @@
 if(MASTER_ID !== "HEROES_OF_ABENEZ") exit;
 
 use Nette\Database\Context;
+use Nette\Security as NS;
 
-class GUser extends Nette\Object implements Nette\Security\IAuthenticator{
+class GUser extends Nette\Object implements NS\IAuthenticator{
   private $id;
   private $user;
   private $role;
@@ -37,7 +38,7 @@ class GUser extends Nette\Object implements Nette\Security\IAuthenticator{
     $_SESSION["username"] = $this->user;
     $_SESSION["role"] = $row->role;
     $_SESSION["login"] = true;
-    $identity = new Identity($row->id, $row->role, $row);
+    $identity = new NS\Identity($row->id, $row->role, $row);
     $_SESSION["identity"] = $identity;
     $db->query("UPDATE users SET lastactivity=CURRENT_TIMESTAMP WHERE id=$this->id");
     return $identity;
