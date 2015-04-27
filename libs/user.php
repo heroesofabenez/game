@@ -4,13 +4,18 @@ if(MASTER_ID !== "HEROES_OF_ABENEZ") exit;
 use Nette\Database\Context;
 
 class GUser extends Nette\Object implements Nette\Security\IAuthenticator{
-  public $id;
-  public $user;
-  public $role;
-  public $name;
+  private $id;
+  private $user;
+  private $role;
+  private $name;
   const USER_NOT_FOUND = 1;
   const INVALID_PASSWORD = 2;
   function __construct() { }
+  
+  function getId() { return $this->id; }
+  function getUser() { return $this->user; }
+  function getRole() { return $this->role; }
+  function getName() { return $this->name; }
 
   public function authenticate(array $credentials) {
     return $this->login($credentials);
