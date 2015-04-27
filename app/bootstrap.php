@@ -1,6 +1,6 @@
 <?php
 if(MASTER_ID !== "HEROES_OF_ABENEZ") { exit; }
-require LIBS_DIR . '/Nette/loader.php';
+require LIBS_DIR . '/Nette/nette.phar';
 Debug::enable(DEBUG::DEVELOPMENT);
 
 $libraries = array("config_ini", "db", "html", "user", "character", "pet"/*, "rpgclub", "base_facebook", "facebook"*/);

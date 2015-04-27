@@ -1,6 +1,6 @@
 <?php
 if(MASTER_ID !== "HEROES_OF_ABENEZ") exit;
-class Element extends Object {
+class Element extends Nette\Object {
   protected $name;
   protected $content;
   protected $class;
@@ -42,7 +42,7 @@ class Element extends Object {
   }
 }
 
-class Container extends Object {
+class Container extends Nette\Object {
   protected $name;
   protected $parts = array();
   protected $class;
@@ -264,7 +264,7 @@ default:
   }
 }
 
-class TextNode extends Object {
+class TextNode extends Nette\Object {
   protected $content;
   function __construct($content = "") {
     if(!is_string($content)) { exit("Invalid value for parametr content passed to method TextNode::__construct. Expected string."); }
@@ -290,7 +290,7 @@ class TextNode extends Object {
   }
 }
 
-class Page extends Object {
+class Page extends Nette\Object {
   public $elements = array();
   protected $title;
   protected $scripts = array();

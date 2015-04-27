@@ -1,6 +1,6 @@
 <?php
 if(MASTER_ID !== "HEROES_OF_ABENEZ") exit;
-class GUser extends Object implements IAuthenticator{
+class GUser extends Nette\Object implements NS\IAuthenticator{
   public $id;
   public $user;
   public $role;

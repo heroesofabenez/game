@@ -1,7 +1,7 @@
 <?php
 if(MASTER_ID !== "HEROES_OF_ABENEZ") exit;
 
-class Team extends Object {
+class Team extends Nette\Object {
   private $name;
   private $members = array();
   function __construct($name) {
@@ -15,7 +15,7 @@ class Team extends Object {
   }
 }
 
-class CombatBase extends Object {
+class CombatBase extends Nette\Object {
   private $team1 = array();
   private $team2 = array();
   private $round;

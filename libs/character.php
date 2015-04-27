@@ -1,6 +1,6 @@
 <?php
 if(MASTER_ID !== "HEROES_OF_ABENEZ") exit;
-class Character extends Object {
+class Character extends Nette\Object {
   private $id;
   private $name;
   private $gender;
