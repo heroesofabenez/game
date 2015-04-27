@@ -1,5 +1,8 @@
 <?php
 if(MASTER_ID !== "HEROES_OF_ABENEZ") exit;
+
+use Nette\Database\Context;
+
 class GUser extends Nette\Object implements Nette\Security\IAuthenticator{
   public $id;
   public $user;
@@ -15,9 +18,10 @@ class GUser extends Nette\Object implements Nette\Security\IAuthenticator{
 
   function login(array $credentials) {
     global $conn;
+    $db = new Context($conn);
     $username = $credentials["username"];
     $password = md5($credentials["password"]);
-    $row = $conn->query("SELECT * FROM users WHERE username='$username'");
+    $row = $db->query("SELECT * FROM users WHERE username='$username'");
     if (!$row OR $row->num_rows == 0) { return self::USER_NOT_FOUND; }
     $row = $row->fetch_object();
     if ($row->password !== $password) { return self::INVALID_PASSWORD; }
@@ -30,7 +34,7 @@ class GUser extends Nette\Object implements Nette\Security\IAuthenticator{
     $_SESSION["login"] = true;
     $identity = new Identity($row->id, $row->role, $row);
     $_SESSION["identity"] = $identity;
-    $conn->query("UPDATE users SET lastactivity=CURRENT_TIMESTAMP WHERE id=$this->id");
+    $db->query("UPDATE users SET lastactivity=CURRENT_TIMESTAMP WHERE id=$this->id");
     return $identity;
   }
 
@@ -46,8 +50,9 @@ class GUser extends Nette\Object implements Nette\Security\IAuthenticator{
     $_SESSION["login"] = false;
     $_SESSION["identity"] = false;
     global $conn;
-    $conn->query("DELETE FROM logins WHERE user = $this->id AND ip = '{$_SERVER["REMOTE_ADDR"]}'");
-    $conn->query("UPDATE users SET lastactivity=CURRENT_TIMESTAMP WHERE id=$this->id");
+    $db = new Context($conn);
+    $db->query("DELETE FROM logins WHERE user = $this->id AND ip = '{$_SERVER["REMOTE_ADDR"]}'");
+    $db->query("UPDATE users SET lastactivity=CURRENT_TIMESTAMP WHERE id=$this->id");
   }
 
   function getIdentity() {
@@ -106,12 +111,13 @@ $birthdayInput: <input type=\"text\" name=\"birthday\" length=\"12\"><br>
   function register() {
     global $conn;
     global $club;
+    $db = new Context($conn);
     $username = $_POST["username"];
     $password = $_POST["password"];
     $email = $_POST["email"];
     $gender = $_POST["gender"];
     $sql = "INSERT INTO users (`username`, `password`, `email`, `gender`) VALUES ('$username', MD5('$password'), '$email', $gender);";
-    if($conn->query($sql)) {
+    if($sb->query($sql)) {
       $club->page->addContent($club->lang->translate("Registration was successful"));
     }
   }
@@ -119,7 +125,8 @@ $birthdayInput: <input type=\"text\" name=\"birthday\" length=\"12\"><br>
   function reloadData() {
     if($this->isLoggedIn()) {
       global $conn;
-      $row = $conn->query("SELECT * FROM users WHERE id='$this->id'");
+      $db = new Context($conn);
+      $row = $db->query("SELECT * FROM users WHERE id='$this->id'");
       $row = $row->fetch_object();
       unset($row->password);
       $_SESSION["username"] = $this->user = $row->username;
@@ -127,7 +134,7 @@ $birthdayInput: <input type=\"text\" name=\"birthday\" length=\"12\"><br>
       $_SESSION["role"] = $row->role = $row->role;
       $identity = new Identity($row->id, $row->role, $row);
       $_SESSION["identity"] = $identity;
-      $conn->query("UPDATE users SET lastactivity=CURRENT_TIMESTAMP WHERE id=$this->id");
+      $db->query("UPDATE users SET lastactivity=CURRENT_TIMESTAMP WHERE id=$this->id");
     }
   }
 }
