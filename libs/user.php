@@ -57,7 +57,6 @@ class GUser extends Nette\Object implements NS\IAuthenticator{
     $_SESSION["identity"] = false;
     global $conn;
     $db = new Context($conn);
-    $db->query("DELETE FROM logins WHERE user = $this->id AND ip = '{$_SERVER["REMOTE_ADDR"]}'");
     $db->query("UPDATE users SET lastactivity=CURRENT_TIMESTAMP WHERE id=$this->id");
   }
 
