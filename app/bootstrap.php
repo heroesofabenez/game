@@ -3,7 +3,7 @@ if(MASTER_ID !== "HEROES_OF_ABENEZ") { exit; }
 require LIBS_DIR . '/Nette/nette.phar';
 use Tracy\Debugger;
 use Nette\Database\Connection;
-Debugger::enable(Debugger::DEVELOPMENT);
+Debugger::enable();
 
 $libraries = array("config_ini", "html", "user", "character", "pet", "combat", "game",);
 foreach($libraries as $lib) {
