@@ -427,21 +427,17 @@ class Page extends Nette\Object {
     $page = "<!DOCTYPE HTML>
 <html>
 <head>
-  <title>$this->title</title>";
+  <title>$this->title</title>\n";
     foreach($this->styles as $style) {
-      $page .= "  <link rel=\"stylesheet\" type=\"text/css\" href=\""."$style"."\">\n
-";
+      $page .= "  <link rel=\"stylesheet\" type=\"text/css\" href=\""."$style"."\">\n";
     }
     foreach($this->scripts as $script) {
-      $page .= "  <script src=\"$script\"></script>\n
-";
+      $page .= "  <script src=\"$script\"></script>\n";
     }
     foreach($this->channels as $title=>$url) {
-    $page .= "  <link rel=\"alternate\" type=\"application/rss+xml\" title=\"$title\" href=\"$url\">\n
-";
+    $page .= "  <link rel=\"alternate\" type=\"application/rss+xml\" title=\"$title\" href=\"$url\">\n";
     }
-    $page .= "
-</head>
+    $page .= "</head>
 <body>
 ";
     foreach($this->elements as $element) {
