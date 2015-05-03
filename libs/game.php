@@ -21,8 +21,7 @@ class Game extends Nette\Object {
   
   function top() {
     global $base_url;
-    $homeDiv = $this->page->addDiv();
-    $homeDiv->id = "top";
+    $homeDiv = $this->page->addDiv("top");
     $homeLink = new Link("Home", "$base_url");
     $homeLink->id = "home";
     $homeDiv->append($homeLink);

@@ -48,9 +48,11 @@ class Container extends Nette\Object {
   protected $parts = array();
   protected $class;
   protected $id;
-  function __construct($name) {
+  function __construct($name, $id = "") {
     if(!is_string($name)) { exit("Invalid value for parametr name passed to method Container::__construct. Expected string."); }
+    if(!is_string($id)) { exit("Invalid value for parametr id passed to method Container::__construct. Expected string."); }
     $this->name = $name;
+    $this->id = $id;
   }
   
   function setId($id) {
@@ -167,8 +169,8 @@ class Image extends Element {
 }
 
 class Div extends Container {
-  function __construct() {
-    parent::__construct("div");
+  function __construct($id = "") {
+    parent::__construct("div", $id);
   }
 }
 
@@ -224,8 +226,8 @@ class Table extends Container {
 }
 
 class Span extends Container{
-  function __construct() {
-    parent::__construct("span");
+  function __construct($id = "") {
+    parent::__construct("span", $id);
   }
 }
 
@@ -374,16 +376,16 @@ class Page extends Nette\Object {
     return $return;
   }
   
-  function addDiv() {
-    $element = new Div();
+  function addDiv($id = "") {
+    $element = new Div($id);
     $count = count($this->elements);
     $this->elements[$count] = $element;
     $return = & $this->elements[$count];
     return $return;
   }
   
-  function addSpan() {
-    $element = new Span();
+  function addSpan($id = "") {
+    $element = new Span($id);
     $count = count($this->elements);
     $this->elements[$count] = $element;
     $return = & $this->elements[$count];
