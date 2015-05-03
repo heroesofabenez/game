@@ -39,6 +39,7 @@ class Element extends Nette\Object {
      if($this->class) { $return .= " class='{$this->class}'"; }
      if($this->id) { $return .= " id='$this->id'"; }
      $return .= ">$this->content</$this->name>\n";
+     return $return;
   }
 }
 
@@ -287,6 +288,29 @@ class TextNode extends Nette\Object {
   
   function render() {
     return $this->content . "\n";
+  }
+}
+
+class Link extends Element {
+  protected $href;
+  function __construct($text = "", $href = "") {
+    parent::__construct("a", $text);
+    if(!is_string($href)) { exit("Invalid value for parametr href passed to method Link::__construct. Expected string."); }
+    $this->href = $href;
+  }
+  
+  function setHref($url) {
+    if(!is_string($url)) { exit("Invalid value for parametr url passed to method Link::setHref. Expected string."); }
+    $this->href = $url;
+  }
+  
+  function render() {
+     $return = "<$this->name";
+     if($this->class) { $return .= " class='{$this->class}'"; }
+     if($this->id) { $return .= " id='$this->id'"; }
+     if($this->href) { $return .= " href='$this->href'"; }
+     $return .= ">$this->content</$this->name>\n";
+     return $return;
   }
 }
 
