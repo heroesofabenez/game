@@ -5,7 +5,7 @@ use Tracy\Debugger;
 use Nette\Database\Connection;
 Debugger::enable(Debugger::DEVELOPMENT);
 
-$libraries = array("config_ini", "html", "user", "character", "pet", "combat"/*, "rpgclub",*/);
+$libraries = array("config_ini", "html", "user", "character", "pet", "combat", "game",);
 foreach($libraries as $lib) {
   require LIBS_DIR . "/$lib.php";
 }
@@ -29,7 +29,6 @@ unset($db_);
 $user = new GUser();
 $user->reloadData();
 
-
-//$club = RPGClub::Init($conn, $page, $user, $config);
-//$club->run();
+$game = Game::Init($conn, $page, $user, $config);
+$game->run();
 ?>
