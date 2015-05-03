@@ -428,6 +428,24 @@ class Page extends Nette\Object {
 <html>
 <head>
   <title>$this->title</title>\n";
+  foreach($this->metas as $meta) {
+    $meta["name"] = strtolower($meta["name"]);
+switch($meta["name"]) {
+case "content-type":
+case "content-language":
+case "refresh":
+case "cache-control":
+  $attribute = "http-equiv";
+  break;
+case "charset":
+  $attribute = "charset";
+  break;
+default:
+  $attribute = "name";
+  break;
+}
+      $page .= "  <meta $attribute=\"{$meta["content"]}\">\n";
+    }
     foreach($this->styles as $style) {
       $page .= "  <link rel=\"stylesheet\" type=\"text/css\" href=\""."$style"."\">\n";
     }
