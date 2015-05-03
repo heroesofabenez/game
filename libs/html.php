@@ -35,11 +35,11 @@ class Element extends Nette\Object {
   }
   
   function render() {
-     $return = "<$this->name";
-     if($this->class) { $return .= " class='{$this->class}'"; }
-     if($this->id) { $return .= " id='$this->id'"; }
-     $return .= ">$this->content</$this->name>\n";
-     return $return;
+    $return = "<$this->name";
+    if($this->class) { $return .= " class='{$this->class}'"; }
+    if($this->id) { $return .= " id='$this->id'"; }
+    $return .= ">$this->content</$this->name>\n";
+    return $return;
   }
 }
 
@@ -64,7 +64,7 @@ class Container extends Nette\Object {
   }
   
   function append($element) {
-    if($element instanceof Element OR $element instanceof Container) {  } else { exit("Invalid value for parametr element passed to method Container::append. Expected Element or Container."); }
+    if($element instanceof Element OR $element instanceof Container) { } else { exit("Invalid value for parametr element passed to method Container::append. Expected Element or Container."); }
     $count = count($this->parts);
     $this->parts[] = $element;
     return $count;
@@ -118,7 +118,7 @@ class Paragraph extends Element{
 }
 
 class RowBreak extends Element{
- function __construct() {
+  function __construct() {
     parent::__construct("br");
   }
   
