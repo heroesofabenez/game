@@ -18,7 +18,6 @@ class Game extends Nette\Object {
     //$game->page->attachStyle("$base_url/style.css");
     //$game->page->attachScript("http://code.jquery.com/jquery-latest.pack.js");
     $game->siteName="HeroesofAbenez sTest";
-    $container = $game->config->createContainer();
     $uri = $container->getService("http.request")->getUrl();
     $game->base_url = $uri->hostUrl . $uri->path;
     return $game;
