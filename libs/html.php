@@ -127,6 +127,249 @@ class RowBreak extends Element{
   }
 }
 
+class Form extends Container {
+  protected $formName;
+  protected $action;
+  protected $method;
+  protected $target;
+  function __construct($name = "", $action = "", $method = "", $target = "", $id = "") {
+    if(!is_string($name)) { exit("Invalid value for parametr name passed to method Form::__construct. Expected string."); }
+    if(!is_string($action)) { exit("Invalid value for parametr action passed to method Form::__construct. Expected string."); }
+    if($method == "get" OR $method == "post") { } else { exit("Invalid value for parametr method passed to method Form::__construct. Expected get or post."); }
+    if(!is_string($target)) { exit("Invalid value for parametr target passed to method Form::__construct. Expected string."); }
+    parent::__construct("form", $id);
+    $this->formName = $name;
+    $this->action = $action;
+    $this->method = $method;
+    $this->target = $target;
+  }
+  
+  function setFormName($name) {
+    $this->formName = $name;
+  }
+  
+  function setAction($url) {
+    $this->action = $url;
+  }
+  
+  function setTarget($frame) {
+    $this->target = $frame;
+  }
+  
+  function setMethod($method) {
+    $method = strtolower($method);
+    if($method == "get" OR $method == "post") { $this->method = $method; }
+    else { exit("Entered invalid value for Form::\$method. Expected get or post."); }
+  }
+  
+  function addInput($name = "", $type = "", $size = "", $value = "", $src = "") {
+    $element = new FormInput($name, $type, $size, $value, $src);
+    $count = count($this->parts);
+    $this->parts[$count] = $element;
+    $return = & $this->parts[$count];
+    return $return;
+  }
+  
+  function addTextArea($name = "", $rows = "", $cols = "", $value = "") {
+    $element = new TextArea($name, $rows, $cols, $value);
+    $count = count($this->parts);
+    $this->parts[$count] = $element;
+    $return = & $this->parts[$count];
+    return $return;
+  }
+  
+  function addSelectBox($name = "", $size = "") {
+    $element = new FormSelectBox($name, $size);
+    $count = count($this->parts);
+    $this->parts[$count] = $element;
+    $return = & $this->parts[$count];
+    return $return;
+  }
+  
+  function render() {
+    $return = "<form";
+    if($this->id) { $return .= " id='$this->id'"; }
+    if($this->formName) { $return .= " name='$this->formName'"; }
+    if($this->class) { $return .= " class='$this->class'"; }
+    if($this->method) { $return .= " method='$this->method'"; }
+    if($this->action) { $return .= " action='$this->action'"; }
+    if($this->target) { $return .= " target='$this->target'"; }
+    $return .= ">\n";
+    foreach($this->parts as $part) {
+      $return .= $part->render();
+    }
+    $return .= "</form>\n";
+    return $return;
+  }
+}
+
+class FormInput extends Element {
+  protected $type;
+  protected $fieldName;
+  protected $value;
+  protected $size;
+  protected $src;
+  protected $allowed_types = array("text", "password", "checkbox", "radio", "hidden", "submit", "reset", "image", "file",
+    "search", "tel", "url", "email", "number", "range", "color",
+    "date", "month", "week", "time", "datetime", "datetime-local");
+  function __construct($name = "", $type = "", $size = "", $value = "", $src = "") {
+    parent::__construct("input");
+    $type = strtolower($type);
+    if(!in_array($type, $this->allowed_types)) { exit("Invalid value for parametr type passed to method FormInput::__construct."); }
+    if(!is_string($name)) { exit("Invalid value for parametr name passed to method FormInput::__construct. Expected string."); }
+    if(!is_string($value)) { exit("Invalid value for parametr value passed to method FormInput::__construct. Expected string."); }
+    $this->type = $type;
+    $this->fieldName = $name;
+    $this->size = $size;
+    $this->value = $value;
+    $this->src = $src;
+  }
+  
+  function setType($type) {
+    if(!in_array($type, $this->allowed_types)) { exit("Invalid value for parametr type passed to method FormInput::setType."); }
+    else { $this->type = strtolower($type); }
+  }
+  
+  function setFieldName($name) {
+    $this->fieldName = $name;
+  }
+  
+  function setValue($value) {
+    $this->value = $value;
+  }
+  
+  function setSize($size) {
+    $this->size = $size;
+  }
+  
+  function setSrc($src) {
+    if($this->type == "image") { $this->src = $src; }
+  }
+  
+  function render() {
+    $return = "<input";
+    if($this->class) { $return .= " class='{$this->class}'"; }
+    if($this->id) { $return .= " id='$this->id'"; }
+    if($this->type) { $return .= " type='$this->type'"; }
+    if($this->fieldName) { $return .= " name='$this->fieldName'"; }
+    if($this->value) { $return .= " value='$this->value'"; }
+    if($this->size) { $return .= " size='$this->size'"; }
+    if($this->src) { $return .= " src='$this->src'"; }
+    $return .= ">\n";
+    return $return;
+  }
+}
+
+class TextArea extends Element {
+  protected $fieldName;
+  function __construct($name = "", $rows = "", $cols = "", $value = "") {
+    parent::__construct("textarea");
+    if(!is_string($name)) { exit("Invalid value for parametr name passed to method FormInput::__construct. Expected string."); }
+    if(!is_string($value)) { exit("Invalid value for parametr value passed to method FormInput::__construct. Expected string."); }
+    $this->fieldName = $name;
+    $this->content = $value;
+    $this->rows = $rows;
+    $this->cols = $cols;
+  }
+  
+  function setFieldName($name) {
+    $this->fieldName = $name;
+  }
+  
+  function setRows($number) {
+    $this->rows = $number;
+  }
+  
+  function setCols($number) {
+    $this->cols = $number;
+  }
+  
+  function setValue($value) {
+    if(!is_string($value)) { exit("Invalid value for parametr value passed to method TextArea::setValue. Expected string."); }
+    $this->content = $value;
+  }
+  
+  function render() {
+    $return = "<textarea";
+    if($this->class) { $return .= " class='{$this->class}'"; }
+    if($this->id) { $return .= " id='$this->id'"; }
+    if($this->fieldName) { $return .= " name='$this->fieldName'"; }
+    if($this->rows) { $return .= " rows='$this->rows'"; }
+    if($this->cols) { $return .= " cols='$this->cols'"; }
+    $return .= ">$this->content</textarea>\n";
+    return $return;
+  }
+}
+
+class FormSelectBox extends Container {
+  protected $fieldName;
+  protected $size;
+  function __construct($name = "", $size = "") {
+    if(!is_string($name)) { exit("Invalid value for parametr name passed to method FormInput::__construct. Expected string."); }
+    parent::__construct("select");
+    $this->fieldName = $name;
+    $this->size = $size;
+  }
+  
+  function setFieldName($name) {
+    $this->fieldName = $name;
+  }
+  
+  function setSize($size) {
+    $this->size = $size;
+  }
+  
+  function addOption($value = "", $text = "") {
+    $element = new FormSelectBoxOption($value, $text);
+    $count = count($this->parts);
+    $this->parts[$count] = $element;
+    $return = & $this->parts[$count];
+    return $return;
+  }
+  
+  function render() {
+    $return = "<select";
+    if($this->class) { $return .= " class='{$this->class}'"; }
+    if($this->id) { $return .= " id='$this->id'"; }
+    if($this->fieldName) { $return .= " name='$this->fieldName'"; }
+    if($this->size) { $return .= " size='$this->size'"; }
+    $return .= ">";
+    foreach($this->parts as $part) {
+      $return .= $part->render();
+    }
+    $return .= "</select>\n";
+    return $return;
+  }
+}
+
+class FormSelectBoxOption extends Element {
+  protected $value;
+  function __construct($value = "", $text = "") {
+    parent::__construct("textarea");
+    if(!is_string($value)) { exit("Invalid value for parametr value passed to method FormSelectBoxOption::__construct. Expected string."); }
+    if(!is_string($text)) { exit("Invalid value for parametr text passed to method FormSelectBoxOption::__construct. Expected string."); }
+    $this->value = $value;
+    $this->content = $text;
+  }
+  
+  function setValue($value) {
+    if(!is_string($value)) { exit("Invalid value for parametr value passed to method FormSelectBoxOption::setValue. Expected string."); }
+    $this->content = $value;
+  }
+  
+  function setText($text) {
+    if(!is_string($text)) { exit("Invalid value for parametr text passed to method FormSelectBoxOption::setText. Expected string."); }
+    $this->content = $text;
+  }
+  
+  function render() {
+    $return = "<option";
+    if($this->value) { $return .= " value='{$this->value}'"; }
+    $return .= ">$this->content</option>\n";
+    return $return;
+  }
+}
+
 class Image extends Element {
   protected $source;
   protected $alt;
@@ -410,6 +653,14 @@ class Page extends Nette\Object {
   
   function addList($type = "ul") {
     $element = new ListElement($type);
+    $count = count($this->elements);
+    $this->elements[$count] = $element;
+    $return = & $this->elements[$count];
+    return $return;
+  }
+  
+  function addForm($name = "", $action = "", $method = "", $target = "", $id = "") {
+    $element = new Form($name, $action, $method, $target, $id);
     $count = count($this->elements);
     $this->elements[$count] = $element;
     $return = & $this->elements[$count];
