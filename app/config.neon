@@ -12,3 +12,6 @@ di:
 tracy:
     email: jakub.konecny2@centrum.cz
     strictMode: TRUE
+services:
+  page: Page
+  guser: GUser
