@@ -21,10 +21,10 @@ class Game extends Nette\Object {
     $game->siteName="HeroesofAbenez sTest";
     $uri = $container->getService("http.request")->getUrl();
     $game->base_url = $uri->hostUrl . $uri->path;
-    $db_cache = new Nette\Caching\Storages\FileStorage(APP_DIR . "/temp/cache");
-    $db_structure = new Nette\Database\Structure($game->conn, $db_cache);
+    $cache = $container->getService("cache.storage");
+    $db_structure = new Nette\Database\Structure($game->conn, $cache);
     $db_structure->rebuild();
-    $game->db = new Nette\Database\Context($game->conn, $db_structure, NULL, $db_cache);
+    $game->db = new Nette\Database\Context($game->conn, $db_structure, NULL, $cache);
     return $game;
   }
   
@@ -66,7 +66,6 @@ class Game extends Nette\Object {
       $profileDiv->addParagraph("Not a member of guild");
     }
     $profileDiv->addParagraph("More info: $char->description");
-    //Tracy\Debugger::Dump();
   }
   
   function page404() {
