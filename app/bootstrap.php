@@ -20,7 +20,7 @@ $page->addMeta("content-type", "text/html; charset=utf-8");
 //$page->attachScript("http://code.jquery.com/jquery-latest.pack.js");
 
 $container = $configurator->createContainer();
-$conn = $container->getService("nette.database.test");
+$conn = $container->getService("database.test");
 
 $user = new GUser();
 $user->reloadData();
