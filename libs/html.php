@@ -105,6 +105,14 @@ class Container extends Nette\Object {
     return $return;
   } 
   
+  function addHeading($level, $content = "") {
+    $element = new Heading($level, $content);
+    $count = count($this->parts);
+    $this->parts[$count] = $element;
+    $return = & $this->parts[$count];
+    return $return;
+  }
+  
   function render() {
     $return = "<$this->name";
     if($this->class) { $return .= " class='$this->class'"; }
@@ -566,6 +574,12 @@ class Link extends Element {
   }
 }
 
+class Heading extends Element {
+  function __construct($level, $content = "") {
+    parent::__construct("h$level", $content);
+  }
+}
+
 class HTMLCode extends Nette\Object {
   protected $content;
   function __construct($content = "") {
@@ -677,6 +691,14 @@ class Page extends Nette\Object {
   
   function addList($type = "ul") {
     $element = new ListElement($type);
+    $count = count($this->elements);
+    $this->elements[$count] = $element;
+    $return = & $this->elements[$count];
+    return $return;
+  }
+  
+  function addHeading($level, $content = "") {
+    $element = new Heading($level, $content = "");
     $count = count($this->elements);
     $this->elements[$count] = $element;
     $return = & $this->elements[$count];
