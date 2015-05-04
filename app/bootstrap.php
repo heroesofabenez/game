@@ -13,18 +13,7 @@ $configurator->addConfig(APP_DIR . '/config.neon');
 $configurator->createRobotLoader()
     ->addDirectory(LIBS_DIR)
     ->register();
-$container = $configurator->createContainer();
 
-$page = $container->getService("page");
-$page->addMeta("content-type", "text/html; charset=utf-8");
-//$page->attachStyle("$base_url/style.css");
-//$page->attachScript("http://code.jquery.com/jquery-latest.pack.js");
-
-$conn = $container->getService("database.test");
-
-$user = $container->getService("guser");
-$user->reloadData();
-
-$game = Game::Init($conn, $page, $user, $configurator);
+$game = Game::Init($configurator);
 $game->run();
 ?>
