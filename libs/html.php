@@ -70,6 +70,13 @@ class Container extends Nette\Object {
     return $count;
   }
   
+  function inject($content) {
+    if(is_string($content) OR $content instanceof HTMLCode) { }
+    else { exit("Invalid value for parametr content passed to method Page::inject. Expected HTMLCode or string."); }
+    if(is_string($content)) { $this->elements[] = new HTMLCode($content); }
+    if(is_a($content, "HTMLCode")) { $this->elements[] = $content; }
+  }
+  
   function remove($nodeId) {
     unset($this->parts[$nodeId]);
   }
@@ -559,6 +566,23 @@ class Link extends Element {
   }
 }
 
+class HTMLCode extends Nette\Object {
+  protected $content;
+  function __construct($content = "") {
+    if(!is_string($content)) { exit("Invalid value for parametr content passed to method HTMLCode::__construct. Expected string."); }
+    $this->content = $content;
+  }
+  
+  function change($content = "") {
+    if(!is_string($content)) { exit("Invalid value for parametr content passed to method HTMLCode::change. Expected string."); }
+    $this->content = $content;
+  }
+  
+  function render() {
+    return $this->content . "\n";
+  }
+}
+
 class Page extends Nette\Object {
   public $elements = array();
   protected $title;
@@ -668,8 +692,15 @@ class Page extends Nette\Object {
   }
   
   function append($element) {
-    if($element instanceof Element OR $element instanceof Container) {  } else { exit("Invalid value for parametr element passed to method Page::append. Expected Element or Container."); }
-    $this->elements[] = $element;
+    if($element instanceof Element OR $element instanceof Container) { $this->elements[] = $element; }
+    else { exit("Invalid value for parametr element passed to method Page::append. Expected Element or Container."); }
+  }
+  
+  function inject($content) {
+    if(is_string($content) OR $content instanceof HTMLCode) { }
+    else { exit("Invalid value for parametr content passed to method Page::inject. Expected HTMLCode or string."); }
+    if(is_string($content)) { $this->elements[] = new HTMLCode($content); }
+    if(is_a($content, "HTMLCode")) { $this->elements[] = $content; }
   }
   
   function remove($node) {
