@@ -7,6 +7,7 @@ class Game extends Nette\Object {
   protected $config;
   protected $siteName;
   protected $base_url;
+  protected $db;
   private function __construct() { }
   static function Init(Nette\Configurator $config) {
     $game = new self;
@@ -20,6 +21,10 @@ class Game extends Nette\Object {
     $game->siteName="HeroesofAbenez sTest";
     $uri = $container->getService("http.request")->getUrl();
     $game->base_url = $uri->hostUrl . $uri->path;
+    $db_cache = new Nette\Caching\Storages\FileStorage(APP_DIR . "/temp/cache");
+    $db_structure = new Nette\Database\Structure($game->conn, $db_cache);
+    $db_structure->rebuild();
+    $game->db = new Nette\Database\Context($game->conn, $db_structure, NULL, $db_cache);
     return $game;
   }
   
