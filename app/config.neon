@@ -16,4 +16,6 @@ services:
     page: Page
     guser: GUser
 session:
-    savePath: "%tempDir%/sessions"  
+    savePath: "%tempDir%/sessions"
+    name: HOASESSID
+    expiration: 7 days
