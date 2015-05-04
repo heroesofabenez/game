@@ -13,5 +13,7 @@ tracy:
     email: jakub.konecny2@centrum.cz
     strictMode: TRUE
 services:
-  page: Page
-  guser: GUser
+    page: Page
+    guser: GUser
+session:
+    savePath: "%tempDir%/sessions"  
