@@ -14,11 +14,9 @@ class Game extends Nette\Object {
     $container = $config->createContainer();
     $game->conn = $container->getService("database.test");
     $game->page = $container->getService("page");
-    $game->user = $container->getService("guser");
     $game->page->addMeta("content-type", "text/html; charset=utf-8");
     //$game->page->attachStyle("$base_url/style.css");
     //$game->page->attachScript("http://code.jquery.com/jquery-latest.pack.js");
-    $game->user->reloadData();
     $game->siteName="HeroesofAbenez sTest";
     $container = $game->config->createContainer();
     $httpRequest = $container->getService("http.request");

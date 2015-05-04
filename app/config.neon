@@ -14,7 +14,6 @@ tracy:
     strictMode: TRUE
 services:
     page: Page
-    guser: GUser
 session:
     savePath: "%tempDir%/sessions"
     name: HOASESSID
