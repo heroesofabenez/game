@@ -73,8 +73,8 @@ class Container extends Nette\Object {
   function inject($content) {
     if(is_string($content) OR $content instanceof HTMLCode) { }
     else { exit("Invalid value for parametr content passed to method Page::inject. Expected HTMLCode or string."); }
-    if(is_string($content)) { $this->elements[] = new HTMLCode($content); }
-    if(is_a($content, "HTMLCode")) { $this->elements[] = $content; }
+    if(is_string($content)) { $this->parts[] = new HTMLCode($content); }
+    if(is_a($content, "HTMLCode")) { $this->parts[] = $content; }
   }
   
   function remove($nodeId) {
