@@ -14,18 +14,14 @@ $configurator->createRobotLoader()
     ->addDirectory(LIBS_DIR)
     ->register();
 
-$container = $configurator->createContainer();
-$httpRequest = $container->getByType('Nette\Http\Request');
-$uri = $httpRequest->getUrl();
-$base_url = $uri->hostUrl . $uri->path;
-unset($httpRequest, $uri);
-
 $page = new Page;
 $page->addMeta("content-type", "text/html; charset=utf-8");
 //$page->attachStyle("$base_url/style.css");
 //$page->attachScript("http://code.jquery.com/jquery-latest.pack.js");
 
+$container = $configurator->createContainer();
 $conn = $container->getService("nette.database.test");
+
 $user = new GUser();
 $user->reloadData();
 

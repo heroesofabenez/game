@@ -6,6 +6,7 @@ class Game extends Nette\Object {
   protected $user;
   protected $config;
   protected $siteName;
+  protected $base_url;
   private function __construct() { }
   static function Init(Nette\Database\Connection $conn, Page $page, GUser $user, Nette\Configurator $config) {
     $game = new self;
@@ -14,6 +15,10 @@ class Game extends Nette\Object {
     $game->user = &$user;
     $game->config = &$config;
     $game->siteName="HeroesofAbenez sTest";
+    $container = $game->config->createContainer();
+    $httpRequest = $container->getByType('Nette\Http\Request');
+    $uri = $httpRequest->getUrl();
+    $game->base_url = $uri->hostUrl . $uri->path;
     return $game;
   }
   
@@ -22,9 +27,8 @@ class Game extends Nette\Object {
   }
   
   function top() {
-    global $base_url;
     $homeDiv = $this->page->addDiv("top");
-    $homeLink = new Link("Home", "$base_url");
+    $homeLink = new Link("Home", "$this->base_url");
     $homeLink->id = "home";
     $homeDiv->append($homeLink);
   }
