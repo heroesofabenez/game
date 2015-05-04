@@ -16,7 +16,7 @@ class Game extends Nette\Object {
     $game->config = &$config;
     $game->siteName="HeroesofAbenez sTest";
     $container = $game->config->createContainer();
-    $httpRequest = $container->getByType('Nette\Http\Request');
+    $httpRequest = $container->getService("http.request");
     $uri = $httpRequest->getUrl();
     $game->base_url = $uri->hostUrl . $uri->path;
     return $game;
