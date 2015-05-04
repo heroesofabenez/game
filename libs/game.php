@@ -34,14 +34,39 @@ class Game extends Nette\Object {
   
   function top() {
     $homeDiv = $this->page->addDiv("top");
-    $homeLink = new Link("Home", "$this->base_url");
-    $homeLink->id = "home";
-    $homeDiv->append($homeLink);
+    $homeDiv->addLink("Home", $this->base_url);
   }
   
   function homePage() {
     $this->page->setTitle("$this->siteName - Home");
     $this->top();
+  }
+  
+  function profile($id) {
+    $this->page->setTitle("$this->siteName - Profile");
+    $this->top();
+    $db = $this->db;
+    $char = $db->table("characters")->get($id);
+    $race = $db->table("character_races")->get($char->race);
+    $occupation = $db->table("character_classess")->get($char->occupation);
+    if($char->specialization > 0) {
+      $specialization = "-" . $db->table("character_specialization")->get($char->specialization);
+    } else {
+      $specialization = "";
+    }
+    $profileDiv = $this->page->addDiv("profile");
+    $profileDiv->addHeading(1, $char->name);
+    $profileDiv->addParagraph("$char->gender, level $char->level $race->name $occupation->name$specialization");
+    $profileDiv->addParagraph("Base stats:<br>Strength $char->strength, Dexterity $char->dexterity, Constitution $char->constitution, Intelligence $char->intelligence, Charisma $char->charisma");
+    if($char->guild > 0) {
+      $guild = $db->table("guilds")->get($char->guild);
+      $guildRank = $db->table("guild_ranks")->get($char->guild_rank);
+      $profileDiv->addParagraph("Guild: $guild->name<br>Position in guild: " . ucfirst($guildRank->name));
+    } else {
+      $profileDiv->addParagraph("Not a member of guild");
+    }
+    $profileDiv->addParagraph("More info: $char->description");
+    //Tracy\Debugger::Dump();
   }
   
   function page404() {
@@ -77,6 +102,9 @@ class Game extends Nette\Object {
     switch($action[0]) {
 case "homepage":
   $this->homePage();
+  break;
+case "profile":
+  $this->profile($action[1]);
   break;
 case "notfound":
   $this->page404();
