@@ -1,19 +1,17 @@
 <?php
 if(MASTER_ID !== "HEROES_OF_ABENEZ") exit;
 class Game extends Nette\Object {
-  protected $conn;
+  protected $db;
   protected $page;
   protected $user;
   protected $config;
   protected $siteName;
   protected $base_url;
-  protected $db;
   private function __construct() { }
   static function Init(Nette\Configurator $config) {
     $game = new self;
     $game->config = &$config;
     $container = $config->createContainer();
-    $game->conn = $container->getService("database.test");
     $game->page = $container->getService("page");
     $game->page->addMeta("content-type", "text/html; charset=utf-8");
     //$game->page->attachStyle("$base_url/style.css");
@@ -21,10 +19,8 @@ class Game extends Nette\Object {
     $game->siteName="HeroesofAbenez sTest";
     $uri = $container->getService("http.request")->getUrl();
     $game->base_url = $uri->hostUrl . $uri->path;
-    $cache = $container->getService("cache.storage");
-    $db_structure = new Nette\Database\Structure($game->conn, $cache);
-    $db_structure->rebuild();
-    $game->db = new Nette\Database\Context($game->conn, $db_structure, NULL, $cache);
+    $game->db = $container->getService("database.test.context");
+    $game->db->structure->rebuild();
     return $game;
   }
   
