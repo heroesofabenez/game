@@ -113,6 +113,54 @@ class Container extends Nette\Object {
     return $return;
   }
   
+  function addDiv($id = "") {
+    $element = new Div($id);
+    $count = count($this->parts);
+    $this->parts[$count] = $element;
+    $return = & $this->parts[$count];
+    return $return;
+  }
+  
+  function addSpan($id = "") {
+    $element = new Span($id);
+    $count = count($this->parts);
+    $this->parts[$count] = $element;
+    $return = & $this->parts[$count];
+    return $return;
+  }
+  
+  function addTable($colls) {
+    $element = new Table($colls);
+    $count = count($this->parts);
+    $this->parts[$count] = $element;
+    $return = & $this->parts[$count];
+    return $return;
+  }
+  
+  function addList($type = "ul") {
+    $element = new ListElement($type);
+    $count = count($this->parts);
+    $this->parts[$count] = $element;
+    $return = & $this->parts[$count];
+    return $return;
+  }
+  
+  function addLink($text = "", $href = "") {
+    $element = new Link($text, $href);
+    $count = count($this->parts);
+    $this->parts[$count] = $element;
+    $return = & $this->parts[$count];
+    return $return;
+  }
+  
+  function addForm($name = "", $action = "", $method = "", $target = "", $id = "") {
+    $element = new Form($name, $action, $method, $target, $id);
+    $count = count($this->parts);
+    $this->parts[$count] = $element;
+    $return = & $this->parts[$count];
+    return $return;
+  }
+  
   function render() {
     $return = "<$this->name";
     if($this->class) { $return .= " class='$this->class'"; }
@@ -649,6 +697,14 @@ class Page extends Nette\Object {
     }
   }
   
+  function addText($node) {
+    if(is_string($node)) {
+      $this->elements[] = new TextNode($node);
+    } elseif($node instanceof TextNode) {
+      $this->elements[] = $node;
+    } else { exit("Invalid value for parametr node passed to method Container::addText. Expected string or TextNode."); }
+  }
+  
   function addParagraph($content = "") {
     $element = new Paragraph($content);
     $count = count($this->elements);
@@ -699,6 +755,14 @@ class Page extends Nette\Object {
   
   function addHeading($level, $content = "") {
     $element = new Heading($level, $content = "");
+    $count = count($this->elements);
+    $this->elements[$count] = $element;
+    $return = & $this->elements[$count];
+    return $return;
+  }
+  
+  function addLink($text = "", $href = "") {
+    $element = new Link($text, $href);
     $count = count($this->elements);
     $this->elements[$count] = $element;
     $return = & $this->elements[$count];
