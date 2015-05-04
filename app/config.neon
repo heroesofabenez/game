@@ -1,0 +1,14 @@
+application:
+    debugger: true
+database:
+    test:
+        dsn: "mysql:host=localhost;dbname=heroesofabenez"
+        user: heroesofabenez
+        password: qwerty
+        debugger: true
+        explain: true
+di:
+    debugger: true
+tracy:
+    email: jakub.konecny2@centrum.cz
+    strictMode: TRUE

@@ -5,30 +5,35 @@ use Tracy\Debugger;
 use Nette\Database\Connection;
 Debugger::enable();
 
-$libraries = array("config_ini", "html", "user", "character", "pet", "combat", "game");
-foreach($libraries as $lib) {
-  require LIBS_DIR . "/$lib.php";
-}
-
-$configObj = new Config_Ini();
-$config = $configObj->getConfig();
+//$libraries = array("config_ini", "html", "user", "character", "pet", "combat", "game");
+//foreach($libraries as $lib) {
+  //require LIBS_DIR . "/$lib.php";
+//}
 
 date_default_timezone_set("Europe/Prague");
 
-session_start();
-session_save_path(realpath(APP_DIR . '/temp'));
+$configurator = new Nette\Configurator;
+$configurator->setTempDirectory(APP_DIR . "/temp");
+$configurator->addConfig(APP_DIR . '/config.neon');
+$configurator->createRobotLoader()
+    ->addDirectory(LIBS_DIR)
+    ->register();
+
+$container = $configurator->createContainer();
+$httpRequest = $container->getByType('Nette\Http\Request');
+$uri = $httpRequest->getUrl();
+$base_url = $uri->hostUrl . $uri->path;
+unset($httpRequest, $uri);
 
 $page = new Page;
 $page->addMeta("content-type", "text/html; charset=utf-8");
 //$page->attachStyle("$base_url/style.css");
 //$page->attachScript("http://code.jquery.com/jquery-latest.pack.js");
 
-$db_ = $config["database"];
-$conn = new Connection($db_["dns"], $db_["username"], $db_["password"]);
-unset($db_);
+$conn = $container->getService("nette.database.test");
 $user = new GUser();
 $user->reloadData();
 
-$game = Game::Init($conn, $page, $user, $config);
+$game = Game::Init($conn, $page, $user, $configurator);
 $game->run();
 ?>

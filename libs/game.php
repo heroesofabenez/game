@@ -5,13 +5,15 @@ class Game extends Nette\Object {
   protected $page;
   protected $user;
   protected $config;
+  protected $siteName;
   private function __construct() { }
-  static function Init(Nette\Database\Connection $conn, Page $page, GUser $user, $config = array()) {
+  static function Init(Nette\Database\Connection $conn, Page $page, GUser $user, Nette\Configurator $config) {
     $game = new self;
     $game->conn = &$conn;
     $game->page = &$page;
     $game->user = &$user;
     $game->config = &$config;
+    $game->siteName="HeroesofAbenez sTest";
     return $game;
   }
   
@@ -28,7 +30,7 @@ class Game extends Nette\Object {
   }
   
   function homePage() {
-    $this->page->setTitle("{$this->config["site"]["siteName"]} - Home");
+    $this->page->setTitle("$this->siteName - Home");
     $this->top();
   }
   
