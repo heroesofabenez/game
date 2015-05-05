@@ -837,7 +837,7 @@ default:
   $attribute = "name";
   break;
 }
-      $page .= "  <meta $attribute=\"{$meta["content"]}\">\n";
+      $page .= "  <meta $attribute=\"{$meta["name"]}\" content=\"{$meta["content"]}\">\n";
     }
     foreach($this->styles as $style) {
       $page .= "  <link rel=\"stylesheet\" type=\"text/css\" href=\""."$style"."\">\n";
