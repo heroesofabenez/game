@@ -77,7 +77,7 @@ class Game extends Nette\Object {
     $profileDiv->addHeading(1, $guild->name);
     $profileDiv->addParagraph("Description: $guild->description");
     $profileDiv->addHeading(2, "Members");
-    $members = $db->table("characters")->where("guild", $guild->id);
+    $members = $db->table("characters")->where("guild", $guild->id)->order("guild_rank DESC, id");
     foreach($members as $member) {
       $rank = ucfirst($member->rank->name);
       $profileDiv->inject("$rank: $member->name<br>");
