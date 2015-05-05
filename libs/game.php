@@ -3,7 +3,6 @@ if(MASTER_ID !== "HEROES_OF_ABENEZ") exit;
 class Game extends Nette\Object {
   protected $db;
   protected $latte;
-  protected $user;
   protected $config;
   protected $site_name;
   protected $base_url;
