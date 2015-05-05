@@ -5,12 +5,12 @@
   <meta http-equiv="text/html; charset=utf-8">
 </head>
 {include "navigation.latte"}
-<div id='profile'>
+<article id='profile'>
   <h1>{$name}</h1>
   <p>{$gender}, level {$level} {$race} {$occupation}{$specialization}</p>
   <p>Base stats:<br>Strength {$strength}, Dexterity {$dexterity}, Constitution {$constitution}, Intelligence {$intelligence}, Charisma {$charisma}</p>
   <p>{$guild|noescape}</p>
   <p>{$active_pet}</p>
   <p>More info: {$description}</p>
-</div>
+</article>
 </html>
