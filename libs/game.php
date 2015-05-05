@@ -2,7 +2,7 @@
 if(MASTER_ID !== "HEROES_OF_ABENEZ") exit;
 class Game extends Nette\Object {
   protected $db;
-  protected $page;
+  protected $latte;
   protected $user;
   protected $config;
   protected $site_name;
@@ -12,10 +12,8 @@ class Game extends Nette\Object {
     $game = new self;
     $game->config = &$config;
     $container = $config->createContainer();
-    $game->page = $container->getService("page");
-    $game->page->addMeta("content-type", "text/html; charset=utf-8");
-    //$game->page->attachStyle("$base_url/style.css");
-    //$game->page->attachScript("http://code.jquery.com/jquery-latest.pack.js");
+    $game->latte = $container->getService("latte");
+    $game->latte->setTempDirectory(APP_DIR . "/temp/cache/Nette.Latte");
     $game->site_name= $container->parameters["application"]["siteName"];
     $game->base_url = $container->parameters["application"]["baseUrl"];
     $game->db = $container->getService("database.default.context");
@@ -27,75 +25,72 @@ class Game extends Nette\Object {
     if(isset($this->$var)) { return $this->$var; }
   }
   
-  function navigation() {
-    $navigation = $this->page->addSection("navigation", "nav");
-    $navigation->addLink("Home", "$this->base_url/");
-  }
-  
-  function homePage() {
-    $this->page->setTitle("$this->site_name - Home");
-    $this->navigation();
-  }
-  
   function profile($id) {
-    $this->page->setTitle("$this->site_name - Profile");
-    $this->navigation();
+    $return = array();
     $db = $this->db;
     $char = $db->table("characters")->get($id);
+    
+    $return["name"] = $char->name;
+    $return["gender"] = $char->gender;
+    $return["level"] = $char->level;
+    $return["race"] = $char->race;
+    $return["description"] = $char->description;
+    $return["strength"] = $char->strength;
+    $return["dexterity"] = $char->dexterity;
+    $return["constitution"] = $char->constitution;
+    $return["intelligence"] = $char->intelligence;
+    $return["charisma"] = $char->charisma;
+    $return["description"] = $char->description;
+    
     $race = $db->table("character_races")->get($char->race);
+    $return["race"] = $race->name;
     $occupation = $db->table("character_classess")->get($char->occupation);
+    $return["occupation"] = $occupation->name;
     if($char->specialization > 0) {
-      $specialization = "-" . $db->table("character_specialization")->get($char->specialization);
+      $return["specialization"] = "-" . $char->specialization;
     } else {
-      $specialization = "";
+      $return["specialization"] = "";
     }
-    $profileDiv = $this->page->addDiv("profile");
-    $profileDiv->addHeading(1, $char->name);
-    $profileDiv->addParagraph("$char->gender, level $char->level $race->name $occupation->name$specialization");
-    $profileDiv->addParagraph("Base stats:<br>Strength $char->strength, Dexterity $char->dexterity, Constitution $char->constitution, Intelligence $char->intelligence, Charisma $char->charisma");
     if($char->guild > 0) {
       $guild = $db->table("guilds")->get($char->guild);
       $guildRank = $db->table("guild_ranks")->get($char->guild_rank);
-      $profileDiv->addParagraph("Guild: $guild->name<br>Position in guild: " . ucfirst($guildRank->name));
+      $return["guild"] = "Guild: $guild->name<br>Position in guild: " . ucfirst($guildRank->name);
     } else {
-      $profileDiv->addParagraph("Not a member of guild");
+      $return["guild"] = "Not a member of guild";
     }
     $activePet = $db->table("pets")->where("owner=$char->id")->where("deployed=1");
     if($activePet->count("*") == 1) {
       $petType = $db->table("pet_types")->get($activePet->type);
       if($activePet->name == "pets") $petName = "Unnamed"; else $petName = $activePet->name . ",";
       $bonusStat = strtoupper($petType->bonus_stat);
-      $profileDiv->addParagraph("Active pet: $petName $petType->name, +$petType->bonus_value% $bonusStat");
+      $return["active_pet"] = "Active pet: $petName $petType->name, +$petType->bonus_value% $bonusStat";
     } else {
-      $profileDiv->addParagraph("No active pet");
+      $return["active_pet"] = "No active pet";
     }
-    $profileDiv->addParagraph("More info: $char->description");
+    return $return;
   }
   
   function myGuild() {
-    $this->navigation();
-    $this->page->setTitle("$this->site_name - Guild");
+    /*$this->navigation();
+    $this->page->setTitle("$this->site_name - Guild");*/
   }
   
   function guildPage($id) {
-    $this->navigation();
+    $return = array();
     $db = $this->db;
     $guild = $db->table("guilds")->get($id);
-    $this->page->setTitle("$this->site_name - Guild $guild->name");
-    $profileDiv = $this->page->addSection("profile", "article");
-    $profileDiv->addHeading(1, $guild->name);
-    $profileDiv->addParagraph("Description: $guild->description");
-    $profileDiv->addHeading(2, "Members");
+    $return["name"] = $guild->name;
+    $return["description"] = $guild->description;
     $members = $db->table("characters")->where("guild", $guild->id)->order("guild_rank DESC, id");
     foreach($members as $member) {
-      $rank = ucfirst($member->rank->name);
-      $profileDiv->inject("$rank: $member->name<br>");
+      $return["members"][] = array("name" => $member->name, "rank" => ucfirst($member->rank->name));
     }
+    return $return;
   }
   
   function page404() {
     header("HTTP/1.1 404 Not Found");
-    $this->page->setTitle("Not found");
+    //$this->page->setTitle("Not found");
   }
   
   function getAction() {  
@@ -103,8 +98,6 @@ class Game extends Nette\Object {
     $action = array("homepage", "");
     if(empty($query)) {
       $action[0] = "homepage";
-    } elseif($query == "profile") {
-      $action[0] = "profile";
     } elseif($query == "guild") {
       $action[0] = "myguild";
     } else {
@@ -125,24 +118,32 @@ class Game extends Nette\Object {
   
   function run() {
     $action = $this->getAction();
+    $parameters = array(
+      "site_name" => $this->site_name,
+      "base_url" => $this->base_url
+    );
     switch($action[0]) {
 case "homepage":
-  $this->homePage();
+  $template = APP_DIR . "/templates/Homepage.latte";
   break;
 case "profile":
-  $this->profile($action[1]);
+  $parameters = array_merge($parameters, $this->profile($action[1]));
+  $template = APP_DIR . "/templates/Profile.latte";
   break;
 case "myguild":
   $this->myGuild();
+  $template = APP_DIR . "/templates/Guild.latte";
   break;
 case "guild":
-  $this->guildPage($action[1]);
+  $parameters = array_merge($parameters, $this->guildPage($action[1]));
+  $template = APP_DIR . "/templates/Guildpage.latte";
   break;
 case "notfound":
   $this->page404();
+  $template = APP_DIR . "/templates/Page404.latte";
   break;
 }
-    echo $this->page->render();
+    $this->latte->render($template, $parameters);
   }
 }
 ?>

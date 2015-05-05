@@ -1,0 +1,16 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <title>{$site_name} - Guild {$name}</title>
+  <meta http-equiv="text/html; charset=utf-8">
+</head>
+{include "navigation.latte"}
+<article id='profile'>
+  <h1>{$name}</h1>
+  <p>Description: {$description}</p>
+  <h2>Members</h2>
+  {foreach $members as $member}
+    {$member['rank']}: {$member['name']}<br>
+  {/foreach}
+</article>
+</html>
