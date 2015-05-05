@@ -122,7 +122,7 @@ class Game extends Nette\Object {
     );
     switch($action[0]) {
 case "homepage":
-  $template = APP_DIR . "/templates/Homepage.latte";
+  $template = APP_DIR . "/templates/HomePage.latte";
   break;
 case "profile":
   $parameters = array_merge($parameters, $this->profile($action[1]));
@@ -134,7 +134,7 @@ case "myguild":
   break;
 case "guild":
   $parameters = array_merge($parameters, $this->guildPage($action[1]));
-  $template = APP_DIR . "/templates/Guildpage.latte";
+  $template = APP_DIR . "/templates/GuildPage.latte";
   break;
 case "notfound":
   $this->page404();
