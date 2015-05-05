@@ -28,19 +28,19 @@ class Game extends Nette\Object {
     if(isset($this->$var)) { return $this->$var; }
   }
   
-  function top() {
-    $homeDiv = $this->page->addDiv("top");
-    $homeDiv->addLink("Home", $this->base_url);
+  function navigation() {
+    $navigation = $this->page->addSection("navigation", "nav");
+    $navigation->addLink("Home", $this->base_url);
   }
   
   function homePage() {
     $this->page->setTitle("$this->siteName - Home");
-    $this->top();
+    $this->navigation();
   }
   
   function profile($id) {
     $this->page->setTitle("$this->siteName - Profile");
-    $this->top();
+    $this->navigation();
     $db = $this->db;
     $char = $db->table("characters")->get($id);
     $race = $db->table("character_races")->get($char->race);
