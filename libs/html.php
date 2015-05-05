@@ -153,6 +153,17 @@ class Container extends Nette\Object {
     return $return;
   }
   
+  function addSection($id = "", $type = "section") {
+    $allowed_types = array("section", "article", "aside", "nav", "header", "footer");
+    $type = strtolower($type);
+    if(!in_array($type, $allowed_types)) { $type = "section"; }
+    $element = new Container($type, $id);
+    $count = count($this->parts);
+    $this->parts[$count] = $element;
+    $return = & $this->parts[$count];
+    return $return;
+  }
+  
   function addForm($name = "", $action = "", $method = "", $target = "", $id = "") {
     $element = new Form($name, $action, $method, $target, $id);
     $count = count($this->parts);
@@ -763,6 +774,17 @@ class Page extends Nette\Object {
   
   function addLink($text = "", $href = "") {
     $element = new Link($text, $href);
+    $count = count($this->elements);
+    $this->elements[$count] = $element;
+    $return = & $this->elements[$count];
+    return $return;
+  }
+  
+  function addSection($id = "", $type = "section") {
+    $allowed_types = array("section", "article", "aside", "nav", "header", "footer");
+    $type = strtolower($type);
+    if(!in_array($type, $allowed_types)) { $type = "section"; }
+    $element = new Container($type, $id);
     $count = count($this->elements);
     $this->elements[$count] = $element;
     $return = & $this->elements[$count];
