@@ -60,6 +60,15 @@ class Game extends Nette\Object {
     } else {
       $profileDiv->addParagraph("Not a member of guild");
     }
+    $activePet = $db->table("pets")->where("owner=$char->id")->where("deployed=1");
+    if($activePet->count("*") == 1) {
+      $petType = $db->table("pet_types")->get(1/*$activePet->type*/);
+      if($activePet->name == "pets") $petName = "Unnamed"; else $petName = $activePet->name . ",";
+      $bonusStat = strtoupper($petType->bonus_stat);
+      $profileDiv->addParagraph("Active pet: $petName $petType->name, +$petType->bonus_value% $bonusStat");
+    } else {
+      $profileDiv->addParagraph("No active pet");
+    }
     $profileDiv->addParagraph("More info: $char->description");
   }
   
