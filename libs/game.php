@@ -90,7 +90,6 @@ class Game extends Nette\Object {
   
   function page404() {
     header("HTTP/1.1 404 Not Found");
-    //$this->page->setTitle("Not found");
   }
   
   function getAction() {  
