@@ -19,7 +19,7 @@ class Game extends Nette\Object {
     $game->siteName="HeroesofAbenez sTest";
     $uri = $container->getService("http.request")->getUrl();
     $game->base_url = $uri->hostUrl . $uri->path;
-    $game->db = $container->getService("database.test.context");
+    $game->db = $container->getService("database.default.context");
     $game->db->structure->rebuild();
     return $game;
   }
