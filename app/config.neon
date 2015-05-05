@@ -21,7 +21,7 @@ tracy:
     email: jakub.konecny2@centrum.cz
     strictMode: TRUE
 services:
-    page: Page
+    page: HTML\Page
 session:
     savePath: "%tempDir%/sessions"
     name: HOASESSID

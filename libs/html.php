@@ -1,6 +1,7 @@
 <?php
+namespace HTML;
 if(MASTER_ID !== "HEROES_OF_ABENEZ") exit;
-class Element extends Nette\Object {
+class Element extends \Nette\Object {
   protected $name;
   protected $content;
   protected $class;
@@ -43,7 +44,7 @@ class Element extends Nette\Object {
   }
 }
 
-class Container extends Nette\Object {
+class Container extends \Nette\Object {
   protected $name;
   protected $parts = array();
   protected $class;
@@ -584,7 +585,7 @@ default:
   }
 }
 
-class TextNode extends Nette\Object {
+class TextNode extends \Nette\Object {
   protected $content;
   function __construct($content = "") {
     if(!is_string($content)) { exit("Invalid value for parametr content passed to method TextNode::__construct. Expected string."); }
@@ -639,7 +640,7 @@ class Heading extends Element {
   }
 }
 
-class HTMLCode extends Nette\Object {
+class HTMLCode extends \Nette\Object {
   protected $content;
   function __construct($content = "") {
     if(!is_string($content)) { exit("Invalid value for parametr content passed to method HTMLCode::__construct. Expected string."); }
@@ -656,7 +657,7 @@ class HTMLCode extends Nette\Object {
   }
 }
 
-class Page extends Nette\Object {
+class Page extends \Nette\Object {
   public $elements = array();
   protected $title;
   protected $scripts = array();
