@@ -29,7 +29,7 @@ class Game extends Nette\Object {
   
   function navigation() {
     $navigation = $this->page->addSection("navigation", "nav");
-    $navigation->addLink("Home", $this->base_url);
+    $navigation->addLink("Home", "$this->base_url/");
   }
   
   function homePage() {

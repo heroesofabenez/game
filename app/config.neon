@@ -5,7 +5,7 @@ parameters:
         password: qwerty
     application:
         siteName: HeroesofAbenez sTest
-        baseUrl: "http://kobliha/heroesofabenez/play.php"
+        baseUrl: "http://kobliha/heroesofabenez"
 application:
     debugger: true
 database:
