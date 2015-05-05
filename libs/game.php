@@ -63,6 +63,27 @@ class Game extends Nette\Object {
     $profileDiv->addParagraph("More info: $char->description");
   }
   
+  function myGuild() {
+    $this->navigation();
+    $this->page->setTitle("$this->site_name - Guild");
+  }
+  
+  function guildPage($id) {
+    $this->navigation();
+    $db = $this->db;
+    $guild = $db->table("guilds")->get($id);
+    $this->page->setTitle("$this->site_name - Guild $guild->name");
+    $profileDiv = $this->page->addSection("profile", "article");
+    $profileDiv->addHeading(1, $guild->name);
+    $profileDiv->addParagraph("Description: $guild->description");
+    $profileDiv->addHeading(2, "Members");
+    $members = $db->table("characters")->where("guild", $guild->id);
+    foreach($members as $member) {
+      $rank = ucfirst($member->rank->name);
+      $profileDiv->inject("$rank: $member->name<br>");
+    }
+  }
+  
   function page404() {
     header("HTTP/1.1 404 Not Found");
     $this->page->setTitle("Not found");
@@ -75,13 +96,15 @@ class Game extends Nette\Object {
       $action[0] = "homepage";
     } elseif($query == "profile") {
       $action[0] = "profile";
+    } elseif($query == "guild") {
+      $action[0] = "myguild";
     } else {
       $action[0] = "notfound";
     }
     $pos = strpos($query, "/");
     $q = substr($query, 0, $pos);
     $params = substr($query, $pos+1);
-    $withParams = array("profile");
+    $withParams = array("profile", "guild");
     if($q !== $query) {
       if(in_array($q, $withParams)) {
         $action[0] = $q;
@@ -99,6 +122,12 @@ case "homepage":
   break;
 case "profile":
   $this->profile($action[1]);
+  break;
+case "myguild":
+  $this->myGuild();
+  break;
+case "guild":
+  $this->guildPage($action[1]);
   break;
 case "notfound":
   $this->page404();
