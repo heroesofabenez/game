@@ -5,7 +5,7 @@ class Game extends Nette\Object {
   protected $page;
   protected $user;
   protected $config;
-  protected $siteName;
+  protected $site_name;
   protected $base_url;
   private function __construct() { }
   static function Init(Nette\Configurator $config) {
@@ -16,9 +16,8 @@ class Game extends Nette\Object {
     $game->page->addMeta("content-type", "text/html; charset=utf-8");
     //$game->page->attachStyle("$base_url/style.css");
     //$game->page->attachScript("http://code.jquery.com/jquery-latest.pack.js");
-    $game->siteName="HeroesofAbenez sTest";
-    $uri = $container->getService("http.request")->getUrl();
-    $game->base_url = $uri->hostUrl . $uri->path;
+    $game->site_name= $container->parameters["application"]["siteName"];
+    $game->base_url = $container->parameters["application"]["baseUrl"];
     $game->db = $container->getService("database.default.context");
     $game->db->structure->rebuild();
     return $game;
@@ -34,12 +33,12 @@ class Game extends Nette\Object {
   }
   
   function homePage() {
-    $this->page->setTitle("$this->siteName - Home");
+    $this->page->setTitle("$this->site_name - Home");
     $this->navigation();
   }
   
   function profile($id) {
-    $this->page->setTitle("$this->siteName - Profile");
+    $this->page->setTitle("$this->site_name - Profile");
     $this->navigation();
     $db = $this->db;
     $char = $db->table("characters")->get($id);

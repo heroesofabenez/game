@@ -3,6 +3,9 @@ parameters:
         dsn: "mysql:host=localhost;dbname=heroesofabenez"
         user: heroesofabenez
         password: qwerty
+    application:
+        siteName: HeroesofAbenez sTest
+        baseUrl: "http://kobliha/heroesofabenez/play.php"
 application:
     debugger: true
 database:
