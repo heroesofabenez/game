@@ -19,11 +19,10 @@ use Nette\Application\Routers\RouteList,
 
 $router = new RouteList;
 $router[] = new Route("profile/<id>", "Profile:view");
-$router[] = new Route("guild", "Guild:default");
 $router[] = new Route("guild/create", "Guild:create");
 $router[] = new Route("guild/join[/<id>]", "Guild:join");
 $router[] = new Route("guild/<id>", "Guild:view");
-$router[] = new Route("<presenter>/<action>[/<id>]", "Homepage:default");
+$router[] = new Route("<presenter>[/<action>][/<id>]", "Homepage:default");
 $container->addService("router", $router);
 
 $container->getService("application")->run();
