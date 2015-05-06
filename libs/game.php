@@ -3,19 +3,18 @@ if(MASTER_ID !== "HEROES_OF_ABENEZ") exit;
 class Game extends Nette\Object {
   protected $db;
   protected $latte;
-  protected $config;
+  protected $container;
   protected $site_name;
   protected $base_url;
   private function __construct() { }
   static function Init(Nette\Configurator $config) {
     $game = new self;
-    $game->config = &$config;
-    $container = $config->createContainer();
-    $game->latte = $container->getService("latte");
+    $game->container = $config->createContainer();
+    $game->latte = $game->container->getService("latte");
     $game->latte->setTempDirectory(APP_DIR . "/temp/cache/Nette.Latte");
-    $game->site_name= $container->parameters["application"]["siteName"];
-    $game->base_url = $container->parameters["application"]["baseUrl"];
-    $game->db = $container->getService("database.default.context");
+    $game->site_name= $game->container->parameters["application"]["siteName"];
+    $game->base_url = $game->container->parameters["application"]["baseUrl"];
+    $game->db = $game->container->getService("database.default.context");
     $game->db->structure->rebuild();
     return $game;
   }
