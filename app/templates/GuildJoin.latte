@@ -1,0 +1,18 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <title>{$site_name} - Join guild</title>
+  <meta http-equiv="text/html; charset=utf-8">
+</head>
+{include "navigation.latte"}
+<article id='main'>
+  <h1>Join guild</h1>
+  <table border="2" cellpadding="5" cellspacing="4" id="guilds">
+    <caption>Guilds</caption>
+    <tr><th>Name</th><th>Description</th><th>Grandmaster</th><th>Members</th><th></th></tr>
+    {foreach $guilds as $guild}
+    <tr><td>{$guild["name"]}</td><td>{$guild["description"]}</td><td>{$guild["leader"]}</td><td align="right">{$guild["members"]}</td><td><a href="{$base_url}/guild/join/{$guild["id"]}">Apply</a></td></tr>
+    {/foreach}
+  </table>
+</article>
+</html>

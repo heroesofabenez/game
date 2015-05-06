@@ -69,8 +69,25 @@ class Game extends Nette\Object {
   }
   
   function myGuild() {
-    /*$this->navigation();
-    $this->page->setTitle("$this->site_name - Guild");*/
+    return 0;
+  }
+  
+  function guildList() {
+    $return = array();
+    $db = $this->db;
+    $guilds = $db->table("guilds");
+    foreach($guilds as $guild) {
+      if($guild->id == 0) continue;
+      $members = $db->table("characters")->where("guild", $guild->id);
+      foreach($members as $member) {
+        if($member->rank->name == "grandmaster") {
+          $leader = $member->name;
+          break;
+        }
+      }
+      $return["guilds"][] = array("id" => $guild->id, "name" => $guild->name, "description" => $guild->description, "leader" => $leader, "members" => $members->count("*"));
+    }
+    return $return;
   }
   
   function guildPage($id) {
@@ -128,12 +145,23 @@ case "profile":
   $template = APP_DIR . "/templates/Profile.latte";
   break;
 case "myguild":
-  $this->myGuild();
-  $template = APP_DIR . "/templates/Guild.latte";
+  if($this->myGuild() == 0) $template = APP_DIR . "/templates/GuildNone.latte";
+  else $template = APP_DIR . "/templates/Guild.latte";
   break;
 case "guild":
-  $parameters = array_merge($parameters, $this->guildPage($action[1]));
-  $template = APP_DIR . "/templates/GuildPage.latte";
+  switch($action[1]) {
+  case "create":
+    $template = APP_DIR . "/templates/GuildCreate.latte";
+    break;
+  case "join":
+    $template = APP_DIR . "/templates/GuildJoin.latte";
+    $parameters = array_merge($parameters, $this->guildList());
+    break;
+  default:
+    $parameters = array_merge($parameters, $this->guildPage($action[1]));
+    $template = APP_DIR . "/templates/GuildPage.latte";
+    break;
+  }
   break;
 case "notfound":
   $this->page404();
