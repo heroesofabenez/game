@@ -183,7 +183,7 @@ case "equipment":
   break;
 }
       if($type == "buff") { $$stat += $bonus_value; }
-      elseif($type == "debuff") { $debuffs[$stat] += $value; }
+      elseif($type == "debuff") { $debuffs[$stat] += $bonus_value; }
       $stat = $type = $duration = $bonus_value = "";
       $i++;
     }
