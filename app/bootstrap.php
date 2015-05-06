@@ -12,6 +12,5 @@ $configurator->createRobotLoader()
     ->addDirectory(LIBS_DIR)
     ->register();
 
-$game = Game::Init($configurator);
-$game->run();
+Game::run($configurator);
 ?>

@@ -1,31 +1,26 @@
 <?php
 if(MASTER_ID !== "HEROES_OF_ABENEZ") exit;
 class Game extends Nette\Object {
-  protected $db;
-  protected $latte;
-  protected $container;
-  protected $site_name;
-  protected $base_url;
+  static protected $db;
+  static protected $latte;
+  static protected $container;
   private function __construct() { }
-  static function Init(Nette\Configurator $config) {
-    $game = new self;
-    $game->container = $config->createContainer();
-    $game->latte = $game->container->getService("latte");
-    $game->latte->setTempDirectory(APP_DIR . "/temp/cache/Nette.Latte");
-    $game->site_name= $game->container->parameters["application"]["siteName"];
-    $game->base_url = $game->container->parameters["application"]["baseUrl"];
-    $game->db = $game->container->getService("database.default.context");
-    $game->db->structure->rebuild();
-    return $game;
+  
+  static function getDb() {
+    return self::$db;
   }
   
-  function &__get($var) {
-    if(isset($this->$var)) { return $this->$var; }
+  static function getLatte() {
+    return self::$latte;
   }
   
-  function profile($id) {
+  static function getContainer() {
+    return self::$container;
+  }
+  
+  static function profile($id) {
     $return = array();
-    $db = $this->db;
+    $db = self::$db;
     $char = $db->table("characters")->get($id);
     
     $return["name"] = $char->name;
@@ -68,13 +63,13 @@ class Game extends Nette\Object {
     return $return;
   }
   
-  function myGuild() {
+  static function myGuild() {
     return 0;
   }
   
-  function guildList() {
+  static function guildList() {
     $return = array();
-    $db = $this->db;
+    $db = self::$db;
     $guilds = $db->table("guilds");
     foreach($guilds as $guild) {
       if($guild->id == 0) continue;
@@ -90,9 +85,9 @@ class Game extends Nette\Object {
     return $return;
   }
   
-  function guildPage($id) {
+  static function guildPage($id) {
     $return = array();
-    $db = $this->db;
+    $db = self::$db;
     $guild = $db->table("guilds")->get($id);
     $return["name"] = $guild->name;
     $return["description"] = $guild->description;
@@ -103,11 +98,11 @@ class Game extends Nette\Object {
     return $return;
   }
   
-  function page404() {
+  static function page404() {
     header("HTTP/1.1 404 Not Found");
   }
   
-  function getAction() {  
+  static function getAction() {  
     if(isset($_GET["q"])) { $query = $_GET["q"]; } else { $query = "";  }
     $action = array("homepage", "");
     if(empty($query)) {
@@ -130,22 +125,27 @@ class Game extends Nette\Object {
     return $action;
   }
   
-  function run() {
-    $action = $this->getAction();
+  static function run(Nette\Configurator $config) {
+    self::$container = $config->createContainer();
+    self::$latte = self::$container->getService("latte");
+    self::$latte->setTempDirectory(APP_DIR . "/temp/cache/Nette.Latte");
+    self::$db = self::$container->getService("database.default.context");
+    self::$db->structure->rebuild();
+    $action = self::getAction();
     $parameters = array(
-      "site_name" => $this->site_name,
-      "base_url" => $this->base_url
+      "site_name" => self::$container->parameters["application"]["siteName"],
+      "base_url" => self::$container->parameters["application"]["baseUrl"]
     );
     switch($action[0]) {
 case "homepage":
   $template = APP_DIR . "/templates/HomePage.latte";
   break;
 case "profile":
-  $parameters = array_merge($parameters, $this->profile($action[1]));
+  $parameters = array_merge($parameters, self::profile($action[1]));
   $template = APP_DIR . "/templates/Profile.latte";
   break;
 case "myguild":
-  if($this->myGuild() == 0) $template = APP_DIR . "/templates/GuildNone.latte";
+  if(self::myGuild() == 0) $template = APP_DIR . "/templates/GuildNone.latte";
   else $template = APP_DIR . "/templates/Guild.latte";
   break;
 case "guild":
@@ -155,20 +155,20 @@ case "guild":
     break;
   case "join":
     $template = APP_DIR . "/templates/GuildJoin.latte";
-    $parameters = array_merge($parameters, $this->guildList());
+    $parameters = array_merge($parameters, self::guildList());
     break;
   default:
-    $parameters = array_merge($parameters, $this->guildPage($action[1]));
+    $parameters = array_merge($parameters, self::guildPage($action[1]));
     $template = APP_DIR . "/templates/GuildPage.latte";
     break;
   }
   break;
 case "notfound":
-  $this->page404();
+  self::page404();
   $template = APP_DIR . "/templates/Page404.latte";
   break;
 }
-    $this->latte->render($template, $parameters);
+    self::$latte->render($template, $parameters);
   }
 }
 ?>
