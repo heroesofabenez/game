@@ -142,11 +142,11 @@ case "homepage":
   break;
 case "profile":
   $parameters = array_merge($parameters, self::profile($action[1]));
-  $template = TEMPLATES_DIR . "//Profile.latte";
+  $template = TEMPLATES_DIR . "/Profile.latte";
   break;
 case "myguild":
   if(self::myGuild() == 0) $template = APP_DIR . "/templates/GuildNone.latte";
-  else $template = TEMPLATES_DIR . "/templates/Guild.latte";
+  else $template = TEMPLATES_DIR . "/Guild.latte";
   break;
 case "guild":
   switch($action[1]) {
