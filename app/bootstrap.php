@@ -1,6 +1,6 @@
 <?php
 if(MASTER_ID !== "HEROES_OF_ABENEZ") { exit; }
-require LIBS_DIR . '/Nette/nette.phar';
+require LIBS_DIR . '/nette.phar';
 Tracy\Debugger::enable();
 
 date_default_timezone_set("Europe/Prague");
