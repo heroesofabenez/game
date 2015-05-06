@@ -3,6 +3,7 @@ class GuildPresenter extends Nette\Application\UI\Presenter {
   function renderDefault() {
     $this->template->site_name = $this->context->parameters["application"]["siteName"];
     $this->template->base_url = $this->context->parameters["application"]["baseUrl"];
+    $this->template->inGuild = false;
   }
   
   function renderView($id) {
