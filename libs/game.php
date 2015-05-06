@@ -138,34 +138,34 @@ class Game extends Nette\Object {
     );
     switch($action[0]) {
 case "homepage":
-  $template = APP_DIR . "/templates/HomePage.latte";
+  $template = TEMPLATES_DIR . "/HomePage.latte";
   break;
 case "profile":
   $parameters = array_merge($parameters, self::profile($action[1]));
-  $template = APP_DIR . "/templates/Profile.latte";
+  $template = TEMPLATES_DIR . "//Profile.latte";
   break;
 case "myguild":
   if(self::myGuild() == 0) $template = APP_DIR . "/templates/GuildNone.latte";
-  else $template = APP_DIR . "/templates/Guild.latte";
+  else $template = TEMPLATES_DIR . "/templates/Guild.latte";
   break;
 case "guild":
   switch($action[1]) {
   case "create":
-    $template = APP_DIR . "/templates/GuildCreate.latte";
+    $template = TEMPLATES_DIR . "/GuildCreate.latte";
     break;
   case "join":
-    $template = APP_DIR . "/templates/GuildJoin.latte";
+    $template = TEMPLATES_DIR . "/GuildJoin.latte";
     $parameters = array_merge($parameters, self::guildList());
     break;
   default:
     $parameters = array_merge($parameters, self::guildPage($action[1]));
-    $template = APP_DIR . "/templates/GuildPage.latte";
+    $template = TEMPLATES_DIR . "/GuildPage.latte";
     break;
   }
   break;
 case "notfound":
   self::page404();
-  $template = APP_DIR . "/templates/Page404.latte";
+  $template = TEMPLATES_DIR . "/Page404.latte";
   break;
 }
     self::$latte->render($template, $parameters);
