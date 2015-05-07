@@ -5,7 +5,11 @@ class GuildPresenter extends UI\Presenter {
   function renderDefault() {
     $this->template->site_name = $this->context->parameters["application"]["siteName"];
     $this->template->base_url = $this->context->parameters["application"]["baseUrl"];
-    $this->template->inGuild = false;
+    $this->forward("noguild");
+  }
+  
+  function renderNoguild() {
+    $this->template->site_name = $this->context->parameters["application"]["siteName"];
   }
   
   function renderView($id) {
