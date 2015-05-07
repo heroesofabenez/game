@@ -14,6 +14,12 @@ class GuildPresenter extends UI\Presenter {
     return $db;
   }
   
+  function inGuild() {
+    $this->flashMessage("You are already in guild.");
+    $char = $this->db->table("characters")->get($this->user->id);
+    if($char->guild > 0) $this->forward("default");
+  }
+  
   function beforeRender() {
     $this->template->server = $this->context->parameters["application"]["server"];
   }
@@ -49,7 +55,13 @@ class GuildPresenter extends UI\Presenter {
     $this->redirect("Guild:");
   }
   
-  function renderCreate() { }
+  function actionCreate() {
+    $this->inGuild();
+  }
+  
+  function actionJoin() {
+    $this->inGuild();
+  }
   
   function renderJoin() {
     $db = $this->context->getService("database.default.context");
