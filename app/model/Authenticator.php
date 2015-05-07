@@ -10,9 +10,17 @@ class Authenticator extends Nette\Object implements NS\IAuthenticator {
   function authenticate(array $credentials) {
     $dev_servers = array("localhost", "kobliha", "test.heroesofabenez.tk");
     if(in_array($_SERVER["SERVER_NAME"], $dev_servers)) {
-      $id = 1;
-    } else { }
-    $char = $this->db->table("characters")->get($id);
+      $uid = 0;
+    } else {
+      define('WP_USE_THEMES', false);
+      require( WWW_DIR . '/wp-blog-header.php' );
+      $current_user = wp_get_current_user();
+      $uid = $current_user->ID;
+    }
+    $chars = $this->db->table("characters");
+    foreach($chars as $char) {
+      if($char->owner == $uid) break;
+    }
     $race = $this->db->table("character_races")->get($char->race);
     $occupation = $this->db->table("character_classess")->get($char->occupation);
     if(is_int($char->specialization)) {
@@ -26,7 +34,9 @@ class Authenticator extends Nette\Object implements NS\IAuthenticator {
       "occupation" => $occupation->name, "specialization" => $specialization,
       "level" => $char->level, "guild" => $char->guild,
     );
-    return new NS\Identity($id, $char->rank->name, $data);
+    if($char->guild > 0) $role = $char->rank->name;
+    else $role = "player";
+    return new NS\Identity($char->id, $role, $data);
   }
 }
 ?>
