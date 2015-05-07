@@ -4,7 +4,6 @@ use Nette\Application\UI;
 class GuildPresenter extends UI\Presenter {
   function renderDefault() {
     $this->template->site_name = $this->context->parameters["application"]["siteName"];
-    $this->template->base_url = $this->context->parameters["application"]["baseUrl"];
     $this->forward("noguild");
   }
   
@@ -14,7 +13,6 @@ class GuildPresenter extends UI\Presenter {
   
   function renderView($id) {
     $this->template->site_name = $this->context->parameters["application"]["siteName"];
-    $this->template->base_url = $this->context->parameters["application"]["baseUrl"];
     $db = $this->context->getService("database.default.context");
     $db->structure->rebuild();
     $data = Guild::view($id, $db);
@@ -42,12 +40,10 @@ class GuildPresenter extends UI\Presenter {
   
   function renderCreate() {
     $this->template->site_name = $this->context->parameters["application"]["siteName"];
-    $this->template->base_url = $this->context->parameters["application"]["baseUrl"];
   }
   
   function renderJoin() {
     $this->template->site_name = $this->context->parameters["application"]["siteName"];
-    $this->template->base_url = $this->context->parameters["application"]["baseUrl"];
     $db = $this->context->getService("database.default.context");
     $db->structure->rebuild();
     $this->template->guilds = Guild::join($db);
