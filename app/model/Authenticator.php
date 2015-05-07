@@ -14,8 +14,7 @@ class Authenticator extends Nette\Object implements NS\IAuthenticator {
     } else {
       define('WP_USE_THEMES', false);
       require( WWW_DIR . '/../wp-blog-header.php' );
-      $current_user = wp_get_current_user();
-      $uid = $current_user->ID;
+      $uid = get_current_user_id();
     }
     $chars = $this->db->table("characters");
     foreach($chars as $char) {
