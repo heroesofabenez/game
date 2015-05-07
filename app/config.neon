@@ -4,8 +4,7 @@ parameters:
         user: heroesofabenez
         password: qwerty
     application:
-        siteName: HeroesofAbenez sTest
-        baseUrl: "http://kobliha/heroesofabenez"
+        server: sTest
 application:
     debugger: true
 database:

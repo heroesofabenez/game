@@ -3,7 +3,7 @@ use Nette\Application\UI;
 
 class GuildPresenter extends UI\Presenter {
   function beforeRender() {
-    $this->template->site_name = $this->context->parameters["application"]["siteName"];
+    $this->template->server = $this->context->parameters["application"]["server"];
   }
   
   function actionDefault() {
