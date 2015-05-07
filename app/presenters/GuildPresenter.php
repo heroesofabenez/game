@@ -2,17 +2,19 @@
 use Nette\Application\UI;
 
 class GuildPresenter extends UI\Presenter {
-  function renderDefault() {
+  function beforeRender() {
     $this->template->site_name = $this->context->parameters["application"]["siteName"];
+  }
+  
+  function actionDefault() {
     $this->forward("noguild");
   }
   
-  function renderNoguild() {
-    $this->template->site_name = $this->context->parameters["application"]["siteName"];
-  }
+  function renderDefault() { }
+  
+  //function renderNoguild() { }
   
   function renderView($id) {
-    $this->template->site_name = $this->context->parameters["application"]["siteName"];
     $db = $this->context->getService("database.default.context");
     $db->structure->rebuild();
     $data = Guild::view($id, $db);
@@ -38,12 +40,9 @@ class GuildPresenter extends UI\Presenter {
     $this->redirect("Guild:");
   }
   
-  function renderCreate() {
-    $this->template->site_name = $this->context->parameters["application"]["siteName"];
-  }
+  function renderCreate() { }
   
   function renderJoin() {
-    $this->template->site_name = $this->context->parameters["application"]["siteName"];
     $db = $this->context->getService("database.default.context");
     $db->structure->rebuild();
     $this->template->guilds = Guild::join($db);
