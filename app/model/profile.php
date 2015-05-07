@@ -3,6 +3,7 @@ class Profile extends Nette\Object {
   static function view($id, $db) {
     $return = array();
     $char = $db->table("characters")->get($id);
+    if(!$char) { return false; }
     $return["name"] = $char->name;
     $return["gender"] = $char->gender;
     $return["level"] = $char->level;

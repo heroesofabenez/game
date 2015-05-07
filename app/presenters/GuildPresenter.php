@@ -17,7 +17,9 @@ class GuildPresenter extends UI\Presenter {
   function renderView($id) {
     $db = $this->context->getService("database.default.context");
     $db->structure->rebuild();
+    if($id == 0) $this->forward("notfound");
     $data = Guild::view($id, $db);
+    if(!$data) $this->forward("notfound");
     foreach($data as $key => $value) {
       $this->template->$key = $value;
     }
