@@ -18,7 +18,8 @@ class GuildPresenter extends UI\Presenter {
   }
   
   function actionDefault() {
-    $this->forward("noguild");
+    $char = $this->db->table("characters")->get($this->user->id);
+    if($char->guild == 0) $this->forward("noguild");
   }
   
   function renderView($id) {
