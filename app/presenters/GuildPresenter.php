@@ -2,6 +2,11 @@
 use Nette\Application\UI;
 
 class GuildPresenter extends UI\Presenter {
+  function startup() {
+    parent::startup();
+    $this->context->getService("user")->login();
+  }
+  
   function beforeRender() {
     $this->template->server = $this->context->parameters["application"]["server"];
   }

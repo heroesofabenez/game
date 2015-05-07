@@ -23,3 +23,5 @@ session:
     savePath: "%tempDir%/sessions"
     name: HOASESSID
     expiration: 7 days
+services:
+    authenticator: Authenticator
