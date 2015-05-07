@@ -4,7 +4,8 @@ use Nette\Application\UI;
 class GuildPresenter extends UI\Presenter {
   function startup() {
     parent::startup();
-    $this->context->getService("user")->login();
+    $user =$this->context->getService("user");
+    if(!$user->isLoggedIn()) $user->login();
   }
   
   function getDb() {

@@ -2,7 +2,8 @@
 class ProfilePresenter extends Nette\Application\UI\Presenter {
   function startup() {
     parent::startup();
-    $this->context->getService("user")->login();
+    $user =$this->context->getService("user");
+    if(!$user->isLoggedIn()) $user->login();
   }
   
   function beforeRender() {
