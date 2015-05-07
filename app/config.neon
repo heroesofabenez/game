@@ -22,6 +22,6 @@ tracy:
 session:
     savePath: "%tempDir%/sessions"
     name: HOASESSID
-    expiration: 7 days
+    expiration: 1 hour
 services:
     authenticator: Authenticator
