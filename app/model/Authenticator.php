@@ -13,7 +13,7 @@ class Authenticator extends Nette\Object implements NS\IAuthenticator {
       $uid = 0;
     } else {
       define('WP_USE_THEMES', false);
-      require( WWW_DIR . '/wp-blog-header.php' );
+      require( WWW_DIR . '/../wp-blog-header.php' );
       $current_user = wp_get_current_user();
       $uid = $current_user->ID;
     }
@@ -34,7 +34,7 @@ class Authenticator extends Nette\Object implements NS\IAuthenticator {
       "occupation" => $occupation->name, "specialization" => $specialization,
       "level" => $char->level, "guild" => $char->guild,
     );
-    if($char->guild > 0) $role = $char->rank->name;
+    if($char->guild > 0) $role = $char->guild_rank->name;
     else $role = "player";
     return new NS\Identity($char->id, $role, $data);
   }
