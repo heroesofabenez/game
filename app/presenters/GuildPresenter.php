@@ -7,6 +7,12 @@ class GuildPresenter extends UI\Presenter {
     $this->context->getService("user")->login();
   }
   
+  function getDb() {
+    $db = $this->context->getService("database.default.context");
+    $db->structure->rebuild();
+    return $db;
+  }
+  
   function beforeRender() {
     $this->template->server = $this->context->parameters["application"]["server"];
   }
@@ -15,15 +21,9 @@ class GuildPresenter extends UI\Presenter {
     $this->forward("noguild");
   }
   
-  function renderDefault() { }
-  
-  //function renderNoguild() { }
-  
   function renderView($id) {
-    $db = $this->context->getService("database.default.context");
-    $db->structure->rebuild();
     if($id == 0) $this->forward("notfound");
-    $data = Guild::view($id, $db);
+    $data = Guild::view($id, $this->db);
     if(!$data) $this->forward("notfound");
     foreach($data as $key => $value) {
       $this->template->$key = $value;
@@ -52,7 +52,7 @@ class GuildPresenter extends UI\Presenter {
   function renderJoin() {
     $db = $this->context->getService("database.default.context");
     $db->structure->rebuild();
-    $this->template->guilds = Guild::join($db);
+    $this->template->guilds = Guild::join($this->db);
   }
   
   function actionPromote($id) {
