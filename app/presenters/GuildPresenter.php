@@ -49,5 +49,20 @@ class GuildPresenter extends UI\Presenter {
     $db->structure->rebuild();
     $this->template->guilds = Guild::join($db);
   }
+  
+  function actionPromote($id) {
+    $this->flashMessage("Member promoted.");
+    $this->redirect("Guild:");
+  }
+  
+  function actionDemote($id) {
+    $this->flashMessage("Member demoted.");
+    $this->redirect("Guild:");
+  }
+  
+  function actionKick($id) {
+    $this->flashMessage("Member kicked.");
+    $this->redirect("Guild:");
+  }
 }
 ?>
