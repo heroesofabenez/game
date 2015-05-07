@@ -4,6 +4,7 @@
   {include "../head.latte"}
   <title>{$site_name} - Guild {$name}</title>
 </head>
+<body>
 {include "../navigation.latte"}
 <article id='profile'>
   <h1>{$name}</h1>
@@ -13,4 +14,5 @@
     {$member["rank"]}: {$member["name"]}<br>
   {/foreach}
 </article>
+</body>
 </html>
