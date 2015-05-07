@@ -3,8 +3,6 @@ class ProfilePresenter extends Nette\Application\UI\Presenter {
   function startup() {
     parent::startup();
     $this->context->getService("user")->login();
-    $db = $this->context->getService("database.default.context");
-    $db->structure->rebuild();
   }
   
   function beforeRender() {
@@ -16,6 +14,8 @@ class ProfilePresenter extends Nette\Application\UI\Presenter {
   }
   
   function renderView($id) {
+    $db = $this->context->getService("database.default.context");
+    $db->structure->rebuild();
     $data = Profile::view($id, $db);
     if(!$data) $this->forward("notfound");
     foreach($data as $key => $value) {
