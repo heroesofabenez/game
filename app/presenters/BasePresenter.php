@@ -18,11 +18,9 @@ class BasePresenter extends Nette\Application\UI\Presenter {
     $uid = $this->user->identity->id;
     switch($uid) {
 case -1:
-  echo "You have no character on this server. Create one now.";
   $this->redirect("Character:create");
   break;
 case 0:
-  echo "You are not logged in. Go to the website, login there and return.";
   //$this->redirect("http://heroesofabenez.tk/");
     }
   }
