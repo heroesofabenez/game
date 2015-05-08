@@ -1,5 +1,5 @@
 <?php
-class BasePresenter extends Nette\Application\UI\Presenter {
+abstract class BasePresenter extends Nette\Application\UI\Presenter {
   function startup() {
     parent::startup();
     $this->tryLogin();
