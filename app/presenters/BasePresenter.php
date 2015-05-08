@@ -7,9 +7,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
   }
   
   function getDb() {
-    $db = $this->context->getService("database.default.context");
-    $db->structure->rebuild();
-    return $db;
+    return $this->context->getService("database.default.context");
   }
   
   function tryLogin() {
