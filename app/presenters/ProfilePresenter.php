@@ -1,23 +1,11 @@
 <?php
-class ProfilePresenter extends Nette\Application\UI\Presenter {
-  function startup() {
-    parent::startup();
-    $user =$this->context->getService("user");
-    if(!$user->isLoggedIn()) $user->login();
-  }
-  
-  function beforeRender() {
-    $this->template->server = $this->context->parameters["application"]["server"];
-  }
-  
+class ProfilePresenter extends BasePresenter {
   function actionDefault() {
     $this->forward("view", $this->user->id);
   }
   
   function renderView($id) {
-    $db = $this->context->getService("database.default.context");
-    $db->structure->rebuild();
-    $data = Profile::view($id, $db);
+    $data = Profile::view($id, $this->db);
     if(!$data) $this->forward("notfound");
     foreach($data as $key => $value) {
       $this->template->$key = $value;
