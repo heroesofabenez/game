@@ -14,7 +14,7 @@ class BasePresenter extends Nette\Application\UI\Presenter {
   
   function tryLogin() {
     $user =$this->context->getService("user");
-    /*if(!$user->isLoggedIn())*/ $identity = $user->login();
+    /*if(!$user->isLoggedIn())*/ $user->login();
     $uid = $this->user->identity->id;
     switch($uid) {
 case -1:
