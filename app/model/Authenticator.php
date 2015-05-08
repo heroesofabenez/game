@@ -10,13 +10,15 @@ class Authenticator extends Nette\Object implements NS\IAuthenticator {
   function authenticate(array $credentials) {
     $dev_servers = array("localhost", "kobliha", "test.heroesofabenez.tk");
     if(in_array($_SERVER["SERVER_NAME"], $dev_servers)) {
-      $uid = 0;
+      $uid = 1;
     } else {
       define('WP_USE_THEMES', false);
       require( WWW_DIR . '/../wp-blog-header.php' );
       $uid = get_current_user_id();
     }
-    $chars = $this->db->table("characters");
+    if($uid == 0) return new NS\Identity(0, "guest");
+    $chars = $this->db->table("characters")->where("owner", $uid);
+    if($chars->count("*") == 0) return new NS\Identity(-1, "guest");
     foreach($chars as $char) {
       if($char->owner == $uid) break;
     }
