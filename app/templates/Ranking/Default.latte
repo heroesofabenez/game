@@ -1,0 +1,19 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  {include "../head.latte"}
+  <title>HeroesofAbenez {$server} - Ranking</title>
+</head>
+<body>
+{include "../navigation.latte"}
+<article id='main'>
+  <h1>Ranking</h1>
+  <table>
+    <tr><th>Nm.</th><th align="left">Name</th><th>Level</th><th>Guild</th><tr>
+    {foreach $characters as $character}
+      <tr><td>{$iterator->counter}.</td><td>{$character["name"]}</td><td align="right">{$character["level"]}</td><td>{$character["guild"]}</td></tr>
+    {/foreach}
+  <table>
+</article>
+</body>
+</html>
