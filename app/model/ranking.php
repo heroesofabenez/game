@@ -12,7 +12,7 @@ class Ranking extends Nette\Object {
       }
       $chars[] = array(
         "name" => $character->name, "level" => $character->level,
-        "guild" => $guildName
+        "guild" => $guildName, "id" => $character->id
       );
     }
     return $chars;

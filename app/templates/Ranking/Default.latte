@@ -9,11 +9,11 @@
 <article id='main'>
   <h1>Ranking</h1>
   <table>
-    <tr><th>Nm.</th><th align="left">Name</th><th>Level</th><th>Guild</th><tr>
+    <tr><th>Nm.</th><th align="left">Name</th><th>Level</th><th>Guild</th><th></th><tr>
     {foreach $characters as $character}
-      <tr><td>{$iterator->counter}.</td><td>{$character["name"]}</td><td align="right">{$character["level"]}</td><td>{$character["guild"]}</td></tr>
+    <tr><td>{$iterator->counter}.</td><td>{$character["name"]}</td><td align="right">{$character["level"]}</td><td>{$character["guild"]}</td><td><a n:href="Profile:view $character['id']">Profile</a></td></tr>
     {/foreach}
-  <table>
+  </table>
 </article>
 </body>
 </html>
