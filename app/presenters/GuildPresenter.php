@@ -34,7 +34,7 @@ class GuildPresenter extends BasePresenter {
     return $form;
   }
   
-  public function createGuildFormSucceeded(UI\Form $form, $values) {
+  function createGuildFormSucceeded(UI\Form $form, $values) {
     $this->flashMessage("Guild created.");
     $this->redirect("Guild:");
   }
