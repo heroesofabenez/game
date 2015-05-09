@@ -1,5 +1,17 @@
 <?php
 class Guild extends Nette\Object {
+  /**
+   * Model Guild
+   * 
+   * @author Jakub Konečný
+   */
+  
+  /**
+   * Gets basic data about specified guild
+   * @param integer $id guild's id
+   * @param Nette\Database\Context $db Database context
+   * @return array info about guild
+   */
   static function view($id, $db) {
     $return = array();
     $guild = $db->table("guilds")->get($id);
@@ -13,6 +25,12 @@ class Guild extends Nette\Object {
     }
     return $return;
   }
+  
+  /**
+   * Gets list of guilds
+   * @param Nette\Database\Context $db Database context
+   * @return array list of guilds (id, name, description, leader)
+   */
   static function join($db) {
     $return = array();
     $guilds = $db->table("guilds");

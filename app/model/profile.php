@@ -1,5 +1,17 @@
 <?php
 class Profile extends Nette\Object {
+  /**
+   * Model Profile
+   * 
+   * @author Jakub Konečný
+   */
+  
+  /**
+   * Gets basic data about specified player
+   * @param integer $id character's id
+   * @param Nette\Database\Context $db Database context
+   * @return array info about character
+   */
   static function view($id, $db) {
     $return = array();
     $char = $db->table("characters")->get($id);

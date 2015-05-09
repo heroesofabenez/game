@@ -1,15 +1,34 @@
 <?php
 abstract class BasePresenter extends Nette\Application\UI\Presenter {
+  /**
+   * Parent of all presenters
+   * 
+   * @author Jakub Konečný
+   */
+  
+  /**
+   * Login user and set server number for template
+   * @return void
+   */
   function startup() {
     parent::startup();
     $this->tryLogin();
     $this->template->server = $this->context->parameters["application"]["server"];
   }
   
+  /**
+   * Provides virtual variable db for all presenters
+   * @return Nette\Database\Context database context
+   */
   function getDb() {
     return $this->context->getService("database.default.context");
   }
   
+  /**
+   * Try to login the user
+   * @return Nette\Security\Identity|void
+   * @todo uncomment redirecting to website
+   */
   function tryLogin() {
     $user =$this->context->getService("user");
     /*if(!$user->isLoggedIn())*/ $user->login();

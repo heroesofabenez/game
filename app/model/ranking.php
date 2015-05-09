@@ -1,5 +1,16 @@
 <?php
 class Ranking extends Nette\Object {
+  /**
+   * Model Ranking
+   * 
+   * @author Jakub Konečný
+   */
+  
+  /**
+   * Gets list of all characters
+   * @param Nette\Database\Context $database Database context
+   * @return array List of all characters (id, name, level, guild)
+   */
   static function characters($db) {
     $characters = $db->table("characters")->order("level, experience, id");
     $chars = array();
@@ -18,6 +29,11 @@ class Ranking extends Nette\Object {
     return $chars;
   }
   
+  /**
+   * Gets list of all guilds
+   * @param Nette\Database\Context $database Database context
+   * @return array List of all guilds (name, number of members)
+   */
   static function guilds($db) {
     $return = array();
     $guilds = $db->table("guilds");

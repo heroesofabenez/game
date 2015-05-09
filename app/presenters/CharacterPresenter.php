@@ -2,6 +2,16 @@
 use Nette\Application\UI;
 
 class CharacterPresenter extends BasePresenter {
+  /**
+   * Presenter Character
+   * 
+   * @author Jakub Konečný
+   */
+  
+  /**
+   * Create form for creating character
+   * @return Nette\Application\UI\Form
+   */
   protected function createComponentCreateCharacterForm() {
     $form = new UI\Form;
     $form->addText("name", "Name:")
@@ -31,6 +41,13 @@ class CharacterPresenter extends BasePresenter {
     return $form;
   }
   
+  /**
+   * Handles creating character
+   * @todo implement :P
+   * @param Nette\Application\UI\Form $form Sent form
+   * @param  Nette\Utils\ArrayHash $values Array vith values
+   * @return void
+   */
   function createCharacterFormSucceeded(UI\Form $form, $values) {
     $this->flashMessage("Character created.");
     $this->redirect("Homepage:");

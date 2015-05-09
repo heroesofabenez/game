@@ -2,6 +2,17 @@
 use Nette\Application\UI;
 
 class GuildPresenter extends BasePresenter {
+  /**
+   * Presenter Guild
+   * 
+   * @author Jakub Konečný
+   */
+    
+  /**
+   * Redirect player to guild page if he is already in guild
+   * 
+   * @return void
+   */
   function inGuild() {
     $this->flashMessage("You are already in guild.");
     $char = $this->db->table("characters")->get($this->user->id);
@@ -22,6 +33,10 @@ class GuildPresenter extends BasePresenter {
     }
   }
   
+  /**
+   * Create form for creating guild
+   * @return Nette\Application\UI\Form
+   */
   protected function createComponentCreateGuildForm() {
     $form = new UI\Form;
     $form->addText("name", "Name:")
@@ -33,7 +48,13 @@ class GuildPresenter extends BasePresenter {
     $form->onSuccess[] = array($this, "createGuildFormSucceeded");
     return $form;
   }
-  
+  /**
+   * Handles creating guild
+   * @todo implement :P
+   * @param Nette\Application\UI\Form $form Sent form
+   * @param  Nette\Utils\ArrayHash $values Array vith values
+   * @return void
+   */
   function createGuildFormSucceeded(UI\Form $form, $values) {
     $this->flashMessage("Guild created.");
     $this->redirect("Guild:");
