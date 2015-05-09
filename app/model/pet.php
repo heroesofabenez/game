@@ -1,5 +1,4 @@
 <?php
-if(MASTER_ID !== "HEROES_OF_ABENEZ") exit;
 class Pet extends Nette\Object {
   private $id;
   private $type;

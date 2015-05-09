@@ -1,5 +1,4 @@
 <?php
-if(MASTER_ID !== "HEROES_OF_ABENEZ") exit;
 
 class Team extends Nette\Object {
   private $name;
