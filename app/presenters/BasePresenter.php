@@ -3,8 +3,7 @@
    * Parent of all presenters
    * 
    * @author Jakub Konečný
-   * 
-   * @property Nette\Database\Context $db Database context
+   * @property-read Nette\Database\Context $db Database context
    */
 abstract class BasePresenter extends Nette\Application\UI\Presenter {
   /**
