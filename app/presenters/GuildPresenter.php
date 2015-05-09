@@ -23,6 +23,10 @@ class GuildPresenter extends BasePresenter {
     if($char->guild == 0) $this->forward("noguild");
   }
   
+  /**
+   * @param int $id id of guild
+   * @return void
+   */
   function renderView($id) {
     if($id == 0) $this->forward("notfound");
     $data = Guild::view($id, $this->db);

@@ -5,10 +5,9 @@ use Nette\Security as NS;
    * Authenticator for the game
    * 
    * @author Jakub Konečný
-   * 
-   * @property Nette\Database\Context $db Database context
    */
 class Authenticator extends Nette\Object implements NS\IAuthenticator {
+  /** @var Nette\Database\Context $db Database context */
   public $db;
   
   /**

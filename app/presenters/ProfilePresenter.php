@@ -9,6 +9,10 @@ class ProfilePresenter extends BasePresenter {
     $this->forward("view", $this->user->id);
   }
   
+  /**
+   * @param int $id id of character
+   * @return void
+   */
   function renderView($id) {
     $data = Profile::view($id, $this->db);
     if(!$data) $this->forward("notfound");
