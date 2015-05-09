@@ -7,7 +7,7 @@ use Nette\Security as NS;
    * @author Jakub Konečný
    */
 class Authenticator extends Nette\Object implements NS\IAuthenticator {
-  /** @var Nette\Database\Context $db Database context */
+  /** @var Nette\Database\Context Database context */
   public $db;
   
   /**

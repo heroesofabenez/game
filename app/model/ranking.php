@@ -43,7 +43,7 @@ class Ranking extends Nette\Object {
       foreach($members as $member) {
         if($member->guild == $guild->id) $count++;
       }
-      $return[] = array("name" => $guild->name, "members" => $count);
+      $return[] = new Guild($guild->id, $guild->name, "", $count);
     }
     return $return;
   }
