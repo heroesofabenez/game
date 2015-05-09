@@ -1,13 +1,12 @@
 <?php
 use Nette\Application\UI;
 
-class GuildPresenter extends BasePresenter {
   /**
    * Presenter Guild
    * 
    * @author Jakub Konečný
    */
-    
+class GuildPresenter extends BasePresenter {
   /**
    * Redirect player to guild page if he is already in guild
    * 

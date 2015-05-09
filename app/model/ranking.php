@@ -1,11 +1,10 @@
 <?php
-class Ranking extends Nette\Object {
   /**
    * Model Ranking
    * 
    * @author Jakub Konečný
    */
-  
+class Ranking extends Nette\Object {
   /**
    * Gets list of all characters
    * @param Nette\Database\Context $database Database context

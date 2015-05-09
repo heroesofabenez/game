@@ -1,11 +1,10 @@
 <?php
-abstract class BasePresenter extends Nette\Application\UI\Presenter {
   /**
    * Parent of all presenters
    * 
    * @author Jakub Konečný
    */
-  
+abstract class BasePresenter extends Nette\Application\UI\Presenter {
   /**
    * Login user and set server number for template
    * @return void

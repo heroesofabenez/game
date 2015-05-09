@@ -1,11 +1,10 @@
 <?php
-class ProfilePresenter extends BasePresenter {
   /**
    * Presenter Profile
    * 
    * @author Jakub Konečný
    */
-  
+class ProfilePresenter extends BasePresenter {
   function actionDefault() {
     $this->forward("view", $this->user->id);
   }

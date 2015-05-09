@@ -1,11 +1,10 @@
 <?php
-class Guild extends Nette\Object {
   /**
    * Model Guild
    * 
    * @author Jakub Konečný
    */
-  
+class Guild extends Nette\Object {
   /**
    * Gets basic data about specified guild
    * @param integer $id guild's id

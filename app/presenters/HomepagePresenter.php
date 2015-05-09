@@ -1,9 +1,9 @@
 <?php
-class HomepagePresenter extends BasePresenter {
   /**
    * Presenter Homepage
    * 
    * @author Jakub Konečný
    */
+class HomepagePresenter extends BasePresenter {
 }
 ?>

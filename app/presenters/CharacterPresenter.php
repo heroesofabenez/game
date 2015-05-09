@@ -1,13 +1,12 @@
 <?php
 use Nette\Application\UI;
 
-class CharacterPresenter extends BasePresenter {
   /**
    * Presenter Character
    * 
    * @author Jakub Konečný
    */
-  
+class CharacterPresenter extends BasePresenter {
   /**
    * Create form for creating character
    * @return Nette\Application\UI\Form

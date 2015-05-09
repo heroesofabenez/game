@@ -1,7 +1,6 @@
 <?php
 use Nette\Security as NS;
 
-class Authenticator extends Nette\Object implements NS\IAuthenticator {
   /**
    * Authenticator for the game
    * 
@@ -9,7 +8,7 @@ class Authenticator extends Nette\Object implements NS\IAuthenticator {
    * 
    * @property Nette\Database\Context $db Database context
    */
-  
+class Authenticator extends Nette\Object implements NS\IAuthenticator {
   public $db;
   
   /**

@@ -1,11 +1,10 @@
 <?php
-class Profile extends Nette\Object {
   /**
    * Model Profile
    * 
    * @author Jakub Konečný
    */
-  
+class Profile extends Nette\Object {
   /**
    * Gets basic data about specified player
    * @param integer $id character's id
