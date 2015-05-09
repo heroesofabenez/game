@@ -72,8 +72,6 @@ class GuildPresenter extends BasePresenter {
   }
   
   function renderJoin() {
-    $db = $this->context->getService("database.default.context");
-    $db->structure->rebuild();
     $this->template->guilds = GuildModel::listOfGuilds($this->db);
   }
   
