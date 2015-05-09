@@ -10,9 +10,9 @@
   <h1>Ranking Guilds</h1>
   <h3><a n:href="Ranking:">Characters</a> Guilds</h3>
   <table>
-    <tr><th>Nm.</th><th align="left">Name</th><th>Members</th><tr>
+    <tr><th>Nm.</th><th align="left">Name</th><th>Members</th><th></th><tr>
     {foreach $guilds as $guild}
-    <tr><td>{$iterator->counter}.</td><td>{$guild->name}</td><td align="right">{$guild->members}</td></tr>
+      <tr><td>{$iterator->counter}.</td><td>{$guild->name}</td><td align="right">{$guild->members}</td><td><a n:href="Guild:view $guild->id">Details</a></td></tr>
     {/foreach}
   <table>
 </article>
