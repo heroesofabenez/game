@@ -15,17 +15,13 @@ class Profile extends Nette\Object {
     $return = array();
     $char = $db->table("characters")->get($id);
     if(!$char) { return false; }
-    $return["name"] = $char->name;
-    $return["gender"] = $char->gender;
-    $return["level"] = $char->level;
-    $return["race"] = $char->race;
-    $return["description"] = $char->description;
-    $return["strength"] = $char->strength;
-    $return["dexterity"] = $char->dexterity;
-    $return["constitution"] = $char->constitution;
-    $return["intelligence"] = $char->intelligence;
-    $return["charisma"] = $char->charisma;
-    $return["description"] = $char->description;
+    $stats = array(
+      "name", "gender", "level", "race", "description", "strength",
+      "dexterity", "constitution", "intelligence", "charisma"
+    );
+    foreach($stats as $stat) {
+      $return[$stat] = $char->$stat;
+    }
     
     $race = $db->table("character_races")->get($char->race);
     $return["race"] = $race->name;

@@ -4,7 +4,7 @@
    * 
    * @author Jakub Konečný
    */
-class Guild extends Nette\Object {
+class GuildModel extends Nette\Object {
   /**
    * Gets basic data about specified guild
    * @param integer $id guild's id
@@ -30,7 +30,7 @@ class Guild extends Nette\Object {
    * @param Nette\Database\Context $db Database context
    * @return array list of guilds (id, name, description, leader)
    */
-  static function join($db) {
+  static function listOfGuilds($db) {
     $return = array();
     $guilds = $db->table("guilds");
     foreach($guilds as $guild) {

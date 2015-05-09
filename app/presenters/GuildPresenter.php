@@ -29,7 +29,7 @@ class GuildPresenter extends BasePresenter {
    */
   function renderView($id) {
     if($id == 0) $this->forward("notfound");
-    $data = Guild::view($id, $this->db);
+    $data = GuildModel::view($id, $this->db);
     if(!$data) $this->forward("notfound");
     foreach($data as $key => $value) {
       $this->template->$key = $value;
@@ -74,7 +74,7 @@ class GuildPresenter extends BasePresenter {
   function renderJoin() {
     $db = $this->context->getService("database.default.context");
     $db->structure->rebuild();
-    $this->template->guilds = Guild::join($this->db);
+    $this->template->guilds = GuildModel::listOfGuilds($this->db);
   }
   
   function actionPromote($id) {
