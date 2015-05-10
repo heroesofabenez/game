@@ -1,0 +1,13 @@
+* { color: #FFFF00 }
+#main, #profile { width: 500px; background-color: #9999CC;
+position: relative; top: -13px }
+#navigation { width: 500px; background-color: gray }
+#navigation a { color: white }
+#navigation a:hover { color: #0099CC }
+#main a { color: #009933 }
+#main a:hover { color: #000033 }
+form label { color: #660099 }
+form input, select { color: #330099 }
+form select option { color: black }
+h1, h2, h3 { color: green; font-family: Courier New, Courier, monotype }
+body { font-family: MS Sans Serif, Geneva, sans-serif }
