@@ -3,6 +3,19 @@
 <head>
   {include "../head.latte"}
   <title>HeroesofAbenez {$server} - Create character</title>
+  <script>
+    racesDes = new Array("");
+    {foreach $races as $race}
+    racesDes[{$iterator->counter}] = {$race};
+    {/foreach}
+    function changeRaceDescription(race) {
+      var racDiv,description;
+      raceDiv = document.getElementById('raceDescription');
+      description =racesDes[race];
+      raceDiv.innerHTML = description;
+      return;
+    }
+  </script>
 </head>
 <body>
 {include "../navigation.latte"}

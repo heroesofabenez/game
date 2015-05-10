@@ -8,6 +8,16 @@ use Nette\Application\UI;
    */
 class CharacterPresenter extends BasePresenter {
   /**
+   * @return void
+   */
+  function renderCreate() {
+    $races = $this->db->table("character_races");
+    $this->template->races = array();
+    foreach($races as $race) {
+      $this->template->races[$race->id] = $race->description;
+    }
+  }
+  /**
    * Create form for creating character
    * @return Nette\Application\UI\Form
    */
@@ -27,6 +37,7 @@ class CharacterPresenter extends BasePresenter {
     $form->addSelect('race', 'Race:', $racesList)
          ->setPrompt('Select race')
          ->setRequired("Select race");
+    $form['race']->getControlPrototype()->onchange("changeRaceDescription(document.getElementById('frm-createCharacterForm-race').value)");
     $classesList = array();
     $classes = $this->db->table("character_classess");
     foreach($classes as $class) {
