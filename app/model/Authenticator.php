@@ -48,7 +48,8 @@ class Authenticator extends Nette\Object implements NS\IAuthenticator {
     $data = array(
       "name" => $char->name, "race" => $race->name, "gender" => $char->gender,
       "occupation" => $occupation->name, "specialization" => $specialization,
-      "level" => $char->level, "guild" => $char->guild,
+      "level" => $char->level, "guild" => $char->guild, "stage" => $char->current_stage,
+      "white_karma" => $char->white_karma, "neutral_karma" => $char->neutral_karma, "dark_karma" => $char->dark_karma
     );
     if($char->guild > 0) $role = $char->rank->name;
     else $role = "player";
