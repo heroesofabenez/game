@@ -11,7 +11,8 @@ class IntroPresenter extends BasePresenter {
   /**
    * @return void
    */
-  function actionDefault() {
+  function startup() {
+    parent::startup();
     $char = $this->db->table("characters")->get($this->user->id);
     $this->part = $this->template->part = $char->intro;
   }
@@ -25,11 +26,21 @@ class IntroPresenter extends BasePresenter {
       ->where("race", $char->race)
       ->where("class", $char->occupation)
       ->where("part", $this->part);
-    if($intros->count("text") == 0) {
+    if($intros->count("*") == 0) {
       $this->template->intro = "";
       return;
     }
     foreach($intros as $intro) { }
     $this->template->intro = $intro->text;
+  }
+  
+  /**
+   * @return void
+   */
+  function actionNext() {
+  $next = $this->part + 1;
+  $data = array("intro" => $next);
+  $this->db->query("UPDATE characters SET ? WHERE id=?", $data, $this->user->id);
+  $this->redirect("Intro:");
   }
 }
