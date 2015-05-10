@@ -7,7 +7,7 @@
 class Ranking extends Nette\Object {
   /**
    * Gets list of all characters
-   * @param Nette\Database\Context $database Database context
+   * @param Nette\Database\Context $db Database context
    * @return array List of all characters (id, name, level, guild)
    */
   static function characters($db) {
