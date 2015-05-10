@@ -42,13 +42,44 @@ class CharacterPresenter extends BasePresenter {
   
   /**
    * Handles creating character
-   * @todo implement :P
    * @param Nette\Application\UI\Form $form Sent form
    * @param  Nette\Utils\ArrayHash $values Array vith values
    * @return void
    */
   function createCharacterFormSucceeded(UI\Form $form, $values) {
-    $this->flashMessage("Character created.");
-    $this->redirect("Homepage:");
+    $data = array(
+      "name" => $values["name"], "race" => $values["race"],
+      "occupation" => $values["class"], "gender" => $values["gender"]
+    );
+    $race = $this->db->table("character_races")->get($values["race"]);
+    $class = $this->db->table("character_classess")->get($values["class"]);
+    $data["strength"] = $class->strength + $race->strength;
+    $data["dexterity"] = $class->dexterity + $race->dexterity;
+    $data["constitution"] = $class->constitution + $race->constitution;
+    $data["intelligence"] = $class->intelligence + $race->intelligence;
+    $data["charisma"] = $class->charisma + $race->charisma;
+    $data["owner"] = $this->realId;
+    
+    $chars = $this->db->table("characters")->where("name", $data["name"]);
+    if($chars->count("*") > 0) $this->forward("Character:exists");
+    
+    $this->db->query("INSERT INTO characters", $data);
+    
+    $data["class"] = $class->name;
+    $data["race"] = $race->name;
+    if($data["gender"]  == 1) $data["gender"] = "male";
+    else $data["gender"] = "female";
+    unset($data["occupation"]);
+    $this->forward("Character:created", array("data" => serialize($data)));
+  }
+  
+  /**
+   * @param string $data Serialized array with data
+   */
+  function renderCreated($data) {
+    $data = unserialize($data);
+    foreach($data as $key => $value) {
+      $this->template->$key = $value;
+    }
   }
 }

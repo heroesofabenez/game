@@ -4,6 +4,7 @@
    * 
    * @author Jakub Konečný
    * @property-read Nette\Database\Context $db Database context
+   * @property-read int $realId Real user's id
    */
 abstract class BasePresenter extends Nette\Application\UI\Presenter {
   /**
@@ -25,6 +26,22 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
   }
   
   /**
+   * Provides virtual variable realId for all presenters
+   * @return int
+   */
+  function getRealId() {
+    $dev_servers = array("localhost", "kobliha", "test.heroesofabenez.tk");
+    if(in_array($_SERVER["SERVER_NAME"], $dev_servers)) {
+      $uid = 1;
+    } else {
+      define('WP_USE_THEMES', false);
+      require( WWW_DIR . '/../wp-blog-header.php' );
+      $uid = get_current_user_id();
+    }
+    return $uid;
+  }
+  
+  /**
    * Try to login the user
    * @return void
    * @todo uncomment redirecting to website
@@ -34,6 +51,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
     /*if(!$user->isLoggedIn())*/ $user->login();
     $uid = $this->user->identity->id;
     if(is_a($this->presenter, "CharacterPresenter") AND $uid == -1) return;
+    if(is_a($this->presenter, "CharacterPresenter") AND $this->user->identity->stage == NULL) return;
     if(is_a($this->presenter, "CharacterPresenter") AND $uid > 0) $this->redirect(301, "Homepage:default");
     if(is_a($this->presenter, "IntroPresenter") AND $this->user->identity->stage == NULL) return;
     switch($uid) {
