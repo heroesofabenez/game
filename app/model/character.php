@@ -1,39 +1,84 @@
 <?php
+/**
+ * Structure for single character
+ * 
+ * @author Jakub Konečný
+ */
 class Character extends Nette\Object {
-  private $id;
-  private $name;
-  private $gender;
-  private $occupation;
-  private $specialization;
-  private $level;
-  private $experience;
-  private $strength;
-  private $base_strength;
-  private $dexterity;
-  private $base_dexterity;
-  private $constitution;
-  private $base_constitution;
-  private $intelligence;
-  private $base_intelligence;
-  private $charisma;
-  private $base_charisma;
-  private $max_hitpoints;
-  private $hitpoints;
-  private $damage;
-  private $base_damage;
-  private $hit;
-  private $base_hit;
-  private $dodge;
-  private $base_dodge;
-  private $initiative;
-  private $base_initiative;
-  private $description;
-  private $guild = null;
-  private $guild_rank = null;
-  private $equipment = array();
-  private $pets = array();
-  private $active_pet = null;
-  private $effects = array();
+  /** @var int */
+  protected $id;
+  /** @var string */
+  protected $name;
+  /** @var string */
+  protected $gender;
+  /** @var string */
+  protected $occupation;
+  /** @var string */
+  protected $specialization;
+  /** @var int */
+  protected $level;
+  /** @var int */
+  protected $experience;
+  /** @var int */
+  protected $strength;
+  /** @var int */
+  protected $base_strength;
+  /** @var int */
+  protected $dexterity;
+  /** @var int */
+  protected $base_dexterity;
+  /** @var int */
+  protected $constitution;
+  /** @var int */
+  protected $base_constitution;
+  /** @var int */
+  protected $intelligence;
+  /** @var int */
+  protected $base_intelligence;
+  /** @var int */
+  protected $charisma;
+  /** @var int */
+  protected $base_charisma;
+  /** @var int */
+  protected $max_hitpoints;
+  /** @var int */
+  protected $hitpoints;
+  /** @var int */
+  protected $damage;
+  /** @var int */
+  protected $base_damage;
+  /** @var int */
+  protected $hit;
+  /** @var int */
+  protected $base_hit;
+  /** @var int */
+  protected $dodge;
+  /** @var int */
+  protected $base_dodge;
+  /** @var int */
+  protected $initiative;
+  /** @var int */
+  protected $base_initiative;
+  /** @var string */
+  protected $description;
+  /** @var int */
+  protected $guild = null;
+  /** @var string Position in guild */
+  protected $guild_rank = null;
+  /** @var array Character's equipment */
+  protected $equipment = array();
+  /** @var array Character's pets */
+  protected $pets = array();
+  /** @var int */
+  protected $active_pet = null;
+  protected $effects = array();
+  
+  /**
+   * 
+   * @param array $stats Stats of the character
+   * @param array $equipment Equipment of the character
+   * @param array $pets Pets owned by the character
+   */
   function __construct($stats = array(), $equipment = array(), $pets = array()) {
     if(!is_array($stats)) { exit("Invalid value for parameter stats passed to method Character::__construct. Expected array."); }
     if(!is_array($equipment)) { exit("Invalid value for parameter equipment passed to method Character::__construct. Expected array."); }
@@ -96,6 +141,12 @@ case "initiative":
     $this->recalculateStats();
   }
   
+  /**
+   * Removes specified effect from the character
+   * 
+   * @param int $effectId Effect to remove
+   * @return bool Success
+   */
   function removeEffect($effectId) {
     for($i = 0; $i <= count($this->effects); $i++) {
     	if($this->effects[$i]["id"] == $effectId) {
@@ -107,6 +158,12 @@ case "initiative":
     return false;
   }
   
+  /**
+   * Get specified equipment of the character
+   * 
+   * @param int $itemid Item's id
+   * @return Equipment Item if found else false
+   */
   function getItem($itemid) {
     if(isset($this->equipment[$itemid])) { return $this->equipment[$itemid]; }
     else { return false; }
@@ -132,11 +189,23 @@ case "initiative":
     }
   }
   
+  /**
+   * Get specified pet
+   * 
+   * @param int $petId Pet's id
+   * @return Pet Pet if found else false
+   */
   function getPet($petId) {
     if(isset($this->pets[$petId]) and is_a($this->pets[$petId], "Pet")) { return $this->pets[$petId]; }
     else { return false; }
   }
   
+  /**
+   * Deploy specified pet (for bonuses)
+   * 
+   * @param int $petId Pet's id
+   * @return void
+   */
   function deployPet($petId) {
     $pet = $this->getPet($petId);
     if(!$pet) {
@@ -146,12 +215,22 @@ case "initiative":
     }
   }
   
+  /**
+   * Dismisses active pet
+   * 
+   * @return void
+   */
   function dismissPet() {
     if(is_int($this->active_pet)) {
       $this->active_pet = null;
     }
   }
   
+  /**
+   * Recalculates stats of the character (mostly used during combat)
+   * 
+   * @return void
+   */
   function recalculateStats() {
     $strength = $this->base_strength;
     $dexterity = $this->base_dexterity;
