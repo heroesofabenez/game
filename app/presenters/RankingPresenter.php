@@ -9,7 +9,7 @@ class RankingPresenter extends BasePresenter {
    * @todo do pagination
    * @return void
    */
-  function renderDefault() {
+  function renderDefault($page) {
     $this->template->characters = Ranking::characters($this->db);
   }
   
@@ -17,7 +17,7 @@ class RankingPresenter extends BasePresenter {
    * @todo do pagination and ordering
    * @return void
    */
-  function renderGuilds() {
+  function renderGuilds($page) {
     $this->template->guilds = Ranking::guilds($this->db);
   }
 }
