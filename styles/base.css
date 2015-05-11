@@ -3,8 +3,8 @@ body, p, li, td, article, div { font-family: MS Sans Serif, Geneva, sans-serif }
 #main, #profile { width: 500px; height: 505px; background-color: #9999CC;
 position: relative; top: -16px }
 #navigation { width: 500px; background-color: gray }
-#navigation a { color: white }
-#navigation a:hover { color: #00CC99 }
+#navigation a { color: white; text-decoration: none }
+#navigation a:hover { color: #000099 }
 #main a { color: #009933 }
 #main a:hover { color: #000066 }
 form label { color: #660099 }
