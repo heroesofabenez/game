@@ -3,9 +3,9 @@
 position: relative; top: -13px }
 #navigation { width: 500px; background-color: gray }
 #navigation a { color: white }
-#navigation a:hover { color: #0099CC }
+#navigation a:hover { color: #00CC99 }
 #main a { color: #009933 }
-#main a:hover { color: #000033 }
+#main a:hover { color: #000066 }
 form label { color: #660099 }
 form input, select { color: #330099 }
 form select option { color: black }
