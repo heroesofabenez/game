@@ -11,7 +11,7 @@ class Profile extends Nette\Object {
    * @param Nette\Database\Context $db Database context
    * @return array info about character
    */
-  static function view($id, $db) {
+  static function view($id, Nette\Database\Context $db) {
     $return = array();
     $char = $db->table("characters")->get($id);
     if(!$char) { return false; }

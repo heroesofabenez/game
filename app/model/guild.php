@@ -44,7 +44,7 @@ class GuildModel extends Nette\Object {
    * @param Nette\Database\Context $db Database context
    * @return array info about guild
    */
-  static function view($id, $db) {
+  static function view($id, Nette\Database\Context  $db) {
     $return = array();
     $guild = $db->table("guilds")->get($id);
     if(!$guild) { return false; }
@@ -63,7 +63,7 @@ class GuildModel extends Nette\Object {
    * @param Nette\Database\Context $db Database context
    * @return array list of guilds (id, name, description, leader)
    */
-  static function listOfGuilds($db) {
+  static function listOfGuilds(Nette\Database\Context $db) {
     $return = array();
     $guilds = $db->table("guilds");
     foreach($guilds as $guild) {
