@@ -81,15 +81,34 @@ class GuildPresenter extends BasePresenter {
    */
   function actionJoin($id) {
     $this->inGuild();
+    if($id > 0) {
+      $guild = $this->db->table("guilds")->get($id);
+      if(!$guild) { $this->forward("notfound"); }
+      $leader = $this->db->table("characters")
+        ->where("guild", $id)
+        ->where("guildrank", 8);
+      $leader = $leader[1];
+      $data = array(
+        "from" => $this->user->id, "to" => $leader->id, "type" => "guild_app"
+      );
+      $row = $this->db->query("INSERT INTO requests", $data);
+      if($row)  $this->flashMessage("Application sent.");
+      else $this->flashMessage("An error occured.");
+      $this->redirect("Guild:");
+    }
   }
   
   /**
-   * @todo implement sending application
    * @param int $id Guild to join   
    * @return void
    */
   function renderJoin($id) {
     $this->template->guilds = GuildModel::listOfGuilds($this->db);
+    $apps = $this->db->table("requests")
+      ->where("from", $this->user->id)
+      ->where("type", "guild_app")
+      ->where("status", "new");
+    if($apps->count("*") > 0) $this->flashMessage("You have an unresolved application.");
   }
   
   /**
