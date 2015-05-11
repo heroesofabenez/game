@@ -76,14 +76,19 @@ class GuildPresenter extends BasePresenter {
   }
   
   /**
-   * @todo implement sending application
+   * @param int $id Guild to join   
    * @return void
    */
-  function actionJoin() {
+  function actionJoin($id) {
     $this->inGuild();
   }
   
-  function renderJoin() {
+  /**
+   * @todo implement sending application
+   * @param int $id Guild to join   
+   * @return void
+   */
+  function renderJoin($id) {
     $this->template->guilds = GuildModel::listOfGuilds($this->db);
   }
   
