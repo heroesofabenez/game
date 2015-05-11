@@ -235,7 +235,7 @@ case "initiative":
     $strength = $this->base_strength;
     $dexterity = $this->base_dexterity;
     $constitution = $this->base_constitution;
-    $intellingence = $this->base_intelligence;
+    $intelligence = $this->base_intelligence;
     $charisma = $this->base_charisma;
     $damage = $this->base_damage;
     $hit = $this->base_hit;
@@ -254,7 +254,7 @@ case "initiative":
 switch($effect->source) {
 case "pet":
 case "skill":
-  $bonus_value = $$stat / 100 * $value;
+  $bonus_value = $$stat / 100 * $effect->value;
 	break;
 case "equipment":
   $bonus_value = $effect->value;
@@ -262,7 +262,7 @@ case "equipment":
 }
       if($type == "buff") { $$stat += $bonus_value; }
       elseif($type == "debuff") { $debuffs[$stat] += $bonus_value; }
-      $stat = $type = $duration = $bonus_value = "";
+      unset($stat, $type, $duration, $bonus_value);
       $i++;
     }
     foreach($debuffs as $stat => $value) {
