@@ -59,6 +59,18 @@ class GuildModel extends Nette\Object {
   }
   
   /**
+   * Get id of player's guild
+   * 
+   * @param Nette\Database\Context $db Database context
+   * @param int $uid Player's id
+   * @return int
+   */
+  static function getGuildId(Nette\Database\Context $db, $uid) {
+    $char = $db->table("characters")->get($uid);
+    return $char->guild;
+  }
+  
+  /**
    * Gets list of guilds
    * @param Nette\Database\Context $db Database context
    * @return array list of guilds (id, name, description, leader)

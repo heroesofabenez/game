@@ -13,15 +13,14 @@ class IntroPresenter extends BasePresenter {
    */
   function startup() {
     parent::startup();
-    $char = $this->db->table("characters")->get($this->user->id);
-    $this->part = $this->template->part = $char->intro;
+    $this->part = $this->template->part = Intro::getIntroPosition($this->db, $this->user->id);
   }
   
   /**
    * @return void
    */
   function renderDefault() {
-    $text = Intro::getIntroPart($this->db, $this->user->id);
+    $text = Intro::getIntroPart($this->db, $this->user->id, $this->part);
     if($text == "ENDOFINTRO") $this->forward("Intro:end");
     $this->template->intro = $text;
   }

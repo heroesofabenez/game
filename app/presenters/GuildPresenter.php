@@ -14,13 +14,13 @@ class GuildPresenter extends BasePresenter {
    */
   function inGuild() {
     $this->flashMessage("You are already in guild.");
-    $char = $this->db->table("characters")->get($this->user->id);
-    if($char->guild > 0) $this->forward("default");
+    $guild = GuildModel::getGuildId($this->db, $this->user->id);
+    if($guild > 0) $this->forward("default");
   }
   
   function actionDefault() {
-    $char = $this->db->table("characters")->get($this->user->id);
-    if($char->guild == 0) $this->forward("noguild");
+    $guild = GuildModel::getGuildId($this->db, $this->user->id);
+    if($guild == 0) $this->forward("noguild");
   }
   
   /**

@@ -6,18 +6,30 @@
  */
 class Intro {
   /**
-   * Get next part of introduction
+   * Check in which part of intro the player is
+   * 
+   * @param Nette\Database\Context $db Database context
+   * @param type $uid User's id
+   * @return type
+   */
+  static function getIntroPosition(Nette\Database\Context $db, $uid) {
+    $char = $db->table("characters")->get($uid);
+    return $char->intro;
+  }
+  /**
+   * Get a part of introduction
    * 
    * @param Nette\Database\Context $db Database context
    * @param int $id Character's id
+   * @param int $part Part's id
    * @return string Text of current introduction part
    */
-  static function getIntroPart(Nette\Database\Context $db, $id) {
+  static function getIntroPart(Nette\Database\Context $db, $id, $part) {
     $char = $db->table("characters")->get($id);
     $intros = $db->table("introduction")
       ->where("race", $char->race)
       ->where("class", $char->occupation)
-      ->where("part", $this->part);
+      ->where("part", $part);
     if($intros->count("*") == 0) return;
     foreach($intros as $intro) { }
     return $intro->text;

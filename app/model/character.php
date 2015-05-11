@@ -281,4 +281,41 @@ case "equipment":
     $this->initiative = $initiative;
   }
 }
+
+/**
+ * Model Character
+ * 
+ * @author Jakub Konečný
+ */
+class CharacterModel {
+  /**
+   * Get list of races
+   * 
+   * @param Nette\Database\Context $db Database context
+   * @return array
+   */
+  static function getRacesList(Nette\Database\Context $db) {
+    $racesList = array();
+    $races = $db->table("character_races");
+    foreach($races as $race) {
+      $racesList[$race->id] = $race->name;
+    }
+    return $racesList;
+  }
+  
+  /**
+   * Get list of classes
+   * 
+   * @param Nette\Database\Context $db
+   * @return array
+   */
+  static function getClassesList(Nette\Database\Context $db) {
+    $classesList = array();
+    $classes = $db->table("character_classess");
+    foreach($classes as $class) {
+      $classesList[$class->id] = $class->name;
+    }
+    return $classesList;
+  }
+}
 ?>
