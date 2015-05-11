@@ -26,7 +26,7 @@ class GuildPresenter extends BasePresenter {
   }
   
   /**
-   * @param int $id id of guild
+   * @param int $id Id of guild to view
    * @return void
    */
   function renderView($id) {
@@ -39,7 +39,7 @@ class GuildPresenter extends BasePresenter {
   }
   
   /**
-   * Create form for creating guild
+   * Creates form for creating guild
    * @return Nette\Application\UI\Form
    */
   protected function createComponentCreateGuildForm() {
