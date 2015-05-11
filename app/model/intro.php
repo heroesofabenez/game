@@ -6,6 +6,24 @@
  */
 class Intro {
   /**
+   * Get next part of introduction
+   * 
+   * @param Nette\Database\Context $db Database context
+   * @param int $id Character's id
+   * @return string Text of current introduction part
+   */
+  static function getIntroPart($db, $id) {
+    $char = $db->table("characters")->get($id);
+    $intros = $db->table("introduction")
+      ->where("race", $char->race)
+      ->where("class", $char->occupation)
+      ->where("part", $this->part);
+    if($intros->count("*") == 0) return;
+    foreach($intros as $intro) { }
+    return $intro->text;
+  }
+  
+  /**
    * Get starting location for the player
    * 
    * @param Nette\Database\Context $db Database context

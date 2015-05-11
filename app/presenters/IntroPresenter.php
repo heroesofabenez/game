@@ -21,18 +21,9 @@ class IntroPresenter extends BasePresenter {
    * @return void
    */
   function renderDefault() {
-    $char = $this->db->table("characters")->get($this->user->id);
-    $intros = $this->db->table("introduction")
-      ->where("race", $char->race)
-      ->where("class", $char->occupation)
-      ->where("part", $this->part);
-    if($intros->count("*") == 0) {
-      $this->template->intro = "";
-      return;
-    }
-    foreach($intros as $intro) { }
-    if($intro->text == "ENDOFINTRO") $this->forward("Intro:end");
-    $this->template->intro = $intro->text;
+    $text = Intro::getIntroPart($this->db, $this->user->id);
+    if($text == "ENDOFINTRO") $this->forward("Intro:end");
+    $this->template->intro = $text;
   }
   
   /**
