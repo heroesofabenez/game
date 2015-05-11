@@ -34,7 +34,7 @@ class Profile extends Nette\Object {
     }
     if($char->guild > 0) {
       $guild = $db->table("guilds")->get($char->guild);
-      $guildRank = $db->table("guild_ranks")->get($char->guild_rank);
+      $guildRank = $db->table("guild_ranks")->get($char->guildrank);
       $return["guild"] = "Guild: $guild->name<br>Position in guild: " . ucfirst($guildRank->name);
     } else {
       $return["guild"] = "Not a member of guild";

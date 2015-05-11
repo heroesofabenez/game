@@ -13,9 +13,11 @@ class GuildPresenter extends BasePresenter {
    * @return void
    */
   function inGuild() {
-    $this->flashMessage("You are already in guild.");
     $guild = GuildModel::getGuildId($this->db, $this->user->id);
-    if($guild > 0) $this->forward("default");
+    if($guild > 0) {
+      $this->flashMessage("You are already in guild.");
+      $this->forward("default");
+    }
   }
   
   function actionDefault() {
@@ -53,12 +55,18 @@ class GuildPresenter extends BasePresenter {
   }
   /**
    * Handles creating guild
-   * @todo implement the function
+   * @todo do not allow creating guild with name which is already used
    * @param Nette\Application\UI\Form $form Sent form
    * @param  Nette\Utils\ArrayHash $values Array vith values
    * @return void
    */
   function createGuildFormSucceeded(UI\Form $form, $values) {
+    $data = array(
+      "name" => $values["name"], "description" => $values["description"]
+    );
+    $row = $this->db->table("guilds")->insert($data);
+    $data2 = array("guild" => $row->id, "guildrank" => 8);
+    $this->db->query("UPDATE characters SET ? WHERE id=?", $data2, $this->user->id);
     $this->flashMessage("Guild created.");
     $this->redirect("Guild:");
   }
