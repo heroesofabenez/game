@@ -1,8 +1,8 @@
 * { color: #FFFF00 }
 body, p, li, td, article, div { font-family: MS Sans Serif, Geneva, sans-serif }
 #main, #profile { width: 500px; height: 505px; background-color: #9999CC;
-position: relative; top: -16px }
-#navigation { width: 500px; background-color: gray }
+position: relative; top: -16px; padding-left: 5px }
+#navigation { width: 500px; background-color: gray; padding-left: 5px }
 #navigation a { color: white; text-decoration: none }
 #navigation a:hover { color: #000099 }
 #main a { color: #009933 }
