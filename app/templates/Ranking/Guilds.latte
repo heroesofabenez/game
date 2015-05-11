@@ -14,7 +14,8 @@
     {foreach $guilds as $guild}
       <tr><td>{$iterator->counter}.</td><td>{$guild->name}</td><td align="right">{$guild->members}</td><td><a n:href="Guild:view $guild->id">Details</a></td></tr>
     {/foreach}
-  <table>
+  </table>
 </article>
+{include "../footer.latte"}
 </body>
 </html>
