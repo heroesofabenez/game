@@ -99,7 +99,7 @@ class GuildPresenter extends BasePresenter {
   }
   
   /**
-   * @param int $id Guild to join   
+   * @param int $id Guild to join
    * @return void
    */
   function renderJoin($id) {
