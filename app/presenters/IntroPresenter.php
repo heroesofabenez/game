@@ -31,6 +31,7 @@ class IntroPresenter extends BasePresenter {
       return;
     }
     foreach($intros as $intro) { }
+    if($intro->text == "ENDOFINTRO") $this->forward("Intro:end");
     $this->template->intro = $intro->text;
   }
   
@@ -42,5 +43,15 @@ class IntroPresenter extends BasePresenter {
   $data = array("intro" => $next);
   $this->db->query("UPDATE characters SET ? WHERE id=?", $data, $this->user->id);
   $this->redirect("Intro:");
+  }
+  
+  /**
+   * @return void
+   */
+  function actionEnd() {
+    $startingLocation = Intro::getStartingLocation($this->db, $this->user->identity);
+    $data = array("current_stage" => $startingLocation);
+    $this->db->query("UPDATE characters SET ? WHERE id=?", $data, $this->user->id);
+    $this->redirect("Homepage:");
   }
 }
