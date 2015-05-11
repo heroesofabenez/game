@@ -75,7 +75,7 @@ class CharacterPresenter extends BasePresenter {
     $data["constitution"] = $class->constitution + $race->constitution;
     $data["intelligence"] = $class->intelligence + $race->intelligence;
     $data["charisma"] = $class->charisma + $race->charisma;
-    $data["owner"] = $this->realId;
+    $data["owner"] = BasePresenter::getRealId();
     
     $chars = $this->db->table("characters")->where("name", $data["name"]);
     if($chars->count("*") > 0) $this->forward("Character:exists");

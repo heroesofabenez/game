@@ -4,7 +4,6 @@
    * 
    * @author Jakub Konečný
    * @property-read Nette\Database\Context $db Database context
-   * @property-read int $realId Real user's id
    */
 abstract class BasePresenter extends Nette\Application\UI\Presenter {
   /**
@@ -26,10 +25,10 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
   }
   
   /**
-   * Provides virtual variable realId for all presenters
+   * Return real user's id
    * @return int
    */
-  function getRealId() {
+  static function getRealId() {
     $dev_servers = array("localhost", "kobliha", "test.heroesofabenez.tk");
     if(in_array($_SERVER["SERVER_NAME"], $dev_servers)) {
       $uid = 1;
