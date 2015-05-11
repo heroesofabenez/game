@@ -16,6 +16,11 @@ class CharacterPresenter extends BasePresenter {
     foreach($races as $race) {
       $this->template->races[$race->id] = $race->description;
     }
+    $classes = $this->db->table("character_classess");
+    $this->template->classes = array();
+    foreach($classes as $class) {
+      $this->template->classes[$class->id] = $class->description;
+    }
   }
   /**
    * Create form for creating character
@@ -37,7 +42,7 @@ class CharacterPresenter extends BasePresenter {
     $form->addSelect('race', 'Race:', $racesList)
          ->setPrompt('Select race')
          ->setRequired("Select race");
-    $form['race']->getControlPrototype()->onchange("changeRaceDescription(document.getElementById('frm-createCharacterForm-race').value)");
+    $form["race"]->getControlPrototype()->onchange("changeRaceDescription(document.getElementById('frm-createCharacterForm-race').value)");
     $classesList = array();
     $classes = $this->db->table("character_classess");
     foreach($classes as $class) {
@@ -46,6 +51,7 @@ class CharacterPresenter extends BasePresenter {
     $form->addSelect('class', 'Class:', $classesList)
          ->setPrompt('Select class')
          ->setRequired("Select class");
+    $form["class"]->getControlPrototype()->onchange("changeClassDescription(document.getElementById('frm-createCharacterForm-class').value)");
     $form->addSubmit("create", "Create character");
     $form->onSuccess[] = array($this, "createCharacterFormSucceeded");
     return $form;

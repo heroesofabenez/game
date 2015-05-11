@@ -15,6 +15,17 @@
       raceDiv.innerHTML = description;
       return;
     }
+    classesDes = new Array("");
+    {foreach $classes as $class}
+    classesDes[{$iterator->counter}] = {$class};
+    {/foreach}
+    function changeClassDescription(classID) {
+      var classDiv,description;
+      classDiv = document.getElementById('classDescription');
+      description =classesDes[classID];
+      classDiv.innerHTML = description;
+      return;
+    }
   </script>
 </head>
 <body>
