@@ -30,7 +30,7 @@ class Ranking extends Nette\Object {
   
   /**
    * Gets list of all guilds
-   * @param Nette\Database\Context $database Database context
+   * @param Nette\Database\Context $db Database context
    * @return array List of all guilds (name, number of members)
    */
   static function guilds(Nette\Database\Context $db) {
