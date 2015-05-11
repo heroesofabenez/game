@@ -50,7 +50,7 @@ class GuildModel extends Nette\Object {
     if(!$guild) { return false; }
     $return["name"] = $guild->name;
     $return["description"] = $guild->description;
-    $members = $db->table("characters")->where("guild", $guild->id)->order("guild_rank DESC, id");
+    $members = $db->table("characters")->where("guild", $guild->id)->order("guildrank DESC, id");
     $return["members"] = array();
     foreach($members as $member) {
       $return["members"][] = array("name" => $member->name, "rank" => ucfirst($member->rank->name));
