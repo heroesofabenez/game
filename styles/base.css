@@ -1,4 +1,5 @@
 * { color: #FFFF00 }
+body, p, li, td, article, div { font-family: MS Sans Serif, Geneva, sans-serif }
 #main, #profile { width: 500px; background-color: #9999CC;
 position: relative; top: -13px }
 #navigation { width: 500px; background-color: gray }
@@ -10,4 +11,3 @@ form label { color: #660099 }
 form input, select { color: #330099 }
 form select option { color: black }
 h1, h2, h3 { color: green; font-family: Courier New, Courier, monotype }
-body { font-family: MS Sans Serif, Geneva, sans-serif }
