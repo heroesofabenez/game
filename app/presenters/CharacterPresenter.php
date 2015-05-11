@@ -38,12 +38,12 @@ class CharacterPresenter extends BasePresenter {
     $form->addSelect('race', 'Race:', $racesList)
          ->setPrompt('Select race')
          ->setRequired("Select race");
-    $form["race"]->getControlPrototype()->onchange("changeRaceDescription(document.getElementById('frm-createCharacterForm-race').value)");
+    $form["race"]->getControlPrototype()->onchange("changeRaceDescription(this.value)");
     $classesList = CharacterModel::getClassesList($this->db);
     $form->addSelect('class', 'Class:', $classesList)
          ->setPrompt('Select class')
          ->setRequired("Select class");
-    $form["class"]->getControlPrototype()->onchange("changeClassDescription(document.getElementById('frm-createCharacterForm-class').value)");
+    $form["class"]->getControlPrototype()->onchange("changeClassDescription(this.value)");
     $form->addSubmit("create", "Create character");
     $form->onSuccess[] = array($this, "createCharacterFormSucceeded");
     return $form;
