@@ -53,7 +53,7 @@ class GuildPresenter extends BasePresenter {
   }
   /**
    * Handles creating guild
-   * @todo implement :P
+   * @todo implement the function
    * @param Nette\Application\UI\Form $form Sent form
    * @param  Nette\Utils\ArrayHash $values Array vith values
    * @return void
@@ -67,6 +67,10 @@ class GuildPresenter extends BasePresenter {
     $this->inGuild();
   }
   
+  /**
+   * @todo implement sending application
+   * @return void
+   */
   function actionJoin() {
     $this->inGuild();
   }
@@ -75,16 +79,28 @@ class GuildPresenter extends BasePresenter {
     $this->template->guilds = GuildModel::listOfGuilds($this->db);
   }
   
+  /**
+   * @todo implement the function
+   * @return void
+   */
   function actionPromote($id) {
     $this->flashMessage("Member promoted.");
     $this->redirect("Guild:");
   }
   
+  /**
+   * @todo implement the function
+   * @return void
+   */
   function actionDemote($id) {
     $this->flashMessage("Member demoted.");
     $this->redirect("Guild:");
   }
   
+  /**
+   * @todo implement the function
+   * @return void
+   */
   function actionKick($id) {
     $this->flashMessage("Member kicked.");
     $this->redirect("Guild:");

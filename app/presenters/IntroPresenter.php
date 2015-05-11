@@ -26,6 +26,8 @@ class IntroPresenter extends BasePresenter {
   }
   
   /**
+   * Move onto next part of introduction
+   * 
    * @return void
    */
   function actionNext() {
@@ -36,6 +38,8 @@ class IntroPresenter extends BasePresenter {
   }
   
   /**
+   * Ends introuction and sends player to his starting location
+   * 
    * @return void
    */
   function actionEnd() {
