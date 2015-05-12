@@ -26,26 +26,18 @@ class IntroPresenter extends BasePresenter {
   }
   
   /**
-   * Move onto next part of introduction
-   * 
    * @return void
    */
   function actionNext() {
-  $next = $this->part + 1;
-  $data = array("intro" => $next);
-  $this->db->query("UPDATE characters SET ? WHERE id=?", $data, $this->user->id);
-  $this->redirect("Intro:");
+    Intro::moveToNextPart($this->part + 1, $this->user->id, $this->db);
+    $this->redirect("Intro:");
   }
   
   /**
-   * Ends introuction and sends player to his starting location
-   * 
    * @return void
    */
   function actionEnd() {
-    $startingLocation = Intro::getStartingLocation($this->db, $this->user->identity);
-    $data = array("current_stage" => $startingLocation);
-    $this->db->query("UPDATE characters SET ? WHERE id=?", $data, $this->user->id);
+    Intro::endIntro($this->db, $this->user->identity);
     $this->redirect("Homepage:");
   }
 }

@@ -36,6 +36,18 @@ class Intro {
   }
   
   /**
+   * Move onto next part of introduction
+   * 
+   * @param int $part
+   * @param int $id Player's id
+   * @param Nette\Database\Context $db Database context
+   */
+  static function moveToNextPart($part, $id, Nette\Database\Context $db) {
+    $data = array("intro" => $part);
+    $db->query("UPDATE characters SET ? WHERE id=?", $data, $id);
+  }
+  
+  /**
    * Get starting location for the player
    * 
    * @param Nette\Database\Context $db Database context
@@ -63,5 +75,18 @@ class Intro {
       foreach($raceSLs as $raceSL) { }
       return $raceSL->id;
     }
+  }
+  
+  /**
+   * Ends introuction and sends player to his starting location
+   * 
+   * @param Nette\Database\Context $db Database context
+   * @param Nette\Security\Identity $identity Player's identity
+   * @return void
+   */
+  static function endIntro(Nette\Database\Context $db, Nette\Security\Identity $identity) {
+    $startingLocation = Intro::getStartingLocation($db, $identity);
+    $data = array("current_stage" => $startingLocation);
+    $db->query("UPDATE characters SET ? WHERE id=?", $data, $identity->id);
   }
 }
