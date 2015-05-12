@@ -2,8 +2,6 @@ includes:
     - config.local.neon
 application:
     debugger: true
-    #errorPresenter: "Error"
-    #catchExceptions: true
 routing:
     routes:
         "profile/<id>": "Profile:view"

@@ -7,3 +7,6 @@ parameters:
         server: sTest
 php:
     date.timezone: Europe/Prague
+application:
+    #errorPresenter: "Error"
+    #catchExceptions: true
