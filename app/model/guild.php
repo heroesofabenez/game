@@ -87,7 +87,7 @@ class GuildModel extends Nette\Object {
           break;
         }
       }
-      $return[] = new Guild($guild->id, $guild->name, $guild->description, $leader, $members->count("*"));
+      $return[] = new Guild($guild->id, $guild->name, $guild->description, $members->count("*"), $leader);
     }
     return $return;
   }
