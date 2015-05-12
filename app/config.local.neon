@@ -1,0 +1,9 @@
+parameters:
+    database:
+        dsn: "mysql:host=localhost;dbname=heroesofabenez"
+        user: heroesofabenez
+        password: qwerty
+    application:
+        server: sTest
+php:
+    date.timezone: Europe/Prague

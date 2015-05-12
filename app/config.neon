@@ -1,14 +1,19 @@
-parameters:
-    database:
-        dsn: "mysql:host=localhost;dbname=heroesofabenez"
-        user: heroesofabenez
-        password: qwerty
-    application:
-        server: sTest
+includes:
+    - config.local.neon
 application:
     debugger: true
     #errorPresenter: "Error"
     #catchExceptions: true
+routing:
+    routes:
+        "profile/<id>": "Profile:view"
+        "guild/join[/<id>]": "Guild:join"
+        "guild/create": "Guild:create"
+        "guild/<id>": "Guild:view"
+        "travel[/<location>]": "Travel:default"
+        "ranking/guilds[/<page>]": "Ranking:guilds"
+        "ranking[/<page>]": "Ranking:default"
+        "<presenter>[/<action>][/<id>]": "Homepage:default"
 database:
     default:
         dsn: %database.dsn%
