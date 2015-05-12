@@ -79,6 +79,7 @@ class CharacterPresenter extends BasePresenter {
     if($data["gender"]  == 1) $data["gender"] = "male";
     else $data["gender"] = "female";
     unset($data["occupation"]);
+    $this->user->logout();
     $this->forward("Character:created", array("data" => serialize($data)));
   }
   

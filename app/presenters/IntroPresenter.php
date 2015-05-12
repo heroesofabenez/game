@@ -12,6 +12,7 @@ class IntroPresenter extends BasePresenter {
    * @return void
    */
   function startup() {
+    $this->user->logout();
     parent::startup();
     $this->part = $this->template->part = Intro::getIntroPosition($this->db, $this->user->id);
   }

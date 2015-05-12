@@ -67,6 +67,7 @@ class GuildPresenter extends BasePresenter {
     );
     $result = GuildModel::create($data, $this->user->id, $this->db);
     if($result) {
+      $this->user->logout();
       $this->flashMessage("Guild created.");
       $this->redirect("Guild:");
     }
