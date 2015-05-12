@@ -53,6 +53,7 @@ class GuildPresenter extends BasePresenter {
     $form->onSuccess[] = array($this, "createGuildFormSucceeded");
     return $form;
   }
+  
   /**
    * Handles creating guild
    * @todo do not allow creating guild with name which is already used
@@ -64,11 +65,11 @@ class GuildPresenter extends BasePresenter {
     $data = array(
       "name" => $values["name"], "description" => $values["description"]
     );
-    $row = $this->db->table("guilds")->insert($data);
-    $data2 = array("guild" => $row->id, "guildrank" => 8);
-    $this->db->query("UPDATE characters SET ? WHERE id=?", $data2, $this->user->id);
-    $this->flashMessage("Guild created.");
-    $this->redirect("Guild:");
+    $result = GuildModel::create($data, $this->user->id, $this->db);
+    if($result) {
+      $this->flashMessage("Guild created.");
+      $this->redirect("Guild:");
+    }
   }
   
   function actionCreate() {

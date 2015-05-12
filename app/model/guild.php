@@ -71,6 +71,21 @@ class GuildModel extends Nette\Object {
   }
   
   /**
+   * Creates a guild
+   * 
+   * @param array $data Name and description
+   * @param int $founder Id of founder
+   * @param Nette\Database\Context $db Database context
+   * @return bool Whetever the action was successful
+   */
+  static function create($data, $founder, Nette\Database\Context  $db) {
+    $row = $db->table("guilds")->insert($data);
+    $data2 = array("guild" => $row->id, "guildrank" => 8);
+    $db->query("UPDATE characters SET ? WHERE id=?", $data2, $founder);
+    return true;
+  }
+  
+  /**
    * Gets list of guilds
    * @param Nette\Database\Context $db Database context
    * @return array list of guilds (id, name, description, leader)
