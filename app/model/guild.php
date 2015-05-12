@@ -86,6 +86,41 @@ class GuildModel extends Nette\Object {
   }
   
   /**
+   * 
+   * @param int $gid Guild to join
+   * @param int $uid Player's id
+   * @param Nette\Database\Context $db Database context
+   * @return bool|-1
+   */
+  static function sendApplication($gid, $uid, Nette\Database\Context $db) {
+    $guild = $db->table("guilds")->get($gid);
+    if(!$guild) { return -1; }
+    $leader = $db->table("characters")
+      ->where("guild", $gid)
+      ->where("guildrank", 8);
+    $leader = $leader[1];
+    $data = array(
+      "from" => $uid, "to" => $leader->id, "type" => "guild_app"
+    );
+    $row = $db->query("INSERT INTO requests", $data);
+    if($row) return true;
+  }
+  
+  /**
+   * 
+   * @param int $id Player's id
+   * @param Nette\Database\Context $db Database context
+   */
+  static function haveUnresolvedApplication($id, Nette\Database\Context $db) {
+    $apps = $db->table("requests")
+      ->where("from", $id)
+      ->where("type", "guild_app")
+      ->where("status", "new");
+    if($apps->count("*") > 0) return true;
+    else return false;
+  }
+  
+  /**
    * Gets list of guilds
    * @param Nette\Database\Context $db Database context
    * @return array list of guilds (id, name, description, leader)

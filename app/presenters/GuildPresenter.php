@@ -82,34 +82,26 @@ class GuildPresenter extends BasePresenter {
    */
   function actionJoin($id) {
     $this->inGuild();
-    if($id > 0) {
-      $guild = $this->db->table("guilds")->get($id);
-      if(!$guild) { $this->forward("notfound"); }
-      $leader = $this->db->table("characters")
-        ->where("guild", $id)
-        ->where("guildrank", 8);
-      $leader = $leader[1];
-      $data = array(
-        "from" => $this->user->id, "to" => $leader->id, "type" => "guild_app"
-      );
-      $row = $this->db->query("INSERT INTO requests", $data);
-      if($row)  $this->flashMessage("Application sent.");
-      else $this->flashMessage("An error occured.");
+    if($id == 0) return;
+    $result = GuildModel::sendApplication($id, $this->user->id, $this->db);
+    if($result === TRUE) {
+      $this->flashMessage("Application sent.");
       $this->redirect("Guild:");
+    } elseif($result === FALSE) {
+      $this->flashMessage("Application sent.");
+      $this->redirect("Guild:");
+    } else {
+      $this->forward("notfound");
     }
   }
   
   /**
-   * @param int $id Guild to join
    * @return void
    */
-  function renderJoin($id) {
+  function renderJoin() {
     $this->template->guilds = GuildModel::listOfGuilds($this->db);
-    $apps = $this->db->table("requests")
-      ->where("from", $this->user->id)
-      ->where("type", "guild_app")
-      ->where("status", "new");
-    if($apps->count("*") > 0) $this->flashMessage("You have an unresolved application.");
+    $apps = GuildModel::haveUnresolvedApplication($this->user->id, $this->db);
+    if($apps) $this->flashMessage("You have an unresolved application.");
   }
   
   /**
