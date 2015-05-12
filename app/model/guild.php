@@ -86,6 +86,7 @@ class GuildModel extends Nette\Object {
   }
   
   /**
+   * Send application to a guild
    * 
    * @param int $gid Guild to join
    * @param int $uid Player's id
@@ -107,6 +108,7 @@ class GuildModel extends Nette\Object {
   }
   
   /**
+   * Check if player has an unresolved application
    * 
    * @param int $id Player's id
    * @param Nette\Database\Context $db Database context
@@ -122,6 +124,7 @@ class GuildModel extends Nette\Object {
   
   /**
    * Gets list of guilds
+   * 
    * @param Nette\Database\Context $db Database context
    * @return array list of guilds (id, name, description, leader)
    */
