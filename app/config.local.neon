@@ -5,6 +5,7 @@ parameters:
         password: qwerty
     application:
         server: sTest
+        webmasterMail: "jakub.konecny2@centrum.cz"
 php:
     date.timezone: Europe/Prague
 application:

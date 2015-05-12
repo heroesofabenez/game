@@ -22,7 +22,7 @@ database:
 di:
     debugger: true
 tracy:
-    email: jakub.konecny2@centrum.cz
+    email: %application.webmasterMail%
     strictMode: TRUE
 session:
     savePath: "%tempDir%/sessions"
