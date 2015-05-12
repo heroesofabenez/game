@@ -1,4 +1,8 @@
 <?php
+namespace HeroesofAbenez\Presenters;
+
+use \HeroesofAbenez as HOA;
+
 /**
  * Presenter Intro
  *
@@ -14,14 +18,14 @@ class IntroPresenter extends BasePresenter {
   function startup() {
     $this->user->logout();
     parent::startup();
-    $this->part = $this->template->part = Intro::getIntroPosition($this->db, $this->user->id);
+    $this->part = $this->template->part = HOA\Intro::getIntroPosition($this->db, $this->user->id);
   }
   
   /**
    * @return void
    */
   function renderDefault() {
-    $text = Intro::getIntroPart($this->db, $this->user->id, $this->part);
+    $text = HOA\Intro::getIntroPart($this->db, $this->user->id, $this->part);
     if($text == "ENDOFINTRO") $this->forward("Intro:end");
     $this->template->intro = $text;
   }
@@ -30,7 +34,7 @@ class IntroPresenter extends BasePresenter {
    * @return void
    */
   function actionNext() {
-    Intro::moveToNextPart($this->part + 1, $this->user->id, $this->db);
+    HOA\Intro::moveToNextPart($this->part + 1, $this->user->id, $this->db);
     $this->redirect("Intro:");
   }
   
@@ -38,7 +42,7 @@ class IntroPresenter extends BasePresenter {
    * @return void
    */
   function actionEnd() {
-    Intro::endIntro($this->db, $this->user->identity);
+    HOA\Intro::endIntro($this->db, $this->user->identity);
     $this->redirect("Homepage:");
   }
 }

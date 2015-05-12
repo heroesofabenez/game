@@ -1,10 +1,12 @@
 <?php
+namespace HeroesofAbenez;
+
 /**
  * Structure for pet
  * 
  * @author Jakub Konečný
  */
-class Pet extends Nette\Object {
+class Pet extends \Nette\Object {
   /** @var int Pet's id */
   protected $id;
   /** @var string Pet's type */

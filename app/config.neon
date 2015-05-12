@@ -2,6 +2,8 @@ includes:
     - config.local.neon
 application:
     debugger: true
+    mapping:
+        *: HeroesofAbenez\Presenters\*Presenter
 routing:
     routes:
         "profile/<id>": "Profile:view"
@@ -29,4 +31,4 @@ session:
     name: HOASESSID
     expiration: 1 hour
 services:
-    authenticator: Authenticator
+    authenticator: HeroesofAbenez\Authenticator

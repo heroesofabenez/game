@@ -1,17 +1,19 @@
 <?php
+namespace HeroesofAbenez;
+
   /**
    * Model Profile
    * 
    * @author Jakub Konečný
    */
-class Profile extends Nette\Object {
+class Profile extends \Nette\Object {
   /**
    * Gets basic data about specified player
    * @param integer $id character's id
    * @param Nette\Database\Context $db Database context
    * @return array info about character
    */
-  static function view($id, Nette\Database\Context $db) {
+  static function view($id, \Nette\Database\Context $db) {
     $return = array();
     $char = $db->table("characters")->get($id);
     if(!$char) { return false; }

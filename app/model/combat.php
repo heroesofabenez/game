@@ -1,10 +1,12 @@
 <?php
+namespace HeroesofAbenez;
+
 /**
  * Structure for a team in combat
  * 
  * @author Jakub Konečný
  */
-class Team extends Nette\Object {
+class Team extends \Nette\Object {
   /** @var string Name of the team */
   protected $name;
   /** @var array Characters in the team */
@@ -36,7 +38,7 @@ class Team extends Nette\Object {
  * 
  * @author Jakub Konečný
  */
-class CombatBase extends Nette\Object {
+class CombatBase extends \Nette\Object {
   /** @var array First team */
   protected $team1 = array();
   /** @var array Second team */

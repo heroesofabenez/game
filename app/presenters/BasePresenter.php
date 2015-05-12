@@ -1,11 +1,13 @@
 <?php
+namespace HeroesofAbenez\Presenters;
+
   /**
    * Parent of all presenters
    * 
    * @author Jakub Konečný
    * @property-read Nette\Database\Context $db Database context
    */
-abstract class BasePresenter extends Nette\Application\UI\Presenter {
+abstract class BasePresenter extends \Nette\Application\UI\Presenter {
   /**
    * Login user and set server number for template
    * @return void

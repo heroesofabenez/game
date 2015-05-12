@@ -1,4 +1,8 @@
 <?php
+namespace HeroesofAbenez\Presenters;
+
+use \HeroesofAbenez as HOA;
+
   /**
    * Presenter Ranking
    * 
@@ -10,7 +14,7 @@ class RankingPresenter extends BasePresenter {
    * @return void
    */
   function renderDefault($page) {
-    $this->template->characters = Ranking::characters($this->db);
+    $this->template->characters = HOA\Ranking::characters($this->db);
   }
   
   /**
@@ -18,7 +22,7 @@ class RankingPresenter extends BasePresenter {
    * @return void
    */
   function renderGuilds($page) {
-    $this->template->guilds = Ranking::guilds($this->db);
+    $this->template->guilds = HOA\Ranking::guilds($this->db);
   }
 }
 ?>

@@ -1,4 +1,6 @@
 <?php
+namespace HeroesofAbenez\Presenters;
+
   /**
    * Presenter Homepage
    * 

@@ -1,16 +1,18 @@
 <?php
+namespace HeroesofAbenez;
+
   /**
    * Model Ranking
    * 
    * @author Jakub Konečný
    */
-class Ranking extends Nette\Object {
+class Ranking extends \Nette\Object {
   /**
    * Gets list of all characters
    * @param Nette\Database\Context $db Database context
    * @return array List of all characters (id, name, level, guild)
    */
-  static function characters(Nette\Database\Context $db) {
+  static function characters(\Nette\Database\Context $db) {
     $characters = $db->table("characters")->order("level, experience, id");
     $chars = array();
     foreach($characters as $character) {
@@ -33,7 +35,7 @@ class Ranking extends Nette\Object {
    * @param Nette\Database\Context $db Database context
    * @return array List of all guilds (name, number of members)
    */
-  static function guilds(Nette\Database\Context $db) {
+  static function guilds(\Nette\Database\Context $db) {
     $return = array();
     $guilds = $db->table("guilds");
     foreach($guilds as $guild) {

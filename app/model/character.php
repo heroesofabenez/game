@@ -1,4 +1,6 @@
 <?php
+namespace HeroesofAbenez;
+
 /**
  * Structure for single character
  * 
@@ -294,7 +296,7 @@ class CharacterModel {
    * @param Nette\Database\Context $db Database context
    * @return array
    */
-  static function getRacesList(Nette\Database\Context $db) {
+  static function getRacesList(\Nette\Database\Context $db) {
     $racesList = array();
     $races = $db->table("character_races");
     foreach($races as $race) {
@@ -309,7 +311,7 @@ class CharacterModel {
    * @param Nette\Database\Context $db
    * @return array
    */
-  static function getClassesList(Nette\Database\Context $db) {
+  static function getClassesList(\Nette\Database\Context $db) {
     $classesList = array();
     $classes = $db->table("character_classess");
     foreach($classes as $class) {

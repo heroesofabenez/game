@@ -1,5 +1,8 @@
 <?php
-use Nette\Application\UI;
+namespace HeroesofAbenez\Presenters;
+
+use \HeroesofAbenez as HOA;
+use \Nette\Application\UI;
 
   /**
    * Presenter Guild
@@ -13,7 +16,7 @@ class GuildPresenter extends BasePresenter {
    * @return void
    */
   function inGuild() {
-    $guild = GuildModel::getGuildId($this->db, $this->user->id);
+    $guild = HOA\GuildModel::getGuildId($this->db, $this->user->id);
     if($guild > 0) {
       $this->flashMessage("You are already in guild.");
       $this->forward("default");
@@ -21,7 +24,7 @@ class GuildPresenter extends BasePresenter {
   }
   
   function actionDefault() {
-    $guild = GuildModel::getGuildId($this->db, $this->user->id);
+    $guild = HOA\GuildModel::getGuildId($this->db, $this->user->id);
     if($guild == 0) $this->forward("noguild");
   }
   
@@ -31,7 +34,7 @@ class GuildPresenter extends BasePresenter {
    */
   function renderView($id) {
     if($id == 0) $this->forward("notfound");
-    $data = GuildModel::view($id, $this->db);
+    $data = HOA\GuildModel::view($id, $this->db);
     if(!$data) $this->forward("notfound");
     foreach($data as $key => $value) {
       $this->template->$key = $value;
@@ -65,7 +68,7 @@ class GuildPresenter extends BasePresenter {
     $data = array(
       "name" => $values["name"], "description" => $values["description"]
     );
-    $result = GuildModel::create($data, $this->user->id, $this->db);
+    $result = HOA\GuildModel::create($data, $this->user->id, $this->db);
     if($result) {
       $this->user->logout();
       $this->flashMessage("Guild created.");
@@ -84,7 +87,7 @@ class GuildPresenter extends BasePresenter {
   function actionJoin($id) {
     $this->inGuild();
     if($id == 0) return;
-    $result = GuildModel::sendApplication($id, $this->user->id, $this->db);
+    $result = HOA\GuildModel::sendApplication($id, $this->user->id, $this->db);
     if($result === TRUE) {
       $this->flashMessage("Application sent.");
       $this->redirect("Guild:");
@@ -101,7 +104,7 @@ class GuildPresenter extends BasePresenter {
    */
   function renderJoin() {
     $this->template->guilds = GuildModel::listOfGuilds($this->db);
-    $apps = GuildModel::haveUnresolvedApplication($this->user->id, $this->db);
+    $apps = HOA\GuildModel::haveUnresolvedApplication($this->user->id, $this->db);
     if($apps) $this->flashMessage("You have an unresolved application.");
   }
   

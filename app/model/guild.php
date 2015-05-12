@@ -1,4 +1,6 @@
 <?php
+namespace HeroesofAbenez;
+
 /**
  * Data structure for guild
  * 
@@ -37,14 +39,14 @@ class Guild {
    * 
    * @author Jakub Konečný
    */
-class GuildModel extends Nette\Object {
+class GuildModel extends \Nette\Object {
   /**
    * Gets basic data about specified guild
    * @param integer $id guild's id
    * @param Nette\Database\Context $db Database context
    * @return array info about guild
    */
-  static function view($id, Nette\Database\Context  $db) {
+  static function view($id, \Nette\Database\Context  $db) {
     $return = array();
     $guild = $db->table("guilds")->get($id);
     if(!$guild) { return false; }
@@ -65,7 +67,7 @@ class GuildModel extends Nette\Object {
    * @param int $uid Player's id
    * @return int
    */
-  static function getGuildId(Nette\Database\Context $db, $uid) {
+  static function getGuildId(\Nette\Database\Context $db, $uid) {
     $char = $db->table("characters")->get($uid);
     return $char->guild;
   }
@@ -78,7 +80,7 @@ class GuildModel extends Nette\Object {
    * @param Nette\Database\Context $db Database context
    * @return bool Whetever the action was successful
    */
-  static function create($data, $founder, Nette\Database\Context  $db) {
+  static function create($data, $founder, \Nette\Database\Context  $db) {
     $row = $db->table("guilds")->insert($data);
     $data2 = array("guild" => $row->id, "guildrank" => 8);
     $db->query("UPDATE characters SET ? WHERE id=?", $data2, $founder);
@@ -93,7 +95,7 @@ class GuildModel extends Nette\Object {
    * @param Nette\Database\Context $db Database context
    * @return bool|-1
    */
-  static function sendApplication($gid, $uid, Nette\Database\Context $db) {
+  static function sendApplication($gid, $uid, \Nette\Database\Context $db) {
     $guild = $db->table("guilds")->get($gid);
     if(!$guild) { return -1; }
     $leader = $db->table("characters")
@@ -113,7 +115,7 @@ class GuildModel extends Nette\Object {
    * @param int $id Player's id
    * @param Nette\Database\Context $db Database context
    */
-  static function haveUnresolvedApplication($id, Nette\Database\Context $db) {
+  static function haveUnresolvedApplication($id, \Nette\Database\Context $db) {
     $apps = $db->table("requests")
       ->where("from", $id)
       ->where("type", "guild_app")
@@ -128,7 +130,7 @@ class GuildModel extends Nette\Object {
    * @param Nette\Database\Context $db Database context
    * @return array list of guilds (id, name, description, leader)
    */
-  static function listOfGuilds(Nette\Database\Context $db) {
+  static function listOfGuilds(\Nette\Database\Context $db) {
     $return = array();
     $guilds = $db->table("guilds");
     foreach($guilds as $guild) {

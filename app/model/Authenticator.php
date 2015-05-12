@@ -1,4 +1,6 @@
 <?php
+namespace HeroesofAbenez;
+
 use Nette\Security as NS;
 
   /**
@@ -6,14 +8,14 @@ use Nette\Security as NS;
    * 
    * @author Jakub Konečný
    */
-class Authenticator extends Nette\Object implements NS\IAuthenticator {
+class Authenticator extends \Nette\Object implements NS\IAuthenticator {
   /** @var Nette\Database\Context Database context */
   protected $db;
   
   /**
    * @param Nette\Database\Context $database Database context
    */
-  function __construct(Nette\Database\Context $database) {
+  function __construct(\Nette\Database\Context $database) {
     $this->db = $database;
   }
   
@@ -23,7 +25,7 @@ class Authenticator extends Nette\Object implements NS\IAuthenticator {
    * @return Nette\Security\Identity User's identity
    */
   function authenticate(array $credentials) {
-    $uid = BasePresenter::getRealId();
+    $uid = Presenters\BasePresenter::getRealId();
     if($uid == 0) return new NS\Identity(0, "guest");
     $chars = $this->db->table("characters")->where("owner", $uid);
     if($chars->count("*") == 0) return new NS\Identity(-1, "guest");

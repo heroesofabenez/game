@@ -1,4 +1,6 @@
 <?php
+namespace HeroesofAbenez;
+
 /**
  * Intro Model
  *
@@ -12,7 +14,7 @@ class Intro {
    * @param type $uid User's id
    * @return type
    */
-  static function getIntroPosition(Nette\Database\Context $db, $uid) {
+  static function getIntroPosition(\Nette\Database\Context $db, $uid) {
     $char = $db->table("characters")->get($uid);
     return $char->intro;
   }
@@ -24,7 +26,7 @@ class Intro {
    * @param int $part Part's id
    * @return string Text of current introduction part
    */
-  static function getIntroPart(Nette\Database\Context $db, $id, $part) {
+  static function getIntroPart(\Nette\Database\Context $db, $id, $part) {
     $char = $db->table("characters")->get($id);
     $intros = $db->table("introduction")
       ->where("race", $char->race)
@@ -42,7 +44,7 @@ class Intro {
    * @param int $id Player's id
    * @param Nette\Database\Context $db Database context
    */
-  static function moveToNextPart($part, $id, Nette\Database\Context $db) {
+  static function moveToNextPart($part, $id, \Nette\Database\Context $db) {
     $data = array("intro" => $part);
     $db->query("UPDATE characters SET ? WHERE id=?", $data, $id);
   }
@@ -54,7 +56,7 @@ class Intro {
    * @param Nette\Security\Identity $identity Player's identity
    * @return int id of starting stage
    */
-  static function getStartingLocation(Nette\Database\Context $db, Nette\Security\Identity $identity) {
+  static function getStartingLocation(\Nette\Database\Context $db, \Nette\Security\Identity $identity) {
     $classRow = $db->table("character_classess")
       ->where("name", $identity->occupation);
     foreach($classRow as $classR) {  }
@@ -84,7 +86,7 @@ class Intro {
    * @param Nette\Security\Identity $identity Player's identity
    * @return void
    */
-  static function endIntro(Nette\Database\Context $db, Nette\Security\Identity $identity) {
+  static function endIntro(\Nette\Database\Context $db, \Nette\Security\Identity $identity) {
     $startingLocation = Intro::getStartingLocation($db, $identity);
     $data = array("current_stage" => $startingLocation);
     $db->query("UPDATE characters SET ? WHERE id=?", $data, $identity->id);
