@@ -33,3 +33,4 @@ session:
     expiration: 1 hour
 services:
     authenticator: HeroesofAbenez\Authenticator
+    authorizator: HeroesofAbenez\Authorizator::create
