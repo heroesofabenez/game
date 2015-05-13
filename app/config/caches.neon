@@ -1,0 +1,3 @@
+services:
+    caches.permissions: Nette\Caching\Cache(@cache.storage, "permissions")
+    caches.guilds: Nette\Caching\Cache(@cache.storage, "guilds")

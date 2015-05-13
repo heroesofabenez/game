@@ -1,20 +1,11 @@
 includes:
     - local.neon
+    - routes.neon
+    - caches.neon
 application:
     debugger: true
     mapping:
         *: HeroesofAbenez\Presenters\*Presenter
-routing:
-    routes:
-        "profile/<id>": "Profile:view"
-        "guild/join[/<id>]": "Guild:join"
-        "guild/create": "Guild:create"
-        "guild/leave": "Guild:leave"
-        "guild/<id>": "Guild:view"
-        "travel[/<location>]": "Travel:default"
-        "ranking/guilds[/<page>]": "Ranking:guilds"
-        "ranking[/<page>]": "Ranking:default"
-        "<presenter>[/<action>][/<id>]": "Homepage:default"
 database:
     default:
         dsn: %database.dsn%
@@ -34,5 +25,3 @@ session:
 services:
     authenticator: HeroesofAbenez\Authenticator
     authorizator: HeroesofAbenez\Authorizator::create
-    caches.permissions: Nette\Caching\Cache(@cache.storage, "permissions")
-    caches.guilds: Nette\Caching\Cache(@cache.storage, "guilds")

@@ -1,0 +1,11 @@
+routing:
+    routes:
+        "profile/<id>": "Profile:view"
+        "guild/join[/<id>]": "Guild:join"
+        "guild/create": "Guild:create"
+        "guild/leave": "Guild:leave"
+        "guild/<id>": "Guild:view"
+        "travel[/<location>]": "Travel:default"
+        "ranking/guilds[/<page>]": "Ranking:guilds"
+        "ranking[/<page>]": "Ranking:default"
+        "<presenter>[/<action>][/<id>]": "Homepage:default"
