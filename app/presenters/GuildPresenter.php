@@ -80,8 +80,10 @@ class GuildPresenter extends BasePresenter {
     $data = array(
       "name" => $values["name"], "description" => $values["description"]
     );
+    $cache = $this->context->getService("caches.guilds");
     $result = HOA\GuildModel::create($data, $this->user->id, $this->db);
     if($result) {
+      $cache->remove("guilds");
       $this->user->logout();
       $this->flashMessage("Guild created.");
       $this->redirect("Guild:");
@@ -115,7 +117,13 @@ class GuildPresenter extends BasePresenter {
    * @return void
    */
   function renderJoin() {
-    $this->template->guilds = GuildModel::listOfGuilds($this->db);
+    $cache = $this->context->getService("caches.guilds");
+    $guilds = $cache->load("guilds");
+    if($guilds === NULL) {
+      $guilds = HOA\GuildModel::listOfGuilds($this->db);
+      $cache->save("guilds", $guilds);
+    }
+    $this->template->guilds = $guilds;
     $apps = HOA\GuildModel::haveUnresolvedApplication($this->user->id, $this->db);
     if($apps) $this->flashMessage("You have an unresolved application.");
   }

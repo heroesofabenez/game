@@ -42,10 +42,12 @@ class Ranking extends \Nette\Object {
       if($guild->id == 0) continue;
       $members = $db->table("characters");
       $count = 0;
+      $leader = "";
       foreach($members as $member) {
         if($member->guild == $guild->id) $count++;
+        if($member->rank->name == "grandmaster") $leader = $member->name;
       }
-      $return[] = new Guild($guild->id, $guild->name, "", $count);
+      $return[] = new Guild($guild->id, $guild->name, $guild->description, $count, $leader);
     }
     return $return;
   }

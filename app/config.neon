@@ -35,3 +35,4 @@ services:
     authenticator: HeroesofAbenez\Authenticator
     authorizator: HeroesofAbenez\Authorizator::create
     caches.permissions: Nette\Caching\Cache(@cache.storage, "permissions")
+    caches.guilds: Nette\Caching\Cache(@cache.storage, "guilds")
