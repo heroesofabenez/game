@@ -16,7 +16,7 @@ class GuildPresenter extends BasePresenter {
    * @return void
    */
   function inGuild() {
-    $guild = HOA\GuildModel::getGuildId($this->db, $this->user->id);
+    $guild = $this->user->identity->guild;
     if($guild > 0) {
       $this->flashMessage("You are already in guild.");
       $this->forward("default");
@@ -29,7 +29,7 @@ class GuildPresenter extends BasePresenter {
    * @param bool $warrning Whetever to print a warrning (via flash message)
   */
   function notInGuild($warrning = true) {
-    $guild = HOA\GuildModel::getGuildId($this->db, $this->user->id);
+    $guild = $this->user->identity->guild;
     if($guild == 0) {
       if($warrning) { $this->flashMessage("You are not in guild."); }
       $this->forward("noguild");
