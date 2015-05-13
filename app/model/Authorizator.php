@@ -8,7 +8,7 @@ namespace HeroesofAbenez;
  */
 class Authorizator extends \Nette\Object {
   /**
-   * Get roles from db
+   * Get roles (from db or cache)
    * 
    * @param \Nette\Di\Container $container
    * @return array
@@ -27,6 +27,13 @@ class Authorizator extends \Nette\Object {
     return $roles;
   }
   
+  /**
+   * Get permissions (from db or cache)
+   * 
+   * @param \Nette\Di\Container $container
+   * @param type $roles
+   * @return type
+   */
   static function getPermissions(\Nette\Di\Container $container, $roles) {
     $cache = $container->getService("caches.permissions");
     $permissions = $cache->load("permissions");
@@ -43,6 +50,8 @@ class Authorizator extends \Nette\Object {
   }
   
   /**
+  * Factory for Authorizator
+  * 
   * @return \Nette\Security\Permission
   */
   static function create(\Nette\Di\Container $container) {
