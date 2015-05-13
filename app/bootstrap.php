@@ -1,10 +1,10 @@
 <?php
-require LIBS_DIR . '/nette.phar';
-Tracy\Debugger::enable(null, APP_DIR . '/log');
+require LIBS_DIR . "/nette.phar";
+Tracy\Debugger::enable(null, APP_DIR . "/log");
 
 $configurator = new Nette\Configurator;
 $configurator->setTempDirectory(APP_DIR . "/temp");
-$configurator->addConfig(APP_DIR . '/config.neon');
+$configurator->addConfig(APP_DIR . "/config.neon");
 $configurator->createRobotLoader()
     ->addDirectory(LIBS_DIR)
     ->addDirectory(APP_DIR)
