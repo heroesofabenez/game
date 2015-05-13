@@ -146,5 +146,19 @@ class GuildModel extends \Nette\Object {
     }
     return $return;
   }
+  
+  /**
+   * Leave the guild
+   * 
+   * @param Nette\Database\Context $db Database context
+   * @param int $id Player's id
+   * @return void
+  */
+  static function leave(\Nette\Database\Context $db, $id) {
+    $data = array(
+      "guild" => 0, "guildrank" => NULL
+    );
+    $db->query("UPDATE characters SET ? WHERE id=?", $data, $id);
+  }
 }
 ?>

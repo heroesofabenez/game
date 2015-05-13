@@ -23,9 +23,21 @@ class GuildPresenter extends BasePresenter {
     }
   }
   
-  function actionDefault() {
+  /**
+   * Redirect player to noguild if he is not in guild
+   * 
+   * @param bool $warrning Whetever to print a warrning (via flash message)
+  */
+  function notInGuild($warrning = true) {
     $guild = HOA\GuildModel::getGuildId($this->db, $this->user->id);
-    if($guild == 0) $this->forward("noguild");
+    if($guild == 0) {
+      if($warrning) { $this->flashMessage("You are not in guild."); }
+      $this->forward("noguild");
+    }
+  }
+  
+  function actionDefault() {
+    $this->notInGuild(false);
   }
   
   /**
@@ -106,6 +118,22 @@ class GuildPresenter extends BasePresenter {
     $this->template->guilds = GuildModel::listOfGuilds($this->db);
     $apps = HOA\GuildModel::haveUnresolvedApplication($this->user->id, $this->db);
     if($apps) $this->flashMessage("You have an unresolved application.");
+  }
+  
+  /**
+   * @return void
+  */
+  function actionLeave() {
+    $this->notInGuild();
+    if($this->user->isInRole("grandmaster")) {
+      $this->flashMessage("Grandmaster cannot leave guild.");
+      $this->redirect("Guild:");
+    } else {
+      HOA\GuildModel::leave($this->db, $this->user->id);
+      $this->flashMessage("You left guild.");
+      $this->user->logout();
+    }
+    $this->forward("default");
   }
   
   /**
