@@ -33,5 +33,5 @@ session:
     expiration: 1 hour
 services:
     authenticator: HeroesofAbenez\Authenticator
-    permissionsCache: Nette\Caching\Cache(@cache.storage, "permissions")
     authorizator: HeroesofAbenez\Authorizator::create
+    caches.permissions: Nette\Caching\Cache(@cache.storage, "permissions")

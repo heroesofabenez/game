@@ -38,7 +38,7 @@ class Authorizator extends \Nette\Object {
     $permission->addRole("guest");
     $permission->addRole("player", "guest");
     
-    $cache = $container->getService("permissionsCache");
+    $cache = $container->getService("caches.permissions");
     $db = $container->getService("database.default.context");
     $roles = $cache->load("roles");
     $permissions = $cache->load("permissions");
