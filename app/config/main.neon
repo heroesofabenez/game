@@ -1,5 +1,5 @@
 includes:
-    - config.local.neon
+    - local.neon
 application:
     debugger: true
     mapping:
