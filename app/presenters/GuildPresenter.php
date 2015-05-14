@@ -144,7 +144,30 @@ class GuildPresenter extends BasePresenter {
    * @return void
    */
   function actionPromote($id) {
-    $this->flashMessage("Member promoted.");
+    $result = HOA\GuildModel::promote($id, $this->context);
+    switch($result) {
+case 1:
+  $this->flashMessage("Member promoted.");
+  break;
+case 2:
+  $this->flashMessage("You aren't in a guild.");
+  break;
+case 3:
+  $this->flashMessage("You don't have permissions for this.");
+  break;
+case 4:
+  $this->flashMessage("Specified player doesn't exist.");
+  break;
+case 5:
+  $this->flashMessage("Specified player isn't in your guild.");
+  break;
+case 6:
+  $this->flashMessage("You can't promote members with higher ranks.");
+  break;
+case 7:
+  $this->flashMessage("You can't promote members to leader.");
+  break;
+    }
     $this->redirect("Guild:");
   }
   

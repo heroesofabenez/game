@@ -155,6 +155,34 @@ class GuildModel extends \Nette\Object {
   }
   
   /**
+   * Increase rank of specified member of guild
+   * 
+   * @param int $id Id of player to be demoted
+   * @param \Nette\Di\Container $container
+   * @return int Error code/1 on success
+   */
+  static function promote($id, \Nette\Di\Container $container) {
+    $admin = $container->getService("security.user");
+    if($admin->identity->guild == 0) return 2;
+    if(!$admin->isAllowed("guild", "promote")) return 3;
+    $db = $container->getService("database.default.context");
+    $character = $db->table("characters")->get($id);
+    if(!$character) return 4;
+    if($character->guild !== $admin->identity->guild) return 5;
+    $roles = Authorizator::getRoles($container);
+    foreach($roles as $role) {
+      if($role["name"] == $admin->roles[0]) {
+        $adminRole = $role["id"];
+        break;
+      }
+    }
+    if($adminRole < $character->guildrank) return 6;
+    if($character->guildrank === 6) return 7;
+    $db->query("UPDATE characters SET guildrank=guildrank+1 WHERE id=$id");
+    return 1;
+  }
+  
+  /**
    * Decrease rank of specified member of guild
    * 
    * @param int $id Id of player to be demoted
