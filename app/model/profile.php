@@ -34,7 +34,7 @@ class Profile extends \Nette\Object {
   /**
    * Get name of specified rank
    * 
-   * @param type $id
+   * @param int $id
    * @param \Nette\Di\Container $container
    * @return string
    */
