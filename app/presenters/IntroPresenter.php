@@ -43,6 +43,7 @@ class IntroPresenter extends BasePresenter {
    */
   function actionEnd() {
     HOA\Intro::endIntro($this->db, $this->user->identity);
+    $this->user->logout();
     $this->redirect("Homepage:");
   }
 }
