@@ -117,12 +117,7 @@ class GuildPresenter extends BasePresenter {
    * @return void
    */
   function renderJoin() {
-    $cache = $this->context->getService("caches.guilds");
-    $guilds = $cache->load("guilds");
-    if($guilds === NULL) {
-      $guilds = HOA\GuildModel::listOfGuilds($this->db);
-      $cache->save("guilds", $guilds);
-    }
+    $guilds = HOA\GuildModel::listOfGuilds($this->context);
     $this->template->guilds = $guilds;
     $apps = HOA\GuildModel::haveUnresolvedApplication($this->user->id, $this->db);
     if($apps) $this->flashMessage("You have an unresolved application.");

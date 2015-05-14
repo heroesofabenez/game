@@ -115,23 +115,28 @@ class GuildModel extends \Nette\Object {
   /**
    * Gets list of guilds
    * 
-   * @param \Nette\Database\Context $db Database context
+   * @param \Nette\Di\Container $container
    * @return array list of guilds (id, name, description, leader)
    */
-  static function listOfGuilds(\Nette\Database\Context $db) {
+  static function listOfGuilds(\Nette\Di\Container $container) {
     $return = array();
-    $guilds = $db->table("guilds");
-    foreach($guilds as $guild) {
-      if($guild->id == 0) continue;
-      $members = $db->table("characters")->where("guild", $guild->id);
-      foreach($members as $member) {
-        if($member->rank->name == "grandmaster") {
-          $leader = $member->name;
-          break;
+    $cache = $container->getService("caches.guilds");
+    $guilds = $cache->load("guilds");
+    if($guilds === NULL) {
+      $db = $container->getService("database.default.context");
+      $guilds = $db->table("guilds");
+      foreach($guilds as $guild) {
+        if($guild->id == 0) continue;
+        $members = $db->table("characters")->where("guild", $guild->id);
+        foreach($members as $member) {
+          if($member->rank->name == "grandmaster") {
+            $leader = $member->name;
+            break;
+          }
         }
+        $return[] = new Guild($guild->id, $guild->name, $guild->description, $members->count("*"), $leader);
       }
-      $return[] = new Guild($guild->id, $guild->name, $guild->description, $members->count("*"), $leader);
-    }
+    } else { $return = $guilds; }
     return $return;
   }
   
