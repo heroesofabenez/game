@@ -153,7 +153,27 @@ class GuildPresenter extends BasePresenter {
    * @return void
    */
   function actionDemote($id) {
-    $this->flashMessage("Member demoted.");
+    $result = HOA\GuildModel::demote($id, $this->context);
+    switch($result) {
+case 1:
+  $this->flashMessage("Member demoted.");
+  break;
+case 2:
+  $this->flashMessage("You aren't in a guild.");
+  break;
+case 3:
+  $this->flashMessage("You don't have permissions for this.");
+  break;
+case 4:
+  $this->flashMessage("Specified player doesn't exist.");
+  break;
+case 5:
+  $this->flashMessage("Specified player isn't in your guild.");
+  break;
+case 7:
+  $this->flashMessage("You can't demote members with the lowest rank.");
+  break;
+    }
     $this->redirect("Guild:");
   }
   

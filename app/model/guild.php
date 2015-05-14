@@ -155,6 +155,27 @@ class GuildModel extends \Nette\Object {
   }
   
   /**
+   * Decrease rank of specified member of guild
+   * 
+   * @todo don't allow demoting member with higher rank, return 6 in that case
+   * @param int $id Id of player to be demoted
+   * @param \Nette\Di\Container $container
+   * @return int Error code/1 on success
+   */
+  static function demote($id, \Nette\Di\Container $container) {
+    $admin = $container->getService("security.user");
+    if($admin->identity->guild == 0) return 2;
+    if(!$admin->isAllowed("guild", "demote")) return 3;
+    $db = $container->getService("database.default.context");
+    $character = $db->table("characters")->get($id);
+    if(!$character) return 4;
+    if($character->guild !== $admin->identity->guild) return 5;
+    if($character->guildrank === 1) return 7;
+    $db->query("UPDATE characters SET guildrank=guildrank-1 WHERE id=$id");
+    return 1;
+  }
+  
+  /**
    * Leave the guild
    * 
    * @param \Nette\Database\Context $db Database context
