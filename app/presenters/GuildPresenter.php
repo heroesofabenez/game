@@ -61,9 +61,9 @@ class GuildPresenter extends BasePresenter {
     $form = new UI\Form;
     $form->addText("name", "Name:")
          ->setRequired("You have to enter name.")
-         ->addRule(Nette\Forms\Form::MAX_LENGTH, "Name can have no more than 20 letters", 20);
+         ->addRule(\Nette\Forms\Form::MAX_LENGTH, "Name can have no more than 20 letters", 20);
     $form->addTextArea("description", "Description:")
-         ->addRule(Nette\Forms\Form::MAX_LENGTH, "Description can have no more than 200 letters", 200);
+         ->addRule(\Nette\Forms\Form::MAX_LENGTH, "Description can have no more than 200 letters", 200);
     $form->addSubmit("create", "Create");
     $form->onSuccess[] = array($this, "createGuildFormSucceeded");
     return $form;
