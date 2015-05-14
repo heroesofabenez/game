@@ -46,7 +46,7 @@ class GuildPresenter extends BasePresenter {
    */
   function renderView($id) {
     if($id == 0) $this->forward("notfound");
-    $data = HOA\GuildModel::view($id, $this->db);
+    $data = HOA\GuildModel::view($id, $this->context);
     if(!$data) $this->forward("notfound");
     foreach($data as $key => $value) {
       $this->template->$key = $value;

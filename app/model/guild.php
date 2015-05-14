@@ -43,19 +43,33 @@ class GuildModel extends \Nette\Object {
   /**
    * Gets basic data about specified guild
    * @param integer $id guild's id
-   * @param \Nette\Database\Context $db Database context
+   * @param \Nette\Di\Container $container
    * @return array info about guild
    */
-  static function view($id, \Nette\Database\Context  $db) {
+  static function view($id, \Nette\Di\Container $container) {
     $return = array();
-    $guild = $db->table("guilds")->get($id);
+    $db = $container->getService("database.default.context");
+    $cacheG = $container->getService("caches.guilds");
+    $guilds = $cacheG->load("guilds");
+    if($guilds === NULL) {
+      $guild = $db->table("guilds")->get($id);
+    } else {
+      $guild = \Nette\Utils\Arrays::get($guilds, $id-1, false);
+    }
     if(!$guild) { return false; }
     $return["name"] = $guild->name;
     $return["description"] = $guild->description;
     $members = $db->table("characters")->where("guild", $guild->id)->order("guildrank DESC, id");
     $return["members"] = array();
+    $cacheR = $container->getService("caches.permissions");
+    $ranks = $cacheR->load("roles");
     foreach($members as $member) {
-      $return["members"][] = array("name" => $member->name, "rank" => ucfirst($member->rank->name));
+      if($ranks === NULL) {
+        $rank = $member->rank->name;
+      } else {
+        $rank = $ranks[$member->rank->id]["name"];
+      }
+      $return["members"][] = array("name" => $member->name, "rank" => ucfirst($rank));
     }
     return $return;
   }
