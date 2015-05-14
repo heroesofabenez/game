@@ -293,14 +293,20 @@ class CharacterModel extends \Nette\Object {
   /**
    * Get list of races
    * 
-   * @param \Nette\Database\Context $db Database context
+   * @param \Nette\Di\Container $container
    * @return array
    */
-  static function getRacesList(\Nette\Database\Context $db) {
-    $racesList = array();
-    $races = $db->table("character_races");
-    foreach($races as $race) {
-      $racesList[$race->id] = $race->name;
+  static function getRacesList(\Nette\Di\Container $container) {
+    $cache = $container->getService("caches.characters");
+    $racesList = $cache->load("races");
+    if($racesList === NULL) {
+      $racesList = array();
+      $db = $container->getService("database.default.context");
+      $races = $db->table("character_races");
+      foreach($races as $race) {
+        $racesList[$race->id] = $race->name;
+      }
+      $cache->save("races", $racesList);
     }
     return $racesList;
   }
@@ -308,15 +314,23 @@ class CharacterModel extends \Nette\Object {
   /**
    * Get list of classes
    * 
-   * @param \Nette\Database\Context $db
+   * @param \Nette\Di\Container $container
    * @return array
    */
-  static function getClassesList(\Nette\Database\Context $db) {
-    $classesList = array();
-    $classes = $db->table("character_classess");
-    foreach($classes as $class) {
-      $classesList[$class->id] = $class->name;
+  static function getClassesList(\Nette\Di\Container $container) {
+    $cache = $container->getService("caches.characters");
+    $classesList = $cache->load("classes");
+    if($classesList === NULL) {
+      $classesList = array();
+      $db = $container->getService("database.default.context");
+      $classes = $db->table("character_classess");
+      foreach($classes as $class) {
+        $classesList[$class->id] = $class->name;
+      }
+      $cache->save("classes", $classesList);
     }
+    
+    
     return $classesList;
   }
 }
