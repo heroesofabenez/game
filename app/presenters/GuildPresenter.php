@@ -162,7 +162,7 @@ case 5:
   $this->flashMessage("Specified player isn't in your guild.");
   break;
 case 6:
-  $this->flashMessage("You can't promote members with higher ranks.");
+  $this->flashMessage("You can't promote members with same or higher ranks.");
   break;
 case 7:
   $this->flashMessage("You can't promote members to leader.");
@@ -194,7 +194,7 @@ case 5:
   $this->flashMessage("Specified player isn't in your guild.");
   break;
 case 6:
-  $this->flashMessage("You can't demote members with higher ranks.");
+  $this->flashMessage("You can't demote members with same or higher ranks.");
   break;
 case 7:
   $this->flashMessage("You can't demote members with the lowest rank.");
