@@ -140,7 +140,6 @@ class GuildPresenter extends BasePresenter {
   }
   
   /**
-   * @todo implement the function
    * @return void
    */
   function actionPromote($id) {
@@ -172,7 +171,6 @@ case 7:
   }
   
   /**
-   * @todo implement the function
    * @return void
    */
   function actionDemote($id) {
