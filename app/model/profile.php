@@ -32,6 +32,18 @@ class Profile extends \Nette\Object {
   }
   
   /**
+   * Get name of specified rank
+   * 
+   * @param type $id
+   * @param \Nette\Di\Container $container
+   * @return string
+   */
+  static function getRankName($id, \Nette\Di\Container $container) {
+    $ranks = Authorizator::getRoles($container);
+    return $ranks[$id]["name"];
+  }
+  
+  /**
    * Gets basic data about specified player
    * @param integer $id character's id
    * @param \Nette\Di\Container $container
@@ -59,8 +71,8 @@ class Profile extends \Nette\Object {
     }
     if($char->guild > 0) {
       $guild = $db->table("guilds")->get($char->guild);
-      $guildRank = $db->table("guild_ranks")->get($char->guildrank);
-      $return["guild"] = "Guild: $guild->name<br>Position in guild: " . ucfirst($guildRank->name);
+      $guildRank = Profile::getRankName($char->guildrank, $container);
+      $return["guild"] = "Guild: $guild->name<br>Position in guild: " . ucfirst($guildRank);
     } else {
       $return["guild"] = "Not a member of guild";
     }
