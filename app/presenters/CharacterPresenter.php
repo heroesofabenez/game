@@ -36,12 +36,12 @@ class CharacterPresenter extends BasePresenter {
     $form->addRadioList('gender', 'Gender:', array( 1 => "male", 2 => "female"))
          ->setRequired("Select gender")
          ->getSeparatorPrototype()->setName(NULL);
-    $racesList = CharacterModel::getRacesList($this->db);
+    $racesList = \HeroesofAbenez\CharacterModel::getRacesList($this->db);
     $form->addSelect('race', 'Race:', $racesList)
          ->setPrompt('Select race')
          ->setRequired("Select race");
     $form["race"]->getControlPrototype()->onchange("changeRaceDescription(this.value)");
-    $classesList = CharacterModel::getClassesList($this->db);
+    $classesList = \HeroesofAbenez\CharacterModel::getClassesList($this->db);
     $form->addSelect('class', 'Class:', $classesList)
          ->setPrompt('Select class')
          ->setRequired("Select class");

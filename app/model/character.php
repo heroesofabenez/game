@@ -6,7 +6,7 @@ namespace HeroesofAbenez;
  * 
  * @author Jakub Konečný
  */
-class Character extends Nette\Object {
+class Character extends \Nette\Object {
   /** @var int */
   protected $id;
   /** @var string */
@@ -289,7 +289,7 @@ case "equipment":
  * 
  * @author Jakub Konečný
  */
-class CharacterModel {
+class CharacterModel extends \Nette\Object {
   /**
    * Get list of races
    * 
