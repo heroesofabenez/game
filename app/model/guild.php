@@ -43,7 +43,7 @@ class GuildModel extends \Nette\Object {
   /**
    * Gets basic data about specified guild
    * @param integer $id guild's id
-   * @param Nette\Database\Context $db Database context
+   * @param \Nette\Database\Context $db Database context
    * @return array info about guild
    */
   static function view($id, \Nette\Database\Context  $db) {
@@ -65,7 +65,7 @@ class GuildModel extends \Nette\Object {
    * 
    * @param array $data Name and description
    * @param int $founder Id of founder
-   * @param Nette\Database\Context $db Database context
+   * @param \Nette\Database\Context $db Database context
    * @return bool Whetever the action was successful
    */
   static function create($data, $founder, \Nette\Database\Context  $db) {
@@ -80,7 +80,7 @@ class GuildModel extends \Nette\Object {
    * 
    * @param int $gid Guild to join
    * @param int $uid Player's id
-   * @param Nette\Database\Context $db Database context
+   * @param \Nette\Database\Context $db Database context
    * @return bool|-1
    */
   static function sendApplication($gid, $uid, \Nette\Database\Context $db) {
@@ -101,7 +101,7 @@ class GuildModel extends \Nette\Object {
    * Check if player has an unresolved application
    * 
    * @param int $id Player's id
-   * @param Nette\Database\Context $db Database context
+   * @param \Nette\Database\Context $db Database context
    */
   static function haveUnresolvedApplication($id, \Nette\Database\Context $db) {
     $apps = $db->table("requests")
@@ -115,7 +115,7 @@ class GuildModel extends \Nette\Object {
   /**
    * Gets list of guilds
    * 
-   * @param Nette\Database\Context $db Database context
+   * @param \Nette\Database\Context $db Database context
    * @return array list of guilds (id, name, description, leader)
    */
   static function listOfGuilds(\Nette\Database\Context $db) {
@@ -138,7 +138,7 @@ class GuildModel extends \Nette\Object {
   /**
    * Leave the guild
    * 
-   * @param Nette\Database\Context $db Database context
+   * @param \Nette\Database\Context $db Database context
    * @param int $id Player's id
    * @return void
   */

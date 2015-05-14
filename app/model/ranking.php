@@ -9,7 +9,7 @@ namespace HeroesofAbenez;
 class Ranking extends \Nette\Object {
   /**
    * Gets list of all characters
-   * @param Nette\Database\Context $db Database context
+   * @param \Nette\Database\Context $db Database context
    * @return array List of all characters (id, name, level, guild)
    */
   static function characters(\Nette\Database\Context $db) {
@@ -32,7 +32,7 @@ class Ranking extends \Nette\Object {
   
   /**
    * Gets list of all guilds
-   * @param Nette\Database\Context $db Database context
+   * @param \Nette\Database\Context $db Database context
    * @return array List of all guilds (name, number of members)
    */
   static function guilds(\Nette\Database\Context $db) {

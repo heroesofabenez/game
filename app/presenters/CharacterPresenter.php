@@ -26,7 +26,7 @@ class CharacterPresenter extends BasePresenter {
   }
   /**
    * Create form for creating character
-   * @return Nette\Application\UI\Form
+   * @return \Nette\Application\UI\Form
    */
   protected function createComponentCreateCharacterForm() {
     $form = new UI\Form;

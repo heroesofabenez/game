@@ -10,7 +10,7 @@ class Profile extends \Nette\Object {
   /**
    * Gets basic data about specified player
    * @param integer $id character's id
-   * @param Nette\Database\Context $db Database context
+   * @param \Nette\Database\Context $db Database context
    * @return array info about character
    */
   static function view($id, \Nette\Database\Context $db) {

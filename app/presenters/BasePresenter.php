@@ -20,7 +20,7 @@ abstract class BasePresenter extends \Nette\Application\UI\Presenter {
   
   /**
    * Provides virtual variable db for all presenters
-   * @return Nette\Database\Context database context
+   * @return \Nette\Database\Context database context
    */
   function getDb() {
     return $this->context->getService("database.default.context");

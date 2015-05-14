@@ -9,11 +9,11 @@ use Nette\Security as NS;
    * @author Jakub Konečný
    */
 class Authenticator extends \Nette\Object implements NS\IAuthenticator {
-  /** @var Nette\Database\Context Database context */
+  /** @var \Nette\Database\Context Database context */
   protected $db;
   
   /**
-   * @param Nette\Database\Context $database Database context
+   * @param \Nette\Database\Context $database Database context
    */
   function __construct(\Nette\Database\Context $database) {
     $this->db = $database;
@@ -22,7 +22,7 @@ class Authenticator extends \Nette\Object implements NS\IAuthenticator {
   /**
    * Logins the user
    * @param array $credentials not really used
-   * @return Nette\Security\Identity User's identity
+   * @return \Nette\Security\Identity User's identity
    */
   function authenticate(array $credentials) {
     $uid = Presenters\BasePresenter::getRealId();

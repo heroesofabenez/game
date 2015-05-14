@@ -32,7 +32,7 @@ class Authorizator extends \Nette\Object {
    * 
    * @param \Nette\Di\Container $container
    * @param type $roles
-   * @return type
+   * @return array
    */
   static function getPermissions(\Nette\Di\Container $container, $roles) {
     $cache = $container->getService("caches.permissions");

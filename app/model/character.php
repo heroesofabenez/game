@@ -293,7 +293,7 @@ class CharacterModel {
   /**
    * Get list of races
    * 
-   * @param Nette\Database\Context $db Database context
+   * @param \Nette\Database\Context $db Database context
    * @return array
    */
   static function getRacesList(\Nette\Database\Context $db) {
@@ -308,7 +308,7 @@ class CharacterModel {
   /**
    * Get list of classes
    * 
-   * @param Nette\Database\Context $db
+   * @param \Nette\Database\Context $db
    * @return array
    */
   static function getClassesList(\Nette\Database\Context $db) {

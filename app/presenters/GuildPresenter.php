@@ -55,7 +55,7 @@ class GuildPresenter extends BasePresenter {
   
   /**
    * Creates form for creating guild
-   * @return Nette\Application\UI\Form
+   * @return \Nette\Application\UI\Form
    */
   protected function createComponentCreateGuildForm() {
     $form = new UI\Form;

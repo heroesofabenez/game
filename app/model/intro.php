@@ -10,7 +10,7 @@ class Intro {
   /**
    * Check in which part of intro the player is
    * 
-   * @param Nette\Database\Context $db Database context
+   * @param \Nette\Database\Context $db Database context
    * @param type $uid User's id
    * @return type
    */
@@ -21,7 +21,7 @@ class Intro {
   /**
    * Get a part of introduction
    * 
-   * @param Nette\Database\Context $db Database context
+   * @param \Nette\Database\Context $db Database context
    * @param int $id Character's id
    * @param int $part Part's id
    * @return string Text of current introduction part
@@ -42,7 +42,7 @@ class Intro {
    * 
    * @param int $part
    * @param int $id Player's id
-   * @param Nette\Database\Context $db Database context
+   * @param \Nette\Database\Context $db Database context
    */
   static function moveToNextPart($part, $id, \Nette\Database\Context $db) {
     $data = array("intro" => $part);
@@ -52,8 +52,8 @@ class Intro {
   /**
    * Get starting location for the player
    * 
-   * @param Nette\Database\Context $db Database context
-   * @param Nette\Security\Identity $identity Player's identity
+   * @param \Nette\Database\Context $db Database context
+   * @param \Nette\Security\Identity $identity Player's identity
    * @return int id of starting stage
    */
   static function getStartingLocation(\Nette\Database\Context $db, \Nette\Security\Identity $identity) {
@@ -82,8 +82,8 @@ class Intro {
   /**
    * Ends introuction and sends player to his starting location
    * 
-   * @param Nette\Database\Context $db Database context
-   * @param Nette\Security\Identity $identity Player's identity
+   * @param \Nette\Database\Context $db Database context
+   * @param \Nette\Security\Identity $identity Player's identity
    * @return void
    */
   static function endIntro(\Nette\Database\Context $db, \Nette\Security\Identity $identity) {
