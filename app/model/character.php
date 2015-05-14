@@ -329,8 +329,6 @@ class CharacterModel extends \Nette\Object {
       }
       $cache->save("classes", $classesList);
     }
-    
-    
     return $classesList;
   }
 }
