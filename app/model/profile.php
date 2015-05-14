@@ -8,12 +8,37 @@ namespace HeroesofAbenez;
    */
 class Profile extends \Nette\Object {
   /**
+   * Get name of specified race
+   * 
+   * @param int $id Race's id
+   * @param \Nette\Di\Container $container
+   * @return string
+   */
+  static function getRaceName($id, \Nette\Di\Container $container) {
+    $racesList = CharacterModel::getRacesList($container);
+    return $racesList[$id];
+  }
+  
+  /**
+   * Get name of specified class
+   * 
+   * @param int $id
+   * @param \Nette\Di\Container $container
+   * @return string
+   */
+  static function getClassName($id, \Nette\Di\Container $container) {
+    $classesList = CharacterModel::getClassesList($container);
+    return $classesList[$id];
+  }
+  
+  /**
    * Gets basic data about specified player
    * @param integer $id character's id
-   * @param \Nette\Database\Context $db Database context
+   * @param \Nette\Di\Container $container
    * @return array info about character
    */
-  static function view($id, \Nette\Database\Context $db) {
+  static function view($id, \Nette\Di\Container $container) {
+    $db = $container->getService("database.default.context");
     $return = array();
     $char = $db->table("characters")->get($id);
     if(!$char) { return false; }
@@ -25,10 +50,8 @@ class Profile extends \Nette\Object {
       $return[$stat] = $char->$stat;
     }
     
-    $race = $db->table("character_races")->get($char->race);
-    $return["race"] = $race->name;
-    $occupation = $db->table("character_classess")->get($char->occupation);
-    $return["occupation"] = $occupation->name;
+    $return["race"] = Profile::getRaceName($char->race, $container);
+    $return["occupation"] = Profile::getClassName($char->occupation, $container);
     if($char->specialization > 0) {
       $return["specialization"] = "-" . $char->specialization;
     } else {
