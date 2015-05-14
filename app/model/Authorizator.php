@@ -31,10 +31,10 @@ class Authorizator extends \Nette\Object {
    * Get permissions (from db or cache)
    * 
    * @param \Nette\Di\Container $container
-   * @param type $roles
    * @return array
    */
-  static function getPermissions(\Nette\Di\Container $container, $roles) {
+  static function getPermissions(\Nette\Di\Container $container) {
+    $roles = Authorizator::getRoles($container);
     $cache = $container->getService("caches.permissions");
     $permissions = $cache->load("permissions");
     if($permissions === NULL) {
@@ -61,7 +61,7 @@ class Authorizator extends \Nette\Object {
     $permission->addRole("player", "guest");
     
     $roles = Authorizator::getRoles($container);
-    $permissions = Authorizator::getPermissions($container, $roles);
+    $permissions = Authorizator::getPermissions($container);
     
     foreach($roles as $i => $row) {
       if($row["id"] == 1) {
