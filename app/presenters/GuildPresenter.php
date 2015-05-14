@@ -170,6 +170,9 @@ case 4:
 case 5:
   $this->flashMessage("Specified player isn't in your guild.");
   break;
+case 6:
+  $this->flashMessage("You can't demote members with higher ranks.");
+  break;
 case 7:
   $this->flashMessage("You can't demote members with the lowest rank.");
   break;
