@@ -141,6 +141,17 @@ class GuildPresenter extends BasePresenter {
   
   /**
    * @return void
+  */     
+  function actionManage() {
+    $this->notInGuild();
+    if(!$this->user->isAllowed("guild", "manage")) {
+      $this->flashMessage("You can't manage guild.");
+      $this->redirect("Guild:");
+    }
+  }
+  
+  /**
+   * @return void
    */
   function actionPromote($id) {
     $result = HOA\GuildModel::promote($id, $this->context);

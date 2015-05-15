@@ -1,0 +1,20 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  {include "../head.latte"}
+  <title>HeroesofAbenez {$server} - Manage guild</title>
+</head>
+<body>
+{include "../navigation.latte"}
+<article id='main'>
+  <h1>Manage guild</h1>
+  <p>Choose action:</p>
+  <ul>
+    <li><a n:href="Guild:members">Manage members</a></li>
+    <li><a n:href="Guild:rename">Rename guild</a></li>
+    <li><a n:href="Guild:dissolve">Dissolve guild</a></li>
+  </ul>
+</article>
+{include "../footer.latte"}
+</body>
+</html>
