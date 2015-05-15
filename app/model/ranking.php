@@ -9,22 +9,28 @@ namespace HeroesofAbenez;
 class Ranking extends \Nette\Object {
   /**
    * Gets list of all characters
-   * @param \Nette\Database\Context $db Database context
+   * @param \Nette\Di\Container $container
    * @param \Nette\Utils\Paginator $paginator
    * @return array List of all characters (id, name, level, guild)
    */
-  static function characters(\Nette\Database\Context $db, \Nette\Utils\Paginator $paginator) {
+  static function characters(\Nette\Di\Container $container, \Nette\Utils\Paginator $paginator) {
+    $db = $container->getService("database.default.context");
     $characters = $db->table("characters")->order("level, experience, id")
       ->limit($paginator->getLength(), $paginator->getOffset());
     $result = $db->table("characters");
     $paginator->itemCount = $result->count("id");
     $chars = array();
+    $guilds = GuildModel::listOfGuilds($container);
     foreach($characters as $character) {
       if($character->guild == 0) {
         $guildName = "";
       } else {
-        $guild = $db->table("guilds")->get($character->guild);
-        $guildName = $guild->name;
+        foreach($guilds as $guild) {
+          if($guild->id == $character->guild) {
+            $guildName = $guild->name;
+            break;
+          }
+        }
       }
       $chars[] = array(
         "name" => $character->name, "level" => $character->level,
