@@ -13,3 +13,5 @@ form select option { color: black }
 h1, h2, h3 { color: green; font-family: Courier New, Courier, monotype }
 footer { width: 500px; background-color: gray; position: relative; top: -10px }
 footer div { height: 20px; }
+#guilds #name { text-align: left }
+#guilds .members { text-align: right }
