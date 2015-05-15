@@ -143,7 +143,7 @@ class GuildModel extends \Nette\Object {
         if($guild->id == 0) continue;
         $members = $db->table("characters")->where("guild", $guild->id);
         foreach($members as $member) {
-          if($member->rank->name == "grandmaster") {
+          if($member->guildrank->name == "grandmaster") {
             $leader = $member->name;
             break;
           }

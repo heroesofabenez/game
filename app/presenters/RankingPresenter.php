@@ -22,12 +22,7 @@ class RankingPresenter extends BasePresenter {
    * @return void
    */
   function renderGuilds($page) {
-    $cache = $this->context->getService("caches.guilds");
-    $guilds = $cache->load("guilds");
-    if($guilds === NULL) {
-      $guilds = HOA\Ranking::guilds($this->db);
-      $cache->save("guilds", $guilds);
-    }
+    $guilds = HOA\Ranking::guilds($this->context);
     $this->template->guilds = $guilds;
   }
 }

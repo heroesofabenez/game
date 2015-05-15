@@ -32,22 +32,31 @@ class Ranking extends \Nette\Object {
   
   /**
    * Gets list of all guilds
-   * @param \Nette\Database\Context $db Database context
+   * @param \Nette\Di\Container $container
    * @return array List of all guilds (name, number of members)
    */
-  static function guilds(\Nette\Database\Context $db) {
+  static function guilds(\Nette\Di\Container $container) {
+    $cache = $container->getService("caches.guilds");
+    $guilds = $cache->load("guilds");
     $return = array();
-    $guilds = $db->table("guilds");
-    foreach($guilds as $guild) {
-      if($guild->id == 0) continue;
-      $members = $db->table("characters");
-      $count = 0;
-      $leader = "";
-      foreach($members as $member) {
-        if($member->guild == $guild->id) $count++;
-        if($member->rank->name == "grandmaster") $leader = $member->name;
+    if($guilds === NULL) {
+      $guilds = array();
+      $db = $container->getService("database.default.context");
+      $guilds = $db->table("guilds");
+      foreach($guilds as $guild) {
+        if($guild->id == 0) continue;
+        $members = $db->table("characters");
+        $count = 0;
+        $leader = "";
+        foreach($members as $member) {
+          if($member->guild == $guild->id) $count++;
+          if($member->guildrank == 7) $leader = $member->name;
+        }
+        $return[] = new Guild($guild->id, $guild->name, $guild->description, $count, $leader);
       }
-      $return[] = new Guild($guild->id, $guild->name, $guild->description, $count, $leader);
+      $cache->save("guilds", $return);
+    } else {
+      $return = $guilds;
     }
     return $return;
   }
