@@ -61,14 +61,8 @@ class GuildModel extends \Nette\Object {
     $return["description"] = $guild->description;
     $members = $db->table("characters")->where("guild", $guild->id)->order("guildrank DESC, id");
     $return["members"] = array();
-    $cacheR = $container->getService("caches.permissions");
-    $ranks = $cacheR->load("roles");
     foreach($members as $member) {
-      if($ranks === NULL) {
-        $rank = $member->rank->name;
-      } else {
-        $rank = $ranks[$member->rank->id]["name"];
-      }
+      $rank = Profile::getRankName($member->guildrank, $container);
       $return["members"][] = array("name" => $member->name, "rank" => ucfirst($rank));
     }
     return $return;
