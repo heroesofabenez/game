@@ -15,7 +15,7 @@
     <tr><td>{$iterator->counter}.</td><td>{$character["name"]}</td><td align="right">{$character["level"]}</td><td>{$character["guild"]}</td><td><a n:href="Profile:view $character['id']">Profile</a></td></tr>
     {/foreach}
   </table>
-  <p>Page {$paginator->page} {if !$paginator->first}<a n:href="Ranking:default $paginator->page-1">Previous</a>{/if} {if !$paginator->last}<a n:href="Ranking:default $paginator->page+1">Next</a>{/if}</p>
+  <p>{if $paginator->pageCount !== 1}Page {$paginator->page}/{$paginator->pageCount}{/if} {if !$paginator->first}<a n:href="Ranking:default $paginator->page-1">Previous</a>{/if} {if !$paginator->last}<a n:href="Ranking:default $paginator->page+1">Next</a>{/if}</p>
 </article>
 {include "../footer.latte"}
 </body>
