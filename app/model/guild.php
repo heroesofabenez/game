@@ -127,15 +127,17 @@ class GuildModel extends \Nette\Object {
    * @return array list of guilds (id, name, description, leader)
    */
   static function listOfGuilds(\Nette\Di\Container $container) {
-    $return = array();
     $cache = $container->getService("caches.guilds");
     $guilds = $cache->load("guilds");
+    $return = array();
     if($guilds === NULL) {
       $db = $container->getService("database.default.context");
       $guilds = $db->table("guilds");
       foreach($guilds as $guild) {
         if($guild->id == 0) continue;
         $members = $db->table("characters")->where("guild", $guild->id);
+        $count = 0;
+        $leader = "";
         foreach($members as $member) {
           if($member->guildrank->name == "grandmaster") {
             $leader = $member->name;
@@ -144,7 +146,10 @@ class GuildModel extends \Nette\Object {
         }
         $return[] = new Guild($guild->id, $guild->name, $guild->description, $members->count("*"), $leader);
       }
-    } else { $return = $guilds; }
+      $cache->save("guilds", $return);
+    } else {
+      $return = $guilds;
+    }
     return $return;
   }
   

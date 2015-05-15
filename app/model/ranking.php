@@ -40,7 +40,6 @@ class Ranking extends \Nette\Object {
     $guilds = $cache->load("guilds");
     $return = array();
     if($guilds === NULL) {
-      $guilds = array();
       $db = $container->getService("database.default.context");
       $guilds = $db->table("guilds");
       foreach($guilds as $guild) {
