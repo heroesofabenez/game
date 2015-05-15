@@ -54,7 +54,7 @@ class GuildModel extends \Nette\Object {
     if($guilds === NULL) {
       $guild = $db->table("guilds")->get($id);
     } else {
-      $guild = \Nette\Utils\Arrays::get($guilds, $id-1, false);
+      $guild = \Nette\Utils\Arrays::get($guilds, $id, false);
     }
     if(!$guild) { return false; }
     $return["name"] = $guild->name;
@@ -142,7 +142,7 @@ class GuildModel extends \Nette\Object {
           if($member->guild == $guild->id) $count++;
           if($member->guildrank == 7) { $leader = $member->name; }
         }
-        $return[] = new Guild($guild->id, $guild->name, $guild->description, $count, $leader);
+        $return[$guild->id] = new Guild($guild->id, $guild->name, $guild->description, $count, $leader);
       }
       $cache->save("guilds", $return);
     } else {

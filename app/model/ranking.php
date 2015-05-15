@@ -22,16 +22,8 @@ class Ranking extends \Nette\Object {
     $chars = array();
     $guilds = GuildModel::listOfGuilds($container);
     foreach($characters as $character) {
-      if($character->guild == 0) {
-        $guildName = "";
-      } else {
-        foreach($guilds as $guild) {
-          if($guild->id == $character->guild) {
-            $guildName = $guild->name;
-            break;
-          }
-        }
-      }
+      if($character->guild == 0)  $guildName = "";
+      else $guildName = $guilds[$character->guild]->name;
       $chars[] = array(
         "name" => $character->name, "level" => $character->level,
         "guild" => $guildName, "id" => $character->id
@@ -61,7 +53,7 @@ class Ranking extends \Nette\Object {
           if($member->guild == $guild->id) $count++;
           if($member->guildrank == 7) $leader = $member->name;
         }
-        $return[] = new Guild($guild->id, $guild->name, $guild->description, $count, $leader);
+        $return[$guild->id] = new Guild($guild->id, $guild->name, $guild->description, $count, $leader);
       }
       $cache->save("guilds", $return);
     } else {
