@@ -9,13 +9,14 @@ use \HeroesofAbenez as HOA;
    * @author Jakub Konečný
    */
 class RankingPresenter extends BasePresenter {
+  const ITEMS_PER_PAGE = 15;
   /**
    * @todo do pagination
    * @return void
    */
   function renderDefault($page) {
     $paginator = new \Nette\Utils\Paginator;
-    $paginator->setItemsPerPage(15);
+    $paginator->setItemsPerPage(self::ITEMS_PER_PAGE);
     $paginator->setPage($page);
     $this->template->characters = HOA\Ranking::characters($this->db, $paginator);
     $this->template->paginator = $paginator;
