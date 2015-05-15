@@ -70,9 +70,9 @@ class Profile extends \Nette\Object {
       $return["specialization"] = "";
     }
     if($char->guild > 0) {
-      $guild = $db->table("guilds")->get($char->guild);
+      $guildName = GuildModel::getGuildName($char->guild, $container);
       $guildRank = Profile::getRankName($char->guildrank, $container);
-      $return["guild"] = "Guild: $guild->name<br>Position in guild: " . ucfirst($guildRank);
+      $return["guild"] = "Guild: $guildName<br>Position in guild: " . ucfirst($guildRank);
     } else {
       $return["guild"] = "Not a member of guild";
     }

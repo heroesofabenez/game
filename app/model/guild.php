@@ -41,6 +41,18 @@ class Guild {
    */
 class GuildModel extends \Nette\Object {
   /**
+   * Get name of specified guild
+   * 
+   * @param int $id Id of guild
+   * @param \Nette\Di\Container $container
+   * @return string
+   */
+  static function getGuildName($id, \Nette\Di\Container $container) {
+    $guilds = GuildModel::listOfGuilds($container);
+    return $guilds[$id]->name;
+  }
+  
+  /**
    * Gets basic data about specified guild
    * @param integer $id guild's id
    * @param \Nette\Di\Container $container
