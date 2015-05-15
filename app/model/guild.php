@@ -49,8 +49,8 @@ class GuildModel extends \Nette\Object {
   static function view($id, \Nette\Di\Container $container) {
     $return = array();
     $db = $container->getService("database.default.context");
-    $cacheG = $container->getService("caches.guilds");
-    $guilds = $cacheG->load("guilds");
+    $cache = $container->getService("caches.guilds");
+    $guilds = $cache->load("guilds");
     if($guilds === NULL) {
       $guild = $db->table("guilds")->get($id);
     } else {
