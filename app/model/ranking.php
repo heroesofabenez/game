@@ -10,10 +10,14 @@ class Ranking extends \Nette\Object {
   /**
    * Gets list of all characters
    * @param \Nette\Database\Context $db Database context
+   * @param \Nette\Utils\Paginator $paginator
    * @return array List of all characters (id, name, level, guild)
    */
-  static function characters(\Nette\Database\Context $db) {
-    $characters = $db->table("characters")->order("level, experience, id");
+  static function characters(\Nette\Database\Context $db, \Nette\Utils\Paginator $paginator) {
+    $characters = $db->table("characters")->order("level, experience, id")
+      ->limit($paginator->getLength(), $paginator->getOffset());
+    $result = $db->table("characters");
+    $paginator->itemCount = $result->count("id");
     $chars = array();
     foreach($characters as $character) {
       if($character->guild == 0) {

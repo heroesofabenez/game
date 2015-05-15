@@ -14,7 +14,11 @@ class RankingPresenter extends BasePresenter {
    * @return void
    */
   function renderDefault($page) {
-    $this->template->characters = HOA\Ranking::characters($this->db);
+    $paginator = new \Nette\Utils\Paginator;
+    $paginator->setItemsPerPage(15);
+    $paginator->setPage($page);
+    $this->template->characters = HOA\Ranking::characters($this->db, $paginator);
+    $this->template->paginator = $paginator;
   }
   
   /**
