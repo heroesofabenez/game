@@ -4,6 +4,7 @@ namespace HeroesofAbenez;
 /**
  * Structure for pet
  * 
+ * @property-read array deployParams 
  * @author Jakub Konečný
  */
 class Pet extends \Nette\Object {
@@ -38,7 +39,7 @@ class Pet extends \Nette\Object {
    * 
    * @return array params
    */
-  function deployParams() {
+  function getDeployParams() {
     return array(
       "id" => "pet" . $this->id . "bonusEffect",
       "type" => "buff",
