@@ -99,7 +99,7 @@ class GuildModel extends \Nette\Object {
     $members = $db->table("characters")->where("guild", $id)->order("guildrank DESC, id");
     foreach($members as $member) {
       $rank = Profile::getRankName($member->guildrank, $container);
-      $return[] = array("name" => $member->name, "rank" => ucfirst($rank));
+      $return[] = array("id" => $member->id, "name" => $member->name, "rank" => ucfirst($rank), "rankId" => $member->guildrank);
     }
     return $return;
   }

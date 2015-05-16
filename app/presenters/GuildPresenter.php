@@ -79,6 +79,16 @@ class GuildPresenter extends BasePresenter {
    */
   function renderMembers() {
     $this->template->members = HOA\GuildModel::guildMembers($this->user->identity->guild, $this->context);
+    $this->template->canPromote = $this->user->isAllowed("guild", "promote");
+    $this->template->canKick = $this->user->isAllowed("guild", "kick");
+    $roles = HOA\Authorizator::getRoles($this->context);
+    foreach($roles as $role) {
+      if($role["name"] == $this->user->roles[0]) {
+        $rankId = $role["id"];
+        break;
+      }
+    }
+    $this->template->rankId = $rankId;
   }
   
   /**
