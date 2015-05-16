@@ -1,0 +1,15 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  {include "../head.latte"}
+  <title>HeroesofAbenez {$server} - Guild members</title>
+</head>
+<body>
+{include "../navigation.latte"}
+<article id='main'>
+  <h1>Guild members</h1>
+  {foreach $members as $member}{$member["rank"]} {$member["name"]}{if !$iterator->isLast()}<br>{/if}{/foreach}
+</article>
+{include "../footer.latte"}
+</body>
+</html>

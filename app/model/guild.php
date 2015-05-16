@@ -87,6 +87,24 @@ class GuildModel extends \Nette\Object {
   }
   
   /**
+   * Get members of specified guild
+   * 
+   * @param type $id Id of guild
+   * @param \Nette\Di\Container $container
+   * @return array
+   */
+  static function guildMembers($id, \Nette\Di\Container $container) {
+    $return = array();
+    $db = $container->getService("database.default.context");
+    $members = $db->table("characters")->where("guild", $id)->order("guildrank DESC, id");
+    foreach($members as $member) {
+      $rank = Profile::getRankName($member->guildrank, $container);
+      $return[] = array("name" => $member->name, "rank" => ucfirst($rank));
+    }
+    return $return;
+  }
+  
+  /**
    * Creates a guild
    * 
    * @param array $data Name and description

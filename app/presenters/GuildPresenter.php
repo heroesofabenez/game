@@ -36,10 +36,16 @@ class GuildPresenter extends BasePresenter {
     }
   }
   
+  /**
+   * @return void
+   */
   function actionDefault() {
     $this->notInGuild(false);
   }
   
+  /**
+   * @return void
+   */
   function renderDefault() {
     $guild = HOA\GuildModel::guildData($this->user->identity->guild, $this->context);
     foreach($guild as $key => $value) {
@@ -59,6 +65,20 @@ class GuildPresenter extends BasePresenter {
     foreach($data as $key => $value) {
       $this->template->$key = $value;
     }
+  }
+  
+  /**
+   * @return void
+   */
+  function actionMembers() {
+    $this->notInGuild();
+  }
+  
+  /**
+   * @return void
+   */
+  function renderMembers() {
+    $this->template->members = HOA\GuildModel::guildMembers($this->user->identity->guild, $this->context);
   }
   
   /**
