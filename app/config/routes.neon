@@ -1,14 +1,7 @@
 routing:
     routes:
         "profile/<id>": "Profile:view"
-        "guild/join[/<id>]": "Guild:join"
-        "guild/create": "Guild:create"
-        "guild/leave": "Guild:leave"
-        "guild/manage": "Guild:manage"
-        "guild/members": "Guild:members"
-        "guild/rename": "Guild:rename"
-        "guild/dissolve": "Guild:dissolve"
-        "guild/<id>": "Guild:view"
+        "guild/<id [0-9]+>": "Guild:view"
         "travel[/<location>]": "Travel:default"
         "ranking/guilds[/<page>]": "Ranking:guilds"
         "ranking[/<page>]": "Ranking:default"
