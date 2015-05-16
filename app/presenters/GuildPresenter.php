@@ -178,6 +178,40 @@ class GuildPresenter extends BasePresenter {
     }
   }
   
+  function actionRename() {
+    $this->notInGuild();
+    if(!$this->user->isAllowed("guild", "rename")) {
+      $this->flashMessage("You can't rename guild.");
+      $this->redirect("Guild:");
+    }
+  }
+  
+  /**
+   * Creates form for renaming guild
+   *
+   * @ return \Nette\Application\UI\Form
+  */     
+  protected function createComponentRenameGuildForm() {
+    $currentName = HOA\GuildModel::getGuildName($this->user->identity->guild, $this->context);
+    $form = new UI\Form;
+    $form->addText("name", "New name:")
+         ->addRule(\Nette\Forms\Form::MAX_LENGTH, "Name can have no more than 20 letters", 20)
+         ->setDefaultValue($currentName);
+    $form->addSubmit("rename", "Rename");
+    $form->onSuccess[] = array($this, "renameGuildFormSucceeded");
+    return $form;
+  }
+  
+  /**
+   * Handles renaming guild
+   *
+   * @todo implement   
+   * @param Nette\Application\UI\Form $form Sent form
+   * @param  Nette\Utils\ArrayHash $values Array vith values
+   * @return void 
+  */     
+  function renameGuildFormSucceeded($form, $values) { }
+  
   /**
    * @return void
    */
