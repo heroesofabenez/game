@@ -138,7 +138,7 @@ class GuildModel extends \Nette\Object {
     if(!$guild) { return -1; }
     $leader = $db->table("characters")
       ->where("guild", $gid)
-      ->where("guildrank", 8);
+      ->where("guildrank", 7);
     $leader = $leader[1];
     $data = array(
       "from" => $uid, "to" => $leader->id, "type" => "guild_app"
