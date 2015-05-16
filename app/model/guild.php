@@ -53,6 +53,17 @@ class GuildModel extends \Nette\Object {
   }
   
   /**
+   * Get data about specified guild
+   * 
+   * @param int $id Id of guild
+   * @param \Nette\Di\Container $container
+   */
+  static function guildData($id, \Nette\Di\Container $container) {
+    $guilds = GuildModel::listOfGuilds($container);
+    return $guilds[$id];
+  }
+  
+  /**
    * Gets basic data about specified guild
    * @param integer $id guild's id
    * @param \Nette\Di\Container $container

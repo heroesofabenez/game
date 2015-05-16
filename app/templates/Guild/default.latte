@@ -7,8 +7,10 @@
 <body>
 {include "../navigation.latte"}
 <article id='main'>
-  <h1>Guild</h1>
-  <p></p>
+  <h1>Guild {$name}</h1>
+  Leader: {$leader} Members: <a n:href="Guild:members">{$members}</a><br>
+  Description: {$description}<br>
+  {if $canManage}<a n:href="Guild:manage">Manage guild</a>{/if}
 </article>
 {include "../footer.latte"}
 </body>

@@ -40,6 +40,14 @@ class GuildPresenter extends BasePresenter {
     $this->notInGuild(false);
   }
   
+  function renderDefault() {
+    $guild = HOA\GuildModel::guildData($this->user->identity->guild, $this->context);
+    foreach($guild as $key => $value) {
+      $this->template->$key = $value;
+    }
+    $this->template->canManage = $this->user->isAllowed("guild", "manage");
+  }
+  
   /**
    * @param int $id Id of guild to view
    * @return void
