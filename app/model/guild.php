@@ -109,12 +109,18 @@ class GuildModel extends \Nette\Object {
    * 
    * @param array $data Name and description
    * @param int $founder Id of founder
-   * @param \Nette\Database\Context $db Database context
+   * @param \Nette\Di\Container $container
    * @return bool Whetever the action was successful
    */
-  static function create($data, $founder, \Nette\Database\Context  $db) {
+  static function create($data, $founder, \Nette\Di\Container $container) {
+    $cache = $container->getService("caches.guilds");
+    $guilds = $cache->load("guilds");
+    foreach($guilds as $guild) {
+      if($guild->name == $data["name"]) return false;
+    }
+    $db = $container->getService("database.default.context");
     $row = $db->table("guilds")->insert($data);
-    $data2 = array("guild" => $row->id, "guildrank" => 8);
+    $data2 = array("guild" => $row->id, "guildrank" => 7);
     $db->query("UPDATE characters SET ? WHERE id=?", $data2, $founder);
     return true;
   }

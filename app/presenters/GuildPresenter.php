@@ -99,7 +99,6 @@ class GuildPresenter extends BasePresenter {
   
   /**
    * Handles creating guild
-   * @todo do not allow creating guild with name which is already used
    * @param Nette\Application\UI\Form $form Sent form
    * @param  Nette\Utils\ArrayHash $values Array vith values
    * @return void
@@ -109,12 +108,14 @@ class GuildPresenter extends BasePresenter {
       "name" => $values["name"], "description" => $values["description"]
     );
     $cache = $this->context->getService("caches.guilds");
-    $result = HOA\GuildModel::create($data, $this->user->id, $this->db);
+    $result = HOA\GuildModel::create($data, $this->user->id, $this->context);
     if($result) {
       $cache->remove("guilds");
       $this->user->logout();
       $this->flashMessage("Guild created.");
       $this->redirect("Guild:");
+    } else {
+      $this->flashMessage("Guild with this name already exists.");
     }
   }
   
