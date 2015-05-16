@@ -52,6 +52,7 @@ class Authorizator extends \Nette\Object {
   /**
   * Factory for Authorizator
   * 
+  * @param \Nette\Di\Container $container
   * @return \Nette\Security\Permission
   */
   static function create(\Nette\Di\Container $container) {
