@@ -107,10 +107,8 @@ class GuildPresenter extends BasePresenter {
     $data = array(
       "name" => $values["name"], "description" => $values["description"]
     );
-    $cache = $this->context->getService("caches.guilds");
     $result = HOA\GuildModel::create($data, $this->user->id, $this->context);
     if($result) {
-      $cache->remove("guilds");
       $this->user->logout();
       $this->flashMessage("Guild created.");
       $this->redirect("Guild:");

@@ -122,6 +122,7 @@ class GuildModel extends \Nette\Object {
     $row = $db->table("guilds")->insert($data);
     $data2 = array("guild" => $row->id, "guildrank" => 7);
     $db->query("UPDATE characters SET ? WHERE id=?", $data2, $founder);
+    $cache->remove("guilds");
     return true;
   }
   
