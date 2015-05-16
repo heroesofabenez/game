@@ -262,5 +262,26 @@ class GuildModel extends \Nette\Object {
     );
     $db->query("UPDATE characters SET ? WHERE id=?", $data, $id);
   }
+  
+  /**
+   * Rename guild
+   *
+   * @param int $id Guild to rename
+   * @param string $name New name
+   * @param \Nette\Di\Container $container
+   * @return bool Whetever the action was successful   
+  */
+  static function rename($id, $name, \Nette\Di\Container $container) {
+    $cache = $container->getService("caches.guilds");
+    $guilds = $cache->load("guilds");
+    foreach($guilds as $guild) {
+      if($guild->name == $name) return false;
+    }
+    $db = $container->getService("database.default.context");
+    $data = array("name" => $name);
+    $db->query("UPDATE guilds SET ? WHERE id=?", $data, $id);
+    $cache->remove("guilds");
+    return true;
+  }
 }
 ?>

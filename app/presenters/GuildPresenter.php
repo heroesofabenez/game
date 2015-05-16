@@ -211,7 +211,17 @@ class GuildPresenter extends BasePresenter {
    * @param  Nette\Utils\ArrayHash $values Array vith values
    * @return void 
   */     
-  function renameGuildFormSucceeded($form, $values) { }
+  function renameGuildFormSucceeded($form, $values) {
+    $gid = $this->user->identity->guild;
+    $name = $values["name"];
+    $result = HOA\GuildModel::rename($gid, $name, $this->context);
+    if($result) {
+      $this->flashMessage("Guild rename.");
+      $this->redirect("Guild:");
+    } else {
+      $this->flashMessage("Guild with this name already exists.");
+    }
+  }
   
   /**
    * @return void
