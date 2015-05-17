@@ -10,8 +10,8 @@ use \HeroesofAbenez as HOA;
    */
 class RankingPresenter extends BasePresenter {
   const ITEMS_PER_PAGE = 15;
+  
   /**
-   * @todo do pagination
    * @return void
    */
   function renderDefault($page) {
