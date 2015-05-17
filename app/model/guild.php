@@ -251,6 +251,35 @@ class GuildModel extends \Nette\Object {
   }
   
   /**
+   * Kick specified member from guild
+   * 
+   * @param int $id Id of player to be kicked
+   * @param \Nette\Di\Container $container
+   * @return int Error code/1 on success
+   */
+  static function kick($id, \Nette\Di\Container $container) {
+    $admin = $container->getService("security.user");
+    if($admin->identity->guild == 0) return 2;
+    if(!$admin->isAllowed("guild", "kick")) return 3;
+    $db = $container->getService("database.default.context");
+    $character = $db->table("characters")->get($id);
+    if(!$character) return 4;
+    if($character->guild !== $admin->identity->guild) return 5;
+    $roles = Authorizator::getRoles($container);
+    foreach($roles as $role) {
+      if($role["name"] == $admin->roles[0]) {
+        $adminRole = $role["id"];
+        break;
+      }
+    }
+    if($adminRole <= $character->guildrank) return 6;
+    $db->query("UPDATE characters SET guildrank=NULL, guild=0 WHERE id=$id");
+    $cache = $container->getService("caches.guilds");
+    $cache->remove("guilds");
+    return 1;
+  }
+  
+  /**
    * Leave the guild
    * 
    * @param \Nette\Database\Context $db Database context

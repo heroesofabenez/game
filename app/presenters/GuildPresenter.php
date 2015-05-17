@@ -294,11 +294,30 @@ case 7:
   }
   
   /**
-   * @todo implement the function
    * @return void
    */
   function actionKick($id) {
-    $this->flashMessage("Member kicked.");
+    $result = HOA\GuildModel::kick($id, $this->context);
+    switch($result) {
+case 1:
+  $this->flashMessage("Member kicked.");
+  break;
+case 2:
+  $this->flashMessage("You aren't in a guild.");
+  break;
+case 3:
+  $this->flashMessage("You don't have permissions for this.");
+  break;
+case 4:
+  $this->flashMessage("Specified player doesn't exist.");
+  break;
+case 5:
+  $this->flashMessage("Specified player isn't in your guild.");
+  break;
+case 6:
+  $this->flashMessage("You can't kick members with same or higher rank.");
+  break;
+    }
     $this->redirect("Guild:");
   }
 }
