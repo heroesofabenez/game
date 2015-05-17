@@ -187,6 +187,14 @@ class GuildPresenter extends BasePresenter {
     }
   }
   
+  /**
+   * @return void
+  */ 
+  function renderManage() {
+    $this->template->canRename = $this->user->isAllowed("guild", "rename");
+    $this->template->canDissolve = $this->user->isAllowed("guild", "dissolve");
+  }
+  
   function actionRename() {
     $this->notInGuild();
     if(!$this->user->isAllowed("guild", "rename")) {
