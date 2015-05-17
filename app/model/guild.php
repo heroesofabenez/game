@@ -282,15 +282,18 @@ class GuildModel extends \Nette\Object {
   /**
    * Leave the guild
    * 
-   * @param \Nette\Database\Context $db Database context
+   * @param \Nette\Di\Container $container
    * @param int $id Player's id
    * @return void
   */
-  static function leave(\Nette\Database\Context $db, $id) {
+  static function leave(\Nette\Di\Container $container, $id) {
+    $db = $container->getService("database.default.context");
     $data = array(
       "guild" => 0, "guildrank" => NULL
     );
     $db->query("UPDATE characters SET ? WHERE id=?", $data, $id);
+    $cache = $container->getService("caches.guilds");
+    $cache->remove("guilds");
   }
   
   /**

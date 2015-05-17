@@ -169,7 +169,7 @@ class GuildPresenter extends BasePresenter {
       $this->flashMessage("Grandmaster cannot leave guild.");
       $this->redirect("Guild:");
     } else {
-      HOA\GuildModel::leave($this->db, $this->user->id);
+      HOA\GuildModel::leave($this->context, $this->user->id);
       $this->flashMessage("You left guild.");
       $this->user->logout();
     }
