@@ -31,7 +31,7 @@ abstract class BasePresenter extends \Nette\Application\UI\Presenter {
    * @return int
    */
   static function getRealId() {
-    $dev_servers = array("localhost", "kobliha", "test.heroesofabenez.tk");
+    $dev_servers = array("localhost", "kobliha");
     if(in_array($_SERVER["SERVER_NAME"], $dev_servers)) {
       $uid = 1;
     } else {
