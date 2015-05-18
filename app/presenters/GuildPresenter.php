@@ -239,7 +239,7 @@ class GuildPresenter extends BasePresenter {
     $name = $values["name"];
     $result = HOA\GuildModel::rename($gid, $name, $this->context);
     if($result) {
-      $this->flashMessage("Guild rename.");
+      $this->flashMessage("Guild renamed.");
       $this->redirect("Guild:");
     } else {
       $this->flashMessage("Guild with this name already exists.");
