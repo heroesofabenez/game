@@ -217,7 +217,7 @@ class GuildModel extends \Nette\Object {
       }
     }
     if($adminRole <= $character->guildrank) return 6;
-    if($character->guildrank === 6) return 7;
+    if($character->guildrank >= 6) return 7;
     $db->query("UPDATE characters SET guildrank=guildrank+1 WHERE id=$id");
     return 1;
   }

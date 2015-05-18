@@ -315,7 +315,7 @@ case 6:
   $this->flashMessage("You can't promote members with same or higher ranks.");
   break;
 case 7:
-  $this->flashMessage("You can't promote members to leader.");
+  $this->flashMessage("You can't promote members to deputy or grandmaster.");
   break;
     }
     $this->redirect("Guild:");
