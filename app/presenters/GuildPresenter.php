@@ -197,6 +197,7 @@ class GuildPresenter extends BasePresenter {
   function renderManage() {
     $this->template->canRename = $this->user->isAllowed("guild", "rename");
     $this->template->canDissolve = $this->user->isAllowed("guild", "dissolve");
+    $this->template->leader = ($this->user->roles[0] == "grandmaster");
   }
   
   /**
@@ -378,6 +379,14 @@ case 6:
   break;
     }
     $this->redirect("Guild:");
+  }
+  
+  function actionLeaders() {
+    $this->notInGuild();
+    if($this->user->roles[0] !== "grandmaster") {
+      $this->flashMessage("You can't change deputy/grandmaster.");
+      $this->redirect("Guild:");
+    }
   }
 }
 ?>

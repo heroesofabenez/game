@@ -13,6 +13,7 @@
     <li><a n:href="Guild:members">Manage members</a></li>
     {if $canRename}<li><a n:href="Guild:rename">Rename guild</a></li>{/if}
     {if $canDissolve}<li><a n:href="Guild:dissolve">Dissolve guild</a></li>{/if}
+    {if $leader}<li><a n:href="Guild:leaders">Change deputy/grandmaster</a></li>{/if}
   </ul>
 </article>
 {include "../footer.latte"}
