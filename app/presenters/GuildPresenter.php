@@ -211,10 +211,55 @@ class GuildPresenter extends BasePresenter {
   }
   
   /**
+   * @return void
+   */
+  function actionDissolve() {
+    $this->notInGuild();
+    if(!$this->user->isAllowed("guild", "dissolve")) {
+      $this->flashMessage("You can't dissolve guild.");
+      $this->redirect("Guild:");
+    }
+  }
+  
+  /**
+   * Creates form for dissolving guild
+   *
+   * @ return \Nette\Application\UI\Form
+  */
+  protected function createComponentDissolveGuildForm() {
+    $currentName = HOA\GuildModel::getGuildName($this->user->identity->guild, $this->context);
+    $form = new UI\Form;
+    $form->addText("name", "Name:")
+         ->addRule(\Nette\Forms\Form::EQUAL, "You entered wrong name", $currentName);
+    $form->addSubmit("dissolve", "Dissolve");
+    $form->onSuccess[] = array($this, "dissolveGuildFormSucceeded");
+    return $form;
+  }
+  
+  /**
+   * Handles dissolving guild
+   *
+   * @param Nette\Application\UI\Form $form Sent form
+   * @param  Nette\Utils\ArrayHash $values Array vith values
+   * @return void
+  */
+  function dissolveGuildFormSucceeded($form, $values) {
+    $gid = $this->user->identity->guild;
+    $result = HOA\GuildModel::dissolve($gid, $this->context);
+    if($result) {
+      $this->flashMessage("Guild dissolved.");
+      $this->user->logout();
+      $this->redirect("Guild:noguild");
+    } else {
+      $this->flashMessage("An error occured.");
+    }
+  }
+  
+  /**
    * Creates form for renaming guild
    *
    * @ return \Nette\Application\UI\Form
-  */     
+  */
   protected function createComponentRenameGuildForm() {
     $currentName = HOA\GuildModel::getGuildName($this->user->identity->guild, $this->context);
     $form = new UI\Form;
@@ -229,11 +274,10 @@ class GuildPresenter extends BasePresenter {
   /**
    * Handles renaming guild
    *
-   * @todo implement   
    * @param Nette\Application\UI\Form $form Sent form
    * @param  Nette\Utils\ArrayHash $values Array vith values
-   * @return void 
-  */     
+   * @return void
+  */
   function renameGuildFormSucceeded($form, $values) {
     $gid = $this->user->identity->guild;
     $name = $values["name"];

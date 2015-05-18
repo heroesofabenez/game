@@ -297,6 +297,25 @@ class GuildModel extends \Nette\Object {
   }
   
   /**
+   * Dissolve guild
+   *
+   * @param type $id Guild to dissolve
+   * @param \Nette\Di\Container $container
+   */
+  static function dissolve($id, \Nette\Di\Container $container) {
+    $cache = $container->getService("caches.guilds");
+    $db = $container->getService("database.default.context");
+    $members = $db->table("characters")->where("guild", $id);
+    $data1 = array("guild" => 0, "guildrank" => NULL);
+    foreach($members as $member) {
+      $db->query("UPDATE characters SET ? WHERE id=?", $data1, $member->id);
+    }
+    $db->query("DELETE FROM guilds WHERE id=?", $id);
+    $cache->remove("guilds");
+    return true;
+  }
+  
+  /**
    * Rename guild
    *
    * @param int $id Guild to rename
