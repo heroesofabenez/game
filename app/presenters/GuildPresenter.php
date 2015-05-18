@@ -27,6 +27,7 @@ class GuildPresenter extends BasePresenter {
    * Redirect player to noguild if he is not in guild
    * 
    * @param bool $warrning Whetever to print a warrning (via flash message)
+   * @return void
   */
   function notInGuild($warrning = true) {
     $guild = $this->user->identity->guild;
@@ -127,6 +128,9 @@ class GuildPresenter extends BasePresenter {
     }
   }
   
+  /**
+   * @return void
+   */
   function actionCreate() {
     $this->inGuild();
   }
@@ -195,6 +199,9 @@ class GuildPresenter extends BasePresenter {
     $this->template->canDissolve = $this->user->isAllowed("guild", "dissolve");
   }
   
+  /**
+   * @return void
+   */
   function actionRename() {
     $this->notInGuild();
     if(!$this->user->isAllowed("guild", "rename")) {
