@@ -35,8 +35,8 @@ abstract class BasePresenter extends \Nette\Application\UI\Presenter {
     if(in_array($_SERVER["SERVER_NAME"], $dev_servers)) {
       $uid = 1;
     } else {
-      define('WP_USE_THEMES', false);
-      require( WWW_DIR . '/../wp-blog-header.php' );
+      define("WP_USE_THEMES", false);
+      require( WWW_DIR . "/../wp-blog-header.php");
       $uid = get_current_user_id();
     }
     return $uid;
