@@ -321,7 +321,7 @@ class GuildModel extends \Nette\Object {
    * @param int $id Guild to rename
    * @param string $name New name
    * @param \Nette\Di\Container $container
-   * @return bool Whetever the action was successful   
+   * @return bool Whetever the action was successful
   */
   static function rename($id, $name, \Nette\Di\Container $container) {
     $cache = $container->getService("caches.guilds");
@@ -334,6 +334,35 @@ class GuildModel extends \Nette\Object {
     $db->query("UPDATE guilds SET ? WHERE id=?", $data, $id);
     $cache->remove("guilds");
     return true;
+  }
+  
+  /**
+   * 
+   * @param int $id Guild's id
+   * @param string $description New description
+   * @param \Nette\Di\Container $container
+   * @return int Error code/1 on success
+   */
+  static function changeDescription($id, $description,  \Nette\Di\Container $container) {
+    $cache = $container->getService("caches.guilds");
+    $guilds = $cache->load("guilds");
+    $found = false;
+    foreach($guilds as $guild) {
+      if($guild->id == $id) {
+        $found = true;
+        break;
+      }
+    }
+    if(!$found) return false;
+    $db = $container->getService("database.default.context");
+    $data = array("description" => $description);
+    $result = $db->query("UPDATE guilds SET ? WHERE id=?", $data, $id);
+    if($result) {
+      $cache->remove("guilds");
+      return 1;
+    } else {
+      return 3;
+    }
   }
 }
 ?>

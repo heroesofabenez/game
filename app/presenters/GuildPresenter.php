@@ -388,5 +388,51 @@ case 6:
       $this->redirect("Guild:");
     }
   }
+  
+  function actionDescription() {
+    $this->notInGuild();
+    if(!$this->user->isAllowed("guild", "manage")) {
+      $this->flashMessage("You can't change guild's description.");
+      $this->redirect("Guild:");
+    }
+  }
+  
+  /**
+   * Creates form for changing guild's description
+   *
+   * @ return \Nette\Application\UI\Form
+  */
+  protected function createComponentGuildDescriptionForm() {
+    $form = new UI\Form;
+    $guild = HOA\GuildModel::guildData($this->user->identity->guild, $this->context);
+    $form->addTextArea("description", "New description:")
+         ->setDefaultValue($guild->description);
+    $form->addSubmit("change", "Change");
+    $form->onSuccess[] = array($this, "guildDescriptionFormSucceeded");
+    return $form;
+  }
+  /**
+   * Handles chaning guild's description
+   *
+   * @param Nette\Application\UI\Form $form Sent form
+   * @param  Nette\Utils\ArrayHash $values Array vith values
+   * @return void
+  */
+  function guildDescriptionFormSucceeded($form, $values) {
+    $guild = $this->user->identity->guild;
+    $description = $values["description"];
+    $result =HOA\GuildModel::changeDescription($guild, $description, $this->context);
+    switch($result) {
+  case 1:
+    $this->flashMessage("Guild's description changed.");
+    break;
+  case 2:
+    $this->flashMessage("Guild doesn't exist.");
+    break;
+  default:
+    $this->flashMessage("An error occurred.");
+    }
+    $this->redirect("Guild:");
+  }
 }
 ?>
