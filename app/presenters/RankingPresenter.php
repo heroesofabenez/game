@@ -12,6 +12,7 @@ class RankingPresenter extends BasePresenter {
   const ITEMS_PER_PAGE = 15;
   
   /**
+   * @param int $page Page to show
    * @return void
    */
   function renderDefault($page) {
