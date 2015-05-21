@@ -14,6 +14,7 @@ class HomepagePresenter extends BasePresenter {
     $stage = $stages[$this->user->identity->stage];
     $this->template->stageName = $stage->name;
     $this->template->areaName = HOA\Location::getAreaName($stage->area, $this->context);
+    $this->template->characterName = $this->user->identity->name;
   }
 }
 ?>
