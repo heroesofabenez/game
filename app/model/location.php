@@ -13,10 +13,15 @@ class Stage extends \Nette\Object {
   public $name;
   /** @var string description */
   public $description;
+  /** @var int minimum level to enter stage */
   public $required_level;
+  /** @var int id of race needed to enter stage */
   public $required_race;
+  /** @var int id of class needed to enter stage */
   public $required_occupation;
+  /** @var int id of parent area */
   public $area;
+  /** @var int order in area */
   public $order;
   
   function __construct($id, $name, $description, $required_level, $required_race, $required_occupation, $area, $order) {
@@ -43,8 +48,11 @@ class Area extends \Nette\Object {
   public $name;
   /** @var string description */
   public $description;
+  /** @var int minimum level to enter stage */
   public $required_level;
+  /** @var int id of race needed to enter stage */
   public $required_race;
+  /** @var int id of class needed to enter stage */
   public $required_occupation;
   public $area;
   public $order;
