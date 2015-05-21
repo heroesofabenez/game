@@ -54,8 +54,6 @@ class Area extends \Nette\Object {
   public $required_race;
   /** @var int id of class needed to enter stage */
   public $required_occupation;
-  public $area;
-  public $order;
   
   function __construct($id, $name, $description, $required_level, $required_race, $required_occupation) {
     $this->id = $id;
