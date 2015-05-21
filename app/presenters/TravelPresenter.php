@@ -8,12 +8,21 @@ namespace HeroesofAbenez\Presenters;
    */
 class TravelPresenter extends BasePresenter {
   /**
-   * @param int $location Location to travel to
-   * @todo implement the function
+   * @todo show map
    * @return void
    */
-  function renderDefault($location) {
-    
-  }
+  function renderDefault() { }
+  
+  /**
+   * @param int $location Area to travel to
+   * @return void
+   */
+  function actionArea($location) { }
+  
+  /**
+   * @param int $location Stage to travel to
+   * @return void
+   */
+  function actionStage($location) { }
 }
 ?>

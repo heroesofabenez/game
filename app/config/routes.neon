@@ -2,6 +2,5 @@ routing:
     routes:
         "profile/<id>": "Profile:view"
         "guild/<id [0-9]+>": "Guild:view"
-        "travel[/<location>]": "Travel:default"
         "ranking[/<page [0-9]+>]": "Ranking:default"
         "<presenter>[/<action>][/<id>]": "Homepage:default"
