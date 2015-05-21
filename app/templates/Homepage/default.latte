@@ -9,6 +9,14 @@
 <article id="main">
   <h1>HeroesofAbenez {$server}</h1>
   <p>Welcome, {$characterName}. You're currently at {$areaName} - {$stageName}.</p>
+  {if count($npcs) == 0}
+  <p>You can't see anyone.</p>
+  {else}
+  <p>You can see:</p>
+  {foreach $npcs as $npc}
+  {$npc->name}<br>
+  {/foreach}
+  {/if}
 </article>
 {include "../footer.latte"}
 </body>

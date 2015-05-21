@@ -65,6 +65,28 @@ class Area extends \Nette\Object {
   }
 }
 
+class NPC extends \Nette\Object {
+  public $id;
+  public $name;
+  public $race;
+  public $sprite;
+  public $portrait;
+  public $stage;
+  public $pos_x;
+  public $pos_y;
+  
+  function __construct($id, $name, $race, $sprite, $portrait, $stage, $pos_x, $pos_y) {
+    $this->id = $id;
+    $this->name = $name;
+    $this->race = $race;
+    $this->sprite = $sprite;
+    $this->portrait = $portrait;
+    $this->stage = $stage;
+    $this->pos_x = $pos_x;
+    $this->pos_y = $pos_y;
+  }
+}
+
 /**
  * Location Model
  * 
@@ -112,6 +134,29 @@ class Location {
       $cache->save("areas", $return);
     } else {
       $return = $areas;
+    }
+    return $return;
+  }
+  
+  /**
+   * Gets list of npcs
+   * 
+   * @param \Nette\Di\Container $container
+   * @return array
+   */
+  static function listOfNpcs(\Nette\Di\Container $container) {
+    $return = array();
+    $cache = $container->getService("caches.locations");
+    $npcs = $cache->load("npcs");
+    if($npcs === NULL) {
+      $db = $container->getService("database.default.context");
+      $npcs = $db->table("npcs");
+      foreach($npcs as $npc) {
+        $return[$npc->id] = new NPC($npc->id, $npc->name, $npc->race, $npc->sprite, $npc->portrait, $npc->stage, $npc->pos_x, $npc->pos_y);
+      }
+      $cache->save("npcs", $return);
+    } else {
+      $return = $npcs;
     }
     return $return;
   }
