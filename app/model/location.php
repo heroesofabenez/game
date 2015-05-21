@@ -142,9 +142,10 @@ class Location {
    * Gets list of npcs
    * 
    * @param \Nette\Di\Container $container
+   * @param int $stage Return npcs only from certain stage, 0 = all stages
    * @return array
    */
-  static function listOfNpcs(\Nette\Di\Container $container) {
+  static function listOfNpcs(\Nette\Di\Container $container, $stage = 0) {
     $return = array();
     $cache = $container->getService("caches.locations");
     $npcs = $cache->load("npcs");
@@ -157,6 +158,11 @@ class Location {
       $cache->save("npcs", $return);
     } else {
       $return = $npcs;
+    }
+    if($stage > 0) {
+      foreach($return as $npc) {
+        if($npc->stage !== $stage) unset($return[$npc->id]);
+      }
     }
     return $return;
   }
