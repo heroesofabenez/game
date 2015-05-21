@@ -3,6 +3,5 @@ routing:
         "profile/<id>": "Profile:view"
         "guild/<id [0-9]+>": "Guild:view"
         "travel[/<location>]": "Travel:default"
-        "ranking/guilds[/<page>]": "Ranking:guilds"
-        "ranking[/<page>]": "Ranking:default"
+        "ranking[/<page [0-9]+>]": "Ranking:default"
         "<presenter>[/<action>][/<id>]": "Homepage:default"
