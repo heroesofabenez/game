@@ -14,15 +14,15 @@ class TravelPresenter extends BasePresenter {
   function renderDefault() { }
   
   /**
-   * @param int $location Area to travel to
+   * @param int $id Area to travel to
    * @return void
    */
-  function actionArea($location) { }
+  function actionArea($id) { }
   
   /**
-   * @param int $location Stage to travel to
+   * @param int $id Stage to travel to
    * @return void
    */
-  function actionStage($location) { }
+  function actionStage($id) { }
 }
 ?>
