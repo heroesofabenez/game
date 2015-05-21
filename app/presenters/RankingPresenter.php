@@ -24,9 +24,10 @@ class RankingPresenter extends BasePresenter {
   
   /**
    * @todo do pagination and ordering
+   * @param int $id Page to show
    * @return void
    */
-  function renderGuilds($page) {
+  function renderGuilds($id) {
     $guilds = HOA\Ranking::guilds($this->context);
     $this->template->guilds = $guilds;
   }
