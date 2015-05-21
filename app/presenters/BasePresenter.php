@@ -36,7 +36,7 @@ abstract class BasePresenter extends \Nette\Application\UI\Presenter {
       $uid = 1;
     } else {
       $ch = curl_init("http://heroesofabenez.tk/auth.php");
-      curl_setopt ($ch, CURLOPT_RETURNTRANSFER, true);
+      curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
       $uid = curl_exec($ch);
       curl_close($ch);
     }
