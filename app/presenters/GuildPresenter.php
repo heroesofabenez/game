@@ -53,6 +53,7 @@ class GuildPresenter extends BasePresenter {
       $this->template->$key = $value;
     }
     $this->template->canManage = $this->user->isAllowed("guild", "manage");
+    $this->template->canInvite = $this->user->isAllowed("guild", "invite");
   }
   
   /**
