@@ -14,5 +14,6 @@ class NpcPresenter extends BasePresenter {
     if(!$npc) $this->forward("notfound");
     if($npc->stage !== $this->user->identity->stage) $this->forward("unavailable");
     $this->template->name = $npc->name;
+    $this->template->description = $npc->description;
   }
 }
