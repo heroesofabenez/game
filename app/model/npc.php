@@ -1,6 +1,8 @@
 <?php
 namespace HeroesofAbenez;
 
+use Nette\Utils\Arrays;
+
 /**
  * Data structure for npc
  * 
@@ -71,4 +73,9 @@ class NPCModel {
     return $return;
   }
   
+  static function view($id, \Nette\Di\Container $container) {
+    $npcs = NPCModel::listOfNpcs($container);
+    $npc = Arrays::get($npcs, $id, false);
+    return $npc;
+  }
 }
