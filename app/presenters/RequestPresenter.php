@@ -34,4 +34,8 @@ class RequestPresenter extends BasePresenter {
     $this->template->sent = $request->sent;
     $this->template->status = $request->status;
   }
+  
+  function actionAccept($id) { }
+  
+  function actionDecline($id) { }
 }

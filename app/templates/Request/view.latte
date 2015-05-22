@@ -18,7 +18,10 @@
   <p>{$from} wants to be {$to}'s friend.</p>
   {/if}
   Sent: {$sent}<br>
-  Status: {$status}
+  Status: {$status}<br>
+  {if $status == "new"}
+  <a n:href="Request:accept $id">Accept</a> <a n:href="Request:decline $id">Decline</a>
+  {/if}
 </article>
 {include "../footer.latte"}
 </body>
