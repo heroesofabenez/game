@@ -20,11 +20,15 @@ class RequestPresenter extends BasePresenter {
   }
   
   /**
-   * @todo forbid viewing request not from/to player/his guild
    * @param int $id Request to show
    * @return void
    */
   function renderView($id) {
+    $canShow = HOA\RequestModel::canShow($id, $this->user, $this->db);
+    if(!$canShow) {
+      $this->flashMessage("You can't see this request.");
+      $this->forward("Homepage:");
+    }
     $request = HOA\RequestModel::show($id, $this->db);
     if(!$request) $this->forward("notfound");
     $this->template->id = $request->id;

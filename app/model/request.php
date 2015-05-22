@@ -30,6 +30,45 @@ class Request extends \Nette\Object {
 }
 
 class RequestModel extends \Nette\Object {
+  /**
+   * Can player see/accept/decline the request?
+   * 
+   * @param int $requestId
+   * @param \Nette\Security\User $user
+   * @param \Nette\Database\Context $db Database context
+   * @return bool
+   */
+  static function canShow($requestId, \Nette\Security\User $user, \Nette\Database\Context $db) {
+    $request = $db->table("requests")->get($requestId);
+    switch($request->type) {
+  case "friendship":
+  case "group_join":
+    if($request->from == $user->id OR $request->to == $user->id) return true;
+    else return false;
+    break;
+  case "guild_join":
+    if($request->to == $user->id) return true;
+    $leader = $db->table("characters")->get($request->from);
+    $guild = $leader->guild;
+    if($user->identity->guild == $guild AND $user->isAllowed("guild", "invite")) {
+      return true;
+    } else {
+      return false;
+    }
+    break;
+  case "guild_app":
+    if($request->from == $user->id) return true;
+    $leader = $db->table("characters")->get($request->to);
+    $guild = $leader->guild;
+    if($user->identity->guild == $guild AND $user->isAllowed("guild", "invite")) {
+      return true;
+    } else {
+      return false;
+    }
+    break;
+    }
+  }
+  
   static function show($id, \Nette\Database\Context $db) {
     $requestRow = $db->table("requests")->get($id);
     if(!$requestRow) return false;
