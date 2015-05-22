@@ -65,28 +65,6 @@ class Area extends \Nette\Object {
   }
 }
 
-class NPC extends \Nette\Object {
-  public $id;
-  public $name;
-  public $race;
-  public $sprite;
-  public $portrait;
-  public $stage;
-  public $pos_x;
-  public $pos_y;
-  
-  function __construct($id, $name, $race, $sprite, $portrait, $stage, $pos_x, $pos_y) {
-    $this->id = $id;
-    $this->name = $name;
-    $this->race = $race;
-    $this->sprite = $sprite;
-    $this->portrait = $portrait;
-    $this->stage = $stage;
-    $this->pos_x = $pos_x;
-    $this->pos_y = $pos_y;
-  }
-}
-
 /**
  * Location Model
  * 

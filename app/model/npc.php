@@ -2,6 +2,41 @@
 namespace HeroesofAbenez;
 
 /**
+ * Data structure for npc
+ * 
+ * @author Jakub Konečný
+ */
+class NPC extends \Nette\Object {
+  /** @var int id */
+  public $id;
+  /** @var string name */
+  public $name;
+  /** @var int id of race */
+  public $race;
+  /** @var string */
+  public $sprite;
+  /** @var string */
+  public $portrait;
+  /** @var int id of stage */
+  public $stage;
+  /** @var int */
+  public $pos_x;
+  /** @var int */
+  public $pos_y;
+  
+  function __construct($id, $name, $race, $sprite, $portrait, $stage, $pos_x, $pos_y) {
+    $this->id = $id;
+    $this->name = $name;
+    $this->race = $race;
+    $this->sprite = $sprite;
+    $this->portrait = $portrait;
+    $this->stage = $stage;
+    $this->pos_x = $pos_x;
+    $this->pos_y = $pos_y;
+  }
+}
+
+/**
  * Npc model
  *
  * @author Jakub Konečný
