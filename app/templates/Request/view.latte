@@ -1,0 +1,25 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  {include "../head.latte"}
+  <title>HeroesofAbenez {$server} - Request {$id}</title>
+</head>
+<body>
+{include "../navigation.latte"}
+<article id='main'>
+  <h1>Request {$id}</h1>
+  {if $type == "guild_join"}
+  <p>{$from} invited {$to} to his/her guild.</p>
+  {elseif $type == "guild_app"}
+  <p>{$from} wants to join {$to}'s guild.</p>
+  {elseif $type == "group_join"}
+  <p>{$from} invited {$to} to his/her group.</p>
+  {elseif $type == "friendship"}
+  <p>{$from} wants to be {$to}'s friend.</p>
+  {/if}
+  Sent: {$sent}<br>
+  Status: {$status}
+</article>
+{include "../footer.latte"}
+</body>
+</html>

@@ -28,3 +28,14 @@ class Request extends \Nette\Object {
     $this->status = $status;
   }
 }
+
+class RequestModel extends \Nette\Object {
+  static function show($id, \Nette\Database\Context $db) {
+    $requestRow = $db->table("requests")->get($id);
+    if(!$requestRow) return false;
+    $from = $db->table("characters")->get($requestRow->from);
+    $to = $db->table("characters")->get($requestRow->to);
+    $return = new Request($requestRow->id, $from->name, $to->name, $requestRow->type, $requestRow->sent, $requestRow->status);
+    return $return;
+  }
+}
