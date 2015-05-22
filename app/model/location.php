@@ -70,7 +70,7 @@ class Area extends \Nette\Object {
  * 
  * @author Jakub Konečný
  */
-class Location {
+class Location extends \Nette\Object {
   /**
    * Gets list of stages
    * 

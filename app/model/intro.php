@@ -6,7 +6,7 @@ namespace HeroesofAbenez;
  *
  * @author Jakub Konečný
  */
-class Intro {
+class Intro extends \Nette\Object {
   /**
    * Check in which part of intro the player is
    * 

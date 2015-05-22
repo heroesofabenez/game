@@ -6,7 +6,7 @@ namespace HeroesofAbenez;
  * 
  * @author Jakub Konečný
  */
-class Guild {
+class Guild extends \Nette\Object {
   /** @var int id */
   public $id;
   /** @var string name */
