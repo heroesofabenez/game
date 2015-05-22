@@ -1,0 +1,21 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  {include "../head.latte"}
+  <title>HeroesofAbenez {$server} - Guild applications</title>
+</head>
+<body>
+{include "../navigation.latte"}
+<article id='main'>
+  <h1>Guild applications</h1>
+  {if count($apps) == 0}
+  <p>No unresolved applications</p>
+  {else}
+  {foreach $apps as $app}
+  {$app->from} ({$app->sent}) wants to join your guild. Accept Decline<br>
+  {/foreach}
+  {/if}
+</article>
+{include "../footer.latte"}
+</body>
+</html>

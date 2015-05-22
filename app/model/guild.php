@@ -164,6 +164,33 @@ class GuildModel extends \Nette\Object {
   }
   
   /**
+   * Get unresolved applications to specified guild
+   * 
+   * @param int $id Guild's id
+   * @param \Nette\Di\Container $container
+   * @return array
+   */
+  static function showApplications($id, \Nette\Di\Container $container) {
+    $return = array();
+    $guilds = GuildModel::listOfGuilds($container);
+    $guild = $guilds[$id];
+    $db = $container->getService("database.default.context");
+    $leaderRow = $db->table("characters")
+      ->where("name", $guild->leader);
+    foreach($leaderRow as $leader) { }
+    $apps = $db->table("requests")
+      ->where("to", $leader->id)
+      ->where("type", "guild_app")
+      ->where("status", "new");
+    foreach($apps as $app) {
+      $from = $db->table("characters")->get($app->from);
+      $to = $leader->name;
+      $return[] = new Request($app->id, $from->name, $to, $app->type, $app->sent, $app->status);
+    }
+    return $return;
+  }
+  
+  /**
    * Gets list of guilds
    * 
    * @param \Nette\Di\Container $container

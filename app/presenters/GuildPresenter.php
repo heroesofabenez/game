@@ -435,5 +435,18 @@ case 6:
     }
     $this->redirect("Guild:");
   }
+  
+  function actionApplications() {
+    $this->notInGuild();
+    if(!$this->user->isAllowed("guild", "invite")) {
+      $this->flashMessage("You can't manage applications.");
+      $this->redirect("Guild:");
+    }
+  }
+  
+  function renderApplications() {
+    $apps = HOA\GuildModel::showApplications($this->user->identity->guild, $this->context);
+    $this->template->apps = $apps;
+  }
 }
 ?>
