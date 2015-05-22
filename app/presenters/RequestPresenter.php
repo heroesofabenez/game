@@ -39,7 +39,15 @@ class RequestPresenter extends BasePresenter {
     $this->template->status = $request->status;
   }
   
+  /**
+   * @param int $id Request to accept
+   * @return void
+   */
   function actionAccept($id) { }
   
+  /**
+   * @param int $id Request to decline
+   * @return void
+   */
   function actionDecline($id) { }
 }

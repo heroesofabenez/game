@@ -69,6 +69,13 @@ class RequestModel extends \Nette\Object {
     }
   }
   
+  /**
+   * Gets data about specified request
+   * 
+   * @param type $id Request's id
+   * @param \Nette\Database\Context $db Database context
+   * @return \HeroesofAbenez\Request|bool
+   */
   static function show($id, \Nette\Database\Context $db) {
     $requestRow = $db->table("requests")->get($id);
     if(!$requestRow) return false;
