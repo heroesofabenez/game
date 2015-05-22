@@ -24,13 +24,13 @@ class RequestPresenter extends BasePresenter {
    * @return void
    */
   function renderView($id) {
+    $request = HOA\RequestModel::show($id, $this->db);
+    if(!$request) $this->forward("notfound");
     $canShow = HOA\RequestModel::canShow($id, $this->user, $this->db);
     if(!$canShow) {
       $this->flashMessage("You can't see this request.");
       $this->forward("Homepage:");
     }
-    $request = HOA\RequestModel::show($id, $this->db);
-    if(!$request) $this->forward("notfound");
     $this->template->id = $request->id;
     $this->template->from = $request->from;
     $this->template->to = $request->to;
