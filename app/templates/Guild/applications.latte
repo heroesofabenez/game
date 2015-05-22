@@ -12,7 +12,8 @@
   <p>No unresolved applications</p>
   {else}
   {foreach $apps as $app}
-  {$app->from} ({$app->sent}) wants to join your guild. Accept Decline<br>
+  <p>{$app->from} ({$app->sent}) wants to join your guild.<br>
+  <a n:href="Request:accept $app->id">Accept</a> <a n:href="Request:decline $app->id">Decline</a></p>
   {/foreach}
   {/if}
 </article>
