@@ -109,6 +109,13 @@ class RequestModel extends \Nette\Object {
     return $return;
   }
   
+  /**
+   * Decline specified request
+   * 
+   * @param int $id Request's id
+   * @param \Nette\Database\Context $db Database context
+   * @return bool
+   */
   static function decline($id, \Nette\Database\Context $db) {
     $data = array("status" => "declined");
     $db->query("UPDATE requests SET ? WHERE id=?", $data, $id);
