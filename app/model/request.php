@@ -97,12 +97,15 @@ class RequestModel extends \Nette\Object {
    * Gets data about specified request
    * 
    * @param type $id Request's id
+   * @param \Nette\Security\User $user
    * @param \Nette\Database\Context $db Database context
-   * @return \HeroesofAbenez\Request|bool
+   * @return \HeroesofAbenez\Request
    */
-  static function show($id, \Nette\Database\Context $db) {
+  static function show($id, \Nette\Security\User $user, \Nette\Database\Context $db) {
     $requestRow = $db->table("requests")->get($id);
-    if(!$requestRow) return false;
+    if(!$requestRow) return NULL;
+    $canShow = RequestModel::canShow($id, $user, $db);
+    if(!$canShow) return false;
     $from = $db->table("characters")->get($requestRow->from);
     $to = $db->table("characters")->get($requestRow->to);
     $return = new Request($requestRow->id, $from->name, $to->name, $requestRow->type, $requestRow->sent, $requestRow->status);
