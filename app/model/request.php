@@ -113,12 +113,20 @@ class RequestModel extends \Nette\Object {
    * Decline specified request
    * 
    * @param int $id Request's id
+   * @param \Nette\Security\User $user
    * @param \Nette\Database\Context $db Database context
-   * @return bool
+   * @return int Error code/1 on success
    */
-  static function decline($id, \Nette\Database\Context $db) {
+  static function decline($id, \Nette\Security\User $user, \Nette\Database\Context $db) {
+    $request = RequestModel::show($id, $db);
+    if(!$request) return 2;
+    $canShow = RequestModel::canShow($id, $user, $db);
+    if(!$canShow) return 3;
+    $canChange = RequestModel::canChange($id, $user, $db);
+    if(!$canChange) return 4;
+    if($request->status !== "new") return 5;
     $data = array("status" => "declined");
     $db->query("UPDATE requests SET ? WHERE id=?", $data, $id);
-    return true;
+    return 1;
   }
 }
