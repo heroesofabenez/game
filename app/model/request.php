@@ -31,7 +31,7 @@ class Request extends \Nette\Object {
 
 class RequestModel extends \Nette\Object {
   /**
-   * Can player see/accept/decline the request?
+   * Can player see the request?
    * 
    * @param int $requestId
    * @param \Nette\Security\User $user
@@ -70,6 +70,30 @@ class RequestModel extends \Nette\Object {
   }
   
   /**
+   * Can player accept/decline the request?
+   * 
+   * @param int $requestId
+   * @param \Nette\Security\User $user
+   * @param \Nette\Database\Context $db Database context
+   * @return bool
+   */
+  static function canChange($requestId, \Nette\Security\User $user, \Nette\Database\Context $db) {
+    $request = $db->table("requests")->get($requestId);
+    if($request->from == $user->id) return false;
+    if($request->to == $user->id) return true;
+    if($request->type == "guild_app") {
+      $leader = $db->table("characters")->get($request->to);
+      $guild = $leader->guild;
+      if($user->identity->guild == $guild AND $user->isAllowed("guild", "invite")) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+    return false;
+  }
+  
+  /**
    * Gets data about specified request
    * 
    * @param type $id Request's id
@@ -83,5 +107,11 @@ class RequestModel extends \Nette\Object {
     $to = $db->table("characters")->get($requestRow->to);
     $return = new Request($requestRow->id, $from->name, $to->name, $requestRow->type, $requestRow->sent, $requestRow->status);
     return $return;
+  }
+  
+  static function decline($id, \Nette\Database\Context $db) {
+    $data = array("status" => "declined");
+    $db->query("UPDATE requests SET ? WHERE id=?", $data, $id);
+    return true;
   }
 }

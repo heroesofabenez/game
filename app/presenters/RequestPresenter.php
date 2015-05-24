@@ -49,5 +49,21 @@ class RequestPresenter extends BasePresenter {
    * @param int $id Request to decline
    * @return void
    */
-  function actionDecline($id) { }
+  function actionDecline($id) {
+    $request = HOA\RequestModel::show($id, $this->db);
+    if(!$request) $this->forward("notfound");
+    $canShow = HOA\RequestModel::canShow($id, $this->user, $this->db);
+    if(!$canShow) {
+      $this->flashMessage("You can't see this request.");
+      $this->forward("Homepage:");
+    }
+    $canChange = HOA\RequestModel::canChange($id, $this->user, $this->db);
+    if(!$canChange) {
+      $this->flashMessage("You can't decline this request.");
+      $this->forward("Homepage:");
+    }
+    HOA\RequestModel::decline($id, $this->db);
+    $this->flashMessage("Request declined.");
+    $this->redirect("Homepage:");
+  }
 }
