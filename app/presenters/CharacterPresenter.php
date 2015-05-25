@@ -34,17 +34,17 @@ class CharacterPresenter extends BasePresenter {
     $form->addText("name", "Name:")
          ->setRequired("You have to enter name.")
          ->addRule(\Nette\Forms\Form::MAX_LENGTH, "Name can have no more than 30 letters", 30);
-    $form->addRadioList('gender', 'Gender:', array( 1 => "male", 2 => "female"))
+    $form->addRadioList("gender", "Gender:", array( 1 => "male", 2 => "female"))
          ->setRequired("Select gender")
          ->getSeparatorPrototype()->setName(NULL);
     $racesList = \HeroesofAbenez\CharacterModel::getRacesList($this->context);
-    $form->addSelect('race', 'Race:', $racesList)
-         ->setPrompt('Select race')
+    $form->addSelect("race", "Race:", $racesList)
+         ->setPrompt("Select race")
          ->setRequired("Select race");
     $form["race"]->getControlPrototype()->onchange("changeRaceDescription(this.value)");
     $classesList = \HeroesofAbenez\CharacterModel::getClassesList($this->context);
-    $form->addSelect('class', 'Class:', $classesList)
-         ->setPrompt('Select class')
+    $form->addSelect("class", "Class:", $classesList)
+         ->setPrompt("Select class")
          ->setRequired("Select class");
     $form["class"]->getControlPrototype()->onchange("changeClassDescription(this.value)");
     $form->addSubmit("create", "Create character");
