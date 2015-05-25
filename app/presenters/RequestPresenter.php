@@ -42,7 +42,30 @@ class RequestPresenter extends BasePresenter {
    * @param int $id Request to accept
    * @return void
    */
-  function actionAccept($id) { }
+  function actionAccept($id) {
+    $result = HOA\RequestModel::accept($id, $this->user, $this->context);
+    switch($result) {
+  case 1:
+    $this->flashMessage("Request accepted.");
+    $this->redirect("Homepage:");
+    break;
+  case 2:
+    $this->forward("notfound");
+    break;
+  case 3:
+    $this->flashMessage("You can't see this request.");
+    $this->forward("Homepage:");
+    break;
+  case 4:
+    $this->flashMessage("You can't accept this request.");
+    $this->forward("Homepage:");
+    break;
+  case 5:
+    $this->flashMessage("This request was already handled.");
+    $this->forward("Homepage:");
+    break;
+    }
+  }
   
   /**
    * @param int $id Request to decline

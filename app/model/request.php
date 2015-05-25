@@ -113,6 +113,48 @@ class RequestModel extends \Nette\Object {
   }
   
   /**
+   * Accept specified request
+   * 
+   * @param int $id Request's id
+   * @param \Nette\Security\User $user
+   * @param \Nette\Di\Container $container
+   * @return int Error code/1 on success
+   */
+  static function accept($id, \Nette\Security\User $user, \Nette\Di\Container $container) {
+    $db = $container->getService("database.default.context");
+    $request = RequestModel::show($id, $user, $db);
+    if(!$request) return 2;
+    $canShow = RequestModel::canShow($id, $user, $db);
+    if(!$canShow) return 3;
+    $canChange = RequestModel::canChange($id, $user, $db);
+    if(!$canChange) return 4;
+    if($request->status !== "new") return 5;
+    switch($request->type) {
+  case "friendship":
+    return 6;
+    break;
+  case "group_join":
+    return 6;
+    break;
+  case "guild_app":
+    $uid = Profile::getCharacterId($request->from, $db);
+    $uid2 = Profile::getCharacterId($request->to, $db);
+    $gid = Profile::getCharacterGuild($uid2, $db);
+    GuildModel::join($uid, $gid, $container);
+    break;
+  case "guild_join":
+    $uid = Profile::getCharacterId($request->to, $db);
+    $uid2 = Profile::getCharacterId($request->from, $db);
+    $gid = Profile::getCharacterGuild($uid2, $db);
+    GuildModel::join($uid, $gid, $container);
+    break;
+    }
+    $data2 = array("status" => "accepted");
+    $db->query("UPDATE requests SET ? WHERE id=?", $data2, $id);
+    return 1;
+  }
+  
+  /**
    * Decline specified request
    * 
    * @param int $id Request's id

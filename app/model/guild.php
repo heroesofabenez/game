@@ -370,7 +370,7 @@ class GuildModel extends \Nette\Object {
    * @param \Nette\Di\Container $container
    * @return int Error code/1 on success
    */
-  static function changeDescription($id, $description,  \Nette\Di\Container $container) {
+  static function changeDescription($id, $description, \Nette\Di\Container $container) {
     $cache = $container->getService("caches.guilds");
     $guilds = $cache->load("guilds");
     $found = false;
@@ -390,6 +390,21 @@ class GuildModel extends \Nette\Object {
     } else {
       return 3;
     }
+  }
+  
+  /**
+   * Join a guild
+   * 
+   * @param int $uid Character's id
+   * @param int $gid Guild's id
+   * @param \Nette\Di\Container $container
+   */
+  static function join($uid, $gid, \Nette\Di\Container $container) {
+    $db = $container->getService("database.default.context");
+    $data = array("guild" => $gid, "guildrank" => 1);
+    $db->query("UPDATE characters SET ? WHERE id=?", $data, $uid);
+    $cache = $container->getService("caches.guilds");
+    $cache->remove("guilds");
   }
 }
 ?>

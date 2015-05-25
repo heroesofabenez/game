@@ -44,6 +44,34 @@ class Profile extends \Nette\Object {
   }
   
   /**
+   * Get character's id
+   * 
+   * @param string $name Character's name
+   * @param \Nette\Database\Context $db Database context
+   * @return int
+   */
+  static function getCharacterId($name, \Nette\Database\Context $db) {
+    $charRow = $db->table("characters")
+      ->where("name", $name);
+    if($charRow->count("id") == 0) return 0;
+    foreach($charRow as $char) { }
+    return $char->id;
+  }
+  
+  /**
+   * Get character's guild
+   * 
+   * @param string $id Character's id
+   * @param \Nette\Database\Context $db Database context
+   * @return int
+   */
+  static function getCharacterGuild($id, \Nette\Database\Context $db) {
+    $char = $db->table("characters")->get($id);
+    if(!$char) return 0;
+    return $char->guild;
+  }
+  
+  /**
    * Gets basic data about specified player
    * @param integer $id character's id
    * @param \Nette\Di\Container $container
