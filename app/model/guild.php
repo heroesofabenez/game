@@ -210,7 +210,7 @@ class GuildModel extends \Nette\Object {
         $leader = "";
         foreach($members as $member) {
           if($member->guild == $guild->id) $count++;
-          if($member->guildrank == 7) { $leader = $member->name; }
+          if($member->guildrank == 7) $leader = $member->name;
         }
         $return[$guild->id] = new Guild($guild->id, $guild->name, $guild->description, $count, $leader);
       }

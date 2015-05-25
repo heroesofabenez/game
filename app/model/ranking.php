@@ -46,7 +46,7 @@ class Ranking extends \Nette\Object {
       $guilds = $db->table("guilds");
       foreach($guilds as $guild) {
         if($guild->id == 0) continue;
-        $members = $db->table("characters");
+        $members = $db->table("characters")->where("guild", $guild->id);
         $count = 0;
         $leader = "";
         foreach($members as $member) {
