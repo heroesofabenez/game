@@ -38,26 +38,7 @@ class Ranking extends \Nette\Object {
    * @return array List of all guilds (name, number of members)
    */
   static function guilds(\Nette\Di\Container $container) {
-    $cache = $container->getService("caches.guilds");
-    $guilds = $cache->load("guilds");
-    $return = array();
-    if($guilds === NULL) {
-      $db = $container->getService("database.default.context");
-      $guilds = $db->table("guilds");
-      foreach($guilds as $guild) {
-        if($guild->id == 0) continue;
-        $members = $db->table("characters")->where("guild", $guild->id);
-        $leader = "";
-        foreach($members as $member) {
-          if($member->guildrank == 7) $leader = $member->name;
-        }
-        $return[$guild->id] = new Guild($guild->id, $guild->name, $guild->description, $members->count(), $leader);
-      }
-      $cache->save("guilds", $return);
-    } else {
-      $return = $guilds;
-    }
-    return $return;
+    return GuildModel::listOfGuilds($container);
   }
 }
 ?>
