@@ -66,6 +66,7 @@ class RequestPresenter extends BasePresenter {
     break;
   case 6:
     $this->forward("Homepage:");
+    break;
     }
   }
   
