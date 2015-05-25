@@ -382,6 +382,10 @@ case 6:
     $this->redirect("Guild:");
   }
   
+  /**
+   * @todo design the form and code its handling
+   * @return void
+   */
   function actionLeaders() {
     $this->notInGuild();
     if($this->user->roles[0] !== "grandmaster") {
@@ -390,6 +394,9 @@ case 6:
     }
   }
   
+  /**
+   * @return void
+   */
   function actionDescription() {
     $this->notInGuild();
     if(!$this->user->isAllowed("guild", "manage")) {
@@ -436,6 +443,9 @@ case 6:
     $this->redirect("Guild:");
   }
   
+  /**
+   * @return void
+   */
   function actionApplications() {
     $this->notInGuild();
     if(!$this->user->isAllowed("guild", "invite")) {
@@ -444,6 +454,9 @@ case 6:
     }
   }
   
+  /**
+   * @return void
+   */
   function renderApplications() {
     $apps = HOA\GuildModel::showApplications($this->user->identity->guild, $this->context);
     $this->template->apps = $apps;
