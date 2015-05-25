@@ -47,13 +47,11 @@ class Ranking extends \Nette\Object {
       foreach($guilds as $guild) {
         if($guild->id == 0) continue;
         $members = $db->table("characters")->where("guild", $guild->id);
-        $count = 0;
         $leader = "";
         foreach($members as $member) {
-          if($member->guild == $guild->id) $count++;
           if($member->guildrank == 7) $leader = $member->name;
         }
-        $return[$guild->id] = new Guild($guild->id, $guild->name, $guild->description, $count, $leader);
+        $return[$guild->id] = new Guild($guild->id, $guild->name, $guild->description, $members->count(), $leader);
       }
       $cache->save("guilds", $return);
     } else {
