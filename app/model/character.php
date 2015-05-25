@@ -331,5 +331,37 @@ class CharacterModel extends \Nette\Object {
     }
     return $classesList;
   }
+  
+  /**
+   * Creates new character
+   * 
+   * @param type $values
+   * @param \Nette\Database\Context $db
+   */
+  static function create($values, \Nette\Database\Context $db) {
+    $data = array(
+      "name" => $values["name"], "race" => $values["race"],
+      "occupation" => $values["class"], "gender" => $values["gender"]
+    );
+    $chars = $db->table("characters")->where("name", $data["name"]);
+    if($chars->count("*") > 0) return false;
+    
+    $race = $db->table("character_races")->get($values["race"]);
+    $class = $db->table("character_classess")->get($values["class"]);
+    $data["strength"] = $class->strength + $race->strength;
+    $data["dexterity"] = $class->dexterity + $race->dexterity;
+    $data["constitution"] = $class->constitution + $race->constitution;
+    $data["intelligence"] = $class->intelligence + $race->intelligence;
+    $data["charisma"] = $class->charisma + $race->charisma;
+    $data["owner"] = Presenters\BasePresenter::getRealId();
+    $db->query("INSERT INTO characters", $data);
+    
+    $data["class"] = $class->name;
+    $data["race"] = $race->name;
+    if($data["gender"]  == 1) $data["gender"] = "male";
+    else $data["gender"] = "female";
+    unset($data["occupation"]);
+    return $data;
+  }
 }
 ?>

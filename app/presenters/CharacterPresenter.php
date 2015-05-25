@@ -1,6 +1,7 @@
 <?php
 namespace HeroesofAbenez\Presenters;
 
+use HeroesofAbenez as HOA;
 use \Nette\Application\UI;
 
   /**
@@ -58,29 +59,8 @@ class CharacterPresenter extends BasePresenter {
    * @return void
    */
   function createCharacterFormSucceeded(UI\Form $form, $values) {
-    $data = array(
-      "name" => $values["name"], "race" => $values["race"],
-      "occupation" => $values["class"], "gender" => $values["gender"]
-    );
-    $race = $this->db->table("character_races")->get($values["race"]);
-    $class = $this->db->table("character_classess")->get($values["class"]);
-    $data["strength"] = $class->strength + $race->strength;
-    $data["dexterity"] = $class->dexterity + $race->dexterity;
-    $data["constitution"] = $class->constitution + $race->constitution;
-    $data["intelligence"] = $class->intelligence + $race->intelligence;
-    $data["charisma"] = $class->charisma + $race->charisma;
-    $data["owner"] = BasePresenter::getRealId();
-    
-    $chars = $this->db->table("characters")->where("name", $data["name"]);
-    if($chars->count("*") > 0) $this->forward("Character:exists");
-    
-    $this->db->query("INSERT INTO characters", $data);
-    
-    $data["class"] = $class->name;
-    $data["race"] = $race->name;
-    if($data["gender"]  == 1) $data["gender"] = "male";
-    else $data["gender"] = "female";
-    unset($data["occupation"]);
+    $data = HOA\CharacterModel::create($values, $this->db);
+    if(!$data) $this->forward("Character:exists");
     $this->user->logout();
     $this->forward("Character:created", array("data" => serialize($data)));
   }
