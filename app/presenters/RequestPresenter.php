@@ -64,6 +64,8 @@ class RequestPresenter extends BasePresenter {
     $this->flashMessage("This request was already handled.");
     $this->forward("Homepage:");
     break;
+  case 6:
+    $this->forward("Homepage:");
     }
   }
   
