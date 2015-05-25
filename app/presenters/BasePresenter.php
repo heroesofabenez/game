@@ -48,8 +48,7 @@ abstract class BasePresenter extends \Nette\Application\UI\Presenter {
    * @return void
    */
   function tryLogin() {
-    $user = $this->context->getService("user");
-    if(!$user->isLoggedIn()) $user->login();
+    if(!$this->user->isLoggedIn()) $this->user->login();
     $uid = $this->user->id;
     if(is_a($this->presenter, "\HeroesofAbenez\Presenters\CharacterPresenter") AND $uid == -1) return;
     if(is_a($this->presenter, "\HeroesofAbenez\Presenters\CharacterPresenter") AND $this->user->identity->stage == NULL) return;
