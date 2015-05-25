@@ -40,8 +40,10 @@ class RankingPresenter extends BasePresenter {
    * @return void
    */
   function renderGuilds($id) {
+    $this->paginator->setPage($id);
     $guilds = HOA\Ranking::guilds($this->context);
     $this->template->guilds = $guilds;
+    $this->template->paginator = $this->paginator;
   }
 }
 ?>
