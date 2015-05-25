@@ -13,6 +13,11 @@ class RankingPresenter extends BasePresenter {
   /** @var \Nette\Utils\Paginator */
   protected $paginator;
   
+  /**
+   * Set up paginator
+   * 
+   * @return void
+   */
   function startup() {
     parent::startup();
     $this->paginator = new \Nette\Utils\Paginator;
