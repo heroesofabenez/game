@@ -2,8 +2,8 @@ routing:
     routes:
         "profile/<id [0-9]+>": "Profile:view"
         "guild/<id [0-9]+>": "Guild:view"
-        "ranking[/<page=1 [0-9]+>]": "Ranking:default"
-        "ranking/<action>[/<page=1 [0-9]+>]": "Ranking:default"
+        "ranking[/<page=1 [0-9]+>]": "Ranking:characters"
+        "ranking/<action>[/<page=1 [0-9]+>]": "Ranking:characters"
         "npc/<id [0-9]+>": "Npc:default"
         "request/<id [0-9]+>": "Request:view"
         "<presenter>[/<action>][/<id>]": "Homepage:default"

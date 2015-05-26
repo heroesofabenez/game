@@ -28,7 +28,7 @@ class RankingPresenter extends BasePresenter {
    * @param int $page Page to show
    * @return void
    */
-  function renderDefault($page) {
+  function renderCharacters($page) {
     $this->paginator->setPage($page);
     $this->template->characters = HOA\Ranking::characters($this->context, $this->paginator);
     $this->template->paginator = $this->paginator;
