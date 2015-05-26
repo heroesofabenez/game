@@ -1,15 +1,8 @@
-<!DOCTYPE HTML>
-<html>
-<head>
-  {include "../head.latte"}
-  <title>HeroesofAbenez {$server} - Introduction {$part}</title>
-</head>
-<body>
-{include "../navigation.latte"}
+{layout '../@layout.latte'}
+{block title}Introduction {$part}{/block}
+{block content}
 <article id='main'>
   <p>{$intro}</p>
   <a n:href="Intro:next">Continue</a>
 </article>
-{include "../footer.latte"}
-</body>
-</html>
+{/block}

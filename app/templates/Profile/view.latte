@@ -1,11 +1,6 @@
-<!DOCTYPE HTML>
-<html>
-<head>
-  {include "../head.latte"}
-  <title>HeroesofAbenez {$server} - Profile</title>
-</head>
-<body>
-{include "../navigation.latte"}
+{layout '../@layout.latte'}
+{block title}Profile{/block}
+{block content}
 <article id='profile'>
   <h1>{$name}</h1>
   <p>{$gender}, level {$level} {$race} {$occupation}{$specialization}</p>
@@ -15,6 +10,4 @@ Intelligence {$intelligence}, Charisma {$charisma}</p>
   <p>{$active_pet}</p>
   <p>More info: {$description}</p>
 </article>
-{include "../footer.latte"}
-</body>
-</html>
+{/block}

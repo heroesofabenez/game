@@ -1,15 +1,8 @@
-<!DOCTYPE HTML>
-<html>
-<head>
-  {include "../head.latte"}
-  <title>HeroesofAbenez {$server} - NPC not found</title>
-</head>
-<body>
-{include "../navigation.latte"}
-<article id='main'>
+{layout '../@layout.latte'}
+{block title}NPC not found{/block}
+{block content}
+<article id="main">
   <h1>NPC not found</h1>
   <p>Requested npc was not found.</p>
 </article>
-{include "../footer.latte"}
-</body>
-</html>
+{/block}

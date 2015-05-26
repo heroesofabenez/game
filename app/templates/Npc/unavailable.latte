@@ -1,15 +1,8 @@
-<!DOCTYPE HTML>
-<html>
-<head>
-  {include "../head.latte"}
-  <title>HeroesofAbenez {$server} - NPC not available</title>
-</head>
-<body>
-{include "../navigation.latte"}
-<article id='main'>
+{layout '../@layout.latte'}
+{block title}NPC not available{/block}
+{block content}
+<article id="main">
   <h1>NPC not available</h1>
   <p>Requested npc is not available at the moment.</p>
 </article>
-{include "../footer.latte"}
-</body>
-</html>
+{/block}

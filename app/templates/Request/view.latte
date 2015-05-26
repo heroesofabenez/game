@@ -1,11 +1,6 @@
-<!DOCTYPE HTML>
-<html>
-<head>
-  {include "../head.latte"}
-  <title>HeroesofAbenez {$server} - Request {$id}</title>
-</head>
-<body>
-{include "../navigation.latte"}
+{layout '../@layout.latte'}
+{block title}Request {$id}{/block}
+{block content}
 <article id='main'>
   <h1>Request {$id}</h1>
   {if $type == "guild_join"}
@@ -23,6 +18,3 @@
   <a n:href="Request:accept $id">Accept</a> <a n:href="Request:decline $id">Decline</a>
   {/if}
 </article>
-{include "../footer.latte"}
-</body>
-</html>

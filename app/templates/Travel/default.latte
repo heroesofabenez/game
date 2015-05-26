@@ -1,11 +1,6 @@
-<!DOCTYPE HTML>
-<html>
-<head>
-  {include "../head.latte"}
-  <title>HeroesofAbenez {$server} - Travel</title>
-</head>
-<body>
-{include "../navigation.latte"}
+{layout '../@layout.latte'}
+{block title}Travel{/block}
+{block content}
 <article id="main">
   <h1>Map</h1>
   <h2>Stages in current area</h2>
@@ -14,6 +9,4 @@
   {else}<a n:href="Travel:stage $stage->id">{$stage->name}</a><br>{/if}
   {/foreach}
 </article>
-{include "../footer.latte"}
-</body>
-</html>
+{/block}

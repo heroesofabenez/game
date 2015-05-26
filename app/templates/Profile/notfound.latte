@@ -1,15 +1,8 @@
-<!DOCTYPE HTML>
-<html>
-<head>
-  {include "../head.latte"}
-  <title>HeroesofAbenez {$server} - Character not found</title>
-</head>
-<body>
-{include "../navigation.latte"}
+{layout '../@layout.latte'}
+{block title}Character not found{/block}
+{block content}
 <article id='main'>
   <h1>Character not found</h1>
   <p>Requested character was not found.</p>
 </article>
-{include "../footer.latte"}
-</body>
-</html>
+{/block}

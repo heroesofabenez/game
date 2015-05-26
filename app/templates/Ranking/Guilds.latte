@@ -1,11 +1,6 @@
-<!DOCTYPE HTML>
-<html>
-<head>
-  {include "../head.latte"}
-  <title>HeroesofAbenez {$server} - Ranking Guilds</title>
-</head>
-<body>
-{include "../navigation.latte"}
+{layout '../@layout.latte'}
+{block title}Ranking Guilds{/block}
+{block content}
 <article id='main'>
   <h1>Ranking Guilds</h1>
   <h3><a n:href="Ranking:">Characters</a> Guilds</h3>
@@ -16,6 +11,4 @@
     {/foreach}
   </table>
 </article>
-{include "../footer.latte"}
-</body>
-</html>
+{/block}

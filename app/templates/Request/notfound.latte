@@ -1,15 +1,8 @@
-<!DOCTYPE HTML>
-<html>
-<head>
-  {include "../head.latte"}
-  <title>HeroesofAbenez {$server} - Request not found</title>
-</head>
-<body>
-{include "../navigation.latte"}
+{layout '../@layout.latte'}
+{block title}Request not found{/block}
+{block content}
 <article id='main'>
   <h1>Request not found</h1>
   <p>Request was not found.</p>
 </article>
-{include "../footer.latte"}
-</body>
-</html>
+{/block}

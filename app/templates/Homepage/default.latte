@@ -1,11 +1,6 @@
-<!DOCTYPE HTML>
-<html>
-<head>
-  {include "../head.latte"}
-  <title>HeroesofAbenez {$server} - Home</title>
-</head>
-<body>
-{include "../navigation.latte"}
+{layout '../@layout.latte'}
+{block title}Home{/block}
+{block content}
 <article id="main">
   <h1>HeroesofAbenez {$server}</h1>
   <p>Welcome, {$characterName}. You're currently in {$stageName} at {$areaName}.</p>
@@ -18,6 +13,4 @@
   {/foreach}
   {/if}
 </article>
-{include "../footer.latte"}
-</body>
-</html>
+{/block}
