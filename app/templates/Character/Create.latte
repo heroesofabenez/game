@@ -1,8 +1,5 @@
-<!DOCTYPE HTML>
-<html>
-<head>
-  {include "../head.latte"}
-  <title>HeroesofAbenez {$server} - Create character</title>
+{layout '../@layout.latte'}
+{block head}
   <script>
     racesDes = new Array("");
     {foreach $races as $race}
@@ -27,9 +24,9 @@
       return;
     }
   </script>
-</head>
-<body>
-{include "../navigation.latte"}
+{/block}
+{block title}Create character{/block}
+{block content}
 <article id='main'>
   <h1>Create character</h1>
   <p>It seems you have no character on this server. (Are you sure you selected the right one?) Before you can start playing, you have to create one.</p>
@@ -37,6 +34,4 @@
   <div id="raceDescription"></div>
   <div id="classDescription"></div>
 </article>
-{include "../footer.latte"}
-</body>
-</html>
+{/block}
