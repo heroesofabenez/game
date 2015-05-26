@@ -175,11 +175,9 @@ class GuildModel extends \Nette\Object {
     $guilds = GuildModel::listOfGuilds($container);
     $guild = $guilds[$id];
     $db = $container->getService("database.default.context");
-    $leaderRow = $db->table("characters")
-      ->where("name", $guild->leader);
-    foreach($leaderRow as $leader) { }
+    $leaderId = Profile::getCharacterId($guild->leader, $container);
     $apps = $db->table("requests")
-      ->where("to", $leader->id)
+      ->where("to", $leaderId)
       ->where("type", "guild_app")
       ->where("status", "new");
     foreach($apps as $app) {
