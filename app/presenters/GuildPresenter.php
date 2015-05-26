@@ -134,6 +134,7 @@ class GuildPresenter extends BasePresenter {
    */
   function actionCreate() {
     $this->inGuild();
+    $this->template->haveForm = true;
   }
   
   /**
@@ -221,6 +222,7 @@ class GuildPresenter extends BasePresenter {
       $this->flashMessage("You can't dissolve guild.");
       $this->redirect("Guild:");
     }
+    $this->template->haveForm = true;
   }
   
   /**
@@ -403,6 +405,7 @@ case 6:
       $this->flashMessage("You can't change guild's description.");
       $this->redirect("Guild:");
     }
+    $this->template->haveForm = true;
   }
   
   /**
