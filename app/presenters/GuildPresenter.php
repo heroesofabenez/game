@@ -228,7 +228,7 @@ class GuildPresenter extends BasePresenter {
   /**
    * Creates form for dissolving guild
    *
-   * @ return \Nette\Application\UI\Form
+   * @return \Nette\Application\UI\Form
   */
   protected function createComponentDissolveGuildForm() {
     $currentName = HOA\GuildModel::getGuildName($this->user->identity->guild, $this->context);
@@ -262,7 +262,7 @@ class GuildPresenter extends BasePresenter {
   /**
    * Creates form for renaming guild
    *
-   * @ return \Nette\Application\UI\Form
+   * @return \Nette\Application\UI\Form
   */
   protected function createComponentRenameGuildForm() {
     $currentName = HOA\GuildModel::getGuildName($this->user->identity->guild, $this->context);
@@ -411,7 +411,7 @@ case 6:
   /**
    * Creates form for changing guild's description
    *
-   * @ return \Nette\Application\UI\Form
+   * @return \Nette\Application\UI\Form
   */
   protected function createComponentGuildDescriptionForm() {
     $form = new UI\Form;
