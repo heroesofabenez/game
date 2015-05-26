@@ -20,7 +20,6 @@ class Ranking extends \Nette\Object {
     $result = $db->table("characters");
     $paginator->itemCount = $result->count("id");
     $chars = array();
-    $guilds = GuildModel::listOfGuilds($container);
     foreach($characters as $character) {
       if($character->guild == 0)  $guildName = "";
       else $guildName = GuildModel::getGuildName($character->guild, $container);
