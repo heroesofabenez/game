@@ -1,16 +1,9 @@
-<!DOCTYPE HTML>
-<html>
-<head>
-  {include "../head.latte"}
-  <title>HeroesofAbenez {$server} - Guild</title>
-  <script src="{$basePath}/netteForms.js"></script>
-</head>
-<body>
-{include "../navigation.latte"}
+{layout '../@layout.latte'}
+{block head}<script src="{$basePath}/netteForms.js"></script>{/block}
+{block title}Guild{/block}
+{block content}
 <article id='main'>
   <h1>Change guild's description</h1>
   {control guildDescriptionForm}
 </article>
-{include "../footer.latte"}
-</body>
-</html>
+{/block}

@@ -1,16 +1,9 @@
-<!DOCTYPE HTML>
-<html>
-<head>
-  {include "../head.latte"}
-  <title>HeroesofAbenez {$server} - Create guild</title>
-  <script src="{$basePath}/netteForms.js"></script>
-</head>
-<body>
-{include "../navigation.latte"}
+{layout '../@layout.latte'}
+{block head}<script src="{$basePath}/netteForms.js"></script>{/block}
+{block title}Create guild{/block}
+{block content}
 <article id='main'>
   <h1>Create guild</h1>
   {control createGuildForm}
 </article>
-{include "../footer.latte"}
-</body>
-</html>
+{/block}

@@ -1,11 +1,6 @@
-<!DOCTYPE HTML>
-<html>
-<head>
-  {include "../head.latte"}
-  <title>HeroesofAbenez {$server} - Guild applications</title>
-</head>
-<body>
-{include "../navigation.latte"}
+{layout '../@layout.latte'}
+{block title}Guild applications{/block}
+{block content}
 <article id='main'>
   <h1>Guild applications</h1>
   {if count($apps) == 0}
@@ -17,6 +12,4 @@
   {/foreach}
   {/if}
 </article>
-{include "../footer.latte"}
-</body>
-</html>
+{/block}

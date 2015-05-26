@@ -1,15 +1,8 @@
-<!DOCTYPE HTML>
-<html>
-<head>
-  {include "../head.latte"}
-  <title>HeroesofAbenez {$server} - Guild not found</title>
-</head>
-<body>
-{include "../navigation.latte"}
+{layout '../@layout.latte'}
+{block title}Guild not found{/block}
+{block content}
 <article id='main'>
   <h1>Guild not found</h1>
   <p>Requested guild was not found.</p>
 </article>
-{include "../footer.latte"}
-</body>
-</html>
+{/block}

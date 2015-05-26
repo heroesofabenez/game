@@ -1,17 +1,10 @@
-<!DOCTYPE HTML>
-<html>
-<head>
-  {include "../head.latte"}
-  <title>HeroesofAbenez {$server} - Dissolve guild</title>
-  <script src="{$basePath}/netteForms.js"></script>
-</head>
-<body>
-{include "../navigation.latte"}
+{layout '../@layout.latte'}
+{block head}<script src="{$basePath}/netteForms.js"></script>{/block}
+{block title}Dissolve guild{/block}
+{block content}
 <article id='main'>
   <h1>Dissolving guild</h1>
   <p>Are you sure that you want to do this? It can't be undone. Confirm the action by entering the guild's name.</p>
   {control dissolveGuildForm}
 </article>
-{include "../footer.latte"}
-</body>
-</html>
+{/block}

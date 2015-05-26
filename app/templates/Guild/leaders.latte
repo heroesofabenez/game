@@ -1,15 +1,8 @@
-<!DOCTYPE HTML>
-<html>
-<head>
-  {include "../head.latte"}
-  <title>HeroesofAbenez {$server} - Guild leaders</title>
-</head>
-<body>
-{include "../navigation.latte"}
+{layout '../@layout.latte'}
+{block title}Guild leaders{/block}
+{block content}
 <article id='main'>
   <h1>Guild leaders</h1>
   <p>Here you can change deputy/grandmaster of your guild. Guild can have 1 deputy at max at any time.</p>
 </article>
-{include "../footer.latte"}
-</body>
-</html>
+{/block}

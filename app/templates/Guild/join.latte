@@ -1,11 +1,6 @@
-<!DOCTYPE HTML>
-<html>
-<head>
-  {include "../head.latte"}
-  <title>HeroesofAbenez {$server} - Join guild</title>
-</head>
-<body>
-{include "../navigation.latte"}
+{layout '../@layout.latte'}
+{block title}Join guild{/block}
+{block content}
 <article id='main'>
   <h1>Join guild</h1>
   <table id="guilds">
@@ -16,6 +11,4 @@
     {/foreach}
   </table>
 </article>
-{include "../footer.latte"}
-</body>
-</html>
+{/block}

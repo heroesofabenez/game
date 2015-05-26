@@ -1,11 +1,6 @@
-<!DOCTYPE HTML>
-<html>
-<head>
-  {include "../head.latte"}
-  <title>HeroesofAbenez {$server} - Manage guild</title>
-</head>
-<body>
-{include "../navigation.latte"}
+{layout '../@layout.latte'}
+{block title}Manage guild{/block}
+{block content}
 <article id='main'>
   <h1>Manage guild</h1>
   <p>Choose action:</p>
@@ -18,6 +13,4 @@
     {if $leader}<li><a n:href="Guild:leaders">Change deputy/grandmaster</a></li>{/if}
   </ul>
 </article>
-{include "../footer.latte"}
-</body>
-</html>
+{/block}

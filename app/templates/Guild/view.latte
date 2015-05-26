@@ -1,11 +1,6 @@
-<!DOCTYPE HTML>
-<html>
-<head>
-  {include "../head.latte"}
-  <title>HeroesofAbenez {$server} - Guild {$name}</title>
-</head>
-<body>
-{include "../navigation.latte"}
+{layout '../@layout.latte'}
+{block title}Guild {$name}{/block}
+{block content}
 <article id='profile'>
   <h1>Guild {$name}</h1>
   <p>Description: {$description}</p>
@@ -14,6 +9,4 @@
     {$member["rank"]}: {$member["name"]}<br>
   {/foreach}
 </article>
-{include "../footer.latte"}
-</body>
-</html>
+{/block}
