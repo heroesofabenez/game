@@ -1,7 +1,6 @@
 {layout '../@layout.latte'}
 {block title}Ranking{/block}
 {block content}
-<article id='main'>
   <h1>Ranking</h1>
   <h3>Characters <a n:href="Ranking:Guilds">Guilds</a></h3>
   <table>
@@ -11,5 +10,4 @@
     {/foreach}
   </table>
   <p>{if $paginator->pageCount !== 1}Page {$paginator->page}/{$paginator->pageCount}{/if} {if !$paginator->first}<a n:href="Ranking:default $paginator->page-1">Previous</a>{/if} {if !$paginator->last}<a n:href="Ranking:default $paginator->page+1">Next</a>{/if}</p>
-</article>
 {/block}

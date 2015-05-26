@@ -1,12 +1,10 @@
 {layout '../@layout.latte'}
 {block title}Guild {$name}{/block}
 {block content}
-<article id='profile'>
   <h1>Guild {$name}</h1>
   <p>Description: {$description}</p>
   <h2>Members</h2>
   {foreach $members as $member}
     {$member["rank"]}: {$member["name"]}<br>
   {/foreach}
-</article>
 {/block}

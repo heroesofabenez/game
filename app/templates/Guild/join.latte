@@ -1,7 +1,6 @@
 {layout '../@layout.latte'}
 {block title}Join guild{/block}
 {block content}
-<article id='main'>
   <h1>Join guild</h1>
   <table id="guilds">
     <caption>Guilds</caption>
@@ -10,5 +9,4 @@
     <tr><td>{$guild->name}</td><td>{$guild->description}</td><td>{$guild->leader}</td><td class="members">{$guild->members}</td><td><a n:href="Guild:join $guild->id">Apply</a></td></tr>
     {/foreach}
   </table>
-</article>
 {/block}

@@ -1,7 +1,6 @@
 {layout '../@layout.latte'}
 {block title}Request {$id}{/block}
 {block content}
-<article id='main'>
   <h1>Request {$id}</h1>
   {if $type == "guild_join"}
   <p>{$from} invited {$to} to his/her guild.</p>
@@ -17,4 +16,4 @@
   {if $status == "new"}
   <a n:href="Request:accept $id">Accept</a> <a n:href="Request:decline $id">Decline</a>
   {/if}
-</article>
+{/block}

@@ -1,7 +1,6 @@
 {layout '../@layout.latte'}
 {block title}Guild applications{/block}
 {block content}
-<article id='main'>
   <h1>Guild applications</h1>
   {if count($apps) == 0}
   <p>No unresolved applications</p>
@@ -11,5 +10,4 @@
   <a n:href="Request:accept $app->id">Accept</a> <a n:href="Request:decline $app->id">Decline</a></p>
   {/foreach}
   {/if}
-</article>
 {/block}

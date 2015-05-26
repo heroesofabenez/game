@@ -1,11 +1,9 @@
 {layout '../@layout.latte'}
 {block title}Guild{/block}
 {block content}
-<article id='main'>
   <h1>Guild {$name}</h1>
   Leader: {$leader} Members: <a n:href="Guild:members">{$members}</a><br>
   Description: {$description}<br>
   {if $canManage}<a n:href="Guild:manage">Manage guild</a>{/if}
   {if $canInvite}<a n:href="Guild:applications">Applications</a>{/if}
-</article>
 {/block}

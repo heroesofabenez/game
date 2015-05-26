@@ -1,7 +1,6 @@
 {layout '../@layout.latte'}
 {block title}Ranking Guilds{/block}
 {block content}
-<article id='main'>
   <h1>Ranking Guilds</h1>
   <h3><a n:href="Ranking:">Characters</a> Guilds</h3>
   <table id="guilds">
@@ -10,5 +9,4 @@
       <tr><td>{$iterator->counter}.</td><td>{$guild->name}</td><td class="members">{$guild->members}</td><td><a n:href="Guild:view $guild->id">Details</a></td></tr>
     {/foreach}
   </table>
-</article>
 {/block}
