@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <link rel="stylesheet" href="{$baseUrl}/styles/base.css">
   {default $haveForm = false}
-  {if $haveForm}<script src="{$basePath}/netteForms.js"></script>{/if}
-  <title>HeroesofAbenez {$server} - {block title}{/block}</title>
+  {if $haveForm}<script src="{$basePath}/netteForms.js"></script>
+  {else}{/if}<title>HeroesofAbenez {$server} - {block title}{/block}</title>
 </head>
 <body>
 {include "navigation.latte"}
