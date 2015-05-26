@@ -98,17 +98,18 @@ class RequestModel extends \Nette\Object {
    * 
    * @param type $id Request's id
    * @param \Nette\Security\User $user
-   * @param \Nette\Database\Context $db Database context
+   * @param \Nette\Di\Container $container
    * @return \HeroesofAbenez\Request
    */
-  static function show($id, \Nette\Security\User $user, \Nette\Database\Context $db) {
+  static function show($id, \Nette\Security\User $user, \Nette\Di\Container $container) {
+    $db = $container->getService("database.default.context");
     $requestRow = $db->table("requests")->get($id);
     if(!$requestRow) return NULL;
     $canShow = RequestModel::canShow($id, $user, $db);
     if(!$canShow) return false;
-    $from = $db->table("characters")->get($requestRow->from);
-    $to = $db->table("characters")->get($requestRow->to);
-    $return = new Request($requestRow->id, $from->name, $to->name, $requestRow->type, $requestRow->sent, $requestRow->status);
+    $from = Profile::getCharacterName($requestRow->from, $container);
+    $to = Profile::getCharacterName($requestRow->to, $container);
+    $return = new Request($requestRow->id, $from, $to, $requestRow->type, $requestRow->sent, $requestRow->status);
     return $return;
   }
   
@@ -137,14 +138,14 @@ class RequestModel extends \Nette\Object {
     return 6;
     break;
   case "guild_app":
-    $uid = Profile::getCharacterId($request->from, $db);
-    $uid2 = Profile::getCharacterId($request->to, $db);
+    $uid = Profile::getCharacterId($request->from, $container);
+    $uid2 = Profile::getCharacterId($request->to, $container);
     $gid = Profile::getCharacterGuild($uid2, $db);
     GuildModel::join($uid, $gid, $container);
     break;
   case "guild_join":
-    $uid = Profile::getCharacterId($request->to, $db);
-    $uid2 = Profile::getCharacterId($request->from, $db);
+    $uid = Profile::getCharacterId($request->to, $container);
+    $uid2 = Profile::getCharacterId($request->from, $container);
     $gid = Profile::getCharacterGuild($uid2, $db);
     GuildModel::join($uid, $gid, $container);
     break;

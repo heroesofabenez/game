@@ -44,18 +44,53 @@ class Profile extends \Nette\Object {
   }
   
   /**
+   * @param \Nette\Di\Container $container
+   * @return array
+   */
+  static function getCharacters(\Nette\Di\Container $container) {
+    $return = array();
+    $cache = $container->getService("caches.characters");
+    $characters = $cache->load("characters");
+    if($characters === NULL) {
+      $db = $container->getService("database.default.context");
+      $characters = $db->table("characters");
+      foreach($characters as $char) {
+        $return[$char->id] = array(
+          "id" => $char->id, "name" => $char->name
+        );
+      }
+      $cache->save("characters", $return);
+    } else {
+      $return = $characters;
+    }
+    return $return;
+  }
+  
+  /**
    * Get character's id
    * 
    * @param string $name Character's name
-   * @param \Nette\Database\Context $db Database context
+   * @param \Nette\Di\Container $container
    * @return int
    */
-  static function getCharacterId($name, \Nette\Database\Context $db) {
-    $charRow = $db->table("characters")
-      ->where("name", $name);
-    if($charRow->count("id") == 0) return 0;
-    foreach($charRow as $char) { }
-    return $char->id;
+  static function getCharacterId($name, \Nette\Di\Container $container) {
+    $characters = Profile::getCharacters($container);
+    foreach($characters as $char) {
+      if($char["name"] == $name) return $char["id"];
+    }
+    return 0;
+  }
+  
+  /**
+   * Get character's name
+   * 
+   * @param int $id Character's id
+   * @param \Nette\Di\Container $container
+   * @return string
+   */
+  static function getCharacterName($id, \Nette\Di\Container $container) {
+    $characters = Profile::getCharacters($container);
+    return $characters[$id]["name"];
   }
   
   /**
