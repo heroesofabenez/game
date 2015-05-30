@@ -42,4 +42,14 @@ class NpcPresenter extends BasePresenter {
     if(!$npc) $this->forward("notfound");
     if($npc->stage !== $this->user->identity->stage) $this->forward("unavailable");
   }
+  
+  /**
+   * @param int $id Npc's id
+   * @return void
+   */
+  function actionTrade($id) {
+    $npc = HOA\NPCModel::view($id, $this->context);
+    if(!$npc) $this->forward("notfound");
+    if($npc->stage !== $this->user->identity->stage) $this->forward("unavailable");
+  }
 }
