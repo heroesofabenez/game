@@ -37,10 +37,13 @@ class NpcPresenter extends BasePresenter {
    * @param int $id Npc's id
    * @return void
    */
-  function actionQuests($id) {
+  function renderQuests($id) {
     $npc = HOA\NPCModel::view($id, $this->context);
     if(!$npc) $this->forward("notfound");
     if($npc->stage !== $this->user->identity->stage) $this->forward("unavailable");
+    $this->template->id = $id;
+    $this->template->name = $npc->name;
+    $this->template->quests = array();
   }
   
   /**

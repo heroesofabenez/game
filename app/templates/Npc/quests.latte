@@ -1,0 +1,16 @@
+{layout '../@layout.latte'}
+{block title}Quests{/block}
+{block content}
+  <h1>{$name} - Quests</h1>
+  <p>Available quests:<br>
+  {if count($quests) == 0}
+  No quests
+  {else}
+    <ol>
+      {foreach $quests as $quest}
+      <li>$quest->name</li>
+      {/foreach}
+    </ol>
+  {/if}
+  </p>
+{/block}
