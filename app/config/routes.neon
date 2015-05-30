@@ -6,4 +6,5 @@ routing:
         "ranking/<action>[/<page=1 [0-9]+>]": "Ranking:characters"
         "npc/<id [0-9]+>": "Npc:default"
         "request/<id [0-9]+>": "Request:view"
+        "quest/<id [0-9]+>": "Quest:view"
         "<presenter>[/<action>][/<id>]": "Homepage:default"
