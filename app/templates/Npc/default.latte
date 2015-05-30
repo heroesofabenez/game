@@ -3,4 +3,8 @@
 {block content}
   <h1>{$name}</h1>
   <p>{$description}</p>
+  <p>Actions:<br>
+    <a n:href="Npc:talk $id">Talk</a><br>
+    <a n:href="Npc:quests $id">Quests</a><br>
+  </p>
 {/block}

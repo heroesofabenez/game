@@ -9,6 +9,9 @@ use \HeroesofAbenez as HOA;
    * @author Jakub Konečný
    */
 class ProfilePresenter extends BasePresenter {
+  /**
+   * @return void
+   */
   function actionDefault() {
     $this->forward("view", $this->user->id);
   }
