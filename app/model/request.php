@@ -160,11 +160,12 @@ class RequestModel extends \Nette\Object {
    * 
    * @param int $id Request's id
    * @param \Nette\Security\User $user
-   * @param \Nette\Database\Context $db Database context
+   * @param \Nette\Di\Container $container
    * @return int Error code/1 on success
    */
-  static function decline($id, \Nette\Security\User $user, \Nette\Database\Context $db) {
-    $request = RequestModel::show($id, $db);
+  static function decline($id, \Nette\Security\User $user, \Nette\Di\Container $container) {
+    $db = $container->getService("database.default.context");
+    $request = RequestModel::show($id, $user, $container);
     if(!$request) return 2;
     $canShow = RequestModel::canShow($id, $user, $db);
     if(!$canShow) return 3;

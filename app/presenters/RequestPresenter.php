@@ -75,7 +75,7 @@ class RequestPresenter extends BasePresenter {
    * @return void
    */
   function actionDecline($id) {
-    $result = HOA\RequestModel::decline($id, $this->user, $this->db);
+    $result = HOA\RequestModel::decline($id, $this->user, $this->context);
     switch($result) {
   case 1:
     $this->flashMessage("Request declined.");

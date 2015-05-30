@@ -1,10 +1,6 @@
 routing:
     routes:
-        "profile/<id [0-9]+>": "Profile:view"
-        "guild/<id [0-9]+>": "Guild:view"
         "ranking[/<page=1 [0-9]+>]": "Ranking:characters"
         "ranking/<action>[/<page=1 [0-9]+>]": "Ranking:characters"
-        "npc/<id [0-9]+>": "Npc:view"
-        "request/<id [0-9]+>": "Request:view"
-        "quest/<id [0-9]+>": "Quest:view"
+        "<presenter>/<id [0-9]+>": "Homepage:view"
         "<presenter>[/<action>][/<id>]": "Homepage:default"
