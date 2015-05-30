@@ -8,7 +8,7 @@
   {else}
   <p>You can see:</p>
   {foreach $npcs as $npc}
-  {$npc->name} - <a n:href="Npc:default $npc->id">Approach</a><br>
+  {$npc->name} - <a n:href="Npc:view $npc->id">Approach</a><br>
   {/foreach}
   {/if}
 {/block}

@@ -10,10 +10,20 @@ use HeroesofAbenez as HOA;
  */
 class NpcPresenter extends BasePresenter {
   /**
+   * Page /quest does not exist
+   * 
+   * @return void
+   * @throws \Nette\Application\BadRequestException
+   */
+  function actionDefault() {
+    throw new \Nette\Application\BadRequestException;
+  }
+  
+  /**
    * @param int $id Npc's id
    * @return void
    */
-  function renderDefault($id) {
+  function renderView($id) {
     $npc = HOA\NPCModel::view($id, $this->context);
     if(!$npc) $this->forward("notfound");
     if($npc->stage !== $this->user->identity->stage) $this->forward("unavailable");
