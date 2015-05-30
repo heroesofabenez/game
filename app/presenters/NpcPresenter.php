@@ -20,6 +20,7 @@ class NpcPresenter extends BasePresenter {
     $this->template->id = $id;
     $this->template->name = $npc->name;
     $this->template->description = $npc->description;
+    $this->template->type = $npc->type;
   }
   
   /**

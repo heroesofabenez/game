@@ -17,6 +17,8 @@ class NPC extends \Nette\Object {
   public $description;
   /** @var int id of race */
   public $race;
+  /** @var string type of npc */
+  public $type;
   /** @var string */
   public $sprite;
   /** @var string */
@@ -28,11 +30,12 @@ class NPC extends \Nette\Object {
   /** @var int */
   public $pos_y;
   
-  function __construct($id, $name, $description, $race, $sprite, $portrait, $stage, $pos_x, $pos_y) {
+  function __construct($id, $name, $description, $race, $type, $sprite, $portrait, $stage, $pos_x, $pos_y) {
     $this->id = $id;
     $this->name = $name;
     $this->description = $description;
     $this->race = $race;
+    $this->type = $type;
     $this->sprite = $sprite;
     $this->portrait = $portrait;
     $this->stage = $stage;
@@ -62,7 +65,7 @@ class NPCModel {
       $db = $container->getService("database.default.context");
       $npcs = $db->table("npcs");
       foreach($npcs as $npc) {
-        $return[$npc->id] = new NPC($npc->id, $npc->name, $npc->description, $npc->race, $npc->sprite, $npc->portrait, $npc->stage, $npc->pos_x, $npc->pos_y);
+        $return[$npc->id] = new NPC($npc->id, $npc->name, $npc->description, $npc->race, $npc->type, $npc->sprite, $npc->portrait, $npc->stage, $npc->pos_x, $npc->pos_y);
       }
       $cache->save("npcs", $return);
     } else {
@@ -76,6 +79,13 @@ class NPCModel {
     return $return;
   }
   
+  /**
+   * Get info about specified npc
+   * 
+   * @param int $id Npc's id
+   * @param \Nette\Di\Container $container
+   * @return \HeroesofAbenez\NPC
+   */
   static function view($id, \Nette\Di\Container $container) {
     $npcs = NPCModel::listOfNpcs($container);
     $npc = Arrays::get($npcs, $id, false);

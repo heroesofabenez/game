@@ -5,6 +5,8 @@
   <p>{$description}</p>
   <p>Actions:<br>
     <a n:href="Npc:talk $id">Talk</a><br>
-    <a n:href="Npc:quests $id">Quests</a><br>
+    {if $type == "quest"}<a n:href="Npc:quests $id">Quests</a><br>{/if}
+    {if $type == "shop"}<a n:href="Npc:trade $id">Trade</a><br>{/if}
+    {if $type == "enemy"}Fight<br>{/if}
   </p>
 {/block}
