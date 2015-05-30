@@ -1,0 +1,9 @@
+{layout '../@layout.latte'}
+{block title}NPC{/block}
+{block content}
+  <h1>{$npcName}</h1>
+  {foreach $texts as $text}
+  {if $text->speaker == "npc"}{$npcName}:
+  {else}{$playerName}:{/if} {$text->text}<br>
+  {/foreach}
+{/block}
