@@ -15,7 +15,9 @@ class Profile extends \Nette\Object {
    * @return string
    */
   static function getRaceName($id, \Nette\Di\Container $container) {
-    $racesList = CharacterModel::getRacesList($container);
+    /** @var \HeroesofAbenez\CharacterModel */
+    $model = $container->getService("model.character");
+    $racesList = $model->getRacesList();
     return $racesList[$id];
   }
   
@@ -27,7 +29,9 @@ class Profile extends \Nette\Object {
    * @return string
    */
   static function getClassName($id, \Nette\Di\Container $container) {
-    $classesList = CharacterModel::getClassesList($container);
+    /** @var \HeroesofAbenez\CharacterModel */
+    $model = $container->getService("model.character");
+    $classesList = $model->getClassesList();
     return $classesList[$id];
   }
   

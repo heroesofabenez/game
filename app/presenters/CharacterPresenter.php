@@ -10,6 +10,16 @@ use \Nette\Application\UI;
    * @author Jakub Konečný
    */
 class CharacterPresenter extends BasePresenter {
+  /** @var \HeroesofAbenez\CharacterModel */
+  protected $model;
+  
+  /**
+   * @return void
+   */
+  function startup() {
+    parent::startup();
+    $this->model = $this->context->getService("model.character");
+  }
   /**
    * @return void
    */
@@ -37,12 +47,12 @@ class CharacterPresenter extends BasePresenter {
     $form->addRadioList("gender", "Gender:", array( 1 => "male", 2 => "female"))
          ->setRequired("Select gender")
          ->getSeparatorPrototype()->setName(NULL);
-    $racesList = \HeroesofAbenez\CharacterModel::getRacesList($this->context);
+    $racesList = $this->model->getRacesList();
     $form->addSelect("race", "Race:", $racesList)
          ->setPrompt("Select race")
          ->setRequired("Select race");
     $form["race"]->getControlPrototype()->onchange("changeRaceDescription(this.value)");
-    $classesList = \HeroesofAbenez\CharacterModel::getClassesList($this->context);
+    $classesList = $this->model->getClassesList();
     $form->addSelect("class", "Class:", $classesList)
          ->setPrompt("Select class")
          ->setRequired("Select class");
@@ -59,7 +69,7 @@ class CharacterPresenter extends BasePresenter {
    * @return void
    */
   function createCharacterFormSucceeded(UI\Form $form, $values) {
-    $data = HOA\CharacterModel::create($values, $this->db);
+    $data = $this->model->create($values);
     if(!$data) $this->forward("Character:exists");
     $this->user->logout();
     $this->forward("Character:created", array("data" => serialize($data)));

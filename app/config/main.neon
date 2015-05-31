@@ -25,5 +25,6 @@ session:
 services:
     authenticator: HeroesofAbenez\Authenticator
     authorizator: HeroesofAbenez\Authorizator::create
+    model.character: HeroesofAbenez\CharacterModel(@caches.characters)
     model.journal: HeroesofAbenez\Journal
     model.request: HeroesofAbenez\RequestModel
