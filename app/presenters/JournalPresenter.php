@@ -33,7 +33,7 @@ class JournalPresenter extends BasePresenter {
    * @return void
    */
   function renderQuests() {
-    $quests = array();
+    $quests = HOA\Journal::quests($this->context);
     $this->template->quests = $quests;
   }
   

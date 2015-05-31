@@ -1,6 +1,18 @@
 <?php
 namespace HeroesofAbenez;
 
+class JournalQuest extends \Nette\Object {
+  /** @var int */
+  public $id;
+  /** @var string */
+  public $name;
+  
+  function __construct($id, $name) {
+    $this->id = (int) $id;
+    $this->name = $name;
+  }
+}
+
 /**
  * Journal Model
  *
@@ -77,6 +89,27 @@ class Journal {
         "id" => $pet->id, "name" => $pet->name,
         "deployed" => (bool) $pet->deployed, "type" => $type->name
       );
+    }
+    return $return;
+  }
+  
+   /**
+   * Gets character's quests
+   * 
+   * @param \Nette\DI\Container $container
+   * @return array
+   */
+  static function quests(\Nette\DI\Container $container) {
+    $return = array();
+    $uid = $container->getService("security.user")->id;
+    $db = $container->getService("database.default.context");
+    $quests = $db->table("character_quests")
+      ->where("character", $uid);
+    foreach($quests as $row) {
+      if($row->progress >3) {
+        $quest = $db->table("quests")->get($row->id);
+        $return[] = new JournalQuest($quest->id, $quest->name);
+      }
     }
     return $return;
   }
