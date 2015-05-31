@@ -9,18 +9,18 @@ namespace HeroesofAbenez;
 class Profile extends \Nette\Object {
   /** @var \Nette\Database\Context  */
   protected $db;
-  /** @var \HeroesofAbenez\GuildModel */
-  protected $guildModel;
+  /** @var \Nette\Caching\Cache */
+  protected $cache;
   /** @var \HeroesofAbenez\CharacterModel */
   protected $characterModel;
   
   /**
    * @param \Nette\Database\Context $db
    */
-  function __construct(\Nette\Database\Context $db, \HeroesofAbenez\GuildModel $guildModel, \HeroesofAbenez\CharacterModel $characterModel) {
+  function __construct(\Nette\Caching\Cache $cache, \Nette\Database\Context $db, \HeroesofAbenez\CharacterModel $characterModel) {
     $this->db = $db;
-    $this->guildModel = $guildModel;
     $this->characterModel = $characterModel;
+    $this->cache = $cache;
   }
   
   /**
@@ -52,28 +52,25 @@ class Profile extends \Nette\Object {
    * @param \Nette\Di\Container $container
    * @return string
    */
-  static function getRankName($id, \Nette\Di\Container $container) {
+  function getRankName($id, \Nette\Di\Container $container) {
     $ranks = Authorizator::getRoles($container);
     return $ranks[$id]["name"];
   }
   
   /**
-   * @param \Nette\Di\Container $container
    * @return array
    */
-  static function getCharacters(\Nette\Di\Container $container) {
+  function getCharacters() {
     $return = array();
-    $cache = $container->getService("caches.characters");
-    $characters = $cache->load("characters");
+    $characters = $this->cache->load("characters");
     if($characters === NULL) {
-      $db = $container->getService("database.default.context");
-      $characters = $db->table("characters");
+      $characters = $this->db->table("characters");
       foreach($characters as $char) {
         $return[$char->id] = array(
           "id" => $char->id, "name" => $char->name
         );
       }
-      $cache->save("characters", $return);
+      $this->cache->save("characters", $return);
     } else {
       $return = $characters;
     }
@@ -84,11 +81,10 @@ class Profile extends \Nette\Object {
    * Get character's id
    * 
    * @param string $name Character's name
-   * @param \Nette\Di\Container $container
    * @return int
    */
-  static function getCharacterId($name, \Nette\Di\Container $container) {
-    $characters = Profile::getCharacters($container);
+  function getCharacterId($name) {
+    $characters = $this->getCharacters();
     foreach($characters as $char) {
       if($char["name"] == $name) return $char["id"];
     }
@@ -99,11 +95,10 @@ class Profile extends \Nette\Object {
    * Get character's name
    * 
    * @param int $id Character's id
-   * @param \Nette\Di\Container $container
    * @return string
    */
-  static function getCharacterName($id, \Nette\Di\Container $container) {
-    $characters = Profile::getCharacters($container);
+  function getCharacterName($id) {
+    $characters = $this->getCharacters();
     return $characters[$id]["name"];
   }
   
@@ -111,11 +106,10 @@ class Profile extends \Nette\Object {
    * Get character's guild
    * 
    * @param string $id Character's id
-   * @param \Nette\Database\Context $db Database context
    * @return int
    */
-  static function getCharacterGuild($id, \Nette\Database\Context $db) {
-    $char = $db->table("characters")->get($id);
+  function getCharacterGuild($id) {
+    $char = $this->db->table("characters")->get($id);
     if(!$char) return 0;
     return $char->guild;
   }
@@ -139,15 +133,15 @@ class Profile extends \Nette\Object {
     }
     
     $return["race"] = $this->getRaceName($char->race);
-    $return["occupation"] = $this->getClassName($char->occupation, $container);
+    $return["occupation"] = $this->getClassName($char->occupation);
     if($char->specialization > 0) {
       $return["specialization"] = "-" . $char->specialization;
     } else {
       $return["specialization"] = "";
     }
     if($char->guild > 0) {
-      $guildName = $this->guildModel->getGuildName($char->guild);
-      $guildRank = Profile::getRankName($char->guildrank, $container);
+      $guildName = $container->getService("model.guild")->getGuildName($char->guild);
+      $guildRank = $this->getRankName($char->guildrank, $container);
       $return["guild"] = "Guild: $guildName<br>Position in guild: " . ucfirst($guildRank);
     } else {
       $return["guild"] = "Not a member of guild";

@@ -46,11 +46,14 @@ class GuildModel extends \Nette\Object {
   protected $db;
   /** @var \Nette\Security\User */
   protected $user;
+  /** @var */
+  protected $profileModel;
   
-  function __construct(\Nette\Caching\Cache $cache, \Nette\Database\Context $db, \Nette\Security\User $user) {
+  function __construct(\Nette\Caching\Cache $cache, \Nette\Database\Context $db, \Nette\Security\User $user, \HeroesofAbenez\Profile $profileModel) {
     $this->cache = $cache;
     $this->db = $db;
     $this->user = $user;
+    $this->profileModel = $profileModel;
   }
   
   /**
@@ -90,7 +93,7 @@ class GuildModel extends \Nette\Object {
     $members = $this->db->table("characters")->where("guild", $guild->id)->order("guildrank DESC, id");
     $return["members"] = array();
     foreach($members as $member) {
-      $rank = Profile::getRankName($member->guildrank, $container);
+      $rank = $this->profileModel->getRankName($member->guildrank, $container);
       $return["members"][] = array("name" => $member->name, "rank" => ucfirst($rank));
     }
     return $return;
@@ -107,7 +110,7 @@ class GuildModel extends \Nette\Object {
     $return = array();
     $members = $this->db->table("characters")->where("guild", $id)->order("guildrank DESC, id");
     foreach($members as $member) {
-      $rank = Profile::getRankName($member->guildrank, $container);
+      $rank = $this->profileModel->getRankName($member->guildrank, $container);
       $return[] = array("id" => $member->id, "name" => $member->name, "rank" => ucfirst($rank), "rankId" => $member->guildrank);
     }
     return $return;
@@ -178,7 +181,7 @@ class GuildModel extends \Nette\Object {
     $return = array();
     $guilds = $this->listOfGuilds();
     $guild = $guilds[$id];
-    $leaderId = Profile::getCharacterId($guild->leader, $container);
+    $leaderId = $this->profileModel->getCharacterId($guild->leader, $container);
     $apps = $this->db->table("requests")
       ->where("to", $leaderId)
       ->where("type", "guild_app")

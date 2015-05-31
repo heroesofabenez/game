@@ -29,7 +29,7 @@ class RequestPresenter extends BasePresenter {
    * @return void
    */
   function renderView($id) {
-    $request = $this->model->show($id, $this->context);
+    $request = $this->model->show($id);
     if($request === NULL) $this->forward("notfound");
     if(!$request) {
       $this->flashMessage("You can't see this request.");
@@ -80,7 +80,7 @@ class RequestPresenter extends BasePresenter {
    * @return void
    */
   function actionDecline($id) {
-    $result = $this->model->decline($id, $this->context);
+    $result = $this->model->decline($id);
     switch($result) {
   case 1:
     $this->flashMessage("Request declined.");

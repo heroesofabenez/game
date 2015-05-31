@@ -34,14 +34,17 @@ class RequestModel extends \Nette\Object {
   protected $user;
   /** @var \Nette\Database\Context */
   protected $db;
+  /** @var \HeroesofAbenez\Profile */
+  protected $profileModel;
   
   /**
    * @param \Nette\Security\User $user
    * @param \Nette\Database\Context $db
    */
-  function __construct(\Nette\Security\User $user,\Nette\Database\Context $db) {
+  function __construct(\Nette\Security\User $user,\Nette\Database\Context $db, \HeroesofAbenez\Profile $profileModel) {
     $this->user = $user;
     $this->db = $db;
+    $this->profileModel = $profileModel;
   }
   
   /**
@@ -107,16 +110,15 @@ class RequestModel extends \Nette\Object {
    * Gets data about specified request
    * 
    * @param type $id Request's id
-   * @param \Nette\Di\Container $container
    * @return \HeroesofAbenez\Request
    */
-  function show($id, \Nette\Di\Container $container) {
+  function show($id) {
     $requestRow = $this->db->table("requests")->get($id);
     if(!$requestRow) return NULL;
     $canShow = $this->canShow($id);
     if(!$canShow) return false;
-    $from = Profile::getCharacterName($requestRow->from, $container);
-    $to = Profile::getCharacterName($requestRow->to, $container);
+    $from = $this->profileModel->getCharacterName($requestRow->from);
+    $to = $this->profileModel->getCharacterName($requestRow->to);
     $return = new Request($requestRow->id, $from, $to, $requestRow->type, $requestRow->sent, $requestRow->status);
     return $return;
   }
@@ -129,7 +131,7 @@ class RequestModel extends \Nette\Object {
    * @return int Error code/1 on success
    */
   function accept($id, \Nette\Di\Container $container) {
-    $request = $this->show($id, $container);
+    $request = $this->show($id);
     if(!$request) return 2;
     $canShow = $this->canShow($id);
     if(!$canShow) return 3;
@@ -144,15 +146,15 @@ class RequestModel extends \Nette\Object {
     return 6;
     break;
   case "guild_app":
-    $uid = Profile::getCharacterId($request->from, $container);
-    $uid2 = Profile::getCharacterId($request->to, $container);
-    $gid = Profile::getCharacterGuild($uid2, $this->db);
+    $uid = $this->profileModel->getCharacterId($request->from, $container);
+    $uid2 = $this->profileModel->getCharacterId($request->to, $container);
+    $gid = $this->profileModel->getCharacterGuild($uid2);
     GuildModel::join($uid, $gid, $container);
     break;
   case "guild_join":
-    $uid = Profile::getCharacterId($request->to, $container);
-    $uid2 = Profile::getCharacterId($request->from, $container);
-    $gid = Profile::getCharacterGuild($uid2, $this->db);
+    $uid = $this->profileModel->getCharacterId($request->to, $container);
+    $uid2 = $this->profileModel->getCharacterId($request->from, $container);
+    $gid = $this->profileModel->getCharacterGuild($uid2);
     GuildModel::join($uid, $gid, $container);
     break;
     }
@@ -165,11 +167,10 @@ class RequestModel extends \Nette\Object {
    * Decline specified request
    * 
    * @param int $id Request's id
-   * @param \Nette\Di\Container $container
    * @return int Error code/1 on success
    */
-  function decline($id, \Nette\Di\Container $container) {
-    $request = $this->show($id, $container);
+  function decline($id) {
+    $request = $this->show($id);
     if(!$request) return 2;
     $canShow = $this->canShow($id);
     if(!$canShow) return 3;

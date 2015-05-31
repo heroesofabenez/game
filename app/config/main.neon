@@ -29,6 +29,6 @@ services:
     model.guild: HeroesofAbenez\GuildModel(@caches.guilds)
     model.journal: HeroesofAbenez\Journal
     model.npc: HeroesofAbenez\NPCModel(@caches.locations)
-    model.profile: HeroesofAbenez\Profile
+    model.profile: HeroesofAbenez\Profile(@caches.characters)
     model.ranking: HeroesofAbenez\Ranking
     model.request: HeroesofAbenez\RequestModel
