@@ -7,6 +7,10 @@ class JournalQuest extends \Nette\Object {
   /** @var string */
   public $name;
   
+  /**
+   * @param int $id
+   * @param string $name
+   */
   function __construct($id, $name) {
     $this->id = (int) $id;
     $this->name = $name;
