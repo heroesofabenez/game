@@ -181,7 +181,7 @@ class GuildModel extends \Nette\Object {
     $return = array();
     $guilds = $this->listOfGuilds();
     $guild = $guilds[$id];
-    $leaderId = $this->profileModel->getCharacterId($guild->leader, $container);
+    $leaderId = $this->profileModel->getCharacterId($guild->leader);
     $apps = $this->db->table("requests")
       ->where("to", $leaderId)
       ->where("type", "guild_app")

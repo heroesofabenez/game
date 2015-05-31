@@ -36,15 +36,18 @@ class RequestModel extends \Nette\Object {
   protected $db;
   /** @var \HeroesofAbenez\Profile */
   protected $profileModel;
+  /** @var \HeroesofAbenez\GuildModel */
+  protected $guildModel;
   
   /**
    * @param \Nette\Security\User $user
    * @param \Nette\Database\Context $db
    */
-  function __construct(\Nette\Security\User $user,\Nette\Database\Context $db, \HeroesofAbenez\Profile $profileModel) {
+  function __construct(\Nette\Security\User $user,\Nette\Database\Context $db, \HeroesofAbenez\Profile $profileModel, \HeroesofAbenez\GuildModel $guildModel) {
     $this->user = $user;
     $this->db = $db;
     $this->profileModel = $profileModel;
+    $this->guildModel = $guildModel;
   }
   
   /**
@@ -146,16 +149,16 @@ class RequestModel extends \Nette\Object {
     return 6;
     break;
   case "guild_app":
-    $uid = $this->profileModel->getCharacterId($request->from, $container);
-    $uid2 = $this->profileModel->getCharacterId($request->to, $container);
+    $uid = $this->profileModel->getCharacterId($request->from);
+    $uid2 = $this->profileModel->getCharacterId($request->to);
     $gid = $this->profileModel->getCharacterGuild($uid2);
-    GuildModel::join($uid, $gid, $container);
+    $this->guildModel->join($uid, $gid, $container);
     break;
   case "guild_join":
-    $uid = $this->profileModel->getCharacterId($request->to, $container);
-    $uid2 = $this->profileModel->getCharacterId($request->from, $container);
+    $uid = $this->profileModel->getCharacterId($request->to);
+    $uid2 = $this->profileModel->getCharacterId($request->from);
     $gid = $this->profileModel->getCharacterGuild($uid2);
-    GuildModel::join($uid, $gid, $container);
+    $this->guildModel->join($uid, $gid, $container);
     break;
     }
     $data2 = array("status" => "accepted");
