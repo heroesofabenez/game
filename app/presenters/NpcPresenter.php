@@ -69,7 +69,8 @@ class NpcPresenter extends BasePresenter {
     if($npc->stage !== $this->user->identity->stage) $this->forward("unavailable");
     $this->template->id = $id;
     $this->template->name = $npc->name;
-    $this->template->quests = HOA\QuestModel::listOfQuests($this->context, $id);
+    $questModel = $this->context->getService("model.quest");
+    $this->template->quests = $questModel->listOfQuests($id);
   }
   
   /**

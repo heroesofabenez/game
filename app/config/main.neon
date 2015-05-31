@@ -32,3 +32,4 @@ services:
     model.profile: HeroesofAbenez\Profile(@caches.characters)
     model.ranking: HeroesofAbenez\Ranking
     model.request: HeroesofAbenez\RequestModel
+    model.quest: HeroesofAbenez\QuestModel(@caches.quests)

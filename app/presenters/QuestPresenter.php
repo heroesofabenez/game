@@ -1,14 +1,20 @@
 <?php
 namespace HeroesofAbenez\Presenters;
 
-use HeroesofAbenez as HOA;
-
 /**
  * Presenter Quest
  *
  * @author Jakub Konečný
  */
 class QuestPresenter extends BasePresenter {
+  /** @var \HeroesofAbenez\QuestModel */
+  protected $model;
+  
+  function startup() {
+    parent::startup();
+    $this->model = $this->context->getService("model.quest");
+  }
+  
   /**
    * Page /quest does not exist
    * 
@@ -24,7 +30,7 @@ class QuestPresenter extends BasePresenter {
    * @return void
    */
   function renderView($id) {
-    $quest = HOA\QuestModel::view($id, $this->context);
+    $quest = $this->model->view($id);
     if(!$quest) $this->forward("notfound");
     $this->template->id = $quest->id;
     $this->template->name = $quest->name;
