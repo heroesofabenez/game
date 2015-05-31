@@ -26,6 +26,7 @@ services:
     authenticator: HeroesofAbenez\Authenticator
     authorizator: HeroesofAbenez\Authorizator::create
     model.character: HeroesofAbenez\CharacterModel(@caches.characters)
+    model.guild: HeroesofAbenez\GuildModel(@caches.guilds)
     model.journal: HeroesofAbenez\Journal
     model.ranking: HeroesofAbenez\Ranking
     model.request: HeroesofAbenez\RequestModel

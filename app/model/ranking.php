@@ -9,9 +9,12 @@ namespace HeroesofAbenez;
 class Ranking extends \Nette\Object {
   /** @var \Nette\Database\Context */
   protected $db;
+  /** @var \HeroesofAbenez\GuildModel */
+  protected $guildMOdel;
   
-  function __construct(\Nette\Database\Context $db) {
+  function __construct(\Nette\Database\Context $db, \HeroesofAbenez\GuildModel $guildModel) {
     $this->db = $db;
+    $this->guildModel = $guildModel;
   }
   
   /**
@@ -28,7 +31,7 @@ class Ranking extends \Nette\Object {
     $chars = array();
     foreach($characters as $character) {
       if($character->guild == 0)  $guildName = "";
-      else $guildName = GuildModel::getGuildName($character->guild, $container);
+      else $guildName = $this->guildModelgetGuildName($character->guild);
       $chars[] = array(
         "name" => $character->name, "level" => $character->level,
         "guild" => $guildName, "id" => $character->id
@@ -39,11 +42,10 @@ class Ranking extends \Nette\Object {
   
   /**
    * Gets list of all guilds
-   * @param \Nette\Di\Container $container
    * @return array List of all guilds (name, number of members)
    */
-  function guilds(\Nette\Di\Container $container) {
-    return GuildModel::listOfGuilds($container);
+  function guilds() {
+    return $this->guildModel->listOfGuilds();
   }
 }
 ?>

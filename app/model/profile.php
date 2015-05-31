@@ -137,7 +137,8 @@ class Profile extends \Nette\Object {
       $return["specialization"] = "";
     }
     if($char->guild > 0) {
-      $guildName = GuildModel::getGuildName($char->guild, $container);
+      $guildModel = $container->getService("model.guild");
+      $guildName = $guildModel->getGuildName($char->guild);
       $guildRank = Profile::getRankName($char->guildrank, $container);
       $return["guild"] = "Guild: $guildName<br>Position in guild: " . ucfirst($guildRank);
     } else {

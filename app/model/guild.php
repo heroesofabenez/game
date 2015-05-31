@@ -40,15 +40,27 @@ class Guild extends \Nette\Object {
    * @author Jakub Konečný
    */
 class GuildModel extends \Nette\Object {
+  /** @var \Nette\Caching\Cache */
+  protected $cache;
+  /** @var \Nette\Database\Context */
+  protected $db;
+  /** @var \Nette\Security\User */
+  protected $user;
+  
+  function __construct(\Nette\Caching\Cache $cache, \Nette\Database\Context $db, \Nette\Security\User $user) {
+    $this->cache = $cache;
+    $this->db = $db;
+    $this->user = $user;
+  }
+  
   /**
    * Get name of specified guild
    * 
    * @param int $id Id of guild
-   * @param \Nette\Di\Container $container
    * @return string
    */
-  static function getGuildName($id, \Nette\Di\Container $container) {
-    $guilds = GuildModel::listOfGuilds($container);
+  function getGuildName($id) {
+    $guilds = $this->listOfGuilds();
     return $guilds[$id]->name;
   }
   
@@ -56,10 +68,9 @@ class GuildModel extends \Nette\Object {
    * Get data about specified guild
    * 
    * @param int $id Id of guild
-   * @param \Nette\Di\Container $container
    */
-  static function guildData($id, \Nette\Di\Container $container) {
-    $guilds = GuildModel::listOfGuilds($container);
+  function guildData($id) {
+    $guilds = $this->listOfGuilds();
     return $guilds[$id];
   }
   
@@ -69,15 +80,14 @@ class GuildModel extends \Nette\Object {
    * @param \Nette\Di\Container $container
    * @return array info about guild
    */
-  static function view($id, \Nette\Di\Container $container) {
+  function view($id, \Nette\Di\Container $container) {
     $return = array();
-    $db = $container->getService("database.default.context");
-    $guilds = GuildModel::listOfGuilds($container);
+    $guilds = $this->listOfGuilds();
     $guild = \Nette\Utils\Arrays::get($guilds, $id, false);
     if(!$guild) { return false; }
     $return["name"] = $guild->name;
     $return["description"] = $guild->description;
-    $members = $db->table("characters")->where("guild", $guild->id)->order("guildrank DESC, id");
+    $members = $this->db->table("characters")->where("guild", $guild->id)->order("guildrank DESC, id");
     $return["members"] = array();
     foreach($members as $member) {
       $rank = Profile::getRankName($member->guildrank, $container);
@@ -93,10 +103,9 @@ class GuildModel extends \Nette\Object {
    * @param \Nette\Di\Container $container
    * @return array
    */
-  static function guildMembers($id, \Nette\Di\Container $container) {
+  function guildMembers($id, \Nette\Di\Container $container) {
     $return = array();
-    $db = $container->getService("database.default.context");
-    $members = $db->table("characters")->where("guild", $id)->order("guildrank DESC, id");
+    $members = $this->db->table("characters")->where("guild", $id)->order("guildrank DESC, id");
     foreach($members as $member) {
       $rank = Profile::getRankName($member->guildrank, $container);
       $return[] = array("id" => $member->id, "name" => $member->name, "rank" => ucfirst($rank), "rankId" => $member->guildrank);
@@ -109,20 +118,17 @@ class GuildModel extends \Nette\Object {
    * 
    * @param array $data Name and description
    * @param int $founder Id of founder
-   * @param \Nette\Di\Container $container
    * @return bool Whetever the action was successful
    */
-  static function create($data, $founder, \Nette\Di\Container $container) {
-    $cache = $container->getService("caches.guilds");
-    $guilds = $cache->load("guilds");
+  function create($data, $founder) {
+    $guilds = $this->cache->load("guilds");
     foreach($guilds as $guild) {
       if($guild->name == $data["name"]) return false;
     }
-    $db = $container->getService("database.default.context");
-    $row = $db->table("guilds")->insert($data);
+    $row = $this->db->table("guilds")->insert($data);
     $data2 = array("guild" => $row->id, "guildrank" => 7);
-    $db->query("UPDATE characters SET ? WHERE id=?", $data2, $founder);
-    $cache->remove("guilds");
+    $this->db->query("UPDATE characters SET ? WHERE id=?", $data2, $founder);
+    $this->cache->remove("guilds");
     return true;
   }
   
@@ -131,20 +137,19 @@ class GuildModel extends \Nette\Object {
    * 
    * @param int $gid Guild to join
    * @param int $uid Player's id
-   * @param \Nette\Database\Context $db Database context
    * @return bool|-1
    */
-  static function sendApplication($gid, $uid, \Nette\Database\Context $db) {
-    $guild = $db->table("guilds")->get($gid);
+  function sendApplication($gid, $uid) {
+    $guild = $this->db->table("guilds")->get($gid);
     if(!$guild) { return -1; }
-    $leader = $db->table("characters")
+    $leader = $this->db->table("characters")
       ->where("guild", $gid)
       ->where("guildrank", 7);
     $leader = $leader[1];
     $data = array(
       "from" => $uid, "to" => $leader->id, "type" => "guild_app"
     );
-    $row = $db->query("INSERT INTO requests", $data);
+    $row = $this->db->query("INSERT INTO requests", $data);
     if($row) return true;
   }
   
@@ -152,10 +157,9 @@ class GuildModel extends \Nette\Object {
    * Check if player has an unresolved application
    * 
    * @param int $id Player's id
-   * @param \Nette\Database\Context $db Database context
    */
-  static function haveUnresolvedApplication($id, \Nette\Database\Context $db) {
-    $apps = $db->table("requests")
+  function haveUnresolvedApplication($id) {
+    $apps = $this->db->table("requests")
       ->where("from", $id)
       ->where("type", "guild_app")
       ->where("status", "new");
@@ -170,18 +174,17 @@ class GuildModel extends \Nette\Object {
    * @param \Nette\Di\Container $container
    * @return array
    */
-  static function showApplications($id, \Nette\Di\Container $container) {
+  function showApplications($id, \Nette\Di\Container $container) {
     $return = array();
-    $guilds = GuildModel::listOfGuilds($container);
+    $guilds = $this->listOfGuilds();
     $guild = $guilds[$id];
-    $db = $container->getService("database.default.context");
     $leaderId = Profile::getCharacterId($guild->leader, $container);
-    $apps = $db->table("requests")
+    $apps = $this->db->table("requests")
       ->where("to", $leaderId)
       ->where("type", "guild_app")
       ->where("status", "new");
     foreach($apps as $app) {
-      $from = $db->table("characters")->get($app->from);
+      $from = $this->db->table("characters")->get($app->from);
       $to = $leader->name;
       $return[] = new Request($app->id, $from->name, $to, $app->type, $app->sent, $app->status);
     }
@@ -190,27 +193,24 @@ class GuildModel extends \Nette\Object {
   
   /**
    * Gets list of guilds
-   * 
-   * @param \Nette\Di\Container $container
+   *
    * @return array list of guilds (id, name, description, leader)
    */
-  static function listOfGuilds(\Nette\Di\Container $container) {
-    $cache = $container->getService("caches.guilds");
-    $guilds = $cache->load("guilds");
+  function listOfGuilds() {
+    $guilds = $this->cache->load("guilds");
     $return = array();
     if($guilds === NULL) {
-      $db = $container->getService("database.default.context");
-      $guilds = $db->table("guilds");
+      $guilds = $this->db->table("guilds");
       foreach($guilds as $guild) {
         if($guild->id == 0) continue;
-        $members = $db->table("characters")->where("guild", $guild->id);
+        $members = $this->db->table("characters")->where("guild", $guild->id);
         $leader = "";
         foreach($members as $member) {
           if($member->guildrank == 7) $leader = $member->name;
         }
         $return[$guild->id] = new Guild($guild->id, $guild->name, $guild->description, $members->count(), $leader);
       }
-      $cache->save("guilds", $return);
+      $this->cache->save("guilds", $return);
     } else {
       $return = $guilds;
     }
@@ -224,12 +224,11 @@ class GuildModel extends \Nette\Object {
    * @param \Nette\Di\Container $container
    * @return int Error code/1 on success
    */
-  static function promote($id, \Nette\Di\Container $container) {
-    $admin = $container->getService("security.user");
+  function promote($id, \Nette\Di\Container $container) {
+    $admin = $this->user;
     if($admin->identity->guild == 0) return 2;
     if(!$admin->isAllowed("guild", "promote")) return 3;
-    $db = $container->getService("database.default.context");
-    $character = $db->table("characters")->get($id);
+    $character = $this->db->table("characters")->get($id);
     if(!$character) return 4;
     if($character->guild !== $admin->identity->guild) return 5;
     $roles = Authorizator::getRoles($container);
@@ -241,7 +240,7 @@ class GuildModel extends \Nette\Object {
     }
     if($adminRole <= $character->guildrank) return 6;
     if($character->guildrank >= 6) return 7;
-    $db->query("UPDATE characters SET guildrank=guildrank+1 WHERE id=$id");
+    $this->db->query("UPDATE characters SET guildrank=guildrank+1 WHERE id=$id");
     return 1;
   }
   
@@ -252,12 +251,11 @@ class GuildModel extends \Nette\Object {
    * @param \Nette\Di\Container $container
    * @return int Error code/1 on success
    */
-  static function demote($id, \Nette\Di\Container $container) {
-    $admin = $container->getService("security.user");
+  function demote($id, \Nette\Di\Container $container) {
+    $admin = $this->user;
     if($admin->identity->guild == 0) return 2;
     if(!$admin->isAllowed("guild", "demote")) return 3;
-    $db = $container->getService("database.default.context");
-    $character = $db->table("characters")->get($id);
+    $character = $this->db->table("characters")->get($id);
     if(!$character) return 4;
     if($character->guild !== $admin->identity->guild) return 5;
     $roles = Authorizator::getRoles($container);
@@ -269,7 +267,7 @@ class GuildModel extends \Nette\Object {
     }
     if($adminRole <= $character->guildrank) return 6;
     if($character->guildrank === 1) return 7;
-    $db->query("UPDATE characters SET guildrank=guildrank-1 WHERE id=$id");
+    $this->db->query("UPDATE characters SET guildrank=guildrank-1 WHERE id=$id");
     return 1;
   }
   
@@ -280,12 +278,11 @@ class GuildModel extends \Nette\Object {
    * @param \Nette\Di\Container $container
    * @return int Error code/1 on success
    */
-  static function kick($id, \Nette\Di\Container $container) {
-    $admin = $container->getService("security.user");
+  function kick($id, \Nette\Di\Container $container) {
+    $admin = $this->user;
     if($admin->identity->guild == 0) return 2;
     if(!$admin->isAllowed("guild", "kick")) return 3;
-    $db = $container->getService("database.default.context");
-    $character = $db->table("characters")->get($id);
+    $character = $this->db->table("characters")->get($id);
     if(!$character) return 4;
     if($character->guild !== $admin->identity->guild) return 5;
     $roles = Authorizator::getRoles($container);
@@ -296,45 +293,38 @@ class GuildModel extends \Nette\Object {
       }
     }
     if($adminRole <= $character->guildrank) return 6;
-    $db->query("UPDATE characters SET guildrank=NULL, guild=0 WHERE id=$id");
-    $cache = $container->getService("caches.guilds");
-    $cache->remove("guilds");
+    $this->db->query("UPDATE characters SET guildrank=NULL, guild=0 WHERE id=$id");
+    $this->cache->remove("guilds");
     return 1;
   }
   
   /**
    * Leave the guild
    * 
-   * @param \Nette\Di\Container $container
    * @param int $id Player's id
    * @return void
   */
-  static function leave(\Nette\Di\Container $container, $id) {
-    $db = $container->getService("database.default.context");
+  function leave($id) {
     $data = array(
       "guild" => 0, "guildrank" => NULL
     );
-    $db->query("UPDATE characters SET ? WHERE id=?", $data, $id);
-    $cache = $container->getService("caches.guilds");
-    $cache->remove("guilds");
+    $this->db->query("UPDATE characters SET ? WHERE id=?", $data, $id);
+    $this->cache->remove("guilds");
   }
   
   /**
    * Dissolve guild
    *
    * @param type $id Guild to dissolve
-   * @param \Nette\Di\Container $container
    */
-  static function dissolve($id, \Nette\Di\Container $container) {
-    $cache = $container->getService("caches.guilds");
-    $db = $container->getService("database.default.context");
-    $members = $db->table("characters")->where("guild", $id);
+  function dissolve($id) {
+    $members = $this->db->table("characters")->where("guild", $id);
     $data1 = array("guild" => 0, "guildrank" => NULL);
     foreach($members as $member) {
-      $db->query("UPDATE characters SET ? WHERE id=?", $data1, $member->id);
+      $this->db->query("UPDATE characters SET ? WHERE id=?", $data1, $member->id);
     }
-    $db->query("DELETE FROM guilds WHERE id=?", $id);
-    $cache->remove("guilds");
+    $this->db->query("DELETE FROM guilds WHERE id=?", $id);
+    $this->cache->remove("guilds");
     return true;
   }
   
@@ -343,19 +333,16 @@ class GuildModel extends \Nette\Object {
    *
    * @param int $id Guild to rename
    * @param string $name New name
-   * @param \Nette\Di\Container $container
    * @return bool Whetever the action was successful
   */
-  static function rename($id, $name, \Nette\Di\Container $container) {
-    $cache = $container->getService("caches.guilds");
-    $guilds = $cache->load("guilds");
+  function rename($id, $name) {
+    $guilds = $this->cache->load("guilds");
     foreach($guilds as $guild) {
       if($guild->name == $name) return false;
     }
-    $db = $container->getService("database.default.context");
     $data = array("name" => $name);
-    $db->query("UPDATE guilds SET ? WHERE id=?", $data, $id);
-    $cache->remove("guilds");
+    $this->db->query("UPDATE guilds SET ? WHERE id=?", $data, $id);
+    $this->cache->remove("guilds");
     return true;
   }
   
@@ -363,12 +350,10 @@ class GuildModel extends \Nette\Object {
    * 
    * @param int $id Guild's id
    * @param string $description New description
-   * @param \Nette\Di\Container $container
    * @return int Error code/1 on success
    */
-  static function changeDescription($id, $description, \Nette\Di\Container $container) {
-    $cache = $container->getService("caches.guilds");
-    $guilds = $cache->load("guilds");
+  function changeDescription($id, $description) {
+    $guilds = $this->cache->load("guilds");
     $found = false;
     foreach($guilds as $guild) {
       if($guild->id == $id) {
@@ -377,11 +362,10 @@ class GuildModel extends \Nette\Object {
       }
     }
     if(!$found) return false;
-    $db = $container->getService("database.default.context");
     $data = array("description" => $description);
-    $result = $db->query("UPDATE guilds SET ? WHERE id=?", $data, $id);
+    $result = $this->db->query("UPDATE guilds SET ? WHERE id=?", $data, $id);
     if($result) {
-      $cache->remove("guilds");
+      $this->cache->remove("guilds");
       return 1;
     } else {
       return 3;
@@ -393,14 +377,11 @@ class GuildModel extends \Nette\Object {
    * 
    * @param int $uid Character's id
    * @param int $gid Guild's id
-   * @param \Nette\Di\Container $container
    */
-  static function join($uid, $gid, \Nette\Di\Container $container) {
-    $db = $container->getService("database.default.context");
+  function join($uid, $gid) {
     $data = array("guild" => $gid, "guildrank" => 1);
-    $db->query("UPDATE characters SET ? WHERE id=?", $data, $uid);
-    $cache = $container->getService("caches.guilds");
-    $cache->remove("guilds");
+    $this->db->query("UPDATE characters SET ? WHERE id=?", $data, $uid);
+    $this->cache->remove("guilds");
   }
 }
 ?>

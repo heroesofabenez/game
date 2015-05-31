@@ -10,6 +10,14 @@ use \Nette\Application\UI;
    * @author Jakub Konečný
    */
 class GuildPresenter extends BasePresenter {
+  /** @var \HeroesofAbenez\GuildModel */
+  protected $model;
+  
+  function startup() {
+    parent::startup();
+    $this->model = $this->context->getService("model.guild");
+  }
+  
   /**
    * Redirect player to guild page if he is already in guild
    * 
@@ -48,7 +56,7 @@ class GuildPresenter extends BasePresenter {
    * @return void
    */
   function renderDefault() {
-    $guild = HOA\GuildModel::guildData($this->user->identity->guild, $this->context);
+    $guild = $this->model->guildData($this->user->identity->guild);
     foreach($guild as $key => $value) {
       $this->template->$key = $value;
     }
@@ -62,7 +70,7 @@ class GuildPresenter extends BasePresenter {
    */
   function renderView($id) {
     if($id == 0) $this->forward("notfound");
-    $data = HOA\GuildModel::view($id, $this->context);
+    $data = $this->model->view($id, $this->context);
     if(!$data) $this->forward("notfound");
     foreach($data as $key => $value) {
       $this->template->$key = $value;
@@ -80,7 +88,7 @@ class GuildPresenter extends BasePresenter {
    * @return void
    */
   function renderMembers() {
-    $this->template->members = HOA\GuildModel::guildMembers($this->user->identity->guild, $this->context);
+    $this->template->members = $this->model->guildMembers($this->user->identity->guild, $this->context);
     $this->template->canPromote = $this->user->isAllowed("guild", "promote");
     $this->template->canKick = $this->user->isAllowed("guild", "kick");
     $roles = HOA\Authorizator::getRoles($this->context);
@@ -119,7 +127,7 @@ class GuildPresenter extends BasePresenter {
     $data = array(
       "name" => $values["name"], "description" => $values["description"]
     );
-    $result = HOA\GuildModel::create($data, $this->user->id, $this->context);
+    $result = $this->model->create($data, $this->user->id, $this->context);
     if($result) {
       $this->user->logout();
       $this->flashMessage("Guild created.");
@@ -144,7 +152,7 @@ class GuildPresenter extends BasePresenter {
   function actionJoin($id) {
     $this->inGuild();
     if($id == 0) return;
-    $result = HOA\GuildModel::sendApplication($id, $this->user->id, $this->db);
+    $result = $this->model->sendApplication($id, $this->user->id);
     if($result === TRUE) {
       $this->flashMessage("Application sent.");
       $this->redirect("Guild:");
@@ -160,9 +168,9 @@ class GuildPresenter extends BasePresenter {
    * @return void
    */
   function renderJoin() {
-    $guilds = HOA\GuildModel::listOfGuilds($this->context);
+    $guilds = $this->model->listOfGuilds();
     $this->template->guilds = $guilds;
-    $apps = HOA\GuildModel::haveUnresolvedApplication($this->user->id, $this->db);
+    $apps = $this->model->haveUnresolvedApplication($this->user->id, $this->db);
     if($apps) $this->flashMessage("You have an unresolved application.");
   }
   
@@ -175,7 +183,7 @@ class GuildPresenter extends BasePresenter {
       $this->flashMessage("Grandmaster cannot leave guild.");
       $this->redirect("Guild:");
     } else {
-      HOA\GuildModel::leave($this->context, $this->user->id);
+      $this->model->leave($this->user->id);
       $this->flashMessage("You left guild.");
       $this->user->logout();
     }
@@ -231,7 +239,7 @@ class GuildPresenter extends BasePresenter {
    * @return \Nette\Application\UI\Form
   */
   protected function createComponentDissolveGuildForm() {
-    $currentName = HOA\GuildModel::getGuildName($this->user->identity->guild, $this->context);
+    $currentName = $this->model->getGuildName($this->user->identity->guild);
     $form = new UI\Form;
     $form->addText("name", "Name:")
          ->addRule(\Nette\Forms\Form::EQUAL, "You entered wrong name", $currentName);
@@ -249,7 +257,7 @@ class GuildPresenter extends BasePresenter {
   */
   function dissolveGuildFormSucceeded($form, $values) {
     $gid = $this->user->identity->guild;
-    $result = HOA\GuildModel::dissolve($gid, $this->context);
+    $result = $this->model->dissolve($gid, $this->context);
     if($result) {
       $this->flashMessage("Guild dissolved.");
       $this->user->logout();
@@ -265,7 +273,7 @@ class GuildPresenter extends BasePresenter {
    * @return \Nette\Application\UI\Form
   */
   protected function createComponentRenameGuildForm() {
-    $currentName = HOA\GuildModel::getGuildName($this->user->identity->guild, $this->context);
+    $currentName = $this->model->getGuildName($this->user->identity->guild);
     $form = new UI\Form;
     $form->addText("name", "New name:")
          ->addRule(\Nette\Forms\Form::MAX_LENGTH, "Name can have no more than 20 letters", 20)
@@ -285,7 +293,7 @@ class GuildPresenter extends BasePresenter {
   function renameGuildFormSucceeded($form, $values) {
     $gid = $this->user->identity->guild;
     $name = $values["name"];
-    $result = HOA\GuildModel::rename($gid, $name, $this->context);
+    $result = $this->model->rename($gid, $name, $this->context);
     if($result) {
       $this->flashMessage("Guild renamed.");
       $this->redirect("Guild:");
@@ -298,7 +306,7 @@ class GuildPresenter extends BasePresenter {
    * @return void
    */
   function actionPromote($id) {
-    $result = HOA\GuildModel::promote($id, $this->context);
+    $result = $this->model->promote($id, $this->context);
     switch($result) {
 case 1:
   $this->flashMessage("Member promoted.");
@@ -329,7 +337,7 @@ case 7:
    * @return void
    */
   function actionDemote($id) {
-    $result = HOA\GuildModel::demote($id, $this->context);
+    $result = $this->model->demote($id, $this->context);
     switch($result) {
 case 1:
   $this->flashMessage("Member demoted.");
@@ -360,7 +368,7 @@ case 7:
    * @return void
    */
   function actionKick($id) {
-    $result = HOA\GuildModel::kick($id, $this->context);
+    $result = $this->model->kick($id, $this->context);
     switch($result) {
 case 1:
   $this->flashMessage("Member kicked.");
@@ -415,7 +423,7 @@ case 6:
   */
   protected function createComponentGuildDescriptionForm() {
     $form = new UI\Form;
-    $guild = HOA\GuildModel::guildData($this->user->identity->guild, $this->context);
+    $guild = $this->model->guildData($this->user->identity->guild);
     $form->addTextArea("description", "New description:")
          ->setDefaultValue($guild->description);
     $form->addSubmit("change", "Change");
@@ -432,7 +440,7 @@ case 6:
   function guildDescriptionFormSucceeded($form, $values) {
     $guild = $this->user->identity->guild;
     $description = $values["description"];
-    $result =HOA\GuildModel::changeDescription($guild, $description, $this->context);
+    $result = $this->model->changeDescription($guild, $description, $this->context);
     switch($result) {
   case 1:
     $this->flashMessage("Guild's description changed.");
@@ -461,7 +469,7 @@ case 6:
    * @return void
    */
   function renderApplications() {
-    $apps = HOA\GuildModel::showApplications($this->user->identity->guild, $this->context);
+    $apps = $this->model->showApplications($this->user->identity->guild, $this->context);
     $this->template->apps = $apps;
   }
 }

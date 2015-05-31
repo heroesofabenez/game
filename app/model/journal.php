@@ -57,7 +57,8 @@ class Journal extends \Nette\Object {
       "stageName" => $stage->name, "areaName" => Location::getAreaName($stage->area, $container)
     );
     if($user->guild > 0) {
-      $return["guild"] = GuildModel::getGuildName($user->guild, $container);
+      $guildModel = $container->getService("model.guild");
+      $return["guild"] = $guildModel->getGuildName($user->guild);
       $return["guildRank"] = ucfirst($user->roles[0]);
     } else {
       $return["guild"] = false;
