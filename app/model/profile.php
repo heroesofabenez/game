@@ -7,17 +7,30 @@ namespace HeroesofAbenez;
    * @author Jakub Konečný
    */
 class Profile extends \Nette\Object {
+  /** @var \Nette\Database\Context  */
+  protected $db;
+  /** @var \HeroesofAbenez\GuildModel */
+  protected $guildModel;
+  /** @var \HeroesofAbenez\CharacterModel */
+  protected $characterModel;
+  
+  /**
+   * @param \Nette\Database\Context $db
+   */
+  function __construct(\Nette\Database\Context $db, \HeroesofAbenez\GuildModel $guildModel, \HeroesofAbenez\CharacterModel $characterModel) {
+    $this->db = $db;
+    $this->guildModel = $guildModel;
+    $this->characterModel = $characterModel;
+  }
+  
   /**
    * Get name of specified race
    * 
    * @param int $id Race's id
-   * @param \Nette\Di\Container $container
    * @return string
    */
-  static function getRaceName($id, \Nette\Di\Container $container) {
-    /** @var \HeroesofAbenez\CharacterModel */
-    $model = $container->getService("model.character");
-    $racesList = $model->getRacesList();
+  function getRaceName($id) {
+    $racesList = $this->characterModel->getRacesList();
     return $racesList[$id];
   }
   
@@ -25,13 +38,10 @@ class Profile extends \Nette\Object {
    * Get name of specified class
    * 
    * @param int $id
-   * @param \Nette\Di\Container $container
    * @return string
    */
-  static function getClassName($id, \Nette\Di\Container $container) {
-    /** @var \HeroesofAbenez\CharacterModel */
-    $model = $container->getService("model.character");
-    $classesList = $model->getClassesList();
+  function getClassName($id) {
+    $classesList = $this->characterModel->getClassesList();
     return $classesList[$id];
   }
   
@@ -116,10 +126,9 @@ class Profile extends \Nette\Object {
    * @param \Nette\Di\Container $container
    * @return array info about character
    */
-  static function view($id, \Nette\Di\Container $container) {
-    $db = $container->getService("database.default.context");
+  function view($id, \Nette\Di\Container $container) {
     $return = array();
-    $char = $db->table("characters")->get($id);
+    $char = $this->db->table("characters")->get($id);
     if(!$char) { return false; }
     $stats = array(
       "name", "gender", "level", "race", "description", "strength",
@@ -129,24 +138,23 @@ class Profile extends \Nette\Object {
       $return[$stat] = $char->$stat;
     }
     
-    $return["race"] = Profile::getRaceName($char->race, $container);
-    $return["occupation"] = Profile::getClassName($char->occupation, $container);
+    $return["race"] = $this->getRaceName($char->race);
+    $return["occupation"] = $this->getClassName($char->occupation, $container);
     if($char->specialization > 0) {
       $return["specialization"] = "-" . $char->specialization;
     } else {
       $return["specialization"] = "";
     }
     if($char->guild > 0) {
-      $guildModel = $container->getService("model.guild");
-      $guildName = $guildModel->getGuildName($char->guild);
+      $guildName = $this->guildModel->getGuildName($char->guild);
       $guildRank = Profile::getRankName($char->guildrank, $container);
       $return["guild"] = "Guild: $guildName<br>Position in guild: " . ucfirst($guildRank);
     } else {
       $return["guild"] = "Not a member of guild";
     }
-    $activePet = $db->table("pets")->where("owner=$char->id")->where("deployed=1");
+    $activePet = $this->db->table("pets")->where("owner=$char->id")->where("deployed=1");
     if($activePet->count("*") == 1) {
-      $petType = $db->table("pet_types")->get($activePet->type);
+      $petType = $this->db->table("pet_types")->get($activePet->type);
       if($activePet->name == "pets") $petName = "Unnamed"; else $petName = $activePet->name . ",";
       $bonusStat = strtoupper($petType->bonus_stat);
       $return["active_pet"] = "Active pet: $petName $petType->name, +$petType->bonus_value% $bonusStat";
