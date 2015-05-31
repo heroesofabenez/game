@@ -12,6 +12,8 @@ class RankingPresenter extends BasePresenter {
   const ITEMS_PER_PAGE = 15;
   /** @var \Nette\Utils\Paginator */
   protected $paginator;
+  /** @var \HeroesofAbenez\RequestModel */
+  protected $model;
   
   /**
    * Set up paginator
@@ -22,6 +24,7 @@ class RankingPresenter extends BasePresenter {
     parent::startup();
     $this->paginator = new \Nette\Utils\Paginator;
     $this->paginator->setItemsPerPage(self::ITEMS_PER_PAGE);
+    $this->model = $this->context->getService("model.ranking");
   }
   
   /**
@@ -30,7 +33,7 @@ class RankingPresenter extends BasePresenter {
    */
   function renderCharacters($page) {
     $this->paginator->setPage($page);
-    $this->template->characters = HOA\Ranking::characters($this->context, $this->paginator);
+    $this->template->characters = $this->model->characters($this->context, $this->paginator);
     $this->template->paginator = $this->paginator;
   }
   
@@ -41,7 +44,7 @@ class RankingPresenter extends BasePresenter {
    */
   function renderGuilds($page) {
     $this->paginator->setPage($page);
-    $guilds = HOA\Ranking::guilds($this->context);
+    $guilds = $this->model->guilds($this->context);
     $this->template->guilds = $guilds;
     $this->template->paginator = $this->paginator;
   }
