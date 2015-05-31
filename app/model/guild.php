@@ -174,10 +174,9 @@ class GuildModel extends \Nette\Object {
    * Get unresolved applications to specified guild
    * 
    * @param int $id Guild's id
-   * @param \Nette\Di\Container $container
    * @return array
    */
-  function showApplications($id, \Nette\Di\Container $container) {
+  function showApplications($id) {
     $return = array();
     $guilds = $this->listOfGuilds();
     $guild = $guilds[$id];
