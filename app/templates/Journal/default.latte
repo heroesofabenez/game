@@ -1,0 +1,12 @@
+{layout '../@layout.latte'}
+{block title}Journal{/block}
+{block content}
+  <h1>Journal of {$name}</h1>
+  <p>{$gender} {$race} {$occupation}{$specialization}</p>
+  <p>level {$level}, {$experiences} experiences</p>
+  <p>Guild:<br>{if $guild}{$guildRank} of guild {$guild}{else}Not in guild{/if}</p>
+  <p>Karma:<br>white {$whiteKarma}, neutral {$neutralKarma}, dark {$darkKarma}</p>
+  <p>Position:<br>{$stageName} at {$areaName}</p>
+  <p>More info:<br>{$description}</p>
+  <p>Chapters: Basic <a n:href="Journal:inventory">Inventory</a> <a n:href="Journal:pets">Pets</a> <a n:href="Journal:quests">Quests</a></p>
+{/block}
