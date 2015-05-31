@@ -2,7 +2,13 @@
 {block title}Quest{/block}
 {block content}
   <h1>{$name}</h1>
+  <p>From: {$npcStart}</p>
   <p>{$introduction}</p>
-  <p>From: {$npcStart}<br>
-  End at: {$npcEnd}</p>
+  <p>For completing this quest you have to:</p>
+  <ul>
+    {foreach $requirements as $requirement}
+    <li>{$requirement}{if $iterator->last}.{else},{/if}</li>
+    {/foreach}
+  </ul>
+  <p>Rewards: {$rewardMoney} silver marks, {$rewardXp} experiences.</p>
 {/block}
