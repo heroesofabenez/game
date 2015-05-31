@@ -18,5 +18,31 @@ class JournalPresenter extends BasePresenter {
       $this->template->$key = $value;
     }
   }
+  
+  /**
+   * @return void
+   */
+  function renderInventory() {
+    $inventory = HOA\Journal::inventory($this->context);
+    foreach($inventory as $key => $value) {
+      $this->template->$key = $value;
+    }
+  }
+  
+  /**
+   * @return void
+   */
+  function renderQuests() {
+    $quests = array();
+    $this->template->quests = $quests;
+  }
+  
+  /**
+   * @return void
+   */
+  function renderPets() {
+    $pets = HOA\Journal::pets($this->context);
+    $this->template->pets = $pets;
+  }
 }
 ?>

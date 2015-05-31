@@ -1,0 +1,15 @@
+{layout '../@layout.latte'}
+{block title}Quests Journal{/block}
+{block content}
+  <h1>Quests Journal</h1>
+  <p>You have {count($quests)} quests open.</p>
+  {if count($quests) == 0}
+  {else}
+  <p>Summary:<br>
+    {foreach $quests as $quest}
+    <a n:href="Quest:view $quest->id">{$quest->name}</a><br>
+    {/foreach}
+  {/if}
+  </p>
+  <p>Chapters: <a n:href="Journal:">Basic</a> <a n:href="Journal:inventory">Inventory</a> <a n:href="Journal:pets">Pets</a> Quests</p>
+{/block}

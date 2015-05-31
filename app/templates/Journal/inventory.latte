@@ -1,0 +1,25 @@
+{layout '../@layout.latte'}
+{block title}Inventory{/block}
+{block content}
+  <h1>Inventory</h1>
+  <p>You have {$money} silver marks.</p>
+  <p>Items:<br>
+  {if count($items) == 0}
+No items
+  {else}
+    {foreach $items as $item}
+{$item->count}x {$item->name}<br>
+    {/foreach}
+  {/if}
+  </p>
+  <p>Equpiment:<br>
+  {if count($equipments) == 0}
+No items
+  {else}
+    {foreach $equipments as $equipment}
+{$equipment->name}<br>
+    {/foreach}
+  {/if}
+  </p>
+  <p>Chapters: <a n:href="Journal:">Basic</a> Inventory <a n:href="Journal:pets">Pets</a> <a n:href="Journal:quests">Quests</a></p>
+{/block}

@@ -41,5 +41,44 @@ class Journal {
     $return["areaName"] = Location::getAreaName($stage->area, $container);
     return $return;
   }
+  
+  /**
+   * Gets character's inventory
+   * 
+   * @param \Nette\DI\Container $container
+   * @return array
+   */
+  static function inventory(\Nette\DI\Container $container) {
+    $return = array();
+    $uid = $container->getService("security.user")->id;
+    $db = $container->getService("database.default.context");
+    $char = $db->table("characters")->get($uid);
+    $return["money"] = $char->money;
+    $return["items"] = array();
+    $return["equipments"] = array();
+    return $return;
+  }
+  
+  /**
+   * Gets character's pets
+   * 
+   * @param \Nette\DI\Container $container
+   * @return array
+   */
+  static function pets(\Nette\DI\Container $container) {
+    $return = array();
+    $uid = $container->getService("security.user")->id;
+    $db = $container->getService("database.default.context");
+    $pets = $db->table("pets")
+      ->where("owner", $uid);
+    foreach($pets as $pet) {
+      $type = $db->table("pet_types")->get($pet->id);
+      $return[] = array(
+        "id" => $pet->id, "name" => $pet->name,
+        "deployed" => (bool) $pet->deployed, "type" => $type->name
+      );
+    }
+    return $return;
+  }
 }
 ?>

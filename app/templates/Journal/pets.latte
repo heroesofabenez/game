@@ -1,0 +1,15 @@
+{layout '../@layout.latte'}
+{block title}Pets{/block}
+{block content}
+  <h1>Pets</h1>
+  <p>You have {count($pets)} pets.</p>
+  {if count($pets) == 0}
+  {else}
+  <p>
+    {foreach $quests as $quest}
+    {$pet["name"]} {$pet["type"]} {if $pet["deployed"]}Deployed{/if}<br>
+    {/foreach}
+  </p>
+  {/if}
+  <p>Chapters: <a n:href="Journal:">Basic</a> <a n:href="Journal:inventory">Inventory</a> Pets <a n:href="Journal:quests">Quests</a></p>
+{/block}
