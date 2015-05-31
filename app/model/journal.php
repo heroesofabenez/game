@@ -36,6 +36,7 @@ class Journal extends \Nette\Object {
     $this->user = $user;
     $this->db = $db;
   }
+  
   /**
    * Gets basic info for character's journal
    * 
