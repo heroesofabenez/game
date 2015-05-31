@@ -91,4 +91,16 @@ class NPCModel {
     $npc = Arrays::get($npcs, $id, false);
     return $npc;
   }
+  
+  /**
+   * Get name of specified npc
+   * 
+   * @param int $id Npc's id
+   * @param \Nette\Di\Container $container
+   * @return string
+   */
+  static function getNpcName($id, \Nette\Di\Container $container) {
+    $npcs = NPCModel::listOfNpcs($container);
+    return $npcs[$id]->name;
+  }
 }
