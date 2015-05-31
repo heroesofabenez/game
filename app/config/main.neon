@@ -26,3 +26,4 @@ services:
     authenticator: HeroesofAbenez\Authenticator
     authorizator: HeroesofAbenez\Authorizator::create
     model.journal: HeroesofAbenez\Journal
+    model.request: HeroesofAbenez\RequestModel

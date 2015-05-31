@@ -1,14 +1,19 @@
 <?php
 namespace HeroesofAbenez\Presenters;
 
-use HeroesofAbenez as HOA;
-
 /**
  * Presenter Request
  *
  * @author Jakub Konečný
  */
 class RequestPresenter extends BasePresenter {
+  /** @var \HeroesofAbenez\RequestModel */
+  protected $model;
+  
+  function startup() {
+    parent::startup();
+    $this->model = $this->context->getService("model.request");
+  }
   /**
    * Page /request does not exist
    * 
@@ -24,7 +29,7 @@ class RequestPresenter extends BasePresenter {
    * @return void
    */
   function renderView($id) {
-    $request = HOA\RequestModel::show($id, $this->user, $this->context);
+    $request = $this->model->show($id, $this->context);
     if($request === NULL) $this->forward("notfound");
     if(!$request) {
       $this->flashMessage("You can't see this request.");
@@ -43,7 +48,7 @@ class RequestPresenter extends BasePresenter {
    * @return void
    */
   function actionAccept($id) {
-    $result = HOA\RequestModel::accept($id, $this->user, $this->context);
+    $result = $this->model->accept($id, $this->context);
     switch($result) {
   case 1:
     $this->flashMessage("Request accepted.");
@@ -75,7 +80,7 @@ class RequestPresenter extends BasePresenter {
    * @return void
    */
   function actionDecline($id) {
-    $result = HOA\RequestModel::decline($id, $this->user, $this->context);
+    $result = $this->model->decline($id, $this->context);
     switch($result) {
   case 1:
     $this->flashMessage("Request declined.");
