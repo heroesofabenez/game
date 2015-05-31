@@ -46,14 +46,17 @@ class GuildModel extends \Nette\Object {
   protected $db;
   /** @var \Nette\Security\User */
   protected $user;
-  /** @var */
+  /** @var HeroesofAbenez\Profile */
   protected $profileModel;
+  /** @var \HeroesofAbenez\Permissions */
+  protected $permissionsModel;
   
-  function __construct(\Nette\Caching\Cache $cache, \Nette\Database\Context $db, \Nette\Security\User $user, \HeroesofAbenez\Profile $profileModel) {
+  function __construct(\Nette\Caching\Cache $cache, \Nette\Database\Context $db, \Nette\Security\User $user, \HeroesofAbenez\Profile $profileModel, \HeroesofAbenez\Permissions $permissionsModel) {
     $this->cache = $cache;
     $this->db = $db;
     $this->user = $user;
     $this->profileModel = $profileModel;
+    $this->permissionsModel = $permissionsModel;
   }
   
   /**
@@ -80,10 +83,9 @@ class GuildModel extends \Nette\Object {
   /**
    * Gets basic data about specified guild
    * @param integer $id guild's id
-   * @param \Nette\Di\Container $container
    * @return array info about guild
    */
-  function view($id, \Nette\Di\Container $container) {
+  function view($id) {
     $return = array();
     $guilds = $this->listOfGuilds();
     $guild = \Nette\Utils\Arrays::get($guilds, $id, false);
@@ -93,7 +95,7 @@ class GuildModel extends \Nette\Object {
     $members = $this->db->table("characters")->where("guild", $guild->id)->order("guildrank DESC, id");
     $return["members"] = array();
     foreach($members as $member) {
-      $rank = $this->profileModel->getRankName($member->guildrank, $container);
+      $rank = $this->profileModel->getRankName($member->guildrank);
       $return["members"][] = array("name" => $member->name, "rank" => ucfirst($rank));
     }
     return $return;
@@ -103,14 +105,13 @@ class GuildModel extends \Nette\Object {
    * Get members of specified guild
    * 
    * @param type $id Id of guild
-   * @param \Nette\Di\Container $container
    * @return array
    */
-  function guildMembers($id, \Nette\Di\Container $container) {
+  function guildMembers($id) {
     $return = array();
     $members = $this->db->table("characters")->where("guild", $id)->order("guildrank DESC, id");
     foreach($members as $member) {
-      $rank = $this->profileModel->getRankName($member->guildrank, $container);
+      $rank = $this->profileModel->getRankName($member->guildrank);
       $return[] = array("id" => $member->id, "name" => $member->name, "rank" => ucfirst($rank), "rankId" => $member->guildrank);
     }
     return $return;
@@ -223,17 +224,16 @@ class GuildModel extends \Nette\Object {
    * Increase rank of specified member of guild
    * 
    * @param int $id Id of player to be demoted
-   * @param \Nette\Di\Container $container
    * @return int Error code/1 on success
    */
-  function promote($id, \Nette\Di\Container $container) {
+  function promote($id) {
     $admin = $this->user;
     if($admin->identity->guild == 0) return 2;
     if(!$admin->isAllowed("guild", "promote")) return 3;
     $character = $this->db->table("characters")->get($id);
     if(!$character) return 4;
     if($character->guild !== $admin->identity->guild) return 5;
-    $roles = Authorizator::getRoles($container);
+    $roles = $this->permissionsModel->getRoles();
     foreach($roles as $role) {
       if($role["name"] == $admin->roles[0]) {
         $adminRole = $role["id"];
@@ -250,17 +250,16 @@ class GuildModel extends \Nette\Object {
    * Decrease rank of specified member of guild
    * 
    * @param int $id Id of player to be demoted
-   * @param \Nette\Di\Container $container
    * @return int Error code/1 on success
    */
-  function demote($id, \Nette\Di\Container $container) {
+  function demote($id) {
     $admin = $this->user;
     if($admin->identity->guild == 0) return 2;
     if(!$admin->isAllowed("guild", "demote")) return 3;
     $character = $this->db->table("characters")->get($id);
     if(!$character) return 4;
     if($character->guild !== $admin->identity->guild) return 5;
-    $roles = Authorizator::getRoles($container);
+    $roles = $this->permissionsModel->getRoles();
     foreach($roles as $role) {
       if($role["name"] == $admin->roles[0]) {
         $adminRole = $role["id"];
@@ -277,17 +276,16 @@ class GuildModel extends \Nette\Object {
    * Kick specified member from guild
    * 
    * @param int $id Id of player to be kicked
-   * @param \Nette\Di\Container $container
    * @return int Error code/1 on success
    */
-  function kick($id, \Nette\Di\Container $container) {
+  function kick($id) {
     $admin = $this->user;
     if($admin->identity->guild == 0) return 2;
     if(!$admin->isAllowed("guild", "kick")) return 3;
     $character = $this->db->table("characters")->get($id);
     if(!$character) return 4;
     if($character->guild !== $admin->identity->guild) return 5;
-    $roles = Authorizator::getRoles($container);
+    $roles = $this->permissionsModel->getRoles();
     foreach($roles as $role) {
       if($role["name"] == $admin->roles[0]) {
         $adminRole = $role["id"];

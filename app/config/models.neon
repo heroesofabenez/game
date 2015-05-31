@@ -5,6 +5,7 @@ services:
     model.journal: HeroesofAbenez\Journal
     model.location: HeroesofAbenez\Location(@caches.locations)
     model.npc: HeroesofAbenez\NPCModel(@caches.locations)
+    model.permissions: HeroesofAbenez\Permissions(@caches.permissions)
     model.profile: HeroesofAbenez\Profile(@caches.characters)
     model.ranking: HeroesofAbenez\Ranking
     model.request: HeroesofAbenez\RequestModel

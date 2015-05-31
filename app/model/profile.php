@@ -13,14 +13,17 @@ class Profile extends \Nette\Object {
   protected $cache;
   /** @var \HeroesofAbenez\CharacterModel */
   protected $characterModel;
+  /** @var \HeroesofAbenez\Permissions */
+  protected $permissionsModel;
   
   /**
    * @param \Nette\Database\Context $db
    */
-  function __construct(\Nette\Caching\Cache $cache, \Nette\Database\Context $db, \HeroesofAbenez\CharacterModel $characterModel) {
+  function __construct(\Nette\Caching\Cache $cache, \Nette\Database\Context $db, \HeroesofAbenez\CharacterModel $characterModel, \HeroesofAbenez\Permissions $permissionsModel) {
     $this->db = $db;
     $this->characterModel = $characterModel;
     $this->cache = $cache;
+    $this->permissionsModel = $permissionsModel;
   }
   
   /**
@@ -49,11 +52,10 @@ class Profile extends \Nette\Object {
    * Get name of specified rank
    * 
    * @param int $id
-   * @param \Nette\Di\Container $container
    * @return string
    */
-  function getRankName($id, \Nette\Di\Container $container) {
-    $ranks = Authorizator::getRoles($container);
+  function getRankName($id) {
+    $ranks = $this->permissionsModel->getRoles();
     return $ranks[$id]["name"];
   }
   
@@ -141,7 +143,7 @@ class Profile extends \Nette\Object {
     }
     if($char->guild > 0) {
       $guildName = $container->getService("model.guild")->getGuildName($char->guild);
-      $guildRank = $this->getRankName($char->guildrank, $container);
+      $guildRank = $this->getRankName($char->guildrank);
       $return["guild"] = "Guild: $guildName<br>Position in guild: " . ucfirst($guildRank);
     } else {
       $return["guild"] = "Not a member of guild";

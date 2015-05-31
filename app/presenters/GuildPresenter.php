@@ -1,7 +1,6 @@
 <?php
 namespace HeroesofAbenez\Presenters;
 
-use \HeroesofAbenez as HOA;
 use \Nette\Application\UI;
 
   /**
@@ -70,7 +69,7 @@ class GuildPresenter extends BasePresenter {
    */
   function renderView($id) {
     if($id == 0) $this->forward("notfound");
-    $data = $this->model->view($id, $this->context);
+    $data = $this->model->view($id);
     if(!$data) $this->forward("notfound");
     foreach($data as $key => $value) {
       $this->template->$key = $value;
@@ -88,10 +87,10 @@ class GuildPresenter extends BasePresenter {
    * @return void
    */
   function renderMembers() {
-    $this->template->members = $this->model->guildMembers($this->user->identity->guild, $this->context);
+    $this->template->members = $this->model->guildMembers($this->user->identity->guild);
     $this->template->canPromote = $this->user->isAllowed("guild", "promote");
     $this->template->canKick = $this->user->isAllowed("guild", "kick");
-    $roles = HOA\Authorizator::getRoles($this->context);
+    $roles = $this->context->getService("model.permissions")->getRoles();
     foreach($roles as $role) {
       if($role["name"] == $this->user->roles[0]) {
         $rankId = $role["id"];
@@ -306,7 +305,7 @@ class GuildPresenter extends BasePresenter {
    * @return void
    */
   function actionPromote($id) {
-    $result = $this->model->promote($id, $this->context);
+    $result = $this->model->promote($id);
     switch($result) {
 case 1:
   $this->flashMessage("Member promoted.");
@@ -337,7 +336,7 @@ case 7:
    * @return void
    */
   function actionDemote($id) {
-    $result = $this->model->demote($id, $this->context);
+    $result = $this->model->demote($id);
     switch($result) {
 case 1:
   $this->flashMessage("Member demoted.");
@@ -368,7 +367,7 @@ case 7:
    * @return void
    */
   function actionKick($id) {
-    $result = $this->model->kick($id, $this->context);
+    $result = $this->model->kick($id);
     switch($result) {
 case 1:
   $this->flashMessage("Member kicked.");
