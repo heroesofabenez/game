@@ -15,7 +15,8 @@ class HomepagePresenter extends BasePresenter {
     $this->template->stageName = $stage->name;
     $this->template->areaName = HOA\Location::getAreaName($stage->area, $this->context);
     $this->template->characterName = $this->user->identity->name;
-    $npcs = HOA\NPCModel::listOfNpcs($this->context, $stage->id);
+    $npcMOdel = $this->context->getService("model.npc");
+    $npcs = $npcMOdel->listOfNpcs($stage->id);
     $this->template->npcs = $npcs;
   }
 }

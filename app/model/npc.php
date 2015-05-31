@@ -49,25 +49,32 @@ class NPC extends \Nette\Object {
  *
  * @author Jakub Konečný
  */
-class NPCModel {
+class NPCModel extends \Nette\Object {
+  /** @var \Nette\Database\Context */
+  protected $db;
+  /** @var \Nette\Caching\Cache */
+  protected $cache;
+  
+  function __construct(\Nette\Caching\Cache $cache, \Nette\Database\Context $db) {
+    $this->db = $db;
+    $this->cache = $cache;
+  }
+  
   /**
    * Gets list of npcs
    * 
-   * @param \Nette\Di\Container $container
    * @param int $stage Return npcs only from certain stage, 0 = all stages
    * @return array
    */
-  static function listOfNpcs(\Nette\Di\Container $container, $stage = 0) {
+  function listOfNpcs($stage = 0) {
     $return = array();
-    $cache = $container->getService("caches.locations");
-    $npcs = $cache->load("npcs");
+    $npcs = $this->cache->load("npcs");
     if($npcs === NULL) {
-      $db = $container->getService("database.default.context");
-      $npcs = $db->table("npcs");
+      $npcs = $this->db->table("npcs");
       foreach($npcs as $npc) {
         $return[$npc->id] = new NPC($npc->id, $npc->name, $npc->description, $npc->race, $npc->type, $npc->sprite, $npc->portrait, $npc->stage, $npc->pos_x, $npc->pos_y);
       }
-      $cache->save("npcs", $return);
+      $this->cache->save("npcs", $return);
     } else {
       $return = $npcs;
     }
@@ -83,11 +90,10 @@ class NPCModel {
    * Get info about specified npc
    * 
    * @param int $id Npc's id
-   * @param \Nette\Di\Container $container
    * @return \HeroesofAbenez\NPC
    */
-  static function view($id, \Nette\Di\Container $container) {
-    $npcs = NPCModel::listOfNpcs($container);
+  function view($id) {
+    $npcs = $this->listOfNpcs();
     $npc = Arrays::get($npcs, $id, false);
     return $npc;
   }
@@ -96,11 +102,10 @@ class NPCModel {
    * Get name of specified npc
    * 
    * @param int $id Npc's id
-   * @param \Nette\Di\Container $container
    * @return string
    */
-  static function getNpcName($id, \Nette\Di\Container $container) {
-    $npcs = NPCModel::listOfNpcs($container);
+  function getNpcName($id) {
+    $npcs = $this->listOfNpcs();
     return $npcs[$id]->name;
   }
 }
