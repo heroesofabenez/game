@@ -1,19 +1,28 @@
 <?php
 namespace HeroesofAbenez\Presenters;
 
-use HeroesofAbenez as HOA;
-
 /**
  * Presenter Journal
  *
  * @author Jakub Konečný
  */
 class JournalPresenter extends BasePresenter {
+  /** @var \HeroesofAbenez\Journal */
+  protected $model;
+  
+  /**
+   * @return void
+   */
+  function startup() {
+    parent::startup();
+    $this->model = $this->context->getService("model.journal");
+  }
+  
   /**
    * @return void
    */
   function renderDefault() {
-    $stats = HOA\Journal::basic($this->context);
+    $stats = $this->model->basic($this->context);
     foreach($stats as $key => $value) {
       $this->template->$key = $value;
     }
@@ -23,7 +32,7 @@ class JournalPresenter extends BasePresenter {
    * @return void
    */
   function renderInventory() {
-    $inventory = HOA\Journal::inventory($this->context);
+    $inventory = $this->model->inventory();
     foreach($inventory as $key => $value) {
       $this->template->$key = $value;
     }
@@ -33,7 +42,7 @@ class JournalPresenter extends BasePresenter {
    * @return void
    */
   function renderQuests() {
-    $quests = HOA\Journal::quests($this->context);
+    $quests = $this->model->quests();
     $this->template->quests = $quests;
   }
   
@@ -41,7 +50,7 @@ class JournalPresenter extends BasePresenter {
    * @return void
    */
   function renderPets() {
-    $pets = HOA\Journal::pets($this->context);
+    $pets = $this->model->pets();
     $this->template->pets = $pets;
   }
 }

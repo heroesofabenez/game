@@ -25,3 +25,4 @@ session:
 services:
     authenticator: HeroesofAbenez\Authenticator
     authorizator: HeroesofAbenez\Authorizator::create
+    model.journal: HeroesofAbenez\Journal

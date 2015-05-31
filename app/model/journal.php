@@ -22,17 +22,29 @@ class JournalQuest extends \Nette\Object {
  *
  * @author Jakub Konečný
  */
-class Journal {
+class Journal extends \Nette\Object {
+  /** @var \Nette\Security\User */
+  protected $user;
+  /** @var \Nette\Database\Context */
+  protected $db;
+  
+  /**
+   * @param \Nette\Security\User $user
+   * @param \Nette\Database\Context $db
+   */
+  function __construct(\Nette\Security\User $user,\Nette\Database\Context $db) {
+    $this->user = $user;
+    $this->db = $db;
+  }
   /**
    * Gets basic info for character's journal
    * 
    * @param \Nette\DI\Container $container
    * @return array
    */
-  static function basic(\Nette\DI\Container $container) {
-    $user = $container->getService("security.user")->identity;
-    $db = $container->getService("database.default.context");
-    $character = $db->table("characters")->get($user->id);
+  function basic(\Nette\DI\Container $container) {
+    $user = $this->user->identity;
+    $character = $this->db->table("characters")->get($user->id);
     $stages = Location::listOfStages($container);
     $stage = $stages[$user->stage];
     $return = array(
@@ -58,11 +70,10 @@ class Journal {
    * @param \Nette\DI\Container $container
    * @return array
    */
-  static function inventory(\Nette\DI\Container $container) {
+  function inventory() {
     $return = array();
-    $uid = $container->getService("security.user")->id;
-    $db = $container->getService("database.default.context");
-    $char = $db->table("characters")->get($uid);
+    $uid = $this->user->id;
+    $char = $this->db->table("characters")->get($uid);
     $return["money"] = $char->money;
     $return["items"] = array();
     $return["equipments"] = array();
@@ -72,17 +83,15 @@ class Journal {
   /**
    * Gets character's pets
    * 
-   * @param \Nette\DI\Container $container
    * @return array
    */
-  static function pets(\Nette\DI\Container $container) {
+  function pets() {
     $return = array();
-    $uid = $container->getService("security.user")->id;
-    $db = $container->getService("database.default.context");
-    $pets = $db->table("pets")
+    $uid = $this->user->id;
+    $pets = $this->db->table("pets")
       ->where("owner", $uid);
     foreach($pets as $pet) {
-      $type = $db->table("pet_types")->get($pet->id);
+      $type = $this->db->table("pet_types")->get($pet->id);
       $return[] = array(
         "id" => $pet->id, "name" => $pet->name,
         "deployed" => (bool) $pet->deployed, "type" => $type->name
@@ -94,18 +103,16 @@ class Journal {
    /**
    * Gets character's quests
    * 
-   * @param \Nette\DI\Container $container
    * @return array
    */
-  static function quests(\Nette\DI\Container $container) {
+  function quests() {
     $return = array();
-    $uid = $container->getService("security.user")->id;
-    $db = $container->getService("database.default.context");
-    $quests = $db->table("character_quests")
+    $uid = $this->user->id;
+    $quests = $this->db->table("character_quests")
       ->where("character", $uid);
     foreach($quests as $row) {
       if($row->progress >3) {
-        $quest = $db->table("quests")->get($row->id);
+        $quest = $this->db->table("quests")->get($row->id);
         $return[] = new JournalQuest($quest->id, $quest->name);
       }
     }
