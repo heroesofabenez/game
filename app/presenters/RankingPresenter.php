@@ -1,8 +1,6 @@
 <?php
 namespace HeroesofAbenez\Presenters;
 
-use \HeroesofAbenez as HOA;
-
   /**
    * Presenter Ranking
    * 
@@ -33,7 +31,7 @@ class RankingPresenter extends BasePresenter {
    */
   function renderCharacters($page) {
     $this->paginator->setPage($page);
-    $this->template->characters = $this->model->characters($this->context, $this->paginator);
+    $this->template->characters = $this->model->characters($this->paginator);
     $this->template->paginator = $this->paginator;
   }
   
