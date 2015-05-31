@@ -45,8 +45,9 @@ class Journal extends \Nette\Object {
    */
   function basic(\Nette\DI\Container $container) {
     $user = $this->user->identity;
+    $locationModel = $container->getService("model.location");
     $character = $this->db->table("characters")->get($user->id);
-    $stages = Location::listOfStages($container);
+    $stages = $locationModel->listOfStages();
     $stage = $stages[$user->stage];
     $return = array(
       "name" => $user->name, "gender" => $user->gender, "race" => $user->race,
@@ -54,7 +55,7 @@ class Journal extends \Nette\Object {
       "level" => $user->level, "whiteKarma" => $user->white_karma,
       "neutralKarma" => $user->neutral_karma, "darkKarma" => $user->dark_karma,
       "experiences" => $character->experience, "description" => $character->description,
-      "stageName" => $stage->name, "areaName" => Location::getAreaName($stage->area, $container)
+      "stageName" => $stage->name, "areaName" => $locationModel->getAreaName($stage->area)
     );
     if($user->guild > 0) {
       $guildModel = $container->getService("model.guild");

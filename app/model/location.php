@@ -71,23 +71,31 @@ class Area extends \Nette\Object {
  * @author Jakub Konečný
  */
 class Location extends \Nette\Object {
+  /** @var \Nette\Caching\Cache */
+  protected $cache;
+  /** @var \Nette\Database\Context */
+  protected $db;
+  
+  function __construct(\Nette\Caching\Cache $cache, \Nette\Database\Context $db) {
+    $this->cache = $cache;
+    $this->db = $db;
+  }
+  
   /**
    * Gets list of stages
    * 
-   * @param \Nette\Di\Container $container
+   * @param
    * @return array list of stages
    */
-  static function listOfStages(\Nette\Di\Container $container) {
+  function listOfStages() {
     $return = array();
-    $cache = $container->getService("caches.locations");
-    $stages = $cache->load("stages");
+    $stages = $this->cache->load("stages");
     if($stages === NULL) {
-      $db = $container->getService("database.default.context");
-      $stages = $db->table("quest_stages");
+      $stages = $this->db->table("quest_stages");
       foreach($stages as $stage) {
         $return[$stage->id] = new Stage($stage->id, $stage->name, $stage->description, $stage->required_level, $stage->required_race, $stage->required_occupation, $stage->area, $stage->order);
       }
-      $cache->save("stages", $return);
+      $this->cache->save("stages", $return);
     } else {
       $return = $stages;
     }
@@ -97,19 +105,16 @@ class Location extends \Nette\Object {
   /**
    * Gets list of areas
    * 
-   * @param \Nette\Di\Container $container
    * @return array list of stages
    */
-  static function listOfAreas(\Nette\Di\Container $container) {
-    $cache = $container->getService("caches.locations");
-    $areas = $cache->load("areas");
+  function listOfAreas() {
+    $areas = $this->cache->load("areas");
     if($areas === NULL) {
-      $db = $container->getService("database.default.context");
-      $areas = $db->table("quest_areas");
+      $areas = $this->db->table("quest_areas");
       foreach($areas as $area) {
         $return[$area->id] = new Area($area->id, $area->name, $area->description, $area->required_level, $area->required_race, $area->required_occupation);
       }
-      $cache->save("areas", $return);
+      $this->cache->save("areas", $return);
     } else {
       $return = $areas;
     }
@@ -120,10 +125,9 @@ class Location extends \Nette\Object {
    * Get name of specified stage
    * 
    * @param int $id Id of stage
-   * @param \Nette\Di\Container $container
    */
-  static function getStageName($id, \Nette\Di\Container $container) {
-    $stages = Location::listOfStages($container);
+  function getStageName($id) {
+    $stages = $this->listOfStages();
     return $stages[$id]->name;
   }
   
@@ -131,10 +135,9 @@ class Location extends \Nette\Object {
    * Get name of specified area
    * 
    * @param int $id Id of area
-   * @param \Nette\Di\Container $container
    */
-  static function getAreaName($id, \Nette\Di\Container $container) {
-    $areas = Location::listOfAreas($container);
+  function getAreaName($id) {
+    $areas = $this->listOfAreas();
     return $areas[$id]->name;
   }
   
@@ -142,11 +145,10 @@ class Location extends \Nette\Object {
    * Get data for homepage of location
    * 
    * @param int $location Id of stage
-   * @param \Nette\Di\Container $container
    * @return array Data about location
    */
-  static function Home($location, \Nette\Di\Container $container) {
-    return Location::getStageName($location, $container);
+  function Home($location) {
+    return $this->getStageName($location);
   }
 }
 ?>
