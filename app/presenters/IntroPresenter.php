@@ -1,8 +1,6 @@
 <?php
 namespace HeroesofAbenez\Presenters;
 
-use \HeroesofAbenez as HOA;
-
 /**
  * Presenter Intro
  *
@@ -11,6 +9,8 @@ use \HeroesofAbenez as HOA;
 class IntroPresenter extends BasePresenter {
   /** @var int In which part of intro we are */
   protected $part;
+  /** @var \HeroesofAbenez\Intro */
+  protected $model;
   
   /**
    * @return void
@@ -18,14 +18,15 @@ class IntroPresenter extends BasePresenter {
   function startup() {
     $this->user->logout();
     parent::startup();
-    $this->part = $this->template->part = HOA\Intro::getIntroPosition($this->db, $this->user->id);
+    $this->model = $this->context->getService("model.intro");
+    $this->part = $this->template->part = $this->model->getIntroPosition($this->db, $this->user->id);
   }
   
   /**
    * @return void
    */
   function renderDefault() {
-    $text = HOA\Intro::getIntroPart($this->db, $this->user->id, $this->part);
+    $text = $this->model->getIntroPart($this->db, $this->user->id, $this->part);
     if($text == "ENDOFINTRO") $this->forward("Intro:end");
     $this->template->intro = $text;
   }
@@ -34,7 +35,7 @@ class IntroPresenter extends BasePresenter {
    * @return void
    */
   function actionNext() {
-    HOA\Intro::moveToNextPart($this->part + 1, $this->user->id, $this->db);
+    $this->model->moveToNextPart($this->part + 1, $this->user->id, $this->db);
     $this->redirect("Intro:");
   }
   
@@ -42,7 +43,7 @@ class IntroPresenter extends BasePresenter {
    * @return void
    */
   function actionEnd() {
-    HOA\Intro::endIntro($this->db, $this->user->identity);
+    $this->model->endIntro($this->db, $this->user->identity);
     $this->user->logout();
     $this->redirect("Homepage:");
   }

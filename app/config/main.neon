@@ -27,6 +27,7 @@ services:
     authorizator: HeroesofAbenez\Authorizator::create
     model.character: HeroesofAbenez\CharacterModel(@caches.characters)
     model.guild: HeroesofAbenez\GuildModel(@caches.guilds)
+    model.intro: HeroesofAbenez\Intro
     model.journal: HeroesofAbenez\Journal
     model.npc: HeroesofAbenez\NPCModel(@caches.locations)
     model.profile: HeroesofAbenez\Profile(@caches.characters)
