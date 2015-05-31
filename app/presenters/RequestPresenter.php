@@ -48,7 +48,7 @@ class RequestPresenter extends BasePresenter {
    * @return void
    */
   function actionAccept($id) {
-    $result = $this->model->accept($id, $this->context);
+    $result = $this->model->accept($id);
     switch($result) {
   case 1:
     $this->flashMessage("Request accepted.");

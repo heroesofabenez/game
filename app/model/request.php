@@ -130,10 +130,9 @@ class RequestModel extends \Nette\Object {
    * Accept specified request
    * 
    * @param int $id Request's id
-   * @param \Nette\Di\Container $container
    * @return int Error code/1 on success
    */
-  function accept($id, \Nette\Di\Container $container) {
+  function accept($id) {
     $request = $this->show($id);
     if(!$request) return 2;
     $canShow = $this->canShow($id);
@@ -152,13 +151,13 @@ class RequestModel extends \Nette\Object {
     $uid = $this->profileModel->getCharacterId($request->from);
     $uid2 = $this->profileModel->getCharacterId($request->to);
     $gid = $this->profileModel->getCharacterGuild($uid2);
-    $this->guildModel->join($uid, $gid, $container);
+    $this->guildModel->join($uid, $gid);
     break;
   case "guild_join":
     $uid = $this->profileModel->getCharacterId($request->to);
     $uid2 = $this->profileModel->getCharacterId($request->from);
     $gid = $this->profileModel->getCharacterGuild($uid2);
-    $this->guildModel->join($uid, $gid, $container);
+    $this->guildModel->join($uid, $gid);
     break;
     }
     $data2 = array("status" => "accepted");
