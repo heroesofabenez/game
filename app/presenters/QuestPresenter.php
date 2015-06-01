@@ -48,10 +48,12 @@ class QuestPresenter extends BasePresenter {
     if($quest->cost_money > 0) $requirements[] = "pay {$quest->cost_money} silver marks";
     if($quest->needed_item > 0) {
       $itemName = $this->itemModel->getItemName($quest->needed_item);
-      $requirements[] = "get {$quest->item_amount}x $itemName";
+      $itemLink = $this->link("Item:view", $quest->needed_item);
+      $requirements[] = "get {$quest->item_amount}x <a href=\"$itemLink\">$itemName</a>";
     }
-    if($quest->npc_start != $quest->npc_end) $requirements[] = "talk to {$this->template->npcEnd}";
-    if($quest->npc_start == $quest->npc_end) $requirements[] = "report back to {$this->template->npcEnd}";
+    $npcLink = $this->link("Npc:view", $quest->npc_end);
+    if($quest->npc_start != $quest->npc_end) $requirements[] = "talk to <a href=\"$npcLink\">{$this->template->npcEnd}</a>";
+    if($quest->npc_start == $quest->npc_end) $requirements[] = "report back to <a href=\"$npcLink\">{$this->template->npcEnd}</a>";
     $this->template->requirements = $requirements;
     $this->template->rewardMoney = $quest->reward_money;
     $this->template->rewardXp = $quest->reward_xp;

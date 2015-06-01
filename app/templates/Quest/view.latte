@@ -7,7 +7,7 @@
   <p>For completing this quest you have to:</p>
   <ul>
     {foreach $requirements as $requirement}
-    <li>{$requirement}{if $iterator->last}.{else},{/if}</li>
+    <li>{!$requirement}{if $iterator->last}.{else},{/if}</li>
     {/foreach}
   </ul>
   <p>Rewards: {$rewardMoney} silver marks, {$rewardXp} experiences.</p>
