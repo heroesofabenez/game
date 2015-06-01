@@ -1,7 +1,6 @@
 <?php
 namespace HeroesofAbenez\Presenters;
 
-use HeroesofAbenez as HOA;
 use \Nette\Application\UI;
 
   /**

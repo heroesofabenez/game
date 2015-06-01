@@ -169,7 +169,7 @@ class GuildPresenter extends BasePresenter {
   function renderJoin() {
     $guilds = $this->model->listOfGuilds();
     $this->template->guilds = $guilds;
-    $apps = $this->model->haveUnresolvedApplication($this->user->id, $this->db);
+    $apps = $this->model->haveUnresolvedApplication($this->user->id);
     if($apps) $this->flashMessage("You have an unresolved application.");
   }
   
