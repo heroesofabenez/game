@@ -8,7 +8,7 @@
   {else}
     <ol>
       {foreach $quests as $quest}
-      <li>{$quest->name}</li>
+      <li>{$quest->name} {if $quest->progress}<b>(Active)</b>{/if}</li>
       {/foreach}
     </ol>
   {/if}

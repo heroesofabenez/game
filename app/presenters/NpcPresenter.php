@@ -70,7 +70,7 @@ class NpcPresenter extends BasePresenter {
     $this->template->id = $id;
     $this->template->name = $npc->name;
     $questModel = $this->context->getService("model.quest");
-    $this->template->quests = $questModel->listOfQuests($id);
+    $this->template->quests = $questModel->availableQuests($id);
   }
   
   /**

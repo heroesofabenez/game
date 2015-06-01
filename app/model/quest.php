@@ -37,6 +37,8 @@ class Quest extends \Nette\Object {
   public $npc_end;
   /** @var int */
   public $order;
+  /** @var bool */
+  public $progress = false;
   
   function __construct($id, $name, $introduction, $middle_text, $end_text,
     $reward_money, $reward_xp, $npc_start, $npc_end, $order,
@@ -67,10 +69,13 @@ class QuestModel extends \Nette\Object {
   protected $db;
   /** @var \Nette\Caching\Cache */
   protected $cache;
+  /** @var \Nette\Security\User */
+  protected $user;
   
-  function __construct(\Nette\Caching\Cache $cache, \Nette\Database\Context $db) {
+  function __construct(\Nette\Caching\Cache $cache, \Nette\Database\Context $db, \Nette\Security\User $user) {
     $this->db = $db;
     $this->cache = $cache;
+    $this->user = $user;
   }
   
   /**
@@ -97,6 +102,25 @@ class QuestModel extends \Nette\Object {
     if($npc > 0) {
       foreach($return as $quest) {
         if($quest->npc_start != $npc OR $quest->npc_end != $npc) unset($return[$quest->id]);
+      }
+    }
+    return $return;
+  }
+  
+  /**
+   * Gets list of available quests from specified npc
+   * 
+   * @param int $npc Npc's id
+   * @return type
+   */
+  function availableQuests($npc) {
+    $return = $this->listOfQuests($npc);
+    $playerQuests = $this->db->table("character_quests")
+      ->where("character", $this->user->id);
+    foreach($playerQuests as $pquest) {
+      foreach($return as $key => $quest) {
+        if($quest->id == $pquest->quest AND $pquest->progress > 2) unset($return[$key]);
+        elseif($quest->id == $pquest->quest AND $pquest->progress <= 2) $quest->progress = true;
       }
     }
     return $return;

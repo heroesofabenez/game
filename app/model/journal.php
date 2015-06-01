@@ -114,7 +114,7 @@ class Journal extends \Nette\Object {
     $quests = $this->db->table("character_quests")
       ->where("character", $uid);
     foreach($quests as $row) {
-      if($row->progress >3) {
+      if($row->progress < 3) {
         $quest = $this->db->table("quests")->get($row->id);
         $return[] = new JournalQuest($quest->id, $quest->name);
       }
