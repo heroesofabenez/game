@@ -55,6 +55,7 @@ class ItemModel extends \Nette\Object {
       foreach($items as $item) {
         $return[$item->id] = new Item($item->id, $item->name, $item->description, $item->image);
       }
+      $this->cache->save("items", $return);
     } else {
       $return = $items;
     }
@@ -72,6 +73,18 @@ class ItemModel extends \Nette\Object {
     $item = Arrays::get($items, $id, false);
     if(!$item) return "";
     else return $item->name;
+  }
+  
+  /**
+   * Get info about specified item
+   * 
+   * @param int $id Item's id
+   * @return \HeroesofAbenez\Item
+   */
+  function view($id) {
+    $items = $this->listOfItems();
+    $item = Arrays::get($items, $id, false);
+    return $item;
   }
 }
 ?>
