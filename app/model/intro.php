@@ -7,28 +7,34 @@ namespace HeroesofAbenez;
  * @author Jakub Konečný
  */
 class Intro extends \Nette\Object {
+  /** @var Nette\Security\User */
+  protected $user;
+  /** @var \Nette\Database\Context */
+  protected $db;
+  
+  function __construct(\Nette\Security\User $user, \Nette\Database\Context $db) {
+    $this->user = $user;
+    $this->db = $db;
+  }
+  
   /**
    * Check in which part of intro the player is
    * 
-   * @param \Nette\Database\Context $db Database context
-   * @param type $uid User's id
-   * @return type
+   * @return int
    */
-  static function getIntroPosition(\Nette\Database\Context $db, $uid) {
-    $char = $db->table("characters")->get($uid);
+  function getIntroPosition() {
+    $char = $this->db->table("characters")->get($this->user->id);
     return $char->intro;
   }
   /**
    * Get a part of introduction
    * 
-   * @param \Nette\Database\Context $db Database context
-   * @param int $id Character's id
    * @param int $part Part's id
    * @return string Text of current introduction part
    */
-  static function getIntroPart(\Nette\Database\Context $db, $id, $part) {
-    $char = $db->table("characters")->get($id);
-    $intros = $db->table("introduction")
+  function getIntroPart($part) {
+    $char = $this->db->table("characters")->get($this->user->id);
+    $intros = $this->db->table("introduction")
       ->where("race", $char->race)
       ->where("class", $char->occupation)
       ->where("part", $part);
@@ -40,37 +46,33 @@ class Intro extends \Nette\Object {
   /**
    * Move onto next part of introduction
    * 
-   * @param int $part
-   * @param int $id Player's id
-   * @param \Nette\Database\Context $db Database context
+   * @return void
    */
-  static function moveToNextPart($part, $id, \Nette\Database\Context $db) {
+  function moveToNextPart($part) {
     $data = array("intro" => $part);
-    $db->query("UPDATE characters SET ? WHERE id=?", $data, $id);
+    $this->db->query("UPDATE characters SET ? WHERE id=?", $data, $this->user->id);
   }
   
   /**
    * Get starting location for the player
    * 
-   * @param \Nette\Database\Context $db Database context
-   * @param \Nette\Security\Identity $identity Player's identity
    * @return int id of starting stage
    */
-  static function getStartingLocation(\Nette\Database\Context $db, \Nette\Security\Identity $identity) {
-    $classRow = $db->table("character_classess")
-      ->where("name", $identity->occupation);
+  function getStartingLocation() {
+    $classRow = $this->db->table("character_classess")
+      ->where("name", $this->user->identity->occupation);
     foreach($classRow as $classR) {  }
-    $classSLs = $db->table("quest_stages")
+    $classSLs = $this->db->table("quest_stages")
       ->where("required_level", 0)
       ->where("required_occupation", $classR->id);
     if($classSLs->count("id") > 0) {
       foreach($classSLs as $classSL) { }
       return $classSL->id;
     }
-    $raceRow = $db->table("character_races")
-      ->where("name", $identity->race);
+    $raceRow = $this->db->table("character_races")
+      ->where("name", $this->user->identity->race);
     foreach($raceRow as $raceR) {  }
-    $raceSLs = $db->table("quest_stages")
+    $raceSLs = $this->db->table("quest_stages")
       ->where("required_level", 0)
       ->where("required_race", $raceR->id);
     if($raceSLs->count("id") > 0) {
@@ -86,9 +88,10 @@ class Intro extends \Nette\Object {
    * @param \Nette\Security\Identity $identity Player's identity
    * @return void
    */
-  static function endIntro(\Nette\Database\Context $db, \Nette\Security\Identity $identity) {
-    $startingLocation = Intro::getStartingLocation($db, $identity);
+  function endIntro() {
+    $startingLocation = Intro::getStartingLocation();
     $data = array("current_stage" => $startingLocation);
-    $db->query("UPDATE characters SET ? WHERE id=?", $data, $identity->id);
+    $this->db->query("UPDATE characters SET ? WHERE id=?", $data, $this->user->id);
   }
 }
+?>

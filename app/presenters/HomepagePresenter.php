@@ -10,12 +10,14 @@ use \HeroesofAbenez as HOA;
    */
 class HomepagePresenter extends BasePresenter {
   function renderDefault() {
-    $stages = HOA\Location::listOfStages($this->context);
+    $locationModel = $this->context->getService("model.location");
+    $stages = $locationModel->listOfStages();
     $stage = $stages[$this->user->identity->stage];
     $this->template->stageName = $stage->name;
-    $this->template->areaName = HOA\Location::getAreaName($stage->area, $this->context);
+    $this->template->areaName = $locationModel->getAreaName($stage->area);
     $this->template->characterName = $this->user->identity->name;
-    $npcs = HOA\NPCModel::listOfNpcs($this->context, $stage->id);
+    $npcMOdel = $this->context->getService("model.npc");
+    $npcs = $npcMOdel->listOfNpcs($stage->id);
     $this->template->npcs = $npcs;
   }
 }

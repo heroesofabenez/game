@@ -30,37 +30,55 @@ class Request extends \Nette\Object {
 }
 
 class RequestModel extends \Nette\Object {
+   /** @var \Nette\Security\User */
+  protected $user;
+  /** @var \Nette\Database\Context */
+  protected $db;
+  /** @var \HeroesofAbenez\Profile */
+  protected $profileModel;
+  /** @var \HeroesofAbenez\GuildModel */
+  protected $guildModel;
+  
+  /**
+   * @param \Nette\Security\User $user
+   * @param \Nette\Database\Context $db
+   */
+  function __construct(\Nette\Security\User $user,\Nette\Database\Context $db, \HeroesofAbenez\Profile $profileModel, \HeroesofAbenez\GuildModel $guildModel) {
+    $this->user = $user;
+    $this->db = $db;
+    $this->profileModel = $profileModel;
+    $this->guildModel = $guildModel;
+  }
+  
   /**
    * Can player see the request?
    * 
    * @param int $requestId
-   * @param \Nette\Security\User $user
-   * @param \Nette\Database\Context $db Database context
    * @return bool
    */
-  static function canShow($requestId, \Nette\Security\User $user, \Nette\Database\Context $db) {
-    $request = $db->table("requests")->get($requestId);
+  function canShow($requestId) {
+    $request = $this->db->table("requests")->get($requestId);
     switch($request->type) {
   case "friendship":
   case "group_join":
-    if($request->from == $user->id OR $request->to == $user->id) return true;
+    if($request->from == $this->user->id OR $request->to == $this->user->id) return true;
     else return false;
     break;
   case "guild_join":
-    if($request->to == $user->id) return true;
-    $leader = $db->table("characters")->get($request->from);
+    if($request->to == $this->user->id) return true;
+    $leader = $this->db->table("characters")->get($request->from);
     $guild = $leader->guild;
-    if($user->identity->guild == $guild AND $user->isAllowed("guild", "invite")) {
+    if($this->user->identity->guild == $guild AND $this->user->isAllowed("guild", "invite")) {
       return true;
     } else {
       return false;
     }
     break;
   case "guild_app":
-    if($request->from == $user->id) return true;
-    $leader = $db->table("characters")->get($request->to);
+    if($request->from == $this->user->id) return true;
+    $leader = $this->db->table("characters")->get($request->to);
     $guild = $leader->guild;
-    if($user->identity->guild == $guild AND $user->isAllowed("guild", "invite")) {
+    if($this->user->identity->guild == $guild AND $this->user->isAllowed("guild", "invite")) {
       return true;
     } else {
       return false;
@@ -73,18 +91,16 @@ class RequestModel extends \Nette\Object {
    * Can player accept/decline the request?
    * 
    * @param int $requestId
-   * @param \Nette\Security\User $user
-   * @param \Nette\Database\Context $db Database context
    * @return bool
    */
-  static function canChange($requestId, \Nette\Security\User $user, \Nette\Database\Context $db) {
-    $request = $db->table("requests")->get($requestId);
-    if($request->from == $user->id) return false;
-    if($request->to == $user->id) return true;
+  function canChange($requestId) {
+    $request = $this->db->table("requests")->get($requestId);
+    if($request->from == $this->user->id) return false;
+    if($request->to == $this->user->id) return true;
     if($request->type == "guild_app") {
-      $leader = $db->table("characters")->get($request->to);
+      $leader = $this->db->table("characters")->get($request->to);
       $guild = $leader->guild;
-      if($user->identity->guild == $guild AND $user->isAllowed("guild", "invite")) {
+      if($this->user->identity->guild == $guild AND $this->user->isAllowed("guild", "invite")) {
         return true;
       } else {
         return false;
@@ -97,18 +113,15 @@ class RequestModel extends \Nette\Object {
    * Gets data about specified request
    * 
    * @param type $id Request's id
-   * @param \Nette\Security\User $user
-   * @param \Nette\Di\Container $container
    * @return \HeroesofAbenez\Request
    */
-  static function show($id, \Nette\Security\User $user, \Nette\Di\Container $container) {
-    $db = $container->getService("database.default.context");
-    $requestRow = $db->table("requests")->get($id);
+  function show($id) {
+    $requestRow = $this->db->table("requests")->get($id);
     if(!$requestRow) return NULL;
-    $canShow = RequestModel::canShow($id, $user, $db);
+    $canShow = $this->canShow($id);
     if(!$canShow) return false;
-    $from = Profile::getCharacterName($requestRow->from, $container);
-    $to = Profile::getCharacterName($requestRow->to, $container);
+    $from = $this->profileModel->getCharacterName($requestRow->from);
+    $to = $this->profileModel->getCharacterName($requestRow->to);
     $return = new Request($requestRow->id, $from, $to, $requestRow->type, $requestRow->sent, $requestRow->status);
     return $return;
   }
@@ -117,17 +130,14 @@ class RequestModel extends \Nette\Object {
    * Accept specified request
    * 
    * @param int $id Request's id
-   * @param \Nette\Security\User $user
-   * @param \Nette\Di\Container $container
    * @return int Error code/1 on success
    */
-  static function accept($id, \Nette\Security\User $user, \Nette\Di\Container $container) {
-    $db = $container->getService("database.default.context");
-    $request = RequestModel::show($id, $user, $db);
+  function accept($id) {
+    $request = $this->show($id);
     if(!$request) return 2;
-    $canShow = RequestModel::canShow($id, $user, $db);
+    $canShow = $this->canShow($id);
     if(!$canShow) return 3;
-    $canChange = RequestModel::canChange($id, $user, $db);
+    $canChange = $this->canChange($id);
     if(!$canChange) return 4;
     if($request->status !== "new") return 5;
     switch($request->type) {
@@ -138,20 +148,20 @@ class RequestModel extends \Nette\Object {
     return 6;
     break;
   case "guild_app":
-    $uid = Profile::getCharacterId($request->from, $container);
-    $uid2 = Profile::getCharacterId($request->to, $container);
-    $gid = Profile::getCharacterGuild($uid2, $db);
-    GuildModel::join($uid, $gid, $container);
+    $uid = $this->profileModel->getCharacterId($request->from);
+    $uid2 = $this->profileModel->getCharacterId($request->to);
+    $gid = $this->profileModel->getCharacterGuild($uid2);
+    $this->guildModel->join($uid, $gid);
     break;
   case "guild_join":
-    $uid = Profile::getCharacterId($request->to, $container);
-    $uid2 = Profile::getCharacterId($request->from, $container);
-    $gid = Profile::getCharacterGuild($uid2, $db);
-    GuildModel::join($uid, $gid, $container);
+    $uid = $this->profileModel->getCharacterId($request->to);
+    $uid2 = $this->profileModel->getCharacterId($request->from);
+    $gid = $this->profileModel->getCharacterGuild($uid2);
+    $this->guildModel->join($uid, $gid);
     break;
     }
     $data2 = array("status" => "accepted");
-    $db->query("UPDATE requests SET ? WHERE id=?", $data2, $id);
+    $this->db->query("UPDATE requests SET ? WHERE id=?", $data2, $id);
     return 1;
   }
   
@@ -159,21 +169,18 @@ class RequestModel extends \Nette\Object {
    * Decline specified request
    * 
    * @param int $id Request's id
-   * @param \Nette\Security\User $user
-   * @param \Nette\Di\Container $container
    * @return int Error code/1 on success
    */
-  static function decline($id, \Nette\Security\User $user, \Nette\Di\Container $container) {
-    $db = $container->getService("database.default.context");
-    $request = RequestModel::show($id, $user, $container);
+  function decline($id) {
+    $request = $this->show($id);
     if(!$request) return 2;
-    $canShow = RequestModel::canShow($id, $user, $db);
+    $canShow = $this->canShow($id);
     if(!$canShow) return 3;
-    $canChange = RequestModel::canChange($id, $user, $db);
+    $canChange = $this->canChange($id);
     if(!$canChange) return 4;
     if($request->status !== "new") return 5;
     $data = array("status" => "declined");
-    $db->query("UPDATE requests SET ? WHERE id=?", $data, $id);
+    $this->db->query("UPDATE requests SET ? WHERE id=?", $data, $id);
     return 1;
   }
 }

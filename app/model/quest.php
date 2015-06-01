@@ -63,27 +63,34 @@ class Quest extends \Nette\Object {
  * @author Jakub Konečný
  */
 class QuestModel extends \Nette\Object {
+  /** @var \Nette\Database\Context */
+  protected $db;
+  /** @var \Nette\Caching\Cache */
+  protected $cache;
+  
+  function __construct(\Nette\Caching\Cache $cache, \Nette\Database\Context $db) {
+    $this->db = $db;
+    $this->cache = $cache;
+  }
+  
   /**
    * Gets list of quests
    * 
-   * @param \Nette\DI\Container $container
    * @param int $npc Return quests only from certain npc, 0 = all npcs
    * @return array
    */
-  static function listOfQuests(\Nette\DI\Container $container, $npc = 0) {
+  function listOfQuests($npc = 0) {
     $return = array();
-    $cache = $container->getService("caches.quests");
-    $quests = $cache->load("quests");
+    $quests = $this->cache->load("quests");
     if($quests === NULL) {
-      $db = $container->getService("database.default.context");
-      $quests = $db->table("quests");
+      $quests = $this->db->table("quests");
       foreach($quests as $quest) {
         $return[$quest->id] =
           new Quest($quest->id, $quest->name, $quest->introduction, $quest->middle_text,
             $quest->end_text, $quest->reward_money, $quest->reward_xp, $quest->npc_start,
             $quest->npc_end, $quest->order);
       }
-      $cache->save("quests", $return);
+      $this->cache->save("quests", $return);
     } else {
       $return = $quests;
     }
@@ -99,11 +106,10 @@ class QuestModel extends \Nette\Object {
    * Gets info about specified quest
    * 
    * @param int $id Quest's id
-   * @param \Nette\DI\Container $container
    * @return \HeroesofAbenez\NPC
    */
-  static function view($id, \Nette\DI\Container $container) {
-    $quests = QuestModel::listOfQuests($container);
+  function view($id) {
+    $quests = $this->listOfQuests();
     $quest = Arrays::get($quests, $id, false);
     return $quest;
   }

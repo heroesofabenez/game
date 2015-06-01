@@ -1,14 +1,20 @@
 <?php
 namespace HeroesofAbenez\Presenters;
 
-use HeroesofAbenez as HOA;
-
 /**
  * Presenter Quest
  *
  * @author Jakub Konečný
  */
 class QuestPresenter extends BasePresenter {
+  /** @var \HeroesofAbenez\QuestModel */
+  protected $model;
+  
+  function startup() {
+    parent::startup();
+    $this->model = $this->context->getService("model.quest");
+  }
+  
   /**
    * Page /quest does not exist
    * 
@@ -24,13 +30,14 @@ class QuestPresenter extends BasePresenter {
    * @return void
    */
   function renderView($id) {
-    $quest = HOA\QuestModel::view($id, $this->context);
+    $quest = $this->model->view($id);
     if(!$quest) $this->forward("notfound");
     $this->template->id = $quest->id;
     $this->template->name = $quest->name;
     $this->template->introduction = $quest->introduction;
-    $this->template->npcStart = HOA\NPCModel::getNpcName($quest->npc_start, $this->context);
-    $this->template->npcEnd = HOA\NPCModel::getNpcName($quest->npc_end, $this->context);
+    $npcMOdel = $this->context->getService("model.npc");
+    $this->template->npcStart = $npcMOdel->getNpcName($quest->npc_start);
+    $this->template->npcEnd = $npcMOdel->getNpcName($quest->npc_end);
     $requirements = array();
     if($quest->cost_money > 0) $requirements[] = "pay {$quest->cost_money} silver marks";
     if($quest->needed_item > 0) $requirements[] = "get {$quest->item_amount}x {$quest->needed_item}";

@@ -9,6 +9,14 @@ use HeroesofAbenez as HOA;
  * @author Jakub Konečný
  */
 class NpcPresenter extends BasePresenter {
+  /** @var \HeroesofAbenez\NPCModel */
+  protected $model;
+  
+  function startup() {
+    parent::startup();
+    $this->model = $this->context->getService("model.npc");
+  }
+  
   /**
    * Page /quest does not exist
    * 
@@ -24,7 +32,7 @@ class NpcPresenter extends BasePresenter {
    * @return void
    */
   function renderView($id) {
-    $npc = HOA\NPCModel::view($id, $this->context);
+    $npc = $this->model->view($id);
     if(!$npc) $this->forward("notfound");
     if($npc->stage !== $this->user->identity->stage) $this->forward("unavailable");
     $this->template->id = $id;
@@ -38,7 +46,7 @@ class NpcPresenter extends BasePresenter {
    * @return void
    */
   function renderTalk($id) {
-    $npc = HOA\NPCModel::view($id, $this->context);
+    $npc = $this->model->view($id);
     if(!$npc) $this->forward("notfound");
     if($npc->stage !== $this->user->identity->stage) $this->forward("unavailable");
     $this->template->npcId = $id;
@@ -56,12 +64,13 @@ class NpcPresenter extends BasePresenter {
    * @return void
    */
   function renderQuests($id) {
-    $npc = HOA\NPCModel::view($id, $this->context);
+    $npc = $this->model->view($id);
     if(!$npc) $this->forward("notfound");
     if($npc->stage !== $this->user->identity->stage) $this->forward("unavailable");
     $this->template->id = $id;
     $this->template->name = $npc->name;
-    $this->template->quests = HOA\QuestModel::listOfQuests($this->context, $id);
+    $questModel = $this->context->getService("model.quest");
+    $this->template->quests = $questModel->listOfQuests($id);
   }
   
   /**
@@ -69,7 +78,7 @@ class NpcPresenter extends BasePresenter {
    * @return void
    */
   function actionTrade($id) {
-    $npc = HOA\NPCModel::view($id, $this->context);
+    $npc = $this->model->view($id);
     if(!$npc) $this->forward("notfound");
     if($npc->stage !== $this->user->identity->stage) $this->forward("unavailable");
   }
