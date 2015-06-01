@@ -9,10 +9,16 @@ namespace HeroesofAbenez\Presenters;
 class QuestPresenter extends BasePresenter {
   /** @var \HeroesofAbenez\QuestModel */
   protected $model;
+  /** @var \HeroesofAbenez\ItemModel */
+  protected $itemModel;
   
+  /**
+   * @return void
+   */
   function startup() {
     parent::startup();
     $this->model = $this->context->getService("model.quest");
+    $this->itemModel = $this->context->getService("model.item");
   }
   
   /**
@@ -40,7 +46,10 @@ class QuestPresenter extends BasePresenter {
     $this->template->npcEnd = $npcMOdel->getNpcName($quest->npc_end);
     $requirements = array();
     if($quest->cost_money > 0) $requirements[] = "pay {$quest->cost_money} silver marks";
-    if($quest->needed_item > 0) $requirements[] = "get {$quest->item_amount}x {$quest->needed_item}";
+    if($quest->needed_item > 0) {
+      $itemName = $this->itemModel->getItemName($quest->needed_item);
+      $requirements[] = "get {$quest->item_amount}x $itemName";
+    }
     if($quest->npc_start != $quest->npc_end) $requirements[] = "talk to {$this->template->npcEnd}";
     if($quest->npc_start == $quest->npc_end) $requirements[] = "report back to {$this->template->npcEnd}";
     $this->template->requirements = $requirements;

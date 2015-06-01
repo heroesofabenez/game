@@ -4,3 +4,4 @@ services:
     caches.characters: Nette\Caching\Cache(@cache.storage, "characters")
     caches.locations: Nette\Caching\Cache(@cache.storage, "locations")
     caches.quests: Nette\Caching\Cache(@cache.storage, "quests")
+    caches.items: Nette\Caching\Cache(@cache.storage, "items")

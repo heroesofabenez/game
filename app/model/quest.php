@@ -88,7 +88,7 @@ class QuestModel extends \Nette\Object {
         $return[$quest->id] =
           new Quest($quest->id, $quest->name, $quest->introduction, $quest->middle_text,
             $quest->end_text, $quest->reward_money, $quest->reward_xp, $quest->npc_start,
-            $quest->npc_end, $quest->order);
+            $quest->npc_end, $quest->order, $quest->needed_item, $quest->item_amount, $quest->item_lose);
       }
       $this->cache->save("quests", $return);
     } else {

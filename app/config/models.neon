@@ -2,6 +2,7 @@ services:
     model.character: HeroesofAbenez\CharacterModel(@caches.characters)
     model.guild: HeroesofAbenez\GuildModel(@caches.guilds)
     model.intro: HeroesofAbenez\Intro
+    model.item: HeroesofAbenez\ItemModel(@caches.items)
     model.journal: HeroesofAbenez\Journal
     model.location: HeroesofAbenez\Location(@caches.locations)
     model.npc: HeroesofAbenez\NPCModel(@caches.locations)
