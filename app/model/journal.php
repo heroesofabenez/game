@@ -27,6 +27,8 @@ class Journal extends \Nette\Object {
   protected $user;
   /** @var \Nette\Database\Context */
   protected $db;
+  /** @var \HeroesofAbenez\QuestModel */
+  protected $questModel;
   
   /**
    * @param \Nette\Security\User $user
@@ -35,6 +37,10 @@ class Journal extends \Nette\Object {
   function __construct(\Nette\Security\User $user,\Nette\Database\Context $db) {
     $this->user = $user;
     $this->db = $db;
+  }
+  
+  function setQuestModel(\HeroesofAbenez\QuestModel $questModel) {
+    $this->questModel = $questModel;
   }
   
   /**
@@ -115,7 +121,7 @@ class Journal extends \Nette\Object {
       ->where("character", $uid);
     foreach($quests as $row) {
       if($row->progress < 3) {
-        $quest = $this->db->table("quests")->get($row->id);
+        $quest = $this->questModel->view($row->id);
         $return[] = new JournalQuest($quest->id, $quest->name);
       }
     }
