@@ -16,7 +16,6 @@ class Quest extends \Nette\Object {
   /** @var string */
   public $introduction;
   /** @var string */
-  /** @var string */
   public $end_text;
   /** @var int */
   public $cost_money;
@@ -235,6 +234,16 @@ class QuestModel extends \Nette\Object {
       }
     }
     else return 6;
+  }
+  
+  function isFinished($id) {
+    $row = $this->db->table("character_quests")
+      ->where("character", $this->user->id)
+      ->where("quest", $id);
+    if($row->count("*") === 0) return false;
+    foreach($row as $r) { }
+    if($r->progress > 2) return true;
+    else return false;
   }
 }
 ?>

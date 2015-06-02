@@ -41,6 +41,8 @@ class QuestPresenter extends BasePresenter {
     $this->template->id = $quest->id;
     $this->template->name = $quest->name;
     $this->template->introduction = $quest->introduction;
+    $this->template->end_text = $quest->end_text;
+    $this->template->finished = $this->model->isFinished($id);
     $npcMOdel = $this->context->getService("model.npc");
     $this->template->npcStart = $npcMOdel->getNpcName($quest->npc_start);
     $this->template->npcEnd = $npcMOdel->getNpcName($quest->npc_end);
