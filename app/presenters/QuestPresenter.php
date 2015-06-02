@@ -96,6 +96,41 @@ case 5:
    * @param int $id Quest's id
    * @return void
    */
-  function actionFinish($id) { }
+  function actionFinish($id) {
+    $quest = $this->model->view($id);
+    if(!$quest) $this->forward("notfound");
+    $url = $this->link("Npc:quests", $quest->npc_start);
+    $this->model->setRequest($this->context->getService("http.request"));
+    $result = $this->model->finish($id, $url);
+    switch($result) {
+case 1:
+  $this->flashMessage("Quest finished.");
+  $this->redirect("Npc:quests", $quest->npc_start);
+  break;
+case 2:
+  $this->forward("notfound");
+  break;
+case 3:
+  $this->flashMessage("You aren't working on this quest.");
+  $this->redirect("Npc:quests", $quest->npc_start);
+  break;
+case 4:
+  $this->flashMessage("You already finished this quest.");
+  $this->redirect("Homepage:default");
+  break;
+case 5:
+  $this->flashMessage("You can't finish the quest from this location.");
+  $this->redirect("Homepage:default");
+  break;
+case 6:
+  $this->flashMessage("You don't meet requirements for this quest.");
+  $this->redirect("Npc:quests", $quest->npc_start);
+  break;
+case 7:
+  $this->flashMessage("An error occured.");
+  $this->redirect("Npc:quests", $quest->npc_start);
+  break; 
+    }
+  }
 }
 ?>

@@ -136,7 +136,7 @@ class QuestModel extends \Nette\Object {
    * Gets info about specified quest
    * 
    * @param int $id Quest's id
-   * @return \HeroesofAbenez\NPC
+   * @return \HeroesofAbenez\Quest
    */
   function view($id) {
     $quests = $this->listOfQuests();
@@ -158,13 +158,85 @@ class QuestModel extends \Nette\Object {
       ->where("character", $this->user->id)
       ->where("quest", $id);
     if($row->count("quest") > 0) return 3;
-    if($this->request->getReferer()->path != $url) return 4;
+    $referer = $this->request->getReferer();
+    if($referer === NULL) return 4;
+    if($referer->path != $url) return 4;
     $data = array(
       "character" => $this->user->id, "quest" => $id
     );
     $result = $this->db->query("INSERT INTO character_quests", $data);
     if(!$result) return 5;
     return 1;
+  }
+  
+  /**
+   * Checks if the player accomplished specified quest's goals
+   * 
+   * @param \HeroesofAbenez\Quest $quest
+   * @return bool
+   */
+  protected function isCompleted($quest) {
+    $haveMoney = $haveItem = false;
+    if($quest->cost_money > 0) {
+      $char = $this->db->table("characters")->get($this->user->id);
+      if($char->money >= $quest->cost_money) $haveMoney = true;
+    } else {
+      $haveMoney = true;
+    }
+    if($quest->needed_item > 0) {
+      $itemRow = $this->db->table("character_items")
+        ->where("character", $this->user->id)
+        ->where("item", $quest->needed_item);
+      if($itemRow->count("id") == 1) {
+        foreach($itemRow as $item) { }
+        if($item->amount >= $quest->item_amount) $haveItem = true;
+      }
+    } else {
+      $haveItem = true;
+    }
+    return ($haveMoney AND $haveItem);
+  }
+  
+  /**
+   * Finish specified quest
+   * 
+   * @param int $id Quest's id
+   * @param string $url
+   * @return int Error code|1 on success
+   */
+  function finish($id, $url) {
+    $quest = $this->db->table("quests")->get($id);
+    if(!$quest) return 2;
+    $row = $this->db->table("character_quests")
+      ->where("character", $this->user->id)
+      ->where("quest", $id);
+    if($row->count("quest") === 0) return 3;
+    foreach($row as $r) { }
+    if($r->progress > 2) return 4;
+    $referer = $this->request->getReferer();
+    if($referer === NULL) return 5;
+    if($referer->path != $url) return 5;
+    if($this->isCompleted($quest)) {
+      $wheres = array(
+        "character" => $this->user->id, "quest" => $id
+      );
+      $data = array(
+        "progress" => 3
+      );
+      $result = $this->db->query("UPDATE character_quests SET ? WHERE ?", $data, $wheres);
+      if($result) {
+        if($quest->item_lose) {
+          $data2 = "amount=amount-{$quest->item_amount}";
+          $wheres2 = array("character" => $this->user->id, "item" => $quest->needed_item);
+          $result2 = $this->db->query("UPDATE character_items SET $data2 WHERE ?", $wheres2);
+          if(!$result2) return 7;
+        }
+        return 1;
+      } else {
+        return 7;
+      }
+    }
+    else return 6;
   }
 }
 ?>
