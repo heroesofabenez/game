@@ -91,5 +91,11 @@ case 5:
   break;
     }
   }
+  
+  /**
+   * @param int $id Quest's id
+   * @return void
+   */
+  function actionFinish($id) { }
 }
 ?>
