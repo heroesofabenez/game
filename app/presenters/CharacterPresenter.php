@@ -23,16 +23,8 @@ class CharacterPresenter extends BasePresenter {
    * @return void
    */
   function renderCreate() {
-    $races = $this->db->table("character_races");
-    $this->template->races = array();
-    foreach($races as $race) {
-      $this->template->races[$race->id] = $race->description;
-    }
-    $classes = $this->db->table("character_classess");
-    $this->template->classes = array();
-    foreach($classes as $class) {
-      $this->template->classes[$class->id] = $class->description;
-    }
+    $this->template->races = $this->model->getRacesDescriptions();
+    $this->template->classes = $this->model->getClassesDescriptions();
   }
   /**
    * Create form for creating character

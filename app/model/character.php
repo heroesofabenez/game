@@ -319,6 +319,20 @@ class CharacterModel extends \Nette\Object {
   }
   
   /**
+   * Get description of races
+   * 
+   * @return array
+   */
+  function getRacesDescriptions() {
+    $return = array();
+    $races = $this->db->table("character_races");
+    foreach($races as $race) {
+      $return[$race->id] = $race->description;
+    }
+    return $return;
+  }
+  
+  /**
    * Get list of classes
    * 
    * @return array
@@ -334,6 +348,20 @@ class CharacterModel extends \Nette\Object {
       $this->cache->save("classes", $classesList);
     }
     return $classesList;
+  }
+  
+  /**
+   * Get description of classes
+   * 
+   * @return array
+   */
+  function getClassesDescriptions() {
+    $return = array();
+    $classes = $this->db->table("character_classess");
+    foreach($classes as $class) {
+      $return[$class->id] = $class->description;
+    }
+    return $return;
   }
   
   /**
