@@ -142,9 +142,8 @@ class Profile extends \Nette\Object {
       $return["specialization"] = "";
     }
     if($char->guild > 0) {
-      $guildName = $container->getService("model.guild")->getGuildName($char->guild);
-      $guildRank = $this->getRankName($char->guildrank);
-      $return["guild"] = "Guild: $guildName<br>Position in guild: " . ucfirst($guildRank);
+      $return["guild"] = $char->guild;
+      $return["guildrank"] = $char->guildrank;
     } else {
       $return["guild"] = "Not a member of guild";
     }
