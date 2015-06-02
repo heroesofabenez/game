@@ -55,7 +55,7 @@ class QuestPresenter extends BasePresenter {
     }
     $npcLink = $this->link("Npc:view", $quest->npc_end);
     if($quest->npc_start != $quest->npc_end) $requirements[] = "talk to <a href=\"$npcLink\">{$this->template->npcEnd}</a>";
-    if($quest->npc_start == $quest->npc_end) $requirements[] = "report back to <a href=\"$npcLink\">{$this->template->npcEnd}</a>";
+    else $requirements[] = "report back to <a href=\"$npcLink\">{$this->template->npcEnd}</a>";
     $this->template->requirements = $requirements;
     $this->template->rewardMoney = $quest->reward_money;
     $this->template->rewardXp = $quest->reward_xp;
