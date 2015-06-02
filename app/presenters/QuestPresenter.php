@@ -58,5 +58,38 @@ class QuestPresenter extends BasePresenter {
     $this->template->rewardMoney = $quest->reward_money;
     $this->template->rewardXp = $quest->reward_xp;
   }
+  
+  /**
+   * @param int $id Quest's id
+   * @return void
+   */
+  function actionAccept($id) {
+    $quest = $this->model->view($id);
+    if(!$quest) $this->forward("notfound");
+    $url = $this->link("Npc:quests", $quest->npc_start);
+    $this->model->setRequest($this->context->getService("http.request"));
+    $result = $this->model->accept($id, $url);
+    switch($result) {
+case 1:
+  $this->flashMessage("Quest accepted.");
+  $this->redirect("Npc:quests", $quest->npc_start);
+  break;
+case 2:
+  $this->forward("notfound");
+  break;
+case 3:
+  $this->flashMessage("You are already working on this quest.");
+  $this->redirect("Npc:quests", $quest->npc_start);
+  break;
+case 4:
+  $this->flashMessage("You can't accept the quest from this location.");
+  $this->redirect("Homepage:default");
+  break;
+case 5:
+  $this->flashMessage("An error occured.");
+  $this->redirect("Npc:quests", $quest->npc_start);
+  break;
+    }
+  }
 }
 ?>

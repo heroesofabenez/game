@@ -8,7 +8,7 @@
   {else}
     <ol>
       {foreach $quests as $quest}
-      <li>{$quest->name} {if $quest->progress}<b>(Active)</b>{/if}</li>
+      <li>{$quest->name} {if $quest->progress}<b>(Active)</b>{else}<a n:href="Quest:accept $quest->id">Accept</a>{/if}</li>
       {/foreach}
     </ol>
   {/if}

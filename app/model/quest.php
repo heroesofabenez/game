@@ -71,11 +71,17 @@ class QuestModel extends \Nette\Object {
   protected $cache;
   /** @var \Nette\Security\User */
   protected $user;
+  /** @var \Nette\Http\Request */
+  protected $request;
   
   function __construct(\Nette\Caching\Cache $cache, \Nette\Database\Context $db, \Nette\Security\User $user) {
     $this->db = $db;
     $this->cache = $cache;
     $this->user = $user;
+  }
+  
+  function setRequest(\Nette\Http\Request $request) {
+    $this->request = $request;
   }
   
   /**
@@ -136,6 +142,29 @@ class QuestModel extends \Nette\Object {
     $quests = $this->listOfQuests();
     $quest = Arrays::get($quests, $id, false);
     return $quest;
+  }
+  
+  /**
+   * Accept specified quest
+   * 
+   * @param int $id Quest's id
+   * @param string $url
+   * @return int Error code|1 on success
+   */
+  function accept($id, $url) {
+    $quest = $this->db->table("quests")->get($id);
+    if(!$quest) return 2;
+    $row = $this->db->table("character_quests")
+      ->where("character", $this->user->id)
+      ->where("quest", $id);
+    if($row->count("quest") > 0) return 3;
+    if($this->request->getReferer()->path != $url) return 4;
+    $data = array(
+      "character" => $this->user->id, "quest" => $id
+    );
+    $result = $this->db->query("INSERT INTO character_quests", $data);
+    if(!$result) return 5;
+    return 1;
   }
 }
 ?>
