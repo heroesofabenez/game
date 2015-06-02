@@ -16,7 +16,6 @@ class Quest extends \Nette\Object {
   /** @var string */
   public $introduction;
   /** @var string */
-  public $middle_text;
   /** @var string */
   public $end_text;
   /** @var int */
@@ -40,13 +39,12 @@ class Quest extends \Nette\Object {
   /** @var bool */
   public $progress = false;
   
-  function __construct($id, $name, $introduction, $middle_text, $end_text,
+  function __construct($id, $name, $introduction, $end_text,
     $reward_money, $reward_xp, $npc_start, $npc_end, $order,
     $needed_item = NULL, $item_amount = 0, $item_lose = false) {
     $this->id = $id;
     $this->name = $name;
     $this->introduction = $introduction;
-    $this->middle_text = $middle_text;
     $this->end_text = $end_text;
     $this->reward_money = $reward_money;
     $this->reward_xp = $reward_xp;
@@ -97,7 +95,7 @@ class QuestModel extends \Nette\Object {
       $quests = $this->db->table("quests");
       foreach($quests as $quest) {
         $return[$quest->id] =
-          new Quest($quest->id, $quest->name, $quest->introduction, $quest->middle_text,
+          new Quest($quest->id, $quest->name, $quest->introduction,
             $quest->end_text, $quest->reward_money, $quest->reward_xp, $quest->npc_start,
             $quest->npc_end, $quest->order, $quest->needed_item, $quest->item_amount, $quest->item_lose);
       }
