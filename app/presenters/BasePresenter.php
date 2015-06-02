@@ -5,7 +5,6 @@ namespace HeroesofAbenez\Presenters;
    * Parent of all presenters
    * 
    * @author Jakub Konečný
-   * @property-read Nette\Database\Context $db Database context, deprecated
    */
 abstract class BasePresenter extends \Nette\Application\UI\Presenter {
   /**
@@ -16,15 +15,6 @@ abstract class BasePresenter extends \Nette\Application\UI\Presenter {
     parent::startup();
     $this->tryLogin();
     $this->template->server = $this->context->parameters["application"]["server"];
-  }
-  
-  /**
-   * Provides virtual variable db for all presenters
-   * @deprecated
-   * @return \Nette\Database\Context database context
-   */
-  function getDb() {
-    return $this->context->getService("database.default.context");
   }
   
   /**
