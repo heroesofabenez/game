@@ -72,7 +72,7 @@ class QuestPresenter extends BasePresenter {
     switch($result) {
 case 1:
   $this->flashMessage("Quest accepted.");
-  $this->redirect("Npc:quests", $quest->npc_start);
+  $this->redirect("Quest:view", $quest->id);
   break;
 case 2:
   $this->forward("notfound");
@@ -105,7 +105,7 @@ case 5:
     switch($result) {
 case 1:
   $this->flashMessage("Quest finished.");
-  $this->redirect("Npc:quests", $quest->npc_start);
+  $this->redirect("Quest:view", $quest->id);
   break;
 case 2:
   $this->forward("notfound");
