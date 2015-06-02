@@ -1,7 +1,6 @@
 includes:
     - local.neon
     - routes.neon
-    - caches.neon
     - models.neon
 application:
     debugger: true
@@ -26,3 +25,4 @@ session:
 services:
     authenticator: HeroesofAbenez\Authenticator
     authorizator: HeroesofAbenez\Authorizator::create
+    cache.cache: Nette\Caching\Cache(@cache.storage, "data")

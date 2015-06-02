@@ -1,13 +1,13 @@
 services:
-    model.character: HeroesofAbenez\CharacterModel(@caches.characters)
-    model.guild: HeroesofAbenez\GuildModel(@caches.guilds)
+    model.character: HeroesofAbenez\CharacterModel
+    model.guild: HeroesofAbenez\GuildModel
     model.intro: HeroesofAbenez\Intro
-    model.item: HeroesofAbenez\ItemModel(@caches.items)
+    model.item: HeroesofAbenez\ItemModel
     model.journal: HeroesofAbenez\Journal
-    model.location: HeroesofAbenez\Location(@caches.locations)
-    model.npc: HeroesofAbenez\NPCModel(@caches.locations)
-    model.permissions: HeroesofAbenez\Permissions(@caches.permissions)
-    model.profile: HeroesofAbenez\Profile(@caches.characters)
+    model.location: HeroesofAbenez\Location
+    model.npc: HeroesofAbenez\NPCModel
+    model.permissions: HeroesofAbenez\Permissions
+    model.profile: HeroesofAbenez\Profile
     model.ranking: HeroesofAbenez\Ranking
     model.request: HeroesofAbenez\RequestModel
-    model.quest: HeroesofAbenez\QuestModel(@caches.quests)
+    model.quest: HeroesofAbenez\QuestModel
