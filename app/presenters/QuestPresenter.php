@@ -67,7 +67,7 @@ class QuestPresenter extends BasePresenter {
     $quest = $this->model->view($id);
     if(!$quest) $this->forward("notfound");
     $url = $this->link("Npc:quests", $quest->npc_start);
-    $this->model->setRequest($this->context->getService("http.request"));
+    $this->model->request = $this->context->getService("http.request");
     $result = $this->model->accept($id, $url);
     switch($result) {
 case 1:
@@ -100,7 +100,7 @@ case 5:
     $quest = $this->model->view($id);
     if(!$quest) $this->forward("notfound");
     $url = $this->link("Npc:quests", $quest->npc_start);
-    $this->model->setRequest($this->context->getService("http.request"));
+    $this->model->request = $this->context->getService("http.request");
     $result = $this->model->finish($id, $url);
     switch($result) {
 case 1:

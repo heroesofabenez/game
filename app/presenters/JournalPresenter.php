@@ -42,7 +42,7 @@ class JournalPresenter extends BasePresenter {
    * @return void
    */
   function renderQuests() {
-    $this->model->setQuestModel($this->context->getService("model.quest"));
+    $this->model->questModel = $this->context->getService("model.quest");
     $quests = $this->model->quests();
     $this->template->quests = $quests;
   }
