@@ -96,7 +96,7 @@ class GuildModel extends \Nette\Object {
     $return["members"] = array();
     foreach($members as $member) {
       $rank = $this->profileModel->getRankName($member->guildrank);
-      $return["members"][] = array("name" => $member->name, "rank" => ucfirst($rank));
+      $return["members"][] = array("id" => $member->id, "name" => $member->name, "rank" => ucfirst($rank));
     }
     return $return;
   }
