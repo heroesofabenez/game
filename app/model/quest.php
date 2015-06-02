@@ -20,6 +20,10 @@ class Quest extends \Nette\Object {
   /** @var int */
   public $cost_money;
   /** @var int */
+  public $needed_level = 0;
+  /** @var int */
+  public $needed_quest = NULL;
+  /** @var int */
   public $needed_item = NULL;
   /** @var int */
   public $item_amount;
@@ -38,9 +42,9 @@ class Quest extends \Nette\Object {
   /** @var bool */
   public $progress = false;
   
-  function __construct($id, $name, $introduction, $end_text,
-    $reward_money, $reward_xp, $npc_start, $npc_end, $order,
-    $needed_item = NULL, $item_amount = 0, $item_lose = false) {
+  function __construct($id, $name, $introduction, $end_text, $reward_money,
+    $reward_xp, $npc_start, $npc_end, $order, $needed_item = NULL, $item_amount = 0,
+    $item_lose = false, $needed_level = NULL, $needed_quest = NULL) {
     $this->id = $id;
     $this->name = $name;
     $this->introduction = $introduction;
@@ -53,6 +57,8 @@ class Quest extends \Nette\Object {
     if(is_int($needed_item)) $this->needed_item = $needed_item;
     $this->item_amount = $item_amount;
     $this->item_lose = (bool) $item_lose;
+    if(is_int($needed_level)) $this->needed_level = $needed_level;
+    if(is_int($needed_quest)) $this->needed_quest = $needed_quest;
   }
 }
 
@@ -94,9 +100,9 @@ class QuestModel extends \Nette\Object {
       $quests = $this->db->table("quests");
       foreach($quests as $quest) {
         $return[$quest->id] =
-          new Quest($quest->id, $quest->name, $quest->introduction,
-            $quest->end_text, $quest->reward_money, $quest->reward_xp, $quest->npc_start,
-            $quest->npc_end, $quest->order, $quest->needed_item, $quest->item_amount, $quest->item_lose);
+          new Quest($quest->id, $quest->name, $quest->introduction, $quest->end_text, $quest->reward_money,
+            $quest->reward_xp, $quest->npc_start, $quest->npc_end, $quest->order, $quest->needed_item,
+            $quest->item_amount, $quest->item_lose, $quest->needed_level, $quest->needed_quest);
       }
       $this->cache->save("quests", $return);
     } else {
@@ -120,10 +126,20 @@ class QuestModel extends \Nette\Object {
     $return = $this->listOfQuests($npc);
     $playerQuests = $this->db->table("character_quests")
       ->where("character", $this->user->id);
-    foreach($playerQuests as $pquest) {
-      foreach($return as $key => $quest) {
-        if($quest->id == $pquest->quest AND $pquest->progress > 2) unset($return[$key]);
-        elseif($quest->id == $pquest->quest AND $pquest->progress <= 2) $quest->progress = true;
+    foreach($return as $key => $quest) {
+      foreach($playerQuests as $pquest) {
+        if($quest->id == $pquest->quest AND $pquest->progress > 2) {
+          unset($return[$key]);
+          continue 2;
+        } elseif($quest->id == $pquest->quest AND $pquest->progress <= 2) {
+          $quest->progress = true;
+          continue 2;
+        }
+      }
+      if($quest->needed_level > 0) {
+        if($this->user->identity->level < $quest->needed_level) unset($return[$key]);
+      } elseif($quest->needed_quest > 0) {
+        if(!$this->isFinished($quest->id)) unset($return[$key]);
       }
     }
     return $return;
