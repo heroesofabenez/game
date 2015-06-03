@@ -18,7 +18,7 @@ class Quest extends \Nette\Object {
   /** @var string */
   public $end_text;
   /** @var int */
-  public $cost_money;
+  public $cost_money = 0;
   /** @var int */
   public $needed_level = 0;
   /** @var int */
@@ -44,7 +44,7 @@ class Quest extends \Nette\Object {
   
   function __construct($id, $name, $introduction, $end_text, $reward_money,
     $reward_xp, $npc_start, $npc_end, $order, $needed_item = NULL, $item_amount = 0,
-    $item_lose = false, $needed_level = NULL, $needed_quest = NULL) {
+    $item_lose = false, $cost_money = 0, $needed_level = NULL, $needed_quest = NULL) {
     $this->id = $id;
     $this->name = $name;
     $this->introduction = $introduction;
@@ -57,6 +57,7 @@ class Quest extends \Nette\Object {
     if(is_int($needed_item)) $this->needed_item = $needed_item;
     $this->item_amount = $item_amount;
     $this->item_lose = (bool) $item_lose;
+    if(is_int($cost_money)) $this->cost_money = $cost_money;
     if(is_int($needed_level)) $this->needed_level = $needed_level;
     if(is_int($needed_quest)) $this->needed_quest = $needed_quest;
   }
@@ -102,7 +103,7 @@ class QuestModel extends \Nette\Object {
         $return[$quest->id] =
           new Quest($quest->id, $quest->name, $quest->introduction, $quest->end_text, $quest->reward_money,
             $quest->reward_xp, $quest->npc_start, $quest->npc_end, $quest->order, $quest->needed_item,
-            $quest->item_amount, $quest->item_lose, $quest->needed_level, $quest->needed_quest);
+            $quest->item_amount, $quest->item_lose, $quest->cost_money, $quest->needed_level, $quest->needed_quest);
       }
       $this->cache->save("quests", $return);
     } else {
@@ -243,6 +244,12 @@ class QuestModel extends \Nette\Object {
           $wheres2 = array("character" => $this->user->id, "item" => $quest->needed_item);
           $result2 = $this->db->query("UPDATE character_items SET $data2 WHERE ?", $wheres2);
           if(!$result2) return 7;
+        }
+        if($quest->cost_money > 0) {
+          $data3 = "money=money-{$quest->cost_money}";
+          $where3 = array("id" => $this->user->id);
+          $result3 = $this->db->query("UPDATE characters SET $data3 WHERE ?", $where3);
+          if(!$result3) return 7;
         }
         return 1;
       } else {
