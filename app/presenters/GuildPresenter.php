@@ -12,6 +12,9 @@ class GuildPresenter extends BasePresenter {
   /** @var \HeroesofAbenez\GuildModel */
   protected $model;
   
+  /**
+   * @return void
+   */
   function startup() {
     parent::startup();
     $this->model = $this->context->getService("model.guild");
