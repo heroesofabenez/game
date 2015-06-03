@@ -24,10 +24,16 @@ class DialogueLine extends \Nette\Object {
     $this->text = str_replace($replace, $names, $text);
   }
   
+  /**
+   * @return string
+   */
   function getSpeaker() {
     return $this->speaker;
   }
   
+  /**
+   * @return string
+   */
   function getText() {
     return $this->text;
   }

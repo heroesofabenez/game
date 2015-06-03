@@ -74,6 +74,7 @@ class GuildModel extends \Nette\Object {
    * Get data about specified guild
    * 
    * @param int $id Id of guild
+   * @return \HeroesofAbenez\Guild
    */
   function guildData($id) {
     $guilds = $this->listOfGuilds();
@@ -377,6 +378,7 @@ class GuildModel extends \Nette\Object {
    * 
    * @param int $uid Character's id
    * @param int $gid Guild's id
+   * @return void
    */
   function join($uid, $gid) {
     $data = array("guild" => $gid, "guildrank" => 1);

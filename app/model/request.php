@@ -19,6 +19,14 @@ class Request extends \Nette\Object {
   /** @var string */
   public $status;
   
+  /**
+   * @param int $id
+   * @param string $from
+   * @param string $to
+   * @param string $type
+   * @param int $sent
+   * @param string $status
+   */
   function __construct($id, $from, $to, $type, $sent, $status) {
     $this->id = $id;
     $this->from = $from;

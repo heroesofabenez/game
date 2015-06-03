@@ -55,6 +55,14 @@ class Area extends \Nette\Object {
   /** @var int id of class needed to enter stage */
   public $required_occupation;
   
+  /**
+   * @param int $id
+   * @param string $name
+   * @param string $description
+   * @param int $required_level
+   * @param int $required_race
+   * @param int $required_occupation
+   */
   function __construct($id, $name, $description, $required_level, $required_race, $required_occupation) {
     $this->id = $id;
     $this->name = $name;
@@ -84,7 +92,6 @@ class Location extends \Nette\Object {
   /**
    * Gets list of stages
    * 
-   * @param
    * @return array list of stages
    */
   function listOfStages() {
@@ -125,6 +132,7 @@ class Location extends \Nette\Object {
    * Get name of specified stage
    * 
    * @param int $id Id of stage
+   * @return string
    */
   function getStageName($id) {
     $stages = $this->listOfStages();
@@ -135,6 +143,7 @@ class Location extends \Nette\Object {
    * Get name of specified area
    * 
    * @param int $id Id of area
+   * @return string
    */
   function getAreaName($id) {
     $areas = $this->listOfAreas();

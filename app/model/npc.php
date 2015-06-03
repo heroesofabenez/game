@@ -30,6 +30,18 @@ class NPC extends \Nette\Object {
   /** @var int */
   public $pos_y;
   
+  /**
+   * @param int $id
+   * @param string $name
+   * @param string $description
+   * @param int $race
+   * @param string $type
+   * @param string $sprite
+   * @param string $portrait
+   * @param int $stage
+   * @param int $pos_x
+   * @param int $pos_y
+   */
   function __construct($id, $name, $description, $race, $type, $sprite, $portrait, $stage, $pos_x, $pos_y) {
     $this->id = $id;
     $this->name = $name;

@@ -18,6 +18,12 @@ class Item extends \Nette\Object {
   /** @var string */
   public $image;
   
+  /**
+   * @param int $id
+   * @param string $name
+   * @param string $description
+   * @param string $image
+   */
   function __construct($id, $name, $description, $image) {
     $this->id = (int) $id;
     $this->name = $name;
