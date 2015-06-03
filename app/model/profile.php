@@ -119,10 +119,9 @@ class Profile extends \Nette\Object {
   /**
    * Gets basic data about specified player
    * @param integer $id character's id
-   * @param \Nette\Di\Container $container
    * @return array info about character
    */
-  function view($id, \Nette\Di\Container $container) {
+  function view($id) {
     $return = array();
     $char = $this->db->table("characters")->get($id);
     if(!$char) { return false; }
