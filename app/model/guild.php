@@ -201,8 +201,8 @@ class GuildModel extends \Nette\Object {
    * @return array list of guilds (id, name, description, leader)
    */
   function listOfGuilds() {
-    $guilds = $this->cache->load("guilds");
     $return = array();
+    $guilds = $this->cache->load("guilds");
     if($guilds === NULL) {
       $guilds = $this->db->table("guilds");
       foreach($guilds as $guild) {
