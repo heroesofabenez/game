@@ -259,6 +259,12 @@ class QuestModel extends \Nette\Object {
     else return 6;
   }
   
+  /**
+   * Checks if the player finished specified quest
+   * 
+   * @param int $id Quest's id
+   * @return bool
+   */
   function isFinished($id) {
     $row = $this->db->table("character_quests")
       ->where("character", $this->user->id)
