@@ -1,6 +1,8 @@
 <?php
 namespace HeroesofAbenez\Presenters;
 
+use HeroesofAbenez as HOA;
+
   /**
    * Presenter Ranking
    * 
