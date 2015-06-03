@@ -317,6 +317,7 @@ class GuildModel extends \Nette\Object {
    * Dissolve guild
    *
    * @param type $id Guild to dissolve
+   * @return bool
    */
   function dissolve($id) {
     $members = $this->db->table("characters")->where("guild", $id);
