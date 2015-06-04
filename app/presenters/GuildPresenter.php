@@ -129,7 +129,7 @@ class GuildPresenter extends BasePresenter {
     $data = array(
       "name" => $values["name"], "description" => $values["description"]
     );
-    $result = $this->model->create($data, $this->user->id, $this->context);
+    $result = $this->model->create($data);
     if($result) {
       $this->user->logout();
       $this->flashMessage("Guild created.");
@@ -154,7 +154,7 @@ class GuildPresenter extends BasePresenter {
   function actionJoin($id) {
     $this->inGuild();
     if($id == 0) return;
-    $result = $this->model->sendApplication($id, $this->user->id);
+    $result = $this->model->sendApplication($id);
     if($result === TRUE) {
       $this->flashMessage("Application sent.");
       $this->redirect("Guild:");
@@ -172,7 +172,7 @@ class GuildPresenter extends BasePresenter {
   function renderJoin() {
     $guilds = $this->model->listOfGuilds();
     $this->template->guilds = $guilds;
-    $apps = $this->model->haveUnresolvedApplication($this->user->id);
+    $apps = $this->model->haveUnresolvedApplication();
     if($apps) $this->flashMessage("You have an unresolved application.");
   }
   
@@ -185,7 +185,7 @@ class GuildPresenter extends BasePresenter {
       $this->flashMessage("Grandmaster cannot leave guild.");
       $this->redirect("Guild:");
     } else {
-      $this->model->leave($this->user->id);
+      $this->model->leave();
       $this->flashMessage("You left guild.");
       $this->user->logout();
     }

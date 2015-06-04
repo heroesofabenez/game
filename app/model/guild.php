@@ -122,17 +122,16 @@ class GuildModel extends \Nette\Object {
    * Creates a guild
    * 
    * @param array $data Name and description
-   * @param int $founder Id of founder
    * @return bool Whetever the action was successful
    */
-  function create($data, $founder) {
+  function create($data) {
     $guilds = $this->cache->load("guilds");
     foreach($guilds as $guild) {
       if($guild->name == $data["name"]) return false;
     }
     $row = $this->db->table("guilds")->insert($data);
     $data2 = array("guild" => $row->id, "guildrank" => 7);
-    $this->db->query("UPDATE characters SET ? WHERE id=?", $data2, $founder);
+    $this->db->query("UPDATE characters SET ? WHERE id=?", $data2, $this->user->id);
     $this->cache->remove("guilds");
     return true;
   }
@@ -141,10 +140,9 @@ class GuildModel extends \Nette\Object {
    * Send application to a guild
    * 
    * @param int $gid Guild to join
-   * @param int $uid Player's id
    * @return bool|-1
    */
-  function sendApplication($gid, $uid) {
+  function sendApplication($gid) {
     $guild = $this->db->table("guilds")->get($gid);
     if(!$guild) { return -1; }
     $leader = $this->db->table("characters")
@@ -152,7 +150,7 @@ class GuildModel extends \Nette\Object {
       ->where("guildrank", 7);
     $leader = $leader[1];
     $data = array(
-      "from" => $uid, "to" => $leader->id, "type" => "guild_app"
+      "from" => $this->user->id, "to" => $leader->id, "type" => "guild_app"
     );
     $row = $this->db->query("INSERT INTO requests", $data);
     if($row) return true;
@@ -160,12 +158,10 @@ class GuildModel extends \Nette\Object {
   
   /**
    * Check if player has an unresolved application
-   * 
-   * @param int $id Player's id
    */
-  function haveUnresolvedApplication($id) {
+  function haveUnresolvedApplication() {
     $apps = $this->db->table("requests")
-      ->where("from", $id)
+      ->where("from", $this->user->id)
       ->where("type", "guild_app")
       ->where("status", "new");
     if($apps->count("*") > 0) return true;
@@ -302,14 +298,13 @@ class GuildModel extends \Nette\Object {
   /**
    * Leave the guild
    * 
-   * @param int $id Player's id
    * @return void
   */
-  function leave($id) {
+  function leave() {
     $data = array(
       "guild" => 0, "guildrank" => NULL
     );
-    $this->db->query("UPDATE characters SET ? WHERE id=?", $data, $id);
+    $this->db->query("UPDATE characters SET ? WHERE id=?", $data, $this->user->id);
     $this->cache->remove("guilds");
   }
   
