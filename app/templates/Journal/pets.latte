@@ -6,8 +6,8 @@
   {if count($pets) == 0}
   {else}
   <p>
-    {foreach $quests as $quest}
-    {$pet["name"]} {$pet["type"]} {if $pet["deployed"]}Deployed{/if}<br>
+    {foreach $pets as $pet}
+    {$pet->name} {$pet->type} {if $pet->deployed}Deployed{/if}<br>
     {/foreach}
   </p>
   {/if}

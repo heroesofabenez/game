@@ -18,6 +18,8 @@ class Pet extends \Nette\Object {
   protected $bonus_stat;
   /** @var int Size of provided bonus */
   protected $bonus_value;
+  /** @var bool Is the pet deployed? */
+  protected $deployed;
   
   /**
    * @param int $id
@@ -25,13 +27,15 @@ class Pet extends \Nette\Object {
    * @param string $name
    * @param string $bonus_stat
    * @param int $bonus_value
+   * @param bool $deployed
    */
-  function __construct($id, $type, $name, $bonus_stat, $bonus_value) {
+  function __construct($id, $type, $name, $bonus_stat, $bonus_value, $deployed = false) {
     $this->id = $id;
     $this->type = $type;
     $this->name = $name;
     $this->bonus_stat = $bonus_stat;
     $this->bonus_value = $bonus_value;
+    $this->deployed = (bool) $deployed;
   }
   
   /**
@@ -48,6 +52,10 @@ class Pet extends \Nette\Object {
       "source" => "pet",
       "duration" => "combat"
     );
+  }
+  
+  function &__get($name) {
+    if(isset($this->$name)) return $this->$name;
   }
 }
 ?>
