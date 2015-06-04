@@ -121,3 +121,4 @@ class NPCModel extends \Nette\Object {
     return $npcs[$id]->name;
   }
 }
+?>

@@ -76,3 +76,4 @@ class CharacterPresenter extends BasePresenter {
     }
   }
 }
+?>

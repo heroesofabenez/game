@@ -192,3 +192,4 @@ class RequestModel extends \Nette\Object {
     return 1;
   }
 }
+?>

@@ -86,3 +86,4 @@ class NpcPresenter extends BasePresenter {
     if($npc->stage !== $this->user->identity->stage) $this->forward("unavailable");
   }
 }
+?>

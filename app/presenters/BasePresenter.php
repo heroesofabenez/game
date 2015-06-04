@@ -55,3 +55,4 @@ case 0:
     if($this->user->identity->stage == NULL) $this->redirect(302, "Intro:default");
   }
 }
+?>

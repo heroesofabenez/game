@@ -38,3 +38,4 @@ class Authorizator extends \Nette\Object {
     return $permission;
   }
 }
+?>

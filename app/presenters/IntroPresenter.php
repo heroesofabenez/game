@@ -48,3 +48,4 @@ class IntroPresenter extends BasePresenter {
     $this->redirect("Homepage:");
   }
 }
+?>
