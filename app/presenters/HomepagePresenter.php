@@ -14,7 +14,7 @@ class HomepagePresenter extends BasePresenter {
     $locationModel = $this->context->getService("model.location");
     $locationModel->user = $this->context->getService("security.user");
     $locationModel->npcModel = $this->context->getService("model.npc");
-    $data = $locationModel->home($this->user->identity->stage);
+    $data = $locationModel->home();
     foreach($data as $key => $value) {
       $this->template->$key = $value;
     }

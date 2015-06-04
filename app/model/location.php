@@ -163,15 +163,14 @@ class Location extends \Nette\Object {
   }
   
   /**
-   * Get data for homepage of location
+   * Get data for homepage
    * 
-   * @param int $location Id of stage
    * @return array Data about location
    */
-  function home($location) {
+  function home() {
     $return = array();
     $stages = $this->listOfStages();
-    $stage = $stages[$location];
+    $stage = $stages[$this->user->identity->stage];
     $return["stageName"] = $stage->name;
     $return["areaName"] = $this->getAreaName($stage->area);
     $return["characterName"] = $this->user->identity->name;
