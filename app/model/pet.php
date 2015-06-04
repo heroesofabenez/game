@@ -54,6 +54,10 @@ class Pet extends \Nette\Object {
     );
   }
   
+  /**
+   * @param string $name Variable name
+   * @return mixed
+   */
   function &__get($name) {
     if(isset($this->$name)) return $this->$name;
   }
