@@ -471,8 +471,7 @@ case 6:
    * @return void
    */
   function renderApplications() {
-    $apps = $this->model->showApplications($this->user->identity->guild);
-    $this->template->apps = $apps;
+    $this->template->apps = $this->model->showApplications($this->user->identity->guild);
   }
 }
 ?>

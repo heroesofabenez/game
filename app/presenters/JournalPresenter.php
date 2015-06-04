@@ -43,16 +43,14 @@ class JournalPresenter extends BasePresenter {
    */
   function renderQuests() {
     $this->model->questModel = $this->context->getService("model.quest");
-    $quests = $this->model->quests();
-    $this->template->quests = $quests;
+    $this->template->quests = $this->model->quests();
   }
   
   /**
    * @return void
    */
   function renderPets() {
-    $pets = $this->model->pets();
-    $this->template->pets = $pets;
+    $this->template->pets = $this->model->pets();
   }
 }
 ?>

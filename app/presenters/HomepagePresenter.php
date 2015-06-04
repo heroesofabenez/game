@@ -15,8 +15,7 @@ class HomepagePresenter extends BasePresenter {
     $this->template->areaName = $locationModel->getAreaName($stage->area);
     $this->template->characterName = $this->user->identity->name;
     $npcMOdel = $this->context->getService("model.npc");
-    $npcs = $npcMOdel->listOfNpcs($stage->id);
-    $this->template->npcs = $npcs;
+    $this->template->npcs = $npcMOdel->listOfNpcs($stage->id);
   }
 }
 ?>
