@@ -29,6 +29,7 @@ class MapPresenter extends BasePresenter {
     $this->template->currentArea = $curr_stage->area;
     foreach($stages as $stage) {
       if($stage->area !== $curr_stage->area) unset($stages[$stage->id]);
+      if($this->user->identity->level < $stage->required_level) unset($stages[$stage->id]);
     }
     $this->template->stages = $stages;
   }
