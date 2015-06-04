@@ -83,10 +83,22 @@ class Location extends \Nette\Object {
   protected $cache;
   /** @var \Nette\Database\Context */
   protected $db;
+  /** @var \Nette\Security\User */
+  protected $user;
+  /** @var \HeroesofAbenez\NPCModel */
+  protected $npcModel;
   
   function __construct(\Nette\Caching\Cache $cache, \Nette\Database\Context $db) {
     $this->cache = $cache;
     $this->db = $db;
+  }
+  
+  function setUser(\Nette\Security\User $user) {
+    $this->user = $user;
+  }
+  
+  function setNpcModel(\HeroesofAbenez\NPCModel $npcModel) {
+    $this->npcModel = $npcModel;
   }
   
   /**
@@ -156,8 +168,15 @@ class Location extends \Nette\Object {
    * @param int $location Id of stage
    * @return array Data about location
    */
-  function Home($location) {
-    return $this->getStageName($location);
+  function home($location) {
+    $return = array();
+    $stages = $this->listOfStages();
+    $stage = $stages[$location];
+    $return["stageName"] = $stage->name;
+    $return["areaName"] = $this->getAreaName($stage->area);
+    $return["characterName"] = $this->user->identity->name;
+    $return["npcs"] = $this->npcModel->listOfNpcs($stage->id);
+    return $return;
   }
 }
 ?>

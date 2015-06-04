@@ -12,13 +12,12 @@ class HomepagePresenter extends BasePresenter {
    */
   function renderDefault() {
     $locationModel = $this->context->getService("model.location");
-    $stages = $locationModel->listOfStages();
-    $stage = $stages[$this->user->identity->stage];
-    $this->template->stageName = $stage->name;
-    $this->template->areaName = $locationModel->getAreaName($stage->area);
-    $this->template->characterName = $this->user->identity->name;
-    $npcMOdel = $this->context->getService("model.npc");
-    $this->template->npcs = $npcMOdel->listOfNpcs($stage->id);
+    $locationModel->user = $this->context->getService("security.user");
+    $locationModel->npcModel = $this->context->getService("model.npc");
+    $data = $locationModel->home($this->user->identity->stage);
+    foreach($data as $key => $value) {
+      $this->template->$key = $value;
+    }
   }
 }
 ?>
