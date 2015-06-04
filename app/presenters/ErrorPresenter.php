@@ -16,6 +16,9 @@ class ErrorPresenter extends BasePresenter {
     $this->logger = $logger;
   }
   
+  /**
+   * @return void
+   */
   function actionDefault($exception) {
     if($exception instanceof \Nette\Application\BadRequestException) {
       $this->setView("404");

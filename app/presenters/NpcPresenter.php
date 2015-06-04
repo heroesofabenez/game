@@ -12,6 +12,9 @@ class NpcPresenter extends BasePresenter {
   /** @var \HeroesofAbenez\NPCModel */
   protected $model;
   
+  /**
+   * @return void
+   */
   function startup() {
     parent::startup();
     $this->model = $this->context->getService("model.npc");

@@ -10,6 +10,9 @@ class RequestPresenter extends BasePresenter {
   /** @var \HeroesofAbenez\RequestModel */
   protected $model;
   
+  /**
+   * @return void
+   */
   function startup() {
     parent::startup();
     $this->model = $this->context->getService("model.request");

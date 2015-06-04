@@ -7,6 +7,9 @@ namespace HeroesofAbenez\Presenters;
    * @author Jakub Konečný
    */
 class HomepagePresenter extends BasePresenter {
+  /**
+   * @return void
+   */
   function renderDefault() {
     $locationModel = $this->context->getService("model.location");
     $stages = $locationModel->listOfStages();
