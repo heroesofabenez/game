@@ -31,7 +31,7 @@ class ProfilePresenter extends BasePresenter {
     foreach($data as $key => $value) {
       if($key == "guild" AND is_int($value)) {
         $guildName = $this->context->getService("model.guild")->getGuildName($value);
-        $guildRank = $this->model->getRankName($data["guildrank"]);
+        $guildRank = $this->context->getService("model.permissions")->getRoleName($data["guildrank"]);
         $guildLink = $this->link("Guild:view", $value);
         $value = "Guild: <a href=\"$guildLink\">$guildName</a><br>Position in guild: " . ucfirst($guildRank);
       }

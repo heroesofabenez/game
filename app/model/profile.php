@@ -49,17 +49,6 @@ class Profile extends \Nette\Object {
   }
   
   /**
-   * Get name of specified rank
-   * 
-   * @param int $id
-   * @return string
-   */
-  function getRankName($id) {
-    $ranks = $this->permissionsModel->getRoles();
-    return $ranks[$id]["name"];
-  }
-  
-  /**
    * @return array
    */
   function getCharacters() {

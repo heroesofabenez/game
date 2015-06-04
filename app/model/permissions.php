@@ -35,6 +35,17 @@ class Permissions extends \Nette\Object {
   }
   
   /**
+   * Get name of specified rank
+   * 
+   * @param int $id
+   * @return string
+   */
+  function getRoleName($id) {
+    $ranks = $this->getRoles();
+    return $ranks[$id]["name"];
+  }
+  
+  /**
    * Get permissions (from db or cache)
    * 
    * @return array

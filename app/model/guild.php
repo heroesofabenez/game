@@ -96,7 +96,7 @@ class GuildModel extends \Nette\Object {
     $members = $this->db->table("characters")->where("guild", $guild->id)->order("guildrank DESC, id");
     $return["members"] = array();
     foreach($members as $member) {
-      $rank = $this->profileModel->getRankName($member->guildrank);
+      $rank = $this->permissionsModel->getRoleName($member->guildrank);
       $return["members"][] = array("id" => $member->id, "name" => $member->name, "rank" => ucfirst($rank));
     }
     return $return;
@@ -112,7 +112,7 @@ class GuildModel extends \Nette\Object {
     $return = array();
     $members = $this->db->table("characters")->where("guild", $id)->order("guildrank DESC, id");
     foreach($members as $member) {
-      $rank = $this->profileModel->getRankName($member->guildrank);
+      $rank = $this->permissionsModel->getRoleName($member->guildrank);
       $return[] = array("id" => $member->id, "name" => $member->name, "rank" => ucfirst($rank), "rankId" => $member->guildrank);
     }
     return $return;
