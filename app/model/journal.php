@@ -29,6 +29,10 @@ class Journal extends \Nette\Object {
   protected $db;
   /** @var \HeroesofAbenez\QuestModel */
   protected $questModel;
+  /** @var \HeroesofAbenez\Location */
+  protected $locationModel;
+  /** @var \HeroesofAbenez\GuildModel */
+  protected $guildModel;
   
   /**
    * @param \Nette\Security\User $user
@@ -43,17 +47,23 @@ class Journal extends \Nette\Object {
     $this->questModel = $questModel;
   }
   
+  function setLocationModel(\HeroesofAbenez\Location $locationModel) {
+    $this->locationModel = $locationModel;
+  }
+  
+  function setGuildModel(\HeroesofAbenez\GuildModel $guildModel) {
+    $this->guildModel = $guildModel;
+  }
+  
   /**
    * Gets basic info for character's journal
    * 
-   * @param \Nette\DI\Container $container
    * @return array
    */
-  function basic(\Nette\DI\Container $container) {
+  function basic() {
     $user = $this->user->identity;
-    $locationModel = $container->getService("model.location");
     $character = $this->db->table("characters")->get($user->id);
-    $stages = $locationModel->listOfStages();
+    $stages = $this->locationModel->listOfStages();
     $stage = $stages[$user->stage];
     $return = array(
       "name" => $user->name, "gender" => $user->gender, "race" => $user->race,
@@ -61,11 +71,10 @@ class Journal extends \Nette\Object {
       "level" => $user->level, "whiteKarma" => $user->white_karma,
       "neutralKarma" => $user->neutral_karma, "darkKarma" => $user->dark_karma,
       "experiences" => $character->experience, "description" => $character->description,
-      "stageName" => $stage->name, "areaName" => $locationModel->getAreaName($stage->area)
+      "stageName" => $stage->name, "areaName" => $this->locationModel->getAreaName($stage->area)
     );
     if($user->guild > 0) {
-      $guildModel = $container->getService("model.guild");
-      $return["guild"] = $guildModel->getGuildName($user->guild);
+      $return["guild"] = $this->guildModel->getGuildName($user->guild);
       $return["guildRank"] = ucfirst($user->roles[0]);
     } else {
       $return["guild"] = false;
