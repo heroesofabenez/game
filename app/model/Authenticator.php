@@ -32,17 +32,9 @@ class Authenticator extends \Nette\Object implements NS\IAuthenticator {
     foreach($chars as $char) {
       if($char->owner == $uid) break;
     }
-    $race = $this->db->table("character_races")->get($char->race);
-    $occupation = $this->db->table("character_classess")->get($char->occupation);
-    if(is_int($char->specialization)) {
-      $specialization = $this->db->table("character_specializations")->get($char->specialization)->name;
-    } else {
-      $specialization = null;
-    }
-    $specialization = $this->db->table("character_specializations")->get($char->specialization);
     $data = array(
-      "name" => $char->name, "race" => $race->name, "gender" => $char->gender,
-      "occupation" => $occupation->name, "specialization" => $specialization,
+      "name" => $char->name, "race" => $char->race, "gender" => $char->gender,
+      "occupation" => $char->occupation, "specialization" => $char->specialization,
       "level" => $char->level, "guild" => $char->guild, "stage" => $char->current_stage,
       "white_karma" => $char->white_karma, "neutral_karma" => $char->neutral_karma, "dark_karma" => $char->dark_karma
     );

@@ -59,22 +59,16 @@ class Intro extends \Nette\Object {
    * @return int id of starting stage
    */
   function getStartingLocation() {
-    $classRow = $this->db->table("character_classess")
-      ->where("name", $this->user->identity->occupation);
-    foreach($classRow as $classR) {  }
     $classSLs = $this->db->table("quest_stages")
       ->where("required_level", 0)
-      ->where("required_occupation", $classR->id);
+      ->where("required_occupation", $this->user->identity->occupation);
     if($classSLs->count("id") > 0) {
       foreach($classSLs as $classSL) { }
       return $classSL->id;
     }
-    $raceRow = $this->db->table("character_races")
-      ->where("name", $this->user->identity->race);
-    foreach($raceRow as $raceR) {  }
     $raceSLs = $this->db->table("quest_stages")
       ->where("required_level", 0)
-      ->where("required_race", $raceR->id);
+      ->where("required_race", $this->user->identity->race);
     if($raceSLs->count("id") > 0) {
       foreach($raceSLs as $raceSL) { }
       return $raceSL->id;
