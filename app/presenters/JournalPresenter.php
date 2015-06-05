@@ -24,7 +24,8 @@ class JournalPresenter extends BasePresenter {
   function renderDefault() {
     $this->model->locationModel = $this->context->getService("model.location");
     $this->model->guildModel = $this->context->getService("model.guild");
-    $stats = $this->model->basic($this->context);
+    $this->model->profileModel = $this->context->getService("model.profile");
+    $stats = $this->model->basic();
     foreach($stats as $key => $value) {
       $this->template->$key = $value;
     }
