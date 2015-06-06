@@ -25,17 +25,11 @@ class DialogueLine extends \Nette\Object {
   }
   
   /**
-   * @return string
+   * @param string $name
+   * @return mixed
    */
-  function getSpeaker() {
-    return $this->speaker;
-  }
-  
-  /**
-   * @return string
-   */
-  function getText() {
-    return $this->text;
+  function &__get($name) {
+    if(isset($this->$name)) return $this->$name;
   }
 }
 ?>
