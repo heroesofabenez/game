@@ -24,7 +24,14 @@ class MapPresenter extends BasePresenter {
    */
   function actionLocal() {
     $data= $this->model->localMap();
+    $this->template->wwwDir = WWW_DIR;
     foreach($data as $key => $value) {
+      if($key == "areas") {
+        foreach($value as $area) {
+          if($area->stage == $this->user->identity->stage) $area->href = "";
+          else $area->href = $this->link("Travel:stage", $area->stage);
+        }
+      }
       $this->template->$key = $value;
     }
   }

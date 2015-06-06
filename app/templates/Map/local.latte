@@ -2,9 +2,10 @@
 {block title}Travel{/block}
 {block content}
   <h1>Map</h1>
-  <h2>Stages in current area</h2>
-  {foreach $stages as $stage}
-  {if $stage->id == $currentStage}{$stage->name}<br>
-  {else}<a n:href="Travel:stage $stage->id">{$stage->name}</a><br>{/if}
+  <image src="{$image|replace:$wwwDir:$basePath}" usemap="#local_map" alt="Local Map">
+  <map name="local_map">
+  {foreach $areas as $area}
+    <area href="{$area->href}" shape="{$area->shape}" coords="{$area->coords}" title="{$area->title}">
   {/foreach}
+  </map>
 {/block}
