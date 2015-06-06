@@ -200,5 +200,33 @@ class Location extends \Nette\Object {
     $return["npcs"] = $this->npcModel->listOfNpcs($stage->id);
     return $return;
   }
+  
+  /**
+   * Try to travel to specified stage
+   * 
+   * @param int $id Stage's id
+   * @return int Error code|1 on success
+   */
+  function travelToStage($id) {
+    $stages = $this->listOfStages();
+    if(!isset($stages[$id])) return 2;
+    $currentStage = $this->user->identity->stage;
+    $foundRoute = false;
+    $routes = $this->stageRoutes();
+    foreach($routes as $route) {
+      if($route->from == $id AND $route->to == $currentStage) {
+        $foundRoute = true;
+        break;
+      } elseif($route->from == $currentStage AND $route->to == $id) {
+        $foundRoute = true;
+        break;
+      }
+    }
+    if(!$foundRoute) return 3;
+    $data = array("current_stage" => $id);
+    $result = $this->db->query("UPDATE characters SET ? WHERE id=?", $data, $this->user->id);
+    if($result) return 1;
+    else return 4;
+  }
 }
 ?>
