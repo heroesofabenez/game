@@ -202,6 +202,24 @@ class Location extends \Nette\Object {
   }
   
   /**
+   * Returns list of accessible stages (in player's current area,
+   * player meets conditions for entering them)
+   * 
+   * @return array
+   */
+  function accessibleStages() {
+    $stages = $this->listOfStages();
+    $curr_stage = $stages[$this->user->identity->stage];
+    foreach($stages as $stage) {
+      if($stage->area !== $curr_stage->area) unset($stages[$stage->id]);
+      if($this->user->identity->level < $stage->required_level) unset($stages[$stage->id]);
+      if(is_int($stage->required_race) AND $stage->required_race != $this->user->identity->race) unset($stages[$stage->id]);
+      if(is_int($stage->required_occupation) AND $stage->required_occupation != $this->user->identity->occupation) unset($stages[$stage->id]);
+    }
+    return $stages;
+  }
+  
+  /**
    * Try to travel to specified stage
    * 
    * @param int $id Stage's id

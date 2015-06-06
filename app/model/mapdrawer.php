@@ -48,14 +48,9 @@ class MapDrawer extends \Nette\Object {
    * @return array
    */
   function localMap() {
-    $stages = $this->locationModel->listOfStages();
+    $this->locationModel->user = $this->user;
+    $stages = $this->locationModel->accessibleStages();
     $curr_stage = $stages[$this->user->identity->stage];
-    foreach($stages as $stage) {
-      if($stage->area !== $curr_stage->area) unset($stages[$stage->id]);
-      if($this->user->identity->level < $stage->required_level) unset($stages[$stage->id]);
-      if(is_int($stage->required_race) AND $stage->required_race != $this->user->identity->race) unset($stages[$stage->id]);
-      if(is_int($stage->required_occupation) AND $stage->required_occupation != $this->user->identity->occupation) unset($stages[$stage->id]);
-    }
     $routes = $this->locationModel->stageRoutes();
     $return = array(
       "image" => $this->draw($stages, $routes, $curr_stage->area),
