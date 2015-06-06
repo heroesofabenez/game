@@ -7,7 +7,7 @@ namespace HeroesofAbenez\Presenters;
  * @author Jakub Konečný
  */
 class MapPresenter extends BasePresenter {
-  /** @var \HeroesofAbenez\MapDrawer */
+  /** @var \HeroesofAbenez\Map */
   protected $model;
   
   /**
@@ -15,7 +15,7 @@ class MapPresenter extends BasePresenter {
    */
   function startup() {
     parent::startup();
-    $this->model = $this->context->getService("model.mapdrawer");
+    $this->model = $this->context->getService("model.map");
   }
   
   /**
@@ -23,7 +23,7 @@ class MapPresenter extends BasePresenter {
    * @return void
    */
   function actionLocal() {
-    $data= $this->model->localMap();
+    $data = $this->model->local();
     $this->template->wwwDir = WWW_DIR;
     foreach($data as $key => $value) {
       if($key == "areas") {

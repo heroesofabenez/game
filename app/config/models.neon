@@ -5,6 +5,7 @@ services:
     model.item: HeroesofAbenez\ItemModel
     model.journal: HeroesofAbenez\Journal
     model.location: HeroesofAbenez\Location
+    model.map: HeroesofAbenez\Map
     model.mapdrawer: HeroesofAbenez\MapDrawer
     model.npc: HeroesofAbenez\NPCModel
     model.permissions: HeroesofAbenez\Permissions

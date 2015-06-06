@@ -25,7 +25,7 @@ class MapDrawer extends \Nette\Object {
    * @param array $points
    * @param array $routes
    * @param int $id
-   * @return string
+   * @return void
    */
   function draw(array $points, array $routes, $id) {
     $image = Image::fromBlank(250, 250, Image::rgb(204, 204, 153));
@@ -39,31 +39,19 @@ class MapDrawer extends \Nette\Object {
     }
     $filename = WWW_DIR . "/images/maps/local-$id.jpeg";
     $image->save($filename);
-    return $filename;
   }
   
   /**
    * Draw local map
    * 
-   * @return array
+   * @return void
    */
   function localMap() {
     $this->locationModel->user = $this->user;
     $stages = $this->locationModel->accessibleStages();
     $curr_stage = $stages[$this->user->identity->stage];
     $routes = $this->locationModel->stageRoutes();
-    $return = array(
-      "image" => $this->draw($stages, $routes, $curr_stage->area),
-      "areas" => array()
-    );
-    foreach($stages as $stage) {
-      $c1 = $stage->x-15; $c2 = $stage->y-15; $c3 = $stage->x+15; $c4 = $stage->y+15;
-      $return["areas"][] = (object) array(
-        "href" => "", "shape" => "rect", "title" => $stage->name,
-        "coords" => "$c1,$c2,$c3,$c4", "stage" => $stage->id
-      );
-    }
-    return $return;
+    $this->draw($stages, $routes, $curr_stage->area);
   }
 }
 ?>
