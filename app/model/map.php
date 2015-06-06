@@ -20,6 +20,11 @@ class Map extends \Nette\Object {
     $this->user = $user;
   }
   
+  /**
+   * Returns data for local map and draws it when necessary
+   * 
+   * @return array
+   */
   function local() {
     $curr_stage = $this->user->identity->stage;
     $filename = WWW_DIR . "/images/maps/local-$curr_stage.jpeg";
