@@ -21,8 +21,12 @@ class Stage extends \Nette\Object {
   public $required_occupation;
   /** @var int id of parent area */
   public $area;
+  /** @var int */
+  public $x;
+  /** @var int */
+  public $y;
   
-  function __construct($id, $name, $description, $required_level, $required_race, $required_occupation, $area) {
+  function __construct($id, $name, $description, $required_level, $required_race, $required_occupation, $area, $x, $y) {
     $this->id = $id;
     $this->name = $name;
     $this->description = $description;
@@ -30,6 +34,8 @@ class Stage extends \Nette\Object {
     $this->required_race = $required_race;
     $this->required_occupation = $required_occupation;
     $this->area = $area;
+    if(is_int($x)) $this->x = $x;
+    if(is_int($y)) $this->y = $y;
   }
 }
 
@@ -109,7 +115,7 @@ class Location extends \Nette\Object {
     if($stages === NULL) {
       $stages = $this->db->table("quest_stages");
       foreach($stages as $stage) {
-        $return[$stage->id] = new Stage($stage->id, $stage->name, $stage->description, $stage->required_level, $stage->required_race, $stage->required_occupation, $stage->area);
+        $return[$stage->id] = new Stage($stage->id, $stage->name, $stage->description, $stage->required_level, $stage->required_race, $stage->required_occupation, $stage->area, $stage->pos_x, $stage->pos_y);
       }
       $this->cache->save("stages", $return);
     } else {
