@@ -8,6 +8,8 @@ parameters:
         webmasterMail: "jakub.konecny2@centrum.cz"
 php:
     date.timezone: Europe/Prague
+di:
+    debugger: true
 application:
     #errorPresenter: "Error"
     #catchExceptions: true

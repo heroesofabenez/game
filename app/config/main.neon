@@ -13,8 +13,6 @@ database:
         password: %database.password%
         debugger: true
         explain: true
-di:
-    debugger: true
 tracy:
     email: %application.webmasterMail%
     strictMode: TRUE
