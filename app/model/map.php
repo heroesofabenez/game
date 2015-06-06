@@ -26,14 +26,14 @@ class Map extends \Nette\Object {
    * @return array
    */
   function local() {
-    $curr_stage = $this->user->identity->stage;
-    $filename = WWW_DIR . "/images/maps/local-$curr_stage.jpeg";
+    $this->locationModel->user = $this->user;
+    $stages = $this->locationModel->accessibleStages();
+    $curr_stage = $stages[$this->user->identity->stage];
+    $filename = WWW_DIR . "/images/maps/local-$curr_stage->area.jpeg";
     $return = array("image" => $filename);
     if(!file_exists($filename)) {
       $this->drawer->localMap();
     }
-    $this->locationModel->user = $this->user;
-    $stages = $this->locationModel->accessibleStages();
     foreach($stages as $stage) {
       $c1 = $stage->x-15; $c2 = $stage->y-15; $c3 = $stage->x+15; $c4 = $stage->y+15;
       $return["areas"][] = (object) array(
