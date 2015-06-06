@@ -21,10 +21,8 @@ class Stage extends \Nette\Object {
   public $required_occupation;
   /** @var int id of parent area */
   public $area;
-  /** @var int order in area */
-  public $order;
   
-  function __construct($id, $name, $description, $required_level, $required_race, $required_occupation, $area, $order) {
+  function __construct($id, $name, $description, $required_level, $required_race, $required_occupation, $area) {
     $this->id = $id;
     $this->name = $name;
     $this->description = $description;
@@ -32,7 +30,6 @@ class Stage extends \Nette\Object {
     $this->required_race = $required_race;
     $this->required_occupation = $required_occupation;
     $this->area = $area;
-    $this->order = $order;
   }
 }
 
@@ -112,11 +109,31 @@ class Location extends \Nette\Object {
     if($stages === NULL) {
       $stages = $this->db->table("quest_stages");
       foreach($stages as $stage) {
-        $return[$stage->id] = new Stage($stage->id, $stage->name, $stage->description, $stage->required_level, $stage->required_race, $stage->required_occupation, $stage->area, $stage->order);
+        $return[$stage->id] = new Stage($stage->id, $stage->name, $stage->description, $stage->required_level, $stage->required_race, $stage->required_occupation, $stage->area);
       }
       $this->cache->save("stages", $return);
     } else {
       $return = $stages;
+    }
+    return $return;
+  }
+  
+  /**
+   * Gets routes between stages
+   * 
+   * @return array
+   */
+  function stageRoutes() {
+    $return = array();
+    $routes = $this->cache->load("stage_routes");
+    if($routes === NULL) {
+      $routes = $this->db->table("routes_stages");
+      foreach($routes as $route) {
+        $return[$route->id] = (object) array("from" => $route->from, "to" => $route->to);
+      }
+      $this->cache->save("stage_routes", $return);
+    } else {
+      $return = $routes;
     }
     return $return;
   }
