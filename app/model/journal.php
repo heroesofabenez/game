@@ -1,10 +1,15 @@
 <?php
 namespace HeroesofAbenez;
 
+/**
+ * Data structure for quest in journal
+ * 
+ * @author Jakub Konečný
+ */
 class JournalQuest extends \Nette\Object {
-  /** @var int */
+  /** @var int Quest's id */
   public $id;
-  /** @var string */
+  /** @var string Quest's name */
   public $name;
   
   /**
