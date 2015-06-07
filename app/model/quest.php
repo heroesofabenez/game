@@ -162,6 +162,19 @@ class QuestModel extends \Nette\Object {
   }
   
   /**
+   * Check if player came from specified url
+   * 
+   * @param string $url Expected url
+   * @return bool
+   */
+  protected function checkReferer($url) {
+    $referer = $this->request->getReferer();
+    if($referer === NULL) return false;
+    if($referer->path != $url) return false;
+    return true;
+  }
+  
+  /**
    * Accept specified quest
    * 
    * @param int $id Quest's id
@@ -175,9 +188,7 @@ class QuestModel extends \Nette\Object {
       ->where("character", $this->user->id)
       ->where("quest", $id);
     if($row->count("quest") > 0) return 3;
-    $referer = $this->request->getReferer();
-    if($referer === NULL) return 4;
-    if($referer->path != $url) return 4;
+    if(!$this->checkReferer($url)) return 4;
     $data = array(
       "character" => $this->user->id, "quest" => $id
     );
@@ -230,9 +241,7 @@ class QuestModel extends \Nette\Object {
     if($row->count("quest") === 0) return 3;
     foreach($row as $r) { }
     if($r->progress > 2) return 4;
-    $referer = $this->request->getReferer();
-    if($referer === NULL) return 5;
-    if($referer->path != $url) return 5;
+    if(!$this->checkReferer($url)) return 5;
     if($this->isCompleted($quest)) {
       $wheres = array(
         "character" => $this->user->id, "quest" => $id
