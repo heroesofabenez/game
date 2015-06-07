@@ -116,6 +116,26 @@ class ItemModel extends \Nette\Object {
   }
   
   /**
+   * @param int $id Item's id
+   * @param int $amount
+   * @return bool
+   */
+  function giveItem($id, $amount = 1) {
+    if($this->haveItem($id)) {
+      $data = "item=$id, amount=amount+$amount";
+      $where = array("character" => $this->user->id, "item" => $id);
+      $result = $this->db->query("UPDATE character_items SET $data WHERE ?", $where);
+      return $result;
+    } else {
+      $data = array(
+        "character" => $this->user->id, "item" => $id, "amount" => $amount
+      );
+      $result = $this->db->query("INSERT INTO character_items", $data);
+      return $result;
+    }
+  }
+  
+  /**
    * 
    * @param int $id Item's id
    * @param int $amount

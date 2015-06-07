@@ -270,6 +270,10 @@ class QuestModel extends \Nette\Object {
           $result3 = $this->db->query("UPDATE characters SET $data3 WHERE ?", $where3);
           if(!$result3) return 7;
         }
+        if($quest->reward_item > 0) {
+          $result4 = $this->itemModel->giveItem($quest->reward_item);
+          if(!$result4) return 7;
+        }
         return 1;
       } else {
         return 7;
