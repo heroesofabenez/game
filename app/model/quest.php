@@ -168,6 +168,20 @@ class QuestModel extends \Nette\Object {
   }
   
   /**
+   * Get quest's status
+   * @param int $id Quest's id
+   * @return int
+   */
+  function status($id) {
+    $row = $this->db->table("character_quests")
+      ->where("character", $this->user->id)
+      ->where("quest", $id);
+    if($row->count("quest") === 0) return 0;
+    foreach($row as $r) { }
+    return $r->progress;
+  }
+  
+  /**
    * Check if player came from specified url
    * 
    * @param string $url Expected url
@@ -190,10 +204,8 @@ class QuestModel extends \Nette\Object {
   function accept($id, $url) {
     $quest = $this->db->table("quests")->get($id);
     if(!$quest) return 2;
-    $row = $this->db->table("character_quests")
-      ->where("character", $this->user->id)
-      ->where("quest", $id);
-    if($row->count("quest") > 0) return 3;
+    $status = $this->status($id);
+    if($status > 0) return 3;
     if(!$this->checkReferer($url)) return 4;
     $data = array(
       "character" => $this->user->id, "quest" => $id
@@ -235,12 +247,9 @@ class QuestModel extends \Nette\Object {
   function finish($id, $url) {
     $quest = $this->view($id);
     if(!$quest) return 2;
-    $row = $this->db->table("character_quests")
-      ->where("character", $this->user->id)
-      ->where("quest", $id);
-    if($row->count("quest") === 0) return 3;
-    foreach($row as $r) { }
-    if($r->progress > 2) return 4;
+    $status = $this->status($id);
+    if($status === 0) return 3;
+    if($status > 2) return 4;
     if(!$this->checkReferer($url)) return 5;
     if($this->isCompleted($quest)) {
       $wheres = array(
@@ -276,12 +285,8 @@ class QuestModel extends \Nette\Object {
    * @return bool
    */
   function isFinished($id) {
-    $row = $this->db->table("character_quests")
-      ->where("character", $this->user->id)
-      ->where("quest", $id);
-    if($row->count("*") === 0) return false;
-    foreach($row as $r) { }
-    if($r->progress > 2) return true;
+    $status = $this->status($id);
+    if($status > 2) return true;
     else return false;
   }
 }
