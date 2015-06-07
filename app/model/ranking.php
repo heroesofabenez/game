@@ -47,9 +47,7 @@ class Ranking extends \Nette\Object {
     $return = array();
     $result = $this->guildModel->listOfGuilds();
     foreach($result as $row) {
-      $data[] = array(
-        "id" => $row->id, "name" => $row->name, "members" => $row->members
-      );
+      $data[] = (array) $row;
     }
     $data2 = Utils\Arrays::orderby($data, "members", SORT_DESC, "id", SORT_ASC);
     foreach($data2 as $row2) {
