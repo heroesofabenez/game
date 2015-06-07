@@ -233,7 +233,7 @@ class QuestModel extends \Nette\Object {
    * @return int Error code|1 on success
    */
   function finish($id, $url) {
-    $quest = $this->db->table("quests")->get($id);
+    $quest = $this->view($id);
     if(!$quest) return 2;
     $row = $this->db->table("character_quests")
       ->where("character", $this->user->id)
