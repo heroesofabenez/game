@@ -34,6 +34,8 @@ class Quest extends \Nette\Object {
   /** @var int */
   public $reward_xp;
   /** @var int */
+  public $reward_item;
+  /** @var int */
   public $npc_start;
   /** @var int */
   public $npc_end;
@@ -43,7 +45,7 @@ class Quest extends \Nette\Object {
   public $progress = false;
   
   function __construct($id, $name, $introduction, $end_text, $reward_money,
-    $reward_xp, $npc_start, $npc_end, $order, $needed_item = NULL, $item_amount = 0,
+    $reward_xp, $reward_item, $npc_start, $npc_end, $order, $needed_item = NULL, $item_amount = 0,
     $item_lose = false, $cost_money = 0, $needed_level = NULL, $needed_quest = NULL) {
     $this->id = $id;
     $this->name = $name;
@@ -51,6 +53,7 @@ class Quest extends \Nette\Object {
     $this->end_text = $end_text;
     $this->reward_money = $reward_money;
     $this->reward_xp = $reward_xp;
+    if(is_int($reward_item)) $this->reward_item = $reward_item;
     $this->npc_start = $npc_start;
     $this->npc_end = $npc_end;
     $this->order = $order;
@@ -102,7 +105,7 @@ class QuestModel extends \Nette\Object {
       foreach($quests as $quest) {
         $return[$quest->id] =
           new Quest($quest->id, $quest->name, $quest->introduction, $quest->end_text, $quest->reward_money,
-            $quest->reward_xp, $quest->npc_start, $quest->npc_end, $quest->order, $quest->needed_item,
+            $quest->reward_xp, $quest->reward_item, $quest->npc_start, $quest->npc_end, $quest->order, $quest->needed_item,
             $quest->item_amount, $quest->item_lose, $quest->cost_money, $quest->needed_level, $quest->needed_quest);
       }
       $this->cache->save("quests", $return);

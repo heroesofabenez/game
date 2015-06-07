@@ -11,5 +11,5 @@
     {/foreach}
   </ul>
   {if $finished}<p>{$end_text}</p>{/if}
-  <p{if $finished} class="crossout"{/if}>Rewards: {$rewardMoney} silver marks, {$rewardXp} experiences.</p>
+  <p{if $finished} class="crossout"{/if}>Rewards: {$rewardMoney} silver marks, {$rewardXp} experiences{if $rewardItem}, {!$rewardItem}{/if}.</p>
 {/block}

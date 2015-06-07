@@ -59,6 +59,13 @@ class QuestPresenter extends BasePresenter {
     $this->template->requirements = $requirements;
     $this->template->rewardMoney = $quest->reward_money;
     $this->template->rewardXp = $quest->reward_xp;
+    if(is_int($quest->reward_item)) {
+      $ritemName = $this->itemModel->getItemName($quest->reward_item);
+      $ritemLink = $this->link("Item:view", $quest->reward_item);
+      $this->template->rewardItem = "<a href=\"$ritemLink\">$ritemName</a>";
+    } else {
+      $this->template->rewardItem = false;
+    }
   }
   
   /**
