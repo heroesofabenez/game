@@ -110,6 +110,7 @@ case 5:
     if(!$quest) $this->forward("notfound");
     $url = $this->link("Npc:quests", $quest->npc_start);
     $this->model->request = $this->context->getService("http.request");
+    $this->model->itemModel = $this->context->getService("model.item");
     $result = $this->model->finish($id, $url);
     switch($result) {
 case 1:

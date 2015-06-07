@@ -80,6 +80,8 @@ class QuestModel extends \Nette\Object {
   protected $user;
   /** @var \Nette\Http\Request */
   protected $request;
+  /** @var \HeroesofAbenez\ItemModel */
+  protected $itemModel;
   
   function __construct(\Nette\Caching\Cache $cache, \Nette\Database\Context $db, \Nette\Security\User $user) {
     $this->db = $db;
@@ -89,6 +91,10 @@ class QuestModel extends \Nette\Object {
   
   function setRequest(\Nette\Http\Request $request) {
     $this->request = $request;
+  }
+  
+  function setItemModel(\HeroesofAbenez\ItemModel $itemModel) {
+    $this->itemModel = $itemModel;
   }
   
   /**
@@ -212,13 +218,7 @@ class QuestModel extends \Nette\Object {
       $haveMoney = true;
     }
     if($quest->needed_item > 0) {
-      $itemRow = $this->db->table("character_items")
-        ->where("character", $this->user->id)
-        ->where("item", $quest->needed_item);
-      if($itemRow->count("id") == 1) {
-        foreach($itemRow as $item) { }
-        if($item->amount >= $quest->item_amount) $haveItem = true;
-      }
+      $haveItem = $this->itemModel->haveItem($quest->needed_item, $quest->item_amount);
     } else {
       $haveItem = true;
     }
@@ -252,9 +252,7 @@ class QuestModel extends \Nette\Object {
       $result = $this->db->query("UPDATE character_quests SET ? WHERE ?", $data, $wheres);
       if($result) {
         if($quest->item_lose) {
-          $data2 = "amount=amount-{$quest->item_amount}";
-          $wheres2 = array("character" => $this->user->id, "item" => $quest->needed_item);
-          $result2 = $this->db->query("UPDATE character_items SET $data2 WHERE ?", $wheres2);
+          $result2 = $this->itemModel->loseItem($quest->needed_item, $quest->item_amount);
           if(!$result2) return 7;
         }
         if($quest->cost_money > 0) {

@@ -42,10 +42,13 @@ class ItemModel extends \Nette\Object {
   protected $db;
   /** @var \Nette\Caching\Cache */
   protected $cache;
+  /** @var \Nette\Security\User */
+  protected $user;
   
-  function __construct(\Nette\Caching\Cache $cache, \Nette\Database\Context $db) {
+  function __construct(\Nette\Caching\Cache $cache, \Nette\Database\Context $db, \Nette\Security\User $user) {
     $this->db = $db;
     $this->cache = $cache;
+    $this->user = $user;
   }
   
   /**
@@ -91,6 +94,39 @@ class ItemModel extends \Nette\Object {
     $items = $this->listOfItems();
     $item = Arrays::get($items, $id, false);
     return $item;
+  }
+  
+  /**
+   * Check if player has specified item
+   * 
+   * @param int $id Item's id
+   * @param int $amount
+   * @return bool
+   */
+  function haveItem($id, $amount = 1) {
+    $return = false;
+    $itemRow = $this->db->table("character_items")
+      ->where("character", $this->user->id)
+      ->where("item", $id);
+    if($itemRow->count("id") == 1) {
+      foreach($itemRow as $item) { }
+      if($item->amount >= $amount) $return = true;
+    }
+    return $return;
+  }
+  
+  /**
+   * 
+   * @param int $id Item's id
+   * @param int $amount
+   * @return bool
+   */
+  function loseItem($id, $amount = 1) {
+    $data = "amount=amount-$amount";
+    $wheres = array("character" => $this->user->id, "item" => $id);
+    $result = $this->db->query("UPDATE character_items SET $data WHERE ?", $wheres);
+    if(!$result) return false;
+    else return true;
   }
 }
 ?>
