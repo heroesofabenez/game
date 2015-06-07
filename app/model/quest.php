@@ -264,12 +264,12 @@ class QuestModel extends \Nette\Object {
           $result2 = $this->itemModel->loseItem($quest->needed_item, $quest->item_amount);
           if(!$result2) return 7;
         }
-        if($quest->cost_money > 0) {
-          $data3 = "money=money-{$quest->cost_money}";
-          $where3 = array("id" => $this->user->id);
-          $result3 = $this->db->query("UPDATE characters SET $data3 WHERE ?", $where3);
-          if(!$result3) return 7;
-        }
+        if($quest->cost_money > 0) $data3 = "money=money-{$quest->cost_money}";
+        else $data3 = "money=money+{$quest->reward_money}";
+        $data3 .= ", experience=experience+{$quest->reward_xp}";
+        $where3 = array("id" => $this->user->id);
+        $result3 = $this->db->query("UPDATE characters SET $data3 WHERE ?", $where3);
+        if(!$result3) return 7;
         if($quest->reward_item > 0) {
           $result4 = $this->itemModel->giveItem($quest->reward_item);
           if(!$result4) return 7;
