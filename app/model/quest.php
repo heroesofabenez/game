@@ -209,7 +209,7 @@ class QuestModel extends \Nette\Object {
    * @param \HeroesofAbenez\Quest $quest
    * @return bool
    */
-  protected function isCompleted($quest) {
+  protected function isCompleted(\HeroesofAbenez\Quest $quest) {
     $haveMoney = $haveItem = false;
     if($quest->cost_money > 0) {
       $char = $this->db->table("characters")->get($this->user->id);
