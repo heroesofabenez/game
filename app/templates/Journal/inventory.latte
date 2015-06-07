@@ -8,7 +8,7 @@
 No items
   {else}
     {foreach $items as $item}
-{$item->count}x {$item->name}<br>
+{$item->amount}x <a n:href="Item:view $item->id">{$item->name}</a><br>
     {/foreach}
   {/if}
   </p>
