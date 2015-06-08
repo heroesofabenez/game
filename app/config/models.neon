@@ -1,5 +1,6 @@
 services:
     model.character: HeroesofAbenez\CharacterModel
+    model.equipment: HeroesofAbenez\EquipmentModel
     model.guild: HeroesofAbenez\GuildModel
     model.intro: HeroesofAbenez\Intro
     model.item: HeroesofAbenez\ItemModel

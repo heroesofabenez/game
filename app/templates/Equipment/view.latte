@@ -1,0 +1,10 @@
+{layout '../@layout.latte'}
+{block title}Equipment{/block}
+{block content}
+  <h1>Equipment {$name}</h1>
+  <p>{$slot|firstUpper}{if $type}-{$type}{/if}</p>
+  <p>{$description}</p>
+  <p>Strength: {$strength}, durability: {$durability}</p>
+  <p>Requires: lvl {$required_lvl}, class {$required_class|firstUpper}</p>
+  <p>Price: {$price} silver marks</p>
+{/block}
