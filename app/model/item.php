@@ -17,18 +17,22 @@ class Item extends \Nette\Object {
   public $description;
   /** @var string */
   public $image;
+  /** @var int */
+  public $price;
   
   /**
    * @param int $id
    * @param string $name
    * @param string $description
    * @param string $image
+   * @param int $price
    */
-  function __construct($id, $name, $description, $image) {
+  function __construct($id, $name, $description, $image, $price = 0) {
     $this->id = (int) $id;
     $this->name = $name;
     $this->description = $description;
     $this->image = $image;
+    $this->price = (int) $price;
   }
 }
 
@@ -62,7 +66,7 @@ class ItemModel extends \Nette\Object {
     if($items === NULL) {
       $items = $this->db->table("items");
       foreach($items as $item) {
-        $return[$item->id] = new Item($item->id, $item->name, $item->description, $item->image);
+        $return[$item->id] = new Item($item->id, $item->name, $item->description, $item->image, $item->price);
       }
       $this->cache->save("items", $return);
     } else {
