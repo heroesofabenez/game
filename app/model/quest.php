@@ -44,25 +44,11 @@ class Quest extends \Nette\Object {
   /** @var bool */
   public $progress = false;
   
-  function __construct($id, $name, $introduction, $end_text, $reward_money,
-    $reward_xp, $reward_item, $npc_start, $npc_end, $order, $needed_item = NULL, $item_amount = 0,
-    $item_lose = false, $cost_money = 0, $needed_level = NULL, $needed_quest = NULL) {
-    $this->id = $id;
-    $this->name = $name;
-    $this->introduction = $introduction;
-    $this->end_text = $end_text;
-    $this->reward_money = $reward_money;
-    $this->reward_xp = $reward_xp;
-    if(is_int($reward_item)) $this->reward_item = $reward_item;
-    $this->npc_start = $npc_start;
-    $this->npc_end = $npc_end;
-    $this->order = $order;
-    if(is_int($needed_item)) $this->needed_item = $needed_item;
-    $this->item_amount = $item_amount;
-    $this->item_lose = (bool) $item_lose;
-    if(is_int($cost_money)) $this->cost_money = $cost_money;
-    if(is_int($needed_level)) $this->needed_level = $needed_level;
-    if(is_int($needed_quest)) $this->needed_quest = $needed_quest;
+  function __construct(\Nette\Database\Table\ActiveRow $row) {
+    if($row->getTable()->name != "quests") exit;
+    foreach($row as $key => $value) {
+      $this->$key = $value;
+    }
   }
 }
 
@@ -110,9 +96,7 @@ class QuestModel extends \Nette\Object {
       $quests = $this->db->table("quests");
       foreach($quests as $quest) {
         $return[$quest->id] =
-          new Quest($quest->id, $quest->name, $quest->introduction, $quest->end_text, $quest->reward_money,
-            $quest->reward_xp, $quest->reward_item, $quest->npc_start, $quest->npc_end, $quest->order, $quest->needed_item,
-            $quest->item_amount, $quest->item_lose, $quest->cost_money, $quest->needed_level, $quest->needed_quest);
+          new Quest($quest);
       }
       $this->cache->save("quests", $return);
     } else {

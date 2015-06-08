@@ -30,29 +30,11 @@ class NPC extends \Nette\Object {
   /** @var int */
   public $pos_y;
   
-  /**
-   * @param int $id
-   * @param string $name
-   * @param string $description
-   * @param int $race
-   * @param string $type
-   * @param string $sprite
-   * @param string $portrait
-   * @param int $stage
-   * @param int $pos_x
-   * @param int $pos_y
-   */
-  function __construct($id, $name, $description, $race, $type, $sprite, $portrait, $stage, $pos_x, $pos_y) {
-    $this->id = $id;
-    $this->name = $name;
-    $this->description = $description;
-    $this->race = $race;
-    $this->type = $type;
-    $this->sprite = $sprite;
-    $this->portrait = $portrait;
-    $this->stage = $stage;
-    $this->pos_x = $pos_x;
-    $this->pos_y = $pos_y;
+  function __construct(\Nette\Database\Table\ActiveRow $row) {
+    if($row->getTable()->name != "npcs") exit;
+    foreach($row as $key => $value) {
+      $this->$key = $value;
+    }
   }
 }
 
@@ -84,7 +66,7 @@ class NPCModel extends \Nette\Object {
     if($npcs === NULL) {
       $npcs = $this->db->table("npcs");
       foreach($npcs as $npc) {
-        $return[$npc->id] = new NPC($npc->id, $npc->name, $npc->description, $npc->race, $npc->type, $npc->sprite, $npc->portrait, $npc->stage, $npc->pos_x, $npc->pos_y);
+        $return[$npc->id] = new NPC($npc);
       }
       $this->cache->save("npcs", $return);
     } else {
