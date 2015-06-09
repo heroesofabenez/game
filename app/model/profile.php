@@ -136,7 +136,7 @@ class Profile extends \Nette\Object {
       $return["guild"] = "Not a member of guild";
     }
     $activePet = $this->db->table("pets")->where("owner=$char->id")->where("deployed=1");
-    if($activePet->count("*") == 1) {
+    if($activePet->count() == 1) {
       $petType = $this->db->table("pet_types")->get($activePet->type);
       if($activePet->name == "pets") $petName = "Unnamed"; else $petName = $activePet->name . ",";
       $bonusStat = strtoupper($petType->bonus_stat);

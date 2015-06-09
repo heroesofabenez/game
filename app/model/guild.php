@@ -166,7 +166,7 @@ class GuildModel extends \Nette\Object {
       ->where("from", $this->user->id)
       ->where("type", "guild_app")
       ->where("status", "new");
-    if($apps->count("*") > 0) return true;
+    if($apps->count() > 0) return true;
     else return false;
   }
   

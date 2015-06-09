@@ -26,7 +26,7 @@ class Ranking extends \Nette\Object {
     $characters = $this->db->table("characters")->order("level, experience, id")
       ->limit($paginator->getLength(), $paginator->getOffset());
     $result = $this->db->table("characters");
-    $paginator->itemCount = $result->count("id");
+    $paginator->itemCount = $result->count();
     $chars = array();
     foreach($characters as $character) {
       if($character->guild == 0)  $guildName = "";

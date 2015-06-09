@@ -31,7 +31,7 @@ class Authenticator extends \Nette\Object implements NS\IAuthenticator {
     $uid = Presenters\BasePresenter::getRealId();
     if($uid == 0) return new NS\Identity(0, "guest");
     $chars = $this->db->table("characters")->where("owner", $uid);
-    if($chars->count("*") == 0) return new NS\Identity(-1, "guest");
+    if($chars->count() == 0) return new NS\Identity(-1, "guest");
     foreach($chars as $char) {
       if($char->owner == $uid) break;
     }

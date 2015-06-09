@@ -160,7 +160,7 @@ class QuestModel extends \Nette\Object {
     $row = $this->db->table("character_quests")
       ->where("character", $this->user->id)
       ->where("quest", $id);
-    if($row->count("quest") === 0) return 0;
+    if($row->count() === 0) return 0;
     foreach($row as $r) { }
     return $r->progress;
   }

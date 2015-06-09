@@ -104,7 +104,7 @@ class ItemModel extends \Nette\Object {
     $itemRow = $this->db->table("character_items")
       ->where("character", $this->user->id)
       ->where("item", $id);
-    if($itemRow->count("id") == 1) {
+    if($itemRow->count() == 1) {
       foreach($itemRow as $item) { }
       if($item->amount >= $amount) $return = true;
     }

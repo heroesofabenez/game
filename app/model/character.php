@@ -375,7 +375,7 @@ class CharacterModel extends \Nette\Object {
       "occupation" => $values["class"], "gender" => $values["gender"]
     );
     $chars = $this->db->table("characters")->where("name", $data["name"]);
-    if($chars->count("*") > 0) return false;
+    if($chars->count() > 0) return false;
     
     $race = $this->db->table("character_races")->get($values["race"]);
     $class = $this->db->table("character_classess")->get($values["class"]);

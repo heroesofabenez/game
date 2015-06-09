@@ -38,7 +38,7 @@ class Intro extends \Nette\Object {
       ->where("race", $char->race)
       ->where("class", $char->occupation)
       ->where("part", $part);
-    if($intros->count("*") == 0) return;
+    if($intros->count() == 0) return;
     foreach($intros as $intro) { }
     return $intro->text;
   }
@@ -62,14 +62,14 @@ class Intro extends \Nette\Object {
     $classSLs = $this->db->table("quest_stages")
       ->where("required_level", 0)
       ->where("required_occupation", $this->user->identity->occupation);
-    if($classSLs->count("id") > 0) {
+    if($classSLs->count() > 0) {
       foreach($classSLs as $classSL) { }
       return $classSL->id;
     }
     $raceSLs = $this->db->table("quest_stages")
       ->where("required_level", 0)
       ->where("required_race", $this->user->identity->race);
-    if($raceSLs->count("id") > 0) {
+    if($raceSLs->count() > 0) {
       foreach($raceSLs as $raceSL) { }
       return $raceSL->id;
     }
