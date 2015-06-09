@@ -22,20 +22,15 @@ class Stage extends \Nette\Object {
   /** @var int id of parent area */
   public $area;
   /** @var int */
-  public $x;
+  public $pos_x;
   /** @var int */
-  public $y;
+  public $pos_y;
   
-  function __construct($id, $name, $description, $required_level, $required_race, $required_occupation, $area, $x, $y) {
-    $this->id = $id;
-    $this->name = $name;
-    $this->description = $description;
-    $this->required_level = $required_level;
-    $this->required_race = $required_race;
-    $this->required_occupation = $required_occupation;
-    $this->area = $area;
-    if(is_int($x)) $this->x = $x;
-    if(is_int($y)) $this->y = $y;
+  function __construct(\Nette\Database\Table\ActiveRow $row) {
+    if($row->getTable()->name != "quest_stages") exit;
+    foreach($row as $key => $value) {
+      $this->$key = $value;
+    }
   }
 }
 
@@ -66,13 +61,11 @@ class Area extends \Nette\Object {
    * @param int $required_race
    * @param int $required_occupation
    */
-  function __construct($id, $name, $description, $required_level, $required_race, $required_occupation) {
-    $this->id = $id;
-    $this->name = $name;
-    $this->description = $description;
-    $this->required_level = $required_level;
-    $this->required_race = $required_race;
-    $this->required_occupation = $required_occupation;
+  function __construct(\Nette\Database\Table\ActiveRow $row) {
+    if($row->getTable()->name != "quest_areas") exit;
+    foreach($row as $key => $value) {
+      $this->$key = $value;
+    }
   }
 }
 
@@ -115,7 +108,7 @@ class Location extends \Nette\Object {
     if($stages === NULL) {
       $stages = $this->db->table("quest_stages");
       foreach($stages as $stage) {
-        $return[$stage->id] = new Stage($stage->id, $stage->name, $stage->description, $stage->required_level, $stage->required_race, $stage->required_occupation, $stage->area, $stage->pos_x, $stage->pos_y);
+        $return[$stage->id] = new Stage($stage);
       }
       $this->cache->save("stages", $return);
     } else {
@@ -154,7 +147,7 @@ class Location extends \Nette\Object {
     if($areas === NULL) {
       $areas = $this->db->table("quest_areas");
       foreach($areas as $area) {
-        $return[$area->id] = new Area($area->id, $area->name, $area->description, $area->required_level, $area->required_race, $area->required_occupation);
+        $return[$area->id] = new Area($area);
       }
       $this->cache->save("areas", $return);
     } else {

@@ -35,7 +35,7 @@ class Map extends \Nette\Object {
       $this->drawer->localMap();
     }
     foreach($stages as $stage) {
-      $c1 = $stage->x-15; $c2 = $stage->y-15; $c3 = $stage->x+15; $c4 = $stage->y+15;
+      $c1 = $stage->pos_x-15; $c2 = $stage->pos_y-15; $c3 = $stage->pos_x+15; $c4 = $stage->pos_y+15;
       $return["areas"][] = (object) array(
         "href" => "", "shape" => "rect", "title" => $stage->name,
         "coords" => "$c1,$c2,$c3,$c4", "stage" => $stage->id
