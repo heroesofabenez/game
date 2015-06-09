@@ -11,12 +11,15 @@ use Nette\Security as NS;
 class Authenticator extends \Nette\Object implements NS\IAuthenticator {
   /** @var \Nette\Database\Context Database context */
   protected $db;
+  /** @var \HeroesofAbenez\Permissions */
+  protected $permissionsModel;
   
   /**
    * @param \Nette\Database\Context $database Database context
    */
-  function __construct(\Nette\Database\Context $database) {
+  function __construct(\Nette\Database\Context $database, \HeroesofAbenez\Permissions $permissionsModel) {
     $this->db = $database;
+    $this->permissionsModel = $permissionsModel;
   }
   
   /**
@@ -39,8 +42,7 @@ class Authenticator extends \Nette\Object implements NS\IAuthenticator {
       "white_karma" => $char->white_karma, "neutral_karma" => $char->neutral_karma, "dark_karma" => $char->dark_karma
     );
     if($char->guild > 0) {
-      $row = $this->db->table("guild_ranks")->get($char->guildrank);
-      $role = $row->name;
+      $role = $this->permissionsModel->getRoleName($char->guildrank);
     }
     else $role = "player";
     return new NS\Identity($char->id, $role, $data);
