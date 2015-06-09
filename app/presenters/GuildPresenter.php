@@ -404,6 +404,7 @@ case 6:
       $this->flashMessage("You can't change deputy/grandmaster.");
       $this->redirect("Guild:");
     }
+    $this->template->haveForm = true;
   }
   
   
@@ -419,7 +420,6 @@ case 6:
       $leaders[$member["id"]] = $member["name"] . "-" . $member["rank"];
     }
     $form->addSelect("grandmaster", "New grandmaster:", $leaders)
-         ->setPrompt("Select new grandmaster")
          ->setRequired("Select grandmaster");
     $form->addSelect("deputy", "New deputy:", $leaders)
          ->setRequired("Select deputy")
