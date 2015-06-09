@@ -113,7 +113,7 @@ class GuildModel extends \Nette\Object {
     $return = array();
     $members = $this->db->table("characters")->where("guild", $id)->order("guildrank DESC, id");
     foreach($members as $member) {
-      if(count($roles) > 0 AND !  in_array($member->guildrank, $roles)) continue;
+      if(count($roles) > 0 AND !in_array($member->guildrank, $roles)) continue;
       $rank = $this->permissionsModel->getRoleName($member->guildrank);
       $return[] = array("id" => $member->id, "name" => $member->name, "rank" => ucfirst($rank), "rankId" => $member->guildrank);
     }
