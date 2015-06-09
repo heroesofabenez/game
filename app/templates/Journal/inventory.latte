@@ -14,10 +14,10 @@ No items
   </p>
   <p>Equpiment:<br>
   {if count($equipments) == 0}
-No items
+No equipment
   {else}
     {foreach $equipments as $equipment}
-{$equipment->name}<br>
+{$equipment->amount}x <a n:href="Equipment:view $equipment->id">{$equipment->name}</a><br>
     {/foreach}
   {/if}
   </p>

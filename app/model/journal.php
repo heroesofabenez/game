@@ -119,6 +119,12 @@ class Journal extends \Nette\Object {
       $return["items"][] = (object) array("id" => $i->id, "name" => $i->name, "amount" => $item->amount);
     }
     $return["equipments"] = array();
+    $equipments = $this->db->table("character_equipment")
+      ->where("character", $this->user->id);
+    foreach($equipments as $equipment) {
+      $i = $this->db->table("equipment")->get($equipment->item);
+      $return["equipments"][] = (object) array("id" => $i->id, "name" => $i->name, "amount" => $equipment->amount);
+    }
     return $return;
   }
   
