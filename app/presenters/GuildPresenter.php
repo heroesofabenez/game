@@ -406,6 +406,33 @@ case 6:
     }
   }
   
+  
+  /**
+   * Creates form for renaming guild
+   *
+   * @return \Nette\Application\UI\Form
+  */
+  protected function createComponentChangeLeadersForm() {
+    $form = new UI\Form;
+    $members = $this->model->guildMembers($this->user->identity->guild, array(5,6,7));
+    foreach($members as $member) {
+      $leaders[$member["id"]] = $member["name"] . "-" . $member["rank"];
+    }
+    $form->addSelect("grandmaster", "New grandmaster:", $leaders)
+         ->setPrompt("Select new grandmaster")
+         ->setRequired("Select grandmaster");
+    $form->addSelect("deputy", "New deputy:", $leaders)
+         ->setRequired("Select deputy")
+         ->setPrompt("Select new deputy");
+    $form->addSubmit("change", "Change");
+    $form->onSuccess[] = array($this, "changeLeadersFormSucceeded");
+    return $form;
+  }
+  
+  function changeLeadersFormSucceeded(UI\Form $form, $values) {
+    
+  }
+  
   /**
    * @return void
    */
