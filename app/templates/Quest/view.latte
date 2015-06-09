@@ -7,7 +7,7 @@
   <p{if $finished} class="crossout"{/if}>For completing this quest you have to:</p>
   <ul>
     {foreach $requirements as $requirement}
-    <li{if $finished} class="crossout"{/if}>{!$requirement}{if $iterator->last}.{else},{/if}</li>
+    <li{if $finished OR $requirement->met} class="crossout"{/if}>{!$requirement->text}{if $iterator->last}.{else},{/if}</li>
     {/foreach}
   </ul>
   {if $finished}<p>{$end_text}</p>{/if}

@@ -47,15 +47,29 @@ class QuestPresenter extends BasePresenter {
     $this->template->npcStart = $npcMOdel->getNpcName($quest->npc_start);
     $this->template->npcEnd = $npcMOdel->getNpcName($quest->npc_end);
     $requirements = array();
-    if($quest->cost_money > 0) $requirements[] = "pay {$quest->cost_money} silver marks";
+    if($quest->cost_money > 0) {
+      $requirements[] = (object) array(
+        "text" => "pay {$quest->cost_money} silver marks", "met" => false
+      );
+    }
     if($quest->needed_item > 0) {
       $itemName = $this->itemModel->getItemName($quest->needed_item);
       $itemLink = $this->link("Item:view", $quest->needed_item);
-      $requirements[] = "get {$quest->item_amount}x <a href=\"$itemLink\">$itemName</a>";
+      $haveItem = $this->itemModel->haveItem($quest->needed_item, $quest->item_amount);
+      $requirements[] = (object) array(
+        "text" => "get {$quest->item_amount}x <a href=\"$itemLink\">$itemName</a>", "met" => $haveItem
+      );
     }
     $npcLink = $this->link("Npc:view", $quest->npc_end);
-    if($quest->npc_start != $quest->npc_end) $requirements[] = "talk to <a href=\"$npcLink\">{$this->template->npcEnd}</a>";
-    else $requirements[] = "report back to <a href=\"$npcLink\">{$this->template->npcEnd}</a>";
+    if($quest->npc_start != $quest->npc_end) {
+      $requirements[] = (object) array(
+        "text" => "talk to <a href=\"$npcLink\">{$this->template->npcEnd}</a>", "met" => false
+      );
+    } else {
+      $requirements[] = (object) array(
+        "text" => "report back to <a href=\"$npcLink\">{$this->template->npcEnd}</a>", "met" => false
+      );
+    }
     $this->template->requirements = $requirements;
     $this->template->rewardMoney = $quest->reward_money;
     $this->template->rewardXp = $quest->reward_xp;
