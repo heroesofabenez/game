@@ -30,6 +30,9 @@ class EquipmentPresenter extends BasePresenter {
       if($key == "required_class") $value = $classes[$value];
       $this->template->$key = $value;
     }
+    $profileModel = $this->context->getService("model.profile");
+    $this->template->level = $this->user->identity->level;
+    $this->template->class = $profileModel->getClassName($this->user->identity->occupation);
   }
 }
 ?>

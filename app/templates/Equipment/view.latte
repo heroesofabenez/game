@@ -5,6 +5,6 @@
   <p>{$slot|firstUpper}{if $type}-{$type}{/if}</p>
   <p>{$description}</p>
   <p>Strength: {$strength}, durability: {$durability}</p>
-  <p>Requires: lvl {$required_lvl}, class {$required_class|firstUpper}</p>
+  <p>Requires: lvl <span class="{if $class >= $required_class}green{else}red{/if}">{$required_lvl}</span>, class <span class="{if $class == $required_class}green{else}red{/if}">{$required_class|firstUpper}</span></p>
   <p>Price: {$price} silver marks</p>
 {/block}
