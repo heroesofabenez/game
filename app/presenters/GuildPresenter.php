@@ -277,7 +277,7 @@ class GuildPresenter extends BasePresenter {
     $currentName = $this->model->getGuildName($this->user->identity->guild);
     $form = new UI\Form;
     $form->addText("name", "New name:")
-         ->addRule(\Nette\Forms\Form::MAX_LENGTH, "Name can have no more than 20 letters", 20)
+         ->addRule(\Nette\Forms\Form::MAX_LENGTH, "Name can have no more than 20 letters.", 20)
          ->setDefaultValue($currentName);
     $form->addSubmit("rename", "Rename");
     $form->onSuccess[] = array($this, "renameGuildFormSucceeded");
