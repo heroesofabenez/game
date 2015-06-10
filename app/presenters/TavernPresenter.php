@@ -37,6 +37,15 @@ class TavernPresenter extends BasePresenter {
     $this->template->chat = "localChat";
   }
   
+   /**
+   * @return void
+   */
+  function actionGlobal() {
+    $this->template->canChat = true;
+    $this->template->title = "Global chat";
+    $this->template->chat = "globalChat";
+  }
+  
   /**
    * @return \HeroesofAbenez\Chat\GuildChatControl
    */
@@ -53,6 +62,15 @@ class TavernPresenter extends BasePresenter {
     $db = $this->context->getService("database.default.context");
     $stage = $this->user->identity->stage;
     return new Chat\LocalChatControl($db, $stage);
+  }
+  
+  /**
+   * @return \HeroesofAbenez\Chat\GlobalChatControl
+   */
+  protected function createComponentGlobalChat() {
+    $db = $this->context->getService("database.default.context");
+    $stage = $db->table("quest_stages")->get($this->user->identity->stage);
+    return new Chat\GlobalChatControl($db, $stage->area);
   }
   
   /**
@@ -85,6 +103,10 @@ case "guild":
 case "local":
   $stage = $this->user->identity->stage;
   $chat = new Chat\LocalChatControl($db, $stage);
+  break;
+case "global":
+  $stage = $db->table("quest_stages")->get($this->user->identity->stage);
+  $chat = new Chat\GlobalChatControl($db, $stage->area);
   break;
     }
     $chat->newMessage($this->user->id, $values["message"]);

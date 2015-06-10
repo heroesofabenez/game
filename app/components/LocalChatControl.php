@@ -29,6 +29,5 @@ class LocalChatControl extends ChatControl {
     }
     return $characters;
   }
-  
 }
 ?>
