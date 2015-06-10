@@ -209,7 +209,6 @@ class GuildPresenter extends BasePresenter {
   function renderManage() {
     $this->template->canRename = $this->user->isAllowed("guild", "rename");
     $this->template->canDissolve = $this->user->isAllowed("guild", "dissolve");
-    $this->template->leader = ($this->user->roles[0] == "grandmaster");
   }
   
   /**
@@ -392,45 +391,6 @@ case 6:
   break;
     }
     $this->redirect("Guild:");
-  }
-  
-  /**
-   * @todo design the form and code its handling
-   * @return void
-   */
-  function actionLeaders() {
-    $this->notInGuild();
-    if($this->user->roles[0] !== "grandmaster") {
-      $this->flashMessage("You can't change deputy/grandmaster.");
-      $this->redirect("Guild:");
-    }
-    $this->template->haveForm = true;
-  }
-  
-  
-  /**
-   * Creates form for renaming guild
-   *
-   * @return \Nette\Application\UI\Form
-  */
-  protected function createComponentChangeLeadersForm() {
-    $form = new UI\Form;
-    $members = $this->model->guildMembers($this->user->identity->guild, array(5,6,7));
-    foreach($members as $member) {
-      $leaders[$member["id"]] = $member["name"] . "-" . $member["rank"];
-    }
-    $form->addSelect("grandmaster", "New grandmaster:", $leaders)
-         ->setRequired("Select grandmaster");
-    $form->addSelect("deputy", "New deputy:", $leaders)
-         ->setRequired("Select deputy")
-         ->setPrompt("Select new deputy");
-    $form->addSubmit("change", "Change");
-    $form->onSuccess[] = array($this, "changeLeadersFormSucceeded");
-    return $form;
-  }
-  
-  function changeLeadersFormSucceeded(UI\Form $form, $values) {
-    
   }
   
   /**
