@@ -160,6 +160,8 @@ class GuildModel extends \Nette\Object {
   
   /**
    * Check if player has an unresolved application
+   * 
+   * @return bool
    */
   function haveUnresolvedApplication() {
     $apps = $this->db->table("requests")
