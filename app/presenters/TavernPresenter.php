@@ -76,14 +76,13 @@ class TavernPresenter extends BasePresenter {
    * @return void
    */
   function newMessageSucceeded(UI\Form $form, $values) {
+    $db = $this->context->getService("database.default.context");
     switch($this->action) {
 case "guild":
-  $db = $this->context->getService("database.default.context");
   $gid = $this->user->identity->guild;
   $chat = new Chat\GuildChatControl($db, $gid);
   break;
 case "local":
-  $db = $this->context->getService("database.default.context");
   $stage = $this->user->identity->stage;
   $chat = new Chat\LocalChatControl($db, $stage);
   break;
