@@ -181,13 +181,13 @@ class GuildPresenter extends BasePresenter {
   */
   function actionLeave() {
     $this->notInGuild();
-    if($this->user->isInRole("grandmaster")) {
-      $this->flashMessage("Grandmaster cannot leave guild.");
-      $this->redirect("Guild:");
-    } else {
-      $this->model->leave();
+    $result = $this->model->leave();
+    if($result) {
       $this->flashMessage("You left guild.");
       $this->user->logout();
+    } else {
+      $this->flashMessage("Grandmaster cannot leave guild.");
+      $this->redirect("Guild:");
     }
     $this->forward("default");
   }

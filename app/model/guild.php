@@ -306,14 +306,16 @@ class GuildModel extends \Nette\Object {
   /**
    * Leave the guild
    * 
-   * @return void
+   * @return bool
   */
   function leave() {
+    if($this->user->isInRole("grandmaster")) return false;
     $data = array(
       "guild" => 0, "guildrank" => NULL
     );
     $this->db->query("UPDATE characters SET ? WHERE id=?", $data, $this->user->id);
     $this->cache->remove("guilds");
+    return true;
   }
   
   /**
