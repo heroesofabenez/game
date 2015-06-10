@@ -1,0 +1,24 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="{$baseUrl}/styles/base.css">
+  <title>HeroesofAbenez {$server} - {$title}</title>
+</head>
+<body>
+{include "navigation.latte"}
+<article id="main">
+  <h1>{$title}</h1>
+  <p>Rooms: <a n:href="Tavern:local">Local</a> <a n:href="Tavern:guild">Guild</a></p>
+  {if $canChat}
+  {control $chat}
+  <div id="chat_new_message">
+    {control newMessageForm}
+  </div>
+  {else}
+  <p>You can't use this room.</p>
+  {/if}
+</article>
+{include "footer.latte"}
+</body>
+</html>

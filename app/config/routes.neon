@@ -3,5 +3,6 @@ routing:
         "ranking[/<page=1 [0-9]+>]": "Ranking:characters"
         "ranking/<action>[/<page=1 [0-9]+>]": "Ranking:characters"
         "map[/<action>]": "Map:local"
+        "tavern[/<action>]": "Tavern:local"
         "<presenter>/<id [0-9]+>": "Homepage:view"
         "<presenter>[/<action>][/<id>]": "Homepage:default"
