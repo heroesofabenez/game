@@ -2,5 +2,5 @@
 {block title}Guild members{/block}
 {block content}
   <h1>Guild members</h1>
-  {foreach $members as $member}{$member["rank"]} {$member["name"]} <a n:href="Profile:view $member['id']">Profile</a> {if $canPromote AND $member["rankId"] < $rankId} <a n:href="Guild:promote $member['id']">Promote</a> <a n:href="Guild:demote $member['id']">Demote</a>{/if}{if $canKick AND $member["rankId"] < $rankId} <a n:href="Guild:kick $member['id']">Kick</a>{/if}{if !$iterator->isLast()}<br>{/if}{/foreach}
+  {foreach $members as $member}{$member->rank} {$member->name} <a n:href="Profile:view $member->id">Profile</a> {if $canPromote AND $member->rankId < $rankId} <a n:href="Guild:promote $member->id">Promote</a> <a n:href="Guild:demote $member->id">Demote</a>{/if}{if $canKick AND $member->rankId < $rankId} <a n:href="Guild:kick $member->id">Kick</a>{/if}{if !$iterator->isLast()}<br>{/if}{/foreach}
 {/block}
