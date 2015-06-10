@@ -243,7 +243,7 @@ class GuildPresenter extends BasePresenter {
     $currentName = $this->model->getGuildName($this->user->identity->guild);
     $form = new UI\Form;
     $form->addText("name", "Name:")
-         ->addRule(\Nette\Forms\Form::EQUAL, "You entered wrong name", $currentName);
+         ->addRule(\Nette\Forms\Form::EQUAL, "You entered wrong name.", $currentName);
     $form->addSubmit("dissolve", "Dissolve");
     $form->onSuccess[] = array($this, "dissolveGuildFormSucceeded");
     return $form;
