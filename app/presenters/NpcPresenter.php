@@ -11,6 +11,8 @@ use HeroesofAbenez as HOA;
 class NpcPresenter extends BasePresenter {
   /** @var \HeroesofAbenez\NPCModel */
   protected $model;
+  /** @var \HeroesofAbenez\NPC */
+  protected $npc;
   
   /**
    * @return void
@@ -18,6 +20,11 @@ class NpcPresenter extends BasePresenter {
   function startup() {
     parent::startup();
     $this->model = $this->context->getService("model.npc");
+    if($this->action != "default") {
+      $this->npc = $this->model->view($this->params["id"]);
+      if(!$this->npc) $this->forward("notfound");
+      if($this->npc->stage !== $this->user->identity->stage) $this->forward("unavailable");
+    }
   }
   
   /**
@@ -35,13 +42,10 @@ class NpcPresenter extends BasePresenter {
    * @return void
    */
   function renderView($id) {
-    $npc = $this->model->view($id);
-    if(!$npc) $this->forward("notfound");
-    if($npc->stage !== $this->user->identity->stage) $this->forward("unavailable");
     $this->template->id = $id;
-    $this->template->name = $npc->name;
-    $this->template->description = $npc->description;
-    $this->template->type = $npc->type;
+    $this->template->name = $this->npc->name;
+    $this->template->description = $this->npc->description;
+    $this->template->type = $this->npc->type;
   }
   
   /**
@@ -49,13 +53,10 @@ class NpcPresenter extends BasePresenter {
    * @return void
    */
   function renderTalk($id) {
-    $npc = $this->model->view($id);
-    if(!$npc) $this->forward("notfound");
-    if($npc->stage !== $this->user->identity->stage) $this->forward("unavailable");
     $this->template->npcId = $id;
-    $this->template->npcName = $npc->name;
+    $this->template->npcName = $this->npc->name;
     $this->template->playerName = $playerName = $this->user->identity->name;
-    $names = array($npc->name, $playerName);
+    $names = array($this->npc->name, $playerName);
     $this->template->texts = new HOA\Dialogue($names);
     $this->template->texts->addLine("npc", "Greetings, #playerName#. Can I help you with anything?");
     $this->template->texts->addLine("player", "Hail, #npcName#. Not now but thank you.");
@@ -66,11 +67,8 @@ class NpcPresenter extends BasePresenter {
    * @return void
    */
   function renderQuests($id) {
-    $npc = $this->model->view($id);
-    if(!$npc) $this->forward("notfound");
-    if($npc->stage !== $this->user->identity->stage) $this->forward("unavailable");
     $this->template->id = $id;
-    $this->template->name = $npc->name;
+    $this->template->name = $this->npc->name;
     $questModel = $this->context->getService("model.quest");
     $this->template->quests = $questModel->availableQuests($id);
   }
@@ -80,9 +78,7 @@ class NpcPresenter extends BasePresenter {
    * @return void
    */
   function actionTrade($id) {
-    $npc = $this->model->view($id);
-    if(!$npc) $this->forward("notfound");
-    if($npc->stage !== $this->user->identity->stage) $this->forward("unavailable");
+    
   }
 }
 ?>
