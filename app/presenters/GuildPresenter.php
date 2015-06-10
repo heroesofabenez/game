@@ -159,7 +159,7 @@ class GuildPresenter extends BasePresenter {
       $this->flashMessage("Application sent.");
       $this->redirect("Guild:");
     } elseif($result === FALSE) {
-      $this->flashMessage("Application sent.");
+      $this->flashMessage("An error occured.");
       $this->redirect("Guild:");
     } else {
       $this->forward("notfound");

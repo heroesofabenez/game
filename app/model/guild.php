@@ -156,6 +156,7 @@ class GuildModel extends \Nette\Object {
     );
     $row = $this->db->query("INSERT INTO requests", $data);
     if($row) return true;
+    else return false;
   }
   
   /**
