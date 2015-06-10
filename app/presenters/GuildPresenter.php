@@ -258,7 +258,7 @@ class GuildPresenter extends BasePresenter {
   */
   function dissolveGuildFormSucceeded($form, $values) {
     $gid = $this->user->identity->guild;
-    $result = $this->model->dissolve($gid, $this->context);
+    $result = $this->model->dissolve($gid);
     if($result) {
       $this->flashMessage("Guild dissolved.");
       $this->user->logout();
