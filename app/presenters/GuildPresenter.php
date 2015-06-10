@@ -330,6 +330,8 @@ case 6:
 case 7:
   $this->flashMessage("You can't promote members to deputy or grandmaster.");
   break;
+case 8:
+  $this->flashMessage("Guild can't have more than 1 deputy.");
     }
     $this->redirect("Guild:");
   }

@@ -243,6 +243,10 @@ class GuildModel extends \Nette\Object {
     }
     if($adminRole <= $character->guildrank) return 6;
     if($character->guildrank >= 6) return 7;
+    if($character->guildrank == 5) {
+      $deputy = $this->guildMembers($admin->identity->guild, array(6));
+      if(count($deputy) > 0) return 8;
+    }
     $this->db->query("UPDATE characters SET guildrank=guildrank+1 WHERE id=$id");
     return 1;
   }
