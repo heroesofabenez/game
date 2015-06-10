@@ -9,7 +9,7 @@
 {include "navigation.latte"}
 <article id="main">
   <h1>{$title}</h1>
-  <p>Rooms: <a n:href="Tavern:local">Local</a> <a n:href="Tavern:guild">Guild</a></p>
+  <p>Rooms: <a n:href="Tavern:local">Local</a> <a n:href="Tavern:guild">Guild</a> <a n:href="Tavern:global">Global</a></p>
   {if $canChat}
   {control $chat}
   <div id="chat_new_message">
