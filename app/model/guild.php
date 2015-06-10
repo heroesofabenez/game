@@ -256,7 +256,7 @@ class GuildModel extends \Nette\Object {
   function demote($id) {
     $admin = $this->user;
     if($admin->identity->guild == 0) return 2;
-    if(!$admin->isAllowed("guild", "demote")) return 3;
+    if(!$admin->isAllowed("guild", "promote")) return 3;
     $character = $this->db->table("characters")->get($id);
     if(!$character) return 4;
     if($character->guild !== $admin->identity->guild) return 5;
