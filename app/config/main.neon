@@ -24,3 +24,6 @@ services:
     authenticator: HeroesofAbenez\Authenticator
     authorizator: HeroesofAbenez\Authorizator::create
     cache.cache: Nette\Caching\Cache(@cache.storage, "data")
+    chat.global: HeroesofAbenez\Chat\GlobalChatControl
+    chat.local: HeroesofAbenez\Chat\LocalChatControl
+    chat.guild: HeroesofAbenez\Chat\GuildChatControl

@@ -48,27 +48,21 @@ class TavernPresenter extends BasePresenter {
    * @return \HeroesofAbenez\Chat\GuildChatControl
    */
   protected function createComponentGuildChat() {
-    $db = $this->context->getService("database.default.context");
-    $user = $this->context->getService("security.user");
-    return new Chat\GuildChatControl($db, $user);
+    return $this->context->getService("chat.guild");
   }
   
   /**
    * @return \HeroesofAbenez\Chat\LocalChatControl
    */
   protected function createComponentLocalChat() {
-    $db = $this->context->getService("database.default.context");
-    $user = $this->context->getService("security.user");
-    return new Chat\LocalChatControl($db, $user);
+    return $this->context->getService("chat.local");
   }
   
   /**
    * @return \HeroesofAbenez\Chat\GlobalChatControl
    */
   protected function createComponentGlobalChat() {
-    $db = $this->context->getService("database.default.context");
-    $user = $this->context->getService("security.user");
-    return new Chat\GlobalChatControl($db, $user);
+    return $this->context->getService("chat.global");
   }
   
   /**
