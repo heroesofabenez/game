@@ -10,9 +10,10 @@ namespace HeroesofAbenez\Chat;
 class LocalChatControl extends ChatControl {
   /**
    * @param \Nette\Database\Context $database
-   * @param int $stage Guild's id
+   * @param \Nette\Security\User $user
    */
-  function __construct(\Nette\Database\Context $database, $stage) {
+  function __construct(\Nette\Database\Context $database, \Nette\Security\User $user) {
+    $stage = $user->identity->stage;
     parent::__construct($database, "chat_local", "stage", $stage);
   }
   

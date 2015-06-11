@@ -49,8 +49,8 @@ class TavernPresenter extends BasePresenter {
    */
   protected function createComponentGuildChat() {
     $db = $this->context->getService("database.default.context");
-    $gid = $this->user->identity->guild;
-    return new Chat\GuildChatControl($db, $gid);
+    $user = $this->context->getService("security.user");
+    return new Chat\GuildChatControl($db, $user);
   }
   
   /**
@@ -58,8 +58,8 @@ class TavernPresenter extends BasePresenter {
    */
   protected function createComponentLocalChat() {
     $db = $this->context->getService("database.default.context");
-    $stage = $this->user->identity->stage;
-    return new Chat\LocalChatControl($db, $stage);
+    $user = $this->context->getService("security.user");
+    return new Chat\LocalChatControl($db, $user);
   }
   
   /**
@@ -67,8 +67,8 @@ class TavernPresenter extends BasePresenter {
    */
   protected function createComponentGlobalChat() {
     $db = $this->context->getService("database.default.context");
-    $stage = $db->table("quest_stages")->get($this->user->identity->stage);
-    return new Chat\GlobalChatControl($db, $stage->area);
+    $user = $this->context->getService("security.user");
+    return new Chat\GlobalChatControl($db, $user);
   }
   
   /**

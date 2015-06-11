@@ -7,8 +7,13 @@ namespace HeroesofAbenez\Chat;
  * @author Jakub Konečný
  */
 class GlobalChatControl extends ChatControl {
-  function __construct(\Nette\Database\Context $database, $area) {
-    parent::__construct($database, "chat_global", "area", $area);
+  /**
+   * @param \Nette\Database\Context $database
+   * @param \Nette\Security\User $user
+   */
+  function __construct(\Nette\Database\Context $database, \Nette\Security\User $user) {
+    $stage = $database->table("quest_stages")->get($user->identity->stage);
+    parent::__construct($database, "chat_global", "area", $stage->area);
   }
   
   /**
