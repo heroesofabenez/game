@@ -16,6 +16,7 @@ class TavernPresenter extends BasePresenter {
   function startup() {
     parent::startup();
     $this->template->haveForm = true;
+    $this->template->canChat = true;
   }
   
   /**
@@ -23,7 +24,6 @@ class TavernPresenter extends BasePresenter {
    */
   function actionGuild() {
     if($this->user->identity->guild === 0) $this->template->canChat = false;
-    else $this->template->canChat = true;
     $this->template->title = "Guild chat";
     $this->template->chat = "guildChat";
   }
@@ -32,7 +32,6 @@ class TavernPresenter extends BasePresenter {
    * @return void
    */
   function actionLocal() {
-    $this->template->canChat = true;
     $this->template->title = "Local chat";
     $this->template->chat = "localChat";
   }
@@ -41,7 +40,6 @@ class TavernPresenter extends BasePresenter {
    * @return void
    */
   function actionGlobal() {
-    $this->template->canChat = true;
     $this->template->title = "Global chat";
     $this->template->chat = "globalChat";
   }
