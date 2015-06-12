@@ -1,6 +1,8 @@
 <?php
 namespace HeroesofAbenez;
 
+use Nette\Utils\Arrays;
+
 /**
  * Data structure for stage
  * 
@@ -118,6 +120,18 @@ class Location extends \Nette\Object {
   }
   
   /**
+   * Gets data about specified stage
+   * 
+   * @param int $id Stage's id
+   * @return Stage
+   */
+  function getStage($id) {
+    $stages = $this->listOfStages();
+    $stage = Arrays::get($stages, $id, false);
+    return $stage;
+  }
+  
+  /**
    * Gets routes between stages
    * 
    * @return array
@@ -154,6 +168,18 @@ class Location extends \Nette\Object {
       $return = $areas;
     }
     return $return;
+  }
+  
+  /**
+   * Gets data about specified area
+   * 
+   * @param int $id Area's id
+   * @return Area
+   */
+  function getArea($id) {
+    $areas = $this->listOfAreas();
+    $area = Arrays::get($areas, $id, false);
+    return $area;
   }
   
   /**
