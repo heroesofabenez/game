@@ -6,6 +6,6 @@
   </aside>
   <article id="chat_texts">
 {foreach $texts as $text}
-  {$text->character} ({$text->when}): {$text->message}<br>
+    <span id="chat_text_{$text->id}">{$text->character} ({$text->when}): {$text->message}</span><br>
 {/foreach}
   </article>

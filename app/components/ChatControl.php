@@ -53,7 +53,7 @@ abstract class ChatControl extends \Nette\Application\UI\Control {
         $this->names[$id] = $char->name;
       }
       $lines[] = (object) array(
-        "character" => $this->names[$line->character], "when" => $line->when, "message" => $line->message
+        "id" => $line->id, "character" => $this->names[$line->character], "when" => $line->when, "message" => $line->message
       );
     }
     return $lines;
