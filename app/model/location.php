@@ -102,9 +102,10 @@ class Location extends \Nette\Object {
   /**
    * Gets list of stages
    * 
+   * @para int $area Return stages only from specified area. 0 = all areas
    * @return array list of stages
    */
-  function listOfStages() {
+  function listOfStages($area = 0) {
     $return = array();
     $stages = $this->cache->load("stages");
     if($stages === NULL) {
@@ -115,6 +116,11 @@ class Location extends \Nette\Object {
       $this->cache->save("stages", $return);
     } else {
       $return = $stages;
+    }
+    if($area > 0) {
+      foreach($return as $stage) {
+        if($stage->area != $area) unset($return[$stage->id]);
+      }
     }
     return $return;
   }
