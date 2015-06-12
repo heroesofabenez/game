@@ -102,7 +102,7 @@ class Location extends \Nette\Object {
   /**
    * Gets list of stages
    * 
-   * @para int $area Return stages only from specified area. 0 = all areas
+   * @param int $area Return stages only from specified area. 0 = all areas
    * @return array list of stages
    */
   function listOfStages($area = 0) {
