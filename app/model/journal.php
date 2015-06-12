@@ -74,8 +74,7 @@ class Journal extends \Nette\Object {
   function basic() {
     $user = $this->user->identity;
     $character = $this->db->table("characters")->get($user->id);
-    $stages = $this->locationModel->listOfStages();
-    $stage = $stages[$user->stage];
+    $stage = $this->locationModel->getStage($user->stage);
     $race = $this->profileModel->getRaceName($user->race);
     $class = $this->profileModel->getClassName($user->occupation);
     if(is_int($user->specialization)) {

@@ -195,8 +195,8 @@ class Location extends \Nette\Object {
    * @return string
    */
   function getStageName($id) {
-    $stages = $this->listOfStages();
-    return $stages[$id]->name;
+    $stage = $this->getStage($id);
+    return $stage->name;
   }
   
   /**
@@ -206,8 +206,8 @@ class Location extends \Nette\Object {
    * @return string
    */
   function getAreaName($id) {
-    $areas = $this->listOfAreas();
-    return $areas[$id]->name;
+    $area = $this->getArea($id);
+    return $area->name;
   }
   
   /**
@@ -217,8 +217,7 @@ class Location extends \Nette\Object {
    */
   function home() {
     $return = array();
-    $stages = $this->listOfStages();
-    $stage = $stages[$this->user->identity->stage];
+    $stage = $this->getStage($this->user->identity->stage);
     $return["stageName"] = $stage->name;
     $return["areaName"] = $this->getAreaName($stage->area);
     $return["characterName"] = $this->user->identity->name;
@@ -251,8 +250,8 @@ class Location extends \Nette\Object {
    * @return int Error code|1 on success
    */
   function travelToStage($id) {
-    $stages = $this->listOfStages();
-    if(!isset($stages[$id])) return 2;
+    $stage = $this->getStage($id);
+    if(!$stage) return 2;
     $currentStage = $this->user->identity->stage;
     $foundRoute = false;
     $routes = $this->stageRoutes();
