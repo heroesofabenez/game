@@ -40,11 +40,17 @@ class ItemModel extends \Nette\Object {
   protected $cache;
   /** @var \Nette\Security\User */
   protected $user;
+  /** @var \Nette\Http\Request */
+  protected $request;
   
   function __construct(\Nette\Caching\Cache $cache, \Nette\Database\Context $db, \Nette\Security\User $user) {
     $this->db = $db;
     $this->cache = $cache;
     $this->user = $user;
+  }
+  
+  function setRequest(\Nette\Http\Request $request) {
+    $this->request = $request;
   }
   
   /**
@@ -144,5 +150,53 @@ class ItemModel extends \Nette\Object {
     if(!$result) return false;
     else return true;
   }
+  
+  /**
+   * @param int $id Items's id
+   * @param array $urls 
+   * @return int Error code|1 on success
+   */
+  function buyItem($id, $urls) {
+    $item = $this->view($id);
+    if(!$item) return 2;
+    if($this->checkReferers($urls)) return 3;
+    $character = $this->db->table("characters")->get($this->user->id);
+    if($character->money < $item->price) return 4;
+    if(!$this->giveItem($id)) return 5;
+    $data = "money=money-{$item->price}";
+    $result = $this->db->query("UPDATE characters SET $data WHERE id=?", $this->user->id);
+    if(!$result) return 5;
+    else return 1;
+  }
+  
+  /**
+   * @param int $id
+   * @return array
+   */
+  function canBuyFrom($id) {
+    $return = array();
+    $result = $this->db->table("shop_items")
+       ->where("item", $id);
+    foreach($result as $row) {
+      $return[] = $row->npc;
+    }
+    return $return;
+  }
+  
+  /**
+   * Check if player came from specified url
+   * 
+   * @param string $urls Expected url
+   * @return bool
+   */
+  protected function checkReferers($urls) {
+    $referer = $this->request->getReferer();
+    if($referer === NULL) return false;
+    foreach($urls as $url) {
+      if($referer->path == $url) return true;
+    }
+    return false;
+  }
+  
 }
 ?>

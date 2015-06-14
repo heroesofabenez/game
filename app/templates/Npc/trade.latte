@@ -7,7 +7,7 @@
   {else}
   <p>I can offer you:</p>
   {foreach $items as $item}
-  <a n:href="Item:view $item->id">{$item->name}</a> for {$item->price} silver marks. Buy<br>
+  <a n:href="Item:view $item->id">{$item->name}</a> for {$item->price} silver marks. <a n:href="Item:buy $item->id">Buy</a><br>
   {/foreach}
   {/if}
 {/block}

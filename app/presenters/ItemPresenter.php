@@ -27,5 +27,36 @@ class ItemPresenter extends BasePresenter {
     if(!$item) $this->forward("notfound");
     $this->template->item = $item;
   }
+  
+  /**
+   * @param int $id
+   * @return void
+   */
+  function actionBuy($id) {
+    $urls = array();
+    $this->model->request = $this->context->getService("http.request");
+    $npcs = $this->model->canBuyFrom($id);
+    foreach($npcs as $npc) {
+      $urls[] = $this->link("Npc:trade", $npc);
+    }
+    $result = $this->model->buyItem($id, $urls);
+    switch($result) {
+case 1:
+  $this->flashMessage("Item bought.");
+  break;
+case 3:
+  $this->flashMessage("Specified item doesn't exist.");
+  break;
+case 4:
+  $this->flashMessage("You don't have enough money.");
+  break;
+case 5:
+  $this->flashMessage("An error occured.");
+  break;
+    }
+    $referer = $this->context->getService("http.request")->getReferer();
+    if(!$referer) $this->redirect("Homepage:");
+    else $this->redirectUrl($referer->absoluteUrl);
+  }
 }
 ?>
