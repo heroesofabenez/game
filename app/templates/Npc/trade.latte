@@ -1,0 +1,13 @@
+{layout '../@layout.latte'}
+{block title}Shop{/block}
+{block content}
+  <h1>{$npcName}'s shop</h1>
+  {if count($items) === 0}
+  <p>Sorry but I have nothing to sell.</p>
+  {else}
+  <p>I can offer you:</p>
+  {foreach $items as $item}
+  <a n:href="Item:view $item->id">{$item->name}</a> for {$item->price} silver marks. Buy<br>
+  {/foreach}
+  {/if}
+{/block}

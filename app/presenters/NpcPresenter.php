@@ -78,7 +78,13 @@ class NpcPresenter extends BasePresenter {
    * @return void
    */
   function actionTrade($id) {
-    
+    if($this->npc->type != "shop") {
+      $this->flashMessage("This npc doesn't have shop.");
+      $this->redirect("view", $id);
+    }
+    $this->template->npcName = $this->npc->name;
+    $this->model->itemModel = $this->context->getService("model.item");
+    $this->template->items = $this->model->shop($id);
   }
 }
 ?>
