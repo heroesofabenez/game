@@ -42,6 +42,8 @@ class ItemModel extends \Nette\Object {
   protected $user;
   /** @var \Nette\Http\Request */
   protected $request;
+  /** @var \Nette\Application\LinkGenerator */
+  protected $linkGenerator;
   
   function __construct(\Nette\Caching\Cache $cache, \Nette\Database\Context $db, \Nette\Security\User $user) {
     $this->db = $db;
@@ -51,6 +53,10 @@ class ItemModel extends \Nette\Object {
   
   function setRequest(\Nette\Http\Request $request) {
     $this->request = $request;
+  }
+  
+  function setLinkGenerator(\Nette\Application\LinkGenerator $generator) {
+    $this->linkGenerator = $generator;
   }
   
   /**
@@ -153,12 +159,12 @@ class ItemModel extends \Nette\Object {
   
   /**
    * @param int $id Items's id
-   * @param array $urls 
    * @return int Error code|1 on success
    */
-  function buyItem($id, $urls) {
+  function buyItem($id) {
     $item = $this->view($id);
     if(!$item) return 2;
+    $urls = $this->canBuyFrom($id);
     if(!$this->checkReferer($urls)) return 3;
     $character = $this->db->table("characters")->get($this->user->id);
     if($character->money < $item->price) return 4;
@@ -178,7 +184,7 @@ class ItemModel extends \Nette\Object {
     $result = $this->db->table("shop_items")
        ->where("item", $id);
     foreach($result as $row) {
-      $return[] = $row->npc;
+      $return[] = $this->linkGenerator->link("Npc:trade", array("id" => $row->npc));
     }
     return $return;
   }
@@ -192,7 +198,7 @@ class ItemModel extends \Nette\Object {
   protected function checkReferer($urls) {
     $referer = $this->request->getReferer();
     if($referer === NULL) return false;
-    if(in_array($referer->path, $urls)) return true;
+    if(in_array($referer->absoluteUrl, $urls)) return true;
     else return false;
   }
   

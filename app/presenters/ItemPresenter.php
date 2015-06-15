@@ -33,13 +33,9 @@ class ItemPresenter extends BasePresenter {
    * @return void
    */
   function actionBuy($id) {
-    $urls = array();
     $this->model->request = $this->context->getService("http.request");
-    $npcs = $this->model->canBuyFrom($id);
-    foreach($npcs as $npc) {
-      $urls[] = $this->link("Npc:trade", $npc);
-    }
-    $result = $this->model->buyItem($id, $urls);
+    $this->model->linkGenerator = $this->context->getService("application.linkGenerator");
+    $result = $this->model->buyItem($id);
     switch($result) {
 case 1:
   $this->flashMessage("Item bought.");
@@ -59,7 +55,7 @@ case 5:
     }
     $referer = $this->context->getService("http.request")->getReferer();
     if(!$referer) $this->redirect("Homepage:");
-    else $this->redirectUrl($referer->absoluteUrl);
+    else $this->redirectUrl($referer->path);
   }
 }
 ?>
