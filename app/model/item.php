@@ -192,10 +192,8 @@ class ItemModel extends \Nette\Object {
   protected function checkReferers($urls) {
     $referer = $this->request->getReferer();
     if($referer === NULL) return false;
-    foreach($urls as $url) {
-      if($referer->path == $url) return true;
-    }
-    return false;
+    if(in_array($referer->path, $urls)) return true;
+    else return false;
   }
   
 }
