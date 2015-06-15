@@ -159,7 +159,7 @@ class ItemModel extends \Nette\Object {
   function buyItem($id, $urls) {
     $item = $this->view($id);
     if(!$item) return 2;
-    if($this->checkReferers($urls)) return 3;
+    if(!$this->checkReferers($urls)) return 3;
     $character = $this->db->table("characters")->get($this->user->id);
     if($character->money < $item->price) return 4;
     if(!$this->giveItem($id)) return 5;

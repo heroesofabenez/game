@@ -44,8 +44,11 @@ class ItemPresenter extends BasePresenter {
 case 1:
   $this->flashMessage("Item bought.");
   break;
-case 3:
+case 2:
   $this->flashMessage("Specified item doesn't exist.");
+  break;
+case 3:
+  $this->flashMessage("You can't buy the item from this location.");
   break;
 case 4:
   $this->flashMessage("You don't have enough money.");
