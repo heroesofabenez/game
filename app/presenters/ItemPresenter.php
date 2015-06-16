@@ -54,8 +54,14 @@ case 5:
   break;
     }
     $referer = $this->context->getService("http.request")->getReferer();
-    if(!$referer) $this->redirect("Homepage:");
-    else $this->redirectUrl($referer->path);
+    if(!$referer) {
+      $this->redirect("Homepage:");
+    } else {
+      $path = $this->getHttpRequest()->url->path;
+      $pos = strrpos($path, "/");
+      $id = substr($path, $pos+1);
+      $this->redirect("Npc:trade", $id);
+    }
   }
 }
 ?>
