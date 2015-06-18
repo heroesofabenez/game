@@ -1,0 +1,53 @@
+Installation instructions
+
+Creating folders
+Before you can start working (developing/testing) with the game, you have to
+create these empty folders:
+
+/images/maps
+/temp
+/temp/cache
+/temp/sessions
+/app/log
+
+. They are used to store generated data and they have to exist else you won't 
+be able to run the application/use certain functions.
+
+Local configuration
+After that, you need to create file /app/config/local.neon with local settings 
+for database and application. An example:
+
+parameters:
+    database:
+        dsn: "mysql:host=localhost;dbname=heroesofabenez"
+        user: heroesofabenez
+        password: qwerty
+    application:
+        server: sTest
+        webmasterMail: "jakub.konecny2@centrum.cz"
+php:
+    date.timezone: Europe/Prague
+di:
+    debugger: true
+
+On live servers add the following lines at the end of the file:
+application:
+    errorPresenter: "Error"
+    catchExceptions: true
+
+. They enable our error handling.
+
+Web server
+Apache
+If you're using Apache, you have little work to do as the repository contains
+all needed .htaccess files. However with that configuration you would have to
+clone the repository to /heroesofabenez. If you want to have it in different
+location, edit accordingly line
+RewriteBase /heroesofabenez
+in /.htaccess and (optionally) set up a virtual host.
+NGINX
+If you have NGINX, you (currenty) have to do all server configuration by yourself.
+General
+It is adviced to install the game to server's root and use localhost, 
+<yourcomputername>, or hoa.local as server's name. If you wish to use your
+computer's name, add its name to array $dev_servers in BasePresenter::getRealId().
