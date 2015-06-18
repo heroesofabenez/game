@@ -4,3 +4,5 @@ temp
 /api
 *test*
 /images
+/app/log
+/app/config/local.neon
