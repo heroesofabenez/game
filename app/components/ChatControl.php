@@ -13,8 +13,12 @@ abstract class ChatControl extends \Nette\Application\UI\Control {
   protected $table;
   /** @var string*/
   protected $param;
+  /** @var string */
+  protected $param2;
   /** @var int*/
   protected $id;
+  /** @var int */
+  protected $id2;
   /** @var array */
   protected $names = array();
   
@@ -23,10 +27,14 @@ abstract class ChatControl extends \Nette\Application\UI\Control {
    * @param string $table
    * @param int $id
    */
-  function __construct(\Nette\Database\Context $database, $table, $param, $id) {
+  function __construct(\Nette\Database\Context $database, $table, $param, $id, $param2 = NULL, $id2 = NULL) {
     $this->db = $database;
     if(is_string($table)) $this->table = $table;
     if(is_string($param)) $this->param = $param;
+    if($param2 === NULL) $this->param2 = $param;
+    else $this->param2 = $param2;
+    if($id2 === NULL) $this->id2 = $id;
+    else $this->id2 = $id2;
     if(is_int($id)) $this->id = $id;
   }
   
@@ -66,7 +74,7 @@ abstract class ChatControl extends \Nette\Application\UI\Control {
    */
   function getCharacters() {
     $characters = $this->db->table("characters")
-      ->where($this->param, $this->id);
+      ->where($this->param2, $this->id2);
     foreach($characters as $char) {
       $this->names[$char->id] = $char->name;
     }
