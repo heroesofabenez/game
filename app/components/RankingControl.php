@@ -11,12 +11,18 @@ abstract class RankingControl extends \Nette\Application\UI\Control {
   protected $name;
   /** @var array */
   protected $cols = array();
+  /** @var string */
+  protected $lastCol;
+  /** @var string */
+  protected $presenter;
   /** @var array */
   protected $rankings;
   
-  function __construct($name, array $cols) {
+  function __construct($name, array $cols, $presenter, $lastCol) {
     $this->name = $name;
     $this->cols = $cols;
+    $this->presenter = $presenter;
+    $this->lastCol = $lastCol;
     $this->rankings = array("characters", "guilds");
   }
   
@@ -28,6 +34,8 @@ abstract class RankingControl extends \Nette\Application\UI\Control {
     $template->name = $this->name;
     $template->rankings = $this->rankings;
     $template->cols = $this->cols;
+    $template->presenter = $this->presenter;
+    $template->lastCol = $this->lastCol;
     $template->rows = $this->getData();
     $template->render();
   }

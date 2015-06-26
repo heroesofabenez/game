@@ -15,7 +15,7 @@ class GuildsRankingControl extends RankingControl {
   
   function __construct(\HeroesofAbenez\GuildModel $model) {
     $this->model = $model;
-    parent::__construct("Guild", array("Name", "Members", ""));
+    parent::__construct("Guild", array("Name", "Members", ""), "Guild", "Details");
   }
   
   function getData() {
