@@ -11,6 +11,8 @@ class DialogueLine extends \Nette\Object {
   protected $speaker;
   /** @var string */
   protected $text;
+  /** @var array */
+  protected $names = array();
   
   /**
    * @param string $speaker
@@ -20,16 +22,24 @@ class DialogueLine extends \Nette\Object {
   function __construct($speaker, $text, $names) {
     $speaker = strtolower($speaker);
     if($speaker == "player" OR $speaker == "npc") $this->speaker = $speaker;
-    $replace = array("#npcName#", "#playerName#");
-    $this->text = str_replace($replace, $names, $text);
+    $this->text = $text;
+    $this->names = $names;
   }
   
   /**
-   * @param string $name
-   * @return mixed
+   * @return string
    */
-  function &__get($name) {
-    if(isset($this->$name)) return $this->$name;
+  function getSpeaker() {
+    if($this->speaker === "npc") return $this->names[0];
+    elseif($this->speaker === "player") return $this->names[1];
+  }
+  
+  /**
+   * @return string
+   */
+  function getText() {
+    $replace = array("#npcName#", "#playerName#");
+    return str_replace($replace, $this->names, $this->text);
   }
 }
 
