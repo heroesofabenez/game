@@ -68,6 +68,20 @@ class NPCDialogueControl extends \Nette\Application\UI\Control {
   }
   
   /**
+   * Gets texts for current npc
+   * 
+   * @return array
+   * @todo make it depend on player's identity and npc   
+   */
+  protected function getTexts() {
+    $texts = array(
+      array("npc", "Greetings, #playerName#. Can I help you with anything?"),
+      array("player", "Hail, #npcName#. Not now but thank you.")
+    );
+    return $texts;
+  }
+  
+  /**
    * Adds new line
    * 
    * @param string $speaker
@@ -83,8 +97,10 @@ class NPCDialogueControl extends \Nette\Application\UI\Control {
     $template->setFile(__DIR__ . "/npcDialogue.latte");
     $template->npcName = $this->npc->name;
     $template->texts = array();
-    $template->texts[] = $this->newLine("npc", "Greetings, #playerName#. Can I help you with anything?");
-    $template->texts[] = $this->newLine("player", "Hail, #npcName#. Not now but thank you.");
+    $texts = $this->getTexts();
+    foreach($texts as $text) {
+      $template->texts[] = $this->newLine($text[0], $text[1]);
+    }
     $template->render();
   }
 }
