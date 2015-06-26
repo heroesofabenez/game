@@ -3,6 +3,6 @@
   <table>
     <tr><th>Nm.</th>{foreach $cols as $col}<th>{$col|firstUpper}</th>{/foreach}<th></th></tr>
     {foreach $rows as $row}
-    <tr><td>{$iterator->counter}.</td>{foreach $cols as $col}<td>{$row[$col]}</td>{/foreach}<td><a href="{plink {$presenter}:view $row['id']}">{$lastCol}</a></td></tr>
+    <tr><td>{$iterator->counter}.</td>{foreach $cols as $col}<td>{$row->$col}</td>{/foreach}<td><a href="{plink {$presenter}:view $row->id}">{$lastCol}</a></td></tr>
     {/foreach}
   </table>
