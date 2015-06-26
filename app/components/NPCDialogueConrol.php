@@ -50,10 +50,6 @@ class DialogueLine extends \Nette\Object {
  * @author Jakub Konečný
  */
 class NPCDialogueControl extends \Nette\Application\UI\Control {
-  /** @var int */
-  protected $position = 0;
-  /** @var array */
-  protected $lines = array();
   /** @var array */
   protected $names;
   /** @var \Nette\Security\User */
@@ -82,16 +78,6 @@ class NPCDialogueControl extends \Nette\Application\UI\Control {
     $count = count($this);
     $this->lines[$count] = new DialogueLine($speaker, $text, $this->names);
     return $count;
-  }
-  
-  /**
-   * Removes specified line
-   * 
-   * @param int $index Line's index
-   * @return void
-   */
-  function removeLine($index) {
-    if(isset($this->lines[$index])) unset($this->lines[$index]);
   }
   
   function render() {
