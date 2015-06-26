@@ -1,0 +1,8 @@
+  <h1>Ranking {$name}</h1>
+  <h3>{foreach $rankings as $ranking}<a href="{plink Ranking:$ranking}">{$ranking|firstUpper}</a>{/foreach}</h3>
+  <table>
+    <tr><th>Nm.</th>{foreach $cols as $col}<th>{$col}</th>{/foreach}</tr>
+    {foreach $rows as $row}
+    <tr><td>{$iterator->counter}.</td>{foreach $row as $value}<td>{$value}</td>{/foreach}</tr>
+    {/foreach}
+  </table>
