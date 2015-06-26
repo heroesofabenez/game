@@ -1,8 +1,8 @@
   <h1>Ranking {$name}</h1>
   <h3>{foreach $rankings as $ranking}<a href="{plink Ranking:$ranking}">{$ranking|firstUpper}</a> {/foreach}</h3>
   <table>
-    <tr><th>Nm.</th>{foreach $cols as $col}<th>{$col}</th>{/foreach}<th></th></tr>
+    <tr><th>Nm.</th>{foreach $cols as $col}<th>{$col|firstUpper}</th>{/foreach}<th></th></tr>
     {foreach $rows as $row}
-    <tr><td>{$iterator->counter}.</td>{foreach $row as $value}<td>{$value}</td>{/foreach}<td><a href="{plink {$presenter}:view 1}">{$lastCol}</a></td></tr>
+    <tr><td>{$iterator->counter}.</td>{foreach $cols as $col}<td>{$row[$col]}</td>{/foreach}<td><a href="{plink {$presenter}:view $row['id']}">{$lastCol}</a></td></tr>
     {/foreach}
   </table>

@@ -15,7 +15,7 @@ class GuildsRankingControl extends RankingControl {
   
   function __construct(\HeroesofAbenez\GuildModel $model) {
     $this->model = $model;
-    parent::__construct("Guild", array("Name", "Members", ""), "Guild", "Details");
+    parent::__construct("Guild", array("name", "members"), "Guild", "Details");
   }
   
   function getData() {
@@ -26,7 +26,7 @@ class GuildsRankingControl extends RankingControl {
     }
     $data2 = Arrays::orderby($data, "members", SORT_DESC, "id", SORT_ASC);
     foreach($data2 as $row2) {
-      $return[] = array($row2["name"], $row2["members"]);
+      $return[] = array("id" => $row2["id"], "name" => $row2["name"], "members" => $row2["members"]);
     }
     return $return;
   }
