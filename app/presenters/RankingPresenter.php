@@ -10,15 +10,6 @@ class RankingPresenter extends BasePresenter {
   const ITEMS_PER_PAGE = 15;
   /** @var \Nette\Utils\Paginator */
   protected $paginator;
-  /** @var \HeroesofAbenez\Ranking */
-  protected $model;
-  
-  /**
-   * @param \HeroesofAbenez\Ranking $model
-   */
-  function __construct(\HeroesofAbenez\Ranking $model) {
-    $this->model = $model;
-  }
   
   /**
    * Set up paginator

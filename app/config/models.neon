@@ -12,6 +12,5 @@ services:
     model.permissions: HeroesofAbenez\Permissions
     model.postoffice: HeroesofAbenez\PostOffice
     model.profile: HeroesofAbenez\Profile
-    model.ranking: HeroesofAbenez\Ranking
     model.request: HeroesofAbenez\RequestModel
     model.quest: HeroesofAbenez\QuestModel
