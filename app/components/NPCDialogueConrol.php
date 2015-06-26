@@ -19,11 +19,19 @@ class DialogueLine extends \Nette\Object {
    * @param string $text
    * @param array $names
    */
-  function __construct($speaker, $text, $names) {
+  function __construct($speaker, $text, array $names) {
     $speaker = strtolower($speaker);
     if($speaker == "player" OR $speaker == "npc") $this->speaker = $speaker;
     $this->text = $text;
     $this->names = $names;
+  }
+  
+  /**
+   * @return string
+   */
+  function getText() {
+    $replace = array("#npcName#", "#playerName#");
+    return str_replace($replace, $this->names, $this->text);
   }
   
   /**
@@ -34,72 +42,33 @@ class DialogueLine extends \Nette\Object {
     elseif($this->speaker === "player") return $this->names[1];
   }
   
-  /**
-   * @return string
-   */
-  function getText() {
-    $replace = array("#npcName#", "#playerName#");
-    return str_replace($replace, $this->names, $this->text);
-  }
 }
 
 /**
- * A set of dialogue lines, simplify working with them. Behaves like an array
+ * A set of dialogue lines, simplify working with them
  * 
  * @author Jakub Konečný
  */
-class Dialogue extends \Nette\Object implements \Iterator, \Countable {
+class NPCDialogueControl extends \Nette\Application\UI\Control {
   /** @var int */
   protected $position = 0;
   /** @var array */
   protected $lines = array();
   /** @var array */
   protected $names;
+  /** @var \Nette\Security\User */
+  protected $user;
+  /** @var \HeroesofAbenez\NPC */
+  protected $npc;
   
-  function __construct(array $names) {
-    $this->names = $names;
+  function __construct(\Nette\Security\User $user) {
+    $this->user = $user;
+    $this->names = array("", $user->identity->name);
   }
   
-  /**
-   * @return void
-   */
-  function rewind() {
-    $this->position = 0;
-  }
-  
-  /**
-   * @return void
-   */
-  function current() {
-    return $this->lines[$this->position];
-  }
-  
-  /**
-   * @return void
-   */
-  function key() {
-    return $this->position;
-  }
-  
-  /**
-   * @return void
-   */
-  function next() {
-    ++$this->position;
-  }
-  
-  /**
-   * @return void
-   */
-  function valid() {
-    return isset($this->lines[$this->position]);
-  }
-  
-  /**
-   * @return int
-   */
-  function count() {
-    return count($this->lines);
+  function setNpc(\HeroesofAbenez\NPC $npc) {
+    $this->npc = $npc;
+    $this->names[0] = $npc->name;
   }
   
   /**
@@ -123,6 +92,16 @@ class Dialogue extends \Nette\Object implements \Iterator, \Countable {
    */
   function removeLine($index) {
     if(isset($this->lines[$index])) unset($this->lines[$index]);
+  }
+  
+  function render() {
+    $template = $this->template;
+    $template->setFile(__DIR__ . "/npcDialogue.latte");
+    $template->npcName = $this->npc->name;
+    $template->texts = array();
+    $template->texts[] = new DialogueLine("npc", "Greetings, #playerName#. Can I help you with anything?", $this->names);
+    $template->texts[] = new DialogueLine("player", "Hail, #npcName#. Not now but thank you.", $this->names);
+    $template->render();
   }
 }
 ?>

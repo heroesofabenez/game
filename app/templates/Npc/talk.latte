@@ -1,8 +1,5 @@
 {layout '../@layout.latte'}
 {block title}NPC{/block}
 {block content}
-  <h1>{$npcName}</h1>
-  {foreach $texts as $text}
-  {$text->speaker}: {$text->text}<br>
-  {/foreach}
+  {control npcDialogue}
 {/block}
