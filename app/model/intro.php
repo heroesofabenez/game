@@ -39,7 +39,7 @@ class Intro extends \Nette\Object {
       ->where("class", $char->occupation)
       ->where("part", $part);
     if($intros->count() == 0) return;
-    foreach($intros as $intro) { }
+    $intro = $intros->fetch();
     return $intro->text;
   }
   

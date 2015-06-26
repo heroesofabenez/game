@@ -47,8 +47,7 @@ abstract class ChatControl extends \Nette\Application\UI\Control {
    * @return array
    */
   function getTexts() {
-    $countR = $this->db->query("SELECT count(*) AS amount FROM $this->table WHERE {$this->param}=$this->id");
-    foreach($countR as $count) { }
+    $count = $this->db->query("SELECT count(*) AS amount FROM $this->table WHERE {$this->param}=$this->id")->fetch();
     $paginator = new \Nette\Utils\Paginator;
     $paginator->setItemCount($count->amount);
     $paginator->setItemsPerPage(25);
