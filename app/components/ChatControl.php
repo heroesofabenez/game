@@ -27,7 +27,7 @@ abstract class ChatControl extends \Nette\Application\UI\Control {
    * @param string $table
    * @param string $param 
    * @param int $id
-   * @param string $param 2
+   * @param string $param2
    * @param int $id2
    */
   function __construct(\Nette\Database\Context $database, $table, $param, $id, $param2 = NULL, $id2 = NULL) {
