@@ -6,3 +6,6 @@
     <tr><td>{$iterator->counter}.</td>{foreach $cols as $col}<td>{$row->$col}</td>{/foreach}<td><a href="{plink {$presenter}:view $row->id}">{$lastCol}</a></td></tr>
     {/foreach}
   </table>
+  {if $paginator}
+  <p>{if $paginator->pageCount !== 1}Page {$paginator->page}/{$paginator->pageCount}{/if} {if !$paginator->first}<a n:href="Ranking:default $paginator->page-1">Previous</a>{/if} {if !$paginator->last}<a n:href="Ranking:default $paginator->page+1">Next</a>{/if}</p>
+  {/if}

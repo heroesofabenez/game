@@ -1,13 +1,5 @@
 {layout '../@layout.latte'}
 {block title}Ranking{/block}
 {block content}
-  <h1>Ranking</h1>
-  <h3>Characters <a n:href="Ranking:Guilds">Guilds</a></h3>
-  <table>
-    <tr><th>Nm.</th><th align="left">Name</th><th>Level</th><th>Guild</th><th></th><tr>
-    {foreach $characters as $character}
-    <tr><td>{$iterator->counter}.</td><td>{$character["name"]}</td><td align="right">{$character["level"]}</td><td>{$character["guild"]}</td><td><a n:href="Profile:view $character['id']">Profile</a></td></tr>
-    {/foreach}
-  </table>
-  <p>{if $paginator->pageCount !== 1}Page {$paginator->page}/{$paginator->pageCount}{/if} {if !$paginator->first}<a n:href="Ranking:default $paginator->page-1">Previous</a>{/if} {if !$paginator->last}<a n:href="Ranking:default $paginator->page+1">Next</a>{/if}</p>
+  {control charactersRanking}
 {/block}

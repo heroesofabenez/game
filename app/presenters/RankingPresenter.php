@@ -35,10 +35,14 @@ class RankingPresenter extends BasePresenter {
    * @param int $page Page to show
    * @return void
    */
-  function renderCharacters($page) {
+  function actionCharacters($page) {
     $this->paginator->setPage($page);
-    $this->template->characters = $this->model->characters($this->paginator);
-    $this->template->paginator = $this->paginator;
+  }
+  
+  function createComponentCharactersRanking() {
+    $component = $this->context->getService("ranking.characters");
+    $component->paginator = $this->paginator;
+    return $component;
   }
   
   function createComponentGuildsRanking() {
