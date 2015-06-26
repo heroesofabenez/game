@@ -190,7 +190,7 @@ class GuildModel extends \Nette\Object {
       ->where("status", "new");
     foreach($apps as $app) {
       $from = $this->db->table("characters")->get($app->from);
-      $to = $leaderId;
+      $to = $guild->leader;
       $return[] = new Request($app->id, $from->name, $to, $app->type, $app->sent, $app->status);
     }
     return $return;
