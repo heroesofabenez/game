@@ -61,8 +61,7 @@ class NpcPresenter extends BasePresenter {
   function renderTalk($id) {
     $this->template->npcId = $id;
     $this->template->npcName = $this->npc->name;
-    $this->template->playerName = $playerName = $this->user->identity->name;
-    $names = array($this->npc->name, $playerName);
+    $names = array($this->npc->name, $this->user->identity->name);
     $this->template->texts = new HOA\Dialogue($names);
     $this->template->texts->addLine("npc", "Greetings, #playerName#. Can I help you with anything?");
     $this->template->texts->addLine("player", "Hail, #npcName#. Not now but thank you.");
