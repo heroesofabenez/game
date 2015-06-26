@@ -11,5 +11,5 @@ $configurator->createRobotLoader()
     ->register();
 $container = $configurator->createContainer();
 
-$container->getService("application")->run();
+return $container;
 ?>
