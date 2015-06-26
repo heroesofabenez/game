@@ -11,11 +11,10 @@ class EquipmentPresenter extends BasePresenter {
   protected $model;
   
   /**
-   * @return void
+   * @param \HeroesofAbenez\EquipmentModel $model
    */
-  function startup() {
-    parent::startup();
-    $this->model = $this->context->getService("model.equipment");
+  function __construct(\HeroesofAbenez\EquipmentModel $model) {
+     $this->model = $model;
   }
   
   /**

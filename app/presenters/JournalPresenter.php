@@ -11,11 +11,10 @@ class JournalPresenter extends BasePresenter {
   protected $model;
   
   /**
-   * @return void
+   * @param \HeroesofAbenez\Journal $model
    */
-  function startup() {
-    parent::startup();
-    $this->model = $this->context->getService("model.journal");
+  function __construct(\HeroesofAbenez\Journal $model) {
+    $this->model = $model;
   }
   
   /**

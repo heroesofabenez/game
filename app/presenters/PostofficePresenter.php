@@ -12,12 +12,12 @@ class PostofficePresenter extends BasePresenter {
   /** @var \HeroesofAbenez\PostOffice */
   protected $model;
   
+  
   /**
-   * @return void
+   * @param \HeroesofAbenez\PostOffice $model
    */
-  function startup() {
-    parent::startup();
-    $this->model = $this->context->getService("model.postoffice");
+  function __construct(\HeroesofAbenez\PostOffice $model) {
+    $this->model = $model;
   }
   
   /**

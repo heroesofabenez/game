@@ -14,6 +14,13 @@ class RankingPresenter extends BasePresenter {
   protected $model;
   
   /**
+   * @param \HeroesofAbenez\Ranking $model
+   */
+  function __construct(\HeroesofAbenez\Ranking $model) {
+    $this->model = $model;
+  }
+  
+  /**
    * Set up paginator
    * 
    * @return void
@@ -22,7 +29,6 @@ class RankingPresenter extends BasePresenter {
     parent::startup();
     $this->paginator = new \Nette\Utils\Paginator;
     $this->paginator->setItemsPerPage(self::ITEMS_PER_PAGE);
-    $this->model = $this->context->getService("model.ranking");
   }
   
   /**

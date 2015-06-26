@@ -11,11 +11,10 @@ class MapPresenter extends BasePresenter {
   protected $model;
   
   /**
-   * @return void
+   * @param \HeroesofAbenez\Map $mapModel
    */
-  function startup() {
-    parent::startup();
-    $this->model = $this->context->getService("model.map");
+  function __construct(\HeroesofAbenez\Map $mapModel) {
+    $this->model = $mapModel;
   }
   
   /**

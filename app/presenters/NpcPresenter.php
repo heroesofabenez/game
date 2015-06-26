@@ -15,11 +15,17 @@ class NpcPresenter extends BasePresenter {
   protected $npc;
   
   /**
+   * @param \HeroesofAbenez\NPCModel $npcModel
+   */
+  function __construct(\HeroesofAbenez\NPCModel $npcModel) {
+    $this->model = $npcModel;
+  }
+  
+  /**
    * @return void
    */
   function startup() {
     parent::startup();
-    $this->model = $this->context->getService("model.npc");
     if($this->action != "default") {
       $this->npc = $this->model->view($this->params["id"]);
       if(!$this->npc) $this->forward("notfound");

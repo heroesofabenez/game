@@ -11,11 +11,10 @@ class TravelPresenter extends BasePresenter {
   protected $model;
   
   /**
-   * @return void
+   * @param \HeroesofAbenez\Location $model
    */
-  function startup() {
-    parent::startup();
-    $this->model = $this->context->getService("model.location");
+  function __construct(\HeroesofAbenez\Location $model) {
+    $this->model = $model;
   }
   
   /**

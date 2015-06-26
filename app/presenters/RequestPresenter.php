@@ -11,12 +11,12 @@ class RequestPresenter extends BasePresenter {
   protected $model;
   
   /**
-   * @return void
+   * @param \HeroesofAbenez\RequestModel $model
    */
-  function startup() {
-    parent::startup();
-    $this->model = $this->context->getService("model.request");
+  function __construct(\HeroesofAbenez\RequestModel $model) {
+    $this->model = $model;
   }
+  
   /**
    * Page /request does not exist
    * 

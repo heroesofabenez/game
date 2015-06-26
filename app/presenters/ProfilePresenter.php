@@ -10,6 +10,9 @@ class ProfilePresenter extends BasePresenter {
   /** @var \HeroesofAbenez\Profile */
   protected $model;
   
+  /**
+   * @param \HeroesofAbenez\Profile $model
+   */
   function __construct(\HeroesofAbenez\Profile $model) {
     $this->model = $model;
   }

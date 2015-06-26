@@ -13,12 +13,12 @@ class QuestPresenter extends BasePresenter {
   protected $itemModel;
   
   /**
-   * @return void
+   * @param \HeroesofAbenez\QuestModel $model
+   * @param \HeroesofAbenez\ItemModel $itemModel
    */
-  function startup() {
-    parent::startup();
-    $this->model = $this->context->getService("model.quest");
-    $this->itemModel = $this->context->getService("model.item");
+  function __construct(\HeroesofAbenez\QuestModel $model, \HeroesofAbenez\ItemModel $itemModel) {
+    $this->model = $model;
+    $this->itemModel = $itemModel;
   }
   
   /**
