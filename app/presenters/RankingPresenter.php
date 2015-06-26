@@ -41,15 +41,8 @@ class RankingPresenter extends BasePresenter {
     $this->template->paginator = $this->paginator;
   }
   
-  /**
-   * @todo do pagination and ordering
-   * @param int $page Page to show
-   * @return void
-   */
-  function renderGuilds($page) {
-    $this->paginator->setPage($page);
-    $this->template->guilds = $this->model->guilds();
-    $this->template->paginator = $this->paginator;
+  function createComponentGuildsRanking() {
+    return $this->context->getService("ranking.guilds");
   }
 }
 ?>

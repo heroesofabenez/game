@@ -28,3 +28,4 @@ services:
     chat.local: HeroesofAbenez\Chat\LocalChatControl
     chat.guild: HeroesofAbenez\Chat\GuildChatControl
     npc_dialogue: HeroesofAbenez\NPCDialogueControl
+    ranking.guilds: HeroesofAbenez\Ranking\GuildsRankingControl
