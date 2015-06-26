@@ -20,6 +20,7 @@ class RankingPresenter extends BasePresenter {
     parent::startup();
     $this->paginator = new \Nette\Utils\Paginator;
     $this->paginator->setItemsPerPage(self::ITEMS_PER_PAGE);
+    $this->paginator->setPage($this->getParameter("page "));
   }
   
   /**
@@ -27,7 +28,7 @@ class RankingPresenter extends BasePresenter {
    * @return void
    */
   function actionCharacters($page) {
-    $this->paginator->setPage($page);
+    
   }
   
   function createComponentCharactersRanking() {
