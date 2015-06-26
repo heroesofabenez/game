@@ -19,6 +19,10 @@ class TavernPresenter extends BasePresenter {
     $this->template->canChat = true;
   }
   
+  function formatTemplateFiles() {
+    return array(APP_DIR . "/templates/Tavern.@layout.latte");
+  }
+  
   /**
    * @return void
    */
