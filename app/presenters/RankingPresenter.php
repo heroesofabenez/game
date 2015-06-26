@@ -23,12 +23,17 @@ class RankingPresenter extends BasePresenter {
     $this->paginator->setPage($this->getParameter("page "));
   }
   
+  function formatTemplateFiles() {
+    return array(APP_DIR . "/templates/Ranking.@layout.latte");
+  }
+  
   /**
    * @param int $page Page to show
    * @return void
    */
   function actionCharacters($page) {
-    
+    $this->template->title = "Ranking Characters";
+    $this->template->ranking = "charactersRanking";
   }
   
   /**
@@ -36,7 +41,8 @@ class RankingPresenter extends BasePresenter {
    * @return void
    */
   function actionGuilds($page) {
-    
+    $this->template->title = "Ranking Guilds";
+    $this->template->ranking = "guildsRanking";
   }
   
   function createComponentCharactersRanking() {
