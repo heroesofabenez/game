@@ -72,12 +72,10 @@ class NPCDialogueControl extends \Nette\Application\UI\Control {
    * 
    * @param string $speaker
    * @param string $text
-   * @return int New line's index
+   * @return \HeroesofAbenez\DialogueLine
    */
-  function addLine($speaker, $text) {
-    $count = count($this);
-    $this->lines[$count] = new DialogueLine($speaker, $text, $this->names);
-    return $count;
+  function newLine($speaker, $text) {
+    return new DialogueLine($speaker, $text, $this->names);
   }
   
   function render() {
@@ -85,8 +83,8 @@ class NPCDialogueControl extends \Nette\Application\UI\Control {
     $template->setFile(__DIR__ . "/npcDialogue.latte");
     $template->npcName = $this->npc->name;
     $template->texts = array();
-    $template->texts[] = new DialogueLine("npc", "Greetings, #playerName#. Can I help you with anything?", $this->names);
-    $template->texts[] = new DialogueLine("player", "Hail, #npcName#. Not now but thank you.", $this->names);
+    $template->texts[] = $this->newLine("npc", "Greetings, #playerName#. Can I help you with anything?");
+    $template->texts[] = $this->newLine("player", "Hail, #npcName#. Not now but thank you.");
     $template->render();
   }
 }
