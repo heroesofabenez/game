@@ -1,7 +1,6 @@
 <?php
 namespace HeroesofAbenez\Presenters;
 
-use HeroesofAbenez\Chat;
 use Nette\Application\UI;
 
 /**
