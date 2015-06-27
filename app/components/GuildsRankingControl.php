@@ -14,11 +14,17 @@ class GuildsRankingControl extends RankingControl {
   /** @var \HeroesofAbenez\GuildModel */
   protected $model;
   
+  /**
+   * @param \HeroesofAbenez\GuildModel $model
+   */
   function __construct(\HeroesofAbenez\GuildModel $model) {
     $this->model = $model;
     parent::__construct("Guilds", array("name", "members"), "Guild", "Details");
   }
   
+  /**
+   * @return array
+   */
   function getData() {
     $return = array();
     $result = $this->model->listOfGuilds();

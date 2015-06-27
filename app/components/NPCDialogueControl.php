@@ -57,6 +57,9 @@ class NPCDialogueControl extends \Nette\Application\UI\Control {
   /** @var \HeroesofAbenez\NPC */
   protected $npc;
   
+  /**
+   * @param \Nette\Security\User $user
+   */
   function __construct(\Nette\Security\User $user) {
     $this->user = $user;
     $this->names = array("", $user->identity->name);
@@ -92,6 +95,9 @@ class NPCDialogueControl extends \Nette\Application\UI\Control {
     return new DialogueLine($speaker, $text, $this->names);
   }
   
+  /**
+   * @return void
+   */
   function render() {
     $template = $this->template;
     $template->setFile(__DIR__ . "/npcDialogue.latte");

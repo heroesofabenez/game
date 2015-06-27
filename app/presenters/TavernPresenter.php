@@ -19,6 +19,11 @@ class TavernPresenter extends BasePresenter {
     $this->template->canChat = true;
   }
   
+  /**
+   * Use just one template for this presenter
+   * 
+   * @return array
+   */
   function formatTemplateFiles() {
     return array(APP_DIR . "/templates/Tavern.@layout.latte");
   }

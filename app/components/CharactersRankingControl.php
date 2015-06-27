@@ -7,12 +7,19 @@ class CharactersRankingControl extends RankingControl {
   /** @var \HeroesofAbenez\GuildModel */
   protected $guildModel;
   
+  /**
+   * @param \Nette\Database\Context $db
+   * @param \HeroesofAbenez\GuildModel $guildModel
+   */
   function __construct(\Nette\Database\Context $db, \HeroesofAbenez\GuildModel $guildModel) {
     $this->db = $db;
     $this->guildModel = $guildModel;
     parent::__construct("Characters", array("name", "level", "guild"), "Profile", "Profile");
   }
   
+  /**
+   * @return array
+   */
   function getData() {
     $characters = $this->db->table("characters")->order("level, experience, id")
       ->limit($this->paginator->getLength(), $this->paginator->getOffset());

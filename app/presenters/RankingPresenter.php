@@ -23,6 +23,11 @@ class RankingPresenter extends BasePresenter {
     $this->paginator->setPage($this->getParameter("page "));
   }
   
+  /**
+   * Use just one template for this presenter
+   * 
+   * @return array
+   */
   function formatTemplateFiles() {
     return array(APP_DIR . "/templates/Ranking.@layout.latte");
   }
@@ -45,12 +50,18 @@ class RankingPresenter extends BasePresenter {
     $this->template->ranking = "guildsRanking";
   }
   
+  /**
+   * @return \HeroesofAbenez\Ranking\CharactersRankingControl
+   */
   function createComponentCharactersRanking() {
     $component = $this->context->getService("ranking.characters");
     $component->paginator = $this->paginator;
     return $component;
   }
   
+  /**
+   * @return \HeroesofAbenez\Ranking\GuildsRankingControl
+   */
   function createComponentGuildsRanking() {
     return $this->context->getService("ranking.guilds");
   }

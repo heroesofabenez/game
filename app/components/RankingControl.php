@@ -20,6 +20,13 @@ abstract class RankingControl extends \Nette\Application\UI\Control {
   /** @var \Nette\Utils\Paginator */
   protected $paginator = false;
   
+  /**
+   * 
+   * @param string $name
+   * @param array $cols
+   * @param string $presenter
+   * @param string $lastCol
+   */
   function __construct($name, array $cols, $presenter, $lastCol) {
     $this->name = $name;
     $this->cols = $cols;
@@ -34,6 +41,9 @@ abstract class RankingControl extends \Nette\Application\UI\Control {
   
   abstract function getData();
   
+  /**
+   * @return void
+   */
   function render() {
     $template = $this->template;
     $template->setFile(__DIR__ . "/ranking.latte");
