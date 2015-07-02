@@ -21,10 +21,9 @@ class CharactersRankingControl extends RankingControl {
    * @return array
    */
   function getData() {
+    $this->paginator->itemCount = $this->db->table("characters")->count("*");
     $characters = $this->db->table("characters")->order("level, experience, id")
       ->limit($this->paginator->getLength(), $this->paginator->getOffset());
-    $result = $this->db->table("characters");
-    $this->paginator->itemCount = $result->count("*");
     $chars = array();
     foreach($characters as $character) {
       if($character->guild == 0)  $guildName = "";
