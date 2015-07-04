@@ -3,6 +3,11 @@ namespace HeroesofAbenez\Model;
 
 use HeroesofAbenez\Entities\Request as RequestEntity;
 
+/**
+ * Request Model
+ * 
+ * @author Jakub Konečný
+ */
 class Request extends \Nette\Object {
    /** @var \Nette\Security\User */
   protected $user;
