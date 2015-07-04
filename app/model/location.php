@@ -17,7 +17,7 @@ class Location extends \Nette\Object {
   protected $db;
   /** @var \Nette\Security\User */
   protected $user;
-  /** @var \HeroesofAbenez\NPCModel */
+  /** @var \HeroesofAbenez\NPC */
   protected $npcModel;
   
   function __construct(\Nette\Caching\Cache $cache, \Nette\Database\Context $db) {
@@ -29,7 +29,7 @@ class Location extends \Nette\Object {
     $this->user = $user;
   }
   
-  function setNpcModel(\HeroesofAbenez\NPCModel $npcModel) {
+  function setNpcModel(\HeroesofAbenez\NPC $npcModel) {
     $this->npcModel = $npcModel;
   }
   

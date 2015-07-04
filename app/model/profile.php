@@ -11,7 +11,7 @@ class Profile extends \Nette\Object {
   protected $db;
   /** @var \Nette\Caching\Cache */
   protected $cache;
-  /** @var \HeroesofAbenez\CharacterModel */
+  /** @var \HeroesofAbenez\Character */
   protected $characterModel;
   /** @var \HeroesofAbenez\Permissions */
   protected $permissionsModel;
@@ -19,7 +19,7 @@ class Profile extends \Nette\Object {
   /**
    * @param \Nette\Database\Context $db
    */
-  function __construct(\Nette\Caching\Cache $cache, \Nette\Database\Context $db, \HeroesofAbenez\CharacterModel $characterModel, \HeroesofAbenez\Permissions $permissionsModel) {
+  function __construct(\Nette\Caching\Cache $cache, \Nette\Database\Context $db, \HeroesofAbenez\Character $characterModel, \HeroesofAbenez\Permissions $permissionsModel) {
     $this->db = $db;
     $this->characterModel = $characterModel;
     $this->cache = $cache;

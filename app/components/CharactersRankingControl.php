@@ -4,14 +4,14 @@ namespace HeroesofAbenez\Ranking;
 class CharactersRankingControl extends RankingControl {
   /** @var \Nette\Database\Context */
   protected $db;
-  /** @var \HeroesofAbenez\GuildModel */
+  /** @var \HeroesofAbenez\Guild */
   protected $guildModel;
   
   /**
    * @param \Nette\Database\Context $db
-   * @param \HeroesofAbenez\GuildModel $guildModel
+   * @param \HeroesofAbenez\Guild $guildModel
    */
-  function __construct(\Nette\Database\Context $db, \HeroesofAbenez\GuildModel $guildModel) {
+  function __construct(\Nette\Database\Context $db, \HeroesofAbenez\Guild $guildModel) {
     $this->db = $db;
     $this->guildModel = $guildModel;
     parent::__construct("Characters", array("name", "level", "guild"), "Profile", "Profile");

@@ -11,13 +11,13 @@ use HeroesofAbenez\Entities\Guild,
  * @author Jakub Konečný
  */
 class GuildsRankingControl extends RankingControl {
-  /** @var \HeroesofAbenez\GuildModel */
+  /** @var \HeroesofAbenez\Guild */
   protected $model;
   
   /**
-   * @param \HeroesofAbenez\GuildModel $model
+   * @param \HeroesofAbenez\Guild $model
    */
-  function __construct(\HeroesofAbenez\GuildModel $model) {
+  function __construct(\HeroesofAbenez\Guild $model) {
     $this->model = $model;
     parent::__construct("Guilds", array("name", "members"), "Guild", "Details");
   }

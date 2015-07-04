@@ -1,23 +1,23 @@
 <?php
 namespace HeroesofAbenez;
 
-use HeroesofAbenez\Entities\Request;
+use HeroesofAbenez\Entities\Request as RequestEntity;
 
-class RequestModel extends \Nette\Object {
+class Request extends \Nette\Object {
    /** @var \Nette\Security\User */
   protected $user;
   /** @var \Nette\Database\Context */
   protected $db;
   /** @var \HeroesofAbenez\Profile */
   protected $profileModel;
-  /** @var \HeroesofAbenez\GuildModel */
+  /** @var \HeroesofAbenez\Guild */
   protected $guildModel;
   
   /**
    * @param \Nette\Security\User $user
    * @param \Nette\Database\Context $db
    */
-  function __construct(\Nette\Security\User $user,\Nette\Database\Context $db, \HeroesofAbenez\Profile $profileModel, \HeroesofAbenez\GuildModel $guildModel) {
+  function __construct(\Nette\Security\User $user,\Nette\Database\Context $db, \HeroesofAbenez\Profile $profileModel, \HeroesofAbenez\Guild $guildModel) {
     $this->user = $user;
     $this->db = $db;
     $this->profileModel = $profileModel;
@@ -96,7 +96,7 @@ class RequestModel extends \Nette\Object {
     if(!$canShow) return false;
     $from = $this->profileModel->getCharacterName($requestRow->from);
     $to = $this->profileModel->getCharacterName($requestRow->to);
-    $return = new Request($requestRow->id, $from, $to, $requestRow->type, $requestRow->sent, $requestRow->status);
+    $return = new RequestEntity($requestRow->id, $from, $to, $requestRow->type, $requestRow->sent, $requestRow->status);
     return $return;
   }
   

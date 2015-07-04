@@ -9,7 +9,7 @@ use \Nette\Application\UI;
    * @author Jakub Konečný
    */
 class CharacterPresenter extends BasePresenter {
-  /** @var \HeroesofAbenez\CharacterModel */
+  /** @var \HeroesofAbenez\Character */
   protected $model;
   
   /**

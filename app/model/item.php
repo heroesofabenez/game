@@ -2,14 +2,14 @@
 namespace HeroesofAbenez;
 
 use Nette\Utils\Arrays,
-    HeroesofAbenez\Entities\Item;
+    HeroesofAbenez\Entities\Item as ItemEntity;
 
 /**
  * Item Model
  *
  * @author Jakub Konečný
  */
-class ItemModel extends \Nette\Object {
+class Item extends \Nette\Object {
   /** @var \Nette\Database\Context */
   protected $db;
   /** @var \Nette\Caching\Cache */
@@ -46,7 +46,7 @@ class ItemModel extends \Nette\Object {
     if($items === NULL) {
       $items = $this->db->table("items");
       foreach($items as $item) {
-        $return[$item->id] = new Item($item);
+        $return[$item->id] = new ItemEntity($item);
       }
       $this->cache->save("items", $return);
     } else {

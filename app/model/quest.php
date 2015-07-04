@@ -2,14 +2,14 @@
 namespace HeroesofAbenez;
 
 use Nette\Utils\Arrays,
-    HeroesofAbenez\Entities\Quest;
+    HeroesofAbenez\Entities\Quest as QuestEntity;
 
 /**
  * Quest Model
  * 
  * @author Jakub Konečný
  */
-class QuestModel extends \Nette\Object {
+class Quest extends \Nette\Object {
   /** @var \Nette\Database\Context */
   protected $db;
   /** @var \Nette\Caching\Cache */
@@ -18,7 +18,7 @@ class QuestModel extends \Nette\Object {
   protected $user;
   /** @var \Nette\Http\Request */
   protected $request;
-  /** @var \HeroesofAbenez\ItemModel */
+  /** @var \HeroesofAbenez\Item */
   protected $itemModel;
   
   function __construct(\Nette\Caching\Cache $cache, \Nette\Database\Context $db, \Nette\Security\User $user) {
@@ -31,7 +31,7 @@ class QuestModel extends \Nette\Object {
     $this->request = $request;
   }
   
-  function setItemModel(\HeroesofAbenez\ItemModel $itemModel) {
+  function setItemModel(\HeroesofAbenez\Item $itemModel) {
     $this->itemModel = $itemModel;
   }
   
@@ -48,7 +48,7 @@ class QuestModel extends \Nette\Object {
       $quests = $this->db->table("quests");
       foreach($quests as $quest) {
         $return[$quest->id] =
-          new Quest($quest);
+          new QuestEntity($quest);
       }
       $this->cache->save("quests", $return);
     } else {

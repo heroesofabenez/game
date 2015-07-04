@@ -1,16 +1,16 @@
 services:
-    model.character: HeroesofAbenez\CharacterModel
-    model.equipment: HeroesofAbenez\EquipmentModel
-    model.guild: HeroesofAbenez\GuildModel
+    model.character: HeroesofAbenez\Character
+    model.equipment: HeroesofAbenez\Equipment
+    model.guild: HeroesofAbenez\Guild
     model.intro: HeroesofAbenez\Intro
-    model.item: HeroesofAbenez\ItemModel
+    model.item: HeroesofAbenez\Item
     model.journal: HeroesofAbenez\Journal
     model.location: HeroesofAbenez\Location
     model.map: HeroesofAbenez\Map
     model.mapdrawer: HeroesofAbenez\MapDrawer
-    model.npc: HeroesofAbenez\NPCModel
+    model.npc: HeroesofAbenez\NPC
     model.permissions: HeroesofAbenez\Permissions
     model.postoffice: HeroesofAbenez\PostOffice
     model.profile: HeroesofAbenez\Profile
-    model.request: HeroesofAbenez\RequestModel
-    model.quest: HeroesofAbenez\QuestModel
+    model.request: HeroesofAbenez\Request
+    model.quest: HeroesofAbenez\Quest

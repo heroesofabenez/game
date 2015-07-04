@@ -7,15 +7,15 @@ namespace HeroesofAbenez\Presenters;
  * @author Jakub Konečný
  */
 class NpcPresenter extends BasePresenter {
-  /** @var \HeroesofAbenez\NPCModel */
+  /** @var \HeroesofAbenez\NPC */
   protected $model;
   /** @var \HeroesofAbenez\Entities\NPC */
   protected $npc;
   
   /**
-   * @param \HeroesofAbenez\NPCModel $npcModel
+   * @param \HeroesofAbenez\NPC $npcModel
    */
-  function __construct(\HeroesofAbenez\NPCModel $npcModel) {
+  function __construct(\HeroesofAbenez\NPC $npcModel) {
     $this->model = $npcModel;
   }
   

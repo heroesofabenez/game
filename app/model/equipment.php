@@ -2,14 +2,14 @@
 namespace HeroesofAbenez;
 
 use Nette\Utils\Arrays,
-    HeroesofAbenez\Entities\Equipment;
+    HeroesofAbenez\Entities\EquipmentEntity;
 
 /**
  * Equipment Model
  *
  * @author Jakub Konečný
  */
-class EquipmentModel {
+class Equipment {
   /** @var \Nette\Database\Context */
   protected $db;
   /** @var \Nette\Security\User */
@@ -34,7 +34,7 @@ class EquipmentModel {
     if($equipments === NULL) {
       $equipments = $this->db->table("equipment");
       foreach($equipments as $eq) {
-        $return[$eq->id] = new Equipment($eq);
+        $return[$eq->id] = new EquipmentEntity($eq);
       }
       $this->cache->save("equipment", $return);
     } else {

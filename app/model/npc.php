@@ -2,19 +2,19 @@
 namespace HeroesofAbenez;
 
 use Nette\Utils\Arrays,
-    HeroesofAbenez\Entities\NPC;
+    HeroesofAbenez\Entities\NPC as NPCEntity;
 
 /**
  * Npc model
  *
  * @author Jakub Konečný
  */
-class NPCModel extends \Nette\Object {
+class NPC extends \Nette\Object {
   /** @var \Nette\Database\Context */
   protected $db;
   /** @var \Nette\Caching\Cache */
   protected $cache;
-  /** @var \HeroesofAbenez\ItemModel */
+  /** @var \HeroesofAbenez\Item */
   protected $itemModel;
   
   function __construct(\Nette\Caching\Cache $cache, \Nette\Database\Context $db) {
@@ -22,7 +22,7 @@ class NPCModel extends \Nette\Object {
     $this->cache = $cache;
   }
   
-  function setItemModel(\HeroesofAbenez\ItemModel $model) {
+  function setItemModel(\HeroesofAbenez\Item $model) {
     $this->itemModel = $model;
   }
   
@@ -38,7 +38,7 @@ class NPCModel extends \Nette\Object {
     if($npcs === NULL) {
       $npcs = $this->db->table("npcs");
       foreach($npcs as $npc) {
-        $return[$npc->id] = new NPC($npc);
+        $return[$npc->id] = new NPCEntity($npc);
       }
       $this->cache->save("npcs", $return);
     } else {

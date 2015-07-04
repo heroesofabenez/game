@@ -2,14 +2,14 @@
 namespace HeroesofAbenez;
 
 use HeroesofAbenez\Entities\Request,
-    HeroesofAbenez\Entities\Guild;
+    HeroesofAbenez\Entities\Guild as GuildEntity;
 
   /**
    * Model Guild
    * 
    * @author Jakub Konečný
    */
-class GuildModel extends \Nette\Object {
+class Guild extends \Nette\Object {
   /** @var \Nette\Caching\Cache */
   protected $cache;
   /** @var \Nette\Database\Context */
@@ -183,7 +183,7 @@ class GuildModel extends \Nette\Object {
         foreach($members as $member) {
           if($member->guildrank == 7) $leader = $member->name;
         }
-        $return[$guild->id] = new Guild($guild->id, $guild->name, $guild->description, $members->count(), $leader);
+        $return[$guild->id] = new GuildEntity($guild->id, $guild->name, $guild->description, $members->count(), $leader);
       }
       $this->cache->save("guilds", $return);
     } else {

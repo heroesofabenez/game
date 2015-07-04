@@ -7,13 +7,13 @@ namespace HeroesofAbenez\Presenters;
  * @author Jakub Konečný
  */
 class RequestPresenter extends BasePresenter {
-  /** @var \HeroesofAbenez\RequestModel */
+  /** @var \HeroesofAbenez\Request */
   protected $model;
   
   /**
-   * @param \HeroesofAbenez\RequestModel $model
+   * @param \HeroesofAbenez\Request $model
    */
-  function __construct(\HeroesofAbenez\RequestModel $model) {
+  function __construct(\HeroesofAbenez\Request $model) {
     $this->model = $model;
   }
   

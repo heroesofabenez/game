@@ -9,13 +9,13 @@ use \Nette\Application\UI;
    * @author Jakub Konečný
    */
 class GuildPresenter extends BasePresenter {
-  /** @var \HeroesofAbenez\GuildModel */
+  /** @var \HeroesofAbenez\Guild */
   protected $model;
   
   /**
-   * @param \HeroesofAbenez\GuildModel $model
+   * @param \HeroesofAbenez\Guild $model
    */
-  function __construct(\HeroesofAbenez\GuildModel $model) {
+  function __construct(\HeroesofAbenez\Guild $model) {
     $this->model = $model;
   }
   

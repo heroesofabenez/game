@@ -14,11 +14,11 @@ class Journal extends \Nette\Object {
   protected $user;
   /** @var \Nette\Database\Context */
   protected $db;
-  /** @var \HeroesofAbenez\QuestModel */
+  /** @var \HeroesofAbenez\Quest */
   protected $questModel;
   /** @var \HeroesofAbenez\Location */
   protected $locationModel;
-  /** @var \HeroesofAbenez\GuildModel */
+  /** @var \HeroesofAbenez\Guild */
   protected $guildModel;
   /** @var \HeroesofAbenez\Profile */
   protected $profileModel;
@@ -32,7 +32,7 @@ class Journal extends \Nette\Object {
     $this->db = $db;
   }
   
-  function setQuestModel(\HeroesofAbenez\QuestModel $questModel) {
+  function setQuestModel(\HeroesofAbenez\Quest $questModel) {
     $this->questModel = $questModel;
   }
   
@@ -40,7 +40,7 @@ class Journal extends \Nette\Object {
     $this->locationModel = $locationModel;
   }
   
-  function setGuildModel(\HeroesofAbenez\GuildModel $guildModel) {
+  function setGuildModel(\HeroesofAbenez\Guild $guildModel) {
     $this->guildModel = $guildModel;
   }
   

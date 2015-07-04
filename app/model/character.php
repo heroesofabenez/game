@@ -6,7 +6,7 @@ namespace HeroesofAbenez;
  * 
  * @author Jakub Konečný
  */
-class CharacterModel extends \Nette\Object {
+class Character extends \Nette\Object {
   /** @var \Nette\Caching\Cache */
   protected $cache;
   /** @var \Nette\Database\Context */
