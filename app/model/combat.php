@@ -1,5 +1,5 @@
 <?php
-namespace HeroesofAbenez;
+namespace HeroesofAbenez\Model;
 
 use HeroesofAbenez\Entities\Team;
 
