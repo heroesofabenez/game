@@ -151,7 +151,7 @@ case "initiative":
    */
   function removeEffect($effectId) {
     for($i = 0; $i <= count($this->effects); $i++) {
-    	if($this->effects[$i]["id"] == $effectId) {
+      if($this->effects[$i]["id"] == $effectId) {
         unset($this->effects[$i]);
         $this->recalculateStats();
         return true;
@@ -182,7 +182,7 @@ case "initiative":
   }
   
   function unequipItem($itemId) {
-  $item = $this->getItem($itemId);
+    $item = $this->getItem($itemId);
     if(!$item) {
       exit;
     } else {
