@@ -1,6 +1,9 @@
 <?php
 namespace HeroesofAbenez;
 
+use HeroesofAbenez\Entities\JournalQuest,
+    HeroesofAbenez\Entities\Pet;
+
 /**
  * Journal Model
  *

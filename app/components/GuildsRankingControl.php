@@ -1,7 +1,7 @@
 <?php
 namespace HeroesofAbenez\Ranking;
 
-use HeroesofAbenez as HOA,
+use HeroesofAbenez\Entities\Guild,
     HeroesofAbenez\Utils\Arrays;
 
 
@@ -33,7 +33,7 @@ class GuildsRankingControl extends RankingControl {
     }
     $data2 = Arrays::orderby($data, "members", SORT_DESC, "id", SORT_ASC);
     foreach($data2 as $row2) {
-      $return[] = new HOA\Guild($row2["id"], $row2["name"], "", $row2["members"]);
+      $return[] = new Guild($row2["id"], $row2["name"], "", $row2["members"]);
     }
     return $return;
   }

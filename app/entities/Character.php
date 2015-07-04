@@ -1,5 +1,5 @@
 <?php
-namespace HeroesofAbenez;
+namespace HeroesofAbenez\Entities;
 
 /**
  * Structure for single character
@@ -118,7 +118,7 @@ case "initiative":
       } else { continue; }
     }
     foreach($pets as $pet) {
-      if($pet instanceof Pet) {
+      if($pet instanceof \HeroesofAbenez\Entities\Pet) {
         $this->pets[] = $pet;
       }
     }

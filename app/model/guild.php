@@ -1,6 +1,9 @@
 <?php
 namespace HeroesofAbenez;
 
+use HeroesofAbenez\Entities\Request,
+    HeroesofAbenez\Entities\Guild;
+
   /**
    * Model Guild
    * 
@@ -41,7 +44,7 @@ class GuildModel extends \Nette\Object {
    * Get data about specified guild
    * 
    * @param int $id Id of guild
-   * @return \HeroesofAbenez\Guild
+   * @return \HeroesofAbenez\Entities\Guild
    */
   function guildData($id) {
     $guilds = $this->listOfGuilds();

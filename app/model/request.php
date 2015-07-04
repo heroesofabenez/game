@@ -1,6 +1,8 @@
 <?php
 namespace HeroesofAbenez;
 
+use HeroesofAbenez\Entities\Request;
+
 class RequestModel extends \Nette\Object {
    /** @var \Nette\Security\User */
   protected $user;
@@ -85,7 +87,7 @@ class RequestModel extends \Nette\Object {
    * Gets data about specified request
    * 
    * @param type $id Request's id
-   * @return \HeroesofAbenez\Request
+   * @return \HeroesofAbenez\Entities\Request
    */
   function show($id) {
     $requestRow = $this->db->table("requests")->get($id);

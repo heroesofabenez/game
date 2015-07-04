@@ -1,7 +1,8 @@
 <?php
 namespace HeroesofAbenez;
 
-use Nette\Utils\Arrays;
+use Nette\Utils\Arrays,
+    HeroesofAbenez\Entities\Quest;
 
 /**
  * Quest Model
@@ -94,7 +95,7 @@ class QuestModel extends \Nette\Object {
    * Gets info about specified quest
    * 
    * @param int $id Quest's id
-   * @return \HeroesofAbenez\Quest
+   * @return \HeroesofAbenez\Entities\Quest
    */
   function view($id) {
     $quests = $this->listOfQuests();
@@ -153,10 +154,10 @@ class QuestModel extends \Nette\Object {
   /**
    * Checks if the player accomplished specified quest's goals
    * 
-   * @param \HeroesofAbenez\Quest $quest
+   * @param \HeroesofAbenez\Entities\Quest $quest
    * @return bool
    */
-  protected function isCompleted(\HeroesofAbenez\Quest $quest) {
+  protected function isCompleted(\HeroesofAbenez\Entities\Quest $quest) {
     $haveMoney = $haveItem = false;
     if($quest->cost_money > 0) {
       $char = $this->db->table("characters")->get($this->user->id);

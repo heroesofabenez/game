@@ -1,5 +1,5 @@
 <?php
-namespace HeroesofAbenez;
+namespace HeroesofAbenez\Entities;
 
 /**
  * Data structure for area
@@ -19,6 +19,10 @@ class Area extends \Nette\Object {
   public $required_race;
   /** @var int id of class needed to enter stage */
   public $required_occupation;
+  /** @var int */
+  public $pos_x;
+  /** @var int */
+  public $pos_y;
   
   /**
    * @param int $id

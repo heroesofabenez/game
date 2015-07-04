@@ -1,7 +1,8 @@
 <?php
 namespace HeroesofAbenez;
 
-use Nette\Utils\Arrays;
+use Nette\Utils\Arrays,
+    HeroesofAbenez\Entities\Equipment;
 
 /**
  * Equipment Model

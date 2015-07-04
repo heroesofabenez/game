@@ -1,8 +1,6 @@
 <?php
 namespace HeroesofAbenez\Presenters;
 
-use HeroesofAbenez as HOA;
-
 /**
  * Presenter Npc
  *
@@ -11,7 +9,7 @@ use HeroesofAbenez as HOA;
 class NpcPresenter extends BasePresenter {
   /** @var \HeroesofAbenez\NPCModel */
   protected $model;
-  /** @var \HeroesofAbenez\NPC */
+  /** @var \HeroesofAbenez\Entities\NPC */
   protected $npc;
   
   /**

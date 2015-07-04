@@ -1,7 +1,8 @@
 <?php
 namespace HeroesofAbenez;
 
-use Nette\Utils\Arrays;
+use Nette\Utils\Arrays,
+    HeroesofAbenez\Entities\Item;
 
 /**
  * Item Model
@@ -71,7 +72,7 @@ class ItemModel extends \Nette\Object {
    * Get info about specified item
    * 
    * @param int $id Item's id
-   * @return \HeroesofAbenez\Item
+   * @return \HeroesofAbenez\Entities\Item
    */
   function view($id) {
     $items = $this->listOfItems();

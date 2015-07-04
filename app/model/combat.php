@@ -1,6 +1,8 @@
 <?php
 namespace HeroesofAbenez;
 
+use HeroesofAbenez\Entities\Team;
+
 /**
  * Handles combat
  * 
@@ -15,12 +17,12 @@ class CombatBase extends \Nette\Object {
   protected $round;
   
   /**
-   * @param Team $team1 First team
-   * @param Team $team2 Second team
+   * @param \HeroesofAbenez\Entities\TeamTeam $team1 First team
+   * @param \HeroesofAbenez\Entities\TeamTeam $team2 Second team
    */
   function __construct(Team $team1, Team $team2) {
-    if(!is_a($team1, "Team")) { exit("Invalid value for parameter team1 passed to method CombatBase:__construct. Expected Team."); }
-    if(!is_a($team2, "Team")) { exit("Invalid value for parameter team2 passed to method CombatBase:__construct. Expected Team."); }
+    if(!is_a($team1, "\HeroesofAbenez\Entities\TeamTeam")) { exit("Invalid value for parameter team1 passed to method CombatBase:__construct. Expected Team."); }
+    if(!is_a($team2, "\HeroesofAbenez\Entities\TeamTeam")) { exit("Invalid value for parameter team2 passed to method CombatBase:__construct. Expected Team."); }
     $this->round = 0;
     $this->team1 = $team1;
     $this->team2 = $team2;

@@ -1,7 +1,8 @@
 <?php
 namespace HeroesofAbenez;
 
-use Nette\Utils\Arrays;
+use Nette\Utils\Arrays,
+    HeroesofAbenez\Entities\NPC;
 
 /**
  * Npc model
@@ -55,7 +56,7 @@ class NPCModel extends \Nette\Object {
    * Get info about specified npc
    * 
    * @param int $id Npc's id
-   * @return \HeroesofAbenez\NPC
+   * @return \HeroesofAbenez\Entities\NPC
    */
   function view($id) {
     $npcs = $this->listOfNpcs();

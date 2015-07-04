@@ -1,7 +1,9 @@
 <?php
 namespace HeroesofAbenez;
 
-use Nette\Utils\Arrays;
+use Nette\Utils\Arrays,
+    HeroesofAbenez\Entities\Area,
+    HeroesofAbenez\Entities\Stage;
 
 /**
  * Location Model

@@ -54,7 +54,7 @@ class NPCDialogueControl extends \Nette\Application\UI\Control {
   protected $names;
   /** @var \Nette\Security\User */
   protected $user;
-  /** @var \HeroesofAbenez\NPC */
+  /** @var \HeroesofAbenez\Entities\NPC */
   protected $npc;
   
   /**
@@ -65,7 +65,7 @@ class NPCDialogueControl extends \Nette\Application\UI\Control {
     $this->names = array("", $user->identity->name);
   }
   
-  function setNpc(\HeroesofAbenez\NPC $npc) {
+  function setNpc(\HeroesofAbenez\Entities\NPC $npc) {
     $this->npc = $npc;
     $this->names[0] = $npc->name;
   }
