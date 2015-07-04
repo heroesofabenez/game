@@ -16,8 +16,8 @@ class Team extends \Nette\Object {
    * @param string $name Name of the team
    */
   function __construct($name) {
-    if(!is_string($name)) { exit("Invalid value for parameter name passed to method Team::__construct. Expected string."); }
-    else { $this->$name = $name; }
+    if(!is_string($name)) exit("Invalid value for parameter name passed to method Team::__construct. Expected string.");
+    else $this->$name = $name;
   }
   
   /**
@@ -28,8 +28,8 @@ class Team extends \Nette\Object {
    * @return void
    */
   function addMember($member) {
-    if(!is_a($member, "Character")) { exit("Invalid value for parameter member passed to method Team:addMember. Expected Character."); }
-    else { $this->members[] = $member; }
+    if(!is_a($member, "Character")) exit("Invalid value for parameter member passed to method Team:addMember. Expected Character.");
+    else $this->members[] = $member;
   }
 }
 
@@ -66,16 +66,16 @@ class CombatBase extends \Nette\Object {
   function start_round() {
     $this->round++;
     foreach($this->team1 as &$character) {
-    	foreach($character->effects as &$effect) {
-     	  if(is_int($effect->duration)) { $effect->duration--; }
-     }
-     $character->recalculateStats();
+      foreach($character->effects as &$effect) {
+     	if(is_int($effect->duration)) { $effect->duration--; }
+      }
+      $character->recalculateStats();
     }
     foreach($this->team2 as &$character) {
-    	foreach($character->effects as &$effect) {
-     	  if(is_int($effect->duration)) { $effect->duration--; }
-     }
-     $character->recalculateStats();
+      foreach($character->effects as &$effect) {
+     	if(is_int($effect->duration)) { $effect->duration--; }
+      }
+      $character->recalculateStats();
     }
   }
   
