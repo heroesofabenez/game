@@ -21,8 +21,8 @@ session:
     name: HOASESSID
     expiration: 1 hour
 services:
-    authenticator: HeroesofAbenez\Authenticator
-    authorizator: HeroesofAbenez\Authorizator::create
+    authenticator: HeroesofAbenez\Auth\Authenticator
+    authorizator: HeroesofAbenez\Auth\Authorizator::create
     cache.cache: Nette\Caching\Cache(@cache.storage, "data")
     chat.global: HeroesofAbenez\Chat\GlobalChatControl
     chat.local: HeroesofAbenez\Chat\LocalChatControl

@@ -1,5 +1,5 @@
 <?php
-namespace HeroesofAbenez;
+namespace HeroesofAbenez\Auth;
 
 use Nette\Security as NS;
 

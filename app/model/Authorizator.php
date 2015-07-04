@@ -1,5 +1,5 @@
 <?php
-namespace HeroesofAbenez;
+namespace HeroesofAbenez\Auth;
 
 /**
  * Authorizator for the game
