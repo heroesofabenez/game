@@ -1,5 +1,5 @@
 <?php
-namespace HeroesofAbenez;
+namespace HeroesofAbenez\Model;
 
 use Nette\Utils\Image;
 
@@ -9,12 +9,12 @@ use Nette\Utils\Image;
  * @author Jakub Konečný
  */
 class MapDrawer extends \Nette\Object {
-  /** @var \HeroesofAbenez\Location */
+  /** @var \HeroesofAbenez\Model\Location */
   protected $locationModel;
   /** @var \Nette\Security\User */
   protected $user;
   
-  function __construct(\HeroesofAbenez\Location $locationModel, \Nette\Security\User $user) {
+  function __construct(\HeroesofAbenez\Model\Location $locationModel, \Nette\Security\User $user) {
     $this->locationModel = $locationModel;
     $this->user = $user;
   }

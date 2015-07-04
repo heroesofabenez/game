@@ -11,13 +11,13 @@ use Nette\Security as NS;
 class Authenticator extends \Nette\Object implements NS\IAuthenticator {
   /** @var \Nette\Database\Context Database context */
   protected $db;
-  /** @var \HeroesofAbenez\Permissions */
+  /** @var \HeroesofAbenez\Model\Permissions */
   protected $permissionsModel;
   
   /**
    * @param \Nette\Database\Context $database Database context
    */
-  function __construct(\Nette\Database\Context $database, \HeroesofAbenez\Permissions $permissionsModel) {
+  function __construct(\Nette\Database\Context $database, \HeroesofAbenez\Model\Permissions $permissionsModel) {
     $this->db = $database;
     $this->permissionsModel = $permissionsModel;
   }

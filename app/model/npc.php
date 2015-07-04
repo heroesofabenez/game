@@ -1,5 +1,5 @@
 <?php
-namespace HeroesofAbenez;
+namespace HeroesofAbenez\Model;
 
 use Nette\Utils\Arrays,
     HeroesofAbenez\Entities\NPC as NPCEntity;
@@ -14,7 +14,7 @@ class NPC extends \Nette\Object {
   protected $db;
   /** @var \Nette\Caching\Cache */
   protected $cache;
-  /** @var \HeroesofAbenez\Item */
+  /** @var \HeroesofAbenez\Model\Item */
   protected $itemModel;
   
   function __construct(\Nette\Caching\Cache $cache, \Nette\Database\Context $db) {
@@ -22,7 +22,7 @@ class NPC extends \Nette\Object {
     $this->cache = $cache;
   }
   
-  function setItemModel(\HeroesofAbenez\Item $model) {
+  function setItemModel(\HeroesofAbenez\Model\Item $model) {
     $this->itemModel = $model;
   }
   

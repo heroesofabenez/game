@@ -1,5 +1,5 @@
 <?php
-namespace HeroesofAbenez;
+namespace HeroesofAbenez\Model;
 
 use HeroesofAbenez\Entities\Request as RequestEntity;
 
@@ -8,16 +8,16 @@ class Request extends \Nette\Object {
   protected $user;
   /** @var \Nette\Database\Context */
   protected $db;
-  /** @var \HeroesofAbenez\Profile */
+  /** @var \HeroesofAbenez\Model\Profile */
   protected $profileModel;
-  /** @var \HeroesofAbenez\Guild */
+  /** @var \HeroesofAbenez\Model\Guild */
   protected $guildModel;
   
   /**
    * @param \Nette\Security\User $user
    * @param \Nette\Database\Context $db
    */
-  function __construct(\Nette\Security\User $user,\Nette\Database\Context $db, \HeroesofAbenez\Profile $profileModel, \HeroesofAbenez\Guild $guildModel) {
+  function __construct(\Nette\Security\User $user,\Nette\Database\Context $db, \HeroesofAbenez\Model\Profile $profileModel, \HeroesofAbenez\Model\Guild $guildModel) {
     $this->user = $user;
     $this->db = $db;
     $this->profileModel = $profileModel;

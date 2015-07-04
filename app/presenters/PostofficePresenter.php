@@ -9,14 +9,14 @@ use Nette\Application\UI;
  * @author Jakub Konečný
  */
 class PostofficePresenter extends BasePresenter {
-  /** @var \HeroesofAbenez\PostOffice */
+  /** @var \HeroesofAbenez\Model\PostOffice */
   protected $model;
   
   
   /**
-   * @param \HeroesofAbenez\PostOffice $model
+   * @param \HeroesofAbenez\Model\PostOffice $model
    */
-  function __construct(\HeroesofAbenez\PostOffice $model) {
+  function __construct(\HeroesofAbenez\Model\PostOffice $model) {
     $this->model = $model;
   }
   

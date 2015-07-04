@@ -7,13 +7,13 @@ namespace HeroesofAbenez\Presenters;
  * @author Jakub Konečný
  */
 class ItemPresenter extends BasePresenter {
-  /**  @var \HeroesofAbenez\Item */
+  /**  @var \HeroesofAbenez\Model\Item */
   protected $model;
   
   /**
-   * @param \HeroesofAbenez\Item $model
+   * @param \HeroesofAbenez\Model\Item $model
    */
-  function __construct(\HeroesofAbenez\Item $model) {
+  function __construct(\HeroesofAbenez\Model\Item $model) {
     $this->model = $model;
   }
   

@@ -7,13 +7,13 @@ namespace HeroesofAbenez\Presenters;
  * @author Jakub Konečný
  */
 class MapPresenter extends BasePresenter {
-  /** @var \HeroesofAbenez\Map */
+  /** @var \HeroesofAbenez\Model\Map */
   protected $model;
   
   /**
-   * @param \HeroesofAbenez\Map $mapModel
+   * @param \HeroesofAbenez\Model\Map $mapModel
    */
-  function __construct(\HeroesofAbenez\Map $mapModel) {
+  function __construct(\HeroesofAbenez\Model\Map $mapModel) {
     $this->model = $mapModel;
   }
   

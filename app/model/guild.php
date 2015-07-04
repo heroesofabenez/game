@@ -1,5 +1,5 @@
 <?php
-namespace HeroesofAbenez;
+namespace HeroesofAbenez\Model;
 
 use HeroesofAbenez\Entities\Request,
     HeroesofAbenez\Entities\Guild as GuildEntity;
@@ -16,12 +16,12 @@ class Guild extends \Nette\Object {
   protected $db;
   /** @var \Nette\Security\User */
   protected $user;
-  /** @var HeroesofAbenez\Profile */
+  /** @var HeroesofAbenez\Model\Profile */
   protected $profileModel;
-  /** @var \HeroesofAbenez\Permissions */
+  /** @var \HeroesofAbenez\Model\Permissions */
   protected $permissionsModel;
   
-  function __construct(\Nette\Caching\Cache $cache, \Nette\Database\Context $db, \Nette\Security\User $user, \HeroesofAbenez\Profile $profileModel, \HeroesofAbenez\Permissions $permissionsModel) {
+  function __construct(\Nette\Caching\Cache $cache, \Nette\Database\Context $db, \Nette\Security\User $user, \HeroesofAbenez\Model\Profile $profileModel, \HeroesofAbenez\Model\Permissions $permissionsModel) {
     $this->cache = $cache;
     $this->db = $db;
     $this->user = $user;

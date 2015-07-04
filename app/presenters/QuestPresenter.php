@@ -7,16 +7,16 @@ namespace HeroesofAbenez\Presenters;
  * @author Jakub Konečný
  */
 class QuestPresenter extends BasePresenter {
-  /** @var \HeroesofAbenez\Quest */
+  /** @var \HeroesofAbenez\Model\Quest */
   protected $model;
-  /** @var \HeroesofAbenez\Item */
+  /** @var \HeroesofAbenez\Model\Item */
   protected $itemModel;
   
   /**
-   * @param \HeroesofAbenez\Quest $model
-   * @param \HeroesofAbenez\Item $itemModel
+   * @param \HeroesofAbenez\Model\Quest $model
+   * @param \HeroesofAbenez\Model\Item $itemModel
    */
-  function __construct(\HeroesofAbenez\Quest $model, \HeroesofAbenez\Item $itemModel) {
+  function __construct(\HeroesofAbenez\Model\Quest $model, \HeroesofAbenez\Model\Item $itemModel) {
     $this->model = $model;
     $this->itemModel = $itemModel;
   }

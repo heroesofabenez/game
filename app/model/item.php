@@ -1,5 +1,5 @@
 <?php
-namespace HeroesofAbenez;
+namespace HeroesofAbenez\Model;
 
 use Nette\Utils\Arrays,
     HeroesofAbenez\Entities\Item as ItemEntity;

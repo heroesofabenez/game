@@ -1,5 +1,5 @@
 <?php
-namespace HeroesofAbenez;
+namespace HeroesofAbenez\Model;
 
 use Nette\Utils\Arrays,
     HeroesofAbenez\Entities\Quest as QuestEntity;
@@ -18,7 +18,7 @@ class Quest extends \Nette\Object {
   protected $user;
   /** @var \Nette\Http\Request */
   protected $request;
-  /** @var \HeroesofAbenez\Item */
+  /** @var \HeroesofAbenez\Model\Item */
   protected $itemModel;
   
   function __construct(\Nette\Caching\Cache $cache, \Nette\Database\Context $db, \Nette\Security\User $user) {
@@ -31,7 +31,7 @@ class Quest extends \Nette\Object {
     $this->request = $request;
   }
   
-  function setItemModel(\HeroesofAbenez\Item $itemModel) {
+  function setItemModel(\HeroesofAbenez\Model\Item $itemModel) {
     $this->itemModel = $itemModel;
   }
   

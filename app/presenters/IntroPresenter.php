@@ -9,7 +9,7 @@ namespace HeroesofAbenez\Presenters;
 class IntroPresenter extends BasePresenter {
   /** @var int In which part of intro we are */
   protected $part;
-  /** @var \HeroesofAbenez\Intro */
+  /** @var \HeroesofAbenez\Model\Intro */
   protected $model;
   
   /**

@@ -1,5 +1,5 @@
 <?php
-namespace HeroesofAbenez;
+namespace HeroesofAbenez\Model;
 
 /**
  * Post Office Model
@@ -11,10 +11,10 @@ class PostOffice extends \Nette\Object {
   protected $db;
   /** @var \Nette\Security\User */
   protected $user;
-  /** @var HeroesofAbenez\Profile */
+  /** @var HeroesofAbenez\Model\Profile */
   protected $profileModel;
   
-  function __construct(\Nette\Database\Context $db, \Nette\Security\User $user, \HeroesofAbenez\Profile $profileModel) {
+  function __construct(\Nette\Database\Context $db, \Nette\Security\User $user, \HeroesofAbenez\Model\Profile $profileModel) {
     $this->db = $db;
     $this->user = $user;
     $this->profileModel = $profileModel;

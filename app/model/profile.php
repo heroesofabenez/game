@@ -1,5 +1,5 @@
 <?php
-namespace HeroesofAbenez;
+namespace HeroesofAbenez\Model;
 
   /**
    * Model Profile
@@ -11,15 +11,15 @@ class Profile extends \Nette\Object {
   protected $db;
   /** @var \Nette\Caching\Cache */
   protected $cache;
-  /** @var \HeroesofAbenez\Character */
+  /** @var \HeroesofAbenez\Model\Character */
   protected $characterModel;
-  /** @var \HeroesofAbenez\Permissions */
+  /** @var \HeroesofAbenez\Model\Permissions */
   protected $permissionsModel;
   
   /**
    * @param \Nette\Database\Context $db
    */
-  function __construct(\Nette\Caching\Cache $cache, \Nette\Database\Context $db, \HeroesofAbenez\Character $characterModel, \HeroesofAbenez\Permissions $permissionsModel) {
+  function __construct(\Nette\Caching\Cache $cache, \Nette\Database\Context $db, \HeroesofAbenez\Model\Character $characterModel, \HeroesofAbenez\Model\Permissions $permissionsModel) {
     $this->db = $db;
     $this->characterModel = $characterModel;
     $this->cache = $cache;

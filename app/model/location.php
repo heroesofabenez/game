@@ -1,5 +1,5 @@
 <?php
-namespace HeroesofAbenez;
+namespace HeroesofAbenez\Model;
 
 use Nette\Utils\Arrays,
     HeroesofAbenez\Entities\Area,
@@ -17,7 +17,7 @@ class Location extends \Nette\Object {
   protected $db;
   /** @var \Nette\Security\User */
   protected $user;
-  /** @var \HeroesofAbenez\NPC */
+  /** @var \HeroesofAbenez\Model\NPC */
   protected $npcModel;
   
   function __construct(\Nette\Caching\Cache $cache, \Nette\Database\Context $db) {
@@ -29,7 +29,7 @@ class Location extends \Nette\Object {
     $this->user = $user;
   }
   
-  function setNpcModel(\HeroesofAbenez\NPC $npcModel) {
+  function setNpcModel(\HeroesofAbenez\Model\NPC $npcModel) {
     $this->npcModel = $npcModel;
   }
   

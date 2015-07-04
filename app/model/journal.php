@@ -1,5 +1,5 @@
 <?php
-namespace HeroesofAbenez;
+namespace HeroesofAbenez\Model;
 
 use HeroesofAbenez\Entities\JournalQuest,
     HeroesofAbenez\Entities\Pet;
@@ -14,13 +14,13 @@ class Journal extends \Nette\Object {
   protected $user;
   /** @var \Nette\Database\Context */
   protected $db;
-  /** @var \HeroesofAbenez\Quest */
+  /** @var \HeroesofAbenez\Model\Quest */
   protected $questModel;
-  /** @var \HeroesofAbenez\Location */
+  /** @var \HeroesofAbenez\Model\Location */
   protected $locationModel;
-  /** @var \HeroesofAbenez\Guild */
+  /** @var \HeroesofAbenez\Model\Guild */
   protected $guildModel;
-  /** @var \HeroesofAbenez\Profile */
+  /** @var \HeroesofAbenez\Model\Profile */
   protected $profileModel;
   
   /**
@@ -32,19 +32,19 @@ class Journal extends \Nette\Object {
     $this->db = $db;
   }
   
-  function setQuestModel(\HeroesofAbenez\Quest $questModel) {
+  function setQuestModel(\HeroesofAbenez\Model\Quest $questModel) {
     $this->questModel = $questModel;
   }
   
-  function setLocationModel(\HeroesofAbenez\Location $locationModel) {
+  function setLocationModel(\HeroesofAbenez\Model\Location $locationModel) {
     $this->locationModel = $locationModel;
   }
   
-  function setGuildModel(\HeroesofAbenez\Guild $guildModel) {
+  function setGuildModel(\HeroesofAbenez\Model\Guild $guildModel) {
     $this->guildModel = $guildModel;
   }
   
-  function setProfileModel(\HeroesofAbenez\Profile $profileModel) {
+  function setProfileModel(\HeroesofAbenez\Model\Profile $profileModel) {
     $this->profileModel = $profileModel;
   }
   

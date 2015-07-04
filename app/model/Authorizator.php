@@ -10,10 +10,10 @@ class Authorizator extends \Nette\Object {
   /**
   * Factory for Authorizator
   * 
-  * @param \HeroesofAbenez\Permissions $model
+  * @param \HeroesofAbenez\Model\Permissions $model
   * @return \Nette\Security\Permission
   */
-  static function create(\HeroesofAbenez\Permissions $model) {
+  static function create(\HeroesofAbenez\Model\Permissions $model) {
     $permission = new \Nette\Security\Permission;
     $permission->addResource("guild");
     $permission->addRole("guest");

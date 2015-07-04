@@ -7,15 +7,15 @@ namespace HeroesofAbenez\Presenters;
  * @author Jakub Konečný
  */
 class NpcPresenter extends BasePresenter {
-  /** @var \HeroesofAbenez\NPC */
+  /** @var \HeroesofAbenez\Model\NPC */
   protected $model;
   /** @var \HeroesofAbenez\Entities\NPC */
   protected $npc;
   
   /**
-   * @param \HeroesofAbenez\NPC $npcModel
+   * @param \HeroesofAbenez\Model\NPC $npcModel
    */
-  function __construct(\HeroesofAbenez\NPC $npcModel) {
+  function __construct(\HeroesofAbenez\Model\NPC $npcModel) {
     $this->model = $npcModel;
   }
   
@@ -61,7 +61,7 @@ class NpcPresenter extends BasePresenter {
   }
   
   /**
-   * @return \HeroesofAbenez\NPCDialogueControl
+   * @return \HeroesofAbenez\Model\NPCDialogueControl
    */
   function createComponentNpcDialogue() {
     $component = $this->context->getService("npc_dialogue");

@@ -1,5 +1,5 @@
 <?php
-namespace HeroesofAbenez;
+namespace HeroesofAbenez\Model;
 
 /**
  * Description of map
@@ -7,14 +7,14 @@ namespace HeroesofAbenez;
  * @author Jakub Konečný
  */
 class Map extends \Nette\Object {
-  /** @var \HeroesofAbenez\Location */
+  /** @var \HeroesofAbenez\Model\Location */
   protected $locationModel;
-  /** @var \HeroesofAbenez\MapDrawer */
+  /** @var \HeroesofAbenez\Model\MapDrawer */
   protected $drawer;
   /** @var \Nette\Security\User */
   protected $user;
   
-  function __construct(\HeroesofAbenez\Location $locationModel, \Nette\Security\User $user, \HeroesofAbenez\MapDrawer $drawer) {
+  function __construct(\HeroesofAbenez\Model\Location $locationModel, \Nette\Security\User $user, \HeroesofAbenez\Model\MapDrawer $drawer) {
     $this->locationModel = $locationModel;
     $this->drawer = $drawer;
     $this->user = $user;

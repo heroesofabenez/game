@@ -10,9 +10,9 @@ class GlobalChatControl extends ChatControl {
   /**
    * @param \Nette\Database\Context $database
    * @param \Nette\Security\User $user
-   * @param \HeroesofAbenez\Location $locationModel
+   * @param \HeroesofAbenez\Model\Location $locationModel
    */
-  function __construct(\Nette\Database\Context $database, \Nette\Security\User $user, \HeroesofAbenez\Location $locationModel) {
+  function __construct(\Nette\Database\Context $database, \Nette\Security\User $user, \HeroesofAbenez\Model\Location $locationModel) {
     $stage = $locationModel->getStage($user->identity->stage);
     $stages = $locationModel->listofStages($this->id);
     $stagesIds = array();
