@@ -39,6 +39,9 @@ class ShopControl extends \Nette\Application\UI\Control {
     return $return;
   }
   
+  /**
+   * @return void
+   */
   function render() {
     $template = $this->template;
     $template->setFile(__DIR__ . "/shop.latte");
