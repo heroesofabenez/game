@@ -1,0 +1,9 @@
+  <h1>{$npcName}'s shop</h1>
+  {if count($items) === 0}
+  <p>Sorry but I have nothing to sell.</p>
+  {else}
+  <p>I can offer you:</p>
+  {foreach $items as $item}
+  <a href="{plink Item:view $item->id}">{$item->name}</a> for {$item->price} silver marks. <a href="{plink Item:buy $item->id}">Buy</a><br>
+  {/foreach}
+  {/if}

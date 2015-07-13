@@ -74,21 +74,5 @@ class NPC extends \Nette\Object {
     $npcs = $this->listOfNpcs();
     return $npcs[$id]->name;
   }
-  
-  /**
-   * 
-   * @param int $id Npc's id
-   * @return array Items to buy
-   */
-  function shop($id) {
-    $return = array();
-    $items = $this->db->table("shop_items")
-      ->where("npc", $id)
-      ->order("order");
-    foreach($items as $item) {
-      $return[] = $this->itemModel->view($item->item);
-    }
-    return $return;
-  }
 }
 ?>

@@ -28,5 +28,6 @@ services:
     chat.local: HeroesofAbenez\Chat\LocalChatControl
     chat.guild: HeroesofAbenez\Chat\GuildChatControl
     npc_dialogue: HeroesofAbenez\Dialogue\NPCDialogueControl
+    npc.shop: HeroesofAbenez\NPC\ShopControl
     ranking.guilds: HeroesofAbenez\Ranking\GuildsRankingControl
     ranking.characters: HeroesofAbenez\Ranking\CharactersRankingControl

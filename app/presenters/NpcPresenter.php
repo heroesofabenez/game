@@ -89,9 +89,15 @@ class NpcPresenter extends BasePresenter {
       $this->flashMessage("This npc doesn't have shop.");
       $this->redirect("view", $id);
     }
-    $this->template->npcName = $this->npc->name;
-    $this->model->itemModel = $this->context->getService("model.item");
-    $this->template->items = $this->model->shop($id);
+  }
+  
+  /**
+   * @return \HeroesofAbenez\NPC\ShopControl
+   */
+  function createComponentNpcShop() {
+    $shop = $this->context->getService("npc.shop");
+    $shop->npc = $this->npc;
+    return $shop;
   }
 }
 ?>
