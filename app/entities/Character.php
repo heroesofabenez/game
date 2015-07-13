@@ -92,7 +92,7 @@ class Character extends \Nette\Object {
     }
     foreach($stats as $key => $value) {
       if(in_array($key, $all_stats)) {
-switch($key) {
+        switch($key) {
 case "name":
 case "description":
   if(!is_string($value)) exit("Invalid value for \$stats[\"$key\"] passed to method Character::__construct. Expected string."); else $this->$key = $value;
@@ -114,7 +114,7 @@ case "initiative":
     $this->$key = $value;
   } 
   break;
-}
+        }
       } else { continue; }
     }
     foreach($pets as $pet) {
@@ -167,8 +167,8 @@ case "initiative":
    * @return Equipment Item if found else false
    */
   function getItem($itemid) {
-    if(isset($this->equipment[$itemid])) { return $this->equipment[$itemid]; }
-    else { return false; }
+    if(isset($this->equipment[$itemid])) return $this->equipment[$itemid];
+    else return false;
   }
   
   function equipItem($itemId) {
@@ -198,8 +198,8 @@ case "initiative":
    * @return Pet Pet if found else false
    */
   function getPet($petId) {
-    if(isset($this->pets[$petId]) and is_a($this->pets[$petId], "Pet")) { return $this->pets[$petId]; }
-    else { return false; }
+    if(isset($this->pets[$petId]) and is_a($this->pets[$petId], "Pet")) return $this->pets[$petId];
+    else return false;
   }
   
   /**
@@ -210,11 +210,8 @@ case "initiative":
    */
   function deployPet($petId) {
     $pet = $this->getPet($petId);
-    if(!$pet) {
-      exit;
-    } else {
-      $this->active_pet = $petId;
-    }
+    if(!$pet) exit;
+    else $this->active_pet = $petId;
   }
   
   /**
@@ -223,9 +220,7 @@ case "initiative":
    * @return void
    */
   function dismissPet() {
-    if(is_int($this->active_pet)) {
-      $this->active_pet = null;
-    }
+    if(is_int($this->active_pet)) $this->active_pet = null;
   }
   
   /**
@@ -259,7 +254,7 @@ case "skill":
 case "equipment":
   $bonus_value = $effect->value;
   break;
-}
+      }
       if($type == "buff") { $$stat += $bonus_value; }
       elseif($type == "debuff") { $debuffs[$stat] += $bonus_value; }
       unset($stat, $type, $duration, $bonus_value);
