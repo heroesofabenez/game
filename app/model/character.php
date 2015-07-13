@@ -1,6 +1,8 @@
 <?php
 namespace HeroesofAbenez\Model;
 
+use HeroesofAbenez\Presenters\BasePresenter;
+
 /**
  * Model Character
  * 
@@ -101,7 +103,7 @@ class Character extends \Nette\Object {
     $data["constitution"] = $class->constitution + $race->constitution;
     $data["intelligence"] = $class->intelligence + $race->intelligence;
     $data["charisma"] = $class->charisma + $race->charisma;
-    $data["owner"] = Presenters\BasePresenter::getRealId();
+    $data["owner"] = BasePresenter::getRealId();
     $this->db->query("INSERT INTO characters", $data);
     
     $data["class"] = $class->name;
