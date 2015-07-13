@@ -110,8 +110,7 @@ case "initiative":
     exit("Invalid value for \$stats[\"$key\"] passed to method Character::__construct. Expected integer.");
   } else {
     $this->$key = $value;
-    $key = "base_$key";
-    $this->$key = $value;
+    $this->{"base_" . $key} = $value;
   } 
   break;
         }
@@ -122,7 +121,6 @@ case "initiative":
         $this->pets[] = $pet;
       }
     }
-    $key = $value = $pet = "";
   }
   
   function addEffect($effect = array()) {
