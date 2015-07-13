@@ -23,13 +23,12 @@ class Team extends \Nette\Object {
   /**
    * Adds a member to the team
    * 
-   * @param Character $member Member to be added to the team
+   * @param \HeroesofAbenez\Entities\Character $member Member to be added to the team
    * 
    * @return void
    */
-  function addMember($member) {
-    if(!is_a($member, "Character")) exit("Invalid value for parameter member passed to method Team:addMember. Expected Character.");
-    else $this->members[] = $member;
+  function addMember(Character $member) {
+    $this->members[] = $member;
   }
 }
 ?>
