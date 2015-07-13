@@ -16,8 +16,6 @@ class Item extends \Nette\Object {
   protected $cache;
   /** @var \Nette\Security\User */
   protected $user;
-  /** @var \Nette\Http\Request */
-  protected $request;
   /** @var \Nette\Application\LinkGenerator */
   protected $linkGenerator;
   
@@ -25,10 +23,6 @@ class Item extends \Nette\Object {
     $this->db = $db;
     $this->cache = $cache;
     $this->user = $user;
-  }
-  
-  function setRequest(\Nette\Http\Request $request) {
-    $this->request = $request;
   }
   
   function setLinkGenerator(\Nette\Application\LinkGenerator $generator) {
