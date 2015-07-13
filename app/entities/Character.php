@@ -81,14 +81,11 @@ class Character extends \Nette\Object {
    * @param array $equipment Equipment of the character
    * @param array $pets Pets owned by the character
    */
-  function __construct($stats = array(), $equipment = array(), $pets = array()) {
-    if(!is_array($stats)) { exit("Invalid value for parameter stats passed to method Character::__construct. Expected array."); }
-    if(!is_array($equipment)) { exit("Invalid value for parameter equipment passed to method Character::__construct. Expected array."); }
-    if(!is_array($pets)) { exit("Invalid value for parameter pets passed to method Character::__construct. Expected array."); }
+  function __construct(array $stats, array $equipment = array(), array $pets = array()) {
     $required_stats = array("id", "name", "gender", "occupation", "level", "experience", "strength", "dexterity", "constitution", "intelligence");
     $all_stats = $required_stats + array("specialization", "description", "guild", "guild_rank");
     foreach($required_stats as $value) {
-      if(!isset($stats[$value])) exit("Not passed all needed elements for parameter stats for method Character::__construct.");
+      if(!isset($stats[$value])) exit("Not passed all needed elements for parameter stats for method Character::__construct. Missing at least $value.");
     }
     foreach($stats as $key => $value) {
       if(in_array($key, $all_stats)) {
