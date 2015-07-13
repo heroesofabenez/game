@@ -1,5 +1,5 @@
 <?php
-namespace HeroesofAbenez\Dialogue;
+namespace HeroesofAbenez\NPC;
 
 use HeroesofAbenez\Entities\DialogueLine;
 

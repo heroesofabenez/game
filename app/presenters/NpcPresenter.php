@@ -64,7 +64,7 @@ class NpcPresenter extends BasePresenter {
    * @return \HeroesofAbenez\Model\NPCDialogueControl
    */
   function createComponentNpcDialogue() {
-    $component = $this->context->getService("npc_dialogue");
+    $component = $this->context->getService("npc.dialogue");
     $component->npc = $this->npc;
     return $component;
   }
