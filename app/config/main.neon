@@ -1,6 +1,5 @@
 includes:
     - local.neon
-    - routes.neon
     - models.neon
 application:
     debugger: true
