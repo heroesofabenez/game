@@ -1,7 +1,8 @@
 <?php
 namespace HeroesofAbenez\Auth;
 
-use Nette\Security as NS;
+use Nette\Security as NS,
+    HeroesofAbenez\Presenters\BasePresenter;
 
   /**
    * Authenticator for the game
@@ -28,7 +29,7 @@ class Authenticator extends \Nette\Object implements NS\IAuthenticator {
    * @return \Nette\Security\Identity User's identity
    */
   function authenticate(array $credentials) {
-    $uid = Presenters\BasePresenter::getRealId();
+    $uid = BasePresenter::getRealId();
     if($uid == 0) return new NS\Identity(0, "guest");
     $chars = $this->db->table("characters")->where("owner", $uid);
     if($chars->count() == 0) return new NS\Identity(-1, "guest");
