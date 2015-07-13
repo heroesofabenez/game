@@ -251,11 +251,11 @@ case "initiative":
         unset($this->effects[$i]);
         continue;
       }
-switch($effect->source) {
+      switch($effect->source) {
 case "pet":
 case "skill":
   $bonus_value = $$stat / 100 * $effect->value;
-	break;
+  break;
 case "equipment":
   $bonus_value = $effect->value;
   break;
