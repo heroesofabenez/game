@@ -1,6 +1,11 @@
 <?php
 namespace HeroesofAbenez\Ranking;
 
+/**
+ * Characters Ranking Control
+ * 
+ * @author Jakub Konečný
+ */
 class CharactersRankingControl extends RankingControl {
   /** @var \Nette\Database\Context */
   protected $db;
