@@ -234,15 +234,13 @@ case "initiative":
    * @return void
    */
   function recalculateStats() {
-    $strength = $this->base_strength;
-    $dexterity = $this->base_dexterity;
-    $constitution = $this->base_constitution;
-    $intelligence = $this->base_intelligence;
-    $charisma = $this->base_charisma;
-    $damage = $this->base_damage;
-    $hit = $this->base_hit;
-    $dodge = $this->base_dodge;
-    $initiative = $this->base_initiative;
+    $stats = array(
+      "strength", "dexterity", "constitution", "intelligence", "charisma",
+      "damage", "hit", "dodge", "initiative"
+    );
+    foreach($stats as $stat) {
+      $$stat = $this->{"base_" . $stat};
+    }
     $debuffs = array();
     $i = 0;
     foreach($this->effects as $effect) {
@@ -272,15 +270,9 @@ case "equipment":
       $bonus_value = $$stat / 100 * $value;
       $$stat -= $bonus_value;
     }
-    $this->strength = $strength;
-    $this->dexterity = $dexterity;
-    $this->constitution = $constitution;
-    $this->intellingence = $intelligence;
-    $this->charisma = $charisma;
-    $this->damage = $damage;
-    $this->hit = $hit;
-    $this->dodge = $dodge;
-    $this->initiative = $initiative;
+    foreach($stats as $stat) {
+      $this->$stat = $$stat;
+    }
   }
 }
 ?>
