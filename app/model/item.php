@@ -132,51 +132,5 @@ class Item extends \Nette\Object {
     if(!$result) return false;
     else return true;
   }
-  
-  /**
-   * @param int $id Items's id
-   * @return int Error code|1 on success
-   */
-  function buyItem($id) {
-    $item = $this->view($id);
-    if(!$item) return 2;
-    $urls = $this->canBuyFrom($id);
-    if(!$this->checkReferer($urls)) return 3;
-    $character = $this->db->table("characters")->get($this->user->id);
-    if($character->money < $item->price) return 4;
-    if(!$this->giveItem($id)) return 5;
-    $data = "money=money-{$item->price}";
-    $result = $this->db->query("UPDATE characters SET $data WHERE id=?", $this->user->id);
-    if(!$result) return 5;
-    else return 1;
-  }
-  
-  /**
-   * @param int $id
-   * @return array
-   */
-  function canBuyFrom($id) {
-    $return = array();
-    $result = $this->db->table("shop_items")
-       ->where("item", $id);
-    foreach($result as $row) {
-      $return[] = $this->linkGenerator->link("Npc:trade", array("id" => $row->npc));
-    }
-    return $return;
-  }
-  
-  /**
-   * Check if player came from specified url
-   * 
-   * @param string $urls Expected url
-   * @return bool
-   */
-  protected function checkReferer($urls) {
-    $referer = $this->request->getReferer();
-    if($referer === NULL) return false;
-    if(in_array($referer->absoluteUrl, $urls)) return true;
-    else return false;
-  }
-  
 }
 ?>
