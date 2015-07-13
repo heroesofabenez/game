@@ -1,8 +1,7 @@
 <?php
 namespace HeroesofAbenez\Auth;
 
-use Nette\Security as NS,
-    HeroesofAbenez\Presenters\BasePresenter;
+use Nette\Security as NS;
 
   /**
    * Authenticator for the game
@@ -24,12 +23,29 @@ class Authenticator extends \Nette\Object implements NS\IAuthenticator {
   }
   
   /**
+   * Return real user's id
+   * @return int
+   */
+  static function getRealId() {
+    $dev_servers = array("localhost", "kobliha", "hoa.local");
+    if(in_array($_SERVER["SERVER_NAME"], $dev_servers)) {
+      $uid = 1;
+    } else {
+      $ch = curl_init("http://heroesofabenez.tk/auth.php");
+      curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+      $uid = curl_exec($ch);
+      curl_close($ch);
+    }
+    return $uid;
+  }
+  
+  /**
    * Logins the user
    * @param array $credentials not really used
    * @return \Nette\Security\Identity User's identity
    */
   function authenticate(array $credentials) {
-    $uid = BasePresenter::getRealId();
+    $uid = self::getRealId();
     if($uid == 0) return new NS\Identity(0, "guest");
     $chars = $this->db->table("characters")->where("owner", $uid);
     if($chars->count() == 0) return new NS\Identity(-1, "guest");

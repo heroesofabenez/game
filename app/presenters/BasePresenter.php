@@ -18,23 +18,6 @@ abstract class BasePresenter extends \Nette\Application\UI\Presenter {
   }
   
   /**
-   * Return real user's id
-   * @return int
-   */
-  static function getRealId() {
-    $dev_servers = array("localhost", "kobliha", "hoa.local");
-    if(in_array($_SERVER["SERVER_NAME"], $dev_servers)) {
-      $uid = 1;
-    } else {
-      $ch = curl_init("http://heroesofabenez.tk/auth.php");
-      curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-      $uid = curl_exec($ch);
-      curl_close($ch);
-    }
-    return $uid;
-  }
-  
-  /**
    * Try to login the user
    * @return void
    */
