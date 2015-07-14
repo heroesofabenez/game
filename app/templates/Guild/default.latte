@@ -1,7 +1,7 @@
 {layout '../@layout.latte'}
 {block title}Guild{/block}
 {block content}
-  <h1>Guild {name}</h1>
+  <h1>Guild {$name}</h1>
   Leader: {$leader} Members: <a n:href="Guild:members">{$members}</a><br>
   Description: {$description}<br>
   {if $canManage}<a n:href="Guild:manage">Manage guild</a>{/if}

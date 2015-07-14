@@ -58,9 +58,10 @@ class GuildPresenter extends BasePresenter {
    */
   function renderDefault() {
     $guild = $this->model->guildData($this->user->identity->guild);
-    foreach($guild as $key => $value) {
+    foreach($guild->__toArray() as $key => $value) {
       $this->template->$key = $value;
     }
+    $this->template->guild = $guild;
     $this->template->canManage = $this->user->isAllowed("guild", "manage");
     $this->template->canInvite = $this->user->isAllowed("guild", "invite");
   }
