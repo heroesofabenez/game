@@ -18,7 +18,7 @@ class MapPresenter extends BasePresenter {
   }
   
   /**
-   * @todo show map
+   * @return void
    */
   function actionLocal() {
     $data = $this->model->local();

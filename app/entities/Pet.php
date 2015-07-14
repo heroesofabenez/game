@@ -4,7 +4,7 @@ namespace HeroesofAbenez\Entities;
 /**
  * Structure for pet
  * 
- * @property-read array deployParams 
+ * @property-read array $deployParams
  * @author Jakub Konečný
  */
 class Pet extends BaseEntity {
