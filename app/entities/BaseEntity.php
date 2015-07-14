@@ -23,5 +23,17 @@ abstract class BaseEntity {
     elseif($rc->hasProperty($name)) return $this->$name;
     throw new \Nette\MemberAccessException("Cannot read property $class::\$$name.");
   }
+  
+  /**
+   * Do not allow write access to properties by default
+   * 
+   * @param string $name
+   * @param string $value
+   * @throws \Nette\MemberAccessException
+   */
+  function __set($name, $value) {
+    $class = get_class($this);
+    throw new \Nette\MemberAccessException("Cannot write to property $class::\$$name.");
+  }
 }
 ?>
