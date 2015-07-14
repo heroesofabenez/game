@@ -16,23 +16,11 @@ class Quest extends \Nette\Object {
   protected $cache;
   /** @var \Nette\Security\User */
   protected $user;
-  /** @var \Nette\Http\Request */
-  protected $request;
-  /** @var \HeroesofAbenez\Model\Item */
-  protected $itemModel;
   
   function __construct(\Nette\Caching\Cache $cache, \Nette\Database\Context $db, \Nette\Security\User $user) {
     $this->db = $db;
     $this->cache = $cache;
     $this->user = $user;
-  }
-  
-  function setRequest(\Nette\Http\Request $request) {
-    $this->request = $request;
-  }
-  
-  function setItemModel(\HeroesofAbenez\Model\Item $itemModel) {
-    $this->itemModel = $itemModel;
   }
   
   /**
