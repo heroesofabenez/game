@@ -63,35 +63,6 @@ class Quest extends \Nette\Object {
   }
   
   /**
-   * Gets list of available quests from specified npc
-   * 
-   * @param int $npc Npc's id
-   * @return type
-   */
-  function availableQuests($npc) {
-    $return = $this->listOfQuests($npc);
-    $playerQuests = $this->db->table("character_quests")
-      ->where("character", $this->user->id);
-    foreach($return as $key => $quest) {
-      foreach($playerQuests as $pquest) {
-        if($quest->id == $pquest->quest AND $pquest->progress > 2) {
-          unset($return[$key]);
-          continue 2;
-        } elseif($quest->id == $pquest->quest AND $pquest->progress <= 2) {
-          $quest->progress = true;
-          continue 2;
-        }
-      }
-      if($quest->needed_level > 0) {
-        if($this->user->identity->level < $quest->needed_level) unset($return[$key]);
-      } elseif($quest->needed_quest > 0) {
-        if(!$this->isFinished($quest->id)) unset($return[$key]);
-      }
-    }
-    return $return;
-  }
-  
-  /**
    * Gets info about specified quest
    * 
    * @param int $id Quest's id

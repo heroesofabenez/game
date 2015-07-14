@@ -74,10 +74,16 @@ class NpcPresenter extends BasePresenter {
    * @return void
    */
   function renderQuests($id) {
-    $this->template->id = $id;
     $this->template->name = $this->npc->name;
-    $questModel = $this->context->getService("model.quest");
-    $this->template->quests = $questModel->availableQuests($id);
+  }
+  
+  /**
+   * @return \HeroesofAbenez\NPC\NPCQuestsControl
+   */
+  function createComponentNpcQuests() {
+    $component = $this->context->getService("npc.quests");
+    $component->npc = $this->npc;
+    return $component;
   }
   
   /**

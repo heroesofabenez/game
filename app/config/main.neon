@@ -28,5 +28,6 @@ services:
     chat.guild: HeroesofAbenez\Chat\GuildChatControl
     npc.dialogue: HeroesofAbenez\NPC\NPCDialogueControl
     npc.shop: HeroesofAbenez\NPC\ShopControl
+    npc.quests: HeroesofAbenez\NPC\NPCQuestsControl
     ranking.guilds: HeroesofAbenez\Ranking\GuildsRankingControl
     ranking.characters: HeroesofAbenez\Ranking\CharactersRankingControl
