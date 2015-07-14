@@ -9,6 +9,8 @@ namespace HeroesofAbenez\NPC;
 class NPCQuestsControl extends \Nette\Application\UI\Control {
   /** @var \HeroesofAbenez\Model\Quest */
   protected $questModel;
+  /** @var \HeroesofAbenez\Model\Item */
+  protected $itemModel;
   /** @var \Nette\Database\Context */
   protected $db;
   /** @var \Nette\Security\User */
@@ -18,11 +20,13 @@ class NPCQuestsControl extends \Nette\Application\UI\Control {
   
   /**
    * @param \HeroesofAbenez\Model\Quest $questModel
+   * @param \HeroesofAbenez\Model\Item $itemModel
    * @param \Nette\Database\Context $db
    * @param \Nette\Security\User $user
    */
-  function __construct(\HeroesofAbenez\Model\Quest $questModel, \Nette\Database\Context $db, \Nette\Security\User $user) {
+  function __construct(\HeroesofAbenez\Model\Quest $questModel, \HeroesofAbenez\Model\Item $itemModel, \Nette\Database\Context $db, \Nette\Security\User $user) {
     $this->questModel = $questModel;
+    $this->itemModel = $itemModel;
     $this->user = $user;
     $this->db = $db;
   }
@@ -69,6 +73,94 @@ class NPCQuestsControl extends \Nette\Application\UI\Control {
     $template->id = $this->npc->id;
     $template->quests = $this->getQuests();
     $template->render();
+  }
+  
+  /**
+   * Accept a quest
+   * 
+   * @param int $questId Quest's id
+   * @return void
+   */
+  function handleAccept($questId) {
+    $quest = $this->questModel->view($questId);
+    if(!$quest) $this->presenter->forward("notfound");
+    $status = $this->questModel->status($questId);
+    if($status > 0) {
+      $this->presenter->flashMessage("You are already working on this quest.");
+      $this->presenter->redirect("Npc:quests", $quest->npc_start);
+    }
+    if($quest->npc_start != $this->npc->id) {
+      $this->presenter->flashMessage("You can't accept the quest from this location.");
+      $this->presenter->redirect("Homepage:default");
+    }
+    $data = array(
+      "character" => $this->user->id, "quest" => $questId
+    );
+    $this->db->query("INSERT INTO character_quests", $data);
+    $this->presenter->flashMessage("Quest accepted.");
+    $this->presenter->redirect("Quest:view", $quest->id);
+  }
+  
+  /**
+   * Checks if the player accomplished specified quest's goals
+   * 
+   * @param \HeroesofAbenez\Entities\Quest $quest
+   * @return bool
+   */
+  protected function isCompleted(\HeroesofAbenez\Entities\Quest $quest) {
+    $haveMoney = $haveItem = false;
+    if($quest->cost_money > 0) {
+      $char = $this->db->table("characters")->get($this->user->id);
+      if($char->money >= $quest->cost_money) $haveMoney = true;
+    } else {
+      $haveMoney = true;
+    }
+    if($quest->needed_item > 0) {
+      $haveItem = $this->itemModel->haveItem($quest->needed_item, $quest->item_amount);
+    } else {
+      $haveItem = true;
+    }
+    return ($haveMoney AND $haveItem);
+  }
+  
+  /**
+   * Finish a quest
+   * 
+   * @param int $questId Quest's id
+   * @return void
+   */
+  function handleFinish($questId) {
+    $quest = $this->questModel->view($questId);
+    if(!$quest) $this->presenter->forward("notfound");
+    $status = $this->questModel->status($questId);
+    if($status === 0) {
+      $this->presenter->flashMessage("You aren't working on this quest.");
+      $this->presenter->redirect("Npc:quests", $quest->npc_start);
+    }
+    if($quest->npc_end != $this->npc->id) {
+      $this->presenter->flashMessage("You can't finish the quest from this location.");
+      $this->presenter->redirect("Homepage:default");
+    }
+    if(!$this->isCompleted($quest)) {
+      $this->presenter->flashMessage("You don't meet requirements for this quest.");
+      $this->presenter->redirect("Homepage:default");
+    }
+    $wheres = array(
+      "character" => $this->user->id, "quest" => $questId
+    );
+    $data = array("progress" => 3);
+    $this->db->query("UPDATE character_quests SET ? WHERE ?", $data, $wheres);
+    if($quest->item_lose) {
+      $this->itemModel->loseItem($quest->needed_item, $quest->item_amount);
+    }
+    if($quest->cost_money > 0) $data3 = "money=money-{$quest->cost_money}";
+    else $data3 = "money=money+{$quest->reward_money}";
+    $data3 .= ", experience=experience+{$quest->reward_xp}";
+    $where3 = array("id" => $this->user->id);
+    $this->db->query("UPDATE characters SET $data3 WHERE ?", $where3);
+    if($quest->reward_item > 0) $this->itemModel->giveItem($quest->reward_item);
+    $this->presenter->flashMessage("Quest finished.");
+    $this->presenter->redirect("Quest:view", $quest->id);
   }
 }
 ?>

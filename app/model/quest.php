@@ -47,8 +47,7 @@ class Quest extends \Nette\Object {
     if($quests === NULL) {
       $quests = $this->db->table("quests");
       foreach($quests as $quest) {
-        $return[$quest->id] =
-          new QuestEntity($quest);
+        $return[$quest->id] = new QuestEntity($quest);
       }
       $this->cache->save("quests", $return);
     } else {
@@ -86,107 +85,6 @@ class Quest extends \Nette\Object {
     if($row->count() === 0) return 0;
     foreach($row as $r) { }
     return $r->progress;
-  }
-  
-  /**
-   * Check if player came from specified url
-   * 
-   * @param string $url Expected url
-   * @return bool
-   */
-  protected function checkReferer($url) {
-    $referer = $this->request->getReferer();
-    if($referer === NULL) return false;
-    if($referer->path != $url) return false;
-    return true;
-  }
-  
-  /**
-   * Accept specified quest
-   * 
-   * @param int $id Quest's id
-   * @param string $url
-   * @return int Error code|1 on success
-   */
-  function accept($id, $url) {
-    $quest = $this->db->table("quests")->get($id);
-    if(!$quest) return 2;
-    $status = $this->status($id);
-    if($status > 0) return 3;
-    if(!$this->checkReferer($url)) return 4;
-    $data = array(
-      "character" => $this->user->id, "quest" => $id
-    );
-    $result = $this->db->query("INSERT INTO character_quests", $data);
-    if(!$result) return 5;
-    return 1;
-  }
-  
-  /**
-   * Checks if the player accomplished specified quest's goals
-   * 
-   * @param \HeroesofAbenez\Entities\Quest $quest
-   * @return bool
-   */
-  protected function isCompleted(\HeroesofAbenez\Entities\Quest $quest) {
-    $haveMoney = $haveItem = false;
-    if($quest->cost_money > 0) {
-      $char = $this->db->table("characters")->get($this->user->id);
-      if($char->money >= $quest->cost_money) $haveMoney = true;
-    } else {
-      $haveMoney = true;
-    }
-    if($quest->needed_item > 0) {
-      $haveItem = $this->itemModel->haveItem($quest->needed_item, $quest->item_amount);
-    } else {
-      $haveItem = true;
-    }
-    return ($haveMoney AND $haveItem);
-  }
-  
-  /**
-   * Finish specified quest
-   * 
-   * @param int $id Quest's id
-   * @param string $url
-   * @return int Error code|1 on success
-   */
-  function finish($id, $url) {
-    $quest = $this->view($id);
-    if(!$quest) return 2;
-    $status = $this->status($id);
-    if($status === 0) return 3;
-    if($status > 2) return 4;
-    if(!$this->checkReferer($url)) return 5;
-    if($this->isCompleted($quest)) {
-      $wheres = array(
-        "character" => $this->user->id, "quest" => $id
-      );
-      $data = array(
-        "progress" => 3
-      );
-      $result = $this->db->query("UPDATE character_quests SET ? WHERE ?", $data, $wheres);
-      if($result) {
-        if($quest->item_lose) {
-          $result2 = $this->itemModel->loseItem($quest->needed_item, $quest->item_amount);
-          if(!$result2) return 7;
-        }
-        if($quest->cost_money > 0) $data3 = "money=money-{$quest->cost_money}";
-        else $data3 = "money=money+{$quest->reward_money}";
-        $data3 .= ", experience=experience+{$quest->reward_xp}";
-        $where3 = array("id" => $this->user->id);
-        $result3 = $this->db->query("UPDATE characters SET $data3 WHERE ?", $where3);
-        if(!$result3) return 7;
-        if($quest->reward_item > 0) {
-          $result4 = $this->itemModel->giveItem($quest->reward_item);
-          if(!$result4) return 7;
-        }
-        return 1;
-      } else {
-        return 7;
-      }
-    }
-    else return 6;
   }
   
   /**
