@@ -6,27 +6,27 @@ namespace HeroesofAbenez\Entities;
  * 
  * @author Jakub Konečný
  */
-class Equipment extends \Nette\Object {
+class Equipment extends BaseEntity {
   /** @var int */
-  public $id;
+  protected $id;
   /** @var string */
-  public $name;
+  protected $name;
   /** @var string */
-  public $description;
+  protected $description;
   /** @var string */
-  public $slot;
+  protected $slot;
   /** @var string */
-  public $type;
+  protected $type;
   /** @var int */
-  public $required_lvl;
+  protected $required_lvl;
   /** @var int */
-  public $required_class;
+  protected $required_class;
   /** @var int */
-  public $price;
+  protected $price;
   /** @var int */
-  public $strength;
+  protected $strength;
   /** @var int */
-  public $durability;
+  protected $durability;
   
   function __construct(\Nette\Database\Table\ActiveRow $row) {
     if($row->getTable()->name != "equipment") exit;

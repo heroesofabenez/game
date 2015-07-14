@@ -6,18 +6,18 @@ namespace HeroesofAbenez\Entities;
  *
  * @author Jakub Konečný
  */
-class Request extends \Nette\Object {
+class Request extends BaseEntity {
   /** @var int */
-  public $id;
+  protected $id;
   /** @var string */
-  public $from;
+  protected $from;
   /** @var string */
-  public $to;
+  protected $to;
   /** @var string */
-  public $type;
-  public $sent;
+  protected $type;
+  protected $sent;
   /** @var string */
-  public $status;
+  protected $status;
   
   /**
    * @param int $id

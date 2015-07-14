@@ -6,11 +6,11 @@ namespace HeroesofAbenez\Entities;
  * 
  * @author Jakub Konečný
  */
-class JournalQuest extends \Nette\Object {
+class JournalQuest extends BaseEntity {
   /** @var int Quest's id */
-  public $id;
+  protected $id;
   /** @var string Quest's name */
-  public $name;
+  protected $name;
   
   /**
    * @param int $id

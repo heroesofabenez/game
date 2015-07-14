@@ -1,7 +1,7 @@
 <?php
 namespace HeroesofAbenez\Model;
 
-use HeroesofAbenez\Entities\Request,
+use HeroesofAbenez\Entities\Request as RequestEntity,
     HeroesofAbenez\Entities\Guild as GuildEntity;
 
   /**
@@ -161,7 +161,7 @@ class Guild extends \Nette\Object {
     foreach($apps as $app) {
       $from = $this->db->table("characters")->get($app->from);
       $to = $guild->leader;
-      $return[] = new Request($app->id, $from->name, $to, $app->type, $app->sent, $app->status);
+      $return[] = new RequestEntity($app->id, $from->name, $to, $app->type, $app->sent, $app->status);
     }
     return $return;
   }

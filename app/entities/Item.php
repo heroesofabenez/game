@@ -6,17 +6,17 @@ namespace HeroesofAbenez\Entities;
  * 
  * @author Jakub Konečný
  */
-class Item extends \Nette\Object {
+class Item extends BaseEntity {
   /** @var int */
-  public $id;
+  protected $id;
   /** @var string */
-  public $name;
+  protected $name;
   /** @var string */
-  public $description;
+  protected $description;
   /** @var string */
-  public $image;
+  protected $image;
   /** @var int */
-  public $price;
+  protected $price;
   
   function __construct(\Nette\Database\Table\ActiveRow $row) {
     if($row->getTable()->name != "items") exit;

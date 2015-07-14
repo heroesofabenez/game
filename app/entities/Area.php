@@ -6,23 +6,23 @@ namespace HeroesofAbenez\Entities;
  * 
  * @author Jakub Konečný
  */
-class Area extends \Nette\Object {
+class Area extends BaseEntity {
   /** @var int id */
-  public $id;
+  protected $id;
   /** @var string name */
-  public $name;
+  protected $name;
   /** @var string description */
-  public $description;
+  protected $description;
   /** @var int minimum level to enter stage */
-  public $required_level;
+  protected $required_level;
   /** @var int id of race needed to enter stage */
-  public $required_race;
+  protected $required_race;
   /** @var int id of class needed to enter stage */
-  public $required_occupation;
+  protected $required_occupation;
   /** @var int */
-  public $pos_x;
+  protected $pos_x;
   /** @var int */
-  public $pos_y;
+  protected $pos_y;
   
   /**
    * @param int $id

@@ -6,17 +6,17 @@ namespace HeroesofAbenez\Entities;
  * 
  * @author Jakub Konečný
  */
-class Guild extends \Nette\Object {
+class Guild extends BaseEntity {
   /** @var int id */
-  public $id;
+  protected $id;
   /** @var string name */
-  public $name;
+  protected $name;
   /** @var string description */
-  public $description;
+  protected $description;
   /** @var int number of members */
-  public $members;
+  protected $members;
   /** @var string name of leader */
-  public $leader;
+  protected $leader;
   
   /**
    * @param int $id id

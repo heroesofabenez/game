@@ -6,7 +6,7 @@ namespace HeroesofAbenez\Entities;
  *
  * @author Jakub Konečný
  */
-class DialogueLine extends \Nette\Object {
+class DialogueLine extends BaseEntity {
   /** @var string */
   protected $speaker;
   /** @var string */

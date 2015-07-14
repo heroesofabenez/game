@@ -6,7 +6,7 @@ namespace HeroesofAbenez\Entities;
  * 
  * @author Jakub Konečný
  */
-class Character extends \Nette\Object {
+class Character extends BaseEntity {
   /** @var int */
   protected $id;
   /** @var string */

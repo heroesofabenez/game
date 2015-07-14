@@ -7,7 +7,7 @@ namespace HeroesofAbenez\Entities;
  * @property-read array deployParams 
  * @author Jakub Konečný
  */
-class Pet extends \Nette\Object {
+class Pet extends BaseEntity {
   /** @var int Pet's id */
   protected $id;
   /** @var string Pet's type */
@@ -52,14 +52,6 @@ class Pet extends \Nette\Object {
       "source" => "pet",
       "duration" => "combat"
     );
-  }
-  
-  /**
-   * @param string $name Variable name
-   * @return mixed
-   */
-  function &__get($name) {
-    if(isset($this->$name)) return $this->$name;
   }
 }
 ?>

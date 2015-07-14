@@ -6,47 +6,51 @@ namespace HeroesofAbenez\Entities;
  * 
  * @author Jakub Konečný
  */
-class Quest extends \Nette\Object {
+class Quest extends BaseEntity {
   /** @var int */
-  public $id;
+  protected $id;
   /** @var string */
-  public $name;
+  protected $name;
   /** @var string */
-  public $introduction;
+  protected $introduction;
   /** @var string */
-  public $end_text;
+  protected $end_text;
   /** @var int */
-  public $cost_money = 0;
+  protected $cost_money = 0;
   /** @var int */
-  public $needed_level = 0;
+  protected $needed_level = 0;
   /** @var int */
-  public $needed_quest = NULL;
+  protected $needed_quest = NULL;
   /** @var int */
-  public $needed_item = NULL;
+  protected $needed_item = NULL;
   /** @var int */
-  public $item_amount;
+  protected $item_amount;
   /** @var bool */
-  public $item_lose;
+  protected $item_lose;
   /** @var int */
-  public $reward_money;
+  protected $reward_money;
   /** @var int */
-  public $reward_xp;
+  protected $reward_xp;
   /** @var int */
-  public $reward_item;
+  protected $reward_item;
   /** @var int */
-  public $npc_start;
+  protected $npc_start;
   /** @var int */
-  public $npc_end;
+  protected $npc_end;
   /** @var int */
-  public $order;
+  protected $order;
   /** @var bool */
-  public $progress = false;
+  protected $progress = false;
   
   function __construct(\Nette\Database\Table\ActiveRow $row) {
     if($row->getTable()->name != "quests") exit;
     foreach($row as $key => $value) {
       $this->$key = $value;
     }
+  }
+  
+  function __set($name, $value) {
+    if($name === "progress") $this->$name = $value;
   }
 }
 ?>

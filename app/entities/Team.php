@@ -6,7 +6,7 @@ namespace HeroesofAbenez\Entities;
  * 
  * @author Jakub Konečný
  */
-class Team extends \Nette\Object {
+class Team extends BaseEntity {
   /** @var string Name of the team */
   protected $name;
   /** @var array Characters in the team */

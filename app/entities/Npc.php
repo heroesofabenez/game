@@ -6,27 +6,27 @@ namespace HeroesofAbenez\Entities;
  * 
  * @author Jakub Konečný
  */
-class NPC extends \Nette\Object {
+class NPC extends BaseEntity {
   /** @var int id */
-  public $id;
+  protected $id;
   /** @var string name */
-  public $name;
+  protected $name;
   /** @var string descrption */
-  public $description;
+  protected $description;
   /** @var int id of race */
-  public $race;
+  protected $race;
   /** @var string type of npc */
-  public $type;
+  protected $type;
   /** @var string */
-  public $sprite;
+  protected $sprite;
   /** @var string */
-  public $portrait;
+  protected $portrait;
   /** @var int id of stage */
-  public $stage;
+  protected $stage;
   /** @var int */
-  public $pos_x;
+  protected $pos_x;
   /** @var int */
-  public $pos_y;
+  protected $pos_y;
   
   function __construct(\Nette\Database\Table\ActiveRow $row) {
     if($row->getTable()->name != "npcs") exit;
