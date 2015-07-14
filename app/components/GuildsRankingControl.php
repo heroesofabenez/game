@@ -29,7 +29,7 @@ class GuildsRankingControl extends RankingControl {
     $return = array();
     $result = $this->model->listOfGuilds();
     foreach($result as $row) {
-      $data[] = (array) $row;
+      $data[] = $row->__toArray();
     }
     $data2 = Arrays::orderby($data, "members", SORT_DESC, "id", SORT_ASC);
     foreach($data2 as $row2) {
