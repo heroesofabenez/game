@@ -6,10 +6,13 @@ namespace HeroesofAbenez\Entities;
  *
  * @author Jakub Konečný
  */
-class BaseEntity {
+abstract class BaseEntity {
   /**
-   * @param string $name
-   * @return mixed
+   * Firstly try to call method getProperty, then directly get property
+   * and if both fails, throw an exception
+   * 
+   * @param string $name Property's name
+   * @return mixed Property's value
    * @throws \Nette\MemberAccessException
    */
   function __get($name) {
