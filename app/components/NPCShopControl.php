@@ -6,7 +6,7 @@ namespace HeroesofAbenez\NPC;
  *
  * @author Jakub Konečný
  */
-class ShopControl extends \Nette\Application\UI\Control {
+class NPCShopControl extends \Nette\Application\UI\Control {
   /** @var \Nette\Database\Context */
   protected $db;
   /** @var \HeroesofAbenez\Model\Item */
@@ -47,7 +47,7 @@ class ShopControl extends \Nette\Application\UI\Control {
    */
   function render() {
     $template = $this->template;
-    $template->setFile(__DIR__ . "/shop.latte");
+    $template->setFile(__DIR__ . "/npcShop.latte");
     $template->npcName = $this->npc->name;
     $template->items = $this->getItems();
     $template->render();
