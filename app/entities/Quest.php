@@ -49,9 +49,8 @@ class Quest extends BaseEntity {
     }
   }
   
-  function __set($name, $value) {
-    if($name === "progress") $this->$name = $value;
-    else parent::__set($name, $value);
+  function setProgress($value) {
+    $this->progress = (bool) $value;
   }
 }
 ?>

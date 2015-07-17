@@ -34,7 +34,10 @@ abstract class BaseEntity {
    */
   function __set($name, $value) {
     $class = get_class($this);
-    throw new \Nette\MemberAccessException("Cannot write to property $class::\$$name.");
+    $rc = new \ReflectionClass($class);
+    $method = "set" . ucfirst($name);
+    if($rc->hasMethod($method)) call_user_func(array($this, $method), $value);
+    else throw new \Nette\MemberAccessException("Cannot write to property $class::\$$name.");
   }
   
   /**
