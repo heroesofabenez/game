@@ -15,8 +15,6 @@ abstract class RankingControl extends \Nette\Application\UI\Control {
   protected $lastCol;
   /** @var string */
   protected $presenter;
-  /** @var array */
-  protected $rankings;
   /** @var \Nette\Utils\Paginator */
   protected $paginator = false;
   
@@ -32,7 +30,6 @@ abstract class RankingControl extends \Nette\Application\UI\Control {
     $this->cols = $cols;
     $this->presenter = $presenter;
     $this->lastCol = $lastCol;
-    $this->rankings = array("characters", "guilds");
   }
   
   function setPaginator(\Nette\Utils\Paginator $paginator) {
@@ -48,7 +45,7 @@ abstract class RankingControl extends \Nette\Application\UI\Control {
     $template = $this->template;
     $template->setFile(__DIR__ . "/ranking.latte");
     $template->name = $this->name;
-    $template->rankings = $this->rankings;
+    $template->rankings = array("characters", "guilds");
     $template->cols = $this->cols;
     $template->presenter = $this->presenter;
     $template->lastCol = $this->lastCol;
