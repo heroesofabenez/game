@@ -12,13 +12,16 @@ class IntroPresenter extends BasePresenter {
   /** @var \HeroesofAbenez\Model\Intro */
   protected $model;
   
+  function __construct(\HeroesofAbenez\Model\Intro $model) {
+    $this->model = $model;
+  }
+  
   /**
    * @return void
    */
   function startup() {
     $this->user->logout();
     parent::startup();
-    $this->model = $this->context->getService("model.intro");
     $this->part = $this->template->part = $this->model->getIntroPosition();
   }
   

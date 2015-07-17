@@ -12,13 +12,10 @@ class CharacterPresenter extends BasePresenter {
   /** @var \HeroesofAbenez\Model\Character */
   protected $model;
   
-  /**
-   * @return void
-   */
-  function startup() {
-    parent::startup();
-    $this->model = $this->context->getService("model.character");
+  function __construct(\HeroesofAbenez\Model\Character $model) {
+    $this->model = $model;
   }
+  
   /**
    * @return void
    */
