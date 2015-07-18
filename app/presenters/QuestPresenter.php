@@ -1,6 +1,8 @@
 <?php
 namespace HeroesofAbenez\Presenters;
 
+use HeroesofAbenez\Model;
+
 /**
  * Presenter Quest
  *
@@ -16,7 +18,7 @@ class QuestPresenter extends BasePresenter {
    * @param \HeroesofAbenez\Model\Quest $model
    * @param \HeroesofAbenez\Model\Item $itemModel
    */
-  function __construct(\HeroesofAbenez\Model\Quest $model, \HeroesofAbenez\Model\Item $itemModel) {
+  function __construct(Model\Quest $model, Model\Item $itemModel) {
     $this->model = $model;
     $this->itemModel = $itemModel;
   }

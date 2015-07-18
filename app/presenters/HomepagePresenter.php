@@ -1,6 +1,8 @@
 <?php
 namespace HeroesofAbenez\Presenters;
 
+use HeroesofAbenez\Model;
+
   /**
    * Presenter Homepage
    * 
@@ -15,7 +17,7 @@ class HomepagePresenter extends BasePresenter {
    * @param \Nette\Security\User $user
    * @param \HeroesofAbenez\Model\NPC $npcModel
    */
-  function __construct(\HeroesofAbenez\Model\Location $locationModel, \Nette\Security\User $user, \HeroesofAbenez\Model\NPC $npcModel) {
+  function __construct(Model\Location $locationModel, \Nette\Security\User $user, Model\NPC $npcModel) {
     $this->model = $locationModel;
     $this->model->user = $user;
     $this->model->npcModel = $npcModel;
