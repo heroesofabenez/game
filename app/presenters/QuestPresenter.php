@@ -13,14 +13,18 @@ class QuestPresenter extends BasePresenter {
   protected $model;
   /** @var \HeroesofAbenez\Model\Item */
   protected $itemModel;
+  /** @var \HeroesofAbenez\Model\NPC */
+  protected $npcModel;
   
   /**
    * @param \HeroesofAbenez\Model\Quest $model
    * @param \HeroesofAbenez\Model\Item $itemModel
+   * @param \HeroesofAbenez\Model\NPC $npcModel
    */
-  function __construct(Model\Quest $model, Model\Item $itemModel) {
+  function __construct(Model\Quest $model, Model\Item $itemModel, Model\NPC $npcModel) {
     $this->model = $model;
     $this->itemModel = $itemModel;
+    $this->npcModel = $npcModel;
   }
   
   /**
@@ -45,9 +49,8 @@ class QuestPresenter extends BasePresenter {
     $this->template->introduction = $quest->introduction;
     $this->template->end_text = $quest->end_text;
     $this->template->finished = $this->model->isFinished($id);
-    $npcMOdel = $this->context->getService("model.npc");
-    $this->template->npcStart = $npcMOdel->getNpcName($quest->npc_start);
-    $this->template->npcEnd = $npcMOdel->getNpcName($quest->npc_end);
+    $this->template->npcStart = $this->npcModel->getNpcName($quest->npc_start);
+    $this->template->npcEnd = $this->npcModel->getNpcName($quest->npc_end);
     $requirements = array();
     if($quest->cost_money > 0) {
       $requirements[] = (object) array(
