@@ -64,14 +64,17 @@ class PostOffice extends \Nette\Object {
   }
   
   /**
+   * Show specified message
    * 
    * @param int $id
-   * @return \stdClass|int
+   * @return \stdClass
+   * @throws \Nette\Application\BadRequestException
+   * @throws \Nette\Application\ForbiddenRequestException
    */
   function message($id) {
     $message = $this->db->table("messages")->get($id);
-    if(!$message) return 0;
-    if(!$this->canShow($message)) return 1;
+    if(!$message) throw new \Nette\Application\BadRequestException;
+    if(!$this->canShow($message)) throw new \Nette\Application\ForbiddenRequestException;
     $from = $this->profileModel->getCharacterName($message->from);
     $to = $this->profileModel->getCharacterName($message->to);
     $return = (object) array(

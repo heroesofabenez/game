@@ -46,11 +46,15 @@ class PostofficePresenter extends BasePresenter {
    * @return void
    */
   function actionMessage($id) {
-    $message = $this->model->message($id);
-    if($message === 0) $this->forward("notfound");
-    elseif($message === 1) $this->forward("cannotshow");
-    foreach($message as $key => $value) {
-      $this->template->$key = $value;
+    try {
+      $message = $this->model->message($id);
+      foreach($message as $key => $value) {
+       $this->template->$key = $value;
+      }
+    } catch(\Nette\Application\BadRequestException $e) {
+      $this->forward("notfound");
+    } catch(\Nette\Application\ForbiddenRequestException $e) {
+      $this->forward("cannotshow");
     }
   }
   

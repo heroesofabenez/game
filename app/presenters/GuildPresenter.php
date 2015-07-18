@@ -307,31 +307,11 @@ class GuildPresenter extends BasePresenter {
    * @return void
    */
   function actionPromote($id) {
-    $result = $this->model->promote($id);
-    switch($result) {
-case 1:
-  $this->flashMessage("Member promoted.");
-  break;
-case 2:
-  $this->flashMessage("You aren't in a guild.");
-  break;
-case 3:
-  $this->flashMessage("You don't have permissions for this.");
-  break;
-case 4:
-  $this->flashMessage("Specified player doesn't exist.");
-  break;
-case 5:
-  $this->flashMessage("Specified player isn't in your guild.");
-  break;
-case 6:
-  $this->flashMessage("You can't promote members with same or higher ranks.");
-  break;
-case 7:
-  $this->flashMessage("You can't promote members to deputy or grandmaster.");
-  break;
-case 8:
-  $this->flashMessage("Guild can't have more than 1 deputy.");
+    try{
+      $this->model->promote($id);
+      $this->flashMessage("Member promoted.");
+    } catch(\Nette\Application\ForbiddenRequestException $e) {
+      $this->flashMessage($e->getMessage());
     }
     $this->redirect("Guild:");
   }
@@ -340,29 +320,11 @@ case 8:
    * @return void
    */
   function actionDemote($id) {
-    $result = $this->model->demote($id);
-    switch($result) {
-case 1:
-  $this->flashMessage("Member demoted.");
-  break;
-case 2:
-  $this->flashMessage("You aren't in a guild.");
-  break;
-case 3:
-  $this->flashMessage("You don't have permissions for this.");
-  break;
-case 4:
-  $this->flashMessage("Specified player doesn't exist.");
-  break;
-case 5:
-  $this->flashMessage("Specified player isn't in your guild.");
-  break;
-case 6:
-  $this->flashMessage("You can't demote members with same or higher ranks.");
-  break;
-case 7:
-  $this->flashMessage("You can't demote members with the lowest rank.");
-  break;
+    try{
+      $this->model->demote($id);
+      $this->flashMessage("Member demoted.");
+    } catch(\Nette\Application\ForbiddenRequestException $e) {
+      $this->flashMessage($e->getMessage());
     }
     $this->redirect("Guild:");
   }
@@ -371,26 +333,11 @@ case 7:
    * @return void
    */
   function actionKick($id) {
-    $result = $this->model->kick($id);
-    switch($result) {
-case 1:
-  $this->flashMessage("Member kicked.");
-  break;
-case 2:
-  $this->flashMessage("You aren't in a guild.");
-  break;
-case 3:
-  $this->flashMessage("You don't have permissions for this.");
-  break;
-case 4:
-  $this->flashMessage("Specified player doesn't exist.");
-  break;
-case 5:
-  $this->flashMessage("Specified player isn't in your guild.");
-  break;
-case 6:
-  $this->flashMessage("You can't kick members with same or higher rank.");
-  break;
+    try {
+      $this->model->kick($id);
+      $this->flashMessage("Member kicked.");
+    } catch(\Nette\Application\ForbiddenRequestException $e) {
+      $this->flashMessage($e->getMessage());
     }
     $this->redirect("Guild:");
   }

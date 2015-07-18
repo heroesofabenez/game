@@ -32,18 +32,20 @@ class RequestPresenter extends BasePresenter {
    * @return void
    */
   function renderView($id) {
-    $request = $this->model->show($id);
-    if($request === NULL) $this->forward("notfound");
-    if(!$request) {
+    try {
+      $request = $this->model->show($id);
+      $this->template->id = $request->id;
+      $this->template->from = $request->from;
+      $this->template->to = $request->to;
+      $this->template->type = $request->type;
+      $this->template->sent = $request->sent;
+      $this->template->status = $request->status;
+    } catch (\Nette\Application\BadRequestException $e) {
+      $this->forward("notfound");
+    } catch (\Nette\Application\ForbiddenRequestException $e) {
       $this->flashMessage("You can't see this request.");
       $this->forward("Homepage:");
     }
-    $this->template->id = $request->id;
-    $this->template->from = $request->from;
-    $this->template->to = $request->to;
-    $this->template->type = $request->type;
-    $this->template->sent = $request->sent;
-    $this->template->status = $request->status;
   }
   
   /**

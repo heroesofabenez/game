@@ -36,22 +36,14 @@ class TravelPresenter extends BasePresenter {
    */
   function actionStage($id) {
     $this->model->user = $this->context->getService("security.user");
-    $result = $this->model->travelToStage($id);
-    switch($result) {
-case 1:
-  $stageName = $this->model->getStageName($id);
-  $this->user->logout();
-  $this->flashMessage("You moved to $stageName.");
-  break;
-case 2:
-  $this->flashMessage("Specified stage doesn't exist.");
-  break;
-case 3:
-  $this->flashMessage("You can't travel to specified stage.");
-  break;
-case 4:
-  $this->flashMessage("An error occured.");
-  break;
+    try {
+      $this->model->travelToStage($id);$stageName = $this->model->getStageName($id);
+      $this->user->logout();
+      $this->flashMessage("You moved to $stageName.");
+    } catch(\Nette\Application\BadRequestException $e) {
+      $this->flashMessage("Specified stage doesn't exist.");
+    } catch(\Nette\Application\ForbiddenRequestException $e) {
+      $this->flashMessage("You can't travel to specified stage.");
     }
     $this->redirect("Homepage:");
   }

@@ -91,14 +91,15 @@ class Request extends \Nette\Object {
   /**
    * Gets data about specified request
    * 
-   * @param type $id Request's id
+   * @param int $id Request's id
    * @return \HeroesofAbenez\Entities\Request
+   * @throws \Nette\Application\BadRequestException
+   * @throws \Nette\Application\ForbiddenRequestException
    */
   function show($id) {
     $requestRow = $this->db->table("requests")->get($id);
-    if(!$requestRow) return NULL;
-    $canShow = $this->canShow($id);
-    if(!$canShow) return false;
+    if(!$requestRow) throw new \Nette\Application\BadRequestException;
+    if(!$this->canShow($id)) throw new \Nette\Application\ForbiddenRequestException;
     $from = $this->profileModel->getCharacterName($requestRow->from);
     $to = $this->profileModel->getCharacterName($requestRow->to);
     $return = new RequestEntity($requestRow->id, $from, $to, $requestRow->type, $requestRow->sent, $requestRow->status);
