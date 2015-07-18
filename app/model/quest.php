@@ -17,6 +17,11 @@ class Quest extends \Nette\Object {
   /** @var \Nette\Security\User */
   protected $user;
   
+  /**
+   * @param \Nette\Caching\Cache $cache
+   * @param \Nette\Database\Context $db
+   * @param \Nette\Security\User $user
+   */
   function __construct(\Nette\Caching\Cache $cache, \Nette\Database\Context $db, \Nette\Security\User $user) {
     $this->db = $db;
     $this->cache = $cache;
@@ -63,6 +68,7 @@ class Quest extends \Nette\Object {
   
   /**
    * Get quest's status
+   * 
    * @param int $id Quest's id
    * @return int
    */

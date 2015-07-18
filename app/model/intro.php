@@ -78,8 +78,6 @@ class Intro extends \Nette\Object {
   /**
    * Ends introuction and sends player to his starting location
    * 
-   * @param \Nette\Database\Context $db Database context
-   * @param \Nette\Security\Identity $identity Player's identity
    * @return void
    */
   function endIntro() {

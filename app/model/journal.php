@@ -84,7 +84,6 @@ class Journal extends \Nette\Object {
   /**
    * Gets character's inventory
    * 
-   * @param \Nette\DI\Container $container
    * @return array
    */
   function inventory() {

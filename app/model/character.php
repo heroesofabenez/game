@@ -12,6 +12,10 @@ class Character extends \Nette\Object {
   /** @var \Nette\Database\Context */
   protected $db;
   
+  /**
+   * @param \Nette\Caching\Cache $cache
+   * @param \Nette\Database\Context $db
+   */
   function __construct(\Nette\Caching\Cache $cache, \Nette\Database\Context $db) {
     $this->cache = $cache;
     $this->db = $db;

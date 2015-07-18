@@ -12,6 +12,10 @@ class Permissions extends \Nette\Object {
   /** @var \Nette\Caching\Cache */
   protected $cache;
   
+  /**
+   * @param \Nette\Caching\Cache $cache
+   * @param \Nette\Database\Context $db
+   */
   function __construct(\Nette\Caching\Cache $cache, \Nette\Database\Context $db) {
     $this->db = $db;
     $this->cache = $cache;

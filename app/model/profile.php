@@ -17,7 +17,10 @@ class Profile extends \Nette\Object {
   protected $permissionsModel;
   
   /**
+   * @param \Nette\Caching\Cache $cache
    * @param \Nette\Database\Context $db
+   * @param \HeroesofAbenez\Model\Character $characterModel
+   * @param \HeroesofAbenez\Model\Permissions $permissionsModel
    */
   function __construct(\Nette\Caching\Cache $cache, \Nette\Database\Context $db, \HeroesofAbenez\Model\Character $characterModel, \HeroesofAbenez\Model\Permissions $permissionsModel) {
     $this->db = $db;

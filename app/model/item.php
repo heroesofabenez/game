@@ -19,6 +19,11 @@ class Item extends \Nette\Object {
   /** @var \Nette\Application\LinkGenerator */
   protected $linkGenerator;
   
+  /**
+   * @param \Nette\Caching\Cache $cache
+   * @param \Nette\Database\Context $db
+   * @param \Nette\Security\User $user
+   */
   function __construct(\Nette\Caching\Cache $cache, \Nette\Database\Context $db, \Nette\Security\User $user) {
     $this->db = $db;
     $this->cache = $cache;
@@ -94,6 +99,8 @@ class Item extends \Nette\Object {
   }
   
   /**
+   * Give the player item(s)
+   * 
    * @param int $id Item's id
    * @param int $amount
    * @return bool

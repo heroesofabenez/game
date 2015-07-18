@@ -17,6 +17,12 @@ class Equipment {
   /** @var \Nette\Caching\Cache */
   protected $cache;
   
+  
+  /**
+   * @param \Nette\Database\Context $db
+   * @param \Nette\Security\User $user
+   * @param \Nette\Caching\Cache $cache
+   */
   function __construct(\Nette\Database\Context $db, \Nette\Security\User $user, \Nette\Caching\Cache $cache) {
     $this->db = $db;
     $this->user = $user;

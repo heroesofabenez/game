@@ -20,6 +20,10 @@ class Location extends \Nette\Object {
   /** @var \HeroesofAbenez\Model\NPC */
   protected $npcModel;
   
+  /**
+   * @param \Nette\Caching\Cache $cache
+   * @param \Nette\Database\Context $db
+   */
   function __construct(\Nette\Caching\Cache $cache, \Nette\Database\Context $db) {
     $this->cache = $cache;
     $this->db = $db;
@@ -63,7 +67,7 @@ class Location extends \Nette\Object {
    * Gets data about specified stage
    * 
    * @param int $id Stage's id
-   * @return Stage
+   * @return \HeroesofAbenez\Entities\Stage
    */
   function getStage($id) {
     $stages = $this->listOfStages();
@@ -114,7 +118,7 @@ class Location extends \Nette\Object {
    * Gets data about specified area
    * 
    * @param int $id Area's id
-   * @return Area
+   * @return HeroesofAbenez\Entities\Area
    */
   function getArea($id) {
     $areas = $this->listOfAreas();

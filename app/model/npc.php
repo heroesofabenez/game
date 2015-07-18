@@ -17,6 +17,10 @@ class NPC extends \Nette\Object {
   /** @var \HeroesofAbenez\Model\Item */
   protected $itemModel;
   
+  /**
+   * @param \Nette\Caching\Cache $cache
+   * @param \Nette\Database\Context $db
+   */
   function __construct(\Nette\Caching\Cache $cache, \Nette\Database\Context $db) {
     $this->db = $db;
     $this->cache = $cache;

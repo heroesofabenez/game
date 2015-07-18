@@ -21,6 +21,8 @@ class Request extends \Nette\Object {
   /**
    * @param \Nette\Security\User $user
    * @param \Nette\Database\Context $db
+   * @param \HeroesofAbenez\Model\Profile $profileModel
+   * @param \HeroesofAbenez\Model\Guild $guildModel
    */
   function __construct(\Nette\Security\User $user,\Nette\Database\Context $db, \HeroesofAbenez\Model\Profile $profileModel, \HeroesofAbenez\Model\Guild $guildModel) {
     $this->user = $user;

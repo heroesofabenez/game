@@ -49,6 +49,9 @@ class CombatBase extends \Nette\Object {
     }
   }
   
+  /**
+   * @return void
+   */
   function execute() { }
 }
 ?>
