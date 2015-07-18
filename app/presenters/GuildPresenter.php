@@ -378,7 +378,7 @@ class GuildPresenter extends BasePresenter {
   function guildDescriptionFormSucceeded($form, $values) {
     $guild = $this->user->identity->guild;
     $description = $values["description"];
-    $result = $this->model->changeDescription($guild, $description, $this->context);
+    $result = $this->model->changeDescription($guild, $description);
     switch($result) {
   case 1:
     $this->flashMessage("Guild's description changed.");
