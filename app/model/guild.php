@@ -29,7 +29,7 @@ class Guild extends \Nette\Object {
    * @param \HeroesofAbenez\Model\Profile $profileModel
    * @param \HeroesofAbenez\Model\Permissions $permissionsModel
    */
-  function __construct(\Nette\Caching\Cache $cache, \Nette\Database\Context $db, \Nette\Security\User $user, \HeroesofAbenez\Model\Profile $profileModel, \HeroesofAbenez\Model\Permissions $permissionsModel) {
+  function __construct(\Nette\Caching\Cache $cache, \Nette\Database\Context $db, \Nette\Security\User $user, Profile $profileModel, Permissions $permissionsModel) {
     $this->cache = $cache;
     $this->db = $db;
     $this->user = $user;

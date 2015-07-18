@@ -32,19 +32,19 @@ class Journal extends \Nette\Object {
     $this->db = $db;
   }
   
-  function setQuestModel(\HeroesofAbenez\Model\Quest $questModel) {
+  function setQuestModel(Quest $questModel) {
     $this->questModel = $questModel;
   }
   
-  function setLocationModel(\HeroesofAbenez\Model\Location $locationModel) {
+  function setLocationModel(Location $locationModel) {
     $this->locationModel = $locationModel;
   }
   
-  function setGuildModel(\HeroesofAbenez\Model\Guild $guildModel) {
+  function setGuildModel(Guild $guildModel) {
     $this->guildModel = $guildModel;
   }
   
-  function setProfileModel(\HeroesofAbenez\Model\Profile $profileModel) {
+  function setProfileModel(Profile $profileModel) {
     $this->profileModel = $profileModel;
   }
   

@@ -22,7 +22,7 @@ class Profile extends \Nette\Object {
    * @param \HeroesofAbenez\Model\Character $characterModel
    * @param \HeroesofAbenez\Model\Permissions $permissionsModel
    */
-  function __construct(\Nette\Caching\Cache $cache, \Nette\Database\Context $db, \HeroesofAbenez\Model\Character $characterModel, \HeroesofAbenez\Model\Permissions $permissionsModel) {
+  function __construct(\Nette\Caching\Cache $cache, \Nette\Database\Context $db, Character $characterModel, Permissions $permissionsModel) {
     $this->db = $db;
     $this->characterModel = $characterModel;
     $this->cache = $cache;

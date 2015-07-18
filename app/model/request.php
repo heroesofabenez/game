@@ -24,7 +24,7 @@ class Request extends \Nette\Object {
    * @param \HeroesofAbenez\Model\Profile $profileModel
    * @param \HeroesofAbenez\Model\Guild $guildModel
    */
-  function __construct(\Nette\Security\User $user,\Nette\Database\Context $db, \HeroesofAbenez\Model\Profile $profileModel, \HeroesofAbenez\Model\Guild $guildModel) {
+  function __construct(\Nette\Security\User $user,\Nette\Database\Context $db, Profile $profileModel, Guild $guildModel) {
     $this->user = $user;
     $this->db = $db;
     $this->profileModel = $profileModel;

@@ -26,7 +26,7 @@ class NPC extends \Nette\Object {
     $this->cache = $cache;
   }
   
-  function setItemModel(\HeroesofAbenez\Model\Item $model) {
+  function setItemModel(Item $model) {
     $this->itemModel = $model;
   }
   

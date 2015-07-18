@@ -20,7 +20,7 @@ class Map extends \Nette\Object {
    * @param \Nette\Security\User $user
    * @param \HeroesofAbenez\Model\MapDrawer $drawer
    */
-  function __construct(\HeroesofAbenez\Model\Location $locationModel, \Nette\Security\User $user, \HeroesofAbenez\Model\MapDrawer $drawer) {
+  function __construct(Location $locationModel, \Nette\Security\User $user, MapDrawer $drawer) {
     $this->locationModel = $locationModel;
     $this->drawer = $drawer;
     $this->user = $user;

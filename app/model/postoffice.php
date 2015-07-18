@@ -19,7 +19,7 @@ class PostOffice extends \Nette\Object {
    * @param \Nette\Security\User $user
    * @param \HeroesofAbenez\Model\Profile $profileModel
    */
-  function __construct(\Nette\Database\Context $db, \Nette\Security\User $user, \HeroesofAbenez\Model\Profile $profileModel) {
+  function __construct(\Nette\Database\Context $db, \Nette\Security\User $user, Profile $profileModel) {
     $this->db = $db;
     $this->user = $user;
     $this->profileModel = $profileModel;

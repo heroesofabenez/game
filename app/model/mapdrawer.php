@@ -18,7 +18,7 @@ class MapDrawer extends \Nette\Object {
    * @param \HeroesofAbenez\Model\Location $locationModel
    * @param \Nette\Security\User $user
    */
-  function __construct(\HeroesofAbenez\Model\Location $locationModel, \Nette\Security\User $user) {
+  function __construct(Location $locationModel, \Nette\Security\User $user) {
     $this->locationModel = $locationModel;
     $this->user = $user;
   }

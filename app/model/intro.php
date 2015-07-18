@@ -12,6 +12,10 @@ class Intro extends \Nette\Object {
   /** @var \Nette\Database\Context */
   protected $db;
   
+  /**
+   * @param \Nette\Security\User $user
+   * @param \Nette\Database\Context $db
+   */
   function __construct(\Nette\Security\User $user, \Nette\Database\Context $db) {
     $this->user = $user;
     $this->db = $db;

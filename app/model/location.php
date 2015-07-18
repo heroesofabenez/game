@@ -33,7 +33,7 @@ class Location extends \Nette\Object {
     $this->user = $user;
   }
   
-  function setNpcModel(\HeroesofAbenez\Model\NPC $npcModel) {
+  function setNpcModel(NPC $npcModel) {
     $this->npcModel = $npcModel;
   }
   
