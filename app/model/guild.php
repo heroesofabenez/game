@@ -336,10 +336,12 @@ class Guild extends \Nette\Object {
   }
   
   /**
+   * Change description of specified guild
    * 
    * @param int $id Guild's id
    * @param string $description New description
-   * @return int Error code/1 on success
+   * @return void
+   * @throws \Nette\Application\BadRequestException
    */
   function changeDescription($id, $description) {
     $guilds = $this->cache->load("guilds");
@@ -350,15 +352,9 @@ class Guild extends \Nette\Object {
         break;
       }
     }
-    if(!$found) return false;
+    if(!$found) throw new \Nette\Application\BadRequestException;
     $data = array("description" => $description);
-    $result = $this->db->query("UPDATE guilds SET ? WHERE id=?", $data, $id);
-    if($result) {
-      $this->cache->remove("guilds");
-      return 1;
-    } else {
-      return 3;
-    }
+    $this->db->query("UPDATE guilds SET ? WHERE id=?", $data, $id);
   }
   
   /**
