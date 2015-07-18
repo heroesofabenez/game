@@ -114,10 +114,8 @@ class Request extends \Nette\Object {
   function accept($id) {
     $request = $this->show($id);
     if(!$request) return 2;
-    $canShow = $this->canShow($id);
-    if(!$canShow) return 3;
-    $canChange = $this->canChange($id);
-    if(!$canChange) return 4;
+    if(!$this->canShow($id)) return 3;
+    if(!$this->canChange($id)) return 4;
     if($request->status !== "new") return 5;
     switch($request->type) {
   case "friendship":
@@ -153,10 +151,8 @@ class Request extends \Nette\Object {
   function decline($id) {
     $request = $this->show($id);
     if(!$request) return 2;
-    $canShow = $this->canShow($id);
-    if(!$canShow) return 3;
-    $canChange = $this->canChange($id);
-    if(!$canChange) return 4;
+    if(!$this->canShow($id)) return 3;
+    if(!$this->canChange($id)) return 4;
     if($request->status !== "new") return 5;
     $data = array("status" => "declined");
     $this->db->query("UPDATE requests SET ? WHERE id=?", $data, $id);
