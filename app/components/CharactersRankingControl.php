@@ -27,7 +27,7 @@ class CharactersRankingControl extends RankingControl {
    */
   function getData() {
     $this->paginator->itemCount = $this->db->table("characters")->count("*");
-    $characters = $this->db->table("characters")->order("level, experience, id")
+    $characters = $this->db->table("characters")->order("level DESC, experience DESC, id")
       ->limit($this->paginator->getLength(), $this->paginator->getOffset());
     $chars = array();
     foreach($characters as $character) {
