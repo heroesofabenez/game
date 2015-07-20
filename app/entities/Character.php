@@ -85,7 +85,7 @@ class Character extends BaseEntity {
    */
   function __construct(array $stats, array $equipment = array(), array $pets = array()) {
     $required_stats = array("id", "name", "gender", "occupation", "level", "experience", "strength", "dexterity", "constitution", "intelligence");
-    $all_stats = $required_stats + array("specialization", "description", "guild", "guild_rank");
+    $all_stats = $required_stats + array("specialization", "guild", "guild_rank");
     foreach($required_stats as $value) {
       if(!isset($stats[$value])) exit("Not passed all needed elements for parameter stats for method Character::__construct. Missing at least $value.");
     }
@@ -93,7 +93,6 @@ class Character extends BaseEntity {
       if(in_array($key, $all_stats)) {
         switch($key) {
 case "name":
-case "description":
   if(!is_string($value)) exit("Invalid value for \$stats[\"$key\"] passed to method Character::__construct. Expected string."); else $this->$key = $value;
   break;
 case "strength":
