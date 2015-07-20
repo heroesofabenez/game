@@ -350,7 +350,7 @@ class Guild extends \Nette\Object {
         break;
       }
     }
-    if(!$found) throw new \Nette\Application\BadRequestException;
+    if(!$found) throw new BadRequestException;
     $data = array("description" => $description);
     $this->db->query("UPDATE guilds SET ? WHERE id=?", $data, $id);
   }
