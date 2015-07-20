@@ -29,6 +29,12 @@ class CombatBase extends \Nette\Object {
     $this->team2 = $team2;
   }
   
+  /**
+   * Get winner of combat
+   * 
+   * @staticvar int $result
+   * @return int Winning team/0
+   */
   function getWinner() {
     static $result = 0;
     if($this->round >= $this->round_limit AND $result === 0) {
