@@ -40,11 +40,11 @@ class RequestPresenter extends BasePresenter {
       $this->template->type = $request->type;
       $this->template->sent = $request->sent;
       $this->template->status = $request->status;
-    } catch (\Nette\Application\BadRequestException $e) {
-      $this->forward("notfound");
-    } catch (\Nette\Application\ForbiddenRequestException $e) {
+    } catch(\Nette\Application\ForbiddenRequestException $e) {
       $this->flashMessage("You can't see this request.");
       $this->forward("Homepage:");
+    } catch(\Nette\Application\BadRequestException $e) {
+      $this->forward("notfound");
     }
   }
   
