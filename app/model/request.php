@@ -1,7 +1,10 @@
 <?php
 namespace HeroesofAbenez\Model;
 
-use HeroesofAbenez\Entities\Request as RequestEntity;
+use HeroesofAbenez\Entities\Request as RequestEntity,
+    Nette\Application\BadRequestException,
+    Nette\Application\ForbiddenRequestException,
+    Nette\NotImplementedException;
 
 /**
  * Request Model
@@ -100,8 +103,8 @@ class Request extends \Nette\Object {
    */
   function show($id) {
     $requestRow = $this->db->table("requests")->get($id);
-    if(!$requestRow) throw new \Nette\Application\BadRequestException;
-    if(!$this->canShow($id)) throw new \Nette\Application\ForbiddenRequestException;
+    if(!$requestRow) throw new BadRequestException;
+    if(!$this->canShow($id)) throw new ForbiddenRequestException;
     $from = $this->profileModel->getCharacterName($requestRow->from);
     $to = $this->profileModel->getCharacterName($requestRow->to);
     $return = new RequestEntity($requestRow->id, $from, $to, $requestRow->type, $requestRow->sent, $requestRow->status);
@@ -112,20 +115,23 @@ class Request extends \Nette\Object {
    * Accept specified request
    * 
    * @param int $id Request's id
-   * @return int Error code/1 on success
+   * @return void
+   * @throws \Nette\Application\BadRequestException
+   * @throws \Nette\Application\ForbiddenRequestException
+   * @throws \Nette\NotImplementedException
    */
   function accept($id) {
     $request = $this->show($id);
-    if(!$request) return 2;
-    if(!$this->canShow($id)) return 3;
-    if(!$this->canChange($id)) return 4;
-    if($request->status !== "new") return 5;
+    if(!$request) throw new BadRequestException;
+    if(!$this->canShow($id)) throw new ForbiddenRequestException("You can't see this request.");
+    if(!$this->canChange($id)) throw new ForbiddenRequestException("You can't accept this request.");
+    if($request->status !== "new") throw new ForbiddenRequestException("This request was already handled.");
     switch($request->type) {
   case "friendship":
-    return 6;
+    throw new NotImplementedException;
     break;
   case "group_join":
-    return 6;
+    throw new NotImplementedException;
     break;
   case "guild_app":
     $uid = $this->profileModel->getCharacterId($request->from);
@@ -142,24 +148,24 @@ class Request extends \Nette\Object {
     }
     $data2 = array("status" => "accepted");
     $this->db->query("UPDATE requests SET ? WHERE id=?", $data2, $id);
-    return 1;
   }
   
   /**
    * Decline specified request
    * 
    * @param int $id Request's id
-   * @return int Error code/1 on success
+   * @return void
+   * @throws \Nette\Application\BadRequestException
+   * @throws \Nette\Application\ForbiddenRequestException
    */
   function decline($id) {
     $request = $this->show($id);
-    if(!$request) return 2;
-    if(!$this->canShow($id)) return 3;
-    if(!$this->canChange($id)) return 4;
-    if($request->status !== "new") return 5;
+    if(!$request) throw new BadRequestException;
+    if(!$this->canShow($id)) throw new ForbiddenRequestException("You can't see this request.");
+    if(!$this->canChange($id)) throw new ForbiddenRequestException("You can't decline this request.");
+    if($request->status !== "new") throw new ForbiddenRequestException("This request was already handled.");
     $data = array("status" => "declined");
     $this->db->query("UPDATE requests SET ? WHERE id=?", $data, $id);
-    return 1;
   }
 }
 ?>

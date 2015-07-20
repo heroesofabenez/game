@@ -53,30 +53,18 @@ class RequestPresenter extends BasePresenter {
    * @return void
    */
   function actionAccept($id) {
-    $result = $this->model->accept($id);
-    switch($result) {
-  case 1:
-    $this->flashMessage("Request accepted.");
-    $this->redirect("Homepage:");
-    break;
-  case 2:
-    $this->forward("notfound");
-    break;
-  case 3:
-    $this->flashMessage("You can't see this request.");
-    $this->forward("Homepage:");
-    break;
-  case 4:
-    $this->flashMessage("You can't accept this request.");
-    $this->forward("Homepage:");
-    break;
-  case 5:
-    $this->flashMessage("This request was already handled.");
-    $this->forward("Homepage:");
-    break;
-  case 6:
-    $this->forward("Homepage:");
-    break;
+    try {
+      $this->model->accept($id);
+      $this->flashMessage("Request accepted.");
+      $this->redirect("Homepage:");
+    } catch(\Nette\Application\ForbiddenRequestException $e) {
+      $this->flashMessage($e->getMessage());
+      $this->forward("Homepage:");
+    } catch(\Nette\Application\BadRequestException $e) {
+      $this->forward("notfound");
+    } catch(\Nette\NotImplementedException $e) {
+      $this->flashMessage("This type of request is not implemented.");
+      $this->forward("Homepage:");
     }
   }
   
@@ -85,27 +73,15 @@ class RequestPresenter extends BasePresenter {
    * @return void
    */
   function actionDecline($id) {
-    $result = $this->model->decline($id);
-    switch($result) {
-  case 1:
-    $this->flashMessage("Request declined.");
-    $this->redirect("Homepage:");
-    break;
-  case 2:
-    $this->forward("notfound");
-    break;
-  case 3:
-    $this->flashMessage("You can't see this request.");
-    $this->forward("Homepage:");
-    break;
-  case 4:
-    $this->flashMessage("You can't decline this request.");
-    $this->forward("Homepage:");
-    break;
-  case 5:
-    $this->flashMessage("This request was already handled.");
-    $this->forward("Homepage:");
-    break;
+    try {
+      $this->model->decline($id);
+      $this->flashMessage("Request declined.");
+      $this->redirect("Homepage:");
+    } catch(\Nette\Application\ForbiddenRequestException $e) {
+      $this->flashMessage($e->getMessage());
+      $this->forward("Homepage:");
+    } catch(\Nette\Application\BadRequestException $e) {
+      $this->forward("notfound");
     }
   }
 }
