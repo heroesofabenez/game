@@ -59,7 +59,7 @@ class CombatBase extends \Nette\Object {
       }
       $character->recalculateStats();
     }
-    if($this->winner < 0) return $this->winner;
+    if($this->getWinner() > 0) return $this->getWinner();
     return 0;
   }
   
@@ -75,13 +75,21 @@ class CombatBase extends \Nette\Object {
     foreach($this->team2 as &$character) {
       $character->recalculateStats();
     }
-    if($this->winner < 0) return $this->winner;
+    if($this->getWinner() > 0) return $this->getWinner();
     return 0;
   }
   
   /**
-   * @return void
+   * Executes the combat
+   * 
+   * @return int Winning team
    */
-  function execute() { }
+  function execute() {
+    while($this->round < $this->round_limit) {
+      if($this->start_round() > 0) break;
+      if($this->end_round() > 0) break;
+    }
+    return $this->getWinner();
+  }
 }
 ?>
