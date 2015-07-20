@@ -77,7 +77,7 @@ class Quest extends \Nette\Object {
       ->where("character", $this->user->id)
       ->where("quest", $id);
     if($row->count() === 0) return 0;
-    foreach($row as $r) { }
+    $r = $row->fetch();
     return $r->progress;
   }
   
