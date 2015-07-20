@@ -236,8 +236,7 @@ case "initiative":
       $$stat = $this->{"base_" . $stat};
     }
     $debuffs = array();
-    $i = 0;
-    foreach($this->effects as $effect) {
+    foreach($this->effects as $i => $effect) {
       $stat = $effect->stat;
       $type = $effect->type;
       $duration = $effect->duration;
@@ -257,7 +256,6 @@ case "equipment":
       if($type == "buff") { $$stat += $bonus_value; }
       elseif($type == "debuff") { $debuffs[$stat] += $bonus_value; }
       unset($stat, $type, $duration, $bonus_value);
-      $i++;
     }
     foreach($debuffs as $stat => $value) {
       if($value > 80) $value = 80;
