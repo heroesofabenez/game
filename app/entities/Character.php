@@ -74,6 +74,8 @@ class Character extends BaseEntity {
   /** @var int */
   protected $active_pet = null;
   protected $effects = array();
+  /** @var bool */
+  protected $stunned = false;
   
   /**
    * 
@@ -124,20 +126,7 @@ case "initiative":
     }
   }
   
-  function addEffect($effect = array()) {
-    $neededParams = array ("id", "type", "stat", "value", "source", "duration");
-    $types = array("buff", "debuff");
-    $stats = array("strength", "dexterity", "constitution", "intelligence", "charisma");
-    $sources = array("pet", "skill", "equipment");
-    $durations = array("combat", "forever");
-    foreach($neededParams as $param) {
-      if(!isset($effect[$param])) exit("Not passed all needed elements for parameter effect for method Character::addEffect.");
-    }
-    if(!is_int($effect["value"])) exit("Invalid value for \$effect[\"value\"] passed to method Character::addEffect. Expected integer.");
-    if(!in_array($effect["sources"], $sources)) exit("Invalid value for \$effect[\"sources\"] passed to method Character::addEffect.");
-    if(!in_array($effect["stat"], $stats)) exit("Invalid value for \$effect[\"stat\"] passed to method Character::addEffect.");
-    if(!in_array($effect["type"], $types)) exit("Invalid value for \$effect[\"type\"] passed to method Character::addEffect.");
-    if(!in_array($effect["duration"], $durations) or $effect["duration"] < 0) exit("Invalid value for \$effect[\"duration\"] passed to method Character::addEffect.");
+  function addEffect(CharacterEffect $effect) {
     $this->effects[] = $effect;
     $this->recalculateStats();
   }
@@ -232,6 +221,7 @@ case "initiative":
       "strength", "dexterity", "constitution", "intelligence", "charisma",
       "damage", "hit", "dodge", "initiative"
     );
+    $stunned = false;
     foreach($stats as $stat) {
       $$stat = $this->{"base_" . $stat};
     }
@@ -247,14 +237,15 @@ case "initiative":
       switch($effect->source) {
 case "pet":
 case "skill":
-  $bonus_value = $$stat / 100 * $effect->value;
+  if($type != "stun") $bonus_value = $$stat / 100 * $effect->value;
   break;
 case "equipment":
-  $bonus_value = $effect->value;
+  if($type != "stun") $bonus_value = $effect->value;
   break;
       }
       if($type == "buff") { $$stat += $bonus_value; }
       elseif($type == "debuff") { $debuffs[$stat] += $bonus_value; }
+      elseif($type == "stun") { $stunned = true; }
       unset($stat, $type, $duration, $bonus_value);
     }
     foreach($debuffs as $stat => $value) {
@@ -265,6 +256,7 @@ case "equipment":
     foreach($stats as $stat) {
       $this->$stat = $$stat;
     }
+    $this->stunned = $stunned;
   }
 }
 ?>
