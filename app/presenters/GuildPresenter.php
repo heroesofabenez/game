@@ -1,7 +1,8 @@
 <?php
 namespace HeroesofAbenez\Presenters;
 
-use \Nette\Application\UI;
+use \Nette\Application\UI,
+    \Nette\Application\ForbiddenRequestException;
 
   /**
    * Presenter Guild
@@ -134,7 +135,7 @@ class GuildPresenter extends BasePresenter {
       $this->user->logout();
       $this->flashMessage("Guild created.");
       $this->redirect("Guild:");
-    } catch(\Nette\Application\ForbiddenRequestException $e) {
+    } catch(ForbiddenRequestException $e) {
       $this->flashMessage($e->getMessage());
     }
   }
@@ -182,7 +183,7 @@ class GuildPresenter extends BasePresenter {
       $this->flashMessage("You left guild.");
       $this->user->logout();
       $this->forward("default");
-    } catch(\Nette\Application\ForbiddenRequestException $e) {
+    } catch(ForbiddenRequestException $e) {
       if($e->getCode() === 202) {
         $this->flashMessage($e->getMessage());
         $this->redirect("Guild:");
@@ -308,7 +309,7 @@ class GuildPresenter extends BasePresenter {
     try{
       $this->model->promote($id);
       $this->flashMessage("Member promoted.");
-    } catch(\Nette\Application\ForbiddenRequestException $e) {
+    } catch(ForbiddenRequestException $e) {
       $this->flashMessage($e->getMessage());
     }
     $this->redirect("Guild:");
@@ -321,7 +322,7 @@ class GuildPresenter extends BasePresenter {
     try{
       $this->model->demote($id);
       $this->flashMessage("Member demoted.");
-    } catch(\Nette\Application\ForbiddenRequestException $e) {
+    } catch(ForbiddenRequestException $e) {
       $this->flashMessage($e->getMessage());
     }
     $this->redirect("Guild:");
@@ -334,7 +335,7 @@ class GuildPresenter extends BasePresenter {
     try {
       $this->model->kick($id);
       $this->flashMessage("Member kicked.");
-    } catch(\Nette\Application\ForbiddenRequestException $e) {
+    } catch(ForbiddenRequestException $e) {
       $this->flashMessage($e->getMessage());
     }
     $this->redirect("Guild:");
