@@ -20,8 +20,8 @@ class CombatBase extends \Nette\Object {
   protected $round_limit = 30;
   
   /**
-   * @param \HeroesofAbenez\Entities\TeamTeam $team1 First team
-   * @param \HeroesofAbenez\Entities\TeamTeam $team2 Second team
+   * @param \HeroesofAbenez\Entities\Team $team1 First team
+   * @param \HeroesofAbenez\Entities\Team $team2 Second team
    */
   function __construct(Team $team1, Team $team2) {
     $this->round = 0;
@@ -43,7 +43,7 @@ class CombatBase extends \Nette\Object {
   /**
    * Starts next round
    * 
-   * @return int
+   * @return int Winning team/0
    */
   protected function start_round() {
     $this->round++;
@@ -66,7 +66,7 @@ class CombatBase extends \Nette\Object {
   /**
    * Ends round
    * 
-   * @return int
+   * @return int Winning team/0
    */
   protected function end_round() {
     foreach($this->team1 as &$character) {
