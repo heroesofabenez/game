@@ -113,6 +113,10 @@ case "initiative":
         }
       } else { continue; }
     }
+    foreach($equipment as $eq) {
+      if($eq instanceof \HeroesofAbenez\Entities\Equipment)
+        $this->equipment[] = $eq;
+    }
     foreach($pets as $pet) {
       if($pet instanceof \HeroesofAbenez\Entities\Pet) {
         $this->pets[] = $pet;
