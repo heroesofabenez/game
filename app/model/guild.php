@@ -3,7 +3,8 @@ namespace HeroesofAbenez\Model;
 
 use HeroesofAbenez\Entities\Request as RequestEntity,
     HeroesofAbenez\Entities\Guild as GuildEntity,
-    Nette\Application\ForbiddenRequestException;
+    Nette\Application\ForbiddenRequestException,
+    Nette\Application\ApplicationException;
 
   /**
    * Model Guild
@@ -285,16 +286,17 @@ class Guild extends \Nette\Object {
   /**
    * Leave the guild
    * 
-   * @return bool
+   * @return void
+   * @throws \Nette\Application\ForbiddenRequestException
   */
   function leave() {
-    if($this->user->isInRole("grandmaster")) return false;
+    if($this->user->identity->guild === 0) throw new ForbiddenRequestException("You aren't in any guild.", 201);
+    if($this->user->isInRole("grandmaster")) throw new ForbiddenRequestException("Grandmaster cannot leave guild.", 202);
     $data = array(
       "guild" => 0, "guildrank" => NULL
     );
     $this->db->query("UPDATE characters SET ? WHERE id=?", $data, $this->user->id);
     $this->cache->remove("guilds");
-    return true;
   }
   
   /**
@@ -319,17 +321,17 @@ class Guild extends \Nette\Object {
    *
    * @param int $id Guild to rename
    * @param string $name New name
-   * @return bool Whetever the action was successful
+   * @return void
+   * @throws \Nette\Application\ApplicationException
   */
   function rename($id, $name) {
     $guilds = $this->cache->load("guilds");
     foreach($guilds as $guild) {
-      if($guild->name == $name) return false;
+      if($guild->name == $name) throw new ApplicationException("Guild with this name already exists.");
     }
     $data = array("name" => $name);
     $this->db->query("UPDATE guilds SET ? WHERE id=?", $data, $id);
     $this->cache->remove("guilds");
-    return true;
   }
   
   /**

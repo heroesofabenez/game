@@ -181,15 +181,17 @@ class GuildPresenter extends BasePresenter {
   */
   function actionLeave() {
     $this->notInGuild();
-    $result = $this->model->leave();
-    if($result) {
+    try {
+      $this->model->leave();
       $this->flashMessage("You left guild.");
       $this->user->logout();
-    } else {
-      $this->flashMessage("Grandmaster cannot leave guild.");
-      $this->redirect("Guild:");
+      $this->forward("default");
+    } catch(\Nette\Application\ForbiddenRequestException $e) {
+      if($e->getCode() === 202) {
+        $this->flashMessage($e->getMessage());
+        $this->redirect("Guild:");
+      }
     }
-    $this->forward("default");
   }
   
   /**
@@ -294,12 +296,12 @@ class GuildPresenter extends BasePresenter {
   function renameGuildFormSucceeded($form, $values) {
     $gid = $this->user->identity->guild;
     $name = $values["name"];
-    $result = $this->model->rename($gid, $name, $this->context);
-    if($result) {
+    try {
+      $this->model->rename($gid, $name);
       $this->flashMessage("Guild renamed.");
       $this->redirect("Guild:");
-    } else {
-      $this->flashMessage("Guild with this name already exists.");
+    } catch(\Nette\Application\ApplicationException $e) {
+      $this->flashMessage($e->getMessage());
     }
   }
   
