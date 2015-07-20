@@ -204,7 +204,7 @@ class Guild extends \Nette\Object {
    * Increase rank of specified member of guild
    * 
    * @param int $id Id of player to be demoted
-   * @return int Error code
+   * @return void
    * @throws \Nette\Application\ForbiddenRequestException
    */
   function promote($id) {
@@ -228,14 +228,13 @@ class Guild extends \Nette\Object {
       if(count($deputy) > 0) throw new ForbiddenRequestException("Guild can't have more than 1 deputy.");
     }
     $this->db->query("UPDATE characters SET guildrank=guildrank+1 WHERE id=$id");
-    return 1;
   }
   
   /**
    * Decrease rank of specified member of guild
    * 
    * @param int $id Id of player to be demoted
-   * @return int
+   * @return void
    * @throws \Nette\Application\ForbiddenRequestException
    */
   function demote($id) {
@@ -255,14 +254,13 @@ class Guild extends \Nette\Object {
     if($adminRole <= $character->guildrank) throw new ForbiddenRequestException("You can't demote members with same or higher ranks.");
     if($character->guildrank === 1) throw new ForbiddenRequestException("You can't demote members with the lowest rank.");
     $this->db->query("UPDATE characters SET guildrank=guildrank-1 WHERE id=$id");
-    return 1;
   }
   
   /**
    * Kick specified member from guild
    * 
    * @param int $id Id of player to be kicked
-   * @return int
+   * @return void
    * @throws \Nette\Application\ForbiddenRequestException
    */
   function kick($id) {
@@ -282,7 +280,6 @@ class Guild extends \Nette\Object {
     if($adminRole <= $character->guildrank) throw new ForbiddenRequestException("You can't kick members with same or higher rank.");
     $this->db->query("UPDATE characters SET guildrank=NULL, guild=0 WHERE id=$id");
     $this->cache->remove("guilds");
-    return 1;
   }
   
   /**
