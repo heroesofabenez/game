@@ -6,6 +6,7 @@ namespace HeroesofAbenez\Entities;
  * 
  * @author Jakub Konečný
  * @property-read array $activeMembers
+ * @property-read array $aliveMembers
  */
 class Team extends BaseEntity {
   /** @var string Name of the team */
@@ -46,13 +47,31 @@ class Team extends BaseEntity {
   }
   
   /**
+   * Get alive members from the team
+   * 
+   * @return array
+   */
+  function getAliveMembers() {
+    $return = array();
+    return $return;
+  }
+  
+  /**
    * Check whetever the team has at least 1 active member
    * 
    * @return bool
    */
   function hasActiveMembers() {
-    $members = $this->getActiveMembers();
-    return count($members) > 0;
+    return count($this->getActiveMembers()) > 0;
+  }
+  
+  /**
+   * Check whetever the team has at least 1 alive member
+   * 
+   * @return bool
+   */
+  function hasAliveMembers() {
+    return count($this->getAliveMembers()) > 0;
   }
 }
 ?>

@@ -34,8 +34,8 @@ class CombatBase extends \Nette\Object {
     if($this->round >= $this->round_limit AND $result === 0) {
       $result = rand(1, 2);
     } elseif($this->round < $this->round_limit AND $result === 0) {
-      if(!$this->team1->hasActiveMembers()) $result = 2;
-      elseif(!$this->team2->hasActiveMembers()) $result = 1;
+      if(!$this->team1->hasAliveMembers()) $result = 2;
+      elseif(!$this->team2->hasAliveMembers()) $result = 1;
     }
     return $result;
   }
