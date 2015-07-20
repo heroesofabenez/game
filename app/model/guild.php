@@ -303,7 +303,7 @@ class Guild extends \Nette\Object {
    * Dissolve guild
    *
    * @param type $id Guild to dissolve
-   * @return bool
+   * @return void
    */
   function dissolve($id) {
     $members = $this->db->table("characters")->where("guild", $id);
@@ -313,7 +313,6 @@ class Guild extends \Nette\Object {
     }
     $this->db->query("DELETE FROM guilds WHERE id=?", $id);
     $this->cache->remove("guilds");
-    return true;
   }
   
   /**
