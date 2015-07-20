@@ -53,6 +53,9 @@ class Team extends BaseEntity {
    */
   function getAliveMembers() {
     $return = array();
+    foreach($this->members as $member) {
+      if($member->hitpoints > 0) $return[] = $member;
+    }
     return $return;
   }
   
