@@ -33,7 +33,7 @@ class CombatBase extends \Nette\Object {
    * 
    * @return int
    */
-  function start_round() {
+  protected function start_round() {
     $this->round++;
     foreach($this->team1 as &$character) {
       foreach($character->effects as &$effect) {
