@@ -1,6 +1,8 @@
 <?php
 namespace HeroesofAbenez\NPC;
 
+use HeroesofAbenez\Model;
+
 /**
  * NPC Quests Control
  *
@@ -24,7 +26,7 @@ class NPCQuestsControl extends \Nette\Application\UI\Control {
    * @param \Nette\Database\Context $db
    * @param \Nette\Security\User $user
    */
-  function __construct(\HeroesofAbenez\Model\Quest $questModel, \HeroesofAbenez\Model\Item $itemModel, \Nette\Database\Context $db, \Nette\Security\User $user) {
+  function __construct(Model\Quest $questModel, Model\Item $itemModel, \Nette\Database\Context $db, \Nette\Security\User $user) {
     $this->questModel = $questModel;
     $this->itemModel = $itemModel;
     $this->user = $user;
