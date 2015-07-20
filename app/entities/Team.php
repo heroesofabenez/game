@@ -44,5 +44,15 @@ class Team extends BaseEntity {
     }
     return $return;
   }
+  
+  /**
+   * Check whetever the team has at least 1 active member
+   * 
+   * @return bool
+   */
+  function hasActiveMembers() {
+    $members = $this->getActiveMembers();
+    return count($members) > 0;
+  }
 }
 ?>
