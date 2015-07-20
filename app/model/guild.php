@@ -4,7 +4,8 @@ namespace HeroesofAbenez\Model;
 use HeroesofAbenez\Entities\Request as RequestEntity,
     HeroesofAbenez\Entities\Guild as GuildEntity,
     Nette\Application\ForbiddenRequestException,
-    Nette\Application\ApplicationException;
+    Nette\Application\ApplicationException,
+    Nette\Application\BadRequestException;
 
   /**
    * Model Guild
@@ -103,29 +104,30 @@ class Guild extends \Nette\Object {
    * Creates a guild
    * 
    * @param array $data Name and description
-   * @return bool Whetever the action was successful
+   * @return void
+   * @throws \Nette\Application\ForbiddenRequestException
    */
   function create($data) {
     $guilds = $this->cache->load("guilds");
     foreach($guilds as $guild) {
-      if($guild->name == $data["name"]) return false;
+      if($guild->name == $data["name"]) throw new ForbiddenRequestException("Guild with this name already exists.");
     }
     $row = $this->db->table("guilds")->insert($data);
     $data2 = array("guild" => $row->id, "guildrank" => 7);
     $this->db->query("UPDATE characters SET ? WHERE id=?", $data2, $this->user->id);
     $this->cache->remove("guilds");
-    return true;
   }
   
   /**
    * Send application to a guild
    * 
    * @param int $gid Guild to join
-   * @return bool|-1
+   * @return void
+   * @throws \Nette\Application\BadRequestException
    */
   function sendApplication($gid) {
     $guild = $this->db->table("guilds")->get($gid);
-    if(!$guild) { return -1; }
+    if(!$guild) { throw new BadRequestException; }
     $leader = $this->db->table("characters")
       ->where("guild", $gid)
       ->where("guildrank", 7);
@@ -133,9 +135,7 @@ class Guild extends \Nette\Object {
     $data = array(
       "from" => $this->user->id, "to" => $leader->id, "type" => "guild_app"
     );
-    $row = $this->db->query("INSERT INTO requests", $data);
-    if($row) return true;
-    else return false;
+    $this->db->query("INSERT INTO requests", $data);
   }
   
   /**

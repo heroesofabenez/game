@@ -129,13 +129,13 @@ class GuildPresenter extends BasePresenter {
     $data = array(
       "name" => $values["name"], "description" => $values["description"]
     );
-    $result = $this->model->create($data);
-    if($result) {
+    try {
+      $this->model->create($data);
       $this->user->logout();
       $this->flashMessage("Guild created.");
       $this->redirect("Guild:");
-    } else {
-      $this->flashMessage("Guild with this name already exists.");
+    } catch(\Nette\Application\ForbiddenRequestException $e) {
+      $this->flashMessage($e->getMessage());
     }
   }
   
@@ -153,15 +153,11 @@ class GuildPresenter extends BasePresenter {
    */
   function actionJoin($id) {
     $this->inGuild();
-    if($id == 0) return;
-    $result = $this->model->sendApplication($id);
-    if($result === TRUE) {
+    try {
+      $this->model->sendApplication($id);
       $this->flashMessage("Application sent.");
       $this->redirect("Guild:");
-    } elseif($result === FALSE) {
-      $this->flashMessage("An error occured.");
-      $this->redirect("Guild:");
-    } else {
+    } catch (Exception $e) {
       $this->forward("notfound");
     }
   }
