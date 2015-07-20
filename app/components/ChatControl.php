@@ -9,6 +9,8 @@ namespace HeroesofAbenez\Chat;
 abstract class ChatControl extends \Nette\Application\UI\Control {
   /** @var \Nette\Database\Context Database context */
   protected $db;
+  /** @var \Nette\Security\User */
+  protected $user;
   /** @var string*/
   protected $table;
   /** @var string*/
@@ -23,15 +25,17 @@ abstract class ChatControl extends \Nette\Application\UI\Control {
   protected $names = array();
   
   /**
-   * @param \Nette\Database\Context $database
+   * @param \Nette\Database\Context $db
+   * @param \Nette\Security\User $user
    * @param string $table
    * @param string $param 
    * @param int $id
    * @param string $param2
    * @param int $id2
    */
-  function __construct(\Nette\Database\Context $database, $table, $param, $id, $param2 = NULL, $id2 = NULL) {
-    $this->db = $database;
+  function __construct(\Nette\Database\Context $db, \Nette\Security\User $user, $table, $param, $id, $param2 = NULL, $id2 = NULL) {
+    $this->db = $db;
+    $this->user = $user;
     if(is_string($table)) $this->table = $table;
     if(is_string($param)) $this->param = $param;
     if($param2 === NULL) $this->param2 = $param;
@@ -99,13 +103,12 @@ abstract class ChatControl extends \Nette\Application\UI\Control {
   /**
    * Submits new message
    * 
-   * @param int $uid Character's id
    * @param string $message message
    * @return void
    */
-  function newMessage($uid, $message) {
+  function newMessage($message) {
     $data = array(
-      "message" => $message,"character" => $uid, "$this->param" => $this->id
+      "message" => $message,"character" => $this->user->id, "$this->param" => $this->id
       );
     $this->db->query("INSERT INTO $this->table", $data);
   }

@@ -19,7 +19,7 @@ class GlobalChatControl extends ChatControl {
     foreach($stages as $s) {
       $stagesIds[] = $s->id;
     }
-    parent::__construct($database, "chat_global", "area", $stage->area, "current_stage", $stagesIds);
+    parent::__construct($database, $user, "chat_global", "area", $stage->area, "current_stage", $stagesIds);
   }
 }
 ?>

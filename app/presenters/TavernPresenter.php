@@ -105,7 +105,7 @@ case "global":
   $chat = $this->createComponentGlobalChat();
   break;
     }
-    $chat->newMessage($this->user->id, $values["message"]);
+    $chat->newMessage($values["message"]);
   }
 }
 ?>
