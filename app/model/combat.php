@@ -7,6 +7,7 @@ use HeroesofAbenez\Entities\Team;
  * Handles combat
  * 
  * @author Jakub Konečný
+ * @property-read int $winner
  */
 class CombatBase extends \Nette\Object {
   /** @var array First team */
@@ -15,6 +16,8 @@ class CombatBase extends \Nette\Object {
   protected $team2 = array();
   /** @var int number of current round */
   protected $round;
+  /** @var int */
+  protected $round_limit = 30;
   
   /**
    * @param \HeroesofAbenez\Entities\TeamTeam $team1 First team
@@ -24,6 +27,17 @@ class CombatBase extends \Nette\Object {
     $this->round = 0;
     $this->team1 = $team1;
     $this->team2 = $team2;
+  }
+  
+  function getWinner() {
+    static $result = 0;
+    if($this->round >= $this->round_limit AND $result === 0) {
+      $result = rand(1, 2);
+    } elseif($this->round < $this->round_limit AND $result === 0) {
+      if(!$this->team1->hasActiveMembers()) $result = 2;
+      elseif(!$this->team2->hasActiveMembers()) $result = 1;
+    }
+    return $result;
   }
   
   /**
@@ -45,8 +59,23 @@ class CombatBase extends \Nette\Object {
       }
       $character->recalculateStats();
     }
-    if(!$this->team1->hasActiveMembers()) return 2;
-    elseif(!$this->team2->hasActiveMembers()) return 1;
+    if($this->winner < 0) return $this->winner;
+    return 0;
+  }
+  
+  /**
+   * Ends round
+   * 
+   * @return int
+   */
+  protected function end_round() {
+    foreach($this->team1 as &$character) {
+      $character->recalculateStats();
+    }
+    foreach($this->team2 as &$character) {
+      $character->recalculateStats();
+    }
+    if($this->winner < 0) return $this->winner;
     return 0;
   }
   
