@@ -31,7 +31,7 @@ class CombatBase extends \Nette\Object {
   /**
    * Starts next round
    * 
-   * @return void 
+   * @return int
    */
   function start_round() {
     $this->round++;
@@ -47,6 +47,9 @@ class CombatBase extends \Nette\Object {
       }
       $character->recalculateStats();
     }
+    if(count($this->team1->activeMembers) < 1) return 2;
+    elseif(count($this->team2->activeMembers) < 1) return 1;
+    return 0;
   }
   
   /**
