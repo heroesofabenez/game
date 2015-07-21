@@ -99,6 +99,7 @@ case "strength":
 case "dexterity":
 case "constitution":
 case "constitution":
+case "intelligence":
 case "charisma":
 case "damage":
 case "hit":
@@ -119,11 +120,11 @@ default:
     }
     foreach($equipment as $eq) {
       if($eq instanceof Equipment)
-        $this->equipment[] = $eq;
+        $this->equipment[$eq->id] = $eq;
     }
     foreach($pets as $pet) {
       if($pet instanceof Pet) {
-        $this->pets[] = $pet;
+        $this->pets[$pet->id] = $pet;
       }
     }
   }
@@ -141,7 +142,7 @@ default:
    */
   function removeEffect($effectId) {
     for($i = 0; $i <= count($this->effects); $i++) {
-      if($this->effects[$i]["id"] == $effectId) {
+      if($this->effects[$i]->id == $effectId) {
         unset($this->effects[$i]);
         $this->recalculateStats();
         return true;
@@ -200,7 +201,7 @@ default:
    */
   function deployPet($petId) {
     $pet = $this->getPet($petId);
-    if(!$pet) exit;
+    if(!$pet) exit("Cannot find pet with id $petId.");
     else $this->active_pet = $petId;
   }
   
@@ -256,7 +257,7 @@ case "equipment":
       $$stat -= $bonus_value;
     }
     foreach($stats as $stat) {
-      $this->$stat = $$stat;
+      $this->$stat = round($$stat);
     }
     $this->stunned = $stunned;
   }
