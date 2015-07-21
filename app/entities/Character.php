@@ -109,7 +109,10 @@ case "initiative":
   } else {
     $this->$key = $value;
     $this->{"base_" . $key} = $value;
-  } 
+  }
+  break;
+default:
+  $this->$key = $value;
   break;
         }
       } else { continue; }
