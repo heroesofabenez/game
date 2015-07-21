@@ -2,7 +2,7 @@
 namespace HeroesofAbenez\Model;
 
 use Nette\Utils\Arrays,
-    HeroesofAbenez\Entities\EquipmentEntity;
+    HeroesofAbenez\Entities\Equipment as EquipmentEntity;
 
 /**
  * Equipment Model
