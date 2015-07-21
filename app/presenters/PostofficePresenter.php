@@ -51,10 +51,10 @@ class PostofficePresenter extends BasePresenter {
       foreach($message as $key => $value) {
        $this->template->$key = $value;
       }
-    } catch(\Nette\Application\BadRequestException $e) {
-      $this->forward("notfound");
     } catch(\Nette\Application\ForbiddenRequestException $e) {
       $this->forward("cannotshow");
+    } catch(\Nette\Application\BadRequestException $e) {
+      $this->forward("notfound");
     }
   }
   
