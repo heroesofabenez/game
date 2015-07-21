@@ -1,13 +1,16 @@
 <?php
 namespace HeroesofAbenez\Model;
 
-use HeroesofAbenez\Entities\Team;
+use HeroesofAbenez\Entities\Team,
+    HeroesofAbenez\Entities\CharacterEffect;
 
 /**
  * Handles combat
  * 
  * @author Jakub Konečný
  * @property-read int $winner
+ * @method void onStart() Tasks to do at the start of the combat
+ * @method void onEnd() Tasks to do at the end of the combat
  */
 class CombatBase extends \Nette\Object {
   /** @var array First team */
@@ -18,6 +21,10 @@ class CombatBase extends \Nette\Object {
   protected $round;
   /** @var int */
   protected $round_limit = 30;
+  /** @var array Tasks to do at the start of the combat */
+  public $onStart = array();
+  /** @var array Tasks to do at the end of the combat */
+  public $onEnd = array();
   
   /**
    * @param \HeroesofAbenez\Entities\Team $team1 First team
@@ -27,6 +34,8 @@ class CombatBase extends \Nette\Object {
     $this->round = 0;
     $this->team1 = $team1;
     $this->team2 = $team2;
+    $this->onStart[] = array($this, "deployPets");
+    $this->onEnd[] = array($this, "removeCombatEffects");
   }
   
   /**
@@ -47,20 +56,53 @@ class CombatBase extends \Nette\Object {
   }
   
   /**
+   * Apply pet's effects to character at the start of the combat
+   * 
+   * @return void
+   */
+  function deployPets() {
+    foreach($this->team1 as $character) {
+      if($character->active_pet) {
+        $effect = $character->getPet($character->active_pet)->deployParams;
+        $character->addEffect(new CharacterEffect($effect));
+      }
+    }
+    foreach($this->team2 as $character) {
+      if($character->active_pet) {
+        $effect = $character->getPet($character->active_pet)->deployParams;
+        $character->addEffect(new CharacterEffect($effect));
+      }
+    }
+  }
+  
+  /**
+   * Remove combat effects from character at the end of the combat
+   * 
+   * @return void
+   */
+  function removeCombatEffects() {
+    foreach($this->team1 as $character) {
+      foreach($character->effects as $effect) {
+        if($effect->duration === "combat") $character->removeEffect($effect->id);
+      }
+    }
+  }
+  
+  /**
    * Starts next round
    * 
    * @return int Winning team/0
    */
   protected function start_round() {
     $this->round++;
-    foreach($this->team1 as &$character) {
-      foreach($character->effects as &$effect) {
+    foreach($this->team1 as $character) {
+      foreach($character->effects as $effect) {
      	if(is_int($effect->duration)) { $effect->duration--; }
       }
       $character->recalculateStats();
     }
-    foreach($this->team2 as &$character) {
-      foreach($character->effects as &$effect) {
+    foreach($this->team2 as $character) {
+      foreach($character->effects as $effect) {
      	if(is_int($effect->duration)) { $effect->duration--; }
       }
       $character->recalculateStats();
@@ -75,10 +117,10 @@ class CombatBase extends \Nette\Object {
    * @return int Winning team/0
    */
   protected function end_round() {
-    foreach($this->team1 as &$character) {
+    foreach($this->team1 as $character) {
       $character->recalculateStats();
     }
-    foreach($this->team2 as &$character) {
+    foreach($this->team2 as $character) {
       $character->recalculateStats();
     }
     if($this->getWinner() > 0) return $this->getWinner();
@@ -91,10 +133,12 @@ class CombatBase extends \Nette\Object {
    * @return int Winning team
    */
   function execute() {
+    $this->onStart();
     while($this->round < $this->round_limit) {
       if($this->start_round() > 0) break;
       if($this->end_round() > 0) break;
     }
+    $this->onEnd();
     return $this->getWinner();
   }
 }
