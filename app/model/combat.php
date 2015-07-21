@@ -13,9 +13,9 @@ use HeroesofAbenez\Entities\Team,
  * @method void onEnd() Tasks to do at the end of the combat
  */
 class CombatBase extends \Nette\Object {
-  /** @var array First team */
+  /** @var \HeroesofAbenez\Entities\Team First team */
   protected $team1 = array();
-  /** @var array Second team */
+  /** @var \HeroesofAbenez\Entities\Team Second team */
   protected $team2 = array();
   /** @var int number of current round */
   protected $round;
