@@ -88,7 +88,7 @@ class CombatBase extends \Nette\Object {
   function removeCombatEffects() {
     foreach($this->team1 as $character) {
       foreach($character->effects as $effect) {
-        if($effect->duration === "combat") $character->removeEffect($effect->id);
+        if($effect->duration === "combat" OR is_int($effect->duration)) $character->removeEffect($effect->id);
       }
     }
   }
