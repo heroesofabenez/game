@@ -16,6 +16,7 @@ use HeroesofAbenez\Entities\Team,
  * @method void onCombatEnd() Tasks to do at the end of the combat
  * @method void onRoundStart() Tasks to do at the start of a round
  * @method void onRoundEnd() Tasks to do at the end of a round
+ * @method void onAttack(\HeroesofAbenez\Entities\Character $character1, \HeroesofAbenez\Entities\Character $character2) Tasks to do at attack
  */
 class CombatBase extends \Nette\Object {
   /** @var \HeroesofAbenez\Entities\Team First team */
@@ -36,6 +37,10 @@ class CombatBase extends \Nette\Object {
   public $onRoundStart = array();
   /** @var array Tasks to do at the end of a turn */
   public $onRoundEnd = array();
+  /** @var array Tasks to do at attack */
+  public $onAttack = array();
+  /** @var array Temporary variable for results of an action */
+  protected $results;
   
   /**
    * @param \HeroesofAbenez\Entities\Team $team1 First team
@@ -50,6 +55,8 @@ class CombatBase extends \Nette\Object {
     $this->onCombatEnd[] = array($this, "removeCombatEffects");
     $this->onRoundStart[] = array($this ,"recalculateStats");
     $this->onRoundStart[] = array($this ,"logRoundNumber");
+    $this->onAttack[] = array($this, "attackHarm");
+    $this->onAttack[] = array($this, "logResults");
   }
   
   /**
@@ -160,6 +167,39 @@ class CombatBase extends \Nette\Object {
   }
   
   /**
+   * Do an attack
+   * Hit chance = Attacker's hit - Defender's dodge, but at least 15%
+   * Damage = Attacker's damage
+   * 
+   * @param \HeroesofAbenez\Entities\Character $character1 Attacker
+   * @param \HeroesofAbenez\Entities\Character $character2 Defender
+   */
+  function attackHarm(CharacterEntity $character1, CharacterEntity $character2) {
+    $result = array();
+    $hit_chance = $character1->hit - $character2->dodge;
+    if($hit_chance < 15) $hit_chance = 15;
+    $roll = rand(0, 100);
+    $result["result"] = ($roll <= $hit_chance);
+    $result["amount"] = ($result["result"]) ? $character1->damage : 0;
+    $character2->harm($result["amount"]);
+    $result["action"] = "attack";
+    $result["name"] = "";
+    $this->results = $result;
+  }
+  
+  /**
+   * Log results of an action
+   * 
+   * @param \HeroesofAbenez\Entities\Character $character1
+   * @param \HeroesofAbenez\Entities\Character $character2
+   */
+  function logResults(CharacterEntity $character1, CharacterEntity $character2) {
+    extract($this->results);
+    $this->log->log($action, $result, $character1, $character2, $amount, $name);
+    $this->results = NULL;
+  }
+  
+  /**
    * @return \HeroesofAbenez\Model\CombatLog
    */
   function getLog() {
@@ -183,13 +223,13 @@ class CombatLog extends \Nette\Object implements \Iterator {
    * 
    * @param string $action
    * @param bool $result
-   * @param int $amount
    * @param \HeroesofAbenez\Entities\Character $character1
    * @param \HeroesofAbenez\Entities\Character $character2
+   * @param int $amount
    * @param string $name
    */
-  function log($action, $result, $amount, CharacterEntity $character1, CharacterEntity $character2, $name = "") {
-    $this->actions[] = new CombatAction($action, $result, $amount, $character1, $character2, $name);
+  function log($action, $result, CharacterEntity $character1, CharacterEntity $character2, $amount = 0, $name = "") {
+    $this->actions[] = new CombatAction($action, $result, $character1, $character2, $amount, $name);
   }
   
   /**

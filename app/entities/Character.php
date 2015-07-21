@@ -244,6 +244,15 @@ default:
   }
   
   /**
+   * Harm the character
+   * 
+   * @param int $amount Number of hitpoints to lose
+   */
+  function harm($amount) {
+    $this->hitpoints -= $amount;
+  }
+  
+  /**
    * Recalculates stats of the character (mostly used during combat)
    * 
    * @return void
