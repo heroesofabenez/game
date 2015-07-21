@@ -227,7 +227,11 @@ class CombatBase extends \Nette\Object {
     if($hit_chance < 15) $hit_chance = 15;
     $roll = rand(0, 100);
     $result["result"] = ($roll <= $hit_chance);
-    $result["amount"] = ($result["result"]) ? $character1->damage : 0;
+    if($result["result"]) {
+      $result["amount"] = (int) $character1->damage - $character2->defense;
+    } else {
+      $result["amount"] = 0;
+    }
     $character2->harm($result["amount"]);
     $result["action"] = "attack";
     $result["name"] = "";

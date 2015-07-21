@@ -33,7 +33,7 @@ class CharacterEffect extends BaseEntity {
     if($effect["type"] === "stun") {
       
     } else {
-      $stats = array("strength", "dexterity", "constitution", "intelligence", "charisma", "damage", "hit", "dodge", "initiative");
+      $stats = array("strength", "dexterity", "constitution", "intelligence", "charisma", "damage", "hit", "dodge", "initiative", "defense");
       if(!is_int($effect["value"])) exit("Invalid value for \$value passed to method CharacterEffect::__construct. Expected integer.");
       if(!in_array($effect["stat"], $stats)) exit("Invalid value for \$stat passed to method CharacterEffect::__construct.");
       $this->stat = $effect["stat"];

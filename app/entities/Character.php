@@ -63,6 +63,10 @@ class Character extends BaseEntity {
   protected $initiative;
   /** @var int */
   protected $base_initiative;
+  /** @var int */
+  protected $defense;
+  /** @var int */
+  protected $base_defense;
   /** @var string */
   protected $description;
   /** @var int */
@@ -133,6 +137,7 @@ default:
     $this->damage = $this->base_damage = round($stats["strength"] / 2) + 1;
     $this->dodge = $this->base_dodge = $stats["dexterity"] * 3;
     $this->hit = $this->base_hit = $stats["dexterity"] * 3;
+    $this->defense = $this->base_defense = 0;
   }
   
   /**
@@ -269,7 +274,7 @@ default:
   function recalculateStats() {
     $stats = array(
       "strength", "dexterity", "constitution", "intelligence", "charisma",
-      "damage", "hit", "dodge", "initiative"
+      "damage", "hit", "dodge", "initiative", "defense"
     );
     $stunned = false;
     foreach($stats as $stat) {
