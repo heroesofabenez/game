@@ -99,7 +99,7 @@ class Character extends BaseEntity {
   }
   
   protected function setStats(array $stats) {
-    $required_stats = array("id", "name", "gender", "occupation", "level", "experience", "strength", "dexterity", "constitution", "intelligence");
+    $required_stats = array("id", "name", "gender", "occupation", "level", "experience", "strength", "dexterity", "constitution", "intelligence", "charisma");
     $all_stats = $required_stats + array("specialization", "guild", "guild_rank");
     foreach($required_stats as $value) {
       if(!isset($stats[$value])) exit("Not passed all needed elements for parameter stats for method Character::__construct. Missing at least $value.");
@@ -108,7 +108,7 @@ class Character extends BaseEntity {
       if(in_array($key, $all_stats)) {
         switch($key) {
 case "name":
-  if(!is_string($value)) exit("Invalid value for \$stats[\"$key\"] passed to method Character::__construct. Expected string."); else $this->$key = $value;
+  $this->$key =(string) $value;
   break;
 case "strength":
 case "dexterity":
@@ -116,10 +116,6 @@ case "constitution":
 case "constitution":
 case "intelligence":
 case "charisma":
-case "damage":
-case "hit":
-case "dodge":
-case "initiative":
   if(!is_int($value)) {
     exit("Invalid value for \$stats[\"$key\"] passed to method Character::__construct. Expected integer.");
   } else {
@@ -133,6 +129,10 @@ default:
         }
       } else { continue; }
     }
+    $this->hitpoints = $this->max_hitpoints = $stats["constitution"] * 5;
+    $this->damage = $this->base_damage = round($stats["strength"] / 2) + 1;
+    $this->dodge = $this->base_dodge = $stats["dexterity"] * 3;
+    $this->hit = $this->base_hit = $stats["dexterity"] * 3;
   }
   
   /**
