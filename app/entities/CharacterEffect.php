@@ -18,25 +18,28 @@ class CharacterEffect extends BaseEntity {
   /** @var int|string */
   protected $duration;
   
-  function __construct($type, $source, $duration, $stat = "", $value = "") {
+  /**
+   * @param array $effect
+   */
+  function __construct(array $effect) {
     $types = array("buff", "debuff", "stun");
     $sources = array("pet", "skill", "equipment");
     $durations = array("combat", "forever");
-    if(!in_array($type, $types)) exit("Invalid value for \$type passed to method CharacterEffect::__construct.");
-    if(!in_array($source, $sources)) exit("Invalid value for \$source passed to method CharacterEffect::__construct.");
-    if(!in_array($duration, $durations) AND $duration < 0) exit("Invalid value for \$duration passed to method CharacterEffect::__construct.");
-    if($type === "stun") {
+    if(!in_array($effect["type"], $types)) exit("Invalid value for \$type passed to method CharacterEffect::__construct.");
+    if(!in_array($effect["source"], $sources)) exit("Invalid value for \$source passed to method CharacterEffect::__construct.");
+    if(!in_array($effect["duration"], $durations) AND $effect["duration"] < 0) exit("Invalid value for \$duration passed to method CharacterEffect::__construct.");
+    if($effect["type"] === "stun") {
       
     } else {
       $stats = array("strength", "dexterity", "constitution", "intelligence", "charisma", "damage", "hit", "dodge", "initiative");
-      if(!is_int($value)) exit("Invalid value for \$value passed to method CharacterEffect::__construct. Expected integer.");
-      if(!in_array($stat, $stats)) exit("Invalid value for \$stat passed to method CharacterEffect::__construct.");
-      $this->stat = $stat;
-      $this->value = $value;
+      if(!is_int($effect["value"])) exit("Invalid value for \$value passed to method CharacterEffect::__construct. Expected integer.");
+      if(!in_array($effect["stat"], $stats)) exit("Invalid value for \$stat passed to method CharacterEffect::__construct.");
+      $this->stat = $effect["stat"];
+      $this->value = $effect["value"];
     }
-    $this->type = $type;
-    $this->source = $source;
-    $this->duration = $duration;
+    $this->type = $effect["type"];
+    $this->source = $effect["source"];
+    $this->duration = $effect["duration"];
   }
 }
 ?>
