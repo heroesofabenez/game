@@ -253,6 +253,15 @@ default:
   }
   
   /**
+   * Heal the character
+   * 
+   * @param int $amount Number of hitpoints to gain
+   */
+  function heal($amount) {
+    $this->hitpoints += $amount;
+  }
+  
+  /**
    * Recalculates stats of the character (mostly used during combat)
    * 
    * @return void

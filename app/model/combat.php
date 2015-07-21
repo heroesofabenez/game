@@ -17,6 +17,7 @@ use HeroesofAbenez\Entities\Team,
  * @method void onRoundStart() Tasks to do at the start of a round
  * @method void onRoundEnd() Tasks to do at the end of a round
  * @method void onAttack(\HeroesofAbenez\Entities\Character $character1, \HeroesofAbenez\Entities\Character $character2) Tasks to do at attack
+ * @method void onHeal(\HeroesofAbenez\Entities\Character $character1, \HeroesofAbenez\Entities\Character $character2) Tasks to do at healing
  */
 class CombatBase extends \Nette\Object {
   /** @var \HeroesofAbenez\Entities\Team First team */
@@ -39,6 +40,8 @@ class CombatBase extends \Nette\Object {
   public $onRoundEnd = array();
   /** @var array Tasks to do at attack */
   public $onAttack = array();
+  /** @var array Tasks to do at healing */
+  public $onHeal = array();
   /** @var array Temporary variable for results of an action */
   protected $results;
   
@@ -57,6 +60,8 @@ class CombatBase extends \Nette\Object {
     $this->onRoundStart[] = array($this ,"logRoundNumber");
     $this->onAttack[] = array($this, "attackHarm");
     $this->onAttack[] = array($this, "logResults");
+    $this->onHeal[] = array($this, "heal");
+    $this->onHeal[] = array($this, "logResults");
   }
   
   /**
@@ -183,6 +188,28 @@ class CombatBase extends \Nette\Object {
     $result["amount"] = ($result["result"]) ? $character1->damage : 0;
     $character2->harm($result["amount"]);
     $result["action"] = "attack";
+    $result["name"] = "";
+    $this->results = $result;
+  }
+  
+  /**
+   * Heal a character
+   * 
+   * @param \HeroesofAbenez\Entities\Character $character1 Healer
+   * @param \HeroesofAbenez\Entities\Character $character2 Wounded character
+   */
+  function heal(CharacterEntity $character1, CharacterEntity $character2) {
+    $result = array();
+    $hit_chance = $character1->intelligence * round($character1->level / 5) + 30;
+    $roll = rand(0, 100);
+    $result["result"] = ($roll <= $hit_chance);
+    $amount = ($result["result"]) ? $character1->intelligence * 2 : 0;
+    if($amount + $character2->hitpoints > $character2->max_hitpoints) {
+      $amount = $character2->max_hitpoints - $character2->hitpoints;
+    }
+    $result["amount"] = $amount;
+    $character2->heal($result["amount"]);
+    $result["action"] = "healing";
     $result["name"] = "";
     $this->results = $result;
   }
