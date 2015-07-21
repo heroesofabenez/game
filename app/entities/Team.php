@@ -37,6 +37,17 @@ class Team extends BaseEntity implements \Iterator {
   }
   
   /**
+   * Check if the team has a character
+   * 
+   * @param int $id Character's id
+   * @return boolean
+   */
+  function hasMember($id) {
+    if(isset($this->members[$id])) return true;
+    else return false;
+  }
+  
+  /**
    * Get active members (alive and not stunned) from the team
    * 
    * @return array
