@@ -182,10 +182,10 @@ case "initiative":
    * Get specified pet
    * 
    * @param int $petId Pet's id
-   * @return Pet Pet if found else false
+   * @return \HeroesofAbenez\Entities\Pet
    */
   function getPet($petId) {
-    if(isset($this->pets[$petId]) and is_a($this->pets[$petId], "Pet")) return $this->pets[$petId];
+    if(isset($this->pets[$petId]) AND $this->pets[$petId] instanceof Pet) return $this->pets[$petId];
     else return false;
   }
   
