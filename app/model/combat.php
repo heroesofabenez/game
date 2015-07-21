@@ -100,6 +100,7 @@ class CombatBase extends \Nette\Object {
    */
   protected function start_round() {
     $this->round++;
+    $this->log->logText("Round $this->round");
     foreach($this->team1 as $character) {
       foreach($character->effects as $effect) {
      	if(is_int($effect->duration)) { $effect->duration--; }
@@ -171,6 +172,16 @@ class CombatLog extends \Nette\Object implements \Iterator {
    */
   function log($action, $result, $amount, CharacterEntity $character1, CharacterEntity $character2, $name = "") {
     $this->actions[] = new CombatAction($action, $result, $amount, $character1, $character2, $name);
+  }
+  
+  /**
+   * Adds text entry
+   * 
+   * @param string $text
+   * @return void
+   */
+  function logText($text) {
+    $this->actions[] = (string) $text;
   }
   
   function rewind() {
