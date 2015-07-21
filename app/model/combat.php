@@ -11,8 +11,8 @@ use HeroesofAbenez\Entities\Team,
  * 
  * @author Jakub Konečný
  * @property-read int $winner
- * @method void onStart() Tasks to do at the start of the combat
- * @method void onEnd() Tasks to do at the end of the combat
+ * @method void onCombatStart() Tasks to do at the start of the combat
+ * @method void onCombatEnd() Tasks to do at the end of the combat
  */
 class CombatBase extends \Nette\Object {
   /** @var \HeroesofAbenez\Entities\Team First team */
@@ -26,9 +26,9 @@ class CombatBase extends \Nette\Object {
   /** @var int */
   protected $round_limit = 30;
   /** @var array Tasks to do at the start of the combat */
-  public $onStart = array();
+  public $onCombatStart = array();
   /** @var array Tasks to do at the end of the combat */
-  public $onEnd = array();
+  public $onCombatEnd = array();
   
   /**
    * @param \HeroesofAbenez\Entities\Team $team1 First team
@@ -39,8 +39,8 @@ class CombatBase extends \Nette\Object {
     $this->team1 = $team1;
     $this->team2 = $team2;
     $this->log = new CombatLog;
-    $this->onStart[] = array($this, "deployPets");
-    $this->onEnd[] = array($this, "removeCombatEffects");
+    $this->onCombatStart[] = array($this, "deployPets");
+    $this->onCombatEnd[] = array($this, "removeCombatEffects");
   }
   
   /**
@@ -139,12 +139,12 @@ class CombatBase extends \Nette\Object {
    * @return int Winning team
    */
   function execute() {
-    $this->onStart();
+    $this->onCombatStart();
     while($this->round < $this->round_limit) {
       if($this->start_round() > 0) break;
       if($this->end_round() > 0) break;
     }
-    $this->onEnd();
+    $this->onCombatEnd();
     return $this->getWinner();
   }
 }
