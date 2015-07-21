@@ -56,8 +56,8 @@ class CombatBase extends \Nette\Object {
     $this->log = new CombatLog;
     $this->onCombatStart[] = array($this, "deployPets");
     $this->onCombatEnd[] = array($this, "removeCombatEffects");
-    $this->onRoundStart[] = array($this ,"recalculateStats");
     $this->onRoundStart[] = array($this ,"logRoundNumber");
+    $this->onRoundStart[] = array($this ,"recalculateStats");
     $this->onAttack[] = array($this, "attackHarm");
     $this->onAttack[] = array($this, "logResults");
     $this->onHeal[] = array($this, "heal");
@@ -114,6 +114,11 @@ class CombatBase extends \Nette\Object {
     }
   }
   
+  /**
+   * Log start of a round
+   * 
+   * @return void
+   */
   function logRoundNumber() {
     $this->round++;
     $this->log->logText("Round $this->round");
@@ -146,6 +151,24 @@ class CombatBase extends \Nette\Object {
   }
   
   /**
+   * Do a round
+   * 
+   * @return void
+   */
+  protected function do_round() {
+    foreach($this->team1->activeMembers as $attacker) {
+      $roll = rand(0, count($this->team2->aliveMembers) - 1);
+      $defender = $this->team2->aliveMembers[$roll];
+      $this->onAttack($attacker, $defender);
+    }
+    foreach($this->team2->activeMembers as $attacker) {
+      $roll = rand(0, count($this->team1->aliveMembers) - 1);
+      $defender = $this->team1->aliveMembers[$roll];
+      $this->onAttack($attacker, $defender);
+    }
+  }
+  
+  /**
    * Ends round
    * 
    * @return int Winning team/0
@@ -165,6 +188,7 @@ class CombatBase extends \Nette\Object {
     $this->onCombatStart();
     while($this->round < $this->round_limit) {
       if($this->start_round() > 0) break;
+      $this->do_round();
       if($this->end_round() > 0) break;
     }
     $this->onCombatEnd();
