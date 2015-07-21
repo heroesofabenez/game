@@ -86,6 +86,19 @@ class Character extends BaseEntity {
    * @param array $pets Pets owned by the character
    */
   function __construct(array $stats, array $equipment = array(), array $pets = array()) {
+    $this->setStats($stats);
+    foreach($equipment as $eq) {
+      if($eq instanceof Equipment)
+        $this->equipment[$eq->id] = $eq;
+    }
+    foreach($pets as $pet) {
+      if($pet instanceof Pet) {
+        $this->pets[$pet->id] = $pet;
+      }
+    }
+  }
+  
+  protected function setStats(array $stats) {
     $required_stats = array("id", "name", "gender", "occupation", "level", "experience", "strength", "dexterity", "constitution", "intelligence");
     $all_stats = $required_stats + array("specialization", "guild", "guild_rank");
     foreach($required_stats as $value) {
@@ -119,15 +132,6 @@ default:
   break;
         }
       } else { continue; }
-    }
-    foreach($equipment as $eq) {
-      if($eq instanceof Equipment)
-        $this->equipment[$eq->id] = $eq;
-    }
-    foreach($pets as $pet) {
-      if($pet instanceof Pet) {
-        $this->pets[$pet->id] = $pet;
-      }
     }
   }
   
