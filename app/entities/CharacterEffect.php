@@ -7,6 +7,8 @@ namespace HeroesofAbenez\Entities;
  * @author Jakub Konečný
  */
 class CharacterEffect extends BaseEntity {
+  /** @var int */
+  protected $id;
   /** @var string */
   protected $type;
   /** @var string */
@@ -37,6 +39,7 @@ class CharacterEffect extends BaseEntity {
       $this->stat = $effect["stat"];
       $this->value = $effect["value"];
     }
+    $this->id = $effect["id"];
     $this->type = $effect["type"];
     $this->source = $effect["source"];
     $this->duration = $effect["duration"];
