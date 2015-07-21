@@ -8,11 +8,13 @@ namespace HeroesofAbenez\Entities;
  * @property-read array $activeMembers
  * @property-read array $aliveMembers
  */
-class Team extends BaseEntity {
+class Team extends BaseEntity implements \Iterator {
   /** @var string Name of the team */
   protected $name;
   /** @var array Characters in the team */
   protected $members = array();
+  /** @var int */
+  protected $pos;
   
   /**
    * @param string $name Name of the team
@@ -20,6 +22,7 @@ class Team extends BaseEntity {
   function __construct($name) {
     if(!is_string($name)) exit("Invalid value for parameter name passed to method Team::__construct. Expected string.");
     else $this->name = $name;
+    $this->pos = 0;
   }
   
   /**
@@ -75,6 +78,26 @@ class Team extends BaseEntity {
    */
   function hasAliveMembers() {
     return count($this->getAliveMembers()) > 0;
+  }
+  
+  function rewind() {
+    $this->pos = 0;
+  }
+  
+  function current() {
+    return $this->members[$this->pos];
+  }
+  
+  function key() {
+    return $this->pos;
+  }
+  
+  function next() {
+    ++$this->pos;
+  }
+  
+  function valid() {
+    return isset($this->members[$this->pos]);
   }
 }
 ?>
