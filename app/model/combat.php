@@ -10,6 +10,7 @@ use HeroesofAbenez\Entities\Team,
  * Handles combat
  * 
  * @author Jakub Konečný
+ * @property-read \HeroesofAbenez\Model\CombatLog $log Log from the combat
  * @property-read int $winner
  * @method void onCombatStart() Tasks to do at the start of the combat
  * @method void onCombatEnd() Tasks to do at the end of the combat
@@ -156,6 +157,13 @@ class CombatBase extends \Nette\Object {
     }
     $this->onCombatEnd();
     return $this->getWinner();
+  }
+  
+  /**
+   * @return \HeroesofAbenez\Model\CombatLog
+   */
+  function getLog() {
+    return $this->log;
   }
 }
 
