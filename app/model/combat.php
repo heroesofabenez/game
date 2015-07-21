@@ -77,7 +77,7 @@ class CombatBase extends \Nette\Object {
   function getWinner() {
     static $result = 0;
     if($this->round >= $this->round_limit AND $result === 0) {
-      $result = rand(1, 2);
+      $result = $this->damage[1] > $this->damage[2] ? 1: 2;
     } elseif($this->round < $this->round_limit AND $result === 0) {
       if(!$this->team1->hasAliveMembers()) $result = 2;
       elseif(!$this->team2->hasAliveMembers()) $result = 1;
