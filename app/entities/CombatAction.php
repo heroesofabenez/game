@@ -19,6 +19,8 @@ class CombatAction extends BaseEntity {
   protected $result;
   /** @var int */
   protected $amount;
+  /** @var string */
+  protected $message;
   
   /**
    * @param string $action
@@ -37,12 +39,13 @@ class CombatAction extends BaseEntity {
     $this->character1 = $character1;
     $this->character2 = $character2;
     $this->name = (string) $name;
+    $this->message = $this->parse();
   }
   
   /**
    * @return string
    */
-  function __toString() {
+  protected function parse() {
     $text = $this->character1->name . " ";
     switch($this->action) {
 case "attack":
@@ -66,6 +69,13 @@ case "healing":
   break;
     }
     return $text;
+  }
+  
+  /**
+   * @return string
+   */
+  function __toString() {
+    return $this->message;
   }
 }
 ?>
