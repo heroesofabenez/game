@@ -1,6 +1,8 @@
 <?php
 namespace HeroesofAbenez\Entities;
 
+use OutOfBoundsException;
+
 /**
  * Structure for single character
  * 
@@ -144,28 +146,29 @@ default:
    * Removes specified effect from the character
    * 
    * @param int $effectId Effect to remove
-   * @return bool Success
+   * @throws \OutOfBoundsException
    */
   function removeEffect($effectId) {
     for($i = 0; $i <= count($this->effects); $i++) {
       if($this->effects[$i]->id == $effectId) {
         unset($this->effects[$i]);
         $this->recalculateStats();
-        return true;
+        return;
       }
     }
-    return false;
+    throw new OutOfBoundsException("Effect to remove was not found.");
   }
   
   /**
    * Get specified equipment of the character
    * 
    * @param int $itemid Item's id
-   * @return Equipment Item if found else false
+   * @return Equipment Item
+   * @throws \OutOfBoundsException
    */
   function getItem($itemid) {
     if(isset($this->equipment[$itemid])) return $this->equipment[$itemid];
-    else return false;
+    else throw new OutOfBoundsException("Item was not found.");
   }
   
   /**
@@ -173,11 +176,12 @@ default:
    * 
    * @param int $itemId
    * @return void
+   * @throws \OutOfBoundsException
    */
   function equipItem($itemId) {
     $item = $this->getItem($itemId);
     if(!$item) {
-      exit;
+      throw new OutOfBoundsException("Item to equip was not found.");
     } else {
       $itemBonus = $item->deployParams();
       $this->addEffect($itemBonus);
@@ -189,11 +193,12 @@ default:
    * 
    * @param int $itemId
    * @return void
+   * @throws \OutOfBoundsException
    */
   function unequipItem($itemId) {
     $item = $this->getItem($itemId);
     if(!$item) {
-      exit;
+      throw new OutOfBoundsException("Item to unequip was not found.");
     } else {
       $itemBonus = $item->deployParams();
       $this->removeEffect($itemBonus->id);
@@ -205,10 +210,11 @@ default:
    * 
    * @param int $petId Pet's id
    * @return \HeroesofAbenez\Entities\Pet
+   * @throws \OutOfBoundsException
    */
   function getPet($petId) {
     if(isset($this->pets[$petId]) AND $this->pets[$petId] instanceof Pet) return $this->pets[$petId];
-    else return false;
+    else throw new OutOfBoundsException("Pet was not found.");
   }
   
   /**
@@ -216,10 +222,11 @@ default:
    * 
    * @param int $petId Pet's id
    * @return void
+   * @throws \OutOfBoundsException
    */
   function deployPet($petId) {
     $pet = $this->getPet($petId);
-    if(!$pet) exit("Cannot find pet with id $petId.");
+    if(!$pet) throw new OutOfBoundsException("Pet to deploy was not found.");
     else $this->active_pet = $petId;
   }
   
