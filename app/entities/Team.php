@@ -33,7 +33,7 @@ class Team extends BaseEntity implements \Iterator {
    * @return void
    */
   function addMember(Character $member) {
-    $this->members[] = $member;
+    $this->members[$member->id] = $member;
   }
   
   /**
