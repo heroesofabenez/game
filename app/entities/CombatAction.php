@@ -57,13 +57,8 @@ case "skill_attack":
   }
   break;
 case "skill_special":
-  $text .= "uses special $this->name on {$this->character2->name} ";
-  if($this->result) {
-    $text .= " andhits. {$this->character2->name} loses $this->amount hitpoint(s).";
-    if($this->character2->hitpoints < 1) $text .= " He/she falls on the ground.";
-  } else {
-    $text .= "but misses.";
-  }
+  if($this->result) $text .= "successfully casts $this->name on {$this->character2->name}";
+  else $text .= "tries to cast $this->name on {$this->character2->name} but fails.";
   break;
 case "healing":
   if($this->result) $text .= "heals {$this->character2->name} for $this->amount hitpoint(s).";
