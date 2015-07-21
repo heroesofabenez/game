@@ -30,6 +30,8 @@ class CombatBase extends \Nette\Object {
   protected $round;
   /** @var int */
   protected $round_limit = 30;
+  /** @var array */
+  protected $damage;
   /** @var array Tasks to do at the start of the combat */
   public $onCombatStart = array();
   /** @var array Tasks to do at the end of the combat */
@@ -54,10 +56,12 @@ class CombatBase extends \Nette\Object {
     $this->team1 = $team1;
     $this->team2 = $team2;
     $this->log = new CombatLog;
+    $this->damage[1] = $this->damage[2] = 0;
     $this->onCombatStart[] = array($this, "deployPets");
     $this->onCombatEnd[] = array($this, "removeCombatEffects");
     $this->onRoundStart[] = array($this ,"recalculateStats");
     $this->onAttack[] = array($this, "attackHarm");
+    $this->onAttack[] = array($this, "logDamage");
     $this->onAttack[] = array($this, "logResults");
     $this->onHeal[] = array($this, "heal");
     $this->onHeal[] = array($this, "logResults");
@@ -248,6 +252,11 @@ class CombatBase extends \Nette\Object {
     extract($this->results);
     $this->log->log($action, $result, $character1, $character2, $amount, $name);
     $this->results = NULL;
+  }
+  
+  function logDamage(CharacterEntity $character1, CharacterEntity $character2) {
+    $team = $this->team1->hasMember($character1->id) ? 1: 2;
+    $this->damage[$team] += $this->results["amount"];
   }
   
   /**
