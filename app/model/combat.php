@@ -2,7 +2,9 @@
 namespace HeroesofAbenez\Model;
 
 use HeroesofAbenez\Entities\Team,
-    HeroesofAbenez\Entities\CharacterEffect;
+    HeroesofAbenez\Entities\Character as CharacterEntity,
+    HeroesofAbenez\Entities\CharacterEffect,
+    HeroesofAbenez\Entities\CombatAction;
 
 /**
  * Handles combat
@@ -17,6 +19,8 @@ class CombatBase extends \Nette\Object {
   protected $team1 = array();
   /** @var \HeroesofAbenez\Entities\Team Second team */
   protected $team2 = array();
+  /** @var \HeroesofAbenez\Model\CombatLog */
+  protected $log;
   /** @var int number of current round */
   protected $round;
   /** @var int */
@@ -34,6 +38,7 @@ class CombatBase extends \Nette\Object {
     $this->round = 0;
     $this->team1 = $team1;
     $this->team2 = $team2;
+    $this->log = new CombatLog;
     $this->onStart[] = array($this, "deployPets");
     $this->onEnd[] = array($this, "removeCombatEffects");
   }
@@ -140,6 +145,52 @@ class CombatBase extends \Nette\Object {
     }
     $this->onEnd();
     return $this->getWinner();
+  }
+}
+
+/**
+ * Combat log
+ * 
+ * @author Jakub Konečný
+ */
+class CombatLog extends \Nette\Object implements \Iterator {
+  /** @var array */
+  protected $actions = array();
+  /** @var int */
+  protected $pos;
+  
+  /**
+   * Adds new entry
+   * 
+   * @param string $action
+   * @param bool $result
+   * @param int $amount
+   * @param \HeroesofAbenez\Entities\Character $character1
+   * @param \HeroesofAbenez\Entities\Character $character2
+   * @param string $name
+   */
+  function log($action, $result, $amount, CharacterEntity $character1, CharacterEntity $character2, $name = "") {
+    $this->actions[] = new CombatAction($action, $result, $amount, $character1, $character2, $name);
+  }
+  
+  function rewind() {
+    $this->pos = 0;
+  }
+  
+  function current() {
+    return $this->actions[$this->pos];
+  }
+  
+  function key() {
+    return $this->pos;
+  }
+  
+  function next() {
+    ++$this->pos;
+  }
+  
+  function valid() {
+    return isset($this->actions[$this->pos]);
   }
 }
 ?>
