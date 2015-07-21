@@ -56,7 +56,6 @@ class CombatBase extends \Nette\Object {
     $this->log = new CombatLog;
     $this->onCombatStart[] = array($this, "deployPets");
     $this->onCombatEnd[] = array($this, "removeCombatEffects");
-    $this->onRoundStart[] = array($this ,"logRoundNumber");
     $this->onRoundStart[] = array($this ,"recalculateStats");
     $this->onAttack[] = array($this, "attackHarm");
     $this->onAttack[] = array($this, "logResults");
@@ -145,6 +144,7 @@ class CombatBase extends \Nette\Object {
    * @return int Winning team/0
    */
   protected function start_round() {
+    $this->logRoundNumber();
     $this->onRoundStart();
     if($this->getWinner() > 0) return $this->getWinner();
     return 0;
