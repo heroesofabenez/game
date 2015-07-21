@@ -13,6 +13,8 @@ use HeroesofAbenez\Entities\Team,
  * @property-read int $winner
  * @method void onCombatStart() Tasks to do at the start of the combat
  * @method void onCombatEnd() Tasks to do at the end of the combat
+ * @method void onRoundStart() Tasks to do at the start of a round
+ * @method void onRoundEnd() Tasks to do at the end of a round
  */
 class CombatBase extends \Nette\Object {
   /** @var \HeroesofAbenez\Entities\Team First team */
@@ -29,6 +31,10 @@ class CombatBase extends \Nette\Object {
   public $onCombatStart = array();
   /** @var array Tasks to do at the end of the combat */
   public $onCombatEnd = array();
+  /** @var array Tasks to do at the start of a turn */
+  public $onRoundStart = array();
+  /** @var array Tasks to do at the end of a turn */
+  public $onRoundEnd = array();
   
   /**
    * @param \HeroesofAbenez\Entities\Team $team1 First team
@@ -41,6 +47,8 @@ class CombatBase extends \Nette\Object {
     $this->log = new CombatLog;
     $this->onCombatStart[] = array($this, "deployPets");
     $this->onCombatEnd[] = array($this, "removeCombatEffects");
+    $this->onRoundStart[] = array($this ,"recalculateStats");
+    $this->onRoundStart[] = array($this ,"logRoundNumber");
   }
   
   /**
@@ -93,18 +101,16 @@ class CombatBase extends \Nette\Object {
     }
   }
   
-  /**
-   * Starts next round
-   * 
-   * @return int Winning team/0
-   */
-  protected function start_round() {
+  function logRoundNumber() {
     $this->round++;
     $this->log->logText("Round $this->round");
+  }
+  
+  function recalculateStats() {
     foreach($this->team1 as $character) {
       foreach($character->effects as $effect) {
      	if(is_int($effect->duration)) { $effect->duration--; }
-      }
+        }
       $character->recalculateStats();
     }
     foreach($this->team2 as $character) {
@@ -113,6 +119,15 @@ class CombatBase extends \Nette\Object {
       }
       $character->recalculateStats();
     }
+  }
+  
+  /**
+   * Starts next round
+   * 
+   * @return int Winning team/0
+   */
+  protected function start_round() {
+    $this->onRoundStart();
     if($this->getWinner() > 0) return $this->getWinner();
     return 0;
   }
@@ -123,12 +138,7 @@ class CombatBase extends \Nette\Object {
    * @return int Winning team/0
    */
   protected function end_round() {
-    foreach($this->team1 as $character) {
-      $character->recalculateStats();
-    }
-    foreach($this->team2 as $character) {
-      $character->recalculateStats();
-    }
+    $this->onRoundStart();
     if($this->getWinner() > 0) return $this->getWinner();
     return 0;
   }
