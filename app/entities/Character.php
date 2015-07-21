@@ -129,6 +129,12 @@ default:
     }
   }
   
+  /**
+   * Applies new effect on the character
+   * 
+   * @param \HeroesofAbenez\Entities\CharacterEffect $effect
+   * @return void
+   */
   function addEffect(CharacterEffect $effect) {
     $this->effects[] = $effect;
     $this->recalculateStats();
@@ -162,6 +168,12 @@ default:
     else return false;
   }
   
+  /**
+   * Equips an owned item
+   * 
+   * @param int $itemId
+   * @return void
+   */
   function equipItem($itemId) {
     $item = $this->getItem($itemId);
     if(!$item) {
@@ -172,6 +184,12 @@ default:
     }
   }
   
+  /**
+   * Ubequips an item
+   * 
+   * @param int $itemId
+   * @return void
+   */
   function unequipItem($itemId) {
     $item = $this->getItem($itemId);
     if(!$item) {
