@@ -58,6 +58,7 @@ class CombatBase extends \Nette\Object {
     $this->log = new CombatLog;
     $this->damage[1] = $this->damage[2] = 0;
     $this->onCombatStart[] = array($this, "deployPets");
+    $this->onCombatStart[] = array($this, "equipItems");
     $this->onCombatEnd[] = array($this, "removeCombatEffects");
     $this->onCombatEnd[] = array($this, "logCombatResult");
     $this->onRoundStart[] = array($this ,"recalculateStats");
@@ -101,6 +102,19 @@ class CombatBase extends \Nette\Object {
       if($character->active_pet) {
         $effect = $character->getPet($character->active_pet)->deployParams;
         $character->addEffect(new CharacterEffect($effect));
+      }
+    }
+  }
+  
+  function equipItems() {
+    foreach($this->team1 as $character) {
+      foreach($character->equipment as $item) {
+        if($item->worn) $character->equipItem($item->id);
+      }
+    }
+    foreach($this->team2 as $character) {
+      foreach($character->equipment as $item) {
+        if($item->worn) $character->equipItem($item->id);
       }
     }
   }

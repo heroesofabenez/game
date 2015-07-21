@@ -192,7 +192,7 @@ default:
     if(!$item) {
       throw new OutOfBoundsException("Item to equip was not found.");
     } else {
-      $itemBonus = $item->deployParams();
+      $itemBonus = new CharacterEffect($item->deployParams);
       $this->addEffect($itemBonus);
     }
   }
