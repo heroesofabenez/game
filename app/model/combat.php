@@ -26,11 +26,11 @@ class CombatBase extends \Nette\Object {
   protected $team2 = array();
   /** @var \HeroesofAbenez\Model\CombatLog */
   protected $log;
-  /** @var int number of current round */
+  /** @var int Number of current round */
   protected $round = 0;
-  /** @var int */
+  /** @var int Round limit */
   protected $round_limit = 30;
-  /** @var array */
+  /** @var array Dealt damage by team */
   protected $damage = array(1 => 0, 2 => 0);
   /** @var array Tasks to do at the start of the combat */
   public $onCombatStart = array();
@@ -104,6 +104,11 @@ class CombatBase extends \Nette\Object {
     }
   }
   
+  /**
+   * Apply effects from worn items
+   * 
+   * @return void
+   */
   function equipItems() {
     foreach($this->team1->members as $character) {
       foreach($character->equipment as $item) {
@@ -153,6 +158,9 @@ class CombatBase extends \Nette\Object {
     $this->log->logText("Round $this->round");
   }
   
+  /**
+   * Decrease duration of effects and recalculate stats
+   */
   function recalculateStats() {
     foreach($this->team1->members as $character) {
       foreach($character->effects as $effect) {
