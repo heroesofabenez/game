@@ -39,7 +39,7 @@ class CombatAction extends BaseEntity {
     $this->character1 = $character1;
     $this->character2 = $character2;
     $this->name = (string) $name;
-    $this->message = $this->parse();
+    $this->parse();
   }
   
   /**
@@ -68,7 +68,7 @@ case "healing":
   else $text .= "tries to heal {$this->character2->name} but fails.";
   break;
     }
-    return $text;
+    $this->message =  $text;
   }
   
   /**
