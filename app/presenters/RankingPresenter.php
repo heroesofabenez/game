@@ -54,7 +54,7 @@ class RankingPresenter extends BasePresenter {
    * @return \HeroesofAbenez\Ranking\CharactersRankingControl
    */
   function createComponentCharactersRanking() {
-    $component = $this->context->getService("ranking.characters");
+    $component = $this->context->getService("ranking.characters")->create();
     $component->paginator = $this->paginator;
     return $component;
   }
@@ -63,7 +63,7 @@ class RankingPresenter extends BasePresenter {
    * @return \HeroesofAbenez\Ranking\GuildsRankingControl
    */
   function createComponentGuildsRanking() {
-    return $this->context->getService("ranking.guilds");
+    return $this->context->getService("ranking.guilds")->create();
   }
 }
 ?>

@@ -41,4 +41,9 @@ class CharactersRankingControl extends RankingControl {
     return $chars;
   }
 }
+
+interface CharactersRankingControlFactory {
+  /** @return \HeroesofAbenez\Ranking\CharactersRankingControl */
+  function create();
+}
 ?>

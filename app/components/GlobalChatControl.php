@@ -22,4 +22,9 @@ class GlobalChatControl extends ChatControl {
     parent::__construct($database, $user, "chat_global", "area", $stage->area, "current_stage", $stagesIds);
   }
 }
+
+interface GlobalChatControlFactory {
+  /** @return \HeroesofAbenez\Chat\GlobalChatControl */
+  function create();
+}
 ?>

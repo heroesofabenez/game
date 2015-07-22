@@ -23,11 +23,11 @@ services:
     authenticator: HeroesofAbenez\Auth\Authenticator
     authorizator: HeroesofAbenez\Auth\Authorizator::create
     cache.cache: Nette\Caching\Cache(@cache.storage, "data")
-    chat.global: HeroesofAbenez\Chat\GlobalChatControl
-    chat.local: HeroesofAbenez\Chat\LocalChatControl
-    chat.guild: HeroesofAbenez\Chat\GuildChatControl
-    npc.dialogue: HeroesofAbenez\NPC\NPCDialogueControl
-    npc.shop: HeroesofAbenez\NPC\NPCShopControl
-    npc.quests: HeroesofAbenez\NPC\NPCQuestsControl
-    ranking.guilds: HeroesofAbenez\Ranking\GuildsRankingControl
-    ranking.characters: HeroesofAbenez\Ranking\CharactersRankingControl
+    chat.global: HeroesofAbenez\Chat\GlobalChatControlFactory
+    chat.local: HeroesofAbenez\Chat\LocalChatControlFactory
+    chat.guild: HeroesofAbenez\Chat\GuildChatControlFactory
+    npc.dialogue: HeroesofAbenez\NPC\NPCDialogueControlFactory
+    npc.shop: HeroesofAbenez\NPC\NPCQuestsControlFactory
+    npc.quests: HeroesofAbenez\NPC\NPCQuestsControlFactoryFactory
+    ranking.guilds: HeroesofAbenez\Ranking\GuildsRankingControlFactory
+    ranking.characters: HeroesofAbenez\Ranking\CharactersRankingControlFactory

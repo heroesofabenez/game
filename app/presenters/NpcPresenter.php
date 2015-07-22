@@ -57,7 +57,7 @@ class NpcPresenter extends BasePresenter {
    * @return \HeroesofAbenez\Model\NPCDialogueControl
    */
   protected function createComponentNpcDialogue() {
-    $component = $this->context->getService("npc.dialogue");
+    $component = $this->context->getService("npc.dialogue")->create();
     $component->npc = $this->npc;
     return $component;
   }
@@ -74,7 +74,7 @@ class NpcPresenter extends BasePresenter {
    * @return \HeroesofAbenez\NPC\NPCQuestsControl
    */
   protected function createComponentNpcQuests() {
-    $component = $this->context->getService("npc.quests");
+    $component = $this->context->getService("npc.quests")->create();
     $component->npc = $this->npc;
     return $component;
   }
@@ -94,7 +94,7 @@ class NpcPresenter extends BasePresenter {
    * @return \HeroesofAbenez\NPC\ShopControl
    */
   protected function createComponentNpcShop() {
-    $shop = $this->context->getService("npc.shop");
+    $shop = $this->context->getService("npc.shop")->create();
     $shop->npc = $this->npc;
     return $shop;
   }

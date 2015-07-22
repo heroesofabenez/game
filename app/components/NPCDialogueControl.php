@@ -69,4 +69,9 @@ class NPCDialogueControl extends \Nette\Application\UI\Control {
     $template->render();
   }
 }
+
+interface NPCDialogueControlFactory {
+  /** @return \HeroesofAbenez\NPC\NPCDialogueControl */
+  function create();
+}
 ?>

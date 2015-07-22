@@ -17,4 +17,9 @@ class LocalChatControl extends ChatControl {
     parent::__construct($database, $user, "chat_local", "stage", $stage, "current_stage");
   }
 }
+
+interface LocalChatControlFactory {
+  /** @return \HeroesofAbenez\Chat\LocalChatControl */
+  function create();
+}
 ?>

@@ -17,4 +17,9 @@ class GuildChatControl extends ChatControl {
     parent::__construct($database, $user, "chat_guild", "guild", $gid);
   }
 }
+
+interface GuildChatControlFactory {
+  /** @return \HeroesofAbenez\Chat\GuildChatControl */
+  function create();
+}
 ?>

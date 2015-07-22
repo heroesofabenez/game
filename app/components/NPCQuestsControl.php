@@ -165,4 +165,9 @@ class NPCQuestsControl extends \Nette\Application\UI\Control {
     $this->presenter->redirect("Quest:view", $quest->id);
   }
 }
+
+interface NPCQuestsControlFactory {
+  /** @return \HeroesofAbenez\NPC\NPCShopControl */
+  function create();
+}
 ?>
