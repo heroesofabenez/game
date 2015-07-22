@@ -33,7 +33,7 @@ class Team extends BaseEntity {
    * @return void
    */
   function addMember(Character $member) {
-    $this->members[$member->id] = $member;
+    $this->members[] = $member;
   }
   
   /**
@@ -43,8 +43,10 @@ class Team extends BaseEntity {
    * @return boolean
    */
   function hasMember($id) {
-    if(isset($this->members[$id])) return true;
-    else return false;
+    foreach($this->members as $member) {
+      if($member->id === $id) return true;
+    }
+    return false;
   }
   
   /**
