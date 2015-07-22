@@ -8,7 +8,7 @@ namespace HeroesofAbenez\Entities;
  * @property-read array $activeMembers
  * @property-read array $aliveMembers
  */
-class Team extends BaseEntity implements \Iterator {
+class Team extends BaseEntity {
   /** @var string Name of the team */
   protected $name;
   /** @var array Characters in the team */
@@ -89,26 +89,6 @@ class Team extends BaseEntity implements \Iterator {
    */
   function hasAliveMembers() {
     return count($this->getAliveMembers()) > 0;
-  }
-  
-  function rewind() {
-    $this->pos = 0;
-  }
-  
-  function current() {
-    return $this->members[$this->pos];
-  }
-  
-  function key() {
-    return $this->pos;
-  }
-  
-  function next() {
-    ++$this->pos;
-  }
-  
-  function valid() {
-    return isset($this->members[$this->pos]);
   }
 }
 ?>

@@ -92,13 +92,13 @@ class CombatBase extends \Nette\Object {
    * @return void
    */
   function deployPets() {
-    foreach($this->team1 as $character) {
+    foreach($this->team1->members as $character) {
       if($character->active_pet) {
         $effect = $character->getPet($character->active_pet)->deployParams;
         $character->addEffect(new CharacterEffect($effect));
       }
     }
-    foreach($this->team2 as $character) {
+    foreach($this->team2->members as $character) {
       if($character->active_pet) {
         $effect = $character->getPet($character->active_pet)->deployParams;
         $character->addEffect(new CharacterEffect($effect));
@@ -107,12 +107,12 @@ class CombatBase extends \Nette\Object {
   }
   
   function equipItems() {
-    foreach($this->team1 as $character) {
+    foreach($this->team1->members as $character) {
       foreach($character->equipment as $item) {
         if($item->worn) $character->equipItem($item->id);
       }
     }
-    foreach($this->team2 as $character) {
+    foreach($this->team2->members as $character) {
       foreach($character->equipment as $item) {
         if($item->worn) $character->equipItem($item->id);
       }
@@ -156,13 +156,13 @@ class CombatBase extends \Nette\Object {
   }
   
   function recalculateStats() {
-    foreach($this->team1 as $character) {
+    foreach($this->team1->members as $character) {
       foreach($character->effects as $effect) {
      	if(is_int($effect->duration)) { $effect->duration--; }
         }
       $character->recalculateStats();
     }
-    foreach($this->team2 as $character) {
+    foreach($this->team2->members as $character) {
       foreach($character->effects as $effect) {
      	if(is_int($effect->duration)) { $effect->duration--; }
       }
