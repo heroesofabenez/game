@@ -127,10 +127,10 @@ default:
         }
       } else { continue; }
     }
-    $this->hitpoints = $this->max_hitpoints = $stats["constitution"] * 5;
-    $this->damage = $this->base_damage = round($stats["strength"] / 2) + 1;
-    $this->dodge = $this->base_dodge = $stats["dexterity"] * 3;
-    $this->hit = $this->base_hit = $stats["dexterity"] * 3;
+    $this->hitpoints = $this->max_hitpoints = $this->constitution * 5;
+    $this->damage = $this->base_damage = round($this->strength / 2) + 1;
+    $this->dodge = $this->base_dodge = $this->dexterity * 3;
+    $this->hit = $this->base_hit = $this->dexterity * 3;
     $this->defense = $this->base_defense = 0;
   }
   
