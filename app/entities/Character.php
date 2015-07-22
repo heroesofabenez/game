@@ -67,12 +67,6 @@ class Character extends BaseEntity {
   protected $defense;
   /** @var int */
   protected $base_defense;
-  /** @var string */
-  protected $description;
-  /** @var int */
-  protected $guild = null;
-  /** @var string Position in guild */
-  protected $guild_rank = null;
   /** @var array Character's equipment */
   protected $equipment = array();
   /** @var array Character's pets */
@@ -104,7 +98,7 @@ class Character extends BaseEntity {
   
   protected function setStats(array $stats) {
     $required_stats = array("id", "name", "gender", "occupation", "level", "experience", "strength", "dexterity", "constitution", "intelligence", "charisma");
-    $all_stats = $required_stats + array("specialization", "guild", "guild_rank");
+    $all_stats = $required_stats + array("specialization");
     foreach($required_stats as $value) {
       if(!isset($stats[$value])) exit("Not passed all needed elements for parameter stats for method Character::__construct. Missing at least $value.");
     }
