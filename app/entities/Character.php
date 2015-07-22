@@ -260,6 +260,16 @@ default:
     $this->hitpoints += $amount;
   }
   
+  function recalculateSecondaryStats() {
+    $stats = array("damage" => "strength", "hit" => "dexterity", "dodge" => "dexterity");
+    foreach($stats as $secondary => $primary) {
+      $gain = $this->$secondary - $this->{"base_$secondary"};
+      if($primary === "strength") $base = round($this->$primary / 2) + 1;
+      else $base = $this->$primary * 3;
+      $this->$secondary = $base + $gain;
+    }
+  }
+  
   /**
    * Recalculates stats of the character (mostly used during combat)
    * 
@@ -305,6 +315,7 @@ case "equipment":
     foreach($stats as $stat) {
       $this->$stat = round($$stat);
     }
+    $this->recalculateSecondaryStats();
     $this->stunned = $stunned;
   }
 }
