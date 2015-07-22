@@ -9,6 +9,10 @@ namespace HeroesofAbenez\Presenters;
 class ProfilePresenter extends BasePresenter {
   /** @var \HeroesofAbenez\Model\Profile @autowire */
   protected $model;
+  /** @var \HeroesofAbenez\Model\Guild @autowire */
+  protected $guildModel;
+  /** @var \HeroesofAbenez\Model\Permissions @autowire */
+  protected $permissionsModel;
   
   /**
    * @return void
@@ -26,8 +30,8 @@ class ProfilePresenter extends BasePresenter {
     if(!$data) $this->forward("notfound");
     foreach($data as $key => $value) {
       if($key == "guild" AND is_int($value)) {
-        $guildName = $this->context->getService("model.guild")->getGuildName($value);
-        $guildRank = $this->context->getService("model.permissions")->getRoleName($data["guildrank"]);
+        $guildName = $this->guildModel->getGuildName($value);
+        $guildRank = $this->permissionsModel->getRoleName($data["guildrank"]);
         $guildLink = $this->link("Guild:view", $value);
         $value = "Guild: <a href=\"$guildLink\">$guildName</a><br>Position in guild: " . ucfirst($guildRank);
       }

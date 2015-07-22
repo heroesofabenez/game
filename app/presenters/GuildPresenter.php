@@ -12,6 +12,8 @@ use \Nette\Application\UI,
 class GuildPresenter extends BasePresenter {
   /** @var \HeroesofAbenez\Model\Guild @autowire */
   protected $model;
+  /** @var \HeroesofAbenez\Model\Permissions @autowire */
+  protected $permissionsModel;
   
   /**
    * Redirect player to guild page if he is already in guild
@@ -87,7 +89,7 @@ class GuildPresenter extends BasePresenter {
     $this->template->members = $this->model->guildMembers($this->user->identity->guild);
     $this->template->canPromote = $this->user->isAllowed("guild", "promote");
     $this->template->canKick = $this->user->isAllowed("guild", "kick");
-    $roles = $this->context->getService("model.permissions")->getRoles();
+    $roles = $this->permissionsModel->getRoles();
     foreach($roles as $role) {
       if($role["name"] == $this->user->roles[0]) {
         $rankId = $role["id"];
