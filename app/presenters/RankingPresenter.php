@@ -1,6 +1,8 @@
 <?php
 namespace HeroesofAbenez\Presenters;
 
+use HeroesofAbenez\Ranking;
+
   /**
    * Presenter Ranking
    * 
@@ -53,8 +55,8 @@ class RankingPresenter extends BasePresenter {
   /**
    * @return \HeroesofAbenez\Ranking\CharactersRankingControl
    */
-  function createComponentCharactersRanking() {
-    $component = $this->context->getService("ranking.characters")->create();
+  function createComponentCharactersRanking(Ranking\CharactersRankingControlFactory $factory) {
+    $component = $factory->create();
     $component->paginator = $this->paginator;
     return $component;
   }
@@ -62,8 +64,8 @@ class RankingPresenter extends BasePresenter {
   /**
    * @return \HeroesofAbenez\Ranking\GuildsRankingControl
    */
-  function createComponentGuildsRanking() {
-    return $this->context->getService("ranking.guilds")->create();
+  function createComponentGuildsRanking(Ranking\GuildsRankingControlFactory $factory) {
+    return $factory->create();
   }
 }
 ?>

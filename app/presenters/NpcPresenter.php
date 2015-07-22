@@ -1,6 +1,8 @@
 <?php
 namespace HeroesofAbenez\Presenters;
 
+use HeroesofAbenez\NPC;
+
 /**
  * Presenter Npc
  *
@@ -56,8 +58,8 @@ class NpcPresenter extends BasePresenter {
   /**
    * @return \HeroesofAbenez\Model\NPCDialogueControl
    */
-  protected function createComponentNpcDialogue() {
-    $component = $this->context->getService("npc.dialogue")->create();
+  protected function createComponentNpcDialogue(NPC\NPCDialogueControlFactory $factory) {
+    $component = $factory->create();
     $component->npc = $this->npc;
     return $component;
   }
@@ -73,8 +75,8 @@ class NpcPresenter extends BasePresenter {
   /**
    * @return \HeroesofAbenez\NPC\NPCQuestsControl
    */
-  protected function createComponentNpcQuests() {
-    $component = $this->context->getService("npc.quests")->create();
+  protected function createComponentNpcQuests(NPC\NPCQuestsControlFactory $factory) {
+    $component = $factory->create();
     $component->npc = $this->npc;
     return $component;
   }
@@ -93,8 +95,8 @@ class NpcPresenter extends BasePresenter {
   /**
    * @return \HeroesofAbenez\NPC\ShopControl
    */
-  protected function createComponentNpcShop() {
-    $shop = $this->context->getService("npc.shop")->create();
+  protected function createComponentNpcShop(NPC\NPCShopControlFactory $factory) {
+    $shop = $factory->create();
     $shop->npc = $this->npc;
     return $shop;
   }

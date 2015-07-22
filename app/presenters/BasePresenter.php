@@ -8,6 +8,7 @@ namespace HeroesofAbenez\Presenters;
    */
 abstract class BasePresenter extends \Nette\Application\UI\Presenter {
   use \Kdyby\Autowired\AutowireProperties;
+  use \Kdyby\Autowired\AutowireComponentFactories;
   
   /**
    * Login user and set server number for template

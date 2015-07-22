@@ -27,7 +27,7 @@ services:
     chat.local: HeroesofAbenez\Chat\LocalChatControlFactory
     chat.guild: HeroesofAbenez\Chat\GuildChatControlFactory
     npc.dialogue: HeroesofAbenez\NPC\NPCDialogueControlFactory
-    npc.shop: HeroesofAbenez\NPC\NPCQuestsControlFactory
-    npc.quests: HeroesofAbenez\NPC\NPCQuestsControlFactoryFactory
+    npc.shop: HeroesofAbenez\NPC\NPCShopControlFactory
+    npc.quests: HeroesofAbenez\NPC\NPCQuestsControlFactory
     ranking.guilds: HeroesofAbenez\Ranking\GuildsRankingControlFactory
     ranking.characters: HeroesofAbenez\Ranking\CharactersRankingControlFactory

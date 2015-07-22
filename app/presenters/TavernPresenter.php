@@ -1,7 +1,8 @@
 <?php
 namespace HeroesofAbenez\Presenters;
 
-use Nette\Application\UI;
+use Nette\Application\UI,
+    HeroesofAbenez\Chat;
 
 /**
  * Presenter Tavern
@@ -55,22 +56,22 @@ class TavernPresenter extends BasePresenter {
   /**
    * @return \HeroesofAbenez\Chat\GuildChatControl
    */
-  protected function createComponentGuildChat() {
-    return $this->context->getService("chat.guild")->create();
+  protected function createComponentGuildChat(Chat\GuildChatControlFactory $factory) {
+    return $factory->create();
   }
   
   /**
    * @return \HeroesofAbenez\Chat\LocalChatControl
    */
-  protected function createComponentLocalChat() {
-    return $this->context->getService("chat.local")->create();
+  protected function createComponentLocalChat(Chat\LocalChatControlFactory $factory) {
+    return $factory->create();
   }
   
   /**
    * @return \HeroesofAbenez\Chat\GlobalChatControl
    */
-  protected function createComponentGlobalChat() {
-    return $this->context->getService("chat.global")->create();
+  protected function createComponentGlobalChat(Chat\GlobalChatControlFactory $factory) {
+    return $factory->create();
   }
   
   /**
