@@ -9,12 +9,8 @@ use \Nette\Application\UI;
    * @author Jakub Konečný
    */
 class CharacterPresenter extends BasePresenter {
-  /** @var \HeroesofAbenez\Model\Character */
+  /** @var \HeroesofAbenez\Model\Character @autowire */
   protected $model;
-  
-  function __construct(\HeroesofAbenez\Model\Character $model) {
-    $this->model = $model;
-  }
   
   /**
    * @return void

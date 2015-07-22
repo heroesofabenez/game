@@ -7,15 +7,8 @@ namespace HeroesofAbenez\Presenters;
  * @author Jakub Konečný
  */
 class JournalPresenter extends BasePresenter {
-  /** @var \HeroesofAbenez\Model\Journal */
+  /** @var \HeroesofAbenez\Model\Journal @autowire */
   protected $model;
-  
-  /**
-   * @param \HeroesofAbenez\Model\Journal $model
-   */
-  function __construct(\HeroesofAbenez\Model\Journal $model) {
-    $this->model = $model;
-  }
   
   /**
    * @return void

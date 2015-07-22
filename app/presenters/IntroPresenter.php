@@ -9,12 +9,8 @@ namespace HeroesofAbenez\Presenters;
 class IntroPresenter extends BasePresenter {
   /** @var int In which part of intro we are */
   protected $part;
-  /** @var \HeroesofAbenez\Model\Intro */
+  /** @var \HeroesofAbenez\Model\Intro @autowire */
   protected $model;
-  
-  function __construct(\HeroesofAbenez\Model\Intro $model) {
-    $this->model = $model;
-  }
   
   /**
    * @return void

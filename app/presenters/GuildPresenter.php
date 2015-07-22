@@ -10,15 +10,8 @@ use \Nette\Application\UI,
    * @author Jakub Konečný
    */
 class GuildPresenter extends BasePresenter {
-  /** @var \HeroesofAbenez\Model\Guild */
+  /** @var \HeroesofAbenez\Model\Guild @autowire */
   protected $model;
-  
-  /**
-   * @param \HeroesofAbenez\Model\Guild $model
-   */
-  function __construct(\HeroesofAbenez\Model\Guild $model) {
-    $this->model = $model;
-  }
   
   /**
    * Redirect player to guild page if he is already in guild

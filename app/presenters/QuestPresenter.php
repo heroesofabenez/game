@@ -1,31 +1,18 @@
 <?php
 namespace HeroesofAbenez\Presenters;
 
-use HeroesofAbenez\Model;
-
 /**
  * Presenter Quest
  *
  * @author Jakub Konečný
  */
 class QuestPresenter extends BasePresenter {
-  /** @var \HeroesofAbenez\Model\Quest */
+  /** @var \HeroesofAbenez\Model\Quest @autowire */
   protected $model;
-  /** @var \HeroesofAbenez\Model\Item */
+  /** @var \HeroesofAbenez\Model\Item @autowire */
   protected $itemModel;
-  /** @var \HeroesofAbenez\Model\NPC */
+  /** @var \HeroesofAbenez\Model\NPC @autowire */
   protected $npcModel;
-  
-  /**
-   * @param \HeroesofAbenez\Model\Quest $model
-   * @param \HeroesofAbenez\Model\Item $itemModel
-   * @param \HeroesofAbenez\Model\NPC $npcModel
-   */
-  function __construct(Model\Quest $model, Model\Item $itemModel, Model\NPC $npcModel) {
-    $this->model = $model;
-    $this->itemModel = $itemModel;
-    $this->npcModel = $npcModel;
-  }
   
   /**
    * Page /quest does not exist

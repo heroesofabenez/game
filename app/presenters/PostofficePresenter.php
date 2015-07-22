@@ -9,16 +9,8 @@ use Nette\Application\UI;
  * @author Jakub Konečný
  */
 class PostofficePresenter extends BasePresenter {
-  /** @var \HeroesofAbenez\Model\PostOffice */
+  /** @var \HeroesofAbenez\Model\PostOffice @autowire */
   protected $model;
-  
-  
-  /**
-   * @param \HeroesofAbenez\Model\PostOffice $model
-   */
-  function __construct(\HeroesofAbenez\Model\PostOffice $model) {
-    $this->model = $model;
-  }
   
   /**
    * @return void

@@ -7,15 +7,8 @@ namespace HeroesofAbenez\Presenters;
  * @author Jakub Konečný
  */
 class ItemPresenter extends BasePresenter {
-  /**  @var \HeroesofAbenez\Model\Item */
+  /**  @var \HeroesofAbenez\Model\Item @autowire */
   protected $model;
-  
-  /**
-   * @param \HeroesofAbenez\Model\Item $model
-   */
-  function __construct(\HeroesofAbenez\Model\Item $model) {
-    $this->model = $model;
-  }
   
   /**
    * @param int $id

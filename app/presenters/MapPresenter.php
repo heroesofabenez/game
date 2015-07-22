@@ -7,15 +7,8 @@ namespace HeroesofAbenez\Presenters;
  * @author Jakub Konečný
  */
 class MapPresenter extends BasePresenter {
-  /** @var \HeroesofAbenez\Model\Map */
+  /** @var \HeroesofAbenez\Model\Map @autowire */
   protected $model;
-  
-  /**
-   * @param \HeroesofAbenez\Model\Map $mapModel
-   */
-  function __construct(\HeroesofAbenez\Model\Map $mapModel) {
-    $this->model = $mapModel;
-  }
   
   /**
    * @return void

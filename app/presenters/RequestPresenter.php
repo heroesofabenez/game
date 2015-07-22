@@ -7,15 +7,8 @@ namespace HeroesofAbenez\Presenters;
  * @author Jakub Konečný
  */
 class RequestPresenter extends BasePresenter {
-  /** @var \HeroesofAbenez\Model\Request */
+  /** @var \HeroesofAbenez\Model\Request @autowire */
   protected $model;
-  
-  /**
-   * @param \HeroesofAbenez\Model\Request $model
-   */
-  function __construct(\HeroesofAbenez\Model\Request $model) {
-    $this->model = $model;
-  }
   
   /**
    * Page /request does not exist

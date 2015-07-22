@@ -7,15 +7,8 @@ namespace HeroesofAbenez\Presenters;
    * @author Jakub Konečný
    */
 class TravelPresenter extends BasePresenter {
-  /** @var \HeroesofAbenez\Model\Location */
+  /** @var \HeroesofAbenez\Model\Location @autowire */
   protected $model;
-  
-  /**
-   * @param \HeroesofAbenez\Model\Location $model
-   */
-  function __construct(\HeroesofAbenez\Model\Location $model) {
-    $this->model = $model;
-  }
   
   /**
    * @return void

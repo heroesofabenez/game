@@ -7,15 +7,8 @@ namespace HeroesofAbenez\Presenters;
    * @author Jakub Konečný
    */
 class ProfilePresenter extends BasePresenter {
-  /** @var \HeroesofAbenez\Model\Profile */
+  /** @var \HeroesofAbenez\Model\Profile @autowire */
   protected $model;
-  
-  /**
-   * @param \HeroesofAbenez\Model\Profile $model
-   */
-  function __construct(\HeroesofAbenez\Model\Profile $model) {
-    $this->model = $model;
-  }
   
   /**
    * @return void
