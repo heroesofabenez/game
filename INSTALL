@@ -1,5 +1,9 @@
 Installation instructions
 
+Downloading
+The game now uses Composer to manage its dependencies so you have to
+clone/fork the repository and then run Composer to get the dependencies.
+
 Creating folders
 Before you can start working (developing/testing) with the game, you have to
 create these empty folders:
