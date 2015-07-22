@@ -27,11 +27,11 @@ class CombatBase extends \Nette\Object {
   /** @var \HeroesofAbenez\Model\CombatLog */
   protected $log;
   /** @var int number of current round */
-  protected $round;
+  protected $round = 0;
   /** @var int */
   protected $round_limit = 30;
   /** @var array */
-  protected $damage;
+  protected $damage = array(1 => 0, 2 => 0);
   /** @var array Tasks to do at the start of the combat */
   public $onCombatStart = array();
   /** @var array Tasks to do at the end of the combat */
@@ -52,11 +52,9 @@ class CombatBase extends \Nette\Object {
    * @param \HeroesofAbenez\Entities\Team $team2 Second team
    */
   function __construct(Team $team1, Team $team2) {
-    $this->round = 0;
     $this->team1 = $team1;
     $this->team2 = $team2;
     $this->log = new CombatLog;
-    $this->damage[1] = $this->damage[2] = 0;
     $this->onCombatStart[] = array($this, "deployPets");
     $this->onCombatStart[] = array($this, "equipItems");
     $this->onCombatEnd[] = array($this, "removeCombatEffects");
