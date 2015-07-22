@@ -6,3 +6,4 @@ temp
 /images
 /app/log
 /app/config/local.neon
+/vendor
