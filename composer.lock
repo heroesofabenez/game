@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "48c94a6da450a50d4ecc7335efca7205",
+    "hash": "1266ff9bf2e8685596e3a74298b1a186",
     "packages": [
         {
             "name": "kdyby/autowired",
-            "version": "dev-master",
+            "version": "v1.3.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Kdyby/Autowired.git",
-                "reference": "e5e608279ff93fcca1f65dccb0a0fe55286e669f"
+                "reference": "a591253b85e4979446d5fada8a6ec9c8fa03b785"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Kdyby/Autowired/zipball/e5e608279ff93fcca1f65dccb0a0fe55286e669f",
-                "reference": "e5e608279ff93fcca1f65dccb0a0fe55286e669f",
+                "url": "https://api.github.com/repos/Kdyby/Autowired/zipball/a591253b85e4979446d5fada8a6ec9c8fa03b785",
+                "reference": "a591253b85e4979446d5fada8a6ec9c8fa03b785",
                 "shasum": ""
             },
             "require": {
@@ -86,7 +86,7 @@
                 "kdyby",
                 "nette"
             ],
-            "time": "2015-06-27 15:52:55"
+            "time": "2015-05-09 21:01:17"
         },
         {
             "name": "latte/latte",
@@ -1298,13 +1298,13 @@
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "kdyby/autowired": 20
-    },
+    "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "php": ">=5.4.0"
+        "php": ">=5.4.0",
+        "lib-curl": "*",
+        "ext-spl": "*"
     },
     "platform-dev": []
 }
