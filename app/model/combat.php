@@ -274,7 +274,7 @@ class CombatBase extends \Nette\Object {
     $hit_chance = $character1->intelligence * round($character1->level / 5) + 30;
     $roll = rand(0, 100);
     $result["result"] = ($roll <= $hit_chance);
-    $amount = ($result["result"]) ? $character1->intelligence * 2 : 0;
+    $amount = ($result["result"]) ? $character1->intelligence / 2 : 0;
     if($amount + $character2->hitpoints > $character2->max_hitpoints) {
       $amount = $character2->max_hitpoints - $character2->hitpoints;
     }
