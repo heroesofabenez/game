@@ -254,7 +254,7 @@ class CombatBase extends \Nette\Object {
     $result["result"] = ($roll <= $hit_chance);
     if($result["result"]) $result["amount"] = (int) $character1->damage - $character2->defense;
     else $result["amount"] = 0;
-    $character2->harm($result["amount"]);
+    if($result["amount"]) $character2->harm($result["amount"]);
     $result["action"] = "attack";
     $result["name"] = "";
     $this->results = $result;
@@ -276,7 +276,7 @@ class CombatBase extends \Nette\Object {
       $amount = $character2->max_hitpoints - $character2->hitpoints;
     }
     $result["amount"] = $amount;
-    $character2->heal($result["amount"]);
+    if($result["amount"]) $character2->heal($result["amount"]);
     $result["action"] = "healing";
     $result["name"] = "";
     $this->results = $result;
