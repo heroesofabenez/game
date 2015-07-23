@@ -31,3 +31,10 @@ services:
     npc.quests: HeroesofAbenez\NPC\NPCQuestsControlFactory
     ranking.guilds: HeroesofAbenez\Ranking\GuildsRankingControlFactory
     ranking.characters: HeroesofAbenez\Ranking\CharactersRankingControlFactory
+extensions:
+    translation: Kdyby\Translation\DI\TranslationExtension
+translation:
+    default: en
+    fallback: [en_US, en]
+    resolvers:
+        request: off
