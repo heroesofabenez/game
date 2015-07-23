@@ -96,6 +96,10 @@ class Character extends BaseEntity {
     }
   }
   
+  /**
+   * @param array $stats
+   * @return void
+   */
   protected function setStats(array $stats) {
     $required_stats = array("id", "name", "occupation", "level", "strength", "dexterity", "constitution", "intelligence", "charisma");
     $all_stats = $required_stats + array("specialization", "gender", "experience");
@@ -149,6 +153,7 @@ default:
    * Removes specified effect from the character
    * 
    * @param int $effectId Effect to remove
+   * @return void
    * @throws \OutOfBoundsException
    */
   function removeEffect($effectId) {
@@ -246,6 +251,7 @@ default:
    * Harm the character
    * 
    * @param int $amount Number of hitpoints to lose
+   * @return void
    */
   function harm($amount) {
     $this->hitpoints -= $amount;
@@ -255,11 +261,17 @@ default:
    * Heal the character
    * 
    * @param int $amount Number of hitpoints to gain
+   * @return void
    */
   function heal($amount) {
     $this->hitpoints += $amount;
   }
   
+  /**
+   * Recalculate secondary stats from the the primary ones
+   * 
+   * @return void
+   */
   function recalculateSecondaryStats() {
     $stats = array("damage" => "strength", "hit" => "dexterity", "dodge" => "dexterity");
     foreach($stats as $secondary => $primary) {
