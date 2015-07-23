@@ -10,7 +10,7 @@ use HeroesofAbenez\Entities\Team,
  * Handles combat
  * 
  * @author Jakub Konečný
- * @property-read \HeroesofAbenez\Model\CombatLog $log Log from the combat
+ * @property-read \HeroesofAbenez\Model\CombatLogger $log Log from the combat
  * @property-read int $winner
  * @method void onCombatStart() Tasks to do at the start of the combat
  * @method void onCombatEnd() Tasks to do at the end of the combat
@@ -24,7 +24,7 @@ class CombatBase extends \Nette\Object {
   protected $team1;
   /** @var \HeroesofAbenez\Entities\Team Second team */
   protected $team2;
-  /** @var \HeroesofAbenez\Model\CombatLog */
+  /** @var \HeroesofAbenez\Model\CombatLogger */
   protected $log;
   /** @var int Number of current round */
   protected $round = 0;
@@ -54,7 +54,7 @@ class CombatBase extends \Nette\Object {
   function __construct(Team $team1, Team $team2) {
     $this->team1 = $team1;
     $this->team2 = $team2;
-    $this->log = new CombatLog;
+    $this->log = new CombatLogger;
     $this->onCombatStart[] = array($this, "deployPets");
     $this->onCombatStart[] = array($this, "equipItems");
     $this->onCombatEnd[] = array($this, "removeCombatEffects");
@@ -303,7 +303,7 @@ class CombatBase extends \Nette\Object {
   }
   
   /**
-   * @return \HeroesofAbenez\Model\CombatLog
+   * @return \HeroesofAbenez\Model\CombatLogger
    */
   function getLog() {
     return $this->log;
@@ -315,7 +315,7 @@ class CombatBase extends \Nette\Object {
  * 
  * @author Jakub Konečný
  */
-class CombatLog extends \Nette\Object implements \Iterator {
+class CombatLogger extends \Nette\Object implements \Iterator {
   /** @var array */
   protected $actions = array();
   /** @var int */
