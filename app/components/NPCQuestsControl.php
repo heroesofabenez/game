@@ -167,7 +167,7 @@ class NPCQuestsControl extends \Nette\Application\UI\Control {
 }
 
 interface NPCQuestsControlFactory {
-  /** @return \HeroesofAbenez\NPC\NPCShopControl */
+  /** @return \HeroesofAbenez\NPC\NPCQuestsControl */
   function create();
 }
 ?>
