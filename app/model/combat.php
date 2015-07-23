@@ -133,6 +133,11 @@ class CombatBase extends \Nette\Object {
         if($effect->duration === "combat" OR is_int($effect->duration)) $character->removeEffect($effect->id);
       }
     }
+    foreach($this->team2 as $character) {
+      foreach($character->effects as $effect) {
+        if($effect->duration === "combat" OR is_int($effect->duration)) $character->removeEffect($effect->id);
+      }
+    }
   }
   
   /**
