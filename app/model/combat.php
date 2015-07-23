@@ -21,9 +21,9 @@ use HeroesofAbenez\Entities\Team,
  */
 class CombatBase extends \Nette\Object {
   /** @var \HeroesofAbenez\Entities\Team First team */
-  protected $team1 = array();
+  protected $team1;
   /** @var \HeroesofAbenez\Entities\Team Second team */
-  protected $team2 = array();
+  protected $team2;
   /** @var \HeroesofAbenez\Model\CombatLog */
   protected $log;
   /** @var int Number of current round */
