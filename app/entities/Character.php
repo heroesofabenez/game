@@ -14,7 +14,7 @@ class Character extends BaseEntity {
   /** @var string */
   protected $name;
   /** @var string */
-  protected $gender;
+  protected $gender = "male";
   /** @var string */
   protected $occupation;
   /** @var string */
@@ -22,7 +22,7 @@ class Character extends BaseEntity {
   /** @var int */
   protected $level;
   /** @var int */
-  protected $experience;
+  protected $experience = 0;
   /** @var int */
   protected $strength;
   /** @var int */
@@ -97,8 +97,8 @@ class Character extends BaseEntity {
   }
   
   protected function setStats(array $stats) {
-    $required_stats = array("id", "name", "gender", "occupation", "level", "experience", "strength", "dexterity", "constitution", "intelligence", "charisma");
-    $all_stats = $required_stats + array("specialization");
+    $required_stats = array("id", "name", "occupation", "level", "strength", "dexterity", "constitution", "intelligence", "charisma");
+    $all_stats = $required_stats + array("specialization", "gender", "experience");
     foreach($required_stats as $value) {
       if(!isset($stats[$value])) exit("Not passed all needed elements for parameter stats for method Character::__construct. Missing at least $value.");
     }
