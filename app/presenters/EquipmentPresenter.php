@@ -9,6 +9,10 @@ namespace HeroesofAbenez\Presenters;
 class EquipmentPresenter extends BasePresenter {
   /** @var \HeroesofAbenez\Model\Equipment @autowire */
   protected $model;
+  /** @var \HeroesofAbenez\Model\Character @autowire */
+  protected $characterModel;
+  /** @var \HeroesofAbenez\Model\Profile @autowire */
+  protected $profileModel;
   
   /**
    * @return void
@@ -16,15 +20,13 @@ class EquipmentPresenter extends BasePresenter {
   function renderView($id) {
     $item = $this->model->view($id);
     if(!$item) $this->forward("notfound");
-    $characterModel = $this->context->getService("model.character");
-    $classes = $characterModel->getClassesList();
+    $classes = $this->characterModel->getClassesList();
     foreach($item as $key => $value) {
       if($key == "required_class") $value = $classes[$value];
       $this->template->$key = $value;
     }
-    $profileModel = $this->context->getService("model.profile");
     $this->template->level = $this->user->identity->level;
-    $this->template->class = $profileModel->getClassName($this->user->identity->occupation);
+    $this->template->class = $this->profileModel->getClassName($this->user->identity->occupation);
   }
 }
 ?>
