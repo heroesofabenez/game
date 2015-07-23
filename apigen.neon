@@ -7,6 +7,10 @@ charset:
 exclude: 
     0: temp
     1: tests
+    2: composer
+    3: examples
+    4: deprecated
+    5: Requirements-Checker
 accessLevels:
     0: public
     1: protected
