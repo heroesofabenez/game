@@ -1,6 +1,6 @@
 {layout '../@layout.latte'}
-{block title}Introduction {$part}{/block}
+{block title}{_texts.intro.title}{$part}{/block}
 {block content}
   <p>{$intro}</p>
-  <a n:href="Intro:next">Continue</a>
+  <a n:href="Intro:next">{_texts.intro.continue}</a>
 {/block}

@@ -1,7 +1,7 @@
 {layout '../@layout.latte'}
-{block title}Dissolve guild{/block}
+{block title}{_texts.guild.dissolveTitle}{/block}
 {block content}
-  <h1>Dissolving guild</h1>
-  <p>Are you sure that you want to do this? It can't be undone. Confirm the action by entering the guild's name.</p>
+  <h1>{_texts.guild.dissolveTitle2}</h1>
+  <p>{_texts.guild.dissolveConfirm}</p>
   {control dissolveGuildForm}
 {/block}

@@ -2,13 +2,13 @@
 {block title}{$title}{/block}
 {block content}
   <h1>{$title}</h1>
-  <p>Rooms: <a n:href="Tavern:local">Local</a> <a n:href="Tavern:guild">Guild</a> <a n:href="Tavern:global">Global</a></p>
+  <p>{_texts.tavern.rooms} <a n:href="Tavern:local">{_texts.tavern.localRoom}</a> <a n:href="Tavern:guild">{_texts.tavern.guildRoom}</a> <a n:href="Tavern:global">{_texts.tavern.globalRoom}</a></p>
   {if $canChat}
   {control $chat}
   <div id="chat_new_message">
     {control newMessageForm}
   </div>
   {else}
-  <p>You can't use this room.</p>
+  <p>{_texts.tavern.cannotUseRoom}</p>
   {/if}
 {/block}

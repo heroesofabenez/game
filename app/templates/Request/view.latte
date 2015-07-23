@@ -1,19 +1,19 @@
 {layout '../@layout.latte'}
-{block title}Request {$id}{/block}
+{block title}{_texts.request.title} {$id}{/block}
 {block content}
-  <h1>Request {$id}</h1>
+  <h1>{_texts.request.title} {$id}</h1>
   {if $type == "guild_join"}
-  <p>{$from} invited {$to} to his/her guild.</p>
+  <p>{_texts.request.invitedToGuild [from => $from, to => $to]}</p>
   {elseif $type == "guild_app"}
   <p>{$from} wants to join {$to}'s guild.</p>
   {elseif $type == "group_join"}
-  <p>{$from} invited {$to} to his/her group.</p>
+  <p>{_texts.request.invitedToGroup [from => $from, to => $to]}</p>
   {elseif $type == "friendship"}
   <p>{$from} wants to be {$to}'s friend.</p>
   {/if}
-  Sent: {$sent}<br>
-  Status: {$status}<br>
+  {_texts.request.sent}: {$sent}<br>
+  {_texts.request.status}: {$status}<br>
   {if $status == "new"}
-  <a n:href="Request:accept $id">Accept</a> <a n:href="Request:decline $id">Decline</a>
+  <a n:href="Request:accept $id">{_texts.request.accept}</a> <a n:href="Request:decline $id">{_texts.request.decline}</a>
   {/if}
 {/block}

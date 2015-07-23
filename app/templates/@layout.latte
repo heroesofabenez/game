@@ -5,7 +5,7 @@
   <link rel="stylesheet" href="{$basePath}/styles/base.css">
   {default $haveForm = false}
   {if $haveForm}<script src="{$basePath}/js/netteForms.js"></script>
-  {else}{/if}<title>HeroesofAbenez {$server} - {block title}{/block}</title>
+  {else}{/if}<title>{_texts.common.game} {$server} - {block title}{/block}</title>
 </head>
 <body>
 {include "navigation.latte"}
