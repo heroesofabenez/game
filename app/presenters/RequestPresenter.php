@@ -34,7 +34,7 @@ class RequestPresenter extends BasePresenter {
       $this->template->sent = $request->sent;
       $this->template->status = $request->status;
     } catch(\Nette\Application\ForbiddenRequestException $e) {
-      $this->flashMessage("You can't see this request.");
+      $this->flashMessage($this->translator->translate("errors.request.cannotSee"));
       $this->forward("Homepage:");
     } catch(\Nette\Application\BadRequestException $e) {
       $this->forward("notfound");
@@ -56,7 +56,7 @@ class RequestPresenter extends BasePresenter {
     } catch(\Nette\Application\BadRequestException $e) {
       $this->forward("notfound");
     } catch(\Nette\NotImplementedException $e) {
-      $this->flashMessage("This type of request is not implemented.");
+      $this->flashMessage($this->translator->translate("errors.request.typeNotImplemented"));
       $this->forward("Homepage:");
     }
   }

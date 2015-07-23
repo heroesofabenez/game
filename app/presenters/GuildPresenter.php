@@ -23,7 +23,7 @@ class GuildPresenter extends BasePresenter {
   function inGuild() {
     $guild = $this->user->identity->guild;
     if($guild > 0) {
-      $this->flashMessage("You are already in guild.");
+      $this->flashMessage($this->translator->translate("errors.guild.inGuild"));
       $this->forward("default");
     }
   }
@@ -37,7 +37,7 @@ class GuildPresenter extends BasePresenter {
   function notInGuild($warrning = true) {
     $guild = $this->user->identity->guild;
     if($guild == 0) {
-      if($warrning) { $this->flashMessage("You are not in guild."); }
+      if($warrning) { $this->flashMessage($this->translator->translate("errors.guild.notInGuild")); }
       $this->forward("noguild");
     }
   }
@@ -192,7 +192,7 @@ class GuildPresenter extends BasePresenter {
   function actionManage() {
     $this->notInGuild();
     if(!$this->user->isAllowed("guild", "manage")) {
-      $this->flashMessage("You can't manage guild.");
+      $this->flashMessage($this->translator->translate("errors.guild.cannotManage"));
       $this->redirect("Guild:");
     }
   }
@@ -211,7 +211,7 @@ class GuildPresenter extends BasePresenter {
   function actionRename() {
     $this->notInGuild();
     if(!$this->user->isAllowed("guild", "rename")) {
-      $this->flashMessage("You can't rename guild.");
+      $this->flashMessage($this->translator->translate("errors.guild.cannotRename"));
       $this->redirect("Guild:");
     }
   }
@@ -222,7 +222,7 @@ class GuildPresenter extends BasePresenter {
   function actionDissolve() {
     $this->notInGuild();
     if(!$this->user->isAllowed("guild", "dissolve")) {
-      $this->flashMessage("You can't dissolve guild.");
+      $this->flashMessage($this->translator->translate("errors.guild.cannotDissolve"));
       $this->redirect("Guild:");
     }
     $this->template->haveForm = true;
@@ -338,7 +338,7 @@ class GuildPresenter extends BasePresenter {
   function actionDescription() {
     $this->notInGuild();
     if(!$this->user->isAllowed("guild", "manage")) {
-      $this->flashMessage("You can't change guild's description.");
+      $this->flashMessage($this->translator->translate("errors.guild.cannotChangeDescription"));
       $this->redirect("Guild:");
     }
     $this->template->haveForm = true;
@@ -372,7 +372,7 @@ class GuildPresenter extends BasePresenter {
       $this->model->changeDescription($guild, $description);
       $this->flashMessage("Guild's description changed.");
     } catch(\Nette\Application\BadRequestException $e) {
-      $this->flashMessage("Guild doesn't exist.");
+      $this->flashMessage($this->translator->translate("errors.guild.doesNotExist"));
     }
     $this->redirect("Guild:");
   }
@@ -383,7 +383,7 @@ class GuildPresenter extends BasePresenter {
   function actionApplications() {
     $this->notInGuild();
     if(!$this->user->isAllowed("guild", "invite")) {
-      $this->flashMessage("You can't manage applications.");
+      $this->flashMessage($this->translator->translate("errors.guild.cannotManageApps"));
       $this->redirect("Guild:");
     }
   }

@@ -4,7 +4,8 @@ namespace HeroesofAbenez\Model;
 use HeroesofAbenez\Entities\Request as RequestEntity,
     Nette\Application\BadRequestException,
     Nette\Application\ForbiddenRequestException,
-    Nette\NotImplementedException;
+    Nette\NotImplementedException,
+    Kdyby\Translation\Translator;
 
 /**
  * Request Model
@@ -20,6 +21,8 @@ class Request extends \Nette\Object {
   protected $profileModel;
   /** @var \HeroesofAbenez\Model\Guild */
   protected $guildModel;
+  /** @var \Kdyby\Translation\Translator */
+  protected $translator;
   
   /**
    * @param \Nette\Security\User $user
@@ -27,11 +30,12 @@ class Request extends \Nette\Object {
    * @param \HeroesofAbenez\Model\Profile $profileModel
    * @param \HeroesofAbenez\Model\Guild $guildModel
    */
-  function __construct(\Nette\Security\User $user,\Nette\Database\Context $db, Profile $profileModel, Guild $guildModel) {
+  function __construct(\Nette\Security\User $user,\Nette\Database\Context $db, Profile $profileModel, Guild $guildModel, Translator $translator) {
     $this->user = $user;
     $this->db = $db;
     $this->profileModel = $profileModel;
     $this->guildModel = $guildModel;
+    $this->translator = $translator;
   }
   
   /**
@@ -123,9 +127,9 @@ class Request extends \Nette\Object {
   function accept($id) {
     $request = $this->show($id);
     if(!$request) throw new BadRequestException;
-    if(!$this->canShow($id)) throw new ForbiddenRequestException("You can't see this request.");
-    if(!$this->canChange($id)) throw new ForbiddenRequestException("You can't accept this request.");
-    if($request->status !== "new") throw new ForbiddenRequestException("This request was already handled.");
+    if(!$this->canShow($id)) throw new ForbiddenRequestException($this->translator->translate("errors.request.cannotSee"));
+    if(!$this->canChange($id)) throw new ForbiddenRequestException($this->translator->translate("errors.request.cannotAccept"));
+    if($request->status !== "new") throw new ForbiddenRequestException($this->translator->translate("errors.request.handled"));
     switch($request->type) {
   case "friendship":
     throw new NotImplementedException;
@@ -161,9 +165,9 @@ class Request extends \Nette\Object {
   function decline($id) {
     $request = $this->show($id);
     if(!$request) throw new BadRequestException;
-    if(!$this->canShow($id)) throw new ForbiddenRequestException("You can't see this request.");
-    if(!$this->canChange($id)) throw new ForbiddenRequestException("You can't decline this request.");
-    if($request->status !== "new") throw new ForbiddenRequestException("This request was already handled.");
+    if(!$this->canShow($id)) throw new ForbiddenRequestException($this->translator->translate("errors.request.cannotSee"));
+    if(!$this->canChange($id)) throw new ForbiddenRequestException($this->translator->translate("errors.request.cannotDecline"));
+    if($request->status !== "new") throw new ForbiddenRequestException($this->translator->translate("errors.request.handled"));
     $data = array("status" => "declined");
     $this->db->query("UPDATE requests SET ? WHERE id=?", $data, $id);
   }
