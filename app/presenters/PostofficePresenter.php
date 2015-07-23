@@ -57,12 +57,7 @@ class PostofficePresenter extends BasePresenter {
    */
   protected function createComponentNewMessageForm() {
     $form = new UI\Form;
-    $db = $this->context->getService("database.default.context");
-    $characters = $db->table("characters")
-      ->order("id");
-    foreach($characters as $char) {
-      $chars[$char->id] = $char->name;
-    }
+    $chars = $this->model->getRecipients();
     $form->addSelect("to", "To:", $chars)
          ->setPrompt("Select recipient");
     $form->addText("subject", "Subject")

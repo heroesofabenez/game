@@ -97,5 +97,18 @@ class PostOffice extends \Nette\Object {
     $result = $this->db->query("INSERT INTO messages", $data);
     return $result;
   }
+  
+  /**
+   * @return array
+   */
+  function getRecipients() {
+    $chars = array();
+    $characters = $this->db->table("characters")
+      ->order("id");
+    foreach($characters as $char) {
+      $chars[$char->id] = $char->name;
+    }
+    return $chars;
+  }
 }
 ?>
