@@ -1,10 +1,10 @@
 {layout '../@layout.latte'}
 {block title}{_texts.equipment.title}{/block}
 {block content}
-  <h1>{_texts.equipment.title} {$name}</h1>
-  <p>{$slot|firstUpper}{if $type}-{$type}{/if}</p>
-  <p>{$description}</p>
-  <p>Strength: {$strength}, durability: {$durability}</p>
-  <p>Requires: lvl <span class="{if $class >= $required_class}green{else}red{/if}">{$required_lvl}</span>, class <span class="{if $class == $required_class}green{else}red{/if}">{$required_class|firstUpper}</span></p>
-  <p>Price: {$price} silver marks</p>
+  <h1>{_texts.equipment.title} {$item->name}</h1>
+  <p>{$item->slot|firstUpper}{if $item->type}-{$item->type}{/if}</p>
+  <p>{$item->description}</p>
+  <p>Strength: {$item->strength}, durability: {$item->durability}</p>
+  <p>Requires: lvl <span class="{if $level >= $item->required_class}green{else}red{/if}">{$item->required_lvl}</span>, class <span class="{if $class == $item->required_class}green{else}red{/if}">{$item->required_class|firstUpper}</span></p>
+  <p>Price: {$item->price} silver marks</p>
 {/block}
