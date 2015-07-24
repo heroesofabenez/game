@@ -32,7 +32,7 @@ class TravelPresenter extends BasePresenter {
     try {
       $this->model->travelToStage($id);$stageName = $this->model->getStageName($id);
       $this->user->logout();
-      $this->flashMessage("You moved to $stageName.");
+      $this->flashMessage($this->translator->translate("messages.travel.movedToSage", NULL, array("stageName" => $stageName)));
     } catch(\Nette\Application\ForbiddenRequestException $e) {
       $this->flashMessage($this->translator->translate("error.travel.cannotTravelToStage"));
     } catch(\Nette\Application\BadRequestException $e) {

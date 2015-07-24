@@ -96,7 +96,7 @@ class NPCShopControl extends \Nette\Application\UI\Control {
     $this->itemModel->giveItem($itemId);
     $data = "money=money-{$item->price}";
     $this->db->query("UPDATE characters SET $data WHERE id=?", $this->user->id);
-    $this->presenter->flashMessage("Item bought.");
+    $this->presenter->flashMessage($this->translator->translate("messages.shop.itemBougt"));
   }
 }
 

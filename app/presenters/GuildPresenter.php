@@ -128,7 +128,7 @@ class GuildPresenter extends BasePresenter {
     try {
       $this->model->create($data);
       $this->user->logout();
-      $this->flashMessage("Guild created.");
+      $this->flashMessage($this->translator->translate("messages.guild.created"));
       $this->redirect("Guild:");
     } catch(ForbiddenRequestException $e) {
       $this->flashMessage($e->getMessage());
@@ -151,7 +151,7 @@ class GuildPresenter extends BasePresenter {
     $this->inGuild();
     try {
       $this->model->sendApplication($id);
-      $this->flashMessage("Application sent.");
+      $this->flashMessage($this->translator->translate("messages.guild.applicationSent"));
       $this->redirect("Guild:");
     } catch (Exception $e) {
       $this->forward("notfound");
@@ -165,7 +165,7 @@ class GuildPresenter extends BasePresenter {
     $guilds = $this->model->listOfGuilds();
     $this->template->guilds = $guilds;
     $apps = $this->model->haveUnresolvedApplication();
-    if($apps) $this->flashMessage("You have an unresolved application.");
+    if($apps) $this->flashMessage($this->translator->translate("messages.guild.unresolvedApplication"));
   }
   
   /**
@@ -175,7 +175,7 @@ class GuildPresenter extends BasePresenter {
     $this->notInGuild();
     try {
       $this->model->leave();
-      $this->flashMessage("You left guild.");
+      $this->flashMessage($this->translator->translate("messages.guild.left"));
       $this->user->logout();
       $this->forward("default");
     } catch(ForbiddenRequestException $e) {
@@ -253,7 +253,7 @@ class GuildPresenter extends BasePresenter {
   function dissolveGuildFormSucceeded($form, $values) {
     $gid = $this->user->identity->guild;
     $this->model->dissolve($gid);
-    $this->flashMessage("Guild dissolved.");
+    $this->flashMessage($this->translator->translate("messages.guild.dissolved"));
     $this->user->logout();
     $this->redirect("Guild:noguild");
   }
@@ -286,7 +286,7 @@ class GuildPresenter extends BasePresenter {
     $name = $values["name"];
     try {
       $this->model->rename($gid, $name);
-      $this->flashMessage("Guild renamed.");
+      $this->flashMessage($this->translator->translate("messages.guild.renamed"));
       $this->redirect("Guild:");
     } catch(\Nette\Application\ApplicationException $e) {
       $this->flashMessage($e->getMessage());
@@ -299,7 +299,7 @@ class GuildPresenter extends BasePresenter {
   function actionPromote($id) {
     try{
       $this->model->promote($id);
-      $this->flashMessage("Member promoted.");
+      $this->flashMessage($this->translator->translate("messages.guild.promoted"));
     } catch(ForbiddenRequestException $e) {
       $this->flashMessage($e->getMessage());
     }
@@ -312,7 +312,7 @@ class GuildPresenter extends BasePresenter {
   function actionDemote($id) {
     try{
       $this->model->demote($id);
-      $this->flashMessage("Member demoted.");
+      $this->flashMessage($this->translator->translate("messages.guild.demoted"));
     } catch(ForbiddenRequestException $e) {
       $this->flashMessage($e->getMessage());
     }
@@ -325,7 +325,7 @@ class GuildPresenter extends BasePresenter {
   function actionKick($id) {
     try {
       $this->model->kick($id);
-      $this->flashMessage("Member kicked.");
+      $this->flashMessage($this->translator->translate("messages.guild.kicked"));
     } catch(ForbiddenRequestException $e) {
       $this->flashMessage($e->getMessage());
     }
@@ -370,7 +370,7 @@ class GuildPresenter extends BasePresenter {
     $description = $values["description"];
     try {
       $this->model->changeDescription($guild, $description);
-      $this->flashMessage("Guild's description changed.");
+      $this->flashMessage($this->translator->translate("messages.guild.descriptionChanged"));
     } catch(\Nette\Application\BadRequestException $e) {
       $this->flashMessage($this->translator->translate("errors.guild.doesNotExist"));
     }

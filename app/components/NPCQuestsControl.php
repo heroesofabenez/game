@@ -103,7 +103,7 @@ class NPCQuestsControl extends \Nette\Application\UI\Control {
       "character" => $this->user->id, "quest" => $questId
     );
     $this->db->query("INSERT INTO character_quests", $data);
-    $this->presenter->flashMessage("Quest accepted.");
+    $this->presenter->flashMessage($this->translator->translate("messages.quest.accepted"));
     $this->presenter->redirect("Quest:view", $quest->id);
   }
   
@@ -165,7 +165,7 @@ class NPCQuestsControl extends \Nette\Application\UI\Control {
     $where3 = array("id" => $this->user->id);
     $this->db->query("UPDATE characters SET $data3 WHERE ?", $where3);
     if($quest->reward_item > 0) $this->itemModel->giveItem($quest->reward_item);
-    $this->presenter->flashMessage("Quest finished.");
+    $this->presenter->flashMessage($this->translator->translate("messages.quest.finnished"));
     $this->presenter->redirect("Quest:view", $quest->id);
   }
 }

@@ -1,0 +1,23 @@
+quest:
+    accepted: "Quest accepted."
+    finnished: "Quest finished."
+shop:
+    itemBougt: "Item bought."
+travel:
+    movedToStage: "You moved to %stageName%."
+request:
+    accepted: "Request accepted."
+    declined: "Request declined."
+postoffice:
+    messageSent: "Message sent."
+guild:
+    created: "Guild created."
+    applicationSent: "Application sent."
+    left: "You left guild."
+    dissolved: "Guild dissolved."
+    renamed: "Guild renamed."
+    unresolvedApplication: "You have an unresolved application."
+    promoted: "Member promoted."
+    demoted: "Member demoted."
+    kicked: "Member kicked."
+    descriptionChanged: "Guild's description changed."

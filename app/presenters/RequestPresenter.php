@@ -48,7 +48,7 @@ class RequestPresenter extends BasePresenter {
   function actionAccept($id) {
     try {
       $this->model->accept($id);
-      $this->flashMessage("Request accepted.");
+      $this->flashMessage($this->translator->translate("messages.request.accepted"));
       $this->redirect("Homepage:");
     } catch(\Nette\Application\ForbiddenRequestException $e) {
       $this->flashMessage($e->getMessage());
@@ -68,7 +68,7 @@ class RequestPresenter extends BasePresenter {
   function actionDecline($id) {
     try {
       $this->model->decline($id);
-      $this->flashMessage("Request declined.");
+      $this->flashMessage($this->translator->translate("messages.request.declined"));
       $this->redirect("Homepage:");
     } catch(\Nette\Application\ForbiddenRequestException $e) {
       $this->flashMessage($e->getMessage());

@@ -82,7 +82,7 @@ class PostofficePresenter extends BasePresenter {
     );
     $result = $this->model->sendMessage($data);
     if($result) {
-      $this->flashMessage("Message sent.");
+      $this->flashMessage($this->translator->translate("messages.postoffice.messageSent"));
       $this->redirect("Postoffice:sent");
     } else {
       $this->flashMessage("An error occured.");
