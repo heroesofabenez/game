@@ -1,11 +1,11 @@
 {layout '../@layout.latte'}
-{block title}Profile{/block}
+{block title}{_texts.profile.title}{/block}
 {block content}
   <h1>{$name}</h1>
   <p>{$gender}, level {$level} {$race} {$occupation}{$specialization}</p>
   <p>Base stats:<br>Strength {$strength}, Dexterity {$dexterity}, Constitution {$constitution}<br>
 Intelligence {$intelligence}, Charisma {$charisma}</p>
-  <p>{if $guildId}Guild <a n:href="Guild:view $guildId">{$guildName}</a><br>Position in guild: {$guildRank|firstUpper}{else}Not a member of guild{/if}</p>
+  <p>{if $guildId}{_texts.guild.title} <a n:href="Guild:view $guildId">{$guildName}</a><br>{_texts.profile.position} {$guildRank|firstUpper}{else}{_texts.profile.notInGuild}{/if}</p>
   <p>{$active_pet}</p>
-  <p>More info: {$description}</p>
+  <p>{_texts.profile.moreInfo} {$description}</p>
 {/block}

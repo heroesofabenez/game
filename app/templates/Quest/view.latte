@@ -1,15 +1,15 @@
 {layout '../@layout.latte'}
-{block title}Quest{/block}
+{block title}{_texts.quest.title}{/block}
 {block content}
   <h1>{$name}</h1>
-  <p>From: {$npcStart}</p>
+  <p>{_texts.quest.from} {$npcStart}</p>
   <p{if $finished} class="crossout"{/if}>{$introduction}</p>
-  <p{if $finished} class="crossout"{/if}>For completing this quest you have to:</p>
+  <p{if $finished} class="crossout"{/if}>{_texts.quest.requirementsHeader}</p>
   <ul>
     {foreach $requirements as $requirement}
     <li{if $finished OR $requirement->met} class="crossout"{/if}>{!$requirement->text}{if $iterator->last}.{else},{/if}</li>
     {/foreach}
   </ul>
   {if $finished}<p>{$end_text}</p>{/if}
-  <p{if $finished} class="crossout"{/if}>Rewards: {$rewardMoney} silver marks, {$rewardXp} experiences{if $rewardItem}, {!$rewardItem}{/if}.</p>
+  <p{if $finished} class="crossout"{/if}>{_texts.quest.rewards} {_texts.quest.rewardMoney, $rewardMoney}, {_texts.quest.rewardXP, $rewardXp}{if $rewardItem}, {!$rewardItem}{/if}.</p>
 {/block}

@@ -19,6 +19,7 @@ item:
     notFoundTitle: "Item not found"
     notFound: "Requested item was not found."
 tavern:
+    title: "Tavern"
     rooms: "Rooms:"
     localRoom: "Local"
     guildRoom: "Guild"
@@ -60,3 +61,40 @@ request:
     invitedToGroup: "%from% invited %to% to his/her group."
     notFoundTitle: "Request not found"
     notFound: "Request was not found."
+postoffice:
+    title: "Post office"
+    messages: "Messages"
+    received: "Received"
+    sent: "Sent"
+    new: "New"
+    notFoundTitle: "Message not found"
+    notFound: "Requested message was not found."
+    messageTitle: "Message"
+    cannotSeeTitle: "Cannot see message"
+    cannotSee: "You cannot see this message."
+journal:
+    title: "Journal"
+ranking:
+    title: "Ranking"
+map:
+    title: "Map"
+quest:
+    title: "Quest"
+    from: "From:"
+    requirementsHeader: "For completing this quest you have to:"
+    rewards: "Rewards:"
+    rewardMoney: "1 silver mark|%count% silver marks"
+    rewardXP: "1 experience|%count% experiences"
+    notFoundTitle: "Quest not found"
+    notFound: "Requested quest was not found."
+profile: 
+    title: "Profile"
+    position: "Position in guild:"
+    notInGuild: "Not a member of guild"
+    moreInfo: "More info:"
+    notFoundTitle: "Character not found"
+    notFound: "Requested character was not found."
+equipment:
+    title: "Equipment"
+    notFoundTitle: "Equipment not found"
+    notFound: "Requested equipment was not found."

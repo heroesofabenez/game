@@ -1,7 +1,7 @@
 {layout '../@layout.latte'}
-{block title}Equipment{/block}
+{block title}{_texts.equipment.title}{/block}
 {block content}
-  <h1>Equipment {$name}</h1>
+  <h1>{_texts.equipment.title} {$name}</h1>
   <p>{$slot|firstUpper}{if $type}-{$type}{/if}</p>
   <p>{$description}</p>
   <p>Strength: {$strength}, durability: {$durability}</p>
