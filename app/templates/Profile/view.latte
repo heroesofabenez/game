@@ -5,7 +5,7 @@
   <p>{$gender}, level {$level} {$race} {$occupation}{$specialization}</p>
   <p>Base stats:<br>Strength {$strength}, Dexterity {$dexterity}, Constitution {$constitution}<br>
 Intelligence {$intelligence}, Charisma {$charisma}</p>
-  <p>{$guild|noescape}</p>
+  <p>{if $guildId}Guild <a n:href="Guild:view $guildId">{$guildName}</a><br>Position in guild: {$guildRank|firstUpper}{else}Not a member of guild{/if}</p>
   <p>{$active_pet}</p>
   <p>More info: {$description}</p>
 {/block}

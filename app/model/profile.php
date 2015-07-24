@@ -136,7 +136,7 @@ class Profile extends \Nette\Object {
       $return["guild"] = $char->guild;
       $return["guildrank"] = $char->guildrank;
     } else {
-      $return["guild"] = "Not a member of guild";
+      $return["guild"] = "";
     }
     $activePet = $this->db->table("pets")->where("owner=$char->id")->where("deployed=1");
     if($activePet->count() == 1) {

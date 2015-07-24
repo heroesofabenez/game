@@ -30,10 +30,13 @@ class ProfilePresenter extends BasePresenter {
     if(!$data) $this->forward("notfound");
     foreach($data as $key => $value) {
       if($key == "guild" AND is_int($value)) {
-        $guildName = $this->guildModel->getGuildName($value);
-        $guildRank = $this->permissionsModel->getRoleName($data["guildrank"]);
-        $guildLink = $this->link("Guild:view", $value);
-        $value = "Guild: <a href=\"$guildLink\">$guildName</a><br>Position in guild: " . ucfirst($guildRank);
+        $this->template->guildId = $value;
+        $this->template->guildName = $this->guildModel->getGuildName($value);
+        $this->template->guildRank = $this->permissionsModel->getRoleName($data["guildrank"]);
+        continue;
+      } elseif($key == "guild" AND $value === "") {
+        $this->template->guildId = 0;
+        continue;
       }
       if($key == "guildrank") continue;
       $this->template->$key = $value;
