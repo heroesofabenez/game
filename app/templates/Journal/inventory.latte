@@ -1,25 +1,25 @@
 {layout '../@layout.latte'}
-{block title}Inventory{/block}
+{block title}{_texts.journal.inventory}{/block}
 {block content}
-  <h1>Inventory</h1>
-  <p>You have {$money} silver marks.</p>
-  <p>Items:<br>
+  <h1>{_texts.journal.inventory}</h1>
+  <p>{_texts.journal.money, $money}</p>
+  <p>{_texts.journal.items}<br>
   {if count($items) == 0}
-No items
+{_texts.journal.noItems}
   {else}
     {foreach $items as $item}
 {$item->amount}x <a n:href="Item:view $item->id">{$item->name}</a><br>
     {/foreach}
   {/if}
   </p>
-  <p>Equpiment:<br>
+  <p>{_texts.journal.equipment}<br>
   {if count($equipments) == 0}
-No equipment
+{_texts.journal.noEquipment}
   {else}
     {foreach $equipments as $equipment}
 {$equipment->amount}x <a n:href="Equipment:view $equipment->id">{$equipment->name}</a><br>
     {/foreach}
   {/if}
   </p>
-  <p>Chapters: <a n:href="Journal:">Basic</a> Inventory <a n:href="Journal:pets">Pets</a> <a n:href="Journal:quests">Quests</a></p>
+  <p>{_texts.journal.chapters} <a n:href="Journal:">{_texts.journal.basic}</a> {_texts.journal.inventory} <a n:href="Journal:pets">{_texts.journal.pets}</a> <a n:href="Journal:quests">{_texts.journal.quests}</a></p>
 {/block}

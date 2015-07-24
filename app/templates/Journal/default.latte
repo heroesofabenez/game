@@ -3,10 +3,10 @@
 {block content}
   <h1>Journal of {$name}</h1>
   <p>{$gender} {$race} {$occupation}{$specialization}</p>
-  <p>level {$level}, {$experiences} experiences</p>
-  <p>Guild:<br>{if $guild}{$guildRank} of guild {$guild}{else}Not in guild{/if}</p>
-  <p>Karma:<br>white {$whiteKarma}, neutral {$neutralKarma}, dark {$darkKarma}</p>
-  <p>Position:<br>{$stageName} at {$areaName}</p>
-  <p>More info:<br>{$description}</p>
-  <p>Chapters: Basic <a n:href="Journal:inventory">Inventory</a> <a n:href="Journal:pets">Pets</a> <a n:href="Journal:quests">Quests</a></p>
+  <p>{_texts.journal.level} {$level}, {_texts.journal.experiences, $experiences}</p>
+  <p>{_texts.journal.guild}<br>{if $guild}{$guildRank} {_texts.journal.ofGuild} {$guild}{else}{_texts.journal.notInGuild}{/if}</p>
+  <p>{_texts.journal.karma}<br>{_texts.journal.white} {$whiteKarma}, {_texts.journal.neutral} {$neutralKarma}, {_texts.journal.dark} {$darkKarma}</p>
+  <p>{_texts.journal.position}<br>{$stageName} {_texts.journal.at} {$areaName}</p>
+  <p>{_texts.profile.moreInfo}<br>{$description}</p>
+  <p>{_texts.journal.chapters} {_texts.journal.basic} <a n:href="Journal:inventory">{_texts.journal.inventory}</a> <a n:href="Journal:pets">{_texts.journal.pets}</a> <a n:href="Journal:quests">{_texts.journal.quests}</a></p>
 {/block}
