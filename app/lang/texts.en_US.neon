@@ -6,6 +6,7 @@ common:
     name: "Name"
     grandmaster: "Grandmaster"
     profile: "Profile"
+    back: "Back"
 homepage:
     greeting: "Welcome, %characterName%. You're currently in %stageName% at %areaName%."
     noOneToSee: "You can't see anyone."
@@ -51,6 +52,8 @@ guild:
     noApplications: "No unresolved applications"
     wantToJoin: "wants to join your guild."
     createTitle: "Create guild"
+    guilds: "Guilds"
+    apply: "Apply"
 request:
     title: "Request"
     accept: "Accept"
@@ -78,6 +81,7 @@ postoffice:
     newMessageTitle: "New message"
     receivedTitle: "Post office - received"
     noMessages: "No messages."
+    sentTitle: "Post office - sent"
 journal:
     title: "Journal"
 map:
@@ -111,6 +115,12 @@ equipment:
     title: "Equipment"
     notFoundTitle: "Equipment not found"
     notFound: "Requested equipment was not found."
+    strength: "Strength"
+    durability: "durability"
+    requires: "Requires"
+    level: "level"
+    class: "class"
+    price: "Price: 1 silver mark|Price: %count% silver marks"
 npc:
     title: "NPC"
     steppedInFront: "You stepped in front of"
@@ -130,6 +140,7 @@ character:
     createTitle: "Create character"
     noCharacterFound: "It seems you have no character on this server. (Are you sure you selected the right one?) Before you can start playing, you have to create one."
     created: "Character created. Details follow:"
+    exists: "Character with entered name already exists. Try different name."
 chat:
     charactersInRoom: "Characters in this room:"
 npcShop:

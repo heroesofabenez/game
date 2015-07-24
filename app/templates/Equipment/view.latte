@@ -4,7 +4,7 @@
   <h1>{_texts.equipment.title} {$item->name}</h1>
   <p>{$item->slot|firstUpper}{if $item->type}-{$item->type}{/if}</p>
   <p>{$item->description}</p>
-  <p>Strength: {$item->strength}, durability: {$item->durability}</p>
-  <p>Requires: lvl <span class="{if $level >= $item->required_class}green{else}red{/if}">{$item->required_lvl}</span>, class <span class="{if $class == $item->required_class}green{else}red{/if}">{$item->required_class|firstUpper}</span></p>
-  <p>Price: {$item->price} silver marks</p>
+  <p>{_texts.equipment.strength}: {$item->strength}, {_texts.equipment.durability}: {$item->durability}</p>
+  <p>{_texts.equipment.requires}: {_texts.equipment.level} <span class="{if $level >= $item->required_class}green{else}red{/if}">{$item->required_lvl}</span>, {_texts.equipment.class} <span class="{if $class == $item->required_class}green{else}red{/if}">{$item->required_class|firstUpper}</span></p>
+  <p>{_texts.equipment.price, $item->price}</p>
 {/block}
