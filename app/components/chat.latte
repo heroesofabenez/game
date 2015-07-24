@@ -1,5 +1,5 @@
   <aside id="chat_characters">
-    <p>Characters in this room:
+    <p>{_texts.chat.charactersInRoom}
 {foreach $characters as $character}
       <a href="{plink Profile:view $character->id}">{$character->name}</a>{if !$iterator->last}, {/if}
 {/foreach}    </p>

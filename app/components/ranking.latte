@@ -1,4 +1,4 @@
-  <h1>Ranking {$name}</h1>
+  <h1>{_texts.ranking.title} {$name}</h1>
   <h3>{foreach $rankings as $ranking}{if ucfirst($ranking) === $name}{$ranking|firstUpper}{else}<a href="{plink Ranking:$ranking}">{$ranking|firstUpper}</a>{/if} {/foreach}</h3>
   <table>
     <tr><th>Nm.</th>{foreach $cols as $col}<th>{$col|firstUpper}</th>{/foreach}<th></th></tr>
@@ -7,5 +7,5 @@
     {/foreach}
   </table>
   {if $paginator}
-  <p>{if $paginator->pageCount !== 1}Page {$paginator->page}/{$paginator->pageCount}{/if} {if !$paginator->first}<a n:href="Ranking:default $paginator->page-1">Previous</a>{/if} {if !$paginator->last}<a n:href="Ranking:default $paginator->page+1">Next</a>{/if}</p>
+  <p>{if $paginator->pageCount !== 1}Page {$paginator->page}/{$paginator->pageCount}{/if} {if !$paginator->first}<a n:href="Ranking:default $paginator->page-1">{_texts.ranking.previous}</a>{/if} {if !$paginator->last}<a n:href="Ranking:default $paginator->page+1">{_texts.ranking.next}</a>{/if}</p>
   {/if}

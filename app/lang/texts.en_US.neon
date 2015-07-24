@@ -80,8 +80,6 @@ postoffice:
     noMessages: "No messages."
 journal:
     title: "Journal"
-ranking:
-    title: "Ranking"
 map:
     title: "Map"
     travelTitle: "Travel"
@@ -132,3 +130,19 @@ character:
     createTitle: "Create character"
     noCharacterFound: "It seems you have no character on this server. (Are you sure you selected the right one?) Before you can start playing, you have to create one."
     created: "Character created. Details follow:"
+chat:
+    charactersInRoom: "Characters in this room:"
+npcShop:
+    noItems: "Sorry but I have nothing to sell."
+    offer: "I can offer you:"
+npcQuests:
+    available: "Available quests:"
+    noQuests: "No quests"
+    accept: "Accept"
+    finish: "Finish"
+    details: "Details"
+    active: "(Active)"
+ranking:
+    title: "Ranking"
+    previous: "Previous"
+    next: "Next"
