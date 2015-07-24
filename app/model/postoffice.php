@@ -91,11 +91,10 @@ class PostOffice extends \Nette\Object {
   
   /**
    * @param array $data
-   * @return bool
+   * @return void
    */
   function sendMessage(array $data) {
-    $result = $this->db->query("INSERT INTO messages", $data);
-    return $result;
+    $this->db->query("INSERT INTO messages", $data);
   }
   
   /**
