@@ -1,8 +1,8 @@
 {layout '../@layout.latte'}
-{block title}Create character{/block}
+{block title}{_texts.character.createTitle}{/block}
 {block content}
-  <h1>Create character</h1>
-  <p>Character created. Details follow:</p>
+  <h1>{_texts.character.createTitle}</h1>
+  <p></p>
   <p>{$name}, {$gender} {$race} {$class}</p>
   <p>strength: {$strength}, dexterity: {$dexterity}, constitution: {$constitution}, intelligence: {$intelligence}, charisma: {$charisma}</p>
 {/block}
