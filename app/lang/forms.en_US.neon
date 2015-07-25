@@ -1,0 +1,54 @@
+dissolveGuild:
+    nameField:
+        label: "Name:"
+        error: "You entered wrong name."
+    dissolveButton:
+        label: "Dissolve"
+renameGuild:
+    nameField:
+        label: "New name:"
+        error: "Name can have no more than 20 letters."
+    renameButton:
+        label: "Rename"
+guildDescription:
+    descriptionField:
+        label: "New description:"
+    changeButton:
+        label: "Change"
+createCharacter:
+    nameField:
+        label: "Name:"
+        empty: "You have to enter name."
+        error: "Name can have no more than 30 letters."
+    genderRadio:
+        label: "Gender:"
+        error: "Select gender."
+    raceSelect:
+        label: "Race:"
+        prompt: "Select race"
+        error: "Select race."
+    classSelect:
+        label: "Class:"
+        prompt: "Select class"
+        error: "Select class."
+    createButton:
+        label: "Create character"
+postOfficeNewMessage:
+    toSelect:
+        label: "To:"
+        prompt: "Select recipient"
+        error: "Select recipient."
+    subjectField:
+        label: "Subject:"
+        empty: "Enter subject."
+        error: "Subject can have no more than 35 letters."
+    messageField:
+        label: "Message:"
+        error: "Enter message."
+    sendButton:
+        label: "Send"
+tavernNewMessage:
+    messageField:
+        error: "Enter message."
+    sendButton:
+        label: "Send"
