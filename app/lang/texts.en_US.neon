@@ -54,6 +54,11 @@ guild:
     createTitle: "Create guild"
     guilds: "Guilds"
     apply: "Apply"
+    noGuildText1: "You don't belong to any guild. You can "
+    noGuildCreateLink: "create"
+    noGuildText2: " your own or "
+    noGuildJoinLink: "join"
+    noGuildText3: " an existing one."
 request:
     title: "Request"
     accept: "Accept"
@@ -61,7 +66,9 @@ request:
     sent: "Sent"
     status: "Status"
     invitedToGuild: "%from% invited %to% to his/her guild."
+    guildApp: "{$from} wants to join {$to}'s guild."
     invitedToGroup: "%from% invited %to% to his/her group."
+    friendship: "%from% wants to be friend with %to%."
     notFoundTitle: "Request not found"
     notFound: "Request was not found."
 postoffice:
@@ -82,8 +89,10 @@ postoffice:
     receivedTitle: "Post office - received"
     noMessages: "No messages."
     sentTitle: "Post office - sent"
+    viewMessage: "View"
 journal:
     title: "Journal"
+    journalOf: "Journal of"
     level: "level"
     experiences: "1 experience| %count% experiences"
     guild: "Guild:"

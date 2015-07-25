@@ -5,11 +5,11 @@
   {if $type == "guild_join"}
   <p>{_texts.request.invitedToGuild [from => $from, to => $to]}</p>
   {elseif $type == "guild_app"}
-  <p>{$from} wants to join {$to}'s guild.</p>
+  <p>{_texts.request.guildApp [from => $from, to => $to]}</p>
   {elseif $type == "group_join"}
   <p>{_texts.request.invitedToGroup [from => $from, to => $to]}</p>
   {elseif $type == "friendship"}
-  <p>{$from} wants to be {$to}'s friend.</p>
+  <p>{_texts.request.friendship [from => $from, to => $to]}</p>
   {/if}
   {_texts.request.sent}: {$sent}<br>
   {_texts.request.status}: {$status}<br>

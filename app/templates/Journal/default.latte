@@ -1,7 +1,7 @@
 {layout '../@layout.latte'}
 {block title}{_texts.journal.title}{/block}
 {block content}
-  <h1>Journal of {$name}</h1>
+  <h1>{_texts.journal.journalOf} {$name}</h1>
   <p>{$gender} {$race} {$occupation}{$specialization}</p>
   <p>{_texts.journal.level} {$level}, {_texts.journal.experiences, $experiences}</p>
   <p>{_texts.journal.guild}<br>{if $guild}{$guildRank} {_texts.journal.ofGuild} {$guild}{else}{_texts.journal.notInGuild}{/if}</p>
