@@ -1,0 +1,23 @@
+quest:
+    accepted: "Úkol přijat."
+    finnished: "Úkol dokončen."
+shop:
+    itemBougt: "Věc koupena."
+travel:
+    movedToStage: "Přesunul jsi se do %stageName%."
+request:
+    accepted: "Požadavek přijat."
+    declined: "Požadavek zamítnut."
+postoffice:
+    messageSent: "Zpráva odeslána."
+guild:
+    created: "Cech vytvořen."
+    applicationSent: "Přihláška odeslána."
+    left: "OPustil jsi cech."
+    dissolved: "Cech rozpušťen."
+    renamed: "Cech přejmenován."
+    unresolvedApplication: "Máš nevyřízenou přihlášku."
+    promoted: "Člen povýšen."
+    demoted: "Člen degradován."
+    kicked: "Člen vyhozen."
+    descriptionChanged: "Popis cechu změněn."
