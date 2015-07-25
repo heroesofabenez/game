@@ -1,14 +1,14 @@
 {layout '../@layout.latte'}
-{block title}Home{/block}
+{block title}{_texts.common.home}{/block}
 {block content}
-  <h1>HeroesofAbenez {$server}</h1>
-  <p>Welcome, {$characterName}. You're currently in {$stageName} at {$areaName}.</p>
+  <h1>{_texts.common.game} {$server}</h1>
+  <p>{_texts.homepage.greeting [characterName => $characterName, stageName => $stageName, areaName => $areaName]}</p>
   {if count($npcs) == 0}
-  <p>You can't see anyone.</p>
+  <p>{_texts.homepage.noOneToSee}</p>
   {else}
-  <p>You can see:</p>
+  <p>{_texts.homepage.canSee}</p>
   {foreach $npcs as $npc}
-  {$npc->name} - <a n:href="Npc:view $npc->id">Approach</a><br>
+  {$npc->name} - <a n:href="Npc:view $npc->id">{_texts.homepage.approachNpc}</a><br>
   {/foreach}
   {/if}
 {/block}

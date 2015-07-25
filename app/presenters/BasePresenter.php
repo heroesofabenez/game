@@ -7,6 +7,9 @@ namespace HeroesofAbenez\Presenters;
    * @author Jakub Konečný
    */
 abstract class BasePresenter extends \Nette\Application\UI\Presenter {
+  /** @var \Kdyby\Translation\Translator @autowire */
+  protected $translator;
+  
   use \Kdyby\Autowired\AutowireProperties;
   use \Kdyby\Autowired\AutowireComponentFactories;
   

@@ -1,10 +1,10 @@
 {layout '../@layout.latte'}
-{block title}Guild{/block}
+{block title}{_texts.guild.title}{/block}
 {block content}
-  <h1>Guild {$name}</h1>
-  Leader: {$leader} Members: <a n:href="Guild:members">{$members}</a><br>
-  Description: {$description}<br>
-  {if $canManage}<a n:href="Guild:manage">Manage guild</a>{/if}
-  {if $canInvite}<a n:href="Guild:applications">Applications</a>{/if}
-  <a n:href="Tavern:guild">Chat</a>
+  <h1>{_texts.guild.title} {$name}</h1>
+  {_texts.guild.leader}: {$leader} {_texts.common.members}: <a n:href="Guild:members">{$members}</a><br>
+  {_texts.common.description}: {$description}<br>
+  {if $canManage}<a n:href="Guild:manage">{_texts.guild.manage}</a>{/if}
+  {if $canInvite}<a n:href="Guild:applications">{_texts.guild.applications}</a>{/if}
+  <a n:href="Tavern:guild">{_texts.guild.chat}</a>
 {/block}

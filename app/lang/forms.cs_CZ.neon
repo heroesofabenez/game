@@ -1,0 +1,54 @@
+dissolveGuild:
+    nameField:
+        label: "Jméno:"
+        error: "Zadal jsi špatné jméno."
+    dissolveButton:
+        label: "Rozpustit"
+renameGuild:
+    nameField:
+        label: "Nové jméno:"
+        error: "Jméno může mít maximálně 20 znaků."
+    renameButton:
+        label: "Přejmenovat"
+guildDescription:
+    descriptionField:
+        label: "Nový popis:"
+    changeButton:
+        label: "Změnit"
+createCharacter:
+    nameField:
+        label: "Jméno:"
+        empty: "Musíš zadat jméno."
+        error: "Jméno může mít maximálně 30 znaků."
+    genderRadio:
+        label: "Pohlaví:"
+        error: "Vyber pohlaví."
+    raceSelect:
+        label: "Rasa:"
+        prompt: "Vyber rasu"
+        error: "Vyber rasu."
+    classSelect:
+        label: "Třída:"
+        prompt: "Vyber třídu"
+        error: "Vyber třídu."
+    createButton:
+        label: "Vytvořit postavu"
+postOfficeNewMessage:
+    toSelect:
+        label: "Pro:"
+        prompt: "Vyber příjemce"
+        error: "Vyber příjemce."
+    subjectField:
+        label: "Předmět:"
+        empty: "Zadej předmět."
+        error: "Předmět může mít maximálně 35 znaků."
+    messageField:
+        label: "Zpráva:"
+        error: "Zadej zprávu."
+    sendButton:
+        label: "Odeslat"
+tavernNewMessage:
+    messageField:
+        error: "Zadej zprávu."
+    sendButton:
+        label: "Odeslat"

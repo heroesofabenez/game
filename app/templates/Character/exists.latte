@@ -1,6 +1,6 @@
 {layout '../@layout.latte'}
-{block title}Create character{/block}
+{block title}{_texts.character.createTitle}{/block}
 {block content}
-  <h1>Create character</h1>
-  <p>Character with entered name already exists. Try different name. <a n:href="Character:create" onclick="history.back()">Back</a></p>
+  <h1>{_texts.character.createTitle}</h1>
+  <p>{_texts.character.exists} <a n:href="Character:create" onclick="history.back()">{_texts.common.back}</a></p>
 {/block}

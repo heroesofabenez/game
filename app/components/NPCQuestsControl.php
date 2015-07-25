@@ -1,7 +1,8 @@
 <?php
 namespace HeroesofAbenez\NPC;
 
-use HeroesofAbenez\Model;
+use HeroesofAbenez\Model,
+    Kdyby\Translation\Translator;
 
 /**
  * NPC Quests Control
@@ -17,6 +18,8 @@ class NPCQuestsControl extends \Nette\Application\UI\Control {
   protected $db;
   /** @var \Nette\Security\User */
   protected $user;
+  /** @var \Kdyby\Translation\Translator */
+  protected $translator;
   /** @var \HeroesofAbenez\Entities\NPC */
   protected $npc;
   
@@ -26,11 +29,12 @@ class NPCQuestsControl extends \Nette\Application\UI\Control {
    * @param \Nette\Database\Context $db
    * @param \Nette\Security\User $user
    */
-  function __construct(Model\Quest $questModel, Model\Item $itemModel, \Nette\Database\Context $db, \Nette\Security\User $user) {
+  function __construct(Model\Quest $questModel, Model\Item $itemModel, \Nette\Database\Context $db, \Nette\Security\User $user, Translator $translator) {
     $this->questModel = $questModel;
     $this->itemModel = $itemModel;
     $this->user = $user;
     $this->db = $db;
+    $this->translator = $translator;
   }
   
   function setNpc(\HeroesofAbenez\Entities\NPC $npc) {
@@ -88,18 +92,18 @@ class NPCQuestsControl extends \Nette\Application\UI\Control {
     if(!$quest) $this->presenter->forward("notfound");
     $status = $this->questModel->status($questId);
     if($status > 0) {
-      $this->presenter->flashMessage("You are already working on this quest.");
+      $this->presenter->flashMessage($this->translator->translate("errors.quest.workingOn"));
       $this->presenter->redirect("Npc:quests", $quest->npc_start);
     }
     if($quest->npc_start != $this->npc->id) {
-      $this->presenter->flashMessage("You can't accept the quest from this location.");
+      $this->presenter->flashMessage($this->translator->translate("errors.quest.cannotAcceptHere"));
       $this->presenter->redirect("Homepage:default");
     }
     $data = array(
       "character" => $this->user->id, "quest" => $questId
     );
     $this->db->query("INSERT INTO character_quests", $data);
-    $this->presenter->flashMessage("Quest accepted.");
+    $this->presenter->flashMessage($this->translator->translate("messages.quest.accepted"));
     $this->presenter->redirect("Quest:view", $quest->id);
   }
   
@@ -136,15 +140,15 @@ class NPCQuestsControl extends \Nette\Application\UI\Control {
     if(!$quest) $this->presenter->forward("notfound");
     $status = $this->questModel->status($questId);
     if($status === 0) {
-      $this->presenter->flashMessage("You aren't working on this quest.");
+      $this->presenter->flashMessage($this->translator->translate("errors.quest.notWorkingOn"));
       $this->presenter->redirect("Npc:quests", $quest->npc_start);
     }
     if($quest->npc_end != $this->npc->id) {
-      $this->presenter->flashMessage("You can't finish the quest from this location.");
+      $this->presenter->flashMessage($this->translator->translate("errors.quest.cannotFinishHere"));
       $this->presenter->redirect("Homepage:default");
     }
     if(!$this->isCompleted($quest)) {
-      $this->presenter->flashMessage("You don't meet requirements for this quest.");
+      $this->presenter->flashMessage($this->translator->translate("errors.quest.requirementsNotMet"));
       $this->presenter->redirect("Homepage:default");
     }
     $wheres = array(
@@ -161,7 +165,7 @@ class NPCQuestsControl extends \Nette\Application\UI\Control {
     $where3 = array("id" => $this->user->id);
     $this->db->query("UPDATE characters SET $data3 WHERE ?", $where3);
     if($quest->reward_item > 0) $this->itemModel->giveItem($quest->reward_item);
-    $this->presenter->flashMessage("Quest finished.");
+    $this->presenter->flashMessage($this->translator->translate("messages.quest.finnished"));
     $this->presenter->redirect("Quest:view", $quest->id);
   }
 }

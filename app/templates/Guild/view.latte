@@ -1,9 +1,9 @@
 {layout '../@layout.latte'}
-{block title}Guild {$name}{/block}
+{block title}{_texts.guild.title} {$name}{/block}
 {block content}
-  <h1>Guild {$name}</h1>
-  <p>Description: {$description}</p>
-  <h2>Members</h2>
+  <h1>{_texts.guild.title} {$name}</h1>
+  <p>{_texts.common.description}: {$description}</p>
+  <h2>{_texts.common.members}</h2>
   {foreach $members as $member}
     {$member["rank"]}: <a n:href="Profile:view $member['id']">{$member["name"]}</a><br>
   {/foreach}

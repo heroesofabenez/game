@@ -23,7 +23,7 @@ class GuildPresenter extends BasePresenter {
   function inGuild() {
     $guild = $this->user->identity->guild;
     if($guild > 0) {
-      $this->flashMessage("You are already in guild.");
+      $this->flashMessage($this->translator->translate("errors.guild.inGuild"));
       $this->forward("default");
     }
   }
@@ -37,7 +37,7 @@ class GuildPresenter extends BasePresenter {
   function notInGuild($warrning = true) {
     $guild = $this->user->identity->guild;
     if($guild == 0) {
-      if($warrning) { $this->flashMessage("You are not in guild."); }
+      if($warrning) { $this->flashMessage($this->translator->translate("errors.guild.notInGuild")); }
       $this->forward("noguild");
     }
   }
@@ -105,6 +105,7 @@ class GuildPresenter extends BasePresenter {
    */
   protected function createComponentCreateGuildForm() {
     $form = new UI\Form;
+    $form->translator = $this->translator;
     $form->addText("name", "Name:")
          ->setRequired("You have to enter name.")
          ->addRule(\Nette\Forms\Form::MAX_LENGTH, "Name can have no more than 20 letters", 20);
@@ -128,7 +129,7 @@ class GuildPresenter extends BasePresenter {
     try {
       $this->model->create($data);
       $this->user->logout();
-      $this->flashMessage("Guild created.");
+      $this->flashMessage($this->translator->translate("messages.guild.created"));
       $this->redirect("Guild:");
     } catch(ForbiddenRequestException $e) {
       $this->flashMessage($e->getMessage());
@@ -151,7 +152,7 @@ class GuildPresenter extends BasePresenter {
     $this->inGuild();
     try {
       $this->model->sendApplication($id);
-      $this->flashMessage("Application sent.");
+      $this->flashMessage($this->translator->translate("messages.guild.applicationSent"));
       $this->redirect("Guild:");
     } catch (Exception $e) {
       $this->forward("notfound");
@@ -165,7 +166,7 @@ class GuildPresenter extends BasePresenter {
     $guilds = $this->model->listOfGuilds();
     $this->template->guilds = $guilds;
     $apps = $this->model->haveUnresolvedApplication();
-    if($apps) $this->flashMessage("You have an unresolved application.");
+    if($apps) $this->flashMessage($this->translator->translate("messages.guild.unresolvedApplication"));
   }
   
   /**
@@ -175,7 +176,7 @@ class GuildPresenter extends BasePresenter {
     $this->notInGuild();
     try {
       $this->model->leave();
-      $this->flashMessage("You left guild.");
+      $this->flashMessage($this->translator->translate("messages.guild.left"));
       $this->user->logout();
       $this->forward("default");
     } catch(ForbiddenRequestException $e) {
@@ -192,7 +193,7 @@ class GuildPresenter extends BasePresenter {
   function actionManage() {
     $this->notInGuild();
     if(!$this->user->isAllowed("guild", "manage")) {
-      $this->flashMessage("You can't manage guild.");
+      $this->flashMessage($this->translator->translate("errors.guild.cannotManage"));
       $this->redirect("Guild:");
     }
   }
@@ -211,7 +212,7 @@ class GuildPresenter extends BasePresenter {
   function actionRename() {
     $this->notInGuild();
     if(!$this->user->isAllowed("guild", "rename")) {
-      $this->flashMessage("You can't rename guild.");
+      $this->flashMessage($this->translator->translate("errors.guild.cannotRename"));
       $this->redirect("Guild:");
     }
   }
@@ -222,7 +223,7 @@ class GuildPresenter extends BasePresenter {
   function actionDissolve() {
     $this->notInGuild();
     if(!$this->user->isAllowed("guild", "dissolve")) {
-      $this->flashMessage("You can't dissolve guild.");
+      $this->flashMessage($this->translator->translate("errors.guild.cannotDissolve"));
       $this->redirect("Guild:");
     }
     $this->template->haveForm = true;
@@ -236,9 +237,10 @@ class GuildPresenter extends BasePresenter {
   protected function createComponentDissolveGuildForm() {
     $currentName = $this->model->getGuildName($this->user->identity->guild);
     $form = new UI\Form;
-    $form->addText("name", "Name:")
-         ->addRule(\Nette\Forms\Form::EQUAL, "You entered wrong name.", $currentName);
-    $form->addSubmit("dissolve", "Dissolve");
+    $form->translator = $this->translator;
+    $form->addText("name", "forms.dissolveGuild.nameField.label")
+         ->addRule(\Nette\Forms\Form::EQUAL, "forms.dissolveGuild.nameField.error", $currentName);
+    $form->addSubmit("dissolve", "forms.dissolveGuild.dissolveButton.label");
     $form->onSuccess[] = array($this, "dissolveGuildFormSucceeded");
     return $form;
   }
@@ -253,7 +255,7 @@ class GuildPresenter extends BasePresenter {
   function dissolveGuildFormSucceeded($form, $values) {
     $gid = $this->user->identity->guild;
     $this->model->dissolve($gid);
-    $this->flashMessage("Guild dissolved.");
+    $this->flashMessage($this->translator->translate("messages.guild.dissolved"));
     $this->user->logout();
     $this->redirect("Guild:noguild");
   }
@@ -266,10 +268,11 @@ class GuildPresenter extends BasePresenter {
   protected function createComponentRenameGuildForm() {
     $currentName = $this->model->getGuildName($this->user->identity->guild);
     $form = new UI\Form;
-    $form->addText("name", "New name:")
-         ->addRule(\Nette\Forms\Form::MAX_LENGTH, "Name can have no more than 20 letters.", 20)
+    $form->translator = $this->translator;
+    $form->addText("name", "forms.renameGuild.nameField.label")
+         ->addRule(\Nette\Forms\Form::MAX_LENGTH, "forms.renameGuild.nameField.error", 20)
          ->setDefaultValue($currentName);
-    $form->addSubmit("rename", "Rename");
+    $form->addSubmit("rename", "forms.renameGuild.renameButton.label");
     $form->onSuccess[] = array($this, "renameGuildFormSucceeded");
     return $form;
   }
@@ -286,7 +289,7 @@ class GuildPresenter extends BasePresenter {
     $name = $values["name"];
     try {
       $this->model->rename($gid, $name);
-      $this->flashMessage("Guild renamed.");
+      $this->flashMessage($this->translator->translate("messages.guild.renamed"));
       $this->redirect("Guild:");
     } catch(\Nette\Application\ApplicationException $e) {
       $this->flashMessage($e->getMessage());
@@ -299,7 +302,7 @@ class GuildPresenter extends BasePresenter {
   function actionPromote($id) {
     try{
       $this->model->promote($id);
-      $this->flashMessage("Member promoted.");
+      $this->flashMessage($this->translator->translate("messages.guild.promoted"));
     } catch(ForbiddenRequestException $e) {
       $this->flashMessage($e->getMessage());
     }
@@ -312,7 +315,7 @@ class GuildPresenter extends BasePresenter {
   function actionDemote($id) {
     try{
       $this->model->demote($id);
-      $this->flashMessage("Member demoted.");
+      $this->flashMessage($this->translator->translate("messages.guild.demoted"));
     } catch(ForbiddenRequestException $e) {
       $this->flashMessage($e->getMessage());
     }
@@ -325,7 +328,7 @@ class GuildPresenter extends BasePresenter {
   function actionKick($id) {
     try {
       $this->model->kick($id);
-      $this->flashMessage("Member kicked.");
+      $this->flashMessage($this->translator->translate("messages.guild.kicked"));
     } catch(ForbiddenRequestException $e) {
       $this->flashMessage($e->getMessage());
     }
@@ -338,7 +341,7 @@ class GuildPresenter extends BasePresenter {
   function actionDescription() {
     $this->notInGuild();
     if(!$this->user->isAllowed("guild", "manage")) {
-      $this->flashMessage("You can't change guild's description.");
+      $this->flashMessage($this->translator->translate("errors.guild.cannotChangeDescription"));
       $this->redirect("Guild:");
     }
     $this->template->haveForm = true;
@@ -351,10 +354,11 @@ class GuildPresenter extends BasePresenter {
   */
   protected function createComponentGuildDescriptionForm() {
     $form = new UI\Form;
+    $form->translator = $this->translator;
     $guild = $this->model->guildData($this->user->identity->guild);
-    $form->addTextArea("description", "New description:")
+    $form->addTextArea("description", "forms.guildDescription.descriptionField.label")
          ->setDefaultValue($guild->description);
-    $form->addSubmit("change", "Change");
+    $form->addSubmit("change", "forms.guildDescription.changeButton.label");
     $form->onSuccess[] = array($this, "guildDescriptionFormSucceeded");
     return $form;
   }
@@ -370,9 +374,9 @@ class GuildPresenter extends BasePresenter {
     $description = $values["description"];
     try {
       $this->model->changeDescription($guild, $description);
-      $this->flashMessage("Guild's description changed.");
+      $this->flashMessage($this->translator->translate("messages.guild.descriptionChanged"));
     } catch(\Nette\Application\BadRequestException $e) {
-      $this->flashMessage("Guild doesn't exist.");
+      $this->flashMessage($this->translator->translate("errors.guild.doesNotExist"));
     }
     $this->redirect("Guild:");
   }
@@ -383,7 +387,7 @@ class GuildPresenter extends BasePresenter {
   function actionApplications() {
     $this->notInGuild();
     if(!$this->user->isAllowed("guild", "invite")) {
-      $this->flashMessage("You can't manage applications.");
+      $this->flashMessage($this->translator->translate("errors.guild.cannotManageApps"));
       $this->redirect("Guild:");
     }
   }

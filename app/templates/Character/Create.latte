@@ -25,10 +25,10 @@
     }
   </script>
 {/block}
-{block title}Create character{/block}
+{block title}{_texts.character.createTitle}{/block}
 {block content}
-  <h1>Create character</h1>
-  <p>It seems you have no character on this server. (Are you sure you selected the right one?) Before you can start playing, you have to create one.</p>
+  <h1>{_texts.character.createTitle}</h1>
+  <p>{_texts.character.noCharacterFound}</p>
   {control createCharacterForm}
   <div id="raceDescription"></div>
   <div id="classDescription"></div>

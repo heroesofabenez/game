@@ -25,23 +25,24 @@ class CharacterPresenter extends BasePresenter {
    */
   protected function createComponentCreateCharacterForm() {
     $form = new UI\Form;
-    $form->addText("name", "Name:")
-         ->setRequired("You have to enter name.")
-         ->addRule(\Nette\Forms\Form::MAX_LENGTH, "Name can have no more than 30 letters", 30);
-    $form->addRadioList("gender", "Gender:", array( 1 => "male", 2 => "female"))
-         ->setRequired("Select gender")
+    $form->translator = $this->translator;
+    $form->addText("name", "forms.createCharacter.nameField.label")
+         ->setRequired("forms.createCharacter.nameField.empty")
+         ->addRule(\Nette\Forms\Form::MAX_LENGTH, "forms.createCharacter.nameField.error", 30);
+    $form->addRadioList("gender", "forms.createCharacter.genderRadio.label", array( 1 => "male", 2 => "female"))
+         ->setRequired("forms.createCharacter.genderRadio.error")
          ->getSeparatorPrototype()->setName(NULL);
     $racesList = $this->model->getRacesList();
-    $form->addSelect("race", "Race:", $racesList)
-         ->setPrompt("Select race")
-         ->setRequired("Select race");
+    $form->addSelect("race", "forms.createCharacter.raceSelect.label", $racesList)
+         ->setPrompt("forms.createCharacter.raceSelect.prompt")
+         ->setRequired("forms.createCharacter.raceSelect.error");
     $form["race"]->getControlPrototype()->onchange("changeRaceDescription(this.value)");
     $classesList = $this->model->getClassesList();
-    $form->addSelect("class", "Class:", $classesList)
-         ->setPrompt("Select class")
-         ->setRequired("Select class");
+    $form->addSelect("class", "forms.createCharacter.classSelect.label", $classesList)
+         ->setPrompt("forms.createCharacter.classSelect.prompt")
+         ->setRequired("forms.createCharacter.classSelect.error");
     $form["class"]->getControlPrototype()->onchange("changeClassDescription(this.value)");
-    $form->addSubmit("create", "Create character");
+    $form->addSubmit("create", "forms.createCharacter.createButton.label");
     $form->onSuccess[] = array($this, "createCharacterFormSucceeded");
     return $form;
   }

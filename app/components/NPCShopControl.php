@@ -1,6 +1,8 @@
 <?php
 namespace HeroesofAbenez\NPC;
 
+use Kdyby\Translation\Translator;
+
 /**
  * Shop Control
  *
@@ -15,11 +17,14 @@ class NPCShopControl extends \Nette\Application\UI\Control {
   protected $npc;
   /** @var \Nette\Security\User */
   protected $user;
+  /** @var \Kdyby\Translation\Translator */
+  protected $translator;
   
-  function __construct(\Nette\Database\Context $db, \HeroesofAbenez\Model\Item $itemModel, \Nette\Security\User $user) {
+  function __construct(\Nette\Database\Context $db, \HeroesofAbenez\Model\Item $itemModel, \Nette\Security\User $user, Translator $translator) {
     $this->db = $db;
     $this->itemModel = $itemModel;
     $this->user = $user;
+    $this->translator = $translator;
   }
   
   function setNpc(\HeroesofAbenez\Entities\NPC $npc) {
@@ -76,22 +81,22 @@ class NPCShopControl extends \Nette\Application\UI\Control {
   function handleBuy($itemId) {
     $item = $this->itemModel->view($itemId);
     if(!$item) {
-      $this->presenter->flashMessage("Specified item doesn't exist.");
+      $this->presenter->flashMessage($this->translator->translate("errors.shop.itemDoesNotExist"));
       return;
     }
     if(!$this->canBuyItem($itemId)) {
-      $this->presenter->flashMessage("You can't buy the item from this location.");
+      $this->presenter->flashMessage($this->translator->translate("errors.shop.cannotBuyHere"));
       return;
     }
     $character = $this->db->table("characters")->get($this->user->id);
     if($character->money < $item->price) {
-      $this->presenter->flashMessage("You don't have enough money.");
+      $this->presenter->flashMessage($this->translator->translate("errors.shop.notEnoughMoney"));
       return;
     }
     $this->itemModel->giveItem($itemId);
     $data = "money=money-{$item->price}";
     $this->db->query("UPDATE characters SET $data WHERE id=?", $this->user->id);
-    $this->presenter->flashMessage("Item bought.");
+    $this->presenter->flashMessage($this->translator->translate("messages.shop.itemBougt"));
   }
 }
 

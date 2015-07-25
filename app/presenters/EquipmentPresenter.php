@@ -21,10 +21,8 @@ class EquipmentPresenter extends BasePresenter {
     $item = $this->model->view($id);
     if(!$item) $this->forward("notfound");
     $classes = $this->characterModel->getClassesList();
-    foreach($item as $key => $value) {
-      if($key == "required_class") $value = $classes[$value];
-      $this->template->$key = $value;
-    }
+    $item->required_class = $classes[$item->required_class];
+    $this->template->item = $item;
     $this->template->level = $this->user->identity->level;
     $this->template->class = $this->profileModel->getClassName($this->user->identity->occupation);
   }

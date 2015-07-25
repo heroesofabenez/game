@@ -47,6 +47,10 @@ class Equipment extends BaseEntity {
     $this->worn = (bool) $value;
   }
   
+  function setRequired_class($value) {
+    $this->required_class = $value;
+  }
+  
   /**
    * Returns deploy parameters of the pet (for effect to character)
    * 

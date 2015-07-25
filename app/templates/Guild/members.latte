@@ -1,6 +1,6 @@
 {layout '../@layout.latte'}
-{block title}Guild members{/block}
+{block title}{_texts.guild.membersTitle}{/block}
 {block content}
-  <h1>Guild members</h1>
-  {foreach $members as $member}{$member->rank} {$member->name} <a n:href="Profile:view $member->id">Profile</a> {if $canPromote AND $member->rankId < $rankId} <a n:href="Guild:promote $member->id">Promote</a> <a n:href="Guild:demote $member->id">Demote</a>{/if}{if $canKick AND $member->rankId < $rankId} <a n:href="Guild:kick $member->id">Kick</a>{/if}{if !$iterator->isLast()}<br>{/if}{/foreach}
+  <h1>{_texts.guild.membersTitle}</h1>
+  {foreach $members as $member}{$member->rank} {$member->name} <a n:href="Profile:view $member->id">{_texts.common.profile}</a> {if $canPromote AND $member->rankId < $rankId} <a n:href="Guild:promote $member->id">{_texts.guild.promote}</a> <a n:href="Guild:demote $member->id">{_texts.guild.demote}</a>{/if}{if $canKick AND $member->rankId < $rankId} <a n:href="Guild:kick $member->id">{_texts.guild.kick}</a>{/if}{if !$iterator->isLast()}<br>{/if}{/foreach}
 {/block}

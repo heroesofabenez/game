@@ -1,10 +1,10 @@
 {layout '../@layout.latte'}
-{block title}Message{/block}
+{block title}{_texts.postoffice.messageTitle}{/block}
 {block content}
   <h1>{$subject}</h1>
-  From: {$from}<br>
-  To: {$to}<br>
-  Subject: {$subject}<br>
-  Sent: {$sent}
+  {_texts.postoffice.from}: {$from}<br>
+  {_texts.postoffice.to}: {$to}<br>
+  {_texts.postoffice.subject}: {$subject}<br>
+  {_texts.postoffice.sent}: {$sent}
   <p>{$text}</p>
 {/block}

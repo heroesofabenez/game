@@ -1,12 +1,12 @@
 {layout '../@layout.latte'}
-{block title}Join guild{/block}
+{block title}{_texts.guild.joinTitle}{/block}
 {block content}
-  <h1>Join guild</h1>
+  <h1>{_texts.guild.joinTitle}</h1>
   <table id="guilds">
-    <caption>Guilds</caption>
-    <tr><th>Name</th><th>Description</th><th>Grandmaster</th><th>Members</th><th></th></tr>
+    <caption>{_texts.guild.guilds}</caption>
+    <tr><th>{_texts.common.name}</th><th>{_texts.common.description}</th><th>{_texts.common.grandmaster}</th><th>{_texts.common.members}</th><th></th></tr>
     {foreach $guilds as $guild}
-    <tr><td>{$guild->name}</td><td>{$guild->description}</td><td>{$guild->leader}</td><td class="members">{$guild->members}</td><td><a n:href="Guild:join $guild->id">Apply</a></td></tr>
+    <tr><td>{$guild->name}</td><td>{$guild->description}</td><td>{$guild->leader}</td><td class="members">{$guild->members}</td><td><a n:href="Guild:join $guild->id">{_texts.guild.apply}</a></td></tr>
     {/foreach}
   </table>
 {/block}

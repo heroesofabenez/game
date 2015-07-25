@@ -57,15 +57,17 @@ class PostofficePresenter extends BasePresenter {
    */
   protected function createComponentNewMessageForm() {
     $form = new UI\Form;
+    $form->translator = $this->translator;
     $chars = $this->model->getRecipients();
-    $form->addSelect("to", "To:", $chars)
-         ->setPrompt("Select recipient");
-    $form->addText("subject", "Subject")
-         ->setRequired("Enter subject.")
-         ->addRule(\Nette\Forms\Form::MAX_LENGTH, "Subject can have no more than 35 letters", 35);
-    $form->addTextArea("message", "Message:")
-         ->setRequired("Enter message.");
-    $form->addSubmit("send", "Send");
+    $form->addSelect("to", "forms.postOfficeNewMessage.toSelect.label", $chars)
+         ->setPrompt("forms.postOfficeNewMessage.toSelect.prompt")
+         ->setRequired("forms.postOfficeNewMessage.toSelect.error");
+    $form->addText("subject", "forms.postOfficeNewMessage.subjectField.label")
+         ->setRequired("forms.postOfficeNewMessage.subjectField.empty")
+         ->addRule(\Nette\Forms\Form::MAX_LENGTH, "forms.postOfficeNewMessage.subjectField.error", 35);
+    $form->addTextArea("message", "forms.postOfficeNewMessage.messageField.label")
+         ->setRequired("forms.postOfficeNewMessage.messageField.error");
+    $form->addSubmit("send", "forms.postOfficeNewMessage.sendButton.label");
     $form->onSuccess[] = array($this, "newMessageFormSucceeded");
     return $form;
   }
@@ -80,13 +82,9 @@ class PostofficePresenter extends BasePresenter {
     $data = array(
       "from" => $this->user->id, "to" => $values["to"], "subject" => $values["subject"], "text" => $values["message"]
     );
-    $result = $this->model->sendMessage($data);
-    if($result) {
-      $this->flashMessage("Message sent.");
-      $this->redirect("Postoffice:sent");
-    } else {
-      $this->flashMessage("An error occured.");
-    }
+    $this->model->sendMessage($data);
+    $this->flashMessage($this->translator->translate("messages.postoffice.messageSent"));
+    $this->redirect("Postoffice:sent");
   }
 }
 ?>
