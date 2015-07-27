@@ -5,7 +5,7 @@
   <p>{$gender}, level {$level} {$race} {$occupation}{$specialization}</p>
   <p>{_texts.profile.baseStats}<br>{_texts.profile.strength} {$strength}, {_texts.profile.dexterity} {$dexterity}, {_texts.profile.constitution} {$constitution}<br>
 {_texts.profile.intelligence} {$intelligence}, {_texts.profile.charisma} {$charisma}</p>
-  <p>{if $guildId}{_texts.guild.title} <a n:href="Guild:view $guildId">{$guildName}</a><br>{_texts.profile.position} {$guildRank|firstUpper}{else}{_texts.profile.notInGuild}{/if}</p>
+  <p>{if $guildId}{_texts.guild.title} <a n:href="Guild:view $guildId">{$guildName}</a><br>{_texts.profile.position} {_guildranks.$guildRank.name|firstUpper}{else}{_texts.profile.notInGuild}{/if}</p>
   <p>{if $pet}{_texts.profile.activePet} {$pet->name} {_pets.$pet->type.name}, +{$pet->bonus_value}% {$pet->bonus_stat}
   {else}{_texts.profile.noActivePet}{/if}</p>
   <p>{_texts.profile.moreInfo} {$description}</p>

@@ -1,0 +1,14 @@
+1:
+    name: "recruit"
+2:
+    name: "member"
+3:
+    name: "regular"
+4:
+    name: "advisor"
+5:
+    name: "master"
+6:
+    name: "deputy"
+7:
+    name: "grandmaster"

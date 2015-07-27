@@ -74,7 +74,7 @@ class Journal extends \Nette\Object {
     );
     if($user->guild > 0) {
       $return["guild"] = $this->guildModel->getGuildName($user->guild);
-      $return["guildRank"] = ucfirst($user->roles[0]);
+      $return["guildRank"] = $character->guildrank;
     } else {
       $return["guild"] = false;
     }
