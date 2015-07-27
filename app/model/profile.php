@@ -120,18 +120,13 @@ class Profile extends \Nette\Object {
     $char = $this->db->table("characters")->get($id);
     if(!$char) { return false; }
     $stats = array(
-      "name", "gender", "level", "race", "description", "strength",
-      "dexterity", "constitution", "intelligence", "charisma", "race", "occupation"
+      "name", "gender", "level", "race", "description", "strength", "dexterity",
+      "constitution", "intelligence", "charisma", "race", "occupation", "specialization"
     );
     foreach($stats as $stat) {
       $return[$stat] = $char->$stat;
     }
     
-    if($char->specialization > 0) {
-      $return["specialization"] = "-" . $char->specialization;
-    } else {
-      $return["specialization"] = "";
-    }
     if($char->guild > 0) {
       $return["guild"] = $char->guild;
       $return["guildrank"] = $char->guildrank;

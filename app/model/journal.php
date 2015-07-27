@@ -51,14 +51,9 @@ class Journal extends \Nette\Object {
     $user = $this->user->identity;
     $character = $this->db->table("characters")->get($user->id);
     $stage = $this->locationModel->getStage($user->stage);
-    if(is_int($user->specialization)) {
-      $specialization = $this->db->table("character_specializations")->get($user->specialization)->name;
-    } else {
-      $specialization = "";
-    }
     $return = array(
       "name" => $user->name, "gender" => $user->gender, "race" => $user->race,
-      "occupation" => $user->occupation, "specialization" => $specialization,
+      "occupation" => $user->occupation, "specialization" => $user->specialization,
       "level" => $user->level, "whiteKarma" => $user->white_karma,
       "neutralKarma" => $user->neutral_karma, "darkKarma" => $user->dark_karma,
       "experiences" => $character->experience, "description" => $character->description,
