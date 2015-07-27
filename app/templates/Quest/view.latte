@@ -11,5 +11,5 @@
     {/foreach}
   </ul>
   {if $finished}<p>{$end_text}</p>{/if}
-  <p{if $finished} class="crossout"{/if}>{_texts.quest.rewards} {_texts.quest.rewardMoney, $rewardMoney}, {_texts.quest.rewardXP, $rewardXp}{if $rewardItem}, {!$rewardItem}{/if}.</p>
+  <p{if $finished} class="crossout"{/if}>{_texts.quest.rewards} {_texts.quest.rewardMoney, $rewardMoney}, {_texts.quest.rewardXP, $rewardXp}{if $rewardItem}, <a n:href="Item:view $rewardItem">{_items.$rewardItem.name}</a>{/if}.</p>
 {/block}
