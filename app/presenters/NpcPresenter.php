@@ -42,8 +42,6 @@ class NpcPresenter extends BasePresenter {
    */
   function renderView($id) {
     $this->template->id = $id;
-    $this->template->name = $this->npc->name;
-    $this->template->description = $this->npc->description;
     $this->template->type = $this->npc->type;
   }
   
@@ -69,7 +67,7 @@ class NpcPresenter extends BasePresenter {
    * @return void
    */
   function renderQuests($id) {
-    $this->template->name = $this->npc->name;
+    $this->template->id = $id;
   }
   
   /**
