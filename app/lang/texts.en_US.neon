@@ -132,7 +132,7 @@ quest:
     notFound: "Requested quest was not found."
 profile: 
     title: "Profile"
-    level: "Level"
+    level: "level"
     baseStats: "Base stats:"
     strength: "Strength"
     dexterity: "Dexterity"

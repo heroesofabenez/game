@@ -132,7 +132,7 @@ quest:
     notFound: "Požadovaný úkol nebyl nalezen."
 profile: 
     title: "Profil"
-    level: "Úroveň"
+    level: "úroveň"
     baseStats: "Základní vlastnosti:"
     strength: "Síla"
     dexterity: "Obratnost"
