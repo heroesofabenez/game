@@ -1,8 +1,8 @@
 {layout "../@layout.latte"}
 {block title}{_texts.npc.title}{/block}
 {block content}
-  <h1>{$name}</h1>
-  <p>{_texts.npc.steppedInFront} {$name}. {$description}</p>
+  <h1>{_npcs.$id.name}</h1>
+  <p>{_texts.npc.steppedInFront} {_npcs.$id.name}. {_npcs.$id.description}</p>
   <p>{_texts.npc.whatToDo}<br>
     <a n:href="Npc:talk $id">{_texts.npc.talk}</a><br>
     {if $type == "quest"}<a n:href="Npc:quests $id">{_texts.npc.askForQuest}</a><br>{/if}

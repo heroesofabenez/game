@@ -20,8 +20,6 @@ class Journal extends \Nette\Object {
   protected $locationModel;
   /** @var \HeroesofAbenez\Model\Guild */
   protected $guildModel;
-  /** @var \HeroesofAbenez\Model\Profile */
-  protected $profileModel;
   
   /**
    * @param \Nette\Security\User $user
@@ -44,10 +42,6 @@ class Journal extends \Nette\Object {
     $this->guildModel = $guildModel;
   }
   
-  function setProfileModel(Profile $profileModel) {
-    $this->profileModel = $profileModel;
-  }
-  
   /**
    * Gets basic info for character's journal
    * 
@@ -57,16 +51,9 @@ class Journal extends \Nette\Object {
     $user = $this->user->identity;
     $character = $this->db->table("characters")->get($user->id);
     $stage = $this->locationModel->getStage($user->stage);
-    $race = $this->profileModel->getRaceName($user->race);
-    $class = $this->profileModel->getClassName($user->occupation);
-    if(is_int($user->specialization)) {
-      $specialization = $this->db->table("character_specializations")->get($user->specialization)->name;
-    } else {
-      $specialization = "";
-    }
     $return = array(
-      "name" => $user->name, "gender" => $user->gender, "race" => $race,
-      "occupation" => $class, "specialization" => $specialization,
+      "name" => $user->name, "gender" => $user->gender, "race" => $user->race,
+      "occupation" => $user->occupation, "specialization" => $user->specialization,
       "level" => $user->level, "whiteKarma" => $user->white_karma,
       "neutralKarma" => $user->neutral_karma, "darkKarma" => $user->dark_karma,
       "experiences" => $character->experience, "description" => $character->description,
@@ -74,7 +61,7 @@ class Journal extends \Nette\Object {
     );
     if($user->guild > 0) {
       $return["guild"] = $this->guildModel->getGuildName($user->guild);
-      $return["guildRank"] = ucfirst($user->roles[0]);
+      $return["guildRank"] = $character->guildrank;
     } else {
       $return["guild"] = false;
     }

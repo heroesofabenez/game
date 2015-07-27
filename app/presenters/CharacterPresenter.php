@@ -33,11 +33,17 @@ class CharacterPresenter extends BasePresenter {
          ->setRequired("forms.createCharacter.genderRadio.error")
          ->getSeparatorPrototype()->setName(NULL);
     $racesList = $this->model->getRacesList();
+    foreach($racesList as $key => &$value) {
+      $value = "races.$key.name";
+    }
     $form->addSelect("race", "forms.createCharacter.raceSelect.label", $racesList)
          ->setPrompt("forms.createCharacter.raceSelect.prompt")
          ->setRequired("forms.createCharacter.raceSelect.error");
     $form["race"]->getControlPrototype()->onchange("changeRaceDescription(this.value)");
     $classesList = $this->model->getClassesList();
+    foreach($classesList as $key => &$value) {
+      $value = "classes.$key.name";
+    }
     $form->addSelect("class", "forms.createCharacter.classSelect.label", $classesList)
          ->setPrompt("forms.createCharacter.classSelect.prompt")
          ->setRequired("forms.createCharacter.classSelect.error");

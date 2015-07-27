@@ -1,0 +1,12 @@
+1:
+    name: "fighter"
+    description: "Fighters tend to use brute force to solve problems. Their endurance is remarkable but their somehow wild appearance and lower intelligence do not earn them much respect in society (in general).<br>++CON, +STR, -INT, -CHAR"
+2:
+    name: "rogue"
+    description: "Rogues try to avoid direct combat if possible as they are physically very fragile, they prefer attacking from shadows and/or using tricks. But if they engage in combat they rely on their swiftness to avoid enemy's attacks and penetrate his defenses.<br>++DEX, +STR, --CON"
+3:
+    name: "wizard"
+    description: "Wizards are the wisest of all classes. Most of them studied at the Academy of magic where they learnt (besides magical theories and casting some basic spells) to read and write (something that most people are not able to do). They amaze other people with their bright intelligence and charisma but their physical shells are quite frail.++INT, +CHAR, -STR, -CON"
+4:
+    name: "archer"
+    description: "Albeit physical weak, archers are very nimble (just like rogues) and they even received basic education. They do not excel in close combat but they can pacify their enemies with bows, crossbows or (if the situation is very dire) throwing weapons before they even come close to them.<br>++DEX, +INT, -STR, -CON"

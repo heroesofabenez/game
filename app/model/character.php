@@ -108,8 +108,8 @@ class Character extends \Nette\Object {
     $data["owner"] = Authenticator::getRealId();
     $this->db->query("INSERT INTO characters", $data);
     
-    $data["class"] = $class->name;
-    $data["race"] = $race->name;
+    $data["class"] = $values["class"];
+    $data["race"] = $values["race"];
     if($data["gender"]  == 1) $data["gender"] = "male";
     else $data["gender"] = "female";
     unset($data["occupation"]);

@@ -11,8 +11,6 @@ class ProfilePresenter extends BasePresenter {
   protected $model;
   /** @var \HeroesofAbenez\Model\Guild @autowire */
   protected $guildModel;
-  /** @var \HeroesofAbenez\Model\Permissions @autowire */
-  protected $permissionsModel;
   
   /**
    * @return void
@@ -32,7 +30,7 @@ class ProfilePresenter extends BasePresenter {
       if($key == "guild" AND is_int($value)) {
         $this->template->guildId = $value;
         $this->template->guildName = $this->guildModel->getGuildName($value);
-        $this->template->guildRank = $this->permissionsModel->getRoleName($data["guildrank"]);
+        $this->template->guildRank = $data["guildrank"];
         continue;
       } elseif($key == "guild" AND $value === "") {
         $this->template->guildId = 0;

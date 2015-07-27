@@ -80,8 +80,7 @@ class Guild extends \Nette\Object {
     $members = $this->db->table("characters")->where("guild", $guild->id)->order("guildrank DESC, id");
     $return["members"] = array();
     foreach($members as $member) {
-      $rank = $this->permissionsModel->getRoleName($member->guildrank);
-      $return["members"][] = array("id" => $member->id, "name" => $member->name, "rank" => ucfirst($rank));
+      $return["members"][] = (object) array("id" => $member->id, "name" => $member->name, "rank" => $member->guildrank);
     }
     return $return;
   }
@@ -98,7 +97,7 @@ class Guild extends \Nette\Object {
     $members = $this->db->table("characters")->where("guild", $id)->order("guildrank DESC, id");
     if(count($roles) > 0) $members->where("guildrank", $roles);
     foreach($members as $member) {
-      $rank = $this->permissionsModel->getRoleName($member->guildrank);
+      $rank = $member->guildrank;
       $return[] = (object) array("id" => $member->id, "name" => $member->name, "rank" => ucfirst($rank), "rankId" => $member->guildrank);
     }
     return $return;

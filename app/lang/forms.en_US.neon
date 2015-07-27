@@ -1,3 +1,13 @@
+createGuild:
+    nameField:
+        label: "Name:"
+        empty: "You have to enter name."
+        error: "Name can have no more than 20 letters."
+    descriptionField:
+        label: "Description:"
+        error: "Description can have no more than 200 letters."
+    createButton:
+        label: "Create"
 dissolveGuild:
     nameField:
         label: "Name:"

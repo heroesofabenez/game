@@ -53,7 +53,7 @@ class NPCShopControl extends \Nette\Application\UI\Control {
   function render() {
     $template = $this->template;
     $template->setFile(__DIR__ . "/npcShop.latte");
-    $template->npcName = $this->npc->name;
+    $template->npcId = $this->npc->id;
     $template->items = $this->getItems();
     $template->render();
   }

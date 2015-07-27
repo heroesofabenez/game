@@ -1,3 +1,13 @@
+createGuild:
+    nameField:
+        label: "Jméno:"
+        empty: "Musíš zadat jméno."
+        error: "Jméno může mít maximálně 20 znaků."
+    descriptionField:
+        label: "Popis:"
+        error: "Popis může mít maximálně 200 znaků."
+    createButton:
+        label: "Vytvořit"
 dissolveGuild:
     nameField:
         label: "Jméno:"
