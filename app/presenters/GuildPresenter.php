@@ -1,7 +1,7 @@
 <?php
 namespace HeroesofAbenez\Presenters;
 
-use \Nette\Application\UI,
+use \Nette\Application\UI\Form,
     \Nette\Application\ForbiddenRequestException;
 
   /**
@@ -104,13 +104,13 @@ class GuildPresenter extends BasePresenter {
    * @return \Nette\Application\UI\Form
    */
   protected function createComponentCreateGuildForm() {
-    $form = new UI\Form;
+    $form = new Form;
     $form->translator = $this->translator;
     $form->addText("name", "forms.createGuild.nameField.label")
          ->setRequired("forms.createGuild.nameField.empty")
-         ->addRule(\Nette\Forms\Form::MAX_LENGTH, "forms.createGuild.nameField.error", 20);
+         ->addRule(Form::MAX_LENGTH, "forms.createGuild.nameField.error", 20);
     $form->addTextArea("description", "forms.createGuild.descriptionField.label")
-         ->addRule(\Nette\Forms\Form::MAX_LENGTH, "forms.createGuild.descriptionField.error", 200);
+         ->addRule(Form::MAX_LENGTH, "forms.createGuild.descriptionField.error", 200);
     $form->addSubmit("create", "forms.createGuild.createButton.label");
     $form->onSuccess[] = array($this, "createGuildFormSucceeded");
     return $form;
@@ -122,7 +122,7 @@ class GuildPresenter extends BasePresenter {
    * @param  Nette\Utils\ArrayHash $values Array vith values
    * @return void
    */
-  function createGuildFormSucceeded(UI\Form $form, $values) {
+  function createGuildFormSucceeded(Form $form, $values) {
     $data = array(
       "name" => $values["name"], "description" => $values["description"]
     );
@@ -236,10 +236,10 @@ class GuildPresenter extends BasePresenter {
   */
   protected function createComponentDissolveGuildForm() {
     $currentName = $this->model->getGuildName($this->user->identity->guild);
-    $form = new UI\Form;
+    $form = new Form;
     $form->translator = $this->translator;
     $form->addText("name", "forms.dissolveGuild.nameField.label")
-         ->addRule(\Nette\Forms\Form::EQUAL, "forms.dissolveGuild.nameField.error", $currentName);
+         ->addRule(Form::EQUAL, "forms.dissolveGuild.nameField.error", $currentName);
     $form->addSubmit("dissolve", "forms.dissolveGuild.dissolveButton.label");
     $form->onSuccess[] = array($this, "dissolveGuildFormSucceeded");
     return $form;
@@ -252,7 +252,7 @@ class GuildPresenter extends BasePresenter {
    * @param  Nette\Utils\ArrayHash $values Array vith values
    * @return void
   */
-  function dissolveGuildFormSucceeded($form, $values) {
+  function dissolveGuildFormSucceeded(Form $form, $values) {
     $gid = $this->user->identity->guild;
     $this->model->dissolve($gid);
     $this->flashMessage($this->translator->translate("messages.guild.dissolved"));
@@ -267,10 +267,10 @@ class GuildPresenter extends BasePresenter {
   */
   protected function createComponentRenameGuildForm() {
     $currentName = $this->model->getGuildName($this->user->identity->guild);
-    $form = new UI\Form;
+    $form = new Form;
     $form->translator = $this->translator;
     $form->addText("name", "forms.renameGuild.nameField.label")
-         ->addRule(\Nette\Forms\Form::MAX_LENGTH, "forms.renameGuild.nameField.error", 20)
+         ->addRule(Form::MAX_LENGTH, "forms.renameGuild.nameField.error", 20)
          ->setDefaultValue($currentName);
     $form->addSubmit("rename", "forms.renameGuild.renameButton.label");
     $form->onSuccess[] = array($this, "renameGuildFormSucceeded");
@@ -284,7 +284,7 @@ class GuildPresenter extends BasePresenter {
    * @param  Nette\Utils\ArrayHash $values Array vith values
    * @return void
   */
-  function renameGuildFormSucceeded($form, $values) {
+  function renameGuildFormSucceeded(Form $form, $values) {
     $gid = $this->user->identity->guild;
     $name = $values["name"];
     try {
@@ -353,7 +353,7 @@ class GuildPresenter extends BasePresenter {
    * @return \Nette\Application\UI\Form
   */
   protected function createComponentGuildDescriptionForm() {
-    $form = new UI\Form;
+    $form = new Form;
     $form->translator = $this->translator;
     $guild = $this->model->guildData($this->user->identity->guild);
     $form->addTextArea("description", "forms.guildDescription.descriptionField.label")
@@ -369,7 +369,7 @@ class GuildPresenter extends BasePresenter {
    * @param  Nette\Utils\ArrayHash $values Array vith values
    * @return void
   */
-  function guildDescriptionFormSucceeded($form, $values) {
+  function guildDescriptionFormSucceeded(Form $form, $values) {
     $guild = $this->user->identity->guild;
     $description = $values["description"];
     try {

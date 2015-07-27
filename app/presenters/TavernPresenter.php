@@ -1,7 +1,7 @@
 <?php
 namespace HeroesofAbenez\Presenters;
 
-use Nette\Application\UI,
+use Nette\Application\UI\Form,
     HeroesofAbenez\Chat;
 
 /**
@@ -80,7 +80,7 @@ class TavernPresenter extends BasePresenter {
    * @return \Nette\Application\UI\Form
    */
   protected function createComponentNewMessageForm() {
-    $form = new UI\Form;
+    $form = new Form;
     $form->translator = $this->translator;
     $form->addText("message")
          ->setRequired("forms.tavernNewMessage.messageField.error");
@@ -95,7 +95,7 @@ class TavernPresenter extends BasePresenter {
    * @param \ Nette\Utils\ArrayHash $values
    * @return void
    */
-  function newMessageSucceeded(UI\Form $form, $values) {
+  function newMessageSucceeded(Form $form, $values) {
     switch($this->action) {
 case "guild":
   $chat = $this->createComponentGuildChat();

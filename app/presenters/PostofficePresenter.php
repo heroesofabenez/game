@@ -1,7 +1,7 @@
 <?php
 namespace HeroesofAbenez\Presenters;
 
-use Nette\Application\UI;
+use Nette\Application\UI\Form;
 
 /**
  * Presenter Postoffice
@@ -56,7 +56,7 @@ class PostofficePresenter extends BasePresenter {
    * @return \Nette\Application\UI\Form
    */
   protected function createComponentNewMessageForm() {
-    $form = new UI\Form;
+    $form = new Form;
     $form->translator = $this->translator;
     $chars = $this->model->getRecipients();
     $form->addSelect("to", "forms.postOfficeNewMessage.toSelect.label", $chars)
@@ -64,7 +64,7 @@ class PostofficePresenter extends BasePresenter {
          ->setRequired("forms.postOfficeNewMessage.toSelect.error");
     $form->addText("subject", "forms.postOfficeNewMessage.subjectField.label")
          ->setRequired("forms.postOfficeNewMessage.subjectField.empty")
-         ->addRule(\Nette\Forms\Form::MAX_LENGTH, "forms.postOfficeNewMessage.subjectField.error", 35);
+         ->addRule(Form::MAX_LENGTH, "forms.postOfficeNewMessage.subjectField.error", 35);
     $form->addTextArea("message", "forms.postOfficeNewMessage.messageField.label")
          ->setRequired("forms.postOfficeNewMessage.messageField.error");
     $form->addSubmit("send", "forms.postOfficeNewMessage.sendButton.label");
@@ -78,7 +78,7 @@ class PostofficePresenter extends BasePresenter {
    * @param \ Nette\Utils\ArrayHash $values
    * @return void
    */
-  function newMessageFormSucceeded(UI\Form $form, $values) {
+  function newMessageFormSucceeded(Form $form, $values) {
     $data = array(
       "from" => $this->user->id, "to" => $values["to"], "subject" => $values["subject"], "text" => $values["message"]
     );

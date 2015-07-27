@@ -1,7 +1,7 @@
 <?php
 namespace HeroesofAbenez\Presenters;
 
-use \Nette\Application\UI;
+use Nette\Application\UI\Form;
 
   /**
    * Presenter Character
@@ -24,11 +24,11 @@ class CharacterPresenter extends BasePresenter {
    * @return \Nette\Application\UI\Form
    */
   protected function createComponentCreateCharacterForm() {
-    $form = new UI\Form;
+    $form = new Form;
     $form->translator = $this->translator;
     $form->addText("name", "forms.createCharacter.nameField.label")
          ->setRequired("forms.createCharacter.nameField.empty")
-         ->addRule(\Nette\Forms\Form::MAX_LENGTH, "forms.createCharacter.nameField.error", 30);
+         ->addRule(Form::MAX_LENGTH, "forms.createCharacter.nameField.error", 30);
     $form->addRadioList("gender", "forms.createCharacter.genderRadio.label", array( 1 => "male", 2 => "female"))
          ->setRequired("forms.createCharacter.genderRadio.error")
          ->getSeparatorPrototype()->setName(NULL);
@@ -59,7 +59,7 @@ class CharacterPresenter extends BasePresenter {
    * @param  Nette\Utils\ArrayHash $values Array vith values
    * @return void
    */
-  function createCharacterFormSucceeded(UI\Form $form, $values) {
+  function createCharacterFormSucceeded(Form $form, $values) {
     $data = $this->model->create($values);
     if(!$data) $this->forward("Character:exists");
     $this->user->logout();
