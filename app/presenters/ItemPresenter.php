@@ -17,7 +17,7 @@ class ItemPresenter extends BasePresenter {
   function renderView($id) {
     $item = $this->model->view($id);
     if(!$item) $this->forward("notfound");
-    $this->template->item = $item;
+    $this->template->item = $item->id;
   }
 }
 ?>
