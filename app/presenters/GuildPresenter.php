@@ -106,12 +106,12 @@ class GuildPresenter extends BasePresenter {
   protected function createComponentCreateGuildForm() {
     $form = new UI\Form;
     $form->translator = $this->translator;
-    $form->addText("name", "Name:")
-         ->setRequired("You have to enter name.")
-         ->addRule(\Nette\Forms\Form::MAX_LENGTH, "Name can have no more than 20 letters", 20);
-    $form->addTextArea("description", "Description:")
-         ->addRule(\Nette\Forms\Form::MAX_LENGTH, "Description can have no more than 200 letters", 200);
-    $form->addSubmit("create", "Create");
+    $form->addText("name", "forms.createGuild.nameField.label")
+         ->setRequired("forms.createGuild.nameField.empty")
+         ->addRule(\Nette\Forms\Form::MAX_LENGTH, "forms.createGuild.nameField.error", 20);
+    $form->addTextArea("description", "forms.createGuild.descriptionField.label")
+         ->addRule(\Nette\Forms\Form::MAX_LENGTH, "forms.createGuild.descriptionField.error", 200);
+    $form->addSubmit("create", "forms.createGuild.createButton.label");
     $form->onSuccess[] = array($this, "createGuildFormSucceeded");
     return $form;
   }
