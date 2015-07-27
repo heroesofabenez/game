@@ -2,7 +2,7 @@
 {block title}{_texts.journal.title}{/block}
 {block content}
   <h1>{_texts.journal.journalOf} {$name}</h1>
-  <p>{$gender} {$race} {$occupation}{$specialization}</p>
+  <p>{$gender} {_races.$race.name} {_classes.$occupation.name}{$specialization}</p>
   <p>{_texts.journal.level} {$level}, {_texts.journal.experiences, $experiences}</p>
   <p>{_texts.journal.guild}<br>{if $guild}{_guildranks.$guildRank.name|firstUpper} {_texts.journal.ofGuild} {$guild}{else}{_texts.journal.notInGuild}{/if}</p>
   <p>{_texts.journal.karma}<br>{_texts.journal.white} {$whiteKarma}, {_texts.journal.neutral} {$neutralKarma}, {_texts.journal.dark} {$darkKarma}</p>

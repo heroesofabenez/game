@@ -1,32 +1,30 @@
 {layout "../@layout.latte"}
-{block head}
+{block title}{_texts.character.createTitle}{/block}
+{block content}
   <script>
     racesDes = new Array("");
     {foreach $races as $race}
-    racesDes[{$iterator->counter}] = {$race};
+    racesDes[{$iterator->counter}] = {_races.$iterator->counter.description};
     {/foreach}
     function changeRaceDescription(race) {
       var raceDiv,description;
-      raceDiv = document.getElementById('raceDescription');
+      raceDiv = document.getElementById("raceDescription");
       description =racesDes[race];
       raceDiv.innerHTML = description;
       return;
     }
     classesDes = new Array("");
     {foreach $classes as $class}
-    classesDes[{$iterator->counter}] = {$class};
+    classesDes[{$iterator->counter}] = {_classes.$iterator->counter.description};
     {/foreach}
     function changeClassDescription(classID) {
       var classDiv,description;
-      classDiv = document.getElementById('classDescription');
+      classDiv = document.getElementById("classDescription");
       description =classesDes[classID];
       classDiv.innerHTML = description;
       return;
     }
   </script>
-{/block}
-{block title}{_texts.character.createTitle}{/block}
-{block content}
   <h1>{_texts.character.createTitle}</h1>
   <p>{_texts.character.noCharacterFound}</p>
   {control createCharacterForm}

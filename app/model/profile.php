@@ -121,14 +121,12 @@ class Profile extends \Nette\Object {
     if(!$char) { return false; }
     $stats = array(
       "name", "gender", "level", "race", "description", "strength",
-      "dexterity", "constitution", "intelligence", "charisma"
+      "dexterity", "constitution", "intelligence", "charisma", "race", "occupation"
     );
     foreach($stats as $stat) {
       $return[$stat] = $char->$stat;
     }
     
-    $return["race"] = $this->getRaceName($char->race);
-    $return["occupation"] = $this->getClassName($char->occupation);
     if($char->specialization > 0) {
       $return["specialization"] = "-" . $char->specialization;
     } else {
