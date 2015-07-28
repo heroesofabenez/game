@@ -120,7 +120,7 @@ class Profile extends \Nette\Object {
     $char = $this->db->table("characters")->get($id);
     if(!$char) { return false; }
     $stats = array(
-      "name", "gender", "level", "race", "description", "strength", "dexterity",
+      "id", "name", "gender", "level", "race", "description", "strength", "dexterity",
       "constitution", "intelligence", "charisma", "race", "occupation", "specialization"
     );
     foreach($stats as $stat) {
