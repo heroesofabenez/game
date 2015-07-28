@@ -11,14 +11,32 @@ use Nette\Application\UI\Form;
 class CharacterPresenter extends BasePresenter {
   /** @var \HeroesofAbenez\Model\Character @autowire */
   protected $model;
+  /** @var \HeroesofAbenez\Entities\CharacterClass[] */
+  protected $classes;
+  /** @var \HeroesofAbenez\Entities\CharacterRace[] */
+  protected $races;
+  
+  function startup() {
+    parent::startup();
+    $this->classes = $this->model->getClassesList();
+    $this->races = $this->model->getRacesList();
+  }
   
   /**
    * @return void
    */
   function renderCreate() {
-    $this->template->races = $this->model->getRacesDescriptions();
-    $this->template->classes = $this->model->getClassesDescriptions();
+    $racesIds = $classesIds = array();
+    foreach($this->races as $race) {
+      $racesIds[] = $race->id;
+    }
+    foreach($this->classes as $class) {
+      $classesIds[] = $class->id;
+    }
+    $this->template->races = $racesIds;
+    $this->template->classes = $classesIds;
   }
+  
   /**
    * Create form for creating character
    * @return \Nette\Application\UI\Form
@@ -55,8 +73,8 @@ class CharacterPresenter extends BasePresenter {
   
   /**
    * Handles creating character
-   * @param Nette\Application\UI\Form $form Sent form
-   * @param  Nette\Utils\ArrayHash $values Array vith values
+   * @param \Nette\Application\UI\Form $form Sent form
+   * @param \Nette\Utils\ArrayHash $values Array vith values
    * @return void
    */
   function createCharacterFormSucceeded(Form $form, $values) {
@@ -68,6 +86,7 @@ class CharacterPresenter extends BasePresenter {
   
   /**
    * @param string $data Serialized array with data
+   * @return void
    */
   function renderCreated($data) {
     $data = unserialize($data);

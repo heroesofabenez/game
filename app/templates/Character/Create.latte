@@ -4,23 +4,23 @@
   <script>
     racesDes = new Array("");
     {foreach $races as $race}
-    racesDes[{$iterator->counter}] = {_races.$iterator->counter.description};
+    racesDes[{$iterator->counter}] = {_races.$race.description};
     {/foreach}
     function changeRaceDescription(race) {
       var raceDiv,description;
       raceDiv = document.getElementById("raceDescription");
-      description =racesDes[race];
+      description = racesDes[race];
       raceDiv.innerHTML = description;
       return;
     }
     classesDes = new Array("");
     {foreach $classes as $class}
-    classesDes[{$iterator->counter}] = {_classes.$iterator->counter.description};
+    classesDes[{$iterator->counter}] = {_classes.$class.description};
     {/foreach}
     function changeClassDescription(classID) {
       var classDiv,description;
       classDiv = document.getElementById("classDescription");
-      description =classesDes[classID];
+      description = classesDes[classID];
       classDiv.innerHTML = description;
       return;
     }

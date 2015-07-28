@@ -1,6 +1,10 @@
 <?php
 namespace HeroesofAbenez\Model;
 
+use HeroesofAbenez\Entities\CharacterClass,
+    HeroesofAbenez\Entities\CharacterRace,
+    Nette\Utils\Arrays;
+
 /**
  * Model Character
  * 
@@ -32,25 +36,17 @@ class Character extends \Nette\Object {
       $racesList = array();
       $races = $this->db->table("character_races");
       foreach($races as $race) {
-        $racesList[$race->id] = $race->name;
+        $racesList[$race->id] = new CharacterRace($race);
       }
       $this->cache->save("races", $racesList);
     }
     return $racesList;
   }
   
-  /**
-   * Get description of races
-   * 
-   * @return array
-   */
-  function getRacesDescriptions() {
-    $return = array();
-    $races = $this->db->table("character_races");
-    foreach($races as $race) {
-      $return[$race->id] = $race->description;
-    }
-    return $return;
+  function getRace($id) {
+    $races = $this->getRacesList();
+    $race = Arrays::get($races, $id, false);
+    return $race;
   }
   
   /**
@@ -64,31 +60,24 @@ class Character extends \Nette\Object {
       $classesList = array();
       $classes = $this->db->table("character_classess");
       foreach($classes as $class) {
-        $classesList[$class->id] = $class->name;
+        $classesList[$class->id] = new CharacterClass($class);
       }
       $this->cache->save("classes", $classesList);
     }
     return $classesList;
   }
   
-  /**
-   * Get description of classes
-   * 
-   * @return array
-   */
-  function getClassesDescriptions() {
-    $return = array();
-    $classes = $this->db->table("character_classess");
-    foreach($classes as $class) {
-      $return[$class->id] = $class->description;
-    }
-    return $return;
+  function getClass($id) {
+    $classes = $this->getClassesList();
+    $class = Arrays::get($classes, $id, false);
+    return $class;
   }
   
   /**
    * Creates new character
    * 
-   * @param type $values
+   * @param \Nette\Utils\ArrayHash $values
+   * @return \Nette\Utils\ArrayHash
    */
   function create($values) {
     $data = array(
@@ -98,8 +87,8 @@ class Character extends \Nette\Object {
     $chars = $this->db->table("characters")->where("name", $data["name"]);
     if($chars->count() > 0) return false;
     
-    $race = $this->db->table("character_races")->get($values["race"]);
-    $class = $this->db->table("character_classess")->get($values["class"]);
+    $race = $this->getRace($values["race"]);
+    $class = $this->getClass($values["class"]);
     $data["strength"] = $class->strength + $race->strength;
     $data["dexterity"] = $class->dexterity + $race->dexterity;
     $data["constitution"] = $class->constitution + $race->constitution;
