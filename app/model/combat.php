@@ -217,7 +217,7 @@ class CombatBase extends \Nette\Object {
    * @return int Winning team/0
    */
   protected function end_round() {
-    $this->onRoundStart();
+    $this->onRoundEnd();
     if($this->getWinner() > 0) return $this->getWinner();
     return 0;
   }
