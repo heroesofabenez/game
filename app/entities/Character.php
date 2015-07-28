@@ -157,7 +157,7 @@ default:
    * @throws \OutOfBoundsException
    */
   function removeEffect($effectId) {
-    for($i = 0; $i <= count($this->effects); $i++) {
+    foreach($this->effects as $i => $effect) {
       if($this->effects[$i]->id == $effectId) {
         unset($this->effects[$i]);
         $this->recalculateStats();
