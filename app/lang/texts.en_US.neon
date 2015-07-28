@@ -192,3 +192,5 @@ ranking:
     title: "Ranking"
     previous: "Previous"
     next: "Next"
+arena:
+    title: "Arena"

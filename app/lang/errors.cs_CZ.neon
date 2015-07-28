@@ -39,3 +39,5 @@ request:
 travel:
     #stageDoesNotExist: "Specified stage doesn't exist."
     #cannotTravelToStage: "You can't travel to specified stage."
+arena:
+    lowLevel: "Musíš dosáhnout úroveň %count%, aby jsi mohl vstoupit do arény."
