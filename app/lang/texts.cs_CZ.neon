@@ -193,4 +193,5 @@ ranking:
     previous: "Předchozí"
     next: "Následující"
 arena:
-    title: "Árena"
+    title: "Aréna"
+    localChampions: "Místní šampióni"

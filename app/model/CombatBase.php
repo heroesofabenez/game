@@ -3,8 +3,7 @@ namespace HeroesofAbenez\Model;
 
 use HeroesofAbenez\Entities\Team,
     HeroesofAbenez\Entities\Character as CharacterEntity,
-    HeroesofAbenez\Entities\CharacterEffect,
-    HeroesofAbenez\Entities\CombatAction;
+    HeroesofAbenez\Entities\CharacterEffect;
 
 /**
  * Handles combat

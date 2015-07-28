@@ -194,3 +194,4 @@ ranking:
     next: "Next"
 arena:
     title: "Arena"
+    localChampions: "Local champions"

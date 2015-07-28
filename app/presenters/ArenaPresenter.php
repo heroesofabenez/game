@@ -1,6 +1,8 @@
 <?php
 namespace HeroesofAbenez\Presenters;
 
+use HeroesofAbenez\Arena;
+
 /**
  * Presenter Arena
  *
@@ -15,6 +17,10 @@ class ArenaPresenter extends BasePresenter {
    */
   function actionDefault() {
     
+  }
+  
+  protected function createComponentArenaPVE(Arena\ArenaPVEControlFactory $factory) {
+    return $factory->create();
   }
 }
 ?>
