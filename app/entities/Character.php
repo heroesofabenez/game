@@ -110,7 +110,7 @@ class Character extends BaseEntity {
       if(in_array($key, $all_stats)) {
         switch($key) {
 case "name":
-  $this->$key =(string) $value;
+  $this->$key = (string) $value;
   break;
 case "strength":
 case "dexterity":
