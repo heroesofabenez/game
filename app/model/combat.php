@@ -60,6 +60,7 @@ class CombatBase extends \Nette\Object {
     $this->onCombatEnd[] = array($this, "removeCombatEffects");
     $this->onCombatEnd[] = array($this, "logCombatResult");
     $this->onRoundStart[] = array($this ,"recalculateStats");
+    $this->onRoundStart[] = array($this, "logRoundNumber");
     $this->onAttack[] = array($this, "attackHarm");
     $this->onAttack[] = array($this, "logDamage");
     $this->onAttack[] = array($this, "logResults");
@@ -187,7 +188,6 @@ class CombatBase extends \Nette\Object {
    * @return int Winning team/0
    */
   protected function start_round() {
-    $this->logRoundNumber();
     $this->onRoundStart();
     if($this->getWinner() > 0) return $this->getWinner();
     return 0;
