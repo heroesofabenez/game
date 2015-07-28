@@ -158,7 +158,7 @@ default:
    */
   function removeEffect($effectId) {
     foreach($this->effects as $i => $effect) {
-      if($this->effects[$i]->id == $effectId) {
+      if($effect->id == $effectId) {
         unset($this->effects[$i]);
         $this->recalculateStats();
         return;
