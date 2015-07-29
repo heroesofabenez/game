@@ -11,29 +11,18 @@ use HeroesofAbenez\Entities\Character as CharacterEntity,
  * @author Jakub Konečný
  */
 class CombatLogger extends \Nette\Object implements \Iterator {
+  /** @var \HeroesofAbenez\Entities\Team First team */
+  protected $team1;
+  /** @var \HeroesofAbenez\Entities\Team Second team */
+  protected $team2;
   /** @var array */
   protected $actions = array();
   /** @var int */
   protected $pos;
   
-  /**
-   * Print participants of the combat
-   * 
-   * @param Team $team1
-   * @param Team $team2
-   * @return void
-   */
-  function openLog(Team $team1, Team $team2) {
-    $this->logText("$team1->name:");
-    foreach($team1 as $member) {
-      $this->logText("$member->name: level $member->level");
-    }
-    $this->logText("");
-    $this->logText("$team2->name:");
-    foreach($team2 as $member) {
-      $this->logText("$member->name: level $member->level");
-    }
-    $this->logText("");
+  function __construct(Team $team1, Team $team2) {
+    $this->team1 = $team1;
+    $this->team2 = $team2;
   }
   
   /**
@@ -64,7 +53,16 @@ class CombatLogger extends \Nette\Object implements \Iterator {
    * @return string
    */
   function __toString() {
-    $output = "";
+    $output = "{$this->team1->name}:<br>\n";
+    foreach($this->team1 as $member) {
+      $output .= "$member->name: level $member->level<br>\n";
+    }
+    $output .= "<br>\n";
+    $output .= "{$this->team2->name}:<br>\n";
+    foreach($this->team2 as $member) {
+      $output .= "$member->name: level $member->level<br>\n";
+    }
+    $output .= "<br>\n";
     foreach($this->actions as $text) {
       $output .= "$text<br>\n";
     }
