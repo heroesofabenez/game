@@ -53,20 +53,12 @@ class CombatLogger extends \Nette\Object implements \Iterator {
    * @return string
    */
   function __toString() {
-    $output = "{$this->team1->name}:<br>\n";
-    foreach($this->team1 as $member) {
-      $output .= "$member->name: level $member->level<br>\n";
-    }
-    $output .= "<br>\n";
-    $output .= "{$this->team2->name}:<br>\n";
-    foreach($this->team2 as $member) {
-      $output .= "$member->name: level $member->level<br>\n";
-    }
-    $output .= "<br>\n";
-    foreach($this->actions as $text) {
-      $output .= "$text<br>\n";
-    }
-    return $output;
+    $latte = new \Latte\Engine;
+    $params = array(
+      "team1" => $this->team1, "team2" => $this->team2, "actions" => $this->actions
+    );
+    $latte->setTempDirectory(APP_DIR . "/temp");
+    return $latte->renderToString(APP_DIR . "/templates/CombatLog.latte", $params);
   }
   
   function rewind() {
