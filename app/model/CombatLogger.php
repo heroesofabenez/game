@@ -2,7 +2,8 @@
 namespace HeroesofAbenez\Model;
 
 use HeroesofAbenez\Entities\Character as CharacterEntity,
-    HeroesofAbenez\Entities\CombatAction;
+    HeroesofAbenez\Entities\CombatAction,
+    HeroesofAbenez\Entities\Team;
 
 /**
  * Combat log
@@ -14,6 +15,26 @@ class CombatLogger extends \Nette\Object implements \Iterator {
   protected $actions = array();
   /** @var int */
   protected $pos;
+  
+  /**
+   * Print participants of the combat
+   * 
+   * @param Team $team1
+   * @param Team $team2
+   * @return void
+   */
+  function openLog(Team $team1, Team $team2) {
+    $this->logText("$team1->name:");
+    foreach($team1 as $member) {
+      $this->logText("$member->name: level $member->level");
+    }
+    $this->logText("");
+    $this->logText("$team2->name:");
+    foreach($team2 as $member) {
+      $this->logText("$member->name: level $member->level");
+    }
+    $this->logText("");
+  }
   
   /**
    * Adds new entry

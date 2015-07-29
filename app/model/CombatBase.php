@@ -56,6 +56,7 @@ class CombatBase extends \Nette\Object {
     $this->log = new CombatLogger;
     $this->onCombatStart[] = array($this, "deployPets");
     $this->onCombatStart[] = array($this, "equipItems");
+    $this->onCombatStart[] = array($this, "openLog");
     $this->onCombatEnd[] = array($this, "removeCombatEffects");
     $this->onCombatEnd[] = array($this, "logCombatResult");
     $this->onRoundStart[] = array($this ,"recalculateStats");
@@ -138,6 +139,15 @@ class CombatBase extends \Nette\Object {
         if($effect->duration === "combat" OR is_int($effect->duration)) $character->removeEffect($effect->id);
       }
     }
+  }
+  
+  /**
+   * Print participants of the combat
+   * 
+   * @return void
+   */
+  function openLog() {
+    $this->log->openLog($this->team1, $this->team2);
   }
   
   /**
