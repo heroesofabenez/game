@@ -6,6 +6,7 @@ use Nette\Security\User,
     HeroesofAbenez\Model\Profile,
     HeroesofAbenez\Model\Equipment,
     HeroesofAbenez\Model\CombatLog,
+    HeroesofAbenez\Model\CombatLogger,
     Kdyby\Translation\Translator,
     HeroesofAbenez\Entities\Character;
 
@@ -84,6 +85,17 @@ abstract class ArenaControl extends \Nette\Application\UI\Control {
    * @return void
    */
   abstract function handleFight($id);
+  
+  /**
+   * Save log from combat
+   * 
+   * @param CombatLogger $logger
+   * @return int Combat's id
+   */
+  function saveCombat(CombatLogger $logger) {
+    $log = (string) $logger;
+    return $this->log->write($log);
+  }
 }
 
 class OpponentNotFoundException extends \Exception {

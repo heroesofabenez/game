@@ -58,8 +58,7 @@ class ArenaPVEControl extends ArenaControl {
     $team2->addMember($npc);
     $combat = new CombatBase($team1, $team2);
     $combat->execute();
-    $log = (string) $combat->log;
-    $combatId = $this->log->write($log);
+    $combatId = $this->saveCombat($combat->log);
     $this->presenter->redirect("Combat:view", array("id" => $combatId));
   }
 }
