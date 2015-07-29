@@ -60,6 +60,17 @@ class CombatLogger extends \Nette\Object implements \Iterator {
     $this->actions[] = (string) $text;
   }
   
+  /**
+   * @return string
+   */
+  function __toString() {
+    $output = "";
+    foreach($this->actions as $text) {
+      $output .= "$text<br>\n";
+    }
+    return $output;
+  }
+  
   function rewind() {
     $this->pos = 0;
   }
