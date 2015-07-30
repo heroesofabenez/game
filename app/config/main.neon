@@ -21,6 +21,7 @@ session:
     expiration: 1 hour
 services:
     arena.pve: HeroesofAbenez\Arena\ArenaPVEControlFactory
+    arena.pvp: HeroesofAbenez\Arena\ArenaPVPControlFactory
     authenticator: HeroesofAbenez\Auth\Authenticator
     authorizator: HeroesofAbenez\Auth\Authorizator::create
     cache.cache: Nette\Caching\Cache(@cache.storage, "data")

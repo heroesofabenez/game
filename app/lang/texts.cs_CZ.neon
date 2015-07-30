@@ -195,3 +195,5 @@ ranking:
 arena:
     title: "Aréna"
     localChampions: "Místní šampióni"
+    toChallenge: "Vyzvat"
+    foreignHeroes: "Cizí hrdinové"

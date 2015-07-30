@@ -195,3 +195,5 @@ ranking:
 arena:
     title: "Arena"
     localChampions: "Local champions"
+    toChallenge: "Challenge"
+    foreignHeroes: "Foreign heroes"
