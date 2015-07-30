@@ -29,7 +29,7 @@ abstract class ArenaControl extends \Nette\Application\UI\Control {
   /** @var \Kdyby\Translation\Translator */
   protected $translator;
   /** @var string */
-  protected $file;
+  protected $arena;
   
   function __construct(User $user, Profile $profileModel, Equipment $equipmentModel, CombatLog $log, Database $db, Translator $translator) {
     $this->user = $user;
@@ -75,8 +75,9 @@ abstract class ArenaControl extends \Nette\Application\UI\Control {
    */
   function render() {
     $template = $this->template;
-    $template->setFile(__DIR__ . "/$this->file.latte");
+    $template->setFile(__DIR__ . "/arena.latte");
     $template->opponents = $this->getOpponents();
+    $template->arena = $this->arena;
     $template->render();
   }
   

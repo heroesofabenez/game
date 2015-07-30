@@ -11,7 +11,7 @@ use HeroesofAbenez\Entities\Team,
  */
 class ArenaPVPControl extends ArenaControl {
   /** @var string */
-  protected $file = "arenaPVP";
+  protected $arena = "heroes";
   
   /**
    * @return array

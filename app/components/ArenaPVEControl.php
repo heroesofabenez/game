@@ -12,7 +12,7 @@ use HeroesofAbenez\Entities\Team,
  */
 class ArenaPVEControl extends ArenaControl {
   /** @var string */
-  protected $file = "arenaPVE";
+  protected $arena = "champions";
   
   /**
    * @return array

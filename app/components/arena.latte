@@ -1,0 +1,5 @@
+  <h1>{_texts.arena.title}</h1>
+  <h3>{if $arena == "heroes"}<a href="{plink Arena:}">{/if}{_texts.arena.localChampions}{if $arena == "heroes"}</a>{/if} {if $arena == "champions"}<a href="{plink Arena:heroes}">{/if}{_texts.arena.foreignHeroes}{if $arena == "champions"}</a>{/if}</h3>
+  {foreach $opponents as $opponent}
+  {$opponent->name} <a n:href="fight! $opponent->id">{_texts.arena.toChallenge}</a><br>
+  {/foreach}

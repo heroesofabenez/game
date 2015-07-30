@@ -1,5 +1,0 @@
-  <h1>{_texts.arena.title}</h1>
-  <h3>{_texts.arena.localChampions} <a href="{plink Arena:heroes}">{_texts.arena.foreignHeroes}</a></h3>
-  {foreach $opponents as $opponent}
-  {$opponent->name} <a n:href="fight! $opponent->id">{_texts.arena.toChallenge}</a><br>
-  {/foreach}
