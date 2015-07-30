@@ -17,7 +17,7 @@ class ArenaPVEControl extends ArenaControl {
   /**
    * @return array
    */
-  function getOpponents() {
+  protected function getOpponents() {
     $level = $this->user->identity->level;
     $opponents = $this->db->table("pve_arena_opponents")
       ->where("level > $level-5")
