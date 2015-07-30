@@ -197,3 +197,5 @@ arena:
     localChampions: "Local champions"
     toChallenge: "Challenge"
     foreignHeroes: "Foreign heroes"
+    champion: "Champion"
+    championNotFound: "Champion not found"

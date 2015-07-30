@@ -39,6 +39,17 @@ class ArenaPVEControl extends ArenaControl {
     return $npc;
   }
   
+  function renderChampion() {
+    $template = $this->template;
+    $template->setFile(__DIR__ . "/arenaChampion.latte");
+    try {
+      $template->champion = $this->getNpc($this->presenter->getParameter("id"));
+    } catch(OpponentNotFoundException $e) {
+      $template->champion = false;
+    }
+    $template->render();
+  }
+  
   /**
    * Fight a npc
    * 

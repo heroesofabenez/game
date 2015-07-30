@@ -197,3 +197,5 @@ arena:
     localChampions: "Místní šampióni"
     toChallenge: "Vyzvat"
     foreignHeroes: "Cizí hrdinové"
+    champion: "Šampión"
+    championNotFound: "Šampión nenalezen"

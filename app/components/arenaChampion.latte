@@ -1,0 +1,8 @@
+{if !$champion}
+  <h2>{_texts.arena.championNotFound}</h2>
+{else}
+  <h1>{$champion->name}</h1>
+  <p>{$champion->gender}, {_texts.profile.level} {$champion->level} {_races.$champion->race.name} {_classes.$champion->occupation.name}</p>
+  <p>{_texts.profile.baseStats}<br>{_texts.profile.strength} {$champion->strength}, {_texts.profile.dexterity} {$champion->dexterity}, {_texts.profile.constitution} {$champion->constitution}<br>
+{_texts.profile.intelligence} {$champion->intelligence}, {_texts.profile.charisma} {$champion->charisma}</p>
+{/if}

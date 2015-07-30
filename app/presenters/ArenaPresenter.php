@@ -13,9 +13,10 @@ class ArenaPresenter extends BasePresenter {
   protected $min_level = 3;
   
   /**
+   * @param int $id
    * @return void
    */
-  function actionDefault() {
+  function actionChampion($id) {
     
   }
   
