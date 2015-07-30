@@ -1,9 +1,7 @@
 <?php
 namespace HeroesofAbenez\Arena;
 
-use HeroesofAbenez\Entities\Team,
-    HeroesofAbenez\Entities\Character,
-    HeroesofAbenez\Model\CombatBase;
+use HeroesofAbenez\Entities\Character;
 
 /**
  *  PVE Arena Control
@@ -39,6 +37,11 @@ class ArenaPVEControl extends ArenaControl {
     return $npc;
   }
   
+  /**
+   * Show champion's profile
+   * 
+   * @return void
+   */
   function renderChampion() {
     $template = $this->template;
     $template->setFile(__DIR__ . "/arenaChampion.latte");
@@ -57,20 +60,12 @@ class ArenaPVEControl extends ArenaControl {
    * @return void
    */
   function handleFight($npcId) {
-    $player = $this->getPlayer($this->user->id);
     try {
       $npc = $this->getNpc($npcId);
     } catch(OpponentNotFoundException $e) {
       $this->presenter->forward("Npc:notfound");
     }
-    $team1 = new Team($player->name);
-    $team1->addMember($player);
-    $team2 = new Team($npc->name);
-    $team2->addMember($npc);
-    $combat = new CombatBase($team1, $team2);
-    $combat->execute();
-    $combatId = $this->saveCombat($combat->log);
-    $this->presenter->redirect("Combat:view", array("id" => $combatId));
+    $this->doDuel($npc);
   }
 }
 

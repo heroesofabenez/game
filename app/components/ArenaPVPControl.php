@@ -1,9 +1,6 @@
 <?php
 namespace HeroesofAbenez\Arena;
 
-use HeroesofAbenez\Entities\Team,
-    HeroesofAbenez\Model\CombatBase;
-
 /**
  * PVP Arena Control
  *
@@ -27,20 +24,12 @@ class ArenaPVPControl extends ArenaControl {
   }
   
   function handleFight($id) {
-    $player = $this->getPlayer($this->user->id);
     try {
       $enemy = $this->getPlayer($id);
     } catch (OpponentNotFoundException $e) {
       $this->presenter->forward("Profile:notfound");
     }
-    $team1 = new Team($player->name);
-    $team1->addMember($player);
-    $team2 = new Team($enemy->name);
-    $team2->addMember($enemy);
-    $combat = new CombatBase($team1, $team2);
-    $combat->execute();
-    $combatId = $this->saveCombat($combat->log);
-    $this->presenter->redirect("Combat:view", array("id" => $combatId));
+    $this->doDuel($enemy);
   }
 }
 

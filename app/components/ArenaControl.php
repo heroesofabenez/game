@@ -8,7 +8,9 @@ use Nette\Security\User,
     HeroesofAbenez\Model\CombatLog,
     HeroesofAbenez\Model\CombatLogger,
     Kdyby\Translation\Translator,
-    HeroesofAbenez\Entities\Character;
+    HeroesofAbenez\Entities\Character,
+    HeroesofAbenez\Entities\Team,
+    HeroesofAbenez\Model\CombatBase;
 
 /**
  * Basic Arena Control
@@ -79,6 +81,24 @@ abstract class ArenaControl extends \Nette\Application\UI\Control {
     $template->opponents = $this->getOpponents();
     $template->arena = $this->arena;
     $template->render();
+  }
+  
+  /**
+   * Execute the duel
+   * 
+   * @param Character $opponent Opponent
+   * @return void
+   */
+  protected function doDuel(Character $opponent) {
+    $player = $this->getPlayer($this->user->id);
+    $team1 = new Team($player->name);
+    $team1->addMember($player);
+    $team2 = new Team($opponent->name);
+    $team2->addMember($opponent);
+    $combat = new CombatBase($team1, $team2);
+    $combat->execute();
+    $combatId = $this->saveCombat($combat->log);
+    $this->presenter->redirect("Combat:view", array("id" => $combatId));
   }
   
   /**
