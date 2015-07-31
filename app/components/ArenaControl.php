@@ -84,6 +84,11 @@ abstract class ArenaControl extends \Nette\Application\UI\Control {
   }
   
   /**
+   * @return array
+   */
+  abstract protected function calculateRewards($player, $opponent);
+  
+  /**
    * Execute the duel
    * 
    * @param Character $opponent Opponent
@@ -96,7 +101,14 @@ abstract class ArenaControl extends \Nette\Application\UI\Control {
     $team2 = new Team($opponent->name);
     $team2->addMember($opponent);
     $combat = new CombatBase($team1, $team2);
-    $combat->execute();
+    $winner = $combat->execute();
+    if($winner === 1) {
+      $rewards = $this->calculateRewards($player, $opponent);
+      $data = "money=money+{$rewards["money"]}, experience=experience+{$rewards["experience"]}";
+      $where = array("id" => $this->user->id);
+      $this->db->query("UPDATE characters SET $data WHERE ?", $where);
+      $combat->log->logText("$player->name gets {$rewards["money"]} silver marks and {$rewards["experience"]} experiences.");
+    }
     $combatId = $this->saveCombat($combat->log);
     $this->presenter->redirect("Combat:view", array("id" => $combatId));
   }
