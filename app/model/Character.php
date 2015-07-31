@@ -89,7 +89,7 @@ class Character extends \Nette\Object {
    * Creates new character
    * 
    * @param \Nette\Utils\ArrayHash $values
-   * @return \Nette\Utils\ArrayHash
+   * @return array Stats of new character
    */
   function create($values) {
     $data = array(
