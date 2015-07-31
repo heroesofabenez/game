@@ -11,7 +11,7 @@
     <h3 class="teamName">{$team1->name}</h3>
     <div class="members">
       {foreach $team1 as $member}
-      {$member->name}: level {$member->level}<br>
+      {$member->name}: level {$member->level}{if !$iterator->last}<br>{/if}
       {/foreach}
     </div>
   </div>
@@ -19,15 +19,14 @@
     <h3 class="teamName">{$team2->name}</h3>
     <div class="members">
       {foreach $team2 as $member}
-      {$member->name}: level {$member->level}<br>
+      {$member->name}: level {$member->level}{if !$iterator->last}<br>{/if}
       {/foreach}
     </div>
   </div>
-  <br>
   <div id="combat">
     <h3>Battle</h3>
     {foreach $actions as $action}
-    {$action}<br>
+    {$action|noescape}
     {/foreach}
   </div>
 </article>

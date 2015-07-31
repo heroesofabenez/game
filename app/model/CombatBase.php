@@ -160,7 +160,7 @@ class CombatBase extends \Nette\Object {
    */
   function logRoundNumber() {
     $this->round++;
-    $this->log->logText("Round $this->round");
+    $this->log->logNewRound($this->round);
   }
   
   /**

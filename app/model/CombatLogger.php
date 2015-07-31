@@ -46,7 +46,15 @@ class CombatLogger extends \Nette\Object implements \Iterator {
    * @return void
    */
   function logText($text) {
-    $this->actions[] = (string) $text;
+    $this->actions[] = (string) $text . "<br>";
+  }
+  
+  /**
+   * @param int $round
+   * @return void
+   */
+  function logNewRound($round) {
+    $this->actions[] = "<h4>Round $round</h4>";
   }
   
   /**
