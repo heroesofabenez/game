@@ -2,18 +2,38 @@
 namespace HeroesofAbenez\Model;
 
 use HeroesofAbenez\Entities\Character as CharacterEntity,
-    HeroesofAbenez\Entities\CombatAction;
+    HeroesofAbenez\Entities\CombatAction,
+    HeroesofAbenez\Entities\Team;
 
 /**
  * Combat log
  * 
  * @author Jakub Konečný
+ * @property-write int $round Current round
  */
 class CombatLogger extends \Nette\Object implements \Iterator {
+  /** @var \HeroesofAbenez\Entities\Team First team */
+  protected $team1;
+  /** @var \HeroesofAbenez\Entities\Team Second team */
+  protected $team2;
   /** @var array */
   protected $actions = array();
   /** @var int */
   protected $pos;
+  /** @var int */
+  protected $round;
+  
+  function __construct(Team $team1, Team $team2) {
+    $this->team1 = $team1;
+    $this->team2 = $team2;
+  }
+  
+  /**
+   * @param int $round
+   */
+  function setRound($round) {
+    $this->round = (int) $round;
+  }
   
   /**
    * Adds new entry
@@ -26,7 +46,7 @@ class CombatLogger extends \Nette\Object implements \Iterator {
    * @param string $name
    */
   function log($action, $result, CharacterEntity $character1, CharacterEntity $character2, $amount = 0, $name = "") {
-    $this->actions[] = new CombatAction($action, $result, $character1, $character2, $amount, $name);
+    $this->actions[$this->round][] = new CombatAction($action, $result, $character1, $character2, $amount, $name);
   }
   
   /**
@@ -36,7 +56,19 @@ class CombatLogger extends \Nette\Object implements \Iterator {
    * @return void
    */
   function logText($text) {
-    $this->actions[] = (string) $text;
+    $this->actions[$this->round][] = (string) $text;
+  }
+  
+  /**
+   * @return string
+   */
+  function __toString() {
+    $latte = new \Latte\Engine;
+    $params = array(
+      "team1" => $this->team1, "team2" => $this->team2, "actions" => $this->actions
+    );
+    $latte->setTempDirectory(APP_DIR . "/temp");
+    return $latte->renderToString(APP_DIR . "/templates/CombatLog.latte", $params);
   }
   
   function rewind() {

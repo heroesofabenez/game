@@ -192,3 +192,10 @@ ranking:
     title: "Hodnocení"
     previous: "Předchozí"
     next: "Následující"
+arena:
+    title: "Aréna"
+    localChampions: "Místní šampióni"
+    toChallenge: "Vyzvat"
+    foreignHeroes: "Cizí hrdinové"
+    champion: "Šampión"
+    championNotFound: "Šampión nenalezen"

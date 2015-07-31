@@ -1,0 +1,37 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>HeroesofAbenez - Combat</title>
+</head>
+<body>
+<article id="main">
+  <h1>Combat</h1>
+  <div id="team1">
+    <h3 class="teamName">{$team1->name}</h3>
+    <div class="members">
+      {foreach $team1 as $member}
+      {$member->name}: level {$member->level}{if !$iterator->last}<br>{/if}
+      {/foreach}
+    </div>
+  </div>
+  <div id="team2">
+    <h3 class="teamName">{$team2->name}</h3>
+    <div class="members">
+      {foreach $team2 as $member}
+      {$member->name}: level {$member->level}{if !$iterator->last}<br>{/if}
+      {/foreach}
+    </div>
+  </div>
+  <div id="combat">
+    <h3>Battle</h3>
+    {foreach $actions as $i => $round}
+      {if $i != 5000}<h4>Round {$i}</h4>{else}<h4>Results:</h4>{/if}
+      {foreach $round as $action}
+      {$action}{if !$iterator->last}<br>{/if}
+      {/foreach}
+    {/foreach}
+  </div>
+</article>
+</body>
+</html>

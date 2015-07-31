@@ -3,8 +3,7 @@ namespace HeroesofAbenez\Model;
 
 use HeroesofAbenez\Entities\Team,
     HeroesofAbenez\Entities\Character as CharacterEntity,
-    HeroesofAbenez\Entities\CharacterEffect,
-    HeroesofAbenez\Entities\CombatAction;
+    HeroesofAbenez\Entities\CharacterEffect;
 
 /**
  * Handles combat
@@ -54,7 +53,7 @@ class CombatBase extends \Nette\Object {
   function __construct(Team $team1, Team $team2) {
     $this->team1 = $team1;
     $this->team2 = $team2;
-    $this->log = new CombatLogger;
+    $this->log = new CombatLogger($team1, $team2);
     $this->onCombatStart[] = array($this, "deployPets");
     $this->onCombatStart[] = array($this, "equipItems");
     $this->onCombatEnd[] = array($this, "removeCombatEffects");
@@ -147,6 +146,7 @@ class CombatBase extends \Nette\Object {
    * @return void
    */
   function logCombatResult() {
+    $this->log->round = 5000;
     $text = "Combat ends. ";
     if($this->getWinner() === 1) $text .= $this->team1->name;
     else $text .= $this->team2->name;
@@ -161,7 +161,7 @@ class CombatBase extends \Nette\Object {
    */
   function logRoundNumber() {
     $this->round++;
-    $this->log->logText("Round $this->round");
+    $this->log->round = $this->round;
   }
   
   /**

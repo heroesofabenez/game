@@ -192,3 +192,10 @@ ranking:
     title: "Ranking"
     previous: "Previous"
     next: "Next"
+arena:
+    title: "Arena"
+    localChampions: "Local champions"
+    toChallenge: "Challenge"
+    foreignHeroes: "Foreign heroes"
+    champion: "Champion"
+    championNotFound: "Champion not found"
