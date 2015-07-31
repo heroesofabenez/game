@@ -50,19 +50,17 @@ class CharacterPresenter extends BasePresenter {
     $form->addRadioList("gender", "forms.createCharacter.genderRadio.label", array( 1 => "male", 2 => "female"))
          ->setRequired("forms.createCharacter.genderRadio.error")
          ->getSeparatorPrototype()->setName(NULL);
-    $racesList = $this->model->getRacesList();
-    foreach($racesList as $key => &$value) {
+    foreach($this->races as $key => &$value) {
       $value = "races.$key.name";
     }
-    $form->addSelect("race", "forms.createCharacter.raceSelect.label", $racesList)
+    $form->addSelect("race", "forms.createCharacter.raceSelect.label", $this->races)
          ->setPrompt("forms.createCharacter.raceSelect.prompt")
          ->setRequired("forms.createCharacter.raceSelect.error");
     $form["race"]->getControlPrototype()->onchange("changeRaceDescription(this.value)");
-    $classesList = $this->model->getClassesList();
-    foreach($classesList as $key => &$value) {
+    foreach($this->classes as $key => &$value) {
       $value = "classes.$key.name";
     }
-    $form->addSelect("class", "forms.createCharacter.classSelect.label", $classesList)
+    $form->addSelect("class", "forms.createCharacter.classSelect.label", $this->classes)
          ->setPrompt("forms.createCharacter.classSelect.prompt")
          ->setRequired("forms.createCharacter.classSelect.error");
     $form["class"]->getControlPrototype()->onchange("changeClassDescription(this.value)");
