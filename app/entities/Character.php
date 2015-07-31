@@ -233,9 +233,12 @@ default:
    * @throws \OutOfBoundsException
    */
   function deployPet($petId) {
-    $pet = $this->getPet($petId);
-    if(!$pet) throw new OutOfBoundsException("Pet to deploy was not found.");
-    else $this->active_pet = $petId;
+    try {
+      $pet = $this->getPet($petId);
+    } catch(OutOfBoundsException $e) {
+      throw $e;
+    }
+    $this->active_pet = $petId;
   }
   
   /**
