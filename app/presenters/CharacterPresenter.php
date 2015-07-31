@@ -16,6 +16,11 @@ class CharacterPresenter extends BasePresenter {
   /** @var \HeroesofAbenez\Entities\CharacterRace[] */
   protected $races;
   
+  /**
+   * Get list of races of classes
+   * 
+   * @return void
+   */
   function startup() {
     parent::startup();
     $this->classes = $this->model->getClassesList();
