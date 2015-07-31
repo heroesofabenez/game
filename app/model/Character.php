@@ -43,6 +43,12 @@ class Character extends \Nette\Object {
     return $racesList;
   }
   
+  /**
+   * Get data about specified race
+   * 
+   * @param int $id Race's id
+   * @return CharacterRace|bool
+   */
   function getRace($id) {
     $races = $this->getRacesList();
     $race = Arrays::get($races, $id, false);
@@ -67,6 +73,12 @@ class Character extends \Nette\Object {
     return $classesList;
   }
   
+  /**
+   * Get data about specified class
+   * 
+   * @param int $id Class' id
+   * @return CharacterClass|bool
+   */
   function getClass($id) {
     $classes = $this->getClassesList();
     $class = Arrays::get($classes, $id, false);
