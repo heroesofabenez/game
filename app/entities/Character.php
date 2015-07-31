@@ -75,6 +75,7 @@ class Character extends BaseEntity {
   protected $pets = array();
   /** @var int */
   protected $active_pet = null;
+  /** @var array Active effects */
   protected $effects = array();
   /** @var bool */
   protected $stunned = false;
