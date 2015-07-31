@@ -187,13 +187,13 @@ default:
    * @throws \OutOfBoundsException
    */
   function equipItem($itemId) {
-    $item = $this->getItem($itemId);
-    if(!$item) {
-      throw new OutOfBoundsException("Item to equip was not found.");
-    } else {
-      $itemBonus = new CharacterEffect($item->deployParams);
-      $this->addEffect($itemBonus);
+    try {
+      $item = $this->getItem($itemId);
+    } catch (\OutOfBoundsException $e) {
+      throw $e;
     }
+    $itemBonus = new CharacterEffect($item->deployParams);
+    $this->addEffect($itemBonus);
   }
   
   /**
@@ -204,13 +204,13 @@ default:
    * @throws \OutOfBoundsException
    */
   function unequipItem($itemId) {
-    $item = $this->getItem($itemId);
-    if(!$item) {
-      throw new OutOfBoundsException("Item to unequip was not found.");
-    } else {
-      $itemBonus = $item->deployParams();
-      $this->removeEffect($itemBonus->id);
+    try {
+      $item = $this->getItem($itemId);
+    } catch (\OutOfBoundsException $e) {
+      throw $e;
     }
+    $itemBonus = $item->deployParams();
+    $this->removeEffect($itemBonus->id);
   }
   
   /**
