@@ -9,6 +9,7 @@ use HeroesofAbenez\Entities\Character as CharacterEntity,
  * Combat log
  * 
  * @author Jakub Konečný
+ * @property-write int $round Current round
  */
 class CombatLogger extends \Nette\Object implements \Iterator {
   /** @var \HeroesofAbenez\Entities\Team First team */
@@ -19,10 +20,19 @@ class CombatLogger extends \Nette\Object implements \Iterator {
   protected $actions = array();
   /** @var int */
   protected $pos;
+  /** @var int */
+  protected $round;
   
   function __construct(Team $team1, Team $team2) {
     $this->team1 = $team1;
     $this->team2 = $team2;
+  }
+  
+  /**
+   * @param int $round
+   */
+  function setRound($round) {
+    $this->round = (int) $round;
   }
   
   /**
@@ -36,7 +46,7 @@ class CombatLogger extends \Nette\Object implements \Iterator {
    * @param string $name
    */
   function log($action, $result, CharacterEntity $character1, CharacterEntity $character2, $amount = 0, $name = "") {
-    $this->actions[] = new CombatAction($action, $result, $character1, $character2, $amount, $name);
+    $this->actions[$this->round][] = new CombatAction($action, $result, $character1, $character2, $amount, $name);
   }
   
   /**
@@ -46,15 +56,7 @@ class CombatLogger extends \Nette\Object implements \Iterator {
    * @return void
    */
   function logText($text) {
-    $this->actions[] = (string) $text . "<br>";
-  }
-  
-  /**
-   * @param int $round
-   * @return void
-   */
-  function logNewRound($round) {
-    $this->actions[] = "<h4>Round $round</h4>";
+    $this->actions[$this->round][] = (string) $text;
   }
   
   /**
