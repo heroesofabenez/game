@@ -66,9 +66,9 @@ class Character extends BaseEntity {
   /** @var int */
   protected $base_initiative;
   /** @var int */
-  protected $defense;
+  protected $defense = 0;
   /** @var int */
-  protected $base_defense;
+  protected $base_defense = 0;
   /** @var array Character's equipment */
   protected $equipment = array();
   /** @var array Character's pets */
@@ -135,10 +135,7 @@ default:
       } else { continue; }
     }
     $this->hitpoints = $this->max_hitpoints = $this->constitution * 5;
-    $this->damage = $this->base_damage = round($this->strength / 2) + 1;
-    $this->dodge = $this->base_dodge = $this->dexterity * 3;
-    $this->hit = $this->base_hit = $this->dexterity * 3;
-    $this->defense = $this->base_defense = 0;
+    $this->recalculateSecondaryStats();
   }
   
   /**
