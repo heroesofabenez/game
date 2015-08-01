@@ -50,21 +50,21 @@ class Character extends BaseEntity {
   /** @var int */
   protected $hitpoints;
   /** @var int */
-  protected $damage;
+  protected $damage = 0;
   /** @var int */
-  protected $base_damage;
+  protected $base_damage = 0;
   /** @var int */
-  protected $hit;
+  protected $hit = 0;
   /** @var int */
-  protected $base_hit;
+  protected $base_hit = 0;
   /** @var int */
-  protected $dodge;
+  protected $dodge = 0;
   /** @var int */
-  protected $base_dodge;
+  protected $base_dodge = 0;
   /** @var int */
-  protected $initiative;
+  protected $initiative = 0;
   /** @var int */
-  protected $base_initiative;
+  protected $base_initiative = 0;
   /** @var int */
   protected $defense = 0;
   /** @var int */
