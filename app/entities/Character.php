@@ -69,7 +69,7 @@ class Character extends BaseEntity {
   protected $defense = 0;
   /** @var int */
   protected $base_defense = 0;
-  /** @var array Character's equipment */
+  /** @var Equipment[] Character's equipment */
   protected $equipment = array();
   /** @var array Character's pets */
   protected $pets = array();
@@ -271,15 +271,39 @@ default:
   }
   
   /**
+   * Determine which (primary) stat should be used to calculate damage
+   * 
+   * @return string
+   */
+  function damageStat() {
+    $stat = "strength";
+    foreach($this->equipment as $item) {
+      if(!$item->worn OR $item->slot != "weapon") continue;
+      switch($item->type) {
+case "staff":
+  $stat = "intelligence";
+  break;
+case "club":
+  $stat = "constitution";
+case "bow":
+case "throwing knife":
+  $stat = "dexterity";
+  break;
+      }
+    }
+    return $stat;
+  }
+  
+  /**
    * Recalculate secondary stats from the the primary ones
    * 
    * @return void
    */
   function recalculateSecondaryStats() {
-    $stats = array("damage" => "strength", "hit" => "dexterity", "dodge" => "dexterity");
+    $stats = array("damage" => $this->damageStat(), "hit" => "dexterity", "dodge" => "dexterity");
     foreach($stats as $secondary => $primary) {
       $gain = $this->$secondary - $this->{"base_$secondary"};
-      if($primary === "strength") $base = round($this->$primary / 2) + 1;
+      if($secondary === "damage") $base = round($this->$primary / 2) + 1;
       else $base = $this->$primary * 3;
       $this->$secondary = $base + $gain;
     }
