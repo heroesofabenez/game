@@ -90,7 +90,7 @@ class Guild extends \Nette\Object {
    * 
    * @param int $id Id of guild
    * @param array $roles Return only members with these roles
-   * @return array
+   * @return \stdClass[]
    */
   function guildMembers($id, $roles = array()) {
     $return = array();
@@ -159,7 +159,7 @@ class Guild extends \Nette\Object {
    * Get unresolved applications to specified guild
    * 
    * @param int $id Guild's id
-   * @return array
+   * @return RequestEntity[]
    */
   function showApplications($id) {
     $return = array();
@@ -181,7 +181,7 @@ class Guild extends \Nette\Object {
   /**
    * Gets list of guilds
    *
-   * @return array list of guilds (id, name, description, leader)
+   * @return GuildEntity[] list of guilds (id, name, description, leader)
    */
   function listOfGuilds() {
     $return = array();

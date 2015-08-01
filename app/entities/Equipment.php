@@ -39,14 +39,23 @@ class Equipment extends BaseEntity {
     }
   }
   
+  /**
+   * @return bool
+   */
   function getWorn() {
     return $this->worn;
   }
   
+  /**
+   * @param bool $value
+   */
   function setWorn($value) {
     $this->worn = (bool) $value;
   }
   
+  /**
+   * @param int $value
+   */
   function setRequired_class($value) {
     $this->required_class = $value;
   }

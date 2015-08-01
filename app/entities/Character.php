@@ -71,11 +71,11 @@ class Character extends BaseEntity {
   protected $base_defense = 0;
   /** @var Equipment[] Character's equipment */
   protected $equipment = array();
-  /** @var array Character's pets */
+  /** @var Pet[] Character's pets */
   protected $pets = array();
   /** @var int */
   protected $active_pet = null;
-  /** @var array Active effects */
+  /** @var CharacterEffect[] Active effects */
   protected $effects = array();
   /** @var bool */
   protected $stunned = false;

@@ -294,6 +294,13 @@ class CombatBase extends \Nette\Object {
     $this->results = NULL;
   }
   
+  /**
+   * Log dealt damage
+   * 
+   * @param CharacterEntity $character1
+   * @param CharacterEntity $character2
+   * @return void
+   */
   function logDamage(CharacterEntity $character1, CharacterEntity $character2) {
     $team = $this->team1->hasMember($character1->id) ? 1: 2;
     $this->damage[$team] += $this->results["amount"];

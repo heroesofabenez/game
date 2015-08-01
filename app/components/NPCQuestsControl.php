@@ -45,7 +45,7 @@ class NPCQuestsControl extends \Nette\Application\UI\Control {
    * Gets list of available quests from the npc
    * 
    * @param int $npc Npc's id
-   * @return array
+   * @return \HeroesofAbenez\Entities\Quest[]
    */
   function getQuests() {
     $return = $this->questModel->listOfQuests($this->npc->id);

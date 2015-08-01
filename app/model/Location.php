@@ -41,7 +41,7 @@ class Location extends \Nette\Object {
    * Gets list of stages
    * 
    * @param int $area Return stages only from specified area. 0 = all areas
-   * @return array list of stages
+   * @return Stage[] list of stages
    */
   function listOfStages($area = 0) {
     $return = array();
@@ -78,7 +78,7 @@ class Location extends \Nette\Object {
   /**
    * Gets routes between stages
    * 
-   * @return array
+   * @return \stdClass[]
    */
   function stageRoutes() {
     $return = array();
@@ -98,7 +98,7 @@ class Location extends \Nette\Object {
   /**
    * Gets list of areas
    * 
-   * @return array list of stages
+   * @return Area[] list of stages
    */
   function listOfAreas() {
     $areas = $this->cache->load("areas");

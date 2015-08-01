@@ -32,7 +32,7 @@ class Equipment {
   /**
    * Gets list of all equipment
    * 
-   * @return array
+   * @return EquipmentEntity[]
    */
   function listOfEquipment() {
     $return = array();
@@ -52,6 +52,7 @@ class Equipment {
   /**
    * Gets data about specified equipment
    * @param int $id
+   * @return EquipmentEntity|bool
    */
   function view($id) {
     $equipments = $this->listOfEquipment();

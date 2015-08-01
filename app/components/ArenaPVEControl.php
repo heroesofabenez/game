@@ -13,7 +13,7 @@ class ArenaPVEControl extends ArenaControl {
   protected $arena = "champions";
   
   /**
-   * @return array
+   * @return \Nette\Database\Table\ActiveRow[]
    */
   protected function getOpponents() {
     $level = $this->user->identity->level;

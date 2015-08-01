@@ -34,7 +34,7 @@ class NPCShopControl extends \Nette\Application\UI\Control {
   /**
    * Get items in npc's shop
    * 
-   * @return array
+   * @return \HeroesofAbenez\Entities\Item[]
    */
   function getItems() {
     $return = array();

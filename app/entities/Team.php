@@ -11,7 +11,7 @@ namespace HeroesofAbenez\Entities;
 class Team extends BaseEntity implements \Iterator {
   /** @var string Name of the team */
   protected $name;
-  /** @var array Characters in the team */
+  /** @var Character[] Characters in the team */
   protected $members = array();
   /** @var int */
   protected $pos;

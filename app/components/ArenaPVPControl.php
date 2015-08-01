@@ -11,7 +11,7 @@ class ArenaPVPControl extends ArenaControl {
   protected $arena = "heroes";
   
   /**
-   * @return array
+   * @return \Nette\Database\Table\ActiveRow[]
    */
   function getOpponents() {
     $level = $this->user->identity->level;
@@ -38,6 +38,12 @@ class ArenaPVPControl extends ArenaControl {
     return array("money" => $money, "experience" => $experience);
   }
   
+  /**
+   * Fight a player
+   * 
+   * @param int $id Player's id
+   * @return void
+   */
   function handleFight($id) {
     try {
       $enemy = $this->getPlayer($id);
