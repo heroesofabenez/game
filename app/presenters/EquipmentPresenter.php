@@ -20,11 +20,9 @@ class EquipmentPresenter extends BasePresenter {
   function renderView($id) {
     $item = $this->model->view($id);
     if(!$item) $this->forward("notfound");
-    $classes = $this->characterModel->getClassesList();
-    $item->required_class = $classes[$item->required_class];
     $this->template->item = $item;
     $this->template->level = $this->user->identity->level;
-    $this->template->class = $this->profileModel->getClassName($this->user->identity->occupation);
+    $this->template->class = $this->user->identity->occupation;
   }
 }
 ?>
