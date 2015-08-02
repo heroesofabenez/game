@@ -10,7 +10,7 @@ use Nette\Security\User,
     Kdyby\Translation\Translator,
     HeroesofAbenez\Entities\Character,
     HeroesofAbenez\Entities\Team,
-    HeroesofAbenez\Model\CombatBase;
+    HeroesofAbenez\Model\CombatDuel;
 
 /**
  * Basic Arena Control
@@ -24,7 +24,7 @@ abstract class ArenaControl extends \Nette\Application\UI\Control {
   protected $profileModel;
   /** @var \HeroesofAbenez\Model\Equipment */
   protected $equipmentModel;
-  /** @var \HeroesofAbenez\Model\CombatBase */
+  /** @var \HeroesofAbenez\Model\CombatDuel */
   protected $combat;
   /** @var \HeroesofAbenez\Model\CombatLogManager */
   protected $log;
@@ -35,7 +35,7 @@ abstract class ArenaControl extends \Nette\Application\UI\Control {
   /** @var string */
   protected $arena;
   
-  function __construct(User $user, Profile $profileModel, Equipment $equipmentModel, CombatBase $combat, CombatLogManager $log, Database $db, Translator $translator) {
+  function __construct(User $user, Profile $profileModel, Equipment $equipmentModel, CombatDuel $combat, CombatLogManager $log, Database $db, Translator $translator) {
     $this->user = $user;
     $this->profileModel = $profileModel;
     $this->equipmentModel = $equipmentModel;
@@ -99,21 +99,16 @@ abstract class ArenaControl extends \Nette\Application\UI\Control {
    */
   protected function doDuel(Character $opponent) {
     $player = $this->getPlayer($this->user->id);
-    $team1 = new Team($player->name);
-    $team1->addMember($player);
-    $team2 = new Team($opponent->name);
-    $team2->addMember($opponent);
-    $combat = $this->combat;
-    $combat->setTeams($team1, $team2);
-    $winner = $combat->execute();
+    $this->combat->setParticipants($player, $opponent);
+    $winner = $this->combat->execute();
     if($winner === 1) {
       $rewards = $this->calculateRewards($player, $opponent);
       $data = "money=money+{$rewards["money"]}, experience=experience+{$rewards["experience"]}";
       $where = array("id" => $this->user->id);
       $this->db->query("UPDATE characters SET $data WHERE ?", $where);
-      $combat->log->logText("$player->name gets {$rewards["money"]} silver marks and {$rewards["experience"]} experiences.");
+      $this->combat->log->logText("$player->name gets {$rewards["money"]} silver marks and {$rewards["experience"]} experiences.");
     }
-    $combatId = $this->saveCombat($combat->log);
+    $combatId = $this->saveCombat($this->combat->log);
     $this->presenter->redirect("Combat:view", array("id" => $combatId));
   }
   
