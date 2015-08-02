@@ -25,6 +25,8 @@ services:
     authenticator: HeroesofAbenez\Auth\Authenticator
     authorizator: HeroesofAbenez\Auth\Authorizator::create
     cache.cache: Nette\Caching\Cache(@cache.storage, "data")
+    combat.base: HeroesofAbenez\Model\CombatBase
+    combat.logger: HeroesofAbenez\Model\CombatLogger
     chat.global: HeroesofAbenez\Chat\GlobalChatControlFactory
     chat.local: HeroesofAbenez\Chat\LocalChatControlFactory
     chat.guild: HeroesofAbenez\Chat\GuildChatControlFactory

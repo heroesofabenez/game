@@ -46,8 +46,8 @@ class CombatBase extends \Nette\Object {
   /** @var array Temporary variable for results of an action */
   protected $results;
   
-  function __construct() {
-    $this->log = new CombatLogger;
+  function __construct(CombatLogger $logger) {
+    $this->log = $logger;
     $this->onCombatStart[] = array($this, "deployPets");
     $this->onCombatStart[] = array($this, "equipItems");
     $this->onCombatEnd[] = array($this, "removeCombatEffects");

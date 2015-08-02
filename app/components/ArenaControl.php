@@ -24,6 +24,8 @@ abstract class ArenaControl extends \Nette\Application\UI\Control {
   protected $profileModel;
   /** @var \HeroesofAbenez\Model\Equipment */
   protected $equipmentModel;
+  /** @var \HeroesofAbenez\Model\CombatBase */
+  protected $combat;
   /** @var \HeroesofAbenez\Model\CombatLogManager */
   protected $log;
   /** @var \Nette\Database\Context */
@@ -33,10 +35,11 @@ abstract class ArenaControl extends \Nette\Application\UI\Control {
   /** @var string */
   protected $arena;
   
-  function __construct(User $user, Profile $profileModel, Equipment $equipmentModel, CombatLogManager $log, Database $db, Translator $translator) {
+  function __construct(User $user, Profile $profileModel, Equipment $equipmentModel, CombatBase $combat, CombatLogManager $log, Database $db, Translator $translator) {
     $this->user = $user;
     $this->profileModel = $profileModel;
     $this->equipmentModel = $equipmentModel;
+    $this->combat = $combat;
     $this->log = $log;
     $this->db = $db;
     $this->translator = $translator;
@@ -100,7 +103,7 @@ abstract class ArenaControl extends \Nette\Application\UI\Control {
     $team1->addMember($player);
     $team2 = new Team($opponent->name);
     $team2->addMember($opponent);
-    $combat = new CombatBase;
+    $combat = $this->combat;
     $combat->setTeams($team1, $team2);
     $winner = $combat->execute();
     if($winner === 1) {
