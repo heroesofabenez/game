@@ -7,7 +7,7 @@ namespace HeroesofAbenez\Presenters;
  * @author Jakub Konečný
  */
 class CombatPresenter extends BasePresenter {
-  /** @var \HeroesofAbenez\Model\CombatLog @autowire */
+  /** @var \HeroesofAbenez\Model\CombatLogManager @autowire */
   protected $log;
   
   /**

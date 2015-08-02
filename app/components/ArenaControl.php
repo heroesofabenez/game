@@ -5,7 +5,7 @@ use Nette\Security\User,
     Nette\Database\Context as Database,
     HeroesofAbenez\Model\Profile,
     HeroesofAbenez\Model\Equipment,
-    HeroesofAbenez\Model\CombatLog,
+    HeroesofAbenez\Model\CombatLogManager,
     HeroesofAbenez\Model\CombatLogger,
     Kdyby\Translation\Translator,
     HeroesofAbenez\Entities\Character,
@@ -24,7 +24,7 @@ abstract class ArenaControl extends \Nette\Application\UI\Control {
   protected $profileModel;
   /** @var \HeroesofAbenez\Model\Equipment */
   protected $equipmentModel;
-  /** @var \HeroesofAbenez\Model\CombatLog */
+  /** @var \HeroesofAbenez\Model\CombatLogManager */
   protected $log;
   /** @var \Nette\Database\Context */
   protected $db;
@@ -33,7 +33,7 @@ abstract class ArenaControl extends \Nette\Application\UI\Control {
   /** @var string */
   protected $arena;
   
-  function __construct(User $user, Profile $profileModel, Equipment $equipmentModel, CombatLog $log, Database $db, Translator $translator) {
+  function __construct(User $user, Profile $profileModel, Equipment $equipmentModel, CombatLogManager $log, Database $db, Translator $translator) {
     $this->user = $user;
     $this->profileModel = $profileModel;
     $this->equipmentModel = $equipmentModel;
