@@ -17,6 +17,7 @@ $router = new RouteList;
 $router[] = new Route("ranking[/<action>][/<page=1 [0-9]+>]", "Ranking:characters");
 $router[] = new Route("map[/<action>]", "Map:local");
 $router[] = new Route("tavern[/<action>]", "Tavern:local");
+$router[] = new Route("postoffice", "Postoffice:received");
 $router[] = new Route("<presenter>/<id [0-9]+>", "Homepage:view");
 $router[] = new Route("<presenter>[/<action>][/<id>]", "Homepage:default");
 $container->addService("router", $router);
