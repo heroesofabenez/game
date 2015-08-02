@@ -100,7 +100,8 @@ abstract class ArenaControl extends \Nette\Application\UI\Control {
     $team1->addMember($player);
     $team2 = new Team($opponent->name);
     $team2->addMember($opponent);
-    $combat = new CombatBase($team1, $team2);
+    $combat = new CombatBase;
+    $combat->setTeams($team1, $team2);
     $winner = $combat->execute();
     if($winner === 1) {
       $rewards = $this->calculateRewards($player, $opponent);

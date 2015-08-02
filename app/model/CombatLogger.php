@@ -23,7 +23,15 @@ class CombatLogger extends \Nette\Object implements \Iterator {
   /** @var int */
   protected $round;
   
-  function __construct(Team $team1, Team $team2) {
+  /**
+   * Set teams
+   * 
+   * @param Team $team1
+   * @param Team $team2
+   * @return void
+   */
+  function setTeams(Team $team1, Team $team2) {
+    if($this->team1) exit("Teams has already been set.");
     $this->team1 = $team1;
     $this->team2 = $team2;
   }

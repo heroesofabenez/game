@@ -46,14 +46,8 @@ class CombatBase extends \Nette\Object {
   /** @var array Temporary variable for results of an action */
   protected $results;
   
-  /**
-   * @param \HeroesofAbenez\Entities\Team $team1 First team
-   * @param \HeroesofAbenez\Entities\Team $team2 Second team
-   */
-  function __construct(Team $team1, Team $team2) {
-    $this->team1 = $team1;
-    $this->team2 = $team2;
-    $this->log = new CombatLogger($team1, $team2);
+  function __construct() {
+    $this->log = new CombatLogger;
     $this->onCombatStart[] = array($this, "deployPets");
     $this->onCombatStart[] = array($this, "equipItems");
     $this->onCombatEnd[] = array($this, "removeCombatEffects");
@@ -65,6 +59,20 @@ class CombatBase extends \Nette\Object {
     $this->onAttack[] = array($this, "logResults");
     $this->onHeal[] = array($this, "heal");
     $this->onHeal[] = array($this, "logResults");
+  }
+  
+  /**
+   * Set teams
+   * 
+   * @param Team $team1
+   * @param Team $team2
+   * @return void
+   */
+  function setTeams(Team $team1, Team $team2) {
+    if($this->team1) exit("Teams has already been set.");
+    $this->team1 = $team1;
+    $this->team2 = $team2;
+    $this->log->setTeams($team1, $team2);
   }
   
   /**
@@ -228,6 +236,7 @@ class CombatBase extends \Nette\Object {
    * @return int Winning team
    */
   function execute() {
+    if(!$this->team1) exit("Teams are not set.");
     $this->onCombatStart();
     while($this->round < $this->round_limit) {
       if($this->start_round() > 0) break;
