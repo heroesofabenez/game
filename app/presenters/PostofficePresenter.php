@@ -1,7 +1,8 @@
 <?php
 namespace HeroesofAbenez\Presenters;
 
-use Nette\Application\UI\Form;
+use Nette\Application\UI\Form,
+    HeroesofAbenez\Postoffice;
 
 /**
  * Presenter Postoffice
@@ -9,22 +10,8 @@ use Nette\Application\UI\Form;
  * @author Jakub Konečný
  */
 class PostofficePresenter extends BasePresenter {
-  /** @var \HeroesofAbenez\Model\PostOffice @autowire */
-  protected $model;
-  
-  /**
-   * @return void
-   */
-  function renderReceived() {
-    $this->template->messages = $this->model->inbox();
-  }
-  
-  /**
-   * @return void
-   */
-  function renderSent() {
-    $this->template->messages = $this->model->sent();
-  }
+  /** @var Postoffice\PostofficeControlFactory @autowire */
+  protected $pofactory;
   
   /**
    * @return void
@@ -38,16 +25,17 @@ class PostofficePresenter extends BasePresenter {
    * @return void
    */
   function actionMessage($id) {
-    try {
-      $message = $this->model->message($id);
-      foreach($message as $key => $value) {
-       $this->template->$key = $value;
-      }
-    } catch(\Nette\Application\ForbiddenRequestException $e) {
-      $this->forward("cannotshow");
-    } catch(\Nette\Application\BadRequestException $e) {
-      $this->forward("notfound");
-    }
+    $status = $this->createComponentPostoffice()->messageStatus($id);
+    if($status === 0) $this->forward("notfound");
+    elseif($status === -1) $this->forward("cannotshow");
+    $this->template->id = $id;
+  }
+  
+  /**
+   * @return Postoffice\PostofficeControl
+   */
+  protected function createComponentPostoffice() {
+    return $this->pofactory->create();
   }
   
   /**
@@ -58,7 +46,7 @@ class PostofficePresenter extends BasePresenter {
   protected function createComponentNewMessageForm() {
     $form = new Form;
     $form->translator = $this->translator;
-    $chars = $this->model->getRecipients();
+    $chars = $this->createComponentPostoffice()->getRecipients();
     $form->addSelect("to", "forms.postOfficeNewMessage.toSelect.label", $chars)
          ->setPrompt("forms.postOfficeNewMessage.toSelect.prompt")
          ->setRequired("forms.postOfficeNewMessage.toSelect.error");
@@ -82,7 +70,7 @@ class PostofficePresenter extends BasePresenter {
     $data = array(
       "from" => $this->user->id, "to" => $values["to"], "subject" => $values["subject"], "text" => $values["message"]
     );
-    $this->model->sendMessage($data);
+    $this->createComponentPostoffice()->sendMessage($data);
     $this->flashMessage($this->translator->translate("messages.postoffice.messageSent"));
     $this->redirect("Postoffice:sent");
   }

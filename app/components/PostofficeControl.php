@@ -1,12 +1,12 @@
 <?php
-namespace HeroesofAbenez\Model;
+namespace HeroesofAbenez\Postoffice;
 
 /**
- * Post Office Model
+ * Postoffice Control
  *
  * @author Jakub Konečný
  */
-class PostOffice extends \Nette\Object {
+class PostofficeControl extends \Nette\Application\UI\Control {
   /** @var \Nette\Database\Context */
   protected $db;
   /** @var \Nette\Security\User */
@@ -14,12 +14,7 @@ class PostOffice extends \Nette\Object {
   /** @var HeroesofAbenez\Model\Profile */
   protected $profileModel;
   
-  /**
-   * @param \Nette\Database\Context $db
-   * @param \Nette\Security\User $user
-   * @param \HeroesofAbenez\Model\Profile $profileModel
-   */
-  function __construct(\Nette\Database\Context $db, \Nette\Security\User $user, Profile $profileModel) {
+  function __construct(\Nette\Database\Context $db, \Nette\Security\User $user, \HeroesofAbenez\Model\Profile $profileModel) {
     $this->db = $db;
     $this->user = $user;
     $this->profileModel = $profileModel;
@@ -30,7 +25,7 @@ class PostOffice extends \Nette\Object {
    * 
    * @return array
    */
-  function inbox() {
+  protected function getReceivedMessages() {
     $return = array();
     $messages = $this->db->table("messages")
       ->where("to", $this->user->id);
@@ -45,11 +40,21 @@ class PostOffice extends \Nette\Object {
   }
   
   /**
-   * Gets list of received messages
+   * @return void
+   */
+  function renderInbox() {
+    $template = $this->template;
+    $template->setFile(__DIR__ . "/postofficeInbox.latte");
+    $template->messages = $this->getReceivedMessages();
+    $template->render();
+  }
+  
+  /**
+   * Gets list of sent messages
    * 
    * @return array
    */
-  function sent() {
+  protected function getSentMessages() {
     $return = array();
     $messages = $this->db->table("messages")
       ->where("from", $this->user->id);
@@ -63,9 +68,30 @@ class PostOffice extends \Nette\Object {
     return $return;
   }
   
+  /**
+   * @return void
+   */
+  function renderOutbox() {
+    $template = $this->template;
+    $template->setFile(__DIR__ . "/postofficeOutbox.latte");
+    $template->messages = $this->getSentMessages();
+    $template->render();
+  }
+  
   protected function canShow($message) {
     if($message->from == $this->user->id OR $message->to == $this->user->id) return true;
     else return false;
+  }
+  
+  /**
+   * @param int $id
+   * @return int
+   */
+  function messageStatus($id) {
+    $message = $this->db->table("messages")->get($id);
+    if(!$message) return 0;
+    if(!$this->canShow($message)) return -1;
+    return 1;
   }
   
   /**
@@ -88,13 +114,24 @@ class PostOffice extends \Nette\Object {
     );
     return $return;
   }
-  
   /**
-   * @param array $data
+   * @param int $id Message's id
    * @return void
    */
-  function sendMessage(array $data) {
-    $this->db->query("INSERT INTO messages", $data);
+  function renderMessage($id) {
+    $template = $this->template;
+    $template->setFile(__DIR__ . "/postofficeMessage.latte");
+    try {
+      $message = $this->message($id);
+      foreach($message as $key => $value) {
+       $template->$key = $value;
+      }
+    } catch(\Nette\Application\ForbiddenRequestException $e) {
+      $this->presenter->forward("cannotshow");
+    } catch(\Nette\Application\BadRequestException $e) {
+      $this->presenter->forward("notfound");
+    }
+    $template->render();
   }
   
   /**
@@ -109,5 +146,18 @@ class PostOffice extends \Nette\Object {
     }
     return $chars;
   }
+  
+  /**
+   * @param array $data
+   * @return void
+   */
+  function sendMessage(array $data) {
+    $this->db->query("INSERT INTO messages", $data);
+  }
+}
+
+interface PostofficeControlFactory {
+  /** @return PostofficeControl */
+  function create();
 }
 ?>

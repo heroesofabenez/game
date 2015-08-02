@@ -1,0 +1,14 @@
+  <h1>{_texts.postoffice.sentTitle}</h1>
+  <p>{_texts.postoffice.messages} <a href="{plink Postoffice:received}">{_texts.postoffice.received}</a> {_texts.postoffice.sent} <a href="{plink Postoffice:new}">{_texts.postoffice.new}</a></p>
+  <article id="messages">
+  {if count($messages) == 0}
+    {_texts.postoffice.noMessages}
+  {else}
+    <table>
+      <tr><th>{_texts.postoffice.to}</th><th>{_texts.postoffice.subject}</th><th>{_texts.postoffice.sent}</th><th></th></tr>
+      {foreach $messages as $message}
+      <tr><td>{$message->to}</td><td>{$message->subject}</td><td>{$message->sent}</td><td><a href="{plink Postoffice:message $message->id}">{_texts.postoffice.viewMessage}</a></td></tr>
+      {/foreach}
+    </table>
+  {/if}
+  </article>

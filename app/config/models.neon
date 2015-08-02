@@ -10,7 +10,6 @@ services:
     model.mapdrawer: HeroesofAbenez\Model\MapDrawer
     model.npc: HeroesofAbenez\Model\NPC
     model.permissions: HeroesofAbenez\Model\Permissions
-    model.postoffice: HeroesofAbenez\Model\PostOffice
     model.profile: HeroesofAbenez\Model\Profile
     model.request: HeroesofAbenez\Model\Request
     model.quest: HeroesofAbenez\Model\Quest

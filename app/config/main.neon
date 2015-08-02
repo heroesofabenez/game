@@ -34,6 +34,7 @@ services:
     npc.dialogue: HeroesofAbenez\NPC\NPCDialogueControlFactory
     npc.shop: HeroesofAbenez\NPC\NPCShopControlFactory
     npc.quests: HeroesofAbenez\NPC\NPCQuestsControlFactory
+    postoffice.postoffice: HeroesofAbenez\Postoffice\PostofficeControlFactory
     ranking.guilds: HeroesofAbenez\Ranking\GuildsRankingControlFactory
     ranking.characters: HeroesofAbenez\Ranking\CharactersRankingControlFactory
 extensions:
