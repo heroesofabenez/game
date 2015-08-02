@@ -1,5 +1,4 @@
 services:
-    combat.logManager: HeroesofAbenez\Model\CombatLogManager
     model.character: HeroesofAbenez\Model\Character
     model.equipment: HeroesofAbenez\Model\Equipment
     model.guild: HeroesofAbenez\Model\Guild
