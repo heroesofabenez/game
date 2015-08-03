@@ -9,7 +9,6 @@ use Nette\Security\User,
     HeroesofAbenez\Model\CombatLogger,
     Kdyby\Translation\Translator,
     HeroesofAbenez\Entities\Character,
-    HeroesofAbenez\Entities\Team,
     HeroesofAbenez\Model\CombatDuel;
 
 /**
