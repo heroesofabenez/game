@@ -3,7 +3,8 @@ namespace HeroesofAbenez\Model;
 
 use HeroesofAbenez\Entities\Character as CharacterEntity,
     HeroesofAbenez\Entities\CombatAction,
-    HeroesofAbenez\Entities\Team;
+    HeroesofAbenez\Entities\Team,
+    Nette\Bridges\ApplicationLatte\ILatteFactory;
 
 /**
  * Combat log
@@ -12,6 +13,8 @@ use HeroesofAbenez\Entities\Character as CharacterEntity,
  * @property-write int $round Current round
  */
 class CombatLogger extends \Nette\Object implements \Iterator {
+  /** @var \Latte\Engine */
+  protected $latte;
   /** @var \HeroesofAbenez\Entities\Team First team */
   protected $team1;
   /** @var \HeroesofAbenez\Entities\Team Second team */
@@ -22,6 +25,13 @@ class CombatLogger extends \Nette\Object implements \Iterator {
   protected $pos;
   /** @var int */
   protected $round;
+  
+  /**
+   * @param ILatteFactory $latteFactory
+   */
+  function __construct(ILatteFactory $latteFactory) {
+    $this->latte = $latteFactory->create();
+  }
   
   /**
    * Set teams
@@ -71,12 +81,11 @@ class CombatLogger extends \Nette\Object implements \Iterator {
    * @return string
    */
   function __toString() {
-    $latte = new \Latte\Engine;
     $params = array(
       "team1" => $this->team1, "team2" => $this->team2, "actions" => $this->actions
     );
-    $latte->setTempDirectory(APP_DIR . "/temp");
-    return $latte->renderToString(APP_DIR . "/templates/CombatLog.latte", $params);
+    $this->latte->setTempDirectory(APP_DIR . "/temp");
+    return $this->latte->renderToString(APP_DIR . "/templates/CombatLog.latte", $params);
   }
   
   function rewind() {
