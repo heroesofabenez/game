@@ -1,5 +1,5 @@
 <?php
-namespace HeroesofAbenez\Auth;
+namespace HeroesofAbenez\Model;
 
 use Nette\Security as NS;
 
@@ -8,7 +8,7 @@ use Nette\Security as NS;
    * 
    * @author Jakub Konečný
    */
-class Authenticator extends \Nette\Object implements NS\IAuthenticator {
+class UserManager extends \Nette\Object implements NS\IAuthenticator {
   /** @var \Nette\Database\Context Database context */
   protected $db;
   /** @var \HeroesofAbenez\Model\Permissions */

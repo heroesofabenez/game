@@ -22,7 +22,7 @@ session:
 services:
     arena.pve: HeroesofAbenez\Arena\ArenaPVEControlFactory
     arena.pvp: HeroesofAbenez\Arena\ArenaPVPControlFactory
-    authenticator: HeroesofAbenez\Auth\Authenticator
+    model.userManager: HeroesofAbenez\Model\UserManager
     authorizator: HeroesofAbenez\Auth\Authorizator::create
     cache.cache: Nette\Caching\Cache(@cache.storage, "data")
     combat.duel: HeroesofAbenez\Model\CombatDuel

@@ -106,7 +106,7 @@ class Character extends \Nette\Object {
     $data["constitution"] = $class->constitution + $race->constitution;
     $data["intelligence"] = $class->intelligence + $race->intelligence;
     $data["charisma"] = $class->charisma + $race->charisma;
-    $data["owner"] = Authenticator::getRealId();
+    $data["owner"] = UserManager::getRealId();
     $this->db->query("INSERT INTO characters", $data);
     
     $data["class"] = $values["class"];
