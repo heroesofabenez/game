@@ -54,7 +54,7 @@ class Profile extends \Nette\Object {
   }
   
   /**
-   * @return array
+   * @return \stdClass[]
    */
   function getCharacters() {
     $return = array();
@@ -62,7 +62,7 @@ class Profile extends \Nette\Object {
     if($characters === NULL) {
       $characters = $this->db->table("characters");
       foreach($characters as $char) {
-        $return[$char->id] = array(
+        $return[$char->id] = (object) array(
           "id" => $char->id, "name" => $char->name
         );
       }
@@ -82,7 +82,7 @@ class Profile extends \Nette\Object {
   function getCharacterId($name) {
     $characters = $this->getCharacters();
     foreach($characters as $char) {
-      if($char["name"] == $name) return $char["id"];
+      if($char->name == $name) return $char["id"];
     }
     return 0;
   }
@@ -95,7 +95,7 @@ class Profile extends \Nette\Object {
    */
   function getCharacterName($id) {
     $characters = $this->getCharacters();
-    return $characters[$id]["name"];
+    return $characters[$id]->name;
   }
   
   /**
