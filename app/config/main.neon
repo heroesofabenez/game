@@ -5,13 +5,6 @@ application:
     debugger: true
     mapping:
         *: HeroesofAbenez\Presenters\*Presenter
-database:
-    default:
-        dsn: %database.dsn%
-        user: %database.user%
-        password: %database.password%
-        debugger: true
-        explain: true
 tracy:
     email: %application.webmasterMail%
     strictMode: TRUE

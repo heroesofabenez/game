@@ -22,13 +22,14 @@ After that, you need to create file /app/config/local.neon with local settings
 for database and application. An example:
 
 parameters:
-    database:
-        dsn: "mysql:host=localhost;dbname=heroesofabenez"
-        user: heroesofabenez
-        password: qwerty
     application:
         server: sTest
         webmasterMail: "jakub.konecny2@centrum.cz"
+database:
+    default:
+        dsn: "mysql:host=localhost;dbname=heroesofabenez"
+        user: heroesofabenez
+        password: qwerty
 php:
     date.timezone: Europe/Prague
 di:
