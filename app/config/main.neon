@@ -2,7 +2,6 @@ includes:
     - local.neon
     - models.neon
 application:
-    debugger: true
     mapping:
         *: HeroesofAbenez\Presenters\*Presenter
 tracy:
