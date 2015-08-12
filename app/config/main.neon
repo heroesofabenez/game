@@ -13,9 +13,6 @@ session:
 services:
     authorizator: HeroesofAbenez\Auth\Authorizator::create
     cache.cache: Nette\Caching\Cache(@cache.storage, "data")
-    combat.duel: HeroesofAbenez\Model\CombatDuel
-    combat.logger: HeroesofAbenez\Model\CombatLogger
-    combat.logManager: HeroesofAbenez\Model\CombatLogManager
     chat.global: HeroesofAbenez\Chat\GlobalChatControlFactory
     chat.local: HeroesofAbenez\Chat\LocalChatControlFactory
     chat.guild: HeroesofAbenez\Chat\GuildChatControlFactory
@@ -28,6 +25,7 @@ services:
 extensions:
     translation: Kdyby\Translation\DI\TranslationExtension
     arena: HeroesofAbenez\Arena\DI\ArenaExtension
+    combat: HeroesofAbenez\Combat\DI\CombatExtension
 translation:
     default: en
     fallback: [en_US, en]
