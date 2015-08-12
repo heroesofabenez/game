@@ -121,7 +121,7 @@ class Profile extends \Nette\Object {
     if(!$char) { return false; }
     $stats = array(
       "id", "name", "gender", "level", "race", "description", "strength", "dexterity",
-      "constitution", "intelligence", "charisma", "race", "occupation", "specialization"
+      "constitution", "intelligence", "charisma", "occupation", "specialization"
     );
     foreach($stats as $stat) {
       $return[$stat] = $char->$stat;
