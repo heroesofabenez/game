@@ -26,7 +26,7 @@ class UserManager extends \Nette\Object implements NS\IAuthenticator {
    * Return real user's id
    * @return int
    */
-  static function getRealId() {
+  protected function getRealId() {
     $dev_servers = array("localhost", "kobliha", "hoa.local");
     if(in_array($_SERVER["SERVER_NAME"], $dev_servers)) {
       $uid = 1;
@@ -45,7 +45,7 @@ class UserManager extends \Nette\Object implements NS\IAuthenticator {
    * @return \Nette\Security\Identity User's identity
    */
   function authenticate(array $credentials) {
-    $uid = self::getRealId();
+    $uid = $this->getRealId();
     if($uid == 0) return new NS\Identity(0, "guest");
     $chars = $this->db->table("characters")->where("owner", $uid);
     if($chars->count() == 0) return new NS\Identity(-1, "guest");
@@ -86,7 +86,7 @@ class UserManager extends \Nette\Object implements NS\IAuthenticator {
     $data["constitution"] = $class->constitution + $race->constitution;
     $data["intelligence"] = $class->intelligence + $race->intelligence;
     $data["charisma"] = $class->charisma + $race->charisma;
-    $data["owner"] = self::getRealId();
+    $data["owner"] = $this->getRealId();
     $this->db->query("INSERT INTO characters", $data);
     
     $data["class"] = $values["class"];
