@@ -84,37 +84,5 @@ class Character extends \Nette\Object {
     $class = Arrays::get($classes, $id, false);
     return $class;
   }
-  
-  /**
-   * Creates new character
-   * 
-   * @param \Nette\Utils\ArrayHash $values
-   * @return array Stats of new character
-   */
-  function create($values) {
-    $data = array(
-      "name" => $values["name"], "race" => $values["race"],
-      "occupation" => $values["class"], "gender" => $values["gender"]
-    );
-    $chars = $this->db->table("characters")->where("name", $data["name"]);
-    if($chars->count() > 0) return false;
-    
-    $race = $this->getRace($values["race"]);
-    $class = $this->getClass($values["class"]);
-    $data["strength"] = $class->strength + $race->strength;
-    $data["dexterity"] = $class->dexterity + $race->dexterity;
-    $data["constitution"] = $class->constitution + $race->constitution;
-    $data["intelligence"] = $class->intelligence + $race->intelligence;
-    $data["charisma"] = $class->charisma + $race->charisma;
-    $data["owner"] = UserManager::getRealId();
-    $this->db->query("INSERT INTO characters", $data);
-    
-    $data["class"] = $values["class"];
-    $data["race"] = $values["race"];
-    if($data["gender"]  == 1) $data["gender"] = "male";
-    else $data["gender"] = "female";
-    unset($data["occupation"]);
-    return $data;
-  }
 }
 ?>

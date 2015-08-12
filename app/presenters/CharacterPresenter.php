@@ -11,6 +11,8 @@ use Nette\Application\UI\Form;
 class CharacterPresenter extends BasePresenter {
   /** @var \HeroesofAbenez\Model\Character @autowire */
   protected $model;
+  /** @var \HeroesofAbenez\Model\UserManager @autowire */
+  protected $userManager;
   /** @var \HeroesofAbenez\Entities\CharacterClass[] */
   protected $classes;
   /** @var \HeroesofAbenez\Entities\CharacterRace[] */
@@ -81,7 +83,7 @@ class CharacterPresenter extends BasePresenter {
    * @return void
    */
   function createCharacterFormSucceeded(Form $form, $values) {
-    $data = $this->model->create($values);
+    $data = $this->$userManager->create($values);
     if(!$data) $this->forward("Character:exists");
     $this->user->logout();
     $this->forward("Character:created", array("data" => serialize($data)));
