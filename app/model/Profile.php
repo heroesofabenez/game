@@ -58,13 +58,16 @@ class Profile extends \Nette\Object {
    */
   function getCharacters() {
     $return = array();
+    $stats = array("id", "name");
     $characters = $this->cache->load("characters");
     if($characters === NULL) {
       $characters = $this->db->table("characters");
-      foreach($characters as $char) {
-        $return[$char->id] = (object) array(
-          "id" => $char->id, "name" => $char->name
-        );
+      foreach($characters as $character) {
+        $char = new \stdClass;
+        foreach($stats as $stat) {
+          $char->$stat = $character->$stat;
+        }
+        $return[$character->id] = $char;
       }
       $this->cache->save("characters", $return);
     } else {
