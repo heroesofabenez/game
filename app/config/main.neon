@@ -13,9 +13,6 @@ session:
 services:
     authorizator: HeroesofAbenez\Auth\Authorizator::create
     cache.cache: Nette\Caching\Cache(@cache.storage, "data")
-    npc.dialogue: HeroesofAbenez\NPC\NPCDialogueControlFactory
-    npc.shop: HeroesofAbenez\NPC\NPCShopControlFactory
-    npc.quests: HeroesofAbenez\NPC\NPCQuestsControlFactory
     postoffice.postoffice: HeroesofAbenez\Postoffice\PostofficeControlFactory
     ranking.guilds: HeroesofAbenez\Ranking\GuildsRankingControlFactory
     ranking.characters: HeroesofAbenez\Ranking\CharactersRankingControlFactory
@@ -24,6 +21,7 @@ extensions:
     arena: HeroesofAbenez\Arena\DI\ArenaExtension
     combat: HeroesofAbenez\Combat\DI\CombatExtension
     chat: HeroesofAbenez\Chat\DI\ChatExtension
+    npc: HeroesofAbenez\NPC\DI\NPCExtension
 translation:
     default: en
     fallback: [en_US, en]
