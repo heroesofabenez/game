@@ -19,7 +19,7 @@ be able to run the application/use certain functions.
 
 Local configuration
 After that, you need to create file /app/config/local.neon with local settings 
-for database and application. An example:
+for database and application. The needed minimum is (just an example):
 
 parameters:
     application:
@@ -32,8 +32,6 @@ database:
         password: qwerty
 php:
     date.timezone: Europe/Prague
-di:
-    debugger: true
 
 On live servers add the following lines at the end of the file:
 application:
