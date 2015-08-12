@@ -13,9 +13,6 @@ session:
 services:
     authorizator: HeroesofAbenez\Auth\Authorizator::create
     cache.cache: Nette\Caching\Cache(@cache.storage, "data")
-    chat.global: HeroesofAbenez\Chat\GlobalChatControlFactory
-    chat.local: HeroesofAbenez\Chat\LocalChatControlFactory
-    chat.guild: HeroesofAbenez\Chat\GuildChatControlFactory
     npc.dialogue: HeroesofAbenez\NPC\NPCDialogueControlFactory
     npc.shop: HeroesofAbenez\NPC\NPCShopControlFactory
     npc.quests: HeroesofAbenez\NPC\NPCQuestsControlFactory
@@ -26,6 +23,7 @@ extensions:
     translation: Kdyby\Translation\DI\TranslationExtension
     arena: HeroesofAbenez\Arena\DI\ArenaExtension
     combat: HeroesofAbenez\Combat\DI\CombatExtension
+    chat: HeroesofAbenez\Chat\DI\ChatExtension
 translation:
     default: en
     fallback: [en_US, en]
