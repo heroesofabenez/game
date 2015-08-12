@@ -24,12 +24,13 @@ for database and application. The needed minimum is (just an example):
 parameters:
     application:
         server: sTest
-        webmasterMail: "jakub.konecny2@centrum.cz"
 database:
     default:
         dsn: "mysql:host=localhost;dbname=heroesofabenez"
         user: heroesofabenez
         password: qwerty
+tracy:
+    email: "jakub.konecny2@centrum.cz"
 php:
     date.timezone: Europe/Prague
 

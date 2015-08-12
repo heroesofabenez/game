@@ -5,7 +5,6 @@ application:
     mapping:
         *: HeroesofAbenez\Presenters\*Presenter
 tracy:
-    email: %application.webmasterMail%
     strictMode: TRUE
 session:
     savePath: "%tempDir%/sessions"
