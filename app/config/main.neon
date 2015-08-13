@@ -1,6 +1,5 @@
 includes:
     - local.neon
-    - models.neon
 application:
     mapping:
         *: HeroesofAbenez\Presenters\*Presenter
@@ -11,24 +10,16 @@ session:
     name: HOASESSID
     expiration: 1 hour
 services:
-    arena.pve: HeroesofAbenez\Arena\ArenaPVEControlFactory
-    arena.pvp: HeroesofAbenez\Arena\ArenaPVPControlFactory
-    authorizator: HeroesofAbenez\Auth\Authorizator::create
     cache.cache: Nette\Caching\Cache(@cache.storage, "data")
-    combat.duel: HeroesofAbenez\Model\CombatDuel
-    combat.logger: HeroesofAbenez\Model\CombatLogger
-    combat.logManager: HeroesofAbenez\Model\CombatLogManager
-    chat.global: HeroesofAbenez\Chat\GlobalChatControlFactory
-    chat.local: HeroesofAbenez\Chat\LocalChatControlFactory
-    chat.guild: HeroesofAbenez\Chat\GuildChatControlFactory
-    npc.dialogue: HeroesofAbenez\NPC\NPCDialogueControlFactory
-    npc.shop: HeroesofAbenez\NPC\NPCShopControlFactory
-    npc.quests: HeroesofAbenez\NPC\NPCQuestsControlFactory
     postoffice.postoffice: HeroesofAbenez\Postoffice\PostofficeControlFactory
-    ranking.guilds: HeroesofAbenez\Ranking\GuildsRankingControlFactory
-    ranking.characters: HeroesofAbenez\Ranking\CharactersRankingControlFactory
 extensions:
     translation: Kdyby\Translation\DI\TranslationExtension
+    arena: HeroesofAbenez\Arena\DI\ArenaExtension
+    combat: HeroesofAbenez\Combat\DI\CombatExtension
+    chat: HeroesofAbenez\Chat\DI\ChatExtension
+    model: HeroesofAbenez\Model\DI\HOAExtension
+    npc: HeroesofAbenez\NPC\DI\NPCExtension
+    ranking: HeroesofAbenez\Ranking\DI\RankingExtension
 translation:
     default: en
     fallback: [en_US, en]
