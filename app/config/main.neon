@@ -1,6 +1,5 @@
 includes:
     - local.neon
-    - models.neon
 application:
     mapping:
         *: HeroesofAbenez\Presenters\*Presenter
@@ -11,7 +10,6 @@ session:
     name: HOASESSID
     expiration: 1 hour
 services:
-    authorizator: HeroesofAbenez\Auth\Authorizator::create
     cache.cache: Nette\Caching\Cache(@cache.storage, "data")
     postoffice.postoffice: HeroesofAbenez\Postoffice\PostofficeControlFactory
 extensions:
@@ -19,6 +17,7 @@ extensions:
     arena: HeroesofAbenez\Arena\DI\ArenaExtension
     combat: HeroesofAbenez\Combat\DI\CombatExtension
     chat: HeroesofAbenez\Chat\DI\ChatExtension
+    model: HeroesofAbenez\Model\DI\HOAExtension
     npc: HeroesofAbenez\NPC\DI\NPCExtension
     ranking: HeroesofAbenez\Ranking\DI\RankingExtension
 translation:
