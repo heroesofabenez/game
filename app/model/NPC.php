@@ -28,7 +28,7 @@ class NPC extends \Nette\Object {
    * Gets list of npcs
    * 
    * @param int $stage Return npcs only from certain stage, 0 = all stages
-   * @return array
+   * @return NPCEntity[]
    */
   function listOfNpcs($stage = 0) {
     $return = array();

@@ -37,7 +37,7 @@ class Item extends \Nette\Object {
   /**
    * Gets list of all items
    * 
-   * @return array
+   * @return ItemEntity[]
    */
   function listOfItems() {
     $return = array();

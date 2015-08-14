@@ -52,7 +52,7 @@ class Permissions extends \Nette\Object {
   /**
    * Get permissions (from db or cache)
    * 
-   * @return array
+   * @return \stdClass[]
    */
   function getPermissions() {
     $roles = $this->getRoles();

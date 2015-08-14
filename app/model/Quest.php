@@ -32,7 +32,7 @@ class Quest extends \Nette\Object {
    * Gets list of quests
    * 
    * @param int $npc Return quests only from certain npc, 0 = all npcs
-   * @return array
+   * @return QuestEntity[]
    */
   function listOfQuests($npc = 0) {
     $return = array();

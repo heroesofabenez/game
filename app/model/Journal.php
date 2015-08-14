@@ -98,7 +98,7 @@ class Journal extends \Nette\Object {
   /**
    * Gets character's pets
    * 
-   * @return array
+   * @return Pet[]
    */
   function pets() {
     $return = array();
@@ -115,7 +115,7 @@ class Journal extends \Nette\Object {
    /**
    * Gets character's quests
    * 
-   * @return array
+   * @return JournalQuest[]
    */
   function quests() {
     $return = array();

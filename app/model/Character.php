@@ -28,7 +28,7 @@ class Character extends \Nette\Object {
   /**
    * Get list of races
    * 
-   * @return array
+   * @return CharacterRace[]
    */
   function getRacesList() {
     $racesList = $this->cache->load("races");
@@ -58,7 +58,7 @@ class Character extends \Nette\Object {
   /**
    * Get list of classes
    * 
-   * @return array
+   * @return CharacterClass[]
    */
   function getClassesList() {
     $classesList = $this->cache->load("classes");

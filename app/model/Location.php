@@ -41,7 +41,7 @@ class Location extends \Nette\Object {
    * Gets list of stages
    * 
    * @param int $area Return stages only from specified area. 0 = all areas
-   * @return Stage[] list of stages
+   * @return Stage[] List of stages
    */
   function listOfStages($area = 0) {
     $return = array();
@@ -167,7 +167,7 @@ class Location extends \Nette\Object {
    * Returns list of accessible stages (in player's current area,
    * player meets conditions for entering them)
    * 
-   * @return array
+   * @return Stage[]
    */
   function accessibleStages() {
     $stages = $this->listOfStages();
