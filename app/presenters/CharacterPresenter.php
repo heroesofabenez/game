@@ -83,7 +83,7 @@ class CharacterPresenter extends BasePresenter {
    * @return void
    */
   function createCharacterFormSucceeded(Form $form, $values) {
-    $data = $this->$userManager->create($values);
+    $data = $this->userManager->create($values);
     if(!$data) $this->forward("Character:exists");
     $this->user->logout();
     $this->forward("Character:created", array("data" => serialize($data)));
