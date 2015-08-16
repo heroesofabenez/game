@@ -21,6 +21,9 @@ class HOAExtension extends \Nette\DI\CompilerExtension {
       ->setFactory("HeroesofAbenez\Model\NPC");
     $builder->addDefinition($this->prefix("authorizator"))
       ->setFactory("HeroesofAbenez\Auth\Authorizator::create");
+    $builder->removeDefinition("router");
+    $builder->addDefinition("router")
+      ->setFactory("HeroesofAbenez\Model\RouterFactory::create");
   }
 }
 ?>
