@@ -5,8 +5,8 @@ namespace HeroesofAbenez\Entities;
  * Structure for a team in combat
  * 
  * @author Jakub Konečný
- * @property-read array $activeMembers
- * @property-read array $aliveMembers
+ * @property-read Character[] $activeMembers
+ * @property-read Character[] $aliveMembers
  */
 class Team extends BaseEntity implements \Iterator {
   /** @var string Name of the team */
@@ -52,7 +52,7 @@ class Team extends BaseEntity implements \Iterator {
   /**
    * Get active members (alive and not stunned) from the team
    * 
-   * @return array
+   * @return Character[]
    */
   function getActiveMembers() {
     $return = array();
@@ -65,7 +65,7 @@ class Team extends BaseEntity implements \Iterator {
   /**
    * Get alive members from the team
    * 
-   * @return array
+   * @return Character[]
    */
   function getAliveMembers() {
     $return = array();
