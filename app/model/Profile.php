@@ -39,7 +39,7 @@ class Profile extends \Nette\Object {
    */
   function getRaceName($id) {
     $racesList = $this->characterModel->getRacesList();
-    return $racesList[$id];
+    return $racesList[$id]->name;
   }
   
   /**
@@ -50,7 +50,7 @@ class Profile extends \Nette\Object {
    */
   function getClassName($id) {
     $classesList = $this->characterModel->getClassesList();
-    return $classesList[$id];
+    return $classesList[$id]->name;
   }
   
   /**
