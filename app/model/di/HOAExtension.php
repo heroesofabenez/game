@@ -15,7 +15,7 @@ class HOAExtension extends \Nette\DI\CompilerExtension {
     );
     foreach($services as $service) {
       $builder->addDefinition($this->prefix(lcfirst($service)))
-       ->setFactory("HeroesofAbenez\Model\\" . $service);
+        ->setFactory("HeroesofAbenez\Model\\" . $service);
     }
     $builder->addDefinition($this->prefix("npc"))
       ->setFactory("HeroesofAbenez\Model\NPC");
