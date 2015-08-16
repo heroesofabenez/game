@@ -1,5 +1,5 @@
 <?php
-namespace HeroesofAbenez\Auth;
+namespace HeroesofAbenez\Model;
 
 /**
  * Authorizator for the game
@@ -13,7 +13,7 @@ class Authorizator extends \Nette\Object {
   * @param \HeroesofAbenez\Model\Permissions $model
   * @return \Nette\Security\Permission
   */
-  static function create(\HeroesofAbenez\Model\Permissions $model) {
+  static function create(Permissions $model) {
     $permission = new \Nette\Security\Permission;
     $permission->addResource("guild");
     $permission->addRole("guest");
