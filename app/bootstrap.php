@@ -1,5 +1,4 @@
 <?php
-
 require WWW_DIR . "/vendor/autoload.php";
 Tracy\Debugger::enable(null, APP_DIR . "/log");
 
