@@ -13,22 +13,48 @@ class Profile extends \Nette\Object {
   protected $db;
   /** @var \Nette\Caching\Cache */
   protected $cache;
-  /** @var \HeroesofAbenez\Model\Character */
-  protected $characterModel;
   /** @var \HeroesofAbenez\Model\Permissions */
   protected $permissionsModel;
   
   /**
-   * @param \Nette\Caching\Cache $cache
    * @param \Nette\Database\Context $db
-   * @param \HeroesofAbenez\Model\Character $characterModel
+   * @param \Nette\Caching\Cache $cache
    * @param \HeroesofAbenez\Model\Permissions $permissionsModel
    */
-  function __construct(\Nette\Caching\Cache $cache, \Nette\Database\Context $db, Character $characterModel, Permissions $permissionsModel) {
+  function __construct(\Nette\Database\Context $db, \Nette\Caching\Cache $cache, \HeroesofAbenez\Model\Permissions $permissionsModel) {
     $this->db = $db;
-    $this->characterModel = $characterModel;
     $this->cache = $cache;
     $this->permissionsModel = $permissionsModel;
+  }
+  
+  /**
+   * Get list of races
+   * 
+   * @return CharacterRace[]
+   */
+  function getRacesList() {
+    $racesList = $this->cache->load("races");
+    if($racesList === NULL) {
+      $racesList = array();
+      $races = $this->db->table("character_races");
+      foreach($races as $race) {
+        $racesList[$race->id] = new CharacterRace($race);
+      }
+      $this->cache->save("races", $racesList);
+    }
+    return $racesList;
+  }
+  
+  /**
+   * Get data about specified race
+   * 
+   * @param int $id Race's id
+   * @return CharacterRace|bool
+   */
+  function getRace($id) {
+    $races = $this->getRacesList();
+    $race = Arrays::get($races, $id, false);
+    return $race;
   }
   
   /**
@@ -38,8 +64,38 @@ class Profile extends \Nette\Object {
    * @return string
    */
   function getRaceName($id) {
-    $racesList = $this->characterModel->getRacesList();
+    $racesList = $this->getRacesList();
     return $racesList[$id]->name;
+  }
+  
+  /**
+   * Get list of classes
+   * 
+   * @return CharacterClass[]
+   */
+  function getClassesList() {
+    $classesList = $this->cache->load("classes");
+    if($classesList === NULL) {
+      $classesList = array();
+      $classes = $this->db->table("character_classess");
+      foreach($classes as $class) {
+        $classesList[$class->id] = new CharacterClass($class);
+      }
+      $this->cache->save("classes", $classesList);
+    }
+    return $classesList;
+  }
+  
+  /**
+   * Get data about specified class
+   * 
+   * @param int $id Class' id
+   * @return CharacterClass|bool
+   */
+  function getClass($id) {
+    $classes = $this->getClassesList();
+    $class = Arrays::get($classes, $id, false);
+    return $class;
   }
   
   /**
@@ -49,7 +105,7 @@ class Profile extends \Nette\Object {
    * @return string
    */
   function getClassName($id) {
-    $classesList = $this->characterModel->getClassesList();
+    $classesList = $this->getClassesList();
     return $classesList[$id]->name;
   }
   

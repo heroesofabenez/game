@@ -9,7 +9,7 @@ use Nette\Application\UI\Form;
    * @author Jakub Konečný
    */
 class CharacterPresenter extends BasePresenter {
-  /** @var \HeroesofAbenez\Model\Character @autowire */
+  /** @var \HeroesofAbenez\Model\Profile @autowire */
   protected $model;
   /** @var \HeroesofAbenez\Model\UserManager @autowire */
   protected $userManager;

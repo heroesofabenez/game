@@ -9,8 +9,6 @@ namespace HeroesofAbenez\Model\DI;
 class HOAExtension extends \Nette\DI\CompilerExtension {
   function loadConfiguration() {
     $builder = $this->getContainerBuilder();
-    $builder->addDefinition($this->prefix("character"))
-      ->setFactory("HeroesofAbenez\Model\Character");
     $builder->addDefinition($this->prefix("equipment"))
       ->setFactory("HeroesofAbenez\Model\Equipment");
     $builder->addDefinition($this->prefix("guild"))

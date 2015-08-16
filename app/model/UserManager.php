@@ -13,16 +13,18 @@ class UserManager extends \Nette\Object implements NS\IAuthenticator {
   protected $db;
   /** @var \HeroesofAbenez\Model\Permissions */
   protected $permissionsModel;
-  /** @var \HeroesofAbenez\Model\Character */
-  protected $characterModel;
+  /** @var \HeroesofAbenez\Model\Profile */
+  protected $profileModel;
   
   /**
-   * @param \Nette\Database\Context $database Database context
+   * @param \Nette\Database\Context $db
+   * @param \HeroesofAbenez\Model\Permissions $permissionsModel
+   * @param \HeroesofAbenez\Model\Profile $profileModel
    */
-  function __construct(\Nette\Database\Context $database, Permissions $permissionsModel, Character $characterModel) {
-    $this->db = $database;
+  function __construct(\Nette\Database\Context $db, \HeroesofAbenez\Model\Permissions $permissionsModel, \HeroesofAbenez\Model\Profile $profileModel) {
+    $this->db = $db;
     $this->permissionsModel = $permissionsModel;
-    $this->characterModel = $characterModel;
+    $this->profileModel = $profileModel;
   }
   
   /**
@@ -82,8 +84,8 @@ class UserManager extends \Nette\Object implements NS\IAuthenticator {
     $chars = $this->db->table("characters")->where("name", $data["name"]);
     if($chars->count() > 0) return false;
     
-    $race = $this->characterModel->getRace($values["race"]);
-    $class = $this->characterModel->getClass($values["class"]);
+    $race = $this->profileModel->getRace($values["race"]);
+    $class = $this->profileModel->getClass($values["class"]);
     $data["strength"] = $class->strength + $race->strength;
     $data["dexterity"] = $class->dexterity + $race->dexterity;
     $data["constitution"] = $class->constitution + $race->constitution;

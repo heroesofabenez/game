@@ -9,8 +9,6 @@ namespace HeroesofAbenez\Presenters;
 class EquipmentPresenter extends BasePresenter {
   /** @var \HeroesofAbenez\Model\Equipment @autowire */
   protected $model;
-  /** @var \HeroesofAbenez\Model\Character @autowire */
-  protected $characterModel;
   /** @var \HeroesofAbenez\Model\Profile @autowire */
   protected $profileModel;
   
