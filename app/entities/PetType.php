@@ -4,6 +4,8 @@ namespace HeroesofAbenez\Entities;
 /**
  * Data structure for pet type
  *
+ * @property-read string $bonusStat
+ * @property-read int $bonusValue
  * @author Jakub Konečný
  */
 class PetType extends BaseEntity {
@@ -22,6 +24,18 @@ class PetType extends BaseEntity {
     foreach($row as $key => $value) {
       $this->$key = $value;
     }
+  }
+  
+  function getBonusStat() {
+    return $this->bonus_stat;
+  }
+  
+  function getBonusValue() {
+    return $this->bonus_value;
+  }
+  
+  function __toString() {
+    return $this->name;
   }
 }
 ?>
