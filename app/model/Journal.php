@@ -107,7 +107,7 @@ class Journal extends \Nette\Object {
       ->where("owner", $uid);
     foreach($pets as $pet) {
       $type = $this->db->table("pet_types")->get($pet->id);
-      $return[] = new Pet($pet->id, $type->name, $pet->name, $pet->bonus_stat, $pet->bonus_value, $pet->deployed);
+      $return[] = new Pet($pet->id, $type->name, $pet->name, $type->bonus_stat, $type->bonus_value, $pet->deployed);
     }
     return $return;
   }
