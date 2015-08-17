@@ -4,38 +4,54 @@ namespace HeroesofAbenez\Entities;
 /**
  * Structure for pet
  * 
+ * @property-read int $typeId
+ * @property-read string $bonusStat To which stat the pet provides bonus
+ * @property-read int $bonusValue Size of provided bonus
  * @property-read array $deployParams
  * @author Jakub Konečný
  */
 class Pet extends BaseEntity {
   /** @var int Pet's id */
   protected $id;
-  /** @var string Pet's type */
+  /** @var PetType Pet's type */
   protected $type;
   /** @var string Pet's name */
   protected $name;
-  /** @var string To which stat the pet provides bonus */
-  protected $bonusStat;
-  /** @var int Size of provided bonus */
-  protected $bonusValue;
   /** @var bool Is the pet deployed? */
   protected $deployed;
   
   /**
    * @param int $id
-   * @param string $type
+   * @param PetType $type
    * @param string $name
-   * @param string $bonus_stat
-   * @param int $bonus_value
    * @param bool $deployed
    */
-  function __construct($id, $type, $name, $bonus_stat, $bonus_value, $deployed = false) {
+  function __construct($id, PetType $type, $name, $deployed = false) {
     $this->id = $id;
     $this->type = $type;
     $this->name = $name;
-    $this->bonusStat = $bonus_stat;
-    $this->bonusValue = $bonus_value;
     $this->deployed = (bool) $deployed;
+  }
+  
+  /**
+   * @return string
+   */
+  function getBonusStat() {
+    return $this->type->bonusStat;
+  }
+  
+  /**
+   * @return int
+   */
+  function getBonusValue() {
+    return $this->type->bonusValue;
+  }
+  
+  /**
+   * @return int
+   */
+  function getTypeId() {
+    return $this->type->id;
   }
   
   /**
@@ -47,8 +63,8 @@ class Pet extends BaseEntity {
     return array(
       "id" => "pet" . $this->id . "bonusEffect",
       "type" => "buff",
-      "stat" => $this->bonusStat,
-      "value" => $this->bonusValue,
+      "stat" => $this->getBonusStat(),
+      "value" => $this->getBonusValue(),
       "source" => "pet",
       "duration" => "combat"
     );

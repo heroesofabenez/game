@@ -195,7 +195,7 @@ class Profile extends \Nette\Object {
       $pet = $activePet->fetch();
       $petType = $this->petModel->viewType($pet->type);
       $petName = ($pet->name === NULL) ? "Unnamed" : $petName = $pet->name . ",";
-      $return["pet"] = new PetEntity($id, $petType->id, $petName, $petType->bonus_stat, $petType->bonus_value);
+      $return["pet"] = new PetEntity($id, $petType, $petName);
     } else {
       $return["pet"] = false;
     }

@@ -26,10 +26,16 @@ class PetType extends BaseEntity {
     }
   }
   
+  /**
+   * @return string
+   */
   function getBonusStat() {
     return $this->bonus_stat;
   }
   
+  /**
+   * @return int
+   */
   function getBonusValue() {
     return $this->bonus_value;
   }
