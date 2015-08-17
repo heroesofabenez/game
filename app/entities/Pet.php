@@ -15,9 +15,9 @@ class Pet extends BaseEntity {
   /** @var string Pet's name */
   protected $name;
   /** @var string To which stat the pet provides bonus */
-  protected $bonus_stat;
+  protected $bonusStat;
   /** @var int Size of provided bonus */
-  protected $bonus_value;
+  protected $bonusValue;
   /** @var bool Is the pet deployed? */
   protected $deployed;
   
@@ -33,8 +33,8 @@ class Pet extends BaseEntity {
     $this->id = $id;
     $this->type = $type;
     $this->name = $name;
-    $this->bonus_stat = $bonus_stat;
-    $this->bonus_value = $bonus_value;
+    $this->bonusStat = $bonus_stat;
+    $this->bonusValue = $bonus_value;
     $this->deployed = (bool) $deployed;
   }
   
@@ -47,8 +47,8 @@ class Pet extends BaseEntity {
     return array(
       "id" => "pet" . $this->id . "bonusEffect",
       "type" => "buff",
-      "stat" => $this->bonus_stat,
-      "value" => $this->bonus_value,
+      "stat" => $this->bonusStat,
+      "value" => $this->bonusValue,
       "source" => "pet",
       "duration" => "combat"
     );
