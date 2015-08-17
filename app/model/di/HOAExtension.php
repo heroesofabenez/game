@@ -11,7 +11,7 @@ class HOAExtension extends \Nette\DI\CompilerExtension {
     $builder = $this->getContainerBuilder();
     $services = array(
       "Equipment", "Guild", "Intro", "Item", "Journal", "Location", "Map",
-      "MapDrawer", "Permissions", "Profile", "Request", "Quest", "UserManager"
+      "MapDrawer", "Permissions", "Pet", "Profile", "Request", "Quest", "UserManager"
     );
     foreach($services as $service) {
       $builder->addDefinition($this->prefix(lcfirst($service)))

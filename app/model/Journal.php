@@ -2,7 +2,7 @@
 namespace HeroesofAbenez\Model;
 
 use HeroesofAbenez\Entities\JournalQuest,
-    HeroesofAbenez\Entities\Pet;
+    HeroesofAbenez\Entities\Pet as PetEntity;
 
 /**
  * Journal Model
@@ -20,14 +20,24 @@ class Journal extends \Nette\Object {
   protected $locationModel;
   /** @var \HeroesofAbenez\Model\Guild */
   protected $guildModel;
+  /** @var \HeroesofAbenez\Model\Pet */
+  protected $petModel;
   
   /**
    * @param \Nette\Security\User $user
    * @param \Nette\Database\Context $db
+   * @param \HeroesofAbenez\Model\Quest $questModel
+   * @param \HeroesofAbenez\Model\Location $locationModel
+   * @param \HeroesofAbenez\Model\Guild $guildModel
+   * @param \HeroesofAbenez\Model\Pet $petModel
    */
-  function __construct(\Nette\Security\User $user,\Nette\Database\Context $db) {
+  function __construct(\Nette\Security\User $user, \Nette\Database\Context $db, \HeroesofAbenez\Model\Quest $questModel, \HeroesofAbenez\Model\Location $locationModel, \HeroesofAbenez\Model\Guild $guildModel, \HeroesofAbenez\Model\Pet $petModel) {
     $this->user = $user;
     $this->db = $db;
+    $this->questModel = $questModel;
+    $this->locationModel = $locationModel;
+    $this->guildModel = $guildModel;
+    $this->petModel = $petModel;
   }
   
   function setQuestModel(Quest $questModel) {
@@ -98,7 +108,7 @@ class Journal extends \Nette\Object {
   /**
    * Gets character's pets
    * 
-   * @return Pet[]
+   * @return PetEntity[]
    */
   function pets() {
     $return = array();
@@ -106,8 +116,8 @@ class Journal extends \Nette\Object {
     $pets = $this->db->table("pets")
       ->where("owner", $uid);
     foreach($pets as $pet) {
-      $type = $this->db->table("pet_types")->get($pet->id);
-      $return[] = new Pet($pet->id, $type->name, $pet->name, $type->bonus_stat, $type->bonus_value, $pet->deployed);
+      $type = $this->petModel->viewType($pet->type);
+      $return[] = new PetEntity($pet->id, $type->name, $pet->name, $type->bonus_stat, $type->bonus_value, $pet->deployed);
     }
     return $return;
   }

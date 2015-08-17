@@ -1,7 +1,7 @@
 <?php
 namespace HeroesofAbenez\Model;
 
-use HeroesofAbenez\Entities\Pet;
+use HeroesofAbenez\Entities\Pet as PetEntity;
 
   /**
    * Model Profile
@@ -15,16 +15,14 @@ class Profile extends \Nette\Object {
   protected $cache;
   /** @var \HeroesofAbenez\Model\Permissions */
   protected $permissionsModel;
+  /** @var \HeroesofAbenez\Model\Pet */
+  protected $petModel;
   
-  /**
-   * @param \Nette\Database\Context $db
-   * @param \Nette\Caching\Cache $cache
-   * @param \HeroesofAbenez\Model\Permissions $permissionsModel
-   */
-  function __construct(\Nette\Database\Context $db, \Nette\Caching\Cache $cache, \HeroesofAbenez\Model\Permissions $permissionsModel) {
+  function __construct(\Nette\Database\Context $db, \Nette\Caching\Cache $cache, Permissions $permissionsModel, Pet $petModel) {
     $this->db = $db;
     $this->cache = $cache;
     $this->permissionsModel = $permissionsModel;
+    $this->petModel = $petModel;
   }
   
   /**
@@ -195,9 +193,9 @@ class Profile extends \Nette\Object {
     $activePet = $this->db->table("pets")->where("owner=$char->id")->where("deployed=1");
     if($activePet->count() == 1) {
       $pet = $activePet->fetch();
-      $petType = $this->db->table("pet_types")->get($pet->type);
+      $petType = $this->petModel->viewType($pet->type);
       $petName = ($pet->name === NULL) ? "Unnamed" : $petName = $pet->name . ",";
-      $return["pet"] = new Pet($id, $petType->id, $petName, $petType->bonus_stat, $petType->bonus_value);
+      $return["pet"] = new PetEntity($id, $petType->id, $petName, $petType->bonus_stat, $petType->bonus_value);
     } else {
       $return["pet"] = false;
     }
