@@ -84,7 +84,7 @@ class CombatLogger extends \Nette\Object implements \Iterator {
     $params = array(
       "team1" => $this->team1, "team2" => $this->team2, "actions" => $this->actions
     );
-    $this->latte->setTempDirectory(APP_DIR . "/temp");
+    $this->latte->setTempDirectory(APP_DIR . "/temp/combats");
     return $this->latte->renderToString(APP_DIR . "/templates/CombatLog.latte", $params);
   }
   
