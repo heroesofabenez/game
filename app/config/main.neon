@@ -10,7 +10,6 @@ session:
     name: HOASESSID
     expiration: 1 hour
 services:
-    cache.cache: Nette\Caching\Cache(@cache.storage, "data")
     postoffice.postoffice: HeroesofAbenez\Postoffice\PostofficeControlFactory
 extensions:
     translation: Kdyby\Translation\DI\TranslationExtension
