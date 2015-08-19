@@ -9,10 +9,10 @@ namespace HeroesofAbenez\Ranking\DI;
 class RankingExtension extends \Nette\DI\CompilerExtension {
   function loadConfiguration() {
     $builder = $this->getContainerBuilder();
+    $builder->addDefinition($this->prefix("characters"))
+      ->setImplement("HeroesofAbenez\Ranking\CharactersRankingControlFactory");
     $builder->addDefinition($this->prefix("guilds"))
       ->setImplement("HeroesofAbenez\Ranking\GuildsRankingControlFactory");
-    $builder->addDefinition($this->prefix("ranking"))
-      ->setImplement("HeroesofAbenez\Ranking\CharactersRankingControlFactory");
   }
 }
 ?>
