@@ -169,6 +169,7 @@ class Profile extends \Nette\Object {
   
   /**
    * Gets basic data about specified player
+   * 
    * @param integer $id character's id
    * @return array info about character
    */

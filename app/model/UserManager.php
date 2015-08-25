@@ -29,6 +29,7 @@ class UserManager extends \Nette\Object implements NS\IAuthenticator {
   
   /**
    * Return real user's id
+   * 
    * @return int
    */
   protected function getRealId() {
@@ -46,6 +47,7 @@ class UserManager extends \Nette\Object implements NS\IAuthenticator {
   
   /**
    * Logins the user
+   * 
    * @param array $credentials not really used
    * @return \Nette\Security\Identity User's identity
    */

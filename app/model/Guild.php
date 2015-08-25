@@ -67,6 +67,7 @@ class Guild extends \Nette\Object {
   
   /**
    * Gets basic data about specified guild
+   * 
    * @param integer $id guild's id
    * @return array info about guild
    */
