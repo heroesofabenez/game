@@ -1,8 +1,6 @@
 <?php
 namespace HeroesofAbenez\Model;
 
-use HeroesofAbenez\Entities\Pet as PetEntity;
-
   /**
    * Model Profile
    * 
@@ -191,15 +189,7 @@ class Profile extends \Nette\Object {
     } else {
       $return["guild"] = "";
     }
-    $activePet = $this->db->table("pets")->where("owner=$char->id")->where("deployed=1");
-    if($activePet->count() == 1) {
-      $pet = $activePet->fetch();
-      $petType = $this->petModel->viewType($pet->type);
-      $petName = ($pet->name === NULL) ? "Unnamed" : $petName = $pet->name . ",";
-      $return["pet"] = new PetEntity($id, $petType, $petName);
-    } else {
-      $return["pet"] = false;
-    }
+    $return["pet"] = $this->petModel->getActivePet($id);
     return $return;
   }
 }

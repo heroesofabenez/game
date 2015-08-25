@@ -2,7 +2,8 @@
 namespace HeroesofAbenez\Model;
 
 use Nette\Utils\Arrays,
-    HeroesofAbenez\Entities\PetType;
+    HeroesofAbenez\Entities\PetType,
+    HeroesofAbenez\Entities\Pet as PetEntity;
 
 /**
  * Pet Model
@@ -54,6 +55,25 @@ class Pet extends \Nette\Object {
     $types = $this->listOfTypes();
     $type = Arrays::get($types, $id, false);
     return $type;
+  }
+  
+  /**
+   * Get specified user's active pet
+   * 
+   * @param int $user User's id
+   * @return PetEntity|bool
+   */
+  function getActivePet($user) {
+    $activePet = $this->db->table("pets")->where("owner=$user")->where("deployed=1");
+    if($activePet->count() == 1) {
+      $pet = $activePet->fetch();
+      $petType = $this->viewType($pet->type);
+      $petName = ($pet->name === NULL) ? "Unnamed" : $petName = $pet->name . ",";
+      $return = new PetEntity($user, $petType, $petName);
+    } else {
+      $return = false;
+    }
+    return $return;
   }
 }
 ?>
