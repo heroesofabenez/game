@@ -26,6 +26,7 @@ class JournalPresenter extends BasePresenter {
    * @return void
    */
   function renderInventory() {
+    $this->model->equipmentModel = $this->context->getService("model.equipment");
     $inventory = $this->model->inventory();
     foreach($inventory as $key => $value) {
       $this->template->$key = $value;

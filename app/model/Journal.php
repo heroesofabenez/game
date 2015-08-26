@@ -22,6 +22,8 @@ class Journal extends \Nette\Object {
   protected $guildModel;
   /** @var \HeroesofAbenez\Model\Pet */
   protected $petModel;
+  /** @var \HeroesofAbenez\Model\Equipment */
+  protected $equipmentModel;
   
   /**
    * @param \Nette\Security\User $user
@@ -50,6 +52,10 @@ class Journal extends \Nette\Object {
   
   function setGuildModel(Guild $guildModel) {
     $this->guildModel = $guildModel;
+  }
+  
+  function setEquipmentModel(\HeroesofAbenez\Model\Equipment $equipmentModel) {
+    $this->equipmentModel = $equipmentModel;
   }
   
   /**
@@ -99,7 +105,7 @@ class Journal extends \Nette\Object {
     $equipments = $this->db->table("character_equipment")
       ->where("character", $this->user->id);
     foreach($equipments as $equipment) {
-      $i = $this->db->table("equipment")->get($equipment->item);
+      $i = $this->equipmentModel->view($equipment->item);
       $return["equipments"][] = (object) array("id" => $i->id, "name" => $i->name, "amount" => $equipment->amount);
     }
     return $return;
