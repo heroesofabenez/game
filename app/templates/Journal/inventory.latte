@@ -17,7 +17,7 @@
 {_texts.journal.noEquipment}
   {else}
     {foreach $equipments as $equipment}
-{$equipment->amount}x <a n:href="Equipment:view $equipment->id">{$equipment->name}</a><br>
+{$equipment->amount}x <a n:href="Equipment:view $equipment->id">{$equipment->name}</a>{if $equipment->worn} {_texts.equipment.worn}{/if}<br>
     {/foreach}
   {/if}
   </p>

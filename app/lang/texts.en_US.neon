@@ -156,6 +156,7 @@ equipment:
     level: "level"
     class: "class"
     price: "Price: 1 silver mark|Price: %count% silver marks"
+    worn: "(Worn)"
 npc:
     title: "NPC"
     steppedInFront: "You stepped in front of"

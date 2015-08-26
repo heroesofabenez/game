@@ -106,7 +106,7 @@ class Journal extends \Nette\Object {
       ->where("character", $this->user->id);
     foreach($equipments as $equipment) {
       $i = $this->equipmentModel->view($equipment->item);
-      $return["equipments"][] = (object) array("id" => $i->id, "name" => $i->name, "amount" => $equipment->amount);
+      $return["equipments"][] = (object) array("id" => $i->id, "name" => $i->name, "amount" => $equipment->amount, "worn" => (bool) $equipment->worn);
     }
     return $return;
   }
