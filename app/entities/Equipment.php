@@ -5,8 +5,8 @@ namespace HeroesofAbenez\Entities;
  * Data structure for equipment
  * 
  * @author Jakub Konečný
- * @property-read array $deployParams
- * @property bool $worn
+ * @property-read array $deployParams Deploy params of the equipment
+ * @property bool $worn Is the item worn?
  */
 class Equipment extends BaseEntity {
   /** @var int */
@@ -61,7 +61,7 @@ class Equipment extends BaseEntity {
   }
   
   /**
-   * Returns deploy parameters of the pet (for effect to character)
+   * Returns deploy parameters of the equipment (for effect to character)
    * 
    * @return array params
    */
