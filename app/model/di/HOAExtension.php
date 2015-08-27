@@ -2,7 +2,7 @@
 namespace HeroesofAbenez\Model\DI;
 
 /**
- * Combat Extension
+ * HOA Extension
  *
  * @author Jakub Konečný
  */
@@ -26,6 +26,11 @@ class HOAExtension extends \Nette\DI\CompilerExtension {
     $builder->removeDefinition("router");
     $builder->addDefinition("router")
       ->setFactory("HeroesofAbenez\Model\RouterFactory::create");
+  }
+  
+  function afterCompile(\Nette\PhpGenerator\ClassType $class) {
+    $initialize = $class->methods["initialize"];
+    $initialize->addBody('$this->getByType("Nette\Security\User")->authenticatedRole = "player";');
   }
 }
 ?>
