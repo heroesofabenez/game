@@ -43,7 +43,7 @@ class CombatAction extends BaseEntity {
   }
   
   /**
-   * @return string
+   * @return void
    */
   protected function parse() {
     $text = $this->character1->name . " ";
