@@ -56,9 +56,7 @@ class UserManager extends \Nette\Object implements NS\IAuthenticator {
     if($uid == 0) return new NS\Identity(0, "guest");
     $chars = $this->db->table("characters")->where("owner", $uid);
     if($chars->count() == 0) return new NS\Identity(-1, "guest");
-    foreach($chars as $char) {
-      if($char->owner == $uid) break;
-    }
+    $char = $chars->fetch();
     $data = array(
       "name" => $char->name, "race" => $char->race, "gender" => $char->gender,
       "occupation" => $char->occupation, "specialization" => $char->specialization,
