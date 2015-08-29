@@ -20,8 +20,7 @@ class Team extends BaseEntity implements \Countable, \IteratorAggregate {
    * @param string $name Name of the team
    */
   function __construct($name) {
-    if(!is_string($name)) exit("Invalid value for parameter name passed to method Team::__construct. Expected string.");
-    else $this->name = $name;
+    $this->name = (string) $name;
     $this->pos = 0;
   }
   
