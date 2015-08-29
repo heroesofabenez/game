@@ -67,14 +67,14 @@ class Intro extends \Nette\Object {
       ->where("required_level", 0)
       ->where("required_occupation", $this->user->identity->occupation);
     if($classSLs->count() > 0) {
-      foreach($classSLs as $classSL) { }
+      $classSL = $classSLs->fetch();
       return $classSL->id;
     }
     $raceSLs = $this->db->table("quest_stages")
       ->where("required_level", 0)
       ->where("required_race", $this->user->identity->race);
     if($raceSLs->count() > 0) {
-      foreach($raceSLs as $raceSL) { }
+      $raceSL = $raceSLs->fetch();
       return $raceSL->id;
     }
   }
