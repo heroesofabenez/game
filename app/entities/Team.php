@@ -8,7 +8,7 @@ namespace HeroesofAbenez\Entities;
  * @property-read Character[] $activeMembers
  * @property-read Character[] $aliveMembers
  */
-class Team extends BaseEntity implements \Iterator {
+class Team extends BaseEntity implements \Countable, \IteratorAggregate {
   /** @var string Name of the team */
   protected $name;
   /** @var Character[] Characters in the team */
@@ -93,24 +93,18 @@ class Team extends BaseEntity implements \Iterator {
     return count($this->getAliveMembers()) > 0;
   }
   
-  function rewind() {
-    $this->pos = 0;
+  /**
+   * @return int
+   */
+  function count() {
+    return count($this->members);
   }
   
-  function current() {
-    return $this->members[$this->pos];
-  }
-  
-  function key() {
-    return $this->pos;
-  }
-  
-  function next() {
-    ++$this->pos;
-  }
-  
-  function valid() {
-    return isset($this->members[$this->pos]);
+  /**
+   * @return \ArrayIterator
+   */
+  function getIterator() {
+    return new \ArrayIterator($this->members);
   }
 }
 ?>

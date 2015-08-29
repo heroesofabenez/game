@@ -12,7 +12,7 @@ use HeroesofAbenez\Entities\Character as CharacterEntity,
  * @author Jakub Konečný
  * @property-write int $round Current round
  */
-class CombatLogger extends \Nette\Object implements \Iterator {
+class CombatLogger extends \Nette\Object implements \Countable, \IteratorAggregate {
   /** @var \Latte\Engine */
   protected $latte;
   /** @var \HeroesofAbenez\Entities\Team First team */
@@ -88,24 +88,18 @@ class CombatLogger extends \Nette\Object implements \Iterator {
     return $this->latte->renderToString(APP_DIR . "/templates/CombatLog.latte", $params);
   }
   
-  function rewind() {
-    $this->pos = 0;
+  /**
+   * @return int
+   */
+  function count() {
+    return count($this->actions);
   }
   
-  function current() {
-    return $this->actions[$this->pos];
-  }
-  
-  function key() {
-    return $this->pos;
-  }
-  
-  function next() {
-    ++$this->pos;
-  }
-  
-  function valid() {
-    return isset($this->actions[$this->pos]);
+  /**
+   * @return \ArrayIterator
+   */
+  function getIterator() {
+    return new \ArrayIterator($this->actions);
   }
 }
 ?>
