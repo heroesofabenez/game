@@ -8,7 +8,7 @@ namespace HeroesofAbenez\Entities;
  * @property-read Character[] $activeMembers
  * @property-read Character[] $aliveMembers
  */
-class Team extends BaseEntity implements \Countable, \IteratorAggregate {
+class Team extends BaseEntity implements \ArrayAccess, \Countable, \IteratorAggregate {
   /** @var string Name of the team */
   protected $name;
   /** @var Character[] Characters in the team */
@@ -27,8 +27,8 @@ class Team extends BaseEntity implements \Countable, \IteratorAggregate {
   /**
    * Adds a member to the team
    * 
+   * @deprecated
    * @param \HeroesofAbenez\Entities\Character $member Member to be added to the team
-   * 
    * @return void
    */
   function addMember(Character $member) {
@@ -104,6 +104,54 @@ class Team extends BaseEntity implements \Countable, \IteratorAggregate {
    */
   function getIterator() {
     return new \ArrayIterator($this->members);
+  }
+  
+  /**
+   * @param int $index
+   * @return bool
+   */
+  function offsetExists($index) {
+    return $index >= 0 AND $index < count($this->members);
+  }
+  
+  /**
+   * @param int $index
+   * @return Character
+   * @throws \Nette\OutOfRangeException
+   */
+  function offsetGet($index) {
+    if($index < 0 OR $index >= count($this->members)) {
+      throw new \Nette\OutOfRangeException("Offset invalid or out of range.");
+    }
+    return $this->members[(int) $index];
+  }
+  
+  /**
+   * @param int $index
+   * @param \HeroesofAbenez\Entities\Character $member
+   * @return void
+   * @throws \Nette\OutOfRangeException
+   */
+  function offsetSet($index, $member) {
+    if(!$member instanceof Character) throw new Nette\InvalidArgumentException("Argument must be of Character type.");
+    if($index === NULL) {
+      $this->members[] = $member;
+    } elseif($index < 0 OR $index >= count($this->members)) {
+      throw new \Nette\OutOfRangeException("Offset invalid or out of range.");
+    } else {
+      $this->members[(int) $index] = $member;
+    }
+  }
+  
+  /**
+   * @param int $index
+   * @return void
+   */
+  function offsetUnset($index) {
+    if($index < 0 OR $index >= count($this->members)) {
+      throw new Nette\OutOfRangeException("Offset invalid or out of range.");
+    }
+    array_splice($this->members, (int) $index, 1);
   }
 }
 ?>
