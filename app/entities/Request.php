@@ -15,6 +15,7 @@ class Request extends BaseEntity {
   protected $to;
   /** @var string */
   protected $type;
+  /** @var int */
   protected $sent;
   /** @var string */
   protected $status;
