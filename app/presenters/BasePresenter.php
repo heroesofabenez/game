@@ -15,6 +15,7 @@ abstract class BasePresenter extends \Nette\Application\UI\Presenter {
   
   /**
    * Login user and set server number for template
+   * 
    * @return void
    */
   function startup() {
@@ -25,6 +26,7 @@ abstract class BasePresenter extends \Nette\Application\UI\Presenter {
   
   /**
    * Try to login the user
+   * 
    * @return void
    */
   function tryLogin() {
