@@ -13,15 +13,12 @@ class Team extends BaseEntity implements \ArrayAccess, \Countable, \IteratorAggr
   protected $name;
   /** @var Character[] Characters in the team */
   protected $members = array();
-  /** @var int */
-  protected $pos;
   
   /**
    * @param string $name Name of the team
    */
   function __construct($name) {
     $this->name = (string) $name;
-    $this->pos = 0;
   }
   
   /**
