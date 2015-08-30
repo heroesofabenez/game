@@ -89,13 +89,10 @@ class Character extends BaseEntity {
   function __construct(array $stats, array $equipment = array(), array $pets = array()) {
     $this->setStats($stats);
     foreach($equipment as $eq) {
-      if($eq instanceof Equipment)
-        $this->equipment[$eq->id] = $eq;
+      if($eq instanceof Equipment) $this->equipment[$eq->id] = $eq;
     }
     foreach($pets as $pet) {
-      if($pet instanceof Pet) {
-        $this->pets[$pet->id] = $pet;
-      }
+      if($pet instanceof Pet) $this->pets[$pet->id] = $pet;
     }
   }
   
