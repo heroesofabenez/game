@@ -5,6 +5,7 @@ namespace HeroesofAbenez\Entities;
  * Structure for a team in combat
  * 
  * @author Jakub Konečný
+ * @property Character[] $items
  * @property-read Character[] $activeMembers
  * @property-read Character[] $aliveMembers
  */
@@ -14,11 +15,14 @@ class Team extends BaseEntity implements \ArrayAccess, \Countable, \IteratorAggr
   /** @var Character[] Characters in the team */
   protected $members = array();
   
+   use \HeroesofAbenez\Utils\TCollection;
+  
   /**
    * @param string $name Name of the team
    */
   function __construct($name) {
     $this->name = (string) $name;
+    $this->class = '\HeroesofAbenez\Entities\Character';
   }
   
   /**
@@ -29,7 +33,7 @@ class Team extends BaseEntity implements \ArrayAccess, \Countable, \IteratorAggr
    * @return void
    */
   function addMember(Character $member) {
-    $this->members[] = $member;
+    $this->items[] = $member;
   }
   
   /**
@@ -39,7 +43,7 @@ class Team extends BaseEntity implements \ArrayAccess, \Countable, \IteratorAggr
    * @return boolean
    */
   function hasMember($id) {
-    foreach($this->members as $member) {
+    foreach($this->items as $member) {
       if($member->id === $id) return true;
     }
     return false;
@@ -52,7 +56,7 @@ class Team extends BaseEntity implements \ArrayAccess, \Countable, \IteratorAggr
    */
   function getActiveMembers() {
     $return = array();
-    foreach($this->members as $member) {
+    foreach($this->items as $member) {
       if(!$member->stunned AND $member->hitpoints > 0) $return[] = $member;
     }
     return $return;
@@ -65,7 +69,7 @@ class Team extends BaseEntity implements \ArrayAccess, \Countable, \IteratorAggr
    */
   function getAliveMembers() {
     $return = array();
-    foreach($this->members as $member) {
+    foreach($this->items as $member) {
       if($member->hitpoints > 0) $return[] = $member;
     }
     return $return;
@@ -87,68 +91,6 @@ class Team extends BaseEntity implements \ArrayAccess, \Countable, \IteratorAggr
    */
   function hasAliveMembers() {
     return count($this->getAliveMembers()) > 0;
-  }
-  
-  /**
-   * @return int
-   */
-  function count() {
-    return count($this->members);
-  }
-  
-  /**
-   * @return \ArrayIterator
-   */
-  function getIterator() {
-    return new \ArrayIterator($this->members);
-  }
-  
-  /**
-   * @param int $index
-   * @return bool
-   */
-  function offsetExists($index) {
-    return $index >= 0 AND $index < count($this->members);
-  }
-  
-  /**
-   * @param int $index
-   * @return Character
-   * @throws \Nette\OutOfRangeException
-   */
-  function offsetGet($index) {
-    if($index < 0 OR $index >= count($this->members)) {
-      throw new \Nette\OutOfRangeException("Offset invalid or out of range.");
-    }
-    return $this->members[(int) $index];
-  }
-  
-  /**
-   * @param int $index
-   * @param \HeroesofAbenez\Entities\Character $member
-   * @return void
-   * @throws \Nette\OutOfRangeException
-   */
-  function offsetSet($index, $member) {
-    if(!$member instanceof Character) throw new Nette\InvalidArgumentException("Argument must be of Character type.");
-    if($index === NULL) {
-      $this->members[] = $member;
-    } elseif($index < 0 OR $index >= count($this->members)) {
-      throw new \Nette\OutOfRangeException("Offset invalid or out of range.");
-    } else {
-      $this->members[(int) $index] = $member;
-    }
-  }
-  
-  /**
-   * @param int $index
-   * @return void
-   */
-  function offsetUnset($index) {
-    if($index < 0 OR $index >= count($this->members)) {
-      throw new \Nette\OutOfRangeException("Offset invalid or out of range.");
-    }
-    array_splice($this->members, (int) $index, 1);
   }
 }
 ?>
