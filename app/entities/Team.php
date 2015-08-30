@@ -146,7 +146,7 @@ class Team extends BaseEntity implements \ArrayAccess, \Countable, \IteratorAggr
    */
   function offsetUnset($index) {
     if($index < 0 OR $index >= count($this->members)) {
-      throw new Nette\OutOfRangeException("Offset invalid or out of range.");
+      throw new \Nette\OutOfRangeException("Offset invalid or out of range.");
     }
     array_splice($this->members, (int) $index, 1);
   }
