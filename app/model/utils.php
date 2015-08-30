@@ -17,10 +17,10 @@ class Arrays {
           $tmp[$key] = $row[$field];
         }
         $args[$n] = $tmp;
-        }
       }
+    }
     $args[] = &$data;
-    call_user_func_array('array_multisort', $args);
+    call_user_func_array("array_multisort", $args);
     return array_pop($args);
   }
 }
