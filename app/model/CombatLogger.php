@@ -22,8 +22,6 @@ class CombatLogger extends \Nette\Object implements \Countable, \IteratorAggrega
   /** @var array */
   protected $actions = array();
   /** @var int */
-  protected $pos;
-  /** @var int */
   protected $round;
   
   /**
