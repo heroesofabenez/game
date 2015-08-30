@@ -26,17 +26,6 @@ class Team extends BaseEntity implements \ArrayAccess, \Countable, \IteratorAggr
   }
   
   /**
-   * Adds a member to the team
-   * 
-   * @deprecated
-   * @param \HeroesofAbenez\Entities\Character $member Member to be added to the team
-   * @return void
-   */
-  function addMember(Character $member) {
-    $this->items[] = $member;
-  }
-  
-  /**
    * Check if the team has a character
    * 
    * @param int $id Character's id
