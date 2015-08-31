@@ -5,15 +5,13 @@ namespace HeroesofAbenez\Entities;
  * Structure for a team in combat
  * 
  * @author Jakub Konečný
- * @property Character[] $items
+ * @property Character[] $items Characters in the team
  * @property-read Character[] $activeMembers
  * @property-read Character[] $aliveMembers
  */
 class Team extends BaseEntity implements \ArrayAccess, \Countable, \IteratorAggregate {
   /** @var string Name of the team */
   protected $name;
-  /** @var Character[] Characters in the team */
-  protected $members = array();
   
    use \HeroesofAbenez\Utils\TCollection;
   
