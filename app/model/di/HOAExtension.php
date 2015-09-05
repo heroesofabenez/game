@@ -22,7 +22,7 @@ class HOAExtension extends \Nette\DI\CompilerExtension {
     $builder->addDefinition("cache.cache")
       ->setFactory("Nette\Caching\Cache", array("@cache.storage", "data"));
     $builder->addDefinition($this->prefix("authorizator"))
-      ->setFactory("HeroesofAbenez\Model\Authorizator::create");
+      ->setFactory("HeroesofAbenez\Model\AuthorizatorFactory::create");
     $builder->removeDefinition("router");
     $builder->addDefinition("router")
       ->setFactory("HeroesofAbenez\Model\RouterFactory::create");
