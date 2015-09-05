@@ -11,15 +11,12 @@ class Profile extends \Nette\Object {
   protected $db;
   /** @var \Nette\Caching\Cache */
   protected $cache;
-  /** @var \HeroesofAbenez\Model\Permissions */
-  protected $permissionsModel;
   /** @var \HeroesofAbenez\Model\Pet */
   protected $petModel;
   
-  function __construct(\Nette\Database\Context $db, \Nette\Caching\Cache $cache, Permissions $permissionsModel, Pet $petModel) {
+  function __construct(\Nette\Database\Context $db, \Nette\Caching\Cache $cache, Pet $petModel) {
     $this->db = $db;
     $this->cache = $cache;
-    $this->permissionsModel = $permissionsModel;
     $this->petModel = $petModel;
   }
   
