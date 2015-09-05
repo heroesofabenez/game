@@ -21,7 +21,7 @@ class UserManager extends \Nette\Object implements NS\IAuthenticator {
    * @param \HeroesofAbenez\Model\Permissions $permissionsModel
    * @param \HeroesofAbenez\Model\Profile $profileModel
    */
-  function __construct(\Nette\Database\Context $db, \HeroesofAbenez\Model\Permissions $permissionsModel, \HeroesofAbenez\Model\Profile $profileModel) {
+  function __construct(\Nette\Database\Context $db, Permissions $permissionsModel, Profile $profileModel) {
     $this->db = $db;
     $this->permissionsModel = $permissionsModel;
     $this->profileModel = $profileModel;

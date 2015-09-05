@@ -14,26 +14,26 @@ class Journal extends \Nette\Object {
   protected $user;
   /** @var \Nette\Database\Context */
   protected $db;
-  /** @var \HeroesofAbenez\Model\Quest */
+  /** @var Quest */
   protected $questModel;
-  /** @var \HeroesofAbenez\Model\Location */
+  /** @var Location */
   protected $locationModel;
-  /** @var \HeroesofAbenez\Model\Guild */
+  /** @var Guild */
   protected $guildModel;
-  /** @var \HeroesofAbenez\Model\Pet */
+  /** @var Pet */
   protected $petModel;
-  /** @var \HeroesofAbenez\Model\Equipment */
+  /** @var Equipment */
   protected $equipmentModel;
   
   /**
    * @param \Nette\Security\User $user
    * @param \Nette\Database\Context $db
-   * @param \HeroesofAbenez\Model\Quest $questModel
-   * @param \HeroesofAbenez\Model\Location $locationModel
-   * @param \HeroesofAbenez\Model\Guild $guildModel
-   * @param \HeroesofAbenez\Model\Pet $petModel
+   * @param Quest $questModel
+   * @param Location $locationModel
+   * @param Guild $guildModel
+   * @param Pet $petModel
    */
-  function __construct(\Nette\Security\User $user, \Nette\Database\Context $db, \HeroesofAbenez\Model\Quest $questModel, \HeroesofAbenez\Model\Location $locationModel, \HeroesofAbenez\Model\Guild $guildModel, \HeroesofAbenez\Model\Pet $petModel) {
+  function __construct(\Nette\Security\User $user, \Nette\Database\Context $db, Quest $questModel, Location $locationModel, \HeroesofAbenez\Model\Guild $guildModel, Pet $petModel) {
     $this->user = $user;
     $this->db = $db;
     $this->questModel = $questModel;
@@ -54,7 +54,7 @@ class Journal extends \Nette\Object {
     $this->guildModel = $guildModel;
   }
   
-  function setEquipmentModel(\HeroesofAbenez\Model\Equipment $equipmentModel) {
+  function setEquipmentModel(Equipment $equipmentModel) {
     $this->equipmentModel = $equipmentModel;
   }
   
