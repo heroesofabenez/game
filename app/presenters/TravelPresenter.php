@@ -28,7 +28,7 @@ class TravelPresenter extends BasePresenter {
    * @return void
    */
   function actionStage($id) {
-    $this->model->user = $this->context->getService("security.user");
+    $this->model->user = $this->user;
     try {
       $this->model->travelToStage($id);$stageName = $this->model->getStageName($id);
       $this->user->logout();
