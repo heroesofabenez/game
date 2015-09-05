@@ -32,31 +32,18 @@ class Journal extends \Nette\Object {
    * @param Location $locationModel
    * @param Guild $guildModel
    * @param Pet $petModel
+   * @param Equipment $equipmentModel
    */
-  function __construct(\Nette\Security\User $user, \Nette\Database\Context $db, Quest $questModel, Location $locationModel, \HeroesofAbenez\Model\Guild $guildModel, Pet $petModel) {
+  function __construct(\Nette\Security\User $user, \Nette\Database\Context $db, Quest $questModel, Location $locationModel, Guild $guildModel, Pet $petModel, Equipment $equipmentModel) {
     $this->user = $user;
     $this->db = $db;
     $this->questModel = $questModel;
     $this->locationModel = $locationModel;
     $this->guildModel = $guildModel;
     $this->petModel = $petModel;
-  }
-  
-  function setQuestModel(Quest $questModel) {
-    $this->questModel = $questModel;
-  }
-  
-  function setLocationModel(Location $locationModel) {
-    $this->locationModel = $locationModel;
-  }
-  
-  function setGuildModel(Guild $guildModel) {
-    $this->guildModel = $guildModel;
-  }
-  
-  function setEquipmentModel(Equipment $equipmentModel) {
     $this->equipmentModel = $equipmentModel;
   }
+
   
   /**
    * Gets basic info for character's journal
