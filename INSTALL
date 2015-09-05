@@ -54,4 +54,4 @@ If you have NGINX, you (currenty) have to do all server configuration by yoursel
 General
 It is adviced to install the game to server's root and use localhost, 
 <yourcomputername>, or hoa.local as server's name. If you wish to use your
-computer's name, add its name to array $dev_servers in BasePresenter::getRealId().
+computer's name, add its name to array $dev_servers in UserManager::getRealId().
