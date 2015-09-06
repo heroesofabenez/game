@@ -9,8 +9,6 @@ session:
     savePath: "%tempDir%/sessions"
     name: HOASESSID
     expiration: 1 hour
-services:
-    postoffice.postoffice: HeroesofAbenez\Postoffice\PostofficeControlFactory
 extensions:
     translation: Kdyby\Translation\DI\TranslationExtension
     arena: HeroesofAbenez\Arena\DI\ArenaExtension
@@ -18,6 +16,7 @@ extensions:
     chat: HeroesofAbenez\Chat\DI\ChatExtension
     model: HeroesofAbenez\Model\DI\HOAExtension
     npc: HeroesofAbenez\NPC\DI\NPCExtension
+    postoffice: HeroesofAbenez\Postoffice\DI\PostofficeExtension
     ranking: HeroesofAbenez\Ranking\DI\RankingExtension
 translation:
     default: en
