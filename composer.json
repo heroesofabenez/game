@@ -18,7 +18,6 @@
         "nette/application": "2.3.x",
         "nette/bootstrap": "2.3.x",
         "nette/caching": "2.3.x",
-        "nette/component-model": "2.2.x",
         "nette/database": "2.3.x",
         "nette/di": "2.3.x",
         "nette/forms": "2.3.x",
