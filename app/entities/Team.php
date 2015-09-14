@@ -13,7 +13,7 @@ class Team extends BaseEntity implements \ArrayAccess, \Countable, \IteratorAggr
   /** @var string Name of the team */
   protected $name;
   
-   use \HeroesofAbenez\Utils\TCollection;
+  use \HeroesofAbenez\Utils\TCollection;
   
   /**
    * @param string $name Name of the team
