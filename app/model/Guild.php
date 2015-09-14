@@ -6,7 +6,8 @@ use HeroesofAbenez\Entities\Request as RequestEntity,
     Nette\Application\ForbiddenRequestException,
     Nette\Application\ApplicationException,
     Nette\Application\BadRequestException,
-    Kdyby\Translation\Translator;
+    Kdyby\Translation\Translator,
+    Nette\Utils\Arrays;
 
   /**
    * Model Guild
@@ -74,7 +75,7 @@ class Guild extends \Nette\Object {
   function view($id) {
     $return = array();
     $guilds = $this->listOfGuilds();
-    $guild = \Nette\Utils\Arrays::get($guilds, $id, false);
+    $guild = Arrays::get($guilds, $id, false);
     if(!$guild) { return false; }
     $return["name"] = $guild->name;
     $return["description"] = $guild->description;
