@@ -69,8 +69,9 @@ class NPC extends \Nette\Object {
    * @return string
    */
   function getNpcName($id) {
-    $npcs = $this->listOfNpcs();
-    return $npcs[$id]->name;
+    $npc = $this->view($id);
+    if(!$npc) return "";
+    else return $npc->name;
   }
 }
 ?>
