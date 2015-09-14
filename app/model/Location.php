@@ -134,7 +134,8 @@ class Location extends \Nette\Object {
    */
   function getStageName($id) {
     $stage = $this->getStage($id);
-    return $stage->name;
+    if(!$stage) return "";
+    else return $stage->name;
   }
   
   /**
@@ -145,7 +146,8 @@ class Location extends \Nette\Object {
    */
   function getAreaName($id) {
     $area = $this->getArea($id);
-    return $area->name;
+    if(!$area) return "";
+    else return $area->name;
   }
   
   /**
