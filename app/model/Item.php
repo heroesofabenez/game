@@ -61,8 +61,7 @@ class Item extends \Nette\Object {
    * @return string
    */
   function getItemName($id) {
-    $items = $this->listOfItems();
-    $item = Arrays::get($items, $id, false);
+    $item = $this->view($id);
     if(!$item) return "";
     else return $item->name;
   }
