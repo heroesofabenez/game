@@ -51,8 +51,9 @@ class Guild extends \Nette\Object {
    * @return string
    */
   function getGuildName($id) {
-    $guilds = $this->listOfGuilds();
-    return $guilds[$id]->name;
+    $guild = Arrays::get($this->listOfGuilds(), $id, false);
+    if(!$guild) return "";
+    else return $guild->name;
   }
   
   /**
