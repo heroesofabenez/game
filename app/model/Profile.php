@@ -57,8 +57,9 @@ class Profile extends \Nette\Object {
    * @return string
    */
   function getRaceName($id) {
-    $racesList = $this->getRacesList();
-    return $racesList[$id]->name;
+    $race = $this->getRace($id);
+    if(!$race) return "";
+    else return $race->name;
   }
   
   /**
@@ -98,8 +99,9 @@ class Profile extends \Nette\Object {
    * @return string
    */
   function getClassName($id) {
-    $classesList = $this->getClassesList();
-    return $classesList[$id]->name;
+    $class = $this->getClass($id);
+    if(!$class) return "";
+    else return $class->name;
   }
   
   /**
