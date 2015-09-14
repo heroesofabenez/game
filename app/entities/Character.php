@@ -186,7 +186,7 @@ default:
   function equipItem($itemId) {
     try {
       $item = $this->getItem($itemId);
-    } catch (\OutOfBoundsException $e) {
+    } catch (OutOfBoundsException $e) {
       throw $e;
     }
     $itemBonus = new CharacterEffect($item->deployParams);
@@ -203,7 +203,7 @@ default:
   function unequipItem($itemId) {
     try {
       $item = $this->getItem($itemId);
-    } catch (\OutOfBoundsException $e) {
+    } catch (OutOfBoundsException $e) {
       throw $e;
     }
     $itemBonus = $item->deployParams();
