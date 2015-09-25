@@ -15,16 +15,19 @@ class UserManager extends \Nette\Object implements NS\IAuthenticator {
   protected $permissionsModel;
   /** @var \HeroesofAbenez\Model\Profile */
   protected $profileModel;
+  /** @var array */
+  protected $devServers;
   
   /**
    * @param \Nette\Database\Context $db
    * @param \HeroesofAbenez\Model\Permissions $permissionsModel
    * @param \HeroesofAbenez\Model\Profile $profileModel
    */
-  function __construct(\Nette\Database\Context $db, Permissions $permissionsModel, Profile $profileModel) {
+  function __construct(array $devServers, \Nette\Database\Context $db, Permissions $permissionsModel, Profile $profileModel) {
     $this->db = $db;
     $this->permissionsModel = $permissionsModel;
     $this->profileModel = $profileModel;
+    $this->devServers = $devServers;
   }
   
   /**
@@ -33,8 +36,7 @@ class UserManager extends \Nette\Object implements NS\IAuthenticator {
    * @return int
    */
   protected function getRealId() {
-    $dev_servers = array("localhost", "kobliha", "hoa.local");
-    if(in_array($_SERVER["SERVER_NAME"], $dev_servers)) {
+    if(in_array($_SERVER["SERVER_NAME"], $this->devSservers)) {
       $uid = 1;
     } else {
       $ch = curl_init("http://heroesofabenez.tk/auth.php");

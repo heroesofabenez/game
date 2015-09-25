@@ -7,11 +7,18 @@ namespace HeroesofAbenez\Model\DI;
  * @author Jakub Konečný
  */
 class HOAExtension extends \Nette\DI\CompilerExtension {
+  protected $defaults = array(
+    "devServers" => array(
+      "localhost", "hoa.local"
+    )
+  );
+  
   function loadConfiguration() {
     $builder = $this->getContainerBuilder();
+    $config = $this->getConfig($this->defaults);
     $services = array(
       "Equipment", "Guild", "Intro", "Item", "Journal", "Location", "Map",
-      "MapDrawer", "Permissions", "Pet", "Profile", "Request", "Quest", "UserManager"
+      "MapDrawer", "Permissions", "Pet", "Profile", "Request", "Quest"
     );
     foreach($services as $service) {
       $builder->addDefinition($this->prefix(lcfirst($service)))
@@ -19,6 +26,8 @@ class HOAExtension extends \Nette\DI\CompilerExtension {
     }
     $builder->addDefinition($this->prefix("npc"))
       ->setFactory("HeroesofAbenez\Model\NPC");
+    $builder->addDefinition($this->prefix("userManager"))
+      ->setFactory("HeroesofAbenez\Model\UserManager", array($config["devServers"]));
     $builder->addDefinition("cache.cache")
       ->setFactory("Nette\Caching\Cache", array("@cache.storage", "data"));
     $builder->addDefinition($this->prefix("authorizator"))
