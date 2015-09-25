@@ -66,7 +66,7 @@ It is adviced to install the game to server's root and use localhost,
 computer's name or in general something not previously mentioned, add the name to app/config/local.neon to section model - devServers as element of array:
 
 ```
-hoa.model:
+hoa:
     devServers:
         - kobliha
 ```

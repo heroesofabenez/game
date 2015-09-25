@@ -11,13 +11,7 @@ session:
     expiration: 1 hour
 extensions:
     translation: Kdyby\Translation\DI\TranslationExtension
-    hoa.arena: HeroesofAbenez\Arena\DI\ArenaExtension
-    hoa.combat: HeroesofAbenez\Combat\DI\CombatExtension
-    hoa.chat: HeroesofAbenez\Chat\DI\ChatExtension
-    hoa.model: HeroesofAbenez\Model\DI\HOAExtension
-    hoa.npc: HeroesofAbenez\NPC\DI\NPCExtension
-    hoa.postoffice: HeroesofAbenez\Postoffice\DI\PostofficeExtension
-    hoa.ranking: HeroesofAbenez\Ranking\DI\RankingExtension
+    hoa: HeroesofAbenez\Model\DI\HOAExtension
 translation:
     default: en
     fallback: [en_US, en]
