@@ -36,7 +36,7 @@ class UserManager extends \Nette\Object implements NS\IAuthenticator {
    * @return int
    */
   protected function getRealId() {
-    if(in_array($_SERVER["SERVER_NAME"], $this->devSservers)) {
+    if(in_array($_SERVER["SERVER_NAME"], $this->devServers)) {
       $uid = 1;
     } else {
       $ch = curl_init("http://heroesofabenez.tk/auth.php");
