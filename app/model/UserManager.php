@@ -19,6 +19,7 @@ class UserManager extends \Nette\Object implements NS\IAuthenticator {
   protected $devServers;
   
   /**
+   * @param array $devServers
    * @param \Nette\Database\Context $db
    * @param \HeroesofAbenez\Model\Permissions $permissionsModel
    * @param \HeroesofAbenez\Model\Profile $profileModel
