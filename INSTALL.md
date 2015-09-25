@@ -63,7 +63,7 @@ If you have NGINX, you (currenty) have to do all server configuration by yoursel
 ### General
 It is adviced to install the game to server's root and use localhost, 
 <yourcomputername>, or hoa.local as server's name. If you wish to use your
-computer's name or in general something not previously mentioned, add the name to app/config/local.neon to section model - devServers as element of array:
+computer's name or in general something not previously mentioned, add the name to app/config/local.neon to section hoa - devServers as element of array:
 
 ```
 hoa:
