@@ -1,6 +1,8 @@
 <?php
 namespace HeroesofAbenez\Model;
 
+use Nette\Utils\Arrays;
+
   /**
    * Model Profile
    * 
