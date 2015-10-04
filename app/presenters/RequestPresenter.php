@@ -1,6 +1,13 @@
 <?php
 namespace HeroesofAbenez\Presenters;
 
+use HeroesofAbenez\Model\RequestNotFoundException,
+    HeroesofAbenez\Model\CannotSeeRequestException,
+    HeroesofAbenez\Model\CannotAcceptRequestException,
+    HeroesofAbenez\Model\CannotDeclineRequestException,
+    HeroesofAbenez\Model\AccessDenied,
+    HeroesofAbenez\Model\RequestAlreadyHandledException;
+
 /**
  * Presenter Request
  *
@@ -33,10 +40,10 @@ class RequestPresenter extends BasePresenter {
       $this->template->type = $request->type;
       $this->template->sent = $request->sent;
       $this->template->status = $request->status;
-    } catch(\Nette\Application\ForbiddenRequestException $e) {
+    } catch(CannotSeeRequestException $e) {
       $this->flashMessage($this->translator->translate("errors.request.cannotSee"));
       $this->forward("Homepage:");
-    } catch(\Nette\Application\BadRequestException $e) {
+    } catch(RequestNotFoundException $e) {
       $this->forward("notfound");
     }
   }
@@ -50,11 +57,15 @@ class RequestPresenter extends BasePresenter {
       $this->model->accept($id);
       $this->flashMessage($this->translator->translate("messages.request.accepted"));
       $this->redirect("Homepage:");
-    } catch(\Nette\Application\ForbiddenRequestException $e) {
-      $this->flashMessage($e->getMessage());
-      $this->forward("Homepage:");
-    } catch(\Nette\Application\BadRequestException $e) {
+    } catch(RequestNotFoundException $e) {
       $this->forward("notfound");
+    } catch(CannotSeeRequestException $e) {
+      $this->flashMessage($this->translator->translate("errors.request.cannotSee"));
+    } catch(CannotAcceptRequestException $e) {
+      $this->flashMessage($this->translator->translate("errors.request.cannotAccept"));
+    } catch(RequestAlreadyHandledException $e) {
+      $this->flashMessage($this->translator->translate("errors.request.handled"));
+      $this->forward("Homepage:");
     } catch(\Nette\NotImplementedException $e) {
       $this->flashMessage($this->translator->translate("errors.request.typeNotImplemented"));
       $this->forward("Homepage:");
@@ -70,11 +81,15 @@ class RequestPresenter extends BasePresenter {
       $this->model->decline($id);
       $this->flashMessage($this->translator->translate("messages.request.declined"));
       $this->redirect("Homepage:");
-    } catch(\Nette\Application\ForbiddenRequestException $e) {
-      $this->flashMessage($e->getMessage());
-      $this->forward("Homepage:");
-    } catch(\Nette\Application\BadRequestException $e) {
+    } catch(RequestNotFoundException $e) {
       $this->forward("notfound");
+    } catch(CannotSeeRequestException $e) {
+      $this->flashMessage($this->translator->translate("errors.request.cannotSee"));
+    } catch(CannotDeclineRequestException $e) {
+      $this->flashMessage($this->translator->translate("errors.request.cannotDecline"));
+    } catch(RequestAlreadyHandledException $e) {
+      $this->flashMessage($this->translator->translate("errors.request.handled"));
+      $this->forward("Homepage:");
     }
   }
 }

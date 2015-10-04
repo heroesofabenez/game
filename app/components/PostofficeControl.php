@@ -99,13 +99,13 @@ class PostofficeControl extends \Nette\Application\UI\Control {
    * 
    * @param int $id
    * @return \stdClass
-   * @throws \Nette\Application\BadRequestException
-   * @throws \Nette\Application\ForbiddenRequestException
+   * @throws MessageNotFoundException
+   * @throws CannotShowMessageException
    */
   function message($id) {
     $message = $this->db->table("messages")->get($id);
-    if(!$message) throw new \Nette\Application\BadRequestException;
-    if(!$this->canShow($message)) throw new \Nette\Application\ForbiddenRequestException;
+    if(!$message) throw new MessageNotFoundException;
+    if(!$this->canShow($message)) throw new CannotShowMessageException;
     $from = $this->profileModel->getCharacterName($message->from);
     $to = $this->profileModel->getCharacterName($message->to);
     $return = (object) array(
@@ -126,9 +126,9 @@ class PostofficeControl extends \Nette\Application\UI\Control {
       foreach($message as $key => $value) {
        $template->$key = $value;
       }
-    } catch(\Nette\Application\ForbiddenRequestException $e) {
+    } catch(CannotShowMessageException $e) {
       $this->presenter->forward("cannotshow");
-    } catch(\Nette\Application\BadRequestException $e) {
+    } catch(MessageNotFoundException $e) {
       $this->presenter->forward("notfound");
     }
     $template->render();
@@ -159,5 +159,13 @@ class PostofficeControl extends \Nette\Application\UI\Control {
 interface PostofficeControlFactory {
   /** @return PostofficeControl */
   function create();
+}
+
+class MessageNotFoundException extends \HeroesofAbenez\Model\RecordNotFoundException {
+  
+}
+
+class CannotShowMessageException extends \HeroesofAbenez\Model\AccessDenied {
+  
 }
 ?>

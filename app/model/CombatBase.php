@@ -69,7 +69,7 @@ class CombatBase extends \Nette\Object {
    * @return void
    */
   function setTeams(Team $team1, Team $team2) {
-    if($this->team1) exit("Teams has already been set.");
+    if($this->team1) throw new ImmutableException("Teams has already been set.");
     $this->team1 = $team1;
     $this->team2 = $team2;
     $this->log->setTeams($team1, $team2);
@@ -236,7 +236,7 @@ class CombatBase extends \Nette\Object {
    * @return int Winning team
    */
   function execute() {
-    if(!$this->team1) exit("Teams are not set.");
+    if(!$this->team1) throw new InvalidStateException("Teams are not set.");
     $this->onCombatStart();
     while($this->round < $this->round_limit) {
       if($this->start_round() > 0) break;

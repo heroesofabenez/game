@@ -39,7 +39,7 @@ class CombatLogger extends \Nette\Object implements \Countable, \IteratorAggrega
    * @return void
    */
   function setTeams(Team $team1, Team $team2) {
-    if($this->team1) exit("Teams has already been set.");
+    if($this->team1) throw new ImmutableException("Teams has already been set.");
     $this->team1 = $team1;
     $this->team2 = $team2;
   }

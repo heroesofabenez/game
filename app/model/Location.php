@@ -188,12 +188,12 @@ class Location extends \Nette\Object {
    * 
    * @param int $id Stage's id
    * @return void
-   * @throws \Nette\Application\BadRequestException
-   * @throws \Nette\Application\ForbiddenRequestException
+   * @throws StageNotFoundException
+   * @throws CannotTravelToStageException
    */
   function travelToStage($id) {
     $stage = $this->getStage($id);
-    if(!$stage) throw new \Nette\Application\BadRequestException;
+    if(!$stage) throw new StageNotFoundException;
     $currentStage = $this->user->identity->stage;
     $foundRoute = false;
     $routes = $this->stageRoutes();
@@ -206,9 +206,17 @@ class Location extends \Nette\Object {
         break;
       }
     }
-    if(!$foundRoute) throw new \Nette\Application\ForbiddenRequestException;
+    if(!$foundRoute) throw new CannotTravelToStageException;
     $data = array("current_stage" => $id);
     $this->db->query("UPDATE characters SET ? WHERE id=?", $data, $this->user->id);
   }
+}
+
+class StageNotFoundException extends RecordNotFoundException {
+  
+}
+
+class CannotTravelToStageException extends AccessDenied {
+  
 }
 ?>

@@ -2,10 +2,7 @@
 namespace HeroesofAbenez\Model;
 
 use HeroesofAbenez\Entities\Request as RequestEntity,
-    Nette\Application\BadRequestException,
-    Nette\Application\ForbiddenRequestException,
-    Nette\NotImplementedException,
-    Kdyby\Translation\Translator;
+    Nette\NotImplementedException;
 
 /**
  * Request Model
@@ -21,8 +18,6 @@ class Request extends \Nette\Object {
   protected $profileModel;
   /** @var \HeroesofAbenez\Model\Guild */
   protected $guildModel;
-  /** @var \Kdyby\Translation\Translator */
-  protected $translator;
   
   /**
    * @param \Nette\Security\User $user
@@ -30,12 +25,11 @@ class Request extends \Nette\Object {
    * @param \HeroesofAbenez\Model\Profile $profileModel
    * @param \HeroesofAbenez\Model\Guild $guildModel
    */
-  function __construct(\Nette\Security\User $user,\Nette\Database\Context $db, Profile $profileModel, Guild $guildModel, Translator $translator) {
+  function __construct(\Nette\Security\User $user,\Nette\Database\Context $db, Profile $profileModel, Guild $guildModel) {
     $this->user = $user;
     $this->db = $db;
     $this->profileModel = $profileModel;
     $this->guildModel = $guildModel;
-    $this->translator = $translator;
   }
   
   /**
@@ -102,13 +96,13 @@ class Request extends \Nette\Object {
    * 
    * @param int $id Request's id
    * @return \HeroesofAbenez\Entities\Request
-   * @throws \Nette\Application\BadRequestException
-   * @throws \Nette\Application\ForbiddenRequestException
+   * @throws RequestNotFoundException
+   * @throws CannotSeeRequestException
    */
   function show($id) {
     $requestRow = $this->db->table("requests")->get($id);
-    if(!$requestRow) throw new BadRequestException;
-    if(!$this->canShow($id)) throw new ForbiddenRequestException;
+    if(!$requestRow) throw new RequestNotFoundException;
+    if(!$this->canShow($id)) throw new CannotSeeRequestException;
     $from = $this->profileModel->getCharacterName($requestRow->from);
     $to = $this->profileModel->getCharacterName($requestRow->to);
     $return = new RequestEntity($requestRow->id, $from, $to, $requestRow->type, $requestRow->sent, $requestRow->status);
@@ -120,16 +114,18 @@ class Request extends \Nette\Object {
    * 
    * @param int $id Request's id
    * @return void
-   * @throws \Nette\Application\BadRequestException
-   * @throws \Nette\Application\ForbiddenRequestException
+   * @throws RequestNotFoundException
+   * @throws CannotSeeRequestException
+   * @throws CannotAcceptRequestException
+   * @throws RequestAlreadyHandledException
    * @throws \Nette\NotImplementedException
    */
   function accept($id) {
     $request = $this->show($id);
-    if(!$request) throw new BadRequestException;
-    if(!$this->canShow($id)) throw new ForbiddenRequestException($this->translator->translate("errors.request.cannotSee"));
-    if(!$this->canChange($id)) throw new ForbiddenRequestException($this->translator->translate("errors.request.cannotAccept"));
-    if($request->status !== "new") throw new ForbiddenRequestException($this->translator->translate("errors.request.handled"));
+    if(!$request) throw new RequestNotFoundException;
+    if(!$this->canShow($id)) throw new CannotSeeRequestException;
+    if(!$this->canChange($id)) throw new CannotAcceptRequestException;
+    if($request->status !== "new") throw new RequestAlreadyHandledException;
     switch($request->type) {
   case "friendship":
     throw new NotImplementedException;
@@ -159,17 +155,39 @@ class Request extends \Nette\Object {
    * 
    * @param int $id Request's id
    * @return void
-   * @throws \Nette\Application\BadRequestException
-   * @throws \Nette\Application\ForbiddenRequestException
+   * @throws RequestNotFoundException
+   * @throws CannotSeeRequestException
+   * @throws CannotDeclineRequestException
+   * @throws RequestAlreadyHandledException
    */
   function decline($id) {
     $request = $this->show($id);
-    if(!$request) throw new BadRequestException;
-    if(!$this->canShow($id)) throw new ForbiddenRequestException($this->translator->translate("errors.request.cannotSee"));
-    if(!$this->canChange($id)) throw new ForbiddenRequestException($this->translator->translate("errors.request.cannotDecline"));
-    if($request->status !== "new") throw new ForbiddenRequestException($this->translator->translate("errors.request.handled"));
+    if(!$request) throw new RequestNotFoundException;
+    if(!$this->canShow($id)) throw new CannotSeeRequestException;
+    if(!$this->canChange($id)) throw new CannotDeclineRequestException;
+    if($request->status !== "new") throw new RequestAlreadyHandledException;
     $data = array("status" => "declined");
     $this->db->query("UPDATE requests SET ? WHERE id=?", $data, $id);
   }
+}
+
+class CannotSeeRequestException extends AccessDenied {
+  
+}
+
+class CannotAcceptRequestException extends AccessDenied {
+  
+}
+
+class CannotDeclineRequestException extends AccessDenied {
+  
+}
+
+class RequestAlreadyHandledException extends \Exception {
+  
+}
+
+class RequestNotFoundException extends RecordNotFoundException {
+  
 }
 ?>
