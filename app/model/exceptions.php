@@ -20,4 +20,12 @@ class HigherRankException extends AccessDenied {
 class NameInUseException extends \Exception {
   
 }
+
+class InvalidStateException extends \RuntimeException {
+  
+}
+
+class ImmutableException extends InvalidStateException {
+  
+}
 ?>
