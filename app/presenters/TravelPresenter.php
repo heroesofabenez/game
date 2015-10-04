@@ -1,6 +1,9 @@
 <?php
 namespace HeroesofAbenez\Presenters;
 
+use HeroesofAbenez\Model\StageNotFoundException,
+    HeroesofAbenez\Model\CannotTravelToStageException;
+
   /**
    * Presenter Travel
    * 
@@ -33,9 +36,9 @@ class TravelPresenter extends BasePresenter {
       $this->model->travelToStage($id);$stageName = $this->model->getStageName($id);
       $this->user->logout();
       $this->flashMessage($this->translator->translate("messages.travel.movedToSage", NULL, array("stageName" => $stageName)));
-    } catch(\Nette\Application\ForbiddenRequestException $e) {
+    } catch(CannotTravelToStageException $e) {
       $this->flashMessage($this->translator->translate("error.travel.cannotTravelToStage"));
-    } catch(\Nette\Application\BadRequestException $e) {
+    } catch(StageNotFoundException $e) {
       $this->flashMessage($this->translator->translate("error.travel.stageDoesNotExist"));
     }
     $this->redirect("Homepage:");

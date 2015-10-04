@@ -1,8 +1,10 @@
 <?php
 namespace HeroesofAbenez\Presenters;
 
-use \Nette\Application\UI\Form,
-    \Nette\Application\ForbiddenRequestException;
+use Nette\Application\UI\Form,
+    HeroesofAbenez\Model\NameInUseException,
+    HeroesofAbenez\Model\GuildNotFoundException,
+    HeroesofAbenez\Model\AccessDenied;
 
   /**
    * Presenter Guild
@@ -131,7 +133,7 @@ class GuildPresenter extends BasePresenter {
       $this->user->logout();
       $this->flashMessage($this->translator->translate("messages.guild.created"));
       $this->redirect("Guild:");
-    } catch(ForbiddenRequestException $e) {
+    } catch(NameInUseException $e) {
       $this->flashMessage($e->getMessage());
     }
   }
@@ -154,7 +156,7 @@ class GuildPresenter extends BasePresenter {
       $this->model->sendApplication($id);
       $this->flashMessage($this->translator->translate("messages.guild.applicationSent"));
       $this->redirect("Guild:");
-    } catch (Exception $e) {
+    } catch(GuildNotFoundException $e) {
       $this->forward("notfound");
     }
   }
@@ -179,11 +181,9 @@ class GuildPresenter extends BasePresenter {
       $this->flashMessage($this->translator->translate("messages.guild.left"));
       $this->user->logout();
       $this->forward("default");
-    } catch(ForbiddenRequestException $e) {
-      if($e->getCode() === 202) {
-        $this->flashMessage($e->getMessage());
-        $this->redirect("Guild:");
-      }
+    } catch(AccessDenied $e) {
+      $this->flashMessage($e->getMessage());
+      $this->redirect("Guild:");
     }
   }
   
@@ -291,7 +291,7 @@ class GuildPresenter extends BasePresenter {
       $this->model->rename($gid, $name);
       $this->flashMessage($this->translator->translate("messages.guild.renamed"));
       $this->redirect("Guild:");
-    } catch(\Nette\Application\ApplicationException $e) {
+    } catch(NameInUseException $e) {
       $this->flashMessage($e->getMessage());
     }
   }
@@ -303,7 +303,9 @@ class GuildPresenter extends BasePresenter {
     try{
       $this->model->promote($id);
       $this->flashMessage($this->translator->translate("messages.guild.promoted"));
-    } catch(ForbiddenRequestException $e) {
+    } catch(AccessDenied $e) {
+      $this->flashMessage($e->getMessage());
+    } catch(PlayerNotFoundException $e) {
       $this->flashMessage($e->getMessage());
     }
     $this->redirect("Guild:");
@@ -316,7 +318,9 @@ class GuildPresenter extends BasePresenter {
     try{
       $this->model->demote($id);
       $this->flashMessage($this->translator->translate("messages.guild.demoted"));
-    } catch(ForbiddenRequestException $e) {
+    } catch(AccessDenied $e) {
+      $this->flashMessage($e->getMessage());
+    } catch(PlayerNotFoundException $e) {
       $this->flashMessage($e->getMessage());
     }
     $this->redirect("Guild:");
@@ -329,7 +333,9 @@ class GuildPresenter extends BasePresenter {
     try {
       $this->model->kick($id);
       $this->flashMessage($this->translator->translate("messages.guild.kicked"));
-    } catch(ForbiddenRequestException $e) {
+    } catch(AccessDenied $e) {
+      $this->flashMessage($e->getMessage());
+    } catch(PlayerNotFoundException $e) {
       $this->flashMessage($e->getMessage());
     }
     $this->redirect("Guild:");
@@ -375,7 +381,7 @@ class GuildPresenter extends BasePresenter {
     try {
       $this->model->changeDescription($guild, $description);
       $this->flashMessage($this->translator->translate("messages.guild.descriptionChanged"));
-    } catch(\Nette\Application\BadRequestException $e) {
+    } catch(GuildNotFoundException $e) {
       $this->flashMessage($this->translator->translate("errors.guild.doesNotExist"));
     }
     $this->redirect("Guild:");

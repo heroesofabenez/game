@@ -1,6 +1,11 @@
 <?php
 namespace HeroesofAbenez\Presenters;
 
+use HeroesofAbenez\Model\RequestNotFoundException,
+    HeroesofAbenez\Model\CannotSeeRequestException,
+    HeroesofAbenez\Model\AccessDenied,
+    HeroesofAbenez\Model\RequestAlreadyHandledException;
+
 /**
  * Presenter Request
  *
@@ -33,10 +38,10 @@ class RequestPresenter extends BasePresenter {
       $this->template->type = $request->type;
       $this->template->sent = $request->sent;
       $this->template->status = $request->status;
-    } catch(\Nette\Application\ForbiddenRequestException $e) {
+    } catch(CannotSeeRequestException $e) {
       $this->flashMessage($this->translator->translate("errors.request.cannotSee"));
       $this->forward("Homepage:");
-    } catch(\Nette\Application\BadRequestException $e) {
+    } catch(RequestNotFoundException $e) {
       $this->forward("notfound");
     }
   }
@@ -50,10 +55,13 @@ class RequestPresenter extends BasePresenter {
       $this->model->accept($id);
       $this->flashMessage($this->translator->translate("messages.request.accepted"));
       $this->redirect("Homepage:");
-    } catch(\Nette\Application\ForbiddenRequestException $e) {
+    } catch(AccessDenied $e) {
       $this->flashMessage($e->getMessage());
       $this->forward("Homepage:");
-    } catch(\Nette\Application\BadRequestException $e) {
+    } catch(RequestAlreadyHandledException $e) {
+      $this->flashMessage($e->getMessage());
+      $this->forward("Homepage:");
+    } catch(RequestNotFoundException $e) {
       $this->forward("notfound");
     } catch(\Nette\NotImplementedException $e) {
       $this->flashMessage($this->translator->translate("errors.request.typeNotImplemented"));
@@ -70,11 +78,14 @@ class RequestPresenter extends BasePresenter {
       $this->model->decline($id);
       $this->flashMessage($this->translator->translate("messages.request.declined"));
       $this->redirect("Homepage:");
-    } catch(\Nette\Application\ForbiddenRequestException $e) {
+    } catch(AccessDenied $e) {
       $this->flashMessage($e->getMessage());
       $this->forward("Homepage:");
-    } catch(\Nette\Application\BadRequestException $e) {
+    } catch(RequestNotFoundException $e) {
       $this->forward("notfound");
+    } catch(RequestAlreadyHandledException $e) {
+      $this->flashMessage($e->getMessage());
+      $this->forward("Homepage:");
     }
   }
 }
