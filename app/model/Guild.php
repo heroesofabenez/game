@@ -3,7 +3,6 @@ namespace HeroesofAbenez\Model;
 
 use HeroesofAbenez\Entities\Request as RequestEntity,
     HeroesofAbenez\Entities\Guild as GuildEntity,
-    Kdyby\Translation\Translator,
     Nette\Utils\Arrays;
 
   /**
@@ -22,8 +21,6 @@ class Guild extends \Nette\Object {
   protected $profileModel;
   /** @var \HeroesofAbenez\Model\Permissions */
   protected $permissionsModel;
-  /** @var \Kdyby\Translation\Translator */
-  protected $translator;
   
   /**
    * @param \Nette\Caching\Cache $cache
@@ -32,13 +29,12 @@ class Guild extends \Nette\Object {
    * @param \HeroesofAbenez\Model\Profile $profileModel
    * @param \HeroesofAbenez\Model\Permissions $permissionsModel
    */
-  function __construct(\Nette\Caching\Cache $cache, \Nette\Database\Context $db, \Nette\Security\User $user, Profile $profileModel, Permissions $permissionsModel, Translator $translator) {
+  function __construct(\Nette\Caching\Cache $cache, \Nette\Database\Context $db, \Nette\Security\User $user, Profile $profileModel, Permissions $permissionsModel) {
     $this->cache = $cache;
     $this->db = $db;
     $this->user = $user;
     $this->profileModel = $profileModel;
     $this->permissionsModel = $permissionsModel;
-    $this->translator = $translator;
   }
   
   /**
@@ -113,7 +109,7 @@ class Guild extends \Nette\Object {
   function create($data) {
     $guilds = $this->cache->load("guilds");
     foreach($guilds as $guild) {
-      if($guild->name == $data["name"]) throw new NameInUseException($this->translator->translate("errors.guild.nameTaken"));
+      if($guild->name == $data["name"]) throw new NameInUseException();
     }
     $row = $this->db->table("guilds")->insert($data);
     $data2 = array("guild" => $row->id, "guildrank" => 7);
@@ -219,11 +215,11 @@ class Guild extends \Nette\Object {
    */
   function promote($id) {
     $admin = $this->user;
-    if($admin->identity->guild == 0) throw new NotInGuildException($this->translator->translate("errors.guild.notInGuild"));
-    if(!$admin->isAllowed("guild", "promote")) throw new MissingPermissionsException($this->translator->translate("errors.guild.missingPermissions"));
+    if($admin->identity->guild == 0) throw new NotInGuildException;
+    if(!$admin->isAllowed("guild", "promote")) throw new MissingPermissionsException;
     $character = $this->db->table("characters")->get($id);
-    if(!$character) throw new PlayerNotFoundException($this->translator->translate("errors.guild.playerDoesNotExist"));
-    if($character->guild !== $admin->identity->guild) throw new PlayerNotInGuild($this->translator->translate("errors.guild.playerNotInGuild"));
+    if(!$character) throw new PlayerNotFoundException;
+    if($character->guild !== $admin->identity->guild) throw new PlayerNotInGuild;
     $roles = $this->permissionsModel->getRoles();
     foreach($roles as $role) {
       if($role["name"] == $admin->roles[0]) {
@@ -231,11 +227,11 @@ class Guild extends \Nette\Object {
         break;
       }
     }
-    if($adminRole <= $character->guildrank) throw new CannotPromoteHigherRanksException($this->translator->translate("errors.guild.cannotPromoteHigherRanks"));
-    if($character->guildrank >= 6) throw new CannotPromoteToGrandmaster($this->translator->translate("errors.guild.cannotPromoteToGranmaster"));
+    if($adminRole <= $character->guildrank) throw new CannotPromoteHigherRanksException;
+    if($character->guildrank >= 6) throw new CannotPromoteToGrandmaster;
     if($character->guildrank == 5) {
       $deputy = $this->guildMembers($admin->identity->guild, array(6));
-      if(count($deputy) > 0) throw new CannotHaveMoreDeputies($this->translator->translate("errors.guild.cannotHaveMoreDeputies"));
+      if(count($deputy) > 0) throw new CannotHaveMoreDeputies;
     }
     $this->db->query("UPDATE characters SET guildrank=guildrank+1 WHERE id=$id");
   }
@@ -254,11 +250,11 @@ class Guild extends \Nette\Object {
    */
   function demote($id) {
     $admin = $this->user;
-    if($admin->identity->guild == 0) throw new NotInGuildException($this->translator->translate("errors.guild.notInGuild"));
-    if(!$admin->isAllowed("guild", "promote")) throw new MissingPermissionsException($this->translator->translate("errors.guild.missingPermissions"));
+    if($admin->identity->guild == 0) throw new NotInGuildException;
+    if(!$admin->isAllowed("guild", "promote")) throw new MissingPermissionsException;
     $character = $this->db->table("characters")->get($id);
-    if(!$character) throw new PlayerNotFoundException($this->translator->translate("errors.guild.playerDoesNotExist"));
-    if($character->guild !== $admin->identity->guild) throw new PlayerNotInGuild($this->translator->translate("errors.guild.playerNotInGuild"));
+    if(!$character) throw new PlayerNotFoundException;
+    if($character->guild !== $admin->identity->guild) throw new PlayerNotInGuild;
     $roles = $this->permissionsModel->getRoles();
     foreach($roles as $role) {
       if($role["name"] == $admin->roles[0]) {
@@ -266,8 +262,8 @@ class Guild extends \Nette\Object {
         break;
       }
     }
-    if($adminRole <= $character->guildrank) throw new CannotDemoteHigherRanksException($this->translator->translate("errors.guild.cannotDemoteHigherRanks"));
-    if($character->guildrank === 1) throw new CannotDemoteLowestRankException($this->translator->translate("errors.guild.cannotDemoteLowestRank"));
+    if($adminRole <= $character->guildrank) throw new CannotDemoteHigherRanksException;
+    if($character->guildrank === 1) throw new CannotDemoteLowestRankException;
     $this->db->query("UPDATE characters SET guildrank=guildrank-1 WHERE id=$id");
   }
   
@@ -284,11 +280,11 @@ class Guild extends \Nette\Object {
    */
   function kick($id) {
     $admin = $this->user;
-    if($admin->identity->guild == 0) throw new NotInGuildException($this->translator->translate("errors.guild.notInGuild"));
-    if(!$admin->isAllowed("guild", "kick")) throw new MissingPermissionsException($this->translator->translate("errors.guild.missingPermissions"));
+    if($admin->identity->guild == 0) throw new NotInGuildException;
+    if(!$admin->isAllowed("guild", "kick")) throw new MissingPermissionsException;
     $character = $this->db->table("characters")->get($id);
-    if(!$character) throw new PlayerNotFoundException($this->translator->translate("errors.guild.playerDoesNotExist"));
-    if($character->guild !== $admin->identity->guild) throw new PlayerNotInGuild($this->translator->translate("errors.guild.playerNotInGuild"));
+    if(!$character) throw new PlayerNotFoundException;
+    if($character->guild !== $admin->identity->guild) throw new PlayerNotInGuild;
     $roles = $this->permissionsModel->getRoles();
     foreach($roles as $role) {
       if($role["name"] == $admin->roles[0]) {
@@ -296,7 +292,7 @@ class Guild extends \Nette\Object {
         break;
       }
     }
-    if($adminRole <= $character->guildrank) throw new CannotKickHigherRanksException($this->translator->translate("errors.guild.cannotKickHigherRanks"));
+    if($adminRole <= $character->guildrank) throw new CannotKickHigherRanksException;
     $this->db->query("UPDATE characters SET guildrank=NULL, guild=0 WHERE id=$id");
     $this->cache->remove("guilds");
   }
@@ -309,8 +305,8 @@ class Guild extends \Nette\Object {
    * @throws GrandmasterCannotLeaveGuild
   */
   function leave() {
-    if($this->user->identity->guild === 0) throw new NotInGuildException($this->translator->translate("errors.guild.notInGuild"));
-    if($this->user->isInRole("grandmaster")) throw new GrandmasterCannotLeaveGuild($this->translator->translate("errors.guild.grandmasterCannotLeave"));
+    if($this->user->identity->guild === 0) throw new NotInGuildException;
+    if($this->user->isInRole("grandmaster")) throw new GrandmasterCannotLeaveGuild;
     $data = array(
       "guild" => 0, "guildrank" => NULL
     );
@@ -345,7 +341,7 @@ class Guild extends \Nette\Object {
   function rename($id, $name) {
     $guilds = $this->cache->load("guilds");
     foreach($guilds as $guild) {
-      if($guild->name == $name) throw new NameInUseException($this->translator->translate("errors.guild.nameTaken"));
+      if($guild->name == $name) throw new NameInUseException;
     }
     $data = array("name" => $name);
     $this->db->query("UPDATE guilds SET ? WHERE id=?", $data, $id);

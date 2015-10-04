@@ -2,8 +2,7 @@
 namespace HeroesofAbenez\Model;
 
 use HeroesofAbenez\Entities\Request as RequestEntity,
-    Nette\NotImplementedException,
-    Kdyby\Translation\Translator;
+    Nette\NotImplementedException;
 
 /**
  * Request Model
@@ -19,8 +18,6 @@ class Request extends \Nette\Object {
   protected $profileModel;
   /** @var \HeroesofAbenez\Model\Guild */
   protected $guildModel;
-  /** @var \Kdyby\Translation\Translator */
-  protected $translator;
   
   /**
    * @param \Nette\Security\User $user
@@ -28,12 +25,11 @@ class Request extends \Nette\Object {
    * @param \HeroesofAbenez\Model\Profile $profileModel
    * @param \HeroesofAbenez\Model\Guild $guildModel
    */
-  function __construct(\Nette\Security\User $user,\Nette\Database\Context $db, Profile $profileModel, Guild $guildModel, Translator $translator) {
+  function __construct(\Nette\Security\User $user,\Nette\Database\Context $db, Profile $profileModel, Guild $guildModel) {
     $this->user = $user;
     $this->db = $db;
     $this->profileModel = $profileModel;
     $this->guildModel = $guildModel;
-    $this->translator = $translator;
   }
   
   /**
@@ -127,9 +123,9 @@ class Request extends \Nette\Object {
   function accept($id) {
     $request = $this->show($id);
     if(!$request) throw new RequestNotFoundException;
-    if(!$this->canShow($id)) throw new CannotSeeRequestException($this->translator->translate("errors.request.cannotSee"));
-    if(!$this->canChange($id)) throw new CannotAcceptRequestException($this->translator->translate("errors.request.cannotAccept"));
-    if($request->status !== "new") throw new RequestAlreadyHandledException($this->translator->translate("errors.request.handled"));
+    if(!$this->canShow($id)) throw new CannotSeeRequestException;
+    if(!$this->canChange($id)) throw new CannotAcceptRequestException;
+    if($request->status !== "new") throw new RequestAlreadyHandledException;
     switch($request->type) {
   case "friendship":
     throw new NotImplementedException;
@@ -167,9 +163,9 @@ class Request extends \Nette\Object {
   function decline($id) {
     $request = $this->show($id);
     if(!$request) throw new RequestNotFoundException;
-    if(!$this->canShow($id)) throw new CannotSeeRequestException($this->translator->translate("errors.request.cannotSee"));
-    if(!$this->canChange($id)) throw new CannotDeclineRequestException($this->translator->translate("errors.request.cannotDecline"));
-    if($request->status !== "new") throw new RequestAlreadyHandledException($this->translator->translate("errors.request.handled"));
+    if(!$this->canShow($id)) throw new CannotSeeRequestException;
+    if(!$this->canChange($id)) throw new CannotDeclineRequestException;
+    if($request->status !== "new") throw new RequestAlreadyHandledException;
     $data = array("status" => "declined");
     $this->db->query("UPDATE requests SET ? WHERE id=?", $data, $id);
   }

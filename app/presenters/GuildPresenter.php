@@ -4,7 +4,14 @@ namespace HeroesofAbenez\Presenters;
 use Nette\Application\UI\Form,
     HeroesofAbenez\Model\NameInUseException,
     HeroesofAbenez\Model\GuildNotFoundException,
-    HeroesofAbenez\Model\AccessDenied;
+    HeroesofAbenez\Model\NotInGuildException,
+    HeroesofAbenez\Model\GrandmasterCannotLeaveGuild,
+    HeroesofAbenez\Model\MissingPermissionsException,
+    HeroesofAbenez\Model\PlayerNotFoundException,
+    HeroesofAbenez\Model\PlayerNotInGuild,
+    HeroesofAbenez\Model\CannotPromoteHigherRanksException,
+    HeroesofAbenez\Model\CannotPromoteToGrandmaster,
+    HeroesofAbenez\Model\CannotHaveMoreDeputies;
 
   /**
    * Presenter Guild
@@ -134,7 +141,7 @@ class GuildPresenter extends BasePresenter {
       $this->flashMessage($this->translator->translate("messages.guild.created"));
       $this->redirect("Guild:");
     } catch(NameInUseException $e) {
-      $this->flashMessage($e->getMessage());
+      $this->flashMessage($this->translator->translate("errors.guild.nameTaken"));
     }
   }
   
@@ -181,8 +188,11 @@ class GuildPresenter extends BasePresenter {
       $this->flashMessage($this->translator->translate("messages.guild.left"));
       $this->user->logout();
       $this->forward("default");
-    } catch(AccessDenied $e) {
-      $this->flashMessage($e->getMessage());
+    } catch(NotInGuildException $e) {
+      $this->flashMessage($this->translator->translate("errors.guild.notInGuild"));
+      $this->redirect("Guild:");
+    } catch(GrandmasterCannotLeaveGuild $e) {
+      $this->flashMessage($this->translator->translate("errors.guild.grandmasterCannotLeave"));
       $this->redirect("Guild:");
     }
   }
@@ -292,7 +302,7 @@ class GuildPresenter extends BasePresenter {
       $this->flashMessage($this->translator->translate("messages.guild.renamed"));
       $this->redirect("Guild:");
     } catch(NameInUseException $e) {
-      $this->flashMessage($e->getMessage());
+      $this->flashMessage($this->translator->translate("errors.guild.nameTaken"));
     }
   }
   
@@ -303,10 +313,20 @@ class GuildPresenter extends BasePresenter {
     try{
       $this->model->promote($id);
       $this->flashMessage($this->translator->translate("messages.guild.promoted"));
-    } catch(AccessDenied $e) {
-      $this->flashMessage($e->getMessage());
+    } catch(NotInGuildException $e) {
+      $this->flashMessage($this->translator->translate("errors.guild.notInGuild"));
+    } catch(MissingPermissionsException $e) {
+      $this->flashMessage($this->translator->translate("errors.guild.missingPermissions"));
     } catch(PlayerNotFoundException $e) {
-      $this->flashMessage($e->getMessage());
+      $this->flashMessage($this->translator->translate("errors.guild.playerDoesNotExist"));
+    } catch(PlayerNotInGuild $e) {
+      $this->flashMessage($this->translator->translate("errors.guild.playerNotInGuild"));
+    } catch(CannotPromoteHigherRanksException $e) {
+      $this->flashMessage($this->translator->translate("errors.guild.cannotPromoteHigherRanks"));
+    } catch(CannotPromoteToGrandmaster $e) {
+      $this->flashMessage($this->translator->translate("errors.guild.cannotPromoteToGranmaster"));
+    } catch(CannotHaveMoreDeputies $e) {
+      $this->flashMessage($this->translator->translate("errors.guild.cannotHaveMoreDeputies"));
     }
     $this->redirect("Guild:");
   }
@@ -318,10 +338,18 @@ class GuildPresenter extends BasePresenter {
     try{
       $this->model->demote($id);
       $this->flashMessage($this->translator->translate("messages.guild.demoted"));
-    } catch(AccessDenied $e) {
-      $this->flashMessage($e->getMessage());
+    } catch(NotInGuildException $e) {
+      $this->flashMessage($this->translator->translate("errors.guild.notInGuild"));
+    } catch(MissingPermissionsException $e) {
+      $this->flashMessage($this->translator->translate("errors.guild.missingPermissions"));
     } catch(PlayerNotFoundException $e) {
-      $this->flashMessage($e->getMessage());
+      $this->flashMessage($this->translator->translate("errors.guild.playerDoesNotExist"));
+    } catch(PlayerNotInGuild $e) {
+      $this->flashMessage($this->translator->translate("errors.guild.playerNotInGuild"));
+    } catch(CannotDemoteHigherRanksException $e) {
+      $this->flashMessage($this->translator->translate("errors.guild.cannotDemoteHigherRanks"));
+    } catch(CannotDemoteLowestRankException $e) {
+      $this->flashMessage($this->translator->translate("errors.guild.cannotDemoteLowestRank"));
     }
     $this->redirect("Guild:");
   }
@@ -333,10 +361,16 @@ class GuildPresenter extends BasePresenter {
     try {
       $this->model->kick($id);
       $this->flashMessage($this->translator->translate("messages.guild.kicked"));
-    } catch(AccessDenied $e) {
-      $this->flashMessage($e->getMessage());
+    } catch(NotInGuildException $e) {
+      $this->flashMessage($this->translator->translate("errors.guild.notInGuild"));
+    } catch(MissingPermissionsException $e) {
+      $this->flashMessage($this->translator->translate("errors.guild.missingPermissions"));
     } catch(PlayerNotFoundException $e) {
-      $this->flashMessage($e->getMessage());
+      $this->flashMessage($this->translator->translate("errors.guild.playerDoesNotExist"));
+    } catch(PlayerNotInGuild $e) {
+      $this->flashMessage($this->translator->translate("errors.guild.playerNotInGuild"));
+    } catch(CannotKickHigherRanksException $e) {
+      $this->flashMessage($this->translator->translate("errors.guild.cannotKickHigherRanks"));
     }
     $this->redirect("Guild:");
   }
