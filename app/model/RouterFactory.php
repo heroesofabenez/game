@@ -19,7 +19,7 @@ class RouterFactory extends \Nette\Object {
     $router[] = new Route("<presenter map|tavern>/<action=local>");
     $router[] = new Route("postoffice", "Postoffice:received");
     $router[] = new Route("<presenter>/<id [0-9]+>", "Homepage:view");
-    $router[] = new Route("<presenter>[/<action>][/<id>]", "Homepage:default");
+    $router[] = new Route("<presenter=Homepage>[/<action=default>][/<id>]");
     return $router;
   }
 }
