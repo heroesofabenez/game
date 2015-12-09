@@ -138,7 +138,7 @@ class Profile extends \Nette\Object {
   function getCharacterId($name) {
     $characters = $this->getCharacters();
     foreach($characters as $char) {
-      if($char->name == $name) return $char["id"];
+      if($char->name == $name) return $char->id;
     }
     return 0;
   }
