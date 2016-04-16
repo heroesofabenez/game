@@ -18,7 +18,7 @@ abstract class BasePresenter extends \Nette\Application\UI\Presenter {
    * 
    * @return void
    */
-  function startup() {
+  protected function startup() {
     parent::startup();
     $this->tryLogin();
     $this->template->server = $this->context->parameters["application"]["server"];
