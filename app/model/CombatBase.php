@@ -155,7 +155,7 @@ class CombatBase extends \Nette\Object {
    */
   function logCombatResult() {
     $this->log->round = 5000;
-    $text = "Combat ends. ";
+    $text = "Combat ends. {$this->team1->name} dealt {$this->damage[1]} damage, {$this->team2->name} dealt {$this->damage[2]} damage. ";
     if($this->getWinner() === 1) $text .= $this->team1->name;
     else $text .= $this->team2->name;
     $text .= " wins.";
