@@ -16,7 +16,7 @@ class RouterFactory extends \Nette\Object {
   static function create() {
     $router = new RouteList;
     $router[] = new Route("ranking[/<action>][/<page=1 [0-9]+>]", "Ranking:characters");
-    $router[] = new Route("<presenter map|tavern>/<action=local>");
+    $router[] = new Route("<presenter map|tavern>[/<action=local>]");
     $router[] = new Route("postoffice", "Postoffice:received");
     $router[] = new Route("<presenter>/<id [0-9]+>", "Homepage:view");
     $router[] = new Route("<presenter=Homepage>[/<action=default>][/<id>]");
