@@ -66,7 +66,7 @@ request:
     sent: "Sent"
     status: "Status"
     invitedToGuild: "%from% invited %to% to his/her guild."
-    guildApp: "{$from} wants to join {$to}'s guild."
+    guildApp: "%from% wants to join %to%'s guild."
     invitedToGroup: "%from% invited %to% to his/her group."
     friendship: "%from% wants to be friend with %to%."
     notFoundTitle: "Request not found"
