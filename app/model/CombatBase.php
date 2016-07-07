@@ -59,6 +59,7 @@ class CombatBase extends \Nette\Object {
     $this->onRoundStart[] = array($this ,"recalculateStats");
     $this->onRoundStart[] = array($this, "logRoundNumber");
     $this->onRound[] = array($this, "doAttacks");
+    $this->onRoundEnd[] = array($this, "clearUsed");
     $this->onAttack[] = array($this, "attackHarm");
     $this->onAttack[] = array($this, "logDamage");
     $this->onAttack[] = array($this, "logResults");
@@ -158,6 +159,16 @@ class CombatBase extends \Nette\Object {
   }
   
   /**
+   * Clear lists of used team members
+   * 
+   * @return void
+   */
+  function clearUsed() {
+    $this->team1->clearUsed();
+    $this->team2->clearUsed();
+  }
+  
+  /**
    * Add winner to the log
    * 
    * @return void
@@ -237,11 +248,13 @@ class CombatBase extends \Nette\Object {
    * @return void
    */
   function doAttacks() {
-    foreach($this->team1->activeMembers as $attacker) {
+    foreach($this->team1->activeMembers as $index => $attacker) {
       $this->onAttack($attacker, $this->selectAttackTarget($attacker, $this->team2));
+      $this->team1->useMember($index);
     }
-    foreach($this->team2->activeMembers as $attacker) {
+    foreach($this->team2->activeMembers as $index => $attacker) {
       $this->onAttack($attacker, $this->selectAttackTarget($attacker, $this->team1));
+      $this->team2->useMember($index);
     }
   }
   
