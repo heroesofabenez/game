@@ -58,6 +58,7 @@ class CombatBase extends \Nette\Object {
     $this->onCombatEnd[] = array($this, "logCombatResult");
     $this->onRoundStart[] = array($this ,"recalculateStats");
     $this->onRoundStart[] = array($this, "logRoundNumber");
+    $this->onRound[] = array($this, "doHealing");
     $this->onRound[] = array($this, "doAttacks");
     $this->onRoundEnd[] = array($this, "clearUsed");
     $this->onAttack[] = array($this, "attackHarm");
@@ -260,6 +261,13 @@ class CombatBase extends \Nette\Object {
     }
     if($lowestId === -1) return NULL;
     else return $team->aliveMembers[$lowestId];
+  }
+  
+  /**
+   * @return void
+   */
+  function doHealing() {
+    
   }
   
   /**
