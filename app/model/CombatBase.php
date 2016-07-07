@@ -63,8 +63,10 @@ class CombatBase extends \Nette\Object {
     $this->onAttack[] = array($this, "attackHarm");
     $this->onAttack[] = array($this, "logDamage");
     $this->onAttack[] = array($this, "logResults");
+    $this->onAttack[] = array($this, "markUsed");
     $this->onHeal[] = array($this, "heal");
     $this->onHeal[] = array($this, "logResults");
+    $this->onHeal[] = array($this, "markUsed");
   }
   
   function getRound() {
@@ -159,6 +161,22 @@ class CombatBase extends \Nette\Object {
   }
   
   /**
+   * Mark primary character as used in this round
+   * @param CharacterEntity $character1
+   * @param CharacterEntity $character2
+   * @return void
+   */
+  function markUsed(CharacterEntity $character1, CharacterEntity $character2) {
+    $team = "team1";
+    $index = $this->team1->getIndex($character1->id);
+    if($index === -1) {
+      $index = $this->team2->getIndex($character1->id);
+      $team = "team2";
+    }
+    $this->$team->useMember($index);
+  }
+  
+  /**
    * Clear lists of used team members
    * 
    * @return void
@@ -250,11 +268,9 @@ class CombatBase extends \Nette\Object {
   function doAttacks() {
     foreach($this->team1->usableMembers as $index => $attacker) {
       $this->onAttack($attacker, $this->selectAttackTarget($attacker, $this->team2));
-      $this->team1->useMember($index);
     }
     foreach($this->team2->usableMembers as $index => $attacker) {
       $this->onAttack($attacker, $this->selectAttackTarget($attacker, $this->team1));
-      $this->team2->useMember($index);
     }
   }
   
