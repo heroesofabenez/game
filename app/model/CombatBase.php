@@ -15,6 +15,7 @@ use HeroesofAbenez\Entities\Team,
  * @method void onCombatStart() Tasks to do at the start of the combat
  * @method void onCombatEnd() Tasks to do at the end of the combat
  * @method void onRoundStart() Tasks to do at the start of a round
+ * @method void onRound() Tasks to do during a round
  * @method void onRoundEnd() Tasks to do at the end of a round
  * @method void onAttack(\HeroesofAbenez\Entities\Character $character1, \HeroesofAbenez\Entities\Character $character2) Tasks to do at attack
  * @method void onHeal(\HeroesofAbenez\Entities\Character $character1, \HeroesofAbenez\Entities\Character $character2) Tasks to do at healing
@@ -38,6 +39,8 @@ class CombatBase extends \Nette\Object {
   public $onCombatEnd = array();
   /** @var array Tasks to do at the start of a turn */
   public $onRoundStart = array();
+  /** @var array Tasks to do during a round */
+  public $onRound = array();
   /** @var array Tasks to do at the end of a turn */
   public $onRoundEnd = array();
   /** @var array Tasks to do at attack */
@@ -55,6 +58,7 @@ class CombatBase extends \Nette\Object {
     $this->onCombatEnd[] = array($this, "logCombatResult");
     $this->onRoundStart[] = array($this ,"recalculateStats");
     $this->onRoundStart[] = array($this, "logRoundNumber");
+    $this->onRound[] = array($this, "doAttacks");
     $this->onAttack[] = array($this, "attackHarm");
     $this->onAttack[] = array($this, "logDamage");
     $this->onAttack[] = array($this, "logResults");
@@ -230,6 +234,18 @@ class CombatBase extends \Nette\Object {
   }
   
   /**
+   * @return void
+   */
+  function doAttacks() {
+    foreach($this->team1->activeMembers as $attacker) {
+      $this->onAttack($attacker, $this->selectAttackTarget($attacker, $this->team2));
+    }
+    foreach($this->team2->activeMembers as $attacker) {
+      $this->onAttack($attacker, $this->selectAttackTarget($attacker, $this->team1));
+    }
+  }
+  
+  /**
    * Starts next round
    * 
    * @return int Winning team/0
@@ -246,12 +262,8 @@ class CombatBase extends \Nette\Object {
    * @return void
    */
   protected function do_round() {
-    foreach($this->team1->activeMembers as $attacker) {
-      $this->onAttack($attacker, $this->selectAttackTarget($attacker, $this->team2));
-    }
-    foreach($this->team2->activeMembers as $attacker) {
-      $this->onAttack($attacker, $this->selectAttackTarget($attacker, $this->team1));
-    }
+    $this->onRound();
+    
   }
   
   /**
