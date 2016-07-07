@@ -210,6 +210,26 @@ class CombatBase extends \Nette\Object {
   }
   
   /**
+   * Select target for healing
+   * 
+   * @param CharacterEntity $healer
+   * @param Team $team
+   * @return CharacterEntity|NULL
+   */
+  protected function selectHealingTarget(CharacterEntity $healer, Team $team) {
+    $lowestHp = 9999;
+    $lowestId = -1;
+    foreach($team->aliveMembers as $index => $member) {
+      if($member->hitpoints < $member->max_hitpoints AND $member->hitpoints < $lowestHp) {
+        $lowestHp = $member->hitpoints;
+        $lowestId = $index;
+      }
+    }
+    if($lowestId === -1) return NULL;
+    else return $team->aliveMembers[$lowestId];
+  }
+  
+  /**
    * Starts next round
    * 
    * @return int Winning team/0
