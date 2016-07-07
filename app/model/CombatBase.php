@@ -248,11 +248,11 @@ class CombatBase extends \Nette\Object {
    * @return void
    */
   function doAttacks() {
-    foreach($this->team1->activeMembers as $index => $attacker) {
+    foreach($this->team1->usableMembers as $index => $attacker) {
       $this->onAttack($attacker, $this->selectAttackTarget($attacker, $this->team2));
       $this->team1->useMember($index);
     }
-    foreach($this->team2->activeMembers as $index => $attacker) {
+    foreach($this->team2->usableMembers as $index => $attacker) {
       $this->onAttack($attacker, $this->selectAttackTarget($attacker, $this->team1));
       $this->team2->useMember($index);
     }

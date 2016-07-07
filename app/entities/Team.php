@@ -8,6 +8,7 @@ namespace HeroesofAbenez\Entities;
  * @property Character[] $items Characters in the team
  * @property-read Character[] $activeMembers
  * @property-read Character[] $aliveMembers
+ * @property-read Character[] $usableMembers
  * @property-read int[] $used
  */
 class Team extends BaseEntity implements \ArrayAccess, \Countable, \IteratorAggregate {
@@ -65,6 +66,19 @@ class Team extends BaseEntity implements \ArrayAccess, \Countable, \IteratorAggr
     $return = array();
     foreach($this->items as $member) {
       if($member->hitpoints > 0) $return[] = $member;
+    }
+    return $return;
+  }
+  
+  /**
+   * Get members which can perform an action
+   * 
+   * @return Character
+   */
+  function getUsableMembers() {
+    $return = array();
+    foreach($this->items as $index => $member) {
+      if(!$member->stunned AND $member->hitpoints > 0 AND !in_array($index, $this->used)) $return[] = $member;
     }
     return $return;
   }
