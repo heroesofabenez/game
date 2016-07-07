@@ -29,7 +29,7 @@ class CombatDuel extends CombatBase {
    * @param Team $opponents
    * @return CharacterEntity
    */
-  protected function selectTarget(CharacterEntity $attacker, Team $opponents) {
+  protected function selectAttackTarget(CharacterEntity $attacker, Team $opponents) {
     return $opponents[0];
   }
 }

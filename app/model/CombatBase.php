@@ -204,7 +204,7 @@ class CombatBase extends \Nette\Object {
    * @param Team $opponents
    * @return CharacterEntity
    */
-  protected function selectTarget(CharacterEntity $attacker, Team $opponents) {
+  protected function selectAttackTarget(CharacterEntity $attacker, Team $opponents) {
     $roll = rand(0, count($opponents->aliveMembers) - 1);
     return $opponents->aliveMembers[$roll];
   }
@@ -227,10 +227,10 @@ class CombatBase extends \Nette\Object {
    */
   protected function do_round() {
     foreach($this->team1->activeMembers as $attacker) {
-      $this->onAttack($attacker, $this->selectTarget($attacker, $this->team2));
+      $this->onAttack($attacker, $this->selectAttackTarget($attacker, $this->team2));
     }
     foreach($this->team2->activeMembers as $attacker) {
-      $this->onAttack($attacker, $this->selectTarget($attacker, $this->team1));
+      $this->onAttack($attacker, $this->selectAttackTarget($attacker, $this->team1));
     }
   }
   
