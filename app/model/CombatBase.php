@@ -11,6 +11,7 @@ use HeroesofAbenez\Entities\Team,
  * @author Jakub Konečný
  * @property-read \HeroesofAbenez\Model\CombatLogger $log Log from the combat
  * @property-read int $winner
+ * @property-read in $round
  * @method void onCombatStart() Tasks to do at the start of the combat
  * @method void onCombatEnd() Tasks to do at the end of the combat
  * @method void onRoundStart() Tasks to do at the start of a round
@@ -59,6 +60,10 @@ class CombatBase extends \Nette\Object {
     $this->onAttack[] = array($this, "logResults");
     $this->onHeal[] = array($this, "heal");
     $this->onHeal[] = array($this, "logResults");
+  }
+  
+  function getRound() {
+    return $this->round;
   }
   
   /**
@@ -179,7 +184,7 @@ class CombatBase extends \Nette\Object {
     foreach($this->team1 as $character) {
       foreach($character->effects as $effect) {
      	if(is_int($effect->duration)) { $effect->duration--; }
-        }
+      }
       $character->recalculateStats();
     }
     foreach($this->team2 as $character) {
