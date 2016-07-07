@@ -179,6 +179,8 @@ class CombatBase extends \Nette\Object {
   
   /**
    * Decrease duration of effects and recalculate stats
+   * 
+   * @return void
    */
   function recalculateStats() {
     foreach($this->team1 as $character) {
@@ -193,6 +195,18 @@ class CombatBase extends \Nette\Object {
       }
       $character->recalculateStats();
     }
+  }
+  
+  /**
+   * Select target for attack
+   * 
+   * @param CharacterEntity $attacker
+   * @param Team $opponents
+   * @return CharacterEntity
+   */
+  protected function selectTarget(CharacterEntity $attacker, Team $opponents) {
+    $roll = rand(0, count($opponents->aliveMembers) - 1);
+    return $opponents->aliveMembers[$roll];
   }
   
   /**
@@ -213,14 +227,10 @@ class CombatBase extends \Nette\Object {
    */
   protected function do_round() {
     foreach($this->team1->activeMembers as $attacker) {
-      $roll = rand(0, count($this->team2->aliveMembers) - 1);
-      $defender = $this->team2->aliveMembers[$roll];
-      $this->onAttack($attacker, $defender);
+      $this->onAttack($attacker, $this->selectTarget($attacker, $this->team2));
     }
     foreach($this->team2->activeMembers as $attacker) {
-      $roll = rand(0, count($this->team1->aliveMembers) - 1);
-      $defender = $this->team1->aliveMembers[$roll];
-      $this->onAttack($attacker, $defender);
+      $this->onAttack($attacker, $this->selectTarget($attacker, $this->team1));
     }
   }
   
