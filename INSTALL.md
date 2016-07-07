@@ -48,10 +48,10 @@ application:
 Web server
 ----------
 ### Apache
-If you're using Apache, you have little work to do as the repository contains all needed .htaccess files. However with that configuration you would have to clone the repository to /heroesofabenez. If you want to have it in different location, edit accordingly line
+If you're using Apache, you have little work to do as the repository contains all needed .htaccess files. However with that configuration you would have to clone the repository to server's root. If you want to have it in different location, edit accordingly line
 
 ```
-RewriteBase /heroesofabenez
+RewriteBase /
 ```
 
 in /.htaccess and (optionally) set up a virtual host.
