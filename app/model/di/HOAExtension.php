@@ -26,14 +26,32 @@ class HOAExtension extends \Nette\DI\CompilerExtension {
   protected function addModels() {
     $builder = $this->getContainerBuilder();
     $config = $this->getConfig($this->defaults);
-    $services = array(
-      "Equipment", "Guild", "Intro", "Item", "Journal", "Location", "Map",
-      "MapDrawer", "Permissions", "Pet", "Profile", "Request", "Quest"
-    );
-    foreach($services as $service) {
-      $builder->addDefinition($this->prefix("model." . lcfirst($service)))
-        ->setFactory("HeroesofAbenez\Model\\" . $service);
-    }
+    $builder->addDefinition($this->prefix("model.equipment"))
+      ->setFactory("HeroesofAbenez\Model\\Equipment");
+    $builder->addDefinition($this->prefix("model.guild"))
+      ->setFactory("HeroesofAbenez\Model\\Guild");
+    $builder->addDefinition($this->prefix("model.intro"))
+      ->setFactory("HeroesofAbenez\Model\\Intro");
+    $builder->addDefinition($this->prefix("model.item"))
+      ->setFactory("HeroesofAbenez\Model\\Item");
+    $builder->addDefinition($this->prefix("model.journal"))
+      ->setFactory("HeroesofAbenez\Model\\Journal");
+    $builder->addDefinition($this->prefix("model.location"))
+      ->setFactory("HeroesofAbenez\Model\\Location");
+    $builder->addDefinition($this->prefix("model.map"))
+      ->setFactory("HeroesofAbenez\Model\\Map");
+    $builder->addDefinition($this->prefix("model.mapDrawer"))
+      ->setFactory("HeroesofAbenez\Model\\MapDrawer");
+    $builder->addDefinition($this->prefix("model.permissions"))
+      ->setFactory("HeroesofAbenez\Model\\Permissions");
+    $builder->addDefinition($this->prefix("model.pet"))
+      ->setFactory("HeroesofAbenez\Model\\Pet");
+    $builder->addDefinition($this->prefix("model.profile"))
+      ->setFactory("HeroesofAbenez\Model\\Profile");
+    $builder->addDefinition($this->prefix("model.request"))
+      ->setFactory("HeroesofAbenez\Model\\Request");
+    $builder->addDefinition($this->prefix("model.quest"))
+      ->setFactory("HeroesofAbenez\Model\\Quest");
     $builder->addDefinition($this->prefix("model.npc"))
       ->setFactory("HeroesofAbenez\Model\NPC");
     $builder->addDefinition($this->prefix("model.userManager"))
@@ -49,13 +67,12 @@ class HOAExtension extends \Nette\DI\CompilerExtension {
   
   protected function addCombat() {
     $builder = $this->getContainerBuilder();
-    $services = array(
-      "duel", "logger", "logManager"
-    );
-    foreach($services as $service) {
-      $builder->addDefinition($this->prefix("combat.$service"))
-        ->setFactory("HeroesofAbenez\Model\Combat" . ucfirst($service));
-    }
+    $builder->addDefinition($this->prefix("combat.duel"))
+      ->setFactory("HeroesofAbenez\Model\CombatDuel");
+    $builder->addDefinition($this->prefix("combat.logger"))
+      ->setFactory("HeroesofAbenez\Model\CombatLogger");
+    $builder->addDefinition($this->prefix("combat.logManager"))
+      ->setFactory("HeroesofAbenez\Model\CombatLogManager");
   }
   
   protected function addArena() {
@@ -68,24 +85,22 @@ class HOAExtension extends \Nette\DI\CompilerExtension {
   
   protected function addChat() {
     $builder = $this->getContainerBuilder();
-    $chats = array(
-      "global", "local", "guild"
-    );
-    foreach($chats as $chat) {
-      $builder->addDefinition($this->prefix("chat.$chat"))
-        ->setImplement("HeroesofAbenez\Chat\\" . ucfirst($chat) . "ChatControlFactory");
-    }
+    $builder->addDefinition($this->prefix("chat.global"))
+      ->setImplement("HeroesofAbenez\Chat\\GlobalChatControlFactory");
+    $builder->addDefinition($this->prefix("chat.local"))
+      ->setImplement("HeroesofAbenez\Chat\\LocalChatControlFactory");
+    $builder->addDefinition($this->prefix("chat.guild"))
+      ->setImplement("HeroesofAbenez\Chat\\GuildChatControlFactory");
   }
   
   protected function addNpc() {
     $builder = $this->getContainerBuilder();
-    $components = array(
-      "dialogue", "shop", "quests"
-    );
-    foreach($components as $component) {
-      $builder->addDefinition($this->prefix("npc.$component"))
-        ->setImplement("HeroesofAbenez\NPC\NPC" . ucfirst($component) . "ControlFactory");
-    }
+    $builder->addDefinition($this->prefix("npc.dialogue"))
+      ->setImplement("HeroesofAbenez\NPC\NPCDialogueControlFactory");
+    $builder->addDefinition($this->prefix("npc.shop"))
+      ->setImplement("HeroesofAbenez\NPC\NPCShopControlFactory");
+    $builder->addDefinition($this->prefix("npc.quests"))
+      ->setImplement("HeroesofAbenez\NPC\NPCQuestsControlFactory");
   }
   
   protected function addPostOffice() {
