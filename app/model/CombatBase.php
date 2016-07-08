@@ -244,6 +244,25 @@ class CombatBase extends \Nette\Object {
   }
   
   /**
+   * Find character with lowest hp in the team
+   * 
+   * @param Team $team
+   * @return CharacterEntity|NULL
+   */
+  protected function findLowestHpCharacter(Team $team) {
+    $lowestHp = 9999;
+    $lowestIndex = -1;
+    foreach($team->aliveMembers as $index => $member) {
+      if($member->hitpoints < $member->max_hitpoints AND $member->hitpoints < $lowestHp) {
+        $lowestHp = $member->hitpoints;
+        $lowestIndex = $index;
+      }
+    }
+    if($lowestIndex === -1) return NULL;
+    else return $team->aliveMembers[$lowestIndex];
+  }
+  
+  /**
    * Select target for healing
    * 
    * @param CharacterEntity $healer
@@ -251,16 +270,7 @@ class CombatBase extends \Nette\Object {
    * @return CharacterEntity|NULL
    */
   protected function selectHealingTarget(CharacterEntity $healer, Team $team) {
-    $lowestHp = 9999;
-    $lowestId = -1;
-    foreach($team->aliveMembers as $index => $member) {
-      if($member->hitpoints < $member->max_hitpoints AND $member->hitpoints < $lowestHp) {
-        $lowestHp = $member->hitpoints;
-        $lowestId = $index;
-      }
-    }
-    if($lowestId === -1) return NULL;
-    else return $team->aliveMembers[$lowestId];
+    return $this->findLowestHpCharacter($team);
   }
   
   /**
