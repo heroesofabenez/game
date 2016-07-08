@@ -133,6 +133,8 @@ default:
     }
     $this->hitpoints = $this->max_hitpoints = $this->constitution * 5;
     $this->recalculateSecondaryStats();
+    $this->base_hit = $this->hit;
+    $this->base_dodge = $this->dodge;
   }
   
   /**
@@ -317,10 +319,11 @@ case "throwing knife":
       "damage", "hit", "dodge", "initiative", "defense"
     );
     $stunned = false;
+    $debuffs = array();
     foreach($stats as $stat) {
       $$stat = $this->{"base_" . $stat};
+      $debuffs[$stat] = 0;
     }
-    $debuffs = array();
     foreach($this->effects as $i => $effect) {
       $stat = $effect->stat;
       $type = $effect->type;
@@ -349,7 +352,7 @@ case "equipment":
       $$stat -= $bonus_value;
     }
     foreach($stats as $stat) {
-      $this->$stat = round($$stat);
+      $this->$stat = (int) round($$stat);
     }
     $this->recalculateSecondaryStats();
     $this->stunned = $stunned;
