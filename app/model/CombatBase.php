@@ -235,9 +235,10 @@ class CombatBase extends \Nette\Object {
    * Select random character of the team
    * 
    * @param Team $team
-   * @return CharacterEntity
+   * @return CharacterEntity|NULL
    */
   protected function selectRandomCharacter(Team $team) {
+    if(count($team->aliveMembers) === 0) return NULL;
     $roll = rand(0, count($team->aliveMembers) - 1);
     return $team->aliveMembers[$roll];
   }
@@ -247,7 +248,7 @@ class CombatBase extends \Nette\Object {
    * 
    * @param CharacterEntity $attacker
    * @param Team $opponents
-   * @return CharacterEntity
+   * @return CharacterEntity|NULL
    */
   protected function selectAttackTarget(CharacterEntity $attacker, Team $opponents) {
     return $this->selectRandomCharacter($opponents);
@@ -295,10 +296,12 @@ class CombatBase extends \Nette\Object {
    */
   function doAttacks() {
     foreach($this->team1->usableMembers as $index => $attacker) {
-      $this->onAttack($attacker, $this->selectAttackTarget($attacker, $this->team2));
+      $target = $this->selectAttackTarget($attacker, $this->team2);
+      if(is_null($target)) break; else $this->onAttack($attacker, $target);
     }
     foreach($this->team2->usableMembers as $index => $attacker) {
-      $this->onAttack($attacker, $this->selectAttackTarget($attacker, $this->team1));
+      $target = $this->selectAttackTarget($attacker, $this->team1);
+      if(is_null($target)) break; else $this->onAttack($attacker, $target);
     }
   }
   
