@@ -263,7 +263,7 @@ class CombatBase extends \Nette\Object {
     $lowestHp = 9999;
     $lowestIndex = -1;
     foreach($team->aliveMembers as $index => $member) {
-      if($member->hitpoints < $member->max_hitpoints AND $member->hitpoints < $lowestHp) {
+      if($member->hitpoints <= $member->max_hitpoints / 2 AND $member->hitpoints < $lowestHp) {
         $lowestHp = $member->hitpoints;
         $lowestIndex = $index;
       }
