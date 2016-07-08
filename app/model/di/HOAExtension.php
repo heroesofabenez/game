@@ -13,6 +13,9 @@ class HOAExtension extends \Nette\DI\CompilerExtension {
     )
   );
   
+  /**
+   * @return void
+   */
   function loadConfiguration() {
     $this->addModels();
     $this->addCombat();
@@ -23,6 +26,9 @@ class HOAExtension extends \Nette\DI\CompilerExtension {
     $this->addRanking();
   }
   
+  /**
+   * @return void
+   */
   protected function addModels() {
     $builder = $this->getContainerBuilder();
     $config = $this->getConfig($this->defaults);
@@ -65,6 +71,9 @@ class HOAExtension extends \Nette\DI\CompilerExtension {
       ->setFactory("HeroesofAbenez\Model\RouterFactory::create");
   }
   
+  /**
+   * @return void
+   */
   protected function addCombat() {
     $builder = $this->getContainerBuilder();
     $builder->addDefinition($this->prefix("combat.duel"))
@@ -75,6 +84,9 @@ class HOAExtension extends \Nette\DI\CompilerExtension {
       ->setFactory("HeroesofAbenez\Model\CombatLogManager");
   }
   
+  /**
+   * @return void
+   */
   protected function addArena() {
     $builder = $this->getContainerBuilder();
     $builder->addDefinition($this->prefix("arena.pve"))
@@ -83,6 +95,9 @@ class HOAExtension extends \Nette\DI\CompilerExtension {
       ->setImplement("HeroesofAbenez\Arena\ArenaPVPControlFactory");
   }
   
+  /**
+   * @return void
+   */
   protected function addChat() {
     $builder = $this->getContainerBuilder();
     $builder->addDefinition($this->prefix("chat.global"))
@@ -93,6 +108,9 @@ class HOAExtension extends \Nette\DI\CompilerExtension {
       ->setImplement("HeroesofAbenez\Chat\\GuildChatControlFactory");
   }
   
+  /**
+   * @return void
+   */
   protected function addNpc() {
     $builder = $this->getContainerBuilder();
     $builder->addDefinition($this->prefix("npc.dialogue"))
@@ -103,12 +121,18 @@ class HOAExtension extends \Nette\DI\CompilerExtension {
       ->setImplement("HeroesofAbenez\NPC\NPCQuestsControlFactory");
   }
   
+  /**
+   * @return void
+   */
   protected function addPostOffice() {
     $builder = $this->getContainerBuilder();
     $builder->addDefinition($this->prefix("postoffice.postoffice"))
       ->setImplement("HeroesofAbenez\Postoffice\PostofficeControlFactory");
   }
   
+  /**
+   * @return void
+   */
   protected function addRanking() {
     $builder = $this->getContainerBuilder();
     $builder->addDefinition($this->prefix("ranking.characters"))
@@ -117,6 +141,10 @@ class HOAExtension extends \Nette\DI\CompilerExtension {
       ->setImplement("HeroesofAbenez\Ranking\GuildsRankingControlFactory");
   }
   
+  /**
+   * @param \Nette\PhpGenerator\ClassType $class
+   * @return void
+   */
   function afterCompile(\Nette\PhpGenerator\ClassType $class) {
     $initialize = $class->methods["initialize"];
     $initialize->addBody('$this->getByType("Nette\Security\User")->authenticatedRole = "player";');
