@@ -96,7 +96,7 @@ class CombatBase extends \Nette\Object {
    */
   function getWinner() {
     static $result = 0;
-    if($this->round >= $this->round_limit AND $result === 0) {
+    if($this->round > $this->round_limit AND $result === 0) {
       $result = $this->damage[1] > $this->damage[2] ? 1: 2;
     } elseif($this->round < $this->round_limit AND $result === 0) {
       if(!$this->team1->hasAliveMembers()) $result = 2;
@@ -322,7 +322,7 @@ class CombatBase extends \Nette\Object {
   function execute() {
     if(!$this->team1) throw new InvalidStateException("Teams are not set.");
     $this->onCombatStart();
-    while($this->round < $this->round_limit) {
+    while($this->round <= $this->round_limit) {
       if($this->start_round() > 0) break;
       $this->do_round();
       if($this->end_round() > 0) break;
