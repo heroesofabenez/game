@@ -232,6 +232,17 @@ class CombatBase extends \Nette\Object {
   }
   
   /**
+   * Select random character of the team
+   * 
+   * @param Team $team
+   * @return CharacterEntity
+   */
+  protected function selectRandomCharacter(Team $team) {
+    $roll = rand(0, count($team->aliveMembers) - 1);
+    return $team->aliveMembers[$roll];
+  }
+  
+  /**
    * Select target for attack
    * 
    * @param CharacterEntity $attacker
@@ -239,8 +250,7 @@ class CombatBase extends \Nette\Object {
    * @return CharacterEntity
    */
   protected function selectAttackTarget(CharacterEntity $attacker, Team $opponents) {
-    $roll = rand(0, count($opponents->aliveMembers) - 1);
-    return $opponents->aliveMembers[$roll];
+    return $this->selectRandomCharacter($opponents);
   }
   
   /**
