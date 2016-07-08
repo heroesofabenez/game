@@ -118,11 +118,11 @@ case "constitution":
 case "constitution":
 case "intelligence":
 case "charisma":
-  if(!is_int($value)) {
+  if(!is_numeric($value)) {
     exit("Invalid value for \$stats[\"$key\"] passed to method Character::__construct. Expected integer.");
   } else {
-    $this->$key = $value;
-    $this->{"base_" . $key} = $value;
+    $this->$key = (int) $value;
+    $this->{"base_" . $key} = (int) $value;
   }
   break;
 default:
