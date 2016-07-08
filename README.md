@@ -1,4 +1,4 @@
-Fantasy browser game set in the world of Abenez during fifth age. Written in Nette Framework, requires PHP 5.4 or later.
+Fantasy browser game set in the world of Abenez during fifth age. Written in Nette Framework, requires PHP 5.5 or later.
 
 The project was started in November 2013 by Jakub Konečný but real development begun at the end of May 2015. It is still in alpha phase.
 
