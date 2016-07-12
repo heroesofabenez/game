@@ -1,9 +1,9 @@
 {
     "name": "heroesofabenez/game",
-    "description": "Work in progress online game Heroes of Abenez. Written in PHP 5.4, built on Nette Framework.",
+    "description": "Work in progress online game Heroes of Abenez. Written in PHP 5.6, built on Nette Framework.",
     "homepage": "http://heroesofabenez.tk/",
     "license": "proprietary",
-    "type": "package",
+    "type": "project",
     "authors": [
         {
             "name": "Jakub Konečný",
