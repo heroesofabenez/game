@@ -2,9 +2,8 @@ Thumbs.db
 temp
 /nbproject
 /api
-*test*
+/tests/*.php
 /images
 /app/log
 /app/config/local.neon
 /vendor
-/libs

@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "af6c7bd8cc9bd2251d2a1a8bfd80bed1",
-    "content-hash": "a7a227f4ab45cb3877d0e177c609e2c6",
+    "hash": "4cab48d8785f66509837ff03a8dbd7d2",
+    "content-hash": "5e9b098028f69ecb6a82156963fe8788",
     "packages": [
         {
             "name": "kdyby/autowired",
@@ -1400,10 +1400,74 @@
             "time": "2016-06-30 19:57:01"
         }
     ],
-    "packages-dev": [],
+    "packages-dev": [
+        {
+            "name": "konecnyjakub/mytester",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/konecnyjakub/mytester.git",
+                "reference": "1a9e20aab22385fac541c82dab423d14c61f0561"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/konecnyjakub/mytester/zipball/1a9e20aab22385fac541c82dab423d14c61f0561",
+                "reference": "1a9e20aab22385fac541c82dab423d14c61f0561",
+                "shasum": ""
+            },
+            "require": {
+                "nette/reflection": "~2.4",
+                "php": ">=5.6.0",
+                "tracy/tracy": "~2.4"
+            },
+            "require-dev": {
+                "nette/di": "~2.4",
+                "nette/robot-loader": "~2.4"
+            },
+            "suggest": {
+                "nette/di": "",
+                "nette/robot-loader": "Needed for automated tests runner."
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "MyTester\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Jakub Konečný",
+                    "email": "jakub.konecny2@centrum.cz",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Simple tester for PHP",
+            "keywords": [
+                "Simple",
+                "browser",
+                "command  line",
+                "php",
+                "test",
+                "tester",
+                "testing"
+            ],
+            "time": "2016-07-13 07:52:15"
+        }
+    ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "konecnyjakub/mytester": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
