@@ -1449,12 +1449,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/konecnyjakub/mytester.git",
-                "reference": "1a9e20aab22385fac541c82dab423d14c61f0561"
+                "reference": "3732eaf2494ce57c706df683bb9001f10d8a46ab"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/konecnyjakub/mytester/zipball/1a9e20aab22385fac541c82dab423d14c61f0561",
-                "reference": "1a9e20aab22385fac541c82dab423d14c61f0561",
+                "url": "https://api.github.com/repos/konecnyjakub/mytester/zipball/3732eaf2494ce57c706df683bb9001f10d8a46ab",
+                "reference": "3732eaf2494ce57c706df683bb9001f10d8a46ab",
                 "shasum": ""
             },
             "require": {
@@ -1479,7 +1479,10 @@
             "autoload": {
                 "psr-4": {
                     "MyTester\\": "src/"
-                }
+                },
+                "files": [
+                    "src/Bridges/NetteDI/autoload.php"
+                ]
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -1502,7 +1505,7 @@
                 "tester",
                 "testing"
             ],
-            "time": "2016-07-13 07:52:15"
+            "time": "2016-07-13 10:47:02"
         }
     ],
     "aliases": [],
