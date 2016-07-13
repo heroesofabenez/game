@@ -12,7 +12,9 @@ use HeroesofAbenez\Entities\Character as CharacterEntity,
  * @author Jakub Konečný
  * @property-write int $round Current round
  */
-class CombatLogger extends \Nette\Object implements \Countable, \IteratorAggregate {
+class CombatLogger implements \Countable, \IteratorAggregate {
+  use \Nette\SmartObject;
+  
   /** @var \Latte\Engine */
   protected $latte;
   /** @var \HeroesofAbenez\Entities\Team First team */

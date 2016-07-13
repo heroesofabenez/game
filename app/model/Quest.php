@@ -9,7 +9,9 @@ use Nette\Utils\Arrays,
  * 
  * @author Jakub Konečný
  */
-class Quest extends \Nette\Object {
+class Quest {
+  use \Nette\SmartObject;
+  
   /** @var \Nette\Database\Context */
   protected $db;
   /** @var \Nette\Caching\Cache */

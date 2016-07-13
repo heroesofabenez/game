@@ -6,7 +6,9 @@ namespace HeroesofAbenez\Model;
  *
  * @author Jakub Konečný
  */
-class Permissions extends \Nette\Object {
+class Permissions {
+  use \Nette\SmartObject;
+  
   /** @var \Nette\Database\Context */
   protected $db;
   /** @var \Nette\Caching\Cache */

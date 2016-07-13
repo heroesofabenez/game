@@ -8,7 +8,9 @@ use Nette\Utils\Image;
  *
  * @author Jakub Konečný
  */
-class MapDrawer extends \Nette\Object {
+class MapDrawer {
+  use \Nette\SmartObject;
+  
   /** @var \HeroesofAbenez\Model\Location */
   protected $locationModel;
   /** @var \Nette\Security\User */

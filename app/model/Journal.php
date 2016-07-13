@@ -9,7 +9,9 @@ use HeroesofAbenez\Entities\JournalQuest,
  *
  * @author Jakub Konečný
  */
-class Journal extends \Nette\Object {
+class Journal {
+  use \Nette\SmartObject;
+  
   /** @var \Nette\Security\User */
   protected $user;
   /** @var \Nette\Database\Context */

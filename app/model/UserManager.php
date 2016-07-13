@@ -8,7 +8,9 @@ use Nette\Security as NS;
    * 
    * @author Jakub Konečný
    */
-class UserManager extends \Nette\Object implements NS\IAuthenticator {
+class UserManager implements NS\IAuthenticator {
+  use \Nette\SmartObject;
+  
   /** @var \Nette\Database\Context Database context */
   protected $db;
   /** @var \HeroesofAbenez\Model\Permissions */

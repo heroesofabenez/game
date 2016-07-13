@@ -8,7 +8,9 @@ use Nette\Utils\Arrays;
    * 
    * @author Jakub Konečný
    */
-class Profile extends \Nette\Object {
+class Profile {
+  use \Nette\SmartObject;
+  
   /** @var \Nette\Database\Context  */
   protected $db;
   /** @var \Nette\Caching\Cache */

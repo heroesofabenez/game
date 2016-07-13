@@ -20,7 +20,9 @@ use HeroesofAbenez\Entities\Team,
  * @method void onAttack(\HeroesofAbenez\Entities\Character $character1, \HeroesofAbenez\Entities\Character $character2) Tasks to do at attack
  * @method void onHeal(\HeroesofAbenez\Entities\Character $character1, \HeroesofAbenez\Entities\Character $character2) Tasks to do at healing
  */
-class CombatBase extends \Nette\Object {
+class CombatBase {
+  use \Nette\SmartObject;
+  
   /** @var \HeroesofAbenez\Entities\Team First team */
   protected $team1;
   /** @var \HeroesofAbenez\Entities\Team Second team */

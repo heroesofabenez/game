@@ -6,7 +6,9 @@ namespace HeroesofAbenez\Model;
  *
  * @author Jakub Konečný
  */
-class AuthorizatorFactory extends \Nette\Object {
+class AuthorizatorFactory {
+  use \Nette\StaticClass;
+  
   /**
   * Factory for Authorizator
   * 

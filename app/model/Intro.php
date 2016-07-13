@@ -6,7 +6,9 @@ namespace HeroesofAbenez\Model;
  *
  * @author Jakub Konečný
  */
-class Intro extends \Nette\Object {
+class Intro {
+  use \Nette\SmartObject;
+  
   /** @var Nette\Security\User */
   protected $user;
   /** @var \Nette\Database\Context */

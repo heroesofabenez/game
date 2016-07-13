@@ -8,8 +8,11 @@ use Nette\Utils\Arrays,
  * Item Model
  *
  * @author Jakub Konečný
+ * @property-write \Nette\Application\LinkGenerator $linkGenerator
  */
-class Item extends \Nette\Object {
+class Item {
+  use \Nette\SmartObject;
+  
   /** @var \Nette\Database\Context */
   protected $db;
   /** @var \Nette\Caching\Cache */

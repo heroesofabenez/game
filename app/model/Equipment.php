@@ -10,6 +10,8 @@ use Nette\Utils\Arrays,
  * @author Jakub Konečný
  */
 class Equipment {
+  use \Nette\SmartObject;
+  
   /** @var \Nette\Database\Context */
   protected $db;
   /** @var \Nette\Security\User */

@@ -6,7 +6,9 @@ namespace HeroesofAbenez\Model;
  *
  * @author Jakub Konečný
  */
-class CombatLogManager extends \Nette\Object {
+class CombatLogManager {
+  use \Nette\SmartObject;
+  
   /** @var \Nette\Database\Context */
   protected $db;
   

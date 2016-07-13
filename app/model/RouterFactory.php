@@ -9,7 +9,9 @@ use Nette\Application\Routers\RouteList,
  *
  * @author Jakub Konečný
  */
-class RouterFactory extends \Nette\Object {
+class RouterFactory {
+  use \Nette\StaticClass;
+  
   /**
    * @return \Nette\Application\Routers\RouteList
    */

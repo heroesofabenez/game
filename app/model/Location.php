@@ -9,8 +9,12 @@ use Nette\Utils\Arrays,
  * Location Model
  * 
  * @author Jakub Konečný
+ * @property-write \Nette\Security\User $user
+ * @property-write NPC $npcModel
  */
-class Location extends \Nette\Object {
+class Location {
+  use \Nette\SmartObject;
+  
   /** @var \Nette\Caching\Cache */
   protected $cache;
   /** @var \Nette\Database\Context */

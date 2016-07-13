@@ -10,7 +10,9 @@ use Nette\Utils\Arrays,
  *
  * @author Jakub Konečný
  */
-class Pet extends \Nette\Object {
+class Pet {
+  use \Nette\SmartObject;
+  
   /** @var \Nette\Caching\Cache */
   protected $cache;
   /** @var \Nette\Database\Context */

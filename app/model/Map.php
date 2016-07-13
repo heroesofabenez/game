@@ -2,11 +2,13 @@
 namespace HeroesofAbenez\Model;
 
 /**
- * Description of map
+ * Map Model
  *
  * @author Jakub Konečný
  */
-class Map extends \Nette\Object {
+class Map {
+  use \Nette\SmartObject;
+  
   /** @var \HeroesofAbenez\Model\Location */
   protected $locationModel;
   /** @var \HeroesofAbenez\Model\MapDrawer */

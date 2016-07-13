@@ -9,7 +9,9 @@ use Nette\Utils\Arrays,
  *
  * @author Jakub Konečný
  */
-class NPC extends \Nette\Object {
+class NPC {
+  use \Nette\SmartObject;
+  
   /** @var \Nette\Database\Context */
   protected $db;
   /** @var \Nette\Caching\Cache */

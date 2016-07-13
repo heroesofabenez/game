@@ -10,7 +10,9 @@ use HeroesofAbenez\Entities\Request as RequestEntity,
    * 
    * @author Jakub Konečný
    */
-class Guild extends \Nette\Object {
+class Guild {
+  use \Nette\SmartObject;
+  
   /** @var \Nette\Caching\Cache */
   protected $cache;
   /** @var \Nette\Database\Context */

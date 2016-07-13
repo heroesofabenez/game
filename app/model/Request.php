@@ -9,7 +9,9 @@ use HeroesofAbenez\Entities\Request as RequestEntity,
  * 
  * @author Jakub Konečný
  */
-class Request extends \Nette\Object {
+class Request {
+  use \Nette\SmartObject;
+  
    /** @var \Nette\Security\User */
   protected $user;
   /** @var \Nette\Database\Context */

@@ -2,6 +2,8 @@
 namespace HeroesofAbenez\Utils;
 
 class Arrays {
+  use \Nette\StaticClass;
+  
   /**
    * @author jimpoz jimpoz@jimpoz.com
    * @license http://creativecommons.org/licenses/by/3.0/ CC-BY-3.0
