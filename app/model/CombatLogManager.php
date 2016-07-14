@@ -33,9 +33,9 @@ class CombatLogManager {
    * @return int New record's id
    */
   function write($text) {
-    $data = array(
+    $data = [
       "text" => $text, "when" => time()
-    );
+    ];
     $this->db->query("INSERT INTO combats", $data);
     $combatId = $this->db->getInsertId("logs");
     return $combatId;

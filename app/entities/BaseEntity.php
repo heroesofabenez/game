@@ -36,7 +36,7 @@ abstract class BaseEntity {
     $class = get_class($this);
     $rc = new \ReflectionClass($class);
     $method = "set" . ucfirst($name);
-    if($rc->hasMethod($method)) call_user_func(array($this, $method), $value);
+    if($rc->hasMethod($method)) call_user_func([$this, $method], $value);
     else throw new \Nette\MemberAccessException("Cannot write to property $class::\$$name.");
   }
   
@@ -46,7 +46,7 @@ abstract class BaseEntity {
    * @return array
    */
   function __toArray() {
-    $return = array();
+    $return = [];
     foreach($this as $key => $value) {
       $return[$key] = $value;
     }

@@ -121,7 +121,7 @@ class GuildPresenter extends BasePresenter {
     $form->addTextArea("description", "forms.createGuild.descriptionField.label")
          ->addRule(Form::MAX_LENGTH, "forms.createGuild.descriptionField.error", 200);
     $form->addSubmit("create", "forms.createGuild.createButton.label");
-    $form->onSuccess[] = array($this, "createGuildFormSucceeded");
+    $form->onSuccess[] = [$this, "createGuildFormSucceeded"];
     return $form;
   }
   
@@ -132,9 +132,9 @@ class GuildPresenter extends BasePresenter {
    * @return void
    */
   function createGuildFormSucceeded(Form $form, $values) {
-    $data = array(
+    $data = [
       "name" => $values["name"], "description" => $values["description"]
-    );
+    ];
     try {
       $this->model->create($data);
       $this->user->logout();
@@ -251,7 +251,7 @@ class GuildPresenter extends BasePresenter {
     $form->addText("name", "forms.dissolveGuild.nameField.label")
          ->addRule(Form::EQUAL, "forms.dissolveGuild.nameField.error", $currentName);
     $form->addSubmit("dissolve", "forms.dissolveGuild.dissolveButton.label");
-    $form->onSuccess[] = array($this, "dissolveGuildFormSucceeded");
+    $form->onSuccess[] = [$this, "dissolveGuildFormSucceeded"];
     return $form;
   }
   
@@ -283,7 +283,7 @@ class GuildPresenter extends BasePresenter {
          ->addRule(Form::MAX_LENGTH, "forms.renameGuild.nameField.error", 20)
          ->setDefaultValue($currentName);
     $form->addSubmit("rename", "forms.renameGuild.renameButton.label");
-    $form->onSuccess[] = array($this, "renameGuildFormSucceeded");
+    $form->onSuccess[] = [$this, "renameGuildFormSucceeded"];
     return $form;
   }
   
@@ -399,7 +399,7 @@ class GuildPresenter extends BasePresenter {
     $form->addTextArea("description", "forms.guildDescription.descriptionField.label")
          ->setDefaultValue($guild->description);
     $form->addSubmit("change", "forms.guildDescription.changeButton.label");
-    $form->onSuccess[] = array($this, "guildDescriptionFormSucceeded");
+    $form->onSuccess[] = [$this, "guildDescriptionFormSucceeded"];
     return $form;
   }
   /**

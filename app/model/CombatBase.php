@@ -34,42 +34,42 @@ class CombatBase {
   /** @var int Round limit */
   protected $round_limit = 30;
   /** @var array Dealt damage by team */
-  protected $damage = array(1 => 0, 2 => 0);
+  protected $damage = [1 => 0, 2 => 0];
   /** @var array Tasks to do at the start of the combat */
-  public $onCombatStart = array();
+  public $onCombatStart = [];
   /** @var array Tasks to do at the end of the combat */
-  public $onCombatEnd = array();
+  public $onCombatEnd = [];
   /** @var array Tasks to do at the start of a turn */
-  public $onRoundStart = array();
+  public $onRoundStart = [];
   /** @var array Tasks to do during a round */
-  public $onRound = array();
+  public $onRound = [];
   /** @var array Tasks to do at the end of a turn */
-  public $onRoundEnd = array();
+  public $onRoundEnd = [];
   /** @var array Tasks to do at attack */
-  public $onAttack = array();
+  public $onAttack = [];
   /** @var array Tasks to do at healing */
-  public $onHeal = array();
+  public $onHeal = [];
   /** @var array Temporary variable for results of an action */
   protected $results;
   
   function __construct(CombatLogger $logger) {
     $this->log = $logger;
-    $this->onCombatStart[] = array($this, "deployPets");
-    $this->onCombatStart[] = array($this, "equipItems");
-    $this->onCombatEnd[] = array($this, "removeCombatEffects");
-    $this->onCombatEnd[] = array($this, "logCombatResult");
-    $this->onRoundStart[] = array($this ,"recalculateStats");
-    $this->onRoundStart[] = array($this, "logRoundNumber");
-    $this->onRound[] = array($this, "doHealing");
-    $this->onRound[] = array($this, "doAttacks");
-    $this->onRoundEnd[] = array($this, "clearUsed");
-    $this->onAttack[] = array($this, "attackHarm");
-    $this->onAttack[] = array($this, "logDamage");
-    $this->onAttack[] = array($this, "logResults");
-    $this->onAttack[] = array($this, "markUsed");
-    $this->onHeal[] = array($this, "heal");
-    $this->onHeal[] = array($this, "logResults");
-    $this->onHeal[] = array($this, "markUsed");
+    $this->onCombatStart[] = [$this, "deployPets"];
+    $this->onCombatStart[] = [$this, "equipItems"];
+    $this->onCombatEnd[] = [$this, "removeCombatEffects"];
+    $this->onCombatEnd[] = [$this, "logCombatResult"];
+    $this->onRoundStart[] = [$this ,"recalculateStats"];
+    $this->onRoundStart[] = [$this, "logRoundNumber"];
+    $this->onRound[] = [$this, "doHealing"];
+    $this->onRound[] = [$this, "doAttacks"];
+    $this->onRoundEnd[] = [$this, "clearUsed"];
+    $this->onAttack[] = [$this, "attackHarm"];
+    $this->onAttack[] = [$this, "logDamage"];
+    $this->onAttack[] = [$this, "logResults"];
+    $this->onAttack[] = [$this, "markUsed"];
+    $this->onHeal[] = [$this, "heal"];
+    $this->onHeal[] = [$this, "logResults"];
+    $this->onHeal[] = [$this, "markUsed"];
   }
   
   function getRound() {
@@ -366,7 +366,7 @@ class CombatBase {
    * @param \HeroesofAbenez\Entities\Character $character2 Defender
    */
   function attackHarm(CharacterEntity $character1, CharacterEntity $character2) {
-    $result = array();
+    $result = [];
     $hit_chance = $character1->hit - $character2->dodge;
     if($hit_chance < 15) $hit_chance = 15;
     if($hit_chance > 100) $hit_chance = 100;
@@ -390,7 +390,7 @@ class CombatBase {
    * @param \HeroesofAbenez\Entities\Character $character2 Wounded character
    */
   function heal(CharacterEntity $character1, CharacterEntity $character2) {
-    $result = array();
+    $result = [];
     $hit_chance = $character1->intelligence * round($character1->level / 5) + 30;
     $roll = rand(0, 100);
     $result["result"] = ($roll <= $hit_chance);

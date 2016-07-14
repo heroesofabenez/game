@@ -70,13 +70,13 @@ class Character extends BaseEntity {
   /** @var int */
   protected $base_defense = 0;
   /** @var Equipment[] Character's equipment */
-  protected $equipment = array();
+  protected $equipment = [];
   /** @var Pet[] Character's pets */
-  protected $pets = array();
+  protected $pets = [];
   /** @var int */
   protected $active_pet = null;
   /** @var CharacterEffect[] Active effects */
-  protected $effects = array();
+  protected $effects = [];
   /** @var bool */
   protected $stunned = false;
   
@@ -86,7 +86,7 @@ class Character extends BaseEntity {
    * @param array $equipment Equipment of the character
    * @param array $pets Pets owned by the character
    */
-  function __construct(array $stats, array $equipment = array(), array $pets = array()) {
+  function __construct(array $stats, array $equipment = [], array $pets = []) {
     $this->setStats($stats);
     foreach($equipment as $eq) {
       if($eq instanceof Equipment) $this->equipment[$eq->id] = $eq;
@@ -101,8 +101,8 @@ class Character extends BaseEntity {
    * @return void
    */
   protected function setStats(array $stats) {
-    $required_stats = array("id", "name", "occupation", "level", "strength", "dexterity", "constitution", "intelligence", "charisma");
-    $all_stats = array_merge($required_stats, array("race", "specialization", "gender", "experience"));
+    $required_stats = ["id", "name", "occupation", "level", "strength", "dexterity", "constitution", "intelligence", "charisma"];
+    $all_stats = array_merge($required_stats, ["race", "specialization", "gender", "experience"]);
     foreach($required_stats as $value) {
       if(!isset($stats[$value])) exit("Not passed all needed elements for parameter stats for method Character::__construct. Missing at least $value.");
     }
@@ -299,7 +299,7 @@ case "throwing knife":
    * @return void
    */
   function recalculateSecondaryStats() {
-    $stats = array("damage" => $this->damageStat(), "hit" => "dexterity", "dodge" => "dexterity");
+    $stats = ["damage" => $this->damageStat(), "hit" => "dexterity", "dodge" => "dexterity"];
     foreach($stats as $secondary => $primary) {
       $gain = $this->$secondary - $this->{"base_$secondary"};
       if($secondary === "damage") $base = round($this->$primary / 2) + 1;
@@ -314,12 +314,12 @@ case "throwing knife":
    * @return void
    */
   function recalculateStats() {
-    $stats = array(
+    $stats = [
       "strength", "dexterity", "constitution", "intelligence", "charisma",
       "damage", "hit", "dodge", "initiative", "defense"
-    );
+    ];
     $stunned = false;
-    $debuffs = array();
+    $debuffs = [];
     foreach($stats as $stat) {
       $$stat = $this->{"base_" . $stat};
       $debuffs[$stat] = 0;

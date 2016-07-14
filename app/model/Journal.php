@@ -56,14 +56,14 @@ class Journal {
     $user = $this->user->identity;
     $character = $this->db->table("characters")->get($user->id);
     $stage = $this->locationModel->getStage($user->stage);
-    $return = array(
+    $return = [
       "name" => $user->name, "gender" => $user->gender, "race" => $user->race,
       "occupation" => $user->occupation, "specialization" => $user->specialization,
       "level" => $user->level, "whiteKarma" => $user->white_karma,
       "neutralKarma" => $user->neutral_karma, "darkKarma" => $user->dark_karma,
       "experiences" => $character->experience, "description" => $character->description,
       "stageName" => $stage->name, "areaName" => $this->locationModel->getAreaName($stage->area)
-    );
+    ];
     if($user->guild > 0) {
       $return["guild"] = $this->guildModel->getGuildName($user->guild);
       $return["guildRank"] = $character->guildrank;
@@ -79,23 +79,23 @@ class Journal {
    * @return array
    */
   function inventory() {
-    $return = array();
+    $return = [];
     $uid = $this->user->id;
     $char = $this->db->table("characters")->get($uid);
     $return["money"] = $char->money;
-    $return["items"] = array();
+    $return["items"] = [];
     $items = $this->db->table("character_items")
       ->where("character", $this->user->id);
     foreach($items as $item) {
       $i = $this->db->table("items")->get($item->item);
-      $return["items"][] = (object) array("id" => $i->id, "name" => $i->name, "amount" => $item->amount);
+      $return["items"][] = (object) ["id" => $i->id, "name" => $i->name, "amount" => $item->amount];
     }
-    $return["equipments"] = array();
+    $return["equipments"] = [];
     $equipments = $this->db->table("character_equipment")
       ->where("character", $this->user->id);
     foreach($equipments as $equipment) {
       $i = $this->equipmentModel->view($equipment->item);
-      $return["equipments"][] = (object) array("id" => $i->id, "name" => $i->name, "amount" => $equipment->amount, "worn" => (bool) $equipment->worn);
+      $return["equipments"][] = (object) ["id" => $i->id, "name" => $i->name, "amount" => $equipment->amount, "worn" => (bool) $equipment->worn];
     }
     return $return;
   }
@@ -106,7 +106,7 @@ class Journal {
    * @return PetEntity[]
    */
   function pets() {
-    $return = array();
+    $return = [];
     $uid = $this->user->id;
     $pets = $this->db->table("pets")
       ->where("owner", $uid);
@@ -123,7 +123,7 @@ class Journal {
    * @return JournalQuest[]
    */
   function quests() {
-    $return = array();
+    $return = [];
     $uid = $this->user->id;
     $quests = $this->db->table("character_quests")
       ->where("character", $uid);

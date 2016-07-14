@@ -33,7 +33,7 @@ class Permissions {
     if($roles === NULL) {
       $rolesRows = $this->db->table("guild_ranks")->order("id");
       foreach($rolesRows as $i => $row) {
-        $roles[$i] = array("id" => $row->id, "name" => $row->name);
+        $roles[$i] = ["id" => $row->id, "name" => $row->name];
       }
       $this->cache->save("roles", $roles);
     }
@@ -63,7 +63,7 @@ class Permissions {
       $privileges = $this->db->table("guild_privileges");
       foreach($privileges as $row) {
         $role = $roles[$row->rank];
-        $permissions[$row->id] = array("role" => $role["name"], "action" => $row->action);
+        $permissions[$row->id] = ["role" => $role["name"], "action" => $row->action];
       }
       $this->cache->save("permissions", $permissions);
     }

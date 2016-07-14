@@ -26,15 +26,15 @@ class PostofficeControl extends \Nette\Application\UI\Control {
    * @return array
    */
   protected function getReceivedMessages() {
-    $return = array();
+    $return = [];
     $messages = $this->db->table("messages")
       ->where("to", $this->user->id);
     foreach($messages as $message) {
       $from = $this->profileModel->getCharacterName($message->from);
-      $return[] = (object) array(
+      $return[] = (object) [
         "id" => $message->id, "from" => $from, "subject" => $message->subject,
         "text" => $message->text, "sent" => $message->sent, "read" => $message->read
-      );
+      ];
     }
     return $return;
   }
@@ -55,15 +55,15 @@ class PostofficeControl extends \Nette\Application\UI\Control {
    * @return array
    */
   protected function getSentMessages() {
-    $return = array();
+    $return = [];
     $messages = $this->db->table("messages")
       ->where("from", $this->user->id);
     foreach($messages as $message) {
       $to = $this->profileModel->getCharacterName($message->to);
-      $return[] = (object) array(
+      $return[] = (object) [
         "id" => $message->id, "to" => $to, "subject" => $message->subject,
         "text" => $message->text, "sent" => $message->sent, "read" => $message->read
-      );
+      ];
     }
     return $return;
   }
@@ -108,10 +108,10 @@ class PostofficeControl extends \Nette\Application\UI\Control {
     if(!$this->canShow($message)) throw new CannotShowMessageException;
     $from = $this->profileModel->getCharacterName($message->from);
     $to = $this->profileModel->getCharacterName($message->to);
-    $return = (object) array(
+    $return = (object) [
       "id" => $message->id, "from" => $from, "to" => $to, "subject" => $message->subject,
         "text" => $message->text, "sent" => $message->sent, "read" => $message->read
-    );
+    ];
     return $return;
   }
   /**
@@ -138,7 +138,7 @@ class PostofficeControl extends \Nette\Application\UI\Control {
    * @return array
    */
   function getRecipients() {
-    $chars = array();
+    $chars = [];
     $characters = $this->db->table("characters")
       ->order("id");
     foreach($characters as $char) {

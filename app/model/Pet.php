@@ -33,7 +33,7 @@ class Pet {
    * @return PetType[]
    */
   function listOfTypes() {
-    $return = array();
+    $return = [];
     $types = $this->cache->load("pet_types");
     if($types === NULL) {
       $types = $this->db->table("pet_types");

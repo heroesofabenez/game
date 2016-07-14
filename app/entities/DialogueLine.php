@@ -12,7 +12,7 @@ class DialogueLine extends BaseEntity {
   /** @var string */
   protected $text;
   /** @var array */
-  protected $names = array();
+  protected $names = [];
   
   /**
    * @param string $speaker
@@ -30,7 +30,7 @@ class DialogueLine extends BaseEntity {
    * @return string
    */
   function getText() {
-    $replace = array("#npcName#", "#playerName#");
+    $replace = ["#npcName#", "#playerName#"];
     return str_replace($replace, $this->names, $this->text);
   }
   

@@ -60,17 +60,17 @@ class Pet extends BaseEntity {
    * @return array params
    */
   function getDeployParams() {
-    $statTransform = array(
+    $statTransform = [
       "str" => "strength", "dex" => "dexterity", "con" => "constitution", "int" => "intelligence", "char" => "charisma"
-    );
-    return array(
+    ];
+    return [
       "id" => "pet" . $this->id . "bonusEffect",
       "type" => "buff",
       "stat" => str_replace(array_keys($statTransform), array_values($statTransform), $this->getBonusStat()),
       "value" => $this->getBonusValue(),
       "source" => "pet",
       "duration" => "combat"
-    );
+    ];
   }
 }
 ?>

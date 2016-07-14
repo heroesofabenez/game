@@ -148,7 +148,7 @@ class Request {
     $this->guildModel->join($uid, $gid);
     break;
     }
-    $data2 = array("status" => "accepted");
+    $data2 = ["status" => "accepted"];
     $this->db->query("UPDATE requests SET ? WHERE id=?", $data2, $id);
   }
   
@@ -168,7 +168,7 @@ class Request {
     if(!$this->canShow($id)) throw new CannotSeeRequestException;
     if(!$this->canChange($id)) throw new CannotDeclineRequestException;
     if($request->status !== "new") throw new RequestAlreadyHandledException;
-    $data = array("status" => "declined");
+    $data = ["status" => "declined"];
     $this->db->query("UPDATE requests SET ? WHERE id=?", $data, $id);
   }
 }

@@ -66,17 +66,17 @@ class Equipment extends BaseEntity {
    * @return array params
    */
   function getDeployParams() {
-    $stat = array(
+    $stat = [
       "weapon" => "damage", "armor" => "defense", "shield" => "dodge", "amulet" => "initiative"
-    );
-    $return = array(
+    ];
+    $return = [
       "id" => "equipment" . $this->id . "bonusEffect",
       "type" => "buff",
       "stat" => $stat[$this->slot],
       "value" => $this->strength,
       "source" => "equipment",
       "duration" => "combat"
-    );
+    ];
     return $return;
   }
 }

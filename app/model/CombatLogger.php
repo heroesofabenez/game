@@ -22,7 +22,7 @@ class CombatLogger implements \Countable, \IteratorAggregate {
   /** @var \HeroesofAbenez\Entities\Team Second team */
   protected $team2;
   /** @var array */
-  protected $actions = array();
+  protected $actions = [];
   /** @var int */
   protected $round;
   
@@ -81,9 +81,9 @@ class CombatLogger implements \Countable, \IteratorAggregate {
    * @return string
    */
   function __toString() {
-    $params = array(
+    $params = [
       "team1" => $this->team1, "team2" => $this->team2, "actions" => $this->actions
-    );
+    ];
     $this->latte->setTempDirectory(APP_DIR . "/temp/combats");
     return $this->latte->renderToString(APP_DIR . "/templates/CombatLog.latte", $params);
   }

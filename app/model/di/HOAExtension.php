@@ -9,11 +9,11 @@ use HeroesofAbenez;
  * @author Jakub Konečný
  */
 class HOAExtension extends \Nette\DI\CompilerExtension {
-  protected $defaults = array(
-    "devServers" => array(
+  protected $defaults = [
+    "devServers" => [
       "localhost", "hoa.local"
-    )
-  );
+    ]
+  ];
   
   /**
    * @return void
@@ -63,9 +63,9 @@ class HOAExtension extends \Nette\DI\CompilerExtension {
     $builder->addDefinition($this->prefix("model.npc"))
       ->setFactory(HeroesofAbenez\Model\NPC::class);
     $builder->addDefinition($this->prefix("model.userManager"))
-      ->setFactory(HeroesofAbenez\Model\UserManager::class, array($config["devServers"]));
+      ->setFactory(HeroesofAbenez\Model\UserManager::class, [$config["devServers"]]);
     $builder->addDefinition("cache.cache")
-      ->setFactory("Nette\Caching\Cache", array("@cache.storage", "data"));
+      ->setFactory("Nette\Caching\Cache", ["@cache.storage", "data"]);
     $builder->addDefinition($this->prefix("model.authorizator"))
       ->setFactory("HeroesofAbenez\Model\AuthorizatorFactory::create");
     $builder->removeDefinition("router");

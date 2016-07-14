@@ -37,7 +37,7 @@ class Equipment {
    * @return EquipmentEntity[]
    */
   function listOfEquipment() {
-    $return = array();
+    $return = [];
     $equipments = $this->cache->load("equipment");
     if($equipments === NULL) {
       $equipments = $this->db->table("equipment");

@@ -14,7 +14,7 @@ class Arrays {
     $data = array_shift($args);
     foreach ($args as $n => $field) {
       if(is_string($field)) {
-        $tmp = array();
+        $tmp = [];
         foreach ($data as $key => $row) {
           $tmp[$key] = $row[$field];
         }
@@ -35,7 +35,7 @@ class Arrays {
  */
 trait TCollection {
   /** @var array Items in the collection */
-  protected $items = array();
+  protected $items = [];
   /** @var string Type of items in the collection */
   protected $class;
   

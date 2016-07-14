@@ -15,7 +15,7 @@ class Team extends BaseEntity implements \ArrayAccess, \Countable, \IteratorAggr
   /** @var string Name of the team */
   protected $name;
   /** @var int[] Characters used in the current round */
-  protected $used = array();
+  protected $used = [];
   
   use \HeroesofAbenez\Utils\TCollection;
   
@@ -63,7 +63,7 @@ class Team extends BaseEntity implements \ArrayAccess, \Countable, \IteratorAggr
    * @return Character[]
    */
   function getActiveMembers() {
-    $return = array();
+    $return = [];
     foreach($this->items as $member) {
       if(!$member->stunned AND $member->hitpoints > 0) $return[] = $member;
     }
@@ -76,7 +76,7 @@ class Team extends BaseEntity implements \ArrayAccess, \Countable, \IteratorAggr
    * @return Character[]
    */
   function getAliveMembers() {
-    $return = array();
+    $return = [];
     foreach($this->items as $member) {
       if($member->hitpoints > 0) $return[] = $member;
     }
@@ -89,7 +89,7 @@ class Team extends BaseEntity implements \ArrayAccess, \Countable, \IteratorAggr
    * @return Character
    */
   function getUsableMembers() {
-    $return = array();
+    $return = [];
     foreach($this->items as $index => $member) {
       if(!$member->stunned AND $member->hitpoints > 0 AND !in_array($index, $this->used)) $return[] = $member;
     }
@@ -132,7 +132,7 @@ class Team extends BaseEntity implements \ArrayAccess, \Countable, \IteratorAggr
    * @return void
    */
   function clearUsed() {
-    $this->used = array();
+    $this->used = [];
   }
 }
 ?>

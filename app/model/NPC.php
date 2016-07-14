@@ -33,7 +33,7 @@ class NPC {
    * @return NPCEntity[]
    */
   function listOfNpcs($stage = 0) {
-    $return = array();
+    $return = [];
     $npcs = $this->cache->load("npcs");
     if($npcs === NULL) {
       $npcs = $this->db->table("npcs");

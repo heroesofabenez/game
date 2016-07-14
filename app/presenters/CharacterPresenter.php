@@ -33,7 +33,7 @@ class CharacterPresenter extends BasePresenter {
    * @return void
    */
   function renderCreate() {
-    $racesIds = $classesIds = array();
+    $racesIds = $classesIds = [];
     foreach($this->races as $race) {
       $racesIds[] = $race->id;
     }
@@ -54,7 +54,7 @@ class CharacterPresenter extends BasePresenter {
     $form->addText("name", "forms.createCharacter.nameField.label")
          ->setRequired("forms.createCharacter.nameField.empty")
          ->addRule(Form::MAX_LENGTH, "forms.createCharacter.nameField.error", 30);
-    $form->addRadioList("gender", "forms.createCharacter.genderRadio.label", array( 1 => "male", 2 => "female"))
+    $form->addRadioList("gender", "forms.createCharacter.genderRadio.label", [ 1 => "male", 2 => "female"])
          ->setRequired("forms.createCharacter.genderRadio.error")
          ->getSeparatorPrototype()->setName(NULL);
     foreach($this->races as $key => &$value) {
@@ -72,7 +72,7 @@ class CharacterPresenter extends BasePresenter {
          ->setRequired("forms.createCharacter.classSelect.error");
     $form["class"]->getControlPrototype()->onchange("changeClassDescription(this.value)");
     $form->addSubmit("create", "forms.createCharacter.createButton.label");
-    $form->onSuccess[] = array($this, "createCharacterFormSucceeded");
+    $form->onSuccess[] = [$this, "createCharacterFormSucceeded"];
     return $form;
   }
   
@@ -86,7 +86,7 @@ class CharacterPresenter extends BasePresenter {
     $data = $this->userManager->create($values);
     if(!$data) $this->forward("Character:exists");
     $this->user->logout();
-    $this->forward("Character:created", array("data" => serialize($data)));
+    $this->forward("Character:created", ["data" => serialize($data)]);
   }
   
   /**

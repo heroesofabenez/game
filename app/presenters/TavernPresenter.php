@@ -25,7 +25,7 @@ class TavernPresenter extends BasePresenter {
    * @return array
    */
   function formatTemplateFiles() {
-    return array(APP_DIR . "/templates/Tavern.@layout.latte");
+    return [APP_DIR . "/templates/Tavern.@layout.latte"];
   }
   
   /**
@@ -85,7 +85,7 @@ class TavernPresenter extends BasePresenter {
     $form->addText("message")
          ->setRequired("forms.tavernNewMessage.messageField.error");
     $form->addSubmit("send", "forms.tavernNewMessage.sendButton.label");
-    $form->onSuccess[] = array($this, "newMessageSucceeded");
+    $form->onSuccess[] = [$this, "newMessageSucceeded"];
     return $form;
   }
   

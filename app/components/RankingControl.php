@@ -10,7 +10,7 @@ abstract class RankingControl extends \Nette\Application\UI\Control {
   /** @var string */
   protected $name;
   /** @var array */
-  protected $cols = array();
+  protected $cols = [];
   /** @var string */
   protected $lastCol;
   /** @var string */
@@ -45,7 +45,7 @@ abstract class RankingControl extends \Nette\Application\UI\Control {
     $template = $this->template;
     $template->setFile(__DIR__ . "/ranking.latte");
     $template->name = $this->name;
-    $template->rankings = array("characters", "guilds");
+    $template->rankings = ["characters", "guilds"];
     $template->cols = $this->cols;
     $template->presenter = $this->presenter;
     $template->lastCol = $this->lastCol;

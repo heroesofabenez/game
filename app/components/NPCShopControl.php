@@ -37,7 +37,7 @@ class NPCShopControl extends \Nette\Application\UI\Control {
    * @return \HeroesofAbenez\Entities\Item[]
    */
   function getItems() {
-    $return = array();
+    $return = [];
     $items = $this->db->table("shop_items")
       ->where("npc", $this->npc->id)
       ->order("order");

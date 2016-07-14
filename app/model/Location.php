@@ -48,7 +48,7 @@ class Location {
    * @return Stage[] List of stages
    */
   function listOfStages($area = 0) {
-    $return = array();
+    $return = [];
     $stages = $this->cache->load("stages");
     if($stages === NULL) {
       $stages = $this->db->table("quest_stages");
@@ -85,12 +85,12 @@ class Location {
    * @return \stdClass[]
    */
   function stageRoutes() {
-    $return = array();
+    $return = [];
     $routes = $this->cache->load("stage_routes");
     if($routes === NULL) {
       $routes = $this->db->table("routes_stages");
       foreach($routes as $route) {
-        $return[$route->id] = (object) array("from" => $route->from, "to" => $route->to);
+        $return[$route->id] = (object) ["from" => $route->from, "to" => $route->to];
       }
       $this->cache->save("stage_routes", $return);
     } else {
@@ -160,7 +160,7 @@ class Location {
    * @return array Data about location
    */
   function home() {
-    $return = array();
+    $return = [];
     $stage = $this->getStage($this->user->identity->stage);
     $return["stageName"] = $stage->name;
     $return["areaName"] = $this->getAreaName($stage->area);
@@ -211,7 +211,7 @@ class Location {
       }
     }
     if(!$foundRoute) throw new CannotTravelToStageException;
-    $data = array("current_stage" => $id);
+    $data = ["current_stage" => $id];
     $this->db->query("UPDATE characters SET ? WHERE id=?", $data, $this->user->id);
   }
 }

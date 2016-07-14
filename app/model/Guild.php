@@ -69,16 +69,16 @@ class Guild {
    * @return array info about guild
    */
   function view($id) {
-    $return = array();
+    $return = [];
     $guilds = $this->listOfGuilds();
     $guild = Arrays::get($guilds, $id, false);
     if(!$guild) { return false; }
     $return["name"] = $guild->name;
     $return["description"] = $guild->description;
     $members = $this->db->table("characters")->where("guild", $guild->id)->order("guildrank DESC, id");
-    $return["members"] = array();
+    $return["members"] = [];
     foreach($members as $member) {
-      $return["members"][] = (object) array("id" => $member->id, "name" => $member->name, "rank" => $member->guildrank);
+      $return["members"][] = (object) ["id" => $member->id, "name" => $member->name, "rank" => $member->guildrank];
     }
     return $return;
   }
@@ -90,13 +90,13 @@ class Guild {
    * @param array $roles Return only members with these roles
    * @return \stdClass[]
    */
-  function guildMembers($id, $roles = array()) {
-    $return = array();
+  function guildMembers($id, $roles = []) {
+    $return = [];
     $members = $this->db->table("characters")->where("guild", $id)->order("guildrank DESC, id");
     if(count($roles) > 0) $members->where("guildrank", $roles);
     foreach($members as $member) {
       $rank = $member->guildrank;
-      $return[] = (object) array("id" => $member->id, "name" => $member->name, "rank" => ucfirst($rank), "rankId" => $member->guildrank);
+      $return[] = (object) ["id" => $member->id, "name" => $member->name, "rank" => ucfirst($rank), "rankId" => $member->guildrank];
     }
     return $return;
   }
@@ -114,7 +114,7 @@ class Guild {
       if($guild->name == $data["name"]) throw new NameInUseException();
     }
     $row = $this->db->table("guilds")->insert($data);
-    $data2 = array("guild" => $row->id, "guildrank" => 7);
+    $data2 = ["guild" => $row->id, "guildrank" => 7];
     $this->db->query("UPDATE characters SET ? WHERE id=?", $data2, $this->user->id);
     $this->cache->remove("guilds");
   }
@@ -133,9 +133,9 @@ class Guild {
       ->where("guild", $gid)
       ->where("guildrank", 7);
     $leader = $leader[1];
-    $data = array(
+    $data = [
       "from" => $this->user->id, "to" => $leader->id, "type" => "guild_app"
-    );
+    ];
     $this->db->query("INSERT INTO requests", $data);
   }
   
@@ -160,7 +160,7 @@ class Guild {
    * @return RequestEntity[]
    */
   function showApplications($id) {
-    $return = array();
+    $return = [];
     $guilds = $this->listOfGuilds();
     $guild = $guilds[$id];
     $leaderId = $this->profileModel->getCharacterId($guild->leader);
@@ -182,7 +182,7 @@ class Guild {
    * @return GuildEntity[] list of guilds (id, name, description, leader)
    */
   function listOfGuilds() {
-    $return = array();
+    $return = [];
     $guilds = $this->cache->load("guilds");
     if($guilds === NULL) {
       $guilds = $this->db->table("guilds");
@@ -232,7 +232,7 @@ class Guild {
     if($adminRole <= $character->guildrank) throw new CannotPromoteHigherRanksException;
     if($character->guildrank >= 6) throw new CannotPromoteToGrandmaster;
     if($character->guildrank == 5) {
-      $deputy = $this->guildMembers($admin->identity->guild, array(6));
+      $deputy = $this->guildMembers($admin->identity->guild, [6]);
       if(count($deputy) > 0) throw new CannotHaveMoreDeputies;
     }
     $this->db->query("UPDATE characters SET guildrank=guildrank+1 WHERE id=$id");
@@ -309,9 +309,9 @@ class Guild {
   function leave() {
     if($this->user->identity->guild === 0) throw new NotInGuildException;
     if($this->user->isInRole("grandmaster")) throw new GrandmasterCannotLeaveGuild;
-    $data = array(
+    $data = [
       "guild" => 0, "guildrank" => NULL
-    );
+    ];
     $this->db->query("UPDATE characters SET ? WHERE id=?", $data, $this->user->id);
     $this->cache->remove("guilds");
   }
@@ -324,7 +324,7 @@ class Guild {
    */
   function dissolve($id) {
     $members = $this->db->table("characters")->where("guild", $id);
-    $data1 = array("guild" => 0, "guildrank" => NULL);
+    $data1 = ["guild" => 0, "guildrank" => NULL];
     foreach($members as $member) {
       $this->db->query("UPDATE characters SET ? WHERE id=?", $data1, $member->id);
     }
@@ -345,7 +345,7 @@ class Guild {
     foreach($guilds as $guild) {
       if($guild->name == $name) throw new NameInUseException;
     }
-    $data = array("name" => $name);
+    $data = ["name" => $name];
     $this->db->query("UPDATE guilds SET ? WHERE id=?", $data, $id);
     $this->cache->remove("guilds");
   }
@@ -368,7 +368,7 @@ class Guild {
       }
     }
     if(!$found) throw new GuildNotFoundException;
-    $data = array("description" => $description);
+    $data = ["description" => $description];
     $this->db->query("UPDATE guilds SET ? WHERE id=?", $data, $id);
   }
   
@@ -380,7 +380,7 @@ class Guild {
    * @return void
    */
   function join($uid, $gid) {
-    $data = array("guild" => $gid, "guildrank" => 1);
+    $data = ["guild" => $gid, "guildrank" => 1];
     $this->db->query("UPDATE characters SET ? WHERE id=?", $data, $uid);
     $this->cache->remove("guilds");
   }

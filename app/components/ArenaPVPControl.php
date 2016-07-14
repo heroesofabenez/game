@@ -35,7 +35,7 @@ class ArenaPVPControl extends ArenaControl {
     if($opponent->level > $player->level) $experience += 2;
     $money = round($opponent->level / 2) + 3;
     if($opponent->level > $player->level) $money += 3;
-    return array("money" => $money, "experience" => $experience);
+    return ["money" => $money, "experience" => $experience];
   }
   
   /**

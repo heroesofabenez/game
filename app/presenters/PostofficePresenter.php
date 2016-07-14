@@ -56,7 +56,7 @@ class PostofficePresenter extends BasePresenter {
     $form->addTextArea("message", "forms.postOfficeNewMessage.messageField.label")
          ->setRequired("forms.postOfficeNewMessage.messageField.error");
     $form->addSubmit("send", "forms.postOfficeNewMessage.sendButton.label");
-    $form->onSuccess[] = array($this, "newMessageFormSucceeded");
+    $form->onSuccess[] = [$this, "newMessageFormSucceeded"];
     return $form;
   }
   
@@ -67,9 +67,9 @@ class PostofficePresenter extends BasePresenter {
    * @return void
    */
   function newMessageFormSucceeded(Form $form, $values) {
-    $data = array(
+    $data = [
       "from" => $this->user->id, "to" => $values["to"], "subject" => $values["subject"], "text" => $values["message"]
-    );
+    ];
     $this->createComponentPostoffice()->sendMessage($data);
     $this->flashMessage($this->translator->translate("messages.postoffice.messageSent"));
     $this->redirect("Postoffice:sent");

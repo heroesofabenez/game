@@ -37,7 +37,7 @@ class Quest {
    * @return QuestEntity[]
    */
   function listOfQuests($npc = 0) {
-    $return = array();
+    $return = [];
     $quests = $this->cache->load("quests");
     if($quests === NULL) {
       $quests = $this->db->table("quests");

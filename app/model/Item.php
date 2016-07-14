@@ -43,7 +43,7 @@ class Item {
    * @return ItemEntity[]
    */
   function listOfItems() {
-    $return = array();
+    $return = [];
     $items = $this->cache->load("items");
     if($items === NULL) {
       $items = $this->db->table("items");
@@ -110,13 +110,13 @@ class Item {
   function giveItem($id, $amount = 1) {
     if($this->haveItem($id)) {
       $data = "item=$id, amount=amount+$amount";
-      $where = array("character" => $this->user->id, "item" => $id);
+      $where = ["character" => $this->user->id, "item" => $id];
       $result = $this->db->query("UPDATE character_items SET $data WHERE ?", $where);
       return $result;
     } else {
-      $data = array(
+      $data = [
         "character" => $this->user->id, "item" => $id, "amount" => $amount
-      );
+      ];
       $result = $this->db->query("INSERT INTO character_items", $data);
       return $result;
     }
@@ -130,7 +130,7 @@ class Item {
    */
   function loseItem($id, $amount = 1) {
     $data = "amount=amount-$amount";
-    $wheres = array("character" => $this->user->id, "item" => $id);
+    $wheres = ["character" => $this->user->id, "item" => $id];
     $result = $this->db->query("UPDATE character_items SET $data WHERE ?", $wheres);
     if(!$result) return false;
     else return true;

@@ -22,7 +22,7 @@ abstract class ChatControl extends \Nette\Application\UI\Control {
   /** @var int */
   protected $id2;
   /** @var array */
-  protected $names = array();
+  protected $names = [];
   
   /**
    * @param \Nette\Database\Context $db
@@ -59,16 +59,16 @@ abstract class ChatControl extends \Nette\Application\UI\Control {
     $data = $this->db->table($this->table)
       ->where($this->param, $this->id)
       ->limit($paginator->length, $paginator->offset);
-    $lines = array();
+    $lines = [];
     foreach($data as $line) {
       if(!isset($this->names[$line->character])) {
         $id = $line->character;
         $char = $this->db->table("characters")->get($id);
         $this->names[$id] = $char->name;
       }
-      $lines[] = (object) array(
+      $lines[] = (object) [
         "id" => $line->id, "character" => $this->names[$line->character], "when" => $line->when, "message" => $line->message
-      );
+      ];
     }
     return $lines;
   }
@@ -107,9 +107,9 @@ abstract class ChatControl extends \Nette\Application\UI\Control {
    * @return void
    */
   function newMessage($message) {
-    $data = array(
+    $data = [
       "message" => $message,"character" => $this->user->id, "$this->param" => $this->id
-      );
+      ];
     $this->db->query("INSERT INTO $this->table", $data);
   }
 }

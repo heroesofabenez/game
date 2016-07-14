@@ -32,7 +32,7 @@ class Profile {
   function getRacesList() {
     $racesList = $this->cache->load("races");
     if($racesList === NULL) {
-      $racesList = array();
+      $racesList = [];
       $races = $this->db->table("character_races");
       foreach($races as $race) {
         $racesList[$race->id] = new CharacterRace($race);
@@ -74,7 +74,7 @@ class Profile {
   function getClassesList() {
     $classesList = $this->cache->load("classes");
     if($classesList === NULL) {
-      $classesList = array();
+      $classesList = [];
       $classes = $this->db->table("character_classess");
       foreach($classes as $class) {
         $classesList[$class->id] = new CharacterClass($class);
@@ -112,8 +112,8 @@ class Profile {
    * @return \stdClass[]
    */
   function getCharacters() {
-    $return = array();
-    $stats = array("id", "name");
+    $return = [];
+    $stats = ["id", "name"];
     $characters = $this->cache->load("characters");
     if($characters === NULL) {
       $characters = $this->db->table("characters");
@@ -175,13 +175,13 @@ class Profile {
    * @return array info about character
    */
   function view($id) {
-    $return = array();
+    $return = [];
     $char = $this->db->table("characters")->get($id);
     if(!$char) { return false; }
-    $stats = array(
+    $stats = [
       "id", "name", "gender", "level", "race", "description", "strength", "dexterity",
       "constitution", "intelligence", "charisma", "occupation", "specialization"
-    );
+    ];
     foreach($stats as $stat) {
       $return[$stat] = $char->$stat;
     }

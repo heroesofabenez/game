@@ -24,15 +24,15 @@ class CharacterEffect extends BaseEntity {
    * @param array $effect
    */
   function __construct(array $effect) {
-    $types = array("buff", "debuff", "stun");
-    $sources = array("pet", "skill", "equipment");
+    $types = ["buff", "debuff", "stun"];
+    $sources = ["pet", "skill", "equipment"];
     if(!in_array($effect["type"], $types)) exit("Invalid value for \$type passed to method CharacterEffect::__construct.");
     if(!in_array($effect["source"], $sources)) exit("Invalid value for \$source passed to method CharacterEffect::__construct.");
     if(!in_array($effect["duration"], self::getDurations()) AND $effect["duration"] < 0) exit("Invalid value for \$duration passed to method CharacterEffect::__construct.");
     if($effect["type"] === "stun") {
       
     } else {
-      $stats = array("strength", "dexterity", "constitution", "intelligence", "charisma", "damage", "hit", "dodge", "initiative", "defense");
+      $stats = ["strength", "dexterity", "constitution", "intelligence", "charisma", "damage", "hit", "dodge", "initiative", "defense"];
       if(!is_int($effect["value"])) exit("Invalid value for \$value passed to method CharacterEffect::__construct. Expected integer.");
       if(!in_array($effect["stat"], $stats)) exit("Invalid value for \$stat passed to method CharacterEffect::__construct.");
       $this->stat = $effect["stat"];
@@ -45,7 +45,7 @@ class CharacterEffect extends BaseEntity {
   }
   
   static function getDurations() {
-    return array("combat", "forever");
+    return ["combat", "forever"];
   }
   
   function setDuration($value) {

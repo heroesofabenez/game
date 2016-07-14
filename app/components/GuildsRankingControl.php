@@ -19,14 +19,14 @@ class GuildsRankingControl extends RankingControl {
    */
   function __construct(\HeroesofAbenez\Model\Guild $model) {
     $this->model = $model;
-    parent::__construct("Guilds", array("name", "members"), "Guild", "Details");
+    parent::__construct("Guilds", ["name", "members"], "Guild", "Details");
   }
   
   /**
    * @return array
    */
   function getData() {
-    $return = array();
+    $return = [];
     $result = $this->model->listOfGuilds();
     foreach($result as $row) {
       $data[] = $row->__toArray();

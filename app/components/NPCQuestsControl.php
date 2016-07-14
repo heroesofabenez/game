@@ -99,9 +99,9 @@ class NPCQuestsControl extends \Nette\Application\UI\Control {
       $this->presenter->flashMessage($this->translator->translate("errors.quest.cannotAcceptHere"));
       $this->presenter->redirect("Homepage:default");
     }
-    $data = array(
+    $data = [
       "character" => $this->user->id, "quest" => $questId
-    );
+    ];
     $this->db->query("INSERT INTO character_quests", $data);
     $this->presenter->flashMessage($this->translator->translate("messages.quest.accepted"));
     $this->presenter->redirect("Quest:view", $quest->id);
@@ -151,10 +151,10 @@ class NPCQuestsControl extends \Nette\Application\UI\Control {
       $this->presenter->flashMessage($this->translator->translate("errors.quest.requirementsNotMet"));
       $this->presenter->redirect("Homepage:default");
     }
-    $wheres = array(
+    $wheres = [
       "character" => $this->user->id, "quest" => $questId
-    );
-    $data = array("progress" => 3);
+    ];
+    $data = ["progress" => 3];
     $this->db->query("UPDATE character_quests SET ? WHERE ?", $data, $wheres);
     if($quest->item_lose) {
       $this->itemModel->loseItem($quest->needed_item, $quest->item_amount);
@@ -162,7 +162,7 @@ class NPCQuestsControl extends \Nette\Application\UI\Control {
     if($quest->cost_money > 0) $data3 = "money=money-{$quest->cost_money}";
     else $data3 = "money=money+{$quest->reward_money}";
     $data3 .= ", experience=experience+{$quest->reward_xp}";
-    $where3 = array("id" => $this->user->id);
+    $where3 = ["id" => $this->user->id];
     $this->db->query("UPDATE characters SET $data3 WHERE ?", $where3);
     if($quest->reward_item > 0) $this->itemModel->giveItem($quest->reward_item);
     $this->presenter->flashMessage($this->translator->translate("messages.quest.finnished"));

@@ -54,7 +54,7 @@ abstract class ArenaControl extends \Nette\Application\UI\Control {
   protected function getPlayer($id) {
     $data = $this->profileModel->view($id);
     if(!$data) throw new OpponentNotFoundException;
-    $pets = $equipment = array();
+    $pets = $equipment = [];
     if($data["pet"]) $pets[] = $data["pet"];
     unset($data["pet"]);
     $equipmentRows = $this->db->table("character_equipment")
@@ -103,12 +103,12 @@ abstract class ArenaControl extends \Nette\Application\UI\Control {
     if($winner === 1) {
       $rewards = $this->calculateRewards($player, $opponent);
       $data = "money=money+{$rewards["money"]}, experience=experience+{$rewards["experience"]}";
-      $where = array("id" => $this->user->id);
+      $where = ["id" => $this->user->id];
       $this->db->query("UPDATE characters SET $data WHERE ?", $where);
       $this->combat->log->logText("$player->name gets {$rewards["money"]} silver marks and {$rewards["experience"]} experiences.");
     }
     $combatId = $this->saveCombat($this->combat->log);
-    $this->presenter->redirect("Combat:view", array("id" => $combatId));
+    $this->presenter->redirect("Combat:view", ["id" => $combatId]);
   }
   
   /**
