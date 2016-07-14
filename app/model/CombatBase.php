@@ -260,13 +260,14 @@ class CombatBase {
    * Find character with lowest hp in the team
    * 
    * @param Team $team
+   * @param int $threshold
    * @return CharacterEntity|NULL
    */
-  protected function findLowestHpCharacter(Team $team) {
+  protected function findLowestHpCharacter(Team $team, $threshold = 0.5) {
     $lowestHp = 9999;
     $lowestIndex = -1;
     foreach($team->aliveMembers as $index => $member) {
-      if($member->hitpoints <= $member->max_hitpoints / 2 AND $member->hitpoints < $lowestHp) {
+      if($member->hitpoints <= $member->max_hitpoints * $threshold AND $member->hitpoints < $lowestHp) {
         $lowestHp = $member->hitpoints;
         $lowestIndex = $index;
       }
