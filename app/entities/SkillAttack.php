@@ -47,6 +47,5 @@ class SkillAttack extends BaseEntity {
     $this->strikes = $row->strikes;
     $this->hit_rate = $row->hit_rate;
   }
-
 }
 ?>
