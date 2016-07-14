@@ -85,8 +85,8 @@ class CombatBase {
    */
   function setTeams(Team $team1, Team $team2) {
     if($this->team1) throw new ImmutableException("Teams has already been set.");
-    $this->team1 = $team1;
-    $this->team2 = $team2;
+    $this->team1 = & $team1;
+    $this->team2 = & $team2;
     $this->log->setTeams($team1, $team2);
   }
   

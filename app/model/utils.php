@@ -86,7 +86,7 @@ trait TCollection {
     } elseif($index < 0 OR $index >= count($this->items)) {
       throw new \Nette\OutOfRangeException("Offset invalid or out of range.");
     } else {
-      $this->items[(int) $index] = $member;
+      $this->items[(int) $index] = & $member;
     }
   }
   
