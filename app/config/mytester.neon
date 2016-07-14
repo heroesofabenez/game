@@ -1,4 +1,4 @@
 extensions:
     mytester: MyTester\Bridges\NetteDI\MyTesterExtension
 mytester:
-    folder: %wwwDir%/tests
+    folder: %appDir%/../tests
