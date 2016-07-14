@@ -3,7 +3,8 @@ namespace HeroesofAbenez\Model;
 
 use HeroesofAbenez\Entities\Team,
     HeroesofAbenez\Entities\Character as CharacterEntity,
-    HeroesofAbenez\Entities\CharacterEffect;
+    HeroesofAbenez\Entities\CharacterEffect,
+    HeroesofAbenez\Entities\CharacterSkillAttack;
 
 /**
  * Handles combat
@@ -18,6 +19,7 @@ use HeroesofAbenez\Entities\Team,
  * @method void onRound() Tasks to do during a round
  * @method void onRoundEnd() Tasks to do at the end of a round
  * @method void onAttack(\HeroesofAbenez\Entities\Character $character1, \HeroesofAbenez\Entities\Character $character2) Tasks to do at attack
+ * @method void onSkillAttack(\HeroesofAbenez\Entities\Character $character1, \HeroesofAbenez\Entities\Character $character2, \HeroesofAbenez\Entities\CharacterSkillAttack $skill) Tasks to do at skill attack
  * @method void onHeal(\HeroesofAbenez\Entities\Character $character1, \HeroesofAbenez\Entities\Character $character2) Tasks to do at healing
  */
 class CombatBase {
@@ -47,6 +49,8 @@ class CombatBase {
   public $onRoundEnd = [];
   /** @var array Tasks to do at attack */
   public $onAttack = [];
+  /** @var array Tasks to do at skill attack */
+  public $onSkillAttack = [];
   /** @var array Tasks to do at healing */
   public $onHeal = [];
   /** @var array Temporary variable for results of an action */
@@ -56,6 +60,7 @@ class CombatBase {
     $this->log = $logger;
     $this->onCombatStart[] = [$this, "deployPets"];
     $this->onCombatStart[] = [$this, "equipItems"];
+    $this->onCombatStart[] = [$this, "setSkillsCooldowns"];
     $this->onCombatEnd[] = [$this, "removeCombatEffects"];
     $this->onCombatEnd[] = [$this, "logCombatResult"];
     $this->onRoundStart[] = [$this ,"recalculateStats"];
@@ -63,10 +68,15 @@ class CombatBase {
     $this->onRound[] = [$this, "doHealing"];
     $this->onRound[] = [$this, "doAttacks"];
     $this->onRoundEnd[] = [$this, "clearUsed"];
+    $this->onRoundEnd[] = [$this, "decreaseSkillsCooldowns"];
     $this->onAttack[] = [$this, "attackHarm"];
     $this->onAttack[] = [$this, "logDamage"];
     $this->onAttack[] = [$this, "logResults"];
     $this->onAttack[] = [$this, "markUsed"];
+    $this->onSkillAttack[] = [$this, "useSkill"];
+    $this->onSkillAttack[] = [$this, "logDamage"];
+    $this->onSkillAttack[] = [$this, "logResults"];
+    $this->onSkillAttack[] = [$this, "markUsed"];
     $this->onHeal[] = [$this, "heal"];
     $this->onHeal[] = [$this, "logResults"];
     $this->onHeal[] = [$this, "markUsed"];
@@ -141,6 +151,42 @@ class CombatBase {
     foreach($this->team2 as $character) {
       foreach($character->equipment as $item) {
         if($item->worn) $character->equipItem($item->id);
+      }
+    }
+  }
+  
+  /**
+   * Set skills' cooldowns
+   * 
+   * @return void
+   */
+  function setSkillsCooldowns() {
+    foreach($this->team1 as $character) {
+      foreach($character->skills as $skill) {
+        $skill->resetCooldown();
+      }
+    }
+    foreach($this->team2 as $character) {
+      foreach($character->skills as $skill) {
+        $skill->resetCooldown();
+      }
+    }
+  }
+  
+  /**
+   * Decrease skills' cooldowns
+   * 
+   * @return void
+   */
+  function decreaseSkillsCooldowns() {
+    foreach($this->team1 as $character) {
+      foreach($character->skills as $skill) {
+        $skill->decreaseCooldown();
+      }
+    }
+    foreach($this->team2 as $character) {
+      foreach($character->skills as $skill) {
+        $skill->decreaseCooldown();
       }
     }
   }
@@ -300,11 +346,23 @@ class CombatBase {
   function doAttacks() {
     foreach($this->team1->usableMembers as $index => $attacker) {
       $target = $this->selectAttackTarget($attacker, $this->team2);
-      if(is_null($target)) break; else $this->onAttack($attacker, $target);
+      if(is_null($target)) break;
+      if(count($attacker->usableSkills)) {
+        $skill = $attacker->usableSkills[0];
+        for($i = 1; $i <= $skill->skill->strikes; $i++) $this->onSkillAttack($attacker, $target, $skill);
+      } else {
+        $this->onAttack($attacker, $target);
+      }
     }
     foreach($this->team2->usableMembers as $index => $attacker) {
       $target = $this->selectAttackTarget($attacker, $this->team1);
-      if(is_null($target)) break; else $this->onAttack($attacker, $target);
+      if(is_null($target)) break;
+      if(count($attacker->usableSkills)) {
+        $skill = $attacker->usableSkills[0];
+        for($i = 1; $i <= $skill->skill->strikes; $i++) $this->onSkillAttack($attacker, $target, $skill);
+      } else {
+        $this->onAttack($attacker, $target);
+      }
     }
   }
   
@@ -381,6 +439,36 @@ class CombatBase {
     $result["action"] = "attack";
     $result["name"] = "";
     $this->results = $result;
+  }
+  
+  /**
+   * Use a skill
+   * 
+   * @param CharacterEntity $character1 Attacker
+   * @param CharacterEntity $character2 Defender
+   * @param CharacterSkillAttack $skill Used skill
+   */
+  function useSkill(CharacterEntity $character1, CharacterEntity $character2, CharacterSkillAttack $skill) {
+    $result = [];
+    $hit_chance = $character1->hit - $character2->dodge;
+    if($hit_chance < 15) $hit_chance = 15;
+    if($hit_chance > 100) $hit_chance = 100;
+    $roll = rand(0, 100);
+    $result["result"] = ($roll <= $hit_chance);
+    if($result["result"]) {
+      $result["amount"] = (int) $character1->damage - $character2->defense;
+      $result["amount"] = (int) ($result["amount"] / 100 * $skill->damage);
+    } else {
+      $result["amount"] = 0;
+    }
+    if($character2->hitpoints - $result["amount"] < 0) {
+      $result["amount"] = $character2->hitpoints;
+    }
+    if($result["amount"]) $character2->harm($result["amount"]);
+    $result["action"] = "skill_attack";
+    $result["name"] = $skill->skill->name;
+    $this->results = $result;
+    $skill->resetCooldown();
   }
   
   /**

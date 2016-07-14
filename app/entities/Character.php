@@ -7,6 +7,7 @@ use OutOfBoundsException;
  * Structure for single character
  * 
  * @author Jakub Konečný
+ * @property-read CharacterSkillAttack[] $usableSkills
  */
 class Character extends BaseEntity {
   /** @var int */
@@ -87,14 +88,18 @@ class Character extends BaseEntity {
    * @param array $stats Stats of the character
    * @param Equipment[] $equipment Equipment of the character
    * @param Pet[] $pets Pets owned by the character
+   * @param array $skills Skills acquired by the character
    */
-  function __construct(array $stats, array $equipment = [], array $pets = []) {
+  function __construct(array $stats, array $equipment = [], array $pets = [], array $skills = []) {
     $this->setStats($stats);
     foreach($equipment as $eq) {
       if($eq instanceof Equipment) $this->equipment[$eq->id] = $eq;
     }
     foreach($pets as $pet) {
       if($pet instanceof Pet) $this->pets[$pet->id] = $pet;
+    }
+    foreach($skills as $skill) {
+      if($skill instanceof CharacterSkillAttack) $this->skills[] = $skill;
     }
   }
   
@@ -249,6 +254,17 @@ default:
    */
   function dismissPet() {
     if(is_int($this->active_pet)) $this->active_pet = null;
+  }
+  
+  /**
+   * @return CharacterSkillAttack[]
+   */
+  function getUsableSkills() {
+    $skills = [];
+    foreach($this->skills as $skill) {
+      if($skill->canUse()) $skills[] = & $skill;
+    }
+    return $skills;
   }
   
   /**
