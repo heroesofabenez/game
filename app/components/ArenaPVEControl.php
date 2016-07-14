@@ -1,7 +1,9 @@
 <?php
 namespace HeroesofAbenez\Arena;
 
-use HeroesofAbenez\Entities\Character;
+use HeroesofAbenez\Entities\Character,
+    HeroesofAbenez\Entities\CharacterSkillAttack,
+    HeroesofAbenez\Entities\SkillAttack;
 
 /**
  *  PVE Arena Control
@@ -33,7 +35,12 @@ class ArenaPVEControl extends ArenaControl {
   protected function getNpc($id) {
     $row = (array) $this->db->query("SELECT * FROM pve_arena_opponents WHERE id=$id")->fetch();
     if(count($row) === 1) throw new OpponentNotFoundException;
-    $npc = new Character($row);
+    $skills = [];
+    $skillRows = $this->db->query("SELECT id FROM skills_attacks WHERE needed_class={$row["occupation"]} AND needed_level<={$row["level"]}");
+    foreach($skillRows as $skillRow) {
+      $skills[] = new CharacterSkillAttack(new SkillAttack($this->db->table("skills_attacks")->get($skillRow->id)), 1);
+     }
+    $npc = new Character($row, [], [], $skills);
     return $npc;
   }
   
