@@ -3,15 +3,15 @@ destination: ./api
 title: Heroes of Abenez
 todo: yes
 charset:
-    0: UTF-8
+    - UTF-8
 exclude: 
-    0: temp
-    1: tests
-    2: composer
-    3: examples
-    4: deprecated
-    5: Requirements-Checker
+    - temp
+    - tests
+    - composer
+    - examples
+    - deprecated
+    - Requirements-Checker
 accessLevels:
-    0: public
-    1: protected
-    2: private
+    - public
+    - protected
+    - private
