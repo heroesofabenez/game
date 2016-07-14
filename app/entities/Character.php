@@ -73,6 +73,8 @@ class Character extends BaseEntity {
   protected $equipment = [];
   /** @var Pet[] Character's pets */
   protected $pets = [];
+  /** @var array Character's skills */
+  protected $skills = [];
   /** @var int */
   protected $active_pet = null;
   /** @var CharacterEffect[] Active effects */
@@ -83,8 +85,8 @@ class Character extends BaseEntity {
   /**
    * 
    * @param array $stats Stats of the character
-   * @param array $equipment Equipment of the character
-   * @param array $pets Pets owned by the character
+   * @param Equipment[] $equipment Equipment of the character
+   * @param Pet[] $pets Pets owned by the character
    */
   function __construct(array $stats, array $equipment = [], array $pets = []) {
     $this->setStats($stats);
