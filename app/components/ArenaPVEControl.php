@@ -35,6 +35,7 @@ class ArenaPVEControl extends ArenaControl {
   protected function getNpc($id) {
     $row = (array) $this->db->query("SELECT * FROM pve_arena_opponents WHERE id=$id")->fetch();
     if(count($row) === 1) throw new OpponentNotFoundException;
+    $row["id"] = "pveArenaNpc" . $row["id"];
     $skills = [];
     $skillRows = $this->db->query("SELECT id FROM skills_attacks WHERE needed_class={$row["occupation"]} AND needed_level<={$row["level"]}");
     foreach($skillRows as $skillRow) {
