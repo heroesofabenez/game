@@ -10,7 +10,7 @@ use OutOfBoundsException;
  * @property-read CharacterSkillAttack[] $usableSkills
  */
 class Character extends BaseEntity {
-  /** @var int */
+  /** @var int|string */
   protected $id;
   /** @var string */
   protected $name;
@@ -74,9 +74,9 @@ class Character extends BaseEntity {
   protected $equipment = [];
   /** @var Pet[] Character's pets */
   protected $pets = [];
-  /** @var array Character's skills */
+  /** @var CharacterSkillAttack[] Character's skills */
   protected $skills = [];
-  /** @var int */
+  /** @var int|NULL */
   protected $active_pet = null;
   /** @var CharacterEffect[] Active effects */
   protected $effects = [];
