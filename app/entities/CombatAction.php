@@ -60,7 +60,7 @@ case "skill_attack":
   }
   break;
 case "skill_special":
-  if($this->result) $text .= "successfully casts $this->name on {$this->character2->name}";
+  if($this->result) $text .= "successfully casts $this->name on {$this->character2->name}.";
   else $text .= "tries to cast $this->name on {$this->character2->name} but fails.";
   break;
 case "healing":

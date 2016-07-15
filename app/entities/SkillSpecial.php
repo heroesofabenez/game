@@ -2,34 +2,37 @@
 namespace HeroesofAbenez\Entities;
 
 /**
- * Attack skill
+ * Skill Special
  *
  * @author Jakub Konečný
  */
-class SkillAttack extends Skill {
+class SkillSpecial extends Skill {
   /** @var string */
-  protected $base_damage;
+  protected $type;
   /** @var string */
-  protected $damage_growth;
+  protected $stat;
   /** @var int */
-  protected $strikes = 1;
-  /** @var string|NULL */
-  protected $hit_rate = NULL;
+  protected $value;
+  /** @var int */
+  protected $value_growth;
+  /** @var int */
+  protected $duration;
   
   function __construct(\Nette\Database\Table\ActiveRow $row) {
-    if($row->getTable()->getName() != "skills_attacks") exit;
+    if($row->getTable()->getName() != "skills_specials") exit;
     $this->id = $row->id;
     $this->name = $row->name;
     $this->description = $row->description;
     $this->needed_class = $row->needed_class;
     $this->needed_specialization = $row->needed_specialization;
     $this->needed_level = $row->needed_level;
-    $this->base_damage = $row->base_damage;
-    $this->damage_growth = $row->damage_growth;
-    $this->levels = $row->levels;
+    $this->type = $row->type;
     $this->target = $row->target;
-    $this->strikes = $row->strikes;
-    $this->hit_rate = $row->hit_rate;
+    $this->stat = $row->stat;
+    $this->value = $row->value;
+    $this->value_growth = $row->value_growth;
+    $this->levels = $row->levels;
+    $this->duration = $row->duration;
   }
 }
 ?>

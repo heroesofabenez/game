@@ -8,7 +8,7 @@ namespace HeroesofAbenez\Entities;
  * @property-read int $damage
  * @property-read int $hitRate
  */
-class CharacterSkillAttack extends BaseEntity {
+class CharacterSkillAttack extends CharacterSkill {
   /** @var SkillAttack */
   protected $skill;
   /** @var int */
@@ -21,8 +21,7 @@ class CharacterSkillAttack extends BaseEntity {
    * @param int $level
    */
   function __construct(SkillAttack $skill, $level) {
-    $this->skill = $skill;
-    $this->level = $level;
+    parent::__construct($skill, $level);
   }
   
   /**
@@ -42,30 +41,6 @@ class CharacterSkillAttack extends BaseEntity {
     if(is_null($this->skill->hit_rate)) return 100;
     elseif(substr($this->skill->hit_rate, -1) === "%") return (int) $this->skill->hit_rate;
     else return 100;
-  }
-  
-  /**
-   * @return bool
-   */
-  function canUse() {
-    if($this->cooldown < 1) return true;
-    else return false;
-  }
-  
-  /**
-   * @return void
-   */
-  function resetCooldown() {
-    $this->cooldown = 3;
-  }
-  
-  /**
-   * @return void
-   */
-  function decreaseCooldown() {
-    if($this->cooldown > 0) {
-      $this->cooldown--;
-    }
   }
 }
 ?>

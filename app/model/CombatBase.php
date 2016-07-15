@@ -4,7 +4,8 @@ namespace HeroesofAbenez\Model;
 use HeroesofAbenez\Entities\Team,
     HeroesofAbenez\Entities\Character as CharacterEntity,
     HeroesofAbenez\Entities\CharacterEffect,
-    HeroesofAbenez\Entities\CharacterSkillAttack;
+    HeroesofAbenez\Entities\CharacterSkillAttack,
+    HeroesofAbenez\Entities\CharacterSkillSpecial;
 
 /**
  * Handles combat
@@ -20,6 +21,7 @@ use HeroesofAbenez\Entities\Team,
  * @method void onRoundEnd() Tasks to do at the end of a round
  * @method void onAttack(\HeroesofAbenez\Entities\Character $character1, \HeroesofAbenez\Entities\Character $character2) Tasks to do at attack
  * @method void onSkillAttack(\HeroesofAbenez\Entities\Character $character1, \HeroesofAbenez\Entities\Character $character2, \HeroesofAbenez\Entities\CharacterSkillAttack $skill) Tasks to do at skill attack
+ * @method void onSkillSpecial(\HeroesofAbenez\Entities\Character $character1, \HeroesofAbenez\Entities\Character $character2, \HeroesofAbenez\Entities\CharacterSkillSpecial $skill) Tasks to do when using special skill
  * @method void onHeal(\HeroesofAbenez\Entities\Character $character1, \HeroesofAbenez\Entities\Character $character2) Tasks to do at healing
  */
 class CombatBase {
@@ -51,6 +53,8 @@ class CombatBase {
   public $onAttack = [];
   /** @var array Tasks to do at skill attack */
   public $onSkillAttack = [];
+  /** @var array Tasks to do when using special skill */
+  public $onSkillSpecial = [];
   /** @var array Tasks to do at healing */
   public $onHeal = [];
   /** @var array Temporary variable for results of an action */
@@ -77,6 +81,9 @@ class CombatBase {
     $this->onSkillAttack[] = [$this, "logDamage"];
     $this->onSkillAttack[] = [$this, "logResults"];
     $this->onSkillAttack[] = [$this, "markUsed"];
+    $this->onSkillSpecial[] = [$this, "useSpecialSkill"];
+    $this->onSkillSpecial[] = [$this, "logResults"];
+    $this->onSkillSpecial[] = [$this, "markUsed"];
     $this->onHeal[] = [$this, "heal"];
     $this->onHeal[] = [$this, "logResults"];
     $this->onHeal[] = [$this, "markUsed"];
@@ -341,6 +348,31 @@ class CombatBase {
   }
   
   /**
+   * @param CharacterEntity $character1
+   * @param CharacterEntity $character2
+   * @param CharacterSkillSpecial $skill
+   * @return void
+   */
+  protected function doSpecialSkill(CharacterEntity $character1, CharacterEntity $character2, CharacterSkillSpecial $skill) {
+    switch($skill->skill->target) {
+      case "enemy":
+        $this->onSkillSpecial($character1, $character2, $skill);
+        break;
+      case "self":
+        $this->onSkillSpecial($character1, $character1, $skill);
+        break;
+      case "party":
+        $team = $this->team1->hasMember($character1->id) ? 1: 2;
+        foreach($this->{"team". $team} as $target) $this->onSkillSpecial($character1, $target, $skill);;
+        break;
+      case "enemy_party":
+        $team = $this->team1->hasMember($character2->id) ? 1: 2;
+        foreach($this->{"team". $team} as $target) $this->onSkillSpecial($character1, $target, $skill);;
+        break;
+    }
+  }
+  
+  /**
    * @return void
    */
   function doAttacks() {
@@ -349,7 +381,11 @@ class CombatBase {
       if(is_null($target)) break;
       if(count($attacker->usableSkills)) {
         $skill = $attacker->usableSkills[0];
-        for($i = 1; $i <= $skill->skill->strikes; $i++) $this->onSkillAttack($attacker, $target, $skill);
+        if($skill instanceof CharacterSkillAttack) {
+          for($i = 1; $i <= $skill->skill->strikes; $i++) $this->onSkillAttack($attacker, $target, $skill);
+        } else {
+          $this->doSpecialSkill($attacker, $target, $skill);
+        }
       } else {
         $this->onAttack($attacker, $target);
       }
@@ -359,7 +395,11 @@ class CombatBase {
       if(is_null($target)) break;
       if(count($attacker->usableSkills)) {
         $skill = $attacker->usableSkills[0];
-        for($i = 1; $i <= $skill->skill->strikes; $i++) $this->onSkillAttack($attacker, $target, $skill);
+        if($skill instanceof CharacterSkillAttack) {
+          for($i = 1; $i <= $skill->skill->strikes; $i++) $this->onSkillAttack($attacker, $target, $skill);
+        } else {
+          $this->doSpecialSkill($attacker, $target, $skill);
+        }
       } else {
         $this->onAttack($attacker, $target);
       }
@@ -442,7 +482,7 @@ class CombatBase {
   }
   
   /**
-   * Use a skill
+   * Use an attack skill
    * 
    * @param CharacterEntity $character1 Attacker
    * @param CharacterEntity $character2 Defender
@@ -468,6 +508,33 @@ class CombatBase {
     $result["action"] = "skill_attack";
     $result["name"] = $skill->skill->name;
     $this->results = $result;
+    $skill->resetCooldown();
+  }
+  
+  /**
+   * Use a special skill
+   * 
+   * @param CharacterEntity $character1
+   * @param CharacterEntity $character2
+   * @param CharacterSkillAttack $skill
+   * @return void
+   */
+  function useSpecialSkill(CharacterEntity $character1, CharacterEntity $character2, CharacterSkillSpecial $skill) {
+    $result = [];
+    $result["result"] = true;
+    $result["amount"] = 0;
+    $result["action"] = "skill_special";
+    $result["name"] = $skill->skill->name;
+    $this->results = $result;
+    $effect = [
+      "id" => "skill{$skill->skill->id}Effect",
+      "type" => $skill->skill->type,
+      "stat" => ($skill->skill->type === "stun"? NULL : $skill->skill->stat),
+      "value" => $skill->value,
+      "source" => "skill",
+      "duration" => $skill->skill->duration
+    ];
+    $character2->addEffect(new CharacterEffect($effect));
     $skill->resetCooldown();
   }
   
