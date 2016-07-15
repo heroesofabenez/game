@@ -376,22 +376,10 @@ class CombatBase {
    * @return void
    */
   function doAttacks() {
-    foreach($this->team1->usableMembers as $index => $attacker) {
-      $target = $this->selectAttackTarget($attacker, $this->team2);
-      if(is_null($target)) break;
-      if(count($attacker->usableSkills)) {
-        $skill = $attacker->usableSkills[0];
-        if($skill instanceof CharacterSkillAttack) {
-          for($i = 1; $i <= $skill->skill->strikes; $i++) $this->onSkillAttack($attacker, $target, $skill);
-        } else {
-          $this->doSpecialSkill($attacker, $target, $skill);
-        }
-      } else {
-        $this->onAttack($attacker, $target);
-      }
-    }
-    foreach($this->team2->usableMembers as $index => $attacker) {
-      $target = $this->selectAttackTarget($attacker, $this->team1);
+    $attackers = array_merge($this->team1->usableMembers, $this->team2->usableMembers);
+    foreach($attackers as $attacker) {
+      $enemyTeam = $this->team1->hasMember($attacker->id) ? 2: 1;
+      $target = $this->selectAttackTarget($attacker, $this->{"team" . $enemyTeam});
       if(is_null($target)) break;
       if(count($attacker->usableSkills)) {
         $skill = $attacker->usableSkills[0];
