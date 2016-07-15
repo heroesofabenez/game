@@ -27,6 +27,8 @@ use HeroesofAbenez\Entities\Team,
 class CombatBase {
   use \Nette\SmartObject;
   
+  const LOWEST_HP_THRESHOLD = 0.5;
+  
   /** @var \HeroesofAbenez\Entities\Team First team */
   protected $team1;
   /** @var \HeroesofAbenez\Entities\Team Second team */
@@ -299,9 +301,10 @@ class CombatBase {
    * @param int $threshold
    * @return CharacterEntity|NULL
    */
-  protected function findLowestHpCharacter(Team $team, $threshold = 0.5) {
+  protected function findLowestHpCharacter(Team $team, $threshold = NULL) {
     $lowestHp = 9999;
     $lowestIndex = -1;
+    if(is_null($threshold)) $threshold = static::LOWEST_HP_THRESHOLD;
     foreach($team->aliveMembers as $index => $member) {
       if($member->hitpoints <= $member->max_hitpoints * $threshold AND $member->hitpoints < $lowestHp) {
         $lowestHp = $member->hitpoints;
