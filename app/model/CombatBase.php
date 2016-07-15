@@ -73,7 +73,7 @@ class CombatBase {
     $this->onAttack[] = [$this, "logDamage"];
     $this->onAttack[] = [$this, "logResults"];
     $this->onAttack[] = [$this, "markUsed"];
-    $this->onSkillAttack[] = [$this, "useSkill"];
+    $this->onSkillAttack[] = [$this, "useAttackSkill"];
     $this->onSkillAttack[] = [$this, "logDamage"];
     $this->onSkillAttack[] = [$this, "logResults"];
     $this->onSkillAttack[] = [$this, "markUsed"];
@@ -448,7 +448,7 @@ class CombatBase {
    * @param CharacterEntity $character2 Defender
    * @param CharacterSkillAttack $skill Used skill
    */
-  function useSkill(CharacterEntity $character1, CharacterEntity $character2, CharacterSkillAttack $skill) {
+  function useAttackSkill(CharacterEntity $character1, CharacterEntity $character2, CharacterSkillAttack $skill) {
     $result = [];
     $hit_chance = ($character1->hit / 100 * $skill->hitRate) - $character2->dodge;
     if($hit_chance < 15) $hit_chance = 15;
