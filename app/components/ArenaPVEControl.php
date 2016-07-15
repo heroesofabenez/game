@@ -3,7 +3,9 @@ namespace HeroesofAbenez\Arena;
 
 use HeroesofAbenez\Entities\Character,
     HeroesofAbenez\Entities\CharacterSkillAttack,
-    HeroesofAbenez\Entities\SkillAttack;
+    HeroesofAbenez\Entities\SkillAttack,
+    HeroesofAbenez\Entities\CharacterSkillSpecial,
+    HeroesofAbenez\Entities\SkillSpecial;
 
 /**
  *  PVE Arena Control
@@ -41,6 +43,11 @@ class ArenaPVEControl extends ArenaControl {
     foreach($skillRows as $skillRow) {
       $skills[] = new CharacterSkillAttack(new SkillAttack($this->db->table("skills_attacks")->get($skillRow->id)), 1);
      }
+    unset($skillRow);
+    $skillRows = $this->db->query("SELECT id FROM skills_specials WHERE needed_class={$row["occupation"]} AND needed_level<={$row["level"]}");
+    foreach($skillRows as $skillRow) {
+      $skills[] = new CharacterSkillSpecial(new SkillSpecial($this->db->table("skills_specials")->get($skillRow->id)), 1);
+    }
     $npc = new Character($row, [], [], $skills);
     return $npc;
   }
