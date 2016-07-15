@@ -460,6 +460,7 @@ class CombatBase {
     $result["result"] = ($roll <= $hit_chance);
     if($result["result"]) $result["amount"] = (int) $character1->damage - $character2->defense;
     else $result["amount"] = 0;
+    if($result["amount"] < 0) $result["amount"] = 0;
     if($character2->hitpoints - $result["amount"] < 0) {
       $result["amount"] = $character2->hitpoints;
     }
