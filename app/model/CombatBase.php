@@ -168,12 +168,8 @@ class CombatBase {
    * @return void
    */
   function setSkillsCooldowns() {
-    foreach($this->team1 as $character) {
-      foreach($character->skills as $skill) {
-        $skill->resetCooldown();
-      }
-    }
-    foreach($this->team2 as $character) {
+    $characters = array_merge($this->team1->items, $this->team2->items);
+    foreach($characters as $character) {
       foreach($character->skills as $skill) {
         $skill->resetCooldown();
       }
@@ -186,12 +182,8 @@ class CombatBase {
    * @return void
    */
   function decreaseSkillsCooldowns() {
-    foreach($this->team1 as $character) {
-      foreach($character->skills as $skill) {
-        $skill->decreaseCooldown();
-      }
-    }
-    foreach($this->team2 as $character) {
+    $characters = array_merge($this->team1->items, $this->team2->items);
+    foreach($characters as $character) {
       foreach($character->skills as $skill) {
         $skill->decreaseCooldown();
       }
@@ -204,12 +196,8 @@ class CombatBase {
    * @return void
    */
   function removeCombatEffects() {
-    foreach($this->team1 as $character) {
-      foreach($character->effects as $effect) {
-        if($effect->duration === "combat" OR is_int($effect->duration)) $character->removeEffect($effect->id);
-      }
-    }
-    foreach($this->team2 as $character) {
+    $characters = array_merge($this->team1->items, $this->team2->items);
+    foreach($characters as $character) {
       foreach($character->effects as $effect) {
         if($effect->duration === "combat" OR is_int($effect->duration)) $character->removeEffect($effect->id);
       }
@@ -272,13 +260,8 @@ class CombatBase {
    * @return void
    */
   function recalculateStats() {
-    foreach($this->team1 as $character) {
-      foreach($character->effects as $effect) {
-     	if(is_int($effect->duration)) { $effect->duration--; }
-      }
-      $character->recalculateStats();
-    }
-    foreach($this->team2 as $character) {
+    $characters = array_merge($this->team1->items, $this->team2->items);
+    foreach($characters as $character) {
       foreach($character->effects as $effect) {
      	if(is_int($effect->duration)) { $effect->duration--; }
       }
