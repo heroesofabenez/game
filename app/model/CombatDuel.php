@@ -26,11 +26,11 @@ class CombatDuel extends CombatBase {
    * Select target for attack
    * 
    * @param CharacterEntity $attacker
-   * @param Team $opponents
    * @return CharacterEntity
    */
-  protected function selectAttackTarget(CharacterEntity $attacker, Team $opponents) {
-    return $opponents[0];
+  protected function selectAttackTarget(CharacterEntity $attacker) {
+    $enemyTeam = $this->getEnemyTeam($attacker);
+    return $this->{"team" . $enemyTeam}[0];
   }
 }
 ?>

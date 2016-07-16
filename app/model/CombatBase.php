@@ -292,11 +292,11 @@ class CombatBase {
    * Select target for attack
    * 
    * @param CharacterEntity $attacker
-   * @param Team $opponents
    * @return CharacterEntity|NULL
    */
-  protected function selectAttackTarget(CharacterEntity $attacker, Team $opponents) {
-    return $this->selectRandomCharacter($opponents);
+  protected function selectAttackTarget(CharacterEntity $attacker) {
+    $enemyTeam = $this->getEnemyTeam($attacker);
+    return $this->selectRandomCharacter($this->{"team" . $enemyTeam});
   }
   
   /**
@@ -324,11 +324,11 @@ class CombatBase {
    * Select target for healing
    * 
    * @param CharacterEntity $healer
-   * @param Team $team
    * @return CharacterEntity|NULL
    */
-  protected function selectHealingTarget(CharacterEntity $healer, Team $team) {
-    return $this->findLowestHpCharacter($team);
+  protected function selectHealingTarget(CharacterEntity $healer) {
+    $team = $this->getTeam($healer);
+    return $this->findLowestHpCharacter($this->{"team" . $team});
   }
   
   /**
@@ -372,16 +372,14 @@ class CombatBase {
     $characters = array_merge($this->team1->usableMembers, $this->team2->usableMembers);
     foreach($characters as $character) {
       if($character->hitpoints < 1) continue;
-      $team = $this->getTeam($character);
-      $enemyTeam = $this->getEnemyTeam($character);
       if(in_array($character, $this->findHealers())) {
-        $target = $this->selectHealingTarget($character, $this->{"team" . $team});
+        $target = $this->selectHealingTarget($character);
         if($target) {
           $this->onHeal($character, $target);
           continue;
         }
       }
-      $target = $this->selectAttackTarget($character, $this->{"team" . $enemyTeam});
+      $target = $this->selectAttackTarget($character);
       if(is_null($target)) break;
       if(count($character->usableSkills)) {
         $skill = $character->usableSkills[0];
