@@ -452,6 +452,22 @@ class CombatBase {
   }
   
   /**
+   * Calculate hit chance for attack/skill attack
+   * 
+   * @param CharacterEntity $character1
+   * @param CharacterEntity $character2
+   * @param CharacterSkillAttack $skill
+   * @return int
+   */
+  protected function calculateHitChance(CharacterEntity $character1, CharacterEntity $character2, CharacterSkillAttack $skill = NULL) {
+    if($skill) $hit_chance = ($character1->hit / 100 * $skill->hitRate) - $character2->dodge;
+    else $hit_chance = $character1->hit - $character2->dodge;
+    if($hit_chance < 15) $hit_chance = 15;
+    if($hit_chance > 100) $hit_chance = 100;
+    return $hit_chance;
+  }
+  
+  /**
    * Do an attack
    * Hit chance = Attacker's hit - Defender's dodge, but at least 15%
    * Damage = Attacker's damage
@@ -461,9 +477,7 @@ class CombatBase {
    */
   function attackHarm(CharacterEntity $character1, CharacterEntity $character2) {
     $result = [];
-    $hit_chance = $character1->hit - $character2->dodge;
-    if($hit_chance < 15) $hit_chance = 15;
-    if($hit_chance > 100) $hit_chance = 100;
+    $hit_chance = $this->calculateHitChance($character1, $character2);
     $roll = rand(0, 100);
     $result["result"] = ($roll <= $hit_chance);
     if($result["result"]) $result["amount"] = (int) $character1->damage - $character2->defense;
@@ -487,9 +501,7 @@ class CombatBase {
    */
   function useAttackSkill(CharacterEntity $character1, CharacterEntity $character2, CharacterSkillAttack $skill) {
     $result = [];
-    $hit_chance = ($character1->hit / 100 * $skill->hitRate) - $character2->dodge;
-    if($hit_chance < 15) $hit_chance = 15;
-    if($hit_chance > 100) $hit_chance = 100;
+    $hit_chance = $this->calculateHitChance($character1, $character2, $skill);
     $roll = rand(0, 100);
     $result["result"] = ($roll <= $hit_chance);
     if($result["result"]) {
