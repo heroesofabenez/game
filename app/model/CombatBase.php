@@ -150,13 +150,8 @@ class CombatBase {
    * @return void
    */
   function deployPets() {
-    foreach($this->team1 as $character) {
-      if($character->active_pet) {
-        $effect = $character->getPet($character->active_pet)->deployParams;
-        $character->addEffect(new CharacterEffect($effect));
-      }
-    }
-    foreach($this->team2 as $character) {
+    $characters = array_merge($this->team1->items, $this->team2->items);
+    foreach($characters as $character) {
       if($character->active_pet) {
         $effect = $character->getPet($character->active_pet)->deployParams;
         $character->addEffect(new CharacterEffect($effect));
@@ -170,12 +165,8 @@ class CombatBase {
    * @return void
    */
   function equipItems() {
-    foreach($this->team1 as $character) {
-      foreach($character->equipment as $item) {
-        if($item->worn) $character->equipItem($item->id);
-      }
-    }
-    foreach($this->team2 as $character) {
+    $characters = array_merge($this->team1->items, $this->team2->items);
+    foreach($characters as $character) {
       foreach($character->equipment as $item) {
         if($item->worn) $character->equipItem($item->id);
       }
