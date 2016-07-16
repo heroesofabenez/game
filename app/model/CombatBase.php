@@ -127,6 +127,24 @@ class CombatBase {
   }
   
   /**
+   * @param CharacterEntity $character
+   * @return int
+   */
+  protected function getTeam(CharacterEntity $character) {
+    $team = $this->team1->hasMember($character->id) ? 1: 2;
+    return $team;
+  }
+  
+  /**
+   * @param CharacterEntity $character
+   * @return int
+   */
+  protected function getEnemyTeam(CharacterEntity $character) {
+    $team = $this->team1->hasMember($character->id) ? 2: 1;
+    return $team;
+  }
+  
+  /**
    * Apply pet's effects to character at the start of the combat
    * 
    * @return void
@@ -339,7 +357,7 @@ class CombatBase {
   function doHealing() {
     $healers = $this->findHealers();
     foreach($healers as $healer) {
-      $team = $this->team1->hasMember($healer->id) ? 1: 2;
+      $team = $this->getTeam($healer);
       $target = $this->selectHealingTarget($healer, $this->{"team" . $team});
       if($target) $this->onHeal($healer, $target);
     }
@@ -360,11 +378,11 @@ class CombatBase {
         $this->onSkillSpecial($character1, $character1, $skill);
         break;
       case "party":
-        $team = $this->team1->hasMember($character1->id) ? 1: 2;
+        $team = $this->getTeam($character1);
         foreach($this->{"team". $team} as $target) $this->onSkillSpecial($character1, $target, $skill);
         break;
       case "enemy_party":
-        $team = $this->team1->hasMember($character2->id) ? 1: 2;
+        $team = $this->getEnemyTeam($character1);
         foreach($this->{"team". $team} as $target) $this->onSkillSpecial($character1, $target, $skill);
         break;
     }
@@ -376,7 +394,7 @@ class CombatBase {
   function doAttacks() {
     $attackers = array_merge($this->team1->usableMembers, $this->team2->usableMembers);
     foreach($attackers as $attacker) {
-      $enemyTeam = $this->team1->hasMember($attacker->id) ? 2: 1;
+      $enemyTeam = $this->getEnemyTeam($attacker);
       $target = $this->selectAttackTarget($attacker, $this->{"team" . $enemyTeam});
       if(is_null($target)) break;
       if(count($attacker->usableSkills)) {
