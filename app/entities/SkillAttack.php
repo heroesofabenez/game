@@ -31,5 +31,12 @@ class SkillAttack extends Skill {
     $this->strikes = $row->strikes;
     $this->hit_rate = $row->hit_rate;
   }
+  
+  /**
+   * @return int
+   */
+  function getCooldown() {
+    return 3;
+  }
 }
 ?>

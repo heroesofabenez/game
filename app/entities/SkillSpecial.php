@@ -34,5 +34,12 @@ class SkillSpecial extends Skill {
     $this->levels = $row->levels;
     $this->duration = $row->duration;
   }
+  
+  /**
+   * @return int
+   */
+  function getCooldown() {
+    return 5;
+  }
 }
 ?>

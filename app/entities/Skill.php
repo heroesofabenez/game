@@ -5,6 +5,7 @@ namespace HeroesofAbenez\Entities;
  * Base Skill
  *
  * @author Jakub Konečný
+ * @property-read int $cooldown
  */
 abstract class Skill extends BaseEntity {
   /** @var int */
@@ -23,5 +24,10 @@ abstract class Skill extends BaseEntity {
   protected $target = "single";
   /** @var int */
   protected $levels;
+  
+  /**
+   * @return int
+   */
+  abstract function getCooldown();
 }
 ?>
