@@ -71,8 +71,7 @@ class CombatBase {
     $this->onCombatEnd[] = [$this, "logCombatResult"];
     $this->onRoundStart[] = [$this ,"recalculateStats"];
     $this->onRoundStart[] = [$this, "logRoundNumber"];
-    $this->onRound[] = [$this, "doHealing"];
-    $this->onRound[] = [$this, "doAttacks"];
+    $this->onRound[] = [$this, "mainStage"];
     $this->onRoundEnd[] = [$this, "clearUsed"];
     $this->onRoundEnd[] = [$this, "decreaseSkillsCooldowns"];
     $this->onAttack[] = [$this, "attackHarm"];
@@ -343,18 +342,6 @@ class CombatBase {
   }
   
   /**
-   * @return void
-   */
-  function doHealing() {
-    $healers = $this->findHealers();
-    foreach($healers as $healer) {
-      $team = $this->getTeam($healer);
-      $target = $this->selectHealingTarget($healer, $this->{"team" . $team});
-      if($target) $this->onHeal($healer, $target);
-    }
-  }
-  
-  /**
    * @param CharacterEntity $character1
    * @param CharacterEntity $character2
    * @param CharacterSkillSpecial $skill
@@ -380,24 +367,34 @@ class CombatBase {
   }
   
   /**
+   * Main stage of a round
+   * 
    * @return void
    */
-  function doAttacks() {
-    $attackers = array_merge($this->team1->usableMembers, $this->team2->usableMembers);
-    foreach($attackers as $attacker) {
-      if($attacker->hitpoints < 1) continue;
-      $enemyTeam = $this->getEnemyTeam($attacker);
-      $target = $this->selectAttackTarget($attacker, $this->{"team" . $enemyTeam});
+  function mainStage() {
+    $characters = array_merge($this->team1->usableMembers, $this->team2->usableMembers);
+    foreach($characters as $character) {
+      if($character->hitpoints < 1) continue;
+      $team = $this->getTeam($character);
+      $enemyTeam = $this->getEnemyTeam($character);
+      if(in_array($character, $this->findHealers())) {
+        $target = $this->selectHealingTarget($character, $this->{"team" . $team});
+        if($target) {
+          $this->onHeal($character, $target);
+          continue;
+        }
+      }
+      $target = $this->selectAttackTarget($character, $this->{"team" . $enemyTeam});
       if(is_null($target)) break;
-      if(count($attacker->usableSkills)) {
-        $skill = $attacker->usableSkills[0];
+      if(count($character->usableSkills)) {
+        $skill = $character->usableSkills[0];
         if($skill instanceof CharacterSkillAttack) {
-          for($i = 1; $i <= $skill->skill->strikes; $i++) $this->onSkillAttack($attacker, $target, $skill);
+          for($i = 1; $i <= $skill->skill->strikes; $i++) $this->onSkillAttack($character, $target, $skill);
         } else {
-          $this->doSpecialSkill($attacker, $target, $skill);
+          $this->doSpecialSkill($character, $target, $skill);
         }
       } else {
-        $this->onAttack($attacker, $target);
+        $this->onAttack($character, $target);
       }
     }
   }
