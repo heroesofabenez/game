@@ -327,10 +327,22 @@ class CombatBase {
   }
   
   /**
+   * @return CharacterEntity[]
+   */
+  protected function findHealers() {
+    return [];
+  }
+  
+  /**
    * @return void
    */
   function doHealing() {
-    
+    $healers = $this->findHealers();
+    foreach($healers as $healer) {
+      $team = $this->team1->hasMember($healer->id) ? 1: 2;
+      $target = $this->selectHealingTarget($healer, $this->{"team" . $team});
+      if($target) $this->onHeal($healer, $target);
+    }
   }
   
   /**
