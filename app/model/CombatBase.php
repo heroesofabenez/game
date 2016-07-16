@@ -349,11 +349,11 @@ class CombatBase {
         break;
       case "party":
         $team = $this->team1->hasMember($character1->id) ? 1: 2;
-        foreach($this->{"team". $team} as $target) $this->onSkillSpecial($character1, $target, $skill);;
+        foreach($this->{"team". $team} as $target) $this->onSkillSpecial($character1, $target, $skill);
         break;
       case "enemy_party":
         $team = $this->team1->hasMember($character2->id) ? 1: 2;
-        foreach($this->{"team". $team} as $target) $this->onSkillSpecial($character1, $target, $skill);;
+        foreach($this->{"team". $team} as $target) $this->onSkillSpecial($character1, $target, $skill);
         break;
     }
   }
