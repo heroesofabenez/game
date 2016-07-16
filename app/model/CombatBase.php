@@ -385,6 +385,7 @@ class CombatBase {
   function doAttacks() {
     $attackers = array_merge($this->team1->usableMembers, $this->team2->usableMembers);
     foreach($attackers as $attacker) {
+      if($attacker->hitpoints < 1) continue;
       $enemyTeam = $this->getEnemyTeam($attacker);
       $target = $this->selectAttackTarget($attacker, $this->{"team" . $enemyTeam});
       if(is_null($target)) break;
