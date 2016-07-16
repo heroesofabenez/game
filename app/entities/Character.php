@@ -88,7 +88,7 @@ class Character extends BaseEntity {
    * @param array $stats Stats of the character
    * @param Equipment[] $equipment Equipment of the character
    * @param Pet[] $pets Pets owned by the character
-   * @param array $skills Skills acquired by the character
+   * @param CharacterSkill[] $skills Skills acquired by the character
    */
   function __construct(array $stats, array $equipment = [], array $pets = [], array $skills = []) {
     $this->setStats($stats);
