@@ -72,19 +72,15 @@ class CombatBase {
     $this->onRoundStart[] = [$this ,"recalculateStats"];
     $this->onRoundStart[] = [$this, "logRoundNumber"];
     $this->onRound[] = [$this, "mainStage"];
-    $this->onRoundEnd[] = [$this, "clearUsed"];
     $this->onRoundEnd[] = [$this, "decreaseSkillsCooldowns"];
     $this->onAttack[] = [$this, "attackHarm"];
     $this->onAttack[] = [$this, "logDamage"];
     $this->onAttack[] = [$this, "logResults"];
-    $this->onAttack[] = [$this, "markUsed"];
     $this->onSkillAttack[] = [$this, "useAttackSkill"];
     $this->onSkillAttack[] = [$this, "logDamage"];
     $this->onSkillAttack[] = [$this, "logResults"];
-    $this->onSkillAttack[] = [$this, "markUsed"];
     $this->onSkillSpecial[] = [$this, "useSpecialSkill"];
     $this->onSkillSpecial[] = [$this, "logResults"];
-    $this->onSkillSpecial[] = [$this, "markUsed"];
     $this->onHeal[] = [$this, "heal"];
     $this->onHeal[] = [$this, "logResults"];
     $this->onHeal[] = [$this, "markUsed"];
@@ -216,6 +212,7 @@ class CombatBase {
   
   /**
    * Mark primary character as used in this round
+   * 
    * @param CharacterEntity $character1
    * @param CharacterEntity $character2
    * @return void
