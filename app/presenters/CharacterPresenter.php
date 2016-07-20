@@ -50,7 +50,7 @@ class CharacterPresenter extends BasePresenter {
    */
   protected function createComponentCreateCharacterForm() {
     $form = new Form;
-    $form->translator = $this->translator;
+    $form->setTranslator($this->translator);
     $form->addText("name", "forms.createCharacter.nameField.label")
          ->setRequired("forms.createCharacter.nameField.empty")
          ->addRule(Form::MAX_LENGTH, "forms.createCharacter.nameField.error", 30);

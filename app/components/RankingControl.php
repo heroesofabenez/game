@@ -5,6 +5,7 @@ namespace HeroesofAbenez\Ranking;
  * Basic Ranking Control
  *
  * @author Jakub Konečný
+ * @property-write \Nette\Utils\Paginator $paginator
  */
 abstract class RankingControl extends \Nette\Application\UI\Control {
   /** @var string */

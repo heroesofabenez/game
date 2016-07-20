@@ -7,6 +7,7 @@ use HeroesofAbenez\Entities\DialogueLine;
  * A set of dialogue lines, simplify working with them
  * 
  * @author Jakub Konečný
+ * @property-write \HeroesofAbenez\Entities\NPC $npc
  */
 class NPCDialogueControl extends \Nette\Application\UI\Control {
   /** @var array */

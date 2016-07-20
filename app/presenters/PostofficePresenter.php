@@ -45,7 +45,7 @@ class PostofficePresenter extends BasePresenter {
    */
   protected function createComponentNewMessageForm() {
     $form = new Form;
-    $form->translator = $this->translator;
+    $form->setTranslator($this->translator);
     $chars = $this->createComponentPostoffice()->getRecipients();
     $form->addSelect("to", "forms.postOfficeNewMessage.toSelect.label", $chars)
          ->setPrompt("forms.postOfficeNewMessage.toSelect.prompt")

@@ -114,7 +114,7 @@ class GuildPresenter extends BasePresenter {
    */
   protected function createComponentCreateGuildForm() {
     $form = new Form;
-    $form->translator = $this->translator;
+    $form->setTranslator($this->translator);
     $form->addText("name", "forms.createGuild.nameField.label")
          ->setRequired("forms.createGuild.nameField.empty")
          ->addRule(Form::MAX_LENGTH, "forms.createGuild.nameField.error", 20);
@@ -247,7 +247,7 @@ class GuildPresenter extends BasePresenter {
   protected function createComponentDissolveGuildForm() {
     $currentName = $this->model->getGuildName($this->user->identity->guild);
     $form = new Form;
-    $form->translator = $this->translator;
+    $form->setTranslator($this->translator);
     $form->addText("name", "forms.dissolveGuild.nameField.label")
          ->addRule(Form::EQUAL, "forms.dissolveGuild.nameField.error", $currentName);
     $form->addSubmit("dissolve", "forms.dissolveGuild.dissolveButton.label");
@@ -278,7 +278,7 @@ class GuildPresenter extends BasePresenter {
   protected function createComponentRenameGuildForm() {
     $currentName = $this->model->getGuildName($this->user->identity->guild);
     $form = new Form;
-    $form->translator = $this->translator;
+    $form->setTranslator($this->translator);
     $form->addText("name", "forms.renameGuild.nameField.label")
          ->addRule(Form::MAX_LENGTH, "forms.renameGuild.nameField.error", 20)
          ->setDefaultValue($currentName);
@@ -394,7 +394,7 @@ class GuildPresenter extends BasePresenter {
   */
   protected function createComponentGuildDescriptionForm() {
     $form = new Form;
-    $form->translator = $this->translator;
+    $form->setTranslator($this->translator);
     $guild = $this->model->guildData($this->user->identity->guild);
     $form->addTextArea("description", "forms.guildDescription.descriptionField.label")
          ->setDefaultValue($guild->description);

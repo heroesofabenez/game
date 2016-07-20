@@ -8,6 +8,7 @@ use HeroesofAbenez\Model,
  * NPC Quests Control
  *
  * @author Jakub Konečný
+ * @property-write \HeroesofAbenez\Entities\NPC $npc
  */
 class NPCQuestsControl extends \Nette\Application\UI\Control {
   /** @var \HeroesofAbenez\Model\Quest */

@@ -7,6 +7,7 @@ use Kdyby\Translation\Translator;
  * Shop Control
  *
  * @author Jakub Konečný
+ * @property-write \HeroesofAbenez\Entities\NPC $npc
  */
 class NPCShopControl extends \Nette\Application\UI\Control {
   /** @var \Nette\Database\Context */
