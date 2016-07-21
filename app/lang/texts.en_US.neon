@@ -117,6 +117,7 @@ journal:
     questsTitle: "Quests Journal"
     activeQuests: "You have 1 active quest.|You have %count% active quests."
     petsNumber: "You have 1 pet.|You have %count% pets."
+    levelUp: "Level up!"
 map:
     title: "Map"
     travelTitle: "Travel"

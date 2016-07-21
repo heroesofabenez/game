@@ -7,6 +7,7 @@ use Nette\Utils\Arrays;
    * Model Profile
    * 
    * @author Jakub Konečný
+ * @property-write \Nette\Security\User $user
    */
 class Profile {
   use \Nette\SmartObject;
@@ -17,11 +18,17 @@ class Profile {
   protected $cache;
   /** @var \HeroesofAbenez\Model\Pet */
   protected $petModel;
+  /** @var \Nette\Security\User */
+  protected $user;
   
-  function __construct(\Nette\Database\Context $db, \Nette\Caching\Cache $cache, Pet $petModel) {
+  function __construct(\Nette\Database\Context $db, \Nette\Caching\Cache $cache, \HeroesofAbenez\Model\Pet $petModel) {
     $this->db = $db;
     $this->cache = $cache;
     $this->petModel = $petModel;
+  }
+  
+  function setUser(\Nette\Security\User $user) {
+    $this->user = $user;
   }
   
   /**
@@ -208,5 +215,29 @@ class Profile {
     }
     return $xps;
   }
+  
+  /**
+   * Level up your character
+   * 
+   * @return void
+   * @throws NotEnoughExperiencesException
+   */
+  function levelUp() {
+    $character = $this->db->table("characters")->get($this->user->id);
+    if($character->experience < $this->getLevelsRequirements()[$character->level + 1]) throw new NotEnoughExperiencesException;
+    $class = $this->getClass($character->occupation);
+    $stats = ["strength", "dexterity", "constitution", "intelligence", "charisma"];
+    $data = "level=level+1, stat_points=stat_points+$class->stat_points_level";
+    foreach($stats as $stat) {
+      $grow = $class->{$stat . "_grow"};
+      if($grow > 0) $data .= ", $stat=$stat+$grow";
+    }
+    $where = ["id" => $this->user->id];
+    $this->db->query("UPDATE characters SET $data WHERE ?", $where);
+  }
+}
+
+class NotEnoughExperiencesException extends AccessDenied {
+  
 }
 ?>

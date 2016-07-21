@@ -1,6 +1,8 @@
 <?php
 namespace HeroesofAbenez\Presenters;
 
+use HeroesofAbenez\Model\NotEnoughExperiencesException;
+
 /**
  * Presenter Journal
  *
@@ -45,6 +47,19 @@ class JournalPresenter extends BasePresenter {
    */
   function renderPets() {
     $this->template->pets = $this->model->pets();
+  }
+  
+  /**
+   * @return void
+   */
+  function handleLevelUp() {
+    $this->profileModel->user = $this->user;
+    try {
+      $this->profileModel->levelUp();
+    } catch(NotEnoughExperiencesException $e) {
+      $this->flashMessage($this->translator->translate("errors.journal.cannotLevelUp"));
+    }
+    $this->redirect("Journal:");
   }
 }
 ?>
