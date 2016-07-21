@@ -53,19 +53,18 @@ class Journal {
    * @return array
    */
   function basic() {
-    $user = $this->user->identity;
-    $character = $this->db->table("characters")->get($user->id);
-    $stage = $this->locationModel->getStage($user->stage);
+    $character = $this->db->table("characters")->get($this->user->id);
+    $stage = $this->locationModel->getStage($character->current_stage);
     $return = [
-      "name" => $user->name, "gender" => $user->gender, "race" => $user->race,
-      "occupation" => $user->occupation, "specialization" => $user->specialization,
-      "level" => $user->level, "whiteKarma" => $user->white_karma,
-      "neutralKarma" => $user->neutral_karma, "darkKarma" => $user->dark_karma,
+      "name" => $character->name, "gender" => $character->gender, "race" => $character->race,
+      "occupation" => $character->occupation, "specialization" => $character->specialization,
+      "level" => $character->level, "whiteKarma" => $character->white_karma,
+      "neutralKarma" => $character->neutral_karma, "darkKarma" => $character->dark_karma,
       "experiences" => $character->experience, "description" => $character->description,
       "stageName" => $stage->name, "areaName" => $this->locationModel->getAreaName($stage->area)
     ];
-    if($user->guild > 0) {
-      $return["guild"] = $this->guildModel->getGuildName($user->guild);
+    if($character->guild > 0) {
+      $return["guild"] = $this->guildModel->getGuildName($character->guild);
       $return["guildRank"] = $character->guildrank;
     } else {
       $return["guild"] = false;
