@@ -195,5 +195,18 @@ class Profile {
     $return["pet"] = $this->petModel->getActivePet($id);
     return $return;
   }
+  
+  /**
+   * Get needed experiences for level up
+   * 
+   * @return int[]
+   */
+  function getLevelsRequirements() {
+    $xps = [1 => 65];
+    for($i = 2; $i <= 100; $i++) {
+      $xps[$i] = (int) ($xps[$i-1] * 1.2);
+    }
+    return $xps;
+  }
 }
 ?>

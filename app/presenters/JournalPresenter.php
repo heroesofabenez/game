@@ -9,6 +9,8 @@ namespace HeroesofAbenez\Presenters;
 class JournalPresenter extends BasePresenter {
   /** @var \HeroesofAbenez\Model\Journal @autowire */
   protected $model;
+  /** @var \HeroesofAbenez\Model\Profile @autowire */
+  protected $profileModel;
   
   /**
    * @return void
@@ -18,6 +20,7 @@ class JournalPresenter extends BasePresenter {
     foreach($stats as $key => $value) {
       $this->template->$key = $value;
     }
+    $this->template->nextLevelExp = $this->profileModel->getLevelsRequirements()[$stats["level"]  + 1];
   }
   
   /**
