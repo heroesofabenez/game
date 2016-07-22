@@ -29,7 +29,7 @@ class PetType extends BaseEntity {
   protected $cost;
   
   function __construct(\Nette\Database\Table\ActiveRow $row) {
-    if($row->getTable()->name != "pet_types") exit;
+    if($row->getTable()->getName() != "pet_types") exit;
     foreach($row as $key => $value) {
       $this->$key = $value;
     }
