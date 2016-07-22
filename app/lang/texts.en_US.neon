@@ -201,3 +201,8 @@ arena:
     foreignHeroes: "Foreign heroes"
     champion: "Champion"
     championNotFound: "Champion not found"
+training:
+   title: "Training grounds"
+   train: "Train"
+   currentStats: "Your current stats:"
+   usableStatPoints: "Usable stat points: %count%"

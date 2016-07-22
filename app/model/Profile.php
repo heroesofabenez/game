@@ -20,11 +20,14 @@ class Profile {
   protected $petModel;
   /** @var \Nette\Security\User */
   protected $user;
+  /** @var string[] */
+  private $stats;
   
   function __construct(\Nette\Database\Context $db, \Nette\Caching\Cache $cache, \HeroesofAbenez\Model\Pet $petModel) {
     $this->db = $db;
     $this->cache = $cache;
     $this->petModel = $petModel;
+    $this->stats = ["strength", "dexterity", "constitution", "intelligence", "charisma"];
   }
   
   function setUser(\Nette\Security\User $user) {
@@ -192,7 +195,6 @@ class Profile {
     foreach($stats as $stat) {
       $return[$stat] = $char->$stat;
     }
-    
     if($char->guild > 0) {
       $return["guild"] = $char->guild;
       $return["guildrank"] = $char->guildrank;
@@ -226,18 +228,64 @@ class Profile {
     $character = $this->db->table("characters")->get($this->user->id);
     if($character->experience < $this->getLevelsRequirements()[$character->level + 1]) throw new NotEnoughExperiencesException;
     $class = $this->getClass($character->occupation);
-    $stats = ["strength", "dexterity", "constitution", "intelligence", "charisma"];
     $data = "level=level+1, stat_points=stat_points+$class->stat_points_level";
-    foreach($stats as $stat) {
+    foreach($this->stats as $stat) {
       $grow = $class->{$stat . "_grow"};
       if($grow > 0) $data .= ", $stat=$stat+$grow";
     }
     $where = ["id" => $this->user->id];
     $this->db->query("UPDATE characters SET $data WHERE ?", $where);
   }
+  
+  /**
+   * Get amount of user's usable skill points
+   * 
+   * @return int
+   */
+  function getStatPoints() {
+    return (int) $this->db->table("characters")->get($this->user->id)->stat_points;
+  }
+  
+  /**
+   * Get user's stats
+   * 
+   * @return int[]
+   */
+  function getStats() {
+    $char = $this->db->table("characters")->get($this->user->id);
+    $return = [];
+    foreach($this->stats as $stat) {
+      $return[$stat] = $char->$stat;
+    }
+    return $return;
+  }
+  
+  /**
+   * Improve a stat
+   * 
+   * @param string $stat
+   * @return void
+   * @throws InvalidStatException
+   * @throws NoStatPointsAvailableException
+   */
+  function trainStat($stat) {
+    if(!in_array($stat, $this->stats)) throw new InvalidStatException;
+    elseif($this->getStatPoints() < 1) throw new NoStatPointsAvailableException;
+    $data = "$stat=$stat+1, stat_points=stat_points-1";
+    $where = ["id" => $this->user->id];
+    $this->db->query("UPDATE characters SET $data WHERE ?", $where);
+  }
 }
 
 class NotEnoughExperiencesException extends AccessDenied {
+  
+}
+
+class InvalidStatException extends \RuntimeException {
+  
+}
+
+class NoStatPointsAvailableException extends AccessDenied {
   
 }
 ?>

@@ -1,0 +1,14 @@
+{layout "../@layout.latte"}
+{block title}{_texts.training.title}{/block}
+{block content}
+  <h1>{_texts.training.title}</h1>
+  <h2>{_texts.training.currentStats}</h2>
+  <ul>
+    <li>{_texts.profile.strength}: {$stats["strength"]} {if $stat_points}<a n:href="trainStat strength">{_texts.training.train}</a>{/if}</li>
+    <li>{_texts.profile.dexterity}: {$stats["dexterity"]} {if $stat_points}<a n:href="trainStat dexterity">{_texts.training.train}</a>{/if}</li>
+    <li>{_texts.profile.constitution}: {$stats["constitution"]} {if $stat_points}<a n:href="trainStat constitution">{_texts.training.train}</a>{/if}</li>
+    <li>{_texts.profile.intelligence}: {$stats["intelligence"]} {if $stat_points}<a n:href="trainStat intelligence">{_texts.training.train}</a>{/if}</li>
+    <li>{_texts.profile.charisma}: {$stats["charisma"]} {if $stat_points}<a n:href="trainStat charisma">{_texts.training.train}</a>{/if}</li>
+  </ul>
+  <p>{_texts.training.usableStatPoints, $stat_points}</p>
+{/block}

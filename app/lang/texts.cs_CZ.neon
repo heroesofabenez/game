@@ -200,3 +200,8 @@ arena:
     foreignHeroes: "Cizí hrdinové"
     champion: "Šampión"
     championNotFound: "Šampión nenalezen"
+training:
+   title: "Cvičiště"
+   train: "Trénovat"
+   currentStats: "Tvé současné vlastnosti:"
+   usableStatPoints: "Použitelné body vlastností: %count%"

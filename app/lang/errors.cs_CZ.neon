@@ -43,3 +43,5 @@ arena:
     lowLevel: "Musíš dosáhnout úroveň %count%, aby jsi mohl vstoupit do arény."
 journal:
    cannotLevelUp: "Nemáš dostatek zkušeností pro postup na další úroveň."
+training:
+    noStatPointsAvailable: "Nemáš žádné body dovedností."

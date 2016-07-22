@@ -42,4 +42,6 @@ travel:
 arena:
     lowLevel: "You need to reach level %count% to enter Arena."
 journal:
-   cannotLevelUp: "You do not have enough experiences for next level."
+    cannotLevelUp: "You do not have enough experiences for next level."
+training:
+    noStatPointsAvailable: "You have no skill points available."
