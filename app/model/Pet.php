@@ -38,7 +38,7 @@ class Pet {
     if($types === NULL) {
       $types = $this->db->table("pet_types");
       foreach($types as $type) {
-        $return[] = new PetType($type);
+        $return[$type->id] = new PetType($type);
       }
       $this->cache->save("pet_types", $return);
     } else {
