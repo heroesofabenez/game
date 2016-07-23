@@ -1,8 +1,10 @@
 <?php
 namespace HeroesofAbenez\Tests;
 
-use MyTester as MT;
-use MyTester\Assert;
+use MyTester as MT,
+    MyTester\Assert,
+    HeroesofAbenez\Entities\CharacterRace,
+    HeroesofAbenez\Entities\CharacterClass;
 
 class ProfileTest extends MT\TestCase {
   /** @var \HeroesofAbenez\Model\Profile */
@@ -38,6 +40,64 @@ class ProfileTest extends MT\TestCase {
     Assert::type("int", $result["guild"]);
     Assert::null($result["specialization"]);
     Assert::type("HeroesofAbenez\Entities\Pet", $result["pet"]);
+  }
+  
+  /**
+   * @return void
+   */
+  function testGetRacesList() {
+    $list = $this->model->getRacesList();
+    Assert::type("array", $list);
+    Assert::type(CharacterRace::class, $list[1]);
+  }
+  
+  /**
+   * @param int $id
+   * @data(1)
+   * @return void
+   */
+  function testGetRace($id) {
+    $result = $this->model->getRace($id);
+    Assert::type(CharacterRace::class, $result);
+  }
+  
+  /**
+   * @param int $id
+   * @data(1)
+   * @return void
+   */
+  function testGetRaceName($id) {
+    $result = $this->model->getRaceName($id);
+    Assert::type("string", $result);
+  }
+  
+  /**
+   * @return void
+   */
+  function testGetClassesList() {
+    $list = $this->model->getClassesList();
+    Assert::type("array", $list);
+    Assert::type(CharacterClass::class, $list[1]);
+  }
+  
+  /**
+   * @param int $id
+   * @data(1)
+   * @return void
+   */
+  function testGetClass($id) {
+    $result = $this->model->getClass($id);
+    Assert::type(CharacterClass::class, $result);
+  }
+  
+  /**
+   * @param int $id
+   * @data(1)
+   * @return void
+   */
+  function testGetClassName($id) {
+    $result = $this->model->getClassName($id);
+    Assert::type("string", $result);
   }
 }
 
