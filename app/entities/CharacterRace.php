@@ -25,7 +25,7 @@ class CharacterRace extends BaseEntity {
   protected $charisma;
   
   function __construct(\Nette\Database\Table\ActiveRow $row) {
-    if($row->getTable()->name != "character_races") exit;
+    if($row->getTable()->getName() != "character_races") exit;
     foreach($row as $key => $value) {
       $this->$key = $value;
     }
