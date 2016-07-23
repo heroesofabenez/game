@@ -23,6 +23,8 @@ abstract class ArenaControl extends \Nette\Application\UI\Control {
   protected $profileModel;
   /** @var \HeroesofAbenez\Model\Equipment */
   protected $equipmentModel;
+  /** @var \HeroesofAbenez\Model\Skills */
+  protected $skillsModel;
   /** @var \HeroesofAbenez\Model\CombatDuel */
   protected $combat;
   /** @var \HeroesofAbenez\Model\CombatLogManager */
@@ -34,10 +36,11 @@ abstract class ArenaControl extends \Nette\Application\UI\Control {
   /** @var string */
   protected $arena;
   
-  function __construct(User $user, Profile $profileModel, Equipment $equipmentModel, CombatDuel $combat, CombatLogManager $log, Database $db, Translator $translator) {
+  function __construct(\Nette\Security\User $user, \HeroesofAbenez\Model\Profile $profileModel, \HeroesofAbenez\Model\Equipment $equipmentModel, \HeroesofAbenez\Model\Skills $skillsModel, \HeroesofAbenez\Model\CombatDuel $combat, \HeroesofAbenez\Model\CombatLogManager $log, \Nette\Database\Context $db, \Kdyby\Translation\Translator $translator) {
     $this->user = $user;
     $this->profileModel = $profileModel;
     $this->equipmentModel = $equipmentModel;
+    $this->skillsModel = $skillsModel;
     $this->combat = $combat;
     $this->log = $log;
     $this->db = $db;
@@ -65,7 +68,8 @@ abstract class ArenaControl extends \Nette\Application\UI\Control {
       $item->worn = true;
       $equipment[] = $item;
     }
-    $player = new Character($data, $equipment, $pets);
+    $skills = $this->skillsModel->getPlayerSkills($id);
+    $player = new Character($data, $equipment, $pets, $skills);
     return $player;
   }
   
