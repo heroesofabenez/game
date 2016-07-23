@@ -1,8 +1,9 @@
 <?php
 namespace HeroesofAbenez\Tests;
 
-use MyTester as MT;
-use MyTester\Assert;
+use MyTester as MT,
+    MyTester\Assert,
+    HeroesofAbenez\Entities\Guild;
 
 class GuildModelTest extends MT\TestCase {
   /** @var \HeroesofAbenez\Model\Guild */
@@ -27,7 +28,7 @@ class GuildModelTest extends MT\TestCase {
    */
   function testGuildData($id) {
     $guild = $this->model->guildData($id);
-    Assert::type("\HeroesofAbenez\Entities\Guild", $guild);
+    Assert::type(Guild::class, $guild);
     Assert::same("Dawn", $guild->name);
   }
   

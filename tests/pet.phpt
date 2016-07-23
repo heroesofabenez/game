@@ -1,8 +1,10 @@
 <?php
 namespace HeroesofAbenez\Tests;
 
-use MyTester as MT;
-use MyTester\Assert;
+use MyTester as MT,
+    MyTester\Assert,
+    HeroesofAbenez\Entities\PetType,
+    HeroesofAbenez\Entities\Pet;
 
 class PetTest extends MT\TestCase {
   /** @var \HeroesofAbenez\Model\Pet */
@@ -18,7 +20,7 @@ class PetTest extends MT\TestCase {
   function testListOfTypes() {
     $types = $this->model->listOfTypes();
     Assert::type("array", $types);
-    Assert::type("HeroesofAbenez\Entities\PetType", $types[1]);
+    Assert::type(PetType::class, $types[1]);
   }
   
   /**
@@ -29,7 +31,7 @@ class PetTest extends MT\TestCase {
   function testViewType($id) {
     $type = $this->model->viewType($id);
     if($id === 1) {
-      Assert::type("HeroesofAbenez\Entities\PetType", $type);
+      Assert::type(PetType::class, $type);
     } elseif($id === 50) {
       Assert::false($type);
     }
@@ -43,7 +45,7 @@ class PetTest extends MT\TestCase {
   function testGetActivePet($user) {
     $pet = $this->model->getActivePet($user);
     if($user === 1) {
-      Assert::type("HeroesofAbenez\Entities\Pet", $pet);
+      Assert::type(Pet::class, $pet);
       Assert::contains($pet->name, "Unnamed");
     } elseif($user === 2) {
       Assert::false($pet);

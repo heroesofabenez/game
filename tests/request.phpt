@@ -1,8 +1,9 @@
 <?php
 namespace HeroesofAbenez\Tests;
 
-use MyTester as MT;
-use MyTester\Assert;
+use MyTester as MT,
+    MyTester\Assert,
+    HeroesofAbenez\Entities\Request;
 
 class RequestModelTest extends MT\TestCase {
   /** @var \HeroesofAbenez\Model\Request */
@@ -29,7 +30,7 @@ class RequestModelTest extends MT\TestCase {
    */
   function testShow($id) {
     $request = $this->model->show($id);
-    Assert::type("\HeroesofAbenez\Entities\Request", $request);
+    Assert::type(Request::class, $request);
   }
 }
 

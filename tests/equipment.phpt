@@ -1,8 +1,9 @@
 <?php
 namespace HeroesofAbenez\Tests;
 
-use MyTester as MT;
-use MyTester\Assert;
+use MyTester as MT,
+    MyTester\Assert,
+    HeroesofAbenez\Entities\Equipment;
 
 class EquipmentTest extends MT\TestCase {
   /** @var \HeroesofAbenez\Model\Equipment */
@@ -18,7 +19,7 @@ class EquipmentTest extends MT\TestCase {
   function testListOfEquipment() {
     $items = $this->model->listOfEquipment();
     Assert::type("array", $items);
-    Assert::type("HeroesofAbenez\Entities\Equipment", $items[1]);
+    Assert::type(Equipment::class, $items[1]);
   }
   
   /**
@@ -28,7 +29,7 @@ class EquipmentTest extends MT\TestCase {
    */
   function testView($id) {
     $item = $this->model->view($id);
-    Assert::type("HeroesofAbenez\Entities\Equipment", $item);
+    Assert::type(Equipment::class, $item);
   }
 }
 

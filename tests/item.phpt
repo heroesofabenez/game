@@ -1,8 +1,9 @@
 <?php
 namespace HeroesofAbenez\Tests;
 
-use MyTester as MT;
-use MyTester\Assert;
+use MyTester as MT,
+    MyTester\Assert,
+    HeroesofAbenez\Entities\Item;
 
 class ItemTest extends MT\TestCase {
   /** @var \HeroesofAbenez\Model\Item */
@@ -15,7 +16,7 @@ class ItemTest extends MT\TestCase {
   function testListOfItems() {
     $items = $this->model->listOfItems();
     Assert::type("array", $items);
-    Assert::type("HeroesofAbenez\Entities\Item", $items[1]);
+    Assert::type(Item::class, $items[1]);
   }
   
   /**
@@ -25,7 +26,7 @@ class ItemTest extends MT\TestCase {
    */
   function testView($id) {
     $item = $this->model->view($id);
-    Assert::type("HeroesofAbenez\Entities\Item", $item);
+    Assert::type(Item::class, $item);
   }
   
   /**
