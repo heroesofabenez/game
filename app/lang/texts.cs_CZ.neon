@@ -205,3 +205,6 @@ training:
    train: "Trénovat"
    currentStats: "Tvé současné vlastnosti:"
    usableStatPoints: "Použitelné body vlastností: %count%"
+   skills: "Dovednosti"
+   skillCurrentLevel: "Současná úroveň: %count%"
+   usableSkillPoints: "Použitelné body dovedností: %count%"

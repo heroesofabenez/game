@@ -62,6 +62,8 @@ class HOAExtension extends \Nette\DI\CompilerExtension {
       ->setFactory(HeroesofAbenez\Model\Quest::class);
     $builder->addDefinition($this->prefix("model.npc"))
       ->setFactory(HeroesofAbenez\Model\NPC::class);
+    $builder->addDefinition($this->prefix("model.skills"))
+      ->setFactory(HeroesofAbenez\Model\Skills::class);
     $builder->addDefinition($this->prefix("model.userManager"))
       ->setFactory(HeroesofAbenez\Model\UserManager::class, [$config["devServers"]]);
     $builder->addDefinition("cache.cache")

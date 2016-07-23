@@ -11,4 +11,9 @@
     <li>{_texts.profile.charisma}: {$stats["charisma"]} {if $stat_points}<a n:href="trainStat charisma">{_texts.training.train}</a>{/if}</li>
   </ul>
   <p>{_texts.training.usableStatPoints, $stat_points}</p>
+  <h2>{_texts.training.skills}</h2>
+  <ul n:inner-foreach="$skills as $skill">
+    <li>{$skill->skill->name} {_texts.training.skillCurrentLevel, $skill->level}</li>
+  </ul>
+  <p>{_texts.training.usableSkillPoints, $skill_points}</p>
 {/block}

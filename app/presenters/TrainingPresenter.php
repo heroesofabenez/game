@@ -12,6 +12,8 @@ use HeroesofAbenez\Model\InvalidStatException,
 class TrainingPresenter extends BasePresenter {
   /** @var \HeroesofAbenez\Model\Profile */
   protected $model;
+  /** @var \HeroesofAbenez\Model\Skills @autowire */
+  protected $skillsModel;
   
   /**
    * @param \HeroesofAbenez\Model\Profile $model
@@ -28,6 +30,8 @@ class TrainingPresenter extends BasePresenter {
   function renderDefault() {
     $this->template->stat_points = $this->model->getStatPoints();
     $this->template->stats = $this->model->getStats();
+    $this->template->skill_points = $this->skillsModel->getSkillPoints();
+    $this->template->skills = $this->skillsModel->getAvailableSkills();
   }
   
   /**

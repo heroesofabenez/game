@@ -284,7 +284,7 @@ class Profile {
   }
   
   /**
-   * Get amount of user's usable skill points
+   * Get amount of user's usable stat points
    * 
    * @return int
    */
