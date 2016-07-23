@@ -4,7 +4,8 @@ namespace HeroesofAbenez\Tests;
 use MyTester as MT,
     MyTester\Assert,
     HeroesofAbenez\Entities\CharacterRace,
-    HeroesofAbenez\Entities\CharacterClass;
+    HeroesofAbenez\Entities\CharacterClass,
+    HeroesofAbenez\Entities\CharacterSpecialization;
 
 class ProfileTest extends MT\TestCase {
   /** @var \HeroesofAbenez\Model\Profile */
@@ -97,6 +98,35 @@ class ProfileTest extends MT\TestCase {
    */
   function testGetClassName($id) {
     $result = $this->model->getClassName($id);
+    Assert::type("string", $result);
+  }
+  
+  /**
+   * @return void
+   */
+  function testGetSpecializationsList() {
+    $list = $this->model->getSpecializationsList();
+    Assert::type("array", $list);
+    Assert::type(CharacterSpecialization::class, $list[1]);
+  }
+  
+  /**
+   * @param int $id
+   * @data(1)
+   * @return void
+   */
+  function testGetSpecialization($id) {
+    $result = $this->model->getSpecialization($id);
+    Assert::type(CharacterSpecialization::class, $result);
+  }
+  
+  /**
+   * @param int $id
+   * @data(1)
+   * @return void
+   */
+  function testGetSpecializationName($id) {
+    $result = $this->model->getSpecializationName($id);
     Assert::type("string", $result);
   }
 }

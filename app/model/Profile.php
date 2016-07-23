@@ -1,7 +1,10 @@
 <?php
 namespace HeroesofAbenez\Model;
 
-use Nette\Utils\Arrays;
+use Nette\Utils\Arrays,
+    HeroesofAbenez\Entities\CharacterRace,
+    HeroesofAbenez\Entities\CharacterClass,
+    HeroesofAbenez\Entities\CharacterSpecialization;
 
   /**
    * Model Profile
@@ -116,6 +119,48 @@ class Profile {
     $class = $this->getClass($id);
     if(!$class) return "";
     else return $class->name;
+  }
+  
+  /**
+   * Get list of specializations
+   * 
+   * @return CharacterSpecialization[]
+   */
+  function getSpecializationsList() {
+    $specializationsList = $this->cache->load("specializations");
+    if($specializationsList === NULL) {
+      $specializationsList = [];
+      $specializations = $this->db->table("character_specializations");
+      foreach($specializations as $specialization) {
+        $specializationsList[$specialization->id] = new CharacterSpecialization($specialization);
+      }
+      $this->cache->save("specializations", $specializationsList);
+    }
+    return $specializationsList;
+  }
+  
+  /**
+   * Get data about specified specialization
+   * 
+   * @param int $id Specialization's id
+   * @return CharacterSpecialization|bool
+   */
+  function getSpecialization($id) {
+    $races = $this->getSpecializationsList();
+    $race = Arrays::get($races, $id, false);
+    return $race;
+  }
+  
+  /**
+   * Get name of specified specialization
+   * 
+   * @param int $id Specialization's id
+   * @return string
+   */
+  function getSpecializationName($id) {
+    $race = $this->getSpecialization($id);
+    if(!$race) return "";
+    else return $race->name;
   }
   
   /**
