@@ -2,7 +2,12 @@
 namespace HeroesofAbenez\Presenters;
 
 use HeroesofAbenez\Model\InvalidStatException,
-    HeroesofAbenez\Model\NoStatPointsAvailableException;
+    HeroesofAbenez\Model\NoStatPointsAvailableException,
+    HeroesofAbenez\Model\InvalidSkillTypeException,
+    HeroesofAbenez\Model\NoSkillPointsAvailableException,
+    HeroesofAbenez\Model\SkillNotFoundException,
+    HeroesofAbenez\Model\SkillMaxLevelReachedException,
+    HeroesofAbenez\Model\CannotLearnSkillException;
 
 /**
  * Presenter Training
@@ -44,6 +49,27 @@ class TrainingPresenter extends BasePresenter {
     } catch(NoStatPointsAvailableException $e) {
       $this->flashMessage($this->translator->translate("errors.training.noStatPointsAvailable"));
     } catch(InvalidStatException $e) {
+      
+    }
+    $this->redirect("Training:");
+  }
+  
+  /**
+   * @param int $skillId
+   * @param string $skillType
+   */
+  function handleTrainSkill($skillId, $skillType) {
+    try {
+      $this->skillsModel->trainSkill($skillId, $skillType);
+    } catch(NoSkillPointsAvailableException $e) {
+      $this->flashMessage($this->translator->translate("errors.training.noSkillPointsAvailable"));
+    } catch(SkillMaxLevelReachedException $e) {
+      $this->flashMessage($this->translator->translate("errors.training.skillMaxLevelReached"));
+    } catch(CannotLearnSkillException $e) {
+      $this->flashMessage($this->translator->translate("errors.training.cannotLearnSkill"));
+    } catch(InvalidSkillTypeException $e) {
+      
+    } catch(SkillNotFoundException $e) {
       
     }
     $this->redirect("Training:");

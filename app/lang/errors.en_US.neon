@@ -44,4 +44,7 @@ arena:
 journal:
     cannotLevelUp: "You do not have enough experiences for next level."
 training:
-    noStatPointsAvailable: "You have no skill points available."
+    noStatPointsAvailable: "You have no stat points available."
+    noSkillPointsAvailable: "You have no skill points available."
+    skillMaxLevelReached: "You reached max level for this skill."
+    cannotLearnSkill: "You cannot learn this skill."

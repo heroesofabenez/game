@@ -48,6 +48,8 @@ class SkillsModelTest extends MT\TestCase {
     Assert::type("int", $skill->hitRate);
     Assert::type("int", $skill->cooldown);
     Assert::same(0, $skill->cooldown);
+    Assert::type("string", $skill->skillType);
+    Assert::same("attack", $skill->skillType);
   }
   
   /**
@@ -80,6 +82,8 @@ class SkillsModelTest extends MT\TestCase {
     Assert::type("int", $skill->value);
     Assert::type("int", $skill->cooldown);
     Assert::same(0, $skill->cooldown);
+    Assert::type("string", $skill->skillType);
+    Assert::same("special", $skill->skillType);
   }
   
   /**

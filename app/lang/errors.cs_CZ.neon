@@ -44,4 +44,7 @@ arena:
 journal:
    cannotLevelUp: "Nemáš dostatek zkušeností pro postup na další úroveň."
 training:
-    noStatPointsAvailable: "Nemáš žádné body dovedností."
+    noStatPointsAvailable: "Nemáš žádné body vlastností."
+    noSkillPointsAvailable: "Nemáš žádné body dovedností."
+    skillMaxLevelReached: "Dosáhl(a) jsi maximální úrovně pro tuto dovednost"
+    cannotLearnSkill: "Nemůžeš se naučit tuto dovednost."

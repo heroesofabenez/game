@@ -5,6 +5,7 @@ namespace HeroesofAbenez\Entities;
  * Base character skill
  *
  * @author Jakub Konečný
+ * @property-read string $skillType
  */
 abstract class CharacterSkill extends BaseEntity {
   /** @var SkillAttack */
@@ -17,6 +18,15 @@ abstract class CharacterSkill extends BaseEntity {
   function __construct(Skill $skill, $level) {
     $this->skill = $skill;
     $this->level = $level;
+  }
+  
+  /**
+   * @return string
+   */
+  function getSkillType() {
+    if($this->skill instanceof SkillAttack) return "attack";
+    elseif($this->skill instanceof SkillSpecial) return "special";
+    else return "";
   }
   
   /**
