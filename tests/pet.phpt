@@ -18,7 +18,7 @@ class PetTest extends MT\TestCase {
   function testListOfTypes() {
     $types = $this->model->listOfTypes();
     Assert::type("array", $types);
-    Assert::type("HeroesofAbenez\Entities\PetType", $types[0]);
+    Assert::type("HeroesofAbenez\Entities\PetType", $types[1]);
   }
   
   /**
