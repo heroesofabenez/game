@@ -256,9 +256,9 @@ class Profile {
    * @return int[]
    */
   function getLevelsRequirements() {
-    $xps = [1 => 65];
-    for($i = 2; $i <= 100; $i++) {
-      $xps[$i] = (int) ($xps[$i-1] * 1.2);
+    $xps = [2 => 65];
+    for($i = 3; $i <= 100; $i++) {
+      $xps[$i] = (int) ($xps[$i-1] * 1.35) + 15;
     }
     return $xps;
   }
