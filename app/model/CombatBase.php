@@ -83,7 +83,6 @@ class CombatBase {
     $this->onSkillSpecial[] = [$this, "logResults"];
     $this->onHeal[] = [$this, "heal"];
     $this->onHeal[] = [$this, "logResults"];
-    $this->onHeal[] = [$this, "markUsed"];
   }
   
   function getRound() {
