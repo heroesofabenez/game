@@ -9,7 +9,8 @@ use Nette\Security\User,
     HeroesofAbenez\Model\CombatLogger,
     Kdyby\Translation\Translator,
     HeroesofAbenez\Entities\Character,
-    HeroesofAbenez\Model\CombatDuel;
+    HeroesofAbenez\Model\CombatDuel,
+    HeroesofAbenez\Model\OpponentNotFoundException;
 
 /**
  * Basic Arena Control
@@ -19,12 +20,8 @@ use Nette\Security\User,
 abstract class ArenaControl extends \Nette\Application\UI\Control {
   /** @var \Nette\Security\User */
   protected $user;
-  /** @var \HeroesofAbenez\Model\Profile */
-  protected $profileModel;
-  /** @var \HeroesofAbenez\Model\Equipment */
-  protected $equipmentModel;
-  /** @var \HeroesofAbenez\Model\Skills */
-  protected $skillsModel;
+  /** @var \HeroesofAbenez\Model\CombatHelper */
+  protected $combatHelper;
   /** @var \HeroesofAbenez\Model\CombatDuel */
   protected $combat;
   /** @var \HeroesofAbenez\Model\CombatLogManager */
@@ -36,11 +33,9 @@ abstract class ArenaControl extends \Nette\Application\UI\Control {
   /** @var string */
   protected $arena;
   
-  function __construct(\Nette\Security\User $user, \HeroesofAbenez\Model\Profile $profileModel, \HeroesofAbenez\Model\Equipment $equipmentModel, \HeroesofAbenez\Model\Skills $skillsModel, \HeroesofAbenez\Model\CombatDuel $combat, \HeroesofAbenez\Model\CombatLogManager $log, \Nette\Database\Context $db, \Kdyby\Translation\Translator $translator) {
+  function __construct(\Nette\Security\User $user, \HeroesofAbenez\Model\CombatHelper $combatHelper, \HeroesofAbenez\Model\CombatDuel $combat, \HeroesofAbenez\Model\CombatLogManager $log, \Nette\Database\Context $db, \Kdyby\Translation\Translator $translator) {
     $this->user = $user;
-    $this->profileModel = $profileModel;
-    $this->equipmentModel = $equipmentModel;
-    $this->skillsModel = $skillsModel;
+    $this->combatHelper = $combatHelper;
     $this->combat = $combat;
     $this->log = $log;
     $this->db = $db;
@@ -55,21 +50,11 @@ abstract class ArenaControl extends \Nette\Application\UI\Control {
    * @throws OpponentNotFoundException
    */
   protected function getPlayer($id) {
-    $data = $this->profileModel->view($id);
-    if(!$data) throw new OpponentNotFoundException;
-    $pets = $equipment = [];
-    if($data["pet"]) $pets[] = $data["pet"];
-    unset($data["pet"]);
-    $equipmentRows = $this->db->table("character_equipment")
-      ->where("character", $id)
-      ->where("worn", 1);
-    foreach($equipmentRows as $row) {
-      $item = $this->equipmentModel->view($row->item);
-      $item->worn = true;
-      $equipment[] = $item;
+    try {
+      $player = $this->combatHelper->getPlayer($id);
+    } catch(OpponentNotFoundException $e) {
+      throw $e;
     }
-    $skills = $this->skillsModel->getPlayerSkills($id);
-    $player = new Character($data, $equipment, $pets, $skills);
     return $player;
   }
   
@@ -131,9 +116,5 @@ abstract class ArenaControl extends \Nette\Application\UI\Control {
     $log = (string) $logger;
     return $this->log->write($log);
   }
-}
-
-class OpponentNotFoundException extends \Exception {
-  
 }
 ?>

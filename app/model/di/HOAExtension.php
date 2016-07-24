@@ -86,6 +86,8 @@ class HOAExtension extends \Nette\DI\CompilerExtension {
       ->setFactory(HeroesofAbenez\Model\CombatLogger::class);
     $builder->addDefinition($this->prefix("combat.logManager"))
       ->setFactory(HeroesofAbenez\Model\CombatLogManager::class);
+    $builder->addDefinition($this->prefix("combat.helper"))
+      ->setFactory(HeroesofAbenez\Model\CombatHelper::class);
   }
   
   /**

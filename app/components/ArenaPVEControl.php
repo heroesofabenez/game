@@ -2,10 +2,7 @@
 namespace HeroesofAbenez\Arena;
 
 use HeroesofAbenez\Entities\Character,
-    HeroesofAbenez\Entities\CharacterSkillAttack,
-    HeroesofAbenez\Entities\SkillAttack,
-    HeroesofAbenez\Entities\CharacterSkillSpecial,
-    HeroesofAbenez\Entities\SkillSpecial;
+    HeroesofAbenez\Model\OpponentNotFoundException;
 
 /**
  *  PVE Arena Control
@@ -35,27 +32,11 @@ class ArenaPVEControl extends ArenaControl {
    * @throws OpponentNotFoundException
    */
   protected function getNpc($id) {
-    $row = (array) $this->db->query("SELECT * FROM pve_arena_opponents WHERE id=$id")->fetch();
-    if(count($row) === 1) throw new OpponentNotFoundException;
-    $row["id"] = "pveArenaNpc" . $row["id"];
-    $skills = $equimpent = [];
-    $skillRows = $this->db->query("SELECT id FROM skills_attacks WHERE needed_class={$row["occupation"]} AND needed_level<={$row["level"]}");
-    foreach($skillRows as $skillRow) {
-      $skills[] = new CharacterSkillAttack(new SkillAttack($this->db->table("skills_attacks")->get($skillRow->id)), 1);
-     }
-    unset($skillRow);
-    $skillRows = $this->db->query("SELECT id FROM skills_specials WHERE needed_class={$row["occupation"]} AND needed_level<={$row["level"]}");
-    foreach($skillRows as $skillRow) {
-      $skills[] = new CharacterSkillSpecial(new SkillSpecial($this->db->table("skills_specials")->get($skillRow->id)), 1);
+    try {
+      $npc = $this->combatHelper->getArenaNpc($id);
+    } catch(OpponentNotFoundException $e) {
+      throw $e;
     }
-    if($row["weapon"]) {
-      $weapon = $this->equipmentModel->view($row["weapon"]);
-      if($weapon) {
-        $weapon->worn = true;
-        $equimpent[] = $weapon;
-      }
-    }
-    $npc = new Character($row, $equimpent, [], $skills);
     return $npc;
   }
   

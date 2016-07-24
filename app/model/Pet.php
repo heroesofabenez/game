@@ -71,7 +71,7 @@ class Pet {
       $pet = $activePet->fetch();
       $petType = $this->viewType($pet->type);
       $petName = ($pet->name === NULL) ? "Unnamed" : $petName = $pet->name . ",";
-      $return = new PetEntity($user, $petType, $petName);
+      $return = new PetEntity($user, $petType, $petName, $pet->deployed);
     } else {
       $return = false;
     }
