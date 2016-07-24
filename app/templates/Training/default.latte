@@ -13,7 +13,7 @@
   <p>{_texts.training.usableStatPoints, $stat_points}</p>
   <h2>{_texts.training.skills}</h2>
   <ul n:inner-foreach="$skills as $skill">
-    <li>{_skills_{$skill->skillType}.{$skill->skill->id}.name} {_texts.training.skillCurrentLevel, $skill->level} {if $skill_points AND $skill->level < $skill->skill->levels}<a n:href="trainSkill! $skill->skill->id, $skill->skillType">{_texts.training.train}</a>{/if}</li>
+    <li><a n:href="Skill:$skill->skillType $skill->skill->id">{_skills_{$skill->skillType}.{$skill->skill->id}.name}</a> {_texts.training.skillCurrentLevel, $skill->level} {if $skill_points AND $skill->level < $skill->skill->levels}<a n:href="trainSkill! $skill->skill->id, $skill->skillType">{_texts.training.train}</a>{/if}</li>
   </ul>
   <p>{_texts.training.usableSkillPoints, $skill_points}</p>
 {/block}
