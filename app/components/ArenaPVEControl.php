@@ -38,7 +38,7 @@ class ArenaPVEControl extends ArenaControl {
     $row = (array) $this->db->query("SELECT * FROM pve_arena_opponents WHERE id=$id")->fetch();
     if(count($row) === 1) throw new OpponentNotFoundException;
     $row["id"] = "pveArenaNpc" . $row["id"];
-    $skills = [];
+    $skills = $equimpent = [];
     $skillRows = $this->db->query("SELECT id FROM skills_attacks WHERE needed_class={$row["occupation"]} AND needed_level<={$row["level"]}");
     foreach($skillRows as $skillRow) {
       $skills[] = new CharacterSkillAttack(new SkillAttack($this->db->table("skills_attacks")->get($skillRow->id)), 1);
@@ -48,7 +48,14 @@ class ArenaPVEControl extends ArenaControl {
     foreach($skillRows as $skillRow) {
       $skills[] = new CharacterSkillSpecial(new SkillSpecial($this->db->table("skills_specials")->get($skillRow->id)), 1);
     }
-    $npc = new Character($row, [], [], $skills);
+    if($row["weapon"]) {
+      $weapon = $this->equipmentModel->view($row["weapon"]);
+      if($weapon) {
+        $weapon->worn = true;
+        $equimpent[] = $weapon;
+      }
+    }
+    $npc = new Character($row, $equimpent, [], $skills);
     return $npc;
   }
   
