@@ -157,6 +157,9 @@ equipment:
     level: "úroveň"
     class: "třídu"
     price: "{0}Trvání: 0 stříbrňáků|{1}Trvání:  1 stříbrňák|[2,4]Trvání: %count% stříbrňáků|[5,Inf]Trvání: %count% stříbrňáků"
+    worn: "(Worn)"
+    equip: "Nasadit věc"
+    unequip: "Sundat věc"
 npc:
     title: "NPC"
     steppedInFront: "Předstoupil jsi před"
