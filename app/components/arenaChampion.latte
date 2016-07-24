@@ -5,4 +5,10 @@
   <p>{$champion->gender}, {_texts.profile.level} {$champion->level} {_races.$champion->race.name} {_classes.$champion->occupation.name}</p>
   <p>{_texts.profile.baseStats}<br>{_texts.profile.strength} {$champion->strength}, {_texts.profile.dexterity} {$champion->dexterity}, {_texts.profile.constitution} {$champion->constitution}<br>
 {_texts.profile.intelligence} {$champion->intelligence}, {_texts.profile.charisma} {$champion->charisma}</p>
+  {if $champion->skills}
+  <p>{_texts.arena.usesSkills}</p>
+  <ul n:inner-foreach="$champion->skills as $skill">
+    <li><a href="{plink Skill:$skill->skillType $skill->skill->id}">{_skills_{$skill->skillType}.{$skill->skill->id}.name}</a> {_texts.arena.skillOnLevel, $skill->level}</li>
+  </ul>
+  {/if}
 {/if}

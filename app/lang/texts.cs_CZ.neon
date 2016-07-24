@@ -200,6 +200,8 @@ arena:
     foreignHeroes: "Cizí hrdinové"
     champion: "Šampión"
     championNotFound: "Šampión nenalezen"
+    usesSkills: "Používá následující dovednosti"
+    skillOnLevel: "na úrovni %count%"
 training:
    title: "Cvičiště"
    train: "Trénovat"

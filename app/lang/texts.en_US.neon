@@ -201,6 +201,8 @@ arena:
     foreignHeroes: "Foreign heroes"
     champion: "Champion"
     championNotFound: "Champion not found"
+    usesSkills: "Uses the following skills:"
+    skillOnLevel: "on level %count%"
 training:
    title: "Training grounds"
    train: "Train"
