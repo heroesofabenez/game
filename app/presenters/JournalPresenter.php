@@ -56,6 +56,7 @@ class JournalPresenter extends BasePresenter {
     $this->profileModel->user = $this->user;
     try {
       $this->profileModel->levelUp();
+      $this->user->logout();
     } catch(NotEnoughExperiencesException $e) {
       $this->flashMessage($this->translator->translate("errors.journal.cannotLevelUp"));
     }
