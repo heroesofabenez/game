@@ -1,7 +1,8 @@
-source: .
+source: app
 destination: api
 title: Heroes of Abenez
 todo: yes
+php: yes
 charset:
     - UTF-8
 exclude: 
