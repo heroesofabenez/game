@@ -54,7 +54,6 @@ class CombatHelper {
     }
     $skills = $this->skillsModel->getPlayerSkills($id);
     $player = new Character($data, $equipment, $pets, $skills);
-    if(count($pets)) $player->deployPet($pets[0]->id);
     return $player;
   }
   

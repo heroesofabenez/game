@@ -96,7 +96,10 @@ class Character extends BaseEntity {
       if($eq instanceof Equipment) $this->equipment[$eq->id] = $eq;
     }
     foreach($pets as $pet) {
-      if($pet instanceof Pet) $this->pets[$pet->id] = $pet;
+      if($pet instanceof Pet) {
+        $this->pets[$pet->id] = $pet;
+        if($pet->deployed) $this->deployPet($pet->id);
+      }
     }
     foreach($skills as $skill) {
       if($skill instanceof CharacterSkill) $this->skills[] = $skill;
