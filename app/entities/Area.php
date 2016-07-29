@@ -33,7 +33,7 @@ class Area extends BaseEntity {
    * @param int $required_occupation
    */
   function __construct(\Nette\Database\Table\ActiveRow $row) {
-    if($row->getTable()->name != "quest_areas") exit;
+    if($row->getTable()->getName() != "quest_areas") exit;
     foreach($row as $key => $value) {
       $this->$key = $value;
     }

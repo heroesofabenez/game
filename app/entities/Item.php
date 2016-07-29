@@ -19,7 +19,7 @@ class Item extends BaseEntity {
   protected $price;
   
   function __construct(\Nette\Database\Table\ActiveRow $row) {
-    if($row->getTable()->name != "items") exit;
+    if($row->getTable()->getName() != "items") exit;
     foreach($row as $key => $value) {
       $this->$key = $value;
     }

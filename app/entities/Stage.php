@@ -27,7 +27,7 @@ class Stage extends BaseEntity {
   protected $pos_y;
   
   function __construct(\Nette\Database\Table\ActiveRow $row) {
-    if($row->getTable()->name != "quest_stages") exit;
+    if($row->getTable()->getName() != "quest_stages") exit;
     foreach($row as $key => $value) {
       $this->$key = $value;
     }

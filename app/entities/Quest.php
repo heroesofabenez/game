@@ -43,7 +43,7 @@ class Quest extends BaseEntity {
   protected $progress = false;
   
   function __construct(\Nette\Database\Table\ActiveRow $row) {
-    if($row->getTable()->name != "quests") exit;
+    if($row->getTable()->getName() != "quests") exit;
     foreach($row as $key => $value) {
       $this->$key = $value;
     }

@@ -33,7 +33,7 @@ class Equipment extends BaseEntity {
   protected $worn = false;
   
   function __construct(\Nette\Database\Table\ActiveRow $row) {
-    if($row->getTable()->name != "equipment") exit;
+    if($row->getTable()->getName() != "equipment") exit;
     foreach($row as $key => $value) {
       $this->$key = $value;
     }

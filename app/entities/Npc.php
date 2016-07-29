@@ -29,7 +29,7 @@ class NPC extends BaseEntity {
   protected $pos_y;
   
   function __construct(\Nette\Database\Table\ActiveRow $row) {
-    if($row->getTable()->name != "npcs") exit;
+    if($row->getTable()->getName() != "npcs") exit;
     foreach($row as $key => $value) {
       $this->$key = $value;
     }
