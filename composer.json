@@ -30,6 +30,6 @@
         "kdyby/translation": "2.3.x@dev"
     },
     "require-dev": {
-        "konecnyjakub/mytester": ">=1.0@dev"
+        "konecnyjakub/mytester": "2.0.x@dev"
     }
 }
