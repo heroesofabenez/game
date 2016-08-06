@@ -249,7 +249,8 @@ class GuildPresenter extends BasePresenter {
     $form = new Form;
     $form->setTranslator($this->translator);
     $form->addText("name", "forms.dissolveGuild.nameField.label")
-         ->addRule(Form::EQUAL, "forms.dissolveGuild.nameField.error", $currentName);
+         ->addRule(Form::EQUAL, "forms.dissolveGuild.nameField.error", $currentName)
+         ->setRequired();
     $form->addSubmit("dissolve", "forms.dissolveGuild.dissolveButton.label");
     $form->onSuccess[] = [$this, "dissolveGuildFormSucceeded"];
     return $form;
@@ -281,7 +282,8 @@ class GuildPresenter extends BasePresenter {
     $form->setTranslator($this->translator);
     $form->addText("name", "forms.renameGuild.nameField.label")
          ->addRule(Form::MAX_LENGTH, "forms.renameGuild.nameField.error", 20)
-         ->setDefaultValue($currentName);
+         ->setDefaultValue($currentName)
+         ->setRequired();
     $form->addSubmit("rename", "forms.renameGuild.renameButton.label");
     $form->onSuccess[] = [$this, "renameGuildFormSucceeded"];
     return $form;
