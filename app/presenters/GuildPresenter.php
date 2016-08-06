@@ -225,6 +225,7 @@ class GuildPresenter extends BasePresenter {
       $this->flashMessage($this->translator->translate("errors.guild.cannotRename"));
       $this->redirect("Guild:");
     }
+    $this->template->haveForm = true;
   }
   
   /**
