@@ -11,7 +11,11 @@ use Nette\Application\UI\Form,
     HeroesofAbenez\Model\PlayerNotInGuild,
     HeroesofAbenez\Model\CannotPromoteHigherRanksException,
     HeroesofAbenez\Model\CannotPromoteToGrandmaster,
-    HeroesofAbenez\Model\CannotHaveMoreDeputies;
+    HeroesofAbenez\Model\CannotHaveMoreDeputies,
+    HeroesofAbenez\Forms\CreateGuildFormFactory,
+    HeroesofAbenez\Forms\RenameGuildFormFactory,
+    HeroesofAbenez\Forms\GuildDescriptionFormFactory,
+    HeroesofAbenez\Forms\DissolveGuildFormFactory;
 
   /**
    * Presenter Guild
@@ -110,39 +114,23 @@ class GuildPresenter extends BasePresenter {
   
   /**
    * Creates form for creating guild
-   * @return \Nette\Application\UI\Form
+   * 
+   * @param CreateGuildFormFactory $factory
+   * @return Form
    */
-  protected function createComponentCreateGuildForm() {
-    $form = new Form;
-    $form->setTranslator($this->translator);
-    $form->addText("name", "forms.createGuild.nameField.label")
-         ->setRequired("forms.createGuild.nameField.empty")
-         ->addRule(Form::MAX_LENGTH, "forms.createGuild.nameField.error", 20);
-    $form->addTextArea("description", "forms.createGuild.descriptionField.label")
-         ->addRule(Form::MAX_LENGTH, "forms.createGuild.descriptionField.error", 200);
-    $form->addSubmit("create", "forms.createGuild.createButton.label");
+  protected function createComponentCreateGuildForm(CreateGuildFormFactory $factory) {
+    $form = $factory->create();
     $form->onSuccess[] = [$this, "createGuildFormSucceeded"];
     return $form;
   }
   
   /**
-   * Handles creating guild
-   * @param Nette\Application\UI\Form $form Sent form
-   * @param  Nette\Utils\ArrayHash $values Array vith values
    * @return void
    */
-  function createGuildFormSucceeded(Form $form, $values) {
-    $data = [
-      "name" => $values["name"], "description" => $values["description"]
-    ];
-    try {
-      $this->model->create($data);
-      $this->user->logout();
-      $this->flashMessage($this->translator->translate("messages.guild.created"));
-      $this->redirect("Guild:");
-    } catch(NameInUseException $e) {
-      $this->flashMessage($this->translator->translate("errors.guild.nameTaken"));
-    }
+  function createGuildFormSucceeded() {
+    $this->user->logout();
+    $this->flashMessage($this->translator->translate("messages.guild.created"));
+    $this->redirect("Guild:");
   }
   
   /**
@@ -243,30 +231,19 @@ class GuildPresenter extends BasePresenter {
   /**
    * Creates form for dissolving guild
    *
-   * @return \Nette\Application\UI\Form
-  */
-  protected function createComponentDissolveGuildForm() {
-    $currentName = $this->model->getGuildName($this->user->identity->guild);
-    $form = new Form;
-    $form->setTranslator($this->translator);
-    $form->addText("name", "forms.dissolveGuild.nameField.label")
-         ->addRule(Form::EQUAL, "forms.dissolveGuild.nameField.error", $currentName)
-         ->setRequired();
-    $form->addSubmit("dissolve", "forms.dissolveGuild.dissolveButton.label");
+   * @param DissolveGuildFormFactory $factory
+   * @return Form
+   */
+  protected function createComponentDissolveGuildForm(DissolveGuildFormFactory $factory) {
+    $form = $factory->create();
     $form->onSuccess[] = [$this, "dissolveGuildFormSucceeded"];
     return $form;
   }
   
   /**
-   * Handles dissolving guild
-   *
-   * @param Nette\Application\UI\Form $form Sent form
-   * @param  Nette\Utils\ArrayHash $values Array vith values
    * @return void
   */
-  function dissolveGuildFormSucceeded(Form $form, $values) {
-    $gid = $this->user->identity->guild;
-    $this->model->dissolve($gid);
+  function dissolveGuildFormSucceeded() {
     $this->flashMessage($this->translator->translate("messages.guild.dissolved"));
     $this->user->logout();
     $this->redirect("Guild:noguild");
@@ -275,17 +252,11 @@ class GuildPresenter extends BasePresenter {
   /**
    * Creates form for renaming guild
    *
-   * @return \Nette\Application\UI\Form
-  */
-  protected function createComponentRenameGuildForm() {
-    $currentName = $this->model->getGuildName($this->user->identity->guild);
-    $form = new Form;
-    $form->setTranslator($this->translator);
-    $form->addText("name", "forms.renameGuild.nameField.label")
-         ->addRule(Form::MAX_LENGTH, "forms.renameGuild.nameField.error", 20)
-         ->setDefaultValue($currentName)
-         ->setRequired();
-    $form->addSubmit("rename", "forms.renameGuild.renameButton.label");
+   * @param RenameGuildFormFactory $factory
+   * @return Form
+   */
+  protected function createComponentRenameGuildForm(RenameGuildFormFactory $factory) {
+    $form = $factory->create();
     $form->onSuccess[] = [$this, "renameGuildFormSucceeded"];
     return $form;
   }
@@ -298,15 +269,8 @@ class GuildPresenter extends BasePresenter {
    * @return void
   */
   function renameGuildFormSucceeded(Form $form, $values) {
-    $gid = $this->user->identity->guild;
-    $name = $values["name"];
-    try {
-      $this->model->rename($gid, $name);
-      $this->flashMessage($this->translator->translate("messages.guild.renamed"));
-      $this->redirect("Guild:");
-    } catch(NameInUseException $e) {
-      $this->flashMessage($this->translator->translate("errors.guild.nameTaken"));
-    }
+    $this->flashMessage($this->translator->translate("messages.guild.renamed"));
+    $this->redirect("Guild:");
   }
   
   /**
@@ -395,32 +359,17 @@ class GuildPresenter extends BasePresenter {
    *
    * @return \Nette\Application\UI\Form
   */
-  protected function createComponentGuildDescriptionForm() {
-    $form = new Form;
-    $form->setTranslator($this->translator);
-    $guild = $this->model->guildData($this->user->identity->guild);
-    $form->addTextArea("description", "forms.guildDescription.descriptionField.label")
-         ->setDefaultValue($guild->description);
-    $form->addSubmit("change", "forms.guildDescription.changeButton.label");
+  protected function createComponentGuildDescriptionForm(GuildDescriptionFormFactory $factory) {
+    $form = $factory->create();
     $form->onSuccess[] = [$this, "guildDescriptionFormSucceeded"];
     return $form;
   }
+  
   /**
-   * Handles chaning guild's description
-   *
-   * @param Nette\Application\UI\Form $form Sent form
-   * @param  Nette\Utils\ArrayHash $values Array vith values
    * @return void
   */
-  function guildDescriptionFormSucceeded(Form $form, $values) {
-    $guild = $this->user->identity->guild;
-    $description = $values["description"];
-    try {
-      $this->model->changeDescription($guild, $description);
-      $this->flashMessage($this->translator->translate("messages.guild.descriptionChanged"));
-    } catch(GuildNotFoundException $e) {
-      $this->flashMessage($this->translator->translate("errors.guild.doesNotExist"));
-    }
+  function guildDescriptionFormSucceeded() {
+    $this->flashMessage($this->translator->translate("messages.guild.descriptionChanged"));
     $this->redirect("Guild:");
   }
   

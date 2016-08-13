@@ -26,6 +26,7 @@ class HOAExtension extends \Nette\DI\CompilerExtension {
     $this->addNpc();
     $this->addPostOffice();
     $this->addRanking();
+    $this->addForms();
   }
   
   /**
@@ -145,6 +146,23 @@ class HOAExtension extends \Nette\DI\CompilerExtension {
       ->setImplement(HeroesofAbenez\Ranking\CharactersRankingControlFactory::class);
     $builder->addDefinition($this->prefix("ranking.guilds"))
       ->setImplement(HeroesofAbenez\Ranking\GuildsRankingControlFactory::class);
+  }
+  
+  /**
+   * @return void
+   */
+  protected function addForms() {
+    $builder = $this->getContainerBuilder();
+    $builder->addDefinition($this->prefix("form.createCharacter"))
+      ->setFactory(HeroesofAbenez\Forms\CreateCharacterFormFactory::class);
+    $builder->addDefinition($this->prefix("form.createGuild"))
+      ->setFactory(HeroesofAbenez\Forms\CreateGuildFormFactory::class);
+    $builder->addDefinition($this->prefix("form.renameGuild"))
+      ->setFactory(HeroesofAbenez\Forms\RenameGuildFormFactory::class);
+    $builder->addDefinition($this->prefix("form.guildDescription"))
+      ->setFactory(HeroesofAbenez\Forms\GuildDescriptionFormFactory::class);
+    $builder->addDefinition($this->prefix("form.dissolveGuild"))
+      ->setFactory(HeroesofAbenez\Forms\DissolveGuildFormFactory::class);
   }
   
   /**
