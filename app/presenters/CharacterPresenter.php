@@ -1,7 +1,8 @@
 <?php
 namespace HeroesofAbenez\Presenters;
 
-use Nette\Application\UI\Form;
+use HeroesofAbenez\Forms\CreateCharacterFormFactory,
+    Nette\Application\UI\Form;
 
   /**
    * Presenter Character
@@ -48,45 +49,15 @@ class CharacterPresenter extends BasePresenter {
    * Create form for creating character
    * @return \Nette\Application\UI\Form
    */
-  protected function createComponentCreateCharacterForm() {
-    $form = new Form;
-    $form->setTranslator($this->translator);
-    $form->addText("name", "forms.createCharacter.nameField.label")
-         ->setRequired("forms.createCharacter.nameField.empty")
-         ->addRule(Form::MAX_LENGTH, "forms.createCharacter.nameField.error", 30);
-    $form->addRadioList("gender", "forms.createCharacter.genderRadio.label", [ 1 => "male", 2 => "female"])
-         ->setRequired("forms.createCharacter.genderRadio.error")
-         ->getSeparatorPrototype()->setName(NULL);
-    foreach($this->races as $key => &$value) {
-      $value = "races.$key.name";
-    }
-    $form->addSelect("race", "forms.createCharacter.raceSelect.label", $this->races)
-         ->setPrompt("forms.createCharacter.raceSelect.prompt")
-         ->setRequired("forms.createCharacter.raceSelect.error");
-    $form["race"]->getControlPrototype()->onchange("changeRaceDescription(this.value)");
-    foreach($this->classes as $key => &$value) {
-      $value = "classes.$key.name";
-    }
-    $form->addSelect("class", "forms.createCharacter.classSelect.label", $this->classes)
-         ->setPrompt("forms.createCharacter.classSelect.prompt")
-         ->setRequired("forms.createCharacter.classSelect.error");
-    $form["class"]->getControlPrototype()->onchange("changeClassDescription(this.value)");
-    $form->addSubmit("create", "forms.createCharacter.createButton.label");
-    $form->onSuccess[] = [$this, "createCharacterFormSucceeded"];
+  protected function createComponentCreateCharacterForm(CreateCharacterFormFactory $factory) {
+    $form = $factory->create($this->races, $this->classes);
+    $form->onSuccess[] = function(Form $form, array $values) {
+      $data = $this->userManager->create($values);
+      if(!$data) $this->forward("Character:exists");
+      $this->user->logout();
+      $this->forward("Character:created", ["data" => serialize($data)]);
+    };
     return $form;
-  }
-  
-  /**
-   * Handles creating character
-   * @param \Nette\Application\UI\Form $form Sent form
-   * @param \Nette\Utils\ArrayHash $values Array vith values
-   * @return void
-   */
-  function createCharacterFormSucceeded(Form $form, $values) {
-    $data = $this->userManager->create($values);
-    if(!$data) $this->forward("Character:exists");
-    $this->user->logout();
-    $this->forward("Character:created", ["data" => serialize($data)]);
   }
   
   /**
