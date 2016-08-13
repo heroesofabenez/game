@@ -370,6 +370,7 @@ class Guild {
     if(!$found) throw new GuildNotFoundException;
     $data = ["description" => $description];
     $this->db->query("UPDATE guilds SET ? WHERE id=?", $data, $id);
+    $this->cache->remove("guilds");
   }
   
   /**
