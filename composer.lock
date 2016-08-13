@@ -1486,12 +1486,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/konecnyjakub/mytester.git",
-                "reference": "c87f8d80ca6876fa9877ed9c987d683160c2ac69"
+                "reference": "9bb983bfa886b33200552124b33acf4b13be0eb8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/konecnyjakub/mytester/zipball/c87f8d80ca6876fa9877ed9c987d683160c2ac69",
-                "reference": "c87f8d80ca6876fa9877ed9c987d683160c2ac69",
+                "url": "https://api.github.com/repos/konecnyjakub/mytester/zipball/9bb983bfa886b33200552124b33acf4b13be0eb8",
+                "reference": "9bb983bfa886b33200552124b33acf4b13be0eb8",
                 "shasum": ""
             },
             "require": {
@@ -1542,7 +1542,7 @@
                 "tester",
                 "testing"
             ],
-            "time": "2016-08-06 14:36:06"
+            "time": "2016-08-07 10:09:56"
         }
     ],
     "aliases": [],
