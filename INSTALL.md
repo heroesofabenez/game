@@ -1,18 +1,28 @@
 Installation instructions
 =========================
 
+Requirements
+------------
+Obviously, you need PHP. Version 5.6 or later is required, but 7.0+ is highly recommended. Then you need web server (preferably Apache of Nginx) and sql server (MySql, PgSql, MariaDb, etc.).
+The game uses Composer to manage its dependecies so you have to have it installed. You also need Git if you want to contribute.
+
 Downloading
 -----------
-The game now uses Composer to manage its dependencies so you have to clone/fork the repository and then run Composer to get the dependencies.
+Clone the repository with git clone.
+
+Auto install
+------------
+
+After cloning the repository, you have to install the dependencies, create certain folders, local configuration file and database with basic data. You can do that by hand if you wish but there is a script which will do that for you.
+The scripts is called install.sh (yes, it is only for Unix-like systems). After running it you can skip to part Database.
 
 Creating folders
 ----------------
 Before you can start working (developing/testing) with the game, you have to create these empty folders:
 
 - /images/maps
-- /temp
-- /temp/cache
-- /temp/sessions
+- /app/temp/cache
+- /app/temp/sessions
 - /app/log
 
 . They are used to store generated data and they have to exist else you won't be able to run the application/use certain functions.
@@ -44,6 +54,16 @@ application:
 ```
 
 . They enable our error handling.
+
+Dependencies
+------------
+The game uses Composer to manage its dependencies. If you do not have them installed, run *composer install* to obtain them. Then, you update them on regular basics with *composer update*.
+
+Database
+--------
+The game needs a database to store its data. We use nette/database to access it which is a layer above PDO so any database supported by it should be fine to use. Before you can run the game for first time, you have to create tables and fill the with at least basic data. Folder app/sqls contains definitions of all table and even basic and test data for MySql/MariaDb. So if you are using this server, just run these queries and you are good to go.
+
+After that, do not forget to write access data (name of database, username and password) to file app/config/local.neon so the game will know where to look for its data.
 
 Web server
 ----------
