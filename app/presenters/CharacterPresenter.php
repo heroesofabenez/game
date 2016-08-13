@@ -51,21 +51,13 @@ class CharacterPresenter extends BasePresenter {
    */
   protected function createComponentCreateCharacterForm(CreateCharacterFormFactory $factory) {
     $form = $factory->create($this->races, $this->classes);
-    $form->onSuccess[] = [$this, "createCharacterFormSucceeded"];
+    $form->onSuccess[] = function(Form $form, array $values) {
+      $data = $this->userManager->create($values);
+      if(!$data) $this->forward("Character:exists");
+      $this->user->logout();
+      $this->forward("Character:created", ["data" => serialize($data)]);
+    };
     return $form;
-  }
-  
-  /**
-   * Handles creating character
-   * @param \Nette\Application\UI\Form $form Sent form
-   * @param \Nette\Utils\ArrayHash $values Array vith values
-   * @return void
-   */
-  function createCharacterFormSucceeded(Form $form, $values) {
-    $data = $this->userManager->create($values);
-    if(!$data) $this->forward("Character:exists");
-    $this->user->logout();
-    $this->forward("Character:created", ["data" => serialize($data)]);
   }
   
   /**

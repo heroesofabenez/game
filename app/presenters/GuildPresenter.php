@@ -120,17 +120,12 @@ class GuildPresenter extends BasePresenter {
    */
   protected function createComponentCreateGuildForm(CreateGuildFormFactory $factory) {
     $form = $factory->create();
-    $form->onSuccess[] = [$this, "createGuildFormSucceeded"];
+    $form->onSuccess[] = function() {
+      $this->user->logout();
+      $this->flashMessage($this->translator->translate("messages.guild.created"));
+      $this->redirect("Guild:");
+    };
     return $form;
-  }
-  
-  /**
-   * @return void
-   */
-  function createGuildFormSucceeded() {
-    $this->user->logout();
-    $this->flashMessage($this->translator->translate("messages.guild.created"));
-    $this->redirect("Guild:");
   }
   
   /**
@@ -236,17 +231,12 @@ class GuildPresenter extends BasePresenter {
    */
   protected function createComponentDissolveGuildForm(DissolveGuildFormFactory $factory) {
     $form = $factory->create();
-    $form->onSuccess[] = [$this, "dissolveGuildFormSucceeded"];
+    $form->onSuccess[] = function() {
+      $this->flashMessage($this->translator->translate("messages.guild.dissolved"));
+      $this->user->logout();
+      $this->redirect("Guild:noguild");
+    };
     return $form;
-  }
-  
-  /**
-   * @return void
-  */
-  function dissolveGuildFormSucceeded() {
-    $this->flashMessage($this->translator->translate("messages.guild.dissolved"));
-    $this->user->logout();
-    $this->redirect("Guild:noguild");
   }
   
   /**
@@ -257,20 +247,11 @@ class GuildPresenter extends BasePresenter {
    */
   protected function createComponentRenameGuildForm(RenameGuildFormFactory $factory) {
     $form = $factory->create();
-    $form->onSuccess[] = [$this, "renameGuildFormSucceeded"];
+    $form->onSuccess[] = function() {
+      $this->flashMessage($this->translator->translate("messages.guild.renamed"));
+      $this->redirect("Guild:");
+    };
     return $form;
-  }
-  
-  /**
-   * Handles renaming guild
-   *
-   * @param Nette\Application\UI\Form $form Sent form
-   * @param  Nette\Utils\ArrayHash $values Array vith values
-   * @return void
-  */
-  function renameGuildFormSucceeded(Form $form, $values) {
-    $this->flashMessage($this->translator->translate("messages.guild.renamed"));
-    $this->redirect("Guild:");
   }
   
   /**
@@ -361,16 +342,11 @@ class GuildPresenter extends BasePresenter {
   */
   protected function createComponentGuildDescriptionForm(GuildDescriptionFormFactory $factory) {
     $form = $factory->create();
-    $form->onSuccess[] = [$this, "guildDescriptionFormSucceeded"];
+    $form->onSuccess[] = function() {
+      $this->flashMessage($this->translator->translate("messages.guild.descriptionChanged"));
+      $this->redirect("Guild:");
+    };
     return $form;
-  }
-  
-  /**
-   * @return void
-  */
-  function guildDescriptionFormSucceeded() {
-    $this->flashMessage($this->translator->translate("messages.guild.descriptionChanged"));
-    $this->redirect("Guild:");
   }
   
   /**
