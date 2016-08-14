@@ -185,7 +185,7 @@ class CannotDeclineRequestException extends AccessDenied {
   
 }
 
-class RequestAlreadyHandledException extends \Exception {
+class RequestAlreadyHandledException extends InvalidStateException {
   
 }
 

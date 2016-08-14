@@ -327,7 +327,7 @@ class NotEnoughExperiencesException extends AccessDenied {
   
 }
 
-class InvalidStatException extends \RuntimeException {
+class InvalidStatException extends \OutOfBoundsException {
   
 }
 

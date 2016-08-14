@@ -90,7 +90,7 @@ class CombatHelper {
   }
 }
 
-class OpponentNotFoundException extends \Exception {
+class OpponentNotFoundException extends RecordNotFoundException {
   
 }
 ?>

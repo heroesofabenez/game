@@ -199,7 +199,7 @@ class Skills {
   }
 }
 
-class InvalidSkillTypeException extends \RuntimeException {
+class InvalidSkillTypeException extends \OutOfBoundsException {
   
 }
 

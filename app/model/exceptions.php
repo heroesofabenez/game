@@ -5,7 +5,7 @@ class RecordNotFoundException extends \Exception {
   
 }
 
-class AccessDenied extends \Exception {
+class AccessDenied extends \RuntimeException {
   
 }
 
@@ -17,7 +17,7 @@ class HigherRankException extends AccessDenied {
   
 }
 
-class NameInUseException extends \Exception {
+class NameInUseException extends AccessDenied {
   
 }
 
