@@ -1,0 +1,12 @@
+parameters:
+    application:
+        server: sTest
+database:
+    default:
+        dsn: "mysql:host=localhost;dbname=heroesofabenez"
+        user: root
+        password: root
+tracy:
+    email: "jakub.konecny2@centrum.cz"
+php:
+    date.timezone: Europe/Prague

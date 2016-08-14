@@ -29,22 +29,7 @@ Before you can start working (developing/testing) with the game, you have to cre
 
 Local configuration
 -------------------
-After that, you need to create file /app/config/local.neon with local settings for database and application. The needed minimum is (just an example):
-
-```
-parameters:
-    application:
-        server: sTest
-database:
-    default:
-        dsn: "mysql:host=localhost;dbname=heroesofabenez"
-        user: heroesofabenez
-        password: qwerty
-tracy:
-    email: "jakub.konecny2@centrum.cz"
-php:
-    date.timezone: Europe/Prague
-```
+After that, you need to create file /app/config/local.neon with local settings for database and application. Use app/config/local.sample.neon as template.
 
 On live servers add the following lines at the end of the file:
 ```

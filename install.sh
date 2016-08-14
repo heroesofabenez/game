@@ -1,16 +1,4 @@
-echo 'parameters:
-    application:
-        server: sTest
-database:
-    default:
-        dsn: "mysql:host=localhost;dbname=heroesofabenez"
-        user: heroesofabenez
-        password: heroesofabenez
-        explain: false
-tracy:
-    email: "jakub.konecny2@centrum.cz"
-php:
-    date.timezone: Europe/Prague' > app/config/local.neon
+cp app/config/local.sample.neon app/config/local.neon
 
 mkdir images
 mkdir images/maps
