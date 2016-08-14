@@ -304,11 +304,11 @@ class Guild {
    * 
    * @return void
    * @throws NotInGuildException
-   * @throws GrandmasterCannotLeaveGuild
+   * @throws GrandmasterCannotLeaveGuildException
   */
   function leave() {
     if($this->user->identity->guild === 0) throw new NotInGuildException;
-    if($this->user->isInRole("grandmaster")) throw new GrandmasterCannotLeaveGuild;
+    if($this->user->isInRole("grandmaster")) throw new GrandmasterCannotLeaveGuildException;
     $data = [
       "guild" => 0, "guildrank" => NULL
     ];
@@ -427,7 +427,7 @@ class CannotHaveMoreDeputies extends AccessDenied {
   
 }
 
-class GrandmasterCannotLeaveGuild extends AccessDenied {
+class GrandmasterCannotLeaveGuildException extends AccessDenied {
   
 }
 ?>

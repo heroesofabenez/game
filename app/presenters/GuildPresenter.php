@@ -5,7 +5,7 @@ use Nette\Application\UI\Form,
     HeroesofAbenez\Model\NameInUseException,
     HeroesofAbenez\Model\GuildNotFoundException,
     HeroesofAbenez\Model\NotInGuildException,
-    HeroesofAbenez\Model\GrandmasterCannotLeaveGuild,
+    HeroesofAbenez\Model\GrandmasterCannotLeaveGuildException,
     HeroesofAbenez\Model\MissingPermissionsException,
     HeroesofAbenez\Model\PlayerNotFoundException,
     HeroesofAbenez\Model\PlayerNotInGuild,
@@ -174,7 +174,7 @@ class GuildPresenter extends BasePresenter {
     } catch(NotInGuildException $e) {
       $this->flashMessage($this->translator->translate("errors.guild.notInGuild"));
       $this->redirect("Guild:");
-    } catch(GrandmasterCannotLeaveGuild $e) {
+    } catch(GrandmasterCannotLeaveGuildException $e) {
       $this->flashMessage($this->translator->translate("errors.guild.grandmasterCannotLeave"));
       $this->redirect("Guild:");
     }
