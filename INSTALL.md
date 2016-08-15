@@ -3,7 +3,7 @@ Installation instructions
 
 Requirements
 ------------
-Obviously, you need PHP. Version 5.6 or later is required, but 7.0+ is highly recommended. Then you need web server (preferably Apache of Nginx) and sql server (MySql, PgSql, MariaDb, etc.).
+Obviously, you need PHP. Version 5.6 or later is required, but 7.0+ is highly recommended. Then you need web server (preferably Apache or Nginx) and sql server (MySql, PgSql, MariaDb, etc.).
 The game uses Composer to manage its dependecies so you have to have it installed. You also need Git if you want to contribute.
 
 Downloading
@@ -13,7 +13,7 @@ Clone the repository with git clone.
 Auto install
 ------------
 
-After cloning the repository, you have to install the dependencies, create certain folders, local configuration file and database with basic data. You can do that by hand if you wish but there is a script which will do that for you.
+After cloning the repository, you have to install the dependencies and create certain folders, local configuration file and database with basic data. You can do that by hand if you wish but there is a script which will do that for you.
 The scripts is called install.sh (yes, it is only for Unix-like systems). After running it you can skip to part Database.
 
 Creating folders
@@ -48,7 +48,7 @@ Database
 --------
 The game needs a database to store its data. We use nette/database to access it which is a layer above PDO so any database supported by it should be fine to use. Before you can run the game for first time, you have to create tables and fill the with at least basic data. Folder app/sqls contains definitions of all table and even basic and test data for MySql/MariaDb. So if you are using this server, just run these queries and you are good to go.
 
-After that, do not forget to write access data (name of database, username and password) to file app/config/local.neon so the game will know where to look for its data.
+After that, do not forget to write access data (name of database, username and password) to file app/config/local.neon so the game will know where to look for data.
 
 Web server
 ----------
