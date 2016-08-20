@@ -94,12 +94,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Kdyby/Translation.git",
-                "reference": "0087736a1cfd599449c455843c30b011b039e4e5"
+                "reference": "8be1a5b412762e7e616a99df8facb19f0976537c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Kdyby/Translation/zipball/0087736a1cfd599449c455843c30b011b039e4e5",
-                "reference": "0087736a1cfd599449c455843c30b011b039e4e5",
+                "url": "https://api.github.com/repos/Kdyby/Translation/zipball/8be1a5b412762e7e616a99df8facb19f0976537c",
+                "reference": "8be1a5b412762e7e616a99df8facb19f0976537c",
                 "shasum": ""
             },
             "require": {
@@ -184,7 +184,7 @@
                 "nette",
                 "translation"
             ],
-            "time": "2016-07-07 20:51:34"
+            "time": "2016-08-20 13:48:41"
         },
         {
             "name": "latte/latte",
@@ -1486,12 +1486,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/konecnyjakub/mytester.git",
-                "reference": "9bb983bfa886b33200552124b33acf4b13be0eb8"
+                "reference": "260abd6e4c4249f1d2869e90113d48bc992cfae1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/konecnyjakub/mytester/zipball/9bb983bfa886b33200552124b33acf4b13be0eb8",
-                "reference": "9bb983bfa886b33200552124b33acf4b13be0eb8",
+                "url": "https://api.github.com/repos/konecnyjakub/mytester/zipball/260abd6e4c4249f1d2869e90113d48bc992cfae1",
+                "reference": "260abd6e4c4249f1d2869e90113d48bc992cfae1",
                 "shasum": ""
             },
             "require": {
@@ -1500,13 +1500,16 @@
                 "tracy/tracy": "~2.4"
             },
             "require-dev": {
+                "nette/bootstrap": "^2.4",
                 "nette/di": "~2.4",
                 "nette/robot-loader": "~2.4"
             },
             "suggest": {
-                "nette/di": "",
                 "nette/robot-loader": "Needed for automated tests runner."
             },
+            "bin": [
+                "src/mytester"
+            ],
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -1542,7 +1545,7 @@
                 "tester",
                 "testing"
             ],
-            "time": "2016-08-07 10:09:56"
+            "time": "2016-08-20 15:11:30"
         }
     ],
     "aliases": [],

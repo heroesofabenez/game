@@ -6,5 +6,6 @@ require WWW_DIR . "/vendor/autoload.php";
 Tracy\Debugger::enable(null, APP_DIR . "/log");
 
 $container = require APP_DIR . "/bootstrap.php";
-$container->getService("mytester.runner")->execute();
+$result = $container->getService("mytester.runner")->execute();
+exit((int) $result);
 ?>
