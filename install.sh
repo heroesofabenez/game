@@ -7,6 +7,6 @@ mkdir app/temp/cache
 mkdir app/temp/sessions
 mkdir app/log
 
-composer install
+composer install -a
 
 exit 0
