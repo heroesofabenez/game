@@ -58,6 +58,23 @@ class CombatHelper {
   }
   
   /**
+   * @param array $data
+   * @param array $skills
+   * @return void
+   */
+  protected function getArenaNpcSkillsLevels(array $data, array &$skills) {
+    if($data["level"] < 2) $skills = [$skills[0]];
+    $skillPoints = $data["level"];
+    for($i = 1; $skillPoints > 0; $i++) {
+      foreach($skills as $skill) {
+        if($skillPoints < 1) break;
+        if($skill->level + 1 <= $skill->skill->levels) $skill->level++;
+        $skillPoints--;
+      }
+    }
+  }
+  
+  /**
    * Get data for specified npc
    * 
    * @param int $id Npc's id
@@ -71,13 +88,14 @@ class CombatHelper {
     $skills = $equimpent = [];
     $skillRows = $this->db->query("SELECT id FROM skills_attacks WHERE needed_class={$row["occupation"]} AND needed_level<={$row["level"]}");
     foreach($skillRows as $skillRow) {
-      $skills[] = new CharacterSkillAttack(new SkillAttack($this->db->table("skills_attacks")->get($skillRow->id)), 1);
+      $skills[] = new CharacterSkillAttack(new SkillAttack($this->db->table("skills_attacks")->get($skillRow->id)), 0);
      }
     unset($skillRow);
     $skillRows = $this->db->query("SELECT id FROM skills_specials WHERE needed_class={$row["occupation"]} AND needed_level<={$row["level"]}");
     foreach($skillRows as $skillRow) {
-      $skills[] = new CharacterSkillSpecial(new SkillSpecial($this->db->table("skills_specials")->get($skillRow->id)), 1);
+      $skills[] = new CharacterSkillSpecial(new SkillSpecial($this->db->table("skills_specials")->get($skillRow->id)), 0);
     }
+    $this->getArenaNpcSkillsLevels($row, $skills);
     if($row["weapon"]) {
       $weapon = $this->equipmentModel->view($row["weapon"]);
       if($weapon) {

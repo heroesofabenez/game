@@ -21,6 +21,13 @@ abstract class CharacterSkill extends BaseEntity {
   }
   
   /**
+   * @param int $level
+   */
+  function setLevel($level) {
+    $this->level = (int) $level;
+  }
+  
+  /**
    * @return string
    */
   function getSkillType() {
