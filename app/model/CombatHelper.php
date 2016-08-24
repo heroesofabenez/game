@@ -32,6 +32,18 @@ class CombatHelper {
   }
   
   /**
+   * Get initiative formula for given class
+   * 
+   * @param int $classId
+   * @return string
+   */
+  function getInitiativeFormula($classId) {
+    $class = $this->profileModel->getClass($classId);
+    if(!$class) return "0";
+    else return $class->initiative;
+  }
+  
+  /**
    * Get data for specified player
    * 
    * @param int $id Player's id
@@ -41,6 +53,7 @@ class CombatHelper {
   function getPlayer($id) {
     $data = $this->profileModel->view($id);
     if(!$data) throw new OpponentNotFoundException;
+    $data["initiative_formula"] = $this->getInitiativeFormula($data["occupation"]);
     $pets = $equipment = [];
     if($data["pet"]) $pets[] = $data["pet"];
     unset($data["pet"]);
@@ -85,6 +98,7 @@ class CombatHelper {
     $row = (array) $this->db->query("SELECT * FROM pve_arena_opponents WHERE id=$id")->fetch();
     if(count($row) === 1) throw new OpponentNotFoundException;
     $row["id"] = "pveArenaNpc" . $row["id"];
+    $row["initiative_formula"] = $this->getInitiativeFormula($row["occupation"]);
     $skills = $equimpent = [];
     $skillRows = $this->db->query("SELECT id FROM skills_attacks WHERE needed_class={$row["occupation"]} AND needed_level<={$row["level"]}");
     foreach($skillRows as $skillRow) {
