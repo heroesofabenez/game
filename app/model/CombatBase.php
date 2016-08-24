@@ -383,6 +383,9 @@ class CombatBase {
    */
   function mainStage() {
     $characters = array_merge($this->team1->usableMembers, $this->team2->usableMembers);
+    usort($characters, function($a, $b) {
+      return -1 * strcmp($a->initiative, $b->initiative);
+    });
     foreach($characters as $character) {
       if($character->hitpoints < 1) continue;
       if(in_array($character, $this->findHealers())) {
