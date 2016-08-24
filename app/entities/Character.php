@@ -66,6 +66,8 @@ class Character extends BaseEntity {
   protected $initiative = 0;
   /** @var int */
   protected $base_initiative = 0;
+  /** @var string */
+  protected $initiative_formula;
   /** @var int */
   protected $defense = 0;
   /** @var int */
@@ -112,7 +114,7 @@ class Character extends BaseEntity {
    */
   protected function setStats(array $stats) {
     $required_stats = ["id", "name", "occupation", "level", "strength", "dexterity", "constitution", "intelligence", "charisma"];
-    $all_stats = array_merge($required_stats, ["race", "specialization", "gender", "experience"]);
+    $all_stats = array_merge($required_stats, ["race", "specialization", "gender", "experience", "initiative_formula"]);
     foreach($required_stats as $value) {
       if(!isset($stats[$value])) exit("Not passed all needed elements for parameter stats for method Character::__construct. Missing at least $value.");
     }
@@ -377,6 +379,33 @@ case "equipment":
     }
     $this->recalculateSecondaryStats();
     $this->stunned = $stunned;
+  }
+  
+  /**
+   * Calculate character's initiative
+   *
+   * @return void
+   * @todo maybe use a regular expression
+   */
+  function calculateInitiative() {
+    $result = 0;
+    $formula = $this->initiative_formula;
+    $formula = str_replace(["INT", "DEX"], [$this->intelligence, $this->dexterity], $formula);
+    $pos = strpos($formula, "d");
+    $dices = [(int) substr($formula, 0, $pos), (int) substr($formula, $pos +1, strpos($formula, "+") - $pos - 1)];
+    for($i = 1; $i <= $dices[0]; $i++) {
+      $result += rand(1, $dices[1]);
+    }
+    $this->initiative = $result;
+  }
+  
+  /**
+   * Reset character's initiative
+   *
+   * @return void
+   */
+  function resetInitiative() {
+    $this->initiative = $this->base_initiative;
   }
 }
 ?>

@@ -73,6 +73,7 @@ class CombatBase {
     $this->onRoundStart[] = [$this, "logRoundNumber"];
     $this->onRound[] = [$this, "mainStage"];
     $this->onRoundEnd[] = [$this, "decreaseSkillsCooldowns"];
+    $this->onRoundEnd[] = [$this, "resetInitiative"];
     $this->onAttack[] = [$this, "attackHarm"];
     $this->onAttack[] = [$this, "logDamage"];
     $this->onAttack[] = [$this, "logResults"];
@@ -272,6 +273,19 @@ class CombatBase {
      	if(is_int($effect->duration)) { $effect->duration--; }
       }
       $character->recalculateStats();
+      if($character->hitpoints > 0) $character->calculateInitiative();
+    }
+  }
+  
+  /**
+   * Reset characters' initiative
+   * 
+   * @return  void
+   */
+  function resetInitiative() {
+    $characters = array_merge($this->team1->items, $this->team2->items);
+    foreach($characters as $character) {
+      $character->resetInitiative();
     }
   }
   
