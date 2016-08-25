@@ -1,0 +1,40 @@
+image: php:5.6
+
+services:
+- mysql
+
+cache:
+  paths:
+  - vendor/
+
+before_script:
+- cp app/config/local.sample.neon app/config/local.neon
+
+- mkdir images
+- mkdir images/maps
+- mkdir temp
+- mkdir temp/cache
+- mkdir temp/sessions
+- mkdir app/log
+
+- apt-get update -yqq
+- apt-get install git -yqq
+- docker-php-ext-install pdo_mysql
+- curl -sS https://getcomposer.org/installer | php
+- php composer.phar install --no-interaction --prefer-source
+
+- php setup_ci.php
+
+variables:
+  MYSQL_DATABASE: heroesofabenez
+  MYSQL_ROOT_PASSWORD: root
+
+test:mysql:
+  script:
+  - ./vendor/bin/parallel-lint app tests -e php,phpt
+
+test:php7:mysql:
+  image: php:7
+  script:
+  - ./vendor/bin/parallel-lint app tests -e php,phpt
+

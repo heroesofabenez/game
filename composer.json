@@ -30,6 +30,8 @@
         "kdyby/translation": "2.3.x@dev"
     },
     "require-dev": {
-        "konecnyjakub/mytester": "2.0.x@dev"
+        "konecnyjakub/mytester": "2.0.x@dev",
+        "jakub-onderka/php-parallel-lint": "^0.9.2",
+        "jakub-onderka/php-console-highlighter": "^0.3.2"
     }
 }
