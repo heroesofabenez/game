@@ -103,7 +103,7 @@ class CombatHelper {
     $skillRows = $this->db->query("SELECT id FROM skills_attacks WHERE needed_class={$row["occupation"]} AND needed_level<={$row["level"]}");
     foreach($skillRows as $skillRow) {
       $skills[] = new CharacterSkillAttack(new SkillAttack($this->db->table("skills_attacks")->get($skillRow->id)), 0);
-     }
+    }
     unset($skillRow);
     $skillRows = $this->db->query("SELECT id FROM skills_specials WHERE needed_class={$row["occupation"]} AND needed_level<={$row["level"]}");
     foreach($skillRows as $skillRow) {

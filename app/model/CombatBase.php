@@ -270,7 +270,7 @@ class CombatBase {
     $characters = array_merge($this->team1->items, $this->team2->items);
     foreach($characters as $character) {
       foreach($character->effects as $effect) {
-     	if(is_int($effect->duration)) { $effect->duration--; }
+        if(is_int($effect->duration)) { $effect->duration--; }
       }
       $character->recalculateStats();
       if($character->hitpoints > 0) $character->calculateInitiative();
@@ -415,7 +415,7 @@ class CombatBase {
    * 
    * @return int Winning team/0
    */
-  protected function start_round() {
+  protected function startRound() {
     $this->onRoundStart();
     if($this->getWinner() > 0) return $this->getWinner();
     return 0;
@@ -426,7 +426,7 @@ class CombatBase {
    * 
    * @return void
    */
-  protected function do_round() {
+  protected function doRound() {
     $this->onRound();
     
   }
@@ -436,7 +436,7 @@ class CombatBase {
    * 
    * @return int Winning team/0
    */
-  protected function end_round() {
+  protected function endRound() {
     $this->onRoundEnd();
     if($this->getWinner() > 0) return $this->getWinner();
     return 0;
@@ -451,9 +451,9 @@ class CombatBase {
     if(!$this->team1) throw new InvalidStateException("Teams are not set.");
     $this->onCombatStart();
     while($this->round <= $this->round_limit) {
-      if($this->start_round() > 0) break;
-      $this->do_round();
-      if($this->end_round() > 0) break;
+      if($this->startRound() > 0) break;
+      $this->doRound();
+      if($this->endRound() > 0) break;
     }
     $this->onCombatEnd();
     return $this->getWinner();

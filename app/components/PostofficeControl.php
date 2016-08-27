@@ -124,7 +124,7 @@ class PostofficeControl extends \Nette\Application\UI\Control {
     try {
       $message = $this->message($id);
       foreach($message as $key => $value) {
-       $template->$key = $value;
+        $template->$key = $value;
       }
     } catch(CannotShowMessageException $e) {
       $this->presenter->forward("cannotshow");

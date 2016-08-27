@@ -43,31 +43,31 @@ class Request {
   function canShow($requestId) {
     $request = $this->db->table("requests")->get($requestId);
     switch($request->type) {
-  case "friendship":
-  case "group_join":
-    if($request->from == $this->user->id OR $request->to == $this->user->id) return true;
-    else return false;
-    break;
-  case "guild_join":
-    if($request->to == $this->user->id) return true;
-    $leader = $this->db->table("characters")->get($request->from);
-    $guild = $leader->guild;
-    if($this->user->identity->guild == $guild AND $this->user->isAllowed("guild", "invite")) {
-      return true;
-    } else {
-      return false;
-    }
-    break;
-  case "guild_app":
-    if($request->from == $this->user->id) return true;
-    $leader = $this->db->table("characters")->get($request->to);
-    $guild = $leader->guild;
-    if($this->user->identity->guild == $guild AND $this->user->isAllowed("guild", "invite")) {
-      return true;
-    } else {
-      return false;
-    }
-    break;
+      case "friendship":
+      case "group_join":
+        if($request->from == $this->user->id OR $request->to == $this->user->id) return true;
+        else return false;
+        break;
+      case "guild_join":
+        if($request->to == $this->user->id) return true;
+        $leader = $this->db->table("characters")->get($request->from);
+        $guild = $leader->guild;
+        if($this->user->identity->guild == $guild AND $this->user->isAllowed("guild", "invite")) {
+          return true;
+        } else {
+          return false;
+        }
+        break;
+      case "guild_app":
+        if($request->from == $this->user->id) return true;
+        $leader = $this->db->table("characters")->get($request->to);
+        $guild = $leader->guild;
+        if($this->user->identity->guild == $guild AND $this->user->isAllowed("guild", "invite")) {
+          return true;
+        } else {
+          return false;
+        }
+        break;
     }
   }
   
@@ -129,23 +129,23 @@ class Request {
     if(!$this->canChange($id)) throw new CannotAcceptRequestException;
     if($request->status !== "new") throw new RequestAlreadyHandledException;
     switch($request->type) {
-  case "friendship":
+      case "friendship":
     throw new NotImplementedException;
-    break;
-  case "group_join":
+      break;
+      case "group_join":
     throw new NotImplementedException;
+      break;
+      case "guild_app":
+        $uid = $this->profileModel->getCharacterId($request->from);
+        $uid2 = $this->profileModel->getCharacterId($request->to);
+        $gid = $this->profileModel->getCharacterGuild($uid2);
+        $this->guildModel->join($uid, $gid);
     break;
-  case "guild_app":
-    $uid = $this->profileModel->getCharacterId($request->from);
-    $uid2 = $this->profileModel->getCharacterId($request->to);
-    $gid = $this->profileModel->getCharacterGuild($uid2);
-    $this->guildModel->join($uid, $gid);
-    break;
-  case "guild_join":
-    $uid = $this->profileModel->getCharacterId($request->to);
-    $uid2 = $this->profileModel->getCharacterId($request->from);
-    $gid = $this->profileModel->getCharacterGuild($uid2);
-    $this->guildModel->join($uid, $gid);
+      case "guild_join":
+        $uid = $this->profileModel->getCharacterId($request->to);
+        $uid2 = $this->profileModel->getCharacterId($request->from);
+        $gid = $this->profileModel->getCharacterGuild($uid2);
+        $this->guildModel->join($uid, $gid);
     break;
     }
     $data2 = ["status" => "accepted"];

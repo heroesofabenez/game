@@ -121,24 +121,24 @@ class Character extends BaseEntity {
     foreach($stats as $key => $value) {
       if(in_array($key, $all_stats)) {
         switch($key) {
-case "name":
-  $this->$key = (string) $value;
+          case "name":
+            $this->$key = (string) $value;
   break;
-case "strength":
-case "dexterity":
-case "constitution":
-case "constitution":
-case "intelligence":
-case "charisma":
-  if(!is_numeric($value)) {
-    exit("Invalid value for \$stats[\"$key\"] passed to method Character::__construct. Expected integer.");
-  } else {
-    $this->$key = (int) $value;
-    $this->{"base_" . $key} = (int) $value;
-  }
+          case "strength":
+          case "dexterity":
+          case "constitution":
+          case "constitution":
+          case "intelligence":
+          case "charisma":
+            if(!is_numeric($value)) {
+              exit("Invalid value for \$stats[\"$key\"] passed to method Character::__construct. Expected integer.");
+            } else {
+              $this->$key = (int) $value;
+              $this->{"base_" . $key} = (int) $value;
+            }
   break;
-default:
-  $this->$key = $value;
+          default:
+            $this->$key = $value;
   break;
         }
       } else { continue; }
@@ -302,14 +302,14 @@ default:
     foreach($this->equipment as $item) {
       if(!$item->worn OR $item->slot != "weapon") continue;
       switch($item->type) {
-case "staff":
-  $stat = "intelligence";
+        case "staff":
+          $stat = "intelligence";
   break;
-case "club":
-  $stat = "constitution";
-case "bow":
-case "throwing knife":
-  $stat = "dexterity";
+        case "club":
+          $stat = "constitution";
+        case "bow":
+        case "throwing knife":
+          $stat = "dexterity";
   break;
       }
     }
@@ -356,12 +356,12 @@ case "throwing knife":
         continue;
       }
       switch($effect->source) {
-case "pet":
-case "skill":
-  if($type != "stun") $bonus_value = $$stat / 100 * $effect->value;
+        case "pet":
+        case "skill":
+          if($type != "stun") $bonus_value = $$stat / 100 * $effect->value;
   break;
-case "equipment":
-  if($type != "stun") $bonus_value = $effect->value;
+        case "equipment":
+          if($type != "stun") $bonus_value = $effect->value;
   break;
       }
       if($type == "buff") { $$stat += $bonus_value; }

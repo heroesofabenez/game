@@ -45,7 +45,7 @@ abstract class BaseEntity {
    * 
    * @return array
    */
-  function __toArray() {
+  function toArray() {
     $return = [];
     foreach($this as $key => $value) {
       $return[$key] = $value;
