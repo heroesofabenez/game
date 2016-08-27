@@ -7,7 +7,7 @@ const APP_DIR = WWW_DIR . "/app";
 require WWW_DIR . "/vendor/autoload.php";
 Tracy\Debugger::enable(null, APP_DIR . "/log");
 
-$filename = WWW_DIR . "/app/config/local.neon";
+$filename = APP_DIR . "/config/local.neon";
 $cfg = Neon::decode(file_get_contents($filename));
 $cfg["database"]["default"]["dsn"] = "mysql:host=mysql;dbname=heroesofabenez";
 unlink($filename);
