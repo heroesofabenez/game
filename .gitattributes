@@ -4,3 +4,4 @@
 .gitlab-ci.yml  export-ignore
 apigen.neon     export-ignore
 setup_ci.php	export-ignore
+ruleset.xml	export-ignore

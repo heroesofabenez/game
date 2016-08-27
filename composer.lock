@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "6f906d75ce1ac4585822d0a924da86a6",
-    "content-hash": "5b21f0e3fd09a5c0c027b97899b33350",
+    "hash": "dfe2c08bc9e91d4645c120e925e05480",
+    "content-hash": "a0b88359a9b61f1764f0523b431f6c19",
     "packages": [
         {
             "name": "kdyby/autowired",
@@ -13,12 +13,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Kdyby/Autowired.git",
-                "reference": "f590a69e79c39239533318fa3c8a8362fda2cba5"
+                "reference": "a81bf753d4e2954732dc0d2797a737140003e4cc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Kdyby/Autowired/zipball/f590a69e79c39239533318fa3c8a8362fda2cba5",
-                "reference": "f590a69e79c39239533318fa3c8a8362fda2cba5",
+                "url": "https://api.github.com/repos/Kdyby/Autowired/zipball/a81bf753d4e2954732dc0d2797a737140003e4cc",
+                "reference": "a81bf753d4e2954732dc0d2797a737140003e4cc",
                 "shasum": ""
             },
             "require": {
@@ -86,7 +86,7 @@
                 "kdyby",
                 "nette"
             ],
-            "time": "2016-07-08 22:15:57"
+            "time": "2016-08-26 06:30:06"
         },
         {
             "name": "kdyby/translation",
@@ -94,12 +94,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Kdyby/Translation.git",
-                "reference": "8be1a5b412762e7e616a99df8facb19f0976537c"
+                "reference": "f14d9c0755ee8fd9118a741687e8392b0e82780d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Kdyby/Translation/zipball/8be1a5b412762e7e616a99df8facb19f0976537c",
-                "reference": "8be1a5b412762e7e616a99df8facb19f0976537c",
+                "url": "https://api.github.com/repos/Kdyby/Translation/zipball/f14d9c0755ee8fd9118a741687e8392b0e82780d",
+                "reference": "f14d9c0755ee8fd9118a741687e8392b0e82780d",
                 "shasum": ""
             },
             "require": {
@@ -184,7 +184,7 @@
                 "nette",
                 "translation"
             ],
-            "time": "2016-08-20 13:48:41"
+            "time": "2016-08-26 06:34:41"
         },
         {
             "name": "latte/latte",
@@ -1679,6 +1679,84 @@
                 "testing"
             ],
             "time": "2016-08-25 19:28:36"
+        },
+        {
+            "name": "squizlabs/php_codesniffer",
+            "version": "2.6.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/squizlabs/PHP_CodeSniffer.git",
+                "reference": "4edb770cb853def6e60c93abb088ad5ac2010c83"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/squizlabs/PHP_CodeSniffer/zipball/4edb770cb853def6e60c93abb088ad5ac2010c83",
+                "reference": "4edb770cb853def6e60c93abb088ad5ac2010c83",
+                "shasum": ""
+            },
+            "require": {
+                "ext-simplexml": "*",
+                "ext-tokenizer": "*",
+                "ext-xmlwriter": "*",
+                "php": ">=5.1.2"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.0"
+            },
+            "bin": [
+                "scripts/phpcs",
+                "scripts/phpcbf"
+            ],
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.x-dev"
+                }
+            },
+            "autoload": {
+                "classmap": [
+                    "CodeSniffer.php",
+                    "CodeSniffer/CLI.php",
+                    "CodeSniffer/Exception.php",
+                    "CodeSniffer/File.php",
+                    "CodeSniffer/Fixer.php",
+                    "CodeSniffer/Report.php",
+                    "CodeSniffer/Reporting.php",
+                    "CodeSniffer/Sniff.php",
+                    "CodeSniffer/Tokens.php",
+                    "CodeSniffer/Reports/",
+                    "CodeSniffer/Tokenizers/",
+                    "CodeSniffer/DocGenerators/",
+                    "CodeSniffer/Standards/AbstractPatternSniff.php",
+                    "CodeSniffer/Standards/AbstractScopeSniff.php",
+                    "CodeSniffer/Standards/AbstractVariableSniff.php",
+                    "CodeSniffer/Standards/IncorrectPatternException.php",
+                    "CodeSniffer/Standards/Generic/Sniffs/",
+                    "CodeSniffer/Standards/MySource/Sniffs/",
+                    "CodeSniffer/Standards/PEAR/Sniffs/",
+                    "CodeSniffer/Standards/PSR1/Sniffs/",
+                    "CodeSniffer/Standards/PSR2/Sniffs/",
+                    "CodeSniffer/Standards/Squiz/Sniffs/",
+                    "CodeSniffer/Standards/Zend/Sniffs/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Greg Sherwood",
+                    "role": "lead"
+                }
+            ],
+            "description": "PHP_CodeSniffer tokenizes PHP, JavaScript and CSS files and detects violations of a defined set of coding standards.",
+            "homepage": "http://www.squizlabs.com/php-codesniffer",
+            "keywords": [
+                "phpcs",
+                "standards"
+            ],
+            "time": "2016-07-13 23:29:13"
         }
     ],
     "aliases": [],

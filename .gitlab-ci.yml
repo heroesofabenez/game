@@ -29,12 +29,15 @@ variables:
   MYSQL_DATABASE: heroesofabenez
   MYSQL_ROOT_PASSWORD: root
 
-test:mysql:
+.job_template: &script_def
   script:
   - ./vendor/bin/parallel-lint app tests -e php,phpt
+  - ./vendor/bin/phpcs --extensions=php . --standard=ruleset.xml --colors
+
+test:mysql:
+  <<: *script_def
 
 test:php7:mysql:
   image: php:7
-  script:
-  - ./vendor/bin/parallel-lint app tests -e php,phpt
+  <<: *script_def
 

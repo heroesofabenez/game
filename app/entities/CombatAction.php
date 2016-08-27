@@ -48,25 +48,25 @@ class CombatAction extends BaseEntity {
   protected function parse() {
     $text = $this->character1->name . " ";
     switch($this->action) {
-case "attack":
-case "skill_attack":
-  if($this->action === "attack") $text .= "attacks {$this->character2->name} ";
-  else $text .= "uses attack $this->name on {$this->character2->name} ";
-  if($this->result) {
-    $text .= " and hits. {$this->character2->name} loses $this->amount hitpoint(s).";
-    if($this->character2->hitpoints < 1) $text .= " He/she falls on the ground.";
-  } else {
-    $text .= "but misses.";
-  }
-  break;
-case "skill_special":
-  if($this->result) $text .= "successfully casts $this->name on {$this->character2->name}.";
-  else $text .= "tries to cast $this->name on {$this->character2->name} but fails.";
-  break;
-case "healing":
-  if($this->result) $text .= "heals {$this->character2->name} for $this->amount hitpoint(s).";
-  else $text .= "tries to heal {$this->character2->name} but fails.";
-  break;
+      case "attack":
+      case "skill_attack":
+        if($this->action === "attack") $text .= "attacks {$this->character2->name} ";
+        else $text .= "uses attack $this->name on {$this->character2->name} ";
+        if($this->result) {
+          $text .= " and hits. {$this->character2->name} loses $this->amount hitpoint(s).";
+          if($this->character2->hitpoints < 1) $text .= " He/she falls on the ground.";
+        } else {
+          $text .= "but misses.";
+        }
+        break;
+      case "skill_special":
+        if($this->result) $text .= "successfully casts $this->name on {$this->character2->name}.";
+        else $text .= "tries to cast $this->name on {$this->character2->name} but fails.";
+        break;
+      case "healing":
+        if($this->result) $text .= "heals {$this->character2->name} for $this->amount hitpoint(s).";
+        else $text .= "tries to heal {$this->character2->name} but fails.";
+        break;
     }
     $this->message =  $text;
   }

@@ -1,7 +1,6 @@
 <?php
 namespace HeroesofAbenez\Chat;
 
-
 /**
  * Guild Chat Control
  *

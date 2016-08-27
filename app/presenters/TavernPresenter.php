@@ -97,14 +97,14 @@ class TavernPresenter extends BasePresenter {
    */
   function newMessageSucceeded(Form $form, $values) {
     switch($this->action) {
-case "guild":
-  $chat = $this->createComponentGuildChat();
+      case "guild":
+        $chat = $this->createComponentGuildChat();
   break;
-case "local":
-  $chat = $this->createComponentLocalChat();
+      case "local":
+        $chat = $this->createComponentLocalChat();
   break;
-case "global":
-  $chat = $this->createComponentGlobalChat();
+      case "global":
+        $chat = $this->createComponentGlobalChat();
   break;
     }
     $chat->create()->newMessage($values["message"]);
