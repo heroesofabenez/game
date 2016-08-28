@@ -41,7 +41,4 @@ class ItemTest extends MT\TestCase {
     //Assert::same($expected, $actual);
   }
 }
-
-/*$suit = new ItemTest($container->getService("hoa.model.item"));
-$suit->run();*/
 ?>

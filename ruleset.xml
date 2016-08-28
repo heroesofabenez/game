@@ -7,7 +7,6 @@
   <config name="tab_width" value="2"/>
   <exclude-pattern>*/vendor/*</exclude-pattern>
   <exclude-pattern>*/temp/*</exclude-pattern>
-  <exclude-pattern>*/tests/*.php</exclude-pattern>
   <rule ref="Generic.Arrays.DisallowLongArraySyntax"/>
   <rule ref="Generic.CodeAnalysis">
     <exclude name="Generic.CodeAnalysis.EmptyStatement"/>
