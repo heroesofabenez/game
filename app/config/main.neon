@@ -3,6 +3,7 @@ includes:
 application:
     mapping:
         *: HeroesofAbenez\Presenters\*Presenter
+    scanDirs: no
 tracy:
     strictMode: TRUE
 session:

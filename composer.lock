@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "dfe2c08bc9e91d4645c120e925e05480",
-    "content-hash": "a0b88359a9b61f1764f0523b431f6c19",
+    "hash": "97a3a4f2f17bb6f885531029b4c9cff5",
+    "content-hash": "fa2a3cd31f09bc1165b351142263b26f",
     "packages": [
         {
             "name": "kdyby/autowired",
@@ -977,64 +977,6 @@
             "time": "2016-05-17 15:49:34"
         },
         {
-            "name": "nette/robot-loader",
-            "version": "v2.4.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/nette/robot-loader.git",
-                "reference": "e5c86ce8b53c7d4be84244624c67485ee4c92dbc"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/nette/robot-loader/zipball/e5c86ce8b53c7d4be84244624c67485ee4c92dbc",
-                "reference": "e5c86ce8b53c7d4be84244624c67485ee4c92dbc",
-                "shasum": ""
-            },
-            "require": {
-                "nette/caching": "~2.2",
-                "nette/finder": "~2.3",
-                "nette/utils": "~2.4",
-                "php": ">=5.6.0"
-            },
-            "conflict": {
-                "nette/nette": "<2.2"
-            },
-            "require-dev": {
-                "nette/tester": "~2.0",
-                "tracy/tracy": "^2.3"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "2.4-dev"
-                }
-            },
-            "autoload": {
-                "classmap": [
-                    "src/"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause",
-                "GPL-2.0",
-                "GPL-3.0"
-            ],
-            "authors": [
-                {
-                    "name": "David Grudl",
-                    "homepage": "https://davidgrudl.com"
-                },
-                {
-                    "name": "Nette Community",
-                    "homepage": "https://nette.org/contributors"
-                }
-            ],
-            "description": "Nette RobotLoader: comfortable autoloading",
-            "homepage": "https://nette.org",
-            "time": "2016-05-17 15:49:40"
-        },
-        {
             "name": "nette/security",
             "version": "v2.4.0",
             "source": {
@@ -1620,12 +1562,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/konecnyjakub/mytester.git",
-                "reference": "cdd692888bf5ce804848fa92397778053d25ffc6"
+                "reference": "51df919ef359e1e478e444825a6dce04358924ff"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/konecnyjakub/mytester/zipball/cdd692888bf5ce804848fa92397778053d25ffc6",
-                "reference": "cdd692888bf5ce804848fa92397778053d25ffc6",
+                "url": "https://api.github.com/repos/konecnyjakub/mytester/zipball/51df919ef359e1e478e444825a6dce04358924ff",
+                "reference": "51df919ef359e1e478e444825a6dce04358924ff",
                 "shasum": ""
             },
             "require": {
@@ -1638,7 +1580,8 @@
                 "jakub-onderka/php-parallel-lint": "^0.9.2",
                 "nette/bootstrap": "^2.4",
                 "nette/di": "~2.4",
-                "nette/robot-loader": "~2.4"
+                "nette/robot-loader": "~2.4",
+                "squizlabs/php_codesniffer": "^2.6"
             },
             "suggest": {
                 "nette/robot-loader": "Needed for automated tests runner."
@@ -1678,7 +1621,65 @@
                 "tester",
                 "testing"
             ],
-            "time": "2016-08-25 19:28:36"
+            "time": "2016-08-27 15:16:49"
+        },
+        {
+            "name": "nette/robot-loader",
+            "version": "v2.4.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/nette/robot-loader.git",
+                "reference": "e5c86ce8b53c7d4be84244624c67485ee4c92dbc"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/nette/robot-loader/zipball/e5c86ce8b53c7d4be84244624c67485ee4c92dbc",
+                "reference": "e5c86ce8b53c7d4be84244624c67485ee4c92dbc",
+                "shasum": ""
+            },
+            "require": {
+                "nette/caching": "~2.2",
+                "nette/finder": "~2.3",
+                "nette/utils": "~2.4",
+                "php": ">=5.6.0"
+            },
+            "conflict": {
+                "nette/nette": "<2.2"
+            },
+            "require-dev": {
+                "nette/tester": "~2.0",
+                "tracy/tracy": "^2.3"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.4-dev"
+                }
+            },
+            "autoload": {
+                "classmap": [
+                    "src/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause",
+                "GPL-2.0",
+                "GPL-3.0"
+            ],
+            "authors": [
+                {
+                    "name": "David Grudl",
+                    "homepage": "https://davidgrudl.com"
+                },
+                {
+                    "name": "Nette Community",
+                    "homepage": "https://nette.org/contributors"
+                }
+            ],
+            "description": "Nette RobotLoader: comfortable autoloading",
+            "homepage": "https://nette.org",
+            "time": "2016-05-17 15:49:40"
         },
         {
             "name": "squizlabs/php_codesniffer",
