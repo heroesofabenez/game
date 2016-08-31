@@ -215,12 +215,4 @@ class Location {
     $this->db->query("UPDATE characters SET ? WHERE id=?", $data, $this->user->id);
   }
 }
-
-class StageNotFoundException extends RecordNotFoundException {
-  
-}
-
-class CannotTravelToStageException extends AccessDenied {
-  
-}
 ?>

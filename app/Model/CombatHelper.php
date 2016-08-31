@@ -121,8 +121,4 @@ class CombatHelper {
     return $npc;
   }
 }
-
-class OpponentNotFoundException extends RecordNotFoundException {
-  
-}
 ?>

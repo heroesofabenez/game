@@ -105,20 +105,4 @@ class Equipment {
     $this->db->query("UPDATE character_equipment SET ? WHERE id=?", $data, $id);
   }
 }
-
-class ItemNotFoundException extends RecordNotFoundException {
-  
-}
-
-class ItemNotOwnedException extends AccessDenied {
-  
-}
-
-class ItemAlreadyEquippedException extends InvalidStateException {
-  
-}
-
-class ItemNotWornException extends InvalidStateException {
-  
-}
 ?>

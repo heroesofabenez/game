@@ -172,24 +172,4 @@ class Request {
     $this->db->query("UPDATE requests SET ? WHERE id=?", $data, $id);
   }
 }
-
-class CannotSeeRequestException extends AccessDenied {
-  
-}
-
-class CannotAcceptRequestException extends AccessDenied {
-  
-}
-
-class CannotDeclineRequestException extends AccessDenied {
-  
-}
-
-class RequestAlreadyHandledException extends InvalidStateException {
-  
-}
-
-class RequestNotFoundException extends RecordNotFoundException {
-  
-}
 ?>

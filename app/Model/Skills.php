@@ -198,24 +198,4 @@ class Skills {
     }
   }
 }
-
-class InvalidSkillTypeException extends \OutOfBoundsException {
-  
-}
-
-class SkillNotFoundException extends RecordNotFoundException {
-  
-}
-
-class NoSkillPointsAvailableException extends AccessDenied {
-  
-}
-
-class SkillMaxLevelReachedException extends AccessDenied {
-  
-}
-
-class CannotLearnSkillException extends AccessDenied {
-  
-}
 ?>

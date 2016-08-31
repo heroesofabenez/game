@@ -322,16 +322,4 @@ class Profile {
     $this->db->query("UPDATE characters SET $data WHERE ?", $where);
   }
 }
-
-class NotEnoughExperiencesException extends AccessDenied {
-  
-}
-
-class InvalidStatException extends \OutOfBoundsException {
-  
-}
-
-class NoStatPointsAvailableException extends AccessDenied {
-  
-}
 ?>

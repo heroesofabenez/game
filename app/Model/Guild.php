@@ -386,48 +386,4 @@ class Guild {
     $this->cache->remove("guilds");
   }
 }
-
-class GuildNotFoundException extends RecordNotFoundException {
-  
-}
-
-class PlayerNotFoundException extends RecordNotFoundException {
-  
-}
-
-class PlayerNotInGuild extends AccessDenied {
-  
-}
-
-class NotInGuildException extends AccessDenied {
-  
-}
-
-class CannotPromoteHigherRanksException extends HigherRankException {
-  
-}
-
-class CannotDemoteHigherRanksException extends HigherRankException {
-  
-}
-
-class CannotKickHigherRanksException extends HigherRankException {
-  
-}
-
-class CannotPromoteToGrandmaster extends AccessDenied {
-  
-}
-
-class CannotDemoteLowestRankException extends AccessDenied {
-  
-}
-
-class CannotHaveMoreDeputies extends AccessDenied {
-  
-}
-
-class GrandmasterCannotLeaveGuildException extends AccessDenied {
-  
-}
 ?>
