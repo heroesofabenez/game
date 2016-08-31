@@ -29,7 +29,7 @@ variables:
 
 .job_template: &script_def
   script:
-  - ./vendor/bin/parallel-lint app tests -e php,phpt
+  - ./vendor/bin/parallel-lint . -e php,phpt --exclude vendor
   - ./vendor/bin/phpcs --extensions=php,phpt . --standard=ruleset.xml --colors
   - php run_tests.php
 
