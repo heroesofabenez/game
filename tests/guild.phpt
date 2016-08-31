@@ -45,7 +45,4 @@ class GuildModelTest extends MT\TestCase {
     Assert::count(2, $guild["members"]);
   }
 }
-
-/*$suit = new GuildModelTest($container->getService("hoa.model.guild"));
-$suit->run();*/
 ?>

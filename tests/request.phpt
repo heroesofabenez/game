@@ -33,7 +33,4 @@ class RequestModelTest extends MT\TestCase {
     Assert::type(Request::class, $request);
   }
 }
-
-/*$suit = new RequestModelTest($container->getService("hoa.model.request"));
-$suit->run();*/
 ?>

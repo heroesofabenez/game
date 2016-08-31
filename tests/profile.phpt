@@ -130,7 +130,4 @@ class ProfileTest extends MT\TestCase {
     Assert::type("string", $result);
   }
 }
-
-/*$suit = new ProfileTest($container->getService("hoa.model.profile"));
-$suit->run();*/
 ?>

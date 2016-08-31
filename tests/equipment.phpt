@@ -32,7 +32,4 @@ class EquipmentTest extends MT\TestCase {
     Assert::type(Equipment::class, $item);
   }
 }
-
-/*$suit = new EquipmentTest($container->getService("hoa.model.equipment"));
-$suit->run();*/
 ?>

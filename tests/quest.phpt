@@ -51,7 +51,4 @@ class QuestModelTest extends MT\TestCase {
     Assert::false($result);
   }
 }
-
-/*$suit = new QuestModelTest($container->getService("hoa.model.quest"));
-$suit->run();*/
 ?>

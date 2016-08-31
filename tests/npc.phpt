@@ -25,7 +25,4 @@ class NPCModelTest extends MT\TestCase {
     Assert::same(2, $npc->race);
   }
 }
-
-/*$suit = new NPCModelTest($container->getService("hoa.model.npc"));
-$suit->run();*/
 ?>

@@ -38,7 +38,6 @@ class ItemTest extends MT\TestCase {
     $actual = $this->model->getItemName($id);
     $expected = "Book ABC";
     Assert::type("string", $actual);
-    //Assert::same($expected, $actual);
   }
 }
 ?>
