@@ -4,14 +4,23 @@ const APP_DIR = WWW_DIR . "/app";
 
 require WWW_DIR . "/vendor/autoload.php";
 Tracy\Debugger::enable(null, APP_DIR . "/log");
+$_SERVER["SERVER_NAME"] = "hoa.local";
 
-$container = require APP_DIR . "/bootstrap.php";
+$configurator = new Nette\Configurator;
+$configurator->setTempDirectory(APP_DIR . "/temp");
+$configurator->addConfig(APP_DIR . "/config/ci.neon");
+$configurator->addParameters([
+  "appDir" => APP_DIR,
+]);
+$container = $configurator->createContainer();
+
 $user = $container->getService("security.user");
 if(!$user->isLoggedIn()) $user->login();
 if($user->id === 0) {
   echo "Cannot login. Exiting.";
   exit(255);
 }
+
 $result = $container->getService("mytester.runner")->execute();
 exit((int) $result);
 ?>

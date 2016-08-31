@@ -1,0 +1,32 @@
+application:
+    mapping:
+        *: HeroesofAbenez\Presenters\*Presenter
+    scanDirs: no
+tracy:
+    strictMode: TRUE
+    email: "jakub.konecny2@centrum.cz"
+session:
+    savePath: "%tempDir%/sessions"
+    name: HOASESSID
+    expiration: 1 hour
+extensions:
+    translation: Kdyby\Translation\DI\TranslationExtension
+    hoa: HeroesofAbenez\Model\DI\HOAExtension
+    mytester: MyTester\Bridges\NetteDI\MyTesterExtension
+    fakeSession: Kdyby\FakeSession\DI\FakeSessionExtension
+translation:
+    default: en
+    fallback: [en_US, en]
+    resolvers:
+        request: off
+parameters:
+    application:
+        server: sTest
+database:
+    default:
+        dsn: "mysql:host=mysql;dbname=heroesofabenez"
+        user: root
+        password: root
+php:
+    date.timezone: Europe/Prague
+

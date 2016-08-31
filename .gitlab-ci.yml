@@ -8,20 +8,18 @@ cache:
   - vendor/
 
 before_script:
-- cp app/config/local.sample.neon app/config/local.neon
-
 - mkdir images
 - mkdir images/maps
-- mkdir temp
-- mkdir temp/cache
-- mkdir temp/sessions
+- mkdir app/temp
+- mkdir app/temp/cache
+- mkdir app/temp/sessions
 - mkdir app/log
 
 - apt-get update -yqq
 - apt-get install git -yqq
 - docker-php-ext-install pdo_mysql
 - curl -sS https://getcomposer.org/installer | php
-- php composer.phar install --no-interaction --prefer-source
+- php composer.phar update --no-interaction --prefer-source -a
 
 - php setup_ci.php
 

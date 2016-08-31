@@ -1,23 +1,18 @@
 <?php
 use Nette\Neon\Neon;
-use Nette\Utils\Finder;
 
 const WWW_DIR = __DIR__;
 const APP_DIR = WWW_DIR . "/app";
 
 require WWW_DIR . "/vendor/autoload.php";
 
-$filename = APP_DIR . "/config/local.neon";
-$cfg = Neon::decode(file_get_contents($filename));
-$cfg["database"]["default"]["dsn"] = "mysql:host=mysql;dbname=heroesofabenez";
-unlink($filename);
-file_put_contents($filename, Neon::encode($cfg, Neon::BLOCK));
+$config = Neon::decode(file_get_contents(APP_DIR . "/config/ci.neon"));
+$dbConfig = $config["database"]["default"];
 
-/*$container = require APP_DIR . "/bootstrap.php";
-$connection = $container->getByType(\Nette\Database\Connection::class);
-
-$files = Finder::findFiles("*.sql")->in(WWW_DIR . "/sqls");
+$connection = new \Nette\Database\Connection($dbConfig["dsn"], $dbConfig["user"], $dbConfig["password"]);
+$sqlsFolder = APP_DIR . "/sqls";
+$files = ["structure", "data_basic", "data_test"];
 foreach($files as $file) {
-  Nette\Database\Helpers::loadFromFile($conn, $file);
-}*/
+  Nette\Database\Helpers::loadFromFile($connection, "$sqlsFolder/$file.sql");
+}
 ?>

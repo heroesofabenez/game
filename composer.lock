@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "97a3a4f2f17bb6f885531029b4c9cff5",
-    "content-hash": "fa2a3cd31f09bc1165b351142263b26f",
+    "hash": "d1b279dd5320e17846dd3f85f997a11b",
+    "content-hash": "337a10871c3847829606bff096226d5e",
     "packages": [
         {
             "name": "kdyby/autowired",
@@ -1555,6 +1555,53 @@
             "description": "This tool check syntax of PHP files about 20x faster than serial check.",
             "homepage": "https://github.com/JakubOnderka/PHP-Parallel-Lint",
             "time": "2015-12-15 10:42:16"
+        },
+        {
+            "name": "kdyby/fake-session",
+            "version": "v2.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Kdyby/FakeSession.git",
+                "reference": "385fe90f8ede04c25c9fd8c24b3a4e4ac0fcb2d3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Kdyby/FakeSession/zipball/385fe90f8ede04c25c9fd8c24b3a4e4ac0fcb2d3",
+                "reference": "385fe90f8ede04c25c9fd8c24b3a4e4ac0fcb2d3",
+                "shasum": ""
+            },
+            "require": {
+                "nette/di": "~2.2@dev",
+                "nette/http": "~2.2@dev"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Kdyby\\FakeSession\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause",
+                "GPL-2.0",
+                "GPL-3.0"
+            ],
+            "authors": [
+                {
+                    "name": "Filip Procházka",
+                    "email": "filip@prochazka.su",
+                    "homepage": "http://filip-prochazka.com"
+                }
+            ],
+            "description": "FakeSession class for Nette Framework",
+            "homepage": "http://kdyby.org",
+            "keywords": [
+                "http",
+                "kdyby",
+                "nette",
+                "session"
+            ],
+            "time": "2015-02-16 16:31:32"
         },
         {
             "name": "konecnyjakub/mytester",
