@@ -118,6 +118,7 @@ journal:
     activeQuests: "You have 1 active quest.|You have %count% active quests."
     petsNumber: "You have 1 pet.|You have %count% pets."
     levelUp: "Level up!"
+    discardPet: "Discard"
 map:
     title: "Map"
     travelTitle: "Travel"

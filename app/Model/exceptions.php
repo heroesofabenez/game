@@ -153,4 +153,16 @@ class SkillMaxLevelReachedException extends AccessDenied {
 class CannotLearnSkillException extends AccessDenied {
   
 }
+
+class PetNotFoundException extends RecordNotFoundException {
+  
+}
+
+class PetNotOwnedException extends AccessDenied {
+  
+}
+
+class PetNotDeployedException extends InvalidStateException {
+  
+}
 ?>

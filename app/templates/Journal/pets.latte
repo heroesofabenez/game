@@ -7,7 +7,7 @@
   {else}
   <p>
     {foreach $pets as $pet}
-    {$pet->name} {$pet->type} {if $pet->deployed}(Deployed){/if}<br>
+    {$pet->name} {$pet->type} {if $pet->deployed}(Deployed) <a n:href="discardPet! $pet->id">{_texts.journal.discardPet}</a>{/if}<br>
     {/foreach}
   </p>
   {/if}

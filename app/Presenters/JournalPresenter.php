@@ -5,7 +5,10 @@ use HeroesofAbenez\Model\NotEnoughExperiencesException,
     HeroesofAbenez\Model\ItemNotFoundException,
     HeroesofAbenez\Model\ItemNotOwnedException,
     HeroesofAbenez\Model\ItemAlreadyEquippedException,
-    HeroesofAbenez\Model\ItemNotWornException;
+    HeroesofAbenez\Model\ItemNotWornException,
+    HeroesofAbenez\Model\PetNotFoundException,
+    HeroesofAbenez\Model\PetNotOwnedException,
+    HeroesofAbenez\Model\PetNotDeployedException;
 
 /**
  * Presenter Journal
@@ -19,6 +22,8 @@ class JournalPresenter extends BasePresenter {
   protected $profileModel;
   /** @var \HeroesofAbenez\Model\Equipment @autowire */
   protected $equipmentModel;
+  /** @var \HeroesofAbenez\Model\Pet @autowire */
+  protected $petModel;
   
   /**
    * @return void
@@ -102,6 +107,25 @@ class JournalPresenter extends BasePresenter {
       $this->flashMessage($this->translator->translate("errors.journal.cannotLevelUp"));
     }
     $this->redirect("Journal:");
+  }
+  
+  /**
+   * @param int $petId
+   * @return void
+   */
+  function handleDiscardPet($petId) {
+    try {
+      $this->petModel->user = $this->user;
+      $this->petModel->discardPet($petId);
+      $this->flashMessage($this->translator->translate("messages.pet.discarded"));
+    } catch(PetNotFoundException $e) {
+      $this->flashMessage($this->translator->translate("errors.pet.notFound"));
+    } catch(PetNotOwnedException $e) {
+      $this->flashMessage($this->translator->translate("errors.pet.notOwned"));
+    } catch(PetNotDeployedException $e) {
+      $this->flashMessage($this->translator->translate("errors.pet.notDeployed"));
+    }
+    $this->redirect("Journal:pets");
   }
 }
 ?>

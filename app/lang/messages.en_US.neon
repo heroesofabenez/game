@@ -21,3 +21,5 @@ guild:
     demoted: "Member demoted."
     kicked: "Member kicked."
     descriptionChanged: "Guild's description changed."
+pet:
+    discarded: "The pet was discarded."

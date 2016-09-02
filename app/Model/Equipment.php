@@ -88,7 +88,7 @@ class Equipment {
   }
   
   /**
-   * Equip an item
+   * Unequip an item
    * 
    * @param int $id
    * @return void

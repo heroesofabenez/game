@@ -21,3 +21,5 @@ guild:
     demoted: "Člen degradován."
     kicked: "Člen vyhozen."
     descriptionChanged: "Popis cechu změněn."
+pet:
+    discarded: "Mazlíček byl odložen."

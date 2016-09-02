@@ -52,3 +52,7 @@ equipment:
     unequiped: "Sundal(a) jsi věc."
     notWorn: "Nenosíš tuto věc."
     alreadyWorn: "Už nosíš tuto věc."
+pet:
+    notFound: "Zadaný mazlíček nebyl nalezen."
+    notOwned: "Zadaný mazlíček ti nepatří."
+    notDeployed: "Zadaný mazlíček není používán."

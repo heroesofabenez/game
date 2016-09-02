@@ -118,6 +118,7 @@ journal:
     activeQuests: "{0} Máš 0 aktivních úkolů.|{1} Máš 1 aktivní úkol.|[2,4] Máš %count% aktivní úkoly.|[5,Inf] Máš %count% aktivních úkolů."
     petsNumber: "{0} Máš 0 mazlíčků.|{1} Máš 1 mazlíčka.|[2,4] Máš %count% mazlíčků.|[5,Inf] Máš %count% mazlíčků."
     levelUp: "Povýšit!"
+    discardPet: "Odložit"
 map:
     title: "Mapa"
     travelTitle: "Cestovat"
