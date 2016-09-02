@@ -165,4 +165,8 @@ class PetNotOwnedException extends AccessDenied {
 class PetNotDeployedException extends InvalidStateException {
   
 }
+
+class PetAlreadyDeployedException extends InvalidStateException {
+  
+}
 ?>

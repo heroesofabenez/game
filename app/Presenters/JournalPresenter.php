@@ -8,7 +8,8 @@ use HeroesofAbenez\Model\NotEnoughExperiencesException,
     HeroesofAbenez\Model\ItemNotWornException,
     HeroesofAbenez\Model\PetNotFoundException,
     HeroesofAbenez\Model\PetNotOwnedException,
-    HeroesofAbenez\Model\PetNotDeployedException;
+    HeroesofAbenez\Model\PetNotDeployedException,
+    HeroesofAbenez\Model\PetAlreadyDeployedException;
 
 /**
  * Presenter Journal
@@ -107,6 +108,24 @@ class JournalPresenter extends BasePresenter {
       $this->flashMessage($this->translator->translate("errors.journal.cannotLevelUp"));
     }
     $this->redirect("Journal:");
+  }
+  
+  /**
+   * @param int $petId
+   * @return void
+   */
+  function handleDeployPet($petId) {
+    try {
+      $this->petModel->user = $this->user;
+      $this->petModel->deployPet($petId);
+    } catch(PetNotFoundException $e) {
+      $this->flashMessage($this->translator->translate("errors.pet.notFound"));
+    } catch(PetNotOwnedException $e) {
+      $this->flashMessage($this->translator->translate("errors.pet.notOwned"));
+    } catch(PetAlreadyDeployedException $e) {
+      $this->flashMessage($this->translator->translate("errors.pet.alreadyDeployed"));
+    }
+    $this->redirect("Journal:pets");
   }
   
   /**

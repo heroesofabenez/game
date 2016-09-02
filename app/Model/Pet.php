@@ -86,6 +86,29 @@ class Pet {
   }
   
   /**
+   * Deploy a pet
+   * 
+   * @param int $id
+   * @return void
+   * @throws PetNotFoundException
+   * @throws PetNotOwnedException
+   * @throws PetAlreadyDeployedException
+   */
+  function deployPet($id) {
+    $pet = $this->db->table("pets")->get($id);
+    if(!$pet) throw new PetNotFoundException;
+    elseif($pet->owner != $this->user->id) throw new PetNotOwnedException;
+    elseif($pet->deployed) throw new PetAlreadyDeployedException;
+    $pets = $this->db->table("pets")
+        ->where("owner", $this->user->id);
+    foreach($pets as $pet) {
+      if($pet->id == $id) continue;
+      $this->db->query("UPDATE pets SET ? WHERE id=?", ["deployed" => 0], $pet->id);
+    }
+    $this->db->query("UPDATE pets SET ? WHERE id=?", ["deployed" => 1], $id);
+  }
+  
+  /**
    * Discard a pet
    * 
    * @param int $id

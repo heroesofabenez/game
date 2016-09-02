@@ -56,3 +56,4 @@ pet:
     notFound: "Zadaný mazlíček nebyl nalezen."
     notOwned: "Zadaný mazlíček ti nepatří."
     notDeployed: "Zadaný mazlíček není používán."
+    alreadyDeployed: "Tento mazlíček je již používán."
