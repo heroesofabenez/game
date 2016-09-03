@@ -33,6 +33,8 @@
   <rule ref="Generic.PHP.ForbiddenFunctions"/>
   <rule ref="Generic.PHP.SAPIUsage"/>
   <rule ref="Generic.PHP.Syntax"/>
+  <rule ref="Generic.PHP.DisallowAlternativePHPTags"/>
+  <rule ref="Generic.PHP.BacktickOperator"/>
   <rule ref="Generic.WhiteSpace.DisallowTabIndent"/>
   <rule ref="Generic.WhiteSpace.ScopeIndent">
     <properties>
@@ -44,7 +46,6 @@
   <rule ref="Squiz.PHP.GlobalKeyword"/>
   <rule ref="Squiz.PHP.LowercasePHPFunctions"/>
   <rule ref="Squiz.PHP.NonExecutableCode"/>
-  <!-- <rule ref="Squiz.WhiteSpace.FunctionSpacing"/> -->
   <rule ref="Squiz.WhiteSpace.SemicolonSpacing"/>
   <rule ref="PSR1.Files.SideEffects"/>
   <rule ref="PSR1.Methods.CamelCapsMethodName">
