@@ -1,42 +1,41 @@
 image: php:5.6
 
-services:
-- mysql
-
-cache:
-  paths:
-  - vendor/
-
-before_script:
-- mkdir images
-- mkdir images/maps
-- mkdir app/temp
-- mkdir app/temp/cache
-- mkdir app/temp/sessions
-- mkdir app/log
-
-- apt-get update -yqq
-- apt-get install git -yqq
-- docker-php-ext-install pdo_mysql
-- curl -sS https://getcomposer.org/installer | php
-- php composer.phar update --no-interaction --prefer-source -a
-
-- php setup_ci.php
-
-variables:
-  MYSQL_DATABASE: heroesofabenez
-  MYSQL_ROOT_PASSWORD: root
-
-.job_template: &script_def
+.job_template: &test_job
+  services:
+  - mysql
+  
+  cache:
+    paths:
+    - vendor/
+  
+  variables:
+    MYSQL_DATABASE: heroesofabenez
+    MYSQL_ROOT_PASSWORD: root
+  
+  before_script:
+  - mkdir images
+  - mkdir images/maps
+  - mkdir app/temp
+  - mkdir app/temp/cache
+  - mkdir app/temp/sessions
+  - mkdir app/log
+  
+  - apt-get update -yqq
+  - apt-get install git -yqq
+  - docker-php-ext-install pdo_mysql
+  - curl -sS https://getcomposer.org/installer | php
+  - php composer.phar update --no-interaction --prefer-source -a
+  
+  - php setup_ci.php
+  
   script:
   - ./vendor/bin/parallel-lint . -e php,phpt --exclude vendor
   - ./vendor/bin/phpcs --extensions=php,phpt . --standard=ruleset.xml --colors
   - php run_tests.php
 
-test:mysql:
-  <<: *script_def
+test:default:
+  <<: *test_job
 
-test:php7:mysql:
+test:php7:
   image: php:7
-  <<: *script_def
-
+  <<: *test_job
