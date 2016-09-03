@@ -3,8 +3,12 @@ const WWW_DIR = __DIR__;
 const APP_DIR = WWW_DIR . "/app";
 
 require WWW_DIR . "/vendor/autoload.php";
-Tracy\Debugger::enable(null, APP_DIR . "/log");
-$_SERVER["SERVER_NAME"] = "hoa.local";
+$isCli = (PHP_SAPI === "cli");
+if(!$isCli) {
+  Tracy\Debugger::enable(null, APP_DIR . "/log");
+} else {
+  $_SERVER["SERVER_NAME"] = "hoa.local";
+}
 
 $configurator = new Nette\Configurator;
 $configurator->setTempDirectory(APP_DIR . "/temp");
