@@ -13,6 +13,9 @@ class ItemTest extends MT\TestCase {
     $this->model = $model;
   }
   
+  /**
+   * @return void
+   */
   function testListOfItems() {
     $items = $this->model->listOfItems();
     Assert::type("array", $items);
