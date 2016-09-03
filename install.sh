@@ -1,3 +1,4 @@
+#!/bin/bash
 cp app/config/local.sample.neon app/config/local.neon
 
 mkdir images
