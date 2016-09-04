@@ -1,8 +1,37 @@
 <?php
 namespace HeroesofAbenez\Tests;
 
-use MyTester as MT;
-use MyTester\Assert;
+use MyTester as MT,
+    MyTester\Assert,
+    HeroesofAbenez\Entities\ChatCommand;
+
+class TestCommand extends ChatCommand {
+  function __construct() {
+    \Tracy\Debugger::barDump(ChatCommandsProcessorTest::COMMAND_NAME);
+    parent::__construct(ChatCommandsProcessorTest::COMMAND_NAME);
+  }
+  
+  /**
+    \Tracy\Debugger::barDump($this->name);
+   * @return string
+   */
+  function execute() {
+    return "passed";
+  }
+}
+
+class Test2Command extends ChatCommand {
+  function __construct() {
+    parent::__construct("test2");
+  }
+  
+  /**
+   * @return string
+   */
+  function execute() {
+    return "test";
+  }
+}
 
 class ChatCommandsProcessorTest extends MT\TestCase {
   const COMMAND_NAME = "test1";
@@ -19,9 +48,7 @@ class ChatCommandsProcessorTest extends MT\TestCase {
    * @return void
    */
   function startUp() {
-    $this->model->addCommand(self::COMMAND_NAME, function() {
-      return "passed"; 
-    });
+    $this->model->addCommand(new TestCommand);
   }
   
   /**
@@ -45,13 +72,8 @@ class ChatCommandsProcessorTest extends MT\TestCase {
    * @return void
    */
   function testAddCommand() {
-    $this->model->addCommand("test2", function() {
-      return "test"; 
-    }, ["testParam" => "testValue"]);
-    $params = $this->model->getCommand("test2")->parameters;
-    Assert::type(\Nette\Security\User::class, $params["user"]);
-    Assert::type("string", $params["testParam"]);
-    Assert::same("testValue", $params["testParam"]);
+    $this->model->addCommand(new Test2Command);
+    Assert::same("test", $this->model->executeCommand("test2"));
   }
   
   /**

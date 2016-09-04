@@ -13,31 +13,6 @@ class ChatCommandsProcessor {
   
   /** @var ChatCommand[] */
   protected $commands = [];
-  /** @var array */
-  protected $parameters = [];
-  
-  function __construct(\Nette\Security\User $user, \Nette\Database\Context $db, \Kdyby\Translation\Translator $translator) {
-    $this->parameters["user"] = $user;
-    $this->parameters["db"] = $db;
-    $this->parameters["translator"] = $translator;
-    $this->addDefaultCommands();
-  }
-  
-  /**
-   * @return void
-   */
-  protected function addDefaultCommands() {
-    $this->addCommand("time", function($params) {
-      $time = date("Y-m-d H:i:s");
-      return $params["translator"]->translate("messages.chat.currentTime", ["time" => $time]); 
-    });
-    $this->addCommand("location", function($params) {
-      $stageId = $params["user"]->identity->stage;
-      $stage = $params["db"]->table("quest_stages")->get($stageId);
-      $area = $params["db"]->table("quest_areas")->get($stage->area);
-      return $params["translator"]->translate("messages.chat.currentLocation", ["stageName" => $stage->name, "areaName" => $area->name]);
-    });
-  }
   
   /**
    * Add new  command
@@ -48,9 +23,9 @@ class ChatCommandsProcessor {
    * @return void
    * @throws CommandNameAlreadyUsedException
    */
-  function addCommand($name, callable $callback, array $parameters = []) {
-    if($this->hasCommand($name)) throw new CommandNameAlreadyUsedException("Command $name is already defined.");
-    $this->commands[] = new ChatCommand($name, $callback, array_merge($this->parameters, $parameters));
+  function addCommand(ChatCommand $command) {
+    if($this->hasCommand($command->name)) throw new CommandNameAlreadyUsedException("Command $command->name is already defined.");
+    $this->commands[] = $command;
   }
   
   /**
