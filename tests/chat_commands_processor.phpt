@@ -7,7 +7,6 @@ use MyTester as MT,
 
 class TestCommand extends ChatCommand {
   function __construct() {
-    \Tracy\Debugger::barDump(ChatCommandsProcessorTest::COMMAND_NAME);
     parent::__construct(ChatCommandsProcessorTest::COMMAND_NAME);
   }
   
@@ -31,7 +30,12 @@ class Test2Command extends ChatCommand {
    * @return string
    */
   function execute() {
-    return "test";
+    $args = func_get_args();
+    $text = "test";
+    foreach($args as $arg) {
+      $text .= $arg;
+    }
+    return $text;
   }
 }
 
@@ -88,6 +92,26 @@ class ChatCommandsProcessorTest extends MT\TestCase {
   }
   
   /**
+   * @param string $text
+   * @data("anagfdffd", "/anagfdffd")
+   * @return void
+   */
+  function testExtractParametersNothing($text) {
+    $result = $this->model->extractParameters($text);
+    Assert::type("array", $result);
+    Assert::count(0, $result);
+  }
+  
+  /**
+   * @return vooid
+   */
+  function testExtractParameters() {
+    $result = $this->model->extractParameters("/test abc 123");
+    Assert::type("array", $result);
+    Assert::count(2, $result);
+  }
+  
+  /**
    * @return void
    */
   function testHasCommand() {
@@ -102,6 +126,7 @@ class ChatCommandsProcessorTest extends MT\TestCase {
     Assert::same("passed", $this->model->parse(self::TEXT));
     Assert::false($this->model->parse("anagfdffd"));
     Assert::false($this->model->parse("/anagfdffd"));
+    Assert::same("test12", $this->model->parse("/test2 1 2"));
   }
 }
 ?>

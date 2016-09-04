@@ -35,11 +35,31 @@ class ChatCommandsProcessor {
    * @return string
    */
   function extractCommand($text) {
-    if(substr($text, 0, 1) === "/" AND $this->hasCommand(substr($text, 1))) {
-      return substr($text, 1);
+    if(substr($text, 0, 1) != "/") return "";
+    if(!strpos($text, " ")) {
+      $command = substr($text, 1);
     } else {
-      return "";
+      $parts = explode(" ", substr($text, 1));
+      $command = $parts[0];
     }
+    if($this->hasCommand($command)) {
+      return $command;
+    }
+    return "";
+  }
+  
+  
+  /**
+   * Extract parameters from text
+   * 
+   * @param string $text
+   * @return array
+   */
+  function extractParameters($text) {
+    if(substr($text, 0, 1) != "/" OR !strpos($text, " ")) return [];
+    $params = explode(" ", $text);
+    unset($params[0]);
+    return $params;
   }
   
   /**
@@ -77,7 +97,8 @@ class ChatCommandsProcessor {
     $commandName = $this->extractCommand($text);
     if($commandName === "") return false;
     $command = $this->getCommand($commandName);
-    return $command->execute();
+    $params = $this->extractParameters($text);
+    return call_user_func_array([$command, "execute"], $params);
   }
 }
 ?>
