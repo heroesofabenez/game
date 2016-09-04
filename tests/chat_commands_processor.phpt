@@ -27,6 +27,23 @@ class ChatCommandsProcessorTest extends MT\TestCase {
   /**
    * @return void
    */
+  function testCommandTime() {
+    $time = $this->model->executeCommand("time");
+    Assert::contains("Current time is ", $time);
+    Assert::contains(date("Y-m-d "), $time);
+  }
+  
+  /**
+   * @return void
+   */
+  function testCommandLocation() {
+    $result = $this->model->executeCommand("location");
+    Assert::contains("You're currently in ", $result);
+  }
+  
+  /**
+   * @return void
+   */
   function testAddCommand() {
     $this->model->addCommand("test2", function() {
       return "test"; 

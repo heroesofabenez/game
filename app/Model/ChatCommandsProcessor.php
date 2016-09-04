@@ -27,7 +27,16 @@ class ChatCommandsProcessor {
    * @return void
    */
   protected function addDefaultCommands() {
-  
+    $this->addCommand("time", function($params) {
+      $time = date("Y-m-d H:i:s");
+      return $params["translator"]->translate("messages.chat.currentTime", ["time" => $time]); 
+    });
+    $this->addCommand("location", function($params) {
+      $stageId = $params["user"]->identity->stage;
+      $stage = $params["db"]->table("quest_stages")->get($stageId);
+      $area = $params["db"]->table("quest_areas")->get($stage->area);
+      return $params["translator"]->translate("messages.chat.currentLocation", ["stageName" => $stage->name, "areaName" => $area->name]);
+    });
   }
   
   /**
