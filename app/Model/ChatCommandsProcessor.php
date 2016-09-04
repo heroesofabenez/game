@@ -1,0 +1,104 @@
+<?php
+namespace HeroesofAbenez\Model;
+
+use HeroesofAbenez\Entities\ChatCommand;
+
+/**
+ * ChatCommandsProcessor
+ *
+ * @author Jakub Konečný
+ */
+class ChatCommandsProcessor {
+  use \Nette\SmartObject;
+  
+  /** @var ChatCommand[] */
+  protected $commands = [];
+  /** @var array */
+  protected $parameters = [];
+  
+  function __construct(\Nette\Security\User $user, \Nette\Database\Context $db, \Kdyby\Translation\Translator $translator) {
+    $this->parameters["user"] = $user;
+    $this->parameters["db"] = $db;
+    $this->parameters["translator"] = $translator;
+    $this->addDefaultCommands();
+  }
+  
+  /**
+   * @return void
+   */
+  protected function addDefaultCommands() {
+  
+  }
+  
+  /**
+   * Add new  command
+   *
+   * @param string $name
+   * @param callable $callback
+   * @param array $parameters
+   * @return void
+   * @throws CommandNameAlreadyUsedException
+   */
+  function addCommand($name, callable $callback, array $parameters = []) {
+    if($this->hasCommand($name)) throw new CommandNameAlreadyUsedException("Command $name is already defined.");
+    $this->commands[] = new ChatCommand($name, $callback, array_merge($this->parameters, $parameters));
+  }
+  
+  /**
+   * Extract command from text
+   *
+   * @param string $text
+   * @return string
+   */
+  function extractCommand($text) {
+    if(substr($text, 0, 1) === "/" AND $this->hasCommand(substr($text, 1))) {
+      return substr($text, 1);
+    } else {
+      return "";
+    }
+  }
+  
+  /**
+   * Check whetever a command is defined
+   *
+   * @param string $name
+   * @return bool
+   */
+  function hasCommand($name) {
+    foreach($this->commands as $command) {
+      if($command->name === $name) return true;
+    }
+    return false;
+  }
+  
+  /**
+   * Get command's definition
+   *
+   * @param string $name
+   * @return ChatCommand
+   * @throws CommandNotFoundException
+   */
+  function getCommand($name) {
+    foreach($this->commands as $command) {
+      if($command->name === $name) return $command;
+    }
+    throw new CommandNotFoundException;
+  }
+  
+  /**
+   * Execute a command
+   *
+   * @param string $name
+   * @return string
+   * @throws CommandNotFoundException
+   */
+  function executeCommand($name) {
+    try {
+      $command = $this->getCommand($name);
+    } catch(CommandNotFoundException $e) {
+      throw $e;
+    }
+    return $command->execute();
+  }
+}
+?>
