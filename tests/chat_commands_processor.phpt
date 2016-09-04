@@ -46,7 +46,7 @@ class ChatCommandsProcessorTest extends MT\TestCase {
   /** @var \HeroesofAbenez\Model\ChatCommandsProcessor */
   protected $model;
   
-  function __construct(\HeroesofAbenez\Model\ChatCommandsProcessor $model) {
+  function __construct(\HeroesofAbenez\Chat\ChatCommandsProcessor $model) {
     $this->model = $model;
   }
   

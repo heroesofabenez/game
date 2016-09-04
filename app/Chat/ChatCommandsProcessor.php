@@ -1,5 +1,5 @@
 <?php
-namespace HeroesofAbenez\Model;
+namespace HeroesofAbenez\Chat;
 
 use HeroesofAbenez\Entities\ChatCommand,
     HeroesofAbenez\Model\CommandNotFoundException,

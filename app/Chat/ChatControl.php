@@ -1,8 +1,6 @@
 <?php
 namespace HeroesofAbenez\Chat;
 
-use \HeroesofAbenez\Model\ChatCommandsProcessor;
-
 /**
  * Basic Chat Control
  *
