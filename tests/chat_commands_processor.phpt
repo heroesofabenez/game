@@ -21,8 +21,10 @@ class TestCommand extends ChatCommand {
 }
 
 class Test2Command extends ChatCommand {
+  const NAME = "test2";
+  
   function __construct() {
-    parent::__construct("test2");
+    parent::__construct(self::NAME);
   }
   
   /**
@@ -55,7 +57,7 @@ class ChatCommandsProcessorTest extends MT\TestCase {
    * @return void
    */
   function testCommandTime() {
-    $time = $this->model->executeCommand("time");
+    $time = $this->model->parse("/time");
     Assert::contains("Current time is ", $time);
     Assert::contains(date("Y-m-d "), $time);
   }
@@ -64,7 +66,7 @@ class ChatCommandsProcessorTest extends MT\TestCase {
    * @return void
    */
   function testCommandLocation() {
-    $result = $this->model->executeCommand("location");
+    $result = $this->model->parse("/location");
     Assert::contains("You're currently in ", $result);
   }
   
@@ -73,7 +75,7 @@ class ChatCommandsProcessorTest extends MT\TestCase {
    */
   function testAddCommand() {
     $this->model->addCommand(new Test2Command);
-    Assert::same("test", $this->model->executeCommand("test2"));
+    Assert::same("test", $this->model->parse("/" . Test2Command::NAME));
   }
   
   /**
@@ -96,9 +98,10 @@ class ChatCommandsProcessorTest extends MT\TestCase {
   /**
    * @return void
    */
-  function testExecuteCommand() {
-    $command = $this->model->extractCommand(self::TEXT);
-    Assert::same("passed", $this->model->executeCommand($command));
+  function testParse() {
+    Assert::same("passed", $this->model->parse(self::TEXT));
+    Assert::false($this->model->parse("anagfdffd"));
+    Assert::false($this->model->parse("/anagfdffd"));
   }
 }
 ?>

@@ -70,18 +70,13 @@ class ChatCommandsProcessor {
   }
   
   /**
-   * Execute a command
-   *
-   * @param string $name
-   * @return string
-   * @throws CommandNotFoundException
+   * @param type $text
+   * @return string|bool Result of the command/false when text text contains no (defined) command
    */
-  function executeCommand($name) {
-    try {
-      $command = $this->getCommand($name);
-    } catch(CommandNotFoundException $e) {
-      throw $e;
-    }
+  function parse($text) {
+    $commandName = $this->extractCommand($text);
+    if($commandName === "") return false;
+    $command = $this->getCommand($commandName);
     return $command->execute();
   }
 }
