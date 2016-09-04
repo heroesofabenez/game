@@ -169,4 +169,12 @@ class PetNotDeployedException extends InvalidStateException {
 class PetAlreadyDeployedException extends InvalidStateException {
   
 }
+
+class CommandNotFoundException extends \OutOfBoundsException {
+  
+}
+
+class CommandNameAlreadyUsedException extends InvalidStateException {
+  
+}
 ?>

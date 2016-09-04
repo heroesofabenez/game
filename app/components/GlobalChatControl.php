@@ -1,6 +1,8 @@
 <?php
 namespace HeroesofAbenez\Chat;
 
+use \HeroesofAbenez\Model\ChatCommandsProcessor;
+
 /**
  * Global Chat Control
  *
@@ -12,14 +14,14 @@ class GlobalChatControl extends ChatControl {
    * @param \Nette\Security\User $user
    * @param \HeroesofAbenez\Model\Location $locationModel
    */
-  function __construct(\Nette\Database\Context $database, \Nette\Security\User $user, \HeroesofAbenez\Model\Location $locationModel) {
+  function __construct(\Nette\Database\Context $database, \Nette\Security\User $user, \HeroesofAbenez\Model\Location $locationModel, ChatCommandsProcessor  $processor) {
     $stage = $locationModel->getStage($user->identity->stage);
     $stages = $locationModel->listofStages($this->id);
     $stagesIds = [];
     foreach($stages as $s) {
       $stagesIds[] = $s->id;
     }
-    parent::__construct($database, $user, "chat_global", "area", $stage->area, "current_stage", $stagesIds);
+    parent::__construct($database, $user, $processor, "chat_global", "area", $stage->area, "current_stage", $stagesIds);
   }
 }
 

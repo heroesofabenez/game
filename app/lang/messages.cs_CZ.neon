@@ -23,3 +23,6 @@ guild:
     descriptionChanged: "Popis cechu změněn."
 pet:
     discarded: "Mazlíček byl odložen."
+chat:
+    currentTime: "Aktuální čas je %time%."
+    currentLocation: "Právě jsi v %stageName% v %areaName%."

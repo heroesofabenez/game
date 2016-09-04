@@ -113,6 +113,12 @@ class HOAExtension extends \Nette\DI\CompilerExtension {
       ->setImplement(HeroesofAbenez\Chat\LocalChatControlFactory::class);
     $builder->addDefinition($this->prefix("chat.guild"))
       ->setImplement(HeroesofAbenez\Chat\GuildChatControlFactory::class);
+    $builder->addDefinition($this->prefix("chat.commandsProcessor"))
+      ->setFactory(HeroesofAbenez\Model\ChatCommandsProcessor::class);
+    $builder->addDefinition($this->prefix("chat.command.time"))
+      ->setFactory(HeroesofAbenez\Chat\Commands\TimeCommand::class);
+    $builder->addDefinition($this->prefix("chat.command.location"))
+      ->setFactory(HeroesofAbenez\Chat\Commands\LocationCommand::class);
   }
   
   /**
@@ -163,6 +169,15 @@ class HOAExtension extends \Nette\DI\CompilerExtension {
       ->setFactory(HeroesofAbenez\Forms\GuildDescriptionFormFactory::class);
     $builder->addDefinition($this->prefix("form.dissolveGuild"))
       ->setFactory(HeroesofAbenez\Forms\DissolveGuildFormFactory::class);
+  }
+  
+  function beforeCompile() {
+    $builder = $this->getContainerBuilder();
+    $processor = $builder->getDefinition($this->prefix("chat.commandsProcessor"));
+    $chatCommands = $builder->findByType(\HeroesofAbenez\Entities\ChatCommand::class);
+    foreach($chatCommands as $command) {
+      $processor->addSetup("addCommand", [$command]);
+    }
   }
   
   /**

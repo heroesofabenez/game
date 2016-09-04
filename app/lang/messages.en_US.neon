@@ -23,3 +23,6 @@ guild:
     descriptionChanged: "Guild's description changed."
 pet:
     discarded: "The pet was discarded."
+chat:
+    currentTime: "Current time is %time%."
+    currentLocation: "You're currently in %stageName% at %areaName%."
