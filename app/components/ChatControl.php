@@ -1,6 +1,8 @@
 <?php
 namespace HeroesofAbenez\Chat;
 
+use \HeroesofAbenez\Model\ChatCommandsProcessor;
+
 /**
  * Basic Chat Control
  *
@@ -11,6 +13,8 @@ abstract class ChatControl extends \Nette\Application\UI\Control {
   protected $db;
   /** @var \Nette\Security\User */
   protected $user;
+  /** @var ChatCommandsProcessor */
+  protected $processor;
   /** @var string*/
   protected $table;
   /** @var string*/
@@ -33,9 +37,10 @@ abstract class ChatControl extends \Nette\Application\UI\Control {
    * @param string $param2
    * @param int $id2
    */
-  function __construct(\Nette\Database\Context $db, \Nette\Security\User $user, $table, $param, $id, $param2 = NULL, $id2 = NULL) {
+  function __construct(\Nette\Database\Context $db, \Nette\Security\User $user, ChatCommandsProcessor  $processor, $table, $param, $id, $param2 = NULL, $id2 = NULL) {
     $this->db = $db;
     $this->user = $user;
+    $this->processor = $processor;
     if(is_string($table)) $this->table = $table;
     if(is_string($param)) $this->param = $param;
     if($param2 === NULL) $this->param2 = $param;
@@ -107,10 +112,16 @@ abstract class ChatControl extends \Nette\Application\UI\Control {
    * @return void
    */
   function newMessage($message) {
-    $data = [
-      "message" => $message,"character" => $this->user->id, "$this->param" => $this->id
+    $result = $this->processor->parse($message);
+    if($result) {
+      $this->presenter->flashMessage($result);
+    } else {
+      $data = [
+        "message" => $message,"character" => $this->user->id, "$this->param" => $this->id
       ];
-    $this->db->query("INSERT INTO $this->table", $data);
+      $this->db->query("INSERT INTO $this->table", $data);
+    }
+    $this->presenter->redirect("this");
   }
 }
 ?>
