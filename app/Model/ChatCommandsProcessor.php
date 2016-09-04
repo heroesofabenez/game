@@ -1,7 +1,9 @@
 <?php
 namespace HeroesofAbenez\Model;
 
-use HeroesofAbenez\Entities\ChatCommand;
+use HeroesofAbenez\Entities\ChatCommand,
+    HeroesofAbenez\Model\CommandNotFoundException,
+    HeroesofAbenez\Model\CommandNameAlreadyUsedException;
 
 /**
  * ChatCommandsProcessor
@@ -15,7 +17,7 @@ class ChatCommandsProcessor {
   protected $commands = [];
   
   /**
-   * Add new  command
+   * Add new command
    *
    * @param string $name
    * @param callable $callback
@@ -26,6 +28,30 @@ class ChatCommandsProcessor {
   function addCommand(ChatCommand $command) {
     if($this->hasCommand($command->name)) throw new CommandNameAlreadyUsedException("Command $command->name is already defined.");
     $this->commands[] = $command;
+  }
+  
+  /**
+   * Add an alias for already defined command
+   * 
+   * @param string $oldName
+   * @param string $newName
+   * @return void
+   * @throws CommandNotFoundException
+   * @throws CommandNameAlreadyUsedException
+   */
+  function addAlias($oldName, $newName) {
+    try {
+      $command = $this->getCommand($oldName);
+    } catch(CommandNotFoundException $ex) {
+      throw $e;
+    }
+    $new = clone $command;
+    $new->name = $newName;
+    try {
+      $this->addCommand($new);
+    } catch(CommandNameAlreadyUsedException $e) {
+      throw $e;
+    }
   }
   
   /**
@@ -86,7 +112,7 @@ class ChatCommandsProcessor {
     foreach($this->commands as $command) {
       if($command->name === $name) return $command;
     }
-    throw new CommandNotFoundException;
+    throw new CommandNotFoundException("Command $name is not defined.");
   }
   
   /**

@@ -85,6 +85,14 @@ class ChatCommandsProcessorTest extends MT\TestCase {
   /**
    * @return void
    */
+  function testAddAlias() {
+    $this->model->addAlias(self::COMMAND_NAME, "test");
+    Assert::same("passed", $this->model->parse("/test"));
+  }
+  
+  /**
+   * @return void
+   */
   function testExtractCommand() {
     Assert::same("", $this->model->extractCommand("anagfdffd"));
     Assert::same("", $this->model->extractCommand("/anagfdffd"));
