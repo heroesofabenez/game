@@ -37,5 +37,5 @@ test:default:
   <<: *test_job
 
 test:php7:
-  image: php:7
+  image: php:7.0
   <<: *test_job
