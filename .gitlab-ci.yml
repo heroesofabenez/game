@@ -39,3 +39,8 @@ test:default:
 test:php7:
   image: php:7.0
   <<: *test_job
+
+test:php71:
+  image: php:7.1
+  <<: *test_job
+  allow_failure: true
