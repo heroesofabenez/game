@@ -48,3 +48,7 @@ INSERT INTO `character_attack_skills` (`id`, `character`, `skill`, `level`) VALU
 
 INSERT INTO `pets` (`id`, `type`, `name`, `owner`, `deployed`) VALUES
 (1,	3,	NULL,	1,	1);
+
+INSERT INTO `guild_ranks_custom` (`id`, `guild`, `rank`, `name`) VALUES
+(1,	1,	7,	'Sun ruler'),
+(2,	1,	1,	'Sun follower');

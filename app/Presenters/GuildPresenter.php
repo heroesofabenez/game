@@ -99,7 +99,7 @@ class GuildPresenter extends BasePresenter {
    * @return void
    */
   function renderMembers() {
-    $this->template->members = $this->model->guildMembers($this->user->identity->guild);
+    $this->template->members = $this->model->guildMembers($this->user->identity->guild, [], true);
     $this->template->canPromote = $this->user->isAllowed("guild", "promote");
     $this->template->canKick = $this->user->isAllowed("guild", "kick");
     $roles = $this->permissionsModel->getRoles();

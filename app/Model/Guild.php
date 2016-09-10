@@ -84,19 +84,37 @@ class Guild {
   }
   
   /**
+   * Get a guild's custom name for a rank
+   * 
+   * @param int $guild
+   * @param int $rank
+   * @return string
+   */
+  function getCustomRankName($guild, $rank) {
+    $customRank = $this->db->table("guild_ranks_custom")->where("guild=? AND rank=?", $guild, $rank);
+    if(count($customRank)) return $customRank->fetch()->name;
+    else return "";
+  }
+  
+  /**
    * Get members of specified guild
    * 
    * @param int $id Id of guild
    * @param array $roles Return only members with these roles
+   * @param bool $customRoleNames Whetever the guild's custom names should be used
    * @return \stdClass[]
    */
-  function guildMembers($id, $roles = []) {
+  function guildMembers($id, $roles = [], $customRoleNames = false) {
     $return = [];
     $members = $this->db->table("characters")->where("guild", $id)->order("guildrank DESC, id");
     if(count($roles) > 0) $members->where("guildrank", $roles);
     foreach($members as $member) {
       $rank = $member->guildrank;
-      $return[] = (object) ["id" => $member->id, "name" => $member->name, "rank" => ucfirst($rank), "rankId" => $member->guildrank];
+      $m = (object) ["id" => $member->id, "name" => $member->name, "rank" => ucfirst($rank), "rankId" => $member->guildrank, "customRankName" => ""];
+      if($customRoleNames) {
+        $m->customRankName = $this->getCustomRankName($id, $m->rankId);
+      }
+      $return[] = $m;
     }
     return $return;
   }
