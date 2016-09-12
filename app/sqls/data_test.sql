@@ -50,5 +50,11 @@ INSERT INTO `pets` (`id`, `type`, `name`, `owner`, `deployed`) VALUES
 (1,	3,	NULL,	1,	1);
 
 INSERT INTO `guild_ranks_custom` (`id`, `guild`, `rank`, `name`) VALUES
-(1,	1,	7,	'Sun ruler'),
-(2,	1,	1,	'Sun follower');
+  (1,	1,	1,	'Sun observer'),
+  (2,	1,	2,	'Sun chaser'),
+  (3,	1,	3,	'Sun follower'),
+  (4,	1,	4,	'Sun watcher'),
+  (5,	1,	5,	'Sun noble'),
+  (6,	1,	6,	'Sun prince'),
+  (7,	1,	7,	'Sun ruler');
+

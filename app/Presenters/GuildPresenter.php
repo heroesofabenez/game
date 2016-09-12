@@ -1,6 +1,7 @@
 <?php
 namespace HeroesofAbenez\Presenters;
 
+use HeroesofAbenez\Forms\CustomGuildRankNamesFormFactory;
 use Nette\Application\UI\Form,
     HeroesofAbenez\Model\NameInUseException,
     HeroesofAbenez\Model\GuildNotFoundException,
@@ -197,6 +198,7 @@ class GuildPresenter extends BasePresenter {
   function renderManage() {
     $this->template->canRename = $this->user->isAllowed("guild", "rename");
     $this->template->canDissolve = $this->user->isAllowed("guild", "dissolve");
+    $this->template->canChangeRankNames = $this->user->isAllowed("guild", "changeRankNames");
   }
   
   /**
@@ -365,6 +367,28 @@ class GuildPresenter extends BasePresenter {
    */
   function renderApplications() {
     $this->template->apps = $this->model->showApplications($this->user->identity->guild);
+  }
+  
+  function actionRankNames() {
+    $this->notInGuild();
+    if(!$this->user->isAllowed("guild", "changeRankNames")) {
+      $this->flashMessage($this->translator->translate("errors.guild.cannotChangeRankNames"));
+      $this->redirect("Guild:");
+    }
+    $this->template->haveForm = true;
+  }
+  
+  /**
+   * @param CustomGuildRankNamesFormFactory $factory
+   * @return Form
+   */
+  protected function createComponentCustomGuildRankNamesForm(CustomGuildRankNamesFormFactory $factory) {
+    $form = $factory->create();
+    $form->onSuccess[] = function() {
+      $this->flashMessage($this->translator->translate("messages.guild.customRankNamesSet"));
+      $this->redirect("Guild:");
+    };
+    return $form;
   }
 }
 ?>

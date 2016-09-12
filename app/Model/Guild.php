@@ -19,7 +19,7 @@ class Guild {
   protected $db;
   /** @var \Nette\Security\User */
   protected $user;
-  /** @var HeroesofAbenez\Model\Profile */
+  /** @var \HeroesofAbenez\Model\Profile */
   protected $profileModel;
   /** @var \HeroesofAbenez\Model\Permissions */
   protected $permissionsModel;
@@ -402,6 +402,46 @@ class Guild {
     $data = ["guild" => $gid, "guildrank" => 1];
     $this->db->query("UPDATE characters SET ? WHERE id=?", $data, $uid);
     $this->cache->remove("guilds");
+  }
+  
+  /**
+   * Get default rank names
+   *
+   * @return string[]
+   */
+  function getDefaultRankNames() {
+    return $this->db->table("guild_ranks")->order("id")->fetchPairs("id", "name");
+  }
+  
+  /**
+   * Get custom rank names for a guild
+   *
+   * @param int $id
+   * @return string[]
+   */
+  function getCustomRankNames($id) {
+    return $this->db->table("guild_ranks_custom")->where("guild=?", $id)->fetchPairs("rank", "name");
+  }
+  
+  /**
+   * Set custom rank names for user's guild
+   *
+   * @param array $names
+   * @return void
+   * @throws MissingPermissionsException
+   */
+  function setCustomRankNames(array $names) {
+    if(!$this->user->isAllowed("guild", "changeRankNames")) throw new MissingPermissionsException;
+    $gid = $this->user->identity->guild;
+    $tableName = "guild_ranks_custom";
+    foreach($names as $rank => $name) {
+      if($name === "") continue;
+      $rank = substr($rank, 4, 1);
+      $data = ["guild" => $gid, "rank" => $rank, "name" => $name];
+      $row = $this->db->table($tableName)->where("guild=? AND rank=?", $gid, $rank);
+      if($row->count("*")) $this->db->query("UPDATE $tableName SET ? WHERE guild=? AND rank=?", $data, $gid, $rank);
+      else $this->db->query("INSERT INTO $tableName", $data);
+    }
   }
 }
 ?>

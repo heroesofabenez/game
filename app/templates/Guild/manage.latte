@@ -7,6 +7,7 @@
     <li><a n:href="Guild:applications">{_texts.guild.applications}</a></li>
     <li><a n:href="Guild:members">{_texts.guild.manageMembers}</a></li>
     <li><a n:href="Guild:description">{_texts.guild.changeDescription}</a></li>
+    {if $canChangeRankNames}<li><a n:href="Guild:rankNames">{_texts.guild.changeRankNames}</a></li>{/if}
     {if $canRename}<li><a n:href="Guild:rename">{_texts.guild.rename}</a></li>{/if}
     {if $canDissolve}<li><a n:href="Guild:dissolve">{_texts.guild.dissolve}</a></li>{/if}
   </ul>

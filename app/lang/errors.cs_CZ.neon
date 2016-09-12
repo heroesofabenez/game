@@ -18,6 +18,7 @@ guild:
     cannotKickHigherRanks: "Nemůžeš vyhodit členy se stejnou nebo vyšší hodností."
     grandmasterCannotLeave: "Velmistr nemůže opustit cech."
     cannotHaveMoreDeputies: "Cech nemůže mít více než 1 zástupce."
+    cannotChangeRankNames: "Nemůžeš měnit jména hodností."
 npc:
     noShop: "Toto npc nemá obchod."
 quest:
