@@ -537,11 +537,9 @@ class CombatBase {
    * @return void
    */
   function useSpecialSkill(CharacterEntity $character1, CharacterEntity $character2, CharacterSkillSpecial $skill) {
-    $result = [];
-    $result["result"] = true;
-    $result["amount"] = 0;
-    $result["action"] = "skill_special";
-    $result["name"] = $skill->skill->name;
+    $result = [
+      "result" => true, "amount" => 0, "action" => "skill_special", "name" => $skill->skill->name
+    ];
     $this->results = $result;
     $effect = [
       "id" => "skill{$skill->skill->id}Effect",
