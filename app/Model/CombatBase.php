@@ -11,29 +11,29 @@ use HeroesofAbenez\Entities\Team,
  * Handles combat
  * 
  * @author Jakub Konečný
- * @property-read \HeroesofAbenez\Model\CombatLogger $log Log from the combat
+ * @property-read CombatLogger $log Log from the combat
  * @property-read int $winner
- * @property-read in $round
+ * @property-read int $round
  * @method void onCombatStart() Tasks to do at the start of the combat
  * @method void onCombatEnd() Tasks to do at the end of the combat
  * @method void onRoundStart() Tasks to do at the start of a round
  * @method void onRound() Tasks to do during a round
  * @method void onRoundEnd() Tasks to do at the end of a round
- * @method void onAttack(\HeroesofAbenez\Entities\Character $character1, \HeroesofAbenez\Entities\Character $character2) Tasks to do at attack
- * @method void onSkillAttack(\HeroesofAbenez\Entities\Character $character1, \HeroesofAbenez\Entities\Character $character2, \HeroesofAbenez\Entities\CharacterSkillAttack $skill) Tasks to do at skill attack
- * @method void onSkillSpecial(\HeroesofAbenez\Entities\Character $character1, \HeroesofAbenez\Entities\Character $character2, \HeroesofAbenez\Entities\CharacterSkillSpecial $skill) Tasks to do when using special skill
- * @method void onHeal(\HeroesofAbenez\Entities\Character $character1, \HeroesofAbenez\Entities\Character $character2) Tasks to do at healing
+ * @method void onAttack(CharacterEntity $character1, CharacterEntity $character2) Tasks to do at attack
+ * @method void onSkillAttack(CharacterEntity $character1, CharacterEntity $character2, CharacterSkillAttack $skill) Tasks to do at skill attack
+ * @method void onSkillSpecial(CharacterEntity $character1, CharacterEntity $character2, CharacterSkillSpecial $skill) Tasks to do when using special skill
+ * @method void onHeal(CharacterEntity $character1, CharacterEntity $character2) Tasks to do at healing
  */
 class CombatBase {
   use \Nette\SmartObject;
   
   const LOWEST_HP_THRESHOLD = 0.5;
   
-  /** @var \HeroesofAbenez\Entities\Team First team */
+  /** @var Team First team */
   protected $team1;
-  /** @var \HeroesofAbenez\Entities\Team Second team */
+  /** @var Team Second team */
   protected $team2;
-  /** @var \HeroesofAbenez\Model\CombatLogger */
+  /** @var CombatLogger */
   protected $log;
   /** @var int Number of current round */
   protected $round = 0;
@@ -505,6 +505,7 @@ class CombatBase {
    * @param CharacterEntity $character1 Attacker
    * @param CharacterEntity $character2 Defender
    * @param CharacterSkillAttack $skill Used skill
+   * @return void
    */
   function useAttackSkill(CharacterEntity $character1, CharacterEntity $character2, CharacterSkillAttack $skill) {
     $result = [];
@@ -532,7 +533,7 @@ class CombatBase {
    * 
    * @param CharacterEntity $character1
    * @param CharacterEntity $character2
-   * @param CharacterSkillAttack $skill
+   * @param CharacterSkillSpecial $skill
    * @return void
    */
   function useSpecialSkill(CharacterEntity $character1, CharacterEntity $character2, CharacterSkillSpecial $skill) {
@@ -555,8 +556,8 @@ class CombatBase {
   /**
    * Heal a character
    * 
-   * @param \HeroesofAbenez\Entities\Character $character1 Healer
-   * @param \HeroesofAbenez\Entities\Character $character2 Wounded character
+   * @param CharacterEntity $character1 Healer
+   * @param CharacterEntity $character2 Wounded character
    */
   function heal(CharacterEntity $character1, CharacterEntity $character2) {
     $result = [];
@@ -577,8 +578,8 @@ class CombatBase {
   /**
    * Log results of an action
    * 
-   * @param \HeroesofAbenez\Entities\Character $character1
-   * @param \HeroesofAbenez\Entities\Character $character2
+   * @param CharacterEntity $character1
+   * @param CharacterEntity $character2
    */
   function logResults(CharacterEntity $character1, CharacterEntity $character2) {
     extract($this->results);
@@ -599,7 +600,7 @@ class CombatBase {
   }
   
   /**
-   * @return \HeroesofAbenez\Model\CombatLogger
+   * @return CombatLogger
    */
   function getLog() {
     return $this->log;
