@@ -48,13 +48,13 @@ INSERT INTO `guild_privileges` (`id`, `action`, `rank`) VALUES
 (7,	'changeRankNames',	7);
 
 INSERT INTO `guild_ranks` (`id`, `name`) VALUES
-(4,	'advisor'),
-(6,	'deputy'),
-(7,	'grandmaster'),
-(5,	'master'),
-(2,	'member'),
 (1,	'recruit'),
-(3,	'regular');
+(2,	'member'),
+(3,	'regular'),
+(4,	'advisor'),
+(5,	'master'),
+(6,	'deputy'),
+(7,	'grandmaster');
 
 INSERT INTO `introduction` (`id`, `race`, `class`, `part`, `text`) VALUES
 (1,	2,	3,	1,	'Part 1'),
