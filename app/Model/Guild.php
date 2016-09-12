@@ -28,8 +28,8 @@ class Guild {
    * @param \Nette\Caching\Cache $cache
    * @param \Nette\Database\Context $db
    * @param \Nette\Security\User $user
-   * @param \HeroesofAbenez\Model\Profile $profileModel
-   * @param \HeroesofAbenez\Model\Permissions $permissionsModel
+   * @param Profile $profileModel
+   * @param Permissions $permissionsModel
    */
   function __construct(\Nette\Caching\Cache $cache, \Nette\Database\Context $db, \Nette\Security\User $user, Profile $profileModel, Permissions $permissionsModel) {
     $this->cache = $cache;
@@ -55,7 +55,7 @@ class Guild {
    * Get data about specified guild
    * 
    * @param int $id Id of guild
-   * @return \HeroesofAbenez\Entities\Guild
+   * @return GuildEntity
    */
   function guildData($id) {
     $guilds = $this->listOfGuilds();

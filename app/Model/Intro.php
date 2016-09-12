@@ -9,7 +9,7 @@ namespace HeroesofAbenez\Model;
 class Intro {
   use \Nette\SmartObject;
   
-  /** @var Nette\Security\User */
+  /** @var \Nette\Security\User */
   protected $user;
   /** @var \Nette\Database\Context */
   protected $db;

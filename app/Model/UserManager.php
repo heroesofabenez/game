@@ -13,9 +13,9 @@ class UserManager implements NS\IAuthenticator {
   
   /** @var \Nette\Database\Context Database context */
   protected $db;
-  /** @var \HeroesofAbenez\Model\Permissions */
+  /** @var Permissions */
   protected $permissionsModel;
-  /** @var \HeroesofAbenez\Model\Profile */
+  /** @var Profile */
   protected $profileModel;
   /** @var array */
   protected $devServers;
@@ -54,7 +54,7 @@ class UserManager implements NS\IAuthenticator {
    * Logins the user
    * 
    * @param array $credentials not really used
-   * @return \Nette\Security\Identity User's identity
+   * @return NS\Identity User's identity
    */
   function authenticate(array $credentials) {
     $uid = $this->getRealId();

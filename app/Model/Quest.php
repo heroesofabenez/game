@@ -60,7 +60,7 @@ class Quest {
    * Gets info about specified quest
    * 
    * @param int $id Quest's id
-   * @return \HeroesofAbenez\Entities\Quest
+   * @return QuestEntity
    */
   function view($id) {
     $quests = $this->listOfQuests();

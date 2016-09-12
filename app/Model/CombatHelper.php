@@ -15,16 +15,16 @@ use HeroesofAbenez\Entities\Character,
 class CombatHelper {
   use \Nette\SmartObject;
   
-  /** @var \HeroesofAbenez\Model\Profile */
+  /** @var Profile */
   protected $profileModel;
-  /** @var \HeroesofAbenez\Model\Equipment */
+  /** @var Equipment */
   protected $equipmentModel;
-  /** @var \HeroesofAbenez\Model\Skills */
+  /** @var Skills */
   protected $skillsModel;
   /** @var \Nette\Database\Context */
   protected $db;
   
-  function __construct(\HeroesofAbenez\Model\Profile $profileModel, \HeroesofAbenez\Model\Equipment $equipmentModel, \HeroesofAbenez\Model\Skills $skillsModel, \Nette\Database\Context $db) {
+  function __construct(Profile $profileModel, Equipment $equipmentModel, Skills $skillsModel, \Nette\Database\Context $db) {
     $this->profileModel = $profileModel;
     $this->equipmentModel = $equipmentModel;
     $this->skillsModel = $skillsModel;

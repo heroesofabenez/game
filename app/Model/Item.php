@@ -73,7 +73,7 @@ class Item {
    * Get info about specified item
    * 
    * @param int $id Item's id
-   * @return \HeroesofAbenez\Entities\Item
+   * @return ItemEntity
    */
   function view($id) {
     $items = $this->listOfItems();

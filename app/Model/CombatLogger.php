@@ -17,9 +17,9 @@ class CombatLogger implements \Countable, \IteratorAggregate {
   
   /** @var \Latte\Engine */
   protected $latte;
-  /** @var \HeroesofAbenez\Entities\Team First team */
+  /** @var Team First team */
   protected $team1;
-  /** @var \HeroesofAbenez\Entities\Team Second team */
+  /** @var Team Second team */
   protected $team2;
   /** @var array */
   protected $actions = [];
@@ -58,8 +58,8 @@ class CombatLogger implements \Countable, \IteratorAggregate {
    * 
    * @param string $action
    * @param bool $result
-   * @param \HeroesofAbenez\Entities\Character $character1
-   * @param \HeroesofAbenez\Entities\Character $character2
+   * @param CharacterEntity $character1
+   * @param CharacterEntity $character2
    * @param int $amount
    * @param string $name
    */

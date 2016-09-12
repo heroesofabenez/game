@@ -71,7 +71,7 @@ class Location {
    * Gets data about specified stage
    * 
    * @param int $id Stage's id
-   * @return \HeroesofAbenez\Entities\Stage
+   * @return Stage
    */
   function getStage($id) {
     $stages = $this->listOfStages();
@@ -122,7 +122,7 @@ class Location {
    * Gets data about specified area
    * 
    * @param int $id Area's id
-   * @return HeroesofAbenez\Entities\Area
+   * @return Area
    */
   function getArea($id) {
     $areas = $this->listOfAreas();

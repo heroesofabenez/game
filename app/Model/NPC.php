@@ -56,7 +56,7 @@ class NPC {
    * Get info about specified npc
    * 
    * @param int $id Npc's id
-   * @return \HeroesofAbenez\Entities\NPC
+   * @return NPCEntity
    */
   function view($id) {
     $npcs = $this->listOfNpcs();

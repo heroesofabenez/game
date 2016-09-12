@@ -11,16 +11,16 @@ class Map {
   
   /** @var \HeroesofAbenez\Model\Location */
   protected $locationModel;
-  /** @var \HeroesofAbenez\Model\MapDrawer */
+  /** @var MapDrawer */
   protected $drawer;
   /** @var \Nette\Security\User */
   protected $user;
   
   /**
    * 
-   * @param \HeroesofAbenez\Model\Location $locationModel
+   * @param Location $locationModel
    * @param \Nette\Security\User $user
-   * @param \HeroesofAbenez\Model\MapDrawer $drawer
+   * @param MapDrawer $drawer
    */
   function __construct(Location $locationModel, \Nette\Security\User $user, MapDrawer $drawer) {
     $this->locationModel = $locationModel;

@@ -11,13 +11,13 @@ use Nette\Utils\Image;
 class MapDrawer {
   use \Nette\SmartObject;
   
-  /** @var \HeroesofAbenez\Model\Location */
+  /** @var Location */
   protected $locationModel;
   /** @var \Nette\Security\User */
   protected $user;
   
   /**
-   * @param \HeroesofAbenez\Model\Location $locationModel
+   * @param Location $locationModel
    * @param \Nette\Security\User $user
    */
   function __construct(Location $locationModel, \Nette\Security\User $user) {

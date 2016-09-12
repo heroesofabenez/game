@@ -1,8 +1,7 @@
 <?php
 namespace HeroesofAbenez\Model;
 
-use HeroesofAbenez\Entities\Request as RequestEntity,
-    Nette\NotImplementedException;
+use HeroesofAbenez\Entities\Request as RequestEntity;
 
 /**
  * Request Model
@@ -16,9 +15,9 @@ class Request {
   protected $user;
   /** @var \Nette\Database\Context */
   protected $db;
-  /** @var \HeroesofAbenez\Model\Profile */
+  /** @var Profile */
   protected $profileModel;
-  /** @var \HeroesofAbenez\Model\Guild */
+  /** @var Guild */
   protected $guildModel;
   
   /**
@@ -97,7 +96,7 @@ class Request {
    * Gets data about specified request
    * 
    * @param int $id Request's id
-   * @return \HeroesofAbenez\Entities\Request
+   * @return RequestEntity
    * @throws RequestNotFoundException
    * @throws CannotSeeRequestException
    */
@@ -120,7 +119,7 @@ class Request {
    * @throws CannotSeeRequestException
    * @throws CannotAcceptRequestException
    * @throws RequestAlreadyHandledException
-   * @throws \Nette\NotImplementedException
+   * @throws NotImplementedException
    */
   function accept($id) {
     $request = $this->show($id);

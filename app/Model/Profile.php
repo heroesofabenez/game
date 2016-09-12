@@ -26,7 +26,7 @@ class Profile {
   /** @var string[] */
   private $stats;
   
-  function __construct(\Nette\Database\Context $db, \Nette\Caching\Cache $cache, \HeroesofAbenez\Model\Pet $petModel) {
+  function __construct(\Nette\Database\Context $db, \Nette\Caching\Cache $cache, Pet $petModel) {
     $this->db = $db;
     $this->cache = $cache;
     $this->petModel = $petModel;

@@ -12,7 +12,7 @@ class AuthorizatorFactory {
   /**
   * Factory for Authorizator
   * 
-  * @param \HeroesofAbenez\Model\Permissions $model
+  * @param Permissions $model
   * @return \Nette\Security\Permission
   */
   static function create(Permissions $model) {
