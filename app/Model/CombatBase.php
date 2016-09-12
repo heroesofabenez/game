@@ -411,7 +411,7 @@ class CombatBase {
   }
   
   /**
-   * Starts next round
+   * Start next round
    * 
    * @return int Winning team/0
    */
@@ -428,11 +428,10 @@ class CombatBase {
    */
   protected function doRound() {
     $this->onRound();
-    
   }
   
   /**
-   * Ends round
+   * End round
    * 
    * @return int Winning team/0
    */
