@@ -62,3 +62,6 @@ tavernNewMessage:
         error: "Zadej zprávu."
     sendButton:
         label: "Odeslat"
+customGuildRankNames:
+    sendButton:
+        label: "Nastavit"

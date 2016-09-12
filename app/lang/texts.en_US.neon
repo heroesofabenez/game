@@ -59,6 +59,7 @@ guild:
     noGuildText2: " your own or "
     noGuildJoinLink: "join"
     noGuildText3: " an existing one."
+    changeRankNames: "Change rank names"
 request:
     title: "Request"
     accept: "Accept"

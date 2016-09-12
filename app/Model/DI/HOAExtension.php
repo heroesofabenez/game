@@ -169,6 +169,8 @@ class HOAExtension extends \Nette\DI\CompilerExtension {
       ->setFactory(HeroesofAbenez\Forms\GuildDescriptionFormFactory::class);
     $builder->addDefinition($this->prefix("form.dissolveGuild"))
       ->setFactory(HeroesofAbenez\Forms\DissolveGuildFormFactory::class);
+    $builder->addDefinition($this->prefix("form.customGuildRankNames"))
+      ->setFactory(HeroesofAbenez\Forms\CustomGuildRankNamesFormFactory::class);
   }
   
   function beforeCompile() {

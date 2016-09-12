@@ -21,6 +21,7 @@ guild:
     demoted: "Member demoted."
     kicked: "Member kicked."
     descriptionChanged: "Guild's description changed."
+    customRankNamesSet: "Custom rank names set."
 pet:
     discarded: "The pet was discarded."
 chat:

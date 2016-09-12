@@ -59,6 +59,7 @@ guild:
     noGuildText2: " svůj vlastní nebo se "
     noGuildJoinLink: "připojit"
     noGuildText3: " k již existujícímu."
+    changeRankNames: "Změnit jména hodností"
 request:
     title: "Požadavek"
     accept: "Přijmout"

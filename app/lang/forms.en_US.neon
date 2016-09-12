@@ -62,3 +62,6 @@ tavernNewMessage:
         error: "Enter message."
     sendButton:
         label: "Send"
+customGuildRankNames:
+    sendButton:
+        label: "Set"

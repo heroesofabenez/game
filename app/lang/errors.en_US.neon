@@ -18,6 +18,7 @@ guild:
     cannotKickHigherRanks: "You can't kick members with same or higher rank."
     grandmasterCannotLeave: "Grandmaster cannot leave guild."
     cannotHaveMoreDeputies: "Guild can't have more than 1 deputy."
+    cannotChangeRankNames: "You can't change rank names."
 npc:
     noShop: "This npc doesn't have shop."
 quest:
