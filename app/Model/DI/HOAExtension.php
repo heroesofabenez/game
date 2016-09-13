@@ -119,6 +119,12 @@ class HOAExtension extends \Nette\DI\CompilerExtension {
       ->setFactory(HeroesofAbenez\Chat\Commands\TimeCommand::class);
     $builder->addDefinition($this->prefix("chat.command.location"))
       ->setFactory(HeroesofAbenez\Chat\Commands\LocationCommand::class);
+    $builder->addDefinition($this->prefix("chat.command.promote"))
+      ->setFactory(HeroesofAbenez\Chat\Commands\PromoteCommand::class);
+    $builder->addDefinition($this->prefix("chat.command.demote"))
+      ->setFactory(HeroesofAbenez\Chat\Commands\DemoteCommand::class);
+    $builder->addDefinition($this->prefix("chat.command.kick"))
+      ->setFactory(HeroesofAbenez\Chat\Commands\KickCommand::class);
   }
   
   /**

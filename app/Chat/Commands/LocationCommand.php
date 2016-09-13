@@ -2,7 +2,7 @@
 namespace HeroesofAbenez\Chat\Commands;
 
 /**
- * chat Command Location
+ * Chat Command Location
  *
  * @author Jakub Konečný
  */
