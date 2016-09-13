@@ -27,10 +27,11 @@ image: php:5.6
   - php composer.phar update --no-interaction --prefer-source -a
   
   - php setup_ci.php
+  - curl https://gitlab.com/heroesofabenez/resources/raw/master/cs-ruleset.xml > cs-ruleset.xml
   
   script:
   - ./vendor/bin/parallel-lint . -e php,phpt --exclude vendor --exclude app/temp
-  - ./vendor/bin/phpcs --extensions=php,phpt . --standard=ruleset.xml --colors
+  - ./vendor/bin/phpcs --extensions=php,phpt . --standard=cs-ruleset.xml --colors
   - php run_tests.php
 
 test:default:
