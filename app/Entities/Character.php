@@ -389,8 +389,7 @@ class Character extends BaseEntity {
    */
   function calculateInitiative() {
     $result = 0;
-    $formula = $this->initiative_formula;
-    $formula = str_replace(["INT", "DEX"], [$this->intelligence, $this->dexterity], $formula);
+    $formula = str_replace(["INT", "DEX"], [$this->intelligence, $this->dexterity], $this->initiative_formula);
     $pos = strpos($formula, "d");
     $dices = [(int) substr($formula, 0, $pos), (int) substr($formula, $pos +1, strpos($formula, "+") - $pos - 1)];
     for($i = 1; $i <= $dices[0]; $i++) {
