@@ -75,4 +75,4 @@ hoa:
 
 Additional resources
 --------------------
-When testing, you will also need to download definition of our coding standard. It can be found (here) [https://gitlab.com/heroesofabenez/resources/raw/master/cs-ruleset.xml].
+When testing, you will also need to download definition of our coding standard. It can be found [here] (https://gitlab.com/heroesofabenez/resources/raw/master/cs-ruleset.xml).
