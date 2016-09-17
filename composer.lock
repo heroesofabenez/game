@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "7e475bd5a394749599dd7f0bc17120f0",
+    "hash": "458a6abe2bf9a2bd670fa5d86e7078cb",
     "content-hash": "337a10871c3847829606bff096226d5e",
     "packages": [
         {
@@ -1609,12 +1609,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/konecnyjakub/mytester.git",
-                "reference": "0c83d04851d713d2680a499e30e7c31d13f41402"
+                "reference": "bc954d4fb3a987e4627564c2a3f49a9defa97fdd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/konecnyjakub/mytester/zipball/0c83d04851d713d2680a499e30e7c31d13f41402",
-                "reference": "0c83d04851d713d2680a499e30e7c31d13f41402",
+                "url": "https://api.github.com/repos/konecnyjakub/mytester/zipball/bc954d4fb3a987e4627564c2a3f49a9defa97fdd",
+                "reference": "bc954d4fb3a987e4627564c2a3f49a9defa97fdd",
                 "shasum": ""
             },
             "require": {
@@ -1668,7 +1668,7 @@
                 "tester",
                 "testing"
             ],
-            "time": "2016-09-11 18:45:22"
+            "time": "2016-09-17 18:43:49"
         },
         {
             "name": "nette/robot-loader",
