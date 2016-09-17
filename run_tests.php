@@ -3,8 +3,7 @@ const WWW_DIR = __DIR__;
 const APP_DIR = WWW_DIR . "/app";
 
 require WWW_DIR . "/vendor/autoload.php";
-$isCli = (PHP_SAPI === "cli");
-if(!$isCli) {
+if(PHP_SAPI != "cli") {
   Tracy\Debugger::enable(null, APP_DIR . "/log");
 } else {
   $_SERVER["SERVER_NAME"] = "hoa.local";
