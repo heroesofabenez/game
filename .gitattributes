@@ -6,3 +6,4 @@ apigen.neon     export-ignore
 setup_ci.php	export-ignore
 ci.neon		export-ignore
 run_tests.php	export-ignore
+run_tests.sh    export-ignore

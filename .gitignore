@@ -1,6 +1,6 @@
-Thumbs.db
 temp
 /nbproject
+/.idea
 /api
 /tests/*.php
 /images
