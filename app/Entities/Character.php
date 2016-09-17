@@ -219,7 +219,7 @@ class Character extends BaseEntity {
     } catch (OutOfBoundsException $e) {
       throw $e;
     }
-    $itemBonus = $item->deployParams();
+    $itemBonus = $item->deployParams;
     $this->removeEffect($itemBonus->id);
   }
   
