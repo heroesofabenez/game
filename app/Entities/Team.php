@@ -86,7 +86,7 @@ class Team extends BaseEntity implements \ArrayAccess, \Countable, \IteratorAggr
   /**
    * Get members which can perform an action
    * 
-   * @return Character
+   * @return Character[]
    */
   function getUsableMembers() {
     $return = [];

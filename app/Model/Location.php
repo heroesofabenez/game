@@ -107,6 +107,7 @@ class Location {
   function listOfAreas() {
     $areas = $this->cache->load("areas");
     if($areas === NULL) {
+      $return = [];
       $areas = $this->db->table("quest_areas");
       foreach($areas as $area) {
         $return[$area->id] = new Area($area);

@@ -42,7 +42,7 @@ class ChatCommandsProcessor {
   function addAlias($oldName, $newName) {
     try {
       $command = $this->getCommand($oldName);
-    } catch(CommandNotFoundException $ex) {
+    } catch(CommandNotFoundException $e) {
       throw $e;
     }
     $new = clone $command;
@@ -116,7 +116,7 @@ class ChatCommandsProcessor {
   }
   
   /**
-   * @param type $text
+   * @param string $text
    * @return string|bool Result of the command/false when text text contains no (defined) command
    */
   function parse($text) {

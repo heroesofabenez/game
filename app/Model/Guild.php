@@ -66,7 +66,7 @@ class Guild {
    * Gets basic data about specified guild
    * 
    * @param integer $id guild's id
-   * @return array info about guild
+   * @return array|bool info about guild
    */
   function view($id) {
     $return = [];
@@ -337,7 +337,7 @@ class Guild {
   /**
    * Dissolve guild
    *
-   * @param type $id Guild to dissolve
+   * @param int $id Guild to dissolve
    * @return void
    */
   function dissolve($id) {

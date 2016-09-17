@@ -1,6 +1,7 @@
 <?php
 namespace HeroesofAbenez\Model;
 
+use HeroesofAbenez\Entities\Character;
 use HeroesofAbenez\Entities\Team,
     HeroesofAbenez\Entities\Character as CharacterEntity,
     HeroesofAbenez\Entities\CharacterEffect,
@@ -146,6 +147,7 @@ class CombatBase {
    */
   function deployPets() {
     $characters = array_merge($this->team1->items, $this->team2->items);
+    /** @var Character $character */
     foreach($characters as $character) {
       if($character->active_pet) {
         $effect = $character->getPet($character->active_pet)->deployParams;
@@ -161,6 +163,7 @@ class CombatBase {
    */
   function equipItems() {
     $characters = array_merge($this->team1->items, $this->team2->items);
+    /** @var Character $character */
     foreach($characters as $character) {
       foreach($character->equipment as $item) {
         if($item->worn) $character->equipItem($item->id);
@@ -175,6 +178,7 @@ class CombatBase {
    */
   function setSkillsCooldowns() {
     $characters = array_merge($this->team1->items, $this->team2->items);
+    /** @var Character $character */
     foreach($characters as $character) {
       foreach($character->skills as $skill) {
         $skill->resetCooldown();
@@ -189,6 +193,7 @@ class CombatBase {
    */
   function decreaseSkillsCooldowns() {
     $characters = array_merge($this->team1->items, $this->team2->items);
+    /** @var Character $character */
     foreach($characters as $character) {
       foreach($character->skills as $skill) {
         $skill->decreaseCooldown();
@@ -203,6 +208,7 @@ class CombatBase {
    */
   function removeCombatEffects() {
     $characters = array_merge($this->team1->items, $this->team2->items);
+    /** @var Character $character */
     foreach($characters as $character) {
       foreach($character->effects as $effect) {
         if($effect->duration === "combat" OR is_int($effect->duration)) $character->removeEffect($effect->id);
@@ -268,6 +274,7 @@ class CombatBase {
    */
   function recalculateStats() {
     $characters = array_merge($this->team1->items, $this->team2->items);
+    /** @var Character $character */
     foreach($characters as $character) {
       foreach($character->effects as $effect) {
         if(is_int($effect->duration)) { $effect->duration--; }
@@ -284,6 +291,7 @@ class CombatBase {
    */
   function resetInitiative() {
     $characters = array_merge($this->team1->items, $this->team2->items);
+    /** @var Character $character */
     foreach($characters as $character) {
       $character->resetInitiative();
     }

@@ -99,7 +99,7 @@ class CombatHelper {
     if(count($row) === 1) throw new OpponentNotFoundException;
     $row["id"] = "pveArenaNpc" . $row["id"];
     $row["initiative_formula"] = $this->getInitiativeFormula($row["occupation"]);
-    $skills = $equimpent = [];
+    $skills = $equipment = [];
     $skillRows = $this->db->query("SELECT id FROM skills_attacks WHERE needed_class={$row["occupation"]} AND needed_level<={$row["level"]}");
     foreach($skillRows as $skillRow) {
       $skills[] = new CharacterSkillAttack(new SkillAttack($this->db->table("skills_attacks")->get($skillRow->id)), 0);
@@ -114,10 +114,10 @@ class CombatHelper {
       $weapon = $this->equipmentModel->view($row["weapon"]);
       if($weapon) {
         $weapon->worn = true;
-        $equimpent[] = $weapon;
+        $equipment[] = $weapon;
       }
     }
-    $npc = new Character($row, $equimpent, [], $skills);
+    $npc = new Character($row, $equipment, [], $skills);
     return $npc;
   }
 }

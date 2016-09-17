@@ -26,7 +26,7 @@ class GuildsRankingControl extends RankingControl {
    * @return array
    */
   function getData() {
-    $return = [];
+    $return = $data = [];
     $result = $this->model->listOfGuilds();
     foreach($result as $row) {
       $data[] = $row->toArray();

@@ -12,7 +12,7 @@ guild:
     playerNotInGuild: "Specified player isn't in your guild."
     playerDoesNotExist: "Specified player doesn't exist."
     cannotPromoteHigherRanks: "You can't promote members with same or higher ranks."
-    cannotPromoteToGranmaster: "You can't promote members to grandmaster."
+    cannotPromoteToGrandmaster: "You can't promote members to grandmaster."
     cannotDemoteHigherRanks: "You can't demote members with same or higher ranks."
     cannotDemoteLowestRank: "You can't demote members with the lowest rank."
     cannotKickHigherRanks: "You can't kick members with same or higher rank."

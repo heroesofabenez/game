@@ -4,7 +4,7 @@ Installation instructions
 Requirements
 ------------
 Obviously, you need PHP. Version 5.6 or later is required, but 7.0+ is highly recommended. Then you need web server (preferably Apache or Nginx) and sql server (MySql, PgSql, MariaDb, etc.).
-The game uses Composer to manage its dependecies so you have to have it installed. You also need Git if you want to contribute.
+The game uses Composer to manage its dependencies so you have to have it installed. You also need Git if you want to contribute.
 
 Downloading
 -----------
@@ -61,9 +61,9 @@ RewriteBase /
 
 in /.htaccess and (optionally) set up a virtual host.
 ### NGINX
-If you have NGINX, you (currenty) have to do all server configuration by yourself.
+If you have NGINX, you (currently) have to do all server configuration by yourself.
 ### General
-It is adviced to install the game to server's root and use localhost, <yourcomputername>, or hoa.local as server's name. If you wish to use your computer's name or in general something not previously mentioned, add the name to app/config/local.neon to section hoa - devServers as element of array:
+It is advised to install the game to server's root and use localhost, <yourcomputername>, or hoa.local as server's name. If you wish to use your computer's name or in general something not previously mentioned, add the name to app/config/local.neon to section hoa - devServers as element of array:
 
 ```
 hoa:

@@ -1,8 +1,8 @@
 quest:
     accepted: "Quest accepted."
-    finnished: "Quest finished."
+    finished: "Quest finished."
 shop:
-    itemBougt: "Item bought."
+    itemBought: "Item bought."
 travel:
     movedToStage: "You moved to %stageName%."
 request:

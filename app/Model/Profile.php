@@ -227,7 +227,7 @@ class Profile {
    * Gets basic data about specified player
    * 
    * @param integer $id character's id
-   * @return array info about character
+   * @return array|bool info about character
    */
   function view($id) {
     $return = [];

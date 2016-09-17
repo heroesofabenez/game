@@ -166,7 +166,7 @@ class NPCQuestsControl extends \Nette\Application\UI\Control {
     $where3 = ["id" => $this->user->id];
     $this->db->query("UPDATE characters SET $data3 WHERE ?", $where3);
     if($quest->reward_item > 0) $this->itemModel->giveItem($quest->reward_item);
-    $this->presenter->flashMessage($this->translator->translate("messages.quest.finnished"));
+    $this->presenter->flashMessage($this->translator->translate("messages.quest.finished"));
     $this->presenter->redirect("Quest:view", $quest->id);
   }
 }

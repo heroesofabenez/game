@@ -104,7 +104,7 @@ class Skills {
   /**
    * @param int $skillId
    * @param int $userId
-   * @return CharacterSkillAttack|bool
+   * @return CharacterSkillSpecial|bool
    */
   function getCharacterSpecialSkill($skillId, $userId = 0) {
     if($userId === 0) $userId = $this->user->id;

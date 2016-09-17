@@ -11,7 +11,7 @@ class PostofficeControl extends \Nette\Application\UI\Control {
   protected $db;
   /** @var \Nette\Security\User */
   protected $user;
-  /** @var HeroesofAbenez\Model\Profile */
+  /** @var \HeroesofAbenez\Model\Profile */
   protected $profileModel;
   
   function __construct(\Nette\Database\Context $db, \Nette\Security\User $user, \HeroesofAbenez\Model\Profile $profileModel) {

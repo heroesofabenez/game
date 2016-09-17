@@ -75,7 +75,7 @@ class TavernPresenter extends BasePresenter {
   }
   
   /**
-   * Creates form for writting new message
+   * Creates form for writing new message
    * 
    * @return \Nette\Application\UI\Form
    */
@@ -92,7 +92,7 @@ class TavernPresenter extends BasePresenter {
   /**
    * 
    * @param \Nette\Application\UI\Form $form
-   * @param \ Nette\Utils\ArrayHash $values
+   * @param \Nette\Utils\ArrayHash $values
    * @return void
    */
   function newMessageSucceeded(Form $form, $values) {

@@ -12,7 +12,7 @@ guild:
     playerNotInGuild: "Zadaný hráč není v tvém cechu."
     playerDoesNotExist: "Zadaný hráč neexistuje."
     cannotPromoteHigherRanks: "Nemůžeš povyšovat členy se stejnou nebo vyšší hodností."
-    cannotPromoteToGranmaster: "Nemůžeš povyšovat členy na velmistra."
+    cannotPromoteToGrandmaster: "Nemůžeš povyšovat členy na velmistra."
     cannotDemoteHigherRanks: "Nemůžeš degradovat členy se stejnou nebo vyšší hodností."
     cannotDemoteLowestRank: "Nemůžeš degradovat členy s nejnižší hodností."
     cannotKickHigherRanks: "Nemůžeš vyhodit členy se stejnou nebo vyšší hodností."

@@ -82,7 +82,7 @@ class Intro {
   }
   
   /**
-   * Ends introuction and sends player to his starting location
+   * Ends introduction and sends player to his starting location
    * 
    * @return void
    */

@@ -1,7 +1,8 @@
 <?php
 namespace HeroesofAbenez\Model;
 
-use HeroesofAbenez\Entities\Request as RequestEntity;
+use HeroesofAbenez\Entities\Request as RequestEntity,
+    Nette\NotImplementedException;
 
 /**
  * Request Model

@@ -11,7 +11,7 @@ class NPC extends BaseEntity {
   protected $id;
   /** @var string name */
   protected $name;
-  /** @var string descrption */
+  /** @var string description */
   protected $description;
   /** @var int id of race */
   protected $race;

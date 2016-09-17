@@ -3,7 +3,6 @@ namespace HeroesofAbenez\Presenters;
 
 use HeroesofAbenez\Forms\CustomGuildRankNamesFormFactory;
 use Nette\Application\UI\Form,
-    HeroesofAbenez\Model\NameInUseException,
     HeroesofAbenez\Model\GuildNotFoundException,
     HeroesofAbenez\Model\NotInGuildException,
     HeroesofAbenez\Model\GrandmasterCannotLeaveGuildException,
@@ -13,6 +12,9 @@ use Nette\Application\UI\Form,
     HeroesofAbenez\Model\CannotPromoteHigherRanksException,
     HeroesofAbenez\Model\CannotPromoteToGrandmaster,
     HeroesofAbenez\Model\CannotHaveMoreDeputies,
+    HeroesofAbenez\Model\CannotDemoteHigherRanksException,
+    HeroesofAbenez\Model\CannotDemoteLowestRankException,
+    HeroesofAbenez\Model\CannotKickHigherRanksException,
     HeroesofAbenez\Forms\CreateGuildFormFactory,
     HeroesofAbenez\Forms\RenameGuildFormFactory,
     HeroesofAbenez\Forms\GuildDescriptionFormFactory,
@@ -45,13 +47,13 @@ class GuildPresenter extends BasePresenter {
   /**
    * Redirect player to noguild if he is not in guild
    * 
-   * @param bool $warrning Whetever to print a warrning (via flash message)
+   * @param bool $warning Whetever to print a warrning (via flash message)
    * @return void
   */
-  function notInGuild($warrning = true) {
+  function notInGuild($warning = true) {
     $guild = $this->user->identity->guild;
     if($guild == 0) {
-      if($warrning) { $this->flashMessage($this->translator->translate("errors.guild.notInGuild")); }
+      if($warning) { $this->flashMessage($this->translator->translate("errors.guild.notInGuild")); }
       $this->forward("noguild");
     }
   }
@@ -274,7 +276,7 @@ class GuildPresenter extends BasePresenter {
     } catch(CannotPromoteHigherRanksException $e) {
       $this->flashMessage($this->translator->translate("errors.guild.cannotPromoteHigherRanks"));
     } catch(CannotPromoteToGrandmaster $e) {
-      $this->flashMessage($this->translator->translate("errors.guild.cannotPromoteToGranmaster"));
+      $this->flashMessage($this->translator->translate("errors.guild.cannotPromoteToGrandmaster"));
     } catch(CannotHaveMoreDeputies $e) {
       $this->flashMessage($this->translator->translate("errors.guild.cannotHaveMoreDeputies"));
     }

@@ -49,7 +49,7 @@ class NPCDialogueControl extends \Nette\Application\UI\Control {
    * 
    * @param string $speaker
    * @param string $text
-   * @return \HeroesofAbenez\DialogueLine
+   * @return DialogueLine
    */
   function newLine($speaker, $text) {
     return new DialogueLine($speaker, $text, $this->names);

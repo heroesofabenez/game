@@ -1,6 +1,8 @@
 <?php
 namespace HeroesofAbenez\Utils;
 
+use HeroesofAbenez\Entities\Character;
+
 /**
  * Trait Collection
  * Target class must implement \ArrayAccess, \Countable, \IteratorAggregate 
@@ -54,7 +56,7 @@ trait TCollection {
    * @throws \Nette\OutOfRangeException
    */
   function offsetSet($index, $member) {
-    if(!$member instanceof $this->class) throw new Nette\InvalidArgumentException("Argument must be of $this->class type.");
+    if(!$member instanceof $this->class) throw new \Nette\InvalidArgumentException("Argument must be of $this->class type.");
     if($index === NULL) {
       $this->items[] = $member;
     } elseif($index < 0 OR $index >= count($this->items)) {

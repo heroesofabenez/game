@@ -43,7 +43,7 @@ class ChatCommandsProcessorTest extends MT\TestCase {
   const COMMAND_NAME = "test1";
   const TEXT = "/" . self::COMMAND_NAME;
   
-  /** @var \HeroesofAbenez\Model\ChatCommandsProcessor */
+  /** @var \HeroesofAbenez\Chat\ChatCommandsProcessor */
   protected $model;
   
   function __construct(\HeroesofAbenez\Chat\ChatCommandsProcessor $model) {
@@ -111,7 +111,7 @@ class ChatCommandsProcessorTest extends MT\TestCase {
   }
   
   /**
-   * @return vooid
+   * @return void
    */
   function testExtractParameters() {
     $result = $this->model->extractParameters("/test abc 123");

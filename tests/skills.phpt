@@ -66,7 +66,7 @@ class SkillsModelTest extends MT\TestCase {
    * @data(1)
    * @return void
    */
-  function testGetSpecialkSkill($id) {
+  function testGetSpecialSkill($id) {
     $skill = $this->model->getSpecialSkill($id);
     Assert::type(SkillSpecial::class, $skill);
   }

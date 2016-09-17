@@ -127,7 +127,6 @@ class Character extends BaseEntity {
           case "strength":
           case "dexterity":
           case "constitution":
-          case "constitution":
           case "intelligence":
           case "charisma":
             if(!is_numeric($value)) {
@@ -304,12 +303,14 @@ class Character extends BaseEntity {
       switch($item->type) {
         case "staff":
           $stat = "intelligence";
-  break;
+          break;
         case "club":
           $stat = "constitution";
+          break;
         case "bow":
         case "throwing knife":
           $stat = "dexterity";
+          break;
   break;
       }
     }

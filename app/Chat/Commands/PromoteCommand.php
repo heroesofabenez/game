@@ -50,7 +50,7 @@ class PromoteCommand extends \HeroesofAbenez\Entities\ChatCommand {
     } catch(CannotPromoteHigherRanksException $e) {
       $message = $this->translator->translate("errors.guild.cannotPromoteHigherRanks");
     } catch(CannotPromoteToGrandmaster $e) {
-      $message = $this->translator->translate("errors.guild.cannotPromoteToGranmaster");
+      $message = $this->translator->translate("errors.guild.cannotPromoteToGrandmaster");
     } catch(CannotHaveMoreDeputies $e) {
       $message = $this->translator->translate("errors.guild.cannotHaveMoreDeputies");
     }

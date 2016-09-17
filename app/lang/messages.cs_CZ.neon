@@ -1,8 +1,8 @@
 quest:
     accepted: "Úkol přijat."
-    finnished: "Úkol dokončen."
+    finished: "Úkol dokončen."
 shop:
-    itemBougt: "Věc koupena."
+    itemBought: "Věc koupena."
 travel:
     movedToStage: "Přesunul jsi se do %stageName%."
 request:

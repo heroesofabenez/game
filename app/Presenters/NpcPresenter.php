@@ -54,7 +54,7 @@ class NpcPresenter extends BasePresenter {
   }
   
   /**
-   * @return \HeroesofAbenez\Model\NPCDialogueControl
+   * @return NPC\NPCDialogueControl
    */
   protected function createComponentNpcDialogue(NPC\NPCDialogueControlFactory $factory) {
     $component = $factory->create();
@@ -91,7 +91,8 @@ class NpcPresenter extends BasePresenter {
   }
   
   /**
-   * @return \HeroesofAbenez\NPC\ShopControl
+   * @param NPC\NPCShopControlFactory $factory
+   * @return NPC\NPCQuestsControl
    */
   protected function createComponentNpcShop(NPC\NPCShopControlFactory $factory) {
     $shop = $factory->create();

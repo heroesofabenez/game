@@ -8,6 +8,7 @@ use HeroesofAbenez\Model\Guild,
     HeroesofAbenez\Model\PlayerNotInGuild,
     HeroesofAbenez\Model\CannotDemoteHigherRanksException,
     HeroesofAbenez\Model\CannotDemoteLowestRankException,
+    HeroesofAbenez\Model\CannotPromoteToGrandmaster,
     Kdyby\Translation\Translator,
     Nette\Utils\Arrays;
 
