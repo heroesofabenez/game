@@ -2,9 +2,7 @@
 namespace HeroesofAbenez\Arena;
 
 use Nette\Security\User,
-    Nette\Database\Context as Database,
-    HeroesofAbenez\Model\Profile,
-    HeroesofAbenez\Model\Equipment,
+    Nette\Database\Context,
     HeroesofAbenez\Model\CombatLogManager,
     HeroesofAbenez\Model\CombatLogger,
     Kdyby\Translation\Translator,
@@ -18,22 +16,22 @@ use Nette\Security\User,
  * @author Jakub Konečný
  */
 abstract class ArenaControl extends \Nette\Application\UI\Control {
-  /** @var \Nette\Security\User */
+  /** @var User */
   protected $user;
   /** @var \HeroesofAbenez\Model\CombatHelper */
   protected $combatHelper;
-  /** @var \HeroesofAbenez\Model\CombatDuel */
+  /** @var CombatDuel */
   protected $combat;
-  /** @var \HeroesofAbenez\Model\CombatLogManager */
+  /** @var CombatLogManager */
   protected $log;
-  /** @var \Nette\Database\Context */
+  /** @var Context */
   protected $db;
-  /** @var \Kdyby\Translation\Translator */
+  /** @var Translator */
   protected $translator;
   /** @var string */
   protected $arena;
   
-  function __construct(\Nette\Security\User $user, \HeroesofAbenez\Model\CombatHelper $combatHelper, \HeroesofAbenez\Model\CombatDuel $combat, \HeroesofAbenez\Model\CombatLogManager $log, \Nette\Database\Context $db, \Kdyby\Translation\Translator $translator) {
+  function __construct(User $user, \HeroesofAbenez\Model\CombatHelper $combatHelper, CombatDuel $combat, CombatLogManager $log, Context $db, Translator $translator) {
     $this->user = $user;
     $this->combatHelper = $combatHelper;
     $this->combat = $combat;
