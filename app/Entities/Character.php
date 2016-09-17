@@ -311,7 +311,6 @@ class Character extends BaseEntity {
         case "throwing knife":
           $stat = "dexterity";
           break;
-  break;
       }
     }
     return $stat;
