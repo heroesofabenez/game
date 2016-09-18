@@ -13,7 +13,7 @@ postoffice:
 guild:
     created: "Cech vytvořen."
     applicationSent: "Přihláška odeslána."
-    left: "OPustil jsi cech."
+    left: "Opustil jsi cech."
     dissolved: "Cech rozpušťen."
     renamed: "Cech přejmenován."
     unresolvedApplication: "Máš nevyřízenou přihlášku."
