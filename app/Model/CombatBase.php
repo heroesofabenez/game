@@ -1,9 +1,8 @@
 <?php
 namespace HeroesofAbenez\Model;
 
-use HeroesofAbenez\Entities\Character;
 use HeroesofAbenez\Entities\Team,
-    HeroesofAbenez\Entities\Character as CharacterEntity,
+    HeroesofAbenez\Entities\Character,
     HeroesofAbenez\Entities\CharacterEffect,
     HeroesofAbenez\Entities\CharacterSkillAttack,
     HeroesofAbenez\Entities\CharacterSkillSpecial;
@@ -20,10 +19,10 @@ use HeroesofAbenez\Entities\Team,
  * @method void onRoundStart() Tasks to do at the start of a round
  * @method void onRound() Tasks to do during a round
  * @method void onRoundEnd() Tasks to do at the end of a round
- * @method void onAttack(CharacterEntity $character1, CharacterEntity $character2) Tasks to do at attack
- * @method void onSkillAttack(CharacterEntity $character1, CharacterEntity $character2, CharacterSkillAttack $skill) Tasks to do at skill attack
- * @method void onSkillSpecial(CharacterEntity $character1, CharacterEntity $character2, CharacterSkillSpecial $skill) Tasks to do when using special skill
- * @method void onHeal(CharacterEntity $character1, CharacterEntity $character2) Tasks to do at healing
+ * @method void onAttack(Character $character1, Character $character2) Tasks to do at attack
+ * @method void onSkillAttack(Character $character1, Character $character2, CharacterSkillAttack $skill) Tasks to do at skill attack
+ * @method void onSkillSpecial(Character $character1, Character $character2, CharacterSkillSpecial $skill) Tasks to do when using special skill
+ * @method void onHeal(Character $character1, Character $character2) Tasks to do at healing
  */
 class CombatBase {
   use \Nette\SmartObject;
@@ -123,19 +122,19 @@ class CombatBase {
   }
   
   /**
-   * @param CharacterEntity $character
+   * @param Character $character
    * @return int
    */
-  protected function getTeam(CharacterEntity $character) {
+  protected function getTeam(Character $character) {
     $team = $this->team1->hasMember($character->id) ? 1: 2;
     return $team;
   }
   
   /**
-   * @param CharacterEntity $character
+   * @param Character $character
    * @return int
    */
-  protected function getEnemyTeam(CharacterEntity $character) {
+  protected function getEnemyTeam(Character $character) {
     $team = $this->team1->hasMember($character->id) ? 2: 1;
     return $team;
   }
@@ -219,11 +218,11 @@ class CombatBase {
   /**
    * Mark primary character as used in this round
    * 
-   * @param CharacterEntity $character1
-   * @param CharacterEntity $character2
+   * @param Character $character1
+   * @param Character $character2
    * @return void
    */
-  function markUsed(CharacterEntity $character1, CharacterEntity $character2) {
+  function markUsed(Character $character1, Character $character2) {
     $team = "team1";
     $index = $this->team1->getIndex($character1->id);
     if($index === -1) {
@@ -301,7 +300,7 @@ class CombatBase {
    * Select random character of the team
    * 
    * @param Team $team
-   * @return CharacterEntity|NULL
+   * @return Character|NULL
    */
   protected function selectRandomCharacter(Team $team) {
     if(count($team->aliveMembers) === 0) return NULL;
@@ -312,10 +311,10 @@ class CombatBase {
   /**
    * Select target for attack
    * 
-   * @param CharacterEntity $attacker
-   * @return CharacterEntity|NULL
+   * @param Character $attacker
+   * @return Character|NULL
    */
-  protected function selectAttackTarget(CharacterEntity $attacker) {
+  protected function selectAttackTarget(Character $attacker) {
     $enemyTeam = $this->getEnemyTeam($attacker);
     return $this->selectRandomCharacter($this->{"team" . $enemyTeam});
   }
@@ -325,7 +324,7 @@ class CombatBase {
    * 
    * @param Team $team
    * @param int $threshold
-   * @return CharacterEntity|NULL
+   * @return Character|NULL
    */
   protected function findLowestHpCharacter(Team $team, $threshold = NULL) {
     $lowestHp = 9999;
@@ -344,28 +343,28 @@ class CombatBase {
   /**
    * Select target for healing
    * 
-   * @param CharacterEntity $healer
-   * @return CharacterEntity|NULL
+   * @param Character $healer
+   * @return Character|NULL
    */
-  protected function selectHealingTarget(CharacterEntity $healer) {
+  protected function selectHealingTarget(Character $healer) {
     $team = $this->getTeam($healer);
     return $this->findLowestHpCharacter($this->{"team" . $team});
   }
   
   /**
-   * @return CharacterEntity[]
+   * @return Character[]
    */
   protected function findHealers() {
     return [];
   }
   
   /**
-   * @param CharacterEntity $character1
-   * @param CharacterEntity $character2
+   * @param Character $character1
+   * @param Character $character2
    * @param CharacterSkillSpecial $skill
    * @return void
    */
-  protected function doSpecialSkill(CharacterEntity $character1, CharacterEntity $character2, CharacterSkillSpecial $skill) {
+  protected function doSpecialSkill(Character $character1, Character $character2, CharacterSkillSpecial $skill) {
     switch($skill->skill->target) {
       case "enemy":
         $this->onSkillSpecial($character1, $character2, $skill);
@@ -469,12 +468,12 @@ class CombatBase {
   /**
    * Calculate hit chance for attack/skill attack
    * 
-   * @param CharacterEntity $character1
-   * @param CharacterEntity $character2
+   * @param Character $character1
+   * @param Character $character2
    * @param CharacterSkillAttack $skill
    * @return int
    */
-  protected function calculateHitChance(CharacterEntity $character1, CharacterEntity $character2, CharacterSkillAttack $skill = NULL) {
+  protected function calculateHitChance(Character $character1, Character $character2, CharacterSkillAttack $skill = NULL) {
     if($skill) $hit_chance = ($character1->hit / 100 * $skill->hitRate) - $character2->dodge;
     else $hit_chance = $character1->hit - $character2->dodge;
     if($hit_chance < 15) $hit_chance = 15;
@@ -490,7 +489,7 @@ class CombatBase {
    * @param \HeroesofAbenez\Entities\Character $character1 Attacker
    * @param \HeroesofAbenez\Entities\Character $character2 Defender
    */
-  function attackHarm(CharacterEntity $character1, CharacterEntity $character2) {
+  function attackHarm(Character $character1, Character $character2) {
     $result = [];
     $hit_chance = $this->calculateHitChance($character1, $character2);
     $roll = rand(0, 100);
@@ -510,12 +509,12 @@ class CombatBase {
   /**
    * Use an attack skill
    * 
-   * @param CharacterEntity $character1 Attacker
-   * @param CharacterEntity $character2 Defender
+   * @param Character $character1 Attacker
+   * @param Character $character2 Defender
    * @param CharacterSkillAttack $skill Used skill
    * @return void
    */
-  function useAttackSkill(CharacterEntity $character1, CharacterEntity $character2, CharacterSkillAttack $skill) {
+  function useAttackSkill(Character $character1, Character $character2, CharacterSkillAttack $skill) {
     $result = [];
     $hit_chance = $this->calculateHitChance($character1, $character2, $skill);
     $roll = rand(0, 100);
@@ -539,12 +538,12 @@ class CombatBase {
   /**
    * Use a special skill
    * 
-   * @param CharacterEntity $character1
-   * @param CharacterEntity $character2
+   * @param Character $character1
+   * @param Character $character2
    * @param CharacterSkillSpecial $skill
    * @return void
    */
-  function useSpecialSkill(CharacterEntity $character1, CharacterEntity $character2, CharacterSkillSpecial $skill) {
+  function useSpecialSkill(Character $character1, Character $character2, CharacterSkillSpecial $skill) {
     $result = [
       "result" => true, "amount" => 0, "action" => "skill_special", "name" => $skill->skill->name
     ];
@@ -564,10 +563,10 @@ class CombatBase {
   /**
    * Heal a character
    * 
-   * @param CharacterEntity $character1 Healer
-   * @param CharacterEntity $character2 Wounded character
+   * @param Character $character1 Healer
+   * @param Character $character2 Wounded character
    */
-  function heal(CharacterEntity $character1, CharacterEntity $character2) {
+  function heal(Character $character1, Character $character2) {
     $result = [];
     $hit_chance = $character1->intelligence * round($character1->level / 5) + 30;
     $roll = rand(0, 100);
@@ -586,10 +585,10 @@ class CombatBase {
   /**
    * Log results of an action
    * 
-   * @param CharacterEntity $character1
-   * @param CharacterEntity $character2
+   * @param Character $character1
+   * @param Character $character2
    */
-  function logResults(CharacterEntity $character1, CharacterEntity $character2) {
+  function logResults(Character $character1, Character $character2) {
     extract($this->results);
     $this->log->log($action, $result, $character1, $character2, $amount, $name);
     $this->results = NULL;
@@ -598,11 +597,11 @@ class CombatBase {
   /**
    * Log dealt damage
    * 
-   * @param CharacterEntity $character1
-   * @param CharacterEntity $character2
+   * @param Character $character1
+   * @param Character $character2
    * @return void
    */
-  function logDamage(CharacterEntity $character1, CharacterEntity $character2) {
+  function logDamage(Character $character1, Character $character2) {
     $team = $this->team1->hasMember($character1->id) ? 1: 2;
     $this->damage[$team] += $this->results["amount"];
   }
