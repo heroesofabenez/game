@@ -10,7 +10,7 @@ use HeroesofAbenez\Entities\Character as CharacterEntity,
  * Combat log
  * 
  * @author Jakub Konečný
- * @property-write int $round Current round
+ * @property int $round Current round
  */
 class CombatLogger implements \Countable, \IteratorAggregate {
   use \Nette\SmartObject;
@@ -44,6 +44,13 @@ class CombatLogger implements \Countable, \IteratorAggregate {
     if($this->team1) throw new ImmutableException("Teams has already been set.");
     $this->team1 = $team1;
     $this->team2 = $team2;
+  }
+  
+  /**
+   * @return int
+   */
+  function getRound() {
+    return $this->round;
   }
   
   /**
