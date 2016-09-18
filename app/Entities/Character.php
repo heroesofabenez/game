@@ -257,7 +257,7 @@ class Character extends BaseEntity {
    * @return void
    */
   function dismissPet() {
-    if(is_int($this->active_pet)) $this->active_pet = null;
+    $this->active_pet = NULL;
   }
   
   /**
