@@ -42,10 +42,17 @@ class CharacterEffect extends BaseEntity {
     $this->duration = $effect["duration"];
   }
   
+  /**
+   * @return string[]
+   */
   static function getDurations() {
     return ["combat", "forever"];
   }
   
+  /**
+   * @param string|int $value
+   * @throws \InvalidArgumentException
+   */
   function setDuration($value) {
     if(!is_int($value) AND !in_array($value, self::getDurations())) throw new \InvalidArgumentException("Invalid value set to CharacterEffect::\$duration. Expected string or integer.");
     $this->duration = $value;

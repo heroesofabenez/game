@@ -15,6 +15,9 @@ abstract class ChatCommand extends BaseEntity {
     $this->name = $name;
   }
   
+  /**
+   * @param string $name
+   */
   function setName($name) {
     $this->name = (string) $name;
   }

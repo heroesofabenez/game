@@ -27,6 +27,9 @@ class Team extends BaseEntity implements \ArrayAccess, \Countable, \IteratorAggr
     $this->class = \HeroesofAbenez\Entities\Character::class;
   }
   
+  /**
+   * @return int[]
+   */
   function getUsed() {
     return $this->used;
   }
