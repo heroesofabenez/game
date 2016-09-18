@@ -220,7 +220,7 @@ class Character extends BaseEntity {
       throw $e;
     }
     $itemBonus = $item->deployParams;
-    $this->removeEffect($itemBonus->id);
+    $this->removeEffect($itemBonus["id"]);
   }
   
   /**
