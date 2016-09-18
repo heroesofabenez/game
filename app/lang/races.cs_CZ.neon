@@ -1,12 +1,12 @@
 1:
     name: "barbar"
-    #description: "Barbarians are mostly humans but they separated ages ago from the main stream to live in the desert. They learnt to survive in the harsh environment and developed higher strength and constitution but lost some of their intelligence and charisma.<br>+STR, +CON, -INT, -CHAR"
+    description: "Barbaří jsou vícemeně lidé, avšak oddělili se od hlavního proudu, aby žili v poušti. Naučili se přežít v tomto drsném prostředí a vypěstovali si vyšší sílu a odolnost, avšak ztratili něco ze své inteligence a charisma.<br>+SÍL, +ODO, -INT, -CHAR"
 2:
     name: "člověk"
-    #description: "Humans are very versatile race, they can survive in almost any environment. They are not really bad in anything but they are masters of nothing either.<br>No modifications to stats"
+    description: "Lidé jsou velmi přizpůsobivá rasa, dovedou přežít v téměř jakémkoli prostředí. Nejsou v ničem vyloženě špatní, ale ani v ničem nevynikají.<br>Žádné úpravy k vlastnostem"
 3:
     name: "elf"
-    #description: "Elves are one obscure race. They mostly dwell in their forests and only seldom interact with other inhabitants of the world. They are told to be very beautiful, intelligent and long living, if not immortal. But their physical shells are much fragile yet nimble.<br>+ INT, ++CHAR, +DEX, -STR, --CON"
+    description: "Elfové jsou velmi tajuplná rasa. Většinou přebývají ve svých lesích a jen výjiměčně spoulupracují s ostatními obyvateli světa. Říká se o ních, že jsou překrásní, velice inteligentní a žijí velmi dlouho, pokud nejsou nesmrtelní. Avšak jejich fyzické schránky jsou velmi křehké, leč hbité.<br>+ INT, ++CHAR, +OBR, -SÍL, --ODO"
 4:
     name: "trapaslík"
-    #description: "Dwarves are quite sturdy (given their size). They spend a lot of time in and under mountains crafting weapons or creating artifacts. They have unusually strong bodies but nimbleness, intelligence or charisma definitely do not belong to their fortes.<br>++CON, +STR, -DEX, -INT, -CHAR"
+    description: "Trpaslíci jsou velmi robustní (vzhledem ke své velikosti). Tráví spoustu času v horách a pod horami vyráběním zbraní či vytvářením artefaktů. Mají velmi silná těla, ale mrštnost, inteligence nebo charisma rozhodně nepatří k jejich silným stránkám.<br>++ODO, +SÍL -OBR, -INT, -CHAR"

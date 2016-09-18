@@ -1,12 +1,12 @@
 1:
     name: "bojovník"
-    #description: "Fighters tend to use brute force to solve problems. Their endurance is remarkable but their somehow wild appearance and lower intelligence do not earn them much respect in society (in general).<br>++CON, +STR, -INT, -CHAR"
+    description: "Bojovníci mají sklon používat hrubého násili k řešení problémů. Jejich výdrž je pozoruhodná, avšak jejich poněkud divoké vzezření a nižší inteligence jim nezískává příliš respektu ve společnosti (obecně).<br>++ODO, +SÍL, -INT, -CHAR"
 2:
-    #name: "rogue"
-    #description: "Rogues try to avoid direct combat if possible as they are physically very fragile, they prefer attacking from shadows and/or using tricks. But if they engage in combat they rely on their swiftness to avoid enemy's attacks and penetrate his defenses.<br>++DEX, +STR, --CON"
+    name: "darebák"
+    description: "Darebáci se snaží vyhnout přímému soubojí jak je to jen možné, protože jsou fyzicky veli křehcí, dávají přednost napadání ze stínů (a)nebo používání triků. Když už se ale zapojí do souboje, spolehají se na svou rychlost k vyhnutí se nepřítelovým útokům a prolomení jeho obrany.<br>++OBR, +SÍL, --ODO"
 3:
     name: "čaroděj"
-    #description: "Wizards are the wisest of all classes. Most of them studied at the Academy of magic where they learnt (besides magical theories and casting some basic spells) to read and write (something that most people are not able to do). They amaze other people with their bright intelligence and charisma but their physical shells are quite frail.++INT, +CHAR, -STR, -CON"
+    description: "Čarodějové jsou nejmoudřejší ze všech tříd. Většina z nich studovala na Akademii magie, kde se naučili (kromě magických teorií a sesílání několika základních kouzel) číst a psát (něco, co většina lidí neumí). Ohromují ostatní svou zářící inteligencí a charisma, avšak jejich fyziké schránky jsou velmi křehké.++INT, +CHAR, -SÍL, -ODO"
 4:
     name: "lučištník"
-    #description: "Albeit physical weak, archers are very nimble (just like rogues) and they even received basic education. They do not excel in close combat but they can pacify their enemies with bows, crossbows or (if the situation is very dire) throwing weapons before they even come close to them.<br>++DEX, +INT, -STR, -CON"
+    description: "Ač fyzicky slabí, lučištníci jsou velmi obrantní (stejně jako darebáci) a dokonce se jim dostalo základního vzdělání. Nevynikají v souboji na blízko, ale zpacifikovat své nepřátelo luky, kušemi nebo (pokud je situace velmi zoufalá) vrhacími zbraněmi než se k nim vůbec dostanou blízko.<br>++OBR, +INT, -SÍL, -ODO"
