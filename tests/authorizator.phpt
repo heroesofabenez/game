@@ -46,7 +46,10 @@ class AuthorizatorTest extends MT\TestCase {
    * @return void
    */
   function testPermissions() {
-  
+    $resource = "guild";
+    Assert::true($this->model->roleInheritsFrom("grandmaster", "guest"));
+    Assert::false($this->model->isAllowed("guest", $resource));
+    Assert::true($this->model->isAllowed("advisor", $resource, "invite"));
   }
 }
 ?>
