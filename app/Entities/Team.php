@@ -24,7 +24,7 @@ class Team extends BaseEntity implements \ArrayAccess, \Countable, \IteratorAggr
    */
   function __construct($name) {
     $this->name = (string) $name;
-    $this->class = \HeroesofAbenez\Entities\Character::class;
+    $this->class = Character::class;
   }
   
   /**
