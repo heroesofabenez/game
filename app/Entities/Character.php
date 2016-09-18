@@ -151,7 +151,7 @@ class Character extends BaseEntity {
   /**
    * Applies new effect on the character
    * 
-   * @param \HeroesofAbenez\Entities\CharacterEffect $effect
+   * @param CharacterEffect $effect
    * @return void
    */
   function addEffect(CharacterEffect $effect) {
@@ -164,7 +164,7 @@ class Character extends BaseEntity {
    * 
    * @param int $effectId Effect to remove
    * @return void
-   * @throws \OutOfBoundsException
+   * @throws OutOfBoundsException
    */
   function removeEffect($effectId) {
     foreach($this->effects as $i => $effect) {
@@ -182,7 +182,7 @@ class Character extends BaseEntity {
    * 
    * @param int $itemid Item's id
    * @return Equipment Item
-   * @throws \OutOfBoundsException
+   * @throws OutOfBoundsException
    */
   function getItem($itemid) {
     if(isset($this->equipment[$itemid])) return $this->equipment[$itemid];
@@ -194,7 +194,7 @@ class Character extends BaseEntity {
    * 
    * @param int $itemId
    * @return void
-   * @throws \OutOfBoundsException
+   * @throws OutOfBoundsException
    */
   function equipItem($itemId) {
     try {
@@ -211,7 +211,7 @@ class Character extends BaseEntity {
    * 
    * @param int $itemId
    * @return void
-   * @throws \OutOfBoundsException
+   * @throws OutOfBoundsException
    */
   function unequipItem($itemId) {
     try {
@@ -227,8 +227,8 @@ class Character extends BaseEntity {
    * Get specified pet
    * 
    * @param int $petId Pet's id
-   * @return \HeroesofAbenez\Entities\Pet
-   * @throws \OutOfBoundsException
+   * @return Pet
+   * @throws OutOfBoundsException
    */
   function getPet($petId) {
     if(isset($this->pets[$petId]) AND $this->pets[$petId] instanceof Pet) return $this->pets[$petId];
@@ -240,7 +240,7 @@ class Character extends BaseEntity {
    * 
    * @param int $petId Pet's id
    * @return void
-   * @throws \OutOfBoundsException
+   * @throws OutOfBoundsException
    */
   function deployPet($petId) {
     try {
