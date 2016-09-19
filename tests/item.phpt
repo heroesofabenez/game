@@ -3,7 +3,7 @@ namespace HeroesofAbenez\Tests;
 
 use MyTester as MT,
     MyTester\Assert,
-    HeroesofAbenez\Entities\Item;
+    HeroesofAbenez\Entities\Item as ItemEntity;
 
 class ItemTest extends MT\TestCase {
   /** @var \HeroesofAbenez\Model\Item */
@@ -19,7 +19,7 @@ class ItemTest extends MT\TestCase {
   function testListOfItems() {
     $items = $this->model->listOfItems();
     Assert::type("array", $items);
-    Assert::type(Item::class, $items[1]);
+    Assert::type(ItemEntity::class, $items[1]);
   }
   
   /**
@@ -29,7 +29,7 @@ class ItemTest extends MT\TestCase {
    */
   function testView($id) {
     $item = $this->model->view($id);
-    Assert::type(Item::class, $item);
+    Assert::type(ItemEntity::class, $item);
   }
   
   /**
