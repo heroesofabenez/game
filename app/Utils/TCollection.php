@@ -1,7 +1,9 @@
 <?php
 namespace HeroesofAbenez\Utils;
 
-use HeroesofAbenez\Entities\Character;
+use HeroesofAbenez\Entities\Character,
+    Nette\OutOfRangeException,
+    Nette\InvalidArgumentException;
 
 /**
  * Trait Collection
@@ -40,11 +42,11 @@ trait TCollection {
   /**
    * @param int $index
    * @return Character
-   * @throws \Nette\OutOfRangeException
+   * @throws OutOfRangeException
    */
   function offsetGet($index) {
     if($index < 0 OR $index >= count($this->items)) {
-      throw new \Nette\OutOfRangeException("Offset invalid or out of range.");
+      throw new OutOfRangeException("Offset invalid or out of range.");
     }
     return $this->items[$index];
   }
@@ -53,14 +55,15 @@ trait TCollection {
    * @param int $index
    * @param \HeroesofAbenez\Entities\Character $member
    * @return void
-   * @throws \Nette\OutOfRangeException
+   * @throws OutOfRangeException
+   * @throws InvalidArgumentException
    */
   function offsetSet($index, $member) {
-    if(!$member instanceof $this->class) throw new \Nette\InvalidArgumentException("Argument must be of $this->class type.");
+    if(!$member instanceof $this->class) throw new InvalidArgumentException("Argument must be of $this->class type.");
     if($index === NULL) {
       $this->items[] = $member;
     } elseif($index < 0 OR $index >= count($this->items)) {
-      throw new \Nette\OutOfRangeException("Offset invalid or out of range.");
+      throw new OutOfRangeException("Offset invalid or out of range.");
     } else {
       $this->items[$index] = & $member;
     }
@@ -72,7 +75,7 @@ trait TCollection {
    */
   function offsetUnset($index) {
     if($index < 0 OR $index >= count($this->items)) {
-      throw new \Nette\OutOfRangeException("Offset invalid or out of range.");
+      throw new OutOfRangeException("Offset invalid or out of range.");
     }
     array_splice($this->items, (int) $index, 1);
   }
