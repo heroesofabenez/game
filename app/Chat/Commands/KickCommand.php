@@ -7,7 +7,7 @@ use HeroesofAbenez\Model\Guild,
     HeroesofAbenez\Model\NotInGuildException,
     HeroesofAbenez\Model\MissingPermissionsException,
     HeroesofAbenez\Model\PlayerNotFoundException,
-    HeroesofAbenez\Model\PlayerNotInGuild,
+    HeroesofAbenez\Model\PlayerNotInGuildException,
     HeroesofAbenez\Model\CannotKickHigherRanksException,
     Kdyby\Translation\Translator,
     Nette\Utils\Arrays;
@@ -45,7 +45,7 @@ class KickCommand extends \HeroesofAbenez\Entities\ChatCommand {
       $message = $this->translator->translate("errors.guild.missingPermissions");
     } catch(PlayerNotFoundException $e) {
       $message = $this->translator->translate("errors.guild.playerDoesNotExist");
-    } catch(PlayerNotInGuild $e) {
+    } catch(PlayerNotInGuildException $e) {
       $message = $this->translator->translate("errors.guild.playerNotInGuild");
     } catch(CannotKickHigherRanksException $e) {
       $message = $this->translator->translate("errors.guild.cannotKickHigherRanks");

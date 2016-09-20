@@ -167,7 +167,7 @@ class MessageNotFoundException extends \HeroesofAbenez\Model\RecordNotFoundExcep
   
 }
 
-class CannotShowMessageException extends \HeroesofAbenez\Model\AccessDenied {
+class CannotShowMessageException extends \HeroesofAbenez\Model\AccessDeniedException {
   
 }
 ?>

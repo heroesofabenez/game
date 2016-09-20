@@ -230,10 +230,10 @@ class Guild {
    * @throws NotInGuildException
    * @throws MissingPermissionsException
    * @throws PlayerNotFoundException
-   * @throws PlayerNotInGuild
+   * @throws PlayerNotInGuildException
    * @throws CannotPromoteHigherRanksException
-   * @throws CannotPromoteToGrandmaster
-   * @throws CannotHaveMoreDeputies
+   * @throws CannotPromoteToGrandmasterException
+   * @throws CannotHaveMoreDeputiesException
    */
   function promote(int $id) {
     $admin = $this->user;
@@ -241,7 +241,7 @@ class Guild {
     if(!$admin->isAllowed("guild", "promote")) throw new MissingPermissionsException;
     $character = $this->db->table("characters")->get($id);
     if(!$character) throw new PlayerNotFoundException;
-    if($character->guild !== $admin->identity->guild) throw new PlayerNotInGuild;
+    if($character->guild !== $admin->identity->guild) throw new PlayerNotInGuildException;
     $roles = $this->permissionsModel->getRoles();
     foreach($roles as $role) {
       if($role["name"] == $admin->roles[0]) {
@@ -250,10 +250,10 @@ class Guild {
       }
     }
     if($adminRole <= $character->guildrank) throw new CannotPromoteHigherRanksException;
-    if($character->guildrank >= 6) throw new CannotPromoteToGrandmaster;
+    if($character->guildrank >= 6) throw new CannotPromoteToGrandmasterException;
     if($character->guildrank == 5) {
       $deputy = $this->guildMembers($admin->identity->guild, [6]);
-      if(count($deputy) > 0) throw new CannotHaveMoreDeputies;
+      if(count($deputy) > 0) throw new CannotHaveMoreDeputiesException;
     }
     $this->db->query("UPDATE characters SET guildrank=guildrank+1 WHERE id=$id");
   }
@@ -266,7 +266,7 @@ class Guild {
    * @throws NotInGuildException
    * @throws MissingPermissionsException
    * @throws PlayerNotFoundException
-   * @throws PlayerNotInGuild
+   * @throws PlayerNotInGuildException
    * @throws CannotDemoteHigherRanksException
    * @throws CannotDemoteLowestRankException
    */
@@ -276,7 +276,7 @@ class Guild {
     if(!$admin->isAllowed("guild", "promote")) throw new MissingPermissionsException;
     $character = $this->db->table("characters")->get($id);
     if(!$character) throw new PlayerNotFoundException;
-    if($character->guild !== $admin->identity->guild) throw new PlayerNotInGuild;
+    if($character->guild !== $admin->identity->guild) throw new PlayerNotInGuildException;
     $roles = $this->permissionsModel->getRoles();
     foreach($roles as $role) {
       if($role["name"] == $admin->roles[0]) {
@@ -297,7 +297,7 @@ class Guild {
    * @throws NotInGuildException
    * @throws MissingPermissionsException
    * @throws PlayerNotFoundException
-   * @throws PlayerNotInGuild
+   * @throws PlayerNotInGuildException
    * @throws CannotKickHigherRanksException
    */
   function kick(int $id) {
@@ -306,7 +306,7 @@ class Guild {
     if(!$admin->isAllowed("guild", "kick")) throw new MissingPermissionsException;
     $character = $this->db->table("characters")->get($id);
     if(!$character) throw new PlayerNotFoundException;
-    if($character->guild !== $admin->identity->guild) throw new PlayerNotInGuild;
+    if($character->guild !== $admin->identity->guild) throw new PlayerNotInGuildException;
     $roles = $this->permissionsModel->getRoles();
     foreach($roles as $role) {
       if($role["name"] == $admin->roles[0]) {

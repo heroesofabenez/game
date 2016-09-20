@@ -7,10 +7,10 @@ use HeroesofAbenez\Model\Guild,
     HeroesofAbenez\Model\NotInGuildException,
     HeroesofAbenez\Model\MissingPermissionsException,
     HeroesofAbenez\Model\PlayerNotFoundException,
-    HeroesofAbenez\Model\PlayerNotInGuild,
+    HeroesofAbenez\Model\PlayerNotInGuildException,
     HeroesofAbenez\Model\CannotPromoteHigherRanksException,
-    HeroesofAbenez\Model\CannotPromoteToGrandmaster,
-    HeroesofAbenez\Model\CannotHaveMoreDeputies,
+    HeroesofAbenez\Model\CannotPromoteToGrandmasterException,
+    HeroesofAbenez\Model\CannotHaveMoreDeputiesException,
     Kdyby\Translation\Translator,
     Nette\Utils\Arrays;
 
@@ -47,13 +47,13 @@ class PromoteCommand extends \HeroesofAbenez\Entities\ChatCommand {
       $message = $this->translator->translate("errors.guild.missingPermissions");
     } catch(PlayerNotFoundException $e) {
       $message = $this->translator->translate("errors.guild.playerDoesNotExist");
-    } catch(PlayerNotInGuild $e) {
+    } catch(PlayerNotInGuildException $e) {
       $message = $this->translator->translate("errors.guild.playerNotInGuild");
     } catch(CannotPromoteHigherRanksException $e) {
       $message = $this->translator->translate("errors.guild.cannotPromoteHigherRanks");
-    } catch(CannotPromoteToGrandmaster $e) {
+    } catch(CannotPromoteToGrandmasterException $e) {
       $message = $this->translator->translate("errors.guild.cannotPromoteToGrandmaster");
-    } catch(CannotHaveMoreDeputies $e) {
+    } catch(CannotHaveMoreDeputiesException $e) {
       $message = $this->translator->translate("errors.guild.cannotHaveMoreDeputies");
     }
     return $message;

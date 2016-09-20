@@ -5,19 +5,19 @@ class RecordNotFoundException extends \Exception {
   
 }
 
-class AccessDenied extends \RuntimeException {
+class AccessDeniedException extends \RuntimeException {
   
 }
 
-class MissingPermissionsException extends AccessDenied {
+class MissingPermissionsException extends AccessDeniedException {
   
 }
 
-class HigherRankException extends AccessDenied {
+class HigherRankException extends AccessDeniedException {
   
 }
 
-class NameInUseException extends AccessDenied {
+class NameInUseException extends AccessDeniedException {
   
 }
 
@@ -29,7 +29,6 @@ class ImmutableException extends InvalidStateException {
   
 }
 
-
 class OpponentNotFoundException extends RecordNotFoundException {
   
 }
@@ -38,7 +37,7 @@ class ItemNotFoundException extends RecordNotFoundException {
   
 }
 
-class ItemNotOwnedException extends AccessDenied {
+class ItemNotOwnedException extends AccessDeniedException {
   
 }
 
@@ -58,11 +57,11 @@ class PlayerNotFoundException extends RecordNotFoundException {
   
 }
 
-class PlayerNotInGuild extends AccessDenied {
+class PlayerNotInGuildException extends AccessDeniedException {
   
 }
 
-class NotInGuildException extends AccessDenied {
+class NotInGuildException extends AccessDeniedException {
   
 }
 
@@ -78,19 +77,19 @@ class CannotKickHigherRanksException extends HigherRankException {
   
 }
 
-class CannotPromoteToGrandmaster extends AccessDenied {
+class CannotPromoteToGrandmasterException extends AccessDeniedException {
   
 }
 
-class CannotDemoteLowestRankException extends AccessDenied {
+class CannotDemoteLowestRankException extends AccessDeniedException {
   
 }
 
-class CannotHaveMoreDeputies extends AccessDenied {
+class CannotHaveMoreDeputiesException extends AccessDeniedException {
   
 }
 
-class GrandmasterCannotLeaveGuildException extends AccessDenied {
+class GrandmasterCannotLeaveGuildException extends AccessDeniedException {
   
 }
 
@@ -98,11 +97,11 @@ class StageNotFoundException extends RecordNotFoundException {
   
 }
 
-class CannotTravelToStageException extends AccessDenied {
+class CannotTravelToStageException extends AccessDeniedException {
   
 }
 
-class NotEnoughExperiencesException extends AccessDenied {
+class NotEnoughExperiencesException extends AccessDeniedException {
   
 }
 
@@ -110,19 +109,19 @@ class InvalidStatException extends \OutOfBoundsException {
   
 }
 
-class NoStatPointsAvailableException extends AccessDenied {
+class NoStatPointsAvailableException extends AccessDeniedException {
   
 }
 
-class CannotSeeRequestException extends AccessDenied {
+class CannotSeeRequestException extends AccessDeniedException {
   
 }
 
-class CannotAcceptRequestException extends AccessDenied {
+class CannotAcceptRequestException extends AccessDeniedException {
   
 }
 
-class CannotDeclineRequestException extends AccessDenied {
+class CannotDeclineRequestException extends AccessDeniedException {
   
 }
 
@@ -142,15 +141,15 @@ class SkillNotFoundException extends RecordNotFoundException {
   
 }
 
-class NoSkillPointsAvailableException extends AccessDenied {
+class NoSkillPointsAvailableException extends AccessDeniedException {
   
 }
 
-class SkillMaxLevelReachedException extends AccessDenied {
+class SkillMaxLevelReachedException extends AccessDeniedException {
   
 }
 
-class CannotLearnSkillException extends AccessDenied {
+class CannotLearnSkillException extends AccessDeniedException {
   
 }
 
@@ -158,7 +157,7 @@ class PetNotFoundException extends RecordNotFoundException {
   
 }
 
-class PetNotOwnedException extends AccessDenied {
+class PetNotOwnedException extends AccessDeniedException {
   
 }
 
