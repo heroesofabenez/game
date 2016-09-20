@@ -90,12 +90,12 @@ class TavernPresenter extends BasePresenter {
   }
   
   /**
-   * 
+   *
    * @param Form $form
-   * @param \Nette\Utils\ArrayHash $values
+   * @param array $values
    * @return void
    */
-  function newMessageSucceeded(Form $form, $values) {
+  function newMessageSucceeded(Form $form, array $values) {
     switch($this->action) {
       case "guild":
         $factory = $this->context->getByType(Chat\GuildChatControlFactory::class);

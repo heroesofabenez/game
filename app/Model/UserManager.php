@@ -78,10 +78,10 @@ class UserManager implements NS\IAuthenticator {
   /**
    * Creates new character
    * 
-   * @param \Nette\Utils\ArrayHash $values
+   * @param array $values
    * @return array|bool Stats of new character
    */
-  function create($values) {
+  function create(array $values) {
     $data = [
       "name" => $values["name"], "race" => $values["race"],
       "occupation" => $values["class"], "gender" => $values["gender"]

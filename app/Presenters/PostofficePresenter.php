@@ -63,10 +63,10 @@ class PostofficePresenter extends BasePresenter {
   /**
    * 
    * @param Form $form
-   * @param \Nette\Utils\ArrayHash $values
+   * @param array $values
    * @return void
    */
-  function newMessageFormSucceeded(Form $form, $values) {
+  function newMessageFormSucceeded(Form $form, array $values) {
     $data = [
       "from" => $this->user->id, "to" => $values["to"], "subject" => $values["subject"], "text" => $values["message"]
     ];
