@@ -51,9 +51,9 @@ abstract class ChatControl extends \Nette\Application\UI\Control {
   /**
    * Gets texts for the current chat
    * 
-   * @return array
+   * @return \stdClass[]
    */
-  function getTexts() {
+  function getTexts(): array {
     $count = $this->db->table($this->table)->where($this->param, $this->id)->count("*");
     $paginator = new \Nette\Utils\Paginator;
     $paginator->setItemCount($count);
@@ -79,9 +79,9 @@ abstract class ChatControl extends \Nette\Application\UI\Control {
   /**
    * Gets characters in the current chat
    * 
-   * @return array
+   * @return string[]
    */
-  function getCharacters() {
+  function getCharacters(): array {
     $characters = $this->db->table("characters")
       ->where($this->param2, $this->id2);
     foreach($characters as $char) {
@@ -109,7 +109,7 @@ abstract class ChatControl extends \Nette\Application\UI\Control {
    * @param string $message message
    * @return void
    */
-  function newMessage($message) {
+  function newMessage(string $message) {
     $result = $this->processor->parse($message);
     if($result) {
       $this->presenter->flashMessage($result);

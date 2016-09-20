@@ -18,7 +18,7 @@ class CombatHelperTest extends MT\TestCase {
    * @data(1)
    * @return void
    */
-  function testGetInitiativeFormula($id) {
+  function testGetInitiativeFormula(int $id) {
     $result = $this->model->getInitiativeFormula($id);
     Assert::type("string", $result);
     Assert::true((strlen($result) > 1));
@@ -29,7 +29,7 @@ class CombatHelperTest extends MT\TestCase {
    * @data(1)
    * @return void
    */
-  function testGetPlayer($id) {
+  function testGetPlayer(int $id) {
     $player = $this->model->getPlayer($id);
     Assert::type(Character::class, $player);
     Assert::true(count($player->pets));
@@ -42,7 +42,7 @@ class CombatHelperTest extends MT\TestCase {
    * @data(1)
    * @return void
    */
-  function testGetArenaNpc($id) {
+  function testGetArenaNpc(int $id) {
     $player = $this->model->getArenaNpc($id);
     Assert::type(Character::class, $player);
     Assert::false(count($player->pets));

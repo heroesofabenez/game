@@ -28,7 +28,7 @@ class QuestPresenter extends BasePresenter {
    * @param int $id Quest's id
    * @return void
    */
-  function renderView($id) {
+  function renderView(int $id) {
     $quest = $this->model->view($id);
     if(!$quest) $this->forward("notfound");
     $this->template->id = $quest->id;

@@ -13,9 +13,10 @@ class EquipmentPresenter extends BasePresenter {
   protected $profileModel;
   
   /**
+   * @param int $id
    * @return void
    */
-  function renderView($id) {
+  function renderView(int $id) {
     $item = $this->model->view($id);
     if(!$item) $this->forward("notfound");
     $this->template->item = $item;

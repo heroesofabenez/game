@@ -44,8 +44,7 @@ class NPCQuestsControl extends \Nette\Application\UI\Control {
   
   /**
    * Gets list of available quests from the npc
-   * 
-   * @param int $npc Npc's id
+   *
    * @return \HeroesofAbenez\Entities\Quest[]
    */
   function getQuests() {
@@ -88,7 +87,7 @@ class NPCQuestsControl extends \Nette\Application\UI\Control {
    * @param int $questId Quest's id
    * @return void
    */
-  function handleAccept($questId) {
+  function handleAccept(int $questId) {
     $quest = $this->questModel->view($questId);
     if(!$quest) $this->presenter->forward("notfound");
     $status = $this->questModel->status($questId);
@@ -114,7 +113,7 @@ class NPCQuestsControl extends \Nette\Application\UI\Control {
    * @param \HeroesofAbenez\Entities\Quest $quest
    * @return bool
    */
-  protected function isCompleted(\HeroesofAbenez\Entities\Quest $quest) {
+  protected function isCompleted(\HeroesofAbenez\Entities\Quest $quest): bool {
     $haveMoney = $haveItem = false;
     if($quest->cost_money > 0) {
       $char = $this->db->table("characters")->get($this->user->id);
@@ -136,7 +135,7 @@ class NPCQuestsControl extends \Nette\Application\UI\Control {
    * @param int $questId Quest's id
    * @return void
    */
-  function handleFinish($questId) {
+  function handleFinish(int $questId) {
     $quest = $this->questModel->view($questId);
     if(!$quest) $this->presenter->forward("notfound");
     $status = $this->questModel->status($questId);

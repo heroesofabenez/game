@@ -36,7 +36,7 @@ class Quest {
    * @param int $npc Return quests only from certain npc, 0 = all npcs
    * @return QuestEntity[]
    */
-  function listOfQuests($npc = 0) {
+  function listOfQuests(int $npc = 0): array {
     $return = [];
     $quests = $this->cache->load("quests");
     if($quests === NULL) {
@@ -62,7 +62,7 @@ class Quest {
    * @param int $id Quest's id
    * @return QuestEntity
    */
-  function view($id) {
+  function view(int $id): QuestEntity {
     $quests = $this->listOfQuests();
     $quest = Arrays::get($quests, $id, false);
     return $quest;
@@ -74,7 +74,7 @@ class Quest {
    * @param int $id Quest's id
    * @return int
    */
-  function status($id) {
+  function status(int $id): int {
     $row = $this->db->table("character_quests")
       ->where("character", $this->user->id)
       ->where("quest", $id);
@@ -89,7 +89,7 @@ class Quest {
    * @param int $id Quest's id
    * @return bool
    */
-  function isFinished($id) {
+  function isFinished(int $id): bool {
     $status = $this->status($id);
     if($status > 2) return true;
     else return false;

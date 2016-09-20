@@ -24,13 +24,15 @@ class TravelPresenter extends BasePresenter {
    * @param int $id Area to travel to
    * @return void
    */
-  function actionArea($id) { }
+  function actionArea(int $id) {
+    
+  }
   
   /**
    * @param int $id Stage to travel to
    * @return void
    */
-  function actionStage($id) {
+  function actionStage(int $id) {
     $this->model->user = $this->user;
     try {
       $this->model->travelToStage($id);$stageName = $this->model->getStageName($id);

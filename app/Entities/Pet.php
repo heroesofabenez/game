@@ -26,7 +26,7 @@ class Pet extends BaseEntity {
    * @param string $name
    * @param bool $deployed
    */
-  function __construct($id, PetType $type, $name, $deployed = false) {
+  function __construct(int $id, PetType $type, string $name, $deployed = false) {
     $this->id = $id;
     $this->type = $type;
     $this->name = $name;
@@ -36,21 +36,21 @@ class Pet extends BaseEntity {
   /**
    * @return string
    */
-  function getBonusStat() {
+  function getBonusStat(): string {
     return $this->type->bonusStat;
   }
   
   /**
    * @return int
    */
-  function getBonusValue() {
+  function getBonusValue(): int {
     return $this->type->bonusValue;
   }
   
   /**
    * @return int
    */
-  function getTypeId() {
+  function getTypeId(): int {
     return $this->type->id;
   }
   
@@ -59,7 +59,7 @@ class Pet extends BaseEntity {
    * 
    * @return array params
    */
-  function getDeployParams() {
+  function getDeployParams(): array {
     $statTransform = [
       "str" => "strength", "dex" => "dexterity", "con" => "constitution", "int" => "intelligence", "char" => "charisma"
     ];

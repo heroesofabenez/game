@@ -39,7 +39,7 @@ class ChatCommandsProcessor {
    * @throws CommandNotFoundException
    * @throws CommandNameAlreadyUsedException
    */
-  function addAlias($oldName, $newName) {
+  function addAlias(string $oldName, string $newName) {
     try {
       $command = $this->getCommand($oldName);
     } catch(CommandNotFoundException $e) {
@@ -60,7 +60,7 @@ class ChatCommandsProcessor {
    * @param string $text
    * @return string
    */
-  function extractCommand($text) {
+  function extractCommand(string $text): string {
     if(substr($text, 0, 1) != "/") return "";
     if(!strpos($text, " ")) {
       $command = substr($text, 1);
@@ -81,7 +81,7 @@ class ChatCommandsProcessor {
    * @param string $text
    * @return array
    */
-  function extractParameters($text) {
+  function extractParameters(string $text): array {
     if(substr($text, 0, 1) != "/" OR !strpos($text, " ")) return [];
     $params = explode(" ", $text);
     unset($params[0]);
@@ -94,7 +94,7 @@ class ChatCommandsProcessor {
    * @param string $name
    * @return bool
    */
-  function hasCommand($name) {
+  function hasCommand(string $name): bool {
     foreach($this->commands as $command) {
       if($command->name === $name) return true;
     }
@@ -108,7 +108,7 @@ class ChatCommandsProcessor {
    * @return ChatCommand
    * @throws CommandNotFoundException
    */
-  function getCommand($name) {
+  function getCommand(string $name): ChatCommand {
     foreach($this->commands as $command) {
       if($command->name === $name) return $command;
     }
@@ -119,7 +119,7 @@ class ChatCommandsProcessor {
    * @param string $text
    * @return string|bool Result of the command/false when text text contains no (defined) command
    */
-  function parse($text) {
+  function parse(string $text) {
     $commandName = $this->extractCommand($text);
     if($commandName === "") return false;
     $command = $this->getCommand($commandName);

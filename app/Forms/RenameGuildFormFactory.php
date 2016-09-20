@@ -24,7 +24,7 @@ class RenameGuildFormFactory extends BaseFormFactory {
   /**
    * @return Form
    */
-  function create() {
+  function create(): Form {
     $form = parent::createBase();
     $currentName = $this->model->getGuildName($this->user->identity->guild);
     $form->addText("name", "forms.renameGuild.nameField.label")

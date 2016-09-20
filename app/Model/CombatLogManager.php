@@ -22,7 +22,7 @@ class CombatLogManager {
    * @param int $id Combat's id
    * @return \Nette\Database\Table\ActiveRow|bool
    */
-  function read($id) {
+  function read(int $id) {
     return $this->db->table("combats")->get($id);
   }
   
@@ -32,7 +32,7 @@ class CombatLogManager {
    * @param string $text Combat log
    * @return int New record's id
    */
-  function write($text) {
+  function write(string $text): int {
     $data = [
       "text" => $text, "when" => time()
     ];

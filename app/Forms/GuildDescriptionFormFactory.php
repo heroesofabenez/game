@@ -24,7 +24,7 @@ class GuildDescriptionFormFactory extends BaseFormFactory {
   /**
    * @return Form
    */
-  function create() {
+  function create(): Form {
     $form = parent::createBase();
     $guild = $this->model->guildData($this->user->identity->guild);
     $form->addTextArea("description", "forms.guildDescription.descriptionField.label")

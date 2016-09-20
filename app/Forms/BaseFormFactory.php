@@ -19,7 +19,7 @@ abstract class BaseFormFactory {
   /**
    * @return Form
    */
-  function createBase() {
+  function createBase(): Form {
     $form = new Form;
     $form->setTranslator($this->translator);
     return $form;

@@ -45,7 +45,7 @@ class Guild {
    * @param int $id Id of guild
    * @return string
    */
-  function getGuildName($id) {
+  function getGuildName(int $id): string {
     $guild = Arrays::get($this->listOfGuilds(), $id, false);
     if(!$guild) return "";
     else return $guild->name;
@@ -57,7 +57,7 @@ class Guild {
    * @param int $id Id of guild
    * @return GuildEntity
    */
-  function guildData($id) {
+  function guildData(int $id) {
     $guilds = $this->listOfGuilds();
     return $guilds[$id];
   }
@@ -68,7 +68,7 @@ class Guild {
    * @param integer $id guild's id
    * @return array|bool info about guild
    */
-  function view($id) {
+  function view(int $id) {
     $return = [];
     $guilds = $this->listOfGuilds();
     $guild = Arrays::get($guilds, $id, false);
@@ -90,7 +90,7 @@ class Guild {
    * @param int $rank
    * @return string
    */
-  function getCustomRankName($guild, $rank) {
+  function getCustomRankName(int $guild, int $rank): string {
     $customRank = $this->db->table("guild_ranks_custom")->where("guild=? AND rank=?", $guild, $rank);
     if(count($customRank)) return $customRank->fetch()->name;
     else return "";
@@ -104,7 +104,7 @@ class Guild {
    * @param bool $customRoleNames Whetever the guild's custom names should be used
    * @return \stdClass[]
    */
-  function guildMembers($id, $roles = [], $customRoleNames = false) {
+  function guildMembers(int $id, array $roles = [], bool $customRoleNames = false): array {
     $return = [];
     $members = $this->db->table("characters")->where("guild", $id)->order("guildrank DESC, id");
     if(count($roles) > 0) $members->where("guildrank", $roles);
@@ -144,7 +144,7 @@ class Guild {
    * @return void
    * @throws GuildNotFoundException
    */
-  function sendApplication($gid) {
+  function sendApplication(int $gid) {
     $guild = $this->db->table("guilds")->get($gid);
     if(!$guild) { throw new GuildNotFoundException; }
     $leader = $this->db->table("characters")
@@ -162,7 +162,7 @@ class Guild {
    * 
    * @return bool
    */
-  function haveUnresolvedApplication() {
+  function haveUnresolvedApplication(): bool {
     $apps = $this->db->table("requests")
       ->where("from", $this->user->id)
       ->where("type", "guild_app")
@@ -177,7 +177,7 @@ class Guild {
    * @param int $id Guild's id
    * @return RequestEntity[]
    */
-  function showApplications($id) {
+  function showApplications(int $id): array {
     $return = [];
     $guilds = $this->listOfGuilds();
     $guild = $guilds[$id];
@@ -199,7 +199,7 @@ class Guild {
    *
    * @return GuildEntity[] list of guilds (id, name, description, leader)
    */
-  function listOfGuilds() {
+  function listOfGuilds(): array {
     $return = [];
     $guilds = $this->cache->load("guilds");
     if($guilds === NULL) {
@@ -233,7 +233,7 @@ class Guild {
    * @throws CannotPromoteToGrandmaster
    * @throws CannotHaveMoreDeputies
    */
-  function promote($id) {
+  function promote(int $id) {
     $admin = $this->user;
     if($admin->identity->guild == 0) throw new NotInGuildException;
     if(!$admin->isAllowed("guild", "promote")) throw new MissingPermissionsException;
@@ -268,7 +268,7 @@ class Guild {
    * @throws CannotDemoteHigherRanksException
    * @throws CannotDemoteLowestRankException
    */
-  function demote($id) {
+  function demote(int $id) {
     $admin = $this->user;
     if($admin->identity->guild == 0) throw new NotInGuildException;
     if(!$admin->isAllowed("guild", "promote")) throw new MissingPermissionsException;
@@ -298,7 +298,7 @@ class Guild {
    * @throws PlayerNotInGuild
    * @throws CannotKickHigherRanksException
    */
-  function kick($id) {
+  function kick(int $id) {
     $admin = $this->user;
     if($admin->identity->guild == 0) throw new NotInGuildException;
     if(!$admin->isAllowed("guild", "kick")) throw new MissingPermissionsException;
@@ -340,7 +340,7 @@ class Guild {
    * @param int $id Guild to dissolve
    * @return void
    */
-  function dissolve($id) {
+  function dissolve(int $id) {
     $members = $this->db->table("characters")->where("guild", $id);
     $data1 = ["guild" => 0, "guildrank" => NULL];
     foreach($members as $member) {
@@ -358,7 +358,7 @@ class Guild {
    * @return void
    * @throws NameInUseException
   */
-  function rename($id, $name) {
+  function rename(int $id, string $name) {
     $guilds = $this->cache->load("guilds");
     foreach($guilds as $guild) {
       if($guild->name == $name) throw new NameInUseException;
@@ -376,7 +376,7 @@ class Guild {
    * @return void
    * @throws GuildNotFoundException
    */
-  function changeDescription($id, $description) {
+  function changeDescription(int $id, string $description) {
     $guilds = $this->cache->load("guilds");
     $found = false;
     foreach($guilds as $guild) {
@@ -398,7 +398,7 @@ class Guild {
    * @param int $gid Guild's id
    * @return void
    */
-  function join($uid, $gid) {
+  function join(int $uid, int $gid) {
     $data = ["guild" => $gid, "guildrank" => 1];
     $this->db->query("UPDATE characters SET ? WHERE id=?", $data, $uid);
     $this->cache->remove("guilds");
@@ -419,7 +419,7 @@ class Guild {
    * @param int $id
    * @return string[]
    */
-  function getCustomRankNames($id) {
+  function getCustomRankNames(int $id): array {
     return $this->db->table("guild_ranks_custom")->where("guild=?", $id)->fetchPairs("rank", "name");
   }
   

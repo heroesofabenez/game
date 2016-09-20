@@ -42,7 +42,7 @@ class Item {
    * 
    * @return ItemEntity[]
    */
-  function listOfItems() {
+  function listOfItems(): array {
     $return = [];
     $items = $this->cache->load("items");
     if($items === NULL) {
@@ -63,7 +63,7 @@ class Item {
    * @param int $id Item's id
    * @return string
    */
-  function getItemName($id) {
+  function getItemName(int $id): string {
     $item = $this->view($id);
     if(!$item) return "";
     else return $item->name;
@@ -75,7 +75,7 @@ class Item {
    * @param int $id Item's id
    * @return ItemEntity
    */
-  function view($id) {
+  function view(int $id): ItemEntity {
     $items = $this->listOfItems();
     $item = Arrays::get($items, $id, false);
     return $item;
@@ -88,7 +88,7 @@ class Item {
    * @param int $amount
    * @return bool
    */
-  function haveItem($id, $amount = 1) {
+  function haveItem(int $id, int $amount = 1): bool {
     $return = false;
     $itemRow = $this->db->table("character_items")
       ->where("character", $this->user->id)
@@ -107,7 +107,7 @@ class Item {
    * @param int $amount
    * @return bool
    */
-  function giveItem($id, $amount = 1) {
+  function giveItem(int $id, int $amount = 1): bool {
     if($this->haveItem($id)) {
       $data = "item=$id, amount=amount+$amount";
       $where = ["character" => $this->user->id, "item" => $id];
@@ -128,7 +128,7 @@ class Item {
    * @param int $amount
    * @return bool
    */
-  function loseItem($id, $amount = 1) {
+  function loseItem(int $id, int $amount = 1): bool {
     $data = "amount=amount-$amount";
     $wheres = ["character" => $this->user->id, "item" => $id];
     $result = $this->db->query("UPDATE character_items SET $data WHERE ?", $wheres);

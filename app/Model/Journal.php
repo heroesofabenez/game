@@ -52,7 +52,7 @@ class Journal {
    * 
    * @return array
    */
-  function basic() {
+  function basic(): array {
     $character = $this->db->table("characters")->get($this->user->id);
     $stage = $this->locationModel->getStage($character->current_stage);
     $return = [
@@ -77,7 +77,7 @@ class Journal {
    * 
    * @return array
    */
-  function inventory() {
+  function inventory(): array {
     $return = [];
     $uid = $this->user->id;
     $char = $this->db->table("characters")->get($uid);
@@ -104,7 +104,7 @@ class Journal {
    * 
    * @return PetEntity[]
    */
-  function pets() {
+  function pets(): array {
     $return = [];
     $uid = $this->user->id;
     $pets = $this->db->table("pets")
@@ -121,7 +121,7 @@ class Journal {
    * 
    * @return JournalQuest[]
    */
-  function quests() {
+  function quests(): array {
     $return = [];
     $uid = $this->user->id;
     $quests = $this->db->table("character_quests")

@@ -26,7 +26,7 @@ class GuildModelTest extends MT\TestCase {
    * @data(1)
    * @return void
    */
-  function testGuildData($id) {
+  function testGuildData(int $id) {
     $guild = $this->model->guildData($id);
     Assert::type(Guild::class, $guild);
     Assert::same("Dawn", $guild->name);
@@ -37,7 +37,7 @@ class GuildModelTest extends MT\TestCase {
    * @data(1)
    * @return void
    */
-  function testView($id) {
+  function testView(int $id) {
     $guild = $this->model->view($id, [], true);
     Assert::type("array", $guild);
     Assert::same("Dawn", $guild["name"]);
@@ -66,7 +66,7 @@ class GuildModelTest extends MT\TestCase {
    * @data(1,2)
    * @return void
    */
-  function testGuildMembers($guild) {
+  function testGuildMembers(int $guild) {
     $members = $this->model->guildMembers($guild, [], true);
     Assert::type("array", $members);
     Assert::type("stdClass", $members[0]);
@@ -90,7 +90,7 @@ class GuildModelTest extends MT\TestCase {
     * @data(1,2)
     * @return void
     */
-  function testGetCustomRankNames($guild) {
+  function testGetCustomRankNames(int $guild) {
     $names = $this->model->getCustomRankNames($guild);
     Assert::type("array", $names);
     if($guild > 1) {

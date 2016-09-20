@@ -19,7 +19,7 @@ class DialogueLine extends BaseEntity {
    * @param string $text
    * @param array $names
    */
-  function __construct($speaker, $text, array $names) {
+  function __construct(string $speaker, string $text, array $names) {
     $speaker = strtolower($speaker);
     if($speaker == "player" OR $speaker == "npc") $this->speaker = $speaker;
     $this->text = $text;
@@ -29,7 +29,7 @@ class DialogueLine extends BaseEntity {
   /**
    * @return string
    */
-  function getText() {
+  function getText(): string {
     $replace = ["#npcName#", "#playerName#"];
     return str_replace($replace, $this->names, $this->text);
   }
@@ -37,7 +37,7 @@ class DialogueLine extends BaseEntity {
   /**
    * @return string
    */
-  function getSpeaker() {
+  function getSpeaker(): string {
     if($this->speaker === "npc") return $this->names[0];
     elseif($this->speaker === "player") return $this->names[1];
   }

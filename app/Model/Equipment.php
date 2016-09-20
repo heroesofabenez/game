@@ -36,7 +36,7 @@ class Equipment {
    * 
    * @return EquipmentEntity[]
    */
-  function listOfEquipment() {
+  function listOfEquipment(): array {
     $return = [];
     $equipments = $this->cache->load("equipment");
     if($equipments === NULL) {
@@ -56,7 +56,7 @@ class Equipment {
    * @param int $id
    * @return EquipmentEntity|bool
    */
-  function view($id) {
+  function view(int $id) {
     $equipments = $this->listOfEquipment();
     $item = Arrays::get($equipments, $id, false);
     return $item;
@@ -71,7 +71,7 @@ class Equipment {
    * @throws ItemNotOwnedException
    * @throws ItemAlreadyEquippedException
    */
-  function equipItem($id) {
+  function equipItem(int $id) {
     $item = $this->db->table("character_equipment")->get($id);
     if(!$item) throw new ItemNotFoundException;
     elseif($item->character != $this->user->id) throw new ItemNotOwnedException;
@@ -96,7 +96,7 @@ class Equipment {
    * @throws ItemNotOwnedException
    * @throws ItemNotWornException
    */
-  function unequipItem($id) {
+  function unequipItem(int $id) {
     $item = $this->db->table("character_equipment")->get($id);
     if(!$item) throw new ItemNotFoundException;
     elseif($item->character != $this->user->id) throw new ItemNotOwnedException;

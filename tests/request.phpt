@@ -19,7 +19,7 @@ class RequestModelTest extends MT\TestCase {
    * @data(1)
    * @return void
    */
-  function testCanShow($id) {
+  function testCanShow(int $id) {
     $result = $this->model->canShow($id);
     Assert::true($result);
   }
@@ -28,7 +28,7 @@ class RequestModelTest extends MT\TestCase {
    * @data(1)
    * @return void
    */
-  function testShow($id) {
+  function testShow(int $id) {
     $request = $this->model->show($id);
     Assert::type(Request::class, $request);
   }

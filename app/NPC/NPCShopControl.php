@@ -65,7 +65,7 @@ class NPCShopControl extends \Nette\Application\UI\Control {
    * @param int $id Item's id
    * @return bool
    */
-  function canBuyItem($id) {
+  function canBuyItem(int $id): bool {
     $row = $this->db->table("shop_items")
       ->where("npc", $this->npc->id)
       ->where("item", $id);
@@ -79,7 +79,7 @@ class NPCShopControl extends \Nette\Application\UI\Control {
    * @param int $itemId Item's id
    * @return void
    */
-  function handleBuy($itemId) {
+  function handleBuy(int $itemId) {
     $item = $this->itemModel->view($itemId);
     if(!$item) {
       $this->presenter->flashMessage($this->translator->translate("errors.shop.itemDoesNotExist"));

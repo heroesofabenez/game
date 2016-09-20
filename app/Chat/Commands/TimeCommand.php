@@ -18,7 +18,7 @@ class TimeCommand extends \HeroesofAbenez\Entities\ChatCommand {
   /**
    * @return string
    */
-  function execute() {
+  function execute(): string {
     $time = date("Y-m-d H:i:s");
     return $this->translator->translate("messages.chat.currentTime", ["time" => $time]);
   }

@@ -27,7 +27,7 @@ class EquipmentTest extends MT\TestCase {
    * @data(1)
    * @return void
    */
-  function testView($id) {
+  function testView(int $id) {
     $item = $this->model->view($id);
     Assert::type(Equipment::class, $item);
   }

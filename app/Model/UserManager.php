@@ -38,7 +38,7 @@ class UserManager implements NS\IAuthenticator {
    * 
    * @return int
    */
-  protected function getRealId() {
+  protected function getRealId(): int {
     if(in_array($_SERVER["SERVER_NAME"], $this->devServers)) {
       $uid = 1;
     } else {
@@ -56,7 +56,7 @@ class UserManager implements NS\IAuthenticator {
    * @param array $credentials not really used
    * @return NS\Identity User's identity
    */
-  function authenticate(array $credentials) {
+  function authenticate(array $credentials): NS\Identity {
     $uid = $this->getRealId();
     if($uid == 0) return new NS\Identity(0, "guest");
     $chars = $this->db->table("characters")->where("owner", $uid);

@@ -24,7 +24,7 @@ class PostofficePresenter extends BasePresenter {
    * @param int $id 
    * @return void
    */
-  function actionMessage($id) {
+  function actionMessage(int $id) {
     $status = $this->createComponentPostoffice()->messageStatus($id);
     if($status === 0) $this->forward("notfound");
     elseif($status === -1) $this->forward("cannotshow");
@@ -34,16 +34,16 @@ class PostofficePresenter extends BasePresenter {
   /**
    * @return Postoffice\PostofficeControl
    */
-  protected function createComponentPostoffice() {
+  protected function createComponentPostoffice(): Postoffice\PostofficeControl {
     return $this->pofactory->create();
   }
   
   /**
    * Creates form for writing new message
    * 
-   * @return \Nette\Application\UI\Form
+   * @return Form
    */
-  protected function createComponentNewMessageForm() {
+  protected function createComponentNewMessageForm(): Form {
     $form = new Form;
     $form->setTranslator($this->translator);
     $chars = $this->createComponentPostoffice()->getRecipients();
@@ -62,7 +62,7 @@ class PostofficePresenter extends BasePresenter {
   
   /**
    * 
-   * @param \Nette\Application\UI\Form $form
+   * @param Form $form
    * @param \Nette\Utils\ArrayHash $values
    * @return void
    */

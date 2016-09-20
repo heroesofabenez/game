@@ -47,7 +47,7 @@ abstract class ArenaControl extends \Nette\Application\UI\Control {
    * @return Character
    * @throws OpponentNotFoundException
    */
-  protected function getPlayer($id) {
+  protected function getPlayer(string $id): Character {
     try {
       $player = $this->combatHelper->getPlayer($id);
     } catch(OpponentNotFoundException $e) {
@@ -59,7 +59,7 @@ abstract class ArenaControl extends \Nette\Application\UI\Control {
   /**
    * @return array
    */
-  abstract protected function getOpponents();
+  abstract protected function getOpponents(): array;
   
   /**
    * @return void
@@ -75,7 +75,7 @@ abstract class ArenaControl extends \Nette\Application\UI\Control {
   /**
    * @return array
    */
-  abstract protected function calculateRewards($player, $opponent);
+  abstract protected function calculateRewards($player, $opponent): array;
   
   /**
    * Execute the duel
@@ -102,7 +102,7 @@ abstract class ArenaControl extends \Nette\Application\UI\Control {
    * @param int $id
    * @return void
    */
-  abstract function handleFight($id);
+  abstract function handleFight(int $id);
   
   /**
    * Save log from combat
@@ -110,7 +110,7 @@ abstract class ArenaControl extends \Nette\Application\UI\Control {
    * @param CombatLogger $logger
    * @return int Combat's id
    */
-  function saveCombat(CombatLogger $logger) {
+  function saveCombat(CombatLogger $logger): int {
     $log = (string) $logger;
     return $this->log->write($log);
   }

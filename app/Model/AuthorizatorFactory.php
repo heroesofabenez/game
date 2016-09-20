@@ -15,7 +15,7 @@ class AuthorizatorFactory {
   * @param Permissions $model
   * @return \Nette\Security\Permission
   */
-  static function create(Permissions $model) {
+  static function create(Permissions $model): \Nette\Security\Permission {
     $permission = new \Nette\Security\Permission;
     $permission->addResource("guild");
     $permission->addRole("guest");

@@ -22,7 +22,7 @@ class Team extends BaseEntity implements \ArrayAccess, \Countable, \IteratorAggr
   /**
    * @param string $name Name of the team
    */
-  function __construct($name) {
+  function __construct(string $name) {
     $this->name = (string) $name;
     $this->class = Character::class;
   }
@@ -30,7 +30,7 @@ class Team extends BaseEntity implements \ArrayAccess, \Countable, \IteratorAggr
   /**
    * @return int[]
    */
-  function getUsed() {
+  function getUsed(): array {
     return $this->used;
   }
   
@@ -40,7 +40,7 @@ class Team extends BaseEntity implements \ArrayAccess, \Countable, \IteratorAggr
    * @param int $id Character's id
    * @return int Index|-1 if the character is not in the team
    */
-  function getIndex($id) {
+  function getIndex(int $id): int {
     foreach($this->items as $index => $member) {
       if($member->id === $id) return $index;
     }
@@ -53,7 +53,7 @@ class Team extends BaseEntity implements \ArrayAccess, \Countable, \IteratorAggr
    * @param int $id Character's id
    * @return boolean
    */
-  function hasMember($id) {
+  function hasMember(int $id): bool {
     foreach($this->items as $member) {
       if($member->id === $id) return true;
     }
@@ -65,7 +65,7 @@ class Team extends BaseEntity implements \ArrayAccess, \Countable, \IteratorAggr
    * 
    * @return Character[]
    */
-  function getActiveMembers() {
+  function getActiveMembers(): array {
     $return = [];
     foreach($this->items as $member) {
       if(!$member->stunned AND $member->hitpoints > 0) $return[] = $member;
@@ -78,7 +78,7 @@ class Team extends BaseEntity implements \ArrayAccess, \Countable, \IteratorAggr
    * 
    * @return Character[]
    */
-  function getAliveMembers() {
+  function getAliveMembers(): array {
     $return = [];
     foreach($this->items as $member) {
       if($member->hitpoints > 0) $return[] = $member;
@@ -91,7 +91,7 @@ class Team extends BaseEntity implements \ArrayAccess, \Countable, \IteratorAggr
    * 
    * @return Character[]
    */
-  function getUsableMembers() {
+  function getUsableMembers(): array {
     $return = [];
     foreach($this->items as $index => $member) {
       if(!$member->stunned AND $member->hitpoints > 0 AND !in_array($index, $this->used)) $return[] = $member;
@@ -104,7 +104,7 @@ class Team extends BaseEntity implements \ArrayAccess, \Countable, \IteratorAggr
    * 
    * @return bool
    */
-  function hasActiveMembers() {
+  function hasActiveMembers(): bool {
     return count($this->getActiveMembers()) > 0;
   }
   
@@ -113,7 +113,7 @@ class Team extends BaseEntity implements \ArrayAccess, \Countable, \IteratorAggr
    * 
    * @return bool
    */
-  function hasAliveMembers() {
+  function hasAliveMembers(): bool {
     return count($this->getAliveMembers()) > 0;
   }
   
@@ -123,7 +123,7 @@ class Team extends BaseEntity implements \ArrayAccess, \Countable, \IteratorAggr
    * @param int $index
    * @return void
    */
-  function useMember($index) {
+  function useMember(int $index) {
     if(!is_int($index) OR !$this->offsetExists($index)) return;
     elseif(in_array($index, $this->used)) return;
     $this->used[] = $index;

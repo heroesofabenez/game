@@ -31,7 +31,7 @@ class RequestPresenter extends BasePresenter {
    * @param int $id Request to show
    * @return void
    */
-  function renderView($id) {
+  function renderView(int $id) {
     try {
       $request = $this->model->show($id);
       $this->template->id = $request->id;
@@ -52,7 +52,7 @@ class RequestPresenter extends BasePresenter {
    * @param int $id Request to accept
    * @return void
    */
-  function actionAccept($id) {
+  function actionAccept(int $id) {
     try {
       $this->model->accept($id);
       $this->flashMessage($this->translator->translate("messages.request.accepted"));
@@ -76,7 +76,7 @@ class RequestPresenter extends BasePresenter {
    * @param int $id Request to decline
    * @return void
    */
-  function actionDecline($id) {
+  function actionDecline(int $id) {
     try {
       $this->model->decline($id);
       $this->flashMessage($this->translator->translate("messages.request.declined"));

@@ -65,7 +65,7 @@ class JournalPresenter extends BasePresenter {
    * @param int $itemId
    * @return void
    */
-  function handleEquipItem($itemId) {
+  function handleEquipItem(int $itemId) {
     try {
       $this->equipmentModel->equipItem($itemId);
     } catch(ItemNotFoundException $e) {
@@ -82,7 +82,7 @@ class JournalPresenter extends BasePresenter {
    * @param int $itemId
    * @return void
    */
-  function handleUnequipItem($itemId) {
+  function handleUnequipItem(int $itemId) {
     try {
       $this->equipmentModel->unequipItem($itemId);
       $this->flashMessage($this->translator->translate("errors.equipment.unequiped"));
@@ -114,7 +114,7 @@ class JournalPresenter extends BasePresenter {
    * @param int $petId
    * @return void
    */
-  function handleDeployPet($petId) {
+  function handleDeployPet(int $petId) {
     try {
       $this->petModel->user = $this->user;
       $this->petModel->deployPet($petId);
@@ -132,7 +132,7 @@ class JournalPresenter extends BasePresenter {
    * @param int $petId
    * @return void
    */
-  function handleDiscardPet($petId) {
+  function handleDiscardPet(int $petId) {
     try {
       $this->petModel->user = $this->user;
       $this->petModel->discardPet($petId);

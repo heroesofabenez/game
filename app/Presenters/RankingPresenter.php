@@ -38,7 +38,7 @@ class RankingPresenter extends BasePresenter {
    * @param int $page Page to show
    * @return void
    */
-  function actionCharacters($page) {
+  function actionCharacters(int $page = 1) {
     $this->template->title = "Ranking Characters";
     $this->template->ranking = "charactersRanking";
   }
@@ -47,24 +47,26 @@ class RankingPresenter extends BasePresenter {
    * @param int $page Page to show
    * @return void
    */
-  function actionGuilds($page) {
+  function actionGuilds(int $page = 1) {
     $this->template->title = "Ranking Guilds";
     $this->template->ranking = "guildsRanking";
   }
   
   /**
-   * @return \HeroesofAbenez\Ranking\CharactersRankingControl
+   * @param Ranking\CharactersRankingControlFactory $factory
+   * @return Ranking\CharactersRankingControl
    */
-  function createComponentCharactersRanking(Ranking\CharactersRankingControlFactory $factory) {
+  function createComponentCharactersRanking(Ranking\CharactersRankingControlFactory $factory): Ranking\CharactersRankingControl {
     $component = $factory->create();
     $component->paginator = $this->paginator;
     return $component;
   }
   
   /**
-   * @return \HeroesofAbenez\Ranking\GuildsRankingControl
+   * @param Ranking\GuildsRankingControlFactory $factory
+   * @return Ranking\GuildsRankingControl
    */
-  function createComponentGuildsRanking(Ranking\GuildsRankingControlFactory $factory) {
+  function createComponentGuildsRanking(Ranking\GuildsRankingControlFactory $factory): Ranking\GuildsRankingControl {
     return $factory->create();
   }
 }

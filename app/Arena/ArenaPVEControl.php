@@ -16,7 +16,7 @@ class ArenaPVEControl extends ArenaControl {
   /**
    * @return \Nette\Database\Table\ActiveRow[]
    */
-  protected function getOpponents() {
+  protected function getOpponents(): array {
     $level = $this->user->identity->level;
     $opponents = $this->db->table("pve_arena_opponents")
       ->where("level > $level-5")
@@ -31,7 +31,7 @@ class ArenaPVEControl extends ArenaControl {
    * @return Character
    * @throws OpponentNotFoundException
    */
-  protected function getNpc($id) {
+  protected function getNpc(int $id): Character {
     try {
       $npc = $this->combatHelper->getArenaNpc($id);
     } catch(OpponentNotFoundException $e) {
@@ -63,7 +63,7 @@ class ArenaPVEControl extends ArenaControl {
    * @param Character $opponent
    * @return array
    */
-  protected function calculateRewards($player, $opponent) {
+  protected function calculateRewards($player, $opponent): array {
     $experience = round($opponent->level / 10) + 1;
     if($opponent->level > $player->level) $experience += 1;
     $money = round($opponent->level / 5) + 1;
@@ -77,7 +77,7 @@ class ArenaPVEControl extends ArenaControl {
    * @param int $npcId
    * @return void
    */
-  function handleFight($npcId) {
+  function handleFight(int $npcId) {
     try {
       $npc = $this->getNpc($npcId);
     } catch(OpponentNotFoundException $e) {

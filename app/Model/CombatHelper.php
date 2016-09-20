@@ -37,7 +37,7 @@ class CombatHelper {
    * @param int $classId
    * @return string
    */
-  function getInitiativeFormula($classId) {
+  function getInitiativeFormula(int $classId): string {
     $class = $this->profileModel->getClass($classId);
     if(!$class) return "0";
     else return $class->initiative;
@@ -45,12 +45,12 @@ class CombatHelper {
   
   /**
    * Get data for specified player
-   * 
+   *
    * @param int $id Player's id
    * @return Character
    * @throws OpponentNotFoundException
    */
-  function getPlayer($id) {
+  function getPlayer(int $id): Character {
     $data = $this->profileModel->view($id);
     if(!$data) throw new OpponentNotFoundException;
     $data["initiative_formula"] = $this->getInitiativeFormula($data["occupation"]);
@@ -94,7 +94,7 @@ class CombatHelper {
    * @return Character
    * @throws OpponentNotFoundException
    */
-  function getArenaNpc($id) {
+  function getArenaNpc($id): Character {
     $row = (array) $this->db->query("SELECT * FROM pve_arena_opponents WHERE id=$id")->fetch();
     if(count($row) === 1) throw new OpponentNotFoundException;
     $row["id"] = "pveArenaNpc" . $row["id"];

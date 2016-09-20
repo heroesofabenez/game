@@ -14,7 +14,7 @@ class TestCommand extends ChatCommand {
     \Tracy\Debugger::barDump($this->name);
    * @return string
    */
-  function execute() {
+  function execute(): string {
     return "passed";
   }
 }
@@ -29,7 +29,7 @@ class Test2Command extends ChatCommand {
   /**
    * @return string
    */
-  function execute() {
+  function execute() : string {
     $args = func_get_args();
     $text = "test";
     foreach($args as $arg) {
@@ -104,7 +104,7 @@ class ChatCommandsProcessorTest extends MT\TestCase {
    * @data("anagfdffd", "/anagfdffd")
    * @return void
    */
-  function testExtractParametersNothing($text) {
+  function testExtractParametersNothing(string $text) {
     $result = $this->model->extractParameters($text);
     Assert::type("array", $result);
     Assert::count(0, $result);

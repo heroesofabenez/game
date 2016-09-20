@@ -33,7 +33,7 @@ class ProfileTest extends MT\TestCase {
    * @data(1)
    * @return void
    */
-  function testView($id) {
+  function testView(int $id) {
     $result = $this->model->view($id);
     Assert::type("array", $result);
     Assert::count(16, $result);
@@ -57,7 +57,7 @@ class ProfileTest extends MT\TestCase {
    * @data(1)
    * @return void
    */
-  function testGetRace($id) {
+  function testGetRace(int $id) {
     $result = $this->model->getRace($id);
     Assert::type(CharacterRace::class, $result);
   }
@@ -67,7 +67,7 @@ class ProfileTest extends MT\TestCase {
    * @data(1)
    * @return void
    */
-  function testGetRaceName($id) {
+  function testGetRaceName(int $id) {
     $result = $this->model->getRaceName($id);
     Assert::type("string", $result);
   }
@@ -86,7 +86,7 @@ class ProfileTest extends MT\TestCase {
    * @data(1)
    * @return void
    */
-  function testGetClass($id) {
+  function testGetClass(int $id) {
     $result = $this->model->getClass($id);
     Assert::type(CharacterClass::class, $result);
   }
@@ -96,7 +96,7 @@ class ProfileTest extends MT\TestCase {
    * @data(1)
    * @return void
    */
-  function testGetClassName($id) {
+  function testGetClassName(int $id) {
     $result = $this->model->getClassName($id);
     Assert::type("string", $result);
   }
@@ -115,7 +115,7 @@ class ProfileTest extends MT\TestCase {
    * @data(1)
    * @return void
    */
-  function testGetSpecialization($id) {
+  function testGetSpecialization(int $id) {
     $result = $this->model->getSpecialization($id);
     Assert::type(CharacterSpecialization::class, $result);
   }
@@ -125,7 +125,7 @@ class ProfileTest extends MT\TestCase {
    * @data(1)
    * @return void
    */
-  function testGetSpecializationName($id) {
+  function testGetSpecializationName(int $id) {
     $result = $this->model->getSpecializationName($id);
     Assert::type("string", $result);
   }

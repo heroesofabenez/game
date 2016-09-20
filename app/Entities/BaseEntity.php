@@ -16,7 +16,7 @@ abstract class BaseEntity {
    * @return mixed Property's value
    * @throws \Nette\MemberAccessException
    */
-  function __get($name) {
+  function __get(string $name) {
     $class = get_class($this);
     $rc = new \ReflectionClass($class);
     $method = "get" . ucfirst($name);
@@ -32,7 +32,7 @@ abstract class BaseEntity {
    * @param string $value
    * @throws \Nette\MemberAccessException
    */
-  function __set($name, $value) {
+  function __set(string $name, string $value) {
     $class = get_class($this);
     $rc = new \ReflectionClass($class);
     $method = "set" . ucfirst($name);
@@ -45,7 +45,7 @@ abstract class BaseEntity {
    * 
    * @return array
    */
-  function toArray() {
+  function toArray(): array {
     $return = [];
     foreach($this as $key => $value) {
       $return[$key] = $value;

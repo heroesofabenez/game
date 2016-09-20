@@ -20,14 +20,14 @@ trait TCollection {
   /**
    * @return int
    */
-  function count() {
+  function count(): int {
     return count($this->items);
   }
   
   /**
    * @return \ArrayIterator
    */
-  function getIterator() {
+  function getIterator(): \ArrayIterator {
     return new \ArrayIterator($this->items);
   }
   
@@ -35,7 +35,7 @@ trait TCollection {
    * @param int $index
    * @return bool
    */
-  function offsetExists($index) {
+  function offsetExists($index): bool {
     return $index >= 0 AND $index < count($this->items);
   }
   

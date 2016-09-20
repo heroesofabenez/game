@@ -49,15 +49,15 @@ class CombatLogger implements \Countable, \IteratorAggregate {
   /**
    * @return int
    */
-  function getRound() {
+  function getRound(): int {
     return $this->round;
   }
   
   /**
    * @param int $round
    */
-  function setRound($round) {
-    $this->round = (int) $round;
+  function setRound(int $round) {
+    $this->round = $round;
   }
   
   /**
@@ -69,8 +69,9 @@ class CombatLogger implements \Countable, \IteratorAggregate {
    * @param CharacterEntity $character2
    * @param int $amount
    * @param string $name
+   * @return void
    */
-  function log($action, $result, CharacterEntity $character1, CharacterEntity $character2, $amount = 0, $name = "") {
+  function log($action, $result, CharacterEntity $character1, CharacterEntity $character2, int $amount = 0, string $name = "") {
     $this->actions[$this->round][] = new CombatAction($action, $result, $character1, $character2, $amount, $name);
   }
   
@@ -80,14 +81,14 @@ class CombatLogger implements \Countable, \IteratorAggregate {
    * @param string $text
    * @return void
    */
-  function logText($text) {
-    $this->actions[$this->round][] = (string) $text;
+  function logText(string $text) {
+    $this->actions[$this->round][] = $text;
   }
   
   /**
    * @return string
    */
-  function __toString() {
+  function __toString(): string {
     $params = [
       "team1" => $this->team1, "team2" => $this->team2, "actions" => $this->actions
     ];
@@ -98,14 +99,14 @@ class CombatLogger implements \Countable, \IteratorAggregate {
   /**
    * @return int
    */
-  function count() {
+  function count(): int {
     return count($this->actions);
   }
   
   /**
    * @return \ArrayIterator
    */
-  function getIterator() {
+  function getIterator(): \ArrayIterator {
     return new \ArrayIterator($this->actions);
   }
 }

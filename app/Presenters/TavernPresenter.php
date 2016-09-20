@@ -54,32 +54,32 @@ class TavernPresenter extends BasePresenter {
   }
   
   /**
-   * @return \HeroesofAbenez\Chat\GuildChatControl
+   * @return Chat\GuildChatControl
    */
-  protected function createComponentGuildChat(Chat\GuildChatControlFactory $factory) {
+  protected function createComponentGuildChat(Chat\GuildChatControlFactory $factory): Chat\GuildChatControl {
     return $factory->create();
   }
   
   /**
-   * @return \HeroesofAbenez\Chat\LocalChatControl
+   * @return Chat\LocalChatControl
    */
-  protected function createComponentLocalChat(Chat\LocalChatControlFactory $factory) {
+  protected function createComponentLocalChat(Chat\LocalChatControlFactory $factory): Chat\LocalChatControl {
     return $factory->create();
   }
   
   /**
-   * @return \HeroesofAbenez\Chat\GlobalChatControl
+   * @return Chat\GlobalChatControl
    */
-  protected function createComponentGlobalChat(Chat\GlobalChatControlFactory $factory) {
+  protected function createComponentGlobalChat(Chat\GlobalChatControlFactory $factory): Chat\GlobalChatControl {
     return $factory->create();
   }
   
   /**
    * Creates form for writing new message
    * 
-   * @return \Nette\Application\UI\Form
+   * @return Form
    */
-  protected function createComponentNewMessageForm() {
+  protected function createComponentNewMessageForm(): Form {
     $form = new Form;
     $form->setTranslator($this->translator);
     $form->addText("message")
@@ -91,7 +91,7 @@ class TavernPresenter extends BasePresenter {
   
   /**
    * 
-   * @param \Nette\Application\UI\Form $form
+   * @param Form $form
    * @param \Nette\Utils\ArrayHash $values
    * @return void
    */

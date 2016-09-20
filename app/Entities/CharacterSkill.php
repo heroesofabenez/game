@@ -23,14 +23,14 @@ abstract class CharacterSkill extends BaseEntity {
   /**
    * @param int $level
    */
-  function setLevel($level) {
+  function setLevel(int $level) {
     $this->level = (int) $level;
   }
   
   /**
    * @return string
    */
-  function getSkillType() {
+  function getSkillType(): string {
     if($this->skill instanceof SkillAttack) return "attack";
     elseif($this->skill instanceof SkillSpecial) return "special";
     else return "";
@@ -39,7 +39,7 @@ abstract class CharacterSkill extends BaseEntity {
   /**
    * @return bool
    */
-  function canUse() {
+  function canUse(): bool {
     if($this->cooldown < 1) return true;
     else return false;
   }

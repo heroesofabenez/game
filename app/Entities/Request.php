@@ -28,7 +28,7 @@ class Request extends BaseEntity {
    * @param int $sent
    * @param string $status
    */
-  function __construct($id, $from, $to, $type, $sent, $status) {
+  function __construct(int $id, string $from, string $to, string $type, $sent, string $status) {
     $this->id = $id;
     $this->from = $from;
     $this->to = $to;

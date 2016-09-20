@@ -27,7 +27,7 @@ class ItemTest extends MT\TestCase {
    * @data(1)
    * @return void
    */
-  function testView($id) {
+  function testView(int $id) {
     $item = $this->model->view($id);
     Assert::type(ItemEntity::class, $item);
   }
@@ -37,7 +37,7 @@ class ItemTest extends MT\TestCase {
    * @data(1)
    * @return void
    */
-  function testGetItemName($id) {
+  function testGetItemName(int $id) {
     $actual = $this->model->getItemName($id);
     $expected = "Book ABC";
     Assert::type("string", $actual);

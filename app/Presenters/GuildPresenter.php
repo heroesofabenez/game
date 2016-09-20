@@ -50,7 +50,7 @@ class GuildPresenter extends BasePresenter {
    * @param bool $warning Whetever to print a warrning (via flash message)
    * @return void
   */
-  function notInGuild($warning = true) {
+  function notInGuild(bool $warning = true) {
     $guild = $this->user->identity->guild;
     if($guild == 0) {
       if($warning) { $this->flashMessage($this->translator->translate("errors.guild.notInGuild")); }
@@ -82,7 +82,7 @@ class GuildPresenter extends BasePresenter {
    * @param int $id Id of guild to view
    * @return void
    */
-  function renderView($id) {
+  function renderView(int $id) {
     if($id == 0) $this->forward("notfound");
     $data = $this->model->view($id);
     if(!$data) $this->forward("notfound");
@@ -121,7 +121,7 @@ class GuildPresenter extends BasePresenter {
    * @param CreateGuildFormFactory $factory
    * @return Form
    */
-  protected function createComponentCreateGuildForm(CreateGuildFormFactory $factory) {
+  protected function createComponentCreateGuildForm(CreateGuildFormFactory $factory): Form {
     $form = $factory->create();
     $form->onSuccess[] = function() {
       $this->user->logout();
@@ -143,7 +143,7 @@ class GuildPresenter extends BasePresenter {
    * @param int $id Guild to join   
    * @return void
    */
-  function actionJoin($id) {
+  function actionJoin(int $id) {
     $this->inGuild();
     try {
       $this->model->sendApplication($id);
@@ -233,7 +233,7 @@ class GuildPresenter extends BasePresenter {
    * @param DissolveGuildFormFactory $factory
    * @return Form
    */
-  protected function createComponentDissolveGuildForm(DissolveGuildFormFactory $factory) {
+  protected function createComponentDissolveGuildForm(DissolveGuildFormFactory $factory): Form {
     $form = $factory->create();
     $form->onSuccess[] = function() {
       $this->flashMessage($this->translator->translate("messages.guild.dissolved"));
@@ -249,7 +249,7 @@ class GuildPresenter extends BasePresenter {
    * @param RenameGuildFormFactory $factory
    * @return Form
    */
-  protected function createComponentRenameGuildForm(RenameGuildFormFactory $factory) {
+  protected function createComponentRenameGuildForm(RenameGuildFormFactory $factory): Form {
     $form = $factory->create();
     $form->onSuccess[] = function() {
       $this->flashMessage($this->translator->translate("messages.guild.renamed"));
@@ -259,9 +259,10 @@ class GuildPresenter extends BasePresenter {
   }
   
   /**
+   * @param  int $id
    * @return void
    */
-  function actionPromote($id) {
+  function actionPromote(int $id) {
     try{
       $this->model->promote($id);
       $this->flashMessage($this->translator->translate("messages.guild.promoted"));
@@ -284,9 +285,10 @@ class GuildPresenter extends BasePresenter {
   }
   
   /**
+   * @param int $id
    * @return void
    */
-  function actionDemote($id) {
+  function actionDemote(int $id) {
     try{
       $this->model->demote($id);
       $this->flashMessage($this->translator->translate("messages.guild.demoted"));
@@ -307,9 +309,10 @@ class GuildPresenter extends BasePresenter {
   }
   
   /**
+   * @param int $id
    * @return void
    */
-  function actionKick($id) {
+  function actionKick(int $id) {
     try {
       $this->model->kick($id);
       $this->flashMessage($this->translator->translate("messages.guild.kicked"));
@@ -342,9 +345,9 @@ class GuildPresenter extends BasePresenter {
   /**
    * Creates form for changing guild's description
    *
-   * @return \Nette\Application\UI\Form
+   * @return Form
   */
-  protected function createComponentGuildDescriptionForm(GuildDescriptionFormFactory $factory) {
+  protected function createComponentGuildDescriptionForm(GuildDescriptionFormFactory $factory): Form {
     $form = $factory->create();
     $form->onSuccess[] = function() {
       $this->flashMessage($this->translator->translate("messages.guild.descriptionChanged"));
@@ -371,6 +374,9 @@ class GuildPresenter extends BasePresenter {
     $this->template->apps = $this->model->showApplications($this->user->identity->guild);
   }
   
+  /**
+   * @return void
+   */
   function actionRankNames() {
     $this->notInGuild();
     if(!$this->user->isAllowed("guild", "changeRankNames")) {
@@ -384,7 +390,7 @@ class GuildPresenter extends BasePresenter {
    * @param CustomGuildRankNamesFormFactory $factory
    * @return Form
    */
-  protected function createComponentCustomGuildRankNamesForm(CustomGuildRankNamesFormFactory $factory) {
+  protected function createComponentCustomGuildRankNamesForm(CustomGuildRankNamesFormFactory $factory): Form {
     $form = $factory->create();
     $form->onSuccess[] = function() {
       $this->flashMessage($this->translator->translate("messages.guild.customRankNamesSet"));

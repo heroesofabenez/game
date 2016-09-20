@@ -34,7 +34,7 @@ class Skills {
    * 
    * @return SkillAttack[]
    */
-  function getListOfAttackSkills() {
+  function getListOfAttackSkills(): array {
     $skillsList = $this->cache->load("attack_skills");
     if($skillsList === NULL) {
       $skillsList = [];
@@ -51,7 +51,7 @@ class Skills {
    * @param int $id
    * @return SkillAttack|bool
    */
-  function getAttackSkill($id) {
+  function getAttackSkill(int $id) {
     $skills = $this->getListOfAttackSkills();
     $skill = Arrays::get($skills, $id, false);
     return $skill;
@@ -62,7 +62,7 @@ class Skills {
    * @param int $userId
    * @return CharacterSkillAttack|bool
    */
-  function getCharacterAttackSkill($skillId, $userId = 0) {
+  function getCharacterAttackSkill(int $skillId, int $userId = 0) {
     if($userId === 0) $userId = $this->user->id;
     $skill = $this->getAttackSkill($skillId);
     if(!$skill) return false;
@@ -78,7 +78,7 @@ class Skills {
    * 
    * @return SkillSpecial[]
    */
-  function getListOfSpecialSkills() {
+  function getListOfSpecialSkills(): array {
     $skillsList = $this->cache->load("special_skills");
     if($skillsList === NULL) {
       $skillsList = [];
@@ -95,7 +95,7 @@ class Skills {
    * @param int $id
    * @return SkillSpecial|bool
    */
-  function getSpecialSkill($id) {
+  function getSpecialSkill(int $id) {
     $skills = $this->getListOfSpecialSkills();
     $skill = Arrays::get($skills, $id, false);
     return $skill;
@@ -106,7 +106,7 @@ class Skills {
    * @param int $userId
    * @return CharacterSkillSpecial|bool
    */
-  function getCharacterSpecialSkill($skillId, $userId = 0) {
+  function getCharacterSpecialSkill(int $skillId, int $userId = 0) {
     if($userId === 0) $userId = $this->user->id;
     $skill = $this->getSpecialSkill($skillId);
     if(!$skill) return false;
@@ -120,7 +120,7 @@ class Skills {
   /**
    * @return CharacterSkill[]
    */
-  function getAvailableSkills() {
+  function getAvailableSkills(): array {
     $return = [];
     $skills = array_merge($this->getListOfAttackSkills(), $this->getListOfSpecialSkills());
     $char = $this->db->table("characters")->get($this->user->id);
@@ -138,7 +138,7 @@ class Skills {
    * @param int $uid
    * @return CharacterSkill[]
    */
-  function getPlayerSkills($uid) {
+  function getPlayerSkills(int $uid): array {
     $return = [];
     $skills = array_merge($this->getListOfAttackSkills(), $this->getListOfSpecialSkills());
     $char = $this->db->table("characters")->get($uid);
@@ -158,7 +158,7 @@ class Skills {
    * 
    * @return int
    */
-  function getSkillPoints() {
+  function getSkillPoints(): int {
     return (int) $this->db->table("characters")->get($this->user->id)->skill_points;
   }
   
@@ -174,7 +174,7 @@ class Skills {
    * @throws SkillMaxLevelReachedException
    * @throws CannotLearnSkillException
    */
-  function trainSkill($id, $type) {
+  function trainSkill(int $id, string $type) {
     if(!in_array($type, ["attack", "special"])) throw new InvalidSkillTypeException;
     elseif($this->getSkillPoints() < 1) throw new NoSkillPointsAvailableException;
     $method = "getCharacter" . ucfirst($type) . "Skill";

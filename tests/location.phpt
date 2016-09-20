@@ -27,7 +27,7 @@ class LocationTest extends MT\TestCase {
    * @param int $id
    * @data(1)
    */
-  function testGetStage($id) {
+  function testGetStage(int $id) {
     $stage = $this->model->getStage($id);
     Assert::type(Stage::class, $stage);
   }
@@ -56,7 +56,7 @@ class LocationTest extends MT\TestCase {
    * @param int $id
    * @data(1)
    */
-  function testGetArea($id) {
+  function testGetArea(int $id) {
     $stage = $this->model->getArea($id);
     Assert::type(Area::class, $stage);
   }
@@ -65,7 +65,7 @@ class LocationTest extends MT\TestCase {
    * @param int $id
    * @data(0,1)
    */
-  function testGetStageName($id) {
+  function testGetStageName(int $id) {
     $name = $this->model->getStageName($id);
     Assert::type("string", $name);
   }
@@ -74,7 +74,7 @@ class LocationTest extends MT\TestCase {
    * @param int $id
    * @data(0,1)
    */
-  function testGetAreaName($id) {
+  function testGetAreaName(int $id) {
     $name = $this->model->getAreaName($id);
     Assert::type("string", $name);
   }

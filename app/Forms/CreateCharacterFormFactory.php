@@ -14,7 +14,7 @@ class CreateCharacterFormFactory extends BaseFormFactory {
    * @param \HeroesofAbenez\Entities\CharacterClass[] $classes
    * @return Form
    */
-  function create(array $races, array $classes) {
+  function create(array $races, array $classes): Form {
     $form = parent::createBase();
     $form->addText("name", "forms.createCharacter.nameField.label")
          ->setRequired("forms.createCharacter.nameField.empty")

@@ -43,7 +43,7 @@ class TrainingPresenter extends BasePresenter {
    * @param string $stat
    * @return void
    */
-  function handleTrainStat($stat) {
+  function handleTrainStat(string $stat) {
     try {
       $this->model->trainStat($stat);
     } catch(NoStatPointsAvailableException $e) {
@@ -57,8 +57,9 @@ class TrainingPresenter extends BasePresenter {
   /**
    * @param int $skillId
    * @param string $skillType
+   * @return void
    */
-  function handleTrainSkill($skillId, $skillType) {
+  function handleTrainSkill(int $skillId, string $skillType) {
     try {
       $this->skillsModel->trainSkill($skillId, $skillType);
     } catch(NoSkillPointsAvailableException $e) {

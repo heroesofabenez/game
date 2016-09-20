@@ -33,7 +33,7 @@ class MapDrawer {
    * @param string $name
    * @return void
    */
-  function draw(array $points, array $routes, $name) {
+  function draw(array $points, array $routes, string $name) {
     $image = Image::fromBlank(250, 250, Image::rgb(204, 204, 153));
     $image->rectangle(0, 0, 249, 249, Image::rgb(204, 102, 0));
     foreach($points as $point) {

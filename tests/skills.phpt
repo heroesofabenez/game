@@ -31,7 +31,7 @@ class SkillsModelTest extends MT\TestCase {
    * @data(1)
    * @return void
    */
-  function testGetAttackSkill($id) {
+  function testGetAttackSkill(int $id) {
     $skill = $this->model->getAttackSkill($id);
     Assert::type(SkillAttack::class, $skill);
   }
@@ -41,7 +41,7 @@ class SkillsModelTest extends MT\TestCase {
    * @data(1)
    * @return void
    */
-  function testGetCharacterAttackSkill($id) {
+  function testGetCharacterAttackSkill(int $id) {
     $skill = $this->model->getCharacterAttackSkill($id);
     Assert::type(CharacterSkillAttack::class, $skill);
     Assert::type("int", $skill->damage);
@@ -66,7 +66,7 @@ class SkillsModelTest extends MT\TestCase {
    * @data(1)
    * @return void
    */
-  function testGetSpecialSkill($id) {
+  function testGetSpecialSkill(int $id) {
     $skill = $this->model->getSpecialSkill($id);
     Assert::type(SkillSpecial::class, $skill);
   }
@@ -76,7 +76,7 @@ class SkillsModelTest extends MT\TestCase {
    * @data(1)
    * @return void
    */
-  function testGetCharacterSpecialSkill($id) {
+  function testGetCharacterSpecialSkill(int $id) {
     $skill = $this->model->getCharacterSpecialSkill($id);
     Assert::type(CharacterSkillSpecial::class, $skill);
     Assert::type("int", $skill->value);

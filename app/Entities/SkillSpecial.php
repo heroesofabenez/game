@@ -38,7 +38,7 @@ class SkillSpecial extends Skill {
   /**
    * @return int
    */
-  function getCooldown() {
+  function getCooldown(): int {
     return 5;
   }
 }

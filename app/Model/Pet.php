@@ -60,7 +60,7 @@ class Pet {
    * @param int $id
    * @return PetType
    */
-  function viewType($id) {
+  function viewType(int $id) {
     $types = $this->listOfTypes();
     $type = Arrays::get($types, $id, false);
     return $type;
@@ -72,7 +72,7 @@ class Pet {
    * @param int $user User's id
    * @return PetEntity|bool
    */
-  function getActivePet($user) {
+  function getActivePet(int $user) {
     $activePet = $this->db->table("pets")->where("owner=$user")->where("deployed=1");
     if($activePet->count() == 1) {
       $pet = $activePet->fetch();
@@ -94,7 +94,7 @@ class Pet {
    * @throws PetNotOwnedException
    * @throws PetAlreadyDeployedException
    */
-  function deployPet($id) {
+  function deployPet(int $id) {
     $pet = $this->db->table("pets")->get($id);
     if(!$pet) throw new PetNotFoundException;
     elseif($pet->owner != $this->user->id) throw new PetNotOwnedException;
@@ -117,7 +117,7 @@ class Pet {
    * @throws PetNotOwnedException
    * @throws PetNotDeployedException
    */
-  function discardPet($id) {
+  function discardPet(int $id) {
     $pet = $this->db->table("pets")->get($id);
     if(!$pet) throw new PetNotFoundException;
     elseif($pet->owner != $this->user->id) throw new PetNotOwnedException;

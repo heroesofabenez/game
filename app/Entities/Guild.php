@@ -25,7 +25,7 @@ class Guild extends BaseEntity {
    * @param int $members number of members
    * @param string $leader name of leader
    */
-  function __construct($id, $name, $description, $members = 0, $leader = "") {
+  function __construct(int $id, string $name, string $description, int $members = 0, $leader = "") {
     $this->id = $id;
     $this->name = $name;
     $this->description = $description;

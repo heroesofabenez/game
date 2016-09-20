@@ -20,14 +20,14 @@ class CharacterSkillAttack extends CharacterSkill {
    * @param \HeroesofAbenez\Entities\SkillAttack $skill
    * @param int $level
    */
-  function __construct(SkillAttack $skill, $level) {
+  function __construct(SkillAttack $skill, int $level) {
     parent::__construct($skill, $level);
   }
   
   /**
    * @return int
    */
-  function getDamage() {
+  function getDamage(): int {
     $damage = 0;
     if(substr($this->skill->base_damage, -1) === "%") $damage += (int) $this->skill->base_damage;
     if(substr($this->skill->damage_growth, -1) === "%") $damage += (int) $this->skill->damage_growth * ($this->level - 1);
@@ -37,7 +37,7 @@ class CharacterSkillAttack extends CharacterSkill {
   /**
    * @return int
    */
-  function getHitRate() {
+  function getHitRate(): int {
     if(is_null($this->skill->hit_rate)) return 100;
     elseif(substr($this->skill->hit_rate, -1) === "%") return (int) $this->skill->hit_rate;
     else return 100;

@@ -40,7 +40,7 @@ class Request {
    * @param int $requestId
    * @return bool
    */
-  function canShow($requestId) {
+  function canShow(int $requestId): bool {
     $request = $this->db->table("requests")->get($requestId);
     switch($request->type) {
       case "friendship":
@@ -77,7 +77,7 @@ class Request {
    * @param int $requestId
    * @return bool
    */
-  function canChange($requestId) {
+  function canChange(int $requestId): bool {
     $request = $this->db->table("requests")->get($requestId);
     if($request->from == $this->user->id) return false;
     if($request->to == $this->user->id) return true;
@@ -101,7 +101,7 @@ class Request {
    * @throws RequestNotFoundException
    * @throws CannotSeeRequestException
    */
-  function show($id) {
+  function show(int $id): RequestEntity {
     $requestRow = $this->db->table("requests")->get($id);
     if(!$requestRow) throw new RequestNotFoundException;
     if(!$this->canShow($id)) throw new CannotSeeRequestException;
@@ -122,7 +122,7 @@ class Request {
    * @throws RequestAlreadyHandledException
    * @throws NotImplementedException
    */
-  function accept($id) {
+  function accept(int $id) {
     $request = $this->show($id);
     if(!$request) throw new RequestNotFoundException;
     if(!$this->canShow($id)) throw new CannotSeeRequestException;
@@ -162,7 +162,7 @@ class Request {
    * @throws CannotDeclineRequestException
    * @throws RequestAlreadyHandledException
    */
-  function decline($id) {
+  function decline(int $id) {
     $request = $this->show($id);
     if(!$request) throw new RequestNotFoundException;
     if(!$this->canShow($id)) throw new CannotSeeRequestException;

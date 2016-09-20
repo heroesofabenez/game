@@ -33,7 +33,7 @@ class DemoteCommand extends \HeroesofAbenez\Entities\ChatCommand {
    * @param int $id
    * @return string
    */
-  function execute() {
+  function execute(): string {
     $id = Arrays::get(func_get_args(), 0, "");
     if($id === "" OR !is_numeric($id)) return "";
     try {

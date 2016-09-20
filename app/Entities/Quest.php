@@ -52,7 +52,7 @@ class Quest extends BaseEntity {
   /**
    * @param bool $value
    */
-  function setProgress($value) {
+  function setProgress(bool $value) {
     $this->progress = (bool) $value;
   }
 }

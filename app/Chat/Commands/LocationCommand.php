@@ -25,7 +25,7 @@ class LocationCommand extends \HeroesofAbenez\Entities\ChatCommand {
   /**
    * @return string
    */
-  function execute() {
+  function execute(): string {
     $stageId = $this->user->identity->stage;
     $stage = $this->db->table("quest_stages")->get($stageId);
     $area = $this->db->table("quest_areas")->get($stage->area);

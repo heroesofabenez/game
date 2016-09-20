@@ -162,11 +162,11 @@ class Character extends BaseEntity {
   /**
    * Removes specified effect from the character
    * 
-   * @param int $effectId Effect to remove
+   * @param string $effectId Effect to remove
    * @return void
    * @throws OutOfBoundsException
    */
-  function removeEffect($effectId) {
+  function removeEffect(string $effectId) {
     foreach($this->effects as $i => $effect) {
       if($effect->id == $effectId) {
         unset($this->effects[$i]);
@@ -184,7 +184,7 @@ class Character extends BaseEntity {
    * @return Equipment Item
    * @throws OutOfBoundsException
    */
-  function getItem($itemid) {
+  function getItem(int $itemid): Equipment {
     if(isset($this->equipment[$itemid])) return $this->equipment[$itemid];
     else throw new OutOfBoundsException("Item was not found.");
   }
@@ -196,7 +196,7 @@ class Character extends BaseEntity {
    * @return void
    * @throws OutOfBoundsException
    */
-  function equipItem($itemId) {
+  function equipItem(int $itemId) {
     try {
       $item = $this->getItem($itemId);
     } catch (OutOfBoundsException $e) {
@@ -213,7 +213,7 @@ class Character extends BaseEntity {
    * @return void
    * @throws OutOfBoundsException
    */
-  function unequipItem($itemId) {
+  function unequipItem(int $itemId) {
     try {
       $item = $this->getItem($itemId);
     } catch (OutOfBoundsException $e) {
@@ -230,7 +230,7 @@ class Character extends BaseEntity {
    * @return Pet
    * @throws OutOfBoundsException
    */
-  function getPet($petId) {
+  function getPet(int $petId): Pet {
     if(isset($this->pets[$petId]) AND $this->pets[$petId] instanceof Pet) return $this->pets[$petId];
     else throw new OutOfBoundsException("Pet was not found.");
   }
@@ -242,7 +242,7 @@ class Character extends BaseEntity {
    * @return void
    * @throws OutOfBoundsException
    */
-  function deployPet($petId) {
+  function deployPet(int $petId) {
     try {
       $pet = $this->getPet($petId);
     } catch(OutOfBoundsException $e) {
@@ -263,7 +263,7 @@ class Character extends BaseEntity {
   /**
    * @return CharacterSkill[]
    */
-  function getUsableSkills() {
+  function getUsableSkills(): array {
     $skills = [];
     foreach($this->skills as $skill) {
       if($skill->canUse()) $skills[] = $skill;
@@ -277,7 +277,7 @@ class Character extends BaseEntity {
    * @param int $amount Number of hitpoints to lose
    * @return void
    */
-  function harm($amount) {
+  function harm(int $amount) {
     $this->hitpoints -= $amount;
   }
   
@@ -287,7 +287,7 @@ class Character extends BaseEntity {
    * @param int $amount Number of hitpoints to gain
    * @return void
    */
-  function heal($amount) {
+  function heal(int $amount) {
     $this->hitpoints += $amount;
   }
   
@@ -296,7 +296,7 @@ class Character extends BaseEntity {
    * 
    * @return string
    */
-  function damageStat() {
+  function damageStat(): string {
     $stat = "strength";
     foreach($this->equipment as $item) {
       if(!$item->worn OR $item->slot != "weapon") continue;

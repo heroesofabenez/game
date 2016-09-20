@@ -28,6 +28,6 @@ abstract class Skill extends BaseEntity {
   /**
    * @return int
    */
-  abstract function getCooldown();
+  abstract function getCooldown(): int;
 }
 ?>

@@ -42,21 +42,21 @@ class Equipment extends BaseEntity {
   /**
    * @return bool
    */
-  function getWorn() {
+  function getWorn(): bool {
     return $this->worn;
   }
   
   /**
    * @param bool $value
    */
-  function setWorn($value) {
-    $this->worn = (bool) $value;
+  function setWorn(bool $value) {
+    $this->worn = $value;
   }
   
   /**
    * @param int $value
    */
-  function setRequired_class($value) {
+  function setRequired_class(int $value) {
     $this->required_class = $value;
   }
   
@@ -65,7 +65,7 @@ class Equipment extends BaseEntity {
    * 
    * @return array params
    */
-  function getDeployParams() {
+  function getDeployParams(): array {
     $stat = [
       "weapon" => "damage", "armor" => "defense", "shield" => "dodge", "amulet" => "initiative"
     ];

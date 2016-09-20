@@ -16,7 +16,7 @@ class ArenaPVPControl extends ArenaControl {
   /**
    * @return \Nette\Database\Table\ActiveRow[]
    */
-  function getOpponents() {
+  function getOpponents(): array {
     $level = $this->user->identity->level;
     $opponents = $this->db->table("characters")
       ->where("current_stage", $this->user->identity->stage)
@@ -33,7 +33,7 @@ class ArenaPVPControl extends ArenaControl {
    * @param Character $opponent
    * @return array
    */
-  protected function calculateRewards($player, $opponent) {
+  protected function calculateRewards($player, $opponent): array {
     $experience = round($opponent->level / 5) + 1;
     if($opponent->level > $player->level) $experience += 2;
     $money = round($opponent->level / 2) + 3;
@@ -47,7 +47,7 @@ class ArenaPVPControl extends ArenaControl {
    * @param int $id Player's id
    * @return void
    */
-  function handleFight($id) {
+  function handleFight(int $id) {
     try {
       $enemy = $this->getPlayer($id);
     } catch (OpponentNotFoundException $e) {

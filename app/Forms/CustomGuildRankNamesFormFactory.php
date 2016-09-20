@@ -25,7 +25,7 @@ class CustomGuildRankNamesFormFactory extends BaseFormFactory  {
   /**
    * @return Form
    */
-  function create() {
+  function create(): Form {
     $form = $this->createBase();
     $defaults = $this->model->getDefaultRankNames();
     $custom = $this->model->getCustomRankNames($this->user->identity->guild);

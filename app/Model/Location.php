@@ -47,7 +47,7 @@ class Location {
    * @param int $area Return stages only from specified area. 0 = all areas
    * @return Stage[] List of stages
    */
-  function listOfStages($area = 0) {
+  function listOfStages(int $area = 0): array {
     $return = [];
     $stages = $this->cache->load("stages");
     if($stages === NULL) {
@@ -73,7 +73,7 @@ class Location {
    * @param int $id Stage's id
    * @return Stage
    */
-  function getStage($id) {
+  function getStage(int $id) {
     $stages = $this->listOfStages();
     $stage = Arrays::get($stages, $id, false);
     return $stage;
@@ -84,7 +84,7 @@ class Location {
    * 
    * @return \stdClass[]
    */
-  function stageRoutes() {
+  function stageRoutes(): array {
     $return = [];
     $routes = $this->cache->load("stage_routes");
     if($routes === NULL) {
@@ -104,7 +104,7 @@ class Location {
    * 
    * @return Area[] list of stages
    */
-  function listOfAreas() {
+  function listOfAreas(): array {
     $areas = $this->cache->load("areas");
     if($areas === NULL) {
       $return = [];
@@ -125,7 +125,7 @@ class Location {
    * @param int $id Area's id
    * @return Area
    */
-  function getArea($id) {
+  function getArea(int $id) {
     $areas = $this->listOfAreas();
     $area = Arrays::get($areas, $id, false);
     return $area;
@@ -137,7 +137,7 @@ class Location {
    * @param int $id Id of stage
    * @return string
    */
-  function getStageName($id) {
+  function getStageName(int $id): string {
     $stage = $this->getStage($id);
     if(!$stage) return "";
     else return $stage->name;
@@ -149,7 +149,7 @@ class Location {
    * @param int $id Id of area
    * @return string
    */
-  function getAreaName($id) {
+  function getAreaName(int $id): string {
     $area = $this->getArea($id);
     if(!$area) return "";
     else return $area->name;
@@ -160,7 +160,7 @@ class Location {
    * 
    * @return array Data about location
    */
-  function home() {
+  function home(): array {
     $return = [];
     $stage = $this->getStage($this->user->identity->stage);
     $return["stageName"] = $stage->name;
@@ -176,7 +176,7 @@ class Location {
    * 
    * @return Stage[]
    */
-  function accessibleStages() {
+  function accessibleStages(): array {
     $stages = $this->listOfStages();
     $curr_stage = $stages[$this->user->identity->stage];
     foreach($stages as $stage) {
@@ -196,7 +196,7 @@ class Location {
    * @throws StageNotFoundException
    * @throws CannotTravelToStageException
    */
-  function travelToStage($id) {
+  function travelToStage(int $id) {
     $stage = $this->getStage($id);
     if(!$stage) throw new StageNotFoundException;
     $currentStage = $this->user->identity->stage;

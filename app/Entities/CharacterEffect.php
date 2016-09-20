@@ -45,7 +45,7 @@ class CharacterEffect extends BaseEntity {
   /**
    * @return string[]
    */
-  static function getDurations() {
+  static function getDurations(): array {
     return ["combat", "forever"];
   }
   

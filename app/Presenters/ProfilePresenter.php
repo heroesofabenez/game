@@ -23,7 +23,7 @@ class ProfilePresenter extends BasePresenter {
    * @param int $id id of character
    * @return void
    */
-  function renderView($id) {
+  function renderView(int $id) {
     $data = $this->model->view($id);
     if(!$data) $this->forward("notfound");
     foreach($data as $key => $value) {

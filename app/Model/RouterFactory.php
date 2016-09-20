@@ -15,7 +15,7 @@ class RouterFactory {
   /**
    * @return RouteList
    */
-  static function create() {
+  static function create(): RouteList {
     $router = new RouteList;
     $router[] = new Route("ranking[/<action>][/<page=1 [0-9]+>]", "Ranking:characters");
     $router[] = new Route("<presenter map|tavern>[/<action=local>]");

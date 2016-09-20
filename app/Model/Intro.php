@@ -28,7 +28,7 @@ class Intro {
    * 
    * @return int
    */
-  function getIntroPosition() {
+  function getIntroPosition(): int {
     $char = $this->db->table("characters")->get($this->user->id);
     return $char->intro;
   }
@@ -38,13 +38,13 @@ class Intro {
    * @param int $part Part's id
    * @return string Text of current introduction part
    */
-  function getIntroPart($part) {
+  function getIntroPart(int $part): string {
     $char = $this->db->table("characters")->get($this->user->id);
     $intros = $this->db->table("introduction")
       ->where("race", $char->race)
       ->where("class", $char->occupation)
       ->where("part", $part);
-    if($intros->count() == 0) return;
+    if($intros->count() == 0) return "";
     $intro = $intros->fetch();
     return $intro->text;
   }
@@ -54,7 +54,7 @@ class Intro {
    * 
    * @return void
    */
-  function moveToNextPart($part) {
+  function moveToNextPart(int $part) {
     $data = ["intro" => $part];
     $this->db->query("UPDATE characters SET ? WHERE id=?", $data, $this->user->id);
   }
@@ -64,7 +64,7 @@ class Intro {
    * 
    * @return int id of starting stage
    */
-  function getStartingLocation() {
+  function getStartingLocation(): int {
     $classSLs = $this->db->table("quest_stages")
       ->where("required_level", 0)
       ->where("required_occupation", $this->user->identity->occupation);

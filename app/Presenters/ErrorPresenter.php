@@ -17,6 +17,7 @@ class ErrorPresenter extends BasePresenter {
   }
   
   /**
+   * @param \Throwable $exception
    * @return void
    */
   function actionDefault($exception) {

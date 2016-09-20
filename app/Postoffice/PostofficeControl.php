@@ -25,7 +25,7 @@ class PostofficeControl extends \Nette\Application\UI\Control {
    * 
    * @return array
    */
-  protected function getReceivedMessages() {
+  protected function getReceivedMessages(): array {
     $return = [];
     $messages = $this->db->table("messages")
       ->where("to", $this->user->id);
@@ -54,7 +54,7 @@ class PostofficeControl extends \Nette\Application\UI\Control {
    * 
    * @return array
    */
-  protected function getSentMessages() {
+  protected function getSentMessages(): array {
     $return = [];
     $messages = $this->db->table("messages")
       ->where("from", $this->user->id);
@@ -87,7 +87,7 @@ class PostofficeControl extends \Nette\Application\UI\Control {
    * @param int $id
    * @return int
    */
-  function messageStatus($id) {
+  function messageStatus(int $id): int {
     $message = $this->db->table("messages")->get($id);
     if(!$message) return 0;
     if(!$this->canShow($message)) return -1;
@@ -102,7 +102,7 @@ class PostofficeControl extends \Nette\Application\UI\Control {
    * @throws MessageNotFoundException
    * @throws CannotShowMessageException
    */
-  function message($id) {
+  function message(int $id): \stdClass {
     $message = $this->db->table("messages")->get($id);
     if(!$message) throw new MessageNotFoundException;
     if(!$this->canShow($message)) throw new CannotShowMessageException;
@@ -118,7 +118,7 @@ class PostofficeControl extends \Nette\Application\UI\Control {
    * @param int $id Message's id
    * @return void
    */
-  function renderMessage($id) {
+  function renderMessage(int $id) {
     $template = $this->template;
     $template->setFile(__DIR__ . "/postofficeMessage.latte");
     try {
@@ -137,7 +137,7 @@ class PostofficeControl extends \Nette\Application\UI\Control {
   /**
    * @return array
    */
-  function getRecipients() {
+  function getRecipients(): array {
     $chars = [];
     $characters = $this->db->table("characters")
       ->order("id");

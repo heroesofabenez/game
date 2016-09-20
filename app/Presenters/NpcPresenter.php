@@ -40,7 +40,7 @@ class NpcPresenter extends BasePresenter {
    * @param int $id Npc's id
    * @return void
    */
-  function renderView($id) {
+  function renderView(int $id) {
     $this->template->id = $id;
     $this->template->type = $this->npc->type;
   }
@@ -49,14 +49,14 @@ class NpcPresenter extends BasePresenter {
    * @param int $id Npc's id
    * @return void
    */
-  function actionTalk($id) {
+  function actionTalk(int $id) {
     
   }
   
   /**
    * @return NPC\NPCDialogueControl
    */
-  protected function createComponentNpcDialogue(NPC\NPCDialogueControlFactory $factory) {
+  protected function createComponentNpcDialogue(NPC\NPCDialogueControlFactory $factory): NPC\NPCDialogueControl {
     $component = $factory->create();
     $component->npc = $this->npc;
     return $component;
@@ -66,14 +66,14 @@ class NpcPresenter extends BasePresenter {
    * @param int $id Npc's id
    * @return void
    */
-  function renderQuests($id) {
+  function renderQuests(int $id) {
     $this->template->id = $id;
   }
   
   /**
-   * @return \HeroesofAbenez\NPC\NPCQuestsControl
+   * @return NPC\NPCQuestsControl
    */
-  protected function createComponentNpcQuests(NPC\NPCQuestsControlFactory $factory) {
+  protected function createComponentNpcQuests(NPC\NPCQuestsControlFactory $factory): NPC\NPCQuestsControl {
     $component = $factory->create();
     $component->npc = $this->npc;
     return $component;
@@ -83,7 +83,7 @@ class NpcPresenter extends BasePresenter {
    * @param int $id Npc's id
    * @return void
    */
-  function actionTrade($id) {
+  function actionTrade(int $id) {
     if($this->npc->type != "shop") {
       $this->flashMessage($this->translator->translate("errors.npc.noShop"));
       $this->redirect("view", $id);
@@ -94,7 +94,7 @@ class NpcPresenter extends BasePresenter {
    * @param NPC\NPCShopControlFactory $factory
    * @return NPC\NPCQuestsControl
    */
-  protected function createComponentNpcShop(NPC\NPCShopControlFactory $factory) {
+  protected function createComponentNpcShop(NPC\NPCShopControlFactory $factory): NPC\NPCQuestsControl {
     $shop = $factory->create();
     $shop->npc = $this->npc;
     return $shop;

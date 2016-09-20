@@ -28,7 +28,7 @@ class PetTest extends MT\TestCase {
    * @data(1,50)
    * @return void
    */
-  function testViewType($id) {
+  function testViewType(int $id) {
     $type = $this->model->viewType($id);
     if($id === 1) {
       Assert::type(PetType::class, $type);
@@ -42,7 +42,7 @@ class PetTest extends MT\TestCase {
    * @data(1,2)
    * @return void
    */
-  function testGetActivePet($user) {
+  function testGetActivePet(int $user) {
     $pet = $this->model->getActivePet($user);
     if($user === 1) {
       Assert::type(Pet::class, $pet);

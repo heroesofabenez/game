@@ -36,7 +36,7 @@ class NPCDialogueControl extends \Nette\Application\UI\Control {
    * @return array
    * @todo make it depend on player's identity and npc   
    */
-  protected function getTexts() {
+  protected function getTexts(): array {
     $texts = [
       ["npc", "Greetings, #playerName#. Can I help you with anything?"],
       ["player", "Hail, #npcName#. Not now but thank you."]
@@ -51,7 +51,7 @@ class NPCDialogueControl extends \Nette\Application\UI\Control {
    * @param string $text
    * @return DialogueLine
    */
-  function newLine($speaker, $text) {
+  function newLine(string $speaker, string $text): DialogueLine {
     return new DialogueLine($speaker, $text, $this->names);
   }
   

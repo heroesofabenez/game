@@ -42,7 +42,7 @@ class Profile {
    * 
    * @return CharacterRace[]
    */
-  function getRacesList() {
+  function getRacesList(): array {
     $racesList = $this->cache->load("races");
     if($racesList === NULL) {
       $racesList = [];
@@ -61,7 +61,7 @@ class Profile {
    * @param int $id Race's id
    * @return CharacterRace|bool
    */
-  function getRace($id) {
+  function getRace(int $id) {
     $races = $this->getRacesList();
     $race = Arrays::get($races, $id, false);
     return $race;
@@ -73,7 +73,7 @@ class Profile {
    * @param int $id Race's id
    * @return string
    */
-  function getRaceName($id) {
+  function getRaceName(int $id): string {
     $race = $this->getRace($id);
     if(!$race) return "";
     else return $race->name;
@@ -84,7 +84,7 @@ class Profile {
    * 
    * @return CharacterClass[]
    */
-  function getClassesList() {
+  function getClassesList(): array {
     $classesList = $this->cache->load("classes");
     if($classesList === NULL) {
       $classesList = [];
@@ -103,7 +103,7 @@ class Profile {
    * @param int $id Class' id
    * @return CharacterClass|bool
    */
-  function getClass($id) {
+  function getClass(int $id) {
     $classes = $this->getClassesList();
     $class = Arrays::get($classes, $id, false);
     return $class;
@@ -115,7 +115,7 @@ class Profile {
    * @param int $id
    * @return string
    */
-  function getClassName($id) {
+  function getClassName(int $id): string {
     $class = $this->getClass($id);
     if(!$class) return "";
     else return $class->name;
@@ -126,7 +126,7 @@ class Profile {
    * 
    * @return CharacterSpecialization[]
    */
-  function getSpecializationsList() {
+  function getSpecializationsList(): array {
     $specializationsList = $this->cache->load("specializations");
     if($specializationsList === NULL) {
       $specializationsList = [];
@@ -145,7 +145,7 @@ class Profile {
    * @param int $id Specialization's id
    * @return CharacterSpecialization|bool
    */
-  function getSpecialization($id) {
+  function getSpecialization(int $id) {
     $races = $this->getSpecializationsList();
     $race = Arrays::get($races, $id, false);
     return $race;
@@ -157,7 +157,7 @@ class Profile {
    * @param int $id Specialization's id
    * @return string
    */
-  function getSpecializationName($id) {
+  function getSpecializationName(int $id): string {
     $race = $this->getSpecialization($id);
     if(!$race) return "";
     else return $race->name;
@@ -166,7 +166,7 @@ class Profile {
   /**
    * @return \stdClass[]
    */
-  function getCharacters() {
+  function getCharacters(): array {
     $return = [];
     $stats = ["id", "name"];
     $characters = $this->cache->load("characters");
@@ -192,7 +192,7 @@ class Profile {
    * @param string $name Character's name
    * @return int
    */
-  function getCharacterId($name) {
+  function getCharacterId(string $name): int {
     $characters = $this->getCharacters();
     foreach($characters as $char) {
       if($char->name == $name) return $char->id;
@@ -206,7 +206,7 @@ class Profile {
    * @param int $id Character's id
    * @return string
    */
-  function getCharacterName($id) {
+  function getCharacterName(int $id): string {
     $characters = $this->getCharacters();
     return $characters[$id]->name;
   }
@@ -217,7 +217,7 @@ class Profile {
    * @param string $id Character's id
    * @return int
    */
-  function getCharacterGuild($id) {
+  function getCharacterGuild(string $id): int {
     $char = $this->db->table("characters")->get($id);
     if(!$char) return 0;
     return $char->guild;
@@ -229,7 +229,7 @@ class Profile {
    * @param integer $id character's id
    * @return array|bool info about character
    */
-  function view($id) {
+  function view(int $id) {
     $return = [];
     $char = $this->db->table("characters")->get($id);
     if(!$char) { return false; }
@@ -255,7 +255,7 @@ class Profile {
    * 
    * @return int[]
    */
-  function getLevelsRequirements() {
+  function getLevelsRequirements(): array {
     $xps = [2 => 65];
     for($i = 3; $i <= 100; $i++) {
       $xps[$i] = (int) ($xps[$i-1] * 1.35) + 15;
@@ -288,7 +288,7 @@ class Profile {
    * 
    * @return int
    */
-  function getStatPoints() {
+  function getStatPoints(): int {
     return (int) $this->db->table("characters")->get($this->user->id)->stat_points;
   }
   
@@ -297,7 +297,7 @@ class Profile {
    * 
    * @return int[]
    */
-  function getStats() {
+  function getStats(): array {
     $char = $this->db->table("characters")->get($this->user->id);
     $return = [];
     foreach($this->stats as $stat) {
@@ -314,7 +314,7 @@ class Profile {
    * @throws InvalidStatException
    * @throws NoStatPointsAvailableException
    */
-  function trainStat($stat) {
+  function trainStat(string $stat) {
     if(!in_array($stat, $this->stats)) throw new InvalidStatException;
     elseif($this->getStatPoints() < 1) throw new NoStatPointsAvailableException;
     $data = "$stat=$stat+1, stat_points=stat_points-1";

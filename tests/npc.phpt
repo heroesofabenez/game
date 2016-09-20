@@ -18,7 +18,7 @@ class NPCModelTest extends MT\TestCase {
    * @data(1)
    * @return void
    */
-  function testView($id) {
+  function testView(int $id) {
     $npc = $this->model->view($id);
     Assert::type(NPC::class, $npc);
     Assert::same("Mentor", $npc->name);

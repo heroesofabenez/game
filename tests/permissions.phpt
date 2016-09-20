@@ -39,7 +39,7 @@ class PermissionsTest extends MT\TestCase {
    * @data(1)
    * @return void
    */
-  function testGetRoleName($id) {
+  function testGetRoleName(int $id) {
     $name = $this->model->getRoleName($id);
     Assert::type("string", $name);
   }

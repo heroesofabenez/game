@@ -24,7 +24,7 @@ class QuestModelTest extends MT\TestCase {
    * @data(1)
    * @return void
    */
-  function testView($id) {
+  function testView(int $id) {
     $quest = $this->model->view($id);
     Assert::type(Quest::class, $quest);
   }
@@ -34,7 +34,7 @@ class QuestModelTest extends MT\TestCase {
    * @data(1)
    * @return void
    */
-  function testStatus($id) {
+  function testStatus(int $id) {
     $result = $this->model->status($id);
     Assert::type("integer", $result);
     Assert::same(1, $result);
@@ -45,7 +45,7 @@ class QuestModelTest extends MT\TestCase {
    * @data(1)
    * @return void
    */
-  function testIsFinished($id) {
+  function testIsFinished(int $id) {
     $result = $this->model->isFinished($id);
     Assert::type("bool", $result);
     Assert::false($result);

@@ -33,7 +33,7 @@ class Map {
    * 
    * @return array
    */
-  function local() {
+  function local(): array {
     $this->locationModel->user = $this->user;
     $stages = $this->locationModel->accessibleStages();
     $curr_stage = $stages[$this->user->identity->stage];

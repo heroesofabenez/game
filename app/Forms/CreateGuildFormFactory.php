@@ -21,7 +21,7 @@ class CreateGuildFormFactory extends BaseFormFactory {
   /**
    * @return Form
    */
-  function create() {
+  function create(): Form {
     $form = parent::createBase();
     $form->addText("name", "forms.createGuild.nameField.label")
          ->setRequired("forms.createGuild.nameField.empty")

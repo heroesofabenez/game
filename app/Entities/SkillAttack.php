@@ -35,7 +35,7 @@ class SkillAttack extends Skill {
   /**
    * @return int
    */
-  function getCooldown() {
+  function getCooldown(): int {
     return 3;
   }
 }

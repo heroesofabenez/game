@@ -47,9 +47,10 @@ class CharacterPresenter extends BasePresenter {
   
   /**
    * Create form for creating character
-   * @return \Nette\Application\UI\Form
+   * @param CreateCharacterFormFactory $factory
+   * @return Form
    */
-  protected function createComponentCreateCharacterForm(CreateCharacterFormFactory $factory) {
+  protected function createComponentCreateCharacterForm(CreateCharacterFormFactory $factory): Form {
     $form = $factory->create($this->races, $this->classes);
     $form->onSuccess[] = function(Form $form, $values) {
       $data = $this->userManager->create($values);
@@ -64,7 +65,7 @@ class CharacterPresenter extends BasePresenter {
    * @param string $data Serialized array with data
    * @return void
    */
-  function renderCreated($data) {
+  function renderCreated(string $data) {
     $data = unserialize($data);
     foreach($data as $key => $value) {
       $this->template->$key = $value;

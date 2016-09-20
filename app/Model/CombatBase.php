@@ -86,7 +86,7 @@ class CombatBase {
     $this->onHeal[] = [$this, "logResults"];
   }
   
-  function getRound() {
+  function getRound(): int {
     return $this->round;
   }
   
@@ -110,7 +110,7 @@ class CombatBase {
    * @staticvar int $result
    * @return int Winning team/0
    */
-  function getWinner() {
+  function getWinner(): int {
     static $result = 0;
     if($this->round <= $this->round_limit AND $result === 0) {
       if(!$this->team1->hasAliveMembers()) $result = 2;
@@ -125,7 +125,7 @@ class CombatBase {
    * @param Character $character
    * @return int
    */
-  protected function getTeam(Character $character) {
+  protected function getTeam(Character $character): int {
     $team = $this->team1->hasMember($character->id) ? 1: 2;
     return $team;
   }
@@ -134,7 +134,7 @@ class CombatBase {
    * @param Character $character
    * @return int
    */
-  protected function getEnemyTeam(Character $character) {
+  protected function getEnemyTeam(Character $character): int {
     $team = $this->team1->hasMember($character->id) ? 2: 1;
     return $team;
   }
@@ -286,7 +286,7 @@ class CombatBase {
   /**
    * Reset characters' initiative
    * 
-   * @return  void
+   * @return void
    */
   function resetInitiative() {
     $characters = array_merge($this->team1->items, $this->team2->items);
@@ -354,7 +354,7 @@ class CombatBase {
   /**
    * @return Character[]
    */
-  protected function findHealers() {
+  protected function findHealers(): array {
     return [];
   }
   
@@ -422,7 +422,7 @@ class CombatBase {
    * 
    * @return int Winning team/0
    */
-  protected function startRound() {
+  protected function startRound(): int {
     $this->onRoundStart();
     if($this->getWinner() > 0) return $this->getWinner();
     return 0;
@@ -442,7 +442,7 @@ class CombatBase {
    * 
    * @return int Winning team/0
    */
-  protected function endRound() {
+  protected function endRound(): int {
     $this->onRoundEnd();
     if($this->getWinner() > 0) return $this->getWinner();
     return 0;
@@ -453,7 +453,7 @@ class CombatBase {
    * 
    * @return int Winning team
    */
-  function execute() {
+  function execute(): int {
     if(!$this->team1) throw new InvalidStateException("Teams are not set.");
     $this->onCombatStart();
     while($this->round <= $this->round_limit) {
@@ -473,7 +473,7 @@ class CombatBase {
    * @param CharacterSkillAttack $skill
    * @return int
    */
-  protected function calculateHitChance(Character $character1, Character $character2, CharacterSkillAttack $skill = NULL) {
+  protected function calculateHitChance(Character $character1, Character $character2, CharacterSkillAttack $skill = NULL): int {
     if($skill) $hit_chance = ($character1->hit / 100 * $skill->hitRate) - $character2->dodge;
     else $hit_chance = $character1->hit - $character2->dodge;
     if($hit_chance < 15) $hit_chance = 15;
@@ -488,6 +488,7 @@ class CombatBase {
    * 
    * @param \HeroesofAbenez\Entities\Character $character1 Attacker
    * @param \HeroesofAbenez\Entities\Character $character2 Defender
+   * @return void
    */
   function attackHarm(Character $character1, Character $character2) {
     $result = [];
@@ -565,6 +566,7 @@ class CombatBase {
    * 
    * @param Character $character1 Healer
    * @param Character $character2 Wounded character
+   * @return void
    */
   function heal(Character $character1, Character $character2) {
     $result = [];
@@ -587,6 +589,7 @@ class CombatBase {
    * 
    * @param Character $character1
    * @param Character $character2
+   * @return void
    */
   function logResults(Character $character1, Character $character2) {
     extract($this->results);
@@ -600,6 +603,7 @@ class CombatBase {
    * @param Character $character1
    * @param Character $character2
    * @return void
+   * @return void
    */
   function logDamage(Character $character1, Character $character2) {
     $team = $this->team1->hasMember($character1->id) ? 1: 2;
@@ -609,7 +613,7 @@ class CombatBase {
   /**
    * @return CombatLogger
    */
-  function getLog() {
+  function getLog(): CombatLogger {
     return $this->log;
   }
 }

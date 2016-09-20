@@ -32,7 +32,7 @@ class NPC {
    * @param int $stage Return npcs only from certain stage, 0 = all stages
    * @return NPCEntity[]
    */
-  function listOfNpcs($stage = 0) {
+  function listOfNpcs(int $stage = 0): array {
     $return = [];
     $npcs = $this->cache->load("npcs");
     if($npcs === NULL) {
@@ -58,7 +58,7 @@ class NPC {
    * @param int $id Npc's id
    * @return NPCEntity
    */
-  function view($id) {
+  function view(int $id): NPCEntity {
     $npcs = $this->listOfNpcs();
     $npc = Arrays::get($npcs, $id, false);
     return $npc;
@@ -70,7 +70,7 @@ class NPC {
    * @param int $id Npc's id
    * @return string
    */
-  function getNpcName($id) {
+  function getNpcName(int $id): string {
     $npc = $this->view($id);
     if(!$npc) return "";
     else return $npc->name;
