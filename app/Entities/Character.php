@@ -1,4 +1,6 @@
 <?php
+declare(strict_types=1);
+
 namespace HeroesofAbenez\Entities;
 
 use OutOfBoundsException;
@@ -351,7 +353,7 @@ class Character extends BaseEntity {
       $stat = $effect->stat;
       $type = $effect->type;
       $duration = $effect->duration;
-      if(is_int($duration) and $duration < 0) {
+      if(is_int($duration) AND $duration < 0) {
         unset($this->effects[$i]);
         continue;
       }

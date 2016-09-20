@@ -1,4 +1,6 @@
 <?php
+declare(strict_types=1);
+
 namespace HeroesofAbenez\Model;
 
 use HeroesofAbenez\Entities\Team,
@@ -275,9 +277,6 @@ class CombatBase {
     $characters = array_merge($this->team1->items, $this->team2->items);
     /** @var Character $character */
     foreach($characters as $character) {
-      foreach($character->effects as $effect) {
-        if(is_int($effect->duration)) { $effect->duration--; }
-      }
       $character->recalculateStats();
       if($character->hitpoints > 0) $character->calculateInitiative();
     }
@@ -391,7 +390,7 @@ class CombatBase {
   function mainStage() {
     $characters = array_merge($this->team1->usableMembers, $this->team2->usableMembers);
     usort($characters, function($a, $b) {
-      return -1 * strcmp($a->initiative, $b->initiative);
+      return -1 * strcmp((string) $a->initiative, (string) $b->initiative);
     });
     foreach($characters as $character) {
       if($character->hitpoints < 1) continue;

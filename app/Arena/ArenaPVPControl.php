@@ -1,4 +1,6 @@
 <?php
+declare(strict_types=1);
+
 namespace HeroesofAbenez\Arena;
 
 use HeroesofAbenez\Entities\Character,
@@ -14,9 +16,9 @@ class ArenaPVPControl extends ArenaControl {
   protected $arena = "heroes";
   
   /**
-   * @return \Nette\Database\Table\ActiveRow[]
+   * @return \Nette\Database\Table\Selection
    */
-  function getOpponents(): array {
+  function getOpponents(): \Nette\Database\Table\Selection {
     $level = $this->user->identity->level;
     $opponents = $this->db->table("characters")
       ->where("current_stage", $this->user->identity->stage)

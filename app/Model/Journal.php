@@ -1,4 +1,6 @@
 <?php
+declare(strict_types=1);
+
 namespace HeroesofAbenez\Model;
 
 use HeroesofAbenez\Entities\JournalQuest,
@@ -111,7 +113,7 @@ class Journal {
       ->where("owner", $uid);
     foreach($pets as $pet) {
       $type = $this->petModel->viewType($pet->type);
-      $return[] = new PetEntity($pet->id, $type, $pet->name, $pet->deployed);
+      $return[] = new PetEntity($pet->id, $type, ($pet->name? $pet->name: ""), $pet->deployed);
     }
     return $return;
   }

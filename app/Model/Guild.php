@@ -1,4 +1,6 @@
 <?php
+declare(strict_types=1);
+
 namespace HeroesofAbenez\Model;
 
 use HeroesofAbenez\Entities\Request as RequestEntity,
@@ -110,7 +112,7 @@ class Guild {
     if(count($roles) > 0) $members->where("guildrank", $roles);
     foreach($members as $member) {
       $rank = $member->guildrank;
-      $m = (object) ["id" => $member->id, "name" => $member->name, "rank" => ucfirst($rank), "rankId" => $member->guildrank, "customRankName" => ""];
+      $m = (object) ["id" => $member->id, "name" => $member->name, "rank" => $rank, "rankId" => $member->guildrank, "customRankName" => ""];
       if($customRoleNames) {
         $m->customRankName = $this->getCustomRankName($id, $m->rankId);
       }

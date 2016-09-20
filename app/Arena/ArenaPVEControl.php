@@ -1,4 +1,6 @@
 <?php
+declare(strict_types=1);
+
 namespace HeroesofAbenez\Arena;
 
 use HeroesofAbenez\Entities\Character,
@@ -14,9 +16,9 @@ class ArenaPVEControl extends ArenaControl {
   protected $arena = "champions";
   
   /**
-   * @return \Nette\Database\Table\ActiveRow[]
+   * @return \Nette\Database\Table\Selection
    */
-  protected function getOpponents(): array {
+  protected function getOpponents(): \Nette\Database\Table\Selection {
     $level = $this->user->identity->level;
     $opponents = $this->db->table("pve_arena_opponents")
       ->where("level > $level-5")
@@ -49,7 +51,7 @@ class ArenaPVEControl extends ArenaControl {
     $template = $this->template;
     $template->setFile(__DIR__ . "/arenaChampion.latte");
     try {
-      $template->champion = $this->getNpc($this->presenter->getParameter("id"));
+      $template->champion = $this->getNpc((int) $this->presenter->getParameter("id"));
     } catch(OpponentNotFoundException $e) {
       $template->champion = false;
     }

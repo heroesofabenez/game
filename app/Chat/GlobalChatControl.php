@@ -1,4 +1,6 @@
 <?php
+declare(strict_types=1);
+
 namespace HeroesofAbenez\Chat;
 
 /**
@@ -14,7 +16,7 @@ class GlobalChatControl extends ChatControl {
    */
   function __construct(\Nette\Database\Context $database, \Nette\Security\User $user, \HeroesofAbenez\Model\Location $locationModel, ChatCommandsProcessor  $processor) {
     $stage = $locationModel->getStage($user->identity->stage);
-    $stages = $locationModel->listOfStages($this->id);
+    $stages = $locationModel->listOfStages($stage->area);
     $stagesIds = [];
     foreach($stages as $s) {
       $stagesIds[] = $s->id;

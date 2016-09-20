@@ -1,4 +1,6 @@
 <?php
+declare(strict_types=1);
+
 namespace HeroesofAbenez\Presenters;
 
 use Nette\Application\UI\Form,

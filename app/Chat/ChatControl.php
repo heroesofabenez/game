@@ -1,4 +1,6 @@
 <?php
+declare(strict_types=1);
+
 namespace HeroesofAbenez\Chat;
 
 /**
@@ -79,9 +81,9 @@ abstract class ChatControl extends \Nette\Application\UI\Control {
   /**
    * Gets characters in the current chat
    * 
-   * @return string[]
+   * @return \Nette\Database\Table\Selection
    */
-  function getCharacters(): array {
+  function getCharacters(): \Nette\Database\Table\Selection {
     $characters = $this->db->table("characters")
       ->where($this->param2, $this->id2);
     foreach($characters as $char) {

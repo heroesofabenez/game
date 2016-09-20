@@ -1,8 +1,10 @@
 <?php
+declare(strict_types=1);
+
 namespace HeroesofAbenez\Tests;
 
-use MyTester as MT;
-use MyTester\Assert;
+use MyTester as MT,
+    MyTester\Assert;
 
 class PermissionsTest extends MT\TestCase {
   /** @var \HeroesofAbenez\Model\Permissions */

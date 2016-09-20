@@ -1,4 +1,6 @@
 <?php
+declare(strict_types=1);
+
 namespace HeroesofAbenez\Model;
 
 /**
@@ -38,7 +40,7 @@ class CombatLogManager {
     ];
     $this->db->query("INSERT INTO combats", $data);
     $combatId = $this->db->getInsertId("logs");
-    return $combatId;
+    return (int) $combatId;
   }
 }
 ?>

@@ -1,4 +1,6 @@
 <?php
+declare(strict_types=1);
+
 namespace HeroesofAbenez\Model;
 
 use Nette\Utils\Arrays,
@@ -214,10 +216,10 @@ class Profile {
   /**
    * Get character's guild
    * 
-   * @param string $id Character's id
+   * @param int $id Character's id
    * @return int
    */
-  function getCharacterGuild(string $id): int {
+  function getCharacterGuild(int $id): int {
     $char = $this->db->table("characters")->get($id);
     if(!$char) return 0;
     return $char->guild;

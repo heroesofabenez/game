@@ -1,4 +1,6 @@
 <?php
+declare(strict_types=1);
+
 namespace HeroesofAbenez\Entities;
 
 /**
@@ -50,10 +52,10 @@ class Team extends BaseEntity implements \ArrayAccess, \Countable, \IteratorAggr
   /**
    * Check if the team has a character
    * 
-   * @param int $id Character's id
+   * @param string $id Character's id
    * @return boolean
    */
-  function hasMember(int $id): bool {
+  function hasMember($id): bool {
     foreach($this->items as $member) {
       if($member->id === $id) return true;
     }

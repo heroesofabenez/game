@@ -1,4 +1,6 @@
 <?php
+declare(strict_types=1);
+
 namespace HeroesofAbenez\Arena;
 
 use Nette\Security\User,
@@ -47,7 +49,7 @@ abstract class ArenaControl extends \Nette\Application\UI\Control {
    * @return Character
    * @throws OpponentNotFoundException
    */
-  protected function getPlayer(string $id): Character {
+  protected function getPlayer(int $id): Character {
     try {
       $player = $this->combatHelper->getPlayer($id);
     } catch(OpponentNotFoundException $e) {
@@ -56,10 +58,7 @@ abstract class ArenaControl extends \Nette\Application\UI\Control {
     return $player;
   }
   
-  /**
-   * @return array
-   */
-  abstract protected function getOpponents(): array;
+  abstract protected function getOpponents();
   
   /**
    * @return void
