@@ -553,3 +553,13 @@ CREATE TABLE `skills_specials` (
   CONSTRAINT `skills_specials_ibfk_1` FOREIGN KEY (`needed_class`) REFERENCES `character_classess` (`id`),
   CONSTRAINT `skills_specials_ibfk_2` FOREIGN KEY (`needed_specialization`) REFERENCES `character_specializations` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `arena_fights_count` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `character` int(11) NOT NULL,
+  `day` varchar(10) NOT NULL,
+  `amount` int(2) NOT NULL DEFAULT '1',
+  PRIMARY KEY (`id`),
+  KEY `character` (`character`),
+  CONSTRAINT `arena_fights_count_ibfk_1` FOREIGN KEY (`character`) REFERENCES `characters` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;

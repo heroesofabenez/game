@@ -122,5 +122,37 @@ class CombatHelper {
     $npc = new Character($row, $equipment, [], $skills);
     return $npc;
   }
+  
+  /**
+   * Get amount of fights a player has fought today in arena
+   *
+   * @param int $uid
+   * @return int
+   */
+  function getNumberOfTodayArenaFights(int $uid): int {
+    $rows = $this->db->table("arena_fights_count")->where("character=? AND day=?", [$uid, date("d.m.Y")]);
+    if(!$rows->count()) return 0;
+    else return $rows->fetch()->amount;
+  }
+  
+  /**
+   * Increase amount of a player's fights in arena
+   *
+   * @param int $uid
+   * @return void
+   */
+  function bumpNumberOfTodayArenaFights(int $uid) {
+    $day = date("d.m.Y");
+    $rows = $this->db->table("arena_fights_count")->where("character=? AND day=?", [$uid, $day]);
+    if(!$rows->count()) {
+      $data = ["character" => $uid, "day" => $day];
+      $this->db->query("INSERT INTO arena_fights_count", $data);
+    } else {
+      $row = $rows->fetch();
+      $data = $row->toArray();
+      $data["amount"]++;
+      $this->db->query("UPDATE arena_fights_count SET ? WHERE id=?", $data, $data["id"]);
+    }
+  }
 }
 ?>
