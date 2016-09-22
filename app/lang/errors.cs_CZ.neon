@@ -42,6 +42,7 @@ travel:
     #cannotTravelToStage: "You can't travel to specified stage."
 arena:
     lowLevel: "Musíš dosáhnout úroveň %count%, aby jsi mohl vstoupit do arény."
+    cannotFightToday: "Nemůžeš bojovat více než %count% krát v Aréně za den."
 journal:
    cannotLevelUp: "Nemáš dostatek zkušeností pro postup na další úroveň."
 training:
