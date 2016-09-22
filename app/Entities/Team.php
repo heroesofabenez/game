@@ -118,26 +118,5 @@ class Team extends BaseEntity implements \ArrayAccess, \Countable, \IteratorAggr
   function hasAliveMembers(): bool {
     return count($this->getAliveMembers()) > 0;
   }
-  
-  /**
-   * Mark member as used in this round
-   * 
-   * @param int $index
-   * @return void
-   */
-  function useMember(int $index) {
-    if(!is_int($index) OR !$this->offsetExists($index)) return;
-    elseif(in_array($index, $this->used)) return;
-    $this->used[] = $index;
-  }
-  
-  /**
-   * Clear list of used members
-   * 
-   * @return void
-   */
-  function clearUsed() {
-    $this->used = [];
-  }
 }
 ?>

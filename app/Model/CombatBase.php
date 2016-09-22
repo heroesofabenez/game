@@ -218,33 +218,6 @@ class CombatBase {
   }
   
   /**
-   * Mark primary character as used in this round
-   * 
-   * @param Character $character1
-   * @param Character $character2
-   * @return void
-   */
-  function markUsed(Character $character1, Character $character2) {
-    $team = "team1";
-    $index = $this->team1->getIndex($character1->id);
-    if($index === -1) {
-      $index = $this->team2->getIndex($character1->id);
-      $team = "team2";
-    }
-    $this->$team->useMember($index);
-  }
-  
-  /**
-   * Clear lists of used team members
-   * 
-   * @return void
-   */
-  function clearUsed() {
-    $this->team1->clearUsed();
-    $this->team2->clearUsed();
-  }
-  
-  /**
    * Add winner to the log
    * 
    * @return void
