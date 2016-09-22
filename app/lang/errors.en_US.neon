@@ -42,6 +42,7 @@ travel:
     cannotTravelToStage: "You can't travel to specified stage."
 arena:
     lowLevel: "You need to reach level %count% to enter Arena."
+    cannotFightToday: "You cannot fight more than %count% times in Arena in one day."
 journal:
     cannotLevelUp: "You do not have enough experiences for next level."
 training:

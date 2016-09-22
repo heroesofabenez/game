@@ -477,7 +477,7 @@ class CombatBase {
     else $hit_chance = $character1->hit - $character2->dodge;
     if($hit_chance < 15) $hit_chance = 15;
     if($hit_chance > 100) $hit_chance = 100;
-    return $hit_chance;
+    return (int) $hit_chance;
   }
   
   /**

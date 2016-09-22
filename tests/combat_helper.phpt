@@ -10,9 +10,12 @@ use MyTester as MT,
 class CombatHelperTest extends MT\TestCase {
   /** @var \HeroesofAbenez\Model\CombatHelper */
   protected $model;
+  /** @var \Nette\Security\User */
+  protected $user;
   
-  function __construct(\HeroesofAbenez\Model\CombatHelper $model) {
+  function __construct(\HeroesofAbenez\Model\CombatHelper $model, \Nette\Security\User $user) {
     $this->model = $model;
+    $this->user = $user;
   }
   
   /**
@@ -49,6 +52,29 @@ class CombatHelperTest extends MT\TestCase {
     Assert::type(Character::class, $player);
     Assert::false(count($player->pets));
     Assert::true(count($player->skills));
+  }
+  
+  /**
+   * @return void
+   */
+  function testGetNumberOfTodayArenaFights() {
+    $actual = $this->model->getNumberOfTodayArenaFights($this->user->id);
+    Assert::type("int", $actual);
+    Assert::same(0, $actual);
+  }
+  
+  /**
+   * @return void
+   */
+  function testBumpNumberOfTodayArenaFights() {
+    $this->model->bumpNumberOfTodayArenaFights($this->user->id);
+    $result = $this->model->getNumberOfTodayArenaFights($this->user->id);
+    \Tracy\Debugger::barDump($result);
+    Assert::same(1, $result);
+    $this->model->bumpNumberOfTodayArenaFights($this->user->id);
+    $result = $this->model->getNumberOfTodayArenaFights($this->user->id);
+    \Tracy\Debugger::barDump($result);
+    Assert::same(2, $result);
   }
 }
 ?>
