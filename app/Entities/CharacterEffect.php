@@ -9,7 +9,7 @@ namespace HeroesofAbenez\Entities;
  * @author Jakub Konečný
  */
 class CharacterEffect extends BaseEntity {
-  /** @var int */
+  /** @var string */
   protected $id;
   /** @var string */
   protected $type;
