@@ -12,10 +12,19 @@ class CombatHelperTest extends MT\TestCase {
   protected $model;
   /** @var \Nette\Security\User */
   protected $user;
+  /** @var  \Nette\Database\Context */
+  protected $db;
   
-  function __construct(\HeroesofAbenez\Model\CombatHelper $model, \Nette\Security\User $user) {
+  /**
+   * CombatHelperTest constructor.
+   * @param \HeroesofAbenez\Model\CombatHelper $model
+   * @param \Nette\Security\User $user
+   * @param \Nette\Database\Context $db
+   */
+  public function __construct(\HeroesofAbenez\Model\CombatHelper $model, \Nette\Security\User $user, \Nette\Database\Context $db) {
     $this->model = $model;
     $this->user = $user;
+    $this->db = $db;
   }
   
   /**
@@ -75,6 +84,15 @@ class CombatHelperTest extends MT\TestCase {
     $result = $this->model->getNumberOfTodayArenaFights($this->user->id);
     \Tracy\Debugger::barDump($result);
     Assert::same(2, $result);
+  }
+  
+  /**
+   * @return void
+   */
+  function shutDown() {
+    $day = date("d.m.Y");
+    $row = $this->db->table("arena_fights_count")->where("character=? AND day=?", [$this->user->id, $day]);
+    $row->delete();
   }
 }
 ?>
