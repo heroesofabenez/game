@@ -1618,12 +1618,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/konecnyjakub/mytester.git",
-                "reference": "59ebb08083d7b3188b68a645175421fb5d48168c"
+                "reference": "af88d1686712f02bb0882532d09b6f71ad3f5d5b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/konecnyjakub/mytester/zipball/59ebb08083d7b3188b68a645175421fb5d48168c",
-                "reference": "59ebb08083d7b3188b68a645175421fb5d48168c",
+                "url": "https://api.github.com/repos/konecnyjakub/mytester/zipball/af88d1686712f02bb0882532d09b6f71ad3f5d5b",
+                "reference": "af88d1686712f02bb0882532d09b6f71ad3f5d5b",
                 "shasum": ""
             },
             "require": {
@@ -1677,7 +1677,7 @@
                 "tester",
                 "testing"
             ],
-            "time": "2016-09-18 16:50:32"
+            "time": "2016-09-24 09:08:32"
         },
         {
             "name": "nette/robot-loader",

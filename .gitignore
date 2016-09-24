@@ -3,6 +3,7 @@ temp
 /.idea
 /api
 /tests/*.php
+/tests/*errors
 /images
 /app/log
 /app/config/local.neon
