@@ -78,11 +78,9 @@ class CombatHelperTest extends MT\TestCase {
   function testBumpNumberOfTodayArenaFights() {
     $this->model->bumpNumberOfTodayArenaFights($this->user->id);
     $result = $this->model->getNumberOfTodayArenaFights($this->user->id);
-    \Tracy\Debugger::barDump($result);
     Assert::same(1, $result);
     $this->model->bumpNumberOfTodayArenaFights($this->user->id);
     $result = $this->model->getNumberOfTodayArenaFights($this->user->id);
-    \Tracy\Debugger::barDump($result);
     Assert::same(2, $result);
   }
   
