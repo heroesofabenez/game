@@ -1,33 +1,62 @@
 image: shipito/php:7.0
 
-.job_template: &test_job
-  services:
-  - mysql
-  
-  cache:
-    paths:
-    - vendor/
-  
-  variables:
-    MYSQL_DATABASE: heroesofabenez
-    MYSQL_ROOT_PASSWORD: root
-  
-  before_script:
+stages:
+  - build
+  - analyze
+  - test
+
+build:
+  stage: build
+
+  script:
   - mkdir images
   - mkdir images/maps
   - mkdir app/temp
   - mkdir app/temp/cache
   - mkdir app/temp/sessions
   - mkdir app/log
-
   - composer install --prefer-dist -a
-  
-  - php setup_ci.php
-  - curl https://gitlab.com/heroesofabenez/resources/raw/master/cs-ruleset.xml > cs-ruleset.xml
-  
+
+  cache:
+    paths:
+    - vendor/
+
+  artifacts:
+    paths:
+    - vendor
+    - app/temp
+    - app/log
+    expire_in: 10 mins
+
+analyze:lint:
+  stage: analyze
+
   script:
   - ./vendor/bin/parallel-lint . -e php,phpt --exclude vendor --exclude app/temp
+
+analyze:cs:
+  stage: analyze
+
+  before_script:
+  - curl https://gitlab.com/heroesofabenez/resources/raw/master/cs-ruleset.xml > cs-ruleset.xml
+
+  script:
   - ./vendor/bin/phpcs --extensions=php,phpt . --standard=cs-ruleset.xml --colors
+
+.job_template: &test_job
+  stage: test
+
+  services:
+  - mysql
+
+  variables:
+    MYSQL_DATABASE: heroesofabenez
+    MYSQL_ROOT_PASSWORD: root
+
+  before_script:
+  - php setup_ci.php
+
+  script:
   - php run_tests.php
 
 test:php7:
