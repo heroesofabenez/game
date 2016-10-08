@@ -1,4 +1,4 @@
-image: php:7.0
+image: shipito/php:7.0
 
 .job_template: &test_job
   services:
@@ -19,12 +19,8 @@ image: php:7.0
   - mkdir app/temp/cache
   - mkdir app/temp/sessions
   - mkdir app/log
-  
-  - apt-get update -yqq
-  - apt-get install git -yqq
-  - docker-php-ext-install pdo_mysql
-  - curl -sS https://getcomposer.org/installer | php
-  - php composer.phar update --no-interaction --prefer-source -a
+
+  - composer install --prefer-dist -a
   
   - php setup_ci.php
   - curl https://gitlab.com/heroesofabenez/resources/raw/master/cs-ruleset.xml > cs-ruleset.xml
@@ -38,6 +34,6 @@ test:php7:
   <<: *test_job
 
 test:php71:
-  image: php:7.1
+  image: shipito/php:7.1
   <<: *test_job
   allow_failure: true
