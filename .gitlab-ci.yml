@@ -59,7 +59,7 @@ analyze:cs:
   script:
   - php run_tests.php
 
-test:php7:
+test:default:
   <<: *test_job
 
 test:php71:
