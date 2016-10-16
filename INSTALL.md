@@ -1,3 +1,4 @@
+
 Installation instructions
 =========================
 
@@ -21,9 +22,8 @@ Creating folders
 Before you can start working (developing/testing) with the game, you have to create these empty folders:
 
 - /images/maps
-- /app/temp/cache
-- /app/temp/sessions
-- /app/log
+- /temp/cache
+- /temp/sessions
 
 . They are used to store generated data and they have to exist else you won't be able to run the application/use certain functions.
 
