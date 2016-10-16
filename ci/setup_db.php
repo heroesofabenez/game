@@ -1,7 +1,7 @@
 <?php
 use Nette\Neon\Neon;
 
-const WWW_DIR = __DIR__;
+const WWW_DIR = __DIR__ . "/..";
 const APP_DIR = WWW_DIR . "/app";
 
 require WWW_DIR . "/vendor/autoload.php";

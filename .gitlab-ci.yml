@@ -52,7 +52,7 @@ analyze:cs:
     MYSQL_ROOT_PASSWORD: root
 
   before_script:
-  - php setup_ci.php
+  - php ci/setup_db.php
 
   script:
   - php run_tests.php
