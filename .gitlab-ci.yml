@@ -22,6 +22,7 @@ build:
   artifacts:
     paths:
     - vendor
+    - images
     - temp/cache
     - temp/sessions
     expire_in: 10 mins
