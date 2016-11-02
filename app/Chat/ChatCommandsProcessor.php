@@ -21,9 +21,7 @@ class ChatCommandsProcessor {
   /**
    * Add new command
    *
-   * @param string $name
-   * @param callable $callback
-   * @param array $parameters
+   * @param ChatCommand $command
    * @return void
    * @throws CommandNameAlreadyUsedException
    */
