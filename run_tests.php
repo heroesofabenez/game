@@ -11,7 +11,9 @@ if(PHP_SAPI != "cli") {
 
 $configurator = new Nette\Configurator;
 $configurator->setTempDirectory(WWW_DIR . "/temp");
+$configurator->addConfig(APP_DIR . "/config/main.neon");
 $configurator->addConfig(APP_DIR . "/config/ci.neon");
+$configurator->addConfig(APP_DIR . "/config/mytester.neon");
 $configurator->addParameters([
   "appDir" => APP_DIR,
 ]);
