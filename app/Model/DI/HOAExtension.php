@@ -38,35 +38,35 @@ class HOAExtension extends \Nette\DI\CompilerExtension {
     $builder = $this->getContainerBuilder();
     $config = $this->getConfig($this->defaults);
     $builder->addDefinition($this->prefix("model.equipment"))
-      ->setFactory(HeroesofAbenez\Model\Equipment::class);
+      ->setClass(HeroesofAbenez\Model\Equipment::class);
     $builder->addDefinition($this->prefix("model.guild"))
-      ->setFactory(HeroesofAbenez\Model\Guild::class);
+      ->setClass(HeroesofAbenez\Model\Guild::class);
     $builder->addDefinition($this->prefix("model.intro"))
-      ->setFactory(HeroesofAbenez\Model\Intro::class);
+      ->setClass(HeroesofAbenez\Model\Intro::class);
     $builder->addDefinition($this->prefix("model.item"))
-      ->setFactory(HeroesofAbenez\Model\Item::class);
+      ->setClass(HeroesofAbenez\Model\Item::class);
     $builder->addDefinition($this->prefix("model.journal"))
-      ->setFactory(HeroesofAbenez\Model\Journal::class);
+      ->setClass(HeroesofAbenez\Model\Journal::class);
     $builder->addDefinition($this->prefix("model.location"))
-      ->setFactory(HeroesofAbenez\Model\Location::class);
+      ->setClass(HeroesofAbenez\Model\Location::class);
     $builder->addDefinition($this->prefix("model.map"))
-      ->setFactory(HeroesofAbenez\Model\Map::class);
+      ->setClass(HeroesofAbenez\Model\Map::class);
     $builder->addDefinition($this->prefix("model.mapDrawer"))
-      ->setFactory(HeroesofAbenez\Model\MapDrawer::class);
+      ->setClass(HeroesofAbenez\Model\MapDrawer::class);
     $builder->addDefinition($this->prefix("model.permissions"))
-      ->setFactory(HeroesofAbenez\Model\Permissions::class);
+      ->setClass(HeroesofAbenez\Model\Permissions::class);
     $builder->addDefinition($this->prefix("model.pet"))
-      ->setFactory(HeroesofAbenez\Model\Pet::class);
+      ->setClass(HeroesofAbenez\Model\Pet::class);
     $builder->addDefinition($this->prefix("model.profile"))
-      ->setFactory(HeroesofAbenez\Model\Profile::class);
+      ->setClass(HeroesofAbenez\Model\Profile::class);
     $builder->addDefinition($this->prefix("model.request"))
-      ->setFactory(HeroesofAbenez\Model\Request::class);
+      ->setClass(HeroesofAbenez\Model\Request::class);
     $builder->addDefinition($this->prefix("model.quest"))
-      ->setFactory(HeroesofAbenez\Model\Quest::class);
+      ->setClass(HeroesofAbenez\Model\Quest::class);
     $builder->addDefinition($this->prefix("model.npc"))
-      ->setFactory(HeroesofAbenez\Model\NPC::class);
+      ->setClass(HeroesofAbenez\Model\NPC::class);
     $builder->addDefinition($this->prefix("model.skills"))
-      ->setFactory(HeroesofAbenez\Model\Skills::class);
+      ->setClass(HeroesofAbenez\Model\Skills::class);
     $builder->addDefinition($this->prefix("model.userManager"))
       ->setFactory(HeroesofAbenez\Model\UserManager::class, [$config["devServers"]]);
     $builder->addDefinition("cache.cache")
@@ -84,13 +84,13 @@ class HOAExtension extends \Nette\DI\CompilerExtension {
   protected function addCombat() {
     $builder = $this->getContainerBuilder();
     $builder->addDefinition($this->prefix("combat.duel"))
-      ->setFactory(HeroesofAbenez\Model\CombatDuel::class);
+      ->setClass(HeroesofAbenez\Model\CombatDuel::class);
     $builder->addDefinition($this->prefix("combat.logger"))
-      ->setFactory(HeroesofAbenez\Model\CombatLogger::class);
+      ->setClass(HeroesofAbenez\Model\CombatLogger::class);
     $builder->addDefinition($this->prefix("combat.logManager"))
-      ->setFactory(HeroesofAbenez\Model\CombatLogManager::class);
+      ->setClass(HeroesofAbenez\Model\CombatLogManager::class);
     $builder->addDefinition($this->prefix("combat.helper"))
-      ->setFactory(HeroesofAbenez\Model\CombatHelper::class);
+      ->setClass(HeroesofAbenez\Model\CombatHelper::class);
   }
   
   /**
@@ -116,17 +116,17 @@ class HOAExtension extends \Nette\DI\CompilerExtension {
     $builder->addDefinition($this->prefix("chat.guild"))
       ->setImplement(HeroesofAbenez\Chat\GuildChatControlFactory::class);
     $builder->addDefinition($this->prefix("chat.commandsProcessor"))
-      ->setFactory(HeroesofAbenez\Chat\ChatCommandsProcessor::class);
+      ->setClass(HeroesofAbenez\Chat\ChatCommandsProcessor::class);
     $builder->addDefinition($this->prefix("chat.command.time"))
-      ->setFactory(HeroesofAbenez\Chat\Commands\TimeCommand::class);
+      ->setClass(HeroesofAbenez\Chat\Commands\TimeCommand::class);
     $builder->addDefinition($this->prefix("chat.command.location"))
-      ->setFactory(HeroesofAbenez\Chat\Commands\LocationCommand::class);
+      ->setClass(HeroesofAbenez\Chat\Commands\LocationCommand::class);
     $builder->addDefinition($this->prefix("chat.command.promote"))
-      ->setFactory(HeroesofAbenez\Chat\Commands\PromoteCommand::class);
+      ->setClass(HeroesofAbenez\Chat\Commands\PromoteCommand::class);
     $builder->addDefinition($this->prefix("chat.command.demote"))
-      ->setFactory(HeroesofAbenez\Chat\Commands\DemoteCommand::class);
+      ->setClass(HeroesofAbenez\Chat\Commands\DemoteCommand::class);
     $builder->addDefinition($this->prefix("chat.command.kick"))
-      ->setFactory(HeroesofAbenez\Chat\Commands\KickCommand::class);
+      ->setClass(HeroesofAbenez\Chat\Commands\KickCommand::class);
   }
   
   /**
@@ -168,17 +168,17 @@ class HOAExtension extends \Nette\DI\CompilerExtension {
   protected function addForms() {
     $builder = $this->getContainerBuilder();
     $builder->addDefinition($this->prefix("form.createCharacter"))
-      ->setFactory(HeroesofAbenez\Forms\CreateCharacterFormFactory::class);
+      ->setClass(HeroesofAbenez\Forms\CreateCharacterFormFactory::class);
     $builder->addDefinition($this->prefix("form.createGuild"))
-      ->setFactory(HeroesofAbenez\Forms\CreateGuildFormFactory::class);
+      ->setClass(HeroesofAbenez\Forms\CreateGuildFormFactory::class);
     $builder->addDefinition($this->prefix("form.renameGuild"))
-      ->setFactory(HeroesofAbenez\Forms\RenameGuildFormFactory::class);
+      ->setClass(HeroesofAbenez\Forms\RenameGuildFormFactory::class);
     $builder->addDefinition($this->prefix("form.guildDescription"))
-      ->setFactory(HeroesofAbenez\Forms\GuildDescriptionFormFactory::class);
+      ->setClass(HeroesofAbenez\Forms\GuildDescriptionFormFactory::class);
     $builder->addDefinition($this->prefix("form.dissolveGuild"))
-      ->setFactory(HeroesofAbenez\Forms\DissolveGuildFormFactory::class);
+      ->setClass(HeroesofAbenez\Forms\DissolveGuildFormFactory::class);
     $builder->addDefinition($this->prefix("form.customGuildRankNames"))
-      ->setFactory(HeroesofAbenez\Forms\CustomGuildRankNamesFormFactory::class);
+      ->setClass(HeroesofAbenez\Forms\CustomGuildRankNamesFormFactory::class);
   }
   
   function beforeCompile() {
