@@ -9,11 +9,10 @@ use HeroesofAbenez\Entities\DialogueLine;
  * A set of dialogue lines, simplify working with them
  * 
  * @author Jakub Konečný
+ * @property-read string[] $names
  * @property-write \HeroesofAbenez\Entities\NPC $npc
  */
 class NPCDialogueControl extends \Nette\Application\UI\Control {
-  /** @var array */
-  protected $names;
   /** @var \Nette\Security\User */
   protected $user;
   /** @var \HeroesofAbenez\Entities\NPC */
@@ -24,12 +23,23 @@ class NPCDialogueControl extends \Nette\Application\UI\Control {
    */
   function __construct(\Nette\Security\User $user) {
     $this->user = $user;
-    $this->names = ["", $user->identity->name];
   }
   
   function setNpc(\HeroesofAbenez\Entities\NPC $npc) {
     $this->npc = $npc;
-    $this->names[0] = $npc->name;
+  }
+  
+  /**
+   * @return string[]
+   */
+  function getNames() {
+    if(is_null($this->npc)) {
+      $npcName = "";
+    } else {
+      $npcName = $this->npc->name;
+    }
+    $playerName = $this->user->identity->name;
+    return [$npcName, $playerName];
   }
   
   /**
