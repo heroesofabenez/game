@@ -37,7 +37,7 @@ class CharacterClass extends BaseEntity {
   protected $charisma_grow;
   /** @var int */
   protected $stat_points_level;
-  /** @var int */
+  /** @var string */
   protected $initiative;
   
   function __construct(\Nette\Database\Table\ActiveRow $row) {
