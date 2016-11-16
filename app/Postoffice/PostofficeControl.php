@@ -45,10 +45,9 @@ class PostofficeControl extends \Nette\Application\UI\Control {
    * @return void
    */
   function renderInbox() {
-    $template = $this->template;
-    $template->setFile(__DIR__ . "/postofficeInbox.latte");
-    $template->messages = $this->getReceivedMessages();
-    $template->render();
+    $this->template->setFile(__DIR__ . "/postofficeInbox.latte");
+    $this->template->messages = $this->getReceivedMessages();
+    $this->template->render();
   }
   
   /**
@@ -74,10 +73,9 @@ class PostofficeControl extends \Nette\Application\UI\Control {
    * @return void
    */
   function renderOutbox() {
-    $template = $this->template;
-    $template->setFile(__DIR__ . "/postofficeOutbox.latte");
-    $template->messages = $this->getSentMessages();
-    $template->render();
+    $this->template->setFile(__DIR__ . "/postofficeOutbox.latte");
+    $this->template->messages = $this->getSentMessages();
+    $this->template->render();
   }
   
   protected function canShow($message) {
@@ -121,19 +119,18 @@ class PostofficeControl extends \Nette\Application\UI\Control {
    * @return void
    */
   function renderMessage(int $id) {
-    $template = $this->template;
-    $template->setFile(__DIR__ . "/postofficeMessage.latte");
+    $this->template->setFile(__DIR__ . "/postofficeMessage.latte");
     try {
       $message = $this->message($id);
       foreach($message as $key => $value) {
-        $template->$key = $value;
+        $this->template->$key = $value;
       }
     } catch(CannotShowMessageException $e) {
       $this->presenter->forward("cannotshow");
     } catch(MessageNotFoundException $e) {
       $this->presenter->forward("notfound");
     }
-    $template->render();
+    $this->template->render();
   }
   
   /**

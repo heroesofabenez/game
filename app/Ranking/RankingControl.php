@@ -45,16 +45,15 @@ abstract class RankingControl extends \Nette\Application\UI\Control {
    * @return void
    */
   function render() {
-    $template = $this->template;
-    $template->setFile(__DIR__ . "/ranking.latte");
-    $template->name = $this->name;
-    $template->rankings = ["characters", "guilds"];
-    $template->cols = $this->cols;
-    $template->presenter = $this->presenter;
-    $template->lastCol = $this->lastCol;
-    $template->rows = $this->getData();
-    $template->paginator = $this->paginator;
-    $template->render();
+    $this->template->setFile(__DIR__ . "/ranking.latte");
+    $this->template->name = $this->name;
+    $this->template->rankings = ["characters", "guilds"];
+    $this->template->cols = $this->cols;
+    $this->template->presenter = $this->presenter;
+    $this->template->lastCol = $this->lastCol;
+    $this->template->rows = $this->getData();
+    $this->template->paginator = $this->paginator;
+    $this->template->render();
   }
 }
 ?>

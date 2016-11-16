@@ -66,11 +66,10 @@ abstract class ArenaControl extends \Nette\Application\UI\Control {
    * @return void
    */
   function render() {
-    $template = $this->template;
-    $template->setFile(__DIR__ . "/arena.latte");
-    $template->opponents = $this->getOpponents();
-    $template->arena = $this->arena;
-    $template->render();
+    $this->template->setFile(__DIR__ . "/arena.latte");
+    $this->template->opponents = $this->getOpponents();
+    $this->template->arena = $this->arena;
+    $this->template->render();
   }
   
   /**

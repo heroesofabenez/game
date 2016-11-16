@@ -98,11 +98,10 @@ abstract class ChatControl extends \Nette\Application\UI\Control {
    * @return void
    */
   function render() {
-    $template = $this->template;
-    $template->setFile(__DIR__ . "/chat.latte");
-    $template->characters = $this->getCharacters();
-    $template->texts = $this->getTexts();
-    $template->render();
+    $this->template->setFile(__DIR__ . "/chat.latte");
+    $this->template->characters = $this->getCharacters();
+    $this->template->texts = $this->getTexts();
+    $this->template->render();
   }
   
   /**

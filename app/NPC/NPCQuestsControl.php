@@ -76,11 +76,10 @@ class NPCQuestsControl extends \Nette\Application\UI\Control {
    * @return void
    */
   function render() {
-    $template = $this->template;
-    $template->setFile(__DIR__ . "/npcQuests.latte");
-    $template->id = $this->npc->id;
-    $template->quests = $this->getQuests();
-    $template->render();
+    $this->template->setFile(__DIR__ . "/npcQuests.latte");
+    $this->template->id = $this->npc->id;
+    $this->template->quests = $this->getQuests();
+    $this->template->render();
   }
   
   /**
