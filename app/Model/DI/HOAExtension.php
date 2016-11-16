@@ -70,12 +70,12 @@ class HOAExtension extends \Nette\DI\CompilerExtension {
     $builder->addDefinition($this->prefix("model.userManager"))
       ->setFactory(HeroesofAbenez\Model\UserManager::class, [$config["devServers"]]);
     $builder->addDefinition("cache.cache")
-      ->setFactory("Nette\Caching\Cache", ["@cache.storage", "data"]);
+      ->setFactory(\Nette\Caching\Cache::class, ["@cache.storage", "data"]);
     $builder->addDefinition($this->prefix("model.authorizator"))
-      ->setFactory("HeroesofAbenez\Model\AuthorizatorFactory::create");
+      ->setFactory(HeroesofAbenez\Model\AuthorizatorFactory::class . "::create");
     $builder->removeDefinition("router");
     $builder->addDefinition("router")
-      ->setFactory("HeroesofAbenez\Model\RouterFactory::create");
+      ->setFactory(HeroesofAbenez\Model\RouterFactory::class . "::create");
   }
   
   /**
