@@ -1,18 +1,19 @@
 <?php
 declare(strict_types=1);
 
-namespace HeroesofAbenez\Tests;
+namespace HeroesofAbenez\Model;
 
 use MyTester as MT,
     MyTester\Assert,
     Nette\Application\IRouter,
-    Nette\Application\Routers\Route;
+    Nette\Application\Routers\Route,
+    Nette\Application\Routers\RouteList;
 
 class RouterTest extends MT\TestCase {
-  /** @var \Nette\Application\Routers\RouteList */
+  /** @var RouteList */
   protected $router;
   
-  function __construct(\Nette\Application\Routers\RouteList $router) {
+  function __construct(RouteList $router) {
     $this->router = $router;
   }
   

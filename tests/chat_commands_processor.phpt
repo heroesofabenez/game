@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace HeroesofAbenez\Tests;
+namespace HeroesofAbenez\Chat;
 
 use MyTester as MT,
     MyTester\Assert,
@@ -13,7 +13,6 @@ class TestCommand extends ChatCommand {
   }
   
   /**
-    \Tracy\Debugger::barDump($this->name);
    * @return string
    */
   function execute(): string {
@@ -45,10 +44,10 @@ class ChatCommandsProcessorTest extends MT\TestCase {
   const COMMAND_NAME = "test1";
   const TEXT = "/" . self::COMMAND_NAME;
   
-  /** @var \HeroesofAbenez\Chat\ChatCommandsProcessor */
+  /** @var ChatCommandsProcessor */
   protected $model;
   
-  function __construct(\HeroesofAbenez\Chat\ChatCommandsProcessor $model) {
+  function __construct(ChatCommandsProcessor $model) {
     $this->model = $model;
   }
   

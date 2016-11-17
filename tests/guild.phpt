@@ -1,17 +1,17 @@
 <?php
 declare(strict_types=1);
 
-namespace HeroesofAbenez\Tests;
+namespace HeroesofAbenez\Model;
 
 use MyTester as MT,
     MyTester\Assert,
-    HeroesofAbenez\Entities\Guild;
+    HeroesofAbenez\Entities\Guild as GuildEntity;
 
 class GuildModelTest extends MT\TestCase {
-  /** @var \HeroesofAbenez\Model\Guild */
+  /** @var Guild */
   protected $model;
   
-  function __construct(\HeroesofAbenez\Model\Guild $model) {
+  function __construct(Guild $model) {
     $this->model = $model;
   }
   
@@ -30,7 +30,7 @@ class GuildModelTest extends MT\TestCase {
    */
   function testGuildData(int $id) {
     $guild = $this->model->guildData($id);
-    Assert::type(Guild::class, $guild);
+    Assert::type(GuildEntity::class, $guild);
     Assert::same("Dawn", $guild->name);
   }
   
@@ -40,7 +40,7 @@ class GuildModelTest extends MT\TestCase {
    * @return void
    */
   function testView(int $id) {
-    $guild = $this->model->view($id, [], true);
+    $guild = $this->model->view($id);
     Assert::type("array", $guild);
     Assert::same("Dawn", $guild["name"]);
     Assert::type("array", $guild["members"]);

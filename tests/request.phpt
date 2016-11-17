@@ -1,17 +1,17 @@
 <?php
 declare(strict_types=1);
 
-namespace HeroesofAbenez\Tests;
+namespace HeroesofAbenez\Model;
 
 use MyTester as MT,
     MyTester\Assert,
-    HeroesofAbenez\Entities\Request;
+    HeroesofAbenez\Entities\Request as RequestEntity;
 
 class RequestModelTest extends MT\TestCase {
-  /** @var \HeroesofAbenez\Model\Request */
+  /** @var Request */
   protected $model;
   
-  function __construct(\HeroesofAbenez\Model\Request $model) {
+  function __construct(Request $model) {
     $this->model = $model;
   }
 
@@ -32,7 +32,7 @@ class RequestModelTest extends MT\TestCase {
    */
   function testShow(int $id) {
     $request = $this->model->show($id);
-    Assert::type(Request::class, $request);
+    Assert::type(RequestEntity::class, $request);
   }
 }
 ?>

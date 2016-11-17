@@ -1,17 +1,17 @@
 <?php
 declare(strict_types=1);
 
-namespace HeroesofAbenez\Tests;
+namespace HeroesofAbenez\Model;
 
 use MyTester as MT,
     MyTester\Assert,
     Nette\Security\Identity;
 
 class UserManagerTest extends MT\TestCase {
-  /** @var \HeroesofAbenez\Model\UserManager */
+  /** @var UserManager */
   protected $model;
   
-  function __construct(\HeroesofAbenez\Model\UserManager $model) {
+  function __construct(UserManager $model) {
     $this->model = $model;
   }
   

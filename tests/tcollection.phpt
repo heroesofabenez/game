@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace HeroesofAbenez\Tests;
+namespace HeroesofAbenez\Utils;
 
 use MyTester as MT,
     MyTester\Assert;
@@ -15,7 +15,7 @@ class Item {
 }
 
 class Collection implements \ArrayAccess, \Countable, \IteratorAggregate {
-  use \HeroesofAbenez\Utils\TCollection;
+  use TCollection;
   
   function __construct() {
     $this->class = Item::class;

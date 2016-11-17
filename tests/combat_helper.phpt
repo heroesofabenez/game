@@ -1,14 +1,14 @@
 <?php
 declare(strict_types=1);
 
-namespace HeroesofAbenez\Tests;
+namespace HeroesofAbenez\Model;
 
 use MyTester as MT,
     MyTester\Assert,
     HeroesofAbenez\Entities\Character;
 
 class CombatHelperTest extends MT\TestCase {
-  /** @var \HeroesofAbenez\Model\CombatHelper */
+  /** @var CombatHelper */
   protected $model;
   /** @var \Nette\Security\User */
   protected $user;
@@ -17,11 +17,11 @@ class CombatHelperTest extends MT\TestCase {
   
   /**
    * CombatHelperTest constructor.
-   * @param \HeroesofAbenez\Model\CombatHelper $model
+   * @param CombatHelper $model
    * @param \Nette\Security\User $user
    * @param \Nette\Database\Context $db
    */
-  public function __construct(\HeroesofAbenez\Model\CombatHelper $model, \Nette\Security\User $user, \Nette\Database\Context $db) {
+  public function __construct(CombatHelper $model, \Nette\Security\User $user, \Nette\Database\Context $db) {
     $this->model = $model;
     $this->user = $user;
     $this->db = $db;

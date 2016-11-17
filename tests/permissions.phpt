@@ -1,16 +1,16 @@
 <?php
 declare(strict_types=1);
 
-namespace HeroesofAbenez\Tests;
+namespace HeroesofAbenez\Model;
 
 use MyTester as MT,
     MyTester\Assert;
 
 class PermissionsTest extends MT\TestCase {
-  /** @var \HeroesofAbenez\Model\Permissions */
+  /** @var Permissions */
   protected $model;
   
-  function __construct(\HeroesofAbenez\Model\Permissions $model) {
+  function __construct(Permissions $model) {
     $this->model = $model;
   }
   

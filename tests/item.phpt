@@ -1,17 +1,17 @@
 <?php
 declare(strict_types=1);
 
-namespace HeroesofAbenez\Tests;
+namespace HeroesofAbenez\Model;
 
 use MyTester as MT,
     MyTester\Assert,
     HeroesofAbenez\Entities\Item as ItemEntity;
 
 class ItemTest extends MT\TestCase {
-  /** @var \HeroesofAbenez\Model\Item */
+  /** @var Item */
   protected $model;
   
-  function __construct(\HeroesofAbenez\Model\Item $model) {
+  function __construct(Item $model) {
     $this->model = $model;
   }
   

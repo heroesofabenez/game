@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace HeroesofAbenez\Tests;
+namespace HeroesofAbenez\Model;
 
 use MyTester as MT,
     MyTester\Assert,
@@ -9,10 +9,10 @@ use MyTester as MT,
     HeroesofAbenez\Entities\Stage;
 
 class LocationTest extends MT\TestCase {
-  /** @var \HeroesofAbenez\Model\Location */
+  /** @var Location */
   protected $model;
   
-  function __construct(\HeroesofAbenez\Model\Location $model) {
+  function __construct(Location $model) {
     $this->model = $model;
   }
   

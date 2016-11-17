@@ -1,24 +1,24 @@
 <?php
 declare(strict_types=1);
 
-namespace HeroesofAbenez\Tests;
+namespace HeroesofAbenez\Model;
 
 use MyTester as MT,
     MyTester\Assert,
-    HeroesofAbenez\Entities\Quest;
+    HeroesofAbenez\Entities\Quest as QuestEntity;
 
 class QuestModelTest extends MT\TestCase {
-  /** @var \HeroesofAbenez\Model\Quest */
+  /** @var Quest */
   protected $model;
   
-  function __construct(\HeroesofAbenez\Model\Quest $model) {
+  function __construct(Quest $model) {
     $this->model = $model;
   }
   
   function testListOfQuests() {
     $quests = $this->model->listOfQuests();
     Assert::type("array", $quests);
-    Assert::type(Quest::class, $quests[1]);
+    Assert::type(QuestEntity::class, $quests[1]);
   }
   
   /**
@@ -28,7 +28,7 @@ class QuestModelTest extends MT\TestCase {
    */
   function testView(int $id) {
     $quest = $this->model->view($id);
-    Assert::type(Quest::class, $quest);
+    Assert::type(QuestEntity::class, $quest);
   }
   
   /**

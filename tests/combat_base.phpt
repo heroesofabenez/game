@@ -1,13 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace HeroesofAbenez\Tests;
+namespace HeroesofAbenez\Model;
 
 use MyTester as MT,
     MyTester\Assert,
-    HeroesofAbenez\Model\CombatBase,
-    HeroesofAbenez\Model\CombatLogger,
-    HeroesofAbenez\Model\CombatHelper,
     HeroesofAbenez\Entities\Character,
     HeroesofAbenez\Entities\Team;
 

@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace HeroesofAbenez\Tests;
+namespace HeroesofAbenez\Model;
 
 use MyTester as MT,
     MyTester\Assert,
@@ -12,10 +12,10 @@ use MyTester as MT,
     HeroesofAbenez\Entities\CharacterSkill;
 
 class SkillsModelTest extends MT\TestCase {
-  /** @var \HeroesofAbenez\Model\Skills */
+  /** @var Skills */
   protected $model;
   
-  function __construct(\HeroesofAbenez\Model\Skills $model) {
+  function __construct(Skills $model) {
     $this->model = $model;
   }
   

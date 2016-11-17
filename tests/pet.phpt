@@ -1,18 +1,18 @@
 <?php
 declare(strict_types=1);
 
-namespace HeroesofAbenez\Tests;
+namespace HeroesofAbenez\Model;
 
 use MyTester as MT,
     MyTester\Assert,
     HeroesofAbenez\Entities\PetType,
-    HeroesofAbenez\Entities\Pet;
+    HeroesofAbenez\Entities\Pet as PetEntity;
 
 class PetTest extends MT\TestCase {
-  /** @var \HeroesofAbenez\Model\Pet */
+  /** @var Pet */
   protected $model;
   
-  function __construct(\HeroesofAbenez\Model\Pet $model) {
+  function __construct(Pet $model) {
     $this->model = $model;
   }
   
@@ -47,7 +47,7 @@ class PetTest extends MT\TestCase {
   function testGetActivePet(int $user) {
     $pet = $this->model->getActivePet($user);
     if($user === 1) {
-      Assert::type(Pet::class, $pet);
+      Assert::type(PetEntity::class, $pet);
       Assert::contains($pet->name, "Unnamed");
     } elseif($user === 2) {
       Assert::false($pet);

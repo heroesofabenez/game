@@ -1,17 +1,17 @@
 <?php
 declare(strict_types=1);
 
-namespace HeroesofAbenez\Tests;
+namespace HeroesofAbenez\Model;
 
 use MyTester as MT,
     MyTester\Assert,
-    HeroesofAbenez\Entities\Equipment;
+    HeroesofAbenez\Entities\Equipment as EquipmentEntity;
 
 class EquipmentTest extends MT\TestCase {
-  /** @var \HeroesofAbenez\Model\Equipment */
+  /** @var Equipment */
   protected $model;
   
-  function __construct(\HeroesofAbenez\Model\Equipment $model) {
+  function __construct(Equipment $model) {
     $this->model = $model;
   }
   
@@ -21,7 +21,7 @@ class EquipmentTest extends MT\TestCase {
   function testListOfEquipment() {
     $items = $this->model->listOfEquipment();
     Assert::type("array", $items);
-    Assert::type(Equipment::class, $items[1]);
+    Assert::type(EquipmentEntity::class, $items[1]);
   }
   
   /**
@@ -31,7 +31,7 @@ class EquipmentTest extends MT\TestCase {
    */
   function testView(int $id) {
     $item = $this->model->view($id);
-    Assert::type(Equipment::class, $item);
+    Assert::type(EquipmentEntity::class, $item);
   }
 }
 ?>
