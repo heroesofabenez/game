@@ -94,7 +94,7 @@ class CombatLogger implements \Countable, \IteratorAggregate {
     $params = [
       "team1" => $this->team1, "team2" => $this->team2, "actions" => $this->actions
     ];
-    $this->latte->setTempDirectory(APP_DIR . "/temp/combats");
+    $this->latte->setTempDirectory(WWW_DIR . "/temp/combats");
     return $this->latte->renderToString(APP_DIR . "/templates/CombatLog.latte", $params);
   }
   
