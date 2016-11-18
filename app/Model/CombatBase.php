@@ -549,7 +549,7 @@ class CombatBase {
     if($amount + $character2->hitpoints > $character2->max_hitpoints) {
       $amount = $character2->max_hitpoints - $character2->hitpoints;
     }
-    $result["amount"] = $amount;
+    $result["amount"] = (int) $amount;
     if($result["amount"]) $character2->heal($result["amount"]);
     $result["action"] = "healing";
     $result["name"] = "";
