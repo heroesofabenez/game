@@ -13,7 +13,7 @@ use Nette\Application\UI\Form,
  */
 class PostofficePresenter extends BasePresenter {
   /** @var Postoffice\PostofficeControlFactory @autowire */
-  protected $pofactory;
+  protected $poFactory;
   
   /**
    * @return void
@@ -28,8 +28,11 @@ class PostofficePresenter extends BasePresenter {
    */
   function actionMessage(int $id) {
     $status = $this->createComponentPostoffice()->messageStatus($id);
-    if($status === 0) $this->forward("notfound");
-    elseif($status === -1) $this->forward("cannotshow");
+    if($status === 0) {
+      $this->forward("notfound");
+    } elseif($status === -1) {
+      $this->forward("cannotshow");
+    }
     $this->template->id = $id;
   }
   
@@ -37,7 +40,7 @@ class PostofficePresenter extends BasePresenter {
    * @return Postoffice\PostofficeControl
    */
   protected function createComponentPostoffice(): Postoffice\PostofficeControl {
-    return $this->pofactory->create();
+    return $this->poFactory->create();
   }
   
   /**
@@ -50,13 +53,13 @@ class PostofficePresenter extends BasePresenter {
     $form->setTranslator($this->translator);
     $chars = $this->createComponentPostoffice()->getRecipients();
     $form->addSelect("to", "forms.postOfficeNewMessage.toSelect.label", $chars)
-         ->setPrompt("forms.postOfficeNewMessage.toSelect.prompt")
-         ->setRequired("forms.postOfficeNewMessage.toSelect.error");
+      ->setPrompt("forms.postOfficeNewMessage.toSelect.prompt")
+      ->setRequired("forms.postOfficeNewMessage.toSelect.error");
     $form->addText("subject", "forms.postOfficeNewMessage.subjectField.label")
-         ->setRequired("forms.postOfficeNewMessage.subjectField.empty")
-         ->addRule(Form::MAX_LENGTH, "forms.postOfficeNewMessage.subjectField.error", 35);
+      ->setRequired("forms.postOfficeNewMessage.subjectField.empty")
+      ->addRule(Form::MAX_LENGTH, "forms.postOfficeNewMessage.subjectField.error", 35);
     $form->addTextArea("message", "forms.postOfficeNewMessage.messageField.label")
-         ->setRequired("forms.postOfficeNewMessage.messageField.error");
+      ->setRequired("forms.postOfficeNewMessage.messageField.error");
     $form->addSubmit("send", "forms.postOfficeNewMessage.sendButton.label");
     $form->onSuccess[] = [$this, "newMessageFormSucceeded"];
     return $form;

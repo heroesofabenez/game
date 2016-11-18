@@ -32,7 +32,9 @@ class QuestPresenter extends BasePresenter {
    */
   function renderView(int $id) {
     $quest = $this->model->view($id);
-    if(!$quest) $this->forward("notfound");
+    if(!$quest) {
+      $this->forward("notfound");
+    }
     $this->template->id = $quest->id;
     $this->template->name = $quest->name;
     $this->template->introduction = $quest->introduction;

@@ -75,13 +75,17 @@ class Equipment {
    */
   function equipItem(int $id) {
     $item = $this->db->table("character_equipment")->get($id);
-    if(!$item) throw new ItemNotFoundException;
-    elseif($item->character != $this->user->id) throw new ItemNotOwnedException;
-    elseif($item->worn) throw new ItemAlreadyEquippedException;
+    if(!$item) {
+      throw new ItemNotFoundException;
+    } elseif($item->character != $this->user->id) {
+      throw new ItemNotOwnedException;
+    } elseif($item->worn) {
+      throw new ItemAlreadyEquippedException;
+    }
     $eq = $this->db->table("equipment")->get($item->item);
     $items = $this->db->table("character_equipment")
-        ->where("item.slot", $eq->slot)
-        ->where("character", $this->user->id);
+      ->where("item.slot", $eq->slot)
+      ->where("character", $this->user->id);
     foreach($items as $i) {
       if($i->id == $id) continue;
       $this->db->query("UPDATE character_equipment SET ? WHERE id=?", ["worn" => 0], $i->id);
@@ -100,9 +104,13 @@ class Equipment {
    */
   function unequipItem(int $id) {
     $item = $this->db->table("character_equipment")->get($id);
-    if(!$item) throw new ItemNotFoundException;
-    elseif($item->character != $this->user->id) throw new ItemNotOwnedException;
-    elseif(!$item->worn) throw new ItemNotWornException;
+    if(!$item) {
+      throw new ItemNotFoundException;
+    } elseif($item->character != $this->user->id) {
+      throw new ItemNotOwnedException;
+    } elseif(!$item->worn) {
+      throw new ItemNotWornException;
+    }
     $data = ["worn" => 0];
     $this->db->query("UPDATE character_equipment SET ? WHERE id=?", $data, $id);
   }

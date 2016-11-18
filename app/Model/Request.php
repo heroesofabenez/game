@@ -47,11 +47,16 @@ class Request {
     switch($request->type) {
       case "friendship":
       case "group_join":
-        if($request->from == $this->user->id OR $request->to == $this->user->id) return true;
-        else return false;
+        if($request->from == $this->user->id OR $request->to == $this->user->id) {
+          return true;
+        } else {
+          return false;
+        }
         break;
       case "guild_join":
-        if($request->to == $this->user->id) return true;
+        if($request->to == $this->user->id) {
+          return true;
+        }
         $leader = $this->db->table("characters")->get($request->from);
         $guild = $leader->guild;
         if($this->user->identity->guild == $guild AND $this->user->isAllowed("guild", "invite")) {
@@ -61,7 +66,9 @@ class Request {
         }
         break;
       case "guild_app":
-        if($request->from == $this->user->id) return true;
+        if($request->from == $this->user->id) {
+          return true;
+        }
         $leader = $this->db->table("characters")->get($request->to);
         $guild = $leader->guild;
         if($this->user->identity->guild == $guild AND $this->user->isAllowed("guild", "invite")) {
@@ -81,8 +88,12 @@ class Request {
    */
   function canChange(int $requestId): bool {
     $request = $this->db->table("requests")->get($requestId);
-    if($request->from == $this->user->id) return false;
-    if($request->to == $this->user->id) return true;
+    if($request->from == $this->user->id) {
+      return false;
+    }
+    if($request->to == $this->user->id) {
+      return true;
+    }
     if($request->type == "guild_app") {
       $leader = $this->db->table("characters")->get($request->to);
       $guild = $leader->guild;
@@ -105,8 +116,12 @@ class Request {
    */
   function show(int $id): RequestEntity {
     $requestRow = $this->db->table("requests")->get($id);
-    if(!$requestRow) throw new RequestNotFoundException;
-    if(!$this->canShow($id)) throw new CannotSeeRequestException;
+    if(!$requestRow) {
+      throw new RequestNotFoundException;
+    }
+    if(!$this->canShow($id)) {
+      throw new CannotSeeRequestException;
+    }
     $from = $this->profileModel->getCharacterName($requestRow->from);
     $to = $this->profileModel->getCharacterName($requestRow->to);
     $return = new RequestEntity($requestRow->id, $from, $to, $requestRow->type, $requestRow->sent, $requestRow->status);
@@ -126,10 +141,18 @@ class Request {
    */
   function accept(int $id) {
     $request = $this->show($id);
-    if(!$request) throw new RequestNotFoundException;
-    if(!$this->canShow($id)) throw new CannotSeeRequestException;
-    if(!$this->canChange($id)) throw new CannotAcceptRequestException;
-    if($request->status !== "new") throw new RequestAlreadyHandledException;
+    if(!$request) {
+      throw new RequestNotFoundException;
+    }
+    if(!$this->canShow($id)) {
+      throw new CannotSeeRequestException;
+    }
+    if(!$this->canChange($id)) {
+      throw new CannotAcceptRequestException;
+    }
+    if($request->status !== "new") {
+      throw new RequestAlreadyHandledException;
+    }
     switch($request->type) {
       case "friendship":
     throw new NotImplementedException;
@@ -166,10 +189,18 @@ class Request {
    */
   function decline(int $id) {
     $request = $this->show($id);
-    if(!$request) throw new RequestNotFoundException;
-    if(!$this->canShow($id)) throw new CannotSeeRequestException;
-    if(!$this->canChange($id)) throw new CannotDeclineRequestException;
-    if($request->status !== "new") throw new RequestAlreadyHandledException;
+    if(!$request) {
+      throw new RequestNotFoundException;
+    }
+    if(!$this->canShow($id)) {
+      throw new CannotSeeRequestException;
+    }
+    if(!$this->canChange($id)) {
+      throw new CannotDeclineRequestException;
+    }
+    if($request->status !== "new") {
+      throw new RequestAlreadyHandledException;
+    }
     $data = ["status" => "declined"];
     $this->db->query("UPDATE requests SET ? WHERE id=?", $data, $id);
   }

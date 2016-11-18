@@ -74,8 +74,11 @@ class NPC {
    */
   function getNpcName(int $id): string {
     $npc = $this->view($id);
-    if(!$npc) return "";
-    else return $npc->name;
+    if(!$npc) {
+      return "";
+    } else {
+      return $npc->name;
+    }
   }
 }
 ?>

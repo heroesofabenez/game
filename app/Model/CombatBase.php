@@ -100,7 +100,9 @@ class CombatBase {
    * @return void
    */
   function setTeams(Team $team1, Team $team2) {
-    if($this->team1) throw new ImmutableException("Teams has already been set.");
+    if($this->team1) {
+      throw new ImmutableException("Teams has already been set.");
+    }
     $this->team1 = & $team1;
     $this->team2 = & $team2;
     $this->log->setTeams($team1, $team2);
@@ -167,7 +169,9 @@ class CombatBase {
     /** @var Character $character */
     foreach($characters as $character) {
       foreach($character->equipment as $item) {
-        if($item->worn) $character->equipItem($item->id);
+        if($item->worn) {
+          $character->equipItem($item->id);
+        }
       }
     }
   }
@@ -212,7 +216,9 @@ class CombatBase {
     /** @var Character $character */
     foreach($characters as $character) {
       foreach($character->effects as $effect) {
-        if($effect->duration === "combat" OR is_int($effect->duration)) $character->removeEffect($effect->id);
+        if($effect->duration === "combat" OR is_int($effect->duration)) {
+          $character->removeEffect($effect->id);
+        }
       }
     }
   }
@@ -225,8 +231,11 @@ class CombatBase {
   function logCombatResult() {
     $this->log->round = 5000;
     $text = "Combat ends. {$this->team1->name} dealt {$this->damage[1]} damage, {$this->team2->name} dealt {$this->damage[2]} damage. ";
-    if($this->getWinner() === 1) $text .= $this->team1->name;
-    else $text .= $this->team2->name;
+    if($this->getWinner() === 1) {
+      $text .= $this->team1->name;
+    } else {
+      $text .= $this->team2->name;
+    }
     $text .= " wins.";
     $this->log->logText($text);
   }
@@ -237,8 +246,7 @@ class CombatBase {
    * @return void
    */
   function logRoundNumber() {
-    $this->round++;
-    $this->log->round = $this->round;
+    $this->log->round = ++$this->round;
   }
   
   /**
@@ -275,7 +283,9 @@ class CombatBase {
    * @return Character|NULL
    */
   protected function selectRandomCharacter(Team $team) {
-    if(count($team->aliveMembers) === 0) return NULL;
+    if(count($team->aliveMembers) === 0) {
+      return NULL;
+    }
     $roll = rand(0, count($team->aliveMembers) - 1);
     return $team->aliveMembers[$roll];
   }
@@ -301,15 +311,20 @@ class CombatBase {
   protected function findLowestHpCharacter(Team $team, $threshold = NULL) {
     $lowestHp = 9999;
     $lowestIndex = -1;
-    if(is_null($threshold)) $threshold = static::LOWEST_HP_THRESHOLD;
+    if(is_null($threshold)) {
+      $threshold = static::LOWEST_HP_THRESHOLD;
+    }
     foreach($team->aliveMembers as $index => $member) {
       if($member->hitpoints <= $member->max_hitpoints * $threshold AND $member->hitpoints < $lowestHp) {
         $lowestHp = $member->hitpoints;
         $lowestIndex = $index;
       }
     }
-    if($lowestIndex === -1) return NULL;
-    else return $team->aliveMembers[$lowestIndex];
+    if($lowestIndex === -1) {
+      return NULL;
+    } else {
+      return $team->aliveMembers[$lowestIndex];
+    }
   }
   
   /**
@@ -346,11 +361,15 @@ class CombatBase {
         break;
       case "party":
         $team = $this->getTeam($character1);
-        foreach($this->{"team". $team} as $target) $this->onSkillSpecial($character1, $target, $skill);
+        foreach($this->{"team". $team} as $target) {
+          $this->onSkillSpecial($character1, $target, $skill);
+        }
         break;
       case "enemy_party":
         $team = $this->getEnemyTeam($character1);
-        foreach($this->{"team". $team} as $target) $this->onSkillSpecial($character1, $target, $skill);
+        foreach($this->{"team". $team} as $target) {
+          $this->onSkillSpecial($character1, $target, $skill);
+        }
         break;
     }
   }
@@ -379,7 +398,9 @@ class CombatBase {
       if(count($character->usableSkills)) {
         $skill = $character->usableSkills[0];
         if($skill instanceof CharacterSkillAttack) {
-          for($i = 1; $i <= $skill->skill->strikes; $i++) $this->onSkillAttack($character, $target, $skill);
+          for($i = 1; $i <= $skill->skill->strikes; $i++) {
+            $this->onSkillAttack($character, $target, $skill);
+          }
         } else {
           $this->doSpecialSkill($character, $target, $skill);
         }
@@ -396,8 +417,11 @@ class CombatBase {
    */
   protected function startRound(): int {
     $this->onRoundStart();
-    if($this->getWinner() > 0) return $this->getWinner();
-    return 0;
+    if($this->getWinner() > 0) {
+      return $this->getWinner();
+    } else {
+      return 0;
+    }
   }
   
   /**
@@ -416,8 +440,11 @@ class CombatBase {
    */
   protected function endRound(): int {
     $this->onRoundEnd();
-    if($this->getWinner() > 0) return $this->getWinner();
-    return 0;
+    if($this->getWinner() > 0) {
+      return $this->getWinner();
+    } else {
+      return 0;
+    }
   }
   
   /**
@@ -426,7 +453,9 @@ class CombatBase {
    * @return int Winning team
    */
   function execute(): int {
-    if(!$this->team1) throw new InvalidStateException("Teams are not set.");
+    if(!$this->team1) {
+      throw new InvalidStateException("Teams are not set.");
+    }
     $this->onCombatStart();
     while($this->round <= $this->round_limit) {
       if($this->startRound() > 0) break;
@@ -446,8 +475,11 @@ class CombatBase {
    * @return int
    */
   protected function calculateHitChance(Character $character1, Character $character2, CharacterSkillAttack $skill = NULL): int {
-    if($skill) $hit_chance = ($character1->hit / 100 * $skill->hitRate) - $character2->dodge;
-    else $hit_chance = $character1->hit - $character2->dodge;
+    if($skill) {
+      $hit_chance = ($character1->hit / 100 * $skill->hitRate) - $character2->dodge;
+    } else {
+      $hit_chance = $character1->hit - $character2->dodge;
+    }
     if($hit_chance < 15) $hit_chance = 15;
     if($hit_chance > 100) $hit_chance = 100;
     return (int) $hit_chance;
@@ -467,8 +499,11 @@ class CombatBase {
     $hit_chance = $this->calculateHitChance($character1, $character2);
     $roll = rand(0, 100);
     $result["result"] = ($roll <= $hit_chance);
-    if($result["result"]) $result["amount"] = (int) $character1->damage - $character2->defense;
-    else $result["amount"] = 0;
+    if($result["result"]) {
+      $result["amount"] = (int) $character1->damage - $character2->defense;
+    } else {
+      $result["amount"] = 0;
+    }
     if($result["amount"] < 0) $result["amount"] = 0;
     if($character2->hitpoints - $result["amount"] < 0) {
       $result["amount"] = $character2->hitpoints;

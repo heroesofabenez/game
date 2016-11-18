@@ -35,7 +35,9 @@ class KickCommand extends \HeroesofAbenez\Entities\ChatCommand {
    */
   function execute(): string {
     $id = Arrays::get(func_get_args(), 0, "");
-    if($id === "" OR !is_numeric($id)) return "";
+    if($id === "" OR !is_numeric($id)) {
+      return "";
+    }
     try {
       $this->model->kick((int) $id);
       $message = $this->translator->translate("messages.guild.kicked");

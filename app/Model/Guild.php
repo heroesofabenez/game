@@ -49,8 +49,11 @@ class Guild {
    */
   function getGuildName(int $id): string {
     $guild = Arrays::get($this->listOfGuilds(), $id, false);
-    if(!$guild) return "";
-    else return $guild->name;
+    if(!$guild) {
+      return "";
+    } else {
+      return $guild->name;
+    }
   }
   
   /**
@@ -74,7 +77,9 @@ class Guild {
     $return = [];
     $guilds = $this->listOfGuilds();
     $guild = Arrays::get($guilds, $id, false);
-    if(!$guild) { return false; }
+    if(!$guild) {
+      return false;
+    }
     $return["name"] = $guild->name;
     $return["description"] = $guild->description;
     $members = $this->db->table("characters")->where("guild", $guild->id)->order("guildrank DESC, id");
@@ -94,8 +99,11 @@ class Guild {
    */
   function getCustomRankName(int $guild, int $rank): string {
     $customRank = $this->db->table("guild_ranks_custom")->where("guild=? AND rank=?", $guild, $rank);
-    if(count($customRank)) return $customRank->fetch()->name;
-    else return "";
+    if(count($customRank)) {
+      return $customRank->fetch()->name;
+    } else {
+      return "";
+    }
   }
   
   /**
@@ -169,8 +177,11 @@ class Guild {
       ->where("from", $this->user->id)
       ->where("type", "guild_app")
       ->where("status", "new");
-    if($apps->count() > 0) return true;
-    else return false;
+    if($apps->count() > 0) {
+      return true;
+    } else {
+      return false;
+    }
   }
   
   /**
@@ -211,7 +222,9 @@ class Guild {
         $members = $this->db->table("characters")->where("guild", $guild->id);
         $leader = "";
         foreach($members as $member) {
-          if($member->guildrank == 7) $leader = $member->name;
+          if($member->guildrank == 7) {
+            $leader = $member->name;
+          }
         }
         $return[$guild->id] = new GuildEntity($guild->id, $guild->name, $guild->description, $members->count(), $leader);
       }
@@ -237,11 +250,19 @@ class Guild {
    */
   function promote(int $id) {
     $admin = $this->user;
-    if($admin->identity->guild == 0) throw new NotInGuildException;
-    if(!$admin->isAllowed("guild", "promote")) throw new MissingPermissionsException;
+    if($admin->identity->guild == 0) {
+      throw new NotInGuildException;
+    }
+    if(!$admin->isAllowed("guild", "promote")) {
+      throw new MissingPermissionsException;
+    }
     $character = $this->db->table("characters")->get($id);
-    if(!$character) throw new PlayerNotFoundException;
-    if($character->guild !== $admin->identity->guild) throw new PlayerNotInGuildException;
+    if(!$character) {
+      throw new PlayerNotFoundException;
+    }
+    if($character->guild !== $admin->identity->guild) {
+      throw new PlayerNotInGuildException;
+    }
     $roles = $this->permissionsModel->getRoles();
     foreach($roles as $role) {
       if($role["name"] == $admin->roles[0]) {
@@ -249,8 +270,12 @@ class Guild {
         break;
       }
     }
-    if($adminRole <= $character->guildrank) throw new CannotPromoteHigherRanksException;
-    if($character->guildrank >= 6) throw new CannotPromoteToGrandmasterException;
+    if($adminRole <= $character->guildrank) {
+      throw new CannotPromoteHigherRanksException;
+    }
+    if($character->guildrank >= 6) {
+      throw new CannotPromoteToGrandmasterException;
+    }
     if($character->guildrank == 5) {
       $deputy = $this->guildMembers($admin->identity->guild, [6]);
       if(count($deputy) > 0) throw new CannotHaveMoreDeputiesException;
@@ -272,11 +297,19 @@ class Guild {
    */
   function demote(int $id) {
     $admin = $this->user;
-    if($admin->identity->guild == 0) throw new NotInGuildException;
-    if(!$admin->isAllowed("guild", "promote")) throw new MissingPermissionsException;
+    if($admin->identity->guild == 0) {
+      throw new NotInGuildException;
+    }
+    if(!$admin->isAllowed("guild", "promote")) {
+      throw new MissingPermissionsException;
+    }
     $character = $this->db->table("characters")->get($id);
-    if(!$character) throw new PlayerNotFoundException;
-    if($character->guild !== $admin->identity->guild) throw new PlayerNotInGuildException;
+    if(!$character) {
+      throw new PlayerNotFoundException;
+    }
+    if($character->guild !== $admin->identity->guild) {
+      throw new PlayerNotInGuildException;
+    }
     $roles = $this->permissionsModel->getRoles();
     foreach($roles as $role) {
       if($role["name"] == $admin->roles[0]) {
@@ -284,8 +317,12 @@ class Guild {
         break;
       }
     }
-    if($adminRole <= $character->guildrank) throw new CannotDemoteHigherRanksException;
-    if($character->guildrank === 1) throw new CannotDemoteLowestRankException;
+    if($adminRole <= $character->guildrank) {
+      throw new CannotDemoteHigherRanksException;
+    }
+    if($character->guildrank === 1) {
+      throw new CannotDemoteLowestRankException;
+    }
     $this->db->query("UPDATE characters SET guildrank=guildrank-1 WHERE id=$id");
   }
   
@@ -302,11 +339,19 @@ class Guild {
    */
   function kick(int $id) {
     $admin = $this->user;
-    if($admin->identity->guild == 0) throw new NotInGuildException;
-    if(!$admin->isAllowed("guild", "kick")) throw new MissingPermissionsException;
+    if($admin->identity->guild == 0) {
+      throw new NotInGuildException;
+    }
+    if(!$admin->isAllowed("guild", "kick")) {
+      throw new MissingPermissionsException;
+    }
     $character = $this->db->table("characters")->get($id);
-    if(!$character) throw new PlayerNotFoundException;
-    if($character->guild !== $admin->identity->guild) throw new PlayerNotInGuildException;
+    if(!$character) {
+      throw new PlayerNotFoundException;
+    }
+    if($character->guild !== $admin->identity->guild) {
+      throw new PlayerNotInGuildException;
+    }
     $roles = $this->permissionsModel->getRoles();
     foreach($roles as $role) {
       if($role["name"] == $admin->roles[0]) {
@@ -314,7 +359,9 @@ class Guild {
         break;
       }
     }
-    if($adminRole <= $character->guildrank) throw new CannotKickHigherRanksException;
+    if($adminRole <= $character->guildrank) {
+      throw new CannotKickHigherRanksException;
+    }
     $this->db->query("UPDATE characters SET guildrank=NULL, guild=0 WHERE id=$id");
     $this->cache->remove("guilds");
   }
@@ -327,8 +374,12 @@ class Guild {
    * @throws GrandmasterCannotLeaveGuildException
   */
   function leave() {
-    if($this->user->identity->guild === 0) throw new NotInGuildException;
-    if($this->user->isInRole("grandmaster")) throw new GrandmasterCannotLeaveGuildException;
+    if($this->user->identity->guild === 0) {
+      throw new NotInGuildException;
+    }
+    if($this->user->isInRole("grandmaster")) {
+      throw new GrandmasterCannotLeaveGuildException;
+    }
     $data = [
       "guild" => 0, "guildrank" => NULL
     ];
@@ -363,7 +414,9 @@ class Guild {
   function rename(int $id, string $name) {
     $guilds = $this->cache->load("guilds");
     foreach($guilds as $guild) {
-      if($guild->name == $name) throw new NameInUseException;
+      if($guild->name == $name) {
+        throw new NameInUseException;
+      }
     }
     $data = ["name" => $name];
     $this->db->query("UPDATE guilds SET ? WHERE id=?", $data, $id);
@@ -387,7 +440,9 @@ class Guild {
         break;
       }
     }
-    if(!$found) throw new GuildNotFoundException;
+    if(!$found) {
+      throw new GuildNotFoundException;
+    }
     $data = ["description" => $description];
     $this->db->query("UPDATE guilds SET ? WHERE id=?", $data, $id);
     $this->cache->remove("guilds");
@@ -433,7 +488,9 @@ class Guild {
    * @throws MissingPermissionsException
    */
   function setCustomRankNames(array $names) {
-    if(!$this->user->isAllowed("guild", "changeRankNames")) throw new MissingPermissionsException;
+    if(!$this->user->isAllowed("guild", "changeRankNames")) {
+      throw new MissingPermissionsException;
+    }
     $gid = $this->user->identity->guild;
     $tableName = "guild_ranks_custom";
     foreach($names as $rank => $name) {
@@ -441,8 +498,11 @@ class Guild {
       $rank = substr($rank, 4, 1);
       $data = ["guild" => $gid, "rank" => $rank, "name" => $name];
       $row = $this->db->table($tableName)->where("guild=? AND rank=?", $gid, $rank);
-      if($row->count("*")) $this->db->query("UPDATE $tableName SET ? WHERE guild=? AND rank=?", $data, $gid, $rank);
-      else $this->db->query("INSERT INTO $tableName", $data);
+      if($row->count("*")) {
+        $this->db->query("UPDATE $tableName SET ? WHERE guild=? AND rank=?", $data, $gid, $rank);
+      } else {
+        $this->db->query("INSERT INTO $tableName", $data);
+      }
     }
   }
 }

@@ -63,7 +63,9 @@ class Location {
     }
     if($area > 0) {
       foreach($return as $stage) {
-        if($stage->area != $area) unset($return[$stage->id]);
+        if($stage->area != $area) {
+          unset($return[$stage->id]);
+        }
       }
     }
     return $return;
@@ -141,8 +143,11 @@ class Location {
    */
   function getStageName(int $id): string {
     $stage = $this->getStage($id);
-    if(!$stage) return "";
-    else return $stage->name;
+    if(!$stage) {
+      return "";
+    } else {
+      return $stage->name;
+    }
   }
   
   /**
@@ -153,8 +158,11 @@ class Location {
    */
   function getAreaName(int $id): string {
     $area = $this->getArea($id);
-    if(!$area) return "";
-    else return $area->name;
+    if(!$area) {
+      return "";
+    } else {
+      return $area->name;
+    }
   }
   
   /**
@@ -182,10 +190,18 @@ class Location {
     $stages = $this->listOfStages();
     $curr_stage = $stages[$this->user->identity->stage];
     foreach($stages as $stage) {
-      if($stage->area !== $curr_stage->area) unset($stages[$stage->id]);
-      if($this->user->identity->level < $stage->required_level) unset($stages[$stage->id]);
-      if(is_int($stage->required_race) AND $stage->required_race != $this->user->identity->race) unset($stages[$stage->id]);
-      if(is_int($stage->required_occupation) AND $stage->required_occupation != $this->user->identity->occupation) unset($stages[$stage->id]);
+      if($stage->area !== $curr_stage->area) {
+        unset($stages[$stage->id]);
+      }
+      if($this->user->identity->level < $stage->required_level) {
+        unset($stages[$stage->id]);
+      }
+      if(is_int($stage->required_race) AND $stage->required_race != $this->user->identity->race) {
+        unset($stages[$stage->id]);
+      }
+      if(is_int($stage->required_occupation) AND $stage->required_occupation != $this->user->identity->occupation) {
+        unset($stages[$stage->id]);
+      }
     }
     return $stages;
   }
@@ -213,7 +229,9 @@ class Location {
         break;
       }
     }
-    if(!$foundRoute) throw new CannotTravelToStageException;
+    if(!$foundRoute) {
+      throw new CannotTravelToStageException;
+    }
     $data = ["current_stage" => $id];
     $this->db->query("UPDATE characters SET ? WHERE id=?", $data, $this->user->id);
   }

@@ -67,8 +67,11 @@ class Item {
    */
   function getItemName(int $id): string {
     $item = $this->view($id);
-    if(!$item) return "";
-    else return $item->name;
+    if(!$item) {
+      return "";
+    } else {
+      return $item->name;
+    }
   }
   
   /**
@@ -134,8 +137,11 @@ class Item {
     $data = "amount=amount-$amount";
     $wheres = ["character" => $this->user->id, "item" => $id];
     $result = $this->db->query("UPDATE character_items SET $data WHERE ?", $wheres);
-    if(!$result) return false;
-    else return true;
+    if(!$result) {
+      return false;
+    } else {
+      return true;
+    }
   }
 }
 ?>

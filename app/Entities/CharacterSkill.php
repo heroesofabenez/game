@@ -33,17 +33,20 @@ abstract class CharacterSkill extends BaseEntity {
    * @return string
    */
   function getSkillType(): string {
-    if($this->skill instanceof SkillAttack) return "attack";
-    elseif($this->skill instanceof SkillSpecial) return "special";
-    else return "";
+    if($this->skill instanceof SkillAttack) {
+      return "attack";
+    } elseif($this->skill instanceof SkillSpecial) {
+      return "special";
+    } else {
+      return "";
+    }
   }
   
   /**
    * @return bool
    */
   function canUse(): bool {
-    if($this->cooldown < 1) return true;
-    else return false;
+    return ($this->cooldown < 1);
   }
   
   /**

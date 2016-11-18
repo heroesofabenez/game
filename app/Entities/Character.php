@@ -97,16 +97,22 @@ class Character extends BaseEntity {
   function __construct(array $stats, array $equipment = [], array $pets = [], array $skills = []) {
     $this->setStats($stats);
     foreach($equipment as $eq) {
-      if($eq instanceof Equipment) $this->equipment[$eq->id] = $eq;
+      if($eq instanceof Equipment) {
+        $this->equipment[$eq->id] = $eq;
+      }
     }
     foreach($pets as $pet) {
       if($pet instanceof Pet) {
         $this->pets[$pet->id] = $pet;
-        if($pet->deployed) $this->deployPet($pet->id);
+        if($pet->deployed) {
+          $this->deployPet($pet->id);
+        }
       }
     }
     foreach($skills as $skill) {
-      if($skill instanceof CharacterSkill) $this->skills[] = $skill;
+      if($skill instanceof CharacterSkill) {
+        $this->skills[] = $skill;
+      }
     }
   }
   
@@ -118,7 +124,9 @@ class Character extends BaseEntity {
     $required_stats = ["id", "name", "occupation", "level", "strength", "dexterity", "constitution", "intelligence", "charisma"];
     $all_stats = array_merge($required_stats, ["race", "specialization", "gender", "experience", "initiative_formula"]);
     foreach($required_stats as $value) {
-      if(!isset($stats[$value])) exit("Not passed all needed elements for parameter stats for method Character::__construct. Missing at least $value.");
+      if(!isset($stats[$value])) {
+        exit("Not passed all needed elements for parameter stats for method Character::__construct. Missing at least $value.");
+      }
     }
     foreach($stats as $key => $value) {
       if(in_array($key, $all_stats)) {
@@ -142,7 +150,9 @@ class Character extends BaseEntity {
             $this->$key = $value;
   break;
         }
-      } else { continue; }
+      } else {
+        continue;
+      }
     }
     $this->hitpoints = $this->max_hitpoints = $this->constitution * 5;
     $this->recalculateSecondaryStats();
@@ -182,13 +192,16 @@ class Character extends BaseEntity {
   /**
    * Get specified equipment of the character
    * 
-   * @param int $itemid Item's id
+   * @param int $itemId Item's id
    * @return Equipment Item
    * @throws OutOfBoundsException
    */
-  function getItem(int $itemid): Equipment {
-    if(isset($this->equipment[$itemid])) return $this->equipment[$itemid];
-    else throw new OutOfBoundsException("Item was not found.");
+  function getItem(int $itemId): Equipment {
+    if(isset($this->equipment[$itemId])) {
+      return $this->equipment[$itemId];
+    } else {
+      throw new OutOfBoundsException("Item was not found.");
+    }
   }
   
   /**
@@ -209,7 +222,7 @@ class Character extends BaseEntity {
   }
   
   /**
-   * Ubequips an item
+   * Unequips an item
    * 
    * @param int $itemId
    * @return void
@@ -233,8 +246,11 @@ class Character extends BaseEntity {
    * @throws OutOfBoundsException
    */
   function getPet(int $petId): Pet {
-    if(isset($this->pets[$petId]) AND $this->pets[$petId] instanceof Pet) return $this->pets[$petId];
-    else throw new OutOfBoundsException("Pet was not found.");
+    if(isset($this->pets[$petId]) AND $this->pets[$petId] instanceof Pet) {
+      return $this->pets[$petId];
+    } else {
+      throw new OutOfBoundsException("Pet was not found.");
+    }
   }
   
   /**
@@ -268,7 +284,9 @@ class Character extends BaseEntity {
   function getUsableSkills(): array {
     $skills = [];
     foreach($this->skills as $skill) {
-      if($skill->canUse()) $skills[] = $skill;
+      if($skill->canUse()) {
+        $skills[] = $skill;
+      }
     }
     return $skills;
   }
@@ -327,8 +345,11 @@ class Character extends BaseEntity {
     $stats = ["damage" => $this->damageStat(), "hit" => "dexterity", "dodge" => "dexterity"];
     foreach($stats as $secondary => $primary) {
       $gain = $this->$secondary - $this->{"base_$secondary"};
-      if($secondary === "damage") $base = round($this->$primary / 2) + 1;
-      else $base = $this->$primary * 3;
+      if($secondary === "damage") {
+        $base = round($this->$primary / 2) + 1;
+      } else {
+        $base = $this->$primary * 3;
+      }
       $this->$secondary = $base + $gain;
     }
   }
@@ -360,15 +381,23 @@ class Character extends BaseEntity {
       switch($effect->source) {
         case "pet":
         case "skill":
-          if($type != "stun") $bonus_value = $$stat / 100 * $effect->value;
+          if($type != "stun") {
+            $bonus_value = $$stat / 100 * $effect->value;
+          }
   break;
         case "equipment":
-          if($type != "stun") $bonus_value = $effect->value;
+          if($type != "stun") {
+            $bonus_value = $effect->value;
+          }
   break;
       }
-      if($type == "buff") { $$stat += $bonus_value; }
-      elseif($type == "debuff") { $debuffs[$stat] += $bonus_value; }
-      elseif($type == "stun") { $stunned = true; }
+      if($type == "buff") {
+        $$stat += $bonus_value;
+      } elseif($type == "debuff") {
+        $debuffs[$stat] += $bonus_value;
+      } elseif($type == "stun") {
+        $stunned = true;
+      }
       unset($stat, $type, $duration, $bonus_value);
     }
     foreach($debuffs as $stat => $value) {

@@ -26,7 +26,9 @@ class ChatCommandsProcessor {
    * @throws CommandNameAlreadyUsedException
    */
   function addCommand(ChatCommand $command) {
-    if($this->hasCommand($command->name)) throw new CommandNameAlreadyUsedException("Command $command->name is already defined.");
+    if($this->hasCommand($command->name)) {
+      throw new CommandNameAlreadyUsedException("Command $command->name is already defined.");
+    }
     $this->commands[] = $command;
   }
   
@@ -61,7 +63,9 @@ class ChatCommandsProcessor {
    * @return string
    */
   function extractCommand(string $text): string {
-    if(substr($text, 0, 1) != "/") return "";
+    if(substr($text, 0, 1) != "/") {
+      return "";
+    }
     if(!strpos($text, " ")) {
       $command = substr($text, 1);
     } else {
@@ -82,7 +86,9 @@ class ChatCommandsProcessor {
    * @return array
    */
   function extractParameters(string $text): array {
-    if(substr($text, 0, 1) != "/" OR !strpos($text, " ")) return [];
+    if(substr($text, 0, 1) != "/" OR !strpos($text, " ")) {
+      return [];
+    }
     $params = explode(" ", $text);
     unset($params[0]);
     return $params;
@@ -96,7 +102,9 @@ class ChatCommandsProcessor {
    */
   function hasCommand(string $name): bool {
     foreach($this->commands as $command) {
-      if($command->name === $name) return true;
+      if($command->name === $name) {
+        return true;
+      }
     }
     return false;
   }
@@ -110,7 +118,9 @@ class ChatCommandsProcessor {
    */
   function getCommand(string $name): ChatCommand {
     foreach($this->commands as $command) {
-      if($command->name === $name) return $command;
+      if($command->name === $name) {
+        return $command;
+      }
     }
     throw new CommandNotFoundException("Command $name is not defined.");
   }
@@ -121,7 +131,9 @@ class ChatCommandsProcessor {
    */
   function parse(string $text) {
     $commandName = $this->extractCommand($text);
-    if($commandName === "") return false;
+    if($commandName === "") {
+      return false;
+    }
     $command = $this->getCommand($commandName);
     $params = $this->extractParameters($text);
     return call_user_func_array([$command, "execute"], $params);

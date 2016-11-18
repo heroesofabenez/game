@@ -121,9 +121,13 @@ class Pet {
    */
   function discardPet(int $id) {
     $pet = $this->db->table("pets")->get($id);
-    if(!$pet) throw new PetNotFoundException;
-    elseif($pet->owner != $this->user->id) throw new PetNotOwnedException;
-    elseif(!$pet->deployed) throw new PetNotDeployedException;
+    if(!$pet) {
+      throw new PetNotFoundException;
+    } elseif($pet->owner != $this->user->id) {
+      throw new PetNotOwnedException;
+    } elseif(!$pet->deployed) {
+      throw new PetNotDeployedException;
+    }
     $data = ["deployed" => 0];
     $this->db->query("UPDATE pets SET ? WHERE id=?", $data, $id);
   }

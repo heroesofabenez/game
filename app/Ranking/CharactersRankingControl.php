@@ -33,8 +33,11 @@ class CharactersRankingControl extends RankingControl {
       ->limit($this->paginator->getLength(), $this->paginator->getOffset());
     $chars = [];
     foreach($characters as $character) {
-      if($character->guild == 0)  $guildName = "";
-      else $guildName = $this->guildModel->getGuildName($character->guild);
+      if($character->guild == 0) {
+        $guildName = "";
+      } else {
+        $guildName = $this->guildModel->getGuildName($character->guild);
+      }
       $chars[] = (object) [
         "name" => $character->name, "level" => $character->level,
         "guild" => $guildName, "id" => $character->id

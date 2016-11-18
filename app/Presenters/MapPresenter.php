@@ -21,8 +21,11 @@ class MapPresenter extends BasePresenter {
     foreach($data as $key => $value) {
       if($key == "areas") {
         foreach($value as $area) {
-          if($area->stage == $this->user->identity->stage) $area->href = "";
-          else $area->href = $this->link("Travel:stage", $area->stage);
+          if($area->stage == $this->user->identity->stage) {
+            $area->href = "";
+          } else {
+            $area->href = $this->link("Travel:stage", $area->stage);
+          }
         }
       }
       $this->template->$key = $value;

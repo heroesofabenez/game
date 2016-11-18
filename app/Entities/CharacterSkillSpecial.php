@@ -22,7 +22,9 @@ class CharacterSkillSpecial extends CharacterSkill {
    * @return int
    */
   function getValue(): int {
-    if($this->skill->type === "stun") return 0;
+    if($this->skill->type === "stun") {
+      return 0;
+    }
     $value = $this->skill->value;
     $value += (int) $this->skill->value_growth * ($this->level - 1);
     return $value;

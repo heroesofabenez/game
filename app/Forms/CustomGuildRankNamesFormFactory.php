@@ -34,7 +34,9 @@ class CustomGuildRankNamesFormFactory extends BaseFormFactory  {
     for($i = 1; $i <= count($defaults); $i++) {
       $fieldName = "rank{$i}name";
       $form->addText($fieldName, "guildranks.$i.name");
-      if(isset($custom[$i])) $form[$fieldName]->value = $custom[$i];
+      if(isset($custom[$i])) {
+        $form[$fieldName]->value = $custom[$i];
+      }
     }
     $form->addSubmit("submit", "forms.customGuildRankNames.sendButton.label");
     $form->onSuccess[] = [$this, "submitted"];

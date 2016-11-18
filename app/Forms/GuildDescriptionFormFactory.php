@@ -30,7 +30,7 @@ class GuildDescriptionFormFactory extends BaseFormFactory {
     $form = parent::createBase();
     $guild = $this->model->guildData($this->user->identity->guild);
     $form->addTextArea("description", "forms.guildDescription.descriptionField.label")
-         ->setDefaultValue($guild->description);
+      ->setDefaultValue($guild->description);
     $form->addSubmit("change", "forms.guildDescription.changeButton.label");
     $form->onSuccess[] = [$this, "submitted"];
     return $form;

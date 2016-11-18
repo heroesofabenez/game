@@ -30,9 +30,9 @@ class RenameGuildFormFactory extends BaseFormFactory {
     $form = parent::createBase();
     $currentName = $this->model->getGuildName($this->user->identity->guild);
     $form->addText("name", "forms.renameGuild.nameField.label")
-         ->addRule(Form::MAX_LENGTH, "forms.renameGuild.nameField.error", 20)
-         ->setDefaultValue($currentName)
-         ->setRequired();
+      ->addRule(Form::MAX_LENGTH, "forms.renameGuild.nameField.error", 20)
+      ->setDefaultValue($currentName)
+      ->setRequired();
     $form->addSubmit("rename", "forms.renameGuild.renameButton.label");
     $form->onSuccess[] = [$this, "submitted"];
     return $form;

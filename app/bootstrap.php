@@ -8,7 +8,9 @@ $configurator = new Nette\Configurator;
 $configurator->setTempDirectory(WWW_DIR . "/temp");
 $configurator->addConfig(APP_DIR . "/config/main.neon");
 $configurator->addConfig(APP_DIR . "/config/local.neon");
-if($configurator->isDebugMode()) $configurator->addConfig(APP_DIR . "/config/mytester.neon");
+if($configurator->isDebugMode()) {
+  $configurator->addConfig(APP_DIR . "/config/mytester.neon");
+}
 $container = $configurator->createContainer();
 
 return $container;

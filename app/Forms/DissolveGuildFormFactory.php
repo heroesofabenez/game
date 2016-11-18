@@ -29,8 +29,8 @@ class DissolveGuildFormFactory extends BaseFormFactory {
     $form = parent::createBase();
     $currentName = $this->model->getGuildName($this->user->identity->guild);
     $form->addText("name", "forms.dissolveGuild.nameField.label")
-         ->addRule(Form::EQUAL, "forms.dissolveGuild.nameField.error", $currentName)
-         ->setRequired();
+      ->addRule(Form::EQUAL, "forms.dissolveGuild.nameField.error", $currentName)
+      ->setRequired();
     $form->addSubmit("dissolve", "forms.dissolveGuild.dissolveButton.label");
     $form->onSuccess[] = [$this, "submitted"];
     return $form;

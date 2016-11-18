@@ -39,7 +39,9 @@ class SkillPresenter extends BasePresenter {
    */
   function renderAttack(int $id) {
     $skill = $this->model->getAttackSkill($id);
-    if(!$skill) $this->forward("notfound");
+    if(!$skill) {
+      $this->forward("notfound");
+    }
     $this->template->skill = $skill;
   }
   

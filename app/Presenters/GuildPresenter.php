@@ -55,7 +55,9 @@ class GuildPresenter extends BasePresenter {
   function notInGuild(bool $warning = true) {
     $guild = $this->user->identity->guild;
     if($guild == 0) {
-      if($warning) { $this->flashMessage($this->translator->translate("errors.guild.notInGuild")); }
+      if($warning) {
+        $this->flashMessage($this->translator->translate("errors.guild.notInGuild"));
+      }
       $this->forward("noguild");
     }
   }
@@ -85,9 +87,13 @@ class GuildPresenter extends BasePresenter {
    * @return void
    */
   function renderView(int $id) {
-    if($id == 0) $this->forward("notfound");
+    if($id == 0) {
+      $this->forward("notfound");
+    }
     $data = $this->model->view($id);
-    if(!$data) $this->forward("notfound");
+    if(!$data) {
+      $this->forward("notfound");
+    }
     foreach($data as $key => $value) {
       $this->template->$key = $value;
     }
@@ -163,7 +169,9 @@ class GuildPresenter extends BasePresenter {
     $guilds = $this->model->listOfGuilds();
     $this->template->guilds = $guilds;
     $apps = $this->model->haveUnresolvedApplication();
-    if($apps) $this->flashMessage($this->translator->translate("messages.guild.unresolvedApplication"));
+    if($apps) {
+      $this->flashMessage($this->translator->translate("messages.guild.unresolvedApplication"));
+    }
   }
   
   /**

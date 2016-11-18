@@ -79,8 +79,11 @@ class PostofficeControl extends \Nette\Application\UI\Control {
   }
   
   protected function canShow($message) {
-    if($message->from == $this->user->id OR $message->to == $this->user->id) return true;
-    else return false;
+    if($message->from == $this->user->id OR $message->to == $this->user->id) {
+      return true;
+    } else {
+      return false;
+    }
   }
   
   /**
@@ -89,8 +92,12 @@ class PostofficeControl extends \Nette\Application\UI\Control {
    */
   function messageStatus(int $id): int {
     $message = $this->db->table("messages")->get($id);
-    if(!$message) return 0;
-    if(!$this->canShow($message)) return -1;
+    if(!$message) {
+      return 0;
+    }
+    if(!$this->canShow($message)) {
+      return -1;
+    }
     return 1;
   }
   
@@ -104,8 +111,12 @@ class PostofficeControl extends \Nette\Application\UI\Control {
    */
   function message(int $id): \stdClass {
     $message = $this->db->table("messages")->get($id);
-    if(!$message) throw new MessageNotFoundException;
-    if(!$this->canShow($message)) throw new CannotShowMessageException;
+    if(!$message) {
+      throw new MessageNotFoundException;
+    }
+    if(!$this->canShow($message)) {
+      throw new CannotShowMessageException;
+    }
     $from = $this->profileModel->getCharacterName($message->from);
     $to = $this->profileModel->getCharacterName($message->to);
     $return = (object) [

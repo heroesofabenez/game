@@ -44,7 +44,9 @@ class Team extends BaseEntity implements \ArrayAccess, \Countable, \IteratorAggr
    */
   function getIndex(int $id): int {
     foreach($this->items as $index => $member) {
-      if($member->id === $id) return $index;
+      if($member->id === $id) {
+        return $index;
+      }
     }
     return -1;
   }
@@ -57,7 +59,9 @@ class Team extends BaseEntity implements \ArrayAccess, \Countable, \IteratorAggr
    */
   function hasMember($id): bool {
     foreach($this->items as $member) {
-      if($member->id === $id) return true;
+      if($member->id === $id) {
+        return true;
+      }
     }
     return false;
   }
@@ -70,7 +74,9 @@ class Team extends BaseEntity implements \ArrayAccess, \Countable, \IteratorAggr
   function getActiveMembers(): array {
     $return = [];
     foreach($this->items as $member) {
-      if(!$member->stunned AND $member->hitpoints > 0) $return[] = $member;
+      if(!$member->stunned AND $member->hitpoints > 0) {
+        $return[] = $member;
+      }
     }
     return $return;
   }
@@ -83,7 +89,9 @@ class Team extends BaseEntity implements \ArrayAccess, \Countable, \IteratorAggr
   function getAliveMembers(): array {
     $return = [];
     foreach($this->items as $member) {
-      if($member->hitpoints > 0) $return[] = $member;
+      if($member->hitpoints > 0) {
+        $return[] = $member;
+      }
     }
     return $return;
   }
@@ -96,7 +104,9 @@ class Team extends BaseEntity implements \ArrayAccess, \Countable, \IteratorAggr
   function getUsableMembers(): array {
     $return = [];
     foreach($this->items as $index => $member) {
-      if(!$member->stunned AND $member->hitpoints > 0 AND !in_array($index, $this->used)) $return[] = $member;
+      if(!$member->stunned AND $member->hitpoints > 0 AND !in_array($index, $this->used)) {
+        $return[] = $member;
+      }
     }
     return $return;
   }

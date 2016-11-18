@@ -46,7 +46,9 @@ class Intro {
       ->where("race", $char->race)
       ->where("class", $char->occupation)
       ->where("part", $part);
-    if($intros->count() == 0) return "";
+    if($intros->count() == 0) {
+      return "";
+    }
     $intro = $intros->fetch();
     return $intro->text;
   }

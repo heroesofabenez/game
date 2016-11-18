@@ -71,8 +71,7 @@ class NPCShopControl extends \Nette\Application\UI\Control {
     $row = $this->db->table("shop_items")
       ->where("npc", $this->npc->id)
       ->where("item", $id);
-    if($row->count("*") > 0) return true;
-    else return false;
+    return $row->count("*") > 0;
   }
   
   /**

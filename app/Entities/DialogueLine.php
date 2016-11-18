@@ -23,7 +23,9 @@ class DialogueLine extends BaseEntity {
    */
   function __construct(string $speaker, string $text, array $names) {
     $speaker = strtolower($speaker);
-    if($speaker == "player" OR $speaker == "npc") $this->speaker = $speaker;
+    if($speaker == "player" OR $speaker == "npc") {
+      $this->speaker = $speaker;
+    }
     $this->text = $text;
     $this->names = $names;
   }
@@ -40,8 +42,11 @@ class DialogueLine extends BaseEntity {
    * @return string
    */
   function getSpeaker(): string {
-    if($this->speaker === "npc") return $this->names[0];
-    elseif($this->speaker === "player") return $this->names[1];
+    if($this->speaker === "npc") {
+      return $this->names[0];
+    } elseif($this->speaker === "player") {
+      return $this->names[1];
+    }
   }
 }
 ?>

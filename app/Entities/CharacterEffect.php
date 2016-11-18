@@ -28,13 +28,23 @@ class CharacterEffect extends BaseEntity {
   function __construct(array $effect) {
     $types = ["buff", "debuff", "stun"];
     $sources = ["pet", "skill", "equipment"];
-    if(!in_array($effect["type"], $types)) exit("Invalid value for \$type passed to method CharacterEffect::__construct.");
-    if(!in_array($effect["source"], $sources)) exit("Invalid value for \$source passed to method CharacterEffect::__construct.");
-    if(!in_array($effect["duration"], self::getDurations()) AND $effect["duration"] < 0) exit("Invalid value for \$duration passed to method CharacterEffect::__construct.");
+    if(!in_array($effect["type"], $types)) {
+      exit("Invalid value for \$type passed to method CharacterEffect::__construct.");
+    }
+    if(!in_array($effect["source"], $sources)) {
+      exit("Invalid value for \$source passed to method CharacterEffect::__construct.");
+    }
+    if(!in_array($effect["duration"], self::getDurations()) AND $effect["duration"] < 0) {
+      exit("Invalid value for \$duration passed to method CharacterEffect::__construct.");
+    }
     if($effect["type"] != "stun") {
       $stats = ["strength", "dexterity", "constitution", "intelligence", "charisma", "damage", "hit", "dodge", "initiative", "defense"];
-      if(!is_int($effect["value"])) exit("Invalid value for \$value passed to method CharacterEffect::__construct. Expected integer.");
-      if(!in_array($effect["stat"], $stats)) exit("Invalid value for \$stat passed to method CharacterEffect::__construct.");
+      if(!is_int($effect["value"])) {
+        exit("Invalid value for \$value passed to method CharacterEffect::__construct. Expected integer.");
+      }
+      if(!in_array($effect["stat"], $stats)) {
+        exit("Invalid value for \$stat passed to method CharacterEffect::__construct.");
+      }
       $this->stat = $effect["stat"];
       $this->value = $effect["value"];
     }
@@ -56,7 +66,9 @@ class CharacterEffect extends BaseEntity {
    * @throws \InvalidArgumentException
    */
   function setDuration($value) {
-    if(!is_int($value) AND !in_array($value, self::getDurations())) throw new \InvalidArgumentException("Invalid value set to CharacterEffect::\$duration. Expected string or integer.");
+    if(!is_int($value) AND !in_array($value, self::getDurations())) {
+      throw new \InvalidArgumentException("Invalid value set to CharacterEffect::\$duration. Expected string or integer.");
+    }
     $this->duration = $value;
   }
 }

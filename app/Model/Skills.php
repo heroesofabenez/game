@@ -65,13 +65,20 @@ class Skills {
    * @return CharacterSkillAttack|bool
    */
   function getCharacterAttackSkill(int $skillId, int $userId = 0) {
-    if($userId === 0) $userId = $this->user->id;
+    if($userId === 0) {
+      $userId = $this->user->id;
+    }
     $skill = $this->getAttackSkill($skillId);
-    if(!$skill) return false;
-    $level = 0;
+    if(!$skill) {
+      return false;
+    }
     $where = ["character" => $userId, "skill" => $skillId];
     $result = $this->db->query("SELECT * FROM character_attack_skills WHERE ?", $where)->fetch();
-    if($result) $level = $result->level;
+    if($result) {
+      $level = $result->level;
+    } else {
+      $level = 0;
+    }
     return new CharacterSkillAttack($skill, $level);
   }
   
@@ -109,13 +116,20 @@ class Skills {
    * @return CharacterSkillSpecial|bool
    */
   function getCharacterSpecialSkill(int $skillId, int $userId = 0) {
-    if($userId === 0) $userId = $this->user->id;
+    if($userId === 0) {
+      $userId = $this->user->id;
+    }
     $skill = $this->getSpecialSkill($skillId);
-    if(!$skill) return false;
-    $level = 0;
+    if(!$skill) {
+      return false;
+    }
     $where = ["character" => $userId, "skill" => $skillId];
     $result = $this->db->query("SELECT * FROM character_special_skills WHERE ?", $where)->fetch();
-    if($result) $level = $result->level;
+    if($result) {
+      $level = $result->level;
+    } else {
+      $level = 0;
+    }
     return new CharacterSkillSpecial($skill, $level);
   }
   
@@ -127,11 +141,18 @@ class Skills {
     $skills = array_merge($this->getListOfAttackSkills(), $this->getListOfSpecialSkills());
     $char = $this->db->table("characters")->get($this->user->id);
     foreach($skills as $skill) {
-      if($skill->needed_class != $char->occupation) continue;
-      elseif($skill->needed_specialization AND $skill->needed_specialization != $char->specialization) continue;
-      elseif($skill->needed_level > $char->level) continue;
-      if($skill instanceof SkillAttack) $return[] = $this->getCharacterAttackSkill($skill->id);
-      elseif($skill instanceof SkillSpecial) $return[] = $this->getCharacterSpecialSkill($skill->id);
+      if($skill->needed_class != $char->occupation) {
+        continue;
+      } elseif($skill->needed_specialization AND $skill->needed_specialization != $char->specialization) {
+        continue;
+      } elseif($skill->needed_level > $char->level) {
+        continue;
+      }
+      if($skill instanceof SkillAttack) {
+        $return[] = $this->getCharacterAttackSkill($skill->id);
+      } elseif($skill instanceof SkillSpecial) {
+        $return[] = $this->getCharacterSpecialSkill($skill->id);
+      }
     }
     return $return;
   }
@@ -145,12 +166,21 @@ class Skills {
     $skills = array_merge($this->getListOfAttackSkills(), $this->getListOfSpecialSkills());
     $char = $this->db->table("characters")->get($uid);
     foreach($skills as $skill) {
-      if($skill->needed_class != $char->occupation) continue;
-      elseif($skill->needed_specialization AND $skill->needed_specialization != $char->specialization) continue;
-      elseif($skill->needed_level > $char->level) continue;
-      if($skill instanceof SkillAttack) $s = $this->getCharacterAttackSkill($skill->id, $uid);
-      elseif($skill instanceof SkillSpecial) $s = $this->getCharacterSpecialSkill($skill->id, $uid);
-      if($s->level) $return[] = $s;
+      if($skill->needed_class != $char->occupation) {
+        continue;
+      } elseif($skill->needed_specialization AND $skill->needed_specialization != $char->specialization) {
+        continue;
+      } elseif($skill->needed_level > $char->level) {
+        continue;
+      }
+      if($skill instanceof SkillAttack) {
+        $s = $this->getCharacterAttackSkill($skill->id, $uid);
+      } elseif($skill instanceof SkillSpecial) {
+        $s = $this->getCharacterSpecialSkill($skill->id, $uid);
+      }
+      if($s->level) {
+        $return[] = $s;
+      }
     }
     return $return;
   }
@@ -177,16 +207,26 @@ class Skills {
    * @throws CannotLearnSkillException
    */
   function trainSkill(int $id, string $type) {
-    if(!in_array($type, ["attack", "special"])) throw new InvalidSkillTypeException;
-    elseif($this->getSkillPoints() < 1) throw new NoSkillPointsAvailableException;
+    if(!in_array($type, ["attack", "special"])) {
+      throw new InvalidSkillTypeException;
+    } elseif($this->getSkillPoints() < 1) {
+      throw new NoSkillPointsAvailableException;
+    }
     $method = "getCharacter" . ucfirst($type) . "Skill";
     $skill = $this->$method($id);
-    if(!$skill) throw new SkillNotFoundException;
-    elseif($skill->level +1 > $skill->skill->levels) throw new SkillMaxLevelReachedException;
+    if(!$skill) {
+      throw new SkillNotFoundException;
+    } elseif($skill->level +1 > $skill->skill->levels) {
+      throw new SkillMaxLevelReachedException;
+    }
     $char = $this->db->table("characters")->get($this->user->id);
-    if($skill->skill->needed_class != $char->occupation) throw new CannotLearnSkillException;
-    elseif($skill->skill->needed_specialization AND $skill->skill->needed_specialization != $char->specialization) throw new CannotLearnSkillException;
-    elseif($skill->skill->needed_level > $char->level) throw new CannotLearnSkillException;
+    if($skill->skill->needed_class != $char->occupation) {
+      throw new CannotLearnSkillException;
+    } elseif($skill->skill->needed_specialization AND $skill->skill->needed_specialization != $char->specialization) {
+      throw new CannotLearnSkillException;
+    } elseif($skill->skill->needed_level > $char->level) {
+      throw new CannotLearnSkillException;
+    }
     $data1 = "skill_points=skill_points-1";
     $where1 = ["id" => $this->user->id];
     $this->db->query("UPDATE characters SET $data1 WHERE ?", $where1);

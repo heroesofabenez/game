@@ -37,7 +37,9 @@ class PromoteCommand extends \HeroesofAbenez\Entities\ChatCommand {
    */
   function execute(): string {
     $id = Arrays::get(func_get_args(), 0, "");
-    if($id === "" OR !is_numeric($id)) return "";
+    if($id === "" OR !is_numeric($id)) {
+      return "";
+    }
     try {
       $this->model->promote((int) $id);
       $message = $this->translator->translate("messages.guild.promoted");

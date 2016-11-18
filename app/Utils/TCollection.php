@@ -61,7 +61,9 @@ trait TCollection {
    * @throws InvalidArgumentException
    */
   function offsetSet($index, $member) {
-    if(!$member instanceof $this->class) throw new InvalidArgumentException("Argument must be of $this->class type.");
+    if(!$member instanceof $this->class) {
+      throw new InvalidArgumentException("Argument must be of $this->class type.");
+    }
     if($index === NULL) {
       $this->items[] = $member;
     } elseif($index < 0 OR $index >= count($this->items)) {

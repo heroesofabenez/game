@@ -27,7 +27,9 @@ class ProfilePresenter extends BasePresenter {
    */
   function renderView(int $id) {
     $data = $this->model->view($id);
-    if(!$data) $this->forward("notfound");
+    if(!$data) {
+      $this->forward("notfound");
+    }
     foreach($data as $key => $value) {
       if($key == "guild" AND is_int($value)) {
         $this->template->guildId = $value;

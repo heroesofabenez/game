@@ -85,7 +85,7 @@ class TavernPresenter extends BasePresenter {
     $form = new Form;
     $form->setTranslator($this->translator);
     $form->addText("message")
-         ->setRequired("forms.tavernNewMessage.messageField.error");
+      ->setRequired("forms.tavernNewMessage.messageField.error");
     $form->addSubmit("send", "forms.tavernNewMessage.sendButton.label");
     $form->onSuccess[] = [$this, "newMessageSucceeded"];
     return $form;
@@ -102,15 +102,15 @@ class TavernPresenter extends BasePresenter {
       case "guild":
         $factory = $this->context->getByType(Chat\GuildChatControlFactory::class);
         $chat = $this->createComponentGuildChat($factory);
-  break;
+        break;
       case "local":
         $factory = $this->context->getByType(Chat\LocalChatControlFactory::class);
         $chat = $this->createComponentLocalChat($factory);
-  break;
+        break;
       case "global":
         $factory = $this->context->getByType(Chat\GlobalChatControlFactory::class);
         $chat = $this->createComponentGlobalChat($factory);
-  break;
+        break;
     }
     $this->addComponent($chat, "chat");
     $chat->newMessage($values["message"]);

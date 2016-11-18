@@ -64,9 +64,13 @@ class NPCQuestsControl extends \Nette\Application\UI\Control {
         }
       }
       if($quest->needed_level > 0) {
-        if($this->user->identity->level < $quest->needed_level) unset($return[$key]);
+        if($this->user->identity->level < $quest->needed_level) {
+          unset($return[$key]);
+        }
       } elseif($quest->needed_quest > 0) {
-        if(!$this->questModel->isFinished($quest->id)) unset($return[$key]);
+        if(!$this->questModel->isFinished($quest->id)) {
+          unset($return[$key]);
+        }
       }
     }
     return $return;
@@ -90,7 +94,9 @@ class NPCQuestsControl extends \Nette\Application\UI\Control {
    */
   function handleAccept(int $questId) {
     $quest = $this->questModel->view($questId);
-    if(!$quest) $this->presenter->forward("notfound");
+    if(!$quest) {
+      $this->presenter->forward("notfound");
+    }
     $status = $this->questModel->status($questId);
     if($status > 0) {
       $this->presenter->flashMessage($this->translator->translate("errors.quest.workingOn"));
@@ -118,7 +124,9 @@ class NPCQuestsControl extends \Nette\Application\UI\Control {
     $haveMoney = $haveItem = false;
     if($quest->cost_money > 0) {
       $char = $this->db->table("characters")->get($this->user->id);
-      if($char->money >= $quest->cost_money) $haveMoney = true;
+      if($char->money >= $quest->cost_money) {
+        $haveMoney = true;
+      }
     } else {
       $haveMoney = true;
     }
@@ -138,7 +146,9 @@ class NPCQuestsControl extends \Nette\Application\UI\Control {
    */
   function handleFinish(int $questId) {
     $quest = $this->questModel->view($questId);
-    if(!$quest) $this->presenter->forward("notfound");
+    if(!$quest) {
+      $this->presenter->forward("notfound");
+    }
     $status = $this->questModel->status($questId);
     if($status === 0) {
       $this->presenter->flashMessage($this->translator->translate("errors.quest.notWorkingOn"));
@@ -160,12 +170,17 @@ class NPCQuestsControl extends \Nette\Application\UI\Control {
     if($quest->item_lose) {
       $this->itemModel->loseItem($quest->needed_item, $quest->item_amount);
     }
-    if($quest->cost_money > 0) $data3 = "money=money-{$quest->cost_money}";
-    else $data3 = "money=money+{$quest->reward_money}";
+    if($quest->cost_money > 0) {
+      $data3 = "money=money-{$quest->cost_money}";
+    } else {
+      $data3 = "money=money+{$quest->reward_money}";
+    }
     $data3 .= ", experience=experience+{$quest->reward_xp}";
     $where3 = ["id" => $this->user->id];
     $this->db->query("UPDATE characters SET $data3 WHERE ?", $where3);
-    if($quest->reward_item > 0) $this->itemModel->giveItem($quest->reward_item);
+    if($quest->reward_item > 0) {
+      $this->itemModel->giveItem($quest->reward_item);
+    }
     $this->presenter->flashMessage($this->translator->translate("messages.quest.finished"));
     $this->presenter->redirect("Quest:view", $quest->id);
   }

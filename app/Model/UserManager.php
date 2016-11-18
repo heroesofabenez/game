@@ -60,9 +60,13 @@ class UserManager implements NS\IAuthenticator {
    */
   function authenticate(array $credentials): NS\Identity {
     $uid = $this->getRealId();
-    if($uid == 0) return new NS\Identity(0, "guest");
+    if($uid == 0) {
+      return new NS\Identity(0, "guest");
+    }
     $chars = $this->db->table("characters")->where("owner", $uid);
-    if($chars->count() == 0) return new NS\Identity(-1, "guest");
+    if($chars->count() == 0) {
+      return new NS\Identity(-1, "guest");
+    }
     $char = $chars->fetch();
     $data = [
       "name" => $char->name, "race" => $char->race, "gender" => $char->gender,
@@ -72,8 +76,9 @@ class UserManager implements NS\IAuthenticator {
     ];
     if($char->guild > 0) {
       $role = $this->permissionsModel->getRoleName($char->guildrank);
+    } else {
+      $role = "player";
     }
-    else $role = "player";
     return new NS\Identity($char->id, $role, $data);
   }
   
@@ -89,7 +94,9 @@ class UserManager implements NS\IAuthenticator {
       "occupation" => $values["class"], "gender" => $values["gender"]
     ];
     $chars = $this->db->table("characters")->where("name", $data["name"]);
-    if($chars->count() > 0) return false;
+    if($chars->count() > 0) {
+      return false;
+    }
     
     $race = $this->profileModel->getRace($values["race"]);
     $class = $this->profileModel->getClass($values["class"]);
@@ -103,8 +110,11 @@ class UserManager implements NS\IAuthenticator {
     
     $data["class"] = $values["class"];
     $data["race"] = $values["race"];
-    if($data["gender"]  == 1) $data["gender"] = "male";
-    else $data["gender"] = "female";
+    if($data["gender"]  == 1) {
+      $data["gender"] = "male";
+    } else {
+      $data["gender"] = "female";
+    }
     unset($data["occupation"]);
     return $data;
   }

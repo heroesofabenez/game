@@ -20,7 +20,9 @@ $configurator->addParameters([
 $container = $configurator->createContainer();
 
 $user = $container->getService("security.user");
-if(!$user->isLoggedIn()) $user->login();
+if(!$user->isLoggedIn()) {
+  $user->login();
+}
 if($user->id === 0) {
   echo "Cannot login. Exiting.";
   exit(255);

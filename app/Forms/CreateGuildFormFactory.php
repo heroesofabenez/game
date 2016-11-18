@@ -26,11 +26,11 @@ class CreateGuildFormFactory extends BaseFormFactory {
   function create(): Form {
     $form = parent::createBase();
     $form->addText("name", "forms.createGuild.nameField.label")
-         ->setRequired("forms.createGuild.nameField.empty")
-         ->addRule(Form::MAX_LENGTH, "forms.createGuild.nameField.error", 20);
+      ->setRequired("forms.createGuild.nameField.empty")
+      ->addRule(Form::MAX_LENGTH, "forms.createGuild.nameField.error", 20);
     $form->addTextArea("description", "forms.createGuild.descriptionField.label")
-         ->addRule(Form::MAX_LENGTH, "forms.createGuild.descriptionField.error", 200)
-         ->setRequired();
+      ->addRule(Form::MAX_LENGTH, "forms.createGuild.descriptionField.error", 200)
+      ->setRequired();
     $form->addSubmit("create", "forms.createGuild.createButton.label");
     $form->onSuccess[] = [$this, "submitted"];
     return $form;

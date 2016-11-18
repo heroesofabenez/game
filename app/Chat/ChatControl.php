@@ -31,6 +31,7 @@ abstract class ChatControl extends \Nette\Application\UI\Control {
   /**
    * @param \Nette\Database\Context $db
    * @param \Nette\Security\User $user
+   * @param ChatCommandsProcessor  $processor
    * @param string $table
    * @param string $param 
    * @param int $id
@@ -41,13 +42,25 @@ abstract class ChatControl extends \Nette\Application\UI\Control {
     $this->db = $db;
     $this->user = $user;
     $this->processor = $processor;
-    if(is_string($table)) $this->table = $table;
-    if(is_string($param)) $this->param = $param;
-    if($param2 === NULL) $this->param2 = $param;
-    else $this->param2 = $param2;
-    if($id2 === NULL) $this->id2 = $id;
-    else $this->id2 = $id2;
-    if(is_int($id)) $this->id = $id;
+    if(is_string($table)) {
+      $this->table = $table;
+    }
+    if(is_string($param)) {
+      $this->param = $param;
+    }
+    if($param2 === NULL) {
+      $this->param2 = $param;
+    } else {
+      $this->param2 = $param2;
+    }
+    if($id2 === NULL) {
+      $this->id2 = $id;
+    } else {
+      $this->id2 = $id2;
+    }
+    if(is_int($id)) {
+      $this->id = $id;
+    }
   }
   
   /**

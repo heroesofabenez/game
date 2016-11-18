@@ -77,8 +77,11 @@ class Profile {
    */
   function getRaceName(int $id): string {
     $race = $this->getRace($id);
-    if(!$race) return "";
-    else return $race->name;
+    if(!$race) {
+      return "";
+    } else {
+      return $race->name;
+    }
   }
   
   /**
@@ -119,8 +122,11 @@ class Profile {
    */
   function getClassName(int $id): string {
     $class = $this->getClass($id);
-    if(!$class) return "";
-    else return $class->name;
+    if(!$class) {
+      return "";
+    } else {
+      return $class->name;
+    }
   }
   
   /**
@@ -161,8 +167,11 @@ class Profile {
    */
   function getSpecializationName(int $id): string {
     $race = $this->getSpecialization($id);
-    if(!$race) return "";
-    else return $race->name;
+    if(!$race) {
+      return "";
+    } else {
+      return $race->name;
+    }
   }
   
   /**
@@ -197,7 +206,9 @@ class Profile {
   function getCharacterId(string $name): int {
     $characters = $this->getCharacters();
     foreach($characters as $char) {
-      if($char->name == $name) return $char->id;
+      if($char->name == $name) {
+        return $char->id;
+      }
     }
     return 0;
   }
@@ -221,8 +232,11 @@ class Profile {
    */
   function getCharacterGuild(int $id): int {
     $char = $this->db->table("characters")->get($id);
-    if(!$char) return 0;
-    return $char->guild;
+    if(!$char) {
+      return 0;
+    } else {
+      return $char->guild;
+    }
   }
   
   /**
@@ -273,9 +287,14 @@ class Profile {
    */
   function levelUp() {
     $character = $this->db->table("characters")->get($this->user->id);
-    if($character->experience < $this->getLevelsRequirements()[$character->level + 1]) throw new NotEnoughExperiencesException;
-    if($character->specialization) $class = $this->getSpecialization($character->specialization);
-    else $class = $this->getClass($character->occupation);
+    if($character->experience < $this->getLevelsRequirements()[$character->level + 1]) {
+      throw new NotEnoughExperiencesException;
+    }
+    if($character->specialization) {
+      $class = $this->getSpecialization($character->specialization);
+    } else {
+      $class = $this->getClass($character->occupation);
+    }
     $data = "level=level+1, stat_points=stat_points+$class->stat_points_level, skill_points=skill_points+1";
     foreach($this->stats as $stat) {
       $grow = $class->{$stat . "_grow"};
@@ -317,8 +336,11 @@ class Profile {
    * @throws NoStatPointsAvailableException
    */
   function trainStat(string $stat) {
-    if(!in_array($stat, $this->stats)) throw new InvalidStatException;
-    elseif($this->getStatPoints() < 1) throw new NoStatPointsAvailableException;
+    if(!in_array($stat, $this->stats)) {
+      throw new InvalidStatException;
+    } elseif($this->getStatPoints() < 1) {
+      throw new NoStatPointsAvailableException;
+    }
     $data = "$stat=$stat+1, stat_points=stat_points-1";
     $where = ["id" => $this->user->id];
     $this->db->query("UPDATE characters SET $data WHERE ?", $where);

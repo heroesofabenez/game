@@ -131,8 +131,11 @@ class CombatHelper {
    */
   function getNumberOfTodayArenaFights(int $uid): int {
     $rows = $this->db->table("arena_fights_count")->where("character=? AND day=?", [$uid, date("d.m.Y")]);
-    if(!$rows->count()) return 0;
-    else return $rows->fetch()->amount;
+    if(!$rows->count()) {
+      return 0;
+    } else {
+      return $rows->fetch()->amount;
+    }
   }
   
   /**

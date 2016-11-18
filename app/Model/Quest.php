@@ -52,7 +52,9 @@ class Quest {
     }
     if($npc > 0) {
       foreach($return as $quest) {
-        if($quest->npc_start != $npc OR $quest->npc_end != $npc) unset($return[$quest->id]);
+        if($quest->npc_start != $npc OR $quest->npc_end != $npc) {
+          unset($return[$quest->id]);
+        }
       }
     }
     return $return;
@@ -80,7 +82,9 @@ class Quest {
     $row = $this->db->table("character_quests")
       ->where("character", $this->user->id)
       ->where("quest", $id);
-    if($row->count() === 0) return 0;
+    if($row->count() === 0) {
+      return 0;
+    }
     $r = $row->fetch();
     return $r->progress;
   }
@@ -93,8 +97,7 @@ class Quest {
    */
   function isFinished(int $id): bool {
     $status = $this->status($id);
-    if($status > 2) return true;
-    else return false;
+    return ($status > 2);
   }
 }
 ?>

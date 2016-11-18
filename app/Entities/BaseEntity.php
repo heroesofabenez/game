@@ -22,8 +22,11 @@ abstract class BaseEntity {
     $class = get_class($this);
     $rc = new \ReflectionClass($class);
     $method = "get" . ucfirst($name);
-    if($rc->hasMethod($method)) return $this->$method();
-    elseif($rc->hasProperty($name)) return $this->$name;
+    if($rc->hasMethod($method)) {
+      return $this->$method();
+    } elseif($rc->hasProperty($name)) {
+      return $this->$name;
+    }
     throw new \Nette\MemberAccessException("Cannot read property $class::\$$name.");
   }
   
@@ -38,8 +41,11 @@ abstract class BaseEntity {
     $class = get_class($this);
     $rc = new \ReflectionClass($class);
     $method = "set" . ucfirst($name);
-    if($rc->hasMethod($method)) call_user_func([$this, $method], $value);
-    else throw new \Nette\MemberAccessException("Cannot write to property $class::\$$name.");
+    if($rc->hasMethod($method)) {
+      call_user_func([$this, $method], $value);
+    } else {
+      throw new \Nette\MemberAccessException("Cannot write to property $class::\$$name.");
+    }
   }
   
   /**

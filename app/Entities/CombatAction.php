@@ -34,7 +34,9 @@ class CombatAction extends BaseEntity {
    */
   function __construct(string $action, bool $result, Character $character1, Character $character2, $amount = 0, $name = "") {
     $actions = ["attack", "skill_attack", "skill_special", "healing"];
-    if(!in_array($action, $actions)) exit("Invalid value for action passed to CombatAction::__construct.");
+    if(!in_array($action, $actions)) {
+      exit("Invalid value for action passed to CombatAction::__construct.");
+    }
     $this->action = $action;
     $this->result = (bool) $result;
     $this->amount = (int) $amount;
@@ -62,12 +64,18 @@ class CombatAction extends BaseEntity {
         }
         break;
       case "skill_special":
-        if($this->result) $text .= "successfully casts $this->name on {$this->character2->name}.";
-        else $text .= "tries to cast $this->name on {$this->character2->name} but fails.";
+        if($this->result) {
+          $text .= "successfully casts $this->name on {$this->character2->name}.";
+        } else {
+          $text .= "tries to cast $this->name on {$this->character2->name} but fails.";
+        }
         break;
       case "healing":
-        if($this->result) $text .= "heals {$this->character2->name} for $this->amount hitpoint(s).";
-        else $text .= "tries to heal {$this->character2->name} but fails.";
+        if($this->result) {
+          $text .= "heals {$this->character2->name} for $this->amount hitpoint(s).";
+        } else {
+          $text .= "tries to heal {$this->character2->name} but fails.";
+        }
         break;
     }
     $this->message =  $text;

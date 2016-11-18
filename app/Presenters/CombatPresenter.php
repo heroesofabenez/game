@@ -18,7 +18,9 @@ class CombatPresenter extends BasePresenter {
    */
   function actionView(int $id) {
     $combat = $this->log->read($id);
-    if(!$combat) $this->forward("notfound");
+    if(!$combat) {
+      $this->forward("notfound");
+    }
     $this->template->log = $combat->text;
   }
 }

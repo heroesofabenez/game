@@ -23,6 +23,7 @@ class HomepagePresenter extends BasePresenter {
     $this->model = $locationModel;
     $this->model->user = $user;
     $this->model->npcModel = $npcModel;
+    parent::__construct();
   }
   
   /**
