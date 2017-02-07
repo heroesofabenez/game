@@ -49,11 +49,21 @@ class NPCDialogueControl extends \Nette\Application\UI\Control {
    * @todo make it depend on player's identity and npc   
    */
   protected function getTexts(): array {
-    $texts = [
+    $texts = [];
+    $texts[] = [
       ["npc", "Greetings, #playerName#. Can I help you with anything?"],
-      ["player", "Hail, #npcName#. Not now but thank you."]
+      ["player", "Hail, #npcName#. Not now but thank you."],
     ];
-    return $texts;
+    $texts[] = [
+      ["npc", "Hail, #playerName#. I am quite busy at the moment. Can you come some other time?"],
+      ["player", "Of course."],
+    ];
+    $texts[] = [
+      ["npc", "Oh, #playerName#, long time one see. How are you doing?"],
+      ["player", "Hail, #npcName#. I am fine and you?"],
+      ["npc", "Everything is alright here."],
+    ];
+    return $texts[rand(0, count($texts) - 1)];
   }
   
   /**
