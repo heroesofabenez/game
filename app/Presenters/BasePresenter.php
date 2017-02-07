@@ -11,6 +11,8 @@ namespace HeroesofAbenez\Presenters;
 abstract class BasePresenter extends \Nette\Application\UI\Presenter {
   /** @var \Kdyby\Translation\Translator @autowire */
   protected $translator;
+  /** @var  \HeroesofAbenez\Model\SettingsRepository @autowire */
+  protected $sr;
   
   use \Kdyby\Autowired\AutowireProperties;
   use \Kdyby\Autowired\AutowireComponentFactories;
@@ -23,7 +25,7 @@ abstract class BasePresenter extends \Nette\Application\UI\Presenter {
   protected function startup() {
     parent::startup();
     $this->tryLogin();
-    $this->template->server = $this->context->parameters["application"]["server"];
+    $this->template->server = $this->sr->settings["application"]["server"];
   }
   
   /**

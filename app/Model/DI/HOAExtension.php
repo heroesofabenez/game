@@ -13,7 +13,10 @@ use HeroesofAbenez;
 class HOAExtension extends \Nette\DI\CompilerExtension {
   protected $defaults = [
     "devServers" => [
-      "localhost", "hoa.local"
+      "localhost", "hoa.local",
+    ],
+    "application" => [
+      "server" => "",
     ]
   ];
   
@@ -37,6 +40,8 @@ class HOAExtension extends \Nette\DI\CompilerExtension {
   protected function addModels() {
     $builder = $this->getContainerBuilder();
     $config = $this->getConfig($this->defaults);
+    $builder->addDefinition($this->prefix("model.settingsRepository"))
+      ->setFactory(HeroesofAbenez\Model\SettingsRepository::class, [$config]);
     $builder->addDefinition($this->prefix("model.equipment"))
       ->setClass(HeroesofAbenez\Model\Equipment::class);
     $builder->addDefinition($this->prefix("model.guild"))
@@ -68,7 +73,7 @@ class HOAExtension extends \Nette\DI\CompilerExtension {
     $builder->addDefinition($this->prefix("model.skills"))
       ->setClass(HeroesofAbenez\Model\Skills::class);
     $builder->addDefinition($this->prefix("model.userManager"))
-      ->setFactory(HeroesofAbenez\Model\UserManager::class, [$config["devServers"]]);
+      ->setClass(HeroesofAbenez\Model\UserManager::class);
     $builder->addDefinition("cache.cache")
       ->setFactory(\Nette\Caching\Cache::class, ["@cache.storage", "data"]);
     $builder->addDefinition($this->prefix("model.authorizator"))

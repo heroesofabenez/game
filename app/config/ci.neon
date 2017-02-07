@@ -2,9 +2,6 @@ tracy:
     email: "jakub.konecny2@centrum.cz"
 extensions:
     fakeSession: Kdyby\FakeSession\DI\FakeSessionExtension
-parameters:
-    application:
-        server: sTest
 database:
     default:
         dsn: "mysql:host=mysql;dbname=heroesofabenez"
@@ -12,3 +9,6 @@ database:
         password: root
 php:
     date.timezone: Europe/Prague
+hoa:
+    application:
+        server: sTest

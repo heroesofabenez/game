@@ -23,16 +23,16 @@ class UserManager implements NS\IAuthenticator {
   protected $devServers;
   
   /**
-   * @param array $devServers
    * @param \Nette\Database\Context $db
-   * @param \HeroesofAbenez\Model\Permissions $permissionsModel
-   * @param \HeroesofAbenez\Model\Profile $profileModel
+   * @param Permissions $permissionsModel
+   * @param Profile $profileModel
+   * @param SettingsRepository $sr
    */
-  function __construct(array $devServers, \Nette\Database\Context $db, Permissions $permissionsModel, Profile $profileModel) {
+  function __construct(\Nette\Database\Context $db, Permissions $permissionsModel, Profile $profileModel, SettingsRepository $sr) {
     $this->db = $db;
     $this->permissionsModel = $permissionsModel;
     $this->profileModel = $profileModel;
-    $this->devServers = $devServers;
+    $this->devServers = $sr->settings["devServers"];
   }
   
   /**
