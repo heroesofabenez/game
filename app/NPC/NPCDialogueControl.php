@@ -67,17 +67,6 @@ class NPCDialogueControl extends \Nette\Application\UI\Control {
   }
   
   /**
-   * Adds new line
-   * 
-   * @param string $speaker
-   * @param string $text
-   * @return DialogueLine
-   */
-  function newLine(string $speaker, string $text): DialogueLine {
-    return new DialogueLine($speaker, $text, $this->names);
-  }
-  
-  /**
    * @return void
    */
   function render() {
@@ -86,7 +75,7 @@ class NPCDialogueControl extends \Nette\Application\UI\Control {
     $this->template->texts = [];
     $texts = $this->getTexts();
     foreach($texts as $text) {
-      $this->template->texts[] = $this->newLine($text[0], $text[1]);
+      $this->template->texts[] = new DialogueLine($text[0], $text[1], $this->names);
     }
     $this->template->render();
   }
