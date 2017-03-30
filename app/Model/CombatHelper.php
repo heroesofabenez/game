@@ -41,8 +41,11 @@ class CombatHelper {
    */
   function getInitiativeFormula(int $classId): string {
     $class = $this->profileModel->getClass($classId);
-    if(!$class) return "0";
-    else return $class->initiative;
+    if(!$class) {
+      return "0";
+    } else {
+      return $class->initiative;
+    }
   }
   
   /**
@@ -59,7 +62,9 @@ class CombatHelper {
     }
     $data["initiative_formula"] = $this->getInitiativeFormula($data["occupation"]);
     $pets = $equipment = [];
-    if($data["pet"]) $pets[] = $data["pet"];
+    if($data["pet"]) {
+      $pets[] = $data["pet"];
+    }
     unset($data["pet"]);
     $equipmentRows = $this->db->table("character_equipment")
       ->where("character", $id)
@@ -80,7 +85,9 @@ class CombatHelper {
    * @return void
    */
   protected function getArenaNpcSkillsLevels(array $data, array &$skills): void {
-    if($data["level"] < 2) $skills = [$skills[0]];
+    if($data["level"] < 2) {
+      $skills = [$skills[0]];
+    }
     $skillPoints = $data["level"];
     for($i = 1; $skillPoints > 0; $i++) {
       foreach($skills as $skill) {
@@ -100,7 +107,9 @@ class CombatHelper {
    */
   function getArenaNpc($id): Character {
     $row = (array) $this->db->query("SELECT * FROM pve_arena_opponents WHERE id=$id")->fetch();
-    if(count($row) === 1) throw new OpponentNotFoundException;
+    if(count($row) === 1) {
+      throw new OpponentNotFoundException;
+    }
     $row["id"] = "pveArenaNpc" . $row["id"];
     $row["initiative_formula"] = $this->getInitiativeFormula($row["occupation"]);
     $skills = $equipment = [];
