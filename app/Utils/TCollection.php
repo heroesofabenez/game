@@ -3,8 +3,7 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Utils;
 
-use HeroesofAbenez\Entities\Character,
-    Nette\OutOfRangeException,
+use Nette\OutOfRangeException,
     Nette\InvalidArgumentException;
 
 /**
@@ -43,7 +42,6 @@ trait TCollection {
   
   /**
    * @param int $index
-   * @return Character
    * @throws OutOfRangeException
    */
   function offsetGet($index) {
