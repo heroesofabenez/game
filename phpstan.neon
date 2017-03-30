@@ -4,7 +4,7 @@ parameters:
     universalObjectCratesClasses:
         - Nette\Security\IIdentity
     earlyTerminatingMethodCalls:
-        Nette\Application\UI\Control:
+        Nette\Application\UI\Presenter:
             - forward
     ignoreErrors:
         - "#Casting to [a-z\\_]+ something that's already [a-z\\_]+#"
