@@ -25,7 +25,7 @@ class ChatCommandsProcessor {
    * @return void
    * @throws CommandNameAlreadyUsedException
    */
-  function addCommand(ChatCommand $command) {
+  function addCommand(ChatCommand $command): void {
     if($this->hasCommand($command->name)) {
       throw new CommandNameAlreadyUsedException("Command $command->name is already defined.");
     }
@@ -41,7 +41,7 @@ class ChatCommandsProcessor {
    * @throws CommandNotFoundException
    * @throws CommandNameAlreadyUsedException
    */
-  function addAlias(string $oldName, string $newName) {
+  function addAlias(string $oldName, string $newName): void {
     try {
       $command = $this->getCommand($oldName);
     } catch(CommandNotFoundException $e) {

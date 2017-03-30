@@ -31,7 +31,7 @@ class JournalPresenter extends BasePresenter {
   /**
    * @return void
    */
-  function renderDefault() {
+  function renderDefault(): void {
     $stats = $this->model->basic();
     foreach($stats as $key => $value) {
       $this->template->$key = $value;
@@ -42,7 +42,7 @@ class JournalPresenter extends BasePresenter {
   /**
    * @return void
    */
-  function renderInventory() {
+  function renderInventory(): void {
     $inventory = $this->model->inventory();
     foreach($inventory as $key => $value) {
       $this->template->$key = $value;
@@ -52,14 +52,14 @@ class JournalPresenter extends BasePresenter {
   /**
    * @return void
    */
-  function renderQuests() {
+  function renderQuests(): void {
     $this->template->quests = $this->model->quests();
   }
   
   /**
    * @return void
    */
-  function renderPets() {
+  function renderPets(): void {
     $this->template->pets = $this->model->pets();
   }
   
@@ -67,7 +67,7 @@ class JournalPresenter extends BasePresenter {
    * @param int $itemId
    * @return void
    */
-  function handleEquipItem(int $itemId) {
+  function handleEquipItem(int $itemId): void {
     try {
       $this->equipmentModel->equipItem($itemId);
     } catch(ItemNotFoundException $e) {
@@ -84,7 +84,7 @@ class JournalPresenter extends BasePresenter {
    * @param int $itemId
    * @return void
    */
-  function handleUnequipItem(int $itemId) {
+  function handleUnequipItem(int $itemId): void {
     try {
       $this->equipmentModel->unequipItem($itemId);
       $this->flashMessage($this->translator->translate("errors.equipment.unequiped"));
@@ -101,7 +101,7 @@ class JournalPresenter extends BasePresenter {
   /**
    * @return void
    */
-  function handleLevelUp() {
+  function handleLevelUp(): void {
     $this->profileModel->user = $this->user;
     try {
       $this->profileModel->levelUp();
@@ -116,7 +116,7 @@ class JournalPresenter extends BasePresenter {
    * @param int $petId
    * @return void
    */
-  function handleDeployPet(int $petId) {
+  function handleDeployPet(int $petId): void {
     try {
       $this->petModel->user = $this->user;
       $this->petModel->deployPet($petId);
@@ -134,7 +134,7 @@ class JournalPresenter extends BasePresenter {
    * @param int $petId
    * @return void
    */
-  function handleDiscardPet(int $petId) {
+  function handleDiscardPet(int $petId): void {
     try {
       $this->petModel->user = $this->user;
       $this->petModel->discardPet($petId);

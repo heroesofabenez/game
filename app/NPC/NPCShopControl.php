@@ -53,7 +53,7 @@ class NPCShopControl extends \Nette\Application\UI\Control {
   /**
    * @return void
    */
-  function render() {
+  function render(): void {
     $template = $this->template;
     $template->setFile(__DIR__ . "/npcShop.latte");
     $template->npcId = $this->npc->id;
@@ -80,7 +80,7 @@ class NPCShopControl extends \Nette\Application\UI\Control {
    * @param int $itemId Item's id
    * @return void
    */
-  function handleBuy(int $itemId) {
+  function handleBuy(int $itemId): void {
     $item = $this->itemModel->view($itemId);
     if(!$item) {
       $this->presenter->flashMessage($this->translator->translate("errors.shop.itemDoesNotExist"));

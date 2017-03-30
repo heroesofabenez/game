@@ -79,7 +79,7 @@ class NPCQuestsControl extends \Nette\Application\UI\Control {
   /**
    * @return void
    */
-  function render() {
+  function render(): void {
     $this->template->setFile(__DIR__ . "/npcQuests.latte");
     $this->template->id = $this->npc->id;
     $this->template->quests = $this->getQuests();
@@ -92,7 +92,7 @@ class NPCQuestsControl extends \Nette\Application\UI\Control {
    * @param int $questId Quest's id
    * @return void
    */
-  function handleAccept(int $questId) {
+  function handleAccept(int $questId): void {
     $quest = $this->questModel->view($questId);
     if(!$quest) {
       $this->presenter->forward("notfound");
@@ -144,7 +144,7 @@ class NPCQuestsControl extends \Nette\Application\UI\Control {
    * @param int $questId Quest's id
    * @return void
    */
-  function handleFinish(int $questId) {
+  function handleFinish(int $questId): void {
     $quest = $this->questModel->view($questId);
     if(!$quest) {
       $this->presenter->forward("notfound");

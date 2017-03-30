@@ -139,7 +139,7 @@ class Request {
    * @throws RequestAlreadyHandledException
    * @throws NotImplementedException
    */
-  function accept(int $id) {
+  function accept(int $id): void {
     $request = $this->show($id);
     if(!$request) {
       throw new RequestNotFoundException;
@@ -187,7 +187,7 @@ class Request {
    * @throws CannotDeclineRequestException
    * @throws RequestAlreadyHandledException
    */
-  function decline(int $id) {
+  function decline(int $id): void {
     $request = $this->show($id);
     if(!$request) {
       throw new RequestNotFoundException;

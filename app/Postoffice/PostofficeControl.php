@@ -44,7 +44,7 @@ class PostofficeControl extends \Nette\Application\UI\Control {
   /**
    * @return void
    */
-  function renderInbox() {
+  function renderInbox(): void {
     $this->template->setFile(__DIR__ . "/postofficeInbox.latte");
     $this->template->messages = $this->getReceivedMessages();
     $this->template->render();
@@ -72,7 +72,7 @@ class PostofficeControl extends \Nette\Application\UI\Control {
   /**
    * @return void
    */
-  function renderOutbox() {
+  function renderOutbox(): void {
     $this->template->setFile(__DIR__ . "/postofficeOutbox.latte");
     $this->template->messages = $this->getSentMessages();
     $this->template->render();
@@ -129,7 +129,7 @@ class PostofficeControl extends \Nette\Application\UI\Control {
    * @param int $id Message's id
    * @return void
    */
-  function renderMessage(int $id) {
+  function renderMessage(int $id): void {
     $this->template->setFile(__DIR__ . "/postofficeMessage.latte");
     try {
       $message = $this->message($id);
@@ -161,7 +161,7 @@ class PostofficeControl extends \Nette\Application\UI\Control {
    * @param array $data
    * @return void
    */
-  function sendMessage(array $data) {
+  function sendMessage(array $data): void {
     $this->db->query("INSERT INTO messages", $data);
   }
 }

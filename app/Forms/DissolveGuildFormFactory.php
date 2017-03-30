@@ -39,7 +39,7 @@ class DissolveGuildFormFactory extends BaseFormFactory {
   /**
    * @return void
    */
-  function submitted() {
+  function submitted(): void {
     $gid = $this->user->identity->guild;
     $this->model->dissolve($gid);
   }

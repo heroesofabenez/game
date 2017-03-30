@@ -285,7 +285,7 @@ class Profile {
    * @return void
    * @throws NotEnoughExperiencesException
    */
-  function levelUp() {
+  function levelUp(): void {
     $character = $this->db->table("characters")->get($this->user->id);
     if($character->experience < $this->getLevelsRequirements()[$character->level + 1]) {
       throw new NotEnoughExperiencesException;
@@ -335,7 +335,7 @@ class Profile {
    * @throws InvalidStatException
    * @throws NoStatPointsAvailableException
    */
-  function trainStat(string $stat) {
+  function trainStat(string $stat): void {
     if(!in_array($stat, $this->stats)) {
       throw new InvalidStatException;
     } elseif($this->getStatPoints() < 1) {

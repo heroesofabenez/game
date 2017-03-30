@@ -102,7 +102,7 @@ class Equipment {
    * @throws ItemNotOwnedException
    * @throws ItemNotWornException
    */
-  function unequipItem(int $id) {
+  function unequipItem(int $id): void {
     $item = $this->db->table("character_equipment")->get($id);
     if(!$item) {
       throw new ItemNotFoundException;

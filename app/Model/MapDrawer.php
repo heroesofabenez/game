@@ -35,7 +35,7 @@ class MapDrawer {
    * @param string $name
    * @return void
    */
-  function draw(array $points, array $routes, string $name) {
+  function draw(array $points, array $routes, string $name): void {
     $image = Image::fromBlank(250, 250, Image::rgb(204, 204, 153));
     $image->rectangle(0, 0, 249, 249, Image::rgb(204, 102, 0));
     foreach($points as $point) {
@@ -54,7 +54,7 @@ class MapDrawer {
    * 
    * @return void
    */
-  function localMap() {
+  function localMap(): void {
     $this->locationModel->user = $this->user;
     $stages = $this->locationModel->accessibleStages();
     $curr_stage = $stages[$this->user->identity->stage];

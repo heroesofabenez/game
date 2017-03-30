@@ -55,10 +55,11 @@ class Intro {
   
   /**
    * Move onto next part of introduction
-   * 
+   *
+   * @param int $part
    * @return void
    */
-  function moveToNextPart(int $part) {
+  function moveToNextPart(int $part): void {
     $data = ["intro" => $part];
     $this->db->query("UPDATE characters SET ? WHERE id=?", $data, $this->user->id);
   }
@@ -90,7 +91,7 @@ class Intro {
    * 
    * @return void
    */
-  function endIntro() {
+  function endIntro(): void {
     $startingLocation = Intro::getStartingLocation();
     $data = ["current_stage" => $startingLocation];
     $this->db->query("UPDATE characters SET ? WHERE id=?", $data, $this->user->id);

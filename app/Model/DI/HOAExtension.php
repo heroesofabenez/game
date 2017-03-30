@@ -23,7 +23,7 @@ class HOAExtension extends \Nette\DI\CompilerExtension {
   /**
    * @return void
    */
-  function loadConfiguration() {
+  function loadConfiguration(): void {
     $this->addModels();
     $this->addCombat();
     $this->addArena();
@@ -37,7 +37,7 @@ class HOAExtension extends \Nette\DI\CompilerExtension {
   /**
    * @return void
    */
-  protected function addModels() {
+  protected function addModels(): void {
     $builder = $this->getContainerBuilder();
     $config = $this->getConfig($this->defaults);
     $builder->addDefinition($this->prefix("model.settingsRepository"))
@@ -86,7 +86,7 @@ class HOAExtension extends \Nette\DI\CompilerExtension {
   /**
    * @return void
    */
-  protected function addCombat() {
+  protected function addCombat(): void {
     $builder = $this->getContainerBuilder();
     $builder->addDefinition($this->prefix("combat.duel"))
       ->setClass(HeroesofAbenez\Model\CombatDuel::class);
@@ -101,7 +101,7 @@ class HOAExtension extends \Nette\DI\CompilerExtension {
   /**
    * @return void
    */
-  protected function addArena() {
+  protected function addArena(): void {
     $builder = $this->getContainerBuilder();
     $builder->addDefinition($this->prefix("arena.pve"))
       ->setImplement(HeroesofAbenez\Arena\ArenaPVEControlFactory::class);
@@ -112,7 +112,7 @@ class HOAExtension extends \Nette\DI\CompilerExtension {
   /**
    * @return void
    */
-  protected function addChat() {
+  protected function addChat(): void {
     $builder = $this->getContainerBuilder();
     $builder->addDefinition($this->prefix("chat.global"))
       ->setImplement(HeroesofAbenez\Chat\GlobalChatControlFactory::class);
@@ -137,7 +137,7 @@ class HOAExtension extends \Nette\DI\CompilerExtension {
   /**
    * @return void
    */
-  protected function addNpc() {
+  protected function addNpc(): void {
     $builder = $this->getContainerBuilder();
     $builder->addDefinition($this->prefix("npc.dialogue"))
       ->setImplement(HeroesofAbenez\NPC\NPCDialogueControlFactory::class);
@@ -150,7 +150,7 @@ class HOAExtension extends \Nette\DI\CompilerExtension {
   /**
    * @return void
    */
-  protected function addPostOffice() {
+  protected function addPostOffice(): void {
     $builder = $this->getContainerBuilder();
     $builder->addDefinition($this->prefix("postoffice.postoffice"))
       ->setImplement(HeroesofAbenez\Postoffice\PostofficeControlFactory::class);
@@ -159,7 +159,7 @@ class HOAExtension extends \Nette\DI\CompilerExtension {
   /**
    * @return void
    */
-  protected function addRanking() {
+  protected function addRanking(): void {
     $builder = $this->getContainerBuilder();
     $builder->addDefinition($this->prefix("ranking.characters"))
       ->setImplement(HeroesofAbenez\Ranking\CharactersRankingControlFactory::class);
@@ -170,7 +170,7 @@ class HOAExtension extends \Nette\DI\CompilerExtension {
   /**
    * @return void
    */
-  protected function addForms() {
+  protected function addForms(): void {
     $builder = $this->getContainerBuilder();
     $builder->addDefinition($this->prefix("form.createCharacter"))
       ->setClass(HeroesofAbenez\Forms\CreateCharacterFormFactory::class);
@@ -186,7 +186,7 @@ class HOAExtension extends \Nette\DI\CompilerExtension {
       ->setClass(HeroesofAbenez\Forms\CustomGuildRankNamesFormFactory::class);
   }
   
-  function beforeCompile() {
+  function beforeCompile(): void {
     $builder = $this->getContainerBuilder();
     $processor = $builder->getDefinition($this->prefix("chat.commandsProcessor"));
     $chatCommands = $builder->findByType(\HeroesofAbenez\Entities\ChatCommand::class);
@@ -199,7 +199,7 @@ class HOAExtension extends \Nette\DI\CompilerExtension {
    * @param \Nette\PhpGenerator\ClassType $class
    * @return void
    */
-  function afterCompile(\Nette\PhpGenerator\ClassType $class) {
+  function afterCompile(\Nette\PhpGenerator\ClassType $class): void {
     $initialize = $class->methods["initialize"];
     $initialize->addBody('$this->getByType(?)->authenticatedRole = "player";', [\Nette\Security\User::class]);
   }

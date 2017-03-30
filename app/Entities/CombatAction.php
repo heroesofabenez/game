@@ -49,7 +49,7 @@ class CombatAction extends BaseEntity {
   /**
    * @return void
    */
-  protected function parse() {
+  protected function parse(): void {
     $text = $this->character1->name . " ";
     switch($this->action) {
       case "attack":

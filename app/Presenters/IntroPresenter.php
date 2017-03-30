@@ -17,7 +17,7 @@ class IntroPresenter extends BasePresenter {
   /**
    * @return void
    */
-  function startup() {
+  function startup(): void {
     $this->user->logout();
     parent::startup();
     $this->part = $this->template->part = $this->model->getIntroPosition();
@@ -26,7 +26,7 @@ class IntroPresenter extends BasePresenter {
   /**
    * @return void
    */
-  function renderDefault() {
+  function renderDefault(): void {
     $text = $this->model->getIntroPart($this->part);
     if($text == "ENDOFINTRO") {
       $this->forward("Intro:end");
@@ -37,7 +37,7 @@ class IntroPresenter extends BasePresenter {
   /**
    * @return void
    */
-  function actionNext() {
+  function actionNext(): void {
     $this->model->moveToNextPart($this->part + 1);
     $this->redirect("Intro:");
   }
@@ -45,7 +45,7 @@ class IntroPresenter extends BasePresenter {
   /**
    * @return void
    */
-  function actionEnd() {
+  function actionEnd(): void {
     $this->model->endIntro();
     $this->user->logout();
     $this->redirect("Homepage:");

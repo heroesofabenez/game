@@ -51,7 +51,7 @@ class ArenaPVPControl extends ArenaControl {
    * @param int $id Player's id
    * @return void
    */
-  function handleFight(int $id) {
+  function handleFight(int $id): void {
     try {
       $enemy = $this->getPlayer($id);
     } catch (OpponentNotFoundException $e) {

@@ -20,7 +20,7 @@ class RankingPresenter extends BasePresenter {
    * 
    * @return void
    */
-  function startup() {
+  function startup(): void {
     parent::startup();
     $this->paginator = new \Nette\Utils\Paginator;
     $this->paginator->setItemsPerPage(self::ITEMS_PER_PAGE);
@@ -40,7 +40,7 @@ class RankingPresenter extends BasePresenter {
    * @param int $page Page to show
    * @return void
    */
-  function actionCharacters(int $page = 1) {
+  function actionCharacters(int $page = 1): void {
     $this->template->title = "Ranking Characters";
     $this->template->ranking = "charactersRanking";
   }
@@ -49,7 +49,7 @@ class RankingPresenter extends BasePresenter {
    * @param int $page Page to show
    * @return void
    */
-  function actionGuilds(int $page = 1) {
+  function actionGuilds(int $page = 1): void {
     $this->template->title = "Ranking Guilds";
     $this->template->ranking = "guildsRanking";
   }

@@ -44,7 +44,7 @@ abstract class RankingControl extends \Nette\Application\UI\Control {
   /**
    * @return void
    */
-  function render() {
+  function render(): void {
     $this->template->setFile(__DIR__ . "/ranking.latte");
     $this->template->name = $this->name;
     $this->template->rankings = ["characters", "guilds"];

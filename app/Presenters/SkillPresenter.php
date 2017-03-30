@@ -15,7 +15,7 @@ class SkillPresenter extends BasePresenter {
   /**
    * @return void
    */
-  protected function startup() {
+  protected function startup(): void {
     parent::startup();
     if($this->action != "default") {
       $this->template->level = $this->user->identity->level;
@@ -29,7 +29,7 @@ class SkillPresenter extends BasePresenter {
    * @return void
    * @throws \Nette\Application\BadRequestException
    */
-  function actionDefault() {
+  function actionDefault(): void {
     throw new \Nette\Application\BadRequestException;
   }
   
@@ -37,7 +37,7 @@ class SkillPresenter extends BasePresenter {
    * @param int $id
    * @return void
    */
-  function renderAttack(int $id) {
+  function renderAttack(int $id): void {
     $skill = $this->model->getAttackSkill($id);
     if(!$skill) {
       $this->forward("notfound");
@@ -49,7 +49,7 @@ class SkillPresenter extends BasePresenter {
    * @param int $id
    * @return void
    */
-  function renderSpecial(int $id) {
+  function renderSpecial(int $id): void {
     $skill = $this->model->getSpecialSkill($id);
     if(!$skill) $this->forward("notfound");
     $this->template->skill = $skill;

@@ -43,7 +43,7 @@ class RenameGuildFormFactory extends BaseFormFactory {
    * @param array $values
    * @return void
    */
-  function submitted(Form $form, array $values) {
+  function submitted(Form $form, array $values): void {
     $gid = $this->user->identity->guild;
     $name = $values["name"];
     try {

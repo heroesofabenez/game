@@ -18,7 +18,7 @@ class TravelPresenter extends BasePresenter {
   /**
    * @return void
    */
-  function renderDefault() {
+  function renderDefault(): void {
     $this->redirect("Map:local");
   }
   
@@ -26,7 +26,7 @@ class TravelPresenter extends BasePresenter {
    * @param int $id Area to travel to
    * @return void
    */
-  function actionArea(int $id) {
+  function actionArea(int $id): void {
     
   }
   
@@ -34,7 +34,7 @@ class TravelPresenter extends BasePresenter {
    * @param int $id Stage to travel to
    * @return void
    */
-  function actionStage(int $id) {
+  function actionStage(int $id): void {
     $this->model->user = $this->user;
     try {
       $this->model->travelToStage($id);$stageName = $this->model->getStageName($id);

@@ -25,7 +25,7 @@ class RequestPresenter extends BasePresenter {
    * @return void
    * @throws \Nette\Application\BadRequestException
    */
-  function actionDefault() {
+  function actionDefault(): void {
     throw new \Nette\Application\BadRequestException;
   }
   
@@ -33,7 +33,7 @@ class RequestPresenter extends BasePresenter {
    * @param int $id Request to show
    * @return void
    */
-  function renderView(int $id) {
+  function renderView(int $id): void {
     try {
       $request = $this->model->show($id);
       $this->template->id = $request->id;
@@ -54,7 +54,7 @@ class RequestPresenter extends BasePresenter {
    * @param int $id Request to accept
    * @return void
    */
-  function actionAccept(int $id) {
+  function actionAccept(int $id): void {
     try {
       $this->model->accept($id);
       $this->flashMessage($this->translator->translate("messages.request.accepted"));
@@ -78,7 +78,7 @@ class RequestPresenter extends BasePresenter {
    * @param int $id Request to decline
    * @return void
    */
-  function actionDecline(int $id) {
+  function actionDecline(int $id): void {
     try {
       $this->model->decline($id);
       $this->flashMessage($this->translator->translate("messages.request.declined"));

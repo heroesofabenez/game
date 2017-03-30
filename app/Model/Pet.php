@@ -96,7 +96,7 @@ class Pet {
    * @throws PetNotOwnedException
    * @throws PetAlreadyDeployedException
    */
-  function deployPet(int $id) {
+  function deployPet(int $id): void {
     $pet = $this->db->table("pets")->get($id);
     if(!$pet) throw new PetNotFoundException;
     elseif($pet->owner != $this->user->id) throw new PetNotOwnedException;
@@ -119,7 +119,7 @@ class Pet {
    * @throws PetNotOwnedException
    * @throws PetNotDeployedException
    */
-  function discardPet(int $id) {
+  function discardPet(int $id): void {
     $pet = $this->db->table("pets")->get($id);
     if(!$pet) {
       throw new PetNotFoundException;

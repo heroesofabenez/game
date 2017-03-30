@@ -110,7 +110,7 @@ abstract class ChatControl extends \Nette\Application\UI\Control {
    * 
    * @return void
    */
-  function render() {
+  function render(): void {
     $this->template->setFile(__DIR__ . "/chat.latte");
     $this->template->characters = $this->getCharacters();
     $this->template->texts = $this->getTexts();
@@ -123,7 +123,7 @@ abstract class ChatControl extends \Nette\Application\UI\Control {
    * @param string $message message
    * @return void
    */
-  function newMessage(string $message) {
+  function newMessage(string $message): void {
     $result = $this->processor->parse($message);
     if($result) {
       $this->presenter->flashMessage($result);

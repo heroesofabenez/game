@@ -18,7 +18,7 @@ class PostofficePresenter extends BasePresenter {
   /**
    * @return void
    */
-  function renderNew() {
+  function renderNew(): void {
     $this->template->haveForm = true;
   }
   
@@ -26,7 +26,7 @@ class PostofficePresenter extends BasePresenter {
    * @param int $id 
    * @return void
    */
-  function actionMessage(int $id) {
+  function actionMessage(int $id): void {
     $status = $this->createComponentPostoffice()->messageStatus($id);
     if($status === 0) {
       $this->forward("notfound");
@@ -71,7 +71,7 @@ class PostofficePresenter extends BasePresenter {
    * @param array $values
    * @return void
    */
-  function newMessageFormSucceeded(Form $form, array $values) {
+  function newMessageFormSucceeded(Form $form, array $values): void {
     $data = [
       "from" => $this->user->id, "to" => $values["to"], "subject" => $values["subject"], "text" => $values["message"]
     ];

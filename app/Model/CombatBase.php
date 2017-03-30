@@ -99,7 +99,7 @@ class CombatBase {
    * @param Team $team2
    * @return void
    */
-  function setTeams(Team $team1, Team $team2) {
+  function setTeams(Team $team1, Team $team2): void {
     if($this->team1) {
       throw new ImmutableException("Teams has already been set.");
     }
@@ -148,7 +148,7 @@ class CombatBase {
    * 
    * @return void
    */
-  function deployPets() {
+  function deployPets(): void {
     $characters = array_merge($this->team1->items, $this->team2->items);
     /** @var Character $character */
     foreach($characters as $character) {
@@ -164,7 +164,7 @@ class CombatBase {
    * 
    * @return void
    */
-  function equipItems() {
+  function equipItems(): void {
     $characters = array_merge($this->team1->items, $this->team2->items);
     /** @var Character $character */
     foreach($characters as $character) {
@@ -181,7 +181,7 @@ class CombatBase {
    * 
    * @return void
    */
-  function setSkillsCooldowns() {
+  function setSkillsCooldowns(): void {
     $characters = array_merge($this->team1->items, $this->team2->items);
     /** @var Character $character */
     foreach($characters as $character) {
@@ -196,7 +196,7 @@ class CombatBase {
    * 
    * @return void
    */
-  function decreaseSkillsCooldowns() {
+  function decreaseSkillsCooldowns(): void {
     $characters = array_merge($this->team1->items, $this->team2->items);
     /** @var Character $character */
     foreach($characters as $character) {
@@ -211,7 +211,7 @@ class CombatBase {
    * 
    * @return void
    */
-  function removeCombatEffects() {
+  function removeCombatEffects(): void {
     $characters = array_merge($this->team1->items, $this->team2->items);
     /** @var Character $character */
     foreach($characters as $character) {
@@ -228,7 +228,7 @@ class CombatBase {
    * 
    * @return void
    */
-  function logCombatResult() {
+  function logCombatResult(): void {
     $this->log->round = 5000;
     $text = "Combat ends. {$this->team1->name} dealt {$this->damage[1]} damage, {$this->team2->name} dealt {$this->damage[2]} damage. ";
     if($this->getWinner() === 1) {
@@ -245,7 +245,7 @@ class CombatBase {
    * 
    * @return void
    */
-  function logRoundNumber() {
+  function logRoundNumber(): void {
     $this->log->round = ++$this->round;
   }
   
@@ -254,7 +254,7 @@ class CombatBase {
    * 
    * @return void
    */
-  function recalculateStats() {
+  function recalculateStats(): void {
     $characters = array_merge($this->team1->items, $this->team2->items);
     /** @var Character $character */
     foreach($characters as $character) {
@@ -268,7 +268,7 @@ class CombatBase {
    * 
    * @return void
    */
-  function resetInitiative() {
+  function resetInitiative(): void {
     $characters = array_merge($this->team1->items, $this->team2->items);
     /** @var Character $character */
     foreach($characters as $character) {
@@ -351,7 +351,7 @@ class CombatBase {
    * @param CharacterSkillSpecial $skill
    * @return void
    */
-  protected function doSpecialSkill(Character $character1, Character $character2, CharacterSkillSpecial $skill) {
+  protected function doSpecialSkill(Character $character1, Character $character2, CharacterSkillSpecial $skill): void {
     switch($skill->skill->target) {
       case "enemy":
         $this->onSkillSpecial($character1, $character2, $skill);
@@ -379,7 +379,7 @@ class CombatBase {
    * 
    * @return void
    */
-  function mainStage() {
+  function mainStage(): void {
     $characters = array_merge($this->team1->usableMembers, $this->team2->usableMembers);
     usort($characters, function($a, $b) {
       return -1 * strcmp((string) $a->initiative, (string) $b->initiative);
@@ -429,7 +429,7 @@ class CombatBase {
    * 
    * @return void
    */
-  protected function doRound() {
+  protected function doRound(): void {
     $this->onRound();
   }
   
@@ -494,7 +494,7 @@ class CombatBase {
    * @param \HeroesofAbenez\Entities\Character $character2 Defender
    * @return void
    */
-  function attackHarm(Character $character1, Character $character2) {
+  function attackHarm(Character $character1, Character $character2): void {
     $result = [];
     $hit_chance = $this->calculateHitChance($character1, $character2);
     $roll = rand(0, 100);
@@ -522,7 +522,7 @@ class CombatBase {
    * @param CharacterSkillAttack $skill Used skill
    * @return void
    */
-  function useAttackSkill(Character $character1, Character $character2, CharacterSkillAttack $skill) {
+  function useAttackSkill(Character $character1, Character $character2, CharacterSkillAttack $skill): void {
     $result = [];
     $hit_chance = $this->calculateHitChance($character1, $character2, $skill);
     $roll = rand(0, 100);
@@ -551,7 +551,7 @@ class CombatBase {
    * @param CharacterSkillSpecial $skill
    * @return void
    */
-  function useSpecialSkill(Character $character1, Character $character2, CharacterSkillSpecial $skill) {
+  function useSpecialSkill(Character $character1, Character $character2, CharacterSkillSpecial $skill): void {
     $result = [
       "result" => true, "amount" => 0, "action" => "skill_special", "name" => $skill->skill->name
     ];
@@ -575,7 +575,7 @@ class CombatBase {
    * @param Character $character2 Wounded character
    * @return void
    */
-  function heal(Character $character1, Character $character2) {
+  function heal(Character $character1, Character $character2): void {
     $result = [];
     $hit_chance = $character1->intelligence * round($character1->level / 5) + 30;
     $roll = rand(0, 100);
@@ -598,7 +598,7 @@ class CombatBase {
    * @param Character $character2
    * @return void
    */
-  function logResults(Character $character1, Character $character2) {
+  function logResults(Character $character1, Character $character2): void {
     extract($this->results);
     $this->log->log($action, $result, $character1, $character2, $amount, $name);
     $this->results = NULL;
@@ -610,9 +610,8 @@ class CombatBase {
    * @param Character $character1
    * @param Character $character2
    * @return void
-   * @return void
    */
-  function logDamage(Character $character1, Character $character2) {
+  function logDamage(Character $character1, Character $character2): void {
     $team = $this->team1->hasMember($character1->id) ? 1: 2;
     $this->damage[$team] += $this->results["amount"];
   }

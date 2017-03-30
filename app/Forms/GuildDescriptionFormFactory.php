@@ -41,7 +41,7 @@ class GuildDescriptionFormFactory extends BaseFormFactory {
    * @param array $values
    * @return void
    */
-  function submitted(Form $form, array $values) {
+  function submitted(Form $form, array $values): void {
     $guild = $this->user->identity->guild;
     $description = $values["description"];
     try {

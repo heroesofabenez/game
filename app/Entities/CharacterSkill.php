@@ -52,14 +52,14 @@ abstract class CharacterSkill extends BaseEntity {
   /**
    * @return void
    */
-  function resetCooldown() {
+  function resetCooldown(): void {
     $this->cooldown = $this->skill->cooldown;
   }
   
   /**
    * @return void
    */
-  function decreaseCooldown() {
+  function decreaseCooldown(): void {
     if($this->cooldown > 0) {
       $this->cooldown--;
     }

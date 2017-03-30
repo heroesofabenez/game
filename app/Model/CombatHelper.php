@@ -77,7 +77,7 @@ class CombatHelper {
    * @param array $skills
    * @return void
    */
-  protected function getArenaNpcSkillsLevels(array $data, array &$skills) {
+  protected function getArenaNpcSkillsLevels(array $data, array &$skills): void {
     if($data["level"] < 2) $skills = [$skills[0]];
     $skillPoints = $data["level"];
     for($i = 1; $skillPoints > 0; $i++) {
@@ -144,7 +144,7 @@ class CombatHelper {
    * @param int $uid
    * @return void
    */
-  function bumpNumberOfTodayArenaFights(int $uid) {
+  function bumpNumberOfTodayArenaFights(int $uid): void {
     $day = date("d.m.Y");
     $rows = $this->db->table("arena_fights_count")->where("character=? AND day=?", [$uid, $day]);
     if(!$rows->count()) {

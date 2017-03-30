@@ -29,7 +29,7 @@ class HomepagePresenter extends BasePresenter {
   /**
    * @return void
    */
-  function renderDefault() {
+  function renderDefault(): void {
     $data = $this->model->home();
     foreach($data as $key => $value) {
       $this->template->$key = $value;

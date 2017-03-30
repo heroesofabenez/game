@@ -69,7 +69,7 @@ class NPCDialogueControl extends \Nette\Application\UI\Control {
   /**
    * @return void
    */
-  function render() {
+  function render(): void {
     $this->template->setFile(__DIR__ . "/npcDialogue.latte");
     $this->template->npcName = $this->npc->name;
     $this->template->texts = [];

@@ -18,7 +18,7 @@ class ArenaPresenter extends BasePresenter {
    * @param int $id
    * @return void
    */
-  function actionChampion($id) {
+  function actionChampion($id): void {
     
   }
   

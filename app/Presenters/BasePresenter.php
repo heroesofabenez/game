@@ -22,7 +22,7 @@ abstract class BasePresenter extends \Nette\Application\UI\Presenter {
    * 
    * @return void
    */
-  protected function startup() {
+  protected function startup(): void {
     parent::startup();
     $this->tryLogin();
     $this->template->server = $this->sr->settings["application"]["server"];
@@ -33,7 +33,7 @@ abstract class BasePresenter extends \Nette\Application\UI\Presenter {
    * 
    * @return void
    */
-  function tryLogin() {
+  function tryLogin(): void {
     if(!$this->user->isLoggedIn()) $this->user->login();
     $uid = $this->user->id;
     if($this instanceof CharacterPresenter AND $uid == -1) return;

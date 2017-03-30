@@ -65,7 +65,7 @@ abstract class ArenaControl extends \Nette\Application\UI\Control {
   /**
    * @return void
    */
-  function render() {
+  function render(): void {
     $this->template->setFile(__DIR__ . "/arena.latte");
     $this->template->opponents = $this->getOpponents();
     $this->template->arena = $this->arena;
@@ -83,7 +83,7 @@ abstract class ArenaControl extends \Nette\Application\UI\Control {
    * @param Character $opponent Opponent
    * @return void
    */
-  protected function doDuel(Character $opponent) {
+  protected function doDuel(Character $opponent): void {
     if($this->combatHelper->getNumberOfTodayArenaFights($this->user->id) >= self::DAILY_FIGHTS_LIMIT) {
       $this->presenter->flashMessage($this->translator->translate("errors.arena.cannotFightToday", self::DAILY_FIGHTS_LIMIT));
       $this->presenter->redirect("this");
@@ -106,7 +106,7 @@ abstract class ArenaControl extends \Nette\Application\UI\Control {
    * @param int $id
    * @return void
    */
-  abstract function handleFight(int $id);
+  abstract function handleFight(int $id): void;
   
   /**
    * Save log from combat

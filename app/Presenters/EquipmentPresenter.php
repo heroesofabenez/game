@@ -18,7 +18,7 @@ class EquipmentPresenter extends BasePresenter {
    * @param int $id
    * @return void
    */
-  function renderView(int $id) {
+  function renderView(int $id): void {
     $item = $this->model->view($id);
     if(!$item) {
       $this->forward("notfound");

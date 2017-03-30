@@ -22,7 +22,7 @@ class ErrorPresenter extends BasePresenter {
    * @param \Throwable $exception
    * @return void
    */
-  function actionDefault($exception) {
+  function actionDefault(\Throwable $exception): void {
     if($exception instanceof \Nette\Application\BadRequestException) {
       $this->setView("404");
     } else {

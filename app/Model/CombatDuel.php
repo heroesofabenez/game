@@ -16,7 +16,7 @@ class CombatDuel extends CombatBase {
    * @param CharacterEntity $player
    * @param CharacterEntity $opponent
    */
-  function setParticipants(CharacterEntity $player, CharacterEntity $opponent) {
+  function setParticipants(CharacterEntity $player, CharacterEntity $opponent): void {
     $team1 = new Team($player->name);
     $team1[] = $player;
     $team2 = new Team($opponent->name);

@@ -22,7 +22,7 @@ class QuestPresenter extends BasePresenter {
    * @return void
    * @throws \Nette\Application\BadRequestException
    */
-  function actionDefault() {
+  function actionDefault(): void {
     throw new \Nette\Application\BadRequestException;
   }
   
@@ -30,7 +30,7 @@ class QuestPresenter extends BasePresenter {
    * @param int $id Quest's id
    * @return void
    */
-  function renderView(int $id) {
+  function renderView(int $id): void {
     $quest = $this->model->view($id);
     if(!$quest) {
       $this->forward("notfound");

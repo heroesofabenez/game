@@ -48,7 +48,7 @@ class CustomGuildRankNamesFormFactory extends BaseFormFactory  {
    * @param array $values
    * @return void
    */
-  function submitted(Form $form, array $values) {
+  function submitted(Form $form, array $values): void {
     try {
       $this->model->setCustomRankNames($values);
     } catch(MissingPermissionsException $e) {

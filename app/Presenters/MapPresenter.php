@@ -15,7 +15,7 @@ class MapPresenter extends BasePresenter {
   /**
    * @return void
    */
-  function actionLocal() {
+  function actionLocal(): void {
     $data = $this->model->local();
     $this->template->wwwDir = WWW_DIR;
     foreach($data as $key => $value) {

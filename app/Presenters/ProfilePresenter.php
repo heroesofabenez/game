@@ -17,7 +17,7 @@ class ProfilePresenter extends BasePresenter {
   /**
    * @return void
    */
-  function actionDefault() {
+  function actionDefault(): void {
     $this->forward("view", $this->user->id);
   }
   
@@ -25,7 +25,7 @@ class ProfilePresenter extends BasePresenter {
    * @param int $id id of character
    * @return void
    */
-  function renderView(int $id) {
+  function renderView(int $id): void {
     $data = $this->model->view($id);
     if(!$data) {
       $this->forward("notfound");

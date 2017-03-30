@@ -214,7 +214,7 @@ class Location {
    * @throws StageNotFoundException
    * @throws CannotTravelToStageException
    */
-  function travelToStage(int $id) {
+  function travelToStage(int $id): void {
     $stage = $this->getStage($id);
     if(!$stage) throw new StageNotFoundException;
     $currentStage = $this->user->identity->stage;

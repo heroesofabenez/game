@@ -120,7 +120,7 @@ class Character extends BaseEntity {
    * @param array $stats
    * @return void
    */
-  protected function setStats(array $stats) {
+  protected function setStats(array $stats): void {
     $required_stats = ["id", "name", "occupation", "level", "strength", "dexterity", "constitution", "intelligence", "charisma"];
     $all_stats = array_merge($required_stats, ["race", "specialization", "gender", "experience", "initiative_formula"]);
     foreach($required_stats as $value) {
@@ -166,7 +166,7 @@ class Character extends BaseEntity {
    * @param CharacterEffect $effect
    * @return void
    */
-  function addEffect(CharacterEffect $effect) {
+  function addEffect(CharacterEffect $effect): void {
     $this->effects[] = $effect;
     $this->recalculateStats();
   }
@@ -178,7 +178,7 @@ class Character extends BaseEntity {
    * @return void
    * @throws OutOfBoundsException
    */
-  function removeEffect(string $effectId) {
+  function removeEffect(string $effectId): void {
     foreach($this->effects as $i => $effect) {
       if($effect->id == $effectId) {
         unset($this->effects[$i]);
@@ -211,7 +211,7 @@ class Character extends BaseEntity {
    * @return void
    * @throws OutOfBoundsException
    */
-  function equipItem(int $itemId) {
+  function equipItem(int $itemId): void {
     try {
       $item = $this->getItem($itemId);
     } catch (OutOfBoundsException $e) {
@@ -228,7 +228,7 @@ class Character extends BaseEntity {
    * @return void
    * @throws OutOfBoundsException
    */
-  function unequipItem(int $itemId) {
+  function unequipItem(int $itemId): void {
     try {
       $item = $this->getItem($itemId);
     } catch (OutOfBoundsException $e) {
@@ -260,7 +260,7 @@ class Character extends BaseEntity {
    * @return void
    * @throws OutOfBoundsException
    */
-  function deployPet(int $petId) {
+  function deployPet(int $petId): void {
     try {
       $pet = $this->getPet($petId);
     } catch(OutOfBoundsException $e) {
@@ -274,7 +274,7 @@ class Character extends BaseEntity {
    * 
    * @return void
    */
-  function dismissPet() {
+  function dismissPet(): void {
     $this->active_pet = NULL;
   }
   
@@ -297,7 +297,7 @@ class Character extends BaseEntity {
    * @param int $amount Number of hitpoints to lose
    * @return void
    */
-  function harm(int $amount) {
+  function harm(int $amount): void {
     $this->hitpoints -= $amount;
   }
   
@@ -307,7 +307,7 @@ class Character extends BaseEntity {
    * @param int $amount Number of hitpoints to gain
    * @return void
    */
-  function heal(int $amount) {
+  function heal(int $amount): void {
     $this->hitpoints += $amount;
   }
   
@@ -341,7 +341,7 @@ class Character extends BaseEntity {
    * 
    * @return void
    */
-  function recalculateSecondaryStats() {
+  function recalculateSecondaryStats(): void {
     $stats = ["damage" => $this->damageStat(), "hit" => "dexterity", "dodge" => "dexterity"];
     foreach($stats as $secondary => $primary) {
       $gain = $this->$secondary - $this->{"base_$secondary"};
@@ -359,7 +359,7 @@ class Character extends BaseEntity {
    * 
    * @return void
    */
-  function recalculateStats() {
+  function recalculateStats(): void {
     $stats = [
       "strength", "dexterity", "constitution", "intelligence", "charisma",
       "damage", "hit", "dodge", "initiative", "defense"
@@ -418,7 +418,7 @@ class Character extends BaseEntity {
    * @return void
    * @todo maybe use a regular expression
    */
-  function calculateInitiative() {
+  function calculateInitiative(): void {
     $result = 0;
     $formula = str_replace(["INT", "DEX"], [$this->intelligence, $this->dexterity], $this->initiative_formula);
     $pos = strpos($formula, "d");
@@ -434,7 +434,7 @@ class Character extends BaseEntity {
    *
    * @return void
    */
-  function resetInitiative() {
+  function resetInitiative(): void {
     $this->initiative = $this->base_initiative;
   }
 }

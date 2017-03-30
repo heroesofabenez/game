@@ -15,7 +15,7 @@ class TavernPresenter extends BasePresenter {
   /**
    * @return void
    */
-  function startup() {
+  function startup(): void {
     parent::startup();
     $this->template->haveForm = true;
     $this->template->canChat = true;
@@ -33,7 +33,7 @@ class TavernPresenter extends BasePresenter {
   /**
    * @return void
    */
-  function actionGuild() {
+  function actionGuild(): void {
     if($this->user->identity->guild === 0) $this->template->canChat = false;
     $this->template->title = "Guild chat";
     $this->template->chat = "guildChat";
@@ -42,7 +42,7 @@ class TavernPresenter extends BasePresenter {
   /**
    * @return void
    */
-  function actionLocal() {
+  function actionLocal(): void {
     $this->template->title = "Local chat";
     $this->template->chat = "localChat";
   }
@@ -50,7 +50,7 @@ class TavernPresenter extends BasePresenter {
    /**
    * @return void
    */
-  function actionGlobal() {
+  function actionGlobal(): void {
     $this->template->title = "Global chat";
     $this->template->chat = "globalChat";
   }
@@ -97,7 +97,7 @@ class TavernPresenter extends BasePresenter {
    * @param array $values
    * @return void
    */
-  function newMessageSucceeded(Form $form, array $values) {
+  function newMessageSucceeded(Form $form, array $values): void {
     switch($this->action) {
       case "guild":
         $factory = $this->context->getByType(Chat\GuildChatControlFactory::class);

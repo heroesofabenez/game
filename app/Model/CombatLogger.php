@@ -42,7 +42,7 @@ class CombatLogger implements \Countable, \IteratorAggregate {
    * @param Team $team2
    * @return void
    */
-  function setTeams(Team $team1, Team $team2) {
+  function setTeams(Team $team1, Team $team2): void {
     if($this->team1) {
       throw new ImmutableException("Teams has already been set.");
     }
@@ -75,7 +75,7 @@ class CombatLogger implements \Countable, \IteratorAggregate {
    * @param string $name
    * @return void
    */
-  function log($action, $result, CharacterEntity $character1, CharacterEntity $character2, int $amount = 0, string $name = "") {
+  function log($action, $result, CharacterEntity $character1, CharacterEntity $character2, int $amount = 0, string $name = ""): void {
     $this->actions[$this->round][] = new CombatAction($action, $result, $character1, $character2, $amount, $name);
   }
   
@@ -85,7 +85,7 @@ class CombatLogger implements \Countable, \IteratorAggregate {
    * @param string $text
    * @return void
    */
-  function logText(string $text) {
+  function logText(string $text): void {
     $this->actions[$this->round][] = $text;
   }
   

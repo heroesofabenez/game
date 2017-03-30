@@ -41,7 +41,7 @@ class CreateGuildFormFactory extends BaseFormFactory {
    * @param array $values
    * @return void
    */
-  function submitted(Form $form, array $values) {
+  function submitted(Form $form, array $values): void {
     $data = [
       "name" => $values["name"], "description" => $values["description"]
     ];

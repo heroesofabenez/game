@@ -136,7 +136,7 @@ class Guild {
    * @return void
    * @throws NameInUseException
    */
-  function create($data) {
+  function create($data): void {
     $guilds = $this->cache->load("guilds");
     foreach($guilds as $guild) {
       if($guild->name == $data["name"]) throw new NameInUseException();
@@ -154,7 +154,7 @@ class Guild {
    * @return void
    * @throws GuildNotFoundException
    */
-  function sendApplication(int $gid) {
+  function sendApplication(int $gid): void {
     $guild = $this->db->table("guilds")->get($gid);
     if(!$guild) { throw new GuildNotFoundException; }
     $leader = $this->db->table("characters")
@@ -248,7 +248,7 @@ class Guild {
    * @throws CannotPromoteToGrandmasterException
    * @throws CannotHaveMoreDeputiesException
    */
-  function promote(int $id) {
+  function promote(int $id): void {
     $admin = $this->user;
     if($admin->identity->guild == 0) {
       throw new NotInGuildException;
@@ -295,7 +295,7 @@ class Guild {
    * @throws CannotDemoteHigherRanksException
    * @throws CannotDemoteLowestRankException
    */
-  function demote(int $id) {
+  function demote(int $id): void {
     $admin = $this->user;
     if($admin->identity->guild == 0) {
       throw new NotInGuildException;
@@ -337,7 +337,7 @@ class Guild {
    * @throws PlayerNotInGuildException
    * @throws CannotKickHigherRanksException
    */
-  function kick(int $id) {
+  function kick(int $id): void {
     $admin = $this->user;
     if($admin->identity->guild == 0) {
       throw new NotInGuildException;
@@ -373,7 +373,7 @@ class Guild {
    * @throws NotInGuildException
    * @throws GrandmasterCannotLeaveGuildException
   */
-  function leave() {
+  function leave(): void {
     if($this->user->identity->guild === 0) {
       throw new NotInGuildException;
     }
@@ -393,7 +393,7 @@ class Guild {
    * @param int $id Guild to dissolve
    * @return void
    */
-  function dissolve(int $id) {
+  function dissolve(int $id): void {
     $members = $this->db->table("characters")->where("guild", $id);
     $data1 = ["guild" => 0, "guildrank" => NULL];
     foreach($members as $member) {
@@ -411,7 +411,7 @@ class Guild {
    * @return void
    * @throws NameInUseException
   */
-  function rename(int $id, string $name) {
+  function rename(int $id, string $name): void {
     $guilds = $this->cache->load("guilds");
     foreach($guilds as $guild) {
       if($guild->name == $name) {
@@ -431,7 +431,7 @@ class Guild {
    * @return void
    * @throws GuildNotFoundException
    */
-  function changeDescription(int $id, string $description) {
+  function changeDescription(int $id, string $description): void {
     $guilds = $this->cache->load("guilds");
     $found = false;
     foreach($guilds as $guild) {
@@ -455,7 +455,7 @@ class Guild {
    * @param int $gid Guild's id
    * @return void
    */
-  function join(int $uid, int $gid) {
+  function join(int $uid, int $gid): void {
     $data = ["guild" => $gid, "guildrank" => 1];
     $this->db->query("UPDATE characters SET ? WHERE id=?", $data, $uid);
     $this->cache->remove("guilds");
@@ -487,7 +487,7 @@ class Guild {
    * @return void
    * @throws MissingPermissionsException
    */
-  function setCustomRankNames(array $names) {
+  function setCustomRankNames(array $names): void {
     if(!$this->user->isAllowed("guild", "changeRankNames")) {
       throw new MissingPermissionsException;
     }
