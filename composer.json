@@ -45,5 +45,8 @@
             ]
         },
         "classmap": ["app/Model/exceptions.php"]
+    },
+    "config": {
+        "classmap-authoritative": true
     }
 }

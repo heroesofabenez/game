@@ -6,6 +6,6 @@ mkdir images/maps
 mkdir temp/cache
 mkdir temp/sessions
 
-composer install -a
+composer install
 
 exit 0
