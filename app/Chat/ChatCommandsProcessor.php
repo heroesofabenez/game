@@ -127,12 +127,12 @@ class ChatCommandsProcessor {
   
   /**
    * @param string $text
-   * @return string|bool Result of the command/false when text text contains no (defined) command
+   * @return string|null Result of the command/false when text text contains no (defined) command
    */
-  function parse(string $text) {
+  function parse(string $text): ?string {
     $commandName = $this->extractCommand($text);
     if($commandName === "") {
-      return false;
+      return NULL;
     }
     $command = $this->getCommand($commandName);
     $params = $this->extractParameters($text);

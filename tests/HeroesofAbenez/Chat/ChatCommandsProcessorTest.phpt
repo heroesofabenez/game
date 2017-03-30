@@ -133,8 +133,8 @@ class ChatCommandsProcessorTest extends MT\TestCase {
    */
   function testParse() {
     Assert::same("passed", $this->model->parse(self::TEXT));
-    Assert::false($this->model->parse("anagfdffd"));
-    Assert::false($this->model->parse("/anagfdffd"));
+    Assert::null($this->model->parse("anagfdffd"));
+    Assert::null($this->model->parse("/anagfdffd"));
     Assert::same("test12", $this->model->parse("/test2 1 2"));
   }
 }
