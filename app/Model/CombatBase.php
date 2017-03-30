@@ -282,7 +282,7 @@ class CombatBase {
    * @param Team $team
    * @return Character|NULL
    */
-  protected function selectRandomCharacter(Team $team) {
+  protected function selectRandomCharacter(Team $team): ?Character {
     if(count($team->aliveMembers) === 0) {
       return NULL;
     }
@@ -296,7 +296,7 @@ class CombatBase {
    * @param Character $attacker
    * @return Character|NULL
    */
-  protected function selectAttackTarget(Character $attacker) {
+  protected function selectAttackTarget(Character $attacker): ?Character {
     $enemyTeam = $this->getEnemyTeam($attacker);
     return $this->selectRandomCharacter($this->{"team" . $enemyTeam});
   }
@@ -308,7 +308,7 @@ class CombatBase {
    * @param int $threshold
    * @return Character|NULL
    */
-  protected function findLowestHpCharacter(Team $team, $threshold = NULL) {
+  protected function findLowestHpCharacter(Team $team, $threshold = NULL): ?Character {
     $lowestHp = 9999;
     $lowestIndex = -1;
     if(is_null($threshold)) {
@@ -333,7 +333,7 @@ class CombatBase {
    * @param Character $healer
    * @return Character|NULL
    */
-  protected function selectHealingTarget(Character $healer) {
+  protected function selectHealingTarget(Character $healer): ?Character {
     $team = $this->getTeam($healer);
     return $this->findLowestHpCharacter($this->{"team" . $team});
   }

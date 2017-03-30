@@ -39,7 +39,7 @@ abstract class RankingControl extends \Nette\Application\UI\Control {
     $this->paginator = $paginator;
   }
   
-  abstract function getData();
+  abstract function getData(): array;
   
   /**
    * @return void

@@ -49,7 +49,7 @@ class NPCQuestsControl extends \Nette\Application\UI\Control {
    *
    * @return \HeroesofAbenez\Entities\Quest[]
    */
-  function getQuests() {
+  function getQuests(): array {
     $return = $this->questModel->listOfQuests($this->npc->id);
     $playerQuests = $this->db->table("character_quests")
       ->where("character", $this->user->id);
