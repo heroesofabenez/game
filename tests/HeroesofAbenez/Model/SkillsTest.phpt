@@ -11,7 +11,7 @@ use MyTester as MT,
     HeroesofAbenez\Entities\CharacterSkillSpecial,
     HeroesofAbenez\Entities\CharacterSkill;
 
-class SkillsModelTest extends MT\TestCase {
+class SkillsTest extends MT\TestCase {
   /** @var Skills */
   protected $model;
   

@@ -7,7 +7,7 @@ use MyTester as MT,
     MyTester\Assert,
     HeroesofAbenez\Entities\Guild as GuildEntity;
 
-class GuildModelTest extends MT\TestCase {
+class GuildTest extends MT\TestCase {
   /** @var Guild */
   protected $model;
   

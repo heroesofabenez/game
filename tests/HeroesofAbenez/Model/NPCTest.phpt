@@ -7,7 +7,7 @@ use MyTester as MT,
     MyTester\Assert,
     HeroesofAbenez\Entities\NPC as NPCEntity;
 
-class NPCModelTest extends MT\TestCase {
+class NPCTest extends MT\TestCase {
   /** @var NPC */
   protected $model;
   

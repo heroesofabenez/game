@@ -7,7 +7,7 @@ use MyTester as MT,
     MyTester\Assert,
     HeroesofAbenez\Entities\Quest as QuestEntity;
 
-class QuestModelTest extends MT\TestCase {
+class QuestTest extends MT\TestCase {
   /** @var Quest */
   protected $model;
   

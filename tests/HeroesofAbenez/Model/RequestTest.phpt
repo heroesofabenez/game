@@ -7,7 +7,7 @@ use MyTester as MT,
     MyTester\Assert,
     HeroesofAbenez\Entities\Request as RequestEntity;
 
-class RequestModelTest extends MT\TestCase {
+class RequestTest extends MT\TestCase {
   /** @var Request */
   protected $model;
   
