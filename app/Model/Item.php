@@ -110,9 +110,9 @@ class Item {
    * 
    * @param int $id Item's id
    * @param int $amount
-   * @return bool
+   * @return \Nette\Database\ResultSet
    */
-  function giveItem(int $id, int $amount = 1): bool {
+  function giveItem(int $id, int $amount = 1): \Nette\Database\ResultSet {
     if($this->haveItem($id)) {
       $data = "item=$id, amount=amount+$amount";
       $where = ["character" => $this->user->id, "item" => $id];

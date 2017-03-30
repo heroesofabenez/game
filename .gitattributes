@@ -1,6 +1,7 @@
 /tests          export-ignore
 .git*		export-ignore
 apigen.neon     export-ignore
+phpstan.neon    export-ignore
 /ci     	export-ignore
 ci.neon		export-ignore
 run_tests.php	export-ignore

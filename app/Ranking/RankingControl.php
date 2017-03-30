@@ -18,7 +18,7 @@ abstract class RankingControl extends \Nette\Application\UI\Control {
   protected $lastCol;
   /** @var string */
   protected $presenter;
-  /** @var \Nette\Utils\Paginator */
+  /** @var \Nette\Utils\Paginator|bool */
   protected $paginator = false;
   
   /**

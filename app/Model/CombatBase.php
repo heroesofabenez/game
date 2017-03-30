@@ -61,7 +61,7 @@ class CombatBase {
   public $onSkillSpecial = [];
   /** @var array Tasks to do at healing */
   public $onHeal = [];
-  /** @var array Temporary variable for results of an action */
+  /** @var array|NULL Temporary variable for results of an action */
   protected $results;
   
   function __construct(CombatLogger $logger) {

@@ -1,0 +1,21 @@
+includes:
+    - vendor/phpstan/phpstan-nette/extension.neon
+parameters:
+    universalObjectCratesClasses:
+        - Nette\Security\IIdentity
+    earlyTerminatingMethodCalls:
+        Nette\Application\UI\Control:
+            - forward
+    ignoreErrors:
+        - "#Casting to [a-z\\_]+ something that's already [a-z\\_]+#"
+        - '#Undefined variable: \$[a-zA-Z0-9_]+#'
+        - '#Cannot access property [a-zA-Z0-9\\_]+::\$[a-zA-Z0-9_]+ from current scope#'
+        - '#Access to an undefined property HeroesofAbenez\\Entities\\Skill::\$[a-zA-Z0-9_]+#'
+        - '#[a-zA-Z0-9\\_]+::__construct\(\) does not call parent constructor from Nette\\ComponentModel\\Component#'
+        - '#[a-zA-Z0-9\\_]+::__construct\(\) does not call parent constructor from Nette\\Application\\UI\\Presenter#'
+        - '#Call to an undefined method Nette\\Utils\\Image::[a-zA-Z0-9_]+\(\)#'
+        - '#Parameter \#[0-9]+ \$[a-zA-Z0-9_]+ of class HeroesofAbenez\\Entities\\[a-zA-Z0-9\\_]+ constructor expects Nette\\Database\\Table\\ActiveRow, Nette\\Database\\Table\\IRow given#'
+        - '#Method HeroesofAbenez\\Model\\CombatLogManager::read\(\) should return Nette\\Database\\Table\\ActiveRow\|bool but returns Nette\\Database\\\Table\\IRow#'
+        - '#Parameter \#1 \$stats of class HeroesofAbenez\\Entities\\Character constructor expects mixed\[\], mixed\[\]\|bool given#'
+        - '#Parameter \#1 \$id of method HeroesofAbenez\\Entities\\Team::hasMember\(\) expects string, int\|string given#'
+        - '#Parameter \#2 \$count of method Kdyby\\Translation\\Translator::translate\(\) expects int\|null, mixed\[\] given#'

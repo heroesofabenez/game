@@ -21,9 +21,9 @@ class Quest extends BaseEntity {
   protected $cost_money = 0;
   /** @var int */
   protected $needed_level = 0;
-  /** @var int */
+  /** @var int|NULL */
   protected $needed_quest = NULL;
-  /** @var int */
+  /** @var int|NULL */
   protected $needed_item = NULL;
   /** @var int */
   protected $item_amount;

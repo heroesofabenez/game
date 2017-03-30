@@ -10,7 +10,7 @@ namespace HeroesofAbenez\Entities;
  * @property-read string $skillType
  */
 abstract class CharacterSkill extends BaseEntity {
-  /** @var SkillAttack */
+  /** @var Skill */
   protected $skill;
   /** @var int */
   protected $level;
