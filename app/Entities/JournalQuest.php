@@ -19,7 +19,7 @@ class JournalQuest extends BaseEntity {
    * @param string $name
    */
   function __construct(int $id, string $name) {
-    $this->id = (int) $id;
+    $this->id = $id;
     $this->name = $name;
   }
 }

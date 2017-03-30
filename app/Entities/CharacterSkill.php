@@ -26,7 +26,7 @@ abstract class CharacterSkill extends BaseEntity {
    * @param int $level
    */
   function setLevel(int $level) {
-    $this->level = (int) $level;
+    $this->level = $level;
   }
   
   /**

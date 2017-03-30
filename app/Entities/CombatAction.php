@@ -32,17 +32,17 @@ class CombatAction extends BaseEntity {
    * @param int $amount
    * @param string $name
    */
-  function __construct(string $action, bool $result, Character $character1, Character $character2, $amount = 0, $name = "") {
+  function __construct(string $action, bool $result, Character $character1, Character $character2, int $amount = 0, string $name = "") {
     $actions = ["attack", "skill_attack", "skill_special", "healing"];
     if(!in_array($action, $actions)) {
       exit("Invalid value for action passed to CombatAction::__construct.");
     }
     $this->action = $action;
-    $this->result = (bool) $result;
-    $this->amount = (int) $amount;
+    $this->result = $result;
+    $this->amount = $amount;
     $this->character1 = $character1;
     $this->character2 = $character2;
-    $this->name = (string) $name;
+    $this->name = $name;
     $this->parse();
   }
   
