@@ -9,7 +9,7 @@ use MyTester as MT,
 
 class TestCommand extends ChatCommand {
   function __construct() {
-    parent::__construct(ChatCommandsProcessorTest::COMMAND_NAME);
+    $this->name =ChatCommandsProcessorTest::COMMAND_NAME;
   }
   
   /**
@@ -22,10 +22,6 @@ class TestCommand extends ChatCommand {
 
 class Test2Command extends ChatCommand {
   const NAME = "test2";
-  
-  function __construct() {
-    parent::__construct(self::NAME);
-  }
   
   /**
    * @return string

@@ -17,7 +17,6 @@ class LocationCommand extends \HeroesofAbenez\Entities\ChatCommand {
   protected $translator;
   
   function __construct(\Nette\Security\User $user, \Nette\Database\Context $db, \Kdyby\Translation\Translator $translator) {
-    parent::__construct("location");
     $this->user = $user;
     $this->db = $db;
     $this->translator = $translator;

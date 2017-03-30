@@ -13,7 +13,6 @@ class TimeCommand extends \HeroesofAbenez\Entities\ChatCommand {
   protected $translator;
   
   function __construct(\Kdyby\Translation\Translator $translator) {
-    parent::__construct("time");
     $this->translator = $translator;
   }
   

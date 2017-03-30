@@ -26,7 +26,6 @@ class DemoteCommand extends \HeroesofAbenez\Entities\ChatCommand {
   protected $translator;
   
   function __construct(Guild $model, Translator $translator) {
-    parent::__construct("demote");
     $this->model = $model;
     $this->translator = $translator;
   }

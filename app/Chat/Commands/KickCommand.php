@@ -24,7 +24,6 @@ class KickCommand extends \HeroesofAbenez\Entities\ChatCommand {
   protected $translator;
   
   function __construct(Guild $model, Translator $translator) {
-    parent::__construct("kick");
     $this->model = $model;
     $this->translator = $translator;
   }

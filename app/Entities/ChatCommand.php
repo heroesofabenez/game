@@ -11,10 +11,20 @@ namespace HeroesofAbenez\Entities;
  */
 abstract class ChatCommand extends BaseEntity {
   /** @var string */
-  protected $name;
+  protected $name = "";
   
-  function __construct($name = "") {
-    $this->name = $name;
+  /**
+   * Defines default name for the chat command
+   * The class' name has to follow XCommand pattern
+   *
+   * @return string
+   */
+  function getName(): string {
+    if($this->name !== "") {
+      return $this->name;
+    }
+    $className = join('', array_slice(explode('\\', static::class), -1));
+    return strtolower(str_replace("Command", "", $className));
   }
   
   /**
