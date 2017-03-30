@@ -381,7 +381,7 @@ class CombatBase {
    */
   function mainStage(): void {
     $characters = array_merge($this->team1->usableMembers, $this->team2->usableMembers);
-    usort($characters, function($a, $b) {
+    usort($characters, function(Character $a, Character $b) {
       return -1 * strcmp((string) $a->initiative, (string) $b->initiative);
     });
     foreach($characters as $character) {
