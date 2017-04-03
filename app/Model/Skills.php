@@ -51,26 +51,26 @@ class Skills {
   
   /**
    * @param int $id
-   * @return SkillAttack|bool
+   * @return SkillAttack|NULL
    */
-  function getAttackSkill(int $id) {
+  function getAttackSkill(int $id): ?SkillAttack {
     $skills = $this->getListOfAttackSkills();
-    $skill = Arrays::get($skills, $id, false);
+    $skill = Arrays::get($skills, $id, NULL);
     return $skill;
   }
   
   /**
    * @param int $skillId
    * @param int $userId
-   * @return CharacterSkillAttack|bool
+   * @return CharacterSkillAttack|NULL
    */
-  function getCharacterAttackSkill(int $skillId, int $userId = 0) {
+  function getCharacterAttackSkill(int $skillId, int $userId = 0): ?CharacterSkillAttack {
     if($userId === 0) {
       $userId = $this->user->id;
     }
     $skill = $this->getAttackSkill($skillId);
     if(!$skill) {
-      return false;
+      return NULL;
     }
     $where = ["character" => $userId, "skill" => $skillId];
     $result = $this->db->query("SELECT * FROM character_attack_skills WHERE ?", $where)->fetch();
@@ -102,26 +102,26 @@ class Skills {
   
   /**
    * @param int $id
-   * @return SkillSpecial|bool
+   * @return SkillSpecial|NULL
    */
-  function getSpecialSkill(int $id) {
+  function getSpecialSkill(int $id): ?SkillSpecial {
     $skills = $this->getListOfSpecialSkills();
-    $skill = Arrays::get($skills, $id, false);
+    $skill = Arrays::get($skills, $id, NULL);
     return $skill;
   }
   
   /**
    * @param int $skillId
    * @param int $userId
-   * @return CharacterSkillSpecial|bool
+   * @return CharacterSkillSpecial|NULL
    */
-  function getCharacterSpecialSkill(int $skillId, int $userId = 0) {
+  function getCharacterSpecialSkill(int $skillId, int $userId = 0): ?CharacterSkillSpecial {
     if($userId === 0) {
       $userId = $this->user->id;
     }
     $skill = $this->getSpecialSkill($skillId);
     if(!$skill) {
-      return false;
+      return NULL;
     }
     $where = ["character" => $userId, "skill" => $skillId];
     $result = $this->db->query("SELECT * FROM character_special_skills WHERE ?", $where)->fetch();

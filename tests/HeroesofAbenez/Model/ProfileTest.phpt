@@ -42,7 +42,7 @@ class ProfileTest extends MT\TestCase {
     Assert::same("male", $result["gender"]);
     Assert::type("int", $result["guild"]);
     Assert::null($result["specialization"]);
-    Assert::type("HeroesofAbenez\Entities\Pet", $result["pet"]);
+    Assert::type(\HeroesofAbenez\Entities\Pet::class , $result["pet"]);
   }
   
   /**

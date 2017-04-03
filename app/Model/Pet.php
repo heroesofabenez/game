@@ -72,9 +72,9 @@ class Pet {
    * Get specified user's active pet
    * 
    * @param int $user User's id
-   * @return PetEntity|bool
+   * @return PetEntity|NULL
    */
-  function getActivePet(int $user) {
+  function getActivePet(int $user): ?PetEntity {
     $activePet = $this->db->table("pets")->where("owner=$user")->where("deployed=1");
     if($activePet->count() == 1) {
       $pet = $activePet->fetch();
@@ -82,7 +82,7 @@ class Pet {
       $petName = ($pet->name === NULL) ? "Unnamed" : $petName = $pet->name . ",";
       $return = new PetEntity($user, $petType, $petName, $pet->deployed);
     } else {
-      $return = false;
+      $return = NULL;
     }
     return $return;
   }

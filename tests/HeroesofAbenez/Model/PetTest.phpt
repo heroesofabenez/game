@@ -50,7 +50,7 @@ class PetTest extends MT\TestCase {
       Assert::type(PetEntity::class, $pet);
       Assert::contains($pet->name, "Unnamed");
     } elseif($user === 2) {
-      Assert::false($pet);
+      Assert::null($pet);
     }
   }
 }

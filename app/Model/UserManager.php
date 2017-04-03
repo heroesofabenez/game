@@ -86,16 +86,16 @@ class UserManager implements NS\IAuthenticator {
    * Creates new character
    * 
    * @param array $values
-   * @return array|bool Stats of new character
+   * @return array|NULL Stats of new character
    */
-  function create(array $values) {
+  function create(array $values): ?array {
     $data = [
       "name" => $values["name"], "race" => $values["race"],
       "occupation" => $values["class"], "gender" => $values["gender"]
     ];
     $chars = $this->db->table("characters")->where("name", $data["name"]);
     if($chars->count() > 0) {
-      return false;
+      return NULL;
     }
     
     $race = $this->profileModel->getRace($values["race"]);

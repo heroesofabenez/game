@@ -22,10 +22,15 @@ class CombatLogManager {
    * Load specified combat from database
    * 
    * @param int $id Combat's id
-   * @return \Nette\Database\Table\ActiveRow|bool
+   * @return \Nette\Database\Table\ActiveRow|NULL
    */
-  function read(int $id) {
-    return $this->db->table("combats")->get($id);
+  function read(int $id): ?\Nette\Database\Table\ActiveRow {
+    $log = $this->db->table("combats")->get($id);
+    if(!$log) {
+      return NULL;
+    } else {
+      return $log;
+    }
   }
   
   /**

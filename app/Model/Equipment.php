@@ -56,11 +56,11 @@ class Equipment {
   /**
    * Gets data about specified equipment
    * @param int $id
-   * @return EquipmentEntity|bool
+   * @return EquipmentEntity|NULL
    */
-  function view(int $id) {
+  function view(int $id): ?EquipmentEntity {
     $equipments = $this->listOfEquipment();
-    $item = Arrays::get($equipments, $id, false);
+    $item = Arrays::get($equipments, $id, NULL);
     return $item;
   }
   

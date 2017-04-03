@@ -61,11 +61,11 @@ class Profile {
    * Get data about specified race
    * 
    * @param int $id Race's id
-   * @return CharacterRace|bool
+   * @return CharacterRace|NULL
    */
-  function getRace(int $id) {
+  function getRace(int $id): ?CharacterRace {
     $races = $this->getRacesList();
-    $race = Arrays::get($races, $id, false);
+    $race = Arrays::get($races, $id, NULL);
     return $race;
   }
   
@@ -106,11 +106,11 @@ class Profile {
    * Get data about specified class
    * 
    * @param int $id Class' id
-   * @return CharacterClass|bool
+   * @return CharacterClass|NULL
    */
-  function getClass(int $id) {
+  function getClass(int $id): ?CharacterClass {
     $classes = $this->getClassesList();
-    $class = Arrays::get($classes, $id, false);
+    $class = Arrays::get($classes, $id, NULL);
     return $class;
   }
   
@@ -151,11 +151,11 @@ class Profile {
    * Get data about specified specialization
    * 
    * @param int $id Specialization's id
-   * @return CharacterSpecialization|bool
+   * @return CharacterSpecialization|NULL
    */
-  function getSpecialization(int $id) {
+  function getSpecialization(int $id): ?CharacterSpecialization {
     $races = $this->getSpecializationsList();
-    $race = Arrays::get($races, $id, false);
+    $race = Arrays::get($races, $id, NULL);
     return $race;
   }
   
@@ -243,12 +243,14 @@ class Profile {
    * Gets basic data about specified player
    * 
    * @param integer $id character's id
-   * @return array|bool info about character
+   * @return array|NULL info about character
    */
-  function view(int $id) {
+  function view(int $id): ?array {
     $return = [];
     $char = $this->db->table("characters")->get($id);
-    if(!$char) { return false; }
+    if(!$char) {
+      return NULL;
+    }
     $stats = [
       "id", "name", "gender", "level", "race", "description", "strength", "dexterity",
       "constitution", "intelligence", "charisma", "occupation", "specialization"

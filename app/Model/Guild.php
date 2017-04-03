@@ -71,14 +71,14 @@ class Guild {
    * Gets basic data about specified guild
    * 
    * @param integer $id guild's id
-   * @return array|bool info about guild
+   * @return array|NULL info about guild
    */
-  function view(int $id) {
+  function view(int $id): ?array {
     $return = [];
     $guilds = $this->listOfGuilds();
     $guild = Arrays::get($guilds, $id, false);
     if(!$guild) {
-      return false;
+      return NULL;
     }
     $return["name"] = $guild->name;
     $return["description"] = $guild->description;
