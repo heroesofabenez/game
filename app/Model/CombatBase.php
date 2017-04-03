@@ -599,8 +599,8 @@ class CombatBase {
    * @return void
    */
   function logResults(Character $character1, Character $character2): void {
-    extract($this->results);
-    $this->log->log($action, $result, $character1, $character2, $amount, $name);
+    $results = $this->results;
+    $this->log->log($results["action"], $results["result"], $character1, $character2, $results["amount"], $results["name"]);
     $this->results = NULL;
   }
   
