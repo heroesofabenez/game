@@ -1,6 +1,7 @@
 includes:
     - vendor/phpstan/phpstan-nette/extension.neon
 parameters:
+    defineVariablesWithoutDefaultBranch: true
     universalObjectCratesClasses:
         - Nette\Security\IIdentity
     earlyTerminatingMethodCalls:
