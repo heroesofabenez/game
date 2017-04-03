@@ -78,7 +78,11 @@ class PostofficeControl extends \Nette\Application\UI\Control {
     $this->template->render();
   }
   
-  protected function canShow($message) {
+  /**
+   * @param \Nette\Database\Table\ActiveRow $message
+   * @return bool
+   */
+  protected function canShow(\Nette\Database\Table\ActiveRow $message): bool {
     if($message->from == $this->user->id OR $message->to == $this->user->id) {
       return true;
     } else {
