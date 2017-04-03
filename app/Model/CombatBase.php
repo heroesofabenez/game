@@ -308,7 +308,7 @@ class CombatBase {
    * @param int $threshold
    * @return Character|NULL
    */
-  protected function findLowestHpCharacter(Team $team, $threshold = NULL): ?Character {
+  protected function findLowestHpCharacter(Team $team, int $threshold = NULL): ?Character {
     $lowestHp = 9999;
     $lowestIndex = -1;
     if(is_null($threshold)) {
