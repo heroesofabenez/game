@@ -1,49 +1,7 @@
 image: shipito/php:7.1
 
 stages:
-  - build
-  - analyze
   - test
-
-build:
-  stage: build
-
-  script:
-  - mkdir images
-  - mkdir images/maps
-  - mkdir temp/cache
-  - mkdir temp/sessions
-  - composer install --prefer-dist
-
-  cache:
-    paths:
-    - vendor/
-
-  artifacts:
-    paths:
-    - vendor
-    - images
-    - temp/cache
-    - temp/sessions
-    expire_in: 10 mins
-
-analyze:lint:
-  stage: analyze
-
-  script:
-  - ./vendor/bin/parallel-lint . -e php,phpt --exclude vendor --exclude temp
-
-analyze:cs:
-  stage: analyze
-
-  script:
-  - ./vendor/bin/phpcs --extensions=php,phpt . --standard=vendor/nexendrie/code-quality/ruleset.xml --colors
-
-analyze:phpstan:
-  stage: analyze
-
-  script:
-  - ./vendor/bin/phpstan analyze -l 5 -c phpstan.neon app ci
 
 .job_template: &test_job
   stage: test
@@ -56,10 +14,10 @@ analyze:phpstan:
     MYSQL_ROOT_PASSWORD: root
 
   before_script:
-  - php ci/setup_db.php
+  - curl -sS https://www.phing.info/get/phing-latest.phar > phing && chmod +x phing
 
   script:
-  - php run_tests.php
+  - ./phing test-ci
 
 test:default:
   <<: *test_job

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project name="Heroes of Abenenez" basedir="." default="test">
+  <target name="test" depends="lint,cs,phpstan,tests"/>
+  <target name="test-ci" depends="install-ci,setup-db,test"/>
+  <target name="install-ci">
+    <mkdir dir="images/maps"/>
+    <mkdir dir="temp/cache"/>
+    <mkdir dir="temp/sessions"/>
+    <exec executable="composer" logoutput="true" passthru="true" checkreturn="true">
+      <arg value="install"/>
+      <arg value="--prefer-dist"/>
+      <arg value="--no-progress"/>
+      <arg value="--no-suggest"/>
+      <arg value="--no-interaction"/>
+    </exec>
+  </target>
+  <target name="setup-db">
+    <exec executable="php" logoutput="true" passthru="true" checkreturn="true">
+      <arg path="ci/setup_db.php"/>
+    </exec>
+  </target>
+  <target name="lint" description="Syntax checks" >
+    <exec executable="vendor/bin/parallel-lint" logoutput="true" passthru="true" checkreturn="true">
+      <arg value="."/>
+      <arg value="-e"/>
+      <arg value="php,phpt"/>
+      <arg value="--exclude"/>
+      <arg path="vendor"/>
+      <arg value="--exclude"/>
+      <arg path="temp"/>
+    </exec>
+  </target>
+  <target name="cs" description="Coding standards compliance">
+    <exec executable="vendor/bin/phpcs" logoutput="true" passthru="true" checkreturn="true">
+      <arg value="--extensions=php,phpt"/>
+      <arg value="."/>
+      <arg value="--standard=vendor/nexendrie/code-quality/ruleset.xml"/>
+      <arg value="--colors"/>
+    </exec>
+  </target>
+  <target name="phpstan" description="PHPStan analyzes">
+    <exec executable="vendor/bin/phpstan" logoutput="true" passthru="true" checkreturn="true">
+      <arg value="analyze"/>
+      <arg value="-l"/>
+      <arg value="5"/>
+      <arg value="-c"/>
+      <arg path="phpstan.neon"/>
+      <arg path="app"/>
+      <arg path="ci"/>
+    </exec>
+  </target>
+  <target name="tests" description="Unit tests">
+    <exec executable="php" logoutput="true" passthru="true" checkreturn="true">
+      <arg path="run_tests.php"/>
+    </exec>
+  </target>
+</project>
