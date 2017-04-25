@@ -37,7 +37,8 @@ class TravelPresenter extends BasePresenter {
   function actionStage(int $id): void {
     $this->model->user = $this->user;
     try {
-      $this->model->travelToStage($id);$stageName = $this->model->getStageName($id);
+      $this->model->travelToStage($id);
+      $stageName = $this->model->getStageName($id);
       $this->user->logout();
       $this->flashMessage($this->translator->translate("messages.travel.movedToStage", NULL, ["stageName" => $stageName]));
     } catch(CannotTravelToStageException $e) {

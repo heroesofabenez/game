@@ -12,7 +12,7 @@ use Nette\Application\UI\Form,
  *
  * @author Jakub Konečný
  */
-class CustomGuildRankNamesFormFactory extends BaseFormFactory  {
+class CustomGuildRankNamesFormFactory extends BaseFormFactory {
   /** @var  \HeroesofAbenez\Model\Guild */
   protected $model;
   /** @var  \Nette\Security\User */

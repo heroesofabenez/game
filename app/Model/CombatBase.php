@@ -120,7 +120,7 @@ class CombatBase {
       if(!$this->team1->hasAliveMembers()) $result = 2;
       elseif(!$this->team2->hasAliveMembers()) $result = 1;
     } elseif($this->round > $this->round_limit AND $result === 0) {
-      $result = $this->damage[1] > $this->damage[2] ? 1: 2;
+      $result = ($this->damage[1] > $this->damage[2]) ? 1 : 2;
     }
     return $result;
   }
@@ -130,7 +130,7 @@ class CombatBase {
    * @return int
    */
   protected function getTeam(Character $character): int {
-    $team = $this->team1->hasMember($character->id) ? 1: 2;
+    $team = $this->team1->hasMember($character->id) ? 1 : 2;
     return $team;
   }
   
@@ -139,7 +139,7 @@ class CombatBase {
    * @return int
    */
   protected function getEnemyTeam(Character $character): int {
-    $team = $this->team1->hasMember($character->id) ? 2: 1;
+    $team = $this->team1->hasMember($character->id) ? 2 : 1;
     return $team;
   }
   
@@ -559,7 +559,7 @@ class CombatBase {
     $effect = [
       "id" => "skill{$skill->skill->id}Effect",
       "type" => $skill->skill->type,
-      "stat" => ($skill->skill->type === "stun"? NULL : $skill->skill->stat),
+      "stat" => (($skill->skill->type === "stun") ? NULL : $skill->skill->stat),
       "value" => $skill->value,
       "source" => "skill",
       "duration" => $skill->skill->duration
@@ -612,7 +612,7 @@ class CombatBase {
    * @return void
    */
   function logDamage(Character $character1, Character $character2): void {
-    $team = $this->team1->hasMember($character1->id) ? 1: 2;
+    $team = $this->team1->hasMember($character1->id) ? 1 : 2;
     $this->damage[$team] += $this->results["amount"];
   }
   

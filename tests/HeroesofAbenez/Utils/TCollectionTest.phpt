@@ -22,7 +22,7 @@ class Collection implements \ArrayAccess, \Countable, \IteratorAggregate {
   }
 }
 
-class TCollectionTest extends MT\TestCase  {
+class TCollectionTest extends MT\TestCase {
   protected $col;
   
   /**

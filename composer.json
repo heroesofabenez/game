@@ -29,14 +29,16 @@
         "kdyby/translation": "2.3.x@dev"
     },
     "require-dev": {
+        "nexendrie/code-quality": "dev-master",
         "konecnyjakub/mytester": "2.0.x@dev",
         "nette/robot-loader": "~2.4",
-        "jakub-onderka/php-parallel-lint": "^0.9.2",
-        "jakub-onderka/php-console-highlighter": "^0.3.2",
-        "squizlabs/php_codesniffer": "^2.8",
         "kdyby/fake-session": "^2.0",
-        "phpstan/phpstan": "^0.6.4",
         "phpstan/phpstan-nette": "^0.6.3"
+    },
+    "replace": {
+        "nette/tester": "*",
+        "mrtnzlml/testbench": "*",
+        "satooshi/php-coveralls": "*"
     },
     "autoload": {
         "psr-4": {

@@ -58,9 +58,11 @@ class Equipment extends BaseEntity {
   /**
    * @param int $value
    */
+  // @codingStandardsIgnoreStart
   function setRequired_class(int $value) {
     $this->required_class = $value;
   }
+  // @codingStandardsIgnoreEnd
   
   /**
    * Returns deploy parameters of the equipment (for effect to character)

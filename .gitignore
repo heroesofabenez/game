@@ -8,5 +8,4 @@
 /log/
 /app/config/local.neon
 /vendor/
-cs-ruleset.xml
 !.htaccess
