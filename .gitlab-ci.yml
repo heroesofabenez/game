@@ -1,4 +1,4 @@
-image: shipito/php:7.1
+image: nexendrie/php
 
 stages:
   - test
@@ -17,11 +17,8 @@ cache:
     MYSQL_DATABASE: heroesofabenez
     MYSQL_ROOT_PASSWORD: root
 
-  before_script:
-  - curl -sS https://www.phing.info/get/phing-latest.phar > phing && chmod +x phing
-
   script:
-  - ./phing test-ci
+  - phing test-ci
 
 test:default:
   <<: *test_job
