@@ -48,7 +48,7 @@ class QuestPresenter extends BasePresenter {
         "text" => "pay {$quest->cost_money} silver marks", "met" => false
       ];
     }
-    if($quest->needed_item > 0) {
+    if(is_int($quest->needed_item)) {
       $itemName = $this->itemModel->getItemName($quest->needed_item);
       $itemLink = $this->link("Item:view", $quest->needed_item);
       $haveItem = $this->itemModel->haveItem($quest->needed_item, $quest->item_amount);

@@ -57,7 +57,7 @@ class CombatHelper {
    */
   function getPlayer(int $id): Character {
     $data = $this->profileModel->view($id);
-    if(!$data) {
+    if(is_null($data)) {
       throw new OpponentNotFoundException;
     }
     $data["initiative_formula"] = $this->getInitiativeFormula($data["occupation"]);

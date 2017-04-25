@@ -130,7 +130,7 @@ class NPCQuestsControl extends \Nette\Application\UI\Control {
     } else {
       $haveMoney = true;
     }
-    if($quest->needed_item > 0) {
+    if(is_int($quest->needed_item)) {
       $haveItem = $this->itemModel->haveItem($quest->needed_item, $quest->item_amount);
     } else {
       $haveItem = true;
