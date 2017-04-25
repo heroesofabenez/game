@@ -3,6 +3,10 @@ image: shipito/php:7.1
 stages:
   - test
 
+cache:
+  paths:
+  - vendor/
+
 .job_template: &test_job
   stage: test
 
