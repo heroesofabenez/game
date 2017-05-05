@@ -94,17 +94,16 @@ class Item {
    * @return bool
    */
   function haveItem(int $id, int $amount = 1): bool {
-    $return = false;
     $itemRow = $this->db->table("character_items")
       ->where("character", $this->user->id)
       ->where("item", $id);
     if($itemRow->count() == 1) {
       $item = $itemRow->fetch();
       if($item->amount >= $amount) {
-        $return = true;
+        return true;
       }
     }
-    return $return;
+    return false;
   }
   
   /**
