@@ -40,12 +40,12 @@ class MapDrawer {
     $image->rectangle(0, 0, 249, 249, Image::rgb(204, 102, 0));
     foreach($points as $point) {
       $image->filledEllipse($point->pos_x, $point->pos_y, 4, 4, Image::rgb(51, 102, 0));
-      $image->ttfText(8, 0, $point->pos_x-18, $point->pos_y+11, Image::rgb(51, 51, 0), APP_DIR . "/arial.ttf", $point->name);
+      $image->ttfText(8, 0, $point->pos_x-18, $point->pos_y+11, Image::rgb(51, 51, 0), __DIR__ . "/../arial.ttf", $point->name);
     }
     foreach($routes as $route) {
       $image->line($points[$route->from]->pos_x, $points[$route->from]->pos_y, $points[$route->to]->pos_x, $points[$route->to]->pos_y, Image::rgb(51, 153, 255));
     }
-    $filename = WWW_DIR . "/images/maps/$name.jpeg";
+    $filename = __DIR__ . "/../../images/maps/$name.jpeg";
     $image->save($filename);
   }
   

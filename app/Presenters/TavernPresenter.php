@@ -27,7 +27,7 @@ class TavernPresenter extends BasePresenter {
    * @return array
    */
   function formatTemplateFiles() {
-    return [APP_DIR . "/templates/Tavern.@layout.latte"];
+    return [__DIR__ . "/../templates/Tavern.@layout.latte"];
   }
   
   /**

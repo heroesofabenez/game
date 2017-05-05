@@ -33,7 +33,7 @@ class RankingPresenter extends BasePresenter {
    * @return array
    */
   function formatTemplateFiles() {
-    return [APP_DIR . "/templates/Ranking.@layout.latte"];
+    return [__DIR__ . "/../templates/Ranking.@layout.latte"];
   }
   
   /**

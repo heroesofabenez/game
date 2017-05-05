@@ -1,15 +1,15 @@
 <?php
 declare(strict_types=1);
 
-require WWW_DIR . "/vendor/autoload.php";
-Tracy\Debugger::enable(null, WWW_DIR . "/log");
+require __DIR__ . "/../vendor/autoload.php";
+Tracy\Debugger::enable(null, __DIR__ . "/../log");
 
 $configurator = new Nette\Configurator;
-$configurator->setTempDirectory(WWW_DIR . "/temp");
-$configurator->addConfig(APP_DIR . "/config/main.neon");
-$configurator->addConfig(APP_DIR . "/config/local.neon");
+$configurator->setTempDirectory(__DIR__ . "/../temp");
+$configurator->addConfig(__DIR__ . "/config/main.neon");
+$configurator->addConfig(__DIR__ . "/config/local.neon");
 if($configurator->isDebugMode()) {
-  $configurator->addConfig(APP_DIR . "/config/mytester.neon");
+  $configurator->addConfig(__DIR__ . "/config/mytester.neon");
 }
 $container = $configurator->createContainer();
 
