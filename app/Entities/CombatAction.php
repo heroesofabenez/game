@@ -54,11 +54,16 @@ class CombatAction extends BaseEntity {
     switch($this->action) {
       case "attack":
       case "skill_attack":
-        if($this->action === "attack") $text .= "attacks {$this->character2->name} ";
-        else $text .= "uses attack $this->name on {$this->character2->name} ";
+        if($this->action === "attack") {
+          $text .= "attacks {$this->character2->name} ";
+        } else {
+          $text .= "uses attack $this->name on {$this->character2->name} ";
+        }
         if($this->result) {
           $text .= " and hits. {$this->character2->name} loses $this->amount hitpoint(s).";
-          if($this->character2->hitpoints < 1) $text .= " He/she falls on the ground.";
+          if($this->character2->hitpoints < 1) {
+            $text .= " He/she falls on the ground.";
+          }
         } else {
           $text .= "but misses.";
         }

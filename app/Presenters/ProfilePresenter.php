@@ -40,7 +40,9 @@ class ProfilePresenter extends BasePresenter {
         $this->template->guildId = 0;
         continue;
       }
-      if($key == "guildrank") continue;
+      if($key == "guildrank") {
+        continue;
+      }
       $this->template->$key = $value;
     }
   }

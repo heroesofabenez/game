@@ -34,12 +34,22 @@ abstract class BasePresenter extends \Nette\Application\UI\Presenter {
    * @return void
    */
   function tryLogin(): void {
-    if(!$this->user->isLoggedIn()) $this->user->login();
+    if(!$this->user->isLoggedIn()) {
+      $this->user->login();
+    }
     $uid = $this->user->id;
-    if($this instanceof CharacterPresenter AND $uid == -1) return;
-    if($this instanceof CharacterPresenter AND $this->user->identity->stage == NULL) return;
-    if($this instanceof CharacterPresenter AND $uid > 0) $this->redirect(301, "Homepage:default");
-    if($this instanceof IntroPresenter AND $this->user->identity->stage == NULL) return;
+    if($this instanceof CharacterPresenter AND $uid == -1) {
+      return;
+    }
+    if($this instanceof CharacterPresenter AND $this->user->identity->stage == NULL) {
+      return;
+    }
+    if($this instanceof CharacterPresenter AND $uid > 0) {
+      $this->redirect(301, "Homepage:default");
+    }
+    if($this instanceof IntroPresenter AND $this->user->identity->stage == NULL) {
+      return;
+    }
     switch($uid) {
       case -1:
         $this->redirect(302, "Character:create");
@@ -47,7 +57,9 @@ abstract class BasePresenter extends \Nette\Application\UI\Presenter {
       case 0:
         $this->redirectUrl("http://heroesofabenez.tk/");
     }
-    if($this->user->identity->stage == NULL) $this->redirect(302, "Intro:default");
+    if($this->user->identity->stage == NULL) {
+      $this->redirect(302, "Intro:default");
+    }
   }
 }
 ?>

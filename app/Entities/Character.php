@@ -319,7 +319,9 @@ class Character extends BaseEntity {
   function damageStat(): string {
     $stat = "strength";
     foreach($this->equipment as $item) {
-      if(!$item->worn OR $item->slot != "weapon") continue;
+      if(!$item->worn OR $item->slot != "weapon") {
+        continue;
+      }
       switch($item->type) {
         case "staff":
           $stat = "intelligence";
@@ -401,7 +403,9 @@ class Character extends BaseEntity {
       unset($stat, $type, $duration, $bonus_value);
     }
     foreach($debuffs as $stat => $value) {
-      if($value > 80) $value = 80;
+      if($value > 80) {
+        $value = 80;
+      }
       $bonus_value = $$stat / 100 * $value;
       $$stat -= $bonus_value;
     }

@@ -91,8 +91,12 @@ class CombatHelper {
     $skillPoints = $data["level"];
     for($i = 1; $skillPoints > 0; $i++) {
       foreach($skills as $skill) {
-        if($skillPoints < 1) break;
-        if($skill->level + 1 <= $skill->skill->levels) $skill->level++;
+        if($skillPoints < 1) {
+          break;
+        }
+        if($skill->level + 1 <= $skill->skill->levels) {
+          $skill->level++;
+        }
         $skillPoints--;
       }
     }

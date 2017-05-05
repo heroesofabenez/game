@@ -117,8 +117,11 @@ class CombatBase {
   function getWinner(): int {
     static $result = 0;
     if($this->round <= $this->round_limit AND $result === 0) {
-      if(!$this->team1->hasAliveMembers()) $result = 2;
-      elseif(!$this->team2->hasAliveMembers()) $result = 1;
+      if(!$this->team1->hasAliveMembers()) {
+        $result = 2;
+      } elseif(!$this->team2->hasAliveMembers()) {
+        $result = 1;
+      }
     } elseif($this->round > $this->round_limit AND $result === 0) {
       $result = ($this->damage[1] > $this->damage[2]) ? 1 : 2;
     }
@@ -259,7 +262,9 @@ class CombatBase {
     /** @var Character $character */
     foreach($characters as $character) {
       $character->recalculateStats();
-      if($character->hitpoints > 0) $character->calculateInitiative();
+      if($character->hitpoints > 0) {
+        $character->calculateInitiative();
+      }
     }
   }
   
@@ -385,7 +390,9 @@ class CombatBase {
       return -1 * strcmp((string) $a->initiative, (string) $b->initiative);
     });
     foreach($characters as $character) {
-      if($character->hitpoints < 1) continue;
+      if($character->hitpoints < 1) {
+        continue;
+      }
       if(in_array($character, $this->findHealers())) {
         $target = $this->selectHealingTarget($character);
         if($target) {
@@ -480,8 +487,11 @@ class CombatBase {
     } else {
       $hit_chance = $character1->hit - $character2->dodge;
     }
-    if($hit_chance < 15) $hit_chance = 15;
-    if($hit_chance > 100) $hit_chance = 100;
+    if($hit_chance < 15) {
+      $hit_chance = 15;
+    } elseif($hit_chance > 100) {
+      $hit_chance = 100;
+    }
     return (int) $hit_chance;
   }
   
@@ -504,11 +514,15 @@ class CombatBase {
     } else {
       $result["amount"] = 0;
     }
-    if($result["amount"] < 0) $result["amount"] = 0;
+    if($result["amount"] < 0) {
+      $result["amount"] = 0;
+    }
     if($defender->hitpoints - $result["amount"] < 0) {
       $result["amount"] = $defender->hitpoints;
     }
-    if($result["amount"]) $defender->harm($result["amount"]);
+    if($result["amount"]) {
+      $defender->harm($result["amount"]);
+    }
     $result["action"] = "attack";
     $result["name"] = "";
     $this->results = $result;
@@ -536,7 +550,9 @@ class CombatBase {
     if($defender->hitpoints - $result["amount"] < 0) {
       $result["amount"] = $defender->hitpoints;
     }
-    if($result["amount"]) $defender->harm($result["amount"]);
+    if($result["amount"]) {
+      $defender->harm($result["amount"]);
+    }
     $result["action"] = "skill_attack";
     $result["name"] = $skill->skill->name;
     $this->results = $result;
@@ -585,7 +601,9 @@ class CombatBase {
       $amount = $patient->max_hitpoints - $patient->hitpoints;
     }
     $result["amount"] = (int) $amount;
-    if($result["amount"]) $patient->heal($result["amount"]);
+    if($result["amount"]) {
+      $patient->heal($result["amount"]);
+    }
     $result["action"] = "healing";
     $result["name"] = "";
     $this->results = $result;

@@ -48,7 +48,9 @@ class NPC {
     }
     if($stage > 0) {
       foreach($return as $npc) {
-        if($npc->stage !== $stage) unset($return[$npc->id]);
+        if($npc->stage !== $stage) {
+          unset($return[$npc->id]);
+        }
       }
     }
     return $return;

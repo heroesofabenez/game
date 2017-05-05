@@ -100,7 +100,9 @@ class Item {
       ->where("item", $id);
     if($itemRow->count() == 1) {
       $item = $itemRow->fetch();
-      if($item->amount >= $amount) $return = true;
+      if($item->amount >= $amount) {
+        $return = true;
+      }
     }
     return $return;
   }

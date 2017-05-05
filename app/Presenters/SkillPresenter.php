@@ -51,7 +51,9 @@ class SkillPresenter extends BasePresenter {
    */
   function renderSpecial(int $id): void {
     $skill = $this->model->getSpecialSkill($id);
-    if(!$skill) $this->forward("notfound");
+    if(!$skill) {
+      $this->forward("notfound");
+    }
     $this->template->skill = $skill;
   }
 }

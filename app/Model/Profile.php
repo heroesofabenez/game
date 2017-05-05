@@ -300,7 +300,9 @@ class Profile {
     $data = "level=level+1, stat_points=stat_points+$class->stat_points_level, skill_points=skill_points+1";
     foreach($this->stats as $stat) {
       $grow = $class->{$stat . "_grow"};
-      if($grow > 0) $data .= ", $stat=$stat+$grow";
+      if($grow > 0) {
+        $data .= ", $stat=$stat+$grow";
+      }
     }
     $where = ["id" => $this->user->id];
     $this->db->query("UPDATE characters SET $data WHERE ?", $where);

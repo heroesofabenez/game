@@ -117,7 +117,9 @@ class Guild {
   function guildMembers(int $id, array $roles = [], bool $customRoleNames = false): array {
     $return = [];
     $members = $this->db->table("characters")->where("guild", $id)->order("guildrank DESC, id");
-    if(count($roles) > 0) $members->where("guildrank", $roles);
+    if(count($roles) > 0) {
+      $members->where("guildrank", $roles);
+    }
     foreach($members as $member) {
       $rank = $member->guildrank;
       $m = (object) ["id" => $member->id, "name" => $member->name, "rank" => $rank, "rankId" => $member->guildrank, "customRankName" => ""];
@@ -139,7 +141,9 @@ class Guild {
   function create($data): void {
     $guilds = $this->cache->load("guilds");
     foreach($guilds as $guild) {
-      if($guild->name == $data["name"]) throw new NameInUseException();
+      if($guild->name == $data["name"]) {
+        throw new NameInUseException();
+      }
     }
     $row = $this->db->table("guilds")->insert($data);
     $data2 = ["guild" => $row->id, "guildrank" => 7];
@@ -218,7 +222,9 @@ class Guild {
     if($guilds === NULL) {
       $guilds = $this->db->table("guilds");
       foreach($guilds as $guild) {
-        if($guild->id == 0) continue;
+        if($guild->id == 0) {
+          continue;
+        }
         $members = $this->db->table("characters")->where("guild", $guild->id);
         $leader = "";
         foreach($members as $member) {
@@ -278,7 +284,9 @@ class Guild {
     }
     if($character->guildrank == 5) {
       $deputy = $this->guildMembers($admin->identity->guild, [6]);
-      if(count($deputy) > 0) throw new CannotHaveMoreDeputiesException;
+      if(count($deputy) > 0) {
+        throw new CannotHaveMoreDeputiesException;
+      }
     }
     $this->db->query("UPDATE characters SET guildrank=guildrank+1 WHERE id=$id");
   }
@@ -494,7 +502,9 @@ class Guild {
     $gid = $this->user->identity->guild;
     $tableName = "guild_ranks_custom";
     foreach($names as $rank => $name) {
-      if($name === "") continue;
+      if($name === "") {
+        continue;
+      }
       $rank = substr($rank, 4, 1);
       $data = ["guild" => $gid, "rank" => $rank, "name" => $name];
       $row = $this->db->table($tableName)->where("guild=? AND rank=?", $gid, $rank);

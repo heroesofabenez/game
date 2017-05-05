@@ -87,7 +87,9 @@ class Equipment {
       ->where("item.slot", $eq->slot)
       ->where("character", $this->user->id);
     foreach($items as $i) {
-      if($i->id == $id) continue;
+      if($i->id == $id) {
+        continue;
+      }
       $this->db->query("UPDATE character_equipment SET ? WHERE id=?", ["worn" => 0], $i->id);
     }
     $this->db->query("UPDATE character_equipment SET ? WHERE id=?", ["worn" => 1], $id);

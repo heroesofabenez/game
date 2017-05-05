@@ -34,7 +34,9 @@ class TavernPresenter extends BasePresenter {
    * @return void
    */
   function actionGuild(): void {
-    if($this->user->identity->guild === 0) $this->template->canChat = false;
+    if($this->user->identity->guild === 0) {
+      $this->template->canChat = false;
+    }
     $this->template->title = "Guild chat";
     $this->template->chat = "guildChat";
   }
