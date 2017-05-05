@@ -39,10 +39,10 @@ class Team extends BaseEntity implements \ArrayAccess, \Countable, \IteratorAggr
   /**
    * Get member's index
    * 
-   * @param int $id Character's id
+   * @param int|string $id Character's id
    * @return int Index|-1 if the character is not in the team
    */
-  function getIndex(int $id): int {
+  function getIndex($id): int {
     foreach($this->items as $index => $member) {
       if($member->id === $id) {
         return $index;
