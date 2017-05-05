@@ -21,10 +21,10 @@ use HeroesofAbenez\Entities\Team,
  * @method void onRoundStart() Tasks to do at the start of a round
  * @method void onRound() Tasks to do during a round
  * @method void onRoundEnd() Tasks to do at the end of a round
- * @method void onAttack(Character $character1, Character $character2) Tasks to do at attack
- * @method void onSkillAttack(Character $character1, Character $character2, CharacterSkillAttack $skill) Tasks to do at skill attack
- * @method void onSkillSpecial(Character $character1, Character $character2, CharacterSkillSpecial $skill) Tasks to do when using special skill
- * @method void onHeal(Character $character1, Character $character2) Tasks to do at healing
+ * @method void onAttack(Character $attacker, Character $defender) Tasks to do at attack
+ * @method void onSkillAttack(Character $attacker, Character $defender, CharacterSkillAttack $skill) Tasks to do at skill attack
+ * @method void onSkillSpecial(Character $character1, Character $target, CharacterSkillSpecial $skill) Tasks to do when using special skill
+ * @method void onHeal(Character $healer, Character $patient) Tasks to do at healing
  */
 class CombatBase {
   use \Nette\SmartObject;
@@ -490,25 +490,25 @@ class CombatBase {
    * Hit chance = Attacker's hit - Defender's dodge, but at least 15%
    * Damage = Attacker's damage
    * 
-   * @param \HeroesofAbenez\Entities\Character $character1 Attacker
-   * @param \HeroesofAbenez\Entities\Character $character2 Defender
+   * @param Character $attacker
+   * @param Character $defender
    * @return void
    */
-  function attackHarm(Character $character1, Character $character2): void {
+  function attackHarm(Character $attacker, Character $defender): void {
     $result = [];
-    $hit_chance = $this->calculateHitChance($character1, $character2);
+    $hit_chance = $this->calculateHitChance($attacker, $defender);
     $roll = rand(0, 100);
     $result["result"] = ($roll <= $hit_chance);
     if($result["result"]) {
-      $result["amount"] = (int) $character1->damage - $character2->defense;
+      $result["amount"] = (int) $attacker->damage - $defender->defense;
     } else {
       $result["amount"] = 0;
     }
     if($result["amount"] < 0) $result["amount"] = 0;
-    if($character2->hitpoints - $result["amount"] < 0) {
-      $result["amount"] = $character2->hitpoints;
+    if($defender->hitpoints - $result["amount"] < 0) {
+      $result["amount"] = $defender->hitpoints;
     }
-    if($result["amount"]) $character2->harm($result["amount"]);
+    if($result["amount"]) $defender->harm($result["amount"]);
     $result["action"] = "attack";
     $result["name"] = "";
     $this->results = $result;
@@ -517,26 +517,26 @@ class CombatBase {
   /**
    * Use an attack skill
    * 
-   * @param Character $character1 Attacker
-   * @param Character $character2 Defender
+   * @param Character $attacker
+   * @param Character $defender
    * @param CharacterSkillAttack $skill Used skill
    * @return void
    */
-  function useAttackSkill(Character $character1, Character $character2, CharacterSkillAttack $skill): void {
+  function useAttackSkill(Character $attacker, Character $defender, CharacterSkillAttack $skill): void {
     $result = [];
-    $hit_chance = $this->calculateHitChance($character1, $character2, $skill);
+    $hit_chance = $this->calculateHitChance($attacker, $defender, $skill);
     $roll = rand(0, 100);
     $result["result"] = ($roll <= $hit_chance);
     if($result["result"]) {
-      $result["amount"] = $character1->damage - $character2->defense;
+      $result["amount"] = $attacker->damage - $defender->defense;
       $result["amount"] = (int) ($result["amount"] / 100 * $skill->damage);
     } else {
       $result["amount"] = 0;
     }
-    if($character2->hitpoints - $result["amount"] < 0) {
-      $result["amount"] = $character2->hitpoints;
+    if($defender->hitpoints - $result["amount"] < 0) {
+      $result["amount"] = $defender->hitpoints;
     }
-    if($result["amount"]) $character2->harm($result["amount"]);
+    if($result["amount"]) $defender->harm($result["amount"]);
     $result["action"] = "skill_attack";
     $result["name"] = $skill->skill->name;
     $this->results = $result;
@@ -547,11 +547,11 @@ class CombatBase {
    * Use a special skill
    * 
    * @param Character $character1
-   * @param Character $character2
+   * @param Character $target
    * @param CharacterSkillSpecial $skill
    * @return void
    */
-  function useSpecialSkill(Character $character1, Character $character2, CharacterSkillSpecial $skill): void {
+  function useSpecialSkill(Character $character1, Character $target, CharacterSkillSpecial $skill): void {
     $result = [
       "result" => true, "amount" => 0, "action" => "skill_special", "name" => $skill->skill->name
     ];
@@ -564,28 +564,28 @@ class CombatBase {
       "source" => "skill",
       "duration" => $skill->skill->duration
     ];
-    $character2->addEffect(new CharacterEffect($effect));
+    $target->addEffect(new CharacterEffect($effect));
     $skill->resetCooldown();
   }
   
   /**
    * Heal a character
    * 
-   * @param Character $character1 Healer
-   * @param Character $character2 Wounded character
+   * @param Character $healer
+   * @param Character $patient
    * @return void
    */
-  function heal(Character $character1, Character $character2): void {
+  function heal(Character $healer, Character $patient): void {
     $result = [];
-    $hit_chance = $character1->intelligence * round($character1->level / 5) + 30;
+    $hit_chance = $healer->intelligence * round($healer->level / 5) + 30;
     $roll = rand(0, 100);
     $result["result"] = ($roll <= $hit_chance);
-    $amount = ($result["result"]) ? $character1->intelligence / 2 : 0;
-    if($amount + $character2->hitpoints > $character2->max_hitpoints) {
-      $amount = $character2->max_hitpoints - $character2->hitpoints;
+    $amount = ($result["result"]) ? $healer->intelligence / 2 : 0;
+    if($amount + $patient->hitpoints > $patient->max_hitpoints) {
+      $amount = $patient->max_hitpoints - $patient->hitpoints;
     }
     $result["amount"] = (int) $amount;
-    if($result["amount"]) $character2->heal($result["amount"]);
+    if($result["amount"]) $patient->heal($result["amount"]);
     $result["action"] = "healing";
     $result["name"] = "";
     $this->results = $result;
@@ -607,12 +607,12 @@ class CombatBase {
   /**
    * Log dealt damage
    * 
-   * @param Character $character1
-   * @param Character $character2
+   * @param Character $attacker
+   * @param Character $defender
    * @return void
    */
-  function logDamage(Character $character1, Character $character2): void {
-    $team = $this->team1->hasMember($character1->id) ? 1 : 2;
+  function logDamage(Character $attacker, Character $defender): void {
+    $team = $this->team1->hasMember($attacker->id) ? 1 : 2;
     $this->damage[$team] += $this->results["amount"];
   }
   
