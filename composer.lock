@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "bd77b3f80428169290b1c9fc5935bd28",
+    "content-hash": "663d8a0bcfaff6a7537e5000fb9c92f0",
     "packages": [
         {
             "name": "kdyby/autowired",
@@ -1102,6 +1102,65 @@
             "description": "Nette Utility Classes",
             "homepage": "https://nette.org",
             "time": "2017-04-26T10:04:49+00:00"
+        },
+        {
+            "name": "nexendrie/menu",
+            "version": "0.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/nexendrie/menu.git",
+                "reference": "d46206b27285eba8e819a500edfa989cda38f3a6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/nexendrie/menu/zipball/d46206b27285eba8e819a500edfa989cda38f3a6",
+                "reference": "d46206b27285eba8e819a500edfa989cda38f3a6",
+                "shasum": ""
+            },
+            "require": {
+                "latte/latte": "^2.4",
+                "nette/application": "^2.4",
+                "nette/di": "^2.4",
+                "nette/utils": "^2.4",
+                "php": ">=7.1.0"
+            },
+            "require-dev": {
+                "nette/tester": "dev-master",
+                "nexendrie/code-quality": "dev-master",
+                "nexendrie/site-generator": "1.0.x-dev",
+                "phpstan/phpstan-nette": "^0.6.2"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Nexendrie\\Menu\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Jakub Konečný",
+                    "email": "jakub.konecny2@centrum.cz",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Simple menu component",
+            "homepage": "https://nexendrie.gitlab.io",
+            "keywords": [
+                "Simple",
+                "component",
+                "menu",
+                "nette"
+            ],
+            "time": "2017-05-11T10:49:20+00:00"
         },
         {
             "name": "psr/log",

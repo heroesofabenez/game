@@ -3,6 +3,9 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Presenters;
 
+use Nexendrie\Menu\IMenuControlFactory,
+    Nexendrie\Menu\MenuControl;
+
   /**
    * Parent of all presenters
    * 
@@ -60,6 +63,10 @@ abstract class BasePresenter extends \Nette\Application\UI\Presenter {
     if($this->user->identity->stage == NULL) {
       $this->redirect(302, "Intro:default");
     }
+  }
+  
+  protected function createComponentMenu(IMenuControlFactory $factory): MenuControl {
+    return $factory->create();
   }
 }
 ?>

@@ -11,8 +11,22 @@ session:
 extensions:
     translation: Kdyby\Translation\DI\TranslationExtension
     hoa: HeroesofAbenez\Model\DI\HOAExtension
+    menu: Nexendrie\Menu\DI\MenuExtension
 translation:
     default: en
     fallback: [en_US, en]
     resolvers:
         request: off
+menu:
+    default:
+        htmlId: navigation
+        translate: true
+        items:
+            texts.common.home: "Homepage:"
+            texts.journal.title: "Journal:"
+            texts.guild.title: "Guild:"
+            texts.tavern.title: "Tavern:local"
+            texts.postoffice.title: "Postoffice:"
+            texts.arena.title: "Arena:"
+            texts.ranking.title: "Ranking:characters"
+            texts.map.title: "Map:local"

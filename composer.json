@@ -26,7 +26,8 @@
         "tracy/tracy": "~2.4",
         "latte/latte": "~2.4",
         "kdyby/autowired": "^1.4",
-        "kdyby/translation": "2.3.x@dev"
+        "kdyby/translation": "2.3.x@dev",
+        "nexendrie/menu": "^0.3"
     },
     "require-dev": {
         "nexendrie/code-quality": "dev-master",
