@@ -53,7 +53,7 @@ trait TCollection {
   
   /**
    * @param int $index
-   * @param \HeroesofAbenez\Entities\Character $member
+   * @param object $member
    * @return void
    * @throws OutOfRangeException
    * @throws InvalidArgumentException
