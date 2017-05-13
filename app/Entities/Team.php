@@ -11,13 +11,10 @@ namespace HeroesofAbenez\Entities;
  * @property-read Character[] $activeMembers
  * @property-read Character[] $aliveMembers
  * @property-read Character[] $usableMembers
- * @property-read int[] $used
  */
 class Team extends BaseEntity implements \ArrayAccess, \Countable, \IteratorAggregate {
   /** @var string Name of the team */
   protected $name;
-  /** @var int[] Characters used in the current round */
-  protected $used = [];
   
   use \HeroesofAbenez\Utils\TCollection;
   
@@ -27,13 +24,6 @@ class Team extends BaseEntity implements \ArrayAccess, \Countable, \IteratorAggr
   function __construct(string $name) {
     $this->name = $name;
     $this->class = Character::class;
-  }
-  
-  /**
-   * @return int[]
-   */
-  function getUsed(): array {
-    return $this->used;
   }
   
   /**
@@ -104,7 +94,7 @@ class Team extends BaseEntity implements \ArrayAccess, \Countable, \IteratorAggr
   function getUsableMembers(): array {
     $return = [];
     foreach($this->items as $index => $member) {
-      if(!$member->stunned AND $member->hitpoints > 0 AND !in_array($index, $this->used)) {
+      if(!$member->stunned AND $member->hitpoints > 0) {
         $return[] = $member;
       }
     }
