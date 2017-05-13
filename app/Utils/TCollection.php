@@ -58,7 +58,7 @@ trait TCollection {
    * @throws OutOfRangeException
    * @throws InvalidArgumentException
    */
-  function offsetSet($index, $member) {
+  function offsetSet($index, $member): void {
     if(!$member instanceof $this->class) {
       throw new InvalidArgumentException("Argument must be of $this->class type.");
     }
@@ -75,7 +75,7 @@ trait TCollection {
    * @param int $index
    * @return void
    */
-  function offsetUnset($index) {
+  function offsetUnset($index): void {
     if($index < 0 OR $index >= count($this->items)) {
       throw new OutOfRangeException("Offset invalid or out of range.");
     }
