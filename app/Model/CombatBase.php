@@ -150,6 +150,48 @@ class CombatBase {
   }
   
   /**
+   * Evaluate winner of combat
+   * Team 1 wins only if they eliminate all opponents before round limit
+   *
+   * @param CombatBase $combat
+   * @return int
+   */
+  function victoryConditionEliminateSecondTeam(CombatBase $combat): int {
+    $result = 0;
+    if($combat->round <= $combat->round_limit) {
+      if(!$combat->team1->hasAliveMembers()) {
+        $result = 2;
+      } elseif(!$combat->team2->hasAliveMembers()) {
+        $result = 1;
+      }
+    } elseif($combat->round > $combat->round_limit) {
+      $result = (!$combat->team2->hasAliveMembers()) ? 1 : 2;
+    }
+    return $result;
+  }
+  
+  /**
+   * Evaluate winner of combat
+   * Team 1 wins if at least 1 of its members is alive after round limit
+   *
+   * @param CombatBase $combat
+   * @return int
+   */
+  function victoryConditionFirstTeamSurvives(CombatBase $combat): int {
+    $result = 0;
+    if($combat->round <= $combat->round_limit) {
+      if(!$combat->team1->hasAliveMembers()) {
+        $result = 2;
+      } elseif(!$combat->team2->hasAliveMembers()) {
+        $result = 1;
+      }
+    } elseif($combat->round > $combat->round_limit) {
+      $result = ($combat->team1->hasAliveMembers()) ? 1 : 2;
+    }
+    return $result;
+  }
+  
+  /**
    * Get winner of combat
    * 
    * @staticvar int $result
