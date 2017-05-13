@@ -17,6 +17,7 @@ use HeroesofAbenez\Entities\Team,
  * @property-read CombatLogger $log Log from the combat
  * @property-read int $winner
  * @property-read int $round
+ * @property callable $victoryCondition To evaluate the winner of combat. Gets CombatBase as first parameter, should return winning team (1/2) or 0 if there is not winner (yet)
  * @method void onCombatStart() Tasks to do at the start of the combat
  * @method void onCombatEnd() Tasks to do at the end of the combat
  * @method void onRoundStart() Tasks to do at the start of a round
@@ -64,6 +65,8 @@ class CombatBase {
   public $onHeal = [];
   /** @var array|NULL Temporary variable for results of an action */
   protected $results;
+  /** @var callable */
+  protected $victoryCondition;
   
   function __construct(CombatLogger $logger) {
     $this->log = $logger;
@@ -87,6 +90,7 @@ class CombatBase {
     $this->onSkillSpecial[] = [$this, "logResults"];
     $this->onHeal[] = [$this, "heal"];
     $this->onHeal[] = [$this, "logResults"];
+    $this->victoryCondition = [$this, "victoryConditionMoreDamage"];
   }
   
   function getRound(): int {
@@ -110,6 +114,42 @@ class CombatBase {
   }
   
   /**
+   * @return callable
+   */
+  function getVictoryCondition(): callable {
+    return $this->victoryCondition;
+  }
+  
+  /**
+   * @param callable $victoryCondition
+   */
+  function setVictoryCondition(callable $victoryCondition) {
+    $this->victoryCondition = $victoryCondition;
+  }
+  
+  /**
+   * Evaluate winner of combat
+   * The team which dealt more damage after round limit, wins
+   * If all members of one team are eliminated before that, the other team wins
+   *
+   * @param CombatBase $combat
+   * @return int
+   */
+  function victoryConditionMoreDamage(CombatBase $combat): int {
+    $result = 0;
+    if($combat->round <= $combat->round_limit) {
+      if(!$combat->team1->hasAliveMembers()) {
+        $result = 2;
+      } elseif(!$combat->team2->hasAliveMembers()) {
+        $result = 1;
+      }
+    } elseif($combat->round > $combat->round_limit) {
+      $result = ($combat->damage[1] > $combat->damage[2]) ? 1 : 2;
+    }
+    return $result;
+  }
+  
+  /**
    * Get winner of combat
    * 
    * @staticvar int $result
@@ -117,14 +157,8 @@ class CombatBase {
    */
   function getWinner(): int {
     static $result = 0;
-    if($this->round <= $this->round_limit AND $result === 0) {
-      if(!$this->team1->hasAliveMembers()) {
-        $result = 2;
-      } elseif(!$this->team2->hasAliveMembers()) {
-        $result = 1;
-      }
-    } elseif($this->round > $this->round_limit AND $result === 0) {
-      $result = ($this->damage[1] > $this->damage[2]) ? 1 : 2;
+    if($result === 0) {
+      $result = call_user_func($this->victoryCondition, $this);
     }
     return $result;
   }
