@@ -170,11 +170,6 @@ class PostofficeControl extends \Nette\Application\UI\Control {
   }
 }
 
-interface PostofficeControlFactory {
-  /** @return PostofficeControl */
-  function create();
-}
-
 class MessageNotFoundException extends \HeroesofAbenez\Model\RecordNotFoundException {
   
 }

@@ -101,9 +101,4 @@ class NPCShopControl extends \Nette\Application\UI\Control {
     $this->presenter->flashMessage($this->translator->translate("messages.shop.itemBought"));
   }
 }
-
-interface NPCShopControlFactory {
-  /** @return \HeroesofAbenez\NPC\NPCQuestsControl */
-  function create();
-}
 ?>

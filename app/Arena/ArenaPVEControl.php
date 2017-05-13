@@ -90,9 +90,4 @@ class ArenaPVEControl extends ArenaControl {
     $this->doDuel($npc);
   }
 }
-
-interface ArenaPVEControlFactory {
-  /** @return \HeroesofAbenez\Arena\ArenaPVEControl */
-  function create();
-}
 ?>

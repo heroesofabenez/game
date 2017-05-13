@@ -40,9 +40,4 @@ class GuildsRankingControl extends RankingControl {
     return $return;
   }
 }
-
-interface GuildsRankingControlFactory {
-  /** @return \HeroesofAbenez\Ranking\GuildsRankingControl */
-  function create();
-}
 ?>

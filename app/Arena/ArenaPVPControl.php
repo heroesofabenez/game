@@ -60,9 +60,4 @@ class ArenaPVPControl extends ArenaControl {
     $this->doDuel($enemy);
   }
 }
-
-interface ArenaPVPControlFactory {
-  /** @return \HeroesofAbenez\Arena\ArenaPVPControl */
-  function create();
-}
 ?>
