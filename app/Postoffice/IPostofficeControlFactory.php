@@ -1,7 +1,7 @@
 <?php
 namespace HeroesofAbenez\Postoffice;
 
-interface PostofficeControlFactory {
+interface IPostofficeControlFactory {
   /** @return PostofficeControl */
   function create();
 }

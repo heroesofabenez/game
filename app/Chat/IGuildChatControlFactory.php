@@ -1,7 +1,7 @@
 <?php
 namespace HeroesofAbenez\Chat;
 
-interface GuildChatControlFactory {
+interface IGuildChatControlFactory {
   /** @return \HeroesofAbenez\Chat\GuildChatControl */
   function create();
 }

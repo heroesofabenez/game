@@ -62,7 +62,7 @@ class NpcPresenter extends BasePresenter {
   /**
    * @return NPC\NPCDialogueControl
    */
-  protected function createComponentNpcDialogue(NPC\NPCDialogueControlFactory $factory): NPC\NPCDialogueControl {
+  protected function createComponentNpcDialogue(NPC\INPCDialogueControlFactory $factory): NPC\NPCDialogueControl {
     $component = $factory->create();
     $component->npc = $this->npc;
     return $component;
@@ -79,7 +79,7 @@ class NpcPresenter extends BasePresenter {
   /**
    * @return NPC\NPCQuestsControl
    */
-  protected function createComponentNpcQuests(NPC\NPCQuestsControlFactory $factory): NPC\NPCQuestsControl {
+  protected function createComponentNpcQuests(NPC\INPCQuestsControlFactory $factory): NPC\NPCQuestsControl {
     $component = $factory->create();
     $component->npc = $this->npc;
     return $component;
@@ -97,10 +97,10 @@ class NpcPresenter extends BasePresenter {
   }
   
   /**
-   * @param NPC\NPCShopControlFactory $factory
+   * @param NPC\INPCShopControlFactory $factory
    * @return NPC\NPCQuestsControl
    */
-  protected function createComponentNpcShop(NPC\NPCShopControlFactory $factory): NPC\NPCQuestsControl {
+  protected function createComponentNpcShop(NPC\INPCShopControlFactory $factory): NPC\NPCQuestsControl {
     $shop = $factory->create();
     $shop->npc = $this->npc;
     return $shop;

@@ -1,7 +1,7 @@
 <?php
 namespace HeroesofAbenez\NPC;
 
-interface NPCQuestsControlFactory {
+interface INPCQuestsControlFactory {
   /** @return \HeroesofAbenez\NPC\NPCQuestsControl */
   function create();
 }

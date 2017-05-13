@@ -1,7 +1,7 @@
 <?php
 namespace HeroesofAbenez\Ranking;
 
-interface GuildsRankingControlFactory {
+interface IGuildsRankingControlFactory {
   /** @return \HeroesofAbenez\Ranking\GuildsRankingControl */
   function create();
 }

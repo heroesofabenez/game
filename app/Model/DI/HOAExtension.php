@@ -104,9 +104,9 @@ class HOAExtension extends \Nette\DI\CompilerExtension {
   protected function addArena(): void {
     $builder = $this->getContainerBuilder();
     $builder->addDefinition($this->prefix("arena.pve"))
-      ->setImplement(HeroesofAbenez\Arena\ArenaPVEControlFactory::class);
+      ->setImplement(HeroesofAbenez\Arena\IArenaPVEControlFactory::class);
     $builder->addDefinition($this->prefix("arena.pvp"))
-      ->setImplement(HeroesofAbenez\Arena\ArenaPVPControlFactory::class);
+      ->setImplement(HeroesofAbenez\Arena\IArenaPVPControlFactory::class);
   }
   
   /**
@@ -115,11 +115,11 @@ class HOAExtension extends \Nette\DI\CompilerExtension {
   protected function addChat(): void {
     $builder = $this->getContainerBuilder();
     $builder->addDefinition($this->prefix("chat.global"))
-      ->setImplement(HeroesofAbenez\Chat\GlobalChatControlFactory::class);
+      ->setImplement(HeroesofAbenez\Chat\IGlobalChatControlFactory::class);
     $builder->addDefinition($this->prefix("chat.local"))
-      ->setImplement(HeroesofAbenez\Chat\LocalChatControlFactory::class);
+      ->setImplement(HeroesofAbenez\Chat\ILocalChatControlFactory::class);
     $builder->addDefinition($this->prefix("chat.guild"))
-      ->setImplement(HeroesofAbenez\Chat\GuildChatControlFactory::class);
+      ->setImplement(HeroesofAbenez\Chat\IGuildChatControlFactory::class);
     $builder->addDefinition($this->prefix("chat.commandsProcessor"))
       ->setClass(HeroesofAbenez\Chat\ChatCommandsProcessor::class);
     $builder->addDefinition($this->prefix("chat.command.time"))
@@ -140,11 +140,11 @@ class HOAExtension extends \Nette\DI\CompilerExtension {
   protected function addNpc(): void {
     $builder = $this->getContainerBuilder();
     $builder->addDefinition($this->prefix("npc.dialogue"))
-      ->setImplement(HeroesofAbenez\NPC\NPCDialogueControlFactory::class);
+      ->setImplement(HeroesofAbenez\NPC\INPCDialogueControlFactory::class);
     $builder->addDefinition($this->prefix("npc.shop"))
-      ->setImplement(HeroesofAbenez\NPC\NPCShopControlFactory::class);
+      ->setImplement(HeroesofAbenez\NPC\INPCShopControlFactory::class);
     $builder->addDefinition($this->prefix("npc.quests"))
-      ->setImplement(HeroesofAbenez\NPC\NPCQuestsControlFactory::class);
+      ->setImplement(HeroesofAbenez\NPC\INPCQuestsControlFactory::class);
   }
   
   /**
@@ -153,7 +153,7 @@ class HOAExtension extends \Nette\DI\CompilerExtension {
   protected function addPostOffice(): void {
     $builder = $this->getContainerBuilder();
     $builder->addDefinition($this->prefix("postoffice.postoffice"))
-      ->setImplement(HeroesofAbenez\Postoffice\PostofficeControlFactory::class);
+      ->setImplement(HeroesofAbenez\Postoffice\IPostofficeControlFactory::class);
   }
   
   /**
@@ -162,9 +162,9 @@ class HOAExtension extends \Nette\DI\CompilerExtension {
   protected function addRanking(): void {
     $builder = $this->getContainerBuilder();
     $builder->addDefinition($this->prefix("ranking.characters"))
-      ->setImplement(HeroesofAbenez\Ranking\CharactersRankingControlFactory::class);
+      ->setImplement(HeroesofAbenez\Ranking\ICharactersRankingControlFactory::class);
     $builder->addDefinition($this->prefix("ranking.guilds"))
-      ->setImplement(HeroesofAbenez\Ranking\GuildsRankingControlFactory::class);
+      ->setImplement(HeroesofAbenez\Ranking\IGuildsRankingControlFactory::class);
   }
   
   /**

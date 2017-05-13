@@ -12,7 +12,7 @@ use Nette\Application\UI\Form,
  * @author Jakub Konečný
  */
 class PostofficePresenter extends BasePresenter {
-  /** @var Postoffice\PostofficeControlFactory @autowire */
+  /** @var Postoffice\IPostofficeControlFactory @autowire */
   protected $poFactory;
   
   /**

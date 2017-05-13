@@ -1,7 +1,7 @@
 <?php
 namespace HeroesofAbenez\Arena;
 
-interface ArenaPVEControlFactory {
+interface IArenaPVEControlFactory {
   /** @return \HeroesofAbenez\Arena\ArenaPVEControl */
   function create();
 }

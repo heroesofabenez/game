@@ -60,21 +60,21 @@ class TavernPresenter extends BasePresenter {
   /**
    * @return Chat\GuildChatControl
    */
-  protected function createComponentGuildChat(Chat\GuildChatControlFactory $factory): Chat\GuildChatControl {
+  protected function createComponentGuildChat(Chat\IGuildChatControlFactory $factory): Chat\GuildChatControl {
     return $factory->create();
   }
   
   /**
    * @return Chat\LocalChatControl
    */
-  protected function createComponentLocalChat(Chat\LocalChatControlFactory $factory): Chat\LocalChatControl {
+  protected function createComponentLocalChat(Chat\ILocalChatControlFactory $factory): Chat\LocalChatControl {
     return $factory->create();
   }
   
   /**
    * @return Chat\GlobalChatControl
    */
-  protected function createComponentGlobalChat(Chat\GlobalChatControlFactory $factory): Chat\GlobalChatControl {
+  protected function createComponentGlobalChat(Chat\IGlobalChatControlFactory $factory): Chat\GlobalChatControl {
     return $factory->create();
   }
   
@@ -102,15 +102,15 @@ class TavernPresenter extends BasePresenter {
   function newMessageSucceeded(Form $form, array $values): void {
     switch($this->action) {
       case "guild":
-        $factory = $this->context->getByType(Chat\GuildChatControlFactory::class);
+        $factory = $this->context->getByType(Chat\IGuildChatControlFactory::class);
         $chat = $this->createComponentGuildChat($factory);
         break;
       case "local":
-        $factory = $this->context->getByType(Chat\LocalChatControlFactory::class);
+        $factory = $this->context->getByType(Chat\ILocalChatControlFactory::class);
         $chat = $this->createComponentLocalChat($factory);
         break;
       case "global":
-        $factory = $this->context->getByType(Chat\GlobalChatControlFactory::class);
+        $factory = $this->context->getByType(Chat\IGlobalChatControlFactory::class);
         $chat = $this->createComponentGlobalChat($factory);
         break;
     }

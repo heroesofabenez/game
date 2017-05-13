@@ -22,11 +22,11 @@ class ArenaPresenter extends BasePresenter {
     
   }
   
-  protected function createComponentArenaPVE(Arena\ArenaPVEControlFactory $factory) {
+  protected function createComponentArenaPVE(Arena\IArenaPVEControlFactory $factory) {
     return $factory->create();
   }
   
-  protected function createComponentArenaPVP(Arena\ArenaPVPControlFactory $factory) {
+  protected function createComponentArenaPVP(Arena\IArenaPVPControlFactory $factory) {
     return $factory->create();
   }
 }

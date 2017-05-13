@@ -1,7 +1,7 @@
 <?php
 namespace HeroesofAbenez\Ranking;
 
-interface CharactersRankingControlFactory {
+interface ICharactersRankingControlFactory {
   /** @return \HeroesofAbenez\Ranking\CharactersRankingControl */
   function create();
 }

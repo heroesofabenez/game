@@ -1,7 +1,7 @@
 <?php
 namespace HeroesofAbenez\Chat;
 
-interface LocalChatControlFactory {
+interface ILocalChatControlFactory {
   /** @return \HeroesofAbenez\Chat\LocalChatControl */
   function create();
 }

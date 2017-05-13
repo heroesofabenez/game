@@ -1,7 +1,7 @@
 <?php
 namespace HeroesofAbenez\NPC;
 
-interface NPCDialogueControlFactory {
+interface INPCDialogueControlFactory {
   /** @return \HeroesofAbenez\NPC\NPCDialogueControl */
   function create();
 }

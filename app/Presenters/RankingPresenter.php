@@ -55,20 +55,20 @@ class RankingPresenter extends BasePresenter {
   }
   
   /**
-   * @param Ranking\CharactersRankingControlFactory $factory
+   * @param Ranking\ICharactersRankingControlFactory $factory
    * @return Ranking\CharactersRankingControl
    */
-  function createComponentCharactersRanking(Ranking\CharactersRankingControlFactory $factory): Ranking\CharactersRankingControl {
+  function createComponentCharactersRanking(Ranking\ICharactersRankingControlFactory $factory): Ranking\CharactersRankingControl {
     $component = $factory->create();
     $component->paginator = $this->paginator;
     return $component;
   }
   
   /**
-   * @param Ranking\GuildsRankingControlFactory $factory
+   * @param Ranking\IGuildsRankingControlFactory $factory
    * @return Ranking\GuildsRankingControl
    */
-  function createComponentGuildsRanking(Ranking\GuildsRankingControlFactory $factory): Ranking\GuildsRankingControl {
+  function createComponentGuildsRanking(Ranking\IGuildsRankingControlFactory $factory): Ranking\GuildsRankingControl {
     return $factory->create();
   }
 }
