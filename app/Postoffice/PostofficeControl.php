@@ -169,12 +169,4 @@ class PostofficeControl extends \Nette\Application\UI\Control {
     $this->db->query("INSERT INTO messages", $data);
   }
 }
-
-class MessageNotFoundException extends \HeroesofAbenez\Model\RecordNotFoundException {
-  
-}
-
-class CannotShowMessageException extends \HeroesofAbenez\Model\AccessDeniedException {
-  
-}
 ?>

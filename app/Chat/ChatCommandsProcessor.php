@@ -3,9 +3,7 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Chat;
 
-use HeroesofAbenez\Entities\ChatCommand,
-    HeroesofAbenez\Model\CommandNotFoundException,
-    HeroesofAbenez\Model\CommandNameAlreadyUsedException;
+use HeroesofAbenez\Entities\ChatCommand;
 
 /**
  * ChatCommandsProcessor

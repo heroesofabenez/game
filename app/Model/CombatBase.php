@@ -7,7 +7,8 @@ use HeroesofAbenez\Entities\Team,
     HeroesofAbenez\Entities\Character,
     HeroesofAbenez\Entities\CharacterEffect,
     HeroesofAbenez\Entities\CharacterSkillAttack,
-    HeroesofAbenez\Entities\CharacterSkillSpecial;
+    HeroesofAbenez\Entities\CharacterSkillSpecial,
+    HeroesofAbenez\Utils\InvalidStateException;
 
 /**
  * Handles combat

@@ -1,11 +1,10 @@
 <?php
 namespace HeroesofAbenez\Model;
 
-class RecordNotFoundException extends \Exception {
-  
-}
+use HeroesofAbenez\Utils\InvalidStateException,
+    HeroesofAbenez\Utils\AccessDeniedException;
 
-class AccessDeniedException extends \RuntimeException {
+class RecordNotFoundException extends \Exception {
   
 }
 
@@ -18,10 +17,6 @@ class HigherRankException extends AccessDeniedException {
 }
 
 class NameInUseException extends AccessDeniedException {
-  
-}
-
-class InvalidStateException extends \RuntimeException {
   
 }
 
@@ -166,14 +161,6 @@ class PetNotDeployedException extends InvalidStateException {
 }
 
 class PetAlreadyDeployedException extends InvalidStateException {
-  
-}
-
-class CommandNotFoundException extends \OutOfBoundsException {
-  
-}
-
-class CommandNameAlreadyUsedException extends InvalidStateException {
   
 }
 ?>

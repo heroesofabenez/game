@@ -9,7 +9,7 @@ use MyTester as MT,
 
 class TestCommand extends ChatCommand {
   function __construct() {
-    $this->name =ChatCommandsProcessorTest::COMMAND_NAME;
+    $this->name = ChatCommandsProcessorTest::COMMAND_NAME;
   }
   
   /**

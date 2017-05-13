@@ -7,7 +7,6 @@ use HeroesofAbenez\Model\RequestNotFoundException,
     HeroesofAbenez\Model\CannotSeeRequestException,
     HeroesofAbenez\Model\CannotAcceptRequestException,
     HeroesofAbenez\Model\CannotDeclineRequestException,
-    HeroesofAbenez\Model\AccessDeniedException,
     HeroesofAbenez\Model\RequestAlreadyHandledException;
 
 /**
