@@ -3,8 +3,6 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Chat;
 
-use HeroesofAbenez\Entities\ChatCommand;
-
 /**
  * ChatCommandsProcessor
  *

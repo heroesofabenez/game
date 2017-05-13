@@ -19,7 +19,7 @@ use HeroesofAbenez\Model\Guild,
  *
  * @author Jakub Konečný
  */
-class PromoteCommand extends \HeroesofAbenez\Entities\ChatCommand {
+class PromoteCommand extends \HeroesofAbenez\Chat\ChatCommand {
   /** @var  Guild */
   protected $model;
   /** @var Translator */

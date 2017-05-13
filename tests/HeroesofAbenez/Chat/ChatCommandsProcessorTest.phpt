@@ -5,7 +5,7 @@ namespace HeroesofAbenez\Chat;
 
 use MyTester as MT,
     MyTester\Assert,
-    HeroesofAbenez\Entities\ChatCommand;
+    HeroesofAbenez\Chat\ChatCommand;
 
 class TestCommand extends ChatCommand {
   function __construct() {

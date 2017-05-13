@@ -17,7 +17,7 @@ use HeroesofAbenez\Model\Guild,
  *
  * @author Jakub Konečný
  */
-class KickCommand extends \HeroesofAbenez\Entities\ChatCommand {
+class KickCommand extends \HeroesofAbenez\Chat\ChatCommand {
   /** @var  Guild */
   protected $model;
   /** @var Translator */

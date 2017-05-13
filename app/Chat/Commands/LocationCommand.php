@@ -8,7 +8,7 @@ namespace HeroesofAbenez\Chat\Commands;
  *
  * @author Jakub Konečný
  */
-class LocationCommand extends \HeroesofAbenez\Entities\ChatCommand {
+class LocationCommand extends \HeroesofAbenez\Chat\ChatCommand {
   /** @var \Nette\Security\User */
   protected $user;
   /** @var \Nette\Database\Context */
