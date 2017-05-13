@@ -402,7 +402,9 @@ class CombatBase {
         }
       }
       $target = $this->selectAttackTarget($character);
-      if(is_null($target)) break;
+      if(is_null($target)) {
+        break;
+      }
       if(count($character->usableSkills)) {
         $skill = $character->usableSkills[0];
         if($skill instanceof CharacterSkillAttack) {
@@ -466,9 +468,13 @@ class CombatBase {
     }
     $this->onCombatStart();
     while($this->round <= $this->round_limit) {
-      if($this->startRound() > 0) break;
+      if($this->startRound() > 0) {
+        break;
+      }
       $this->doRound();
-      if($this->endRound() > 0) break;
+      if($this->endRound() > 0) {
+        break;
+      }
     }
     $this->onCombatEnd();
     return $this->getWinner();

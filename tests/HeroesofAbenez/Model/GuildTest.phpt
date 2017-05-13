@@ -56,9 +56,13 @@ class GuildTest extends MT\TestCase {
     foreach($guildIds as $guildId) {
       foreach($rankIds as $rankId) {
         $rankName = $this->model->getCustomRankName($guildId, $rankId);
-        if($guildId === 1 AND $rankId === 7) Assert::same("Sun ruler", $rankName);
-        elseif($guildId === 1 AND $rankId === 1) Assert::same("Sun observer", $rankName);
-        else Assert::same("", $rankName);
+        if($guildId === 1 AND $rankId === 7) {
+          Assert::same("Sun ruler", $rankName);
+        } elseif($guildId === 1 AND $rankId === 1) {
+          Assert::same("Sun observer", $rankName);
+        } else {
+          Assert::same("", $rankName);
+        }
       }
     }
   }
@@ -73,8 +77,11 @@ class GuildTest extends MT\TestCase {
     Assert::type("array", $members);
     Assert::type("stdClass", $members[0]);
     Assert::type("string", $members[0]->customRankName);
-    if($guild === 1) Assert::same("Sun ruler", $members[0]->customRankName);
-    else Assert::same("", $members[0]->customRankName);
+    if($guild === 1) {
+      Assert::same("Sun ruler", $members[0]->customRankName);
+    } else {
+      Assert::same("", $members[0]->customRankName);
+    }
   }
 
   /**
