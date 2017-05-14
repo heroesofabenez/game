@@ -45,17 +45,9 @@ abstract class ChatControl extends \Nette\Application\UI\Control {
     $this->processor = $processor;
     $this->table = $table;
     $this->param = $param;
-    if($param2 === NULL) {
-      $this->param2 = $param;
-    } else {
-      $this->param2 = $param2;
-    }
+    $this->param2 = $param2 ?? $param;
     $this->id = $id;
-    if($id2 === NULL) {
-      $this->id2 = $id;
-    } else {
-      $this->id2 = $id2;
-    }
+    $this->id2 = $id2 ?? $id;
   }
   
   /**
