@@ -73,9 +73,11 @@ abstract class ArenaControl extends \Nette\Application\UI\Control {
   }
   
   /**
-   * @return array
+   * @param Character $player
+   * @param Character $opponent
+   * @return int[]
    */
-  abstract protected function calculateRewards($player, $opponent): array;
+  abstract protected function calculateRewards(Character $player, Character $opponent): array;
   
   /**
    * Execute the duel
