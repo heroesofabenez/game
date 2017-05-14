@@ -366,6 +366,8 @@ class CombatBase {
   protected function selectRandomCharacter(Team $team): ?Character {
     if(count($team->aliveMembers) === 0) {
       return NULL;
+    } elseif(count($team) === 1) {
+      return $team[0];
     }
     $roll = rand(0, count($team->aliveMembers) - 1);
     return $team->aliveMembers[$roll];

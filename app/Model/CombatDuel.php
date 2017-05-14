@@ -23,15 +23,5 @@ class CombatDuel extends CombatBase {
     $team2[] = $opponent;
     $this->setTeams($team1, $team2);
   }
-  
-  /**
-   * Select target for attack
-   * 
-   * @param CharacterEntity $attacker
-   * @return CharacterEntity
-   */
-  protected function selectAttackTarget(CharacterEntity $attacker): CharacterEntity {
-    return $this->getEnemyTeam($attacker)[0];
-  }
 }
 ?>
