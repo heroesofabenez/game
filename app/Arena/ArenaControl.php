@@ -36,6 +36,7 @@ abstract class ArenaControl extends \Nette\Application\UI\Control {
   protected $arena;
   
   function __construct(User $user, \HeroesofAbenez\Model\CombatHelper $combatHelper, CombatDuel $combat, CombatLogManager $log, Context $db, Translator $translator) {
+    parent::__construct();
     $this->user = $user;
     $this->combatHelper = $combatHelper;
     $this->combat = $combat;

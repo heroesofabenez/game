@@ -29,6 +29,7 @@ abstract class RankingControl extends \Nette\Application\UI\Control {
    * @param string $lastCol
    */
   function __construct($name, array $cols, $presenter, $lastCol) {
+    parent::__construct();
     $this->name = $name;
     $this->cols = $cols;
     $this->presenter = $presenter;

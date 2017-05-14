@@ -24,6 +24,7 @@ class NPCShopControl extends \Nette\Application\UI\Control {
   protected $translator;
   
   function __construct(\Nette\Database\Context $db, \HeroesofAbenez\Model\Item $itemModel, \Nette\Security\User $user, Translator $translator) {
+    parent::__construct();
     $this->db = $db;
     $this->itemModel = $itemModel;
     $this->user = $user;

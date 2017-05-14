@@ -39,6 +39,7 @@ abstract class ChatControl extends \Nette\Application\UI\Control {
    * @param int|array $id2
    */
   function __construct(\Nette\Database\Context $db, \Nette\Security\User $user, ChatCommandsProcessor  $processor, $table, $param, $id, $param2 = NULL, $id2 = NULL) {
+    parent::__construct();
     $this->db = $db;
     $this->user = $user;
     $this->processor = $processor;

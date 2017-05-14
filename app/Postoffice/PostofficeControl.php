@@ -17,6 +17,7 @@ class PostofficeControl extends \Nette\Application\UI\Control {
   protected $profileModel;
   
   function __construct(\Nette\Database\Context $db, \Nette\Security\User $user, \HeroesofAbenez\Model\Profile $profileModel) {
+    parent::__construct();
     $this->db = $db;
     $this->user = $user;
     $this->profileModel = $profileModel;

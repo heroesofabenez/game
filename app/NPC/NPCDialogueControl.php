@@ -22,6 +22,7 @@ class NPCDialogueControl extends \Nette\Application\UI\Control {
    * @param \Nette\Security\User $user
    */
   function __construct(\Nette\Security\User $user) {
+    parent::__construct();
     $this->user = $user;
   }
   

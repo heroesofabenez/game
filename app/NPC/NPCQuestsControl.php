@@ -26,13 +26,8 @@ class NPCQuestsControl extends \Nette\Application\UI\Control {
   /** @var \HeroesofAbenez\Entities\NPC */
   protected $npc;
   
-  /**
-   * @param \HeroesofAbenez\Model\Quest $questModel
-   * @param \HeroesofAbenez\Model\Item $itemModel
-   * @param \Nette\Database\Context $db
-   * @param \Nette\Security\User $user
-   */
   function __construct(Model\Quest $questModel, Model\Item $itemModel, \Nette\Database\Context $db, \Nette\Security\User $user, Translator $translator) {
+    parent::__construct();
     $this->questModel = $questModel;
     $this->itemModel = $itemModel;
     $this->user = $user;
