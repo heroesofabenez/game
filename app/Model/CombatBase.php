@@ -505,11 +505,7 @@ class CombatBase {
    */
   protected function startRound(): int {
     $this->onRoundStart();
-    if($this->getWinner() > 0) {
-      return $this->getWinner();
-    } else {
-      return 0;
-    }
+    return $this->getWinner();
   }
   
   /**
@@ -528,11 +524,7 @@ class CombatBase {
    */
   protected function endRound(): int {
     $this->onRoundEnd();
-    if($this->getWinner() > 0) {
-      return $this->getWinner();
-    } else {
-      return 0;
-    }
+    return $this->getWinner();
   }
   
   /**
