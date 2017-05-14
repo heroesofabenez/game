@@ -21,14 +21,7 @@ abstract class RankingControl extends \Nette\Application\UI\Control {
   /** @var \Nette\Utils\Paginator|bool */
   protected $paginator = false;
   
-  /**
-   * 
-   * @param string $name
-   * @param array $cols
-   * @param string $presenter
-   * @param string $lastCol
-   */
-  function __construct($name, array $cols, $presenter, $lastCol) {
+  function __construct(string $name, array $cols, string $presenter, string $lastCol) {
     parent::__construct();
     $this->name = $name;
     $this->cols = $cols;
