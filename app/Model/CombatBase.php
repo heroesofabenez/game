@@ -201,6 +201,7 @@ class CombatBase {
     static $result = 0;
     if($result === 0) {
       $result = call_user_func($this->victoryCondition, $this);
+      $result = min(max($result, 0), 2);
     }
     return $result;
   }
