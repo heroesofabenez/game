@@ -208,20 +208,18 @@ class CombatBase {
   
   /**
    * @param Character $character
-   * @return int
+   * @return Team
    */
-  protected function getTeam(Character $character): int {
-    $team = $this->team1->hasMember($character->id) ? 1 : 2;
-    return $team;
+  protected function getTeam(Character $character): Team {
+    return $this->team1->hasMember($character->id) ? $this->team1 : $this->team2;
   }
   
   /**
    * @param Character $character
-   * @return int
+   * @return Team
    */
-  protected function getEnemyTeam(Character $character): int {
-    $team = $this->team1->hasMember($character->id) ? 2 : 1;
-    return $team;
+  protected function getEnemyTeam(Character $character): Team {
+    return $this->team1->hasMember($character->id) ? $this->team2 : $this->team1;
   }
   
   /**
@@ -380,8 +378,7 @@ class CombatBase {
    * @return Character|NULL
    */
   protected function selectAttackTarget(Character $attacker): ?Character {
-    $enemyTeam = $this->getEnemyTeam($attacker);
-    return $this->selectRandomCharacter($this->{"team" . $enemyTeam});
+    return $this->selectRandomCharacter($this->getEnemyTeam($attacker));
   }
   
   /**
@@ -418,8 +415,7 @@ class CombatBase {
    * @return Character|NULL
    */
   protected function selectHealingTarget(Character $healer): ?Character {
-    $team = $this->getTeam($healer);
-    return $this->findLowestHpCharacter($this->{"team" . $team});
+    return $this->findLowestHpCharacter($this->getTeam($healer));
   }
   
   /**
@@ -445,13 +441,13 @@ class CombatBase {
         break;
       case "party":
         $team = $this->getTeam($character1);
-        foreach($this->{"team". $team} as $target) {
+        foreach($team as $target) {
           $this->onSkillSpecial($character1, $target, $skill);
         }
         break;
       case "enemy_party":
         $team = $this->getEnemyTeam($character1);
-        foreach($this->{"team". $team} as $target) {
+        foreach($team as $target) {
           $this->onSkillSpecial($character1, $target, $skill);
         }
         break;
