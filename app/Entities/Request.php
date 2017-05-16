@@ -7,8 +7,17 @@ namespace HeroesofAbenez\Entities;
  * Data structure for request
  *
  * @author Jakub Konečný
+ * @property-read int $id
+ * @property-read string $name
+ * @property-read string $from
+ * @property-read string $to
+ * @property-read string $type
+ * @property-read int $sent
+ * @property-read string $status
  */
-class Request extends BaseEntity {
+class Request {
+  use \Nette\SmartObject;
+  
   /** @var int */
   protected $id;
   /** @var string */
@@ -37,6 +46,55 @@ class Request extends BaseEntity {
     $this->type = $type;
     $this->sent = $sent;
     $this->status = $status;
+  }
+  
+  /**
+   * @return int
+   */
+  function getId(): int {
+    return $this->id;
+  }
+  
+  /**
+   * @return string
+   */
+  function getName(): string {
+    return $this->name;
+  }
+  
+  /**
+   * @return string
+   */
+  function getTo(): string {
+    return $this->to;
+  }
+  
+  /**
+   * @return string
+   */
+  function getType(): string {
+    return $this->type;
+  }
+  
+  /**
+   * @return int
+   */
+  function getSent() {
+    return $this->sent;
+  }
+  
+  /**
+   * @return string
+   */
+  function getStatus(): string {
+    return $this->status;
+  }
+  
+  /**
+   * @return string
+   */
+  function getFrom(): string {
+    return $this->from;
   }
 }
 ?>

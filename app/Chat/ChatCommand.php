@@ -3,15 +3,15 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Chat;
 
-use HeroesofAbenez\Entities\BaseEntity;
-
 /**
  * Chat Command
  *
  * @author Jakub Konečný
  * @property string $name
  */
-abstract class ChatCommand extends BaseEntity {
+abstract class ChatCommand {
+  use \Nette\SmartObject;
+  
   /** @var string */
   protected $name = "";
   

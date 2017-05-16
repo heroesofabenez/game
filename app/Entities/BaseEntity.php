@@ -47,18 +47,5 @@ abstract class BaseEntity {
       throw new \Nette\MemberAccessException("Cannot write to property $class::\$$name.");
     }
   }
-  
-  /**
-   * Converts entity into array
-   * 
-   * @return array
-   */
-  function toArray(): array {
-    $return = [];
-    foreach($this as $key => $value) {
-      $return[$key] = $value;
-    }
-    return $return;
-  }
 }
 ?>

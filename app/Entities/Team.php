@@ -7,15 +7,17 @@ namespace HeroesofAbenez\Entities;
  * Structure for a team in combat
  * 
  * @author Jakub Konečný
- * @property Character[] $items Characters in the team
+ * @property-read string $name
+ * @property-read Character[] $items Characters in the team
  * @property-read Character[] $activeMembers
  * @property-read Character[] $aliveMembers
  * @property-read Character[] $usableMembers
  */
-class Team extends BaseEntity implements \ArrayAccess, \Countable, \IteratorAggregate {
+class Team implements \ArrayAccess, \Countable, \IteratorAggregate {
   /** @var string Name of the team */
   protected $name;
   
+  use \Nette\SmartObject;
   use \HeroesofAbenez\Utils\TCollection;
   
   /**
@@ -26,6 +28,19 @@ class Team extends BaseEntity implements \ArrayAccess, \Countable, \IteratorAggr
     $this->class = Character::class;
   }
   
+  /**
+   * @return Character[]
+   */
+  function getItems(): array {
+    return $this->items;
+  }
+  
+  /**
+   * @return string
+   */
+  function getName(): string {
+    return $this->name;
+  }
   /**
    * Get member's index
    * 

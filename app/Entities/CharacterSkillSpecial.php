@@ -7,15 +7,22 @@ namespace HeroesofAbenez\Entities;
  * Character skill special
  *
  * @author Jakub Konečný
+ * @property-read SkillSpecial $skill
  * @property-read int $value
  */
 class CharacterSkillSpecial extends CharacterSkill {
-  /**
-   * @param \HeroesofAbenez\Entities\SkillSpecial $skill
-   * @param int $level
-   */
+  /** @var  SkillSpecial */
+  protected $skill;
+  
   function __construct(SkillSpecial $skill, $level) {
     parent::__construct($skill, $level);
+  }
+  
+  /**
+   * @return SkillSpecial
+   */
+  function getSkill(): SkillSpecial {
+    return $this->skill;
   }
   
   /**

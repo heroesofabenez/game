@@ -7,23 +7,23 @@ namespace HeroesofAbenez\Entities;
  * Character skill attack
  *
  * @author Jakub Konečný
+ * @property-read SkillAttack $skill
  * @property-read int $damage
  * @property-read int $hitRate
  */
 class CharacterSkillAttack extends CharacterSkill {
   /** @var SkillAttack */
   protected $skill;
-  /** @var int */
-  protected $level;
-  /** @var int */
-  protected $cooldown = 0;
   
-  /**
-   * @param \HeroesofAbenez\Entities\SkillAttack $skill
-   * @param int $level
-   */
   function __construct(SkillAttack $skill, int $level) {
     parent::__construct($skill, $level);
+  }
+  
+  /**
+   * @return SkillAttack
+   */
+  function getSkill(): SkillAttack {
+    return $this->skill;
   }
   
   /**

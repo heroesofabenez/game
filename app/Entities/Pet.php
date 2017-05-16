@@ -5,14 +5,20 @@ namespace HeroesofAbenez\Entities;
 
 /**
  * Structure for pet
- * 
+ *
+ * @property-read int $id
+ * @property-read PetType $type
+ * @property-read string $name
+ * @property-read bool $deployed
  * @property-read int $typeId
  * @property-read string $bonusStat To which stat the pet provides bonus
  * @property-read int $bonusValue Size of provided bonus
  * @property-read array $deployParams
  * @author Jakub Konečný
  */
-class Pet extends BaseEntity {
+class Pet {
+  use \Nette\SmartObject;
+  
   /** @var int Pet's id */
   protected $id;
   /** @var PetType Pet's type */
@@ -33,6 +39,34 @@ class Pet extends BaseEntity {
     $this->type = $type;
     $this->name = $name;
     $this->deployed = (bool) $deployed;
+  }
+  
+  /**
+   * @return int
+   */
+  function getId(): int {
+    return $this->id;
+  }
+  
+  /**
+   * @return PetType
+   */
+  function getType(): PetType {
+    return $this->type;
+  }
+  
+  /**
+   * @return string
+   */
+  function getName(): string {
+    return $this->name;
+  }
+  
+  /**
+   * @return bool
+   */
+  function isDeployed(): bool {
+    return $this->deployed;
   }
   
   /**

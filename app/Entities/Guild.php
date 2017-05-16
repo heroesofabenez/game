@@ -7,8 +7,15 @@ namespace HeroesofAbenez\Entities;
  * Data structure for guild
  * 
  * @author Jakub Konečný
+ * @property-read int $id
+ * @property-read string $name
+ * @property-read string $description
+ * @property-read int $members
+ * @property-read string $leader
  */
-class Guild extends BaseEntity {
+class Guild {
+  use \Nette\SmartObject;
+  
   /** @var int id */
   protected $id;
   /** @var string name */
@@ -33,6 +40,54 @@ class Guild extends BaseEntity {
     $this->description = $description;
     $this->members = $members;
     $this->leader = $leader;
+  }
+  
+  /**
+   * @return int
+   */
+  function getId(): int {
+    return $this->id;
+  }
+  
+  /**
+   * @return string
+   */
+  function getName(): string {
+    return $this->name;
+  }
+  
+  /**
+   * @return string
+   */
+  function getDescription(): string {
+    return $this->description;
+  }
+  
+  /**
+   * @return int
+   */
+  function getMembers(): int {
+    return $this->members;
+  }
+  
+  /**
+   * @return string
+   */
+  function getLeader(): string {
+    return $this->leader;
+  }
+  
+  /**
+   * Converts entity into array
+   *
+   * @return array
+   */
+  function toArray(): array {
+    $return = [];
+    foreach($this as $key => $value) {
+      $return[$key] = $value;
+    }
+    return $return;
   }
 }
 ?>

@@ -7,8 +7,15 @@ namespace HeroesofAbenez\Entities;
  * Data structure for effect on character
  *
  * @author Jakub Konečný
+ * @property-read string $id
+ * @property-read string $type
+ * @property-read string $stat
+ * @property-read int $value
+ * @property-read string $source
+ * @property int|string $duration
  */
-class CharacterEffect extends BaseEntity {
+class CharacterEffect {
+  use \Nette\SmartObject;
   /** @var string */
   protected $id;
   /** @var string */
@@ -59,6 +66,48 @@ class CharacterEffect extends BaseEntity {
    */
   static function getDurations(): array {
     return ["combat", "forever"];
+  }
+  
+  /**
+   * @return string
+   */
+  function getId(): string {
+    return $this->id;
+  }
+  
+  /**
+   * @return string
+   */
+  function getType(): string {
+    return $this->type;
+  }
+  
+  /**
+   * @return string
+   */
+  function getStat(): string {
+    return $this->stat;
+  }
+  
+  /**
+   * @return int
+   */
+  function getValue(): int {
+    return $this->value;
+  }
+  
+  /**
+   * @return string
+   */
+  function getSource(): string {
+    return $this->source;
+  }
+  
+  /**
+   * @return int|string
+   */
+  function getDuration() {
+    return $this->duration;
   }
   
   /**

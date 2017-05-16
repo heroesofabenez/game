@@ -7,11 +7,18 @@ namespace HeroesofAbenez\Entities;
  * Data structure for combat action
  *
  * @author Jakub Konečný
+ * @property-read Character $character1
+ * @property-read Character $character2
+ * @property-read string $action
+ * @property-read string $name
+ * @property-read bool $result
+ * @property-read int $amount
+ * @property-read string $message
  */
 class CombatAction extends BaseEntity {
-  /** @var \HeroesofAbenez\Entities\Character */
+  /** @var Character */
   protected $character1;
-  /** @var \HeroesofAbenez\Entities\Character */
+  /** @var Character */
   protected $character2;
   /** @var  string */
   protected $action;
@@ -24,14 +31,6 @@ class CombatAction extends BaseEntity {
   /** @var string */
   protected $message;
   
-  /**
-   * @param string $action
-   * @param bool $result
-   * @param \HeroesofAbenez\Entities\Character $character1
-   * @param \HeroesofAbenez\Entities\Character $character2
-   * @param int $amount
-   * @param string $name
-   */
   function __construct(string $action, bool $result, Character $character1, Character $character2, int $amount = 0, string $name = "") {
     $actions = ["attack", "skill_attack", "skill_special", "healing"];
     if(!in_array($action, $actions)) {
@@ -44,6 +43,55 @@ class CombatAction extends BaseEntity {
     $this->character2 = $character2;
     $this->name = $name;
     $this->parse();
+  }
+  
+  /**
+   * @return Character
+   */
+  function getCharacter1(): Character {
+    return $this->character1;
+  }
+  
+  /**
+   * @return Character
+   */
+  function getCharacter2(): Character {
+    return $this->character2;
+  }
+  
+  /**
+   * @return string
+   */
+  function getAction(): string {
+    return $this->action;
+  }
+  
+  /**
+   * @return string
+   */
+  function getName(): string {
+    return $this->name;
+  }
+  
+  /**
+   * @return bool
+   */
+  function isResult(): bool {
+    return $this->result;
+  }
+  
+  /**
+   * @return int
+   */
+  function getAmount(): int {
+    return $this->amount;
+  }
+  
+  /**
+   * @return string
+   */
+  function getMessage(): string {
+    return $this->message;
   }
   
   /**

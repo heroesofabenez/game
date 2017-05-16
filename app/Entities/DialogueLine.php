@@ -7,13 +7,18 @@ namespace HeroesofAbenez\Entities;
  * One line of dialogue with a npc
  *
  * @author Jakub Konečný
+ * @property-read string $speaker
+ * @property-read string $text
+ * @property-read string[] $names
  */
-class DialogueLine extends BaseEntity {
+class DialogueLine {
+  use \Nette\SmartObject;
+  
   /** @var string */
   protected $speaker;
   /** @var string */
   protected $text;
-  /** @var array */
+  /** @var string[] */
   protected $names = [];
   
   /**
@@ -47,6 +52,13 @@ class DialogueLine extends BaseEntity {
     } elseif($this->speaker === "player") {
       return $this->names[1];
     }
+  }
+  
+  /**
+   * @return string[]
+   */
+  function getNames(): array {
+    return $this->names;
   }
 }
 ?>

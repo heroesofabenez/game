@@ -7,8 +7,12 @@ namespace HeroesofAbenez\Entities;
  * Data structure for quest in journal
  * 
  * @author Jakub Konečný
+ * @property-read int $id
+ * @property-read string $name
  */
-class JournalQuest extends BaseEntity {
+class JournalQuest {
+  use \Nette\SmartObject;
+  
   /** @var int Quest's id */
   protected $id;
   /** @var string Quest's name */
@@ -21,6 +25,20 @@ class JournalQuest extends BaseEntity {
   function __construct(int $id, string $name) {
     $this->id = $id;
     $this->name = $name;
+  }
+  
+  /**
+   * @return int
+   */
+  function getId(): int {
+    return $this->id;
+  }
+  
+  /**
+   * @return string
+   */
+  function getName(): string {
+    return $this->name;
   }
 }
 ?>

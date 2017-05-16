@@ -7,9 +7,14 @@ namespace HeroesofAbenez\Entities;
  * Base character skill
  *
  * @author Jakub Konečný
+ * @property-read Skill $skill
+ * @property int $level
+ * @property-read int $cooldown
  * @property-read string $skillType
  */
-abstract class CharacterSkill extends BaseEntity {
+abstract class CharacterSkill {
+  use \Nette\SmartObject;
+  
   /** @var Skill */
   protected $skill;
   /** @var int */
@@ -20,6 +25,20 @@ abstract class CharacterSkill extends BaseEntity {
   function __construct(Skill $skill, $level) {
     $this->skill = $skill;
     $this->level = $level;
+  }
+  
+  /**
+   * @return int
+   */
+  function getLevel(): int {
+    return $this->level;
+  }
+  
+  /**
+   * @return int
+   */
+  function getCooldown(): int {
+    return $this->cooldown;
   }
   
   /**
