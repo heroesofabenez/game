@@ -18,8 +18,8 @@ class ArenaPresenter extends BasePresenter {
    * @param int $id
    * @return void
    */
-  function actionChampion($id): void {
-    
+  function renderChampion($id): void {
+    $this->template->id = $id;
   }
   
   protected function createComponentArenaPVE(Arena\IArenaPVEControlFactory $factory) {

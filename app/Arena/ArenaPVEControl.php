@@ -44,14 +44,15 @@ class ArenaPVEControl extends ArenaControl {
   
   /**
    * Show champion's profile
-   * 
+   *
+   * @param int $id
    * @return void
    */
-  function renderChampion(): void {
+  function renderChampion(int $id): void {
     $template = $this->template;
     $template->setFile(__DIR__ . "/arenaChampion.latte");
     try {
-      $template->champion = $this->getNpc((int) $this->presenter->getParameter("id"));
+      $template->champion = $this->getNpc($id);
     } catch(OpponentNotFoundException $e) {
       $template->champion = false;
     }

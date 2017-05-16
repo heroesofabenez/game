@@ -28,7 +28,7 @@ class ErrorPresenter extends BasePresenter {
       $this->setView("404");
     } else {
       $this->setView("500");
-      if($this->logger) {
+      if(!is_null($this->logger)) {
         $this->logger->log($exception, ILogger::EXCEPTION);
       }
     }

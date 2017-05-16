@@ -70,7 +70,7 @@ class Skills {
       $userId = $this->user->id;
     }
     $skill = $this->getAttackSkill($skillId);
-    if(!$skill) {
+    if(is_null($skill)) {
       return NULL;
     }
     $where = ["character" => $userId, "skill" => $skillId];
@@ -122,7 +122,7 @@ class Skills {
       $userId = $this->user->id;
     }
     $skill = $this->getSpecialSkill($skillId);
-    if(!$skill) {
+    if(is_null($skill)) {
       return NULL;
     }
     $where = ["character" => $userId, "skill" => $skillId];
