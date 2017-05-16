@@ -44,7 +44,7 @@ class Team extends BaseEntity implements \ArrayAccess, \Countable, \IteratorAggr
   /**
    * Check if the team has a character
    * 
-   * @param string $id Character's id
+   * @param string|int $id Character's id
    * @return boolean
    */
   function hasMember($id): bool {
