@@ -5,4 +5,3 @@ phpstan.neon    export-ignore
 /ci     	export-ignore
 ci.neon		export-ignore
 run_tests.php	export-ignore
-run_tests.sh    export-ignore
