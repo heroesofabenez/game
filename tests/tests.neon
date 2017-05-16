@@ -1,0 +1,8 @@
+extensions:
+    fakeSession: Kdyby\FakeSession\DI\FakeSessionExtension
+    mytester: MyTester\Bridges\NetteDI\MyTesterExtension
+hoa:
+    application:
+        server: sTest
+php:
+    date.timezone: Europe/Prague

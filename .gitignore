@@ -6,6 +6,6 @@
 /tests/*errors
 /images/
 /log/
-/app/config/local.neon
+local.neon
 /vendor/
 !.htaccess

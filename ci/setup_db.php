@@ -3,7 +3,7 @@ use Nette\Neon\Neon;
 
 require __DIR__ . "/../vendor/autoload.php";
 
-$config = Neon::decode(file_get_contents(__DIR__ . "/../app/config/ci.neon"));
+$config = Neon::decode(file_get_contents(__DIR__ . "/../tests/local.neon"));
 $dbConfig = $config["database"]["default"];
 
 $connection = new \Nette\Database\Connection($dbConfig["dsn"], $dbConfig["user"], $dbConfig["password"]);
