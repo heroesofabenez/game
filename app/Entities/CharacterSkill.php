@@ -22,7 +22,7 @@ abstract class CharacterSkill {
   /** @var int */
   protected $cooldown = 0;
   
-  function __construct(Skill $skill, $level) {
+  function __construct(Skill $skill, int $level) {
     $this->skill = $skill;
     $this->level = $level;
   }

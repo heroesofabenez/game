@@ -14,7 +14,7 @@ class CharacterSkillSpecial extends CharacterSkill {
   /** @var  SkillSpecial */
   protected $skill;
   
-  function __construct(SkillSpecial $skill, $level) {
+  function __construct(SkillSpecial $skill, int $level) {
     parent::__construct($skill, $level);
   }
   
@@ -33,7 +33,7 @@ class CharacterSkillSpecial extends CharacterSkill {
       return 0;
     }
     $value = $this->skill->value;
-    $value += (int) $this->skill->value_growth * ($this->level - 1);
+    $value += $this->skill->value_growth * ($this->level - 1);
     return $value;
   }
 }
