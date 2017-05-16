@@ -13,12 +13,11 @@ namespace HeroesofAbenez\Entities;
  * @property-read Character[] $aliveMembers
  * @property-read Character[] $usableMembers
  */
-class Team implements \ArrayAccess, \Countable, \IteratorAggregate {
+class Team extends \HeroesofAbenez\Utils\Collection {
   /** @var string Name of the team */
   protected $name;
   
   use \Nette\SmartObject;
-  use \HeroesofAbenez\Utils\TCollection;
   
   /**
    * @param string $name Name of the team

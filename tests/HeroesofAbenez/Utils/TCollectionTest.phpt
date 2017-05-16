@@ -14,8 +14,7 @@ class Item {
   }
 }
 
-class Collection implements \ArrayAccess, \Countable, \IteratorAggregate {
-  use TCollection;
+class TestCollection extends Collection {
   
   function __construct() {
     $this->class = Item::class;
@@ -29,7 +28,7 @@ class TCollectionTest extends MT\TestCase {
    * @return void
    */
   function setUp() {
-    $this->col = new Collection;
+    $this->col = new TestCollection;
   }
   
   /**

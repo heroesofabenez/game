@@ -7,12 +7,11 @@ use Nette\OutOfRangeException,
     Nette\InvalidArgumentException;
 
 /**
- * Trait Collection
- * Target class must implement \ArrayAccess, \Countable, \IteratorAggregate 
+ * Collection
  * 
  * @author Jakub Konečný
  */
-trait TCollection {
+class Collection  implements \ArrayAccess, \Countable, \IteratorAggregate {
   /** @var array Items in the collection */
   protected $items = [];
   /** @var string Type of items in the collection */
