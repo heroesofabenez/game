@@ -27,6 +27,7 @@ class TrainingPresenter extends BasePresenter {
    * @param \Nette\Security\User $user
    */
   function __construct(\HeroesofAbenez\Model\Profile $model, \Nette\Security\User $user) {
+    parent::__construct();
     $this->model = $model;
     $this->model->user = $user;
   }

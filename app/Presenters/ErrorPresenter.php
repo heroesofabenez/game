@@ -15,6 +15,7 @@ class ErrorPresenter extends BasePresenter {
   private $logger;
   
   function __construct(ILogger $logger = NULL) {
+    parent::__construct();
     $this->logger = $logger;
   }
   
