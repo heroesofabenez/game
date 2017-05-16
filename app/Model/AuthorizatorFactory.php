@@ -3,28 +3,40 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Model;
 
+use Nette\Security\Permission;
+
 /**
  * Authorizator for the game
  *
  * @author Jakub Konečný
  */
 class AuthorizatorFactory {
-  use \Nette\StaticClass;
+  use \Nette\SmartObject;
+  
+  /** @var Permissions */
+  protected $model;
+  
+  /**
+   * AuthorizatorFactory constructor.
+   * @param Permissions $model
+   */
+  function __construct(Permissions $model) {
+    $this->model = $model;
+  }
   
   /**
   * Factory for Authorizator
-  * 
-  * @param Permissions $model
-  * @return \Nette\Security\Permission
+  *
+  * @return Permission
   */
-  static function create(Permissions $model): \Nette\Security\Permission {
-    $permission = new \Nette\Security\Permission;
+  function create(): Permission {
+    $permission = new Permission;
     $permission->addResource("guild");
     $permission->addRole("guest");
     $permission->addRole("player", "guest");
     
-    $roles = $model->getRoles();
-    $permissions = $model->getPermissions();
+    $roles = $this->model->getRoles();
+    $permissions = $this->model->getPermissions();
     
     foreach($roles as $i => $row) {
       if($row["id"] == 1) {

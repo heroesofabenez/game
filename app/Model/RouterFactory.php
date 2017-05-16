@@ -12,12 +12,12 @@ use Nette\Application\Routers\RouteList,
  * @author Jakub Konečný
  */
 class RouterFactory {
-  use \Nette\StaticClass;
+  use \Nette\SmartObject;
   
   /**
    * @return RouteList
    */
-  static function create(): RouteList {
+  function create(): RouteList {
     $router = new RouteList;
     $router[] = new Route("ranking[/<action>][/<page=1 [0-9]+>]", "Ranking:characters");
     $router[] = new Route("<presenter map|tavern>[/<action=local>]");
