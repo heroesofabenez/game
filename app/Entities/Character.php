@@ -403,9 +403,7 @@ class Character extends BaseEntity {
       unset($stat, $type, $duration, $bonus_value);
     }
     foreach($debuffs as $stat => $value) {
-      if($value > 80) {
-        $value = 80;
-      }
+      $value = min($value, 80);
       $bonus_value = $$stat / 100 * $value;
       $$stat -= $bonus_value;
     }
