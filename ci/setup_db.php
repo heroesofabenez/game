@@ -10,6 +10,8 @@ $connection = new \Nette\Database\Connection($dbConfig["dsn"], $dbConfig["user"]
 $sqlsFolder = __DIR__ . "/../app/sqls";
 $files = ["structure", "data_basic", "data_test"];
 foreach($files as $file) {
+  echo "Executing file: $file";
   Nette\Database\Helpers::loadFromFile($connection, "$sqlsFolder/$file.sql");
+  echo "... Done";
 }
 ?>
