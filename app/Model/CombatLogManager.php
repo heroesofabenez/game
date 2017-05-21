@@ -3,6 +3,9 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Model;
 
+use HeroesofAbenez\Orm\Model as ORM,
+    HeroesofAbenez\Orm\Combat as CombatEntity;
+
 /**
  * Combat Log
  *
@@ -11,26 +14,21 @@ namespace HeroesofAbenez\Model;
 class CombatLogManager {
   use \Nette\SmartObject;
   
-  /** @var \Nette\Database\Context */
-  protected $db;
+  /** @var ORM */
+  protected $orm;
   
-  function __construct(\Nette\Database\Context $db) {
-    $this->db = $db;
+  function __construct(ORM $orm) {
+    $this->orm = $orm;
   }
   
   /**
    * Load specified combat from database
    * 
    * @param int $id Combat's id
-   * @return \Nette\Database\Table\ActiveRow|NULL
+   * @return CombatEntity|NULL
    */
-  function read(int $id): ?\Nette\Database\Table\ActiveRow {
-    $log = $this->db->table("combats")->get($id);
-    if(!$log) {
-      return NULL;
-    } else {
-      return $log;
-    }
+  function read(int $id): ?CombatEntity {
+    return $this->orm->combats->getById($id);
   }
   
   /**
@@ -40,12 +38,10 @@ class CombatLogManager {
    * @return int New record's id
    */
   function write(string $text): int {
-    $data = [
-      "text" => $text, "when" => time()
-    ];
-    $this->db->query("INSERT INTO combats", $data);
-    $combatId = $this->db->getInsertId("logs");
-    return (int) $combatId;
+    $combat = new CombatEntity;
+    $combat->text = $text;
+    $this->orm->combats->persistAndFlush($combat);
+    return $combat->id;
   }
 }
 ?>

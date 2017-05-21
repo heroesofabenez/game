@@ -19,6 +19,7 @@ namespace HeroesofAbenez\Orm;
  * @property-read RoutesAreasRepository $areaRoutes
  * @property-read QuestStagesRepository $stages
  * @property-read RoutesStagesRepository $stageRoutes
+ * @property-read CombatsRepository $combats
  */
 class Model extends \Nextras\Orm\Model\Model {
   
