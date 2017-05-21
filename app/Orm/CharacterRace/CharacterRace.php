@@ -20,6 +20,7 @@ use Nextras\Orm\Relationships\OneHasMany;
  * @property OneHasMany|PetType[] $petTypes {1:m PetType::$requiredRace}
  * @property OneHasMany|QuestArea[] $areas {1:m QuestArea::$requiredRace}
  * @property OneHasMany|QuestStage[] $stages {1:m QuestStage::$requiredRace}
+ * @property OneHasMany|Npc[] $npcs {1:m Npc::$race}
  */
 class CharacterRace extends \Nextras\Orm\Entity\Entity {
   const MAX_STATS = 99;

@@ -3,20 +3,21 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\NPC;
 
-use Kdyby\Translation\Translator;
+use Kdyby\Translation\Translator,
+    HeroesofAbenez\Orm\NpcDummy;
 
 /**
  * Shop Control
  *
  * @author Jakub Konečný
- * @property-write \HeroesofAbenez\Entities\NPC $npc
+ * @property-write NpcDummy $npc
  */
 class NPCShopControl extends \Nette\Application\UI\Control {
   /** @var \Nette\Database\Context */
   protected $db;
   /** @var \HeroesofAbenez\Model\Item */
   protected $itemModel;
-  /** @var \HeroesofAbenez\Entities\NPC */
+  /** @var NpcDummy */
   protected $npc;
   /** @var \Nette\Security\User */
   protected $user;
@@ -31,7 +32,7 @@ class NPCShopControl extends \Nette\Application\UI\Control {
     $this->translator = $translator;
   }
   
-  function setNpc(\HeroesofAbenez\Entities\NPC $npc) {
+  function setNpc(NpcDummy $npc) {
     $this->npc = $npc;
   }
   

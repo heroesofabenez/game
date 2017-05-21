@@ -4,7 +4,9 @@ declare(strict_types=1);
 namespace HeroesofAbenez\Model;
 
 use Nette\Utils\Arrays,
-    HeroesofAbenez\Entities\NPC as NPCEntity;
+    HeroesofAbenez\Orm\Npc as NPCEntity,
+    HeroesofAbenez\Orm\Model as ORM,
+    HeroesofAbenez\Orm\NpcDummy;
 
 /**
  * Npc model
@@ -14,17 +16,13 @@ use Nette\Utils\Arrays,
 class NPC {
   use \Nette\SmartObject;
   
-  /** @var \Nette\Database\Context */
-  protected $db;
+  /** @var ORM */
+  protected $orm;
   /** @var \Nette\Caching\Cache */
   protected $cache;
   
-  /**
-   * @param \Nette\Caching\Cache $cache
-   * @param \Nette\Database\Context $db
-   */
-  function __construct(\Nette\Caching\Cache $cache, \Nette\Database\Context $db) {
-    $this->db = $db;
+  function __construct(\Nette\Caching\Cache $cache, ORM $orm) {
+    $this->orm = $orm;
     $this->cache = $cache;
   }
   
@@ -32,40 +30,38 @@ class NPC {
    * Gets list of npcs
    * 
    * @param int $stage Return npcs only from certain stage, 0 = all stages
-   * @return NPCEntity[]
+   * @return NpcDummy[]
    */
   function listOfNpcs(int $stage = 0): array {
-    $return = [];
-    $npcs = $this->cache->load("npcs");
-    if($npcs === NULL) {
-      $npcs = $this->db->table("npcs");
+    $npcs = $this->cache->load("npcs", function(& $dependencies) {
+      $return = [];
+      $npcs = $this->orm->npcs->findAll();
+      /** @var NPCEntity $npc */
       foreach($npcs as $npc) {
-        $return[$npc->id] = new NPCEntity($npc);
+        $return[$npc->id] = new NpcDummy($npc);
       }
-      $this->cache->save("npcs", $return);
-    } else {
-      $return = $npcs;
-    }
+      return $return;
+    });
     if($stage > 0) {
-      foreach($return as $npc) {
+      /** @var NpcDummy $npc */
+      foreach($npcs as $npc) {
         if($npc->stage !== $stage) {
-          unset($return[$npc->id]);
+          unset($npcs[$npc->id]);
         }
       }
     }
-    return $return;
+    return $npcs;
   }
   
   /**
    * Get info about specified npc
    * 
    * @param int $id Npc's id
-   * @return NPCEntity
+   * @return NpcDummy|NULL
    */
-  function view(int $id): NPCEntity {
+  function view(int $id): ?NpcDummy {
     $npcs = $this->listOfNpcs();
-    $npc = Arrays::get($npcs, $id, false);
-    return $npc;
+    return Arrays::get($npcs, $id, NULL);
   }
   
   /**
@@ -76,7 +72,7 @@ class NPC {
    */
   function getNpcName(int $id): string {
     $npc = $this->view($id);
-    if(!$npc) {
+    if(is_null($npc)) {
       return "";
     } else {
       return $npc->name;

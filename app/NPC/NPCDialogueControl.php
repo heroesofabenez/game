@@ -3,19 +3,20 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\NPC;
 
-use HeroesofAbenez\Entities\DialogueLine;
+use HeroesofAbenez\Entities\DialogueLine,
+    HeroesofAbenez\Orm\NpcDummy;
 
 /**
  * A set of dialogue lines, simplify working with them
  * 
  * @author Jakub Konečný
  * @property-read string[] $names
- * @property-write \HeroesofAbenez\Entities\NPC $npc
+ * @property-write NpcDummy $npc
  */
 class NPCDialogueControl extends \Nette\Application\UI\Control {
   /** @var \Nette\Security\User */
   protected $user;
-  /** @var \HeroesofAbenez\Entities\NPC */
+  /** @var NpcDummy */
   protected $npc;
   
   /**
@@ -26,7 +27,7 @@ class NPCDialogueControl extends \Nette\Application\UI\Control {
     $this->user = $user;
   }
   
-  function setNpc(\HeroesofAbenez\Entities\NPC $npc) {
+  function setNpc(NpcDummy $npc) {
     $this->npc = $npc;
   }
   

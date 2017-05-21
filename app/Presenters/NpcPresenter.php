@@ -13,7 +13,7 @@ use HeroesofAbenez\NPC;
 class NpcPresenter extends BasePresenter {
   /** @var \HeroesofAbenez\Model\NPC @autowire */
   protected $model;
-  /** @var \HeroesofAbenez\Entities\NPC */
+  /** @var \HeroesofAbenez\Orm\NpcDummy */
   protected $npc;
   
   /**
@@ -23,7 +23,7 @@ class NpcPresenter extends BasePresenter {
     parent::startup();
     if($this->action != "default" AND $this->action != "notfound") {
       $this->npc = $this->model->view((int) $this->params["id"]);
-      if(!$this->npc) {
+      if(is_null($this->npc)) {
         $this->forward("notfound");
       }
       if($this->npc->stage !== $this->user->identity->stage) {

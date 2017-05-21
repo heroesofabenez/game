@@ -20,6 +20,7 @@ namespace HeroesofAbenez\Orm;
  * @property-read QuestStagesRepository $stages
  * @property-read RoutesStagesRepository $stageRoutes
  * @property-read CombatsRepository $combats
+ * @property-read NpcsRepository $npcs
  */
 class Model extends \Nextras\Orm\Model\Model {
   
