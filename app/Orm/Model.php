@@ -10,6 +10,7 @@ namespace HeroesofAbenez\Orm;
  * @property-read GuildsRepository $guilds
  * @property-read GuildRanksRepository $guildRanks
  * @property-read GuildRanksCustomRepository $guildRanksCustom
+ * @property-read GuildPrivilegesRepository $guildPrivileges
  * @property-read CharacterRacesRepository $races
  * @property-read CharacterClassesRepository $classes
  * @property-read CharacterSpecializationsRepository $specializations

@@ -3,6 +3,10 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Model;
 
+use HeroesofAbenez\Orm\Model as ORM,
+    HeroesofAbenez\Orm\GuildRank,
+    HeroesofAbenez\Orm\GuildPrivilege;
+
 /**
  * Permissions Model
  *
@@ -11,17 +15,13 @@ namespace HeroesofAbenez\Model;
 class Permissions {
   use \Nette\SmartObject;
   
-  /** @var \Nette\Database\Context */
-  protected $db;
+  /** @var ORM */
+  protected $orm;
   /** @var \Nette\Caching\Cache */
   protected $cache;
   
-  /**
-   * @param \Nette\Caching\Cache $cache
-   * @param \Nette\Database\Context $db
-   */
-  function __construct(\Nette\Caching\Cache $cache, \Nette\Database\Context $db) {
-    $this->db = $db;
+  function __construct(ORM $orm, \Nette\Caching\Cache $cache) {
+    $this->orm = $orm;
     $this->cache = $cache;
   }
   
@@ -31,15 +31,15 @@ class Permissions {
    * @return array
    */
   function getRoles(): array {
-    $roles = $this->cache->load("roles");
-    if($roles === NULL) {
+    $roles = $this->cache->load("roles", function(& $dependencies) {
       $roles = [];
-      $rolesRows = $this->db->table("guild_ranks")->order("id");
-      foreach($rolesRows as $i => $row) {
-        $roles[$i] = ["id" => $row->id, "name" => $row->name];
+      $rows = $this->orm->guildRanks->findAll()->orderBy("id");
+      /** @var GuildRank $row */
+      foreach($rows as $row) {
+        $roles[$row->id] = ["id" => $row->id, "name" => $row->name];
       }
-      $this->cache->save("roles", $roles);
-    }
+      return $roles;
+    });
     return $roles;
   }
   
@@ -61,16 +61,16 @@ class Permissions {
    */
   function getPermissions(): array {
     $roles = $this->getRoles();
-    $permissions = $this->cache->load("permissions");
-    if($permissions === NULL) {
+    $permissions = $this->cache->load("permissions", function(& $dependencies) use($roles) {
       $permissions = [];
-      $privileges = $this->db->table("guild_privileges");
-      foreach($privileges as $row) {
-        $role = $roles[$row->rank];
-        $permissions[$row->id] = ["role" => $role["name"], "action" => $row->action];
+      $privileges = $this->orm->guildPrivileges->findAll();
+      /** @var GuildPrivilege $privilege */
+      foreach($privileges as $privilege) {
+        $role = $roles[$privilege->rank->id];
+        $permissions[$privilege->id] = ["role" => $role["name"], "action" => $privilege->action];
       }
-      $this->cache->save("permissions", $permissions);
-    }
+      return $permissions;
+    });
     return $permissions;
   }
 }

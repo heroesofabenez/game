@@ -12,6 +12,7 @@ use Nextras\Orm\Relationships\OneHasMany;
  * @property int $id {primary}
  * @property string $name
  * @property OneHasMany|GuildRankCustom[] $customNames {1:m GuildRankCustom::$rank}
+ * @property OneHasMany|GuildPrivilege[] $privileges {1:m GuildPrivilege::$rank}
  */
 class GuildRank extends \Nextras\Orm\Entity\Entity {
   function __toString() {
