@@ -4,9 +4,12 @@ declare(strict_types=1);
 namespace HeroesofAbenez\Model;
 
 use Nette\Utils\Arrays,
-    HeroesofAbenez\Entities\CharacterRace,
-    HeroesofAbenez\Entities\CharacterClass,
-    HeroesofAbenez\Entities\CharacterSpecialization;
+    HeroesofAbenez\Orm\CharacterRace,
+    HeroesofAbenez\Orm\CharacterClass,
+    HeroesofAbenez\Orm\Model as ORM,
+    HeroesofAbenez\Orm\CharacterRaceDummy,
+    HeroesofAbenez\Orm\CharacterClassDummy,
+    HeroesofAbenez\Orm\CharacterSpecializationDummy;
 
   /**
    * Model Profile
@@ -19,6 +22,8 @@ class Profile {
   
   /** @var \Nette\Database\Context  */
   protected $db;
+  /** @var ORM */
+  protected $orm;
   /** @var \Nette\Caching\Cache */
   protected $cache;
   /** @var \HeroesofAbenez\Model\Pet */
@@ -28,8 +33,9 @@ class Profile {
   /** @var string[] */
   private $stats;
   
-  function __construct(\Nette\Database\Context $db, \Nette\Caching\Cache $cache, Pet $petModel) {
+  function __construct(ORM $orm, \Nette\Database\Context $db, \Nette\Caching\Cache $cache, Pet $petModel) {
     $this->db = $db;
+    $this->orm = $orm;
     $this->cache = $cache;
     $this->petModel = $petModel;
     $this->stats = ["strength", "dexterity", "constitution", "intelligence", "charisma"];
@@ -42,18 +48,18 @@ class Profile {
   /**
    * Get list of races
    * 
-   * @return CharacterRace[]
+   * @return CharacterRaceDummy[]
    */
   function getRacesList(): array {
-    $racesList = $this->cache->load("races");
-    if($racesList === NULL) {
+    $racesList = $this->cache->load("races", function(& $dependencies) {
       $racesList = [];
-      $races = $this->db->table("character_races");
+      $races = $this->orm->races->findAll();
+      /** @var CharacterRace $race */
       foreach($races as $race) {
-        $racesList[$race->id] = new CharacterRace($race);
+        $racesList[$race->id] = new CharacterRaceDummy($race);
       }
-      $this->cache->save("races", $racesList);
-    }
+      return $racesList;
+    });
     return $racesList;
   }
   
@@ -61,12 +67,11 @@ class Profile {
    * Get data about specified race
    * 
    * @param int $id Race's id
-   * @return CharacterRace|NULL
+   * @return CharacterRaceDummy|NULL
    */
-  function getRace(int $id): ?CharacterRace {
+  function getRace(int $id): ?CharacterRaceDummy {
     $races = $this->getRacesList();
-    $race = Arrays::get($races, $id, NULL);
-    return $race;
+    return Arrays::get($races, $id, NULL);
   }
   
   /**
@@ -77,7 +82,7 @@ class Profile {
    */
   function getRaceName(int $id): string {
     $race = $this->getRace($id);
-    if(!$race) {
+    if(is_null($race)) {
       return "";
     } else {
       return $race->name;
@@ -87,18 +92,18 @@ class Profile {
   /**
    * Get list of classes
    * 
-   * @return CharacterClass[]
+   * @return CharacterClassDummy[]
    */
   function getClassesList(): array {
-    $classesList = $this->cache->load("classes");
-    if($classesList === NULL) {
+    $classesList = $this->cache->load("classes", function(& $dependencies) {
       $classesList = [];
-      $classes = $this->db->table("character_classes");
+      $classes = $this->orm->classes->findAll();
+      /** @var CharacterClass $class */
       foreach($classes as $class) {
-        $classesList[$class->id] = new CharacterClass($class);
+        $classesList[$class->id] = new CharacterClassDummy($class);
       }
-      $this->cache->save("classes", $classesList);
-    }
+      return $classesList;
+    });
     return $classesList;
   }
   
@@ -106,12 +111,11 @@ class Profile {
    * Get data about specified class
    * 
    * @param int $id Class' id
-   * @return CharacterClass|NULL
+   * @return CharacterClassDummy|NULL
    */
-  function getClass(int $id): ?CharacterClass {
+  function getClass(int $id): ?CharacterClassDummy {
     $classes = $this->getClassesList();
-    $class = Arrays::get($classes, $id, NULL);
-    return $class;
+    return Arrays::get($classes, $id, NULL);
   }
   
   /**
@@ -122,7 +126,7 @@ class Profile {
    */
   function getClassName(int $id): string {
     $class = $this->getClass($id);
-    if(!$class) {
+    if(is_null($class)) {
       return "";
     } else {
       return $class->name;
@@ -132,18 +136,17 @@ class Profile {
   /**
    * Get list of specializations
    * 
-   * @return CharacterSpecialization[]
+   * @return CharacterSpecializationDummy[]
    */
   function getSpecializationsList(): array {
-    $specializationsList = $this->cache->load("specializations");
-    if($specializationsList === NULL) {
+    $specializationsList = $this->cache->load("specializations", function(& $dependencies) {
       $specializationsList = [];
-      $specializations = $this->db->table("character_specializations");
+      $specializations = $this->orm->specializations->findAll();
       foreach($specializations as $specialization) {
-        $specializationsList[$specialization->id] = new CharacterSpecialization($specialization);
+        $specializationsList[$specialization->id] = new CharacterSpecializationDummy($specialization);
       }
-      $this->cache->save("specializations", $specializationsList);
-    }
+      return $specializationsList;
+    });
     return $specializationsList;
   }
   
@@ -151,12 +154,11 @@ class Profile {
    * Get data about specified specialization
    * 
    * @param int $id Specialization's id
-   * @return CharacterSpecialization|NULL
+   * @return CharacterSpecializationDummy|NULL
    */
-  function getSpecialization(int $id): ?CharacterSpecialization {
-    $races = $this->getSpecializationsList();
-    $race = Arrays::get($races, $id, NULL);
-    return $race;
+  function getSpecialization(int $id): ?CharacterSpecializationDummy {
+    $specializations = $this->getSpecializationsList();
+    return Arrays::get($specializations, $id, NULL);
   }
   
   /**
@@ -166,11 +168,11 @@ class Profile {
    * @return string
    */
   function getSpecializationName(int $id): string {
-    $race = $this->getSpecialization($id);
-    if(!$race) {
+    $specialization = $this->getSpecialization($id);
+    if(is_null($specialization)) {
       return "";
     } else {
-      return $race->name;
+      return $specialization->name;
     }
   }
   
@@ -253,7 +255,7 @@ class Profile {
     }
     $stats = [
       "id", "name", "gender", "level", "race", "description", "strength", "dexterity",
-      "constitution", "intelligence", "charisma", "occupation", "specialization"
+      "constitution", "intelligence", "charisma", "occupation", "specialization",
     ];
     foreach($stats as $stat) {
       $return[$stat] = $char->$stat;

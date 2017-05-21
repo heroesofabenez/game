@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace HeroesofAbenez\Entities;
+namespace HeroesofAbenez\Orm;
 
 /**
  * Data structure for race
@@ -16,7 +16,7 @@ namespace HeroesofAbenez\Entities;
  * @property-read int $intelligence
  * @property-read int $charisma
  */
-class CharacterRace {
+class CharacterRaceDummy {
   use \Nette\SmartObject;
   
   /** @var int */
@@ -36,11 +36,15 @@ class CharacterRace {
   /** @var int */
   protected $charisma;
   
-  function __construct(\Nette\Database\Table\ActiveRow $row) {
-    if($row->getTable()->getName() != "character_races") exit;
-    foreach($row as $key => $value) {
-      $this->$key = $value;
-    }
+  function __construct(CharacterRace $race) {
+    $this->id = $race->id;
+    $this->name = $race->name;
+    $this->description = $race->description;
+    $this->strength = $race->strength;
+    $this->dexterity = $race->dexterity;
+    $this->constitution = $race->constitution;
+    $this->intelligence = $race->intelligence;
+    $this->charisma = $race->charisma;
   }
   
   /**

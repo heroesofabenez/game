@@ -12,8 +12,8 @@ use Nette\Application\UI\Form;
  */
 class CreateCharacterFormFactory extends BaseFormFactory {
   /**
-   * @param \HeroesofAbenez\Entities\CharacterRace[] $races
-   * @param \HeroesofAbenez\Entities\CharacterClass[] $classes
+   * @param \HeroesofAbenez\Orm\CharacterRaceDummy[] $races
+   * @param \HeroesofAbenez\Orm\CharacterClassDummy[] $classes
    * @return Form
    */
   function create(array $races, array $classes): Form {
