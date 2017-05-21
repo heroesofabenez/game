@@ -27,7 +27,7 @@
         "latte/latte": "~2.4",
         "kdyby/autowired": "^1.4",
         "kdyby/translation": "^2.4",
-        "nexendrie/menu": "^0.3"
+        "nexendrie/menu": "^1.0"
     },
     "require-dev": {
         "nexendrie/code-quality": "dev-master",

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "50b912c28b6bdbade2f3a21be6509e38",
+    "content-hash": "b1526526b144abcfbf8d1f4961a349f8",
     "packages": [
         {
             "name": "kdyby/autowired",
@@ -170,16 +170,16 @@
         },
         {
             "name": "latte/latte",
-            "version": "v2.4.3",
+            "version": "v2.4.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nette/latte.git",
-                "reference": "b62ee346467e1e2402a43c499cf6047fddc5d321"
+                "reference": "7d207e620cfc1386fb7ccd8de403d5760f7ca655"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nette/latte/zipball/b62ee346467e1e2402a43c499cf6047fddc5d321",
-                "reference": "b62ee346467e1e2402a43c499cf6047fddc5d321",
+                "url": "https://api.github.com/repos/nette/latte/zipball/7d207e620cfc1386fb7ccd8de403d5760f7ca655",
+                "reference": "7d207e620cfc1386fb7ccd8de403d5760f7ca655",
                 "shasum": ""
             },
             "require": {
@@ -196,8 +196,7 @@
             },
             "suggest": {
                 "ext-fileinfo": "to use filter |datastream",
-                "ext-mbstring": "to use filters like lower, upper, capitalize, ...",
-                "ext-xml": "to use filters like length, substring, ..."
+                "ext-mbstring": "to use filters like lower, upper, capitalize, ..."
             },
             "type": "library",
             "extra": {
@@ -232,7 +231,7 @@
                 "templating",
                 "twig"
             ],
-            "time": "2017-01-19T11:06:59+00:00"
+            "time": "2017-05-17T12:00:19+00:00"
         },
         {
             "name": "nette/application",
@@ -1094,16 +1093,16 @@
         },
         {
             "name": "nexendrie/menu",
-            "version": "0.3.0",
+            "version": "1.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nexendrie/menu.git",
-                "reference": "d46206b27285eba8e819a500edfa989cda38f3a6"
+                "reference": "bc06c63249f6fc77a6868d6ad87bf2d27637ab58"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nexendrie/menu/zipball/d46206b27285eba8e819a500edfa989cda38f3a6",
-                "reference": "d46206b27285eba8e819a500edfa989cda38f3a6",
+                "url": "https://api.github.com/repos/nexendrie/menu/zipball/bc06c63249f6fc77a6868d6ad87bf2d27637ab58",
+                "reference": "bc06c63249f6fc77a6868d6ad87bf2d27637ab58",
                 "shasum": ""
             },
             "require": {
@@ -1117,7 +1116,10 @@
                 "nette/tester": "dev-master",
                 "nexendrie/code-quality": "dev-master",
                 "nexendrie/site-generator": "1.0.x-dev",
-                "phpstan/phpstan-nette": "^0.6.2"
+                "phpstan/phpstan-nette": "^0.7"
+            },
+            "suggest": {
+                "nette/security": "To use menu item conditions related to user"
             },
             "type": "library",
             "extra": {
@@ -1149,7 +1151,7 @@
                 "menu",
                 "nette"
             ],
-            "time": "2017-05-11T10:49:20+00:00"
+            "time": "2017-05-20T15:55:43+00:00"
         },
         {
             "name": "psr/log",
