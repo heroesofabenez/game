@@ -24,7 +24,8 @@ use Nextras\Orm\Relationships\OneHasMany;
  * @property float $charismaGrow
  * @property float $statPointsLevel
  * @property string $initiative
- * @property OneHasMany|CharacterSpecialization $specializations {1:m CharacterSpecialization::$class}
+ * @property OneHasMany|CharacterSpecialization[] $specializations {1:m CharacterSpecialization::$class}
+ * @property OneHasMany|PetType[] $petTypes {1:m PetType::$requiredClass}
  */
 class CharacterClass extends \Nextras\Orm\Entity\Entity {
   const MAX_STATS = 99;

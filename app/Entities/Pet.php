@@ -3,11 +3,13 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Entities;
 
+use HeroesofAbenez\Orm\PetTypeDummy;
+
 /**
  * Structure for pet
  *
  * @property-read int $id
- * @property-read PetType $type
+ * @property-read PetTypeDummy $type
  * @property-read string $name
  * @property-read bool $deployed
  * @property-read int $typeId
@@ -21,20 +23,14 @@ class Pet {
   
   /** @var int Pet's id */
   protected $id;
-  /** @var PetType Pet's type */
+  /** @var PetTypeDummy Pet's type */
   protected $type;
   /** @var string Pet's name */
   protected $name;
   /** @var bool Is the pet deployed? */
   protected $deployed;
   
-  /**
-   * @param int $id
-   * @param PetType $type
-   * @param string $name
-   * @param bool $deployed
-   */
-  function __construct(int $id, PetType $type, string $name, $deployed = false) {
+  function __construct(int $id, PetTypeDummy $type, string $name, $deployed = false) {
     $this->id = $id;
     $this->type = $type;
     $this->name = $name;
@@ -49,9 +45,9 @@ class Pet {
   }
   
   /**
-   * @return PetType
+   * @return PetTypeDummy
    */
-  function getType(): PetType {
+  function getType(): PetTypeDummy {
     return $this->type;
   }
   

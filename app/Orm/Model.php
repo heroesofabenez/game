@@ -14,6 +14,7 @@ namespace HeroesofAbenez\Orm;
  * @property-read CharacterRacesRepository $races
  * @property-read CharacterClassesRepository $classes
  * @property-read CharacterSpecializationsRepository $specializations
+ * @property-read PetTypesRepository $petTypes
  */
 class Model extends \Nextras\Orm\Model\Model {
   

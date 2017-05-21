@@ -4,8 +4,10 @@ declare(strict_types=1);
 namespace HeroesofAbenez\Model;
 
 use Nette\Utils\Arrays,
-    HeroesofAbenez\Entities\PetType,
-    HeroesofAbenez\Entities\Pet as PetEntity;
+    HeroesofAbenez\Orm\PetType,
+    HeroesofAbenez\Entities\Pet as PetEntity,
+    HeroesofAbenez\Orm\Model as ORM,
+    HeroesofAbenez\Orm\PetTypeDummy;
 
 /**
  * Pet Model
@@ -18,6 +20,8 @@ class Pet {
   
   /** @var \Nette\Caching\Cache */
   protected $cache;
+  /** @var ORM */
+  protected $orm;
   /** @var \Nette\Database\Context */
   protected $db;
   /** @var \Nette\Security\User */
@@ -27,9 +31,10 @@ class Pet {
    * @param \Nette\Caching\Cache $cache
    * @param \Nette\Database\Context $db
    */
-  function __construct(\Nette\Caching\Cache $cache, \Nette\Database\Context $db) {
+  function __construct(\Nette\Caching\Cache $cache, \Nette\Database\Context $db, ORM $orm) {
     $this->cache = $cache;
     $this->db = $db;
+    $this->orm = $orm;
   }
   
   function setUser(\Nette\Security\User $user) {
@@ -39,33 +44,30 @@ class Pet {
   /**
    * Get list of all pet types
    * 
-   * @return PetType[]
+   * @return PetTypeDummy[]
    */
   function listOfTypes() {
-    $return = [];
-    $types = $this->cache->load("pet_types");
-    if($types === NULL) {
-      $types = $this->db->table("pet_types");
+    $types = $this->cache->load("pet_types", function(& $dependencies) {
+      $return = [];
+      $types = $this->orm->petTypes->findAll();
+      /** @var PetType $type */
       foreach($types as $type) {
-        $return[$type->id] = new PetType($type);
+        $return[$type->id] = new PetTypeDummy($type);
       }
-      $this->cache->save("pet_types", $return);
-    } else {
-      $return = $types;
-    }
-    return $return;
+      return $return;
+    });
+    return $types;
   }
   
   /**
    * Get info about specified pet type
    * 
    * @param int $id
-   * @return PetType
+   * @return PetTypeDummy|NULL
    */
-  function viewType(int $id) {
+  function viewType(int $id): ?PetTypeDummy {
     $types = $this->listOfTypes();
-    $type = Arrays::get($types, $id, false);
-    return $type;
+    return Arrays::get($types, $id, NULL);
   }
   
   /**

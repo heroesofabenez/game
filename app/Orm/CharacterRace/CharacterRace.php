@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Orm;
 
+use Nextras\Orm\Relationships\OneHasMany;
+
 /**
  * CharacterRace
  *
@@ -15,6 +17,7 @@ namespace HeroesofAbenez\Orm;
  * @property int $constitution {default 0}
  * @property int $intelligence {default 0}
  * @property int $charisma {default 0}
+ * @property OneHasMany|PetType[] $petTypes {1:m PetType::$requiredRace}
  */
 class CharacterRace extends \Nextras\Orm\Entity\Entity {
   const MAX_STATS = 99;
