@@ -4,8 +4,12 @@ declare(strict_types=1);
 namespace HeroesofAbenez\Model;
 
 use Nette\Utils\Arrays,
-    HeroesofAbenez\Entities\Area,
-    HeroesofAbenez\Entities\Stage;
+    HeroesofAbenez\Orm\Model as ORM,
+    HeroesofAbenez\Orm\QuestAreaDummy,
+    HeroesofAbenez\Orm\QuestStageDummy,
+    HeroesofAbenez\Orm\QuestStage,
+    HeroesofAbenez\Orm\QuestArea,
+    HeroesofAbenez\Orm\RoutesStage;
 
 /**
  * Location Model
@@ -21,18 +25,17 @@ class Location {
   protected $cache;
   /** @var \Nette\Database\Context */
   protected $db;
+  /** @var ORM */
+  protected $orm;
   /** @var \Nette\Security\User */
   protected $user;
   /** @var \HeroesofAbenez\Model\NPC */
   protected $npcModel;
   
-  /**
-   * @param \Nette\Caching\Cache $cache
-   * @param \Nette\Database\Context $db
-   */
-  function __construct(\Nette\Caching\Cache $cache, \Nette\Database\Context $db) {
+  function __construct(\Nette\Caching\Cache $cache, \Nette\Database\Context $db, ORM $orm) {
     $this->cache = $cache;
     $this->db = $db;
+    $this->orm = $orm;
   }
   
   function setUser(\Nette\Security\User $user) {
@@ -47,40 +50,37 @@ class Location {
    * Gets list of stages
    * 
    * @param int $area Return stages only from specified area. 0 = all areas
-   * @return Stage[] List of stages
+   * @return QuestStageDummy[] List of stages
    */
   function listOfStages(int $area = 0): array {
-    $return = [];
-    $stages = $this->cache->load("stages");
-    if($stages === NULL) {
-      $stages = $this->db->table("quest_stages");
+    $stages = $this->cache->load("stages", function(& $dependencies) {
+      $return = [];
+      $stages = $this->orm->stages->findAll();
+      /** @var QuestStage $stage */
       foreach($stages as $stage) {
-        $return[$stage->id] = new Stage($stage);
+        $return[$stage->id] = new QuestStageDummy($stage);
       }
-      $this->cache->save("stages", $return);
-    } else {
-      $return = $stages;
-    }
+      return $return;
+    });
     if($area > 0) {
-      foreach($return as $stage) {
+      foreach($stages as $stage) {
         if($stage->area != $area) {
-          unset($return[$stage->id]);
+          unset($stages[$stage->id]);
         }
       }
     }
-    return $return;
+    return $stages;
   }
   
   /**
    * Gets data about specified stage
    * 
    * @param int $id Stage's id
-   * @return Stage
+   * @return QuestStageDummy|NULL
    */
-  function getStage(int $id) {
+  function getStage(int $id): ?QuestStageDummy {
     $stages = $this->listOfStages();
-    $stage = Arrays::get($stages, $id, false);
-    return $stage;
+    return Arrays::get($stages, $id, NULL);
   }
   
   /**
@@ -89,50 +89,45 @@ class Location {
    * @return \stdClass[]
    */
   function stageRoutes(): array {
-    $return = [];
-    $routes = $this->cache->load("stage_routes");
-    if($routes === NULL) {
-      $routes = $this->db->table("routes_stages");
+    $routes = $this->cache->load("stage_routes", function(& $dependencies) {
+      $return = [];
+      $routes = $this->orm->stageRoutes->findAll();
+      /** @var RoutesStage $route */
       foreach($routes as $route) {
-        $return[$route->id] = (object) ["from" => $route->from, "to" => $route->to];
+        $return[$route->id] = (object) ["from" => $route->from->id, "to" => $route->to->id];
       }
-      $this->cache->save("stage_routes", $return);
-    } else {
-      $return = $routes;
-    }
-    return $return;
+      return $return;
+    });
+    return $routes;
   }
   
   /**
    * Gets list of areas
    * 
-   * @return Area[] list of stages
+   * @return QuestAreaDummy[] list of stages
    */
   function listOfAreas(): array {
-    $areas = $this->cache->load("areas");
-    if($areas === NULL) {
+    $areas = $this->cache->load("areas", function(& $dependencies) {
       $return = [];
-      $areas = $this->db->table("quest_areas");
+      $areas = $this->orm->areas->findAll();
+      /** @var QuestArea $area */
       foreach($areas as $area) {
-        $return[$area->id] = new Area($area);
+        $return[$area->id] = new QuestAreaDummy($area);
       }
-      $this->cache->save("areas", $return);
-    } else {
-      $return = $areas;
-    }
-    return $return;
+      return $return;
+    });
+    return $areas;
   }
   
   /**
    * Gets data about specified area
    * 
    * @param int $id Area's id
-   * @return Area
+   * @return QuestAreaDummy|NULL
    */
-  function getArea(int $id) {
+  function getArea(int $id): ?QuestAreaDummy {
     $areas = $this->listOfAreas();
-    $area = Arrays::get($areas, $id, false);
-    return $area;
+    return Arrays::get($areas, $id, NULL);
   }
   
   /**
@@ -158,7 +153,7 @@ class Location {
    */
   function getAreaName(int $id): string {
     $area = $this->getArea($id);
-    if(!$area) {
+    if(is_null($area)) {
       return "";
     } else {
       return $area->name;
@@ -184,22 +179,23 @@ class Location {
    * Returns list of accessible stages (in player's current area,
    * player meets conditions for entering them)
    * 
-   * @return Stage[]
+   * @return QuestStageDummy[]
    */
   function accessibleStages(): array {
     $stages = $this->listOfStages();
     $curr_stage = $stages[$this->user->identity->stage];
+    /** @var QuestStage $stage */
     foreach($stages as $stage) {
       if($stage->area !== $curr_stage->area) {
         unset($stages[$stage->id]);
       }
-      if($this->user->identity->level < $stage->required_level) {
+      if($this->user->identity->level < $stage->requiredLevel) {
         unset($stages[$stage->id]);
       }
-      if(is_int($stage->required_race) AND $stage->required_race != $this->user->identity->race) {
+      if(is_int($stage->requiredRace) AND $stage->requiredRace != $this->user->identity->race) {
         unset($stages[$stage->id]);
       }
-      if(is_int($stage->required_occupation) AND $stage->required_occupation != $this->user->identity->occupation) {
+      if(is_int($stage->requiredOccupation) AND $stage->requiredOccupation != $this->user->identity->occupation) {
         unset($stages[$stage->id]);
       }
     }
