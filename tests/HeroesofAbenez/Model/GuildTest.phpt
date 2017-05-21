@@ -5,7 +5,7 @@ namespace HeroesofAbenez\Model;
 
 use MyTester as MT,
     MyTester\Assert,
-    HeroesofAbenez\Entities\Guild as GuildEntity;
+    HeroesofAbenez\Orm\GuildDummy as GuildEntity;
 
 class GuildTest extends MT\TestCase {
   /** @var Guild */

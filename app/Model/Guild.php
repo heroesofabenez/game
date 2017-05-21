@@ -4,8 +4,11 @@ declare(strict_types=1);
 namespace HeroesofAbenez\Model;
 
 use HeroesofAbenez\Entities\Request as RequestEntity,
-    HeroesofAbenez\Entities\Guild as GuildEntity,
-    Nette\Utils\Arrays;
+    HeroesofAbenez\Orm\Guild as GuildEntity,
+    HeroesofAbenez\Orm\GuildDummy,
+    Nette\Utils\Arrays,
+    HeroesofAbenez\Orm\Model as ORM,
+    HeroesofAbenez\Orm\GuildRankCustom;
 
   /**
    * Model Guild
@@ -15,6 +18,8 @@ use HeroesofAbenez\Entities\Request as RequestEntity,
 class Guild {
   use \Nette\SmartObject;
   
+  /** @var ORM */
+  protected $orm;
   /** @var \Nette\Caching\Cache */
   protected $cache;
   /** @var \Nette\Database\Context */
@@ -26,16 +31,10 @@ class Guild {
   /** @var \HeroesofAbenez\Model\Permissions */
   protected $permissionsModel;
   
-  /**
-   * @param \Nette\Caching\Cache $cache
-   * @param \Nette\Database\Context $db
-   * @param \Nette\Security\User $user
-   * @param Profile $profileModel
-   * @param Permissions $permissionsModel
-   */
-  function __construct(\Nette\Caching\Cache $cache, \Nette\Database\Context $db, \Nette\Security\User $user, Profile $profileModel, Permissions $permissionsModel) {
+  function __construct(ORM $orm, \Nette\Caching\Cache $cache, \Nette\Database\Context $db, \Nette\Security\User $user, Profile $profileModel, Permissions $permissionsModel) {
     $this->cache = $cache;
     $this->db = $db;
+    $this->orm = $orm;
     $this->user = $user;
     $this->profileModel = $profileModel;
     $this->permissionsModel = $permissionsModel;
@@ -60,7 +59,7 @@ class Guild {
    * Get data about specified guild
    * 
    * @param int $id Id of guild
-   * @return GuildEntity
+   * @return GuildDummy
    */
   function guildData(int $id) {
     $guilds = $this->listOfGuilds();
@@ -98,11 +97,11 @@ class Guild {
    * @return string
    */
   function getCustomRankName(int $guild, int $rank): string {
-    $customRank = $this->db->table("guild_ranks_custom")->where("guild=? AND rank=?", $guild, $rank);
-    if(count($customRank)) {
-      return $customRank->fetch()->name;
-    } else {
+    $customRank = $this->orm->guildRanksCustom->getByGuildAndRank($guild, $rank);
+    if(is_null($customRank)) {
       return "";
+    } else {
+      return $customRank->name;
     }
   }
   
@@ -139,14 +138,16 @@ class Guild {
    * @throws NameInUseException
    */
   function create($data): void {
-    $guilds = $this->cache->load("guilds");
-    foreach($guilds as $guild) {
-      if($guild->name == $data["name"]) {
-        throw new NameInUseException();
-      }
+    $guild = $this->orm->guilds->getByName($data["name"]);
+    if(!is_null($guild)) {
+      throw new NameInUseException;
     }
-    $row = $this->db->table("guilds")->insert($data);
-    $data2 = ["guild" => $row->id, "guildrank" => 7];
+    $guild = new \HeroesofAbenez\Orm\Guild;
+    foreach($data as $key => $value) {
+      $guild->$key = $value;
+    }
+    $this->orm->guilds->persistAndFlush($guild);
+    $data2 = ["guild" => $guild->id, "guildrank" => 7];
     $this->db->query("UPDATE characters SET ? WHERE id=?", $data2, $this->user->id);
     $this->cache->remove("guilds");
   }
@@ -159,14 +160,16 @@ class Guild {
    * @throws GuildNotFoundException
    */
   function sendApplication(int $gid): void {
-    $guild = $this->db->table("guilds")->get($gid);
-    if(!$guild) { throw new GuildNotFoundException; }
+    $guild = $this->orm->guilds->getById($gid);
+    if(is_null($guild)) {
+      throw new GuildNotFoundException;
+    }
     $leader = $this->db->table("characters")
       ->where("guild", $gid)
       ->where("guildrank", 7);
     $leader = $leader[1];
     $data = [
-      "from" => $this->user->id, "to" => $leader->id, "type" => "guild_app"
+      "from" => $this->user->id, "to" => $leader->id, "type" => "guild_app",
     ];
     $this->db->query("INSERT INTO requests", $data);
   }
@@ -214,17 +217,14 @@ class Guild {
   /**
    * Gets list of guilds
    *
-   * @return GuildEntity[] list of guilds (id, name, description, leader)
+   * @return GuildDummy[] list of guilds (id, name, description, leader)
    */
   function listOfGuilds(): array {
-    $return = [];
-    $guilds = $this->cache->load("guilds");
-    if($guilds === NULL) {
-      $guilds = $this->db->table("guilds");
-      foreach($guilds as $guild) {
-        if($guild->id == 0) {
-          continue;
-        }
+    $guilds = $this->cache->load("guilds", function(& $dependencies) {
+      $guilds = [];
+      $rows = $this->orm->guilds->findBy(["id>" => 0]);
+      /** @var GuildEntity $guild */
+      foreach($rows as $guild) {
         $members = $this->db->table("characters")->where("guild", $guild->id);
         $leader = "";
         foreach($members as $member) {
@@ -232,13 +232,11 @@ class Guild {
             $leader = $member->name;
           }
         }
-        $return[$guild->id] = new GuildEntity($guild->id, $guild->name, $guild->description, $members->count(), $leader);
+        $guilds[$guild->id] = new GuildDummy($guild->id, $guild->name, $guild->description, $members->count(), $leader);
       }
-      $this->cache->save("guilds", $return);
-    } else {
-      $return = $guilds;
-    }
-    return $return;
+      return $guilds;
+    });
+    return $guilds;
   }
   
   /**
@@ -389,7 +387,7 @@ class Guild {
       throw new GrandmasterCannotLeaveGuildException;
     }
     $data = [
-      "guild" => 0, "guildrank" => NULL
+      "guild" => 0, "guildrank" => NULL,
     ];
     $this->db->query("UPDATE characters SET ? WHERE id=?", $data, $this->user->id);
     $this->cache->remove("guilds");
@@ -407,7 +405,8 @@ class Guild {
     foreach($members as $member) {
       $this->db->query("UPDATE characters SET ? WHERE id=?", $data1, $member->id);
     }
-    $this->db->query("DELETE FROM guilds WHERE id=?", $id);
+    $guild = $this->orm->guilds->getById($id);
+    $this->orm->guilds->removeAndFlush($guild);
     $this->cache->remove("guilds");
   }
   
@@ -422,12 +421,13 @@ class Guild {
   function rename(int $id, string $name): void {
     $guilds = $this->cache->load("guilds");
     foreach($guilds as $guild) {
-      if($guild->name == $name) {
+      if($guild->name == $name AND $guild->id !== $id) {
         throw new NameInUseException;
       }
     }
-    $data = ["name" => $name];
-    $this->db->query("UPDATE guilds SET ? WHERE id=?", $data, $id);
+    $guild = $this->orm->guilds->getById($id);
+    $guild->name = $name;
+    $this->orm->guilds->persistAndFlush($guild);
     $this->cache->remove("guilds");
   }
   
@@ -440,19 +440,12 @@ class Guild {
    * @throws GuildNotFoundException
    */
   function changeDescription(int $id, string $description): void {
-    $guilds = $this->cache->load("guilds");
-    $found = false;
-    foreach($guilds as $guild) {
-      if($guild->id == $id) {
-        $found = true;
-        break;
-      }
-    }
-    if(!$found) {
+    $guild = $this->orm->guilds->getById($id);
+    if(is_null($guild)) {
       throw new GuildNotFoundException;
     }
-    $data = ["description" => $description];
-    $this->db->query("UPDATE guilds SET ? WHERE id=?", $data, $id);
+    $guild->description = $description;
+    $this->orm->guilds->persistAndFlush($guild);
     $this->cache->remove("guilds");
   }
   
@@ -475,7 +468,7 @@ class Guild {
    * @return string[]
    */
   function getDefaultRankNames() {
-    return $this->db->table("guild_ranks")->order("id")->fetchPairs("id", "name");
+    return $this->orm->guildRanks->findAll()->fetchPairs("id", "name");
   }
   
   /**
@@ -485,7 +478,7 @@ class Guild {
    * @return string[]
    */
   function getCustomRankNames(int $id): array {
-    return $this->db->table("guild_ranks_custom")->where("guild=?", $id)->fetchPairs("rank", "name");
+    return $this->orm->guildRanksCustom->findByGuild($id)->fetchPairs("rank", "name");
   }
   
   /**
@@ -500,19 +493,22 @@ class Guild {
       throw new MissingPermissionsException;
     }
     $gid = $this->user->identity->guild;
-    $tableName = "guild_ranks_custom";
     foreach($names as $rank => $name) {
       if($name === "") {
         continue;
       }
       $rank = substr($rank, 4, 1);
-      $data = ["guild" => $gid, "rank" => $rank, "name" => $name];
-      $row = $this->db->table($tableName)->where("guild=? AND rank=?", $gid, $rank);
-      if($row->count("*")) {
-        $this->db->query("UPDATE $tableName SET ? WHERE guild=? AND rank=?", $data, $gid, $rank);
+      $row = $this->orm->guildRanksCustom->getByGuildAndRank($gid, $rank);
+      if(is_null($row)) {
+        $row = new GuildRankCustom;
+        $this->orm->guildRanksCustom->attach($row);
+        $row->guild = $gid;
+        $row->rank = $rank;
+        $row->name = $name;
       } else {
-        $this->db->query("INSERT INTO $tableName", $data);
+        $row->name = $name;
       }
+      $this->orm->guildRanksCustom->persistAndFlush($row);
     }
   }
 }

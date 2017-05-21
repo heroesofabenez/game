@@ -1,11 +1,11 @@
 <?php
 declare(strict_types=1);
 
-namespace HeroesofAbenez\Entities;
+namespace HeroesofAbenez\Orm;
 
 /**
  * Data structure for guild
- * 
+ *
  * @author Jakub Konečný
  * @property-read int $id
  * @property-read string $name
@@ -13,7 +13,7 @@ namespace HeroesofAbenez\Entities;
  * @property-read int $members
  * @property-read string $leader
  */
-class Guild {
+class GuildDummy {
   use \Nette\SmartObject;
   
   /** @var int id */
