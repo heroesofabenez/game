@@ -92,7 +92,7 @@ class Intro {
    * @return void
    */
   function endIntro(): void {
-    $startingLocation = Intro::getStartingLocation();
+    $startingLocation = $this->getStartingLocation();
     $data = ["current_stage" => $startingLocation];
     $this->db->query("UPDATE characters SET ? WHERE id=?", $data, $this->user->id);
   }
