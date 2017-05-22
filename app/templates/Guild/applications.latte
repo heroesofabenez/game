@@ -6,7 +6,7 @@
   <p>{_texts.guild.noApplications}</p>
   {else}
   {foreach $apps as $app}
-  <p>{$app->from} ({$app->sent}) {_texts.guild.wantToJoin}<br>
+  <p>{$app->from->name} ({$app->sentAt}) {_texts.guild.wantToJoin}<br>
   <a n:href="Request:accept $app->id">{_texts.request.accept}</a> <a n:href="Request:decline $app->id">{_texts.request.decline}</a></p>
   {/foreach}
   {/if}

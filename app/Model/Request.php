@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Model;
 
-use HeroesofAbenez\Entities\Request as RequestEntity,
+use HeroesofAbenez\Orm\Request as RequestEntity,
     Nette\NotImplementedException,
     HeroesofAbenez\Orm\Model as ORM;
 
@@ -19,17 +19,14 @@ class Request {
   protected $user;
   /** @var ORM */
   protected $orm;
-  /** @var \Nette\Database\Context */
-  protected $db;
   /** @var Profile */
   protected $profileModel;
   /** @var Guild */
   protected $guildModel;
   
-  function __construct(\Nette\Security\User $user, ORM $orm, \Nette\Database\Context $db, Profile $profileModel, Guild $guildModel) {
+  function __construct(\Nette\Security\User $user, ORM $orm, Profile $profileModel, Guild $guildModel) {
     $this->user = $user;
     $this->orm = $orm;
-    $this->db = $db;
     $this->profileModel = $profileModel;
     $this->guildModel = $guildModel;
   }
@@ -41,21 +38,21 @@ class Request {
    * @return bool
    */
   function canShow(int $requestId): bool {
-    $request = $this->db->table("requests")->get($requestId);
+    $request = $this->orm->requests->getById($requestId);
     switch($request->type) {
-      case "friendship":
-      case "group_join":
-        if($request->from == $this->user->id OR $request->to == $this->user->id) {
+      case RequestEntity::TYPE_FRIENDSHIP:
+      case RequestEntity::TYPE_GROUP_JOIN:
+        if($request->from == $this->user->id OR $request->to->id == $this->user->id) {
           return true;
         } else {
           return false;
         }
         break;
-      case "guild_join":
-        if($request->to == $this->user->id) {
+      case RequestEntity::TYPE_GUILD_JOIN:
+        if($request->to->id == $this->user->id) {
           return true;
         }
-        $leader = $this->orm->characters->getById($request->from);
+        $leader = $this->orm->characters->getById($request->from->id);
         $guild = $leader->guild->id;
         if($this->user->identity->guild == $guild AND $this->user->isAllowed("guild", "invite")) {
           return true;
@@ -63,11 +60,11 @@ class Request {
           return false;
         }
         break;
-      case "guild_app":
-        if($request->from == $this->user->id) {
+      case RequestEntity::TYPE_GUILD_APP:
+        if($request->from->id === $this->user->id) {
           return true;
         }
-        $leader = $this->orm->characters->getById($request->to);
+        $leader = $this->orm->characters->getById($request->to->id);
         $guild = $leader->guild->id;
         if($this->user->identity->guild == $guild AND $this->user->isAllowed("guild", "invite")) {
           return true;
@@ -76,6 +73,7 @@ class Request {
         }
         break;
     }
+    return false;
   }
   
   /**
@@ -85,16 +83,15 @@ class Request {
    * @return bool
    */
   function canChange(int $requestId): bool {
-    $request = $this->db->table("requests")->get($requestId);
-    if($request->from == $this->user->id) {
+    $request = $this->orm->requests->getById($requestId);
+    if($request->from->id == $this->user->id) {
       return false;
     }
-    if($request->to == $this->user->id) {
+    if($request->to->id == $this->user->id) {
       return true;
     }
     if($request->type == "guild_app") {
-      $leader = $this->orm->characters->getById($request->to);
-      $guild = $leader->guild->id;
+      $guild = $request->to->guild->id;
       if($this->user->identity->guild == $guild AND $this->user->isAllowed("guild", "invite")) {
         return true;
       } else {
@@ -113,17 +110,14 @@ class Request {
    * @throws CannotSeeRequestException
    */
   function show(int $id): RequestEntity {
-    $requestRow = $this->db->table("requests")->get($id);
-    if(!$requestRow) {
+    $request = $this->orm->requests->getById($id);
+    if(is_null($request)) {
       throw new RequestNotFoundException;
     }
     if(!$this->canShow($id)) {
       throw new CannotSeeRequestException;
     }
-    $from = $this->profileModel->getCharacterName($requestRow->from);
-    $to = $this->profileModel->getCharacterName($requestRow->to);
-    $return = new RequestEntity($requestRow->id, $from, $to, $requestRow->type, $requestRow->sent, $requestRow->status);
-    return $return;
+    return $request;
   }
   
   /**
@@ -138,9 +132,10 @@ class Request {
    * @throws NotImplementedException
    */
   function accept(int $id): void {
-    $request = $this->show($id);
-    if(!$request) {
-      throw new RequestNotFoundException;
+    try {
+      $request = $this->show($id);
+    } catch(RequestNotFoundException $e) {
+      throw $e;
     }
     if(!$this->canShow($id)) {
       throw new CannotSeeRequestException;
@@ -152,27 +147,23 @@ class Request {
       throw new RequestAlreadyHandledException;
     }
     switch($request->type) {
-      case "friendship":
-    throw new NotImplementedException;
-      break;
-      case "group_join":
-    throw new NotImplementedException;
-      break;
-      case "guild_app":
-        $uid = $this->profileModel->getCharacterId($request->from);
-        $uid2 = $this->profileModel->getCharacterId($request->to);
-        $gid = $this->profileModel->getCharacterGuild($uid2);
+      case RequestEntity::TYPE_FRIENDSHIP:
+      case RequestEntity::TYPE_GROUP_JOIN:
+        throw new NotImplementedException;
+        break;
+      case RequestEntity::TYPE_GUILD_APP:
+        $uid = $request->from->id;
+        $gid = $request->to->guild->id;
         $this->guildModel->join($uid, $gid);
-    break;
-      case "guild_join":
-        $uid = $this->profileModel->getCharacterId($request->to);
-        $uid2 = $this->profileModel->getCharacterId($request->from);
-        $gid = $this->profileModel->getCharacterGuild($uid2);
+        break;
+      case RequestEntity::TYPE_GUILD_JOIN:
+        $uid = $request->to->id;
+        $gid = $request->from->guild->id;
         $this->guildModel->join($uid, $gid);
-    break;
+        break;
     }
-    $data2 = ["status" => "accepted"];
-    $this->db->query("UPDATE requests SET ? WHERE id=?", $data2, $id);
+    $request->status = RequestEntity::STATUS_ACCEPTED;
+    $this->orm->requests->persistAndFlush($request);
   }
   
   /**
@@ -186,9 +177,10 @@ class Request {
    * @throws RequestAlreadyHandledException
    */
   function decline(int $id): void {
-    $request = $this->show($id);
-    if(!$request) {
-      throw new RequestNotFoundException;
+    try {
+      $request = $this->show($id);
+    } catch(RequestNotFoundException $e) {
+      throw $e;
     }
     if(!$this->canShow($id)) {
       throw new CannotSeeRequestException;
@@ -196,11 +188,11 @@ class Request {
     if(!$this->canChange($id)) {
       throw new CannotDeclineRequestException;
     }
-    if($request->status !== "new") {
+    if($request->status !== RequestEntity::STATUS_NEW) {
       throw new RequestAlreadyHandledException;
     }
-    $data = ["status" => "declined"];
-    $this->db->query("UPDATE requests SET ? WHERE id=?", $data, $id);
+    $request->status = RequestEntity::STATUS_DECLINED;
+    $this->orm->requests->persistAndFlush($request);
   }
 }
 ?>

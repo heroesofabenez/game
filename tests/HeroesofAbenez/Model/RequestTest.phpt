@@ -5,7 +5,7 @@ namespace HeroesofAbenez\Model;
 
 use MyTester as MT,
     MyTester\Assert,
-    HeroesofAbenez\Entities\Request as RequestEntity;
+    HeroesofAbenez\Orm\Request as RequestEntity;
 
 class RequestTest extends MT\TestCase {
   /** @var Request */

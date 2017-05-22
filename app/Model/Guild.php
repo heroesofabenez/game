@@ -3,12 +3,13 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Model;
 
-use HeroesofAbenez\Entities\Request as RequestEntity,
+use HeroesofAbenez\Orm\Request as RequestEntity,
     HeroesofAbenez\Orm\Guild as GuildEntity,
     HeroesofAbenez\Orm\GuildDummy,
     Nette\Utils\Arrays,
     HeroesofAbenez\Orm\Model as ORM,
-    HeroesofAbenez\Orm\GuildRankCustom;
+    HeroesofAbenez\Orm\GuildRankCustom,
+    Nextras\Orm\Collection\ICollection;
 
   /**
    * Model Guild
@@ -22,8 +23,6 @@ class Guild {
   protected $orm;
   /** @var \Nette\Caching\Cache */
   protected $cache;
-  /** @var \Nette\Database\Context */
-  protected $db;
   /** @var \Nette\Security\User */
   protected $user;
   /** @var \HeroesofAbenez\Model\Profile */
@@ -31,9 +30,8 @@ class Guild {
   /** @var \HeroesofAbenez\Model\Permissions */
   protected $permissionsModel;
   
-  function __construct(ORM $orm, \Nette\Caching\Cache $cache, \Nette\Database\Context $db, \Nette\Security\User $user, Profile $profileModel, Permissions $permissionsModel) {
+  function __construct(ORM $orm, \Nette\Caching\Cache $cache, \Nette\Security\User $user, Profile $profileModel, Permissions $permissionsModel) {
     $this->cache = $cache;
-    $this->db = $db;
     $this->orm = $orm;
     $this->user = $user;
     $this->profileModel = $profileModel;
@@ -153,12 +151,14 @@ class Guild {
       throw new GuildNotFoundException;
     }
     $leader = $this->orm->characters->getBy([
-      "guild" => $gid, "guildrank" => 7
+      "guild" => $gid, "guildrank" => 7,
     ]);
-    $data = [
-      "from" => $this->user->id, "to" => $leader->id, "type" => "guild_app",
-    ];
-    $this->db->query("INSERT INTO requests", $data);
+    $request = new RequestEntity;
+    $this->orm->requests->attach($request);
+    $request->from = $this->user->id;
+    $request->to = $leader;
+    $request->type = RequestEntity::TYPE_GUILD_APP;
+    $this->orm->requests->persistAndFlush($request);
   }
   
   /**
@@ -167,38 +167,25 @@ class Guild {
    * @return bool
    */
   function haveUnresolvedApplication(): bool {
-    $apps = $this->db->table("requests")
-      ->where("from", $this->user->id)
-      ->where("type", "guild_app")
-      ->where("status", "new");
-    if($apps->count() > 0) {
-      return true;
-    } else {
-      return false;
-    }
+    $app = $this->orm->requests->getBy([
+      "from" => $this->user->id,
+      "type" => RequestEntity::TYPE_GUILD_APP,
+      "status" => RequestEntity::STATUS_NEW,
+    ]);
+    return (!is_null($app));
   }
   
   /**
    * Get unresolved applications to specified guild
    * 
    * @param int $id Guild's id
-   * @return RequestEntity[]
+   * @return ICollection|RequestEntity[]
    */
-  function showApplications(int $id): array {
-    $return = [];
+  function showApplications(int $id): ICollection {
     $guilds = $this->listOfGuilds();
     $guild = $guilds[$id];
     $leaderId = $this->profileModel->getCharacterId($guild->leader);
-    $apps = $this->db->table("requests")
-      ->where("to", $leaderId)
-      ->where("type", "guild_app")
-      ->where("status", "new");
-    foreach($apps as $app) {
-      $from = $this->orm->characters->getById($app->from);
-      $to = $guild->leader;
-      $return[] = new RequestEntity($app->id, $from->name, $to, $app->type, $app->sent, $app->status);
-    }
-    return $return;
+    return $this->orm->requests->findUnresolvedGuildApplications($leaderId);
   }
   
   /**

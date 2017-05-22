@@ -34,13 +34,7 @@ class RequestPresenter extends BasePresenter {
    */
   function renderView(int $id): void {
     try {
-      $request = $this->model->show($id);
-      $this->template->id = $request->id;
-      $this->template->from = $request->from;
-      $this->template->to = $request->to;
-      $this->template->type = $request->type;
-      $this->template->sent = $request->sent;
-      $this->template->status = $request->status;
+      $this->template->request = $this->model->show($id);
     } catch(CannotSeeRequestException $e) {
       $this->flashMessage($this->translator->translate("errors.request.cannotSee"));
       $this->forward("Homepage:");

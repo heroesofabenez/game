@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Orm;
 
+use Nextras\Orm\Relationships\OneHasMany;
+
 /**
  * Character
  *
@@ -33,6 +35,8 @@ namespace HeroesofAbenez\Orm;
  * @property \DateTime|NULL $joined
  * @property float|NULL $statPoints {default 0}
  * @property int|NULL $skillPoints {default 0}
+ * @property OneHasMany|Request[] $sentRequests {1:m Request::$from}
+ * @property OneHasMany|Request[] $receivedRequests {1:m Request::$to}
  */
 class Character extends \Nextras\Orm\Entity\Entity {
   const GENDER_MALE = "male";
