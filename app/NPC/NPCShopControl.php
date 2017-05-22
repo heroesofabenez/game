@@ -4,7 +4,8 @@ declare(strict_types=1);
 namespace HeroesofAbenez\NPC;
 
 use Kdyby\Translation\Translator,
-    HeroesofAbenez\Orm\NpcDummy;
+    HeroesofAbenez\Orm\NpcDummy,
+    HeroesofAbenez\Orm\ItemDummy;
 
 /**
  * Shop Control
@@ -39,7 +40,7 @@ class NPCShopControl extends \Nette\Application\UI\Control {
   /**
    * Get items in npc's shop
    * 
-   * @return \HeroesofAbenez\Entities\Item[]
+   * @return ItemDummy[]
    */
   function getItems(): array {
     $return = [];

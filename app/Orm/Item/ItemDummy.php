@@ -1,11 +1,11 @@
 <?php
 declare(strict_types=1);
 
-namespace HeroesofAbenez\Entities;
+namespace HeroesofAbenez\Orm;
 
 /**
  * Data structure for item
- * 
+ *
  * @author Jakub Konečný
  * @property-read int $id
  * @property-read string $name
@@ -13,7 +13,7 @@ namespace HeroesofAbenez\Entities;
  * @property-read string $image
  * @property-read int $price
  */
-class Item {
+class ItemDummy {
   use \Nette\SmartObject;
   
   /** @var int */
@@ -27,11 +27,12 @@ class Item {
   /** @var int */
   protected $price;
   
-  function __construct(\Nette\Database\Table\ActiveRow $row) {
-    if($row->getTable()->getName() != "items") exit;
-    foreach($row as $key => $value) {
-      $this->$key = $value;
-    }
+  function __construct(Item $item) {
+    $this->id = $item->id;
+    $this->name = $item->name;
+    $this->description = $item->description;
+    $this->image = $item->image;
+    $this->price = $item->price;
   }
   
   /**

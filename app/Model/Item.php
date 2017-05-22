@@ -4,7 +4,9 @@ declare(strict_types=1);
 namespace HeroesofAbenez\Model;
 
 use Nette\Utils\Arrays,
-    HeroesofAbenez\Entities\Item as ItemEntity;
+    HeroesofAbenez\Orm\Item as ItemEntity,
+    HeroesofAbenez\Orm\Model as ORM,
+    HeroesofAbenez\Orm\ItemDummy;
 
 /**
  * Item Model
@@ -17,6 +19,8 @@ class Item {
   
   /** @var \Nette\Database\Context */
   protected $db;
+  /** @var ORM */
+  protected $orm;
   /** @var \Nette\Caching\Cache */
   protected $cache;
   /** @var \Nette\Security\User */
@@ -24,13 +28,9 @@ class Item {
   /** @var \Nette\Application\LinkGenerator */
   protected $linkGenerator;
   
-  /**
-   * @param \Nette\Caching\Cache $cache
-   * @param \Nette\Database\Context $db
-   * @param \Nette\Security\User $user
-   */
-  function __construct(\Nette\Caching\Cache $cache, \Nette\Database\Context $db, \Nette\Security\User $user) {
+  function __construct(\Nette\Caching\Cache $cache, \Nette\Database\Context $db, ORM $orm, \Nette\Security\User $user) {
     $this->db = $db;
+    $this->orm = $orm;
     $this->cache = $cache;
     $this->user = $user;
   }
@@ -42,21 +42,19 @@ class Item {
   /**
    * Gets list of all items
    * 
-   * @return ItemEntity[]
+   * @return ItemDummy[]
    */
   function listOfItems(): array {
-    $return = [];
-    $items = $this->cache->load("items");
-    if($items === NULL) {
-      $items = $this->db->table("items");
+    $items = $this->cache->load("items", function(& $dependencies) {
+      $return = [];
+      $items = $this->orm->items->findAll();
+      /** @var ItemEntity $item */
       foreach($items as $item) {
-        $return[$item->id] = new ItemEntity($item);
+        $return[$item->id] = new ItemDummy($item);
       }
-      $this->cache->save("items", $return);
-    } else {
-      $return = $items;
-    }
-    return $return;
+      return $return;
+    });
+    return $items;
   }
   
   /**
@@ -67,7 +65,7 @@ class Item {
    */
   function getItemName(int $id): string {
     $item = $this->view($id);
-    if(!$item) {
+    if(is_null($item)) {
       return "";
     } else {
       return $item->name;
@@ -78,12 +76,11 @@ class Item {
    * Get info about specified item
    * 
    * @param int $id Item's id
-   * @return ItemEntity
+   * @return ItemDummy|NULL
    */
-  function view(int $id): ItemEntity {
+  function view(int $id): ?ItemDummy {
     $items = $this->listOfItems();
-    $item = Arrays::get($items, $id, false);
-    return $item;
+    return Arrays::get($items, $id, NULL);
   }
   
   /**
@@ -121,7 +118,7 @@ class Item {
       return $result;
     } else {
       $data = [
-        "character" => $this->user->id, "item" => $id, "amount" => $amount
+        "character" => $this->user->id, "item" => $id, "amount" => $amount,
       ];
       $result = $this->db->query("INSERT INTO character_items", $data);
       return $result;
