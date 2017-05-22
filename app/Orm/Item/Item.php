@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Orm;
 
+use Nextras\Orm\Relationships\OneHasMany;
+
 /**
  * Item
  *
@@ -12,6 +14,7 @@ namespace HeroesofAbenez\Orm;
  * @property string $description
  * @property string $image
  * @property int $price
+ * @property OneHasMany|ShopItem[] $inShops {1:m ShopItem::$item}
  */
 class Item extends \Nextras\Orm\Entity\Entity {
   /**

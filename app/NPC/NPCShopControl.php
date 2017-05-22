@@ -5,7 +5,8 @@ namespace HeroesofAbenez\NPC;
 
 use Kdyby\Translation\Translator,
     HeroesofAbenez\Orm\NpcDummy,
-    HeroesofAbenez\Orm\ItemDummy;
+    HeroesofAbenez\Orm\ItemDummy,
+    HeroesofAbenez\Orm\Model as ORM;
 
 /**
  * Shop Control
@@ -16,6 +17,8 @@ use Kdyby\Translation\Translator,
 class NPCShopControl extends \Nette\Application\UI\Control {
   /** @var \Nette\Database\Context */
   protected $db;
+  /** @var ORM */
+  protected $orm;
   /** @var \HeroesofAbenez\Model\Item */
   protected $itemModel;
   /** @var NpcDummy */
@@ -25,9 +28,10 @@ class NPCShopControl extends \Nette\Application\UI\Control {
   /** @var \Kdyby\Translation\Translator */
   protected $translator;
   
-  function __construct(\Nette\Database\Context $db, \HeroesofAbenez\Model\Item $itemModel, \Nette\Security\User $user, Translator $translator) {
+  function __construct(\Nette\Database\Context $db, ORM $orm, \HeroesofAbenez\Model\Item $itemModel, \Nette\Security\User $user, Translator $translator) {
     parent::__construct();
     $this->db = $db;
+    $this->orm = $orm;
     $this->itemModel = $itemModel;
     $this->user = $user;
     $this->translator = $translator;
@@ -44,11 +48,9 @@ class NPCShopControl extends \Nette\Application\UI\Control {
    */
   function getItems(): array {
     $return = [];
-    $items = $this->db->table("shop_items")
-      ->where("npc", $this->npc->id)
-      ->order("order");
+    $items = $this->orm->shopItems->findByNpc($this->npc->id);
     foreach($items as $item) {
-      $return[] = $this->itemModel->view($item->item);
+      $return[] = $this->itemModel->view($item->item->id);
     }
     return $return;
   }
@@ -71,10 +73,8 @@ class NPCShopControl extends \Nette\Application\UI\Control {
    * @return bool
    */
   function canBuyItem(int $id): bool {
-    $row = $this->db->table("shop_items")
-      ->where("npc", $this->npc->id)
-      ->where("item", $id);
-    return $row->count("*") > 0;
+    $row = $this->orm->shopItems->getById($id);
+    return (!is_null($row));
   }
   
   /**

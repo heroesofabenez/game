@@ -2,7 +2,7 @@
 namespace HeroesofAbenez\NPC;
 
 interface INPCShopControlFactory {
-  /** @return \HeroesofAbenez\NPC\NPCQuestsControl */
+  /** @return \HeroesofAbenez\NPC\NPCShopControl */
   function create();
 }
 ?>

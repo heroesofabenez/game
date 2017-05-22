@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Orm;
 
+use Nextras\Orm\Relationships\OneHasMany;
+
 /**
  * Npc
  *
@@ -17,6 +19,7 @@ namespace HeroesofAbenez\Orm;
  * @property QuestStage $stage {m:1 QuestStage::$npcs}
  * @property int $posX
  * @property int $posY
+ * @property OneHasMany|ShopItem[] $items {1:m ShopItem::$npc}
  */
 class Npc extends \Nextras\Orm\Entity\Entity {
   const TYPE_QUEST = "quest";
