@@ -8,7 +8,8 @@ use Nette\Utils\Arrays,
     HeroesofAbenez\Entities\SkillSpecial,
     HeroesofAbenez\Entities\CharacterSkillAttack,
     HeroesofAbenez\Entities\CharacterSkillSpecial,
-    HeroesofAbenez\Entities\CharacterSkill;
+    HeroesofAbenez\Entities\CharacterSkill,
+    HeroesofAbenez\Orm\Model as ORM;
 
 /**
  * Skills Model
@@ -20,13 +21,16 @@ class Skills {
   
   /** @var \Nette\Caching\Cache */
   protected $cache;
+  /** @var ORM */
+  protected $orm;
   /** @var \Nette\Database\Context */
   protected $db;
   /** @var \Nette\Security\User */
   protected $user;
   
-  function __construct(\Nette\Caching\Cache $cache, \Nette\Database\Context $db, \Nette\Security\User $user) {
+  function __construct(\Nette\Caching\Cache $cache, ORM $orm, \Nette\Database\Context $db, \Nette\Security\User $user) {
     $this->cache = $cache;
+    $this->orm = $orm;
     $this->db = $db;
     $this->user = $user;
   }
@@ -141,12 +145,16 @@ class Skills {
   function getAvailableSkills(): array {
     $return = [];
     $skills = array_merge($this->getListOfAttackSkills(), $this->getListOfSpecialSkills());
-    $char = $this->db->table("characters")->get($this->user->id);
+    $char = $this->orm->characters->getById($this->user->id);
     foreach($skills as $skill) {
-      if($skill->needed_class != $char->occupation) {
+      if($skill->needed_class != $char->occupation->id) {
         continue;
-      } elseif($skill->needed_specialization AND $skill->needed_specialization != $char->specialization) {
-        continue;
+      } elseif($skill->needed_specialization) {
+        if(is_null($char->specialization)) {
+          continue;
+        } elseif($skill->needed_specialization != $char->specialization) {
+          continue;
+        }
       } elseif($skill->needed_level > $char->level) {
         continue;
       }
@@ -166,12 +174,16 @@ class Skills {
   function getPlayerSkills(int $uid): array {
     $return = [];
     $skills = array_merge($this->getListOfAttackSkills(), $this->getListOfSpecialSkills());
-    $char = $this->db->table("characters")->get($uid);
+    $char = $this->orm->characters->getById($this->user->id);
     foreach($skills as $skill) {
-      if($skill->needed_class != $char->occupation) {
+      if($skill->needed_class != $char->occupation->id) {
         continue;
-      } elseif($skill->needed_specialization AND $skill->needed_specialization != $char->specialization) {
-        continue;
+      } elseif($skill->needed_specialization) {
+        if(is_null($char->specialization)) {
+          continue;
+        } elseif($skill->needed_specialization != $char->specialization) {
+          continue;
+        }
       } elseif($skill->needed_level > $char->level) {
         continue;
       }
@@ -193,7 +205,7 @@ class Skills {
    * @return int
    */
   function getSkillPoints(): int {
-    return (int) $this->db->table("characters")->get($this->user->id)->skill_points;
+    return $this->orm->characters->getById($this->user->id)->skillPoints;
   }
   
   /**
@@ -221,11 +233,15 @@ class Skills {
     } elseif($skill->level +1 > $skill->skill->levels) {
       throw new SkillMaxLevelReachedException;
     }
-    $char = $this->db->table("characters")->get($this->user->id);
-    if($skill->skill->needed_class != $char->occupation) {
+    $char = $this->orm->characters->getById($this->user->id);
+    if($skill->skill->needed_class != $char->occupation->id) {
       throw new CannotLearnSkillException;
-    } elseif($skill->skill->needed_specialization AND $skill->skill->needed_specialization != $char->specialization) {
-      throw new CannotLearnSkillException;
+    } elseif($skill->skill->needed_specialization) {
+      if(is_null($char->specialization)) {
+        throw new CannotLearnSkillException;
+      } elseif($skill->skill->needed_specialization != $char->specialization->id) {
+        throw new CannotLearnSkillException;
+      }
     } elseif($skill->skill->needed_level > $char->level) {
       throw new CannotLearnSkillException;
     }

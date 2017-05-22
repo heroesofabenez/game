@@ -91,12 +91,10 @@ class GuildPresenter extends BasePresenter {
       $this->forward("notfound");
     }
     $data = $this->model->view($id);
-    if(!$data) {
+    if(is_null($data)) {
       $this->forward("notfound");
     }
-    foreach($data as $key => $value) {
-      $this->template->$key = $value;
-    }
+    $this->template->guild = $data;
   }
   
   /**

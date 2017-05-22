@@ -7,6 +7,8 @@ parameters:
         - "#Casting to [a-z\\_]+ something that's already [a-z\\_]+#"
         - '#Undefined variable: \$[a-zA-Z0-9_]+#'
         - '#Access to protected property \$[a-zA-Z0-9_]+ of class [a-zA-Z0-9\\_]+#'
+        - '#Access to an undefined property Nextras\\Orm\\Entity\\IEntity::\$id#'
         - '#Parameter \#[0-9]+ \$[a-zA-Z0-9_]+ of class HeroesofAbenez\\Entities\\[a-zA-Z0-9\\_]+ constructor expects Nette\\Database\\Table\\ActiveRow, Nette\\Database\\Table\\IRow given#'
         - '#Parameter \#1 \$message of method HeroesofAbenez\\Postoffice\\PostofficeControl::canShow\(\) expects Nette\\Database\\Table\\ActiveRow, Nette\\Database\\Table\\IRow given#'
         - '#Parameter \#2 \$count of method Kdyby\\Translation\\Translator::translate\(\) expects int\|null, mixed\[\] given#'
+        - '#Property HeroesofAbenez\\Orm\\[a-zA-Z0-9_]+::\$[a-zA-Z0-9_]+ \(HeroesofAbenez\\Orm\\[a-zA-Z0-9_]+|null\) does not accept int#'

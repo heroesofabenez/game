@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Orm;
 
+use Nextras\Orm\Relationships\OneHasMany;
+
 /**
  * CharacterSpecialization
  *
@@ -16,6 +18,7 @@ namespace HeroesofAbenez\Orm;
  * @property float $intelligenceGrow
  * @property float $charismaGrow
  * @property float $statPointsLevel
+ * @property OneHasMany|Character[] $characters {1:m Character::$specialization}
  */
 class CharacterSpecialization extends \Nextras\Orm\Entity\Entity {
   

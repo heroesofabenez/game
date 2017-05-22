@@ -4,7 +4,8 @@ declare(strict_types=1);
 namespace HeroesofAbenez\Model;
 
 use HeroesofAbenez\Entities\Request as RequestEntity,
-    Nette\NotImplementedException;
+    Nette\NotImplementedException,
+    HeroesofAbenez\Orm\Model as ORM;
 
 /**
  * Request Model
@@ -16,6 +17,8 @@ class Request {
   
    /** @var \Nette\Security\User */
   protected $user;
+  /** @var ORM */
+  protected $orm;
   /** @var \Nette\Database\Context */
   protected $db;
   /** @var Profile */
@@ -23,14 +26,9 @@ class Request {
   /** @var Guild */
   protected $guildModel;
   
-  /**
-   * @param \Nette\Security\User $user
-   * @param \Nette\Database\Context $db
-   * @param \HeroesofAbenez\Model\Profile $profileModel
-   * @param \HeroesofAbenez\Model\Guild $guildModel
-   */
-  function __construct(\Nette\Security\User $user,\Nette\Database\Context $db, Profile $profileModel, Guild $guildModel) {
+  function __construct(\Nette\Security\User $user, ORM $orm, \Nette\Database\Context $db, Profile $profileModel, Guild $guildModel) {
     $this->user = $user;
+    $this->orm = $orm;
     $this->db = $db;
     $this->profileModel = $profileModel;
     $this->guildModel = $guildModel;
@@ -57,8 +55,8 @@ class Request {
         if($request->to == $this->user->id) {
           return true;
         }
-        $leader = $this->db->table("characters")->get($request->from);
-        $guild = $leader->guild;
+        $leader = $this->orm->characters->getById($request->from);
+        $guild = $leader->guild->id;
         if($this->user->identity->guild == $guild AND $this->user->isAllowed("guild", "invite")) {
           return true;
         } else {
@@ -69,8 +67,8 @@ class Request {
         if($request->from == $this->user->id) {
           return true;
         }
-        $leader = $this->db->table("characters")->get($request->to);
-        $guild = $leader->guild;
+        $leader = $this->orm->characters->getById($request->to);
+        $guild = $leader->guild->id;
         if($this->user->identity->guild == $guild AND $this->user->isAllowed("guild", "invite")) {
           return true;
         } else {
@@ -95,8 +93,8 @@ class Request {
       return true;
     }
     if($request->type == "guild_app") {
-      $leader = $this->db->table("characters")->get($request->to);
-      $guild = $leader->guild;
+      $leader = $this->orm->characters->getById($request->to);
+      $guild = $leader->guild->id;
       if($this->user->identity->guild == $guild AND $this->user->isAllowed("guild", "invite")) {
         return true;
       } else {

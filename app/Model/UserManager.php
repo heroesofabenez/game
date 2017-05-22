@@ -3,7 +3,9 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Model;
 
-use Nette\Security as NS;
+use Nette\Security as NS,
+    HeroesofAbenez\Orm\Model as ORM,
+    HeroesofAbenez\Orm\Character;
 
   /**
    * Authenticator for the game
@@ -13,8 +15,8 @@ use Nette\Security as NS;
 class UserManager implements NS\IAuthenticator {
   use \Nette\SmartObject;
   
-  /** @var \Nette\Database\Context Database context */
-  protected $db;
+  /** @var ORM */
+  protected $orm;
   /** @var Permissions */
   protected $permissionsModel;
   /** @var Profile */
@@ -22,14 +24,8 @@ class UserManager implements NS\IAuthenticator {
   /** @var array */
   protected $devServers;
   
-  /**
-   * @param \Nette\Database\Context $db
-   * @param Permissions $permissionsModel
-   * @param Profile $profileModel
-   * @param SettingsRepository $sr
-   */
-  function __construct(\Nette\Database\Context $db, Permissions $permissionsModel, Profile $profileModel, SettingsRepository $sr) {
-    $this->db = $db;
+  function __construct(ORM $orm, Permissions $permissionsModel, Profile $profileModel, SettingsRepository $sr) {
+    $this->orm = $orm;
     $this->permissionsModel = $permissionsModel;
     $this->profileModel = $profileModel;
     $this->devServers = $sr->settings["devServers"];
@@ -63,19 +59,19 @@ class UserManager implements NS\IAuthenticator {
     if($uid == 0) {
       return new NS\Identity(0, "guest");
     }
-    $chars = $this->db->table("characters")->where("owner", $uid);
-    if($chars->count() == 0) {
+    $char = $this->orm->characters->getByOwner($uid);
+    if(is_null($char)) {
       return new NS\Identity(-1, "guest");
     }
-    $char = $chars->fetch();
     $data = [
-      "name" => $char->name, "race" => $char->race, "gender" => $char->gender,
-      "occupation" => $char->occupation, "specialization" => $char->specialization,
-      "level" => $char->level, "guild" => $char->guild, "stage" => $char->current_stage,
-      "white_karma" => $char->white_karma, "neutral_karma" => $char->neutral_karma, "dark_karma" => $char->dark_karma
+      "name" => $char->name, "race" => $char->race->id, "gender" => $char->gender,
+      "occupation" => ($char->occupation) ? $char->occupation->id : NULL,
+      "specialization" => ($char->specialization) ? $char->specialization->id : NULL,
+      "level" => $char->level, "guild" => $char->guild->id, "stage" => $char->currentStage,
+      "white_karma" => $char->whiteKarma, "neutral_karma" => $char->neutralKarma, "dark_karma" => $char->darkKarma
     ];
-    if($char->guild > 0) {
-      $role = $this->permissionsModel->getRoleName($char->guildrank);
+    if($char->guild->id > 0) {
+      $role = $char->guildrank->name;
     } else {
       $role = "player";
     }
@@ -91,30 +87,34 @@ class UserManager implements NS\IAuthenticator {
   function create(array $values): ?array {
     $data = [
       "name" => $values["name"], "race" => $values["race"],
-      "occupation" => $values["class"], "gender" => $values["gender"]
+      "occupation" => $values["class"], "owner" => $this->getRealId(),
     ];
-    $chars = $this->db->table("characters")->where("name", $data["name"]);
-    if($chars->count() > 0) {
-      return NULL;
-    }
-    
-    $race = $this->profileModel->getRace($values["race"]);
-    $class = $this->profileModel->getClass($values["class"]);
-    $data["strength"] = $class->strength + $race->strength;
-    $data["dexterity"] = $class->dexterity + $race->dexterity;
-    $data["constitution"] = $class->constitution + $race->constitution;
-    $data["intelligence"] = $class->intelligence + $race->intelligence;
-    $data["charisma"] = $class->charisma + $race->charisma;
-    $data["owner"] = $this->getRealId();
-    $this->db->query("INSERT INTO characters", $data);
-    
-    $data["class"] = $values["class"];
-    $data["race"] = $values["race"];
-    if($data["gender"]  == 1) {
+    if($values["gender"] == 1) {
       $data["gender"] = "male";
     } else {
       $data["gender"] = "female";
     }
+    
+    $character = $this->orm->characters->getByName($data["name"]);
+    if(!is_null($character)) {
+      return NULL;
+    }
+    
+    $character = new Character;
+    $this->orm->characters->attach($character);
+    foreach ($data as $key => $value) {
+      $character->$key = $value;
+    }
+    $data["strength"] = $character->strength = $character->occupation->strength + $character->race->strength;
+    $data["dexterity"] = $character->dexterity = $character->occupation->dexterity + $character->race->dexterity;
+    $data["constitution"] = $character->constitution = $character->occupation->constitution + $character->race->constitution;
+    $data["intelligence"] = $character->intelligence = $character->occupation->intelligence + $character->race->intelligence;
+    $data["charisma"] = $character->charisma = $character->occupation->charisma + $character->race->charisma;
+    $this->orm->characters->persistAndFlush($character);
+  
+    $data["class"] = $values["class"];
+    $data["race"] = $values["race"];
+  
     unset($data["occupation"]);
     return $data;
   }

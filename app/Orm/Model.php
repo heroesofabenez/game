@@ -7,6 +7,7 @@ namespace HeroesofAbenez\Orm;
  * Orm Model
  *
  * @author Jakub Konečný
+ * @property-read CharactersRepository $characters
  * @property-read GuildsRepository $guilds
  * @property-read GuildRanksRepository $guildRanks
  * @property-read GuildRanksCustomRepository $guildRanksCustom

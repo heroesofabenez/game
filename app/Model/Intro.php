@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Model;
 
+use HeroesofAbenez\Orm\Model as ORM;
+
 /**
  * Intro Model
  *
@@ -13,15 +15,14 @@ class Intro {
   
   /** @var \Nette\Security\User */
   protected $user;
+  /** @var ORM */
+  protected $orm;
   /** @var \Nette\Database\Context */
   protected $db;
   
-  /**
-   * @param \Nette\Security\User $user
-   * @param \Nette\Database\Context $db
-   */
-  function __construct(\Nette\Security\User $user, \Nette\Database\Context $db) {
+  function __construct(\Nette\Security\User $user, ORM $orm, \Nette\Database\Context $db) {
     $this->user = $user;
+    $this->orm = $orm;
     $this->db = $db;
   }
   
@@ -31,8 +32,7 @@ class Intro {
    * @return int
    */
   function getIntroPosition(): int {
-    $char = $this->db->table("characters")->get($this->user->id);
-    return $char->intro;
+    return $this->orm->characters->getById($this->user->id)->intro;
   }
   /**
    * Get a part of introduction
@@ -41,10 +41,10 @@ class Intro {
    * @return string Text of current introduction part
    */
   function getIntroPart(int $part): string {
-    $char = $this->db->table("characters")->get($this->user->id);
+    $char = $this->orm->characters->getById($this->user->id);
     $intros = $this->db->table("introduction")
-      ->where("race", $char->race)
-      ->where("class", $char->occupation)
+      ->where("race", $char->race->id)
+      ->where("class", $char->occupation->id)
       ->where("part", $part);
     if($intros->count() == 0) {
       return "";
@@ -60,8 +60,9 @@ class Intro {
    * @return void
    */
   function moveToNextPart(int $part): void {
-    $data = ["intro" => $part];
-    $this->db->query("UPDATE characters SET ? WHERE id=?", $data, $this->user->id);
+    $character = $this->orm->characters->getById($this->user->id);
+    $character->intro = $part;
+    $this->orm->characters->persistAndFlush($character);
   }
   
   /**

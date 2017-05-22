@@ -16,9 +16,6 @@ class GuildsRankingControl extends RankingControl {
   /** @var \HeroesofAbenez\Model\Guild */
   protected $model;
   
-  /**
-   * @param \HeroesofAbenez\Model\Guild $model
-   */
   function __construct(\HeroesofAbenez\Model\Guild $model) {
     $this->model = $model;
     parent::__construct("Guilds", ["name", "members"], "Guild", "Details");

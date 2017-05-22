@@ -47,8 +47,8 @@ class Guild {
    * @return string
    */
   function getGuildName(int $id): string {
-    $guild = Arrays::get($this->listOfGuilds(), $id, false);
-    if(!$guild) {
+    $guild = Arrays::get($this->listOfGuilds(), $id, NULL);
+    if(is_null($guild)) {
       return "";
     } else {
       return $guild->name;
@@ -70,23 +70,10 @@ class Guild {
    * Gets basic data about specified guild
    * 
    * @param integer $id guild's id
-   * @return array|NULL info about guild
+   * @return GuildEntity|NULL
    */
-  function view(int $id): ?array {
-    $return = [];
-    $guilds = $this->listOfGuilds();
-    $guild = Arrays::get($guilds, $id, false);
-    if(!$guild) {
-      return NULL;
-    }
-    $return["name"] = $guild->name;
-    $return["description"] = $guild->description;
-    $members = $this->db->table("characters")->where("guild", $guild->id)->order("guildrank DESC, id");
-    $return["members"] = [];
-    foreach($members as $member) {
-      $return["members"][] = (object) ["id" => $member->id, "name" => $member->name, "rank" => $member->guildrank];
-    }
-    return $return;
+  function view(int $id): ?GuildEntity {
+    return $this->orm->guilds->getById($id);
   }
   
   /**
@@ -115,13 +102,13 @@ class Guild {
    */
   function guildMembers(int $id, array $roles = [], bool $customRoleNames = false): array {
     $return = [];
-    $members = $this->db->table("characters")->where("guild", $id)->order("guildrank DESC, id");
-    if(count($roles) > 0) {
-      $members->where("guildrank", $roles);
+    $members = $this->orm->characters->findByGuild($id);
+    if(count($roles)) {
+      $members = $members->findBy(["guildrank" => $roles]);
     }
     foreach($members as $member) {
       $rank = $member->guildrank;
-      $m = (object) ["id" => $member->id, "name" => $member->name, "rank" => $rank, "rankId" => $member->guildrank, "customRankName" => ""];
+      $m = (object) ["id" => $member->id, "name" => $member->name, "rank" => $rank, "rankId" => $member->guildrank->id, "customRankName" => ""];
       if($customRoleNames) {
         $m->customRankName = $this->getCustomRankName($id, $m->rankId);
       }
@@ -146,9 +133,10 @@ class Guild {
     foreach($data as $key => $value) {
       $guild->$key = $value;
     }
-    $this->orm->guilds->persistAndFlush($guild);
-    $data2 = ["guild" => $guild->id, "guildrank" => 7];
-    $this->db->query("UPDATE characters SET ? WHERE id=?", $data2, $this->user->id);
+    $character = $this->orm->characters->getById($this->user->id);
+    $character->guild = $guild;
+    $character->guildrank = 7;
+    $this->orm->characters->persistAndFlush($character);
     $this->cache->remove("guilds");
   }
   
@@ -164,10 +152,9 @@ class Guild {
     if(is_null($guild)) {
       throw new GuildNotFoundException;
     }
-    $leader = $this->db->table("characters")
-      ->where("guild", $gid)
-      ->where("guildrank", 7);
-    $leader = $leader[1];
+    $leader = $this->orm->characters->getBy([
+      "guild" => $gid, "guildrank" => 7
+    ]);
     $data = [
       "from" => $this->user->id, "to" => $leader->id, "type" => "guild_app",
     ];
@@ -207,7 +194,7 @@ class Guild {
       ->where("type", "guild_app")
       ->where("status", "new");
     foreach($apps as $app) {
-      $from = $this->db->table("characters")->get($app->from);
+      $from = $this->orm->characters->getById($app->from);
       $to = $guild->leader;
       $return[] = new RequestEntity($app->id, $from->name, $to, $app->type, $app->sent, $app->status);
     }
@@ -225,14 +212,13 @@ class Guild {
       $rows = $this->orm->guilds->findBy(["id>" => 0]);
       /** @var GuildEntity $guild */
       foreach($rows as $guild) {
-        $members = $this->db->table("characters")->where("guild", $guild->id);
         $leader = "";
-        foreach($members as $member) {
-          if($member->guildrank == 7) {
+        foreach($guild->members as $member) {
+          if($member->guildrank->id == 7) {
             $leader = $member->name;
           }
         }
-        $guilds[$guild->id] = new GuildDummy($guild->id, $guild->name, $guild->description, $members->count(), $leader);
+        $guilds[$guild->id] = new GuildDummy($guild->id, $guild->name, $guild->description, $guild->members->countStored(), $leader);
       }
       return $guilds;
     });
@@ -260,11 +246,11 @@ class Guild {
     if(!$admin->isAllowed("guild", "promote")) {
       throw new MissingPermissionsException;
     }
-    $character = $this->db->table("characters")->get($id);
-    if(!$character) {
+    $character = $this->orm->characters->getById($id);
+    if(is_null($character)) {
       throw new PlayerNotFoundException;
     }
-    if($character->guild !== $admin->identity->guild) {
+    if($character->guild->id !== $admin->identity->guild) {
       throw new PlayerNotInGuildException;
     }
     $roles = $this->permissionsModel->getRoles();
@@ -274,19 +260,20 @@ class Guild {
         break;
       }
     }
-    if($adminRole <= $character->guildrank) {
+    if($adminRole <= $character->guildrank->id) {
       throw new CannotPromoteHigherRanksException;
     }
-    if($character->guildrank >= 6) {
+    if($character->guildrank->id >= 6) {
       throw new CannotPromoteToGrandmasterException;
     }
-    if($character->guildrank == 5) {
+    if($character->guildrank->id == 5) {
       $deputy = $this->guildMembers($admin->identity->guild, [6]);
       if(count($deputy) > 0) {
         throw new CannotHaveMoreDeputiesException;
       }
     }
-    $this->db->query("UPDATE characters SET guildrank=guildrank+1 WHERE id=$id");
+    $character->guildrank = $character->guildrank->id + 1;
+    $this->orm->characters->persistAndFlush($character);
   }
   
   /**
@@ -309,11 +296,11 @@ class Guild {
     if(!$admin->isAllowed("guild", "promote")) {
       throw new MissingPermissionsException;
     }
-    $character = $this->db->table("characters")->get($id);
-    if(!$character) {
+    $character = $this->orm->characters->getById($id);
+    if(is_null($character)) {
       throw new PlayerNotFoundException;
     }
-    if($character->guild !== $admin->identity->guild) {
+    if($character->guild->id !== $admin->identity->guild) {
       throw new PlayerNotInGuildException;
     }
     $roles = $this->permissionsModel->getRoles();
@@ -323,13 +310,14 @@ class Guild {
         break;
       }
     }
-    if($adminRole <= $character->guildrank) {
+    if($adminRole <= $character->guildrank->id) {
       throw new CannotDemoteHigherRanksException;
     }
-    if($character->guildrank === 1) {
+    if($character->guildrank->id === 1) {
       throw new CannotDemoteLowestRankException;
     }
-    $this->db->query("UPDATE characters SET guildrank=guildrank-1 WHERE id=$id");
+    $character->guildrank = $character->guildrank->id - 1;
+    $this->orm->characters->persistAndFlush($character);
   }
   
   /**
@@ -351,11 +339,11 @@ class Guild {
     if(!$admin->isAllowed("guild", "kick")) {
       throw new MissingPermissionsException;
     }
-    $character = $this->db->table("characters")->get($id);
-    if(!$character) {
+    $character = $this->orm->characters->getById($id);
+    if(is_null($character)) {
       throw new PlayerNotFoundException;
     }
-    if($character->guild !== $admin->identity->guild) {
+    if($character->guild->id !== $admin->identity->guild) {
       throw new PlayerNotInGuildException;
     }
     $roles = $this->permissionsModel->getRoles();
@@ -365,10 +353,12 @@ class Guild {
         break;
       }
     }
-    if($adminRole <= $character->guildrank) {
+    if($adminRole <= $character->guildrank->id) {
       throw new CannotKickHigherRanksException;
     }
-    $this->db->query("UPDATE characters SET guildrank=NULL, guild=0 WHERE id=$id");
+    $character->guildrank = NULL;
+    $character->guild = 0;
+    $this->orm->characters->persistAndFlush($character);
     $this->cache->remove("guilds");
   }
   
@@ -386,10 +376,10 @@ class Guild {
     if($this->user->isInRole("grandmaster")) {
       throw new GrandmasterCannotLeaveGuildException;
     }
-    $data = [
-      "guild" => 0, "guildrank" => NULL,
-    ];
-    $this->db->query("UPDATE characters SET ? WHERE id=?", $data, $this->user->id);
+    $character = $this->orm->characters->getById($this->user->id);
+    $character->guildrank = NULL;
+    $character->guild = 0;
+    $this->orm->characters->persistAndFlush($character);
     $this->cache->remove("guilds");
   }
   
@@ -400,13 +390,15 @@ class Guild {
    * @return void
    */
   function dissolve(int $id): void {
-    $members = $this->db->table("characters")->where("guild", $id);
-    $data1 = ["guild" => 0, "guildrank" => NULL];
-    foreach($members as $member) {
-      $this->db->query("UPDATE characters SET ? WHERE id=?", $data1, $member->id);
+    $guild = $this->orm->guilds->getById($id);
+    foreach($guild->members as $member) {
+      $member->guild = 0;
+      $member->guildrank = NULL;
+      $this->orm->characters->persist($member);
     }
     $guild = $this->orm->guilds->getById($id);
-    $this->orm->guilds->removeAndFlush($guild);
+    $this->orm->guilds->remove($guild);
+    $this->orm->flush();
     $this->cache->remove("guilds");
   }
   
@@ -457,8 +449,10 @@ class Guild {
    * @return void
    */
   function join(int $uid, int $gid): void {
-    $data = ["guild" => $gid, "guildrank" => 1];
-    $this->db->query("UPDATE characters SET ? WHERE id=?", $data, $uid);
+    $character = $this->orm->characters->getById($uid);
+    $character->guild = $gid;
+    $character->guildrank = 1;
+    $this->orm->characters->persistAndFlush($character);
     $this->cache->remove("guilds");
   }
   

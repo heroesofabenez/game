@@ -14,6 +14,7 @@ use Nextras\Orm\Relationships\OneHasMany;
  * @property string|NULL $description
  * @property int $money {default 0}
  * @property OneHasMany|GuildRankCustom[] $customRanks {1:m GuildRankCustom::$guild}
+ * @property OneHasMany|Character[] $members {1:m Character::$guild, orderBy=[guildrank=DESC,id]}
  */
 class Guild extends \Nextras\Orm\Entity\Entity {
   
