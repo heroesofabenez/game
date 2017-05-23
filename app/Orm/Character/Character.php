@@ -37,6 +37,8 @@ use Nextras\Orm\Relationships\OneHasMany;
  * @property int|NULL $skillPoints {default 0}
  * @property OneHasMany|Request[] $sentRequests {1:m Request::$from}
  * @property OneHasMany|Request[] $receivedRequests {1:m Request::$to}
+ * @property OneHasMany|Message[] $sentMessages {1:m Message::$from}
+ * @property OneHasMany|Message[] $receivedMessages {1:m Message::$to}
  */
 class Character extends \Nextras\Orm\Entity\Entity {
   const GENDER_MALE = "male";
