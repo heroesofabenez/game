@@ -17,13 +17,10 @@ class Intro {
   protected $user;
   /** @var ORM */
   protected $orm;
-  /** @var \Nette\Database\Context */
-  protected $db;
   
-  function __construct(\Nette\Security\User $user, ORM $orm, \Nette\Database\Context $db) {
+  function __construct(\Nette\Security\User $user, ORM $orm) {
     $this->user = $user;
     $this->orm = $orm;
-    $this->db = $db;
   }
   
   /**
@@ -42,15 +39,16 @@ class Intro {
    */
   function getIntroPart(int $part): string {
     $char = $this->orm->characters->getById($this->user->id);
-    $intros = $this->db->table("introduction")
-      ->where("race", $char->race->id)
-      ->where("class", $char->occupation->id)
-      ->where("part", $part);
-    if($intros->count() == 0) {
+    $intro = $this->orm->introduction->getBy([
+      "race" => $char->race->id,
+      "class" => $char->occupation->id,
+      "part" => $part
+    ]);
+    if(is_null($intro)) {
       return "";
+    } else {
+      return $intro->text;
     }
-    $intro = $intros->fetch();
-    return $intro->text;
   }
   
   /**
@@ -71,18 +69,12 @@ class Intro {
    * @return int id of starting stage
    */
   function getStartingLocation(): int {
-    $classSLs = $this->db->table("quest_stages")
-      ->where("required_level", 0)
-      ->where("required_occupation", $this->user->identity->occupation);
-    if($classSLs->count() > 0) {
-      $classSL = $classSLs->fetch();
+    $classSL = $this->orm->stages->getClassStartingLocation($this->user->identity->occupation);
+    if(!is_null($classSL)) {
       return $classSL->id;
     }
-    $raceSLs = $this->db->table("quest_stages")
-      ->where("required_level", 0)
-      ->where("required_race", $this->user->identity->race);
-    if($raceSLs->count() > 0) {
-      $raceSL = $raceSLs->fetch();
+    $raceSL = $this->orm->stages->getRaceStartingLocation($this->user->identity->occupation);
+    if(!is_null($raceSL)) {
       return $raceSL->id;
     }
   }
@@ -94,8 +86,9 @@ class Intro {
    */
   function endIntro(): void {
     $startingLocation = $this->getStartingLocation();
-    $data = ["current_stage" => $startingLocation];
-    $this->db->query("UPDATE characters SET ? WHERE id=?", $data, $this->user->id);
+    $character = $this->orm->characters->getById($this->user->id);
+    $character->currentStage = $startingLocation;
+    $this->orm->characters->persistAndFlush($character);
   }
 }
 ?>

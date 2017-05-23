@@ -26,6 +26,7 @@ namespace HeroesofAbenez\Orm;
  * @property-read ShopItemsRepository $shopItems
  * @property-read RequestsRepository $requests
  * @property-read MessagesRepository $messages
+ * @property-read IntroductionsRepository $introduction
  */
 class Model extends \Nextras\Orm\Model\Model {
   

@@ -37,5 +37,27 @@ class QuestStagesRepository extends \Nextras\Orm\Repository\Repository {
       "area" => $area
     ]);
   }
+  
+  /**
+   * @param CharacterClass|int $class
+   * @return QuestStage|NULL
+   */
+  function getClassStartingLocation($class): ?QuestStage {
+    return $this->getBy([
+      "requiredLevel" => 0,
+      "requiredOccupation" => $class
+    ]);
+  }
+  
+  /**
+   * @param CharacterRace|int $race
+   * @return QuestStage|NULL
+   */
+  function getRaceStartingLocation($race): ?QuestStage {
+    return $this->getBy([
+      "requiredLevel" => 0,
+      "requiredRace" => $race
+    ]);
+  }
 }
 ?>
