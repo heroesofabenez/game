@@ -21,8 +21,6 @@ use Nette\Utils\Arrays,
 class Profile {
   use \Nette\SmartObject;
   
-  /** @var \Nette\Database\Context  */
-  protected $db;
   /** @var ORM */
   protected $orm;
   /** @var \Nette\Caching\Cache */
@@ -34,8 +32,7 @@ class Profile {
   /** @var string[] */
   private $stats;
   
-  function __construct(ORM $orm, \Nette\Database\Context $db, \Nette\Caching\Cache $cache, Pet $petModel) {
-    $this->db = $db;
+  function __construct(ORM $orm, \Nette\Caching\Cache $cache, Pet $petModel) {
     $this->orm = $orm;
     $this->cache = $cache;
     $this->petModel = $petModel;
@@ -347,9 +344,10 @@ class Profile {
     } elseif($this->getStatPoints() < 1) {
       throw new NoStatPointsAvailableException;
     }
-    $data = "$stat=$stat+1, stat_points=stat_points-1";
-    $where = ["id" => $this->user->id];
-    $this->db->query("UPDATE characters SET $data WHERE ?", $where);
+    $character = $this->orm->characters->getById($this->user->id);
+    $character->{$stat}++;
+    $character->statPoints--;
+    $this->orm->characters->persistAndFlush($character);
   }
 }
 ?>

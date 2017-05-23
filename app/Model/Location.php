@@ -23,8 +23,6 @@ class Location {
   
   /** @var \Nette\Caching\Cache */
   protected $cache;
-  /** @var \Nette\Database\Context */
-  protected $db;
   /** @var ORM */
   protected $orm;
   /** @var \Nette\Security\User */
@@ -32,9 +30,8 @@ class Location {
   /** @var \HeroesofAbenez\Model\NPC */
   protected $npcModel;
   
-  function __construct(\Nette\Caching\Cache $cache, \Nette\Database\Context $db, ORM $orm) {
+  function __construct(\Nette\Caching\Cache $cache, ORM $orm) {
     $this->cache = $cache;
-    $this->db = $db;
     $this->orm = $orm;
   }
   
@@ -230,8 +227,9 @@ class Location {
     if(!$foundRoute) {
       throw new CannotTravelToStageException;
     }
-    $data = ["current_stage" => $id];
-    $this->db->query("UPDATE characters SET ? WHERE id=?", $data, $this->user->id);
+    $character = $this->orm->characters->getById($this->user->id);
+    $character->currentStage = $id;
+    $this->orm->characters->persistAndFlush($character);
   }
 }
 ?>
