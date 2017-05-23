@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Orm;
 
+use Nextras\Orm\Relationships\OneHasMany;
+
 /**
  * PetType
  *
@@ -16,6 +18,7 @@ namespace HeroesofAbenez\Orm;
  * @property CharacterClass|NULL $requiredClass {m:1 CharacterClass::$petTypes}
  * @property CharacterRace|NULL $requiredRace {m:1 CharacterRace::$petTypes}
  * @property int $cost {default 0}
+ * @property OneHasMany|Pet[] $pets {1:m Pet::$type}
  */
 class PetType extends \Nextras\Orm\Entity\Entity {
   const STAT_STR = "str";

@@ -5,7 +5,8 @@ namespace HeroesofAbenez\Model;
 
 use HeroesofAbenez\Entities\JournalQuest,
     HeroesofAbenez\Entities\Pet as PetEntity,
-    HeroesofAbenez\Orm\Model as ORM;
+    HeroesofAbenez\Orm\Model as ORM,
+    HeroesofAbenez\Orm\PetTypeDummy;
 
 /**
  * Journal Model
@@ -103,11 +104,9 @@ class Journal {
    */
   function pets(): array {
     $return = [];
-    $uid = $this->user->id;
-    $pets = $this->db->table("pets")
-      ->where("owner", $uid);
+    $pets = $this->orm->pets->findByOwner($this->user->id);
     foreach($pets as $pet) {
-      $type = $this->petModel->viewType($pet->type);
+      $type = new PetTypeDummy($pet->type);
       $return[] = new PetEntity($pet->id, $type, (($pet->name) ? $pet->name : ""), $pet->deployed);
     }
     return $return;

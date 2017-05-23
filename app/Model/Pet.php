@@ -22,18 +22,11 @@ class Pet {
   protected $cache;
   /** @var ORM */
   protected $orm;
-  /** @var \Nette\Database\Context */
-  protected $db;
   /** @var \Nette\Security\User */
   protected $user;
   
-  /**
-   * @param \Nette\Caching\Cache $cache
-   * @param \Nette\Database\Context $db
-   */
-  function __construct(\Nette\Caching\Cache $cache, \Nette\Database\Context $db, ORM $orm) {
+  function __construct(\Nette\Caching\Cache $cache, ORM $orm) {
     $this->cache = $cache;
-    $this->db = $db;
     $this->orm = $orm;
   }
   
@@ -77,16 +70,13 @@ class Pet {
    * @return PetEntity|NULL
    */
   function getActivePet(int $user): ?PetEntity {
-    $activePet = $this->db->table("pets")->where("owner=$user")->where("deployed=1");
-    if($activePet->count() == 1) {
-      $pet = $activePet->fetch();
-      $petType = $this->viewType($pet->type);
-      $petName = ($pet->name === NULL) ? "Unnamed" : $petName = $pet->name . ",";
-      $return = new PetEntity($user, $petType, $petName, $pet->deployed);
-    } else {
-      $return = NULL;
+    $pet = $this->orm->pets->getActivePet($user);
+    if(is_null($pet)) {
+      return NULL;
     }
-    return $return;
+    $type = new PetTypeDummy($pet->type);
+    $name = $pet->name ?? "Unnamed";
+    return new PetEntity($pet->id, $type, $name, $pet->deployed);
   }
   
   /**
@@ -99,23 +89,21 @@ class Pet {
    * @throws PetAlreadyDeployedException
    */
   function deployPet(int $id): void {
-    $pet = $this->db->table("pets")->get($id);
-    if(!$pet) {
+    $pet = $this->orm->pets->getById($id);
+    if(is_null($pet)) {
       throw new PetNotFoundException;
-    } elseif($pet->owner != $this->user->id) {
+    } elseif($pet->owner->id !== $this->user->id) {
       throw new PetNotOwnedException;
     } elseif($pet->deployed) {
       throw new PetAlreadyDeployedException;
     }
-    $pets = $this->db->table("pets")
-        ->where("owner", $this->user->id);
+    $pets = $this->orm->pets->findByOwner($this->user->id);
+    /** @var \HeroesofAbenez\Orm\Pet $pet */
     foreach($pets as $pet) {
-      if($pet->id == $id) {
-        continue;
-      }
-      $this->db->query("UPDATE pets SET ? WHERE id=?", ["deployed" => 0], $pet->id);
+      $pet->deployed = ($pet->id === $id);
+      $this->orm->pets->persist($pet);
     }
-    $this->db->query("UPDATE pets SET ? WHERE id=?", ["deployed" => 1], $id);
+    $this->orm->pets->flush();
   }
   
   /**
@@ -128,16 +116,16 @@ class Pet {
    * @throws PetNotDeployedException
    */
   function discardPet(int $id): void {
-    $pet = $this->db->table("pets")->get($id);
-    if(!$pet) {
+    $pet = $this->orm->pets->getById($id);
+    if(is_null($pet)) {
       throw new PetNotFoundException;
-    } elseif($pet->owner != $this->user->id) {
+    } elseif($pet->owner->id !== $this->user->id) {
       throw new PetNotOwnedException;
     } elseif(!$pet->deployed) {
       throw new PetNotDeployedException;
     }
-    $data = ["deployed" => 0];
-    $this->db->query("UPDATE pets SET ? WHERE id=?", $data, $id);
+    $pet->deployed = false;
+    $this->orm->pets->persistAndFlush($pet);
   }
 }
 ?>
