@@ -15,8 +15,6 @@ use Kdyby\Translation\Translator,
  * @property-write NpcDummy $npc
  */
 class NPCShopControl extends \Nette\Application\UI\Control {
-  /** @var \Nette\Database\Context */
-  protected $db;
   /** @var ORM */
   protected $orm;
   /** @var \HeroesofAbenez\Model\Item */
@@ -28,9 +26,8 @@ class NPCShopControl extends \Nette\Application\UI\Control {
   /** @var \Kdyby\Translation\Translator */
   protected $translator;
   
-  function __construct(\Nette\Database\Context $db, ORM $orm, \HeroesofAbenez\Model\Item $itemModel, \Nette\Security\User $user, Translator $translator) {
+  function __construct(ORM $orm, \HeroesofAbenez\Model\Item $itemModel, \Nette\Security\User $user, Translator $translator) {
     parent::__construct();
-    $this->db = $db;
     $this->orm = $orm;
     $this->itemModel = $itemModel;
     $this->user = $user;
@@ -93,14 +90,14 @@ class NPCShopControl extends \Nette\Application\UI\Control {
       $this->presenter->flashMessage($this->translator->translate("errors.shop.cannotBuyHere"));
       return;
     }
-    $character = $this->db->table("characters")->get($this->user->id);
+    $character = $this->orm->characters->getById($this->user->id);
     if($character->money < $item->price) {
       $this->presenter->flashMessage($this->translator->translate("errors.shop.notEnoughMoney"));
       return;
     }
     $this->itemModel->giveItem($itemId);
-    $data = "money=money-{$item->price}";
-    $this->db->query("UPDATE characters SET $data WHERE id=?", $this->user->id);
+    $character->money -= $item->price;
+    $this->orm->characters->persistAndFlush($character);
     $this->presenter->flashMessage($this->translator->translate("messages.shop.itemBought"));
   }
 }
