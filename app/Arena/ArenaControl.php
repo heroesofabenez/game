@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace HeroesofAbenez\Arena;
 
 use Nette\Security\User,
-    Nette\Database\Context,
+    HeroesofAbenez\Orm\Model as ORM,
     HeroesofAbenez\Model\CombatLogManager,
     HeroesofAbenez\Model\CombatLogger,
     Kdyby\Translation\Translator,
@@ -28,20 +28,20 @@ abstract class ArenaControl extends \Nette\Application\UI\Control {
   protected $combat;
   /** @var CombatLogManager */
   protected $log;
-  /** @var Context */
-  protected $db;
+  /** @var ORM */
+  protected $orm;
   /** @var Translator */
   protected $translator;
   /** @var string */
   protected $arena;
   
-  function __construct(User $user, \HeroesofAbenez\Model\CombatHelper $combatHelper, CombatDuel $combat, CombatLogManager $log, Context $db, Translator $translator) {
+  function __construct(User $user, \HeroesofAbenez\Model\CombatHelper $combatHelper, CombatDuel $combat, CombatLogManager $log, ORM $orm, Translator $translator) {
     parent::__construct();
     $this->user = $user;
     $this->combatHelper = $combatHelper;
     $this->combat = $combat;
     $this->log = $log;
-    $this->db = $db;
+    $this->orm = $orm;
     $this->translator = $translator;
   }
   
@@ -96,9 +96,10 @@ abstract class ArenaControl extends \Nette\Application\UI\Control {
     $winner = $this->combat->execute();
     if($winner === 1) {
       $rewards = $this->calculateRewards($player, $opponent);
-      $data = "money=money+{$rewards["money"]}, experience=experience+{$rewards["experience"]}";
-      $where = ["id" => $this->user->id];
-      $this->db->query("UPDATE characters SET $data WHERE ?", $where);
+      $character = $this->orm->characters->getById($this->user->id);
+      $character->money += $rewards["money"];
+      $character->experience += $rewards["experience"];
+      $this->orm->characters->persistAndFlush($character);
       $this->combat->log->logText("$player->name gets {$rewards["money"]} silver marks and {$rewards["experience"]} experiences.");
     }
     $combatId = $this->saveCombat($this->combat->log);

@@ -30,6 +30,7 @@ use Nextras\Orm\Relationships\OneHasMany;
  * @property OneHasMany|QuestStage[] $stages {1:m QuestStage::$requiredOccupation}
  * @property OneHasMany|Character[] $characters {1:m Character::$occupation}
  * @property OneHasMany|Introduction[] $intro {1:m Introduction::$class}
+ * @property OneHasMany|PveArenaOpponent[] $arenaNpcs {1:m PveArenaOpponent::$occupation}
  */
 class CharacterClass extends \Nextras\Orm\Entity\Entity {
   const MAX_STATS = 99;

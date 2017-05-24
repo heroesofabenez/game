@@ -4,7 +4,8 @@ declare(strict_types=1);
 namespace HeroesofAbenez\Arena;
 
 use HeroesofAbenez\Entities\Character,
-    HeroesofAbenez\Model\OpponentNotFoundException;
+    HeroesofAbenez\Model\OpponentNotFoundException,
+    Nextras\Orm\Collection\ICollection;
 
 /**
  * PVP Arena Control
@@ -16,16 +17,16 @@ class ArenaPVPControl extends ArenaControl {
   protected $arena = "heroes";
   
   /**
-   * @return \Nette\Database\Table\Selection
+   * @return ICollection|\HeroesofAbenez\Orm\Character
    */
-  function getOpponents(): \Nette\Database\Table\Selection {
+  function getOpponents(): ICollection {
     $level = $this->user->identity->level;
-    $opponents = $this->db->table("characters")
-      ->where("current_stage", $this->user->identity->stage)
-      ->where("level > $level-5")
-      ->where("level < $level+5")
-      ->where("NOT id={$this->user->id}");
-    return $opponents;
+    return $this->orm->characters->findBy([
+      "currentStage" => $this->user->identity->stage,
+      "level>" => $level - 5,
+      "level<" => $level + 5,
+      "id!=" => $this->user->id
+    ]);
   }
   
   /**

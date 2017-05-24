@@ -4,13 +4,13 @@ declare(strict_types=1);
 namespace HeroesofAbenez\Orm;
 
 /**
- * GuildRanksCustomMapper
+ * ArenaFightsCountMapper
  *
  * @author Jakub Konečný
  */
-class GuildRanksCustomMapper extends \Nextras\Orm\Mapper\Mapper {
+class ArenaFightsCountMapper extends \Nextras\Orm\Mapper\Mapper {
   function getTableName(): string {
-    return "guild_ranks_custom";
+    return "arena_fights_count";
   }
 }
 ?>

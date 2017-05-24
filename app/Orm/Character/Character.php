@@ -40,6 +40,7 @@ use Nextras\Orm\Relationships\OneHasMany;
  * @property OneHasMany|Message[] $sentMessages {1:m Message::$from}
  * @property OneHasMany|Message[] $receivedMessages {1:m Message::$to}
  * @property OneHasMany|Pet[] $pets {1:m Pet::$owner}
+ * @property OneHasMany|ArenaFightCount[] $arenaFights {1:m ArenaFightCount::$character}
  */
 class Character extends \Nextras\Orm\Entity\Entity {
   const GENDER_MALE = "male";

@@ -7,7 +7,10 @@ use HeroesofAbenez\Entities\Character,
     HeroesofAbenez\Entities\CharacterSkillAttack,
     HeroesofAbenez\Entities\SkillAttack,
     HeroesofAbenez\Entities\CharacterSkillSpecial,
-    HeroesofAbenez\Entities\SkillSpecial;
+    HeroesofAbenez\Entities\SkillSpecial,
+    HeroesofAbenez\Orm\Model as ORM,
+    HeroesofAbenez\Orm\ArenaFightCount,
+    Nextras\Orm\Entity\IEntity;
 
 /**
  * Combat Helper
@@ -23,13 +26,16 @@ class CombatHelper {
   protected $equipmentModel;
   /** @var Skills */
   protected $skillsModel;
+  /** @var ORM */
+  protected $orm;
   /** @var \Nette\Database\Context */
   protected $db;
   
-  function __construct(Profile $profileModel, Equipment $equipmentModel, Skills $skillsModel, \Nette\Database\Context $db) {
+  function __construct(Profile $profileModel, Equipment $equipmentModel, Skills $skillsModel, ORM $orm, \Nette\Database\Context $db) {
     $this->profileModel = $profileModel;
     $this->equipmentModel = $equipmentModel;
     $this->skillsModel = $skillsModel;
+    $this->orm = $orm;
     $this->db = $db;
   }
   
@@ -110,10 +116,11 @@ class CombatHelper {
    * @throws OpponentNotFoundException
    */
   function getArenaNpc($id): Character {
-    $row = (array) $this->db->query("SELECT * FROM pve_arena_opponents WHERE id=$id")->fetch();
-    if(count($row) === 1) {
+    $row = $this->orm->arenaNpcs->getById($id);
+    if(is_null($row)) {
       throw new OpponentNotFoundException;
     }
+    $row = $row->toArray(IEntity::TO_ARRAY_RELATIONSHIP_AS_ID);
     $row["id"] = "pveArenaNpc" . $row["id"];
     $row["initiative_formula"] = $this->getInitiativeFormula($row["occupation"]);
     $skills = $equipment = [];
@@ -145,11 +152,11 @@ class CombatHelper {
    * @return int
    */
   function getNumberOfTodayArenaFights(int $uid): int {
-    $rows = $this->db->table("arena_fights_count")->where("character=? AND day=?", [$uid, date("d.m.Y")]);
-    if(!$rows->count()) {
+    $row = $this->orm->arenaFightsCount->getByCharacterAndDay($uid, date("d.m.Y"));
+    if(is_null($row)) {
       return 0;
     } else {
-      return $rows->fetch()->amount;
+      return $row->amount;
     }
   }
   
@@ -161,16 +168,16 @@ class CombatHelper {
    */
   function bumpNumberOfTodayArenaFights(int $uid): void {
     $day = date("d.m.Y");
-    $rows = $this->db->table("arena_fights_count")->where("character=? AND day=?", [$uid, $day]);
-    if(!$rows->count()) {
-      $data = ["character" => $uid, "day" => $day];
-      $this->db->query("INSERT INTO arena_fights_count", $data);
+    $row = $this->orm->arenaFightsCount->getByCharacterAndDay($uid, $day);
+    if(is_null($row)) {
+      $row = new ArenaFightCount;
+      $this->orm->arenaFightsCount->attach($row);
+      $row->character = $uid;
+      $row->day = $day;
     } else {
-      $row = $rows->fetch();
-      $data = $row->toArray();
-      $data["amount"]++;
-      $this->db->query("UPDATE arena_fights_count SET ? WHERE id=?", $data, $data["id"]);
+      $row->amount++;
     }
+    $this->orm->arenaFightsCount->persistAndFlush($row);
   }
 }
 ?>
