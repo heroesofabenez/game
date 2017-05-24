@@ -26,7 +26,7 @@ INSERT INTO `character_specializations` (`id`, `name`, `class`, `strength_grow`,
 (8,	'sorcerer',	3,	0,	0.2,	0.2,	0.75,	0.25,	1.1),
 (9,	'mystic',	3,	0.1,	0.3,	0.3,	0.6,	0.2,	1);
 
-INSERT INTO `equipment` (`id`, `name`, `description`, `slot`, `type`, `required_lvl`, `required_class`, `price`, `strength`, `durability`) VALUES
+INSERT INTO `equipment` (`id`, `name`, `description`, `slot`, `type`, `required_level`, `required_class`, `price`, `strength`, `durability`) VALUES
 (1,	'Novice\'s Sword',	'Sword given to fresh recruits. Deals very little damage.',	'weapon',	'sword',	1,	1,	0,	1,	10),
 (2,	'Novice\'s Axe',	'Axe given to fresh recruits. Deals very little damage.',	'weapon',	'axe',	1,	1,	0,	2,	10),
 (3,	'Rookie\'s Dagger',	'Dagger used by new rogues. Its usefulness in combat is questionable.',	'weapon',	'dagger',	1,	2,	0,	1,	10),

@@ -22,7 +22,7 @@ class Equipment extends BaseEntity {
   /** @var string */
   protected $type;
   /** @var int */
-  protected $required_lvl;
+  protected $required_level;
   /** @var int */
   protected $required_class;
   /** @var int */

@@ -209,7 +209,7 @@ CREATE TABLE `equipment` (
   `description` text NOT NULL,
   `slot` enum('weapon','armor','shield','amulet') NOT NULL,
   `type` enum('sword','axe','club','dagger','spear','staff','bow','crossbow','throwing knife') DEFAULT NULL,
-  `required_lvl` int(11) NOT NULL DEFAULT '1',
+  `required_level` int(11) NOT NULL DEFAULT '1',
   `required_class` int(11) DEFAULT NULL,
   `price` int(11) NOT NULL DEFAULT '0',
   `strength` int(3) NOT NULL,
