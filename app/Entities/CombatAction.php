@@ -15,7 +15,9 @@ namespace HeroesofAbenez\Entities;
  * @property-read int $amount
  * @property-read string $message
  */
-class CombatAction extends BaseEntity {
+class CombatAction {
+  use \Nette\SmartObject;
+  
   /** @var Character */
   protected $character1;
   /** @var Character */
