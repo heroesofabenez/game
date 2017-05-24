@@ -3,8 +3,7 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Model;
 
-use HeroesofAbenez\Entities\JournalQuest,
-    HeroesofAbenez\Orm\Pet as PetEntity,
+use HeroesofAbenez\Orm\Pet as PetEntity,
     HeroesofAbenez\Orm\Model as ORM,
     Nextras\Orm\Collection\ICollection;
 
@@ -101,7 +100,7 @@ class Journal {
    /**
    * Gets character's quests
    * 
-   * @return JournalQuest[]
+   * @return \stdClass[]
    */
   function quests(): array {
     $return = [];
@@ -109,7 +108,9 @@ class Journal {
     foreach($quests as $row) {
       if($row->progress < 3) {
         $quest = $this->questModel->view($row->id);
-        $return[] = new JournalQuest($quest->id, $quest->name);
+        $return[] = (object) [
+          "id" => $quest->id, "name" => $quest->name
+        ];
       }
     }
     return $return;
