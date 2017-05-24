@@ -42,7 +42,7 @@ CREATE TABLE `characters` (
   CONSTRAINT `characters_ibfk_13` FOREIGN KEY (`specialization`) REFERENCES `character_specializations` (`id`),
   CONSTRAINT `characters_ibfk_14` FOREIGN KEY (`guild`) REFERENCES `guilds` (`id`),
   CONSTRAINT `characters_ibfk_6` FOREIGN KEY (`race`) REFERENCES `character_races` (`id`),
-  CONSTRAINT `characters_ibfk_7` FOREIGN KEY (`occupation`) REFERENCES `character_classess` (`id`),
+  CONSTRAINT `characters_ibfk_7` FOREIGN KEY (`occupation`) REFERENCES `character_classes` (`id`),
   CONSTRAINT `characters_ibfk_9` FOREIGN KEY (`race`) REFERENCES `character_races` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -60,7 +60,7 @@ CREATE TABLE `character_attack_skills` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
-CREATE TABLE `character_classess` (
+CREATE TABLE `character_classes` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(7) NOT NULL,
   `description` text NOT NULL,
@@ -145,7 +145,7 @@ CREATE TABLE `character_specializations` (
   `stat_points_level` float NOT NULL,
   PRIMARY KEY (`id`),
   KEY `class` (`class`),
-  CONSTRAINT `character_specializations_ibfk_1` FOREIGN KEY (`class`) REFERENCES `character_classess` (`id`)
+  CONSTRAINT `character_specializations_ibfk_1` FOREIGN KEY (`class`) REFERENCES `character_classes` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
@@ -216,7 +216,7 @@ CREATE TABLE `equipment` (
   `durability` int(3) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `required_class` (`required_class`),
-  CONSTRAINT `equipment_ibfk_1` FOREIGN KEY (`required_class`) REFERENCES `character_classess` (`id`)
+  CONSTRAINT `equipment_ibfk_1` FOREIGN KEY (`required_class`) REFERENCES `character_classes` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
@@ -271,7 +271,7 @@ CREATE TABLE `introduction` (
   KEY `race` (`race`),
   KEY `class` (`class`),
   CONSTRAINT `introduction_ibfk_1` FOREIGN KEY (`race`) REFERENCES `character_races` (`id`),
-  CONSTRAINT `introduction_ibfk_2` FOREIGN KEY (`class`) REFERENCES `character_classess` (`id`)
+  CONSTRAINT `introduction_ibfk_2` FOREIGN KEY (`class`) REFERENCES `character_classes` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 
@@ -348,7 +348,7 @@ CREATE TABLE `pet_types` (
   UNIQUE KEY `name` (`name`),
   KEY `required_class` (`required_class`),
   KEY `required_race` (`required_race`),
-  CONSTRAINT `pet_types_ibfk_1` FOREIGN KEY (`required_class`) REFERENCES `character_classess` (`id`),
+  CONSTRAINT `pet_types_ibfk_1` FOREIGN KEY (`required_class`) REFERENCES `character_classes` (`id`),
   CONSTRAINT `pet_types_ibfk_2` FOREIGN KEY (`required_race`) REFERENCES `character_races` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -370,7 +370,7 @@ CREATE TABLE `pve_arena_opponents` (
   KEY `occupation` (`occupation`),
   KEY `race` (`race`),
   KEY `weapon` (`weapon`),
-  CONSTRAINT `pve_arena_opponents_ibfk_1` FOREIGN KEY (`occupation`) REFERENCES `character_classess` (`id`),
+  CONSTRAINT `pve_arena_opponents_ibfk_1` FOREIGN KEY (`occupation`) REFERENCES `character_classes` (`id`),
   CONSTRAINT `pve_arena_opponents_ibfk_2` FOREIGN KEY (`race`) REFERENCES `character_races` (`id`),
   CONSTRAINT `pve_arena_opponents_ibfk_3` FOREIGN KEY (`weapon`) REFERENCES `equipment` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -415,7 +415,7 @@ CREATE TABLE `quest_areas` (
   PRIMARY KEY (`id`),
   KEY `required_occupation` (`required_occupation`),
   KEY `required_race` (`required_race`),
-  CONSTRAINT `quest_areas_ibfk_1` FOREIGN KEY (`required_occupation`) REFERENCES `character_classess` (`id`),
+  CONSTRAINT `quest_areas_ibfk_1` FOREIGN KEY (`required_occupation`) REFERENCES `character_classes` (`id`),
   CONSTRAINT `quest_areas_ibfk_2` FOREIGN KEY (`required_race`) REFERENCES `character_races` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -435,7 +435,7 @@ CREATE TABLE `quest_stages` (
   KEY `required_occupation` (`required_occupation`),
   KEY `required_race` (`required_race`),
   CONSTRAINT `quest_stages_ibfk_1` FOREIGN KEY (`area`) REFERENCES `quest_areas` (`id`),
-  CONSTRAINT `quest_stages_ibfk_2` FOREIGN KEY (`required_occupation`) REFERENCES `character_classess` (`id`),
+  CONSTRAINT `quest_stages_ibfk_2` FOREIGN KEY (`required_occupation`) REFERENCES `character_classes` (`id`),
   CONSTRAINT `quest_stages_ibfk_3` FOREIGN KEY (`required_race`) REFERENCES `character_races` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -506,7 +506,7 @@ CREATE TABLE `skills_attacks` (
   PRIMARY KEY (`id`),
   KEY `needed_class` (`needed_class`),
   KEY `needed_specialization` (`needed_specialization`),
-  CONSTRAINT `skills_attacks_ibfk_1` FOREIGN KEY (`needed_class`) REFERENCES `character_classess` (`id`),
+  CONSTRAINT `skills_attacks_ibfk_1` FOREIGN KEY (`needed_class`) REFERENCES `character_classes` (`id`),
   CONSTRAINT `skills_attacks_ibfk_2` FOREIGN KEY (`needed_specialization`) REFERENCES `character_specializations` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -528,7 +528,7 @@ CREATE TABLE `skills_specials` (
   PRIMARY KEY (`id`),
   KEY `needed_class` (`needed_class`),
   KEY `needed_specialization` (`needed_specialization`),
-  CONSTRAINT `skills_specials_ibfk_1` FOREIGN KEY (`needed_class`) REFERENCES `character_classess` (`id`),
+  CONSTRAINT `skills_specials_ibfk_1` FOREIGN KEY (`needed_class`) REFERENCES `character_classes` (`id`),
   CONSTRAINT `skills_specials_ibfk_2` FOREIGN KEY (`needed_specialization`) REFERENCES `character_specializations` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 

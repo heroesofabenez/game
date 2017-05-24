@@ -41,7 +41,7 @@ class CharacterClass extends BaseEntity {
   protected $initiative;
   
   function __construct(\Nette\Database\Table\ActiveRow $row) {
-    if($row->getTable()->getName() != "character_classess") exit;
+    if($row->getTable()->getName() != "character_classes") exit;
     foreach($row as $key => $value) {
       $this->$key = $value;
     }

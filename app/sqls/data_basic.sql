@@ -3,7 +3,7 @@ SET time_zone = '+00:00';
 SET foreign_key_checks = 0;
 SET sql_mode = 'NO_AUTO_VALUE_ON_ZERO';
 
-INSERT INTO `character_classess` (`id`, `name`, `description`, `strength`, `strength_grow`, `dexterity`, `dexterity_grow`, `constitution`, `constitution_grow`, `intelligence`, `intelligence_grow`, `charisma`, `charisma_grow`, `stat_points_level`, `initiative`) VALUES
+INSERT INTO `character_classes` (`id`, `name`, `description`, `strength`, `strength_grow`, `dexterity`, `dexterity_grow`, `constitution`, `constitution_grow`, `intelligence`, `intelligence_grow`, `charisma`, `charisma_grow`, `stat_points_level`, `initiative`) VALUES
 (1,	'fighter',	'Fighters tend to use brute force to solve problems. Their endurance is remarkable but their somehow wild appearance and lower intelligence do not earn them much respect in society (in general).<br>\r\n++CON, +STR, -INT, -CHAR',	11,	0.25,	10,	0.1,	12,	0.5,	9,	0.1,	9,	0.1,	1,	'1d5+DEX/4'),
 (2,	'rogue',	'Rogues try to avoid direct combat if possible as they are physically very fragile, they prefer attacking from shadows and/or using tricks. But if they engage in combat they rely on their swiftness to avoid enemy\'s attacks and penetrate his defenses.<br>\r\n++DEX, +STR, --CON',	11,	0.25,	12,	0.5,	8,	0.1,	10,	0.1,	10,	0.1,	1,	'2d3+DEX/4'),
 (3,	'wizard',	'Wizards are the wisest of all classes. Most of them studied at the Academy of magic where they learnt (besides magical theories and casting some basic spells) to read and write (something that most people are not able to do). They amaze other people with their bright intelligence and charisma but their physical shells are quite frail.\r\n++INT, +CHAR, -STR, -CON',	9,	0,	10,	0.1,	9,	0.1,	12,	0.5,	11,	0.25,	1.25,	'5d2+INT/3'),

@@ -93,7 +93,7 @@ class Profile {
     $classesList = $this->cache->load("classes");
     if($classesList === NULL) {
       $classesList = [];
-      $classes = $this->db->table("character_classess");
+      $classes = $this->db->table("character_classes");
       foreach($classes as $class) {
         $classesList[$class->id] = new CharacterClass($class);
       }
