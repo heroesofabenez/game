@@ -4,7 +4,8 @@ declare(strict_types=1);
 namespace HeroesofAbenez\Entities;
 
 use OutOfBoundsException,
-    HeroesofAbenez\Orm\EquipmentDummy as Equipment;
+    HeroesofAbenez\Orm\EquipmentDummy as Equipment,
+    HeroesofAbenez\Orm\Pet;
 
 /**
  * Structure for single character

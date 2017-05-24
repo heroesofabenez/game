@@ -5,7 +5,7 @@ namespace HeroesofAbenez\Model;
 
 use Nette\Utils\Arrays,
     HeroesofAbenez\Orm\PetType,
-    HeroesofAbenez\Entities\Pet as PetEntity,
+    HeroesofAbenez\Orm\Pet as PetEntity,
     HeroesofAbenez\Orm\Model as ORM,
     HeroesofAbenez\Orm\PetTypeDummy;
 
@@ -70,13 +70,7 @@ class Pet {
    * @return PetEntity|NULL
    */
   function getActivePet(int $user): ?PetEntity {
-    $pet = $this->orm->pets->getActivePet($user);
-    if(is_null($pet)) {
-      return NULL;
-    }
-    $type = new PetTypeDummy($pet->type);
-    $name = $pet->name ?? "Unnamed";
-    return new PetEntity($pet->id, $type, $name, $pet->deployed);
+    return $this->orm->pets->getActivePet($user);
   }
   
   /**

@@ -12,8 +12,40 @@ namespace HeroesofAbenez\Orm;
  * @property string|NULL $name
  * @property Character $owner {m:1 Character::$pets}
  * @property bool $deployed {default false}
+ * @property-read string $bonusStat {virtual}
+ * @property-read int $bonusValue {virtual}
+ * @property-read array $deployParams {virtual}
  */
 class Pet extends \Nextras\Orm\Entity\Entity {
+  /**
+   * @return string
+   */
+  protected function getterBonusStat(): string {
+    return $this->type->bonusStat;
+  }
   
+  /**
+   * @return int
+   */
+  protected function getterBonusValue(): int {
+    return $this->type->bonusValue;
+  }
+  
+  /**
+   * @return array
+   */
+  protected function getterDeployParams(): array {
+    $stats = [
+      "str" => "strength", "dex" => "dexterity", "con" => "constitution", "int" => "intelligence", "char" => "charisma"
+    ];
+    return [
+      "id" => "pet" . $this->id . "bonusEffect",
+      "type" => "buff",
+      "stat" => str_replace(array_keys($stats), array_values($stats), $this->bonusStat),
+      "value" => $this->bonusValue,
+      "source" => "pet",
+      "duration" => "combat"
+    ];
+  }
 }
 ?>

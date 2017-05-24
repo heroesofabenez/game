@@ -5,7 +5,7 @@ namespace HeroesofAbenez\Model;
 
 use MyTester as MT,
     MyTester\Assert,
-    HeroesofAbenez\Entities\Pet as PetEntity,
+    HeroesofAbenez\Orm\Pet as PetEntity,
     HeroesofAbenez\Orm\PetTypeDummy;
 
 class PetTest extends MT\TestCase {
@@ -48,7 +48,7 @@ class PetTest extends MT\TestCase {
     $pet = $this->model->getActivePet($user);
     if($user === 1) {
       Assert::type(PetEntity::class, $pet);
-      Assert::contains($pet->name, "Unnamed");
+      Assert::null($pet->name);
     } elseif($user === 2) {
       Assert::null($pet);
     }

@@ -4,9 +4,9 @@ declare(strict_types=1);
 namespace HeroesofAbenez\Model;
 
 use HeroesofAbenez\Entities\JournalQuest,
-    HeroesofAbenez\Entities\Pet as PetEntity,
+    HeroesofAbenez\Orm\Pet as PetEntity,
     HeroesofAbenez\Orm\Model as ORM,
-    HeroesofAbenez\Orm\PetTypeDummy;
+    Nextras\Orm\Collection\ICollection;
 
 /**
  * Journal Model
@@ -92,16 +92,10 @@ class Journal {
   /**
    * Gets character's pets
    * 
-   * @return PetEntity[]
+   * @return ICollection|PetEntity[]
    */
-  function pets(): array {
-    $return = [];
-    $pets = $this->orm->pets->findByOwner($this->user->id);
-    foreach($pets as $pet) {
-      $type = new PetTypeDummy($pet->type);
-      $return[] = new PetEntity($pet->id, $type, (($pet->name) ? $pet->name : ""), $pet->deployed);
-    }
-    return $return;
+  function pets(): ICollection {
+    return $this->orm->pets->findByOwner($this->user->id);
   }
   
    /**
