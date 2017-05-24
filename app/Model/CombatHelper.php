@@ -62,21 +62,33 @@ class CombatHelper {
    * @throws OpponentNotFoundException
    */
   function getPlayer(int $id): Character {
-    $data = $this->profileModel->view($id);
-    if(is_null($data)) {
+    $data = $equipment = $pets = [];
+    $character = $this->orm->characters->getById($id);
+    if(is_null($character)) {
       throw new OpponentNotFoundException;
     }
-    $data["initiative_formula"] = $this->getInitiativeFormula($data["occupation"]);
-    $pets = $equipment = [];
-    if($data["pet"]) {
-      $pets[] = $data["pet"];
+    $stats = [
+      "id", "name", "occupation", "level", "strength", "dexterity", "constitution", "intelligence",
+      "charisma", "race", "specialization", "gender", "experience",
+    ];
+    foreach($stats as $stat) {
+      if($character->$stat instanceof IEntity) {
+        $data[$stat] = $character->$stat->id;
+      } else {
+        $data[$stat] = $character->$stat;
+      }
     }
-    unset($data["pet"]);
-    $equipmentRows = $this->orm->characterEquipment->findCharactersEquipment($id);
-    foreach($equipmentRows as $row) {
+    $data["initiative_formula"] = $this->getInitiativeFormula($data["occupation"]);
+    $pet = $this->orm->pets->getActivePet($character);
+    if(!is_null($pet)) {
+      $pets[] = $pet;
+    }
+    foreach($character->equipment as $row) {
+      if(!$row->worn) {
+        continue;
+      }
       $item = $this->equipmentModel->view($row->item->id);
       $item->worn = true;
-      $equipment[] = $item;
     }
     $skills = $this->skillsModel->getPlayerSkills($id);
     $player = new Character($data, $equipment, $pets, $skills);
@@ -114,32 +126,43 @@ class CombatHelper {
    * @throws OpponentNotFoundException
    */
   function getArenaNpc($id): Character {
-    $row = $this->orm->arenaNpcs->getById($id);
-    if(is_null($row)) {
+    $data = [];
+    $npc = $this->orm->arenaNpcs->getById($id);
+    if(is_null($npc)) {
       throw new OpponentNotFoundException;
     }
-    $row = $row->toArray(IEntity::TO_ARRAY_RELATIONSHIP_AS_ID);
-    $row["id"] = "pveArenaNpc" . $row["id"];
-    $row["initiative_formula"] = $this->getInitiativeFormula($row["occupation"]);
+    $stats = [
+      "id", "name", "occupation", "level", "strength", "dexterity", "constitution", "intelligence",
+      "charisma", "race", "gender",
+    ];
+    foreach($stats as $stat) {
+      if($npc->$stat instanceof IEntity) {
+        $data[$stat] = $npc->$stat->id;
+      } else {
+        $data[$stat] = $npc->$stat;
+      }
+    }
+    $data["id"] = "pveArenaNpc" . $npc->id;
+    $data["initiative_formula"] = $this->getInitiativeFormula($data["occupation"]);
     $skills = $equipment = [];
-    $skillRows = $this->db->query("SELECT id FROM skills_attacks WHERE needed_class={$row["occupation"]} AND needed_level<={$row["level"]}");
+    $skillRows = $this->db->query("SELECT id FROM skills_attacks WHERE needed_class={$data["occupation"]} AND needed_level<={$data["level"]}");
     foreach($skillRows as $skillRow) {
       $skills[] = new CharacterSkillAttack(new SkillAttack($this->db->table("skills_attacks")->get($skillRow->id)), 0);
     }
     unset($skillRow);
-    $skillRows = $this->db->query("SELECT id FROM skills_specials WHERE needed_class={$row["occupation"]} AND needed_level<={$row["level"]}");
+    $skillRows = $this->db->query("SELECT id FROM skills_specials WHERE needed_class={$data["occupation"]} AND needed_level<={$data["level"]}");
     foreach($skillRows as $skillRow) {
       $skills[] = new CharacterSkillSpecial(new SkillSpecial($this->db->table("skills_specials")->get($skillRow->id)), 0);
     }
-    $this->getArenaNpcSkillsLevels($row, $skills);
-    if($row["weapon"]) {
-      $weapon = $this->equipmentModel->view($row["weapon"]);
+    $this->getArenaNpcSkillsLevels($data, $skills);
+    if($npc->weapon) {
+      $weapon = $this->equipmentModel->view($npc->weapon->id);
       if($weapon) {
         $weapon->worn = true;
         $equipment[] = $weapon;
       }
     }
-    $npc = new Character($row, $equipment, [], $skills);
+    $npc = new Character($data, $equipment, [], $skills);
     return $npc;
   }
   
