@@ -21,6 +21,7 @@ use Nextras\Orm\Relationships\OneHasMany;
  * @property OneHasMany|RoutesStage[] $routesOutgoing {1:m RoutesStage::$from}
  * @property OneHasMany|RoutesStage[] $routesIncoming {1:m RoutesStage::$to}
  * @property OneHasMany|Npc[] $npcs {1:m Npc::$stage}
+ * @property OneHasMany|ChatMessage[] $chatMessages {1:m ChatMessage::$stage}
  */
 class QuestStage extends \Nextras\Orm\Entity\Entity {
   

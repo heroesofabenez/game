@@ -3,14 +3,18 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Chat;
 
+use HeroesofAbenez\Orm\Model as ORM,
+    HeroesofAbenez\Orm\ChatMessage,
+    Nextras\Orm\Collection\ICollection;
+
 /**
  * Basic Chat Control
  *
  * @author Jakub Konečný
  */
 abstract class ChatControl extends \Nette\Application\UI\Control {
-  /** @var \Nette\Database\Context Database context */
-  protected $db;
+  /** @var ORM */
+  protected $orm;
   /** @var \Nette\Security\User */
   protected $user;
   /** @var ChatCommandsProcessor */
@@ -28,9 +32,9 @@ abstract class ChatControl extends \Nette\Application\UI\Control {
   /** @var array */
   protected $names = [];
   
-  function __construct(\Nette\Database\Context $db, \Nette\Security\User $user, ChatCommandsProcessor  $processor, string $param, int $id, string $param2 = NULL, $id2 = NULL) {
+  function __construct(ORM $orm, \Nette\Security\User $user, ChatCommandsProcessor  $processor, string $param, int $id, string $param2 = NULL, $id2 = NULL) {
     parent::__construct();
-    $this->db = $db;
+    $this->orm = $orm;
     $this->user = $user;
     $this->processor = $processor;
     $this->param = $param;
@@ -42,43 +46,30 @@ abstract class ChatControl extends \Nette\Application\UI\Control {
   /**
    * Gets texts for the current chat
    * 
-   * @return \stdClass[]
+   * @return ICollection|ChatMessage[]
    */
-  function getTexts(): array {
-    $count = $this->db->table("chat_messages")->where($this->param, $this->id)->count("*");
+  function getTexts(): ICollection {
+    $count = $this->orm->chatMessages->findBy([
+      $this->param => $this->id,
+    ])->countStored();
     $paginator = new \Nette\Utils\Paginator;
     $paginator->setItemCount($count);
     $paginator->setItemsPerPage(25);
     $paginator->setPage($paginator->pageCount);
-    $data = $this->db->table("chat_messages")
-      ->where($this->param, $this->id)
-      ->limit($paginator->length, $paginator->offset);
-    $lines = [];
-    foreach($data as $line) {
-      if(!isset($this->names[$line->character])) {
-        $id = $line->character;
-        $char = $this->db->table("characters")->get($id);
-        $this->names[$id] = $char->name;
-      }
-      $lines[] = (object) [
-        "id" => $line->id, "character" => $this->names[$line->character], "when" => $line->when, "message" => $line->message
-      ];
-    }
-    return $lines;
+    return $this->orm->chatMessages->findBy([
+      $this->param => $this->id,
+    ])->limitBy($paginator->length, $paginator->offset);
   }
   
   /**
    * Gets characters in the current chat
    * 
-   * @return \Nette\Database\Table\Selection
+   * @return ICollection|ChatMessage[]
    */
-  function getCharacters(): \Nette\Database\Table\Selection {
-    $characters = $this->db->table("characters")
-      ->where($this->param2, $this->id2);
-    foreach($characters as $char) {
-      $this->names[$char->id] = $char->name;
-    }
-    return $characters;
+  function getCharacters(): ICollection {
+    return $this->orm->characters->findBy([
+      $this->param2 => $this->id2
+    ]);
   }
   
   /**
@@ -104,10 +95,12 @@ abstract class ChatControl extends \Nette\Application\UI\Control {
     if($result) {
       $this->presenter->flashMessage($result);
     } else {
-      $data = [
-        "message" => $message,"character" => $this->user->id, "$this->param" => $this->id
-      ];
-      $this->db->query("INSERT INTO chat_messages", $data);
+      $chatMessage = new ChatMessage;
+      $chatMessage->message = $message;
+      $this->orm->chatMessages->attach($chatMessage);
+      $chatMessage->character = $this->user->id;
+      $chatMessage->{$this->param} = $this->id;
+      $this->orm->chatMessages->persistAndFlush($chatMessage);
     }
     $this->presenter->redirect("this");
   }

@@ -20,6 +20,7 @@ use Nextras\Orm\Relationships\OneHasMany;
  * @property OneHasMany|QuestStage[] $stages {1:m QuestStage::$area}
  * @property OneHasMany|RoutesArea[] $routesOutgoing {1:m RoutesArea::$from}
  * @property OneHasMany|RoutesArea[] $routesIncoming {1:m RoutesArea::$to}
+ * @property OneHasMany|ChatMessage[] $chatMessages {1:m ChatMessage::$area}
  */
 class QuestArea extends \Nextras\Orm\Entity\Entity {
   /**

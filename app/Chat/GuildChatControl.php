@@ -3,15 +3,17 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Chat;
 
+use HeroesofAbenez\Orm\Model as ORM;
+
 /**
  * Guild Chat Control
  *
  * @author Jakub Konečný
  */
 class GuildChatControl extends ChatControl {
-  function __construct(\Nette\Database\Context $database, \Nette\Security\User $user, ChatCommandsProcessor  $processor) {
+  function __construct(ORM $orm, \Nette\Security\User $user, ChatCommandsProcessor  $processor) {
     $gid = $user->identity->guild;
-    parent::__construct($database, $user, $processor, "guild", $gid);
+    parent::__construct($orm, $user, $processor, "guild", $gid);
   }
 }
 ?>
