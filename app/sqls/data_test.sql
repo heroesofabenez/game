@@ -16,18 +16,14 @@ INSERT INTO `character_quests` (`id`, `character`, `quest`, `progress`) VALUES
 (1,	1,	1,	1);
 
 
-INSERT INTO `chat_global` (`id`, `message`, `character`, `area`, `when`) VALUES
-(1,	'Welcome to Academy of Magic',	1,	1,	'2015-06-10 22:06:30');
-
-INSERT INTO `chat_guild` (`id`, `message`, `character`, `guild`, `when`) VALUES
-(1,	'Test message',	1,	1,	'2015-06-10 16:13:06'),
-(2,	'Hello World!',	1,	1,	'2015-06-10 16:34:27'),
-(3,	'test',	1,	1,	'2015-06-10 17:04:36'),
-(4,	'test test',	1,	1,	'2015-06-10 18:19:04');
-
-INSERT INTO `chat_local` (`id`, `message`, `character`, `stage`, `when`) VALUES
-(1,	'Hail, fellow wizards',	1,	1,	'2015-06-10 18:30:04'),
-(2,	'Hello',	1,	1,	'2015-06-11 10:24:20');
+INSERT INTO `chat_messages` (`id`, `message`, `character`, `area`, `stage`, `guild`, `when`) VALUES
+  (1,	'Test message',	1,	NULL,	NULL,	1,	'2015-06-10 16:13:06'),
+  (2,	'Hello world!',	1,	NULL,	NULL,	1,	'2015-06-10 16:34:27'),
+  (3,	'test',	1,	NULL,	NULL,	1,	'2015-06-10 17:04:36'),
+  (4,	'test tests',	1,	NULL,	NULL,	1,	'2015-06-10 18:19:04'),
+  (5,	'Hail, fellow wizards',	1,	NULL,	1,	NULL,	'2015-06-10 18:30:04'),
+  (6,	'Welcome to Academy of Magic',	1,	1,	NULL,	NULL,	'2015-06-10 22:06:30'),
+  (7,	'Hello',	1,	NULL,	1,	NULL,	'2015-06-11 10:24:20');
 
 INSERT INTO `guilds` (`id`, `name`, `description`, `money`) VALUES
 (0,	'None',	'Not a real guild',	0),

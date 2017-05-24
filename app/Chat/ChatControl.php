@@ -28,22 +28,11 @@ abstract class ChatControl extends \Nette\Application\UI\Control {
   /** @var array */
   protected $names = [];
   
-  /**
-   * @param \Nette\Database\Context $db
-   * @param \Nette\Security\User $user
-   * @param ChatCommandsProcessor  $processor
-   * @param string $table
-   * @param string $param 
-   * @param int $id
-   * @param string $param2
-   * @param int|array $id2
-   */
-  function __construct(\Nette\Database\Context $db, \Nette\Security\User $user, ChatCommandsProcessor  $processor, string $table, string $param, int $id, string $param2 = NULL, $id2 = NULL) {
+  function __construct(\Nette\Database\Context $db, \Nette\Security\User $user, ChatCommandsProcessor  $processor, string $param, int $id, string $param2 = NULL, $id2 = NULL) {
     parent::__construct();
     $this->db = $db;
     $this->user = $user;
     $this->processor = $processor;
-    $this->table = $table;
     $this->param = $param;
     $this->param2 = $param2 ?? $param;
     $this->id = $id;
@@ -56,12 +45,12 @@ abstract class ChatControl extends \Nette\Application\UI\Control {
    * @return \stdClass[]
    */
   function getTexts(): array {
-    $count = $this->db->table($this->table)->where($this->param, $this->id)->count("*");
+    $count = $this->db->table("chat_messages")->where($this->param, $this->id)->count("*");
     $paginator = new \Nette\Utils\Paginator;
     $paginator->setItemCount($count);
     $paginator->setItemsPerPage(25);
     $paginator->setPage($paginator->pageCount);
-    $data = $this->db->table($this->table)
+    $data = $this->db->table("chat_messages")
       ->where($this->param, $this->id)
       ->limit($paginator->length, $paginator->offset);
     $lines = [];
@@ -118,7 +107,7 @@ abstract class ChatControl extends \Nette\Application\UI\Control {
       $data = [
         "message" => $message,"character" => $this->user->id, "$this->param" => $this->id
       ];
-      $this->db->query("INSERT INTO $this->table", $data);
+      $this->db->query("INSERT INTO chat_messages", $data);
     }
     $this->presenter->redirect("this");
   }

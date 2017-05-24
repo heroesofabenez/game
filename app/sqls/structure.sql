@@ -175,46 +175,24 @@ CREATE TABLE `chat_bans` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 
-CREATE TABLE `chat_global` (
+CREATE TABLE `chat_messages` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `message` text COLLATE utf8_unicode_ci NOT NULL,
+  `message` text NOT NULL,
   `character` int(11) NOT NULL,
-  `area` int(11) NOT NULL,
+  `area` int(11) DEFAULT NULL,
+  `stage` int(11) DEFAULT NULL,
+  `guild` int(11) DEFAULT NULL,
   `when` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   KEY `character` (`character`),
   KEY `area` (`area`),
-  CONSTRAINT `chat_global_ibfk_1` FOREIGN KEY (`character`) REFERENCES `characters` (`id`),
-  CONSTRAINT `chat_global_ibfk_2` FOREIGN KEY (`area`) REFERENCES `quest_areas` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
-
-CREATE TABLE `chat_guild` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `message` text COLLATE utf8_unicode_ci NOT NULL,
-  `character` int(11) NOT NULL,
-  `guild` int(11) NOT NULL,
-  `when` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`),
-  KEY `character` (`character`),
-  KEY `guild` (`guild`),
-  CONSTRAINT `chat_guild_ibfk_1` FOREIGN KEY (`character`) REFERENCES `characters` (`id`),
-  CONSTRAINT `chat_guild_ibfk_2` FOREIGN KEY (`guild`) REFERENCES `guilds` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
-
-CREATE TABLE `chat_local` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `message` text COLLATE utf8_unicode_ci NOT NULL,
-  `character` int(11) NOT NULL,
-  `stage` int(11) NOT NULL,
-  `when` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`),
-  KEY `character` (`character`),
   KEY `stage` (`stage`),
-  CONSTRAINT `chat_local_ibfk_1` FOREIGN KEY (`character`) REFERENCES `characters` (`id`),
-  CONSTRAINT `chat_local_ibfk_2` FOREIGN KEY (`stage`) REFERENCES `quest_stages` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  KEY `guild` (`guild`),
+  CONSTRAINT `chat_messages_ibfk_1` FOREIGN KEY (`character`) REFERENCES `characters` (`id`),
+  CONSTRAINT `chat_messages_ibfk_2` FOREIGN KEY (`area`) REFERENCES `quest_areas` (`id`),
+  CONSTRAINT `chat_messages_ibfk_3` FOREIGN KEY (`stage`) REFERENCES `quest_stages` (`id`),
+  CONSTRAINT `chat_messages_ibfk_4` FOREIGN KEY (`guild`) REFERENCES `guilds` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
 CREATE TABLE `combats` (
