@@ -72,11 +72,9 @@ class CombatHelper {
       $pets[] = $data["pet"];
     }
     unset($data["pet"]);
-    $equipmentRows = $this->db->table("character_equipment")
-      ->where("character", $id)
-      ->where("worn", 1);
+    $equipmentRows = $this->orm->characterEquipment->findCharactersEquipment($id);
     foreach($equipmentRows as $row) {
-      $item = $this->equipmentModel->view($row->item);
+      $item = $this->equipmentModel->view($row->item->id);
       $item->worn = true;
       $equipment[] = $item;
     }

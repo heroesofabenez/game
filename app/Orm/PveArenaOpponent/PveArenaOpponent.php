@@ -18,8 +18,7 @@ namespace HeroesofAbenez\Orm;
  * @property int $constitution
  * @property int $intelligence
  * @property int $charisma
- * @property int|NULL $weapon
- * @todo add relationship from $weapon to Equipment
+ * @property Equipment|NULL $weapon {m:1 Equipment::$arenaNpcs}
  */
 class PveArenaOpponent extends \Nextras\Orm\Entity\Entity {
   const GENDER_MALE = "male";

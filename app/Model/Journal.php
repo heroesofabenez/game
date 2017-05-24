@@ -85,10 +85,8 @@ class Journal {
       $return["items"][] = (object) ["id" => $item->item->id, "name" => $item->item->name, "amount" => $item->amount];
     }
     $return["equipments"] = [];
-    $equipments = $this->db->table("character_equipment")
-      ->where("character", $this->user->id);
-    foreach($equipments as $equipment) {
-      $i = $this->equipmentModel->view($equipment->item);
+    foreach($char->equipment as $equipment) {
+      $i = $equipment->item;
       $return["equipments"][] = (object) ["id" => $i->id, "name" => $i->name, "amount" => $equipment->amount, "worn" => (bool) $equipment->worn, "eqid" => $equipment->id];
     }
     return $return;
