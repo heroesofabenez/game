@@ -33,6 +33,8 @@ namespace HeroesofAbenez\Orm;
  * @property-read CharacterItemsRepository $characterItems
  * @property-read EquipmentRepository $equipment
  * @property-read CharacterEquipmentRepository $characterEquipment
+ * @property-read QuestsRepository $quests
+ * @property-read CharacterQuestsRepository $characterQuests
  */
 class Model extends \Nextras\Orm\Model\Model {
   

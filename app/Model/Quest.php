@@ -4,7 +4,8 @@ declare(strict_types=1);
 namespace HeroesofAbenez\Model;
 
 use Nette\Utils\Arrays,
-    HeroesofAbenez\Entities\Quest as QuestEntity;
+    HeroesofAbenez\Orm\QuestDummy as QuestEntity,
+    HeroesofAbenez\Orm\Model as ORM;
 
 /**
  * Quest Model
@@ -14,20 +15,15 @@ use Nette\Utils\Arrays,
 class Quest {
   use \Nette\SmartObject;
   
-  /** @var \Nette\Database\Context */
-  protected $db;
+  /** @var ORM */
+  protected $orm;
   /** @var \Nette\Caching\Cache */
   protected $cache;
   /** @var \Nette\Security\User */
   protected $user;
   
-  /**
-   * @param \Nette\Caching\Cache $cache
-   * @param \Nette\Database\Context $db
-   * @param \Nette\Security\User $user
-   */
-  function __construct(\Nette\Caching\Cache $cache, \Nette\Database\Context $db, \Nette\Security\User $user) {
-    $this->db = $db;
+  function __construct(\Nette\Caching\Cache $cache, ORM $orm,  \Nette\Security\User $user) {
+    $this->orm = $orm;
     $this->cache = $cache;
     $this->user = $user;
   }
@@ -39,37 +35,34 @@ class Quest {
    * @return QuestEntity[]
    */
   function listOfQuests(int $npc = 0): array {
-    $return = [];
-    $quests = $this->cache->load("quests");
-    if($quests === NULL) {
-      $quests = $this->db->table("quests");
+    $quests = $this->cache->load("quests", function(& $dependencies) {
+      $return = [];
+      $quests = $this->orm->quests->findAll();
+      /** @var \HeroesofAbenez\Orm\Quest $quest */
       foreach($quests as $quest) {
         $return[$quest->id] = new QuestEntity($quest);
       }
-      $this->cache->save("quests", $return);
-    } else {
-      $return = $quests;
-    }
+      return $return;
+    });
     if($npc > 0) {
-      foreach($return as $quest) {
-        if($quest->npc_start != $npc OR $quest->npc_end != $npc) {
-          unset($return[$quest->id]);
+      foreach($quests as $quest) {
+        if($quest->npcStart !== $npc OR $quest->npcEnd !== $npc) {
+          unset($quests[$quest->id]);
         }
       }
     }
-    return $return;
+    return $quests;
   }
   
   /**
    * Gets info about specified quest
    * 
    * @param int $id Quest's id
-   * @return QuestEntity
+   * @return QuestEntity|NULL
    */
-  function view(int $id): QuestEntity {
+  function view(int $id): ?QuestEntity {
     $quests = $this->listOfQuests();
-    $quest = Arrays::get($quests, $id, false);
-    return $quest;
+    return Arrays::get($quests, $id, NULL);
   }
   
   /**
@@ -79,14 +72,12 @@ class Quest {
    * @return int
    */
   function status(int $id): int {
-    $row = $this->db->table("character_quests")
-      ->where("character", $this->user->id)
-      ->where("quest", $id);
-    if($row->count() === 0) {
+    $row = $this->orm->characterQuests->getByCharacterAndQuest($this->user->id, $id);
+    if(is_null($row)) {
       return 0;
+    } else {
+      return $row->progress;
     }
-    $r = $row->fetch();
-    return $r->progress;
   }
   
   /**

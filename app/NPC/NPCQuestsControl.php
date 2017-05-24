@@ -5,7 +5,10 @@ namespace HeroesofAbenez\NPC;
 
 use HeroesofAbenez\Model,
     Kdyby\Translation\Translator,
-    HeroesofAbenez\Orm\NpcDummy;
+    HeroesofAbenez\Orm\NpcDummy,
+    HeroesofAbenez\Orm\QuestDummy as QuestEntity,
+    HeroesofAbenez\Orm\Model as ORM,
+    HeroesofAbenez\Orm\CharacterQuest;
 
 /**
  * NPC Quests Control
@@ -18,8 +21,8 @@ class NPCQuestsControl extends \Nette\Application\UI\Control {
   protected $questModel;
   /** @var \HeroesofAbenez\Model\Item */
   protected $itemModel;
-  /** @var \Nette\Database\Context */
-  protected $db;
+  /** @var ORM */
+  protected $orm;
   /** @var \Nette\Security\User */
   protected $user;
   /** @var \Kdyby\Translation\Translator */
@@ -27,12 +30,12 @@ class NPCQuestsControl extends \Nette\Application\UI\Control {
   /** @var NpcDummy */
   protected $npc;
   
-  function __construct(Model\Quest $questModel, Model\Item $itemModel, \Nette\Database\Context $db, \Nette\Security\User $user, Translator $translator) {
+  function __construct(Model\Quest $questModel, Model\Item $itemModel, ORM $orm, \Nette\Security\User $user, Translator $translator) {
     parent::__construct();
     $this->questModel = $questModel;
     $this->itemModel = $itemModel;
     $this->user = $user;
-    $this->db = $db;
+    $this->orm = $orm;
     $this->translator = $translator;
   }
   
@@ -43,27 +46,26 @@ class NPCQuestsControl extends \Nette\Application\UI\Control {
   /**
    * Gets list of available quests from the npc
    *
-   * @return \HeroesofAbenez\Entities\Quest[]
+   * @return QuestEntity[]
    */
   function getQuests(): array {
     $return = $this->questModel->listOfQuests($this->npc->id);
-    $playerQuests = $this->db->table("character_quests")
-      ->where("character", $this->user->id);
+    $playerQuests = $this->orm->characterQuests->findByCharacter($this->user->id);
     foreach($return as $key => $quest) {
       foreach($playerQuests as $pquest) {
-        if($quest->id == $pquest->quest AND $pquest->progress > 2) {
+        if($quest->id == $pquest->quest->id AND $pquest->progress > 2) {
           unset($return[$key]);
           continue 2;
-        } elseif($quest->id == $pquest->quest AND $pquest->progress <= 2) {
+        } elseif($quest->id == $pquest->quest->id AND $pquest->progress <= 2) {
           $quest->progress = true;
           continue 2;
         }
       }
-      if($quest->needed_level > 0) {
-        if($this->user->identity->level < $quest->needed_level) {
+      if($quest->neededLevel > 0) {
+        if($this->user->identity->level < $quest->neededLevel) {
           unset($return[$key]);
         }
-      } elseif($quest->needed_quest > 0) {
+      } elseif($quest->neededQuest > 0) {
         if(!$this->questModel->isFinished($quest->id)) {
           unset($return[$key]);
         }
@@ -90,22 +92,23 @@ class NPCQuestsControl extends \Nette\Application\UI\Control {
    */
   function handleAccept(int $questId): void {
     $quest = $this->questModel->view($questId);
-    if(!$quest) {
+    if(is_null($quest)) {
       $this->presenter->forward("notfound");
     }
     $status = $this->questModel->status($questId);
     if($status > 0) {
       $this->presenter->flashMessage($this->translator->translate("errors.quest.workingOn"));
-      $this->presenter->redirect("Npc:quests", $quest->npc_start);
+      $this->presenter->redirect("Npc:quests", $quest->npcStart);
     }
-    if($quest->npc_start != $this->npc->id) {
+    if($quest->npcStart != $this->npc->id) {
       $this->presenter->flashMessage($this->translator->translate("errors.quest.cannotAcceptHere"));
       $this->presenter->redirect("Homepage:default");
     }
-    $data = [
-      "character" => $this->user->id, "quest" => $questId
-    ];
-    $this->db->query("INSERT INTO character_quests", $data);
+    $record = new CharacterQuest;
+    $this->orm->characterQuests->attach($record);
+    $record->character = $this->user->id;
+    $record->quest = $questId;
+    $this->orm->characterQuests->persistAndFlush($record);
     $this->presenter->flashMessage($this->translator->translate("messages.quest.accepted"));
     $this->presenter->redirect("Quest:view", $quest->id);
   }
@@ -113,21 +116,21 @@ class NPCQuestsControl extends \Nette\Application\UI\Control {
   /**
    * Checks if the player accomplished specified quest's goals
    * 
-   * @param \HeroesofAbenez\Entities\Quest $quest
+   * @param QuestEntity $quest
    * @return bool
    */
-  protected function isCompleted(\HeroesofAbenez\Entities\Quest $quest): bool {
+  protected function isCompleted(QuestEntity $quest): bool {
     $haveMoney = $haveItem = false;
-    if($quest->cost_money > 0) {
-      $char = $this->db->table("characters")->get($this->user->id);
-      if($char->money >= $quest->cost_money) {
+    if($quest->costMoney > 0) {
+      $char = $this->orm->characters->getById($this->user->id);
+      if($char->money >= $quest->costMoney) {
         $haveMoney = true;
       }
     } else {
       $haveMoney = true;
     }
-    if(is_int($quest->needed_item)) {
-      $haveItem = $this->itemModel->haveItem($quest->needed_item, $quest->item_amount);
+    if(is_int($quest->neededItem)) {
+      $haveItem = $this->itemModel->haveItem($quest->neededItem, $quest->itemAmount);
     } else {
       $haveItem = true;
     }
@@ -142,15 +145,15 @@ class NPCQuestsControl extends \Nette\Application\UI\Control {
    */
   function handleFinish(int $questId): void {
     $quest = $this->questModel->view($questId);
-    if(!$quest) {
+    if(is_null($quest)) {
       $this->presenter->forward("notfound");
     }
     $status = $this->questModel->status($questId);
     if($status === 0) {
       $this->presenter->flashMessage($this->translator->translate("errors.quest.notWorkingOn"));
-      $this->presenter->redirect("Npc:quests", $quest->npc_start);
+      $this->presenter->redirect("Npc:quests", $quest->npcStart);
     }
-    if($quest->npc_end != $this->npc->id) {
+    if($quest->npcEnd != $this->npc->id) {
       $this->presenter->flashMessage($this->translator->translate("errors.quest.cannotFinishHere"));
       $this->presenter->redirect("Homepage:default");
     }
@@ -158,25 +161,21 @@ class NPCQuestsControl extends \Nette\Application\UI\Control {
       $this->presenter->flashMessage($this->translator->translate("errors.quest.requirementsNotMet"));
       $this->presenter->redirect("Homepage:default");
     }
-    $wheres = [
-      "character" => $this->user->id, "quest" => $questId
-    ];
-    $data = ["progress" => 3];
-    $this->db->query("UPDATE character_quests SET ? WHERE ?", $data, $wheres);
-    if($quest->item_lose) {
-      $this->itemModel->loseItem($quest->needed_item, $quest->item_amount);
+    $record = $this->orm->characterQuests->getByCharacterAndQuest($this->user->id, $questId);
+    $record->progress = 3;
+    if($quest->itemLose) {
+      $this->itemModel->loseItem($quest->neededItem, $quest->itemAmount);
     }
-    if($quest->cost_money > 0) {
-      $data3 = "money=money-{$quest->cost_money}";
+    if($quest->costMoney > 0) {
+      $record->character->money -= $quest->costMoney;
     } else {
-      $data3 = "money=money+{$quest->reward_money}";
+      $record->character->money += $quest->rewardMoney;
     }
-    $data3 .= ", experience=experience+{$quest->reward_xp}";
-    $where3 = ["id" => $this->user->id];
-    $this->db->query("UPDATE characters SET $data3 WHERE ?", $where3);
-    if($quest->reward_item > 0) {
-      $this->itemModel->giveItem($quest->reward_item);
+    $record->character->experience += $quest->rewardXp;
+    if($quest->rewardItem > 0) {
+      $this->itemModel->giveItem($quest->rewardItem);
     }
+    $this->orm->characterQuests->persistAndFlush($record);
     $this->presenter->flashMessage($this->translator->translate("messages.quest.finished"));
     $this->presenter->redirect("Quest:view", $quest->id);
   }

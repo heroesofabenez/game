@@ -20,6 +20,8 @@ use Nextras\Orm\Relationships\OneHasMany;
  * @property int $posX
  * @property int $posY
  * @property OneHasMany|ShopItem[] $items {1:m ShopItem::$npc}
+ * @property OneHasMany|Quest[] $startQuests {1:m Quest::$npcStart}
+ * @property OneHasMany|Quest $endQuests {1:m Quest::$npcEnd}
  */
 class Npc extends \Nextras\Orm\Entity\Entity {
   const TYPE_QUEST = "quest";

@@ -5,7 +5,7 @@ namespace HeroesofAbenez\Model;
 
 use MyTester as MT,
     MyTester\Assert,
-    HeroesofAbenez\Entities\Quest as QuestEntity;
+    HeroesofAbenez\Orm\QuestDummy as QuestEntity;
 
 class QuestTest extends MT\TestCase {
   /** @var Quest */

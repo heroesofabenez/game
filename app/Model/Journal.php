@@ -20,8 +20,6 @@ class Journal {
   protected $user;
   /** @var ORM */
   protected $orm;
-  /** @var \Nette\Database\Context */
-  protected $db;
   /** @var Quest */
   protected $questModel;
   /** @var Location */
@@ -33,9 +31,8 @@ class Journal {
   /** @var Equipment */
   protected $equipmentModel;
   
-  function __construct(\Nette\Security\User $user, ORM $orm, \Nette\Database\Context $db, Quest $questModel, Location $locationModel, Guild $guildModel, Pet $petModel, Equipment $equipmentModel) {
+  function __construct(\Nette\Security\User $user, ORM $orm, Quest $questModel, Location $locationModel, Guild $guildModel, Pet $petModel, Equipment $equipmentModel) {
     $this->user = $user;
-    $this->db = $db;
     $this->orm = $orm;
     $this->questModel = $questModel;
     $this->locationModel = $locationModel;
@@ -114,9 +111,7 @@ class Journal {
    */
   function quests(): array {
     $return = [];
-    $uid = $this->user->id;
-    $quests = $this->db->table("character_quests")
-      ->where("character", $uid);
+    $quests = $this->orm->characterQuests->findByCharacter($this->user->id);
     foreach($quests as $row) {
       if($row->progress < 3) {
         $quest = $this->questModel->view($row->id);

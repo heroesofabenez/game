@@ -43,6 +43,7 @@ use Nextras\Orm\Relationships\OneHasMany;
  * @property OneHasMany|ArenaFightCount[] $arenaFights {1:m ArenaFightCount::$character}
  * @property OneHasMany|CharacterItem[] $items {1:m CharacterItem::$character}
  * @property OneHasMany|CharacterEquipment[] $equipment {1:m CharacterEquipment::$character}
+ * @property OneHasMany|CharacterQuest[] $quests {1:m CharacterQuest::$character}
  */
 class Character extends \Nextras\Orm\Entity\Entity {
   const GENDER_MALE = "male";
