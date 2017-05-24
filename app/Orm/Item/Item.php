@@ -15,6 +15,7 @@ use Nextras\Orm\Relationships\OneHasMany;
  * @property string $image
  * @property int $price
  * @property OneHasMany|ShopItem[] $inShops {1:m ShopItem::$item}
+ * @property OneHasMany|CharacterItem[] $characterItems {1:m CharacterItem::$item}
  */
 class Item extends \Nextras\Orm\Entity\Entity {
   /**

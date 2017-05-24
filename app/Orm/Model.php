@@ -30,6 +30,7 @@ namespace HeroesofAbenez\Orm;
  * @property-read PetsRepository $pets
  * @property-read PveArenaOpponentsRepository $arenaNpcs
  * @property-read ArenaFightsCountRepository $arenaFightsCount
+ * @property-read CharacterItemsRepository $characterItems
  */
 class Model extends \Nextras\Orm\Model\Model {
   

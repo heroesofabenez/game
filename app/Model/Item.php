@@ -6,7 +6,8 @@ namespace HeroesofAbenez\Model;
 use Nette\Utils\Arrays,
     HeroesofAbenez\Orm\Item as ItemEntity,
     HeroesofAbenez\Orm\Model as ORM,
-    HeroesofAbenez\Orm\ItemDummy;
+    HeroesofAbenez\Orm\ItemDummy,
+    HeroesofAbenez\Orm\CharacterItem;
 
 /**
  * Item Model
@@ -17,8 +18,6 @@ use Nette\Utils\Arrays,
 class Item {
   use \Nette\SmartObject;
   
-  /** @var \Nette\Database\Context */
-  protected $db;
   /** @var ORM */
   protected $orm;
   /** @var \Nette\Caching\Cache */
@@ -28,8 +27,7 @@ class Item {
   /** @var \Nette\Application\LinkGenerator */
   protected $linkGenerator;
   
-  function __construct(\Nette\Caching\Cache $cache, \Nette\Database\Context $db, ORM $orm, \Nette\Security\User $user) {
-    $this->db = $db;
+  function __construct(\Nette\Caching\Cache $cache, ORM $orm, \Nette\Security\User $user) {
     $this->orm = $orm;
     $this->cache = $cache;
     $this->user = $user;
@@ -91,16 +89,14 @@ class Item {
    * @return bool
    */
   function haveItem(int $id, int $amount = 1): bool {
-    $itemRow = $this->db->table("character_items")
-      ->where("character", $this->user->id)
-      ->where("item", $id);
-    if($itemRow->count() == 1) {
-      $item = $itemRow->fetch();
-      if($item->amount >= $amount) {
-        return true;
-      }
+    $item = $this->orm->characterItems->getByCharacterAndItem($this->user->id, $id);
+    if(is_null($item)) {
+      return false;
+    } elseif($item->amount < $amount) {
+      return false;
+    } else {
+      return true;
     }
-    return false;
   }
   
   /**
@@ -108,38 +104,35 @@ class Item {
    * 
    * @param int $id Item's id
    * @param int $amount
-   * @return \Nette\Database\ResultSet
+   * @return void
    */
-  function giveItem(int $id, int $amount = 1): \Nette\Database\ResultSet {
-    if($this->haveItem($id)) {
-      $data = "item=$id, amount=amount+$amount";
-      $where = ["character" => $this->user->id, "item" => $id];
-      $result = $this->db->query("UPDATE character_items SET $data WHERE ?", $where);
-      return $result;
+  function giveItem(int $id, int $amount = 1): void {
+    $item = $this->orm->characterItems->getByCharacterAndItem($this->user->id, $id);
+    if(is_null($item)) {
+      $item = new CharacterItem;
+      $this->orm->characterItems->attach($item);
+      $item->character = $this->user->id;
+      $item->item = $id;
+      $item->amount = $amount;
     } else {
-      $data = [
-        "character" => $this->user->id, "item" => $id, "amount" => $amount,
-      ];
-      $result = $this->db->query("INSERT INTO character_items", $data);
-      return $result;
+      $item->amount += $amount;
     }
+    $this->orm->characterItems->persistAndFlush($item);
   }
   
   /**
    * 
    * @param int $id Item's id
    * @param int $amount
-   * @return bool
+   * @return void
    */
-  function loseItem(int $id, int $amount = 1): bool {
-    $data = "amount=amount-$amount";
-    $wheres = ["character" => $this->user->id, "item" => $id];
-    $result = $this->db->query("UPDATE character_items SET $data WHERE ?", $wheres);
-    if(!$result) {
-      return false;
-    } else {
-      return true;
+  function loseItem(int $id, int $amount = 1): void {
+    $item = $this->orm->characterItems->getByCharacterAndItem($this->user->id, $id);
+    if(is_null($item)) {
+      return;
     }
+    $item->amount -= $amount;
+    $this->orm->characterItems->persistAndFlush($item);
   }
 }
 ?>

@@ -63,7 +63,7 @@ class Journal {
       "stageName" => $stage->name, "areaName" => $this->locationModel->getAreaName($stage->area)
     ];
     if($character->guild->id > 0) {
-      $return["guild"] = $this->guildModel->getGuildName($character->guild->id);
+      $return["guild"] = $character->guild->name;
       $return["guildRank"] = $character->guildrank->id;
     } else {
       $return["guild"] = false;
@@ -81,11 +81,8 @@ class Journal {
     $char = $this->orm->characters->getById($this->user->id);
     $return["money"] = $char->money;
     $return["items"] = [];
-    $items = $this->db->table("character_items")
-      ->where("character", $this->user->id);
-    foreach($items as $item) {
-      $i = $this->db->table("items")->get($item->item);
-      $return["items"][] = (object) ["id" => $i->id, "name" => $i->name, "amount" => $item->amount];
+    foreach($char->items as $item) {
+      $return["items"][] = (object) ["id" => $item->item->id, "name" => $item->item->name, "amount" => $item->amount];
     }
     $return["equipments"] = [];
     $equipments = $this->db->table("character_equipment")
