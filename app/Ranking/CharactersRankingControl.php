@@ -14,12 +14,9 @@ use HeroesofAbenez\Orm\Model as ORM,
 class CharactersRankingControl extends RankingControl {
   /** @var ORM */
   protected $orm;
-  /** @var \HeroesofAbenez\Model\Guild */
-  protected $guildModel;
   
-  function __construct(ORM $orm, \HeroesofAbenez\Model\Guild $guildModel) {
+  function __construct(ORM $orm) {
     $this->orm = $orm;
-    $this->guildModel = $guildModel;
     parent::__construct("Characters", ["name", "level", "guild"], "Profile", "Profile");
   }
   

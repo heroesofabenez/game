@@ -4,7 +4,8 @@ declare(strict_types=1);
 namespace HeroesofAbenez\Presenters;
 
 use HeroesofAbenez\Forms\CreateCharacterFormFactory,
-    Nette\Application\UI\Form;
+    Nette\Application\UI\Form,
+    Nextras\Orm\Collection\ICollection;
 
   /**
    * Presenter Character
@@ -16,9 +17,9 @@ class CharacterPresenter extends BasePresenter {
   protected $model;
   /** @var \HeroesofAbenez\Model\UserManager @autowire */
   protected $userManager;
-  /** @var \HeroesofAbenez\Orm\CharacterClassDummy[] */
+  /** @var ICollection|\HeroesofAbenez\Orm\CharacterClass[] */
   protected $classes;
-  /** @var \HeroesofAbenez\Orm\CharacterRaceDummy[] */
+  /** @var ICollection|\HeroesofAbenez\Orm\CharacterRace[] */
   protected $races;
   
   /**

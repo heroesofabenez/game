@@ -3,10 +3,8 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Model;
 
-use Nette\Utils\Arrays,
-    HeroesofAbenez\Orm\Item as ItemEntity,
+use HeroesofAbenez\Orm\Item as ItemEntity,
     HeroesofAbenez\Orm\Model as ORM,
-    HeroesofAbenez\Orm\ItemDummy,
     HeroesofAbenez\Orm\CharacterItem;
 
 /**
@@ -20,39 +18,18 @@ class Item {
   
   /** @var ORM */
   protected $orm;
-  /** @var \Nette\Caching\Cache */
-  protected $cache;
   /** @var \Nette\Security\User */
   protected $user;
   /** @var \Nette\Application\LinkGenerator */
   protected $linkGenerator;
   
-  function __construct(\Nette\Caching\Cache $cache, ORM $orm, \Nette\Security\User $user) {
+  function __construct(ORM $orm, \Nette\Security\User $user) {
     $this->orm = $orm;
-    $this->cache = $cache;
     $this->user = $user;
   }
   
   function setLinkGenerator(\Nette\Application\LinkGenerator $generator) {
     $this->linkGenerator = $generator;
-  }
-  
-  /**
-   * Gets list of all items
-   * 
-   * @return ItemDummy[]
-   */
-  function listOfItems(): array {
-    $items = $this->cache->load("items", function(& $dependencies) {
-      $return = [];
-      $items = $this->orm->items->findAll();
-      /** @var ItemEntity $item */
-      foreach($items as $item) {
-        $return[$item->id] = new ItemDummy($item);
-      }
-      return $return;
-    });
-    return $items;
   }
   
   /**
@@ -74,11 +51,10 @@ class Item {
    * Get info about specified item
    * 
    * @param int $id Item's id
-   * @return ItemDummy|NULL
+   * @return ItemEntity|NULL
    */
-  function view(int $id): ?ItemDummy {
-    $items = $this->listOfItems();
-    return Arrays::get($items, $id, NULL);
+  function view(int $id): ?ItemEntity {
+    return $this->orm->items->getById($id);
   }
   
   /**

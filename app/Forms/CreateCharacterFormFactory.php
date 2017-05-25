@@ -3,7 +3,8 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Forms;
 
-use Nette\Application\UI\Form;
+use Nette\Application\UI\Form,
+    Nextras\Orm\Collection\ICollection;
 
 /**
  * Factory for form CreateCharacter
@@ -12,29 +13,30 @@ use Nette\Application\UI\Form;
  */
 class CreateCharacterFormFactory extends BaseFormFactory {
   /**
-   * @param \HeroesofAbenez\Orm\CharacterRaceDummy[] $races
-   * @param \HeroesofAbenez\Orm\CharacterClassDummy[] $classes
+   * @param ICollection|\HeroesofAbenez\Orm\CharacterRace[] $races
+   * @param ICollection|\HeroesofAbenez\Orm\CharacterClass[] $classes
    * @return Form
    */
-  function create(array $races, array $classes): Form {
+  function create(ICollection $races, ICollection $classes): Form {
     $form = parent::createBase();
+    $racesList = $classesList = [];
     $form->addText("name", "forms.createCharacter.nameField.label")
       ->setRequired("forms.createCharacter.nameField.empty")
       ->addRule(Form::MAX_LENGTH, "forms.createCharacter.nameField.error", 30);
     $form->addRadioList("gender", "forms.createCharacter.genderRadio.label", [ 1 => "male", 2 => "female"])
       ->setRequired("forms.createCharacter.genderRadio.error")
       ->getSeparatorPrototype()->setName(NULL);
-    foreach($races as $key => &$value) {
-      $value = "races.$key.name";
+    foreach($races as $value) {
+      $racesList[$value->id] = "races.{$value->id}.name";
     }
-    $form->addSelect("race", "forms.createCharacter.raceSelect.label", $races)
+    $form->addSelect("race", "forms.createCharacter.raceSelect.label", $racesList)
       ->setPrompt("forms.createCharacter.raceSelect.prompt")
       ->setRequired("forms.createCharacter.raceSelect.error");
     $form["race"]->getControlPrototype()->onchange("changeRaceDescription(this.value)");
-    foreach($classes as $key => &$value) {
-      $value = "classes.$key.name";
+    foreach($classes as $value) {
+      $classesList[$value->id] = "classes.{$value->id}.name";
     }
-    $form->addSelect("class", "forms.createCharacter.classSelect.label", $classes)
+    $form->addSelect("class", "forms.createCharacter.classSelect.label", $classesList)
       ->setPrompt("forms.createCharacter.classSelect.prompt")
       ->setRequired("forms.createCharacter.classSelect.error");
     $form["class"]->getControlPrototype()->onchange("changeClassDescription(this.value)");

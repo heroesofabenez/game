@@ -5,9 +5,10 @@ namespace HeroesofAbenez\Model;
 
 use MyTester as MT,
     MyTester\Assert,
-    HeroesofAbenez\Orm\CharacterRaceDummy,
-    HeroesofAbenez\Orm\CharacterClassDummy,
-    HeroesofAbenez\Orm\CharacterSpecializationDummy;
+    HeroesofAbenez\Orm\CharacterRace,
+    HeroesofAbenez\Orm\CharacterClass,
+    HeroesofAbenez\Orm\CharacterSpecialization,
+    Nextras\Orm\Collection\ICollection;
 
 class ProfileTest extends MT\TestCase {
   /** @var Profile */
@@ -50,8 +51,7 @@ class ProfileTest extends MT\TestCase {
    */
   function testGetRacesList() {
     $list = $this->model->getRacesList();
-    Assert::type("array", $list);
-    Assert::type(CharacterRaceDummy::class, $list[1]);
+    Assert::type(ICollection::class, $list);
   }
   
   /**
@@ -61,7 +61,7 @@ class ProfileTest extends MT\TestCase {
    */
   function testGetRace(int $id) {
     $result = $this->model->getRace($id);
-    Assert::type(CharacterRaceDummy::class, $result);
+    Assert::type(CharacterRace::class, $result);
   }
   
   /**
@@ -79,8 +79,7 @@ class ProfileTest extends MT\TestCase {
    */
   function testGetClassesList() {
     $list = $this->model->getClassesList();
-    Assert::type("array", $list);
-    Assert::type(CharacterClassDummy::class, $list[1]);
+    Assert::type(ICollection::class, $list);
   }
   
   /**
@@ -90,7 +89,7 @@ class ProfileTest extends MT\TestCase {
    */
   function testGetClass(int $id) {
     $result = $this->model->getClass($id);
-    Assert::type(CharacterClassDummy::class, $result);
+    Assert::type(CharacterClass::class, $result);
   }
   
   /**
@@ -104,22 +103,13 @@ class ProfileTest extends MT\TestCase {
   }
   
   /**
-   * @return void
-   */
-  function testGetSpecializationsList() {
-    $list = $this->model->getSpecializationsList();
-    Assert::type("array", $list);
-    Assert::type(CharacterSpecializationDummy::class, $list[1]);
-  }
-  
-  /**
    * @param int $id
    * @data(1)
    * @return void
    */
   function testGetSpecialization(int $id) {
     $result = $this->model->getSpecialization($id);
-    Assert::type(CharacterSpecializationDummy::class, $result);
+    Assert::type(CharacterSpecialization::class, $result);
   }
   
   /**

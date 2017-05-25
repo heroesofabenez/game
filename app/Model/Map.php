@@ -39,7 +39,7 @@ class Map {
     $this->locationModel->user = $this->user;
     $stages = $this->locationModel->accessibleStages();
     $curr_stage = $stages[$this->user->identity->stage];
-    $filename = __DIR__ . "/../../images/maps/local-$curr_stage->area.jpeg";
+    $filename = __DIR__ . "/../../images/maps/local-{$curr_stage->area->id}.jpeg";
     $return = ["image" => $filename];
     if(!file_exists($filename)) {
       $this->drawer->localMap();

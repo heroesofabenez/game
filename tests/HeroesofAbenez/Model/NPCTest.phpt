@@ -5,7 +5,7 @@ namespace HeroesofAbenez\Model;
 
 use MyTester as MT,
     MyTester\Assert,
-    HeroesofAbenez\Orm\NpcDummy;
+    HeroesofAbenez\Orm\Npc as NpcEntity;
 
 class NPCTest extends MT\TestCase {
   /** @var NPC */
@@ -22,9 +22,9 @@ class NPCTest extends MT\TestCase {
    */
   function testView(int $id) {
     $npc = $this->model->view($id);
-    Assert::type(NpcDummy::class, $npc);
+    Assert::type(NpcEntity::class, $npc);
     Assert::same("Mentor", $npc->name);
-    Assert::same(2, $npc->race);
+    Assert::same(2, $npc->race->id);
   }
 }
 ?>

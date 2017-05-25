@@ -5,7 +5,7 @@ namespace HeroesofAbenez\Model;
 
 use MyTester as MT,
     MyTester\Assert,
-    HeroesofAbenez\Orm\ItemDummy;
+    HeroesofAbenez\Orm\Item as ItemEntity;
 
 class ItemTest extends MT\TestCase {
   /** @var Item */
@@ -16,22 +16,13 @@ class ItemTest extends MT\TestCase {
   }
   
   /**
-   * @return void
-   */
-  function testListOfItems() {
-    $items = $this->model->listOfItems();
-    Assert::type("array", $items);
-    Assert::type(ItemDummy::class, $items[1]);
-  }
-  
-  /**
    * @param int $id
    * @data(1)
    * @return void
    */
   function testView(int $id) {
     $item = $this->model->view($id);
-    Assert::type(ItemDummy::class, $item);
+    Assert::type(ItemEntity::class, $item);
   }
   
   /**

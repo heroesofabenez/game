@@ -398,11 +398,9 @@ class Guild {
    * @throws NameInUseException
   */
   function rename(int $id, string $name): void {
-    $guilds = $this->cache->load("guilds");
-    foreach($guilds as $guild) {
-      if($guild->name == $name AND $guild->id !== $id) {
-        throw new NameInUseException;
-      }
+    $guild = $this->orm->guilds->getByName($name);
+    if(!is_null($guild) AND $guild->id !== $id) {
+      throw new NameInUseException;
     }
     $guild = $this->orm->guilds->getById($id);
     $guild->name = $name;

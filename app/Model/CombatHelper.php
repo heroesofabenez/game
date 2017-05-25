@@ -44,7 +44,7 @@ class CombatHelper {
    */
   function getInitiativeFormula(int $classId): string {
     $class = $this->profileModel->getClass($classId);
-    if(!$class) {
+    if(is_null($class)) {
       return "0";
     } else {
       return $class->initiative;

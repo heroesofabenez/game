@@ -5,7 +5,7 @@ namespace HeroesofAbenez\NPC;
 
 use HeroesofAbenez\Model,
     Kdyby\Translation\Translator,
-    HeroesofAbenez\Orm\NpcDummy,
+    HeroesofAbenez\Orm\Npc,
     HeroesofAbenez\Orm\QuestDummy as QuestEntity,
     HeroesofAbenez\Orm\Model as ORM,
     HeroesofAbenez\Orm\CharacterQuest;
@@ -14,7 +14,7 @@ use HeroesofAbenez\Model,
  * NPC Quests Control
  *
  * @author Jakub Konečný
- * @property-write NpcDummy $npc
+ * @property-write Npc $npc
  */
 class NPCQuestsControl extends \Nette\Application\UI\Control {
   /** @var \HeroesofAbenez\Model\Quest */
@@ -27,7 +27,7 @@ class NPCQuestsControl extends \Nette\Application\UI\Control {
   protected $user;
   /** @var \Kdyby\Translation\Translator */
   protected $translator;
-  /** @var NpcDummy */
+  /** @var Npc */
   protected $npc;
   
   function __construct(Model\Quest $questModel, Model\Item $itemModel, ORM $orm, \Nette\Security\User $user, Translator $translator) {
@@ -39,7 +39,7 @@ class NPCQuestsControl extends \Nette\Application\UI\Control {
     $this->translator = $translator;
   }
   
-  function setNpc(NpcDummy $npc) {
+  function setNpc(Npc $npc) {
     $this->npc = $npc;
   }
   

@@ -5,8 +5,9 @@ namespace HeroesofAbenez\Model;
 
 use MyTester as MT,
     MyTester\Assert,
-    HeroesofAbenez\Orm\QuestAreaDummy,
-    HeroesofAbenez\Orm\QuestStageDummy;
+    HeroesofAbenez\Orm\QuestArea,
+    HeroesofAbenez\Orm\QuestStage,
+    Nextras\Orm\Collection\ICollection;
 
 class LocationTest extends MT\TestCase {
   /** @var Location */
@@ -17,21 +18,12 @@ class LocationTest extends MT\TestCase {
   }
   
   /**
-   * @return void
-   */
-  function testListOfStages() {
-    $stages = $this->model->listOfStages();
-    Assert::type("array", $stages);
-    Assert::type(QuestStageDummy::class, $stages[1]);
-  }
-  
-  /**
    * @param int $id
    * @data(1)
    */
   function testGetStage(int $id) {
     $stage = $this->model->getStage($id);
-    Assert::type(QuestStageDummy::class, $stage);
+    Assert::type(QuestStage::class, $stage);
   }
   
   /**
@@ -39,19 +31,7 @@ class LocationTest extends MT\TestCase {
    */
   function testStageRoutes() {
     $routes = $this->model->stageRoutes();
-    Assert::type("array", $routes);
-    Assert::type("stdClass", $routes[1]);
-    Assert::type("int", $routes[1]->from);
-    Assert::type("int", $routes[1]->to);
-  }
-  
-  /**
-   * @return void
-   */
-  function testListOfAreas() {
-    $areas = $this->model->listOfAreas();
-    Assert::type("array", $areas);
-    Assert::type(QuestAreaDummy::class, $areas[1]);
+    Assert::type(ICollection::class, $routes);
   }
   
   /**
@@ -60,7 +40,7 @@ class LocationTest extends MT\TestCase {
    */
   function testGetArea(int $id) {
     $stage = $this->model->getArea($id);
-    Assert::type(QuestAreaDummy::class, $stage);
+    Assert::type(QuestArea::class, $stage);
   }
   
   /**

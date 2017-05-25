@@ -4,22 +4,22 @@ declare(strict_types=1);
 namespace HeroesofAbenez\NPC;
 
 use Kdyby\Translation\Translator,
-    HeroesofAbenez\Orm\NpcDummy,
-    HeroesofAbenez\Orm\ItemDummy,
+    HeroesofAbenez\Orm\Item,
+    HeroesofAbenez\Orm\Npc,
     HeroesofAbenez\Orm\Model as ORM;
 
 /**
  * Shop Control
  *
  * @author Jakub Konečný
- * @property-write NpcDummy $npc
+ * @property-write Npc $npc
  */
 class NPCShopControl extends \Nette\Application\UI\Control {
   /** @var ORM */
   protected $orm;
   /** @var \HeroesofAbenez\Model\Item */
   protected $itemModel;
-  /** @var NpcDummy */
+  /** @var Npc */
   protected $npc;
   /** @var \Nette\Security\User */
   protected $user;
@@ -34,20 +34,20 @@ class NPCShopControl extends \Nette\Application\UI\Control {
     $this->translator = $translator;
   }
   
-  function setNpc(NpcDummy $npc) {
+  function setNpc(Npc $npc) {
     $this->npc = $npc;
   }
   
   /**
    * Get items in npc's shop
    * 
-   * @return ItemDummy[]
+   * @return Item[]
    */
   function getItems(): array {
     $return = [];
-    $items = $this->orm->shopItems->findByNpc($this->npc->id);
+    $items = $this->npc->items;
     foreach($items as $item) {
-      $return[] = $this->itemModel->view($item->item->id);
+      $return[] = $item->item;
     }
     return $return;
   }
@@ -71,7 +71,7 @@ class NPCShopControl extends \Nette\Application\UI\Control {
    */
   function canBuyItem(int $id): bool {
     $row = $this->orm->shopItems->getById($id);
-    return (!is_null($row));
+    return (!is_null($row) AND $row->npc->id === $this->npc->id);
   }
   
   /**
@@ -81,8 +81,8 @@ class NPCShopControl extends \Nette\Application\UI\Control {
    * @return void
    */
   function handleBuy(int $itemId): void {
-    $item = $this->itemModel->view($itemId);
-    if(!$item) {
+    $item = $this->orm->items->getById($itemId);
+    if(is_null($item)) {
       $this->presenter->flashMessage($this->translator->translate("errors.shop.itemDoesNotExist"));
       return;
     }

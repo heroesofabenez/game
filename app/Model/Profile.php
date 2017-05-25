@@ -3,14 +3,12 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Model;
 
-use Nette\Utils\Arrays,
-    HeroesofAbenez\Orm\CharacterRace,
+use HeroesofAbenez\Orm\CharacterRace,
     HeroesofAbenez\Orm\CharacterClass,
     HeroesofAbenez\Orm\Model as ORM,
-    HeroesofAbenez\Orm\CharacterRaceDummy,
-    HeroesofAbenez\Orm\CharacterClassDummy,
-    HeroesofAbenez\Orm\CharacterSpecializationDummy,
-    Nextras\Orm\Entity\IEntity;
+    HeroesofAbenez\Orm\CharacterSpecialization,
+    Nextras\Orm\Entity\IEntity,
+    Nextras\Orm\Collection\ICollection;
 
   /**
    * Model Profile
@@ -23,8 +21,6 @@ class Profile {
   
   /** @var ORM */
   protected $orm;
-  /** @var \Nette\Caching\Cache */
-  protected $cache;
   /** @var \HeroesofAbenez\Model\Pet */
   protected $petModel;
   /** @var \Nette\Security\User */
@@ -32,9 +28,8 @@ class Profile {
   /** @var string[] */
   private $stats;
   
-  function __construct(ORM $orm, \Nette\Caching\Cache $cache, Pet $petModel) {
+  function __construct(ORM $orm, Pet $petModel) {
     $this->orm = $orm;
-    $this->cache = $cache;
     $this->petModel = $petModel;
     $this->stats = ["strength", "dexterity", "constitution", "intelligence", "charisma"];
   }
@@ -46,30 +41,20 @@ class Profile {
   /**
    * Get list of races
    * 
-   * @return CharacterRaceDummy[]
+   * @return ICollection|CharacterRace[]
    */
-  function getRacesList(): array {
-    $racesList = $this->cache->load("races", function(& $dependencies) {
-      $racesList = [];
-      $races = $this->orm->races->findAll();
-      /** @var CharacterRace $race */
-      foreach($races as $race) {
-        $racesList[$race->id] = new CharacterRaceDummy($race);
-      }
-      return $racesList;
-    });
-    return $racesList;
+  function getRacesList(): ICollection {
+    return $this->orm->races->findAll();
   }
   
   /**
    * Get data about specified race
    * 
    * @param int $id Race's id
-   * @return CharacterRaceDummy|NULL
+   * @return CharacterRace|NULL
    */
-  function getRace(int $id): ?CharacterRaceDummy {
-    $races = $this->getRacesList();
-    return Arrays::get($races, $id, NULL);
+  function getRace(int $id): ?CharacterRace {
+    return $this->orm->races->getById($id);
   }
   
   /**
@@ -90,30 +75,20 @@ class Profile {
   /**
    * Get list of classes
    * 
-   * @return CharacterClassDummy[]
+   * @return ICollection|CharacterClass[]
    */
-  function getClassesList(): array {
-    $classesList = $this->cache->load("classes", function(& $dependencies) {
-      $classesList = [];
-      $classes = $this->orm->classes->findAll();
-      /** @var CharacterClass $class */
-      foreach($classes as $class) {
-        $classesList[$class->id] = new CharacterClassDummy($class);
-      }
-      return $classesList;
-    });
-    return $classesList;
+  function getClassesList(): ICollection {
+    return $this->orm->classes->findAll();
   }
   
   /**
    * Get data about specified class
    * 
    * @param int $id Class' id
-   * @return CharacterClassDummy|NULL
+   * @return CharacterClass|NULL
    */
-  function getClass(int $id): ?CharacterClassDummy {
-    $classes = $this->getClassesList();
-    return Arrays::get($classes, $id, NULL);
+  function getClass(int $id): ?CharacterClass {
+    return $this->orm->classes->getById($id);
   }
   
   /**
@@ -132,31 +107,13 @@ class Profile {
   }
   
   /**
-   * Get list of specializations
-   * 
-   * @return CharacterSpecializationDummy[]
-   */
-  function getSpecializationsList(): array {
-    $specializationsList = $this->cache->load("specializations", function(& $dependencies) {
-      $specializationsList = [];
-      $specializations = $this->orm->specializations->findAll();
-      foreach($specializations as $specialization) {
-        $specializationsList[$specialization->id] = new CharacterSpecializationDummy($specialization);
-      }
-      return $specializationsList;
-    });
-    return $specializationsList;
-  }
-  
-  /**
    * Get data about specified specialization
    * 
    * @param int $id Specialization's id
-   * @return CharacterSpecializationDummy|NULL
+   * @return CharacterSpecialization|NULL
    */
-  function getSpecialization(int $id): ?CharacterSpecializationDummy {
-    $specializations = $this->getSpecializationsList();
-    return Arrays::get($specializations, $id, NULL);
+  function getSpecialization(int $id): ?CharacterSpecialization {
+    return $this->orm->specializations->getById($id);
   }
   
   /**
@@ -175,40 +132,18 @@ class Profile {
   }
   
   /**
-   * @return \stdClass[]
-   */
-  function getCharacters(): array {
-    $characters = $this->cache->load("characters", function(& $dependencies) {
-      $return = [];
-      $stats = ["id", "name"];
-      $characters = $this->orm->characters->findAll();
-      /** @var \HeroesofAbenez\Orm\Character $character */
-      foreach($characters as $character) {
-        $char = new \stdClass;
-        foreach($stats as $stat) {
-          $char->$stat = $character->$stat;
-        }
-        $return[$character->id] = $char;
-      }
-      return $return;
-    });
-    return $characters;
-  }
-  
-  /**
    * Get character's id
    * 
    * @param string $name Character's name
    * @return int
    */
   function getCharacterId(string $name): int {
-    $characters = $this->getCharacters();
-    foreach($characters as $char) {
-      if($char->name == $name) {
-        return $char->id;
-      }
+    $character = $this->orm->characters->getByName($name);
+    if(is_null($character)) {
+      return 0;
+    }else {
+      return $character->id;
     }
-    return 0;
   }
   
   /**
@@ -218,8 +153,12 @@ class Profile {
    * @return string
    */
   function getCharacterName(int $id): string {
-    $characters = $this->getCharacters();
-    return $characters[$id]->name;
+    $character = $this->orm->characters->getById($id);
+    if(is_null($character)) {
+      return "";
+    } else {
+      return $character->name;
+    }
   }
   
   /**
@@ -295,9 +234,9 @@ class Profile {
       throw new NotEnoughExperiencesException;
     }
     if(!is_null($character->specialization)) {
-      $class = $this->getSpecialization($character->specialization->id);
+      $class = $character->specialization;
     } else {
-      $class = $this->getClass($character->occupation->id);
+      $class = $character->occupation;
     }
     $character->level++;
     $character->statPoints += $class->statPointsLevel;

@@ -19,7 +19,7 @@ use HeroesofAbenez\NPC\INPCDialogueControlFactory,
 class NpcPresenter extends BasePresenter {
   /** @var \HeroesofAbenez\Model\NPC @autowire */
   protected $model;
-  /** @var \HeroesofAbenez\Orm\NpcDummy */
+  /** @var Npc */
   protected $npc;
   
   /**
@@ -27,12 +27,12 @@ class NpcPresenter extends BasePresenter {
    */
   function startup(): void {
     parent::startup();
-    if($this->action != "default" AND $this->action != "notfound") {
+    if($this->action != "default" AND !in_array($this->action, ["notfound", "unavailable"])) {
       $this->npc = $this->model->view((int) $this->params["id"]);
       if(is_null($this->npc)) {
         $this->forward("notfound");
       }
-      if($this->npc->stage !== $this->user->identity->stage) {
+      if($this->npc->stage->id !== $this->user->identity->stage) {
         $this->forward("unavailable");
       }
     }

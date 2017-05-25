@@ -3,11 +3,9 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Model;
 
-use Nette\Utils\Arrays,
-    HeroesofAbenez\Orm\PetType,
+use HeroesofAbenez\Orm\PetType,
     HeroesofAbenez\Orm\Pet as PetEntity,
-    HeroesofAbenez\Orm\Model as ORM,
-    HeroesofAbenez\Orm\PetTypeDummy;
+    HeroesofAbenez\Orm\Model as ORM;
 
 /**
  * Pet Model
@@ -18,15 +16,12 @@ use Nette\Utils\Arrays,
 class Pet {
   use \Nette\SmartObject;
   
-  /** @var \Nette\Caching\Cache */
-  protected $cache;
   /** @var ORM */
   protected $orm;
   /** @var \Nette\Security\User */
   protected $user;
   
-  function __construct(\Nette\Caching\Cache $cache, ORM $orm) {
-    $this->cache = $cache;
+  function __construct(ORM $orm) {
     $this->orm = $orm;
   }
   
@@ -35,32 +30,13 @@ class Pet {
   }
   
   /**
-   * Get list of all pet types
-   * 
-   * @return PetTypeDummy[]
-   */
-  function listOfTypes() {
-    $types = $this->cache->load("pet_types", function(& $dependencies) {
-      $return = [];
-      $types = $this->orm->petTypes->findAll();
-      /** @var PetType $type */
-      foreach($types as $type) {
-        $return[$type->id] = new PetTypeDummy($type);
-      }
-      return $return;
-    });
-    return $types;
-  }
-  
-  /**
    * Get info about specified pet type
    * 
    * @param int $id
-   * @return PetTypeDummy|NULL
+   * @return PetType|NULL
    */
-  function viewType(int $id): ?PetTypeDummy {
-    $types = $this->listOfTypes();
-    return Arrays::get($types, $id, NULL);
+  function viewType(int $id): ?PetType {
+    return $this->orm->petTypes->getById($id);
   }
   
   /**

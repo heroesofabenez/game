@@ -3,13 +3,13 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Model;
 
-use Nette\Utils\Arrays,
-    HeroesofAbenez\Orm\Model as ORM,
-    HeroesofAbenez\Orm\QuestAreaDummy,
-    HeroesofAbenez\Orm\QuestStageDummy,
+use HeroesofAbenez\Orm\Model as ORM,
     HeroesofAbenez\Orm\QuestStage,
     HeroesofAbenez\Orm\QuestArea,
-    HeroesofAbenez\Orm\RoutesStage;
+    HeroesofAbenez\Orm\RoutesStage,
+    Nextras\Orm\Collection\ICollection,
+    HeroesofAbenez\Orm\CharacterRace,
+    HeroesofAbenez\Orm\CharacterClass;
 
 /**
  * Location Model
@@ -44,87 +44,32 @@ class Location {
   }
   
   /**
-   * Gets list of stages
-   * 
-   * @param int $area Return stages only from specified area. 0 = all areas
-   * @return QuestStageDummy[] List of stages
-   */
-  function listOfStages(int $area = 0): array {
-    $stages = $this->cache->load("stages", function(& $dependencies) {
-      $return = [];
-      $stages = $this->orm->stages->findAll();
-      /** @var QuestStage $stage */
-      foreach($stages as $stage) {
-        $return[$stage->id] = new QuestStageDummy($stage);
-      }
-      return $return;
-    });
-    if($area > 0) {
-      foreach($stages as $stage) {
-        if($stage->area != $area) {
-          unset($stages[$stage->id]);
-        }
-      }
-    }
-    return $stages;
-  }
-  
-  /**
    * Gets data about specified stage
    * 
    * @param int $id Stage's id
-   * @return QuestStageDummy|NULL
+   * @return QuestStage|NULL
    */
-  function getStage(int $id): ?QuestStageDummy {
-    $stages = $this->listOfStages();
-    return Arrays::get($stages, $id, NULL);
+  function getStage(int $id): ?QuestStage {
+    return $this->orm->stages->getById($id);
   }
   
   /**
    * Gets routes between stages
    * 
-   * @return \stdClass[]
+   * @return ICollection|RoutesStage[]
    */
-  function stageRoutes(): array {
-    $routes = $this->cache->load("stage_routes", function(& $dependencies) {
-      $return = [];
-      $routes = $this->orm->stageRoutes->findAll();
-      /** @var RoutesStage $route */
-      foreach($routes as $route) {
-        $return[$route->id] = (object) ["from" => $route->from->id, "to" => $route->to->id];
-      }
-      return $return;
-    });
-    return $routes;
-  }
-  
-  /**
-   * Gets list of areas
-   * 
-   * @return QuestAreaDummy[] list of stages
-   */
-  function listOfAreas(): array {
-    $areas = $this->cache->load("areas", function(& $dependencies) {
-      $return = [];
-      $areas = $this->orm->areas->findAll();
-      /** @var QuestArea $area */
-      foreach($areas as $area) {
-        $return[$area->id] = new QuestAreaDummy($area);
-      }
-      return $return;
-    });
-    return $areas;
+  function stageRoutes(): ICollection {
+    return $this->orm->stageRoutes->findAll();
   }
   
   /**
    * Gets data about specified area
    * 
    * @param int $id Area's id
-   * @return QuestAreaDummy|NULL
+   * @return QuestArea|NULL
    */
-  function getArea(int $id): ?QuestAreaDummy {
-    $areas = $this->listOfAreas();
-    return Arrays::get($areas, $id, NULL);
+  function getArea(int $id): ?QuestArea {
+    return $this->orm->areas->getById($id);
   }
   
   /**
@@ -135,7 +80,7 @@ class Location {
    */
   function getStageName(int $id): string {
     $stage = $this->getStage($id);
-    if(!$stage) {
+    if(is_null($stage)) {
       return "";
     } else {
       return $stage->name;
@@ -164,11 +109,11 @@ class Location {
    */
   function home(): array {
     $return = [];
-    $stage = $this->getStage($this->user->identity->stage);
+    $stage = $this->orm->stages->getById($this->user->identity->stage);
     $return["stageName"] = $stage->name;
-    $return["areaName"] = $this->getAreaName($stage->area);
+    $return["areaName"] = $stage->area->name;
     $return["characterName"] = $this->user->identity->name;
-    $return["npcs"] = $this->npcModel->listOfNpcs($stage->id);
+    $return["npcs"] = $stage->npcs;
     return $return;
   }
   
@@ -176,27 +121,26 @@ class Location {
    * Returns list of accessible stages (in player's current area,
    * player meets conditions for entering them)
    * 
-   * @return QuestStageDummy[]
+   * @return QuestStage[]
    */
   function accessibleStages(): array {
-    $stages = $this->listOfStages();
-    $curr_stage = $stages[$this->user->identity->stage];
+    $return = [];
+    $stages = $this->orm->stages->findAll();
+    $curr_stage = $this->getStage($this->user->identity->stage);
     /** @var QuestStage $stage */
     foreach($stages as $stage) {
-      if($stage->area !== $curr_stage->area) {
-        unset($stages[$stage->id]);
+      if($stage->area->id !== $curr_stage->area->id) {
+        continue;
+      } elseif($this->user->identity->level < $stage->requiredLevel) {
+        continue;
+      } elseif(is_a($stage->requiredRace, CharacterRace::class) AND $stage->requiredRace->id != $this->user->identity->race) {
+        continue;
+      } elseif(is_a($stage->requiredOccupation, CharacterClass::class) AND $stage->requiredOccupation->id != $this->user->identity->occupation) {
+        continue;
       }
-      if($this->user->identity->level < $stage->requiredLevel) {
-        unset($stages[$stage->id]);
-      }
-      if(is_int($stage->requiredRace) AND $stage->requiredRace != $this->user->identity->race) {
-        unset($stages[$stage->id]);
-      }
-      if(is_int($stage->requiredOccupation) AND $stage->requiredOccupation != $this->user->identity->occupation) {
-        unset($stages[$stage->id]);
-      }
+      $return[$stage->id] = $stage;
     }
-    return $stages;
+    return $return;
   }
   
   /**
@@ -209,17 +153,17 @@ class Location {
    */
   function travelToStage(int $id): void {
     $stage = $this->getStage($id);
-    if(!$stage) {
+    if(is_null($stage)) {
       throw new StageNotFoundException;
     }
     $currentStage = $this->user->identity->stage;
     $foundRoute = false;
     $routes = $this->stageRoutes();
     foreach($routes as $route) {
-      if($route->from == $id AND $route->to == $currentStage) {
+      if($route->from->id == $id AND $route->to->id == $currentStage) {
         $foundRoute = true;
         break;
-      } elseif($route->from == $currentStage AND $route->to == $id) {
+      } elseif($route->from->id == $currentStage AND $route->to->id == $id) {
         $foundRoute = true;
         break;
       }

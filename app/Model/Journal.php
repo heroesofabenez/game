@@ -105,11 +105,10 @@ class Journal {
   function quests(): array {
     $return = [];
     $quests = $this->orm->characterQuests->findByCharacter($this->user->id);
-    foreach($quests as $row) {
-      if($row->progress < 3) {
-        $quest = $this->questModel->view($row->id);
+    foreach($quests as $quest) {
+      if($quest->progress < 3) {
         $return[] = (object) [
-          "id" => $quest->id, "name" => $quest->name
+          "id" => $quest->quest->id, "name" => $quest->quest->name
         ];
       }
     }
