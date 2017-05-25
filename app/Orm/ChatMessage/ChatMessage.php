@@ -14,8 +14,13 @@ namespace HeroesofAbenez\Orm;
  * @property QuestStage|NULL $stage {m:1 QuestStage::$chatMessages} {default NULL}
  * @property Guild|NULL $guild {m:1 Guild::$chatMessages} {default NULL}
  * @property \DateTime $when
+ * @property string $whenS
  */
 class ChatMessage extends \Nextras\Orm\Entity\Entity {
+  protected function getterWhenS() {
+    return $this->when->format("Y-m-d H:i:s");
+  }
+  
   protected function onBeforeInsert() {
     $this->when = time();
   }
