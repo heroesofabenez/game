@@ -1,17 +1,17 @@
 <?php
-use Nette\Neon\Neon;
+use Nette\Neon\Neon,
+    Nextras\Dbal\Utils\FileImporter;
 
 require __DIR__ . "/../vendor/autoload.php";
 
 $config = Neon::decode(file_get_contents(__DIR__ . "/../tests/local.neon"));
-$dbConfig = $config["database"]["default"];
 
-$connection = new \Nette\Database\Connection($dbConfig["dsn"], $dbConfig["user"], $dbConfig["password"]);
+$connection = new Nextras\Dbal\Connection($config["dbal"]);
 $sqlsFolder = __DIR__ . "/../app/sqls";
 $files = ["structure", "data_basic", "data_test"];
 foreach($files as $file) {
   echo "Executing file: $file.sql";
-  Nette\Database\Helpers::loadFromFile($connection, "$sqlsFolder/$file.sql");
+  FileImporter::executeFile($connection, "$sqlsFolder/$file.sql");
   echo " ... Done\n";
 }
 ?>
