@@ -83,7 +83,7 @@ class Journal {
     $return["equipments"] = [];
     foreach($char->equipment as $equipment) {
       $i = $equipment->item;
-      $return["equipments"][] = (object) ["id" => $i->id, "name" => $i->name, "amount" => $equipment->amount, "worn" => (bool) $equipment->worn, "eqid" => $equipment->id];
+      $return["equipments"][] = (object) ["id" => $i->id, "name" => $i->name, "amount" => $equipment->amount, "worn" => $equipment->worn, "eqid" => $equipment->id];
     }
     return $return;
   }
