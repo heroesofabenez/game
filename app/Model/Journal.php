@@ -48,7 +48,7 @@ class Journal {
    */
   function basic(): array {
     $character = $this->orm->characters->getById($this->user->id);
-    $stage = $this->locationModel->getStage($character->currentStage);
+    $stage = $character->currentStage;
     $return = [
       "name" => $character->name, "gender" => $character->gender, "race" => $character->race->id,
       "occupation" => $character->occupation->id,
@@ -56,7 +56,7 @@ class Journal {
       "level" => $character->level, "whiteKarma" => $character->whiteKarma,
       "neutralKarma" => $character->neutralKarma, "darkKarma" => $character->darkKarma,
       "experiences" => $character->experience, "description" => $character->description,
-      "stageName" => $stage->name, "areaName" => $this->locationModel->getAreaName($stage->area)
+      "stageName" => $character->currentStage->name, "areaName" => $stage->area->name
     ];
     if($character->guild->id > 0) {
       $return["guild"] = $character->guild->name;

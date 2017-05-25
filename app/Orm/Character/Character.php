@@ -27,7 +27,7 @@ use Nextras\Orm\Relationships\OneHasMany;
  * @property Guild $guild {m:1 Guild::$members} {default 0}
  * @property GuildRank|NULL $guildrank {m:1 GuildRank::$characters} {default NULL}
  * @property int $owner
- * @property int|NULL $currentStage {default NULL}
+ * @property QuestStage|NULL $currentStage {m:1 QuestStage::$characters} {default NULL}
  * @property int|NULL $whiteKarma {default 0}
  * @property int|NULL $neutralKarma {default 0}
  * @property int|NULL $darkKarma {default 0}

@@ -41,6 +41,7 @@ CREATE TABLE `characters` (
   CONSTRAINT `characters_ibfk_12` FOREIGN KEY (`guildrank`) REFERENCES `guild_ranks` (`id`),
   CONSTRAINT `characters_ibfk_13` FOREIGN KEY (`specialization`) REFERENCES `character_specializations` (`id`),
   CONSTRAINT `characters_ibfk_14` FOREIGN KEY (`guild`) REFERENCES `guilds` (`id`),
+  CONSTRAINT `characters_ibfk_15` FOREIGN KEY (`current_stage`) REFERENCES `quest_stages` (`id`),
   CONSTRAINT `characters_ibfk_6` FOREIGN KEY (`race`) REFERENCES `character_races` (`id`),
   CONSTRAINT `characters_ibfk_7` FOREIGN KEY (`occupation`) REFERENCES `character_classes` (`id`),
   CONSTRAINT `characters_ibfk_9` FOREIGN KEY (`race`) REFERENCES `character_races` (`id`)
