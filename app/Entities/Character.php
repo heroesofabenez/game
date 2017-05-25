@@ -3,13 +3,16 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Entities;
 
-use OutOfBoundsException;
+use OutOfBoundsException,
+    HeroesofAbenez\Orm\EquipmentDummy as Equipment,
+    HeroesofAbenez\Orm\Pet,
+    HeroesofAbenez\Orm\BaseCharacterSkill;
 
 /**
  * Structure for single character
  * 
  * @author Jakub Konečný
- * @property-read CharacterSkill[] $usableSkills
+ * @property-read BaseCharacterSkill[] $usableSkills
  */
 class Character extends BaseEntity {
   /** @var int|string */
@@ -78,7 +81,7 @@ class Character extends BaseEntity {
   protected $equipment = [];
   /** @var Pet[] Character's pets */
   protected $pets = [];
-  /** @var CharacterSkill[] Character's skills */
+  /** @var BaseCharacterSkill[] Character's skills */
   protected $skills = [];
   /** @var int|NULL */
   protected $active_pet = null;
@@ -92,7 +95,7 @@ class Character extends BaseEntity {
    * @param array $stats Stats of the character
    * @param Equipment[] $equipment Equipment of the character
    * @param Pet[] $pets Pets owned by the character
-   * @param CharacterSkill[] $skills Skills acquired by the character
+   * @param BaseCharacterSkill[] $skills Skills acquired by the character
    */
   function __construct(array $stats, array $equipment = [], array $pets = [], array $skills = []) {
     $this->setStats($stats);
@@ -110,7 +113,7 @@ class Character extends BaseEntity {
       }
     }
     foreach($skills as $skill) {
-      if($skill instanceof CharacterSkill) {
+      if($skill instanceof BaseCharacterSkill) {
         $this->skills[] = $skill;
       }
     }
@@ -279,7 +282,7 @@ class Character extends BaseEntity {
   }
   
   /**
-   * @return CharacterSkill[]
+   * @return BaseCharacterSkill[]
    */
   function getUsableSkills(): array {
     $skills = [];

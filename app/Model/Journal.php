@@ -3,8 +3,9 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Model;
 
-use HeroesofAbenez\Entities\JournalQuest,
-    HeroesofAbenez\Entities\Pet as PetEntity;
+use HeroesofAbenez\Orm\Pet as PetEntity,
+    HeroesofAbenez\Orm\Model as ORM,
+    Nextras\Orm\Collection\ICollection;
 
 /**
  * Journal Model
@@ -16,8 +17,8 @@ class Journal {
   
   /** @var \Nette\Security\User */
   protected $user;
-  /** @var \Nette\Database\Context */
-  protected $db;
+  /** @var ORM */
+  protected $orm;
   /** @var Quest */
   protected $questModel;
   /** @var Location */
@@ -29,18 +30,9 @@ class Journal {
   /** @var Equipment */
   protected $equipmentModel;
   
-  /**
-   * @param \Nette\Security\User $user
-   * @param \Nette\Database\Context $db
-   * @param Quest $questModel
-   * @param Location $locationModel
-   * @param Guild $guildModel
-   * @param Pet $petModel
-   * @param Equipment $equipmentModel
-   */
-  function __construct(\Nette\Security\User $user, \Nette\Database\Context $db, Quest $questModel, Location $locationModel, Guild $guildModel, Pet $petModel, Equipment $equipmentModel) {
+  function __construct(\Nette\Security\User $user, ORM $orm, Quest $questModel, Location $locationModel, Guild $guildModel, Pet $petModel, Equipment $equipmentModel) {
     $this->user = $user;
-    $this->db = $db;
+    $this->orm = $orm;
     $this->questModel = $questModel;
     $this->locationModel = $locationModel;
     $this->guildModel = $guildModel;
@@ -55,19 +47,20 @@ class Journal {
    * @return array
    */
   function basic(): array {
-    $character = $this->db->table("characters")->get($this->user->id);
-    $stage = $this->locationModel->getStage($character->current_stage);
+    $character = $this->orm->characters->getById($this->user->id);
+    $stage = $this->locationModel->getStage($character->currentStage);
     $return = [
-      "name" => $character->name, "gender" => $character->gender, "race" => $character->race,
-      "occupation" => $character->occupation, "specialization" => $character->specialization,
-      "level" => $character->level, "whiteKarma" => $character->white_karma,
-      "neutralKarma" => $character->neutral_karma, "darkKarma" => $character->dark_karma,
+      "name" => $character->name, "gender" => $character->gender, "race" => $character->race->id,
+      "occupation" => $character->occupation->id,
+      "specialization" => ($character->specialization) ? $character->specialization->id : NULL,
+      "level" => $character->level, "whiteKarma" => $character->whiteKarma,
+      "neutralKarma" => $character->neutralKarma, "darkKarma" => $character->darkKarma,
       "experiences" => $character->experience, "description" => $character->description,
       "stageName" => $stage->name, "areaName" => $this->locationModel->getAreaName($stage->area)
     ];
-    if($character->guild > 0) {
-      $return["guild"] = $this->guildModel->getGuildName($character->guild);
-      $return["guildRank"] = $character->guildrank;
+    if($character->guild->id > 0) {
+      $return["guild"] = $character->guild->name;
+      $return["guildRank"] = $character->guildrank->id;
     } else {
       $return["guild"] = false;
     }
@@ -81,21 +74,15 @@ class Journal {
    */
   function inventory(): array {
     $return = [];
-    $uid = $this->user->id;
-    $char = $this->db->table("characters")->get($uid);
+    $char = $this->orm->characters->getById($this->user->id);
     $return["money"] = $char->money;
     $return["items"] = [];
-    $items = $this->db->table("character_items")
-      ->where("character", $this->user->id);
-    foreach($items as $item) {
-      $i = $this->db->table("items")->get($item->item);
-      $return["items"][] = (object) ["id" => $i->id, "name" => $i->name, "amount" => $item->amount];
+    foreach($char->items as $item) {
+      $return["items"][] = (object) ["id" => $item->item->id, "name" => $item->item->name, "amount" => $item->amount];
     }
     $return["equipments"] = [];
-    $equipments = $this->db->table("character_equipment")
-      ->where("character", $this->user->id);
-    foreach($equipments as $equipment) {
-      $i = $this->equipmentModel->view($equipment->item);
+    foreach($char->equipment as $equipment) {
+      $i = $equipment->item;
       $return["equipments"][] = (object) ["id" => $i->id, "name" => $i->name, "amount" => $equipment->amount, "worn" => (bool) $equipment->worn, "eqid" => $equipment->id];
     }
     return $return;
@@ -104,34 +91,26 @@ class Journal {
   /**
    * Gets character's pets
    * 
-   * @return PetEntity[]
+   * @return ICollection|PetEntity[]
    */
-  function pets(): array {
-    $return = [];
-    $uid = $this->user->id;
-    $pets = $this->db->table("pets")
-      ->where("owner", $uid);
-    foreach($pets as $pet) {
-      $type = $this->petModel->viewType($pet->type);
-      $return[] = new PetEntity($pet->id, $type, (($pet->name) ? $pet->name : ""), $pet->deployed);
-    }
-    return $return;
+  function pets(): ICollection {
+    return $this->orm->pets->findByOwner($this->user->id);
   }
   
    /**
    * Gets character's quests
    * 
-   * @return JournalQuest[]
+   * @return \stdClass[]
    */
   function quests(): array {
     $return = [];
-    $uid = $this->user->id;
-    $quests = $this->db->table("character_quests")
-      ->where("character", $uid);
+    $quests = $this->orm->characterQuests->findByCharacter($this->user->id);
     foreach($quests as $row) {
       if($row->progress < 3) {
         $quest = $this->questModel->view($row->id);
-        $return[] = new JournalQuest($quest->id, $quest->name);
+        $return[] = (object) [
+          "id" => $quest->id, "name" => $quest->name
+        ];
       }
     }
     return $return;

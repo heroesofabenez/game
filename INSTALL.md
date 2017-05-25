@@ -1,4 +1,3 @@
-
 Installation instructions
 =========================
 
@@ -46,7 +45,7 @@ The game uses Composer to manage its dependencies. If you do not have them insta
 
 Database
 --------
-The game needs a database to store its data. We use nette/database to access it which is a layer above PDO so any database supported by it should be fine to use. Before you can run the game for first time, you have to create tables and fill the with at least basic data. Folder app/sqls contains definitions of all table and even basic and test data for MySql/MariaDb. So if you are using this server, just run these queries and you are good to go.
+The game needs a database to store its data. We use nextras/orm with nextras/dbal to access it which currently supports only MySQL/MariaDB and PostgreSQL. Before you can run the game for first time, you have to create tables and fill them with at least basic data. Folder app/sqls contains definitions of all table and even basic and test data for MySql/MariaDb. So if you are using this server, just run these queries and you are good to go.
 
 After that, do not forget to write access data (name of database, username and password) to file app/config/local.neon so the game will know where to look for data.
 

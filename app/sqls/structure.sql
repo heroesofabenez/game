@@ -128,7 +128,7 @@ CREATE TABLE `character_races` (
   `dexterity` int(2) NOT NULL DEFAULT '0',
   `constitution` int(2) NOT NULL DEFAULT '0',
   `intelligence` int(2) NOT NULL DEFAULT '0',
-  `charisma` int(2) NOT NULL,
+  `charisma` int(2) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 

@@ -7,7 +7,7 @@
     <table>
       <tr><th>{_texts.postoffice.to}</th><th>{_texts.postoffice.subject}</th><th>{_texts.postoffice.sent}</th><th></th></tr>
       {foreach $messages as $message}
-      <tr><td>{$message->to}</td><td>{$message->subject}</td><td>{$message->sent}</td><td><a href="{plink Postoffice:message $message->id}">{_texts.postoffice.viewMessage}</a></td></tr>
+      <tr><td>{$message->to->name}</td><td>{$message->subject}</td><td>{$message->sentAt}</td><td><a href="{plink Postoffice:message $message->id}">{_texts.postoffice.viewMessage}</a></td></tr>
       {/foreach}
     </table>
   {/if}

@@ -5,26 +5,21 @@ namespace HeroesofAbenez\Model;
 
 use MyTester as MT,
     MyTester\Assert,
-    HeroesofAbenez\Entities\Character;
+    HeroesofAbenez\Entities\Character,
+    HeroesofAbenez\Orm\Model as ORM;
 
 class CombatHelperTest extends MT\TestCase {
   /** @var CombatHelper */
   protected $model;
   /** @var \Nette\Security\User */
   protected $user;
-  /** @var  \Nette\Database\Context */
-  protected $db;
+  /** @var ORM */
+  protected $orm;
   
-  /**
-   * CombatHelperTest constructor.
-   * @param CombatHelper $model
-   * @param \Nette\Security\User $user
-   * @param \Nette\Database\Context $db
-   */
-  public function __construct(CombatHelper $model, \Nette\Security\User $user, \Nette\Database\Context $db) {
+  function __construct(CombatHelper $model, \Nette\Security\User $user, ORM $orm) {
     $this->model = $model;
     $this->user = $user;
-    $this->db = $db;
+    $this->orm = $orm;
   }
   
   /**
@@ -88,9 +83,8 @@ class CombatHelperTest extends MT\TestCase {
    * @return void
    */
   function shutDown() {
-    $day = date("d.m.Y");
-    $row = $this->db->table("arena_fights_count")->where("character=? AND day=?", [$this->user->id, $day]);
-    $row->delete();
+    $record = $this->orm->arenaFightsCount->getByCharacterAndDay($this->user->id, date("d.m.Y"));
+    $this->orm->arenaFightsCount->removeAndFlush($record);
   }
 }
 ?>

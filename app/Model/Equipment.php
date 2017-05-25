@@ -4,7 +4,8 @@ declare(strict_types=1);
 namespace HeroesofAbenez\Model;
 
 use Nette\Utils\Arrays,
-    HeroesofAbenez\Entities\Equipment as EquipmentEntity;
+    HeroesofAbenez\Orm\EquipmentDummy as EquipmentEntity,
+    HeroesofAbenez\Orm\Model as ORM;
 
 /**
  * Equipment Model
@@ -14,21 +15,15 @@ use Nette\Utils\Arrays,
 class Equipment {
   use \Nette\SmartObject;
   
-  /** @var \Nette\Database\Context */
-  protected $db;
+  /** @var ORM */
+  protected $orm;
   /** @var \Nette\Security\User */
   protected $user;
   /** @var \Nette\Caching\Cache */
   protected $cache;
   
-  
-  /**
-   * @param \Nette\Database\Context $db
-   * @param \Nette\Security\User $user
-   * @param \Nette\Caching\Cache $cache
-   */
-  function __construct(\Nette\Database\Context $db, \Nette\Security\User $user, \Nette\Caching\Cache $cache) {
-    $this->db = $db;
+  function __construct(ORM $orm, \Nette\Security\User $user, \Nette\Caching\Cache $cache) {
+    $this->orm = $orm;
     $this->user = $user;
     $this->cache = $cache;
   }
@@ -39,18 +34,16 @@ class Equipment {
    * @return EquipmentEntity[]
    */
   function listOfEquipment(): array {
-    $return = [];
-    $equipments = $this->cache->load("equipment");
-    if($equipments === NULL) {
-      $equipments = $this->db->table("equipment");
-      foreach($equipments as $eq) {
-        $return[$eq->id] = new EquipmentEntity($eq);
+    $equipments = $this->cache->load("equipment", function(& $dependencies) {
+      $return = [];
+      $equipments = $this->orm->equipment->findAll();
+      /** @var \HeroesofAbenez\Orm\Equipment $equipment */
+      foreach($equipments as $equipment) {
+        $return[$equipment->id] = new EquipmentEntity($equipment);
       }
-      $this->cache->save("equipment", $return);
-    } else {
-      $return = $equipments;
-    }
-    return $return;
+      return $return;
+    });
+    return $equipments;
   }
   
   /**
@@ -60,8 +53,7 @@ class Equipment {
    */
   function view(int $id): ?EquipmentEntity {
     $equipments = $this->listOfEquipment();
-    $item = Arrays::get($equipments, $id, NULL);
-    return $item;
+    return Arrays::get($equipments, $id, NULL);
   }
   
   /**
@@ -73,26 +65,21 @@ class Equipment {
    * @throws ItemNotOwnedException
    * @throws ItemAlreadyEquippedException
    */
-  function equipItem(int $id) {
-    $item = $this->db->table("character_equipment")->get($id);
-    if(!$item) {
+  function equipItem(int $id): void {
+    $item = $this->orm->characterEquipment->getById($id);
+    if(is_null($item)) {
       throw new ItemNotFoundException;
-    } elseif($item->character != $this->user->id) {
+    } elseif($item->character->id !== $this->user->id) {
       throw new ItemNotOwnedException;
     } elseif($item->worn) {
       throw new ItemAlreadyEquippedException;
     }
-    $eq = $this->db->table("equipment")->get($item->item);
-    $items = $this->db->table("character_equipment")
-      ->where("item.slot", $eq->slot)
-      ->where("character", $this->user->id);
-    foreach($items as $i) {
-      if($i->id == $id) {
-        continue;
-      }
-      $this->db->query("UPDATE character_equipment SET ? WHERE id=?", ["worn" => 0], $i->id);
+    $items = $this->orm->characterEquipment->findByCharacterAndSlot($this->user->id, $item->item->slot);
+    foreach($items as $item) {
+      $item->worn = ($item->id === $id);
+      $this->orm->characterEquipment->persist($item);
     }
-    $this->db->query("UPDATE character_equipment SET ? WHERE id=?", ["worn" => 1], $id);
+    $this->orm->characterEquipment->flush();
   }
   
   /**
@@ -105,16 +92,16 @@ class Equipment {
    * @throws ItemNotWornException
    */
   function unequipItem(int $id): void {
-    $item = $this->db->table("character_equipment")->get($id);
-    if(!$item) {
+    $item = $this->orm->characterEquipment->getById($id);
+    if(is_null($item)) {
       throw new ItemNotFoundException;
-    } elseif($item->character != $this->user->id) {
+    } elseif($item->character->id !== $this->user->id) {
       throw new ItemNotOwnedException;
     } elseif(!$item->worn) {
       throw new ItemNotWornException;
     }
-    $data = ["worn" => 0];
-    $this->db->query("UPDATE character_equipment SET ? WHERE id=?", $data, $id);
+    $item->worn = false;
+    $this->orm->characterEquipment->persistAndFlush($item);
   }
 }
 ?>

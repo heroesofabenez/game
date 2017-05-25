@@ -12,6 +12,10 @@ extensions:
     translation: Kdyby\Translation\DI\TranslationExtension
     hoa: HeroesofAbenez\Model\DI\HOAExtension
     menu: Nexendrie\Menu\DI\MenuExtension
+    dbal: Nextras\Dbal\Bridges\NetteDI\DbalExtension
+    orm: Nextras\Orm\Bridges\NetteDI\OrmExtension
+orm:
+    model: HeroesofAbenez\Orm\Model
 translation:
     default: en
     fallback: [en_US, en]

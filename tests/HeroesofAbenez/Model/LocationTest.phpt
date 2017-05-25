@@ -5,8 +5,8 @@ namespace HeroesofAbenez\Model;
 
 use MyTester as MT,
     MyTester\Assert,
-    HeroesofAbenez\Entities\Area,
-    HeroesofAbenez\Entities\Stage;
+    HeroesofAbenez\Orm\QuestAreaDummy,
+    HeroesofAbenez\Orm\QuestStageDummy;
 
 class LocationTest extends MT\TestCase {
   /** @var Location */
@@ -22,7 +22,7 @@ class LocationTest extends MT\TestCase {
   function testListOfStages() {
     $stages = $this->model->listOfStages();
     Assert::type("array", $stages);
-    Assert::type(Stage::class, $stages[1]);
+    Assert::type(QuestStageDummy::class, $stages[1]);
   }
   
   /**
@@ -31,7 +31,7 @@ class LocationTest extends MT\TestCase {
    */
   function testGetStage(int $id) {
     $stage = $this->model->getStage($id);
-    Assert::type(Stage::class, $stage);
+    Assert::type(QuestStageDummy::class, $stage);
   }
   
   /**
@@ -51,7 +51,7 @@ class LocationTest extends MT\TestCase {
   function testListOfAreas() {
     $areas = $this->model->listOfAreas();
     Assert::type("array", $areas);
-    Assert::type(Area::class, $areas[1]);
+    Assert::type(QuestAreaDummy::class, $areas[1]);
   }
   
   /**
@@ -60,7 +60,7 @@ class LocationTest extends MT\TestCase {
    */
   function testGetArea(int $id) {
     $stage = $this->model->getArea($id);
-    Assert::type(Area::class, $stage);
+    Assert::type(QuestAreaDummy::class, $stage);
   }
   
   /**

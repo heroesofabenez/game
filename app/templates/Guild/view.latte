@@ -1,10 +1,10 @@
 {layout "../@layout.latte"}
-{block title}{_texts.guild.title} {$name}{/block}
+{block title}{_texts.guild.title} {$guild->name}{/block}
 {block content}
-  <h1>{_texts.guild.title} {$name}</h1>
-  <p>{_texts.common.description}: {$description}</p>
+  <h1>{_texts.guild.title} {$guild->name}</h1>
+  <p>{_texts.common.description}: {$guild->description}</p>
   <h2>{_texts.common.members}</h2>
-  {foreach $members as $member}
-    {_guildranks.$member->rank.name|firstUpper}: <a n:href="Profile:view $member->id">{$member->name}</a><br>
+  {foreach $guild->members as $member}
+    {_guildranks.{$member->guildrank->id}.name|firstUpper}: <a n:href="Profile:view $member->id">{$member->name}</a><br>
   {/foreach}
 {/block}

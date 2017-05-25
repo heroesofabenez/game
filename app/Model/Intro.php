@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Model;
 
+use HeroesofAbenez\Orm\Model as ORM;
+
 /**
  * Intro Model
  *
@@ -13,16 +15,12 @@ class Intro {
   
   /** @var \Nette\Security\User */
   protected $user;
-  /** @var \Nette\Database\Context */
-  protected $db;
+  /** @var ORM */
+  protected $orm;
   
-  /**
-   * @param \Nette\Security\User $user
-   * @param \Nette\Database\Context $db
-   */
-  function __construct(\Nette\Security\User $user, \Nette\Database\Context $db) {
+  function __construct(\Nette\Security\User $user, ORM $orm) {
     $this->user = $user;
-    $this->db = $db;
+    $this->orm = $orm;
   }
   
   /**
@@ -31,8 +29,7 @@ class Intro {
    * @return int
    */
   function getIntroPosition(): int {
-    $char = $this->db->table("characters")->get($this->user->id);
-    return $char->intro;
+    return $this->orm->characters->getById($this->user->id)->intro;
   }
   /**
    * Get a part of introduction
@@ -41,16 +38,17 @@ class Intro {
    * @return string Text of current introduction part
    */
   function getIntroPart(int $part): string {
-    $char = $this->db->table("characters")->get($this->user->id);
-    $intros = $this->db->table("introduction")
-      ->where("race", $char->race)
-      ->where("class", $char->occupation)
-      ->where("part", $part);
-    if($intros->count() == 0) {
+    $char = $this->orm->characters->getById($this->user->id);
+    $intro = $this->orm->introduction->getBy([
+      "race" => $char->race->id,
+      "class" => $char->occupation->id,
+      "part" => $part
+    ]);
+    if(is_null($intro)) {
       return "";
+    } else {
+      return $intro->text;
     }
-    $intro = $intros->fetch();
-    return $intro->text;
   }
   
   /**
@@ -60,8 +58,9 @@ class Intro {
    * @return void
    */
   function moveToNextPart(int $part): void {
-    $data = ["intro" => $part];
-    $this->db->query("UPDATE characters SET ? WHERE id=?", $data, $this->user->id);
+    $character = $this->orm->characters->getById($this->user->id);
+    $character->intro = $part;
+    $this->orm->characters->persistAndFlush($character);
   }
   
   /**
@@ -70,18 +69,12 @@ class Intro {
    * @return int id of starting stage
    */
   function getStartingLocation(): int {
-    $classSLs = $this->db->table("quest_stages")
-      ->where("required_level", 0)
-      ->where("required_occupation", $this->user->identity->occupation);
-    if($classSLs->count() > 0) {
-      $classSL = $classSLs->fetch();
+    $classSL = $this->orm->stages->getClassStartingLocation($this->user->identity->occupation);
+    if(!is_null($classSL)) {
       return $classSL->id;
     }
-    $raceSLs = $this->db->table("quest_stages")
-      ->where("required_level", 0)
-      ->where("required_race", $this->user->identity->race);
-    if($raceSLs->count() > 0) {
-      $raceSL = $raceSLs->fetch();
+    $raceSL = $this->orm->stages->getRaceStartingLocation($this->user->identity->occupation);
+    if(!is_null($raceSL)) {
       return $raceSL->id;
     }
   }
@@ -93,8 +86,9 @@ class Intro {
    */
   function endIntro(): void {
     $startingLocation = $this->getStartingLocation();
-    $data = ["current_stage" => $startingLocation];
-    $this->db->query("UPDATE characters SET ? WHERE id=?", $data, $this->user->id);
+    $character = $this->orm->characters->getById($this->user->id);
+    $character->currentStage = $startingLocation;
+    $this->orm->characters->persistAndFlush($character);
   }
 }
 ?>

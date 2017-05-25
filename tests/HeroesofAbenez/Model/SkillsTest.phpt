@@ -5,11 +5,11 @@ namespace HeroesofAbenez\Model;
 
 use MyTester as MT,
     MyTester\Assert,
-    HeroesofAbenez\Entities\SkillAttack,
-    HeroesofAbenez\Entities\SkillSpecial,
-    HeroesofAbenez\Entities\CharacterSkillAttack,
-    HeroesofAbenez\Entities\CharacterSkillSpecial,
-    HeroesofAbenez\Entities\CharacterSkill;
+    HeroesofAbenez\Orm\SkillAttackDummy,
+    HeroesofAbenez\Orm\SkillSpecialDummy,
+    HeroesofAbenez\Orm\CharacterAttackSkillDummy,
+    HeroesofAbenez\Orm\CharacterSpecialSkillDummy,
+    HeroesofAbenez\Orm\BaseCharacterSkill;
 
 class SkillsTest extends MT\TestCase {
   /** @var Skills */
@@ -25,7 +25,7 @@ class SkillsTest extends MT\TestCase {
   function testGetListOfAttackSkills() {
     $result = $this->model->getListOfAttackSkills();
     Assert::type("array", $result);
-    Assert::type(SkillAttack::class, $result[1]);
+    Assert::type(SkillAttackDummy::class, $result[1]);
   }
   
   /**
@@ -35,7 +35,7 @@ class SkillsTest extends MT\TestCase {
    */
   function testGetAttackSkill(int $id) {
     $skill = $this->model->getAttackSkill($id);
-    Assert::type(SkillAttack::class, $skill);
+    Assert::type(SkillAttackDummy::class, $skill);
   }
   
   /**
@@ -45,7 +45,7 @@ class SkillsTest extends MT\TestCase {
    */
   function testGetCharacterAttackSkill(int $id) {
     $skill = $this->model->getCharacterAttackSkill($id);
-    Assert::type(CharacterSkillAttack::class, $skill);
+    Assert::type(CharacterAttackSkillDummy::class, $skill);
     Assert::type("int", $skill->damage);
     Assert::type("int", $skill->hitRate);
     Assert::type("int", $skill->cooldown);
@@ -60,7 +60,7 @@ class SkillsTest extends MT\TestCase {
   function testGetListOfSpecialSkills() {
     $result = $this->model->getListOfSpecialSkills();
     Assert::type("array", $result);
-    Assert::type(SkillSpecial::class, $result[1]);
+    Assert::type(SkillSpecialDummy::class, $result[1]);
   }
   
   /**
@@ -70,7 +70,7 @@ class SkillsTest extends MT\TestCase {
    */
   function testGetSpecialSkill(int $id) {
     $skill = $this->model->getSpecialSkill($id);
-    Assert::type(SkillSpecial::class, $skill);
+    Assert::type(SkillSpecialDummy::class, $skill);
   }
   
   /**
@@ -80,7 +80,7 @@ class SkillsTest extends MT\TestCase {
    */
   function testGetCharacterSpecialSkill(int $id) {
     $skill = $this->model->getCharacterSpecialSkill($id);
-    Assert::type(CharacterSkillSpecial::class, $skill);
+    Assert::type(CharacterSpecialSkillDummy::class, $skill);
     Assert::type("int", $skill->value);
     Assert::type("int", $skill->cooldown);
     Assert::same(0, $skill->cooldown);
@@ -94,7 +94,7 @@ class SkillsTest extends MT\TestCase {
   function testGetAvailableSkills() {
     $result = $this->model->getAvailableSkills();
     Assert::type("array", $result);
-    Assert::type(CharacterSkill::class, $result[0]);
+    Assert::type(BaseCharacterSkill::class, $result[0]);
   }
   
   /**

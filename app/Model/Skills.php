@@ -4,11 +4,15 @@ declare(strict_types=1);
 namespace HeroesofAbenez\Model;
 
 use Nette\Utils\Arrays,
-    HeroesofAbenez\Entities\SkillAttack,
-    HeroesofAbenez\Entities\SkillSpecial,
-    HeroesofAbenez\Entities\CharacterSkillAttack,
-    HeroesofAbenez\Entities\CharacterSkillSpecial,
-    HeroesofAbenez\Entities\CharacterSkill;
+    HeroesofAbenez\Orm\Model as ORM,
+    HeroesofAbenez\Orm\BaseSkill,
+    HeroesofAbenez\Orm\SkillAttackDummy,
+    HeroesofAbenez\Orm\SkillSpecialDummy,
+    HeroesofAbenez\Orm\BaseCharacterSkill,
+    HeroesofAbenez\Orm\CharacterAttackSkillDummy,
+    HeroesofAbenez\Orm\CharacterSpecialSkillDummy,
+    HeroesofAbenez\Orm\CharacterAttackSkill,
+    HeroesofAbenez\Orm\CharacterSpecialSkill;
 
 /**
  * Skills Model
@@ -20,52 +24,51 @@ class Skills {
   
   /** @var \Nette\Caching\Cache */
   protected $cache;
-  /** @var \Nette\Database\Context */
-  protected $db;
+  /** @var ORM */
+  protected $orm;
   /** @var \Nette\Security\User */
   protected $user;
   
-  function __construct(\Nette\Caching\Cache $cache, \Nette\Database\Context $db, \Nette\Security\User $user) {
+  function __construct(\Nette\Caching\Cache $cache, ORM $orm, \Nette\Security\User $user) {
     $this->cache = $cache;
-    $this->db = $db;
+    $this->orm = $orm;
     $this->user = $user;
   }
   
   /**
    * Get list of attack skills
    * 
-   * @return SkillAttack[]
+   * @return SkillAttackDummy[]
    */
   function getListOfAttackSkills(): array {
-    $skillsList = $this->cache->load("attack_skills");
-    if($skillsList === NULL) {
-      $skillsList = [];
-      $skills = $this->db->table("skills_attacks");
+    $skillsList = $this->cache->load("attack_skills", function(& $dependencies) {
+      $return = [];
+      $skills = $this->orm->attackSkills->findAll();
+      /** @var \HeroesofAbenez\Orm\SkillAttack $skill */
       foreach($skills as $skill) {
-        $skillsList[$skill->id] = new SkillAttack($skill);
+        $return[$skill->id] = new SkillAttackDummy($skill);
       }
-      $this->cache->save("attack_skills", $skillsList);
-    }
+      return $return;
+    });
     return $skillsList;
   }
   
   /**
    * @param int $id
-   * @return SkillAttack|NULL
+   * @return SkillAttackDummy|NULL
    */
-  function getAttackSkill(int $id): ?SkillAttack {
+  function getAttackSkill(int $id): ?SkillAttackDummy {
     $skills = $this->getListOfAttackSkills();
-    $skill = Arrays::get($skills, $id, NULL);
-    return $skill;
+    return Arrays::get($skills, $id, NULL);
   }
   
   /**
    * @param int $skillId
    * @param int $userId
-   * @return CharacterSkillAttack|NULL
+   * @return CharacterAttackSkillDummy|NULL
    */
   // @codingStandardsIgnoreLine
-  function getCharacterAttackSkill(int $skillId, int $userId = 0): ?CharacterSkillAttack {
+  function getCharacterAttackSkill(int $skillId, int $userId = 0): ?CharacterAttackSkillDummy {
     if($userId === 0) {
       $userId = $this->user->id;
     }
@@ -73,51 +76,49 @@ class Skills {
     if(is_null($skill)) {
       return NULL;
     }
-    $where = ["character" => $userId, "skill" => $skillId];
-    $result = $this->db->query("SELECT * FROM character_attack_skills WHERE ?", $where)->fetch();
-    if($result) {
-      $level = $result->level;
-    } else {
+    $row = $this->orm->characterAttackSkills->getByCharacterAndSkill($userId, $skillId);
+    if(is_null($row)) {
       $level = 0;
+    } else {
+      $level = $row->level;
     }
-    return new CharacterSkillAttack($skill, $level);
+    return new CharacterAttackSkillDummy($skill, $level);
   }
   
   /**
    * Get list of special skills
    * 
-   * @return SkillSpecial[]
+   * @return SkillSpecialDummy[]
    */
   function getListOfSpecialSkills(): array {
-    $skillsList = $this->cache->load("special_skills");
-    if($skillsList === NULL) {
-      $skillsList = [];
-      $skills = $this->db->table("skills_specials");
+    $skillsList = $this->cache->load("special_skills", function(& $dependencies) {
+      $return = [];
+      $skills = $this->orm->specialSkills->findAll();
+      /** @var \HeroesofAbenez\Orm\SkillSpecial $skill */
       foreach($skills as $skill) {
-        $skillsList[$skill->id] = new SkillSpecial($skill);
+        $return[$skill->id] = new SkillSpecialDummy($skill);
       }
-      $this->cache->save("special_skills", $skillsList);
-    }
+      return $return;
+    });
     return $skillsList;
   }
   
   /**
    * @param int $id
-   * @return SkillSpecial|NULL
+   * @return SkillSpecialDummy|NULL
    */
-  function getSpecialSkill(int $id): ?SkillSpecial {
+  function getSpecialSkill(int $id): ?SkillSpecialDummy {
     $skills = $this->getListOfSpecialSkills();
-    $skill = Arrays::get($skills, $id, NULL);
-    return $skill;
+    return Arrays::get($skills, $id, NULL);
   }
   
   /**
    * @param int $skillId
    * @param int $userId
-   * @return CharacterSkillSpecial|NULL
+   * @return CharacterSpecialSkillDummy|NULL
    */
   // @codingStandardsIgnoreLine
-  function getCharacterSpecialSkill(int $skillId, int $userId = 0): ?CharacterSkillSpecial {
+  function getCharacterSpecialSkill(int $skillId, int $userId = 0): ?CharacterSpecialSkillDummy {
     if($userId === 0) {
       $userId = $this->user->id;
     }
@@ -125,34 +126,38 @@ class Skills {
     if(is_null($skill)) {
       return NULL;
     }
-    $where = ["character" => $userId, "skill" => $skillId];
-    $result = $this->db->query("SELECT * FROM character_special_skills WHERE ?", $where)->fetch();
-    if($result) {
-      $level = $result->level;
-    } else {
+    $row = $this->orm->characterSpecialSkills->getByCharacterAndSkill($userId, $skillId);
+    if(is_null($row)) {
       $level = 0;
+    } else {
+      $level = $row->level;
     }
-    return new CharacterSkillSpecial($skill, $level);
+    return new CharacterSpecialSkillDummy($skill, $level);
   }
   
   /**
-   * @return CharacterSkill[]
+   * @return BaseCharacterSkill[]
    */
   function getAvailableSkills(): array {
     $return = [];
     $skills = array_merge($this->getListOfAttackSkills(), $this->getListOfSpecialSkills());
-    $char = $this->db->table("characters")->get($this->user->id);
+    $char = $this->orm->characters->getById($this->user->id);
+    /** @var BaseSkill $skill */
     foreach($skills as $skill) {
-      if($skill->needed_class != $char->occupation) {
+      if($skill->neededClass != $char->occupation->id) {
         continue;
-      } elseif($skill->needed_specialization AND $skill->needed_specialization != $char->specialization) {
-        continue;
-      } elseif($skill->needed_level > $char->level) {
+      } elseif($skill->neededSpecialization) {
+        if(is_null($char->specialization)) {
+          continue;
+        } elseif($skill->neededSpecialization != $char->specialization) {
+          continue;
+        }
+      } elseif($skill->neededLevel > $char->level) {
         continue;
       }
-      if($skill instanceof SkillAttack) {
+      if($skill instanceof SkillAttackDummy) {
         $return[] = $this->getCharacterAttackSkill($skill->id);
-      } elseif($skill instanceof SkillSpecial) {
+      } elseif($skill instanceof SkillSpecialDummy) {
         $return[] = $this->getCharacterSpecialSkill($skill->id);
       }
     }
@@ -161,23 +166,28 @@ class Skills {
   
   /**
    * @param int $uid
-   * @return CharacterSkill[]
+   * @return BaseCharacterSkill[]
    */
   function getPlayerSkills(int $uid): array {
     $return = [];
     $skills = array_merge($this->getListOfAttackSkills(), $this->getListOfSpecialSkills());
-    $char = $this->db->table("characters")->get($uid);
+    $char = $this->orm->characters->getById($this->user->id);
+    /** @var BaseSkill $skill */
     foreach($skills as $skill) {
-      if($skill->needed_class != $char->occupation) {
+      if($skill->neededClass != $char->occupation->id) {
         continue;
-      } elseif($skill->needed_specialization AND $skill->needed_specialization != $char->specialization) {
-        continue;
-      } elseif($skill->needed_level > $char->level) {
+      } elseif($skill->neededSpecialization) {
+        if(is_null($char->specialization)) {
+          continue;
+        } elseif($skill->neededSpecialization != $char->specialization) {
+          continue;
+        }
+      } elseif($skill->neededLevel > $char->level) {
         continue;
       }
-      if($skill instanceof SkillAttack) {
+      if($skill instanceof SkillAttackDummy) {
         $s = $this->getCharacterAttackSkill($skill->id, $uid);
-      } elseif($skill instanceof SkillSpecial) {
+      } elseif($skill instanceof SkillSpecialDummy) {
         $s = $this->getCharacterSpecialSkill($skill->id, $uid);
       }
       if($s->level) {
@@ -193,7 +203,7 @@ class Skills {
    * @return int
    */
   function getSkillPoints(): int {
-    return (int) $this->db->table("characters")->get($this->user->id)->skill_points;
+    return $this->orm->characters->getById($this->user->id)->skillPoints;
   }
   
   /**
@@ -221,24 +231,42 @@ class Skills {
     } elseif($skill->level +1 > $skill->skill->levels) {
       throw new SkillMaxLevelReachedException;
     }
-    $char = $this->db->table("characters")->get($this->user->id);
-    if($skill->skill->needed_class != $char->occupation) {
+    $char = $this->orm->characters->getById($this->user->id);
+    if($skill->skill->needed_class != $char->occupation->id) {
       throw new CannotLearnSkillException;
-    } elseif($skill->skill->needed_specialization AND $skill->skill->needed_specialization != $char->specialization) {
-      throw new CannotLearnSkillException;
+    } elseif($skill->skill->needed_specialization) {
+      if(is_null($char->specialization)) {
+        throw new CannotLearnSkillException;
+      } elseif($skill->skill->needed_specialization != $char->specialization->id) {
+        throw new CannotLearnSkillException;
+      }
     } elseif($skill->skill->needed_level > $char->level) {
       throw new CannotLearnSkillException;
     }
-    $data1 = "skill_points=skill_points-1";
-    $where1 = ["id" => $this->user->id];
-    $this->db->query("UPDATE characters SET $data1 WHERE ?", $where1);
-    if($skill->level === 0) {
-      $data2 = ["character" => $this->user->id, "skill" => $id, "level" => 1];
-      $this->db->query("INSERT INTO character_{$type}_skills", $data2);
-    } else {
-      $data2 = "level=level+1";
-      $where2 = ["character" => $this->user->id, "skill" => $id];
-      $this->db->query("UPDATE character_{$type}_skills SET $data2 WHERE ?", $where2);
+    $character = $this->orm->characters->getById($this->user->id);
+    $character->skillPoints--;
+    if($type === "attack") {
+      $record = $this->orm->characterAttackSkills->getByCharacterAndSkill($this->user->id, $id);
+      if(is_null($record)) {
+        $record = new CharacterAttackSkill;
+        $this->orm->characterAttackSkills->attach($record);
+        $record->character = $character;
+        $record->skill = $id;
+      } else {
+        $record->level++;
+      }
+      $this->orm->characterAttackSkills->persistAndFlush($record);
+    } elseif($type === "special") {
+      $record = $this->orm->characterSpecialSkills->getByCharacterAndSkill($this->user->id, $id);
+      if(is_null($record)) {
+        $record = new CharacterSpecialSkill();
+        $this->orm->characterSpecialSkills->attach($record);
+        $record->character = $character;
+        $record->skill = $id;
+      } else {
+        $record->level++;
+      }
+      $this->orm->characterSpecialSkills->persistAndFlush($record);
     }
   }
 }

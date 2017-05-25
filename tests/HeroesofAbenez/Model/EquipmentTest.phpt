@@ -5,7 +5,7 @@ namespace HeroesofAbenez\Model;
 
 use MyTester as MT,
     MyTester\Assert,
-    HeroesofAbenez\Entities\Equipment as EquipmentEntity;
+    HeroesofAbenez\Orm\EquipmentDummy as EquipmentEntity;
 
 class EquipmentTest extends MT\TestCase {
   /** @var Equipment */

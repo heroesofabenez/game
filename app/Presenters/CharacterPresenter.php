@@ -16,9 +16,9 @@ class CharacterPresenter extends BasePresenter {
   protected $model;
   /** @var \HeroesofAbenez\Model\UserManager @autowire */
   protected $userManager;
-  /** @var \HeroesofAbenez\Entities\CharacterClass[] */
+  /** @var \HeroesofAbenez\Orm\CharacterClassDummy[] */
   protected $classes;
-  /** @var \HeroesofAbenez\Entities\CharacterRace[] */
+  /** @var \HeroesofAbenez\Orm\CharacterRaceDummy[] */
   protected $races;
   
   /**

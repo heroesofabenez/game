@@ -3,22 +3,26 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Postoffice;
 
+use HeroesofAbenez\Orm\Model as ORM,
+    Nextras\Orm\Collection\ICollection,
+    HeroesofAbenez\Orm\Message;
+
 /**
  * Postoffice Control
  *
  * @author Jakub Konečný
  */
 class PostofficeControl extends \Nette\Application\UI\Control {
-  /** @var \Nette\Database\Context */
-  protected $db;
+  /** @var ORM */
+  protected $orm;
   /** @var \Nette\Security\User */
   protected $user;
   /** @var \HeroesofAbenez\Model\Profile */
   protected $profileModel;
   
-  function __construct(\Nette\Database\Context $db, \Nette\Security\User $user, \HeroesofAbenez\Model\Profile $profileModel) {
+  function __construct(ORM $orm, \Nette\Security\User $user, \HeroesofAbenez\Model\Profile $profileModel) {
     parent::__construct();
-    $this->db = $db;
+    $this->orm = $orm;
     $this->user = $user;
     $this->profileModel = $profileModel;
   }
@@ -26,20 +30,10 @@ class PostofficeControl extends \Nette\Application\UI\Control {
   /**
    * Gets list of received messages
    * 
-   * @return array
+   * @return ICollection|Message[]
    */
-  protected function getReceivedMessages(): array {
-    $return = [];
-    $messages = $this->db->table("messages")
-      ->where("to", $this->user->id);
-    foreach($messages as $message) {
-      $from = $this->profileModel->getCharacterName($message->from);
-      $return[] = (object) [
-        "id" => $message->id, "from" => $from, "subject" => $message->subject,
-        "text" => $message->text, "sent" => $message->sent, "read" => $message->read
-      ];
-    }
-    return $return;
+  protected function getReceivedMessages(): ICollection {
+    return $this->orm->messages->findByTo($this->user->id);
   }
   
   /**
@@ -54,20 +48,10 @@ class PostofficeControl extends \Nette\Application\UI\Control {
   /**
    * Gets list of sent messages
    * 
-   * @return array
+   * @return ICollection|Message[]
    */
-  protected function getSentMessages(): array {
-    $return = [];
-    $messages = $this->db->table("messages")
-      ->where("from", $this->user->id);
-    foreach($messages as $message) {
-      $to = $this->profileModel->getCharacterName($message->to);
-      $return[] = (object) [
-        "id" => $message->id, "to" => $to, "subject" => $message->subject,
-        "text" => $message->text, "sent" => $message->sent, "read" => $message->read
-      ];
-    }
-    return $return;
+  protected function getSentMessages(): ICollection {
+    return $this->orm->messages->findByFrom($this->user->id);
   }
   
   /**
@@ -80,11 +64,11 @@ class PostofficeControl extends \Nette\Application\UI\Control {
   }
   
   /**
-   * @param \Nette\Database\Table\ActiveRow $message
+   * @param Message $message
    * @return bool
    */
-  protected function canShow(\Nette\Database\Table\ActiveRow $message): bool {
-    if($message->from == $this->user->id OR $message->to == $this->user->id) {
+  protected function canShow(Message $message): bool {
+    if($message->from->id == $this->user->id OR $message->to->id == $this->user->id) {
       return true;
     } else {
       return false;
@@ -96,8 +80,8 @@ class PostofficeControl extends \Nette\Application\UI\Control {
    * @return int
    */
   function messageStatus(int $id): int {
-    $message = $this->db->table("messages")->get($id);
-    if(!$message) {
+    $message = $this->orm->messages->getById($id);
+    if(is_null($message)) {
       return 0;
     }
     if(!$this->canShow($message)) {
@@ -110,25 +94,19 @@ class PostofficeControl extends \Nette\Application\UI\Control {
    * Show specified message
    * 
    * @param int $id
-   * @return \stdClass
+   * @return Message
    * @throws MessageNotFoundException
    * @throws CannotShowMessageException
    */
-  function message(int $id): \stdClass {
-    $message = $this->db->table("messages")->get($id);
-    if(!$message) {
+  function message(int $id): Message {
+    $message = $this->orm->messages->getById($id);
+    if(is_null($message)) {
       throw new MessageNotFoundException;
     }
     if(!$this->canShow($message)) {
       throw new CannotShowMessageException;
     }
-    $from = $this->profileModel->getCharacterName($message->from);
-    $to = $this->profileModel->getCharacterName($message->to);
-    $return = (object) [
-      "id" => $message->id, "from" => $from, "to" => $to, "subject" => $message->subject,
-        "text" => $message->text, "sent" => $message->sent, "read" => $message->read
-    ];
-    return $return;
+    return $message;
   }
   /**
    * @param int $id Message's id
@@ -137,10 +115,7 @@ class PostofficeControl extends \Nette\Application\UI\Control {
   function renderMessage(int $id): void {
     $this->template->setFile(__DIR__ . "/postofficeMessage.latte");
     try {
-      $message = $this->message($id);
-      foreach($message as $key => $value) {
-        $this->template->$key = $value;
-      }
+      $this->template->message = $this->message($id);
     } catch(CannotShowMessageException $e) {
       $this->presenter->forward("cannotshow");
     } catch(MessageNotFoundException $e) {
@@ -153,13 +128,9 @@ class PostofficeControl extends \Nette\Application\UI\Control {
    * @return array
    */
   function getRecipients(): array {
-    $chars = [];
-    $characters = $this->db->table("characters")
-      ->order("id");
-    foreach($characters as $char) {
-      $chars[$char->id] = $char->name;
-    }
-    return $chars;
+    return $this->orm->characters->findAll()
+      ->orderBy("id")
+      ->fetchPairs("id", "name");
   }
   
   /**
@@ -167,7 +138,12 @@ class PostofficeControl extends \Nette\Application\UI\Control {
    * @return void
    */
   function sendMessage(array $data): void {
-    $this->db->query("INSERT INTO messages", $data);
+    $message = new Message;
+    $this->orm->messages->attach($message);
+    foreach($data as $key => $value) {
+      $message->$key = $value;
+    }
+    $this->orm->messages->persistAndFlush($message);
   }
 }
 ?>

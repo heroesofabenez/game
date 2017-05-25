@@ -3,6 +3,12 @@ database:
         dsn: "mysql:host=localhost;dbname=heroesofabenez"
         user: root
         password: root
+dbal:
+    driver: mysqli
+    host: localhost
+    username: root
+    password: root
+    database: heroesofabenez
 tracy:
     email: "jakub.konecny2@centrum.cz"
 php:

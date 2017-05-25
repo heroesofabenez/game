@@ -1,5 +1,6 @@
-database:
-    default:
-        dsn: "mysql:host=mysql;dbname=heroesofabenez"
-        user: root
-        password: root
+dbal:
+    driver: mysqli
+    host: mysql
+    username: root
+    password: root
+    database: heroesofabenez

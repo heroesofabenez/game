@@ -32,32 +32,32 @@ class QuestPresenter extends BasePresenter {
    */
   function renderView(int $id): void {
     $quest = $this->model->view($id);
-    if(!$quest) {
+    if(is_null($quest)) {
       $this->forward("notfound");
     }
     $this->template->id = $quest->id;
     $this->template->name = $quest->name;
     $this->template->introduction = $quest->introduction;
-    $this->template->end_text = $quest->end_text;
+    $this->template->end_text = $quest->endText;
     $this->template->finished = $this->model->isFinished($id);
-    $this->template->npcStart = $this->npcModel->getNpcName($quest->npc_start);
-    $this->template->npcEnd = $this->npcModel->getNpcName($quest->npc_end);
+    $this->template->npcStart = $this->npcModel->getNpcName($quest->npcStart);
+    $this->template->npcEnd = $this->npcModel->getNpcName($quest->npcEnd);
     $requirements = [];
-    if($quest->cost_money > 0) {
+    if($quest->costMoney > 0) {
       $requirements[] = (object) [
-        "text" => "pay {$quest->cost_money} silver marks", "met" => false
+        "text" => "pay {$quest->costMoney} silver marks", "met" => false
       ];
     }
-    if(is_int($quest->needed_item)) {
-      $itemName = $this->itemModel->getItemName($quest->needed_item);
-      $itemLink = $this->link("Item:view", $quest->needed_item);
-      $haveItem = $this->itemModel->haveItem($quest->needed_item, $quest->item_amount);
+    if(is_int($quest->neededItem)) {
+      $itemName = $this->itemModel->getItemName($quest->neededItem);
+      $itemLink = $this->link("Item:view", $quest->neededItem);
+      $haveItem = $this->itemModel->haveItem($quest->neededItem, $quest->itemAmount);
       $requirements[] = (object) [
-        "text" => "get {$quest->item_amount}x <a href=\"$itemLink\">$itemName</a>", "met" => $haveItem
+        "text" => "get {$quest->itemAmount}x <a href=\"$itemLink\">$itemName</a>", "met" => $haveItem
       ];
     }
-    $npcLink = $this->link("Npc:view", $quest->npc_end);
-    if($quest->npc_start != $quest->npc_end) {
+    $npcLink = $this->link("Npc:view", $quest->npcEnd);
+    if($quest->npcStart != $quest->npcEnd) {
       $requirements[] = (object) [
         "text" => "talk to <a href=\"$npcLink\">{$this->template->npcEnd}</a>", "met" => false
       ];
@@ -67,9 +67,9 @@ class QuestPresenter extends BasePresenter {
       ];
     }
     $this->template->requirements = $requirements;
-    $this->template->rewardMoney = $quest->reward_money;
-    $this->template->rewardXp = $quest->reward_xp;
-    $this->template->rewardItem = (is_int($quest->reward_item)) ? $quest->reward_item : false;
+    $this->template->rewardMoney = $quest->rewardMoney;
+    $this->template->rewardXp = $quest->rewardXp;
+    $this->template->rewardItem = (is_int($quest->rewardItem)) ? $quest->rewardItem : false;
   }
 }
 ?>

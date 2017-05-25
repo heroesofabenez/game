@@ -5,7 +5,8 @@ namespace HeroesofAbenez\Model;
 
 use MyTester as MT,
     MyTester\Assert,
-    HeroesofAbenez\Entities\Guild as GuildEntity;
+    HeroesofAbenez\Orm\GuildDummy,
+    HeroesofAbenez\Orm\Guild as GuildEntity;
 
 class GuildTest extends MT\TestCase {
   /** @var Guild */
@@ -30,7 +31,7 @@ class GuildTest extends MT\TestCase {
    */
   function testGuildData(int $id) {
     $guild = $this->model->guildData($id);
-    Assert::type(GuildEntity::class, $guild);
+    Assert::type(GuildDummy::class, $guild);
     Assert::same("Dawn", $guild->name);
   }
   
@@ -41,10 +42,10 @@ class GuildTest extends MT\TestCase {
    */
   function testView(int $id) {
     $guild = $this->model->view($id);
-    Assert::type("array", $guild);
-    Assert::same("Dawn", $guild["name"]);
-    Assert::type("array", $guild["members"]);
-    Assert::count(2, $guild["members"]);
+    Assert::type(GuildEntity::class, $guild);
+    Assert::same("Dawn", $guild->name);
+    Assert::type(\Nextras\Orm\Relationships\OneHasMany::class, $guild->members);
+    Assert::same(2, $guild->members->countStored());
   }
   
   /**
