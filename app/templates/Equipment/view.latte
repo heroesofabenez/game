@@ -5,6 +5,6 @@
   <p>{$item->slot|firstUpper}{if $item->type}-{$item->type}{/if}</p>
   <p>{_equipment.$item->id.description}</p>
   <p>{_texts.equipment.strength}: {$item->strength}, {_texts.equipment.durability}: {$item->durability}</p>
-  <p>{_texts.equipment.requires}: {_texts.equipment.level} <span class="{if $level >= $item->required_lvl}green{else}red{/if}">{$item->required_lvl}</span>, {_texts.equipment.class} <span class="{if $class == $item->required_class}green{else}red{/if}">{_classes.$item->required_class.name}</span></p>
+  <p>{_texts.equipment.requires}: {_texts.equipment.level} <span class="{if $level >= $item->requiredLevel}green{else}red{/if}">{$item->requiredLevel}</span>, {_texts.equipment.class} <span class="{if $class == $item->requiredClass}green{else}red{/if}">{_classes.$item->requiredClass.name}</span></p>
   <p>{_texts.equipment.price, $item->price}</p>
 {/block}

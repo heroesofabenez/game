@@ -4,8 +4,8 @@
   <h1>{_texts.skill.title} {_skills_attack.$skill->id.name}</h1>
   <p>{_texts.skill.attackSkill}</p>
   <p>{_skills_attack.$skill->id.description}</p>
-  <p>{_texts.skill.requires}: {_texts.skill.level} <span class="{if $level >= $skill->needed_level}green{else}red{/if}">{$skill->needed_level}</span>, {_texts.skill.class} <span class="{if $class == $skill->needed_class}green{else}red{/if}">{_classes.$skill->needed_class.name}</span>{if $skill->needed_specialization},{_texts.skill.specialization} {_subclasses.$skill->needed_specialization.name}{/if}</p>
-  <p>{_texts.skill.skillDamage, ["baseDamage" => $skill->base_damage, "damageGrowth" => $skill->damage_growth]}<br>
+  <p>{_texts.skill.requires}: {_texts.skill.level} <span class="{if $level >= $skill->neededLevel}green{else}red{/if}">{$skill->neededLevel}</span>, {_texts.skill.class} <span class="{if $class == $skill->neededClass}green{else}red{/if}">{_classes.$skill->neededClass.name}</span>{if $skill->neededSpecialization},{_texts.skill.specialization} {_subclasses.$skill->neededSpecialization.name}{/if}</p>
+  <p>{_texts.skill.skillDamage, ["baseDamage" => $skill->baseDamage, "damageGrowth" => $skill->damageGrowth]}<br>
   {_texts.skill.skillLevels, $skill->levels}<br>
   {_texts.skill.target$skill->target}<br>
   {_texts.skill.skillStrikes, $skill->strikes}
