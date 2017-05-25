@@ -6,8 +6,8 @@ namespace HeroesofAbenez\Model;
 use HeroesofAbenez\Entities\Team,
     HeroesofAbenez\Entities\Character,
     HeroesofAbenez\Entities\CharacterEffect,
-    HeroesofAbenez\Entities\CharacterSkillAttack,
-    HeroesofAbenez\Entities\CharacterSkillSpecial,
+    HeroesofAbenez\Orm\CharacterAttackSkillDummy,
+    HeroesofAbenez\Orm\CharacterSpecialSkillDummy,
     HeroesofAbenez\Utils\InvalidStateException;
 
 /**
@@ -24,8 +24,8 @@ use HeroesofAbenez\Entities\Team,
  * @method void onRound() Tasks to do during a round
  * @method void onRoundEnd() Tasks to do at the end of a round
  * @method void onAttack(Character $attacker, Character $defender) Tasks to do at attack
- * @method void onSkillAttack(Character $attacker, Character $defender, CharacterSkillAttack $skill) Tasks to do at skill attack
- * @method void onSkillSpecial(Character $character1, Character $target, CharacterSkillSpecial $skill) Tasks to do when using special skill
+ * @method void onSkillAttack(Character $attacker, Character $defender, CharacterAttackSkillDummy $skill) Tasks to do at skill attack
+ * @method void onSkillSpecial(Character $character1, Character $target, CharacterSpecialSkillDummy $skill) Tasks to do when using special skill
  * @method void onHeal(Character $healer, Character $patient) Tasks to do at healing
  */
 class CombatBase {
@@ -430,10 +430,10 @@ class CombatBase {
   /**
    * @param Character $character1
    * @param Character $character2
-   * @param CharacterSkillSpecial $skill
+   * @param CharacterSpecialSkillDummy $skill
    * @return void
    */
-  protected function doSpecialSkill(Character $character1, Character $character2, CharacterSkillSpecial $skill): void {
+  protected function doSpecialSkill(Character $character1, Character $character2, CharacterSpecialSkillDummy $skill): void {
     switch($skill->skill->target) {
       case "enemy":
         $this->onSkillSpecial($character1, $character2, $skill);
@@ -483,7 +483,7 @@ class CombatBase {
       }
       if(count($character->usableSkills)) {
         $skill = $character->usableSkills[0];
-        if($skill instanceof CharacterSkillAttack) {
+        if($skill instanceof CharacterAttackSkillDummy) {
           for($i = 1; $i <= $skill->skill->strikes; $i++) {
             $this->onSkillAttack($character, $target, $skill);
           }
@@ -553,10 +553,10 @@ class CombatBase {
    * 
    * @param Character $character1
    * @param Character $character2
-   * @param CharacterSkillAttack $skill
+   * @param CharacterAttackSkillDummy $skill
    * @return int
    */
-  protected function calculateHitChance(Character $character1, Character $character2, CharacterSkillAttack $skill = NULL): int {
+  protected function calculateHitChance(Character $character1, Character $character2, CharacterAttackSkillDummy $skill = NULL): int {
     if($skill) {
       $hit_chance = ($character1->hit / 100 * $skill->hitRate) - $character2->dodge;
     } else {
@@ -608,10 +608,10 @@ class CombatBase {
    * 
    * @param Character $attacker
    * @param Character $defender
-   * @param CharacterSkillAttack $skill Used skill
+   * @param CharacterAttackSkillDummy $skill Used skill
    * @return void
    */
-  function useAttackSkill(Character $attacker, Character $defender, CharacterSkillAttack $skill): void {
+  function useAttackSkill(Character $attacker, Character $defender, CharacterAttackSkillDummy $skill): void {
     $result = [];
     $hit_chance = $this->calculateHitChance($attacker, $defender, $skill);
     $roll = rand(0, 100);
@@ -639,10 +639,10 @@ class CombatBase {
    * 
    * @param Character $character1
    * @param Character $target
-   * @param CharacterSkillSpecial $skill
+   * @param CharacterSpecialSkillDummy $skill
    * @return void
    */
-  function useSpecialSkill(Character $character1, Character $target, CharacterSkillSpecial $skill): void {
+  function useSpecialSkill(Character $character1, Character $target, CharacterSpecialSkillDummy $skill): void {
     $result = [
       "result" => true, "amount" => 0, "action" => "skill_special", "name" => $skill->skill->name
     ];

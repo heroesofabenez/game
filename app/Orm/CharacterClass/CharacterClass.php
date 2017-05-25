@@ -32,6 +32,8 @@ use Nextras\Orm\Relationships\OneHasMany;
  * @property OneHasMany|Introduction[] $intro {1:m Introduction::$class}
  * @property OneHasMany|PveArenaOpponent[] $arenaNpcs {1:m PveArenaOpponent::$occupation}
  * @property OneHasMany|Equipment[] $equipment {1:m Equipment::$requiredClass}
+ * @property OneHasMany|SkillAttack[] $attackSkills {1:m SkillAttack::$neededClass}
+ * @property OneHasMany|SkillSpecial[] $specialSkills {1:m SkillSpecial::$neededClass}
  */
 class CharacterClass extends \Nextras\Orm\Entity\Entity {
   const MAX_STATS = 99;

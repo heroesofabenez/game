@@ -37,6 +37,10 @@ namespace HeroesofAbenez\Orm;
  * @property-read CharacterQuestsRepository $characterQuests
  * @property-read ChatBansRepository $chatBans
  * @property-read ChatMessagesRepository $chatMessages
+ * @property-read SkillAttacksRepository $attackSkills
+ * @property-read SkillSpecialsRepository $specialSkills
+ * @property-read CharacterAttackSkillsRepository $characterAttackSkills
+ * @property-read CharacterSpecialSkillsRepository $characterSpecialSkills
  */
 class Model extends \Nextras\Orm\Model\Model {
   

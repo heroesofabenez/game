@@ -1,28 +1,28 @@
 <?php
 declare(strict_types=1);
 
-namespace HeroesofAbenez\Entities;
+namespace HeroesofAbenez\Orm;
 
 /**
  * Base character skill
  *
  * @author Jakub Konečný
- * @property-read Skill $skill
+ * @property-read BaseSkill $skill
  * @property int $level
  * @property-read int $cooldown
  * @property-read string $skillType
  */
-abstract class CharacterSkill {
+abstract class BaseCharacterSkill {
   use \Nette\SmartObject;
   
-  /** @var Skill */
+  /** @var BaseSkill */
   protected $skill;
   /** @var int */
   protected $level;
   /** @var int */
   protected $cooldown = 0;
   
-  function __construct(Skill $skill, int $level) {
+  function __construct(BaseSkill $skill, int $level) {
     $this->skill = $skill;
     $this->level = $level;
   }
@@ -52,9 +52,9 @@ abstract class CharacterSkill {
    * @return string
    */
   function getSkillType(): string {
-    if($this->skill instanceof SkillAttack) {
+    if($this->skill instanceof SkillAttackDummy) {
       return "attack";
-    } elseif($this->skill instanceof SkillSpecial) {
+    } elseif($this->skill instanceof SkillSpecialDummy) {
       return "special";
     } else {
       return "";

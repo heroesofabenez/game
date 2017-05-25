@@ -4,10 +4,10 @@ declare(strict_types=1);
 namespace HeroesofAbenez\Model;
 
 use HeroesofAbenez\Entities\Character,
-    HeroesofAbenez\Entities\CharacterSkillAttack,
-    HeroesofAbenez\Entities\SkillAttack,
-    HeroesofAbenez\Entities\CharacterSkillSpecial,
-    HeroesofAbenez\Entities\SkillSpecial,
+    HeroesofAbenez\Orm\CharacterAttackSkillDummy,
+    HeroesofAbenez\Orm\SkillAttackDummy,
+    HeroesofAbenez\Orm\CharacterSpecialSkillDummy,
+    HeroesofAbenez\Orm\SkillSpecialDummy,
     HeroesofAbenez\Orm\Model as ORM,
     HeroesofAbenez\Orm\ArenaFightCount,
     Nextras\Orm\Entity\IEntity;
@@ -28,15 +28,12 @@ class CombatHelper {
   protected $skillsModel;
   /** @var ORM */
   protected $orm;
-  /** @var \Nette\Database\Context */
-  protected $db;
   
-  function __construct(Profile $profileModel, Equipment $equipmentModel, Skills $skillsModel, ORM $orm, \Nette\Database\Context $db) {
+  function __construct(Profile $profileModel, Equipment $equipmentModel, Skills $skillsModel, ORM $orm) {
     $this->profileModel = $profileModel;
     $this->equipmentModel = $equipmentModel;
     $this->skillsModel = $skillsModel;
     $this->orm = $orm;
-    $this->db = $db;
   }
   
   /**
@@ -145,14 +142,14 @@ class CombatHelper {
     $data["id"] = "pveArenaNpc" . $npc->id;
     $data["initiative_formula"] = $this->getInitiativeFormula($data["occupation"]);
     $skills = $equipment = [];
-    $skillRows = $this->db->query("SELECT id FROM skills_attacks WHERE needed_class={$data["occupation"]} AND needed_level<={$data["level"]}");
+    $skillRows = $this->orm->attackSkills->findByClassAndLevel($data["occupation"], $data["level"]);
     foreach($skillRows as $skillRow) {
-      $skills[] = new CharacterSkillAttack(new SkillAttack($this->db->table("skills_attacks")->get($skillRow->id)), 0);
+      $skills[] = new CharacterAttackSkillDummy(new SkillAttackDummy($skillRow), 0);
     }
     unset($skillRow);
-    $skillRows = $this->db->query("SELECT id FROM skills_specials WHERE needed_class={$data["occupation"]} AND needed_level<={$data["level"]}");
+    $skillRows = $this->orm->specialSkills->findByClassAndLevel($data["occupation"], $data["level"]);
     foreach($skillRows as $skillRow) {
-      $skills[] = new CharacterSkillSpecial(new SkillSpecial($this->db->table("skills_specials")->get($skillRow->id)), 0);
+      $skills[] = new CharacterSpecialSkillDummy(new SkillSpecialDummy($skillRow), 0);
     }
     $this->getArenaNpcSkillsLevels($data, $skills);
     if($npc->weapon) {

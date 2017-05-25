@@ -49,7 +49,7 @@ class CharacterEffect {
       if(!is_int($effect["value"])) {
         exit("Invalid value for \$value passed to method CharacterEffect::__construct. Expected integer.");
       }
-      if(!in_array($effect["stat"], $stats)) {
+      if(!in_array($effect["stat"], $stats) OR (is_null($effect["stat"]) AND $effect["type"] === "stun")) {
         exit("Invalid value for \$stat passed to method CharacterEffect::__construct.");
       }
       $this->stat = $effect["stat"];
