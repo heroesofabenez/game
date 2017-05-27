@@ -26,7 +26,6 @@ INSERT INTO `chat_messages` (`id`, `message`, `character`, `area`, `stage`, `gui
   (7,	'Hello',	1,	NULL,	1,	NULL,	'2015-06-11 10:24:20');
 
 INSERT INTO `guilds` (`id`, `name`, `description`, `money`) VALUES
-(0,	'None',	'Not a real guild',	0),
 (1,	'Dawn',	'.',	0),
 (2,	'Wizards College',	'only for wizards',	0),
 (3,	'Elven Council',	'only elves',	0);

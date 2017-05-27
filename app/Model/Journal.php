@@ -58,7 +58,7 @@ class Journal {
       "experiences" => $character->experience, "description" => $character->description,
       "stageName" => $character->currentStage->name, "areaName" => $stage->area->name
     ];
-    if($character->guild->id > 0) {
+    if(!is_null($character->guild)) {
       $return["guild"] = $character->guild->name;
       $return["guildRank"] = $character->guildrank->id;
     } else {

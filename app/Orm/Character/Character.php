@@ -24,7 +24,7 @@ use Nextras\Orm\Relationships\OneHasMany;
  * @property float $intelligence
  * @property float $charisma
  * @property string|NULL $description
- * @property Guild $guild {m:1 Guild::$members} {default 0}
+ * @property Guild|NULL $guild {m:1 Guild::$members} {default NULL}
  * @property GuildRank|NULL $guildrank {m:1 GuildRank::$characters} {default NULL}
  * @property int $owner
  * @property QuestStage|NULL $currentStage {m:1 QuestStage::$characters} {default NULL}

@@ -67,12 +67,14 @@ class UserManager implements NS\IAuthenticator {
       "name" => $char->name, "race" => $char->race->id, "gender" => $char->gender,
       "occupation" => ($char->occupation) ? $char->occupation->id : NULL,
       "specialization" => ($char->specialization) ? $char->specialization->id : NULL,
-      "level" => $char->level, "guild" => $char->guild->id, "stage" => $char->currentStage->id,
+      "level" => $char->level,  "stage" => $char->currentStage->id,
       "white_karma" => $char->whiteKarma, "neutral_karma" => $char->neutralKarma, "dark_karma" => $char->darkKarma
     ];
-    if($char->guild->id > 0) {
+    if(!is_null($char->guild)) {
+      $data["guild"] = $char->guild->id;
       $role = $char->guildrank->name;
     } else {
+      $data["guild"] = 0;
       $role = "player";
     }
     return new NS\Identity($char->id, $role, $data);

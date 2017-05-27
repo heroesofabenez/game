@@ -237,6 +237,9 @@ class Guild {
     if(is_null($character)) {
       throw new PlayerNotFoundException;
     }
+    if(is_null($character->guild)) {
+      throw new PlayerNotInGuildException;
+    }
     if($character->guild->id !== $admin->identity->guild) {
       throw new PlayerNotInGuildException;
     }
@@ -286,6 +289,9 @@ class Guild {
     $character = $this->orm->characters->getById($id);
     if(is_null($character)) {
       throw new PlayerNotFoundException;
+    }
+    if(is_null($character->guild)) {
+      throw new PlayerNotInGuildException;
     }
     if($character->guild->id !== $admin->identity->guild) {
       throw new PlayerNotInGuildException;
@@ -343,8 +349,7 @@ class Guild {
     if($adminRole <= $character->guildrank->id) {
       throw new CannotKickHigherRanksException;
     }
-    $character->guildrank = NULL;
-    $character->guild = 0;
+    $character->guild = $character->guildrank = NULL;
     $this->orm->characters->persistAndFlush($character);
     $this->cache->remove("guilds");
   }
@@ -364,8 +369,7 @@ class Guild {
       throw new GrandmasterCannotLeaveGuildException;
     }
     $character = $this->orm->characters->getById($this->user->id);
-    $character->guildrank = NULL;
-    $character->guild = 0;
+    $character->guild = $character->guildrank = NULL;
     $this->orm->characters->persistAndFlush($character);
     $this->cache->remove("guilds");
   }
@@ -379,8 +383,7 @@ class Guild {
   function dissolve(int $id): void {
     $guild = $this->orm->guilds->getById($id);
     foreach($guild->members as $member) {
-      $member->guild = 0;
-      $member->guildrank = NULL;
+      $member->guild = $member->guildrank = NULL;
       $this->orm->characters->persist($member);
     }
     $guild = $this->orm->guilds->getById($id);

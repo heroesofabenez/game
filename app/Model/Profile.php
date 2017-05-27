@@ -171,6 +171,8 @@ class Profile {
     $char = $this->orm->characters->getById($id);
     if(is_null($char)) {
       return 0;
+    } elseif(is_null($char->guild)) {
+      return 0;
     } else {
       return $char->guild->id;
     }
@@ -199,7 +201,7 @@ class Profile {
         $return[$stat] = $char->$stat;
       }
     }
-    if($char->guild->id > 0) {
+    if(!is_null($char->guild)) {
       $return["guild"] = $char->guild->id;
       $return["guildrank"] = ($char->guildrank) ? $char->guildrank->id : NULL;
     } else {
