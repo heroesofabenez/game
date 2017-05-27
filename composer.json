@@ -34,7 +34,8 @@
         "konecnyjakub/mytester": "^2.0",
         "nette/robot-loader": "^3.0",
         "kdyby/fake-session": "^2.0",
-        "phpstan/phpstan-nette": "^0.7"
+        "phpstan/phpstan-nette": "^0.7",
+        "symplify/easy-coding-standard": "^2.0"
     },
     "replace": {
         "nette/tester": "*",

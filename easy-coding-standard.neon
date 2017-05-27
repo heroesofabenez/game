@@ -1,0 +1,73 @@
+checkers:
+    - PHP_CodeSniffer\Standards\Generic\Sniffs\Arrays\DisallowLongArraySyntaxSniff
+    - PHP_CodeSniffer\Standards\Generic\Sniffs\Classes\DuplicateClassNameSniff
+    - PHP_CodeSniffer\Standards\Generic\Sniffs\Classes\OpeningBraceSameLineSniff
+    - PHP_CodeSniffer\Standards\Generic\Sniffs\CodeAnalysis\ForLoopShouldBeWhileLoopSniff
+    - PHP_CodeSniffer\Standards\Generic\Sniffs\CodeAnalysis\ForLoopWithTestFunctionCallSniff
+    - PHP_CodeSniffer\Standards\Generic\Sniffs\CodeAnalysis\JumbledIncrementerSniff
+    - PHP_CodeSniffer\Standards\Generic\Sniffs\CodeAnalysis\UnconditionalIfStatementSniff
+    - PHP_CodeSniffer\Standards\Generic\Sniffs\CodeAnalysis\UnnecessaryFinalModifierSniff
+    - PHP_CodeSniffer\Standards\Generic\Sniffs\CodeAnalysis\UnusedFunctionParameterSniff
+    - PHP_CodeSniffer\Standards\Generic\Sniffs\CodeAnalysis\UselessOverridingMethodSniff
+    PHP_CodeSniffer\Standards\Generic\Sniffs\ControlStructures\InlineControlStructureSniff:
+        error: false
+    - PHP_CodeSniffer\Standards\Generic\Sniffs\Files\ByteOrderMarkSniff
+    - PHP_CodeSniffer\Standards\Generic\Sniffs\Files\EndFileNoNewlineSniff
+    - PHP_CodeSniffer\Standards\Generic\Sniffs\Files\InlineHTMLSniff
+    - PHP_CodeSniffer\Standards\Generic\Sniffs\Files\LineEndingsSniff
+    PHP_CodeSniffer\Standards\Generic\Sniffs\Files\LineLengthSniff:
+        absoluteLineLimit: 261
+    - PHP_CodeSniffer\Standards\Generic\Sniffs\Formatting\DisallowMultipleStatementsSniff
+    - PHP_CodeSniffer\Standards\Generic\Sniffs\Formatting\SpaceAfterCastSniff
+    - PHP_CodeSniffer\Standards\Generic\Sniffs\Functions\FunctionCallArgumentSpacingSniff
+    - PHP_CodeSniffer\Standards\Generic\Sniffs\Functions\OpeningFunctionBraceKernighanRitchieSniff
+    - PHP_CodeSniffer\Standards\Generic\Sniffs\Metrics\CyclomaticComplexitySniff
+    - PHP_CodeSniffer\Standards\Generic\Sniffs\Metrics\NestingLevelSniff
+    - PHP_CodeSniffer\Standards\Generic\Sniffs\NamingConventions\ConstructorNameSniff
+    - PHP_CodeSniffer\Standards\Generic\Sniffs\NamingConventions\UpperCaseConstantNameSniff
+    - PHP_CodeSniffer\Standards\Generic\Sniffs\PHP\BacktickOperatorSniff
+    - PHP_CodeSniffer\Standards\Generic\Sniffs\PHP\CharacterBeforePHPOpeningTagSniff
+    - PHP_CodeSniffer\Standards\Generic\Sniffs\PHP\ClosingPHPTagSniff
+    - PHP_CodeSniffer\Standards\Generic\Sniffs\PHP\DeprecatedFunctionsSniff
+    - PHP_CodeSniffer\Standards\Generic\Sniffs\PHP\DisallowAlternativePHPTagsSniff
+    - PHP_CodeSniffer\Standards\Generic\Sniffs\PHP\DisallowShortOpenTagSniff
+    - PHP_CodeSniffer\Standards\Generic\Sniffs\PHP\ForbiddenFunctionsSniff
+    - PHP_CodeSniffer\Standards\Generic\Sniffs\PHP\NoSilencedErrorsSniff
+    - PHP_CodeSniffer\Standards\Generic\Sniffs\PHP\SAPIUsageSniff
+    - PHP_CodeSniffer\Standards\Generic\Sniffs\PHP\SyntaxSniff
+    - PHP_CodeSniffer\Standards\Generic\Sniffs\WhiteSpace\DisallowTabIndentSniff
+    PHP_CodeSniffer\Standards\Generic\Sniffs\WhiteSpace\ScopeIndentSniff:
+        indent: 2
+    - PHP_CodeSniffer\Standards\Squiz\Sniffs\Classes\DuplicatePropertySniff
+    - PHP_CodeSniffer\Standards\Squiz\Sniffs\Classes\ValidClassNameSniff
+    - PHP_CodeSniffer\Standards\Squiz\Sniffs\ControlStructures\ForEachLoopDeclarationSniff
+    - PHP_CodeSniffer\Standards\Squiz\Sniffs\ControlStructures\ForLoopDeclarationSniff
+    - PHP_CodeSniffer\Standards\Squiz\Sniffs\ControlStructures\InlineIfDeclarationSniff
+    - PHP_CodeSniffer\Standards\Squiz\Sniffs\ControlStructures\LowercaseDeclarationSniff
+    # easy-coding-standard claims there is a missing method
+    #- PHP_CodeSniffer\Standards\Squiz\Sniffs\PHP\CommentedOutCodeSniff
+    - PHP_CodeSniffer\Standards\Squiz\Sniffs\PHP\DiscouragedFunctionsSniff
+    - PHP_CodeSniffer\Standards\Squiz\Sniffs\PHP\EvalSniff
+    - PHP_CodeSniffer\Standards\Squiz\Sniffs\PHP\GlobalKeywordSniff
+    - PHP_CodeSniffer\Standards\Squiz\Sniffs\PHP\LowercasePHPFunctionsSniff
+    - PHP_CodeSniffer\Standards\Squiz\Sniffs\PHP\NonExecutableCodeSniff
+    - PHP_CodeSniffer\Standards\Squiz\Sniffs\Scope\MemberVarScopeSniff
+    - PHP_CodeSniffer\Standards\Squiz\Sniffs\Scope\StaticThisUsageSniff
+    - PHP_CodeSniffer\Standards\Squiz\Sniffs\WhiteSpace\SemicolonSpacingSniff
+    - PHP_CodeSniffer\Standards\PSR1\Sniffs\Files\SideEffectsSniff
+    - PHP_CodeSniffer\Standards\PSR1\Sniffs\Methods\CamelCapsMethodNameSniff
+    - PHP_CodeSniffer\Standards\PSR2\Sniffs\ControlStructures\ElseIfDeclarationSniff
+    - PHP_CodeSniffer\Standards\PSR2\Sniffs\Methods\FunctionCallSignatureSniff
+    - PHP_CodeSniffer\Standards\PSR2\Sniffs\Methods\MethodDeclarationSniff
+    - PHP_CodeSniffer\Standards\PSR2\Sniffs\Namespaces\NamespaceDeclarationSniff
+parameters:
+    skip:
+        PHP_CodeSniffer\Sniffs\Sniff:
+            - tests/_temp/cache/*/*.php
+        PHP_CodeSniffer\Standards\PSR1\Sniffs\Files\SideEffectsSniff:
+            - tests/*.php
+            - tests/HeroesofAbenez/*/*.php
+        # until new version of codesniffer is released
+        PHP_CodeSniffer\Standards\Squiz\Sniffs\ControlStructures\InlineIfDeclarationSniff:
+            - app/Model/Skills.php
+            - app/Model/CombatBase.php
