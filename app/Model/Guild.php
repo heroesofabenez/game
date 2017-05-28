@@ -45,7 +45,7 @@ class Guild {
    * @return string
    */
   function getGuildName(int $id): string {
-    $guild = Arrays::get($this->listOfGuilds(), $id, NULL);
+    $guild = $this->view($id);
     if(is_null($guild)) {
       return "";
     } else {
