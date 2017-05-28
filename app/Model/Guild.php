@@ -5,8 +5,6 @@ namespace HeroesofAbenez\Model;
 
 use HeroesofAbenez\Orm\Request as RequestEntity,
     HeroesofAbenez\Orm\Guild as GuildEntity,
-    HeroesofAbenez\Orm\GuildDummy,
-    Nette\Utils\Arrays,
     HeroesofAbenez\Orm\Model as ORM,
     HeroesofAbenez\Orm\GuildRankCustom,
     Nextras\Orm\Collection\ICollection;
@@ -21,8 +19,6 @@ class Guild {
   
   /** @var ORM */
   protected $orm;
-  /** @var \Nette\Caching\Cache */
-  protected $cache;
   /** @var \Nette\Security\User */
   protected $user;
   /** @var \HeroesofAbenez\Model\Profile */
@@ -30,8 +26,7 @@ class Guild {
   /** @var \HeroesofAbenez\Model\Permissions */
   protected $permissionsModel;
   
-  function __construct(ORM $orm, \Nette\Caching\Cache $cache, \Nette\Security\User $user, Profile $profileModel, Permissions $permissionsModel) {
-    $this->cache = $cache;
+  function __construct(ORM $orm, \Nette\Security\User $user, Profile $profileModel, Permissions $permissionsModel) {
     $this->orm = $orm;
     $this->user = $user;
     $this->profileModel = $profileModel;
@@ -51,17 +46,6 @@ class Guild {
     } else {
       return $guild->name;
     }
-  }
-  
-  /**
-   * Get data about specified guild
-   * 
-   * @param int $id Id of guild
-   * @return GuildDummy
-   */
-  function guildData(int $id) {
-    $guilds = $this->listOfGuilds();
-    return $guilds[$id];
   }
   
   /**
@@ -135,7 +119,6 @@ class Guild {
     $character->guild = $guild;
     $character->guildrank = 7;
     $this->orm->characters->persistAndFlush($character);
-    $this->cache->remove("guilds");
   }
   
   /**
@@ -182,34 +165,18 @@ class Guild {
    * @return ICollection|RequestEntity[]
    */
   function showApplications(int $id): ICollection {
-    $guilds = $this->listOfGuilds();
-    $guild = $guilds[$id];
-    $leaderId = $this->profileModel->getCharacterId($guild->leader);
+    $guild = $this->view($id);
+    $leaderId = $this->profileModel->getCharacterId($guild->leader->name);
     return $this->orm->requests->findUnresolvedGuildApplications($leaderId);
   }
   
   /**
    * Gets list of guilds
    *
-   * @return GuildDummy[] list of guilds (id, name, description, leader)
+   * @return ICollection|GuildEntity[] list of guilds (id, name, description, leader)
    */
-  function listOfGuilds(): array {
-    $guilds = $this->cache->load("guilds", function(& $dependencies) {
-      $guilds = [];
-      $rows = $this->orm->guilds->findAll();
-      /** @var GuildEntity $guild */
-      foreach($rows as $guild) {
-        $leader = "";
-        foreach($guild->members as $member) {
-          if($member->guildrank->id == 7) {
-            $leader = $member->name;
-          }
-        }
-        $guilds[$guild->id] = new GuildDummy($guild->id, $guild->name, $guild->description, $guild->members->countStored(), $leader);
-      }
-      return $guilds;
-    });
-    return $guilds;
+  function listOfGuilds(): ICollection {
+    return $this->orm->guilds->findAll();
   }
   
   /**
@@ -351,7 +318,6 @@ class Guild {
     }
     $character->guild = $character->guildrank = NULL;
     $this->orm->characters->persistAndFlush($character);
-    $this->cache->remove("guilds");
   }
   
   /**
@@ -371,7 +337,6 @@ class Guild {
     $character = $this->orm->characters->getById($this->user->id);
     $character->guild = $character->guildrank = NULL;
     $this->orm->characters->persistAndFlush($character);
-    $this->cache->remove("guilds");
   }
   
   /**
@@ -389,7 +354,6 @@ class Guild {
     $guild = $this->orm->guilds->getById($id);
     $this->orm->guilds->remove($guild);
     $this->orm->flush();
-    $this->cache->remove("guilds");
   }
   
   /**
@@ -408,7 +372,6 @@ class Guild {
     $guild = $this->orm->guilds->getById($id);
     $guild->name = $name;
     $this->orm->guilds->persistAndFlush($guild);
-    $this->cache->remove("guilds");
   }
   
   /**
@@ -426,7 +389,6 @@ class Guild {
     }
     $guild->description = $description;
     $this->orm->guilds->persistAndFlush($guild);
-    $this->cache->remove("guilds");
   }
   
   /**
@@ -441,7 +403,6 @@ class Guild {
     $character->guild = $gid;
     $character->guildrank = 1;
     $this->orm->characters->persistAndFlush($character);
-    $this->cache->remove("guilds");
   }
   
   /**

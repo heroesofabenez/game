@@ -3,8 +3,7 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Ranking;
 
-use HeroesofAbenez\Orm\GuildDummy,
-    HeroesofAbenez\Utils\Arrays;
+use HeroesofAbenez\Utils\Arrays;
 
 
 /**
@@ -22,17 +21,17 @@ class GuildsRankingControl extends RankingControl {
   }
   
   /**
-   * @return array
+   * @return \stdClass[]
    */
   function getData(): array {
     $return = $data = [];
     $result = $this->model->listOfGuilds();
     foreach($result as $row) {
-      $data[] = $row->toArray();
+      $data[] = [ "id" => $row->id, "name" =>  $row->name, "description" => $row->description, "members" => $row->members->countStored(), $row->leader->name];
     }
     $data2 = Arrays::orderby($data, "members", SORT_DESC, "id", SORT_ASC);
     foreach($data2 as $row2) {
-      $return[] = new GuildDummy($row2["id"], $row2["name"], "", $row2["members"]);
+      $return[] = (object) ["id" => $row2["id"], "name" => $row2["name"], "members" => $row2["members"]];
     }
     return $return;
   }

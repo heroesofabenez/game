@@ -5,8 +5,8 @@ namespace HeroesofAbenez\Model;
 
 use MyTester as MT,
     MyTester\Assert,
-    HeroesofAbenez\Orm\GuildDummy,
-    HeroesofAbenez\Orm\Guild as GuildEntity;
+    HeroesofAbenez\Orm\Guild as GuildEntity,
+    Nextras\Orm\Collection\ICollection;
 
 class GuildTest extends MT\TestCase {
   /** @var Guild */
@@ -21,18 +21,7 @@ class GuildTest extends MT\TestCase {
    */
   function testListOfGuilds() {
     $result = $this->model->listOfGuilds();
-    Assert::type("array", $result);
-  }
-  
-  /**
-   * @param int $id
-   * @data(1)
-   * @return void
-   */
-  function testGuildData(int $id) {
-    $guild = $this->model->guildData($id);
-    Assert::type(GuildDummy::class, $guild);
-    Assert::same("Dawn", $guild->name);
+    Assert::type(ICollection::class, $result);
   }
   
   /**
