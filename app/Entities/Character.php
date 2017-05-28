@@ -12,6 +12,40 @@ use OutOfBoundsException,
  * Structure for single character
  * 
  * @author Jakub Konečný
+ * @property-read int|string $id
+ * @property-read string $name
+ * @property-read string $gender
+ * @property-read string $race
+ * @property-read string $occupation
+ * @property-read int $level
+ * @property-read int $experience
+ * @property-read int $strength
+ * @property-read int $strengthBase
+ * @property-read int $dexterity
+ * @property-read int $dexterityBase
+ * @property-read int $constitution
+ * @property-read int $constitutionBase
+ * @property-read int $charisma
+ * @property-read int $charismaBase
+ * @property-read int $maxHitpoints
+ * @property-read int $hitpoints
+ * @property-read int $damage
+ * @property-read int $damageBase
+ * @property-read int $hit
+ * @property-read int $hitBase
+ * @property-read int $dodge
+ * @property-read int $dodgeBase
+ * @property-read int $initiative
+ * @property-read int $initiativeBase
+ * @property-read string $initiativeFormula
+ * @property-read int $defense
+ * @property-read int $defenseBase
+ * @property-read Equipment[] $equipment
+ * @property-read Pet[] $pets
+ * @property-read BaseCharacterSkill[] $skills
+ * @property-read int|NULL $activePet
+ * @property-read CharacterEffect[] $effects
+ * @property-read bool $stunned
  * @property-read BaseCharacterSkill[] $usableSkills
  */
 class Character extends BaseEntity {
