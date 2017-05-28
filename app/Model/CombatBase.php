@@ -585,7 +585,7 @@ class CombatBase {
     $roll = rand(0, 100);
     $result["result"] = ($roll <= $hit_chance);
     if($result["result"]) {
-      $result["amount"] = (int) $attacker->damage - $defender->defense;
+      $result["amount"] = $attacker->damage - $defender->defense;
     } else {
       $result["amount"] = 0;
     }

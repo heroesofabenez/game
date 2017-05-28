@@ -93,9 +93,9 @@ class Character {
   protected $maxHitpoints;
   /** @var int */
   protected $hitpoints;
-  /** @var int */
+  /** @var float */
   protected $damage = 0;
-  /** @var int */
+  /** @var float */
   protected $damageBase = 0;
   /** @var int */
   protected $hit = 0;
@@ -111,9 +111,9 @@ class Character {
   protected $initiativeBase = 0;
   /** @var string */
   protected $initiativeFormula;
-  /** @var int */
+  /** @var float */
   protected $defense = 0;
-  /** @var int */
+  /** @var float */
   protected $defenseBase = 0;
   /** @var Equipment[] Character's equipment */
   protected $equipment = [];
