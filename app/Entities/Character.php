@@ -25,6 +25,8 @@ use OutOfBoundsException,
  * @property-read int $dexterityBase
  * @property-read int $constitution
  * @property-read int $constitutionBase
+ * @property-read int $intelligence
+ * @property-read int $intelligenceBase
  * @property-read int $charisma
  * @property-read int $charismaBase
  * @property-read int $maxHitpoints
@@ -48,7 +50,9 @@ use OutOfBoundsException,
  * @property-read bool $stunned
  * @property-read BaseCharacterSkill[] $usableSkills
  */
-class Character extends BaseEntity {
+class Character {
+  use \Nette\SmartObject;
+  
   /** @var int|string */
   protected $id;
   /** @var string */
@@ -195,6 +199,265 @@ class Character extends BaseEntity {
     $this->recalculateSecondaryStats();
     $this->hitBase = $this->hit;
     $this->dodgeBase = $this->dodge;
+  }
+  
+  /**
+   * @return int|string
+   */
+  function getId() {
+    return $this->id;
+  }
+  
+  /**
+   * @return string
+   */
+  function getName(): string {
+    return $this->name;
+  }
+  
+  /**
+   * @return string
+   */
+  function getGender(): string {
+    return $this->gender;
+  }
+  
+  /**
+   * @return string
+   */
+  function getRace(): string {
+    return $this->race;
+  }
+  
+  /**
+   * @return string
+   */
+  function getOccupation(): string {
+    return $this->occupation;
+  }
+  
+  /**
+   * @return int
+   */
+  function getLevel(): int {
+    return $this->level;
+  }
+  
+  /**
+   * @return int
+   */
+  function getExperience(): int {
+    return $this->experience;
+  }
+  
+  /**
+   * @return int
+   */
+  function getStrength(): int {
+    return $this->strength;
+  }
+  
+  /**
+   * @return int
+   */
+  function getStrengthBase(): int {
+    return $this->strengthBase;
+  }
+  
+  /**
+   * @return int
+   */
+  function getDexterity(): int {
+    return $this->dexterity;
+  }
+  
+  /**
+   * @return int
+   */
+  function getDexterityBase(): int {
+    return $this->dexterityBase;
+  }
+  
+  /**
+   * @return int
+   */
+  function getConstitution(): int {
+    return $this->constitution;
+  }
+  
+  /**
+   * @return int
+   */
+  function getConstitutionBase(): int {
+    return $this->constitutionBase;
+  }
+  
+  /**
+   * @return int
+   */
+  function getCharisma(): int {
+    return $this->charisma;
+  }
+  
+  /**
+   * @return int
+   */
+  function getCharismaBase(): int {
+    return $this->charismaBase;
+  }
+  
+  /**
+   * @return int
+   */
+  function getMaxHitpoints(): int {
+    return $this->maxHitpoints;
+  }
+  
+  /**
+   * @return int
+   */
+  function getHitpoints(): int {
+    return $this->hitpoints;
+  }
+  
+  /**
+   * @return int
+   */
+  function getDamage(): int {
+    return (int) $this->damage;
+  }
+  
+  /**
+   * @return int
+   */
+  function getDamageBase(): int {
+    return (int) $this->damageBase;
+  }
+  
+  /**
+   * @return int
+   */
+  function getHit(): int {
+    return $this->hit;
+  }
+  
+  /**
+   * @return int
+   */
+  function getHitBase(): int {
+    return $this->hitBase;
+  }
+  
+  /**
+   * @return int
+   */
+  function getDodge(): int {
+    return $this->dodge;
+  }
+  
+  /**
+   * @return int
+   */
+  function getDodgeBase(): int {
+    return $this->dodgeBase;
+  }
+  
+  /**
+   * @return int
+   */
+  function getInitiative(): int {
+    return $this->initiative;
+  }
+  
+  /**
+   * @return int
+   */
+  function getInitiativeBase(): int {
+    return $this->initiativeBase;
+  }
+  
+  /**
+   * @return string
+   */
+  function getInitiativeFormula(): string {
+    return $this->initiativeFormula;
+  }
+  
+  /**
+   * @return int
+   */
+  function getDefense(): int {
+    return (int) $this->defense;
+  }
+  
+  /**
+   * @return int
+   */
+  function getDefenseBase(): int {
+    return (int) $this->defenseBase;
+  }
+  
+  /**
+   * @return Equipment[]
+   */
+  function getEquipment(): array {
+    return $this->equipment;
+  }
+  
+  /**
+   * @return Pet[]
+   */
+  function getPets(): array {
+    return $this->pets;
+  }
+  
+  /**
+   * @return BaseCharacterSkill[]
+   */
+  function getSkills(): array {
+    return $this->skills;
+  }
+  
+  /**
+   * @return int|NULL
+   */
+  function getActivePet(): ?int {
+    return $this->activePet;
+  }
+  
+  /**
+   * @return CharacterEffect[]
+   */
+  function getEffects(): array {
+    return $this->effects;
+  }
+  
+  /**
+   * @return bool
+   */
+  function isStunned(): bool {
+    return $this->stunned;
+  }
+  
+  /**
+   * @return string
+   */
+  function getSpecialization(): string {
+    return $this->specialization;
+  }
+  
+  /**
+   * @return int
+   */
+  function getIntelligence(): int {
+    return $this->intelligence;
+  }
+  
+  /**
+   * @return int
+   */
+  function getIntelligenceBase(): int {
+    return $this->intelligenceBase;
   }
   
   /**
