@@ -196,7 +196,7 @@ class Guild {
   function listOfGuilds(): array {
     $guilds = $this->cache->load("guilds", function(& $dependencies) {
       $guilds = [];
-      $rows = $this->orm->guilds->findBy(["id>" => 0]);
+      $rows = $this->orm->guilds->findAll();
       /** @var GuildEntity $guild */
       foreach($rows as $guild) {
         $leader = "";
