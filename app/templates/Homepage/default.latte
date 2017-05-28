@@ -2,12 +2,12 @@
 {block title}{_texts.common.home}{/block}
 {block content}
   <h1>{_texts.common.game} {$server}</h1>
-  <p>{_texts.homepage.greeting [characterName => $characterName, stageName => $stageName, areaName => $areaName]}</p>
-  {if count($npcs) == 0}
+  <p>{_texts.homepage.greeting [characterName => $user->identity->name, stageName => $stage->name, areaName => $stage->area->name]}</p>
+  {if $stage->npcs->count() == 0}
   <p>{_texts.homepage.noOneToSee}</p>
   {else}
   <p>{_texts.homepage.canSee}</p>
-  {foreach $npcs as $npc}
+  {foreach $stage->npcs as $npc}
   {$npc->name} - <a n:href="Npc:view $npc->id">{_texts.homepage.approachNpc}</a><br>
   {/foreach}
   {/if}

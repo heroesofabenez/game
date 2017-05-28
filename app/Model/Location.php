@@ -103,21 +103,6 @@ class Location {
   }
   
   /**
-   * Get data for homepage
-   * 
-   * @return array Data about location
-   */
-  function home(): array {
-    $return = [];
-    $stage = $this->orm->stages->getById($this->user->identity->stage);
-    $return["stageName"] = $stage->name;
-    $return["areaName"] = $stage->area->name;
-    $return["characterName"] = $this->user->identity->name;
-    $return["npcs"] = $stage->npcs;
-    return $return;
-  }
-  
-  /**
    * Returns list of accessible stages (in player's current area,
    * player meets conditions for entering them)
    * 
