@@ -14,7 +14,7 @@ use HeroesofAbenez\Orm\CharacterRace,
    * Model Profile
    * 
    * @author Jakub Konečný
- * @property-write \Nette\Security\User $user
+   * @property-write \Nette\Security\User $user
    */
 class Profile {
   use \Nette\SmartObject;
@@ -267,8 +267,13 @@ class Profile {
    * @return int[]
    */
   function getStats(): array {
+    $stats = ["strength", "dexterity", "constitution", "intelligence", "charisma",];
+    $return = [];
     $char = $this->orm->characters->getById($this->user->id);
-    return $char->toArray(IEntity::TO_ARRAY_RELATIONSHIP_AS_ID);
+    foreach($stats as $stat) {
+      $return[$stat] = $char->$stat;
+    }
+    return $return;
   }
   
   /**

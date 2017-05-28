@@ -14,8 +14,9 @@ class ProfileTest extends MT\TestCase {
   /** @var Profile */
   protected $model;
   
-  function __construct(Profile $model) {
+  function __construct(Profile $model, \Nette\Security\User $user) {
     $this->model = $model;
+    $this->model->user = $user;
   }
   
   /**
@@ -120,6 +121,15 @@ class ProfileTest extends MT\TestCase {
   function testGetSpecializationName(int $id) {
     $result = $this->model->getSpecializationName($id);
     Assert::type("string", $result);
+  }
+  
+  /**
+   * @return void
+   */
+  function testGetStats() {
+    $result = $this->model->getStats();
+    Assert::type("array", $result);
+    Assert::count(5, $result);
   }
 }
 ?>
