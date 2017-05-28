@@ -149,8 +149,11 @@ class GuildPresenter extends BasePresenter {
    * @param int $id Guild to join   
    * @return void
    */
-  function actionJoin(int $id): void {
+  function actionJoin(int $id = NULL): void {
     $this->inGuild();
+    if(is_null($id)) {
+      return;
+    }
     try {
       $this->model->sendApplication($id);
       $this->flashMessage($this->translator->translate("messages.guild.applicationSent"));
@@ -161,9 +164,10 @@ class GuildPresenter extends BasePresenter {
   }
   
   /**
+   * @param int $id Guild to join
    * @return void
    */
-  function renderJoin(): void {
+  function renderJoin(int $id = NULL): void {
     $guilds = $this->model->listOfGuilds();
     $this->template->guilds = $guilds;
     $apps = $this->model->haveUnresolvedApplication();
