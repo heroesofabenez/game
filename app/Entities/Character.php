@@ -34,49 +34,49 @@ class Character extends BaseEntity {
   /** @var int */
   protected $strength;
   /** @var int */
-  protected $base_strength;
+  protected $strengthBase;
   /** @var int */
   protected $dexterity;
   /** @var int */
-  protected $base_dexterity;
+  protected $dexterityBase;
   /** @var int */
   protected $constitution;
   /** @var int */
-  protected $base_constitution;
+  protected $constitutionBase;
   /** @var int */
   protected $intelligence;
   /** @var int */
-  protected $base_intelligence;
+  protected $intelligenceBase;
   /** @var int */
   protected $charisma;
   /** @var int */
-  protected $base_charisma;
+  protected $charismaBase;
   /** @var int */
-  protected $max_hitpoints;
+  protected $maxHitpoints;
   /** @var int */
   protected $hitpoints;
   /** @var int */
   protected $damage = 0;
   /** @var int */
-  protected $base_damage = 0;
+  protected $damageBase = 0;
   /** @var int */
   protected $hit = 0;
   /** @var int */
-  protected $base_hit = 0;
+  protected $hitBase = 0;
   /** @var int */
   protected $dodge = 0;
   /** @var int */
-  protected $base_dodge = 0;
+  protected $dodgeBase = 0;
   /** @var int */
   protected $initiative = 0;
   /** @var int */
-  protected $base_initiative = 0;
+  protected $initiativeBase = 0;
   /** @var string */
-  protected $initiative_formula;
+  protected $initiativeFormula;
   /** @var int */
   protected $defense = 0;
   /** @var int */
-  protected $base_defense = 0;
+  protected $defenseBase = 0;
   /** @var Equipment[] Character's equipment */
   protected $equipment = [];
   /** @var Pet[] Character's pets */
@@ -84,7 +84,7 @@ class Character extends BaseEntity {
   /** @var BaseCharacterSkill[] Character's skills */
   protected $skills = [];
   /** @var int|NULL */
-  protected $active_pet = null;
+  protected $activePet = null;
   /** @var CharacterEffect[] Active effects */
   protected $effects = [];
   /** @var bool */
@@ -125,7 +125,7 @@ class Character extends BaseEntity {
    */
   protected function setStats(array $stats): void {
     $required_stats = ["id", "name", "occupation", "level", "strength", "dexterity", "constitution", "intelligence", "charisma"];
-    $all_stats = array_merge($required_stats, ["race", "specialization", "gender", "experience", "initiative_formula"]);
+    $all_stats = array_merge($required_stats, ["race", "specialization", "gender", "experience", "initiativeFormula"]);
     foreach($required_stats as $value) {
       if(!isset($stats[$value])) {
         exit("Not passed all needed elements for parameter stats for method Character::__construct. Missing at least $value.");
@@ -146,7 +146,7 @@ class Character extends BaseEntity {
               exit("Invalid value for \$stats[\"$key\"] passed to method Character::__construct. Expected integer.");
             } else {
               $this->$key = (int) $value;
-              $this->{"base_" . $key} = (int) $value;
+              $this->{$key . "Base"} = (int) $value;
             }
   break;
           default:
@@ -157,10 +157,10 @@ class Character extends BaseEntity {
         continue;
       }
     }
-    $this->hitpoints = $this->max_hitpoints = $this->constitution * 5;
+    $this->hitpoints = $this->maxHitpoints = $this->constitution * 5;
     $this->recalculateSecondaryStats();
-    $this->base_hit = $this->hit;
-    $this->base_dodge = $this->dodge;
+    $this->hitBase = $this->hit;
+    $this->dodgeBase = $this->dodge;
   }
   
   /**
@@ -269,7 +269,7 @@ class Character extends BaseEntity {
     } catch(OutOfBoundsException $e) {
       throw $e;
     }
-    $this->active_pet = $petId;
+    $this->activePet = $petId;
   }
   
   /**
@@ -278,7 +278,7 @@ class Character extends BaseEntity {
    * @return void
    */
   function dismissPet(): void {
-    $this->active_pet = NULL;
+    $this->activePet = NULL;
   }
   
   /**
@@ -349,7 +349,7 @@ class Character extends BaseEntity {
   function recalculateSecondaryStats(): void {
     $stats = ["damage" => $this->damageStat(), "hit" => "dexterity", "dodge" => "dexterity"];
     foreach($stats as $secondary => $primary) {
-      $gain = $this->$secondary - $this->{"base_$secondary"};
+      $gain = $this->$secondary - $this->{$secondary . "Base"};
       if($secondary === "damage") {
         $base = round($this->$primary / 2) + 1;
       } else {
@@ -372,7 +372,7 @@ class Character extends BaseEntity {
     $stunned = false;
     $debuffs = [];
     foreach($stats as $stat) {
-      $$stat = $this->{"base_" . $stat};
+      $$stat = $this->{$stat . "Base"};
       $debuffs[$stat] = 0;
     }
     foreach($this->effects as $i => $effect) {
@@ -425,7 +425,7 @@ class Character extends BaseEntity {
    */
   function calculateInitiative(): void {
     $result = 0;
-    $formula = str_replace(["INT", "DEX"], [$this->intelligence, $this->dexterity], $this->initiative_formula);
+    $formula = str_replace(["INT", "DEX"], [$this->intelligence, $this->dexterity], $this->initiativeFormula);
     $pos = strpos($formula, "d");
     $dices = [(int) substr($formula, 0, $pos), (int) substr($formula, $pos +1, strpos($formula, "+") - $pos - 1)];
     for($i = 1; $i <= $dices[0]; $i++) {
@@ -440,7 +440,7 @@ class Character extends BaseEntity {
    * @return void
    */
   function resetInitiative(): void {
-    $this->initiative = $this->base_initiative;
+    $this->initiative = $this->initiativeBase;
   }
 }
 ?>

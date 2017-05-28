@@ -231,8 +231,8 @@ class CombatBase {
     $characters = array_merge($this->team1->items, $this->team2->items);
     /** @var Character $character */
     foreach($characters as $character) {
-      if($character->active_pet) {
-        $effect = $character->getPet($character->active_pet)->deployParams;
+      if($character->activePet) {
+        $effect = $character->getPet($character->activePet)->deployParams;
         $character->addEffect(new CharacterEffect($effect));
       }
     }
@@ -398,7 +398,7 @@ class CombatBase {
       $threshold = static::LOWEST_HP_THRESHOLD;
     }
     foreach($team->aliveMembers as $index => $member) {
-      if($member->hitpoints <= $member->max_hitpoints * $threshold AND $member->hitpoints < $lowestHp) {
+      if($member->hitpoints <= $member->maxHitpoints * $threshold AND $member->hitpoints < $lowestHp) {
         $lowestHp = $member->hitpoints;
         $lowestIndex = $index;
       }
@@ -672,8 +672,8 @@ class CombatBase {
     $roll = rand(0, 100);
     $result["result"] = ($roll <= $hit_chance);
     $amount = ($result["result"]) ? $healer->intelligence / 2 : 0;
-    if($amount + $patient->hitpoints > $patient->max_hitpoints) {
-      $amount = $patient->max_hitpoints - $patient->hitpoints;
+    if($amount + $patient->hitpoints > $patient->maxHitpoints) {
+      $amount = $patient->maxHitpoints - $patient->hitpoints;
     }
     $result["amount"] = (int) $amount;
     if($result["amount"]) {

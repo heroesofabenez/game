@@ -75,7 +75,7 @@ class CombatHelper {
         $data[$stat] = $character->$stat;
       }
     }
-    $data["initiative_formula"] = $this->getInitiativeFormula($data["occupation"]);
+    $data["initiativeFormula"] = $this->getInitiativeFormula($data["occupation"]);
     $pet = $this->orm->pets->getActivePet($character);
     if(!is_null($pet)) {
       $pets[] = $pet;
@@ -140,7 +140,7 @@ class CombatHelper {
       }
     }
     $data["id"] = "pveArenaNpc" . $npc->id;
-    $data["initiative_formula"] = $this->getInitiativeFormula($data["occupation"]);
+    $data["initiativeFormula"] = $this->getInitiativeFormula($data["occupation"]);
     $skills = $equipment = [];
     $skillRows = $this->orm->attackSkills->findByClassAndLevel($data["occupation"], $data["level"]);
     foreach($skillRows as $skillRow) {
