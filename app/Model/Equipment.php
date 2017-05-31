@@ -3,8 +3,7 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Model;
 
-use Nette\Utils\Arrays,
-    HeroesofAbenez\Orm\EquipmentDummy as EquipmentEntity,
+use HeroesofAbenez\Orm\Equipment as EquipmentEntity,
     HeroesofAbenez\Orm\Model as ORM;
 
 /**
@@ -19,31 +18,10 @@ class Equipment {
   protected $orm;
   /** @var \Nette\Security\User */
   protected $user;
-  /** @var \Nette\Caching\Cache */
-  protected $cache;
   
-  function __construct(ORM $orm, \Nette\Security\User $user, \Nette\Caching\Cache $cache) {
+  function __construct(ORM $orm, \Nette\Security\User $user) {
     $this->orm = $orm;
     $this->user = $user;
-    $this->cache = $cache;
-  }
-  
-  /**
-   * Gets list of all equipment
-   * 
-   * @return EquipmentEntity[]
-   */
-  function listOfEquipment(): array {
-    $equipments = $this->cache->load("equipment", function(& $dependencies) {
-      $return = [];
-      $equipments = $this->orm->equipment->findAll();
-      /** @var \HeroesofAbenez\Orm\Equipment $equipment */
-      foreach($equipments as $equipment) {
-        $return[$equipment->id] = new EquipmentEntity($equipment);
-      }
-      return $return;
-    });
-    return $equipments;
   }
   
   /**
@@ -52,8 +30,7 @@ class Equipment {
    * @return EquipmentEntity|NULL
    */
   function view(int $id): ?EquipmentEntity {
-    $equipments = $this->listOfEquipment();
-    return Arrays::get($equipments, $id, NULL);
+    return $this->orm->equipment->getById($id);
   }
   
   /**

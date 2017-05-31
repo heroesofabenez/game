@@ -21,6 +21,8 @@ use Nextras\Orm\Relationships\OneHasMany;
  * @property int $durability
  * @property OneHasMany|PveArenaOpponent[] $arenaNpcs {1:m PveArenaOpponent::$weapon}
  * @property OneHasMany|CharacterEquipment[] $characterEquipment {1:m CharacterEquipment::$item}
+ * @property-read array $deployParams Deploy params of the equipment {virtual}
+ * @property bool $worn Is the item worn? {virtual}
  */
 class Equipment extends \Nextras\Orm\Entity\Entity {
   const SLOT_WEAPON = "weapon";
@@ -47,6 +49,23 @@ class Equipment extends \Nextras\Orm\Entity\Entity {
     } else {
       return $value;
     }
+  }
+  /**
+   * @return array params
+   */
+  protected function getterDeployParams(): array {
+    $stat = [
+      "weapon" => "damage", "armor" => "defense", "shield" => "dodge", "amulet" => "initiative"
+    ];
+    $return = [
+      "id" => "equipment" . $this->id . "bonusEffect",
+      "type" => "buff",
+      "stat" => $stat[$this->slot],
+      "value" => $this->strength,
+      "source" => "equipment",
+      "duration" => "combat"
+    ];
+    return $return;
   }
 }
 ?>

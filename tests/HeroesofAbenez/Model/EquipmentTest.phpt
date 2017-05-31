@@ -5,7 +5,7 @@ namespace HeroesofAbenez\Model;
 
 use MyTester as MT,
     MyTester\Assert,
-    HeroesofAbenez\Orm\EquipmentDummy as EquipmentEntity;
+    HeroesofAbenez\Orm\Equipment as EquipmentEntity;
 
 class EquipmentTest extends MT\TestCase {
   /** @var Equipment */
@@ -13,15 +13,6 @@ class EquipmentTest extends MT\TestCase {
   
   function __construct(Equipment $model) {
     $this->model = $model;
-  }
-  
-  /**
-   * @return void
-   */
-  function testListOfEquipment() {
-    $items = $this->model->listOfEquipment();
-    Assert::type("array", $items);
-    Assert::type(EquipmentEntity::class, $items[1]);
   }
   
   /**
