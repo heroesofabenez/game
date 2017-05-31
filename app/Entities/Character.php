@@ -718,17 +718,17 @@ class Character {
    * Calculate character's initiative
    *
    * @return void
-   * @todo maybe use a regular expression
    */
   function calculateInitiative(): void {
     $result = 0;
     $formula = str_replace(["INT", "DEX"], [$this->intelligence, $this->dexterity], $this->initiativeFormula);
-    $pos = strpos($formula, "d");
-    $dices = [(int) substr($formula, 0, $pos), (int) substr($formula, $pos +1, strpos($formula, "+") - $pos - 1)];
-    for($i = 1; $i <= $dices[0]; $i++) {
-      $result += rand(1, $dices[1]);
+    preg_match_all("/^([1-9]+)d([1-9]+)/", $formula, $dices);
+    for($i = 1; $i <= (int) $dices[1][0]; $i++) {
+      $result += rand(1, (int) $dices[2][0]);
     }
-    $this->initiative = $result;
+    preg_match_all("/\+([0-9]+)\/([0-9]+)/", $formula, $ammendum);
+    $result += (int) $ammendum[1][0] / (int) $ammendum[2][0];
+    $this->initiative = (int) $result;
   }
   
   /**
