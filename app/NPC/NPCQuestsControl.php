@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace HeroesofAbenez\NPC;
 
 use HeroesofAbenez\Model,
-    Kdyby\Translation\Translator,
+    Nette\Localization\ITranslator,
     HeroesofAbenez\Orm\Npc,
     HeroesofAbenez\Orm\QuestDummy as QuestEntity,
     HeroesofAbenez\Orm\Model as ORM,
@@ -25,12 +25,12 @@ class NPCQuestsControl extends \Nette\Application\UI\Control {
   protected $orm;
   /** @var \Nette\Security\User */
   protected $user;
-  /** @var \Kdyby\Translation\Translator */
+  /** @var ITranslator */
   protected $translator;
   /** @var Npc */
   protected $npc;
   
-  function __construct(Model\Quest $questModel, Model\Item $itemModel, ORM $orm, \Nette\Security\User $user, Translator $translator) {
+  function __construct(Model\Quest $questModel, Model\Item $itemModel, ORM $orm, \Nette\Security\User $user, ITranslator $translator) {
     parent::__construct();
     $this->questModel = $questModel;
     $this->itemModel = $itemModel;

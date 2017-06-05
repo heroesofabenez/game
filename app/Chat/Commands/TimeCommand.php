@@ -9,10 +9,10 @@ namespace HeroesofAbenez\Chat\Commands;
  * @author Jakub Konečný
  */
 class TimeCommand extends \HeroesofAbenez\Chat\ChatCommand {
-  /** @var \Kdyby\Translation\Translator */
+  /** @var \Nette\Localization\ITranslator */
   protected $translator;
   
-  function __construct(\Kdyby\Translation\Translator $translator) {
+  function __construct(\Nette\Localization\ITranslator $translator) {
     $this->translator = $translator;
   }
   

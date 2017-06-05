@@ -12,7 +12,7 @@ use Nexendrie\Menu\IMenuControlFactory,
    * @author Jakub Konečný
    */
 abstract class BasePresenter extends \Nette\Application\UI\Presenter {
-  /** @var \Kdyby\Translation\Translator @autowire */
+  /** @var \Nette\Localization\ITranslator @autowire */
   protected $translator;
   /** @var  \HeroesofAbenez\Model\SettingsRepository @autowire */
   protected $sr;

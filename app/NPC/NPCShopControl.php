@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\NPC;
 
-use Kdyby\Translation\Translator,
+use Nette\Localization\ITranslator,
     HeroesofAbenez\Orm\Item,
     HeroesofAbenez\Orm\Npc,
     HeroesofAbenez\Orm\Model as ORM;
@@ -23,10 +23,10 @@ class NPCShopControl extends \Nette\Application\UI\Control {
   protected $npc;
   /** @var \Nette\Security\User */
   protected $user;
-  /** @var \Kdyby\Translation\Translator */
+  /** @var ITranslator */
   protected $translator;
   
-  function __construct(ORM $orm, \HeroesofAbenez\Model\Item $itemModel, \Nette\Security\User $user, Translator $translator) {
+  function __construct(ORM $orm, \HeroesofAbenez\Model\Item $itemModel, \Nette\Security\User $user, ITranslator $translator) {
     parent::__construct();
     $this->orm = $orm;
     $this->itemModel = $itemModel;

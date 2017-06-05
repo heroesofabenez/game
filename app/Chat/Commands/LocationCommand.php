@@ -3,7 +3,8 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Chat\Commands;
 
-use HeroesofAbenez\Orm\Model as ORM;
+use HeroesofAbenez\Orm\Model as ORM,
+    Nette\Localization\ITranslator;
 
 /**
  * Chat Command Location
@@ -15,10 +16,10 @@ class LocationCommand extends \HeroesofAbenez\Chat\ChatCommand {
   protected $user;
   /** @var ORM */
   protected $orm;
-  /** @var \Kdyby\Translation\Translator */
+  /** @var ITranslator */
   protected $translator;
   
-  function __construct(\Nette\Security\User $user, ORM $orm, \Kdyby\Translation\Translator $translator) {
+  function __construct(\Nette\Security\User $user, ORM $orm, ITranslator $translator) {
     $this->user = $user;
     $this->orm = $orm;
     $this->translator = $translator;

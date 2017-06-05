@@ -7,7 +7,7 @@ use Nette\Security\User,
     HeroesofAbenez\Orm\Model as ORM,
     HeroesofAbenez\Model\CombatLogManager,
     HeroesofAbenez\Model\CombatLogger,
-    Kdyby\Translation\Translator,
+    Nette\Localization\ITranslator,
     HeroesofAbenez\Entities\Character,
     HeroesofAbenez\Model\CombatDuel,
     HeroesofAbenez\Model\OpponentNotFoundException;
@@ -30,12 +30,12 @@ abstract class ArenaControl extends \Nette\Application\UI\Control {
   protected $log;
   /** @var ORM */
   protected $orm;
-  /** @var Translator */
+  /** @var ITranslator */
   protected $translator;
   /** @var string */
   protected $arena;
   
-  function __construct(User $user, \HeroesofAbenez\Model\CombatHelper $combatHelper, CombatDuel $combat, CombatLogManager $log, ORM $orm, Translator $translator) {
+  function __construct(User $user, \HeroesofAbenez\Model\CombatHelper $combatHelper, CombatDuel $combat, CombatLogManager $log, ORM $orm, ITranslator $translator) {
     parent::__construct();
     $this->user = $user;
     $this->combatHelper = $combatHelper;

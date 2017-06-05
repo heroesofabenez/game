@@ -8,5 +8,5 @@ parameters:
         - '#Undefined variable: \$[a-zA-Z0-9_]+#'
         - '#Access to protected property \$[a-zA-Z0-9_]+ of class [a-zA-Z0-9\\_]+#'
         - '#Access to an undefined property Nextras\\Orm\\Entity\\IEntity::\$id#'
-        - '#Parameter \#2 \$count of method Kdyby\\Translation\\Translator::translate\(\) expects int\|null, [a-z]+\[\] given#'
+        - '#Method Nette\\Localization\\ITranslator::translate\(\) invoked with 3 parameters, 1-2 required#'
         - '#Property HeroesofAbenez\\Orm\\[a-zA-Z0-9_]+::\$[a-zA-Z0-9_]+ \(HeroesofAbenez\\Orm\\[a-zA-Z0-9_]+|null\) does not accept int#'

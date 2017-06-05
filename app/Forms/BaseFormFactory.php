@@ -3,7 +3,8 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Forms;
 
-use Nette\Application\UI\Form;
+use Nette\Application\UI\Form,
+    Nette\Localization\ITranslator;
 
 /**
  * BaseFormFactory
@@ -11,10 +12,10 @@ use Nette\Application\UI\Form;
  * @author Jakub Konečný
  */
 abstract class BaseFormFactory {
-  /** @var \Nette\Localization\ITranslator */
+  /** @var ITranslator */
   protected $translator;
   
-  function __construct(\Nette\Localization\ITranslator $translator) {
+  function __construct(ITranslator $translator) {
     $this->translator = $translator;
   }
   
