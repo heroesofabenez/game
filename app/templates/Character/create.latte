@@ -1,10 +1,10 @@
 {layout "../@layout.latte"}
-{block title}{_texts.character.createTitle}{/block}
+{block title}{_"texts.character.createTitle"}{/block}
 {block content}
   <script>
     racesDes = new Array("");
     {foreach $races as $race}
-    racesDes[{$iterator->counter}] = {_races.$race.description};
+    racesDes[{$iterator->counter}] = {_"races.$race.description"};
     {/foreach}
     function changeRaceDescription(race) {
       var raceDiv,description;
@@ -15,7 +15,7 @@
     }
     classesDes = new Array("");
     {foreach $classes as $class}
-    classesDes[{$iterator->counter}] = {_classes.$class.description};
+    classesDes[{$iterator->counter}] = {_"classes.$class.description"};
     {/foreach}
     function changeClassDescription(classID) {
       var classDiv,description;
@@ -25,8 +25,8 @@
       return;
     }
   </script>
-  <h1>{_texts.character.createTitle}</h1>
-  <p>{_texts.character.noCharacterFound}</p>
+  <h1>{_"texts.character.createTitle"}</h1>
+  <p>{_"texts.character.noCharacterFound"}</p>
   {control createCharacterForm}
   <div id="raceDescription"></div>
   <div id="classDescription"></div>

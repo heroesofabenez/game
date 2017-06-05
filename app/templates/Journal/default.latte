@@ -1,12 +1,12 @@
 {layout "../@layout.latte"}
-{block title}{_texts.journal.title}{/block}
+{block title}{_"texts.journal.title"}{/block}
 {block content}
-  <h1>{_texts.journal.journalOf} {$name}</h1>
-  <p>{$gender} {_races.$race.name} {_classes.$occupation.name}{if $specialization}-{_subclasses.$specialization.name}{/if}</p>
-  <p>{_texts.journal.level} {$level}, {_texts.journal.experiences, $experiences}/{$nextLevelExp} {if $experiences >= $nextLevelExp}<a n:href="levelUp!">{_texts.journal.levelUp}</a>{/if} {if $level > 1}<a n:href="Training:">{_texts.training.train}</a>{/if}</p>
-  <p>{_texts.journal.guild}<br>{if $guild}{_guildranks.$guildRank.name|firstUpper} {_texts.journal.ofGuild} {$guild}{else}{_texts.journal.notInGuild}{/if}</p>
-  <p>{_texts.journal.karma}<br>{_texts.journal.white} {$whiteKarma}, {_texts.journal.neutral} {$neutralKarma}, {_texts.journal.dark} {$darkKarma}</p>
-  <p>{_texts.journal.position}<br>{$stageName} {_texts.journal.at} {$areaName}</p>
-  <p>{_texts.profile.moreInfo}<br>{$description}</p>
-  <p>{_texts.journal.chapters} {_texts.journal.basic} <a n:href="Journal:inventory">{_texts.journal.inventory}</a> <a n:href="Journal:pets">{_texts.journal.pets}</a> <a n:href="Journal:quests">{_texts.journal.quests}</a></p>
+  <h1>{_"texts.journal.journalOf"} {$name}</h1>
+  <p>{$gender} {_"races.$race.name"} {_"classes.$occupation.name"}{if $specialization}-{_"subclasses.$specialization.name"}{/if}</p>
+  <p>{_"texts.journal.level"} {$level}, {_texts.journal.experiences, $experiences}/{$nextLevelExp} {if $experiences >= $nextLevelExp}<a n:href="levelUp!">{_"texts.journal.levelUp"}</a>{/if} {if $level > 1}<a n:href="Training:">{_"texts.training.train"}</a>{/if}</p>
+  <p>{_"texts.journal.guild"}<br>{if $guild}{_guildranks.$guildRank.name|firstUpper} {_"texts.journal.ofGuild"} {$guild}{else}{_"texts.journal.notInGuild"}{/if}</p>
+  <p>{_"texts.journal.karma"}<br>{_"texts.journal.white"} {$whiteKarma}, {_"texts.journal.neutral"} {$neutralKarma}, {_"texts.journal.dark"} {$darkKarma}</p>
+  <p>{_"texts.journal.position"}<br>{$stageName} {_"texts.journal.at"} {$areaName}</p>
+  <p>{_"texts.profile.moreInfo"}<br>{$description}</p>
+  <p>{_"texts.journal.chapters"} {_"texts.journal.basic"} <a n:href="Journal:inventory">{_"texts.journal.inventory"}</a> <a n:href="Journal:pets">{_"texts.journal.pets"}</a> <a n:href="Journal:quests">{_"texts.journal.quests"}</a></p>
 {/block}

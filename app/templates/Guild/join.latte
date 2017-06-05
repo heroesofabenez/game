@@ -1,12 +1,12 @@
 {layout "../@layout.latte"}
-{block title}{_texts.guild.joinTitle}{/block}
+{block title}{_"texts.guild.joinTitle"}{/block}
 {block content}
-  <h1>{_texts.guild.joinTitle}</h1>
+  <h1>{_"texts.guild.joinTitle"}</h1>
   <table id="guilds">
-    <caption>{_texts.guild.guilds}</caption>
-    <tr><th>{_texts.common.name}</th><th>{_texts.common.description}</th><th>{_texts.common.grandmaster}</th><th>{_texts.common.members}</th><th></th></tr>
+    <caption>{_"texts.guild.guilds"}</caption>
+    <tr><th>{_"texts.common.name"}</th><th>{_"texts.common.description"}</th><th>{_"texts.common.grandmaster"}</th><th>{_"texts.common.members"}</th><th></th></tr>
     {foreach $guilds as $guild}
-    <tr><td>{$guild->name}</td><td>{$guild->description}</td><td>{$guild->leader->name}</td><td class="members">{$guild->members->countStored()}</td><td><a n:href="Guild:join $guild->id">{_texts.guild.apply}</a></td></tr>
+    <tr><td>{$guild->name}</td><td>{$guild->description}</td><td>{$guild->leader->name}</td><td class="members">{$guild->members->countStored()}</td><td><a n:href="Guild:join $guild->id">{_"texts.guild.apply"}</a></td></tr>
     {/foreach}
   </table>
 {/block}

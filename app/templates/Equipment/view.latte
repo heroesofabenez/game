@@ -1,10 +1,10 @@
 {layout "../@layout.latte"}
-{block title}{_texts.equipment.title}{/block}
+{block title}{_"texts.equipment.title"}{/block}
 {block content}
-  <h1>{_texts.equipment.title} {_equipment.$item->id.name}</h1>
+  <h1>{_"texts.equipment.title"} {_equipment.$item->id.name}</h1>
   <p>{$item->slot|firstUpper}{if $item->type}-{$item->type}{/if}</p>
   <p>{_equipment.$item->id.description}</p>
-  <p>{_texts.equipment.strength}: {$item->strength}, {_texts.equipment.durability}: {$item->durability}</p>
-  <p>{_texts.equipment.requires}: {_texts.equipment.level} <span class="{if $level >= $item->requiredLevel}green{else}red{/if}">{$item->requiredLevel}</span>, {_texts.equipment.class} <span class="{if !is_null($item->requiredClass) && $class == $item->requiredClass->id}green{else}red{/if}">{_classes.{$item->requiredClass->id}.name}</span></p>
+  <p>{_"texts.equipment.strength"}: {$item->strength}, {_"texts.equipment.durability"}: {$item->durability}</p>
+  <p>{_"texts.equipment.requires"}: {_"texts.equipment.level"} <span class="{if $level >= $item->requiredLevel}green{else}red{/if}">{$item->requiredLevel}</span>, {_"texts.equipment.class"} <span class="{if !is_null($item->requiredClass) && $class == $item->requiredClass->id}green{else}red{/if}">{_classes.{$item->requiredClass->id}.name}</span></p>
   <p>{_texts.equipment.price, $item->price}</p>
 {/block}

@@ -1,13 +1,13 @@
 {layout "../@layout.latte"}
-{block title}{_texts.guild.applicationsTitle}{/block}
+{block title}{_"texts.guild.applicationsTitle"}{/block}
 {block content}
-  <h1>{_texts.guild.applicationsTitle}</h1>
+  <h1>{_"texts.guild.applicationsTitle"}</h1>
   {if count($apps) == 0}
-  <p>{_texts.guild.noApplications}</p>
+  <p>{_"texts.guild.noApplications"}</p>
   {else}
   {foreach $apps as $app}
-  <p>{$app->from->name} ({$app->sentAt}) {_texts.guild.wantToJoin}<br>
-  <a n:href="Request:accept $app->id">{_texts.request.accept}</a> <a n:href="Request:decline $app->id">{_texts.request.decline}</a></p>
+  <p>{$app->from->name} ({$app->sentAt}) {_"texts.guild.wantToJoin"}<br>
+  <a n:href="Request:accept $app->id">{_"texts.request.accept"}</a> <a n:href="Request:decline $app->id">{_"texts.request.decline"}</a></p>
   {/foreach}
   {/if}
 {/block}

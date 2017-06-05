@@ -1,10 +1,10 @@
 {layout "../@layout.latte"}
-{block title}{_texts.guild.title}{/block}
+{block title}{_"texts.guild.title"}{/block}
 {block content}
-  <h1>{_texts.guild.title} {$guild->name}</h1>
-  {_texts.guild.leader}: {$guild->leader->name} {_texts.common.members}: <a n:href="Guild:members">{$guild->members->countStored()}</a><br>
-  {_texts.common.description}: {$guild->description}<br>
-  {if $canManage}<a n:href="Guild:manage">{_texts.guild.manage}</a>{/if}
-  {if $canInvite}<a n:href="Guild:applications">{_texts.guild.applications}</a>{/if}
-  <a n:href="Tavern:guild">{_texts.guild.chat}</a>
+  <h1>{_"texts.guild.title"} {$guild->name}</h1>
+  {_"texts.guild.leader"}: {$guild->leader->name} {_"texts.common.members"}: <a n:href="Guild:members">{$guild->members->countStored()}</a><br>
+  {_"texts.common.description"}: {$guild->description}<br>
+  {if $canManage}<a n:href="Guild:manage">{_"texts.guild.manage"}</a>{/if}
+  {if $canInvite}<a n:href="Guild:applications">{_"texts.guild.applications"}</a>{/if}
+  <a n:href="Tavern:guild">{_"texts.guild.chat"}</a>
 {/block}

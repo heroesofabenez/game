@@ -1,7 +1,7 @@
 {layout "../@layout.latte"}
-{block title}{_texts.request.title} {$request->id}{/block}
+{block title}{_"texts.request.title"} {$request->id}{/block}
 {block content}
-  <h1>{_texts.request.title} {$request->id}</h1>
+  <h1>{_"texts.request.title"} {$request->id}</h1>
   {if $request->type == \HeroesofAbenez\Orm\Request::TYPE_GUILD_JOIN}
   <p>{_texts.request.invitedToGuild [from => $request->from->name, to => $request->to->name]}</p>
   {elseif $request->type == \HeroesofAbenez\Orm\Request::TYPE_GUILD_APP}
@@ -11,9 +11,9 @@
   {elseif $request->type == \HeroesofAbenez\Orm\Request::TYPE_FRIENDSHIP}
   <p>{_texts.request.friendship [from => $request->from->name, to => $request->to->name]}</p>
   {/if}
-  {_texts.request.sent}: {$request->sentAt}<br>
-  {_texts.request.status}: {$request->status}<br>
+  {_"texts.request.sent"}: {$request->sentAt}<br>
+  {_"texts.request.status"}: {$request->status}<br>
   {if $request->status == \HeroesofAbenez\Orm\Request::STATUS_NEW}
-  <a n:href="Request:accept $request->id">{_texts.request.accept}</a> <a n:href="Request:decline $request->id">{_texts.request.decline}</a>
+  <a n:href="Request:accept $request->id">{_"texts.request.accept"}</a> <a n:href="Request:decline $request->id">{_"texts.request.decline"}</a>
   {/if}
 {/block}

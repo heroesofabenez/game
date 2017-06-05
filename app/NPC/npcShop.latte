@@ -1,8 +1,8 @@
-  <h1>{_npcs.$npcId.name}'s shop</h1>
+  <h1>{_"npcs.$npcId.name"}'s shop</h1>
   {if count($items) === 0}
-  <p>{_texts.npcShop.noItems}</p>
+  <p>{_"texts.npcShop.noItems"}</p>
   {else}
-  <p>{_texts.npcShop.offer}</p>
+  <p>{_"texts.npcShop.offer"}</p>
   {foreach $items as $item}
   <a href="{plink Item:view $item->id}">{$item->name}</a> for {$item->price} silver marks. <a n:href="buy! $item->id">Buy</a><br>
   {/foreach}

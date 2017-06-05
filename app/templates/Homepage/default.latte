@@ -1,14 +1,14 @@
 {layout "../@layout.latte"}
-{block title}{_texts.common.home}{/block}
+{block title}{_"texts.common.home"}{/block}
 {block content}
-  <h1>{_texts.common.game} {$server}</h1>
+  <h1>{_"texts.common.game"} {$server}</h1>
   <p>{_texts.homepage.greeting, 0, [characterName => $user->identity->name, stageName => $stage->name, areaName => $stage->area->name]}</p>
   {if $stage->npcs->count() == 0}
-  <p>{_texts.homepage.noOneToSee}</p>
+  <p>{_"texts.homepage.noOneToSee"}</p>
   {else}
-  <p>{_texts.homepage.canSee}</p>
+  <p>{_"texts.homepage.canSee"}</p>
   {foreach $stage->npcs as $npc}
-  {$npc->name} - <a n:href="Npc:view $npc->id">{_texts.homepage.approachNpc}</a><br>
+  {$npc->name} - <a n:href="Npc:view $npc->id">{_"texts.homepage.approachNpc"}</a><br>
   {/foreach}
   {/if}
 {/block}

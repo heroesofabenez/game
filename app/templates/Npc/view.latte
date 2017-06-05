@@ -1,13 +1,13 @@
 {layout "../@layout.latte"}
-{block title}{_texts.npc.title}{/block}
+{block title}{_"texts.npc.title"}{/block}
 {block content}
-  <h1>{_npcs.$id.name}</h1>
-  <p>{_texts.npc.steppedInFront} {_npcs.$id.name}. {_npcs.$id.description}</p>
-  <p>{_texts.npc.whatToDo}<br>
-    <a n:href="Npc:talk $id">{_texts.npc.talk}</a><br>
-    {if $type == "quest"}<a n:href="Npc:quests $id">{_texts.npc.askForQuest}</a><br>{/if}
-    {if $type == "shop"}<a n:href="Npc:trade $id">{_texts.npc.trade}</a><br>{/if}
-    {if $type == "enemy"}{_texts.npc.fight}<br>{/if}
-    <a n:href="Homepage:default">{_texts.npc.walkAway}</a>
+  <h1>{_"npcs.$id.name"}</h1>
+  <p>{_"texts.npc.steppedInFront"} {_"npcs.$id.name"}. {_"npcs.$id.description"}</p>
+  <p>{_"texts.npc.whatToDo"}<br>
+    <a n:href="Npc:talk $id">{_"texts.npc.talk"}</a><br>
+    {if $type == "quest"}<a n:href="Npc:quests $id">{_"texts.npc.askForQuest"}</a><br>{/if}
+    {if $type == "shop"}<a n:href="Npc:trade $id">{_"texts.npc.trade"}</a><br>{/if}
+    {if $type == "enemy"}{_"texts.npc.fight"}<br>{/if}
+    <a n:href="Homepage:default">{_"texts.npc.walkAway"}</a>
   </p>
 {/block}

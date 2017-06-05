@@ -1,25 +1,25 @@
 {layout "../@layout.latte"}
-{block title}{_texts.journal.inventory}{/block}
+{block title}{_"texts.journal.inventory"}{/block}
 {block content}
-  <h1>{_texts.journal.inventory}</h1>
+  <h1>{_"texts.journal.inventory"}</h1>
   <p>{_texts.journal.money, $money}</p>
-  <p>{_texts.journal.items}<br>
+  <p>{_"texts.journal.items"}<br>
   {if count($items) == 0}
-{_texts.journal.noItems}
+{_"texts.journal.noItems"}
   {else}
     {foreach $items as $item}
 {$item->amount}x <a n:href="Item:view $item->id">{$item->name}</a><br>
     {/foreach}
   {/if}
   </p>
-  <p>{_texts.journal.equipment}<br>
+  <p>{_"texts.journal.equipment"}<br>
   {if count($equipments) == 0}
-{_texts.journal.noEquipment}
+{_"texts.journal.noEquipment"}
   {else}
     {foreach $equipments as $equipment}
-{$equipment->amount}x <a n:href="Equipment:view $equipment->id">{$equipment->name}</a> {if $equipment->worn}{_texts.equipment.worn} <a n:href="unequipItem! $equipment->eqid">{_texts.equipment.unequip}</a>{else}<a n:href="equipItem! $equipment->eqid">{_texts.equipment.equip}</a>{/if}<br>
+{$equipment->amount}x <a n:href="Equipment:view $equipment->id">{$equipment->name}</a> {if $equipment->worn}{_"texts.equipment.worn"} <a n:href="unequipItem! $equipment->eqid">{_"texts.equipment.unequip"}</a>{else}<a n:href="equipItem! $equipment->eqid">{_"texts.equipment.equip"}</a>{/if}<br>
     {/foreach}
   {/if}
   </p>
-  <p>{_texts.journal.chapters} <a n:href="Journal:">{_texts.journal.basic}</a> {_texts.journal.inventory} <a n:href="Journal:pets">{_texts.journal.pets}</a> <a n:href="Journal:quests">{_texts.journal.quests}</a></p>
+  <p>{_"texts.journal.chapters"} <a n:href="Journal:">{_"texts.journal.basic"}</a> {_"texts.journal.inventory"} <a n:href="Journal:pets">{_"texts.journal.pets"}</a> <a n:href="Journal:quests">{_"texts.journal.quests"}</a></p>
 {/block}

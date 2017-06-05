@@ -1,14 +1,14 @@
 {layout "../@layout.latte"}
-{block title}{_texts.guild.manage}{/block}
+{block title}{_"texts.guild.manage"}{/block}
 {block content}
-  <h1>{_texts.guild.manage}</h1>
-  <p>{_texts.guild.chooseAction}</p>
+  <h1>{_"texts.guild.manage"}</h1>
+  <p>{_"texts.guild.chooseAction"}</p>
   <ul>
-    <li><a n:href="Guild:applications">{_texts.guild.applications}</a></li>
-    <li><a n:href="Guild:members">{_texts.guild.manageMembers}</a></li>
-    <li><a n:href="Guild:description">{_texts.guild.changeDescription}</a></li>
-    {if $canChangeRankNames}<li><a n:href="Guild:rankNames">{_texts.guild.changeRankNames}</a></li>{/if}
-    {if $canRename}<li><a n:href="Guild:rename">{_texts.guild.rename}</a></li>{/if}
-    {if $canDissolve}<li><a n:href="Guild:dissolve">{_texts.guild.dissolve}</a></li>{/if}
+    <li><a n:href="Guild:applications">{_"texts.guild.applications"}</a></li>
+    <li><a n:href="Guild:members">{_"texts.guild.manageMembers"}</a></li>
+    <li><a n:href="Guild:description">{_"texts.guild.changeDescription"}</a></li>
+    {if $canChangeRankNames}<li><a n:href="Guild:rankNames">{_"texts.guild.changeRankNames"}</a></li>{/if}
+    {if $canRename}<li><a n:href="Guild:rename">{_"texts.guild.rename"}</a></li>{/if}
+    {if $canDissolve}<li><a n:href="Guild:dissolve">{_"texts.guild.dissolve"}</a></li>{/if}
   </ul>
 {/block}

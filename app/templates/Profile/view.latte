@@ -1,12 +1,12 @@
 {layout "../@layout.latte"}
-{block title}{_texts.profile.title}{/block}
+{block title}{_"texts.profile.title"}{/block}
 {block content}
   <h1>{$name}</h1>
-  <p>{$gender}, {_texts.profile.level} {$level} {_races.$race.name} {_classes.$occupation.name}{if $specialization}-{_subclasses.$specialization.name}{/if}</p>
-  <p>{_texts.profile.baseStats}<br>{_texts.profile.strength} {$strength}, {_texts.profile.dexterity} {$dexterity}, {_texts.profile.constitution} {$constitution}<br>
-{_texts.profile.intelligence} {$intelligence}, {_texts.profile.charisma} {$charisma}</p>
-  <p>{if $guildId}{_texts.guild.title} <a n:href="Guild:view $guildId">{$guildName}</a><br>{_texts.profile.position} {_guildranks.$guildRank.name|firstUpper}{else}{_texts.profile.notInGuild}{/if}</p>
-  <p>{if $pet}{_texts.profile.activePet} {$pet->name ?? "Unnamed"} {_pets.{$pet->type->id}.name}, +{$pet->bonusValue}% {$pet->bonusStat}
-  {else}{_texts.profile.noActivePet}{/if}</p>
-  <p>{_texts.profile.moreInfo} {$description}</p>
+  <p>{$gender}, {_"texts.profile.level"} {$level} {_"races.$race.name"} {_"classes.$occupation.name"}{if $specialization}-{_"subclasses.$specialization.name"}{/if}</p>
+  <p>{_"texts.profile.baseStats"}<br>{_"texts.profile.strength"} {$strength}, {_"texts.profile.dexterity"} {$dexterity}, {_"texts.profile.constitution"} {$constitution}<br>
+{_"texts.profile.intelligence"} {$intelligence}, {_"texts.profile.charisma"} {$charisma}</p>
+  <p>{if $guildId}{_"texts.guild.title"} <a n:href="Guild:view $guildId">{$guildName}</a><br>{_"texts.profile.position"} {_guildranks.$guildRank.name|firstUpper}{else}{_"texts.profile.notInGuild"}{/if}</p>
+  <p>{if $pet}{_"texts.profile.activePet"} {$pet->name ?? "Unnamed"} {_pets.{$pet->type->id}.name}, +{$pet->bonusValue}% {$pet->bonusStat}
+  {else}{_"texts.profile.noActivePet"}{/if}</p>
+  <p>{_"texts.profile.moreInfo"} {$description}</p>
 {/block}

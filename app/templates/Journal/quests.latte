@@ -1,7 +1,7 @@
 {layout "../@layout.latte"}
-{block title}{_texts.journal.questsTitle}{/block}
+{block title}{_"texts.journal.questsTitle"}{/block}
 {block content}
-  <h1>{_texts.journal.questsTitle}</h1>
+  <h1>{_"texts.journal.questsTitle"}</h1>
   <p>{_texts.journal.activeQuests, count($quests)}</p>
   {if count($quests) == 0}
   {else}
@@ -9,5 +9,5 @@
   <a n:href="Quest:view $quest->id">{$quest->name}</a><br>
     {/foreach}
   {/if}
-  <p>{_texts.journal.chapters} <a n:href="Journal:">{_texts.journal.basic}</a> <a n:href="Journal:inventory">{_texts.journal.inventory}</a> <a n:href="Journal:pets">{_texts.journal.pets}</a> {_texts.journal.quests}</p>
+  <p>{_"texts.journal.chapters"} <a n:href="Journal:">{_"texts.journal.basic"}</a> <a n:href="Journal:inventory">{_"texts.journal.inventory"}</a> <a n:href="Journal:pets">{_"texts.journal.pets"}</a> {_"texts.journal.quests"}</p>
 {/block}

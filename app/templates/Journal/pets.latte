@@ -1,15 +1,15 @@
 {layout "../@layout.latte"}
-{block title}{_texts.journal.pets}{/block}
+{block title}{_"texts.journal.pets"}{/block}
 {block content}
-  <h1>{_texts.journal.pets}</h1>
+  <h1>{_"texts.journal.pets"}</h1>
   <p>{_texts.journal.petsNumber, count($pets)}</p>
   {if count($pets) == 0}
   {else}
   <p>
     {foreach $pets as $pet}
-    {$pet->name} {$pet->type->name} {if $pet->deployed}(Deployed) <a n:href="discardPet! $pet->id">{_texts.journal.discardPet}</a>{else}<a n:href="deployPet! $pet->id">{_texts.journal.deployPet}</a>{/if}<br>
+    {$pet->name} {$pet->type->name} {if $pet->deployed}(Deployed) <a n:href="discardPet! $pet->id">{_"texts.journal.discardPet"}</a>{else}<a n:href="deployPet! $pet->id">{_"texts.journal.deployPet"}</a>{/if}<br>
     {/foreach}
   </p>
   {/if}
-  <p>{_texts.journal.chapters} <a n:href="Journal:">{_texts.journal.basic}</a> <a n:href="Journal:inventory">{_texts.journal.inventory}</a> {_texts.journal.pets} <a n:href="Journal:quests">{_texts.journal.quests}</a></p>
+  <p>{_"texts.journal.chapters"} <a n:href="Journal:">{_"texts.journal.basic"}</a> <a n:href="Journal:inventory">{_"texts.journal.inventory"}</a> {_"texts.journal.pets"} <a n:href="Journal:quests">{_"texts.journal.quests"}</a></p>
 {/block}
