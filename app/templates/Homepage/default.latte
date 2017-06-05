@@ -2,7 +2,7 @@
 {block title}{_texts.common.home}{/block}
 {block content}
   <h1>{_texts.common.game} {$server}</h1>
-  <p>{_texts.homepage.greeting [characterName => $user->identity->name, stageName => $stage->name, areaName => $stage->area->name]}</p>
+  <p>{_texts.homepage.greeting, 0, [characterName => $user->identity->name, stageName => $stage->name, areaName => $stage->area->name]}</p>
   {if $stage->npcs->count() == 0}
   <p>{_texts.homepage.noOneToSee}</p>
   {else}
