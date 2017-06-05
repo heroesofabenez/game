@@ -31,7 +31,7 @@ class LocationCommand extends \HeroesofAbenez\Chat\ChatCommand {
    */
   function execute(): string {
     $stage = $this->orm->stages->getById($this->user->identity->stage);
-    return $this->translator->translate("messages.chat.currentLocation", ["stageName" => $stage->name, "areaName" => $stage->area->name]);
+    return $this->translator->translate("messages.chat.currentLocation", 0, ["stageName" => $stage->name, "areaName" => $stage->area->name]);
   }
 }
 ?>

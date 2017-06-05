@@ -9,18 +9,19 @@ session:
     name: HOASESSID
     expiration: 1 hour
 extensions:
-    translation: Kdyby\Translation\DI\TranslationExtension
+    translation: Nexendrie\Translation\Bridges\NetteDI\TranslationExtension
     hoa: HeroesofAbenez\Model\DI\HOAExtension
     menu: Nexendrie\Menu\DI\MenuExtension
     dbal: Nextras\Dbal\Bridges\NetteDI\DbalExtension
     orm: Nextras\Orm\Bridges\NetteDI\OrmExtension
+services:
+    latte.latteFactory:
+        setup:
+            - addFilter("translate", [@translation.translator, "translate"])
 orm:
     model: HeroesofAbenez\Orm\Model
 translation:
-    default: en
-    fallback: [en_US, en]
-    resolvers:
-        request: off
+    localeResolver: header
 menu:
     default:
         htmlId: navigation
