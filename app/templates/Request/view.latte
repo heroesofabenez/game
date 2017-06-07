@@ -3,13 +3,13 @@
 {block content}
   <h1>{_"texts.request.title"} {$request->id}</h1>
   {if $request->type == \HeroesofAbenez\Orm\Request::TYPE_GUILD_JOIN}
-  <p>{_texts.request.invitedToGuild [from => $request->from->name, to => $request->to->name]}</p>
+  <p>{_"texts.request.invitedToGuild", 0, [from => $request->from->name, to => $request->to->name]}</p>
   {elseif $request->type == \HeroesofAbenez\Orm\Request::TYPE_GUILD_APP}
-  <p>{_texts.request.guildApp [from => $request->from->name, to => $request->to->name]}</p>
+  <p>{_"texts.request.guildApp", 0, [from => $request->from->name, to => $request->to->name]}</p>
   {elseif $request->type == \HeroesofAbenez\Orm\Request::TYPE_GROUP_JOIN}
-  <p>{_texts.request.invitedToGroup [from => $request->from->name, to => $request->to->name]}</p>
+  <p>{_"texts.request.invitedToGroup", 0, [from => $request->from->name, to => $request->to->name]}</p>
   {elseif $request->type == \HeroesofAbenez\Orm\Request::TYPE_FRIENDSHIP}
-  <p>{_texts.request.friendship [from => $request->from->name, to => $request->to->name]}</p>
+  <p>{_"texts.request.friendship", 0, [from => $request->from->name, to => $request->to->name]}</p>
   {/if}
   {_"texts.request.sent"}: {$request->sentAt}<br>
   {_"texts.request.status"}: {$request->status}<br>

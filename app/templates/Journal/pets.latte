@@ -2,7 +2,7 @@
 {block title}{_"texts.journal.pets"}{/block}
 {block content}
   <h1>{_"texts.journal.pets"}</h1>
-  <p>{_texts.journal.petsNumber, count($pets)}</p>
+  <p>{_"texts.journal.petsNumber", count($pets)}</p>
   {if count($pets) == 0}
   {else}
   <p>

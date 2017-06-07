@@ -5,8 +5,8 @@
   <p>{$gender}, {_"texts.profile.level"} {$level} {_"races.$race.name"} {_"classes.$occupation.name"}{if $specialization}-{_"subclasses.$specialization.name"}{/if}</p>
   <p>{_"texts.profile.baseStats"}<br>{_"texts.profile.strength"} {$strength}, {_"texts.profile.dexterity"} {$dexterity}, {_"texts.profile.constitution"} {$constitution}<br>
 {_"texts.profile.intelligence"} {$intelligence}, {_"texts.profile.charisma"} {$charisma}</p>
-  <p>{if $guildId}{_"texts.guild.title"} <a n:href="Guild:view $guildId">{$guildName}</a><br>{_"texts.profile.position"} {_guildranks.$guildRank.name|firstUpper}{else}{_"texts.profile.notInGuild"}{/if}</p>
-  <p>{if $pet}{_"texts.profile.activePet"} {$pet->name ?? "Unnamed"} {_pets.{$pet->type->id}.name}, +{$pet->bonusValue}% {$pet->bonusStat}
+  <p>{if $guildId}{_"texts.guild.title"} <a n:href="Guild:view $guildId">{$guildName}</a><br>{_"texts.profile.position"} {_"guildranks.a$guildRank.name"|firstUpper}{else}{_"texts.profile.notInGuild"}{/if}</p>
+  <p>{if $pet}{_"texts.profile.activePet"} {$pet->name ?? "Unnamed"} {_"pets.{$pet->type->id}.name"}, +{$pet->bonusValue}% {$pet->bonusStat}
   {else}{_"texts.profile.noActivePet"}{/if}</p>
   <p>{_"texts.profile.moreInfo"} {$description}</p>
 {/block}

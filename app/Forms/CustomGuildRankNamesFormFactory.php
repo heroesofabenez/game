@@ -33,7 +33,7 @@ class CustomGuildRankNamesFormFactory extends BaseFormFactory {
     $custom = $this->model->getCustomRankNames($this->user->identity->guild);
     for($i = 1; $i <= count($defaults); $i++) {
       $fieldName = "rank{$i}name";
-      $form->addText($fieldName, "guildranks.$i.name");
+      $form->addText($fieldName, "guildranks.a$i.name");
       if(isset($custom[$i])) {
         $form[$fieldName]->value = $custom[$i];
       }

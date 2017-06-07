@@ -10,10 +10,10 @@
     <li>{_"texts.profile.intelligence"}: {$stats["intelligence"]} {if $stat_points}<a n:href="trainStat! intelligence">{_"texts.training.train"}</a>{/if}</li>
     <li>{_"texts.profile.charisma"}: {$stats["charisma"]} {if $stat_points}<a n:href="trainStat! charisma">{_"texts.training.train"}</a>{/if}</li>
   </ul>
-  <p>{_texts.training.usableStatPoints, $stat_points}</p>
+  <p>{_"texts.training.usableStatPoints", $stat_points}</p>
   <h2>{_"texts.training.skills"}</h2>
   <ul n:inner-foreach="$skills as $skill">
-    <li><a n:href="Skill:$skill->skillType $skill->skill->id">{_skills_{$skill->skillType}.{$skill->skill->id}.name}</a> {_texts.training.skillCurrentLevel, $skill->level} {if $skill_points and $skill->level < $skill->skill->levels}<a n:href="trainSkill! $skill->skill->id, $skill->skillType">{_"texts.training.train"}</a>{/if}</li>
+    <li><a n:href="Skill:$skill->skillType $skill->skill->id">{_"skills_{$skill->skillType}.{$skill->skill->id}.name"}</a> {_"texts.training.skillCurrentLevel", $skill->level} {if $skill_points and $skill->level < $skill->skill->levels}<a n:href="trainSkill! $skill->skill->id, $skill->skillType">{_"texts.training.train"}</a>{/if}</li>
   </ul>
-  <p>{_texts.training.usableSkillPoints, $skill_points}</p>
+  <p>{_"texts.training.usableSkillPoints", $skill_points}</p>
 {/block}

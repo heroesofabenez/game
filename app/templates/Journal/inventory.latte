@@ -2,7 +2,7 @@
 {block title}{_"texts.journal.inventory"}{/block}
 {block content}
   <h1>{_"texts.journal.inventory"}</h1>
-  <p>{_texts.journal.money, $money}</p>
+  <p>{_"texts.journal.money", $money}</p>
   <p>{_"texts.journal.items"}<br>
   {if count($items) == 0}
 {_"texts.journal.noItems"}

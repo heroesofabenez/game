@@ -2,7 +2,7 @@
 {block title}{_"texts.journal.questsTitle"}{/block}
 {block content}
   <h1>{_"texts.journal.questsTitle"}</h1>
-  <p>{_texts.journal.activeQuests, count($quests)}</p>
+  <p>{_"texts.journal.activeQuests", count($quests)}</p>
   {if count($quests) == 0}
   {else}
     {foreach $quests as $quest}

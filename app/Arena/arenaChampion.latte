@@ -2,13 +2,13 @@
   <h2>{_"texts.arena.championNotFound"}</h2>
 {else}
   <h1>{$champion->name}</h1>
-  <p>{$champion->gender}, {_"texts.profile.level"} {$champion->level} {_races.$champion->race.name} {_classes.$champion->occupation.name}</p>
+  <p>{$champion->gender}, {_"texts.profile.level"} {$champion->level} {_"races.$champion->race.name"} {_"classes.$champion->occupation.name"}</p>
   <p>{_"texts.profile.baseStats"}<br>{_"texts.profile.strength"} {$champion->strength}, {_"texts.profile.dexterity"} {$champion->dexterity}, {_"texts.profile.constitution"} {$champion->constitution}<br>
 {_"texts.profile.intelligence"} {$champion->intelligence}, {_"texts.profile.charisma"} {$champion->charisma}</p>
   {if $champion->skills}
   <p>{_"texts.arena.usesSkills"}</p>
   <ul n:inner-foreach="$champion->skills as $skill">
-    <li><a href="{plink Skill:$skill->skillType $skill->skill->id}">{_skills_{$skill->skillType}.{$skill->skill->id}.name}</a> {_texts.arena.skillOnLevel, $skill->level}</li>
+    <li><a href="{plink Skill:$skill->skillType $skill->skill->id}">{_"skills_{$skill->skillType}.{$skill->skill->id}.name"}</a> {_"texts.arena.skillOnLevel", $skill->level}</li>
   </ul>
   {/if}
 {/if}

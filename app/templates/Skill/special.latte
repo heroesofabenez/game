@@ -1,12 +1,12 @@
 {layout "../@layout.latte"}
 {block title}{_"texts.skill.title"}{/block}
 {block content}
-  <h1>{_"texts.skill.title"} {_skills_special.$skill->id.name}</h1>
+  <h1>{_"texts.skill.title"} {_"skills_special.$skill->id.name"}</h1>
   <p>{_"texts.skill.specialSkill"}</p>
-  <p>{_skills_special.$skill->id.description}</p>
-  <p>{_"texts.skill.requires"}: {_"texts.skill.level"} <span class="{if $level >= $skill->neededLevel}green{else}red{/if}">{$skill->neededLevel}</span>, {_"texts.skill.class"} <span class="{if $class == $skill->neededClass}green{else}red{/if}">{_classes.$skill->neededClass.name}</span>{if $skill->neededSpecialization},{_"texts.skill.specialization"} {_subclasses.$skill->neededSpecialization.name}{/if}</p>
-  {_texts.skill.skillLevels, $skill->levels}<br>
-  {_texts.skill.target$skill->target}<br>
-  {_texts.skill.skillDuration, $skill->duration}<br>
-  {if $skill->type === "stun"}{_"texts.skill.effectstun"}{else}{_texts.skill.effect$skill->type$skill->stat, ["value" => $skill->value, "valueGrowth" => $skill->valueGrowth]}{/if}
+  <p>{_"skills_special.$skill->id.description"}</p>
+  <p>{_"texts.skill.requires"}: {_"texts.skill.level"} <span class="{if $level >= $skill->neededLevel}green{else}red{/if}">{$skill->neededLevel}</span>, {_"texts.skill.class"} <span class="{if $class == $skill->neededClass}green{else}red{/if}">{_"classes.$skill->neededClass.name"}</span>{if $skill->neededSpecialization},{_"texts.skill.specialization"} {_"subclasses.$skill->neededSpecialization.name"}{/if}</p>
+  {_"texts.skill.skillLevels", $skill->levels}<br>
+  {_"texts.skill.target$skill->target"}<br>
+  {_"texts.skill.skillDuration", $skill->duration}<br>
+  {if $skill->type === "stun"}{_"texts.skill.effectstun"}{else}{_"texts.skill.effect$skill->type$skill->stat", 0, ["value" => $skill->value, "valueGrowth" => $skill->valueGrowth]}{/if}
 {/block}

@@ -226,14 +226,14 @@ class Character {
    * @return string
    */
   function getRace(): string {
-    return $this->race;
+    return (string) $this->race;
   }
   
   /**
    * @return string
    */
   function getOccupation(): string {
-    return $this->occupation;
+    return (string) $this->occupation;
   }
   
   /**

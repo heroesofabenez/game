@@ -1,14 +1,14 @@
-1:
+a1:
     name: "recruit"
-2:
+a2:
     name: "member"
-3:
+a3:
     name: "regular"
-4:
+a4:
     name: "advisor"
-5:
+a5:
     name: "master"
-6:
+a6:
     name: "deputy"
-7:
+a7:
     name: "grandmaster"
