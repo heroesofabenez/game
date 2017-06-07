@@ -25,7 +25,7 @@
         "tracy/tracy": "~2.4",
         "latte/latte": "~2.4",
         "kdyby/autowired": "^1.4",
-        "nexendrie/translation": "^0.5",
+        "nexendrie/translation": "^1.0",
         "nexendrie/menu": "^1.0",
         "nextras/orm": "^2.2"
     },
