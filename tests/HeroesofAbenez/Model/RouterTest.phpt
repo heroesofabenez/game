@@ -3,18 +3,21 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Model;
 
-use MyTester as MT,
-    MyTester\Assert,
+use Tester\Assert,
     Nette\Application\IRouter,
     Nette\Application\Routers\Route,
     Nette\Application\Routers\RouteList;
 
-class RouterTest extends MT\TestCase {
+require __DIR__ . "/../../bootstrap.php";
+
+class RouterTest extends \Tester\TestCase {
   /** @var RouteList */
   protected $router;
   
-  function __construct(RouteList $router) {
-    $this->router = $router;
+  use \Testbench\TCompiledContainer;
+  
+  function setUp() {
+    $this->router = $this->getService(RouteList::class);
   }
   
   /**
@@ -27,4 +30,7 @@ class RouterTest extends MT\TestCase {
     }
   }
 }
+
+$test = new RouterTest;
+$test->run();
 ?>

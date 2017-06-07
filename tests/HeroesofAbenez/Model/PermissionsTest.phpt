@@ -3,15 +3,18 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Model;
 
-use MyTester as MT,
-    MyTester\Assert;
+use Tester\Assert;
 
-class PermissionsTest extends MT\TestCase {
+require __DIR__ . "/../../bootstrap.php";
+
+class PermissionsTest extends \Tester\TestCase {
   /** @var Permissions */
   protected $model;
   
-  function __construct(Permissions $model) {
-    $this->model = $model;
+  use \Testbench\TCompiledContainer;
+  
+  function setUp() {
+    $this->model = $this->getService(Permissions::class);
   }
   
   /**
@@ -37,13 +40,14 @@ class PermissionsTest extends MT\TestCase {
   }
   
   /**
-   * @param int $id
-   * @data(1)
    * @return void
    */
-  function testGetRoleName(int $id) {
-    $name = $this->model->getRoleName($id);
+  function testGetRoleName() {
+    $name = $this->model->getRoleName(1);
     Assert::type("string", $name);
   }
 }
+
+$test = new PermissionsTest;
+$test->run();
 ?>

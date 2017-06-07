@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "d13de080b260144053642985a706fce8",
+    "content-hash": "7f7d3cd463996930623fb5e4b6161a4c",
     "packages": [
         {
             "name": "kdyby/autowired",
@@ -1878,74 +1878,77 @@
             "time": "2015-02-16T16:31:32+00:00"
         },
         {
-            "name": "konecnyjakub/mytester",
-            "version": "dev-master",
+            "name": "mrtnzlml/testbench",
+            "version": "v2.4.2",
             "source": {
                 "type": "git",
-                "url": "https://github.com/konecnyjakub/mytester.git",
-                "reference": "22f839e280fb0dca082477ed9ae62f3828847bd9"
+                "url": "https://github.com/mrtnzlml/testbench.git",
+                "reference": "b96b8c8fc8f529ce53090655b419694472ca4f74"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/konecnyjakub/mytester/zipball/22f839e280fb0dca082477ed9ae62f3828847bd9",
-                "reference": "22f839e280fb0dca082477ed9ae62f3828847bd9",
+                "url": "https://api.github.com/repos/mrtnzlml/testbench/zipball/b96b8c8fc8f529ce53090655b419694472ca4f74",
+                "reference": "b96b8c8fc8f529ce53090655b419694472ca4f74",
                 "shasum": ""
             },
             "require": {
-                "nette/reflection": "^2.4",
-                "nette/utils": "^2.4",
-                "php": ">=7.1.0",
-                "tracy/tracy": "^2.4"
+                "kdyby/fake-session": "^2.0",
+                "nette/application": "^2.4 || ^v3.0",
+                "nette/bootstrap": "^2.4 || ^v3.0",
+                "nette/di": "^2.4 || ^v3.0",
+                "nette/safe-stream": "^2.3",
+                "nette/security": "^2.4 || ^v3.0",
+                "nette/tester": "2.0.x-dev as v1.7",
+                "nette/utils": "^2.4 || ^v3.0",
+                "php": ">=5.6.0"
             },
             "require-dev": {
-                "jakub-onderka/php-console-highlighter": "^0.3.2",
-                "jakub-onderka/php-parallel-lint": "^0.9.2",
-                "nette/bootstrap": "^2.4",
-                "nette/di": "^2.4",
-                "nette/robot-loader": "^3.0",
-                "phpstan/phpstan": "^0.7",
-                "phpstan/phpstan-nette": "^0.7",
-                "squizlabs/php_codesniffer": "^3.0"
+                "kdyby/doctrine": "^3.1",
+                "kdyby/doctrine-cache": "^2.5",
+                "kdyby/doctrine-dbal-batchimport": "dev-master",
+                "kdyby/events": "^3.0",
+                "latte/latte": "^2.4",
+                "nette/database": "^2.4 || ^v3.0",
+                "nette/forms": "^2.4 || ^v3.0",
+                "nette/robot-loader": "^2.4 || ^v3.0",
+                "tracy/tracy": "^2.4",
+                "zenify/doctrine-migrations": "^2.3"
             },
             "suggest": {
-                "nette/robot-loader": "Needed for automated tests runner."
+                "kdyby/doctrine": "Allows enhanced database tests using Doctrine",
+                "kdyby/doctrine-dbal-batchimport": "Allows SQL scripts import for Doctrine (required with kdyby/doctrine)",
+                "nette/database": "Allows enhanced database tests using Nette\\Database",
+                "zenify/doctrine-migrations": "Migrate database to the fresh state"
             },
             "bin": [
-                "src/mytester"
+                "src/run-tests"
             ],
             "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "2.0.x-dev"
-                }
-            },
             "autoload": {
                 "psr-4": {
-                    "MyTester\\": "src/"
-                }
+                    "Testbench\\": [
+                        "src/",
+                        "src/Traits/"
+                    ]
+                },
+                "files": [
+                    "src/Testbench.php"
+                ]
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
-                "BSD-3-Clause"
+                "BSD-3-Clause",
+                "GPL-2.0",
+                "GPL-3.0"
             ],
             "authors": [
                 {
-                    "name": "Jakub Konečný",
-                    "email": "jakub.konecny2@centrum.cz",
-                    "role": "Developer"
+                    "name": "Martin Zlámal",
+                    "homepage": "http://zlml.cz/"
                 }
             ],
-            "description": "Simple tester for PHP",
-            "keywords": [
-                "Simple",
-                "browser",
-                "command  line",
-                "php",
-                "test",
-                "tester",
-                "testing"
-            ],
-            "time": "2017-05-27T11:12:44+00:00"
+            "description": "Simple integration testing tool for Nette Framework applications",
+            "time": "2017-02-06T13:39:41+00:00"
         },
         {
             "name": "nette/robot-loader",
@@ -2011,6 +2014,123 @@
                 "trait"
             ],
             "time": "2017-02-10T13:44:22+00:00"
+        },
+        {
+            "name": "nette/safe-stream",
+            "version": "v2.3.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/nette/safe-stream.git",
+                "reference": "4b9bb3266a537e59b10a2932f05dca47333420fc"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/nette/safe-stream/zipball/4b9bb3266a537e59b10a2932f05dca47333420fc",
+                "reference": "4b9bb3266a537e59b10a2932f05dca47333420fc",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.1"
+            },
+            "conflict": {
+                "nette/nette": "<2.2"
+            },
+            "require-dev": {
+                "nette/tester": "~1.0",
+                "tracy/tracy": "^2.3"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.3-dev"
+                }
+            },
+            "autoload": {
+                "files": [
+                    "src/loader.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause",
+                "GPL-2.0",
+                "GPL-3.0"
+            ],
+            "authors": [
+                {
+                    "name": "David Grudl",
+                    "homepage": "https://davidgrudl.com"
+                },
+                {
+                    "name": "Nette Community",
+                    "homepage": "https://nette.org/contributors"
+                }
+            ],
+            "description": "Nette SafeStream: Atomic Operations",
+            "homepage": "https://nette.org",
+            "time": "2016-03-19T13:06:04+00:00"
+        },
+        {
+            "name": "nette/tester",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/nette/tester.git",
+                "reference": "ab8dab40cbcf1caa08283779a42e16297be21667"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/nette/tester/zipball/ab8dab40cbcf1caa08283779a42e16297be21667",
+                "reference": "ab8dab40cbcf1caa08283779a42e16297be21667",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4.0"
+            },
+            "bin": [
+                "src/tester"
+            ],
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.0-dev"
+                }
+            },
+            "autoload": {
+                "classmap": [
+                    "src/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause",
+                "GPL-2.0",
+                "GPL-3.0"
+            ],
+            "authors": [
+                {
+                    "name": "David Grudl",
+                    "homepage": "https://davidgrudl.com"
+                },
+                {
+                    "name": "Nette Community",
+                    "homepage": "https://nette.org/contributors"
+                }
+            ],
+            "description": "Tester: enjoyable unit testing in PHP with code coverage reporter. 🍏🍏🍎🍏",
+            "homepage": "https://tester.nette.org",
+            "keywords": [
+                "Xdebug",
+                "assertions",
+                "clover",
+                "code coverage",
+                "nette",
+                "phpdbg",
+                "phpunit",
+                "testing",
+                "unit"
+            ],
+            "time": "2017-05-02T15:37:20+00:00"
         },
         {
             "name": "nexendrie/code-quality",

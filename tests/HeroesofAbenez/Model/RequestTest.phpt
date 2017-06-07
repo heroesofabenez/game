@@ -3,36 +3,37 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Model;
 
-use MyTester as MT,
-    MyTester\Assert,
+use Tester\Assert,
     HeroesofAbenez\Orm\Request as RequestEntity;
 
-class RequestTest extends MT\TestCase {
+require __DIR__ . "/../../bootstrap.php";
+
+class RequestTest extends \Tester\TestCase {
   /** @var Request */
   protected $model;
   
-  function __construct(Request $model) {
-    $this->model = $model;
+  use \Testbench\TCompiledContainer;
+  
+  function setUp() {
+    $this->model = $this->getService(Request::class);
   }
-
   
   /**
-   * @param int $id
-   * @data(1)
    * @return void
    */
-  function testCanShow(int $id) {
-    $result = $this->model->canShow($id);
+  function testCanShow() {
+    $result = $this->model->canShow(1);
     Assert::true($result);
   }
   /**
-   * @param int $id
-   * @data(1)
    * @return void
    */
-  function testShow(int $id) {
-    $request = $this->model->show($id);
+  function testShow() {
+    $request = $this->model->show(1);
     Assert::type(RequestEntity::class, $request);
   }
 }
+
+$test = new RequestTest;
+$test->run();
 ?>

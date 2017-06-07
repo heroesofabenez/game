@@ -3,8 +3,9 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Utils;
 
-use MyTester as MT,
-    MyTester\Assert;
+use Tester\Assert;
+
+require __DIR__ . "/../../bootstrap.php";
 
 class Item {
   public $var;
@@ -21,7 +22,7 @@ class TestCollection extends Collection {
   }
 }
 
-class TCollectionTest extends MT\TestCase {
+class TCollectionTest extends \Tester\TestCase {
   protected $col;
   
   /**
@@ -80,4 +81,7 @@ class TCollectionTest extends MT\TestCase {
     Assert::false(isset($this->col[0]));
   }
 }
+
+$test = new TCollectionTest;
+$test->run();
 ?>

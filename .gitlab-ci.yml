@@ -22,3 +22,13 @@ cache:
 
 test:default:
   <<: *test_job
+
+test:cc:
+  <<: *test_job
+  script:
+  - phing test-ci-coverage
+  coverage: '/(\d+\%) covered/'
+  artifacts:
+    name: "Code coverage"
+    paths:
+    - coverage.html

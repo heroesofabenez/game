@@ -3,20 +3,22 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Model;
 
-use MyTester as MT,
-    MyTester\Assert,
+use Tester\Assert,
     HeroesofAbenez\Orm\CharacterRace,
     HeroesofAbenez\Orm\CharacterClass,
     HeroesofAbenez\Orm\CharacterSpecialization,
     Nextras\Orm\Collection\ICollection;
 
-class ProfileTest extends MT\TestCase {
+require __DIR__ . "/../../bootstrap.php";
+
+class ProfileTest extends \Tester\TestCase {
   /** @var Profile */
   protected $model;
   
-  function __construct(Profile $model, \Nette\Security\User $user) {
-    $this->model = $model;
-    $this->model->user = $user;
+  use \Testbench\TCompiledContainer;
+  
+  function setUp() {
+    $this->model = $this->getService(Profile::class);
   }
   
   /**
@@ -33,12 +35,10 @@ class ProfileTest extends MT\TestCase {
   }
   
   /**
-   * @param int $id
-   * @data(1)
    * @return void
    */
-  function testView(int $id) {
-    $result = $this->model->view($id);
+  function testView() {
+    $result = $this->model->view(1);
     Assert::type("array", $result);
     Assert::count(16, $result);
     Assert::same("male", $result["gender"]);
@@ -56,22 +56,18 @@ class ProfileTest extends MT\TestCase {
   }
   
   /**
-   * @param int $id
-   * @data(1)
    * @return void
    */
-  function testGetRace(int $id) {
-    $result = $this->model->getRace($id);
+  function testGetRace() {
+    $result = $this->model->getRace(1);
     Assert::type(CharacterRace::class, $result);
   }
   
   /**
-   * @param int $id
-   * @data(1)
    * @return void
    */
-  function testGetRaceName(int $id) {
-    $result = $this->model->getRaceName($id);
+  function testGetRaceName() {
+    $result = $this->model->getRaceName(1);
     Assert::type("string", $result);
   }
   
@@ -84,42 +80,34 @@ class ProfileTest extends MT\TestCase {
   }
   
   /**
-   * @param int $id
-   * @data(1)
    * @return void
    */
-  function testGetClass(int $id) {
-    $result = $this->model->getClass($id);
+  function testGetClass() {
+    $result = $this->model->getClass(1);
     Assert::type(CharacterClass::class, $result);
   }
   
   /**
-   * @param int $id
-   * @data(1)
    * @return void
    */
-  function testGetClassName(int $id) {
-    $result = $this->model->getClassName($id);
+  function testGetClassName() {
+    $result = $this->model->getClassName(1);
     Assert::type("string", $result);
   }
   
   /**
-   * @param int $id
-   * @data(1)
    * @return void
    */
-  function testGetSpecialization(int $id) {
-    $result = $this->model->getSpecialization($id);
+  function testGetSpecialization() {
+    $result = $this->model->getSpecialization(1);
     Assert::type(CharacterSpecialization::class, $result);
   }
   
   /**
-   * @param int $id
-   * @data(1)
    * @return void
    */
-  function testGetSpecializationName(int $id) {
-    $result = $this->model->getSpecializationName($id);
+  function testGetSpecializationName() {
+    $result = $this->model->getSpecializationName(1);
     Assert::type("string", $result);
   }
   
@@ -127,9 +115,13 @@ class ProfileTest extends MT\TestCase {
    * @return void
    */
   function testGetStats() {
+    $this->model->user = $this->getService(\Nette\Security\User::class);
     $result = $this->model->getStats();
     Assert::type("array", $result);
     Assert::count(5, $result);
   }
 }
+
+$test = new ProfileTest;
+$test->run();
 ?>

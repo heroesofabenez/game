@@ -3,15 +3,18 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Tests;
 
-use MyTester as MT,
-    MyTester\Assert;
+use Tester\Assert;
 
-class AuthorizatorTest extends MT\TestCase {
+require __DIR__ . "/../../bootstrap.php";
+
+class AuthorizatorTest extends \Tester\TestCase {
   /** @var \Nette\Security\Permission */
   protected $model;
   
-  function __construct(\Nette\Security\Permission $model) {
-    $this->model = $model;
+  use \Testbench\TCompiledContainer;
+  
+  function setUp() {
+    $this->model = $this->getService(\Nette\Security\Permission::class);
   }
   
   /**
@@ -23,12 +26,12 @@ class AuthorizatorTest extends MT\TestCase {
       Assert::true($this->model->hasRole($role));
       $parents = $this->model->getRoleParents($role);
       if($role === "guest") {
-        Assert::false(count($parents));
+        Assert::count(0, $parents);
       } elseif($role === "player") {
-        Assert::true(count($parents));
+        Assert::true(count($parents) > 0);
         Assert::true($this->model->roleInheritsFrom($role, "guest"));
       } else {
-        Assert::true(count($parents));
+        Assert::true(count($parents) > 0);
         Assert::true($this->model->roleInheritsFrom($role, "player"));
       }
     }
@@ -54,4 +57,7 @@ class AuthorizatorTest extends MT\TestCase {
     Assert::true($this->model->isAllowed("advisor", $resource, "invite"));
   }
 }
+
+$test = new AuthorizatorTest;
+$test->run();
 ?>

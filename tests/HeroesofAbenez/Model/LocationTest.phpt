@@ -3,26 +3,28 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Model;
 
-use MyTester as MT,
-    MyTester\Assert,
+use Tester\Assert,
     HeroesofAbenez\Orm\QuestArea,
     HeroesofAbenez\Orm\QuestStage,
     Nextras\Orm\Collection\ICollection;
 
-class LocationTest extends MT\TestCase {
+require __DIR__ . "/../../bootstrap.php";
+
+class LocationTest extends \Tester\TestCase {
   /** @var Location */
   protected $model;
   
-  function __construct(Location $model) {
-    $this->model = $model;
+  use \Testbench\TCompiledContainer;
+  
+  function setUp() {
+    $this->model = $this->getService(Location::class);
   }
   
   /**
-   * @param int $id
-   * @data(1)
+   * @return void
    */
-  function testGetStage(int $id) {
-    $stage = $this->model->getStage($id);
+  function testGetStage() {
+    $stage = $this->model->getStage(1);
     Assert::type(QuestStage::class, $stage);
   }
   
@@ -35,30 +37,40 @@ class LocationTest extends MT\TestCase {
   }
   
   /**
-   * @param int $id
-   * @data(1)
+   * @return void
    */
-  function testGetArea(int $id) {
-    $stage = $this->model->getArea($id);
+  function testGetArea() {
+    $stage = $this->model->getArea(1);
     Assert::type(QuestArea::class, $stage);
   }
   
   /**
-   * @param int $id
-   * @data(0,1)
+   * @return void
    */
-  function testGetStageName(int $id) {
-    $name = $this->model->getStageName($id);
+  function testGetStageName() {
+    $name = $this->model->getStageName(1);
     Assert::type("string", $name);
   }
   
   /**
+   * @return int[]
+   */
+  function getAreaIds(): array {
+    return [
+      [0, 1,]
+    ];
+  }
+  
+  /**
    * @param int $id
-   * @data(0,1)
+   * @dataProvider getAreaIds
    */
   function testGetAreaName(int $id) {
     $name = $this->model->getAreaName($id);
     Assert::type("string", $name);
   }
 }
+
+$test = new LocationTest;
+$test->run();
 ?>

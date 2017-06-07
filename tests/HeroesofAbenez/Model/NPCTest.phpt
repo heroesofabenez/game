@@ -3,28 +3,32 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Model;
 
-use MyTester as MT,
-    MyTester\Assert,
+use Tester\Assert,
     HeroesofAbenez\Orm\Npc as NpcEntity;
 
-class NPCTest extends MT\TestCase {
+require __DIR__ . "/../../bootstrap.php";
+
+class NPCTest extends \Tester\TestCase {
   /** @var NPC */
   protected $model;
   
-  function __construct(NPC $model) {
-    $this->model = $model;
+  use \Testbench\TCompiledContainer;
+  
+  function setUp() {
+    $this->model = $this->getService(NPC::class);
   }
   
   /**
-   * @param int $id
-   * @data(1)
    * @return void
    */
-  function testView(int $id) {
-    $npc = $this->model->view($id);
+  function testView() {
+    $npc = $this->model->view(1);
     Assert::type(NpcEntity::class, $npc);
     Assert::same("Mentor", $npc->name);
     Assert::same(2, $npc->race->id);
   }
 }
+
+$test = new NPCTest;
+$test->run();
 ?>

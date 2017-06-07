@@ -3,16 +3,19 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Model;
 
-use MyTester as MT,
-    MyTester\Assert,
+use Tester\Assert,
     Nette\Security\Identity;
 
-class UserManagerTest extends MT\TestCase {
+require __DIR__ . "/../../bootstrap.php";
+
+class UserManagerTest extends \Tester\TestCase {
   /** @var UserManager */
   protected $model;
   
-  function __construct(UserManager $model) {
-    $this->model = $model;
+  use \Testbench\TCompiledContainer;
+  
+  function setUp() {
+    $this->model = $this->getService(UserManager::class);
   }
   
   /**
@@ -24,4 +27,7 @@ class UserManagerTest extends MT\TestCase {
     Assert::same(1, $identity->id);
   }
 }
+
+$test = new UserManagerTest;
+$test->run();
 ?>

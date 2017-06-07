@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <project name="Heroes of Abenenez" basedir="." default="test">
   <target name="test" depends="lint,cs,phpstan,tests"/>
+  <target name="test-coverage" depends="lint,cs,phpstan,tests-coverage"/>
   <target name="test-ci" depends="install-ci,setup-db,test"/>
+  <target name="test-ci-coverage" depends="install-ci,setup-db,lint,cs,phpstan,tests-coverage"/>
+  <target name="test-phpdbg" depends="lint,cs,phpstan,tests-phpdbg"/>
   <target name="install-ci">
     <mkdir dir="images/maps"/>
     <mkdir dir="temp/cache"/>
@@ -60,8 +63,35 @@
     </exec>
   </target>
   <target name="tests" description="Unit tests">
-    <exec executable="php" logoutput="true" passthru="true" checkreturn="true">
-      <arg path="run_tests.php"/>
+    <exec executable="vendor/bin/run-tests" logoutput="true" passthru="true" checkreturn="true">
+      <arg value="-p"/>
+      <arg value="php"/>
+      <arg path="tests"/>
+      <arg value="-s"/>
+    </exec>
+  </target>
+  <target name="tests-coverage" description="Unit tests with code coverage (XDebug)">
+    <exec executable="vendor/bin/run-tests" logoutput="true" passthru="true" checkreturn="true">
+      <arg value="-p"/>
+      <arg value="php"/>
+      <arg path="tests"/>
+      <arg value="--coverage"/>
+      <arg path="./coverage.html"/>
+      <arg value="--coverage-src"/>
+      <arg path="./app"/>
+      <arg value="-s"/>
+    </exec>
+  </target>
+  <target name="tests-phpdbg" description="Unit tests with code coverage (phpdbg)">
+    <exec executable="vendor/bin/run-tests" logoutput="true" passthru="true" checkreturn="true">
+      <arg value="-p"/>
+      <arg value="phpdbg"/>
+      <arg path="tests"/>
+      <arg value="--coverage"/>
+      <arg path="./coverage.html"/>
+      <arg value="--coverage-src"/>
+      <arg path="./app"/>
+      <arg value="-s"/>
     </exec>
   </target>
 </project>

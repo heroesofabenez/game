@@ -3,37 +3,39 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Model;
 
-use MyTester as MT,
-    MyTester\Assert,
+use Tester\Assert,
     HeroesofAbenez\Orm\Item as ItemEntity;
 
-class ItemTest extends MT\TestCase {
+require __DIR__ . "/../../bootstrap.php";
+
+class ItemTest extends \Tester\TestCase {
   /** @var Item */
   protected $model;
   
-  function __construct(Item $model) {
-    $this->model = $model;
+  use \Testbench\TCompiledContainer;
+  
+  function setUp() {
+    $this->model = $this->getService(Item::class);
   }
   
   /**
-   * @param int $id
-   * @data(1)
    * @return void
    */
-  function testView(int $id) {
-    $item = $this->model->view($id);
+  function testView() {
+    $item = $this->model->view(1);
     Assert::type(ItemEntity::class, $item);
   }
   
   /**
-   * @param int $id
-   * @data(1)
    * @return void
    */
-  function testGetItemName(int $id) {
-    $actual = $this->model->getItemName($id);
+  function testGetItemName() {
+    $actual = $this->model->getItemName(1);
     $expected = "Book ABC";
     Assert::type("string", $actual);
   }
 }
+
+$test = new ItemTest;
+$test->run();
 ?>
