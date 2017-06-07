@@ -3,20 +3,23 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Model;
 
-use MyTester as MT,
-    MyTester\Assert,
+use Tester\Assert,
     HeroesofAbenez\Entities\Character,
     HeroesofAbenez\Entities\Team;
 
-class CombatBaseTest extends MT\TestCase {
+require __DIR__ . "/../../bootstrap.php";
+
+class CombatBaseTest extends \Tester\TestCase {
   /** @var  CombatLogger */
   protected $logger;
   /** @var  CombatHelper */
   protected $helper;
   
-  function __construct(CombatLogger $logger, CombatHelper $helper) {
-    $this->logger = $logger;
-    $this->helper = $helper;
+  use \Testbench\TCompiledContainer;
+  
+  function setUp() {
+    $this->logger = $this->getService(CombatLogger::class);
+    $this->helper = $this->getService(CombatHelper::class);
   }
   
   /**
@@ -30,9 +33,9 @@ class CombatBaseTest extends MT\TestCase {
     $team2[] = $this->helper->getPlayer(2);
     $combat->setTeams($team1, $team2);
     $combat->execute();
-    Assert::true($combat->round);
+    Assert::type("int", $combat->round);
     Assert::true(($combat->round <= 31));
-    Assert::true($combat->log->round);
+    Assert::type("int", $combat->log->round);
     Assert::same(5000, $combat->log->round);
     $players = array_merge($team1->items, $team2->items);
     /** @var Character $player */
@@ -41,4 +44,7 @@ class CombatBaseTest extends MT\TestCase {
     }
   }
 }
+
+$test = new CombatBaseTest;
+$test->run();
 ?>

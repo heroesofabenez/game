@@ -3,20 +3,23 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Model;
 
-use MyTester as MT,
-    MyTester\Assert,
+use Tester\Assert,
     HeroesofAbenez\Orm\SkillAttackDummy,
     HeroesofAbenez\Orm\SkillSpecialDummy,
     HeroesofAbenez\Orm\CharacterAttackSkillDummy,
     HeroesofAbenez\Orm\CharacterSpecialSkillDummy,
     HeroesofAbenez\Orm\BaseCharacterSkill;
 
-class SkillsTest extends MT\TestCase {
+require __DIR__ . "/../../bootstrap.php";
+
+class SkillsTest extends \Tester\TestCase {
   /** @var Skills */
   protected $model;
   
-  function __construct(Skills $model) {
-    $this->model = $model;
+  use \Testbench\TCompiledContainer;
+  
+  function setUp() {
+    $this->model = $this->getService(Skills::class);
   }
   
   /**
@@ -29,22 +32,18 @@ class SkillsTest extends MT\TestCase {
   }
   
   /**
-   * @param int $id
-   * @data(1)
    * @return void
    */
-  function testGetAttackSkill(int $id) {
-    $skill = $this->model->getAttackSkill($id);
+  function testGetAttackSkill() {
+    $skill = $this->model->getAttackSkill(1);
     Assert::type(SkillAttackDummy::class, $skill);
   }
   
   /**
-   * @param int $id
-   * @data(1)
    * @return void
    */
-  function testGetCharacterAttackSkill(int $id) {
-    $skill = $this->model->getCharacterAttackSkill($id);
+  function testGetCharacterAttackSkill() {
+    $skill = $this->model->getCharacterAttackSkill(1);
     Assert::type(CharacterAttackSkillDummy::class, $skill);
     Assert::type("int", $skill->damage);
     Assert::type("int", $skill->hitRate);
@@ -64,22 +63,18 @@ class SkillsTest extends MT\TestCase {
   }
   
   /**
-   * @param int $id
-   * @data(1)
    * @return void
    */
-  function testGetSpecialSkill(int $id) {
-    $skill = $this->model->getSpecialSkill($id);
+  function testGetSpecialSkill() {
+    $skill = $this->model->getSpecialSkill(1);
     Assert::type(SkillSpecialDummy::class, $skill);
   }
   
   /**
-   * @param int $id
-   * @data(1)
    * @return void
    */
-  function testGetCharacterSpecialSkill(int $id) {
-    $skill = $this->model->getCharacterSpecialSkill($id);
+  function testGetCharacterSpecialSkill() {
+    $skill = $this->model->getCharacterSpecialSkill(1);
     Assert::type(CharacterSpecialSkillDummy::class, $skill);
     Assert::type("int", $skill->value);
     Assert::type("int", $skill->cooldown);
@@ -105,4 +100,7 @@ class SkillsTest extends MT\TestCase {
     Assert::type("int", $result);
   }
 }
+
+$test = new SkillsTest;
+$test->run();
 ?>

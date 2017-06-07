@@ -2,10 +2,12 @@
 /nbproject/
 /.idea/
 /api/
-/tests/*.php
-/tests/*errors
+/tests/_temp/
 /images/
 /log/
 local.neon
 /vendor/
 !.htaccess
+output/
+*.output
+coverage.*

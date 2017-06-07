@@ -3,34 +3,26 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Model;
 
-use MyTester as MT,
-    MyTester\Assert,
-    HeroesofAbenez\Orm\Guild as GuildEntity,
-    Nextras\Orm\Collection\ICollection;
+use Tester\Assert,
+    HeroesofAbenez\Orm\Guild as GuildEntity;
 
-class GuildTest extends MT\TestCase {
+require __DIR__ . "/../../bootstrap.php";
+
+class GuildTest extends \Tester\TestCase {
   /** @var Guild */
   protected $model;
   
-  function __construct(Guild $model) {
-    $this->model = $model;
+  use \Testbench\TCompiledContainer;
+  
+  function setUp() {
+    $this->model = $this->getService(Guild::class);
   }
   
   /**
    * @return void
    */
-  function testListOfGuilds() {
-    $result = $this->model->listOfGuilds();
-    Assert::type(ICollection::class, $result);
-  }
-  
-  /**
-   * @param int $id
-   * @data(1)
-   * @return void
-   */
-  function testView(int $id) {
-    $guild = $this->model->view($id);
+  function testView() {
+    $guild = $this->model->view(1);
     Assert::type(GuildEntity::class, $guild);
     Assert::same("Dawn", $guild->name);
     Assert::type(\Nextras\Orm\Relationships\OneHasMany::class, $guild->members);
@@ -58,8 +50,17 @@ class GuildTest extends MT\TestCase {
   }
   
   /**
+   * @return int[]
+   */
+  function getIds(): array {
+    return [
+      [1, 2,]
+    ];
+  }
+  
+  /**
    * @param int $guild
-   * @data(1,2)
+   * @dataProvider getIds
    * @return void
    */
   function testGuildMembers(int $guild) {
@@ -86,7 +87,7 @@ class GuildTest extends MT\TestCase {
 
   /**
     * @param int $guild
-    * @data(1,2)
+   * @dataProvider getIds
     * @return void
     */
   function testGetCustomRankNames(int $guild) {
@@ -104,4 +105,7 @@ class GuildTest extends MT\TestCase {
     }
   }
 }
+
+$test = new GuildTest;
+$test->run();
 ?>

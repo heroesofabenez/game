@@ -3,9 +3,9 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Chat;
 
-use MyTester as MT,
-    MyTester\Assert,
-    HeroesofAbenez\Chat\ChatCommand;
+use Tester\Assert;
+
+require __DIR__ . "/../../bootstrap.php";
 
 class TestCommand extends ChatCommand {
   function __construct() {
@@ -36,22 +36,23 @@ class Test2Command extends ChatCommand {
   }
 }
 
-class ChatCommandsProcessorTest extends MT\TestCase {
+class ChatCommandsProcessorTest extends \Tester\TestCase {
   const COMMAND_NAME = "test1";
   const TEXT = "/" . self::COMMAND_NAME;
   
   /** @var ChatCommandsProcessor */
-  protected $model;
+  protected $model = NULL;
   
-  function __construct(ChatCommandsProcessor $model) {
-    $this->model = $model;
-  }
+  use \Testbench\TCompiledContainer;
   
   /**
    * @return void
    */
-  function startUp() {
-    $this->model->addCommand(new TestCommand);
+  function setUp() {
+    if(is_null($this->model)) {
+      $this->model = $this->getService(ChatCommandsProcessor::class);
+      $this->model->addCommand(new TestCommand);
+    }
   }
   
   /**
@@ -75,16 +76,18 @@ class ChatCommandsProcessorTest extends MT\TestCase {
    * @return void
    */
   function testAddCommand() {
-    $this->model->addCommand(new Test2Command);
-    Assert::same("test", $this->model->parse("/" . Test2Command::NAME));
+    $model = clone $this->model;
+    $model->addCommand(new Test2Command);
+    Assert::same("test", $model->parse("/" . Test2Command::NAME));
   }
   
   /**
    * @return void
    */
   function testAddAlias() {
-    $this->model->addAlias(self::COMMAND_NAME, "test");
-    Assert::same("passed", $this->model->parse("/test"));
+    $model = clone $this->model;
+    $model->addAlias(self::COMMAND_NAME, "test");
+    Assert::same("passed", $model->parse("/test"));
   }
   
   /**
@@ -97,8 +100,17 @@ class ChatCommandsProcessorTest extends MT\TestCase {
   }
   
   /**
+   * @return string[]
+   */
+  function getTexts(): array {
+    return [
+      ["anagfdffd", "/anagfdffd", ]
+    ];
+  }
+  
+  /**
    * @param string $text
-   * @data("anagfdffd", "/anagfdffd")
+   * @dataProvider getTexts
    * @return void
    */
   function testExtractParametersNothing(string $text) {
@@ -128,10 +140,15 @@ class ChatCommandsProcessorTest extends MT\TestCase {
    * @return void
    */
   function testParse() {
+    $model = clone $this->model;
+    $model->addCommand(new Test2Command);
     Assert::same("passed", $this->model->parse(self::TEXT));
-    Assert::null($this->model->parse("anagfdffd"));
-    Assert::null($this->model->parse("/anagfdffd"));
-    Assert::same("test12", $this->model->parse("/test2 1 2"));
+    Assert::null($model->parse("anagfdffd"));
+    Assert::null($model->parse("/anagfdffd"));
+    Assert::same("test12", $model->parse("/test2 1 2"));
   }
 }
+
+$test = new ChatCommandsProcessorTest;
+$test->run();
 ?>

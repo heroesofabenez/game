@@ -3,22 +3,34 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Model;
 
-use MyTester as MT,
-    MyTester\Assert,
+use Tester\Assert,
     HeroesofAbenez\Orm\Pet as PetEntity,
     HeroesofAbenez\Orm\PetType;
 
-class PetTest extends MT\TestCase {
+require __DIR__ . "/../../bootstrap.php";
+
+class PetTest extends \Tester\TestCase {
   /** @var Pet */
   protected $model;
   
-  function __construct(Pet $model) {
-    $this->model = $model;
+  use \Testbench\TCompiledContainer;
+  
+  function setUp() {
+    $this->model = $this->getService(Pet::class);
+  }
+  
+  /**
+   * @return int[]
+   */
+  function getPetIds(): array {
+    return [
+      [1, 50,]
+    ];
   }
   
   /**
    * @param int $id
-   * @data(1,50)
+   * @dataProvider getPetIds
    * @return void
    */
   function testViewType(int $id) {
@@ -31,8 +43,17 @@ class PetTest extends MT\TestCase {
   }
   
   /**
+   * @return int[]
+   */
+  function getUserIds(): array {
+    return [
+      [1, 2,]
+    ];
+  }
+  
+  /**
    * @param int $user
-   * @data(1,2)
+   * @dataProvider getUserIds
    * @return void
    */
   function testGetActivePet(int $user) {
@@ -45,4 +66,7 @@ class PetTest extends MT\TestCase {
     }
   }
 }
+
+$test = new PetTest;
+$test->run();
 ?>

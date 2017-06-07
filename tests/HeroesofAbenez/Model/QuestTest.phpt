@@ -3,16 +3,19 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Model;
 
-use MyTester as MT,
-    MyTester\Assert,
+use Tester\Assert,
     HeroesofAbenez\Orm\QuestDummy as QuestEntity;
 
-class QuestTest extends MT\TestCase {
+require __DIR__ . "/../../bootstrap.php";
+
+class QuestTest extends \Tester\TestCase {
   /** @var Quest */
   protected $model;
   
-  function __construct(Quest $model) {
-    $this->model = $model;
+  use \Testbench\TCompiledContainer;
+  
+  function setUp() {
+    $this->model = $this->getService(Quest::class);
   }
   
   function testListOfQuests() {
@@ -22,35 +25,32 @@ class QuestTest extends MT\TestCase {
   }
   
   /**
-   * @param int $id
-   * @data(1)
    * @return void
    */
-  function testView(int $id) {
-    $quest = $this->model->view($id);
+  function testView() {
+    $quest = $this->model->view(1);
     Assert::type(QuestEntity::class, $quest);
   }
   
   /**
-   * @param int $id
-   * @data(1)
    * @return void
    */
-  function testStatus(int $id) {
-    $result = $this->model->status($id);
+  function testStatus() {
+    $result = $this->model->status(1);
     Assert::type("integer", $result);
     Assert::same(1, $result);
   }
   
   /**
-   * @param int $id
-   * @data(1)
    * @return void
    */
-  function testIsFinished(int $id) {
-    $result = $this->model->isFinished($id);
+  function testIsFinished() {
+    $result = $this->model->isFinished(1);
     Assert::type("bool", $result);
     Assert::false($result);
   }
 }
+
+$test = new QuestTest;
+$test->run();
 ?>

@@ -3,12 +3,13 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Model;
 
-use MyTester as MT,
-    MyTester\Assert,
+use Tester\Assert,
     HeroesofAbenez\Entities\Character,
     HeroesofAbenez\Orm\Model as ORM;
 
-class CombatHelperTest extends MT\TestCase {
+require __DIR__ . "/../../bootstrap.php";
+
+class CombatHelperTest extends \Tester\TestCase {
   /** @var CombatHelper */
   protected $model;
   /** @var \Nette\Security\User */
@@ -16,46 +17,42 @@ class CombatHelperTest extends MT\TestCase {
   /** @var ORM */
   protected $orm;
   
-  function __construct(CombatHelper $model, \Nette\Security\User $user, ORM $orm) {
-    $this->model = $model;
-    $this->user = $user;
-    $this->orm = $orm;
+  use \Testbench\TCompiledContainer;
+  
+  function setUp() {
+    $this->model = $this->getService(CombatHelper::class);
+    $this->user = $this->getService(\Nette\Security\User::class);
+    $this->orm = $this->getService(ORM::class);
   }
   
   /**
-   * @param int $id
-   * @data(1)
    * @return void
    */
-  function testGetInitiativeFormula(int $id) {
-    $result = $this->model->getInitiativeFormula($id);
+  function testGetInitiativeFormula() {
+    $result = $this->model->getInitiativeFormula(1);
     Assert::type("string", $result);
     Assert::true((strlen($result) > 1));
   }
   
   /**
-   * @param int $id
-   * @data(1)
    * @return void
    */
-  function testGetPlayer(int $id) {
-    $player = $this->model->getPlayer($id);
+  function testGetPlayer() {
+    $player = $this->model->getPlayer(1);
     Assert::type(Character::class, $player);
-    Assert::true(count($player->pets));
-    Assert::true(count($player->equipment));
-    Assert::true(count($player->skills));
+    Assert::count(1, $player->pets);
+    Assert::count(0, $player->equipment);
+    Assert::count(1, $player->skills);
   }
   
   /**
-   * @param int $id
-   * @data(1)
    * @return void
    */
-  function testGetArenaNpc(int $id) {
-    $player = $this->model->getArenaNpc($id);
+  function testGetArenaNpc() {
+    $player = $this->model->getArenaNpc(1);
     Assert::type(Character::class, $player);
-    Assert::false(count($player->pets));
-    Assert::true(count($player->skills));
+    Assert::count(0, $player->pets);
+    Assert::count(1, $player->skills);
   }
   
   /**
@@ -87,4 +84,7 @@ class CombatHelperTest extends MT\TestCase {
     $this->orm->arenaFightsCount->removeAndFlush($record);
   }
 }
+
+$test = new CombatHelperTest;
+$test->run();
 ?>
