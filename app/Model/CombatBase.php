@@ -75,6 +75,7 @@ class CombatBase {
     $this->onCombatStart[] = [$this, "setSkillsCooldowns"];
     $this->onCombatEnd[] = [$this, "removeCombatEffects"];
     $this->onCombatEnd[] = [$this, "logCombatResult"];
+    $this->onCombatEnd[] = [$this, "resetInitiative"];
     $this->onRoundStart[] = [$this ,"recalculateStats"];
     $this->onRoundStart[] = [$this, "logRoundNumber"];
     $this->onRound[] = [$this, "mainStage"];
