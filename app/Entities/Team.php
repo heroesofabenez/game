@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Entities;
 
+use Nexendrie\Utils\Collection;
+
 /**
  * Structure for a team in combat
  * 
@@ -13,7 +15,7 @@ namespace HeroesofAbenez\Entities;
  * @property-read Character[] $aliveMembers
  * @property-read Character[] $usableMembers
  */
-class Team extends \HeroesofAbenez\Utils\Collection {
+class Team extends Collection {
   /** @var string Name of the team */
   protected $name;
   

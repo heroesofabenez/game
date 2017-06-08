@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "7f7d3cd463996930623fb5e4b6161a4c",
+    "content-hash": "b08634182922fd43cda24e408a04b6c5",
     "packages": [
         {
             "name": "kdyby/autowired",
@@ -2130,7 +2130,7 @@
                 "testing",
                 "unit"
             ],
-            "time": "2017-05-02T15:37:20+00:00"
+            "time": "2017-05-02 15:37:20"
         },
         {
             "name": "nexendrie/code-quality",

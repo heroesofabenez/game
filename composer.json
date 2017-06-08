@@ -27,6 +27,7 @@
         "kdyby/autowired": "^1.4",
         "nexendrie/translation": "^1.0",
         "nexendrie/menu": "^1.0",
+        "nexendrie/utils": "^1.0",
         "nextras/orm": "^2.2"
     },
     "require-dev": {
