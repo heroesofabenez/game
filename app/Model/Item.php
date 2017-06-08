@@ -20,16 +20,10 @@ class Item {
   protected $orm;
   /** @var \Nette\Security\User */
   protected $user;
-  /** @var \Nette\Application\LinkGenerator */
-  protected $linkGenerator;
   
   function __construct(ORM $orm, \Nette\Security\User $user) {
     $this->orm = $orm;
     $this->user = $user;
-  }
-  
-  function setLinkGenerator(\Nette\Application\LinkGenerator $generator) {
-    $this->linkGenerator = $generator;
   }
   
   /**
