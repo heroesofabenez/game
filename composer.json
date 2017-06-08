@@ -45,6 +45,13 @@
         },
         "classmap": ["app/Model/exceptions.php"]
     },
+    "autoload-dev": {
+        "psr-4": {
+            "HeroesofAbenez\\": [
+                "tests/"
+            ]
+        }
+    },
     "config": {
         "classmap-authoritative": true
     },

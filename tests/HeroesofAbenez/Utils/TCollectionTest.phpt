@@ -7,21 +7,6 @@ use Tester\Assert;
 
 require __DIR__ . "/../../bootstrap.php";
 
-class Item {
-  public $var;
-  
-  public function __construct($var) {
-    $this->var = $var;
-  }
-}
-
-class TestCollection extends Collection {
-  
-  function __construct() {
-    $this->class = Item::class;
-  }
-}
-
 /**
  * @testCase
  */

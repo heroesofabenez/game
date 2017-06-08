@@ -7,35 +7,6 @@ use Tester\Assert;
 
 require __DIR__ . "/../../bootstrap.php";
 
-class TestCommand extends ChatCommand {
-  function __construct() {
-    $this->name = ChatCommandsProcessorTest::COMMAND_NAME;
-  }
-  
-  /**
-   * @return string
-   */
-  function execute(): string {
-    return "passed";
-  }
-}
-
-class Test2Command extends ChatCommand {
-  const NAME = "test2";
-  
-  /**
-   * @return string
-   */
-  function execute() : string {
-    $args = func_get_args();
-    $text = "test";
-    foreach($args as $arg) {
-      $text .= $arg;
-    }
-    return $text;
-  }
-}
-
 /**
  * @testCase
  */
