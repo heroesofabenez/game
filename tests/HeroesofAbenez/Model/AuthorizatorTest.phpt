@@ -7,6 +7,9 @@ use Tester\Assert;
 
 require __DIR__ . "/../../bootstrap.php";
 
+/**
+ * @testCase
+ */
 class AuthorizatorTest extends \Tester\TestCase {
   /** @var \Nette\Security\Permission */
   protected $model;

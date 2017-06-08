@@ -36,6 +36,9 @@ class Test2Command extends ChatCommand {
   }
 }
 
+/**
+ * @testCase
+ */
 class ChatCommandsProcessorTest extends \Tester\TestCase {
   const COMMAND_NAME = "test1";
   const TEXT = "/" . self::COMMAND_NAME;

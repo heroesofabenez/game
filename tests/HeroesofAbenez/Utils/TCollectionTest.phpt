@@ -22,6 +22,9 @@ class TestCollection extends Collection {
   }
 }
 
+/**
+ * @testCase
+ */
 class TCollectionTest extends \Tester\TestCase {
   protected $col;
   

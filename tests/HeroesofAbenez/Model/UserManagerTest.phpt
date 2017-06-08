@@ -8,6 +8,9 @@ use Tester\Assert,
 
 require __DIR__ . "/../../bootstrap.php";
 
+/**
+ * @testCase
+ */
 class UserManagerTest extends \Tester\TestCase {
   /** @var UserManager */
   protected $model;

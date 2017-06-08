@@ -11,6 +11,9 @@ use Tester\Assert,
 
 require __DIR__ . "/../../bootstrap.php";
 
+/**
+ * @testCase
+ */
 class ProfileTest extends \Tester\TestCase {
   /** @var Profile */
   protected $model;
