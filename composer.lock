@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "b08634182922fd43cda24e408a04b6c5",
+    "content-hash": "45001f8d0bf02df3e2a091f2cf72662f",
     "packages": [
         {
             "name": "kdyby/autowired",
@@ -2138,21 +2138,21 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/nexendrie/code-quality.git",
-                "reference": "77dc1ccfb922a80c05aa3baabb862a5d26df0af7"
+                "reference": "7b29a8dcfeb5ad54ae49c2b8144962b1b427e44c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nexendrie/code-quality/zipball/77dc1ccfb922a80c05aa3baabb862a5d26df0af7",
-                "reference": "77dc1ccfb922a80c05aa3baabb862a5d26df0af7",
+                "url": "https://api.github.com/repos/nexendrie/code-quality/zipball/7b29a8dcfeb5ad54ae49c2b8144962b1b427e44c",
+                "reference": "7b29a8dcfeb5ad54ae49c2b8144962b1b427e44c",
                 "shasum": ""
             },
             "require": {
+                "codacy/coverage": "^1.1",
                 "jakub-onderka/php-console-highlighter": "^0.3.2",
                 "jakub-onderka/php-parallel-lint": "^0.9.2",
                 "mrtnzlml/testbench": "^2.4.2",
                 "nette/tester": "2.0.x-dev",
                 "phpstan/phpstan": "^0.7",
-                "satooshi/php-coveralls": "^1.0",
                 "squizlabs/php_codesniffer": "^3.0"
             },
             "type": "library",
@@ -2173,7 +2173,7 @@
                 "quality",
                 "testing"
             ],
-            "time": "2017-05-15T08:19:42+00:00"
+            "time": "2017-06-10T13:23:15+00:00"
         },
         {
             "name": "nikic/php-parser",
