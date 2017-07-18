@@ -17,8 +17,6 @@ class RankingPresenter extends BasePresenter {
   
   /**
    * Set up paginator
-   * 
-   * @return void
    */
   function startup(): void {
     parent::startup();
@@ -29,45 +27,27 @@ class RankingPresenter extends BasePresenter {
   
   /**
    * Use just one template for this presenter
-   * 
-   * @return array
    */
   function formatTemplateFiles() {
     return [__DIR__ . "/../templates/Ranking.@layout.latte"];
   }
   
-  /**
-   * @param int $page Page to show
-   * @return void
-   */
   function actionCharacters(int $page = 1): void {
     $this->template->title = "Ranking Characters";
     $this->template->ranking = "charactersRanking";
   }
   
-  /**
-   * @param int $page Page to show
-   * @return void
-   */
   function actionGuilds(int $page = 1): void {
     $this->template->title = "Ranking Guilds";
     $this->template->ranking = "guildsRanking";
   }
   
-  /**
-   * @param Ranking\ICharactersRankingControlFactory $factory
-   * @return Ranking\CharactersRankingControl
-   */
   function createComponentCharactersRanking(Ranking\ICharactersRankingControlFactory $factory): Ranking\CharactersRankingControl {
     $component = $factory->create();
     $component->paginator = $this->paginator;
     return $component;
   }
   
-  /**
-   * @param Ranking\IGuildsRankingControlFactory $factory
-   * @return Ranking\GuildsRankingControl
-   */
   function createComponentGuildsRanking(Ranking\IGuildsRankingControlFactory $factory): Ranking\GuildsRankingControl {
     return $factory->create();
   }

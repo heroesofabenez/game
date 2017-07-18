@@ -74,8 +74,6 @@ abstract class ChatControl extends \Nette\Application\UI\Control {
   
   /**
    * Renders the chat
-   * 
-   * @return void
    */
   function render(): void {
     $this->template->setFile(__DIR__ . "/chat.latte");
@@ -86,9 +84,6 @@ abstract class ChatControl extends \Nette\Application\UI\Control {
   
   /**
    * Submits new message
-   * 
-   * @param string $message message
-   * @return void
    */
   function newMessage(string $message): void {
     $result = $this->processor->parse($message);

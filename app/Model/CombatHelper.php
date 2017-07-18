@@ -38,9 +38,6 @@ class CombatHelper {
   
   /**
    * Get initiative formula for given class
-   * 
-   * @param int $classId
-   * @return string
    */
   function getInitiativeFormula(int $classId): string {
     $class = $this->profileModel->getClass($classId);
@@ -53,9 +50,6 @@ class CombatHelper {
   
   /**
    * Get data for specified player
-   *
-   * @param int $id Player's id
-   * @return Character
    * @throws OpponentNotFoundException
    */
   function getPlayer(int $id): Character {
@@ -92,11 +86,6 @@ class CombatHelper {
     return $player;
   }
   
-  /**
-   * @param array $data
-   * @param array $skills
-   * @return void
-   */
   protected function getArenaNpcSkillsLevels(array $data, array &$skills): void {
     if($data["level"] < 2) {
       $skills = [$skills[0]];
@@ -117,9 +106,6 @@ class CombatHelper {
   
   /**
    * Get data for specified npc
-   * 
-   * @param int $id Npc's id
-   * @return Character
    * @throws OpponentNotFoundException
    */
   function getArenaNpc($id): Character {
@@ -165,9 +151,6 @@ class CombatHelper {
   
   /**
    * Get amount of fights a player has fought today in arena
-   *
-   * @param int $uid
-   * @return int
    */
   function getNumberOfTodayArenaFights(int $uid): int {
     $row = $this->orm->arenaFightsCount->getByCharacterAndDay($uid, date("d.m.Y"));
@@ -180,9 +163,6 @@ class CombatHelper {
   
   /**
    * Increase amount of a player's fights in arena
-   *
-   * @param int $uid
-   * @return void
    */
   function bumpNumberOfTodayArenaFights(int $uid): void {
     $day = date("d.m.Y");

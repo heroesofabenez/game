@@ -15,17 +15,10 @@ class PostofficePresenter extends BasePresenter {
   /** @var Postoffice\IPostofficeControlFactory @autowire */
   protected $poFactory;
   
-  /**
-   * @return void
-   */
   function renderNew(): void {
     $this->template->haveForm = true;
   }
   
-  /**
-   * @param int $id 
-   * @return void
-   */
   function actionMessage(int $id): void {
     $status = $this->createComponentPostoffice()->messageStatus($id);
     if($status === 0) {
@@ -36,17 +29,12 @@ class PostofficePresenter extends BasePresenter {
     $this->template->id = $id;
   }
   
-  /**
-   * @return Postoffice\PostofficeControl
-   */
   protected function createComponentPostoffice(): Postoffice\PostofficeControl {
     return $this->poFactory->create();
   }
   
   /**
    * Creates form for writing new message
-   * 
-   * @return Form
    */
   protected function createComponentNewMessageForm(): Form {
     $form = new Form;
@@ -65,12 +53,6 @@ class PostofficePresenter extends BasePresenter {
     return $form;
   }
   
-  /**
-   * 
-   * @param Form $form
-   * @param array $values
-   * @return void
-   */
   function newMessageFormSucceeded(Form $form, array $values): void {
     $data = [
       "from" => $this->user->id, "to" => $values["to"], "subject" => $values["subject"], "text" => $values["message"]

@@ -56,9 +56,6 @@ class Quest {
   
   /**
    * Gets info about specified quest
-   * 
-   * @param int $id Quest's id
-   * @return QuestEntity|NULL
    */
   function view(int $id): ?QuestEntity {
     $quests = $this->listOfQuests();
@@ -67,9 +64,6 @@ class Quest {
   
   /**
    * Get quest's status
-   * 
-   * @param int $id Quest's id
-   * @return int
    */
   function status(int $id): int {
     $row = $this->orm->characterQuests->getByCharacterAndQuest($this->user->id, $id);
@@ -82,9 +76,6 @@ class Quest {
   
   /**
    * Checks if the player finished specified quest
-   * 
-   * @param int $id Quest's id
-   * @return bool
    */
   function isFinished(int $id): bool {
     $status = $this->status($id);

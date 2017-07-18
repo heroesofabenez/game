@@ -33,9 +33,6 @@ class Request {
   
   /**
    * Can player see the request?
-   * 
-   * @param int $requestId
-   * @return bool
    */
   function canShow(int $requestId): bool {
     $request = $this->orm->requests->getById($requestId);
@@ -78,9 +75,6 @@ class Request {
   
   /**
    * Can player accept/decline the request?
-   * 
-   * @param int $requestId
-   * @return bool
    */
   function canChange(int $requestId): bool {
     $request = $this->orm->requests->getById($requestId);
@@ -103,9 +97,7 @@ class Request {
   
   /**
    * Gets data about specified request
-   * 
-   * @param int $id Request's id
-   * @return RequestEntity
+   *
    * @throws RequestNotFoundException
    * @throws CannotSeeRequestException
    */
@@ -122,9 +114,7 @@ class Request {
   
   /**
    * Accept specified request
-   * 
-   * @param int $id Request's id
-   * @return void
+   *
    * @throws RequestNotFoundException
    * @throws CannotSeeRequestException
    * @throws CannotAcceptRequestException
@@ -168,9 +158,7 @@ class Request {
   
   /**
    * Decline specified request
-   * 
-   * @param int $id Request's id
-   * @return void
+   *
    * @throws RequestNotFoundException
    * @throws CannotSeeRequestException
    * @throws CannotDeclineRequestException

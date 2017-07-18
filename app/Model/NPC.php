@@ -23,9 +23,6 @@ class NPC {
   
   /**
    * Get info about specified npc
-   * 
-   * @param int $id Npc's id
-   * @return NPCEntity|NULL
    */
   function view(int $id): ?NPCEntity {
     return $this->orm->npcs->getById($id);
@@ -33,9 +30,6 @@ class NPC {
   
   /**
    * Get name of specified npc
-   * 
-   * @param int $id Npc's id
-   * @return string
    */
   function getNpcName(int $id): string {
     $npc = $this->view($id);

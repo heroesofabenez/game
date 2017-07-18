@@ -35,9 +35,6 @@ class Guild {
   
   /**
    * Get name of specified guild
-   * 
-   * @param int $id Id of guild
-   * @return string
    */
   function getGuildName(int $id): string {
     $guild = $this->view($id);
@@ -50,9 +47,6 @@ class Guild {
   
   /**
    * Gets basic data about specified guild
-   * 
-   * @param integer $id guild's id
-   * @return GuildEntity|NULL
    */
   function view(int $id): ?GuildEntity {
     return $this->orm->guilds->getById($id);
@@ -60,10 +54,6 @@ class Guild {
   
   /**
    * Get a guild's custom name for a rank
-   * 
-   * @param int $guild
-   * @param int $rank
-   * @return string
    */
   function getCustomRankName(int $guild, int $rank): string {
     $customRank = $this->orm->guildRanksCustom->getByGuildAndRank($guild, $rank);
@@ -78,8 +68,8 @@ class Guild {
    * Get members of specified guild
    * 
    * @param int $id Id of guild
-   * @param array $roles Return only members with these roles
-   * @param bool $customRoleNames Whetever the guild's custom names should be used
+   * @param int[] $roles Return only members with these roles
+   * @param bool $customRoleNames Whether the guild's custom names should be used
    * @return \stdClass[]
    */
   function guildMembers(int $id, array $roles = [], bool $customRoleNames = false): array {
@@ -123,9 +113,7 @@ class Guild {
   
   /**
    * Send application to a guild
-   * 
-   * @param int $gid Guild to join
-   * @return void
+   *
    * @throws GuildNotFoundException
    */
   function sendApplication(int $gid): void {
@@ -146,8 +134,6 @@ class Guild {
   
   /**
    * Check if player has an unresolved application
-   * 
-   * @return bool
    */
   function haveUnresolvedApplication(): bool {
     $app = $this->orm->requests->getBy([
@@ -181,9 +167,7 @@ class Guild {
   
   /**
    * Increase rank of specified member of guild
-   * 
-   * @param int $id Id of player to be demoted
-   * @return void
+   *
    * @throws NotInGuildException
    * @throws MissingPermissionsException
    * @throws PlayerNotFoundException
@@ -235,9 +219,7 @@ class Guild {
   
   /**
    * Decrease rank of specified member of guild
-   * 
-   * @param int $id Id of player to be demoted
-   * @return void
+   *
    * @throws NotInGuildException
    * @throws MissingPermissionsException
    * @throws PlayerNotFoundException
@@ -282,9 +264,7 @@ class Guild {
   
   /**
    * Kick specified member from guild
-   * 
-   * @param int $id Id of player to be kicked
-   * @return void
+   *
    * @throws NotInGuildException
    * @throws MissingPermissionsException
    * @throws PlayerNotFoundException
@@ -322,8 +302,7 @@ class Guild {
   
   /**
    * Leave the guild
-   * 
-   * @return void
+   *
    * @throws NotInGuildException
    * @throws GrandmasterCannotLeaveGuildException
   */
@@ -341,9 +320,6 @@ class Guild {
   
   /**
    * Dissolve guild
-   *
-   * @param int $id Guild to dissolve
-   * @return void
    */
   function dissolve(int $id): void {
     $guild = $this->orm->guilds->getById($id);
@@ -358,10 +334,6 @@ class Guild {
   
   /**
    * Rename guild
-   *
-   * @param int $id Guild to rename
-   * @param string $name New name
-   * @return void
    * @throws NameInUseException
   */
   function rename(int $id, string $name): void {
@@ -376,10 +348,7 @@ class Guild {
   
   /**
    * Change description of specified guild
-   * 
-   * @param int $id Guild's id
-   * @param string $description New description
-   * @return void
+   *
    * @throws GuildNotFoundException
    */
   function changeDescription(int $id, string $description): void {
@@ -393,10 +362,6 @@ class Guild {
   
   /**
    * Join a guild
-   * 
-   * @param int $uid Character's id
-   * @param int $gid Guild's id
-   * @return void
    */
   function join(int $uid, int $gid): void {
     $character = $this->orm->characters->getById($uid);
@@ -427,8 +392,6 @@ class Guild {
   /**
    * Set custom rank names for user's guild
    *
-   * @param array $names
-   * @return void
    * @throws MissingPermissionsException
    */
   function setCustomRankNames(array $names): void {

@@ -24,8 +24,6 @@ class CharacterPresenter extends BasePresenter {
   
   /**
    * Get list of races of classes
-   * 
-   * @return void
    */
   function startup(): void {
     parent::startup();
@@ -33,9 +31,6 @@ class CharacterPresenter extends BasePresenter {
     $this->races = $this->model->getRacesList();
   }
   
-  /**
-   * @return void
-   */
   function renderCreate(): void {
     $racesIds = $classesIds = [];
     foreach($this->races as $race) {
@@ -50,8 +45,6 @@ class CharacterPresenter extends BasePresenter {
   
   /**
    * Create form for creating character
-   * @param CreateCharacterFormFactory $factory
-   * @return Form
    */
   protected function createComponentCreateCharacterForm(CreateCharacterFormFactory $factory): Form {
     $form = $factory->create($this->races, $this->classes);
@@ -68,7 +61,6 @@ class CharacterPresenter extends BasePresenter {
   
   /**
    * @param string $data Serialized array with data
-   * @return void
    */
   function renderCreated(string $data): void {
     $data = unserialize($data);

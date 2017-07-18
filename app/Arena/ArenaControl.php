@@ -10,7 +10,8 @@ use Nette\Security\User,
     Nette\Localization\ITranslator,
     HeroesofAbenez\Entities\Character,
     HeroesofAbenez\Model\CombatDuel,
-    HeroesofAbenez\Model\OpponentNotFoundException;
+    HeroesofAbenez\Model\OpponentNotFoundException,
+    Nextras\Orm\Collection\ICollection;
 
 /**
  * Basic Arena Control
@@ -47,9 +48,7 @@ abstract class ArenaControl extends \Nette\Application\UI\Control {
   
   /**
    * Get data for specified player
-   * 
-   * @param int $id Player's id
-   * @return Character
+   *
    * @throws OpponentNotFoundException
    */
   protected function getPlayer(int $id): Character {
@@ -61,11 +60,8 @@ abstract class ArenaControl extends \Nette\Application\UI\Control {
     return $player;
   }
   
-  abstract protected function getOpponents();
+  abstract protected function getOpponents(): ICollection;
   
-  /**
-   * @return void
-   */
   function render(): void {
     $this->template->setFile(__DIR__ . "/arena.latte");
     $this->template->opponents = $this->getOpponents();
@@ -74,17 +70,12 @@ abstract class ArenaControl extends \Nette\Application\UI\Control {
   }
   
   /**
-   * @param Character $player
-   * @param Character $opponent
    * @return int[]
    */
   abstract protected function calculateRewards(Character $player, Character $opponent): array;
   
   /**
    * Execute the duel
-   * 
-   * @param Character $opponent Opponent
-   * @return void
    */
   protected function doDuel(Character $opponent): void {
     if($this->combatHelper->getNumberOfTodayArenaFights($this->user->id) >= self::DAILY_FIGHTS_LIMIT) {
@@ -106,10 +97,6 @@ abstract class ArenaControl extends \Nette\Application\UI\Control {
     $this->presenter->redirect("Combat:view", ["id" => $combatId]);
   }
   
-  /**
-   * @param int $id
-   * @return void
-   */
   abstract function handleFight(int $id): void;
   
   /**

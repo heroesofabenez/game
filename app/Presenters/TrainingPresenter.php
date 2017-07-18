@@ -22,19 +22,12 @@ class TrainingPresenter extends BasePresenter {
   /** @var \HeroesofAbenez\Model\Skills @autowire */
   protected $skillsModel;
   
-  /**
-   * @param \HeroesofAbenez\Model\Profile $model
-   * @param \Nette\Security\User $user
-   */
   function __construct(\HeroesofAbenez\Model\Profile $model, \Nette\Security\User $user) {
     parent::__construct();
     $this->model = $model;
     $this->model->user = $user;
   }
   
-  /**
-   * @return void
-   */
   function renderDefault(): void {
     $this->template->stat_points = $this->model->getStatPoints();
     $this->template->stats = $this->model->getStats();
@@ -42,10 +35,6 @@ class TrainingPresenter extends BasePresenter {
     $this->template->skills = $this->skillsModel->getAvailableSkills();
   }
   
-  /**
-   * @param string $stat
-   * @return void
-   */
   function handleTrainStat(string $stat): void {
     try {
       $this->model->trainStat($stat);
@@ -57,11 +46,6 @@ class TrainingPresenter extends BasePresenter {
     $this->redirect("Training:");
   }
   
-  /**
-   * @param int $skillId
-   * @param string $skillType
-   * @return void
-   */
   function handleTrainSkill(int $skillId, string $skillType): void {
     try {
       $this->skillsModel->trainSkill($skillId, $skillType);

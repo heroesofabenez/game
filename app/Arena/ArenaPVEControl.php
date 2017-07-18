@@ -30,9 +30,7 @@ class ArenaPVEControl extends ArenaControl {
   
   /**
    * Get data for specified npc
-   * 
-   * @param int $id Npc's id
-   * @return Character
+   *
    * @throws OpponentNotFoundException
    */
   protected function getNpc(int $id): Character {
@@ -46,9 +44,6 @@ class ArenaPVEControl extends ArenaControl {
   
   /**
    * Show champion's profile
-   *
-   * @param int $id
-   * @return void
    */
   function renderChampion(int $id): void {
     $template = $this->template;
@@ -63,9 +58,7 @@ class ArenaPVEControl extends ArenaControl {
   
   /**
    * Calculate rewards from won combat
-   * 
-   * @param Character $player
-   * @param Character $opponent
+   *
    * @return int[]
    */
   protected function calculateRewards(Character $player, Character $opponent): array {
@@ -80,9 +73,6 @@ class ArenaPVEControl extends ArenaControl {
   
   /**
    * Fight a npc
-   * 
-   * @param int $npcId
-   * @return void
    */
   function handleFight(int $npcId): void {
     try {

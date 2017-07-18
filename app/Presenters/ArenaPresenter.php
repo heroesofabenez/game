@@ -14,11 +14,7 @@ class ArenaPresenter extends BasePresenter {
   /** @var int */
   protected $min_level = 3;
   
-  /**
-   * @param int $id
-   * @return void
-   */
-  function renderChampion($id): void {
+  function renderChampion(int $id): void {
     $this->template->id = $id;
   }
   

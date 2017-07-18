@@ -45,9 +45,6 @@ class Location {
   
   /**
    * Gets data about specified stage
-   * 
-   * @param int $id Stage's id
-   * @return QuestStage|NULL
    */
   function getStage(int $id): ?QuestStage {
     return $this->orm->stages->getById($id);
@@ -64,9 +61,6 @@ class Location {
   
   /**
    * Gets data about specified area
-   * 
-   * @param int $id Area's id
-   * @return QuestArea|NULL
    */
   function getArea(int $id): ?QuestArea {
     return $this->orm->areas->getById($id);
@@ -74,9 +68,6 @@ class Location {
   
   /**
    * Get name of specified stage
-   * 
-   * @param int $id Id of stage
-   * @return string
    */
   function getStageName(int $id): string {
     $stage = $this->getStage($id);
@@ -89,9 +80,6 @@ class Location {
   
   /**
    * Get name of specified area
-   * 
-   * @param int $id Id of area
-   * @return string
    */
   function getAreaName(int $id): string {
     $area = $this->getArea($id);
@@ -130,9 +118,7 @@ class Location {
   
   /**
    * Try to travel to specified stage
-   * 
-   * @param int $id Stage's id
-   * @return void
+   *
    * @throws StageNotFoundException
    * @throws CannotTravelToStageException
    */

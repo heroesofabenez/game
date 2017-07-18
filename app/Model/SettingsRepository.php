@@ -19,9 +19,6 @@ class SettingsRepository {
     $this->settings = $settings;
   }
   
-  /**
-   * @return array
-   */
   function getSettings(): array {
     return $this->settings;
   }

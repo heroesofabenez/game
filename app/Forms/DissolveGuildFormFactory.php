@@ -22,9 +22,6 @@ class DissolveGuildFormFactory extends BaseFormFactory {
     parent::__construct($translator);
   }
   
-  /**
-   * @return Form
-   */
   function  create(): Form {
     $form = parent::createBase();
     $currentName = $this->model->getGuildName($this->user->identity->guild);
@@ -36,9 +33,6 @@ class DissolveGuildFormFactory extends BaseFormFactory {
     return $form;
   }
   
-  /**
-   * @return void
-   */
   function submitted(): void {
     $gid = $this->user->identity->guild;
     $this->model->dissolve($gid);

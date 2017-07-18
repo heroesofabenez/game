@@ -19,9 +19,6 @@ abstract class BaseFormFactory {
     $this->translator = $translator;
   }
   
-  /**
-   * @return Form
-   */
   function createBase(): Form {
     $form = new Form;
     $form->setTranslator($this->translator);

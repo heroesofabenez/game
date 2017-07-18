@@ -35,17 +35,11 @@ class DialogueLine {
     $this->names = $names;
   }
   
-  /**
-   * @return string
-   */
   function getText(): string {
     $replace = ["#npcName#", "#playerName#"];
     return str_replace($replace, $this->names, $this->text);
   }
   
-  /**
-   * @return string
-   */
   function getSpeaker(): string {
     if($this->speaker === "npc") {
       return $this->names[0];

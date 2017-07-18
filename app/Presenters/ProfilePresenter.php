@@ -14,17 +14,10 @@ class ProfilePresenter extends BasePresenter {
   /** @var \HeroesofAbenez\Model\Guild @autowire */
   protected $guildModel;
   
-  /**
-   * @return void
-   */
   function actionDefault(): void {
     $this->forward("view", $this->user->id);
   }
   
-  /**
-   * @param int $id id of character
-   * @return void
-   */
   function renderView(int $id): void {
     $data = $this->model->view($id);
     if(is_null($data)) {

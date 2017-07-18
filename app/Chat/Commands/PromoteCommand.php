@@ -32,7 +32,6 @@ class PromoteCommand extends \HeroesofAbenez\Chat\ChatCommand {
   
   /**
    * @param int $id
-   * @return string
    */
   function execute(): string {
     $id = Arrays::get(func_get_args(), 0, "");

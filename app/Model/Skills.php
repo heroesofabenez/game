@@ -53,20 +53,11 @@ class Skills {
     return $skillsList;
   }
   
-  /**
-   * @param int $id
-   * @return SkillAttackDummy|NULL
-   */
   function getAttackSkill(int $id): ?SkillAttackDummy {
     $skills = $this->getListOfAttackSkills();
     return Arrays::get($skills, $id, NULL);
   }
   
-  /**
-   * @param int $skillId
-   * @param int $userId
-   * @return CharacterAttackSkillDummy|NULL
-   */
   function getCharacterAttackSkill(int $skillId, int $userId = 0): ?CharacterAttackSkillDummy {
     if($userId === 0) {
       $userId = $this->user->id;
@@ -102,20 +93,11 @@ class Skills {
     return $skillsList;
   }
   
-  /**
-   * @param int $id
-   * @return SkillSpecialDummy|NULL
-   */
   function getSpecialSkill(int $id): ?SkillSpecialDummy {
     $skills = $this->getListOfSpecialSkills();
     return Arrays::get($skills, $id, NULL);
   }
   
-  /**
-   * @param int $skillId
-   * @param int $userId
-   * @return CharacterSpecialSkillDummy|NULL
-   */
   function getCharacterSpecialSkill(int $skillId, int $userId = 0): ?CharacterSpecialSkillDummy {
     if($userId === 0) {
       $userId = $this->user->id;
@@ -197,8 +179,6 @@ class Skills {
   
   /**
    * Get amount of user's usable skill points
-   * 
-   * @return int
    */
   function getSkillPoints(): int {
     return $this->orm->characters->getById($this->user->id)->skillPoints;
@@ -206,10 +186,7 @@ class Skills {
   
   /**
    * Learn new skill/improve existing one
-   * 
-   * @param int $id
-   * @param string $type
-   * @return void
+   *
    * @throws InvalidSkillTypeException
    * @throws NoSkillPointsAvailableException
    * @throws SkillNotFoundException

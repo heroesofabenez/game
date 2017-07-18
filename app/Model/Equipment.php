@@ -26,8 +26,6 @@ class Equipment {
   
   /**
    * Gets data about specified equipment
-   * @param int $id
-   * @return EquipmentEntity|NULL
    */
   function view(int $id): ?EquipmentEntity {
     return $this->orm->equipment->getById($id);
@@ -35,12 +33,6 @@ class Equipment {
   
   /**
    * Equip an item
-   * 
-   * @param int $id
-   * @return void
-   * @throws ItemNotFoundException
-   * @throws ItemNotOwnedException
-   * @throws ItemAlreadyEquippedException
    */
   function equipItem(int $id): void {
     $item = $this->orm->characterEquipment->getById($id);
@@ -61,9 +53,7 @@ class Equipment {
   
   /**
    * Unequip an item
-   * 
-   * @param int $id
-   * @return void
+   *
    * @throws ItemNotFoundException
    * @throws ItemNotOwnedException
    * @throws ItemNotWornException

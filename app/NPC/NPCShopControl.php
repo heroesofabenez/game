@@ -52,9 +52,6 @@ class NPCShopControl extends \Nette\Application\UI\Control {
     return $return;
   }
   
-  /**
-   * @return void
-   */
   function render(): void {
     $template = $this->template;
     $template->setFile(__DIR__ . "/npcShop.latte");
@@ -65,9 +62,6 @@ class NPCShopControl extends \Nette\Application\UI\Control {
   
   /**
    * Check if an item is in the shop
-   * 
-   * @param int $id Item's id
-   * @return bool
    */
   function canBuyItem(int $id): bool {
     $row = $this->orm->shopItems->getById($id);
@@ -76,9 +70,6 @@ class NPCShopControl extends \Nette\Application\UI\Control {
   
   /**
    * Buy an item in the shop
-   * 
-   * @param int $itemId Item's id
-   * @return void
    */
   function handleBuy(int $itemId): void {
     $item = $this->orm->items->getById($itemId);

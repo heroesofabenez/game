@@ -12,9 +12,6 @@ class SkillPresenter extends BasePresenter {
   /** @var \HeroesofAbenez\Model\Skills @autowire */
   protected $model;
   
-  /**
-   * @return void
-   */
   protected function startup(): void {
     parent::startup();
     if($this->action != "default") {
@@ -25,18 +22,13 @@ class SkillPresenter extends BasePresenter {
   
   /**
    * Page /skill does not exist
-   * 
-   * @return void
+   *
    * @throws \Nette\Application\BadRequestException
    */
   function actionDefault(): void {
     throw new \Nette\Application\BadRequestException;
   }
   
-  /**
-   * @param int $id
-   * @return void
-   */
   function renderAttack(int $id): void {
     $skill = $this->model->getAttackSkill($id);
     if(!$skill) {
@@ -45,10 +37,6 @@ class SkillPresenter extends BasePresenter {
     $this->template->skill = $skill;
   }
   
-  /**
-   * @param int $id
-   * @return void
-   */
   function renderSpecial(int $id): void {
     $skill = $this->model->getSpecialSkill($id);
     if(!$skill) {

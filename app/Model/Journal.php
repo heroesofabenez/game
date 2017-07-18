@@ -43,8 +43,6 @@ class Journal {
   
   /**
    * Gets basic info for character's journal
-   * 
-   * @return array
    */
   function basic(): array {
     $character = $this->orm->characters->getById($this->user->id);
@@ -69,8 +67,6 @@ class Journal {
   
   /**
    * Gets character's inventory
-   * 
-   * @return array
    */
   function inventory(): array {
     $return = [];

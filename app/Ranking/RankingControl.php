@@ -35,9 +35,6 @@ abstract class RankingControl extends \Nette\Application\UI\Control {
   
   abstract function getData(): array;
   
-  /**
-   * @return void
-   */
   function render(): void {
     $this->template->setFile(__DIR__ . "/ranking.latte");
     $this->template->name = $this->name;

@@ -35,8 +35,6 @@ class GuildPresenter extends BasePresenter {
   
   /**
    * Redirect player to guild page if he is already in guild
-   * 
-   * @return void
    */
   function inGuild(): void {
     $guild = $this->user->identity->guild;
@@ -49,8 +47,7 @@ class GuildPresenter extends BasePresenter {
   /**
    * Redirect player to noguild if he is not in guild
    * 
-   * @param bool $warning Whetever to print a warrning (via flash message)
-   * @return void
+   * @param bool $warning Whetever to print a warning (via flash message)
   */
   function notInGuild(bool $warning = true): void {
     $guild = $this->user->identity->guild;
@@ -62,26 +59,16 @@ class GuildPresenter extends BasePresenter {
     }
   }
   
-  /**
-   * @return void
-   */
   function actionDefault(): void {
     $this->notInGuild(false);
   }
   
-  /**
-   * @return void
-   */
   function renderDefault(): void {
     $this->template->guild = $this->model->view($this->user->identity->guild);
     $this->template->canManage = $this->user->isAllowed("guild", "manage");
     $this->template->canInvite = $this->user->isAllowed("guild", "invite");
   }
   
-  /**
-   * @param int $id Id of guild to view
-   * @return void
-   */
   function renderView(int $id): void {
     if($id == 0) {
       $this->forward("notfound");
@@ -93,16 +80,10 @@ class GuildPresenter extends BasePresenter {
     $this->template->guild = $data;
   }
   
-  /**
-   * @return void
-   */
   function actionMembers(): void {
     $this->notInGuild();
   }
   
-  /**
-   * @return void
-   */
   function renderMembers(): void {
     $this->template->members = $this->model->guildMembers($this->user->identity->guild, [], true);
     $this->template->canPromote = $this->user->isAllowed("guild", "promote");
@@ -119,9 +100,6 @@ class GuildPresenter extends BasePresenter {
   
   /**
    * Creates form for creating guild
-   * 
-   * @param CreateGuildFormFactory $factory
-   * @return Form
    */
   protected function createComponentCreateGuildForm(CreateGuildFormFactory $factory): Form {
     $form = $factory->create();
@@ -133,18 +111,11 @@ class GuildPresenter extends BasePresenter {
     return $form;
   }
   
-  /**
-   * @return void
-   */
   function actionCreate(): void {
     $this->inGuild();
     $this->template->haveForm = true;
   }
   
-  /**
-   * @param int $id Guild to join   
-   * @return void
-   */
   function actionJoin(int $id = NULL): void {
     $this->inGuild();
     if(is_null($id)) {
@@ -159,10 +130,6 @@ class GuildPresenter extends BasePresenter {
     }
   }
   
-  /**
-   * @param int $id Guild to join
-   * @return void
-   */
   function renderJoin(int $id = NULL): void {
     $guilds = $this->model->listOfGuilds();
     $this->template->guilds = $guilds;
@@ -172,9 +139,6 @@ class GuildPresenter extends BasePresenter {
     }
   }
   
-  /**
-   * @return void
-  */
   function actionLeave(): void {
     $this->notInGuild();
     try {
@@ -191,9 +155,6 @@ class GuildPresenter extends BasePresenter {
     }
   }
   
-  /**
-   * @return void
-  */     
   function actionManage(): void {
     $this->notInGuild();
     if(!$this->user->isAllowed("guild", "manage")) {
@@ -202,18 +163,12 @@ class GuildPresenter extends BasePresenter {
     }
   }
   
-  /**
-   * @return void
-  */ 
   function renderManage(): void {
     $this->template->canRename = $this->user->isAllowed("guild", "rename");
     $this->template->canDissolve = $this->user->isAllowed("guild", "dissolve");
     $this->template->canChangeRankNames = $this->user->isAllowed("guild", "changeRankNames");
   }
   
-  /**
-   * @return void
-   */
   function actionRename(): void {
     $this->notInGuild();
     if(!$this->user->isAllowed("guild", "rename")) {
@@ -223,9 +178,6 @@ class GuildPresenter extends BasePresenter {
     $this->template->haveForm = true;
   }
   
-  /**
-   * @return void
-   */
   function actionDissolve(): void {
     $this->notInGuild();
     if(!$this->user->isAllowed("guild", "dissolve")) {
@@ -237,9 +189,6 @@ class GuildPresenter extends BasePresenter {
   
   /**
    * Creates form for dissolving guild
-   *
-   * @param DissolveGuildFormFactory $factory
-   * @return Form
    */
   protected function createComponentDissolveGuildForm(DissolveGuildFormFactory $factory): Form {
     $form = $factory->create();
@@ -253,9 +202,6 @@ class GuildPresenter extends BasePresenter {
   
   /**
    * Creates form for renaming guild
-   *
-   * @param RenameGuildFormFactory $factory
-   * @return Form
    */
   protected function createComponentRenameGuildForm(RenameGuildFormFactory $factory): Form {
     $form = $factory->create();
@@ -266,10 +212,6 @@ class GuildPresenter extends BasePresenter {
     return $form;
   }
   
-  /**
-   * @param  int $id
-   * @return void
-   */
   function actionPromote(int $id): void {
     try{
       $this->model->promote($id);
@@ -292,10 +234,6 @@ class GuildPresenter extends BasePresenter {
     $this->redirect("Guild:");
   }
   
-  /**
-   * @param int $id
-   * @return void
-   */
   function actionDemote(int $id): void {
     try{
       $this->model->demote($id);
@@ -316,10 +254,6 @@ class GuildPresenter extends BasePresenter {
     $this->redirect("Guild:");
   }
   
-  /**
-   * @param int $id
-   * @return void
-   */
   function actionKick(int $id): void {
     try {
       $this->model->kick($id);
@@ -338,9 +272,6 @@ class GuildPresenter extends BasePresenter {
     $this->redirect("Guild:");
   }
   
-  /**
-   * @return void
-   */
   function actionDescription(): void {
     $this->notInGuild();
     if(!$this->user->isAllowed("guild", "manage")) {
@@ -352,8 +283,6 @@ class GuildPresenter extends BasePresenter {
   
   /**
    * Creates form for changing guild's description
-   *
-   * @return Form
   */
   protected function createComponentGuildDescriptionForm(GuildDescriptionFormFactory $factory): Form {
     $form = $factory->create();
@@ -364,9 +293,6 @@ class GuildPresenter extends BasePresenter {
     return $form;
   }
   
-  /**
-   * @return void
-   */
   function actionApplications(): void {
     $this->notInGuild();
     if(!$this->user->isAllowed("guild", "invite")) {
@@ -375,16 +301,10 @@ class GuildPresenter extends BasePresenter {
     }
   }
   
-  /**
-   * @return void
-   */
   function renderApplications(): void {
     $this->template->apps = $this->model->showApplications($this->user->identity->guild);
   }
   
-  /**
-   * @return void
-   */
   function actionRankNames(): void {
     $this->notInGuild();
     if(!$this->user->isAllowed("guild", "changeRankNames")) {
@@ -394,10 +314,6 @@ class GuildPresenter extends BasePresenter {
     $this->template->haveForm = true;
   }
   
-  /**
-   * @param CustomGuildRankNamesFormFactory $factory
-   * @return Form
-   */
   protected function createComponentCustomGuildRankNamesForm(CustomGuildRankNamesFormFactory $factory): Form {
     $form = $factory->create();
     $form->onSuccess[] = function() {

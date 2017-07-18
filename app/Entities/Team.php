@@ -33,17 +33,14 @@ class Team extends Collection {
     return $this->items;
   }
   
-  /**
-   * @return string
-   */
   function getName(): string {
     return $this->name;
   }
+  
   /**
    * Get member's index
    * 
    * @param int|string $id Character's id
-   * @return int|NULL Index|NULL if the character is not in the team
    */
   function getIndex($id): ?int {
     foreach($this->items as $index => $member) {
@@ -58,7 +55,6 @@ class Team extends Collection {
    * Check if the team has a character
    * 
    * @param string|int $id Character's id
-   * @return boolean
    */
   function hasMember($id): bool {
     foreach($this->items as $member) {

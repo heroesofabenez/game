@@ -25,17 +25,13 @@ class Intro {
   
   /**
    * Check in which part of intro the player is
-   * 
-   * @return int
    */
   function getIntroPosition(): int {
     return $this->orm->characters->getById($this->user->id)->intro;
   }
+  
   /**
    * Get a part of introduction
-   * 
-   * @param int $part Part's id
-   * @return string Text of current introduction part
    */
   function getIntroPart(int $part): string {
     $char = $this->orm->characters->getById($this->user->id);
@@ -53,9 +49,6 @@ class Intro {
   
   /**
    * Move onto next part of introduction
-   *
-   * @param int $part
-   * @return void
    */
   function moveToNextPart(int $part): void {
     $character = $this->orm->characters->getById($this->user->id);
@@ -65,8 +58,6 @@ class Intro {
   
   /**
    * Get starting location for the player
-   * 
-   * @return int id of starting stage
    */
   function getStartingLocation(): int {
     $classSL = $this->orm->stages->getClassStartingLocation($this->user->identity->occupation);
@@ -81,8 +72,6 @@ class Intro {
   
   /**
    * Ends introduction and sends player to his starting location
-   * 
-   * @return void
    */
   function endIntro(): void {
     $startingLocation = $this->getStartingLocation();

@@ -2,7 +2,6 @@
 namespace HeroesofAbenez\Ranking;
 
 interface ICharactersRankingControlFactory {
-  /** @return \HeroesofAbenez\Ranking\CharactersRankingControl */
-  function create();
+  function create(): CharactersRankingControl;
 }
 ?>

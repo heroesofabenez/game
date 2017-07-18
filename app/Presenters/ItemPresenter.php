@@ -12,10 +12,6 @@ class ItemPresenter extends BasePresenter {
   /**  @var \HeroesofAbenez\Model\Item @autowire */
   protected $model;
   
-  /**
-   * @param int $id
-   * @return void
-   */
   function renderView(int $id): void {
     $item = $this->model->view($id);
     if(!$item) {

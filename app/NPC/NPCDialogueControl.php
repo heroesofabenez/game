@@ -19,9 +19,6 @@ class NPCDialogueControl extends \Nette\Application\UI\Control {
   /** @var Npc */
   protected $npc;
   
-  /**
-   * @param \Nette\Security\User $user
-   */
   function __construct(\Nette\Security\User $user) {
     parent::__construct();
     $this->user = $user;
@@ -46,8 +43,7 @@ class NPCDialogueControl extends \Nette\Application\UI\Control {
   
   /**
    * Gets texts for current npc
-   * 
-   * @return array
+   *
    * @todo make it depend on player's identity and npc   
    */
   protected function getTexts(): array {
@@ -68,9 +64,6 @@ class NPCDialogueControl extends \Nette\Application\UI\Control {
     return $texts[rand(0, count($texts) - 1)];
   }
   
-  /**
-   * @return void
-   */
   function render(): void {
     $this->template->setFile(__DIR__ . "/npcDialogue.latte");
     $this->template->npcName = $this->npc->name;

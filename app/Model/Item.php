@@ -28,9 +28,6 @@ class Item {
   
   /**
    * Gets name of specified item
-   * 
-   * @param int $id Item's id
-   * @return string
    */
   function getItemName(int $id): string {
     $item = $this->view($id);
@@ -43,9 +40,6 @@ class Item {
   
   /**
    * Get info about specified item
-   * 
-   * @param int $id Item's id
-   * @return ItemEntity|NULL
    */
   function view(int $id): ?ItemEntity {
     return $this->orm->items->getById($id);
@@ -53,10 +47,6 @@ class Item {
   
   /**
    * Check if player has specified item
-   * 
-   * @param int $id Item's id
-   * @param int $amount
-   * @return bool
    */
   function haveItem(int $id, int $amount = 1): bool {
     $item = $this->orm->characterItems->getByCharacterAndItem($this->user->id, $id);
@@ -71,10 +61,6 @@ class Item {
   
   /**
    * Give the player item(s)
-   * 
-   * @param int $id Item's id
-   * @param int $amount
-   * @return void
    */
   function giveItem(int $id, int $amount = 1): void {
     $item = $this->orm->characterItems->getByCharacterAndItem($this->user->id, $id);
@@ -90,12 +76,6 @@ class Item {
     $this->orm->characterItems->persistAndFlush($item);
   }
   
-  /**
-   * 
-   * @param int $id Item's id
-   * @param int $amount
-   * @return void
-   */
   function loseItem(int $id, int $amount = 1): void {
     $item = $this->orm->characterItems->getByCharacterAndItem($this->user->id, $id);
     if(is_null($item)) {

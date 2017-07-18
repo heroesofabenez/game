@@ -28,9 +28,6 @@ class JournalPresenter extends BasePresenter {
   /** @var \HeroesofAbenez\Model\Pet @autowire */
   protected $petModel;
   
-  /**
-   * @return void
-   */
   function renderDefault(): void {
     $stats = $this->model->basic();
     foreach($stats as $key => $value) {
@@ -39,9 +36,6 @@ class JournalPresenter extends BasePresenter {
     $this->template->nextLevelExp = $this->profileModel->getLevelsRequirements()[$stats["level"]  + 1];
   }
   
-  /**
-   * @return void
-   */
   function renderInventory(): void {
     $inventory = $this->model->inventory();
     foreach($inventory as $key => $value) {
@@ -49,24 +43,14 @@ class JournalPresenter extends BasePresenter {
     }
   }
   
-  /**
-   * @return void
-   */
   function renderQuests(): void {
     $this->template->quests = $this->model->quests();
   }
   
-  /**
-   * @return void
-   */
   function renderPets(): void {
     $this->template->pets = $this->model->pets();
   }
   
-  /**
-   * @param int $itemId
-   * @return void
-   */
   function handleEquipItem(int $itemId): void {
     try {
       $this->equipmentModel->equipItem($itemId);
@@ -80,10 +64,6 @@ class JournalPresenter extends BasePresenter {
     $this->redirect("Journal:inventory");
   }
   
-  /**
-   * @param int $itemId
-   * @return void
-   */
   function handleUnequipItem(int $itemId): void {
     try {
       $this->equipmentModel->unequipItem($itemId);
@@ -98,9 +78,6 @@ class JournalPresenter extends BasePresenter {
     $this->redirect("Journal:inventory");
   }
   
-  /**
-   * @return void
-   */
   function handleLevelUp(): void {
     $this->profileModel->user = $this->user;
     try {
@@ -112,10 +89,6 @@ class JournalPresenter extends BasePresenter {
     $this->redirect("Journal:");
   }
   
-  /**
-   * @param int $petId
-   * @return void
-   */
   function handleDeployPet(int $petId): void {
     try {
       $this->petModel->user = $this->user;
@@ -130,10 +103,6 @@ class JournalPresenter extends BasePresenter {
     $this->redirect("Journal:pets");
   }
   
-  /**
-   * @param int $petId
-   * @return void
-   */
   function handleDiscardPet(int $petId): void {
     try {
       $this->petModel->user = $this->user;

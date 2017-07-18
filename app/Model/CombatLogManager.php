@@ -23,9 +23,6 @@ class CombatLogManager {
   
   /**
    * Load specified combat from database
-   * 
-   * @param int $id Combat's id
-   * @return CombatEntity|NULL
    */
   function read(int $id): ?CombatEntity {
     return $this->orm->combats->getById($id);

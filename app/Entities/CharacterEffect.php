@@ -29,9 +29,6 @@ class CharacterEffect {
   /** @var int|string */
   protected $duration;
   
-  /**
-   * @param array $effect
-   */
   function __construct(array $effect) {
     $types = ["buff", "debuff", "stun"];
     $sources = ["pet", "skill", "equipment"];
@@ -68,37 +65,22 @@ class CharacterEffect {
     return ["combat", "forever"];
   }
   
-  /**
-   * @return string
-   */
   function getId(): string {
     return $this->id;
   }
   
-  /**
-   * @return string
-   */
   function getType(): string {
     return $this->type;
   }
   
-  /**
-   * @return string
-   */
   function getStat(): string {
     return $this->stat;
   }
   
-  /**
-   * @return int
-   */
   function getValue(): int {
     return $this->value;
   }
   
-  /**
-   * @return string
-   */
   function getSource(): string {
     return $this->source;
   }

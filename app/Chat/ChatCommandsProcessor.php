@@ -17,8 +17,6 @@ class ChatCommandsProcessor {
   /**
    * Add new command
    *
-   * @param ChatCommand $command
-   * @return void
    * @throws CommandNameAlreadyUsedException
    */
   function addCommand(ChatCommand $command): void {
@@ -30,10 +28,7 @@ class ChatCommandsProcessor {
   
   /**
    * Add an alias for already defined command
-   * 
-   * @param string $oldName
-   * @param string $newName
-   * @return void
+   *
    * @throws CommandNotFoundException
    * @throws CommandNameAlreadyUsedException
    */
@@ -54,9 +49,6 @@ class ChatCommandsProcessor {
   
   /**
    * Extract command from text
-   *
-   * @param string $text
-   * @return string
    */
   function extractCommand(string $text): string {
     if(substr($text, 0, 1) != "/") {
@@ -77,9 +69,6 @@ class ChatCommandsProcessor {
   
   /**
    * Extract parameters from text
-   * 
-   * @param string $text
-   * @return array
    */
   function extractParameters(string $text): array {
     if(substr($text, 0, 1) != "/" OR !strpos($text, " ")) {
@@ -91,10 +80,7 @@ class ChatCommandsProcessor {
   }
   
   /**
-   * Check whetever a command is defined
-   *
-   * @param string $name
-   * @return bool
+   * Check whether a command is defined
    */
   function hasCommand(string $name): bool {
     foreach($this->commands as $command) {
@@ -108,8 +94,6 @@ class ChatCommandsProcessor {
   /**
    * Get command's definition
    *
-   * @param string $name
-   * @return ChatCommand
    * @throws CommandNotFoundException
    */
   function getCommand(string $name): ChatCommand {
@@ -122,7 +106,6 @@ class ChatCommandsProcessor {
   }
   
   /**
-   * @param string $text
    * @return string|null Result of the command/null when text text contains no (defined) command
    */
   function parse(string $text): ?string {

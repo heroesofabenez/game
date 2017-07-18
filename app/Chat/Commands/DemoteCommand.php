@@ -20,7 +20,7 @@ use HeroesofAbenez\Model\Guild,
  * @author Jakub Konečný
  */
 class DemoteCommand extends \HeroesofAbenez\Chat\ChatCommand {
-  /** @var  Guild */
+  /** @var Guild */
   protected $model;
   /** @var ITranslator */
   protected $translator;
@@ -32,7 +32,6 @@ class DemoteCommand extends \HeroesofAbenez\Chat\ChatCommand {
   
   /**
    * @param int $id
-   * @return string
    */
   function execute(): string {
     $id = Arrays::get(func_get_args(), 0, "");

@@ -23,9 +23,6 @@ class GuildDescriptionFormFactory extends BaseFormFactory {
     parent::__construct($translator);
   }
   
-  /**
-   * @return Form
-   */
   function create(): Form {
     $form = parent::createBase();
     $guild = $this->model->view($this->user->identity->guild);
@@ -36,11 +33,6 @@ class GuildDescriptionFormFactory extends BaseFormFactory {
     return $form;
   }
   
-  /**
-   * @param Form $form
-   * @param array $values
-   * @return void
-   */
   function submitted(Form $form, array $values): void {
     $guild = $this->user->identity->guild;
     $description = $values["description"];

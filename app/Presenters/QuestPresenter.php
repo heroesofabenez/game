@@ -18,18 +18,13 @@ class QuestPresenter extends BasePresenter {
   
   /**
    * Page /quest does not exist
-   * 
-   * @return void
+   *
    * @throws \Nette\Application\BadRequestException
    */
   function actionDefault(): void {
     throw new \Nette\Application\BadRequestException;
   }
   
-  /**
-   * @param int $id Quest's id
-   * @return void
-   */
   function renderView(int $id): void {
     $quest = $this->model->view($id);
     if(is_null($quest)) {

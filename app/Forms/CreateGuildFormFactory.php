@@ -20,9 +20,6 @@ class CreateGuildFormFactory extends BaseFormFactory {
     parent::__construct($translator);
   }
   
-  /**
-   * @return Form
-   */
   function create(): Form {
     $form = parent::createBase();
     $form->addText("name", "forms.createGuild.nameField.label")
@@ -36,11 +33,6 @@ class CreateGuildFormFactory extends BaseFormFactory {
     return $form;
   }
   
-  /**
-   * @param Form $form
-   * @param array $values
-   * @return void
-   */
   function submitted(Form $form, array $values): void {
     $data = [
       "name" => $values["name"], "description" => $values["description"]

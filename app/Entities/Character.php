@@ -157,10 +157,6 @@ class Character {
     }
   }
   
-  /**
-   * @param array $stats
-   * @return void
-   */
   protected function setStats(array $stats): void {
     $required_stats = ["id", "name", "occupation", "level", "strength", "dexterity", "constitution", "intelligence", "charisma"];
     $all_stats = array_merge($required_stats, ["race", "specialization", "gender", "experience", "initiativeFormula"]);
@@ -208,191 +204,110 @@ class Character {
     return $this->id;
   }
   
-  /**
-   * @return string
-   */
   function getName(): string {
     return $this->name;
   }
   
-  /**
-   * @return string
-   */
   function getGender(): string {
     return $this->gender;
   }
   
-  /**
-   * @return string
-   */
   function getRace(): string {
     return (string) $this->race;
   }
   
-  /**
-   * @return string
-   */
   function getOccupation(): string {
     return (string) $this->occupation;
   }
   
-  /**
-   * @return int
-   */
   function getLevel(): int {
     return $this->level;
   }
   
-  /**
-   * @return int
-   */
   function getExperience(): int {
     return $this->experience;
   }
   
-  /**
-   * @return int
-   */
   function getStrength(): int {
     return $this->strength;
   }
   
-  /**
-   * @return int
-   */
   function getStrengthBase(): int {
     return $this->strengthBase;
   }
   
-  /**
-   * @return int
-   */
   function getDexterity(): int {
     return $this->dexterity;
   }
   
-  /**
-   * @return int
-   */
   function getDexterityBase(): int {
     return $this->dexterityBase;
   }
   
-  /**
-   * @return int
-   */
   function getConstitution(): int {
     return $this->constitution;
   }
   
-  /**
-   * @return int
-   */
   function getConstitutionBase(): int {
     return $this->constitutionBase;
   }
   
-  /**
-   * @return int
-   */
   function getCharisma(): int {
     return $this->charisma;
   }
   
-  /**
-   * @return int
-   */
   function getCharismaBase(): int {
     return $this->charismaBase;
   }
   
-  /**
-   * @return int
-   */
   function getMaxHitpoints(): int {
     return $this->maxHitpoints;
   }
   
-  /**
-   * @return int
-   */
   function getHitpoints(): int {
     return $this->hitpoints;
   }
   
-  /**
-   * @return int
-   */
   function getDamage(): int {
     return (int) $this->damage;
   }
   
-  /**
-   * @return int
-   */
   function getDamageBase(): int {
     return (int) $this->damageBase;
   }
   
-  /**
-   * @return int
-   */
   function getHit(): int {
     return $this->hit;
   }
   
-  /**
-   * @return int
-   */
   function getHitBase(): int {
     return $this->hitBase;
   }
   
-  /**
-   * @return int
-   */
   function getDodge(): int {
     return $this->dodge;
   }
   
-  /**
-   * @return int
-   */
   function getDodgeBase(): int {
     return $this->dodgeBase;
   }
   
-  /**
-   * @return int
-   */
   function getInitiative(): int {
     return $this->initiative;
   }
   
-  /**
-   * @return int
-   */
   function getInitiativeBase(): int {
     return $this->initiativeBase;
   }
   
-  /**
-   * @return string
-   */
   function getInitiativeFormula(): string {
     return $this->initiativeFormula;
   }
   
-  /**
-   * @return int
-   */
   function getDefense(): int {
     return (int) $this->defense;
   }
   
-  /**
-   * @return int
-   */
   function getDefenseBase(): int {
     return (int) $this->defenseBase;
   }
@@ -418,9 +333,6 @@ class Character {
     return $this->skills;
   }
   
-  /**
-   * @return int|NULL
-   */
   function getActivePet(): ?int {
     return $this->activePet;
   }
@@ -432,39 +344,24 @@ class Character {
     return $this->effects;
   }
   
-  /**
-   * @return bool
-   */
   function isStunned(): bool {
     return $this->stunned;
   }
   
-  /**
-   * @return string
-   */
   function getSpecialization(): string {
     return $this->specialization;
   }
   
-  /**
-   * @return int
-   */
   function getIntelligence(): int {
     return $this->intelligence;
   }
   
-  /**
-   * @return int
-   */
   function getIntelligenceBase(): int {
     return $this->intelligenceBase;
   }
   
   /**
    * Applies new effect on the character
-   * 
-   * @param CharacterEffect $effect
-   * @return void
    */
   function addEffect(CharacterEffect $effect): void {
     $this->effects[] = $effect;
@@ -473,9 +370,7 @@ class Character {
   
   /**
    * Removes specified effect from the character
-   * 
-   * @param string $effectId Effect to remove
-   * @return void
+   *
    * @throws OutOfBoundsException
    */
   function removeEffect(string $effectId): void {
@@ -491,9 +386,7 @@ class Character {
   
   /**
    * Get specified equipment of the character
-   * 
-   * @param int $itemId Item's id
-   * @return Equipment Item
+   *
    * @throws OutOfBoundsException
    */
   function getItem(int $itemId): Equipment {
@@ -506,9 +399,7 @@ class Character {
   
   /**
    * Equips an owned item
-   * 
-   * @param int $itemId
-   * @return void
+   *
    * @throws OutOfBoundsException
    */
   function equipItem(int $itemId): void {
@@ -523,9 +414,7 @@ class Character {
   
   /**
    * Unequips an item
-   * 
-   * @param int $itemId
-   * @return void
+   *
    * @throws OutOfBoundsException
    */
   function unequipItem(int $itemId): void {
@@ -540,9 +429,7 @@ class Character {
   
   /**
    * Get specified pet
-   * 
-   * @param int $petId Pet's id
-   * @return Pet
+   *
    * @throws OutOfBoundsException
    */
   function getPet(int $petId): Pet {
@@ -555,9 +442,7 @@ class Character {
   
   /**
    * Deploy specified pet (for bonuses)
-   * 
-   * @param int $petId Pet's id
-   * @return void
+   *
    * @throws OutOfBoundsException
    */
   function deployPet(int $petId): void {
@@ -571,8 +456,6 @@ class Character {
   
   /**
    * Dismisses active pet
-   * 
-   * @return void
    */
   function dismissPet(): void {
     $this->activePet = NULL;
@@ -593,9 +476,6 @@ class Character {
   
   /**
    * Harm the character
-   * 
-   * @param int $amount Number of hitpoints to lose
-   * @return void
    */
   function harm(int $amount): void {
     $this->hitpoints -= $amount;
@@ -603,9 +483,6 @@ class Character {
   
   /**
    * Heal the character
-   * 
-   * @param int $amount Number of hitpoints to gain
-   * @return void
    */
   function heal(int $amount): void {
     $this->hitpoints += $amount;
@@ -613,8 +490,6 @@ class Character {
   
   /**
    * Determine which (primary) stat should be used to calculate damage
-   * 
-   * @return string
    */
   function damageStat(): string {
     $stat = "strength";
@@ -640,8 +515,6 @@ class Character {
   
   /**
    * Recalculate secondary stats from the the primary ones
-   * 
-   * @return void
    */
   function recalculateSecondaryStats(): void {
     $stats = ["damage" => $this->damageStat(), "hit" => "dexterity", "dodge" => "dexterity"];
@@ -658,8 +531,6 @@ class Character {
   
   /**
    * Recalculates stats of the character (mostly used during combat)
-   * 
-   * @return void
    */
   function recalculateStats(): void {
     $stats = [
@@ -716,8 +587,6 @@ class Character {
   
   /**
    * Calculate character's initiative
-   *
-   * @return void
    */
   function calculateInitiative(): void {
     $result = 0;
@@ -733,8 +602,6 @@ class Character {
   
   /**
    * Reset character's initiative
-   *
-   * @return void
    */
   function resetInitiative(): void {
     $this->initiative = $this->initiativeBase;

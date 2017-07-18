@@ -49,9 +49,6 @@ class Profile {
   
   /**
    * Get data about specified race
-   * 
-   * @param int $id Race's id
-   * @return CharacterRace|NULL
    */
   function getRace(int $id): ?CharacterRace {
     return $this->orm->races->getById($id);
@@ -59,9 +56,6 @@ class Profile {
   
   /**
    * Get name of specified race
-   * 
-   * @param int $id Race's id
-   * @return string
    */
   function getRaceName(int $id): string {
     $race = $this->getRace($id);
@@ -83,9 +77,6 @@ class Profile {
   
   /**
    * Get data about specified class
-   * 
-   * @param int $id Class' id
-   * @return CharacterClass|NULL
    */
   function getClass(int $id): ?CharacterClass {
     return $this->orm->classes->getById($id);
@@ -93,9 +84,6 @@ class Profile {
   
   /**
    * Get name of specified class
-   * 
-   * @param int $id
-   * @return string
    */
   function getClassName(int $id): string {
     $class = $this->getClass($id);
@@ -108,9 +96,6 @@ class Profile {
   
   /**
    * Get data about specified specialization
-   * 
-   * @param int $id Specialization's id
-   * @return CharacterSpecialization|NULL
    */
   function getSpecialization(int $id): ?CharacterSpecialization {
     return $this->orm->specializations->getById($id);
@@ -118,9 +103,6 @@ class Profile {
   
   /**
    * Get name of specified specialization
-   * 
-   * @param int $id Specialization's id
-   * @return string
    */
   function getSpecializationName(int $id): string {
     $specialization = $this->getSpecialization($id);
@@ -133,9 +115,6 @@ class Profile {
   
   /**
    * Get character's id
-   * 
-   * @param string $name Character's name
-   * @return int
    */
   function getCharacterId(string $name): int {
     $character = $this->orm->characters->getByName($name);
@@ -148,9 +127,6 @@ class Profile {
   
   /**
    * Get character's name
-   * 
-   * @param int $id Character's id
-   * @return string
    */
   function getCharacterName(int $id): string {
     $character = $this->orm->characters->getById($id);
@@ -163,9 +139,6 @@ class Profile {
   
   /**
    * Get character's guild
-   * 
-   * @param int $id Character's id
-   * @return int
    */
   function getCharacterGuild(int $id): int {
     $char = $this->orm->characters->getById($id);
@@ -180,9 +153,6 @@ class Profile {
   
   /**
    * Gets basic data about specified player
-   * 
-   * @param integer $id character's id
-   * @return array|NULL info about character
    */
   function view(int $id): ?array {
     $return = [];
@@ -226,8 +196,7 @@ class Profile {
   
   /**
    * Level up your character
-   * 
-   * @return void
+   *
    * @throws NotEnoughExperiencesException
    */
   function levelUp(): void {
@@ -254,8 +223,6 @@ class Profile {
   
   /**
    * Get amount of user's usable stat points
-   * 
-   * @return int
    */
   function getStatPoints(): int {
     return (int) $this->orm->characters->getById($this->user->id)->statPoints;
@@ -278,9 +245,7 @@ class Profile {
   
   /**
    * Improve a stat
-   * 
-   * @param string $stat
-   * @return void
+   *
    * @throws InvalidStatException
    * @throws NoStatPointsAvailableException
    */

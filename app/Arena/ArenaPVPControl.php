@@ -31,9 +31,7 @@ class ArenaPVPControl extends ArenaControl {
   
   /**
    * Calculate rewards from won combat
-   * 
-   * @param Character $player
-   * @param Character $opponent
+   *
    * @return int[]
    */
   protected function calculateRewards(Character $player, Character $opponent): array {
@@ -48,9 +46,6 @@ class ArenaPVPControl extends ArenaControl {
   
   /**
    * Fight a player
-   * 
-   * @param int $id Player's id
-   * @return void
    */
   function handleFight(int $id): void {
     try {

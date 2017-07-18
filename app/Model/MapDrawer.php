@@ -21,10 +21,6 @@ class MapDrawer {
   /** @var \Nette\Security\User */
   protected $user;
   
-  /**
-   * @param Location $locationModel
-   * @param \Nette\Security\User $user
-   */
   function __construct(Location $locationModel, \Nette\Security\User $user) {
     $this->locationModel = $locationModel;
     $this->user = $user;
@@ -54,8 +50,6 @@ class MapDrawer {
   
   /**
    * Draw local map
-   * 
-   * @return void
    */
   function localMap(): void {
     $this->locationModel->user = $this->user;

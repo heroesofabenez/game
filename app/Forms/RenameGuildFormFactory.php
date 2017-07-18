@@ -22,10 +22,7 @@ class RenameGuildFormFactory extends BaseFormFactory {
     $this->user = $user;
     parent::__construct($translator);
   }
-
-  /**
-   * @return Form
-   */
+  
   function create(): Form {
     $form = parent::createBase();
     $currentName = $this->model->getGuildName($this->user->identity->guild);
@@ -38,11 +35,6 @@ class RenameGuildFormFactory extends BaseFormFactory {
     return $form;
   }
   
-  /**
-   * @param Form $form
-   * @param array $values
-   * @return void
-   */
   function submitted(Form $form, array $values): void {
     $gid = $this->user->identity->guild;
     $name = $values["name"];

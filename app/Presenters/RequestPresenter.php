@@ -20,18 +20,13 @@ class RequestPresenter extends BasePresenter {
   
   /**
    * Page /request does not exist
-   * 
-   * @return void
+   *
    * @throws \Nette\Application\BadRequestException
    */
   function actionDefault(): void {
     throw new \Nette\Application\BadRequestException;
   }
   
-  /**
-   * @param int $id Request to show
-   * @return void
-   */
   function renderView(int $id): void {
     try {
       $this->template->request = $this->model->show($id);
@@ -43,10 +38,6 @@ class RequestPresenter extends BasePresenter {
     }
   }
   
-  /**
-   * @param int $id Request to accept
-   * @return void
-   */
   function actionAccept(int $id): void {
     try {
       $this->model->accept($id);
@@ -67,10 +58,6 @@ class RequestPresenter extends BasePresenter {
     }
   }
   
-  /**
-   * @param int $id Request to decline
-   * @return void
-   */
   function actionDecline(int $id): void {
     try {
       $this->model->decline($id);

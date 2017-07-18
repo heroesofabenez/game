@@ -31,9 +31,6 @@ class Pet {
   
   /**
    * Get info about specified pet type
-   * 
-   * @param int $id
-   * @return PetType|NULL
    */
   function viewType(int $id): ?PetType {
     return $this->orm->petTypes->getById($id);
@@ -41,9 +38,6 @@ class Pet {
   
   /**
    * Get specified user's active pet
-   * 
-   * @param int $user User's id
-   * @return PetEntity|NULL
    */
   function getActivePet(int $user): ?PetEntity {
     return $this->orm->pets->getActivePet($user);
@@ -51,9 +45,7 @@ class Pet {
   
   /**
    * Deploy a pet
-   * 
-   * @param int $id
-   * @return void
+   *
    * @throws PetNotFoundException
    * @throws PetNotOwnedException
    * @throws PetAlreadyDeployedException
@@ -78,9 +70,7 @@ class Pet {
   
   /**
    * Discard a pet
-   * 
-   * @param int $id
-   * @return void
+   *
    * @throws PetNotFoundException
    * @throws PetNotOwnedException
    * @throws PetNotDeployedException

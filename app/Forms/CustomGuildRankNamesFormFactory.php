@@ -24,9 +24,6 @@ class CustomGuildRankNamesFormFactory extends BaseFormFactory {
     $this->user = $user;
   }
   
-  /**
-   * @return Form
-   */
   function create(): Form {
     $form = $this->createBase();
     $defaults = $this->model->getDefaultRankNames();
@@ -43,11 +40,6 @@ class CustomGuildRankNamesFormFactory extends BaseFormFactory {
     return $form;
   }
   
-  /**
-   * @param Form $form
-   * @param array $values
-   * @return void
-   */
   function submitted(Form $form, array $values): void {
     try {
       $this->model->setCustomRankNames($values);

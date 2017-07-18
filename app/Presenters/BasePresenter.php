@@ -14,7 +14,7 @@ use Nexendrie\Menu\IMenuControlFactory,
 abstract class BasePresenter extends \Nette\Application\UI\Presenter {
   /** @var \Nette\Localization\ITranslator @autowire */
   protected $translator;
-  /** @var  \HeroesofAbenez\Model\SettingsRepository @autowire */
+  /** @var \HeroesofAbenez\Model\SettingsRepository @autowire */
   protected $sr;
   
   use \Kdyby\Autowired\AutowireProperties;
@@ -22,8 +22,6 @@ abstract class BasePresenter extends \Nette\Application\UI\Presenter {
   
   /**
    * Login user and set server number for template
-   * 
-   * @return void
    */
   protected function startup(): void {
     parent::startup();
@@ -33,8 +31,6 @@ abstract class BasePresenter extends \Nette\Application\UI\Presenter {
   
   /**
    * Try to login the user
-   * 
-   * @return void
    */
   function tryLogin(): void {
     if(!$this->user->isLoggedIn()) {

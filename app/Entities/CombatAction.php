@@ -47,58 +47,34 @@ class CombatAction {
     $this->parse();
   }
   
-  /**
-   * @return Character
-   */
   function getCharacter1(): Character {
     return $this->character1;
   }
   
-  /**
-   * @return Character
-   */
   function getCharacter2(): Character {
     return $this->character2;
   }
   
-  /**
-   * @return string
-   */
   function getAction(): string {
     return $this->action;
   }
   
-  /**
-   * @return string
-   */
   function getName(): string {
     return $this->name;
   }
   
-  /**
-   * @return bool
-   */
   function isResult(): bool {
     return $this->result;
   }
   
-  /**
-   * @return int
-   */
   function getAmount(): int {
     return $this->amount;
   }
   
-  /**
-   * @return string
-   */
   function getMessage(): string {
     return $this->message;
   }
   
-  /**
-   * @return void
-   */
   protected function parse(): void {
     $text = $this->character1->name . " ";
     switch($this->action) {
@@ -136,9 +112,6 @@ class CombatAction {
     $this->message =  $text;
   }
   
-  /**
-   * @return string
-   */
   function __toString(): string {
     return $this->message;
   }

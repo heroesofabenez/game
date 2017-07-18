@@ -15,25 +15,14 @@ class TravelPresenter extends BasePresenter {
   /** @var \HeroesofAbenez\Model\Location @autowire */
   protected $model;
   
-  /**
-   * @return void
-   */
   function renderDefault(): void {
     $this->redirect("Map:local");
   }
   
-  /**
-   * @param int $id Area to travel to
-   * @return void
-   */
   function actionArea(int $id): void {
     
   }
   
-  /**
-   * @param int $id Stage to travel to
-   * @return void
-   */
   function actionStage(int $id): void {
     $this->model->user = $this->user;
     try {

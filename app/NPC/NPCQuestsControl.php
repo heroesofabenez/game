@@ -74,9 +74,6 @@ class NPCQuestsControl extends \Nette\Application\UI\Control {
     return $return;
   }
   
-  /**
-   * @return void
-   */
   function render(): void {
     $this->template->setFile(__DIR__ . "/npcQuests.latte");
     $this->template->id = $this->npc->id;
@@ -86,9 +83,6 @@ class NPCQuestsControl extends \Nette\Application\UI\Control {
   
   /**
    * Accept a quest
-   * 
-   * @param int $questId Quest's id
-   * @return void
    */
   function handleAccept(int $questId): void {
     $quest = $this->questModel->view($questId);
@@ -115,9 +109,6 @@ class NPCQuestsControl extends \Nette\Application\UI\Control {
   
   /**
    * Checks if the player accomplished specified quest's goals
-   * 
-   * @param QuestEntity $quest
-   * @return bool
    */
   protected function isCompleted(QuestEntity $quest): bool {
     $haveMoney = $haveItem = false;
@@ -139,9 +130,6 @@ class NPCQuestsControl extends \Nette\Application\UI\Control {
   
   /**
    * Finish a quest
-   * 
-   * @param int $questId Quest's id
-   * @return void
    */
   function handleFinish(int $questId): void {
     $quest = $this->questModel->view($questId);

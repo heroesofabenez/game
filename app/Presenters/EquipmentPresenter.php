@@ -14,10 +14,6 @@ class EquipmentPresenter extends BasePresenter {
   /** @var \HeroesofAbenez\Model\Profile @autowire */
   protected $profileModel;
   
-  /**
-   * @param int $id
-   * @return void
-   */
   function renderView(int $id): void {
     $item = $this->model->view($id);
     if(!$item) {

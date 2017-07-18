@@ -36,9 +36,6 @@ class PostofficeControl extends \Nette\Application\UI\Control {
     return $this->orm->messages->findByTo($this->user->id);
   }
   
-  /**
-   * @return void
-   */
   function renderInbox(): void {
     $this->template->setFile(__DIR__ . "/postofficeInbox.latte");
     $this->template->messages = $this->getReceivedMessages();
@@ -54,19 +51,12 @@ class PostofficeControl extends \Nette\Application\UI\Control {
     return $this->orm->messages->findByFrom($this->user->id);
   }
   
-  /**
-   * @return void
-   */
   function renderOutbox(): void {
     $this->template->setFile(__DIR__ . "/postofficeOutbox.latte");
     $this->template->messages = $this->getSentMessages();
     $this->template->render();
   }
   
-  /**
-   * @param Message $message
-   * @return bool
-   */
   protected function canShow(Message $message): bool {
     if($message->from->id == $this->user->id OR $message->to->id == $this->user->id) {
       return true;
@@ -75,10 +65,6 @@ class PostofficeControl extends \Nette\Application\UI\Control {
     }
   }
   
-  /**
-   * @param int $id
-   * @return int
-   */
   function messageStatus(int $id): int {
     $message = $this->orm->messages->getById($id);
     if(is_null($message)) {
@@ -92,9 +78,7 @@ class PostofficeControl extends \Nette\Application\UI\Control {
   
   /**
    * Show specified message
-   * 
-   * @param int $id
-   * @return Message
+   *
    * @throws MessageNotFoundException
    * @throws CannotShowMessageException
    */
@@ -108,10 +92,7 @@ class PostofficeControl extends \Nette\Application\UI\Control {
     }
     return $message;
   }
-  /**
-   * @param int $id Message's id
-   * @return void
-   */
+  
   function renderMessage(int $id): void {
     $this->template->setFile(__DIR__ . "/postofficeMessage.latte");
     try {
@@ -124,19 +105,12 @@ class PostofficeControl extends \Nette\Application\UI\Control {
     $this->template->render();
   }
   
-  /**
-   * @return array
-   */
   function getRecipients(): array {
     return $this->orm->characters->findAll()
       ->orderBy("id")
       ->fetchPairs("id", "name");
   }
   
-  /**
-   * @param array $data
-   * @return void
-   */
   function sendMessage(array $data): void {
     $message = new Message;
     $this->orm->messages->attach($message);

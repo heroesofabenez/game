@@ -20,9 +20,6 @@ class CharactersRankingControl extends RankingControl {
     parent::__construct("Characters", ["name", "level", "guild"], "Profile", "Profile");
   }
   
-  /**
-   * @return array
-   */
   function getData(): array {
     $this->paginator->itemCount = $this->orm->characters->findAll()->countStored();
     $characters = $this->orm->characters->findAll()

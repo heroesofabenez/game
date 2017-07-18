@@ -16,18 +16,12 @@ class AuthorizatorFactory {
   /** @var Permissions */
   protected $model;
   
-  /**
-   * AuthorizatorFactory constructor.
-   * @param Permissions $model
-   */
   function __construct(Permissions $model) {
     $this->model = $model;
   }
   
   /**
   * Factory for Authorizator
-  *
-  * @return Permission
   */
   function create(): Permission {
     $permission = new Permission;

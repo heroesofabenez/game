@@ -27,8 +27,6 @@ class Permissions {
   
   /**
    * Get roles (from db or cache)
-   * 
-   * @return array
    */
   function getRoles(): array {
     $roles = $this->cache->load("roles", function(& $dependencies) {
@@ -45,9 +43,6 @@ class Permissions {
   
   /**
    * Get name of specified rank
-   * 
-   * @param int $id
-   * @return string
    */
   function getRoleName(int $id): string {
     $ranks = $this->getRoles();

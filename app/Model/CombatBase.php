@@ -100,10 +100,6 @@ class CombatBase {
   
   /**
    * Set teams
-   * 
-   * @param Team $team1
-   * @param Team $team2
-   * @return void
    */
   function setTeams(Team $team1, Team $team2): void {
     if($this->team1) {
@@ -114,16 +110,10 @@ class CombatBase {
     $this->log->setTeams($team1, $team2);
   }
   
-  /**
-   * @return callable
-   */
   function getVictoryCondition(): callable {
     return $this->victoryCondition;
   }
   
-  /**
-   * @param callable $victoryCondition
-   */
   function setVictoryCondition(callable $victoryCondition) {
     $this->victoryCondition = $victoryCondition;
   }
@@ -132,9 +122,6 @@ class CombatBase {
    * Evaluate winner of combat
    * The team which dealt more damage after round limit, wins
    * If all members of one team are eliminated before that, the other team wins
-   *
-   * @param CombatBase $combat
-   * @return int
    */
   function victoryConditionMoreDamage(CombatBase $combat): int {
     $result = 0;
@@ -153,9 +140,6 @@ class CombatBase {
   /**
    * Evaluate winner of combat
    * Team 1 wins only if they eliminate all opponents before round limit
-   *
-   * @param CombatBase $combat
-   * @return int
    */
   function victoryConditionEliminateSecondTeam(CombatBase $combat): int {
     $result = 0;
@@ -174,9 +158,6 @@ class CombatBase {
   /**
    * Evaluate winner of combat
    * Team 1 wins if at least 1 of its members is alive after round limit
-   *
-   * @param CombatBase $combat
-   * @return int
    */
   function victoryConditionFirstTeamSurvives(CombatBase $combat): int {
     $result = 0;
@@ -207,26 +188,16 @@ class CombatBase {
     return $result;
   }
   
-  /**
-   * @param Character $character
-   * @return Team
-   */
   protected function getTeam(Character $character): Team {
     return $this->team1->hasMember($character->id) ? $this->team1 : $this->team2;
   }
   
-  /**
-   * @param Character $character
-   * @return Team
-   */
   protected function getEnemyTeam(Character $character): Team {
     return $this->team1->hasMember($character->id) ? $this->team2 : $this->team1;
   }
   
   /**
    * Apply pet's effects to character at the start of the combat
-   * 
-   * @return void
    */
   function deployPets(): void {
     $characters = array_merge($this->team1->items, $this->team2->items);
@@ -241,8 +212,6 @@ class CombatBase {
   
   /**
    * Apply effects from worn items
-   * 
-   * @return void
    */
   function equipItems(): void {
     $characters = array_merge($this->team1->items, $this->team2->items);
@@ -258,8 +227,6 @@ class CombatBase {
   
   /**
    * Set skills' cooldowns
-   * 
-   * @return void
    */
   function setSkillsCooldowns(): void {
     $characters = array_merge($this->team1->items, $this->team2->items);
@@ -273,8 +240,6 @@ class CombatBase {
   
   /**
    * Decrease skills' cooldowns
-   * 
-   * @return void
    */
   function decreaseSkillsCooldowns(): void {
     $characters = array_merge($this->team1->items, $this->team2->items);
@@ -288,8 +253,6 @@ class CombatBase {
   
   /**
    * Remove combat effects from character at the end of the combat
-   * 
-   * @return void
    */
   function removeCombatEffects(): void {
     $characters = array_merge($this->team1->items, $this->team2->items);
@@ -305,8 +268,6 @@ class CombatBase {
   
   /**
    * Add winner to the log
-   * 
-   * @return void
    */
   function logCombatResult(): void {
     $this->log->round = 5000;
@@ -322,8 +283,6 @@ class CombatBase {
   
   /**
    * Log start of a round
-   * 
-   * @return void
    */
   function logRoundNumber(): void {
     $this->log->round = ++$this->round;
@@ -331,8 +290,6 @@ class CombatBase {
   
   /**
    * Decrease duration of effects and recalculate stats
-   * 
-   * @return void
    */
   function recalculateStats(): void {
     $characters = array_merge($this->team1->items, $this->team2->items);
@@ -347,8 +304,6 @@ class CombatBase {
   
   /**
    * Reset characters' initiative
-   * 
-   * @return void
    */
   function resetInitiative(): void {
     $characters = array_merge($this->team1->items, $this->team2->items);
@@ -360,9 +315,6 @@ class CombatBase {
   
   /**
    * Select random character of the team
-   * 
-   * @param Team $team
-   * @return Character|NULL
    */
   protected function selectRandomCharacter(Team $team): ?Character {
     if(count($team->aliveMembers) === 0) {
@@ -376,9 +328,6 @@ class CombatBase {
   
   /**
    * Select target for attack
-   * 
-   * @param Character $attacker
-   * @return Character|NULL
    */
   protected function selectAttackTarget(Character $attacker): ?Character {
     return $this->selectRandomCharacter($this->getEnemyTeam($attacker));
@@ -386,10 +335,6 @@ class CombatBase {
   
   /**
    * Find character with lowest hp in the team
-   * 
-   * @param Team $team
-   * @param int $threshold
-   * @return Character|NULL
    */
   protected function findLowestHpCharacter(Team $team, int $threshold = NULL): ?Character {
     $lowestHp = 9999;
@@ -412,9 +357,6 @@ class CombatBase {
   
   /**
    * Select target for healing
-   * 
-   * @param Character $healer
-   * @return Character|NULL
    */
   protected function selectHealingTarget(Character $healer): ?Character {
     return $this->findLowestHpCharacter($this->getTeam($healer));
@@ -427,12 +369,6 @@ class CombatBase {
     return [];
   }
   
-  /**
-   * @param Character $character1
-   * @param Character $character2
-   * @param CharacterSpecialSkillDummy $skill
-   * @return void
-   */
   protected function doSpecialSkill(Character $character1, Character $character2, CharacterSpecialSkillDummy $skill): void {
     switch($skill->skill->target) {
       case "enemy":
@@ -458,8 +394,6 @@ class CombatBase {
   
   /**
    * Main stage of a round
-   * 
-   * @return void
    */
   function mainStage(): void {
     $characters = array_merge($this->team1->usableMembers, $this->team2->usableMembers);
@@ -508,8 +442,6 @@ class CombatBase {
   
   /**
    * Do a round
-   * 
-   * @return void
    */
   protected function doRound(): void {
     $this->onRound();
@@ -550,11 +482,6 @@ class CombatBase {
   
   /**
    * Calculate hit chance for attack/skill attack
-   * 
-   * @param Character $character1
-   * @param Character $character2
-   * @param CharacterAttackSkillDummy $skill
-   * @return int
    */
   protected function calculateHitChance(Character $character1, Character $character2, CharacterAttackSkillDummy $skill = NULL): int {
     if($skill) {
@@ -574,10 +501,6 @@ class CombatBase {
    * Do an attack
    * Hit chance = Attacker's hit - Defender's dodge, but at least 15%
    * Damage = Attacker's damage
-   * 
-   * @param Character $attacker
-   * @param Character $defender
-   * @return void
    */
   function attackHarm(Character $attacker, Character $defender): void {
     $result = [];
@@ -605,11 +528,6 @@ class CombatBase {
   
   /**
    * Use an attack skill
-   * 
-   * @param Character $attacker
-   * @param Character $defender
-   * @param CharacterAttackSkillDummy $skill Used skill
-   * @return void
    */
   function useAttackSkill(Character $attacker, Character $defender, CharacterAttackSkillDummy $skill): void {
     $result = [];
@@ -636,11 +554,6 @@ class CombatBase {
   
   /**
    * Use a special skill
-   * 
-   * @param Character $character1
-   * @param Character $target
-   * @param CharacterSpecialSkillDummy $skill
-   * @return void
    */
   function useSpecialSkill(Character $character1, Character $target, CharacterSpecialSkillDummy $skill): void {
     $result = [
@@ -661,10 +574,6 @@ class CombatBase {
   
   /**
    * Heal a character
-   * 
-   * @param Character $healer
-   * @param Character $patient
-   * @return void
    */
   function heal(Character $healer, Character $patient): void {
     $result = [];
@@ -686,10 +595,6 @@ class CombatBase {
   
   /**
    * Log results of an action
-   * 
-   * @param Character $character1
-   * @param Character $character2
-   * @return void
    */
   function logResults(Character $character1, Character $character2): void {
     $results = $this->results;
@@ -699,19 +604,12 @@ class CombatBase {
   
   /**
    * Log dealt damage
-   * 
-   * @param Character $attacker
-   * @param Character $defender
-   * @return void
    */
   function logDamage(Character $attacker, Character $defender): void {
     $team = $this->team1->hasMember($attacker->id) ? 1 : 2;
     $this->damage[$team] += $this->results["amount"];
   }
   
-  /**
-   * @return CombatLogger
-   */
   function getLog(): CombatLogger {
     return $this->log;
   }
