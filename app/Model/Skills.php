@@ -67,7 +67,6 @@ class Skills {
    * @param int $userId
    * @return CharacterAttackSkillDummy|NULL
    */
-  // @codingStandardsIgnoreLine
   function getCharacterAttackSkill(int $skillId, int $userId = 0): ?CharacterAttackSkillDummy {
     if($userId === 0) {
       $userId = $this->user->id;
@@ -117,7 +116,6 @@ class Skills {
    * @param int $userId
    * @return CharacterSpecialSkillDummy|NULL
    */
-  // @codingStandardsIgnoreLine
   function getCharacterSpecialSkill(int $skillId, int $userId = 0): ?CharacterSpecialSkillDummy {
     if($userId === 0) {
       $userId = $this->user->id;

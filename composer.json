@@ -35,9 +35,6 @@
         "phpstan/phpstan-nette": "^0.7",
         "symplify/easy-coding-standard": "^2.0"
     },
-    "replace": {
-        "codacy/coverage": "*"
-    },
     "autoload": {
         "psr-4": {
             "HeroesofAbenez\\": [

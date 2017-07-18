@@ -67,7 +67,3 @@ parameters:
         PHP_CodeSniffer\Standards\PSR1\Sniffs\Files\SideEffectsSniff:
             - tests/*.php
             - tests/HeroesofAbenez/*/*.php
-        # until new version of codesniffer is released
-        PHP_CodeSniffer\Standards\Squiz\Sniffs\ControlStructures\InlineIfDeclarationSniff:
-            - app/Model/Skills.php
-            - app/Model/CombatBase.php
