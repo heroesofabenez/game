@@ -16,17 +16,14 @@ use Nexendrie\Utils\Collection;
  * @property-read Character[] $usableMembers
  */
 class Team extends Collection {
+  protected $class = Character::class;
   /** @var string Name of the team */
   protected $name;
   
   use \Nette\SmartObject;
   
-  /**
-   * @param string $name Name of the team
-   */
   function __construct(string $name) {
     $this->name = $name;
-    $this->class = Character::class;
   }
   
   /**
@@ -118,7 +115,7 @@ class Team extends Collection {
   }
   
   /**
-   * Check whetever the team has at least 1 active member
+   * Check whether the team has at least 1 active member
    * 
    * @return bool
    */
@@ -127,7 +124,7 @@ class Team extends Collection {
   }
   
   /**
-   * Check whetever the team has at least 1 alive member
+   * Check whether the team has at least 1 alive member
    * 
    * @return bool
    */
