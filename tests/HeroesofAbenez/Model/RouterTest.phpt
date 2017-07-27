@@ -20,9 +20,6 @@ class RouterTest extends \Tester\TestCase {
     $this->router = $this->getService(RouteList::class);
   }
   
-  /**
-   * @return void
-   */
   public function testRoutes() {
     foreach($this->router->getIterator() as $route) {
       Assert::type(IRouter::class, $route);

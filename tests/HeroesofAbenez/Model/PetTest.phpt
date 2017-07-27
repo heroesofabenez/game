@@ -29,9 +29,7 @@ class PetTest extends \Tester\TestCase {
   }
   
   /**
-   * @param int $id
    * @dataProvider getPetIds
-   * @return void
    */
   public function testViewType(int $id) {
     $type = $this->model->viewType($id);
@@ -52,9 +50,7 @@ class PetTest extends \Tester\TestCase {
   }
   
   /**
-   * @param int $user
    * @dataProvider getUserIds
-   * @return void
    */
   public function testGetActivePet(int $user) {
     $pet = $this->model->getActivePet($user);

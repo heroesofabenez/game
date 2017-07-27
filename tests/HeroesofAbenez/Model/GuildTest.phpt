@@ -18,9 +18,6 @@ class GuildTest extends \Tester\TestCase {
     $this->model = $this->getService(Guild::class);
   }
   
-  /**
-   * @return void
-   */
   public function testView() {
     $guild = $this->model->view(1);
     Assert::type(GuildEntity::class, $guild);
@@ -29,9 +26,6 @@ class GuildTest extends \Tester\TestCase {
     Assert::same(2, $guild->members->countStored());
   }
   
-  /**
-   * @return void
-   */
   public function testCustomRankName() {
     $guildIds = [1, 2];
     $rankIds = [1, 7];
@@ -59,9 +53,7 @@ class GuildTest extends \Tester\TestCase {
   }
   
   /**
-   * @param int $guild
    * @dataProvider getIds
-   * @return void
    */
   public function testGuildMembers(int $guild) {
     $members = $this->model->guildMembers($guild, [], true);
@@ -74,10 +66,7 @@ class GuildTest extends \Tester\TestCase {
       Assert::same("", $members[0]->customRankName);
     }
   }
-
-  /**
-   * @return void
-   */
+  
   public function testGetDefaultRankNames() {
     $names = $this->model->getDefaultRankNames();
     Assert::type("array", $names);
@@ -86,9 +75,7 @@ class GuildTest extends \Tester\TestCase {
   }
 
   /**
-    * @param int $guild
-   * @dataProvider getIds
-    * @return void
+    * @dataProvider getIds
     */
   public function testGetCustomRankNames(int $guild) {
     $names = $this->model->getCustomRankNames($guild);

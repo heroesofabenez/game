@@ -22,26 +22,17 @@ class SkillsTest extends \Tester\TestCase {
     $this->model = $this->getService(Skills::class);
   }
   
-  /**
-   * @return void
-   */
   public function testGetListOfAttackSkills() {
     $result = $this->model->getListOfAttackSkills();
     Assert::type("array", $result);
     Assert::type(SkillAttackDummy::class, $result[1]);
   }
   
-  /**
-   * @return void
-   */
   public function testGetAttackSkill() {
     $skill = $this->model->getAttackSkill(1);
     Assert::type(SkillAttackDummy::class, $skill);
   }
   
-  /**
-   * @return void
-   */
   public function testGetCharacterAttackSkill() {
     $skill = $this->model->getCharacterAttackSkill(1);
     Assert::type(CharacterAttackSkillDummy::class, $skill);
@@ -53,26 +44,17 @@ class SkillsTest extends \Tester\TestCase {
     Assert::same("attack", $skill->skillType);
   }
   
-  /**
-   * @return void
-   */
   public function testGetListOfSpecialSkills() {
     $result = $this->model->getListOfSpecialSkills();
     Assert::type("array", $result);
     Assert::type(SkillSpecialDummy::class, $result[1]);
   }
   
-  /**
-   * @return void
-   */
   public function testGetSpecialSkill() {
     $skill = $this->model->getSpecialSkill(1);
     Assert::type(SkillSpecialDummy::class, $skill);
   }
   
-  /**
-   * @return void
-   */
   public function testGetCharacterSpecialSkill() {
     $skill = $this->model->getCharacterSpecialSkill(1);
     Assert::type(CharacterSpecialSkillDummy::class, $skill);
@@ -83,18 +65,12 @@ class SkillsTest extends \Tester\TestCase {
     Assert::same("special", $skill->skillType);
   }
   
-  /**
-   * @return void
-   */
   public function testGetAvailableSkills() {
     $result = $this->model->getAvailableSkills();
     Assert::type("array", $result);
     Assert::type(BaseCharacterSkill::class, $result[0]);
   }
   
-  /**
-   * @return void
-   */
   public function testGetSkillPoints() {
     $result = $this->model->getSkillPoints();
     Assert::type("int", $result);

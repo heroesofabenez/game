@@ -18,17 +18,11 @@ class ItemTest extends \Tester\TestCase {
     $this->model = $this->getService(Item::class);
   }
   
-  /**
-   * @return void
-   */
   public function testView() {
     $item = $this->model->view(1);
     Assert::type(ItemEntity::class, $item);
   }
   
-  /**
-   * @return void
-   */
   public function testGetItemName() {
     $actual = $this->model->getItemName(1);
     $expected = "Book ABC";

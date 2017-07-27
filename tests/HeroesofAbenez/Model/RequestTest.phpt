@@ -18,16 +18,11 @@ class RequestTest extends \Tester\TestCase {
     $this->model = $this->getService(Request::class);
   }
   
-  /**
-   * @return void
-   */
   public function testCanShow() {
     $result = $this->model->canShow(1);
     Assert::true($result);
   }
-  /**
-   * @return void
-   */
+  
   public function testShow() {
     $request = $this->model->show(1);
     Assert::type(RequestEntity::class, $request);

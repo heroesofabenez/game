@@ -24,26 +24,17 @@ class QuestTest extends \Tester\TestCase {
     Assert::type(QuestEntity::class, $quests[1]);
   }
   
-  /**
-   * @return void
-   */
   public function testView() {
     $quest = $this->model->view(1);
     Assert::type(QuestEntity::class, $quest);
   }
   
-  /**
-   * @return void
-   */
   public function testStatus() {
     $result = $this->model->status(1);
     Assert::type("integer", $result);
     Assert::same(1, $result);
   }
   
-  /**
-   * @return void
-   */
   public function testIsFinished() {
     $result = $this->model->isFinished(1);
     Assert::type("bool", $result);

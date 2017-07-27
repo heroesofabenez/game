@@ -6,9 +6,6 @@ namespace HeroesofAbenez\Chat;
 class Test2Command extends ChatCommand {
   const NAME = "test2";
   
-  /**
-   * @return string
-   */
   public function execute() : string {
     $args = func_get_args();
     $text = "test";

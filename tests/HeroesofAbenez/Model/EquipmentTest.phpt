@@ -18,9 +18,6 @@ class EquipmentTest extends \Tester\TestCase {
     $this->model = $this->getService(Equipment::class);
   }
   
-  /**
-   * @return void
-   */
   public function testView() {
     $item = $this->model->view(1);
     Assert::type(EquipmentEntity::class, $item);

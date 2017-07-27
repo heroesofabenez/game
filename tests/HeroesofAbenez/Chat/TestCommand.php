@@ -8,9 +8,6 @@ class TestCommand extends ChatCommand {
     $this->name = ChatCommandsProcessorTest::COMMAND_NAME;
   }
   
-  /**
-   * @return string
-   */
   public function execute(): string {
     return "passed";
   }

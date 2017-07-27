@@ -18,9 +18,6 @@ class UserManagerTest extends \Tester\TestCase {
     $this->model = $this->getService(UserManager::class);
   }
   
-  /**
-   * @return void
-   */
   public function testAuthenticate() {
     $identity = $this->model->authenticate([]);
     Assert::type(Identity::class, $identity);

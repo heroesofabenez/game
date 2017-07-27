@@ -20,33 +20,21 @@ class LocationTest extends \Tester\TestCase {
     $this->model = $this->getService(Location::class);
   }
   
-  /**
-   * @return void
-   */
   public function testGetStage() {
     $stage = $this->model->getStage(1);
     Assert::type(QuestStage::class, $stage);
   }
   
-  /**
-   * @return void
-   */
   public function testStageRoutes() {
     $routes = $this->model->stageRoutes();
     Assert::type(ICollection::class, $routes);
   }
   
-  /**
-   * @return void
-   */
   public function testGetArea() {
     $stage = $this->model->getArea(1);
     Assert::type(QuestArea::class, $stage);
   }
   
-  /**
-   * @return void
-   */
   public function testGetStageName() {
     $name = $this->model->getStageName(1);
     Assert::type("string", $name);
@@ -62,7 +50,6 @@ class LocationTest extends \Tester\TestCase {
   }
   
   /**
-   * @param int $id
    * @dataProvider getAreaIds
    */
   public function testGetAreaName(int $id) {

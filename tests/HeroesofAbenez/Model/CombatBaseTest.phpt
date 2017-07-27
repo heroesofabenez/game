@@ -10,9 +10,9 @@ use Tester\Assert,
 require __DIR__ . "/../../bootstrap.php";
 
 class CombatBaseTest extends \Tester\TestCase {
-  /** @var  CombatLogger */
+  /** @var CombatLogger */
   protected $logger;
-  /** @var  CombatHelper */
+  /** @var CombatHelper */
   protected $helper;
   
   use \Testbench\TCompiledContainer;
@@ -22,9 +22,6 @@ class CombatBaseTest extends \Tester\TestCase {
     $this->helper = $this->getService(CombatHelper::class);
   }
   
-  /**
-   * @return void
-   */
   public function testPostCombat() {
     $combat = new CombatBase(clone $this->logger);
     $team1 = new Team("Team 1");

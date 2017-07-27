@@ -21,9 +21,6 @@ class ProfileTest extends \Tester\TestCase {
     $this->model = $this->getService(Profile::class);
   }
   
-  /**
-   * @return void
-   */
   public function testIds() {
     $expected = 0;
     $actual = $this->model->getCharacterId("abc");
@@ -34,9 +31,6 @@ class ProfileTest extends \Tester\TestCase {
     Assert::same($expected, $actual);
   }
   
-  /**
-   * @return void
-   */
   public function testView() {
     $result = $this->model->view(1);
     Assert::type("array", $result);
@@ -47,73 +41,46 @@ class ProfileTest extends \Tester\TestCase {
     Assert::type(\HeroesofAbenez\Orm\Pet::class, $result["pet"]);
   }
   
-  /**
-   * @return void
-   */
   public function testGetRacesList() {
     $list = $this->model->getRacesList();
     Assert::type(ICollection::class, $list);
   }
   
-  /**
-   * @return void
-   */
   public function testGetRace() {
     $result = $this->model->getRace(1);
     Assert::type(CharacterRace::class, $result);
   }
   
-  /**
-   * @return void
-   */
   public function testGetRaceName() {
     $result = $this->model->getRaceName(1);
     Assert::type("string", $result);
   }
   
-  /**
-   * @return void
-   */
   public function testGetClassesList() {
     $list = $this->model->getClassesList();
     Assert::type(ICollection::class, $list);
   }
   
-  /**
-   * @return void
-   */
   public function testGetClass() {
     $result = $this->model->getClass(1);
     Assert::type(CharacterClass::class, $result);
   }
   
-  /**
-   * @return void
-   */
   public function testGetClassName() {
     $result = $this->model->getClassName(1);
     Assert::type("string", $result);
   }
   
-  /**
-   * @return void
-   */
   public function testGetSpecialization() {
     $result = $this->model->getSpecialization(1);
     Assert::type(CharacterSpecialization::class, $result);
   }
   
-  /**
-   * @return void
-   */
   public function testGetSpecializationName() {
     $result = $this->model->getSpecializationName(1);
     Assert::type("string", $result);
   }
   
-  /**
-   * @return void
-   */
   public function testGetStats() {
     $this->model->user = $this->getService(\Nette\Security\User::class);
     $result = $this->model->getStats();

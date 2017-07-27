@@ -17,9 +17,6 @@ class AuthorizatorTest extends \Tester\TestCase {
     $this->model = $this->getService(\Nette\Security\Permission::class);
   }
   
-  /**
-   * @return void
-   */
   public function testRoles() {
     $roles = ["guest", "player", "recruit", "member", "regular", "advisor", "master", "deputy", "grandmaster"];
     foreach($roles as $role) {
@@ -37,19 +34,13 @@ class AuthorizatorTest extends \Tester\TestCase {
     }
   }
   
-  /**
-   * @return void
-   */
   public function testResources() {
     $resources = ["guild"];
     foreach($resources as $resource) {
       Assert::true($this->model->hasResource($resource));
     }
   }
-    
-  /**
-   * @return void
-   */
+  
   public function testPermissions() {
     $resource = "guild";
     Assert::true($this->model->roleInheritsFrom("grandmaster", "guest"));

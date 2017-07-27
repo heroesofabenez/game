@@ -17,9 +17,6 @@ class PermissionsTest extends \Tester\TestCase {
     $this->model = $this->getService(Permissions::class);
   }
   
-  /**
-   * @return void
-   */
   public function testGetPermissions() {
     $permissions = $this->model->getPermissions();
     Assert::type("array", $permissions);
@@ -28,9 +25,6 @@ class PermissionsTest extends \Tester\TestCase {
     Assert::type("string", $permissions[1]["action"]);
   }
   
-  /**
-   * @return void
-   */
   public function testGetRoles() {
     $roles = $this->model->getRoles();
     Assert::type("array", $roles);
@@ -39,9 +33,6 @@ class PermissionsTest extends \Tester\TestCase {
     Assert::type("string", $roles[1]["name"]);
   }
   
-  /**
-   * @return void
-   */
   public function testGetRoleName() {
     $name = $this->model->getRoleName(1);
     Assert::type("string", $name);

@@ -18,9 +18,6 @@ class NPCTest extends \Tester\TestCase {
     $this->model = $this->getService(NPC::class);
   }
   
-  /**
-   * @return void
-   */
   public function testView() {
     $npc = $this->model->view(1);
     Assert::type(NpcEntity::class, $npc);
