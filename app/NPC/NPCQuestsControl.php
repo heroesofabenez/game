@@ -30,7 +30,7 @@ class NPCQuestsControl extends \Nette\Application\UI\Control {
   /** @var Npc */
   protected $npc;
   
-  function __construct(Model\Quest $questModel, Model\Item $itemModel, ORM $orm, \Nette\Security\User $user, ITranslator $translator) {
+  public function __construct(Model\Quest $questModel, Model\Item $itemModel, ORM $orm, \Nette\Security\User $user, ITranslator $translator) {
     parent::__construct();
     $this->questModel = $questModel;
     $this->itemModel = $itemModel;
@@ -39,7 +39,7 @@ class NPCQuestsControl extends \Nette\Application\UI\Control {
     $this->translator = $translator;
   }
   
-  function setNpc(Npc $npc) {
+  public function setNpc(Npc $npc) {
     $this->npc = $npc;
   }
   
@@ -48,7 +48,7 @@ class NPCQuestsControl extends \Nette\Application\UI\Control {
    *
    * @return QuestEntity[]
    */
-  function getQuests(): array {
+  public function getQuests(): array {
     $return = $this->questModel->listOfQuests($this->npc->id);
     $playerQuests = $this->orm->characterQuests->findByCharacter($this->user->id);
     foreach($return as $key => $quest) {
@@ -74,7 +74,7 @@ class NPCQuestsControl extends \Nette\Application\UI\Control {
     return $return;
   }
   
-  function render(): void {
+  public function render(): void {
     $this->template->setFile(__DIR__ . "/npcQuests.latte");
     $this->template->id = $this->npc->id;
     $this->template->quests = $this->getQuests();
@@ -84,7 +84,7 @@ class NPCQuestsControl extends \Nette\Application\UI\Control {
   /**
    * Accept a quest
    */
-  function handleAccept(int $questId): void {
+  public function handleAccept(int $questId): void {
     $quest = $this->questModel->view($questId);
     if(is_null($quest)) {
       $this->presenter->forward("notfound");
@@ -131,7 +131,7 @@ class NPCQuestsControl extends \Nette\Application\UI\Control {
   /**
    * Finish a quest
    */
-  function handleFinish(int $questId): void {
+  public function handleFinish(int $questId): void {
     $quest = $this->questModel->view($questId);
     if(is_null($quest)) {
       $this->presenter->forward("notfound");

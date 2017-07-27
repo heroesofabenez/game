@@ -16,7 +16,7 @@ class CreateCharacterFormFactory extends BaseFormFactory {
    * @param ICollection|\HeroesofAbenez\Orm\CharacterRace[] $races
    * @param ICollection|\HeroesofAbenez\Orm\CharacterClass[] $classes
    */
-  function create(ICollection $races, ICollection $classes): Form {
+  public function create(ICollection $races, ICollection $classes): Form {
     $form = parent::createBase();
     $racesList = $classesList = [];
     $form->addText("name", "forms.createCharacter.nameField.label")

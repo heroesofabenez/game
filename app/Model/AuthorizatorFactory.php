@@ -16,14 +16,14 @@ class AuthorizatorFactory {
   /** @var Permissions */
   protected $model;
   
-  function __construct(Permissions $model) {
+  public function __construct(Permissions $model) {
     $this->model = $model;
   }
   
   /**
   * Factory for Authorizator
   */
-  function create(): Permission {
+  public function create(): Permission {
     $permission = new Permission;
     $permission->addResource("guild");
     $permission->addRole("guest");

@@ -12,7 +12,7 @@ use HeroesofAbenez\Entities\Team,
  * @author Jakub Konečný
  */
 class CombatDuel extends CombatBase {
-  function setParticipants(CharacterEntity $player, CharacterEntity $opponent): void {
+  public function setParticipants(CharacterEntity $player, CharacterEntity $opponent): void {
     $team1 = new Team($player->name);
     $team1[] = $player;
     $team2 = new Team($opponent->name);

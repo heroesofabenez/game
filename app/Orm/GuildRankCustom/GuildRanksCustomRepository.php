@@ -21,7 +21,7 @@ class GuildRanksCustomRepository extends \Nextras\Orm\Repository\Repository {
   /**
    * @param int $id
    */
-  function getById($id): ?GuildRankCustom {
+  public function getById($id): ?GuildRankCustom {
     return $this->getBy([
       "id" => $id
     ]);
@@ -31,7 +31,7 @@ class GuildRanksCustomRepository extends \Nextras\Orm\Repository\Repository {
    * @param Guild|int $guild
    * @param GuildRank|int $rank
    */
-  function getByGuildAndRank($guild, $rank): ?GuildRankCustom {
+  public function getByGuildAndRank($guild, $rank): ?GuildRankCustom {
     return $this->getBy([
       "guild" => $guild, "rank" => $rank
     ]);
@@ -41,7 +41,7 @@ class GuildRanksCustomRepository extends \Nextras\Orm\Repository\Repository {
    * @param Guild|int $guild
    * @return ICollection|GuildRankCustom[]
    */
-  function findByGuild($guild): ICollection {
+  public function findByGuild($guild): ICollection {
     return $this->findBy([
       "guild" => $guild
     ]);

@@ -20,7 +20,7 @@ class HOAExtension extends \Nette\DI\CompilerExtension {
     ]
   ];
   
-  function loadConfiguration(): void {
+  public function loadConfiguration(): void {
     $this->addModels();
     $this->addCombat();
     $this->addArena();
@@ -163,7 +163,7 @@ class HOAExtension extends \Nette\DI\CompilerExtension {
       ->setClass(HeroesofAbenez\Forms\CustomGuildRankNamesFormFactory::class);
   }
   
-  function beforeCompile(): void {
+  public function beforeCompile(): void {
     $builder = $this->getContainerBuilder();
     $processor = $builder->getDefinition($this->prefix("chat.commandsProcessor"));
     $chatCommands = $builder->findByType(HeroesofAbenez\Chat\ChatCommand::class);
@@ -172,7 +172,7 @@ class HOAExtension extends \Nette\DI\CompilerExtension {
     }
   }
   
-  function afterCompile(\Nette\PhpGenerator\ClassType $class): void {
+  public function afterCompile(\Nette\PhpGenerator\ClassType $class): void {
     $initialize = $class->methods["initialize"];
     $initialize->addBody('$user = $this->getByType(?);
 $user->authenticatedRole = "player";

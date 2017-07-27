@@ -12,7 +12,7 @@ class SkillAttacksMapper extends \Nextras\Orm\Mapper\Mapper {
   /**
    * @return string
    */
-  function getTableName(): string {
+  public function getTableName(): string {
     return "skills_attacks";
   }
 }

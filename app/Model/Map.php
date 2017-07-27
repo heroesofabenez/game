@@ -18,7 +18,7 @@ class Map {
   /** @var \Nette\Security\User */
   protected $user;
   
-  function __construct(Location $locationModel, \Nette\Security\User $user, MapDrawer $drawer) {
+  public function __construct(Location $locationModel, \Nette\Security\User $user, MapDrawer $drawer) {
     $this->locationModel = $locationModel;
     $this->drawer = $drawer;
     $this->user = $user;
@@ -27,7 +27,7 @@ class Map {
   /**
    * Returns data for local map and draws it when necessary
    */
-  function local(): array {
+  public function local(): array {
     $this->locationModel->user = $this->user;
     $stages = $this->locationModel->accessibleStages();
     $curr_stage = $stages[$this->user->identity->stage];

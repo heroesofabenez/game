@@ -21,7 +21,7 @@ class SkillAttacksRepository extends \Nextras\Orm\Repository\Repository {
   /**
    * @param int $id
    */
-  function getById($id): ?SkillAttack {
+  public function getById($id): ?SkillAttack {
     return $this->getBy([
       "id" => $id
     ]);
@@ -31,7 +31,7 @@ class SkillAttacksRepository extends \Nextras\Orm\Repository\Repository {
    * @param CharacterClass|int $class
    * @return ICollection|SkillAttack
    */
-  function findByClassAndLevel($class, int $level): ICollection {
+  public function findByClassAndLevel($class, int $level): ICollection {
     return $this->findBy([
       "neededClass" => $class,
       "neededLevel>=" => $level

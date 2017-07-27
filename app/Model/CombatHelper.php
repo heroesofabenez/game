@@ -29,7 +29,7 @@ class CombatHelper {
   /** @var ORM */
   protected $orm;
   
-  function __construct(Profile $profileModel, Equipment $equipmentModel, Skills $skillsModel, ORM $orm) {
+  public function __construct(Profile $profileModel, Equipment $equipmentModel, Skills $skillsModel, ORM $orm) {
     $this->profileModel = $profileModel;
     $this->equipmentModel = $equipmentModel;
     $this->skillsModel = $skillsModel;
@@ -39,7 +39,7 @@ class CombatHelper {
   /**
    * Get initiative formula for given class
    */
-  function getInitiativeFormula(int $classId): string {
+  public function getInitiativeFormula(int $classId): string {
     $class = $this->profileModel->getClass($classId);
     if(is_null($class)) {
       return "0";
@@ -53,7 +53,7 @@ class CombatHelper {
    *
    * @throws OpponentNotFoundException
    */
-  function getPlayer(int $id): Character {
+  public function getPlayer(int $id): Character {
     $data = $equipment = $pets = [];
     $character = $this->orm->characters->getById($id);
     if(is_null($character)) {
@@ -110,7 +110,7 @@ class CombatHelper {
    *
    * @throws OpponentNotFoundException
    */
-  function getArenaNpc($id): Character {
+  public function getArenaNpc($id): Character {
     $data = [];
     $npc = $this->orm->arenaNpcs->getById($id);
     if(is_null($npc)) {
@@ -154,7 +154,7 @@ class CombatHelper {
   /**
    * Get amount of fights a player has fought today in arena
    */
-  function getNumberOfTodayArenaFights(int $uid): int {
+  public function getNumberOfTodayArenaFights(int $uid): int {
     $row = $this->orm->arenaFightsCount->getByCharacterAndDay($uid, date("d.m.Y"));
     if(is_null($row)) {
       return 0;
@@ -166,7 +166,7 @@ class CombatHelper {
   /**
    * Increase amount of a player's fights in arena
    */
-  function bumpNumberOfTodayArenaFights(int $uid): void {
+  public function bumpNumberOfTodayArenaFights(int $uid): void {
     $day = date("d.m.Y");
     $row = $this->orm->arenaFightsCount->getByCharacterAndDay($uid, $day);
     if(is_null($row)) {

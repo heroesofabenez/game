@@ -21,7 +21,7 @@ class ShopItemsRepository extends \Nextras\Orm\Repository\Repository {
   /**
    * @param int $id
    */
-  function getById($id): ?ShopItem {
+  public function getById($id): ?ShopItem {
     return $this->getBy([
       "id" => $id
     ]);
@@ -31,7 +31,7 @@ class ShopItemsRepository extends \Nextras\Orm\Repository\Repository {
    * @param Npc|int $npc
    * @return ICollection|ShopItem[]
    */
-  function findByNpc($npc): ICollection {
+  public function findByNpc($npc): ICollection {
     return $this->findBy([
       "npc" => $npc
     ])->orderBy("order");

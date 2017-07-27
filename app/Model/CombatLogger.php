@@ -28,14 +28,14 @@ class CombatLogger implements \Countable, \IteratorAggregate {
   /** @var int */
   protected $round;
   
-  function __construct(ILatteFactory $latteFactory) {
+  public function __construct(ILatteFactory $latteFactory) {
     $this->latte = $latteFactory->create();
   }
   
   /**
    * Set teams
    */
-  function setTeams(Team $team1, Team $team2): void {
+  public function setTeams(Team $team1, Team $team2): void {
     if($this->team1) {
       throw new ImmutableException("Teams has already been set.");
     }
@@ -43,29 +43,29 @@ class CombatLogger implements \Countable, \IteratorAggregate {
     $this->team2 = $team2;
   }
   
-  function getRound(): int {
+  public function getRound(): int {
     return $this->round;
   }
   
-  function setRound(int $round) {
+  public function setRound(int $round) {
     $this->round = $round;
   }
   
   /**
    * Adds new entry
    */
-  function log($action, $result, CharacterEntity $character1, CharacterEntity $character2, int $amount = 0, string $name = ""): void {
+  public function log($action, $result, CharacterEntity $character1, CharacterEntity $character2, int $amount = 0, string $name = ""): void {
     $this->actions[$this->round][] = new CombatAction($action, $result, $character1, $character2, $amount, $name);
   }
   
   /**
    * Adds text entry
    */
-  function logText(string $text): void {
+  public function logText(string $text): void {
     $this->actions[$this->round][] = $text;
   }
   
-  function __toString(): string {
+  public function __toString(): string {
     $params = [
       "team1" => $this->team1, "team2" => $this->team2, "actions" => $this->actions
     ];
@@ -73,11 +73,11 @@ class CombatLogger implements \Countable, \IteratorAggregate {
     return $this->latte->renderToString(__DIR__ . "/../templates/CombatLog.latte", $params);
   }
   
-  function count(): int {
+  public function count(): int {
     return count($this->actions);
   }
   
-  function getIterator(): \ArrayIterator {
+  public function getIterator(): \ArrayIterator {
     return new \ArrayIterator($this->actions);
   }
 }

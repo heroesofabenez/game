@@ -28,13 +28,13 @@ class Profile {
   /** @var string[] */
   private $stats;
   
-  function __construct(ORM $orm, Pet $petModel) {
+  public function __construct(ORM $orm, Pet $petModel) {
     $this->orm = $orm;
     $this->petModel = $petModel;
     $this->stats = ["strength", "dexterity", "constitution", "intelligence", "charisma"];
   }
   
-  function setUser(\Nette\Security\User $user) {
+  public function setUser(\Nette\Security\User $user) {
     $this->user = $user;
   }
   
@@ -43,21 +43,21 @@ class Profile {
    * 
    * @return ICollection|CharacterRace[]
    */
-  function getRacesList(): ICollection {
+  public function getRacesList(): ICollection {
     return $this->orm->races->findAll();
   }
   
   /**
    * Get data about specified race
    */
-  function getRace(int $id): ?CharacterRace {
+  public function getRace(int $id): ?CharacterRace {
     return $this->orm->races->getById($id);
   }
   
   /**
    * Get name of specified race
    */
-  function getRaceName(int $id): string {
+  public function getRaceName(int $id): string {
     $race = $this->getRace($id);
     if(is_null($race)) {
       return "";
@@ -71,21 +71,21 @@ class Profile {
    * 
    * @return ICollection|CharacterClass[]
    */
-  function getClassesList(): ICollection {
+  public function getClassesList(): ICollection {
     return $this->orm->classes->findAll();
   }
   
   /**
    * Get data about specified class
    */
-  function getClass(int $id): ?CharacterClass {
+  public function getClass(int $id): ?CharacterClass {
     return $this->orm->classes->getById($id);
   }
   
   /**
    * Get name of specified class
    */
-  function getClassName(int $id): string {
+  public function getClassName(int $id): string {
     $class = $this->getClass($id);
     if(is_null($class)) {
       return "";
@@ -97,14 +97,14 @@ class Profile {
   /**
    * Get data about specified specialization
    */
-  function getSpecialization(int $id): ?CharacterSpecialization {
+  public function getSpecialization(int $id): ?CharacterSpecialization {
     return $this->orm->specializations->getById($id);
   }
   
   /**
    * Get name of specified specialization
    */
-  function getSpecializationName(int $id): string {
+  public function getSpecializationName(int $id): string {
     $specialization = $this->getSpecialization($id);
     if(is_null($specialization)) {
       return "";
@@ -116,7 +116,7 @@ class Profile {
   /**
    * Get character's id
    */
-  function getCharacterId(string $name): int {
+  public function getCharacterId(string $name): int {
     $character = $this->orm->characters->getByName($name);
     if(is_null($character)) {
       return 0;
@@ -128,7 +128,7 @@ class Profile {
   /**
    * Get character's name
    */
-  function getCharacterName(int $id): string {
+  public function getCharacterName(int $id): string {
     $character = $this->orm->characters->getById($id);
     if(is_null($character)) {
       return "";
@@ -140,7 +140,7 @@ class Profile {
   /**
    * Get character's guild
    */
-  function getCharacterGuild(int $id): int {
+  public function getCharacterGuild(int $id): int {
     $char = $this->orm->characters->getById($id);
     if(is_null($char)) {
       return 0;
@@ -154,7 +154,7 @@ class Profile {
   /**
    * Gets basic data about specified player
    */
-  function view(int $id): ?array {
+  public function view(int $id): ?array {
     $return = [];
     $char = $this->orm->characters->getById($id);
     if(is_null($char)) {
@@ -186,7 +186,7 @@ class Profile {
    * 
    * @return int[]
    */
-  function getLevelsRequirements(): array {
+  public function getLevelsRequirements(): array {
     $xps = [2 => 65];
     for($i = 3; $i <= 100; $i++) {
       $xps[$i] = (int) ($xps[$i-1] * 1.35) + 15;
@@ -199,7 +199,7 @@ class Profile {
    *
    * @throws NotEnoughExperiencesException
    */
-  function levelUp(): void {
+  public function levelUp(): void {
     $character = $this->orm->characters->getById($this->user->id);
     if($character->experience < $this->getLevelsRequirements()[$character->level + 1]) {
       throw new NotEnoughExperiencesException;
@@ -224,7 +224,7 @@ class Profile {
   /**
    * Get amount of user's usable stat points
    */
-  function getStatPoints(): int {
+  public function getStatPoints(): int {
     return (int) $this->orm->characters->getById($this->user->id)->statPoints;
   }
   
@@ -233,7 +233,7 @@ class Profile {
    * 
    * @return int[]
    */
-  function getStats(): array {
+  public function getStats(): array {
     $stats = ["strength", "dexterity", "constitution", "intelligence", "charisma",];
     $return = [];
     $char = $this->orm->characters->getById($this->user->id);
@@ -249,7 +249,7 @@ class Profile {
    * @throws InvalidStatException
    * @throws NoStatPointsAvailableException
    */
-  function trainStat(string $stat): void {
+  public function trainStat(string $stat): void {
     if(!in_array($stat, $this->stats)) {
       throw new InvalidStatException;
     } elseif($this->getStatPoints() < 1) {

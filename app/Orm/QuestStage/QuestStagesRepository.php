@@ -21,7 +21,7 @@ class QuestStagesRepository extends \Nextras\Orm\Repository\Repository {
   /**
    * @param int $id
    */
-  function getById($id): ?QuestStage {
+  public function getById($id): ?QuestStage {
     return $this->getBy([
       "id" => $id
     ]);
@@ -31,7 +31,7 @@ class QuestStagesRepository extends \Nextras\Orm\Repository\Repository {
    * @param QuestArea|int $area
    * @return ICollection|QuestStage[]
    */
-  function findByArea($area): ICollection {
+  public function findByArea($area): ICollection {
     return $this->findBy([
       "area" => $area
     ]);
@@ -40,7 +40,7 @@ class QuestStagesRepository extends \Nextras\Orm\Repository\Repository {
   /**
    * @param CharacterClass|int $class
    */
-  function getClassStartingLocation($class): ?QuestStage {
+  public function getClassStartingLocation($class): ?QuestStage {
     return $this->getBy([
       "requiredLevel" => 0,
       "requiredOccupation" => $class
@@ -50,7 +50,7 @@ class QuestStagesRepository extends \Nextras\Orm\Repository\Repository {
   /**
    * @param CharacterRace|int $race
    */
-  function getRaceStartingLocation($race): ?QuestStage {
+  public function getRaceStartingLocation($race): ?QuestStage {
     return $this->getBy([
       "requiredLevel" => 0,
       "requiredRace" => $race

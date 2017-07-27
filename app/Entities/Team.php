@@ -22,18 +22,18 @@ class Team extends Collection {
   
   use \Nette\SmartObject;
   
-  function __construct(string $name) {
+  public function __construct(string $name) {
     $this->name = $name;
   }
   
   /**
    * @return Character[]
    */
-  function getItems(): array {
+  public function getItems(): array {
     return $this->items;
   }
   
-  function getName(): string {
+  public function getName(): string {
     return $this->name;
   }
   
@@ -42,7 +42,7 @@ class Team extends Collection {
    * 
    * @param int|string $id Character's id
    */
-  function getIndex($id): ?int {
+  public function getIndex($id): ?int {
     foreach($this->items as $index => $member) {
       if($member->id === $id) {
         return $index;
@@ -56,7 +56,7 @@ class Team extends Collection {
    * 
    * @param string|int $id Character's id
    */
-  function hasMember($id): bool {
+  public function hasMember($id): bool {
     foreach($this->items as $member) {
       if($member->id === $id) {
         return true;
@@ -70,7 +70,7 @@ class Team extends Collection {
    * 
    * @return Character[]
    */
-  function getActiveMembers(): array {
+  public function getActiveMembers(): array {
     $return = [];
     foreach($this->items as $member) {
       if(!$member->stunned AND $member->hitpoints > 0) {
@@ -85,7 +85,7 @@ class Team extends Collection {
    * 
    * @return Character[]
    */
-  function getAliveMembers(): array {
+  public function getAliveMembers(): array {
     $return = [];
     foreach($this->items as $member) {
       if($member->hitpoints > 0) {
@@ -100,7 +100,7 @@ class Team extends Collection {
    * 
    * @return Character[]
    */
-  function getUsableMembers(): array {
+  public function getUsableMembers(): array {
     $return = [];
     foreach($this->items as $index => $member) {
       if(!$member->stunned AND $member->hitpoints > 0) {
@@ -113,14 +113,14 @@ class Team extends Collection {
   /**
    * Check whether the team has at least 1 active member
    */
-  function hasActiveMembers(): bool {
+  public function hasActiveMembers(): bool {
     return count($this->getActiveMembers()) > 0;
   }
   
   /**
    * Check whether the team has at least 1 alive member
    */
-  function hasAliveMembers(): bool {
+  public function hasAliveMembers(): bool {
     return count($this->getAliveMembers()) > 0;
   }
 }

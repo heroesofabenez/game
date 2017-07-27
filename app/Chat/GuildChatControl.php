@@ -11,7 +11,7 @@ use HeroesofAbenez\Orm\Model as ORM;
  * @author Jakub Konečný
  */
 class GuildChatControl extends ChatControl {
-  function __construct(ORM $orm, \Nette\Security\User $user, ChatCommandsProcessor  $processor) {
+  public function __construct(ORM $orm, \Nette\Security\User $user, ChatCommandsProcessor  $processor) {
     $gid = $user->identity->guild;
     parent::__construct($orm, $user, $processor, "guild", $gid);
   }

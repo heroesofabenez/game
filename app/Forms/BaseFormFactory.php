@@ -15,11 +15,11 @@ abstract class BaseFormFactory {
   /** @var ITranslator */
   protected $translator;
   
-  function __construct(ITranslator $translator) {
+  public function __construct(ITranslator $translator) {
     $this->translator = $translator;
   }
   
-  function createBase(): Form {
+  public function createBase(): Form {
     $form = new Form;
     $form->setTranslator($this->translator);
     return $form;

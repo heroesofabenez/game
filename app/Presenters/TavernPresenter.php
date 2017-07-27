@@ -12,7 +12,7 @@ use Nette\Application\UI\Form,
  * @author Jakub Konečný
  */
 class TavernPresenter extends BasePresenter {
-  function startup(): void {
+  public function startup(): void {
     parent::startup();
     $this->template->haveForm = true;
     $this->template->canChat = true;
@@ -21,11 +21,11 @@ class TavernPresenter extends BasePresenter {
   /**
    * Use just one template for this presenter
    */
-  function formatTemplateFiles() {
+  public function formatTemplateFiles() {
     return [__DIR__ . "/../templates/Tavern.@layout.latte"];
   }
   
-  function actionGuild(): void {
+  public function actionGuild(): void {
     if($this->user->identity->guild === 0) {
       $this->template->canChat = false;
     }
@@ -33,12 +33,12 @@ class TavernPresenter extends BasePresenter {
     $this->template->chat = "guildChat";
   }
   
-  function actionLocal(): void {
+  public function actionLocal(): void {
     $this->template->title = "Local chat";
     $this->template->chat = "localChat";
   }
   
-  function actionGlobal(): void {
+  public function actionGlobal(): void {
     $this->template->title = "Global chat";
     $this->template->chat = "globalChat";
   }
@@ -68,7 +68,7 @@ class TavernPresenter extends BasePresenter {
     return $form;
   }
   
-  function newMessageSucceeded(Form $form, array $values): void {
+  public function newMessageSucceeded(Form $form, array $values): void {
     switch($this->action) {
       case "guild":
         $factory = $this->context->getByType(Chat\IGuildChatControlFactory::class);

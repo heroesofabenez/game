@@ -19,7 +19,7 @@ class EquipmentRepository extends \Nextras\Orm\Repository\Repository {
   /**
    * @param int $id
    */
-  function getById($id): ?Equipment {
+  public function getById($id): ?Equipment {
     return $this->getBy([
       "id" => $id
     ]);

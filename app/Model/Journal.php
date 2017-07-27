@@ -30,7 +30,7 @@ class Journal {
   /** @var Equipment */
   protected $equipmentModel;
   
-  function __construct(\Nette\Security\User $user, ORM $orm, Quest $questModel, Location $locationModel, Guild $guildModel, Pet $petModel, Equipment $equipmentModel) {
+  public function __construct(\Nette\Security\User $user, ORM $orm, Quest $questModel, Location $locationModel, Guild $guildModel, Pet $petModel, Equipment $equipmentModel) {
     $this->user = $user;
     $this->orm = $orm;
     $this->questModel = $questModel;
@@ -44,7 +44,7 @@ class Journal {
   /**
    * Gets basic info for character's journal
    */
-  function basic(): array {
+  public function basic(): array {
     $character = $this->orm->characters->getById($this->user->id);
     $stage = $character->currentStage;
     $return = [
@@ -68,7 +68,7 @@ class Journal {
   /**
    * Gets character's inventory
    */
-  function inventory(): array {
+  public function inventory(): array {
     $return = [];
     $char = $this->orm->characters->getById($this->user->id);
     $return["money"] = $char->money;
@@ -89,7 +89,7 @@ class Journal {
    * 
    * @return ICollection|PetEntity[]
    */
-  function pets(): ICollection {
+  public function pets(): ICollection {
     return $this->orm->pets->findByOwner($this->user->id);
   }
   
@@ -98,7 +98,7 @@ class Journal {
    * 
    * @return \stdClass[]
    */
-  function quests(): array {
+  public function quests(): array {
     $return = [];
     $quests = $this->orm->characterQuests->findByCharacter($this->user->id);
     foreach($quests as $quest) {

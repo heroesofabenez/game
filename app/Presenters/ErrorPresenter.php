@@ -14,12 +14,12 @@ class ErrorPresenter extends BasePresenter {
   /** @var ILogger|NULL */
   private $logger;
   
-  function __construct(ILogger $logger = NULL) {
+  public function __construct(ILogger $logger = NULL) {
     parent::__construct();
     $this->logger = $logger;
   }
   
-  function actionDefault(\Throwable $exception): void {
+  public function actionDefault(\Throwable $exception): void {
     if($exception instanceof \Nette\Application\BadRequestException) {
       $this->setView("404");
     } else {

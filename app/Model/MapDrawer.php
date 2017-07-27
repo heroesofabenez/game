@@ -21,7 +21,7 @@ class MapDrawer {
   /** @var \Nette\Security\User */
   protected $user;
   
-  function __construct(Location $locationModel, \Nette\Security\User $user) {
+  public function __construct(Location $locationModel, \Nette\Security\User $user) {
     $this->locationModel = $locationModel;
     $this->user = $user;
   }
@@ -32,7 +32,7 @@ class MapDrawer {
    * @param QuestStage[] $points
    * @param ICollection|RoutesStage[] $routes
    */
-  function draw(array $points, ICollection $routes, string $name): void {
+  public function draw(array $points, ICollection $routes, string $name): void {
     $image = Image::fromBlank(250, 250, Image::rgb(204, 204, 153));
     $image->rectangle(0, 0, 249, 249, Image::rgb(204, 102, 0));
     foreach($points as $point) {
@@ -49,7 +49,7 @@ class MapDrawer {
   /**
    * Draw local map
    */
-  function localMap(): void {
+  public function localMap(): void {
     $this->locationModel->user = $this->user;
     $stages = $this->locationModel->accessibleStages();
     $curr_stage = $stages[$this->user->identity->stage];

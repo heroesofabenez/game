@@ -15,7 +15,7 @@ class GuildsRankingControl extends RankingControl {
   /** @var \HeroesofAbenez\Model\Guild */
   protected $model;
   
-  function __construct(\HeroesofAbenez\Model\Guild $model) {
+  public function __construct(\HeroesofAbenez\Model\Guild $model) {
     $this->model = $model;
     parent::__construct("Guilds", ["name", "members"], "Guild", "Details");
   }
@@ -23,7 +23,7 @@ class GuildsRankingControl extends RankingControl {
   /**
    * @return \stdClass[]
    */
-  function getData(): array {
+  public function getData(): array {
     $return = $data = [];
     $result = $this->model->listOfGuilds();
     foreach($result as $row) {

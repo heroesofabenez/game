@@ -16,14 +16,14 @@ class PermissionsTest extends \Tester\TestCase {
   
   use \Testbench\TCompiledContainer;
   
-  function setUp() {
+  public function setUp() {
     $this->model = $this->getService(Permissions::class);
   }
   
   /**
    * @return void
    */
-  function testGetPermissions() {
+  public function testGetPermissions() {
     $permissions = $this->model->getPermissions();
     Assert::type("array", $permissions);
     Assert::type("array", $permissions[1]);
@@ -34,7 +34,7 @@ class PermissionsTest extends \Tester\TestCase {
   /**
    * @return void
    */
-  function testGetRoles() {
+  public function testGetRoles() {
     $roles = $this->model->getRoles();
     Assert::type("array", $roles);
     Assert::type("array", $roles[1]);
@@ -45,7 +45,7 @@ class PermissionsTest extends \Tester\TestCase {
   /**
    * @return void
    */
-  function testGetRoleName() {
+  public function testGetRoleName() {
     $name = $this->model->getRoleName(1);
     Assert::type("string", $name);
   }

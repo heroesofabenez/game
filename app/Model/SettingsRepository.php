@@ -15,11 +15,11 @@ class SettingsRepository {
   
   use \Nette\SmartObject;
   
-  function __construct(array $settings) {
+  public function __construct(array $settings) {
     $this->settings = $settings;
   }
   
-  function getSettings(): array {
+  public function getSettings(): array {
     return $this->settings;
   }
 }

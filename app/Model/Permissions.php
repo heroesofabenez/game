@@ -20,7 +20,7 @@ class Permissions {
   /** @var \Nette\Caching\Cache */
   protected $cache;
   
-  function __construct(ORM $orm, \Nette\Caching\Cache $cache) {
+  public function __construct(ORM $orm, \Nette\Caching\Cache $cache) {
     $this->orm = $orm;
     $this->cache = $cache;
   }
@@ -28,7 +28,7 @@ class Permissions {
   /**
    * Get roles (from db or cache)
    */
-  function getRoles(): array {
+  public function getRoles(): array {
     $roles = $this->cache->load("roles", function(& $dependencies) {
       $roles = [];
       $rows = $this->orm->guildRanks->findAll()->orderBy("id");
@@ -44,7 +44,7 @@ class Permissions {
   /**
    * Get name of specified rank
    */
-  function getRoleName(int $id): string {
+  public function getRoleName(int $id): string {
     $ranks = $this->getRoles();
     return $ranks[$id]["name"];
   }
@@ -54,7 +54,7 @@ class Permissions {
    * 
    * @return \stdClass[]
    */
-  function getPermissions(): array {
+  public function getPermissions(): array {
     $roles = $this->getRoles();
     $permissions = $this->cache->load("permissions", function(& $dependencies) use($roles) {
       $permissions = [];

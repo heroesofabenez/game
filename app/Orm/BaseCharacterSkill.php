@@ -22,24 +22,24 @@ abstract class BaseCharacterSkill {
   /** @var int */
   protected $cooldown = 0;
   
-  function __construct(BaseSkill $skill, int $level) {
+  public function __construct(BaseSkill $skill, int $level) {
     $this->skill = $skill;
     $this->level = $level;
   }
   
-  function getLevel(): int {
+  public function getLevel(): int {
     return $this->level;
   }
   
-  function getCooldown(): int {
+  public function getCooldown(): int {
     return $this->cooldown;
   }
   
-  function setLevel(int $level) {
+  public function setLevel(int $level) {
     $this->level = $level;
   }
   
-  function getSkillType(): string {
+  public function getSkillType(): string {
     if($this->skill instanceof SkillAttackDummy) {
       return "attack";
     } elseif($this->skill instanceof SkillSpecialDummy) {
@@ -49,15 +49,15 @@ abstract class BaseCharacterSkill {
     }
   }
   
-  function canUse(): bool {
+  public function canUse(): bool {
     return ($this->cooldown < 1);
   }
   
-  function resetCooldown(): void {
+  public function resetCooldown(): void {
     $this->cooldown = $this->skill->cooldown;
   }
   
-  function decreaseCooldown(): void {
+  public function decreaseCooldown(): void {
     if($this->cooldown > 0) {
       $this->cooldown--;
     }

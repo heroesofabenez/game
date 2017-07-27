@@ -135,7 +135,7 @@ class Character {
    * @param Pet[] $pets Pets owned by the character
    * @param BaseCharacterSkill[] $skills Skills acquired by the character
    */
-  function __construct(array $stats, array $equipment = [], array $pets = [], array $skills = []) {
+  public function __construct(array $stats, array $equipment = [], array $pets = [], array $skills = []) {
     $this->setStats($stats);
     foreach($equipment as $eq) {
       if($eq instanceof Equipment) {
@@ -200,170 +200,170 @@ class Character {
   /**
    * @return int|string
    */
-  function getId() {
+  public function getId() {
     return $this->id;
   }
   
-  function getName(): string {
+  public function getName(): string {
     return $this->name;
   }
   
-  function getGender(): string {
+  public function getGender(): string {
     return $this->gender;
   }
   
-  function getRace(): string {
+  public function getRace(): string {
     return (string) $this->race;
   }
   
-  function getOccupation(): string {
+  public function getOccupation(): string {
     return (string) $this->occupation;
   }
   
-  function getLevel(): int {
+  public function getLevel(): int {
     return $this->level;
   }
   
-  function getExperience(): int {
+  public function getExperience(): int {
     return $this->experience;
   }
   
-  function getStrength(): int {
+  public function getStrength(): int {
     return $this->strength;
   }
   
-  function getStrengthBase(): int {
+  public function getStrengthBase(): int {
     return $this->strengthBase;
   }
   
-  function getDexterity(): int {
+  public function getDexterity(): int {
     return $this->dexterity;
   }
   
-  function getDexterityBase(): int {
+  public function getDexterityBase(): int {
     return $this->dexterityBase;
   }
   
-  function getConstitution(): int {
+  public function getConstitution(): int {
     return $this->constitution;
   }
   
-  function getConstitutionBase(): int {
+  public function getConstitutionBase(): int {
     return $this->constitutionBase;
   }
   
-  function getCharisma(): int {
+  public function getCharisma(): int {
     return $this->charisma;
   }
   
-  function getCharismaBase(): int {
+  public function getCharismaBase(): int {
     return $this->charismaBase;
   }
   
-  function getMaxHitpoints(): int {
+  public function getMaxHitpoints(): int {
     return $this->maxHitpoints;
   }
   
-  function getHitpoints(): int {
+  public function getHitpoints(): int {
     return $this->hitpoints;
   }
   
-  function getDamage(): int {
+  public function getDamage(): int {
     return (int) $this->damage;
   }
   
-  function getDamageBase(): int {
+  public function getDamageBase(): int {
     return (int) $this->damageBase;
   }
   
-  function getHit(): int {
+  public function getHit(): int {
     return $this->hit;
   }
   
-  function getHitBase(): int {
+  public function getHitBase(): int {
     return $this->hitBase;
   }
   
-  function getDodge(): int {
+  public function getDodge(): int {
     return $this->dodge;
   }
   
-  function getDodgeBase(): int {
+  public function getDodgeBase(): int {
     return $this->dodgeBase;
   }
   
-  function getInitiative(): int {
+  public function getInitiative(): int {
     return $this->initiative;
   }
   
-  function getInitiativeBase(): int {
+  public function getInitiativeBase(): int {
     return $this->initiativeBase;
   }
   
-  function getInitiativeFormula(): string {
+  public function getInitiativeFormula(): string {
     return $this->initiativeFormula;
   }
   
-  function getDefense(): int {
+  public function getDefense(): int {
     return (int) $this->defense;
   }
   
-  function getDefenseBase(): int {
+  public function getDefenseBase(): int {
     return (int) $this->defenseBase;
   }
   
   /**
    * @return Equipment[]
    */
-  function getEquipment(): array {
+  public function getEquipment(): array {
     return $this->equipment;
   }
   
   /**
    * @return Pet[]
    */
-  function getPets(): array {
+  public function getPets(): array {
     return $this->pets;
   }
   
   /**
    * @return BaseCharacterSkill[]
    */
-  function getSkills(): array {
+  public function getSkills(): array {
     return $this->skills;
   }
   
-  function getActivePet(): ?int {
+  public function getActivePet(): ?int {
     return $this->activePet;
   }
   
   /**
    * @return CharacterEffect[]
    */
-  function getEffects(): array {
+  public function getEffects(): array {
     return $this->effects;
   }
   
-  function isStunned(): bool {
+  public function isStunned(): bool {
     return $this->stunned;
   }
   
-  function getSpecialization(): string {
+  public function getSpecialization(): string {
     return $this->specialization;
   }
   
-  function getIntelligence(): int {
+  public function getIntelligence(): int {
     return $this->intelligence;
   }
   
-  function getIntelligenceBase(): int {
+  public function getIntelligenceBase(): int {
     return $this->intelligenceBase;
   }
   
   /**
    * Applies new effect on the character
    */
-  function addEffect(CharacterEffect $effect): void {
+  public function addEffect(CharacterEffect $effect): void {
     $this->effects[] = $effect;
     $this->recalculateStats();
   }
@@ -373,7 +373,7 @@ class Character {
    *
    * @throws OutOfBoundsException
    */
-  function removeEffect(string $effectId): void {
+  public function removeEffect(string $effectId): void {
     foreach($this->effects as $i => $effect) {
       if($effect->id == $effectId) {
         unset($this->effects[$i]);
@@ -389,7 +389,7 @@ class Character {
    *
    * @throws OutOfBoundsException
    */
-  function getItem(int $itemId): Equipment {
+  public function getItem(int $itemId): Equipment {
     if(isset($this->equipment[$itemId])) {
       return $this->equipment[$itemId];
     } else {
@@ -402,7 +402,7 @@ class Character {
    *
    * @throws OutOfBoundsException
    */
-  function equipItem(int $itemId): void {
+  public function equipItem(int $itemId): void {
     try {
       $item = $this->getItem($itemId);
     } catch (OutOfBoundsException $e) {
@@ -417,7 +417,7 @@ class Character {
    *
    * @throws OutOfBoundsException
    */
-  function unequipItem(int $itemId): void {
+  public function unequipItem(int $itemId): void {
     try {
       $item = $this->getItem($itemId);
     } catch (OutOfBoundsException $e) {
@@ -432,7 +432,7 @@ class Character {
    *
    * @throws OutOfBoundsException
    */
-  function getPet(int $petId): Pet {
+  public function getPet(int $petId): Pet {
     if(isset($this->pets[$petId]) AND $this->pets[$petId] instanceof Pet) {
       return $this->pets[$petId];
     } else {
@@ -445,7 +445,7 @@ class Character {
    *
    * @throws OutOfBoundsException
    */
-  function deployPet(int $petId): void {
+  public function deployPet(int $petId): void {
     try {
       $pet = $this->getPet($petId);
     } catch(OutOfBoundsException $e) {
@@ -457,14 +457,14 @@ class Character {
   /**
    * Dismisses active pet
    */
-  function dismissPet(): void {
+  public function dismissPet(): void {
     $this->activePet = NULL;
   }
   
   /**
    * @return BaseCharacterSkill[]
    */
-  function getUsableSkills(): array {
+  public function getUsableSkills(): array {
     $skills = [];
     foreach($this->skills as $skill) {
       if($skill->canUse()) {
@@ -477,21 +477,21 @@ class Character {
   /**
    * Harm the character
    */
-  function harm(int $amount): void {
+  public function harm(int $amount): void {
     $this->hitpoints -= $amount;
   }
   
   /**
    * Heal the character
    */
-  function heal(int $amount): void {
+  public function heal(int $amount): void {
     $this->hitpoints += $amount;
   }
   
   /**
    * Determine which (primary) stat should be used to calculate damage
    */
-  function damageStat(): string {
+  public function damageStat(): string {
     $stat = "strength";
     foreach($this->equipment as $item) {
       if(!$item->worn OR $item->slot != "weapon") {
@@ -516,7 +516,7 @@ class Character {
   /**
    * Recalculate secondary stats from the the primary ones
    */
-  function recalculateSecondaryStats(): void {
+  public function recalculateSecondaryStats(): void {
     $stats = ["damage" => $this->damageStat(), "hit" => "dexterity", "dodge" => "dexterity"];
     foreach($stats as $secondary => $primary) {
       $gain = $this->$secondary - $this->{$secondary . "Base"};
@@ -532,7 +532,7 @@ class Character {
   /**
    * Recalculates stats of the character (mostly used during combat)
    */
-  function recalculateStats(): void {
+  public function recalculateStats(): void {
     $stats = [
       "strength", "dexterity", "constitution", "intelligence", "charisma",
       "damage", "hit", "dodge", "initiative", "defense"
@@ -588,7 +588,7 @@ class Character {
   /**
    * Calculate character's initiative
    */
-  function calculateInitiative(): void {
+  public function calculateInitiative(): void {
     $result = 0;
     $formula = str_replace(["INT", "DEX"], [$this->intelligence, $this->dexterity], $this->initiativeFormula);
     preg_match_all("/^([1-9]+)d([1-9]+)/", $formula, $dices);
@@ -603,7 +603,7 @@ class Character {
   /**
    * Reset character's initiative
    */
-  function resetInitiative(): void {
+  public function resetInitiative(): void {
     $this->initiative = $this->initiativeBase;
   }
 }

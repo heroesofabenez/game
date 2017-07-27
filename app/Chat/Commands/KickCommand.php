@@ -23,7 +23,7 @@ class KickCommand extends \HeroesofAbenez\Chat\ChatCommand {
   /** @var ITranslator */
   protected $translator;
   
-  function __construct(Guild $model, ITranslator $translator) {
+  public function __construct(Guild $model, ITranslator $translator) {
     $this->model = $model;
     $this->translator = $translator;
   }
@@ -31,7 +31,7 @@ class KickCommand extends \HeroesofAbenez\Chat\ChatCommand {
   /**
    * @param int $id
    */
-  function execute(): string {
+  public function execute(): string {
     $id = Arrays::get(func_get_args(), 0, "");
     if($id === "" OR !is_numeric($id)) {
       return "";

@@ -17,14 +17,14 @@ class NPCTest extends \Tester\TestCase {
   
   use \Testbench\TCompiledContainer;
   
-  function setUp() {
+  public function setUp() {
     $this->model = $this->getService(NPC::class);
   }
   
   /**
    * @return void
    */
-  function testView() {
+  public function testView() {
     $npc = $this->model->view(1);
     Assert::type(NpcEntity::class, $npc);
     Assert::same("Mentor", $npc->name);

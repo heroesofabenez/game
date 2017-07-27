@@ -17,14 +17,14 @@ class EquipmentTest extends \Tester\TestCase {
   
   use \Testbench\TCompiledContainer;
   
-  function setUp() {
+  public function setUp() {
     $this->model = $this->getService(Equipment::class);
   }
   
   /**
    * @return void
    */
-  function testView() {
+  public function testView() {
     $item = $this->model->view(1);
     Assert::type(EquipmentEntity::class, $item);
   }

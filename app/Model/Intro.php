@@ -18,7 +18,7 @@ class Intro {
   /** @var ORM */
   protected $orm;
   
-  function __construct(\Nette\Security\User $user, ORM $orm) {
+  public function __construct(\Nette\Security\User $user, ORM $orm) {
     $this->user = $user;
     $this->orm = $orm;
   }
@@ -26,14 +26,14 @@ class Intro {
   /**
    * Check in which part of intro the player is
    */
-  function getIntroPosition(): int {
+  public function getIntroPosition(): int {
     return $this->orm->characters->getById($this->user->id)->intro;
   }
   
   /**
    * Get a part of introduction
    */
-  function getIntroPart(int $part): string {
+  public function getIntroPart(int $part): string {
     $char = $this->orm->characters->getById($this->user->id);
     $intro = $this->orm->introduction->getBy([
       "race" => $char->race->id,
@@ -50,7 +50,7 @@ class Intro {
   /**
    * Move onto next part of introduction
    */
-  function moveToNextPart(int $part): void {
+  public function moveToNextPart(int $part): void {
     $character = $this->orm->characters->getById($this->user->id);
     $character->intro = $part;
     $this->orm->characters->persistAndFlush($character);
@@ -59,7 +59,7 @@ class Intro {
   /**
    * Get starting location for the player
    */
-  function getStartingLocation(): int {
+  public function getStartingLocation(): int {
     $classSL = $this->orm->stages->getClassStartingLocation($this->user->identity->occupation);
     if(!is_null($classSL)) {
       return $classSL->id;
@@ -73,7 +73,7 @@ class Intro {
   /**
    * Ends introduction and sends player to his starting location
    */
-  function endIntro(): void {
+  public function endIntro(): void {
     $startingLocation = $this->getStartingLocation();
     $character = $this->orm->characters->getById($this->user->id);
     $character->currentStage = $startingLocation;

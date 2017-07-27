@@ -26,7 +26,7 @@ class Guild {
   /** @var \HeroesofAbenez\Model\Permissions */
   protected $permissionsModel;
   
-  function __construct(ORM $orm, \Nette\Security\User $user, Profile $profileModel, Permissions $permissionsModel) {
+  public function __construct(ORM $orm, \Nette\Security\User $user, Profile $profileModel, Permissions $permissionsModel) {
     $this->orm = $orm;
     $this->user = $user;
     $this->profileModel = $profileModel;
@@ -36,7 +36,7 @@ class Guild {
   /**
    * Get name of specified guild
    */
-  function getGuildName(int $id): string {
+  public function getGuildName(int $id): string {
     $guild = $this->view($id);
     if(is_null($guild)) {
       return "";
@@ -48,14 +48,14 @@ class Guild {
   /**
    * Gets basic data about specified guild
    */
-  function view(int $id): ?GuildEntity {
+  public function view(int $id): ?GuildEntity {
     return $this->orm->guilds->getById($id);
   }
   
   /**
    * Get a guild's custom name for a rank
    */
-  function getCustomRankName(int $guild, int $rank): string {
+  public function getCustomRankName(int $guild, int $rank): string {
     $customRank = $this->orm->guildRanksCustom->getByGuildAndRank($guild, $rank);
     if(is_null($customRank)) {
       return "";
@@ -72,7 +72,7 @@ class Guild {
    * @param bool $customRoleNames Whether the guild's custom names should be used
    * @return \stdClass[]
    */
-  function guildMembers(int $id, array $roles = [], bool $customRoleNames = false): array {
+  public function guildMembers(int $id, array $roles = [], bool $customRoleNames = false): array {
     $return = [];
     $members = $this->orm->characters->findByGuild($id);
     if(count($roles)) {
@@ -95,7 +95,7 @@ class Guild {
    * @param array $data Name and description
    * @throws NameInUseException
    */
-  function create($data): void {
+  public function create($data): void {
     $guild = $this->orm->guilds->getByName($data["name"]);
     if(!is_null($guild)) {
       throw new NameInUseException;
@@ -115,7 +115,7 @@ class Guild {
    *
    * @throws GuildNotFoundException
    */
-  function sendApplication(int $gid): void {
+  public function sendApplication(int $gid): void {
     $guild = $this->orm->guilds->getById($gid);
     if(is_null($guild)) {
       throw new GuildNotFoundException;
@@ -134,7 +134,7 @@ class Guild {
   /**
    * Check if player has an unresolved application
    */
-  function haveUnresolvedApplication(): bool {
+  public function haveUnresolvedApplication(): bool {
     $app = $this->orm->requests->getBy([
       "from" => $this->user->id,
       "type" => RequestEntity::TYPE_GUILD_APP,
@@ -149,7 +149,7 @@ class Guild {
    * @param int $id Guild's id
    * @return ICollection|RequestEntity[]
    */
-  function showApplications(int $id): ICollection {
+  public function showApplications(int $id): ICollection {
     $guild = $this->view($id);
     $leaderId = $this->profileModel->getCharacterId($guild->leader->name);
     return $this->orm->requests->findUnresolvedGuildApplications($leaderId);
@@ -160,7 +160,7 @@ class Guild {
    *
    * @return ICollection|GuildEntity[] list of guilds (id, name, description, leader)
    */
-  function listOfGuilds(): ICollection {
+  public function listOfGuilds(): ICollection {
     return $this->orm->guilds->findAll();
   }
   
@@ -175,7 +175,7 @@ class Guild {
    * @throws CannotPromoteToGrandmasterException
    * @throws CannotHaveMoreDeputiesException
    */
-  function promote(int $id): void {
+  public function promote(int $id): void {
     $admin = $this->user;
     if($admin->identity->guild == 0) {
       throw new NotInGuildException;
@@ -226,7 +226,7 @@ class Guild {
    * @throws CannotDemoteHigherRanksException
    * @throws CannotDemoteLowestRankException
    */
-  function demote(int $id): void {
+  public function demote(int $id): void {
     $admin = $this->user;
     if($admin->identity->guild == 0) {
       throw new NotInGuildException;
@@ -270,7 +270,7 @@ class Guild {
    * @throws PlayerNotInGuildException
    * @throws CannotKickHigherRanksException
    */
-  function kick(int $id): void {
+  public function kick(int $id): void {
     $admin = $this->user;
     if($admin->identity->guild == 0) {
       throw new NotInGuildException;
@@ -305,7 +305,7 @@ class Guild {
    * @throws NotInGuildException
    * @throws GrandmasterCannotLeaveGuildException
   */
-  function leave(): void {
+  public function leave(): void {
     if($this->user->identity->guild === 0) {
       throw new NotInGuildException;
     }
@@ -320,7 +320,7 @@ class Guild {
   /**
    * Dissolve guild
    */
-  function dissolve(int $id): void {
+  public function dissolve(int $id): void {
     $guild = $this->orm->guilds->getById($id);
     foreach($guild->members as $member) {
       $member->guild = $member->guildrank = NULL;
@@ -336,7 +336,7 @@ class Guild {
    *
    * @throws NameInUseException
   */
-  function rename(int $id, string $name): void {
+  public function rename(int $id, string $name): void {
     $guild = $this->orm->guilds->getByName($name);
     if(!is_null($guild) AND $guild->id !== $id) {
       throw new NameInUseException;
@@ -351,7 +351,7 @@ class Guild {
    *
    * @throws GuildNotFoundException
    */
-  function changeDescription(int $id, string $description): void {
+  public function changeDescription(int $id, string $description): void {
     $guild = $this->orm->guilds->getById($id);
     if(is_null($guild)) {
       throw new GuildNotFoundException;
@@ -363,7 +363,7 @@ class Guild {
   /**
    * Join a guild
    */
-  function join(int $uid, int $gid): void {
+  public function join(int $uid, int $gid): void {
     $character = $this->orm->characters->getById($uid);
     $character->guild = $gid;
     $character->guildrank = 1;
@@ -375,7 +375,7 @@ class Guild {
    *
    * @return string[]
    */
-  function getDefaultRankNames() {
+  public function getDefaultRankNames() {
     return $this->orm->guildRanks->findAll()->fetchPairs("id", "name");
   }
   
@@ -384,7 +384,7 @@ class Guild {
    *
    * @return string[]
    */
-  function getCustomRankNames(int $id): array {
+  public function getCustomRankNames(int $id): array {
     return $this->orm->guildRanksCustom->findByGuild($id)->fetchPairs("rank", "name");
   }
   
@@ -393,7 +393,7 @@ class Guild {
    *
    * @throws MissingPermissionsException
    */
-  function setCustomRankNames(array $names): void {
+  public function setCustomRankNames(array $names): void {
     if(!$this->user->isAllowed("guild", "changeRankNames")) {
       throw new MissingPermissionsException;
     }

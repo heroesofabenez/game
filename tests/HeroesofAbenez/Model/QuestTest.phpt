@@ -17,11 +17,11 @@ class QuestTest extends \Tester\TestCase {
   
   use \Testbench\TCompiledContainer;
   
-  function setUp() {
+  public function setUp() {
     $this->model = $this->getService(Quest::class);
   }
   
-  function testListOfQuests() {
+  public function testListOfQuests() {
     $quests = $this->model->listOfQuests();
     Assert::type("array", $quests);
     Assert::type(QuestEntity::class, $quests[1]);
@@ -30,7 +30,7 @@ class QuestTest extends \Tester\TestCase {
   /**
    * @return void
    */
-  function testView() {
+  public function testView() {
     $quest = $this->model->view(1);
     Assert::type(QuestEntity::class, $quest);
   }
@@ -38,7 +38,7 @@ class QuestTest extends \Tester\TestCase {
   /**
    * @return void
    */
-  function testStatus() {
+  public function testStatus() {
     $result = $this->model->status(1);
     Assert::type("integer", $result);
     Assert::same(1, $result);
@@ -47,7 +47,7 @@ class QuestTest extends \Tester\TestCase {
   /**
    * @return void
    */
-  function testIsFinished() {
+  public function testIsFinished() {
     $result = $this->model->isFinished(1);
     Assert::type("bool", $result);
     Assert::false($result);

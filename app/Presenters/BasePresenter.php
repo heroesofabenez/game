@@ -32,7 +32,7 @@ abstract class BasePresenter extends \Nette\Application\UI\Presenter {
   /**
    * Try to login the user
    */
-  function tryLogin(): void {
+  public function tryLogin(): void {
     if(!$this->user->isLoggedIn()) {
       $this->user->login();
     }

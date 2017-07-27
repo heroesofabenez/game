@@ -19,14 +19,14 @@ class RouterTest extends \Tester\TestCase {
   
   use \Testbench\TCompiledContainer;
   
-  function setUp() {
+  public function setUp() {
     $this->router = $this->getService(RouteList::class);
   }
   
   /**
    * @return void
    */
-  function testRoutes() {
+  public function testRoutes() {
     foreach($this->router->getIterator() as $route) {
       Assert::type(IRouter::class, $route);
       Assert::type(Route::class, $route);

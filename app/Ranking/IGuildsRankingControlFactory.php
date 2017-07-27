@@ -2,6 +2,6 @@
 namespace HeroesofAbenez\Ranking;
 
 interface IGuildsRankingControlFactory {
-  function create(): GuildsRankingControl;
+  public function create(): GuildsRankingControl;
 }
 ?>

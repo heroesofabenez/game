@@ -17,13 +17,13 @@ class GuildDescriptionFormFactory extends BaseFormFactory {
   /** @var \Nette\Security\User */
   protected $user;
   
-  function __construct(\Nette\Localization\ITranslator $translator, \HeroesofAbenez\Model\Guild $model, \Nette\Security\User $user) {
+  public function __construct(\Nette\Localization\ITranslator $translator, \HeroesofAbenez\Model\Guild $model, \Nette\Security\User $user) {
     $this->model = $model;
     $this->user = $user;
     parent::__construct($translator);
   }
   
-  function create(): Form {
+  public function create(): Form {
     $form = parent::createBase();
     $guild = $this->model->view($this->user->identity->guild);
     $form->addTextArea("description", "forms.guildDescription.descriptionField.label")
@@ -33,7 +33,7 @@ class GuildDescriptionFormFactory extends BaseFormFactory {
     return $form;
   }
   
-  function submitted(Form $form, array $values): void {
+  public function submitted(Form $form, array $values): void {
     $guild = $this->user->identity->guild;
     $description = $values["description"];
     try {

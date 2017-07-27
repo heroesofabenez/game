@@ -3,6 +3,6 @@ namespace HeroesofAbenez\Chat;
 
 interface ILocalChatControlFactory {
   /** @return \HeroesofAbenez\Chat\LocalChatControl */
-  function create();
+  public function create();
 }
 ?>

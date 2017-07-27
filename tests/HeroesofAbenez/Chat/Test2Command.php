@@ -9,7 +9,7 @@ class Test2Command extends ChatCommand {
   /**
    * @return string
    */
-  function execute() : string {
+  public function execute() : string {
     $args = func_get_args();
     $text = "test";
     foreach($args as $arg) {

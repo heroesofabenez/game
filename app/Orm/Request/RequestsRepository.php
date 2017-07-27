@@ -21,7 +21,7 @@ class RequestsRepository extends \Nextras\Orm\Repository\Repository {
   /**
    * @param int $id
    */
-  function getById($id): ?Request {
+  public function getById($id): ?Request {
     return $this->getBy([
       "id" => $id
     ]);
@@ -31,7 +31,7 @@ class RequestsRepository extends \Nextras\Orm\Repository\Repository {
    * @param Character|int $guildLeader
    * @return ICollection|Request[]
    */
-  function findUnresolvedGuildApplications($guildLeader): ICollection {
+  public function findUnresolvedGuildApplications($guildLeader): ICollection {
     return $this->findBy([
       "to" => $guildLeader,
       "type" => Request::TYPE_GUILD_APP,

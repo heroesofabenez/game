@@ -21,7 +21,7 @@ class Item {
   /** @var \Nette\Security\User */
   protected $user;
   
-  function __construct(ORM $orm, \Nette\Security\User $user) {
+  public function __construct(ORM $orm, \Nette\Security\User $user) {
     $this->orm = $orm;
     $this->user = $user;
   }
@@ -29,7 +29,7 @@ class Item {
   /**
    * Gets name of specified item
    */
-  function getItemName(int $id): string {
+  public function getItemName(int $id): string {
     $item = $this->view($id);
     if(is_null($item)) {
       return "";
@@ -41,14 +41,14 @@ class Item {
   /**
    * Get info about specified item
    */
-  function view(int $id): ?ItemEntity {
+  public function view(int $id): ?ItemEntity {
     return $this->orm->items->getById($id);
   }
   
   /**
    * Check if player has specified item
    */
-  function haveItem(int $id, int $amount = 1): bool {
+  public function haveItem(int $id, int $amount = 1): bool {
     $item = $this->orm->characterItems->getByCharacterAndItem($this->user->id, $id);
     if(is_null($item)) {
       return false;
@@ -62,7 +62,7 @@ class Item {
   /**
    * Give the player item(s)
    */
-  function giveItem(int $id, int $amount = 1): void {
+  public function giveItem(int $id, int $amount = 1): void {
     $item = $this->orm->characterItems->getByCharacterAndItem($this->user->id, $id);
     if(is_null($item)) {
       $item = new CharacterItem;
@@ -76,7 +76,7 @@ class Item {
     $this->orm->characterItems->persistAndFlush($item);
   }
   
-  function loseItem(int $id, int $amount = 1): void {
+  public function loseItem(int $id, int $amount = 1): void {
     $item = $this->orm->characterItems->getByCharacterAndItem($this->user->id, $id);
     if(is_null($item)) {
       return;

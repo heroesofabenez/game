@@ -45,7 +45,7 @@ class ArenaPVEControl extends ArenaControl {
   /**
    * Show champion's profile
    */
-  function renderChampion(int $id): void {
+  public function renderChampion(int $id): void {
     $template = $this->template;
     $template->setFile(__DIR__ . "/arenaChampion.latte");
     try {
@@ -74,7 +74,7 @@ class ArenaPVEControl extends ArenaControl {
   /**
    * Fight a npc
    */
-  function handleFight(int $npcId): void {
+  public function handleFight(int $npcId): void {
     try {
       $npc = $this->getNpc($npcId);
     } catch(OpponentNotFoundException $e) {

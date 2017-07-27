@@ -25,13 +25,13 @@ class CharacterPresenter extends BasePresenter {
   /**
    * Get list of races of classes
    */
-  function startup(): void {
+  public function startup(): void {
     parent::startup();
     $this->classes = $this->model->getClassesList();
     $this->races = $this->model->getRacesList();
   }
   
-  function renderCreate(): void {
+  public function renderCreate(): void {
     $racesIds = $classesIds = [];
     foreach($this->races as $race) {
       $racesIds[] = $race->id;
@@ -62,7 +62,7 @@ class CharacterPresenter extends BasePresenter {
   /**
    * @param string $data Serialized array with data
    */
-  function renderCreated(string $data): void {
+  public function renderCreated(string $data): void {
     $data = unserialize($data);
     foreach($data as $key => $value) {
       $this->template->$key = $value;

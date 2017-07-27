@@ -26,7 +26,7 @@ class NPCShopControl extends \Nette\Application\UI\Control {
   /** @var ITranslator */
   protected $translator;
   
-  function __construct(ORM $orm, \HeroesofAbenez\Model\Item $itemModel, \Nette\Security\User $user, ITranslator $translator) {
+  public function __construct(ORM $orm, \HeroesofAbenez\Model\Item $itemModel, \Nette\Security\User $user, ITranslator $translator) {
     parent::__construct();
     $this->orm = $orm;
     $this->itemModel = $itemModel;
@@ -34,7 +34,7 @@ class NPCShopControl extends \Nette\Application\UI\Control {
     $this->translator = $translator;
   }
   
-  function setNpc(Npc $npc) {
+  public function setNpc(Npc $npc) {
     $this->npc = $npc;
   }
   
@@ -43,7 +43,7 @@ class NPCShopControl extends \Nette\Application\UI\Control {
    * 
    * @return Item[]
    */
-  function getItems(): array {
+  public function getItems(): array {
     $return = [];
     $items = $this->npc->items;
     foreach($items as $item) {
@@ -52,7 +52,7 @@ class NPCShopControl extends \Nette\Application\UI\Control {
     return $return;
   }
   
-  function render(): void {
+  public function render(): void {
     $template = $this->template;
     $template->setFile(__DIR__ . "/npcShop.latte");
     $template->npcId = $this->npc->id;
@@ -63,7 +63,7 @@ class NPCShopControl extends \Nette\Application\UI\Control {
   /**
    * Check if an item is in the shop
    */
-  function canBuyItem(int $id): bool {
+  public function canBuyItem(int $id): bool {
     $row = $this->orm->shopItems->getById($id);
     return (!is_null($row) AND $row->npc->id === $this->npc->id);
   }
@@ -71,7 +71,7 @@ class NPCShopControl extends \Nette\Application\UI\Control {
   /**
    * Buy an item in the shop
    */
-  function handleBuy(int $itemId): void {
+  public function handleBuy(int $itemId): void {
     $item = $this->orm->items->getById($itemId);
     if(is_null($item)) {
       $this->presenter->flashMessage($this->translator->translate("errors.shop.itemDoesNotExist"));

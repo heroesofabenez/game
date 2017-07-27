@@ -22,7 +22,7 @@ class Quest {
   /** @var \Nette\Security\User */
   protected $user;
   
-  function __construct(\Nette\Caching\Cache $cache, ORM $orm,  \Nette\Security\User $user) {
+  public function __construct(\Nette\Caching\Cache $cache, ORM $orm,  \Nette\Security\User $user) {
     $this->orm = $orm;
     $this->cache = $cache;
     $this->user = $user;
@@ -34,7 +34,7 @@ class Quest {
    * @param int $npc Return quests only from certain npc, 0 = all npcs
    * @return QuestEntity[]
    */
-  function listOfQuests(int $npc = 0): array {
+  public function listOfQuests(int $npc = 0): array {
     $quests = $this->cache->load("quests", function(& $dependencies) {
       $return = [];
       $quests = $this->orm->quests->findAll();
@@ -57,7 +57,7 @@ class Quest {
   /**
    * Gets info about specified quest
    */
-  function view(int $id): ?QuestEntity {
+  public function view(int $id): ?QuestEntity {
     $quests = $this->listOfQuests();
     return Arrays::get($quests, $id, NULL);
   }
@@ -65,7 +65,7 @@ class Quest {
   /**
    * Get quest's status
    */
-  function status(int $id): int {
+  public function status(int $id): int {
     $row = $this->orm->characterQuests->getByCharacterAndQuest($this->user->id, $id);
     if(is_null($row)) {
       return 0;
@@ -77,7 +77,7 @@ class Quest {
   /**
    * Checks if the player finished specified quest
    */
-  function isFinished(int $id): bool {
+  public function isFinished(int $id): bool {
     $status = $this->status($id);
     return ($status > 2);
   }

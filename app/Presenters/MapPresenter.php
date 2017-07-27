@@ -12,7 +12,7 @@ class MapPresenter extends BasePresenter {
   /** @var \HeroesofAbenez\Model\Map @autowire */
   protected $model;
   
-  function actionLocal(): void {
+  public function actionLocal(): void {
     $data = $this->model->local();
     $this->template->wwwDir = realpath(__DIR__ . "/../../");
     foreach($data as $key => $value) {

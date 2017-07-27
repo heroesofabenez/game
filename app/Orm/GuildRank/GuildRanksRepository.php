@@ -19,7 +19,7 @@ class GuildRanksRepository extends \Nextras\Orm\Repository\Repository {
   /**
    * @param int $id
    */
-  function getById($id): ?GuildRank {
+  public function getById($id): ?GuildRank {
     return $this->getBy([
       "id" => $id
     ]);

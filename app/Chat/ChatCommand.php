@@ -19,7 +19,7 @@ abstract class ChatCommand {
    * Defines default name for the chat command
    * The class' name has to follow XCommand pattern
    */
-  function getName(): string {
+  public function getName(): string {
     if($this->name !== "") {
       return $this->name;
     }
@@ -27,7 +27,7 @@ abstract class ChatCommand {
     return strtolower(str_replace("Command", "", $className));
   }
   
-  function setName(string $name) {
+  public function setName(string $name) {
     $this->name = $name;
   }
   

@@ -19,7 +19,7 @@ class ChatCommandsProcessor {
    *
    * @throws CommandNameAlreadyUsedException
    */
-  function addCommand(ChatCommand $command): void {
+  public function addCommand(ChatCommand $command): void {
     if($this->hasCommand($command->name)) {
       throw new CommandNameAlreadyUsedException("Command $command->name is already defined.");
     }
@@ -32,7 +32,7 @@ class ChatCommandsProcessor {
    * @throws CommandNotFoundException
    * @throws CommandNameAlreadyUsedException
    */
-  function addAlias(string $oldName, string $newName): void {
+  public function addAlias(string $oldName, string $newName): void {
     try {
       $command = $this->getCommand($oldName);
     } catch(CommandNotFoundException $e) {
@@ -50,7 +50,7 @@ class ChatCommandsProcessor {
   /**
    * Extract command from text
    */
-  function extractCommand(string $text): string {
+  public function extractCommand(string $text): string {
     if(substr($text, 0, 1) != "/") {
       return "";
     }
@@ -70,7 +70,7 @@ class ChatCommandsProcessor {
   /**
    * Extract parameters from text
    */
-  function extractParameters(string $text): array {
+  public function extractParameters(string $text): array {
     if(substr($text, 0, 1) != "/" OR !strpos($text, " ")) {
       return [];
     }
@@ -82,7 +82,7 @@ class ChatCommandsProcessor {
   /**
    * Check whether a command is defined
    */
-  function hasCommand(string $name): bool {
+  public function hasCommand(string $name): bool {
     foreach($this->commands as $command) {
       if($command->name === $name) {
         return true;
@@ -96,7 +96,7 @@ class ChatCommandsProcessor {
    *
    * @throws CommandNotFoundException
    */
-  function getCommand(string $name): ChatCommand {
+  public function getCommand(string $name): ChatCommand {
     foreach($this->commands as $command) {
       if($command->name === $name) {
         return $command;
@@ -108,7 +108,7 @@ class ChatCommandsProcessor {
   /**
    * @return string|null Result of the command/null when text text contains no (defined) command
    */
-  function parse(string $text): ?string {
+  public function parse(string $text): ?string {
     $commandName = $this->extractCommand($text);
     if($commandName === "") {
       return NULL;

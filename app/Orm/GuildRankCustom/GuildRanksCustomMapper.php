@@ -9,7 +9,7 @@ namespace HeroesofAbenez\Orm;
  * @author Jakub Konečný
  */
 class GuildRanksCustomMapper extends \Nextras\Orm\Mapper\Mapper {
-  function getTableName(): string {
+  public function getTableName(): string {
     return "guild_ranks_custom";
   }
 }

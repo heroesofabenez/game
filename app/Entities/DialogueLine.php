@@ -21,7 +21,7 @@ class DialogueLine {
   /** @var string[] */
   protected $names = [];
   
-  function __construct(string $speaker, string $text, array $names) {
+  public function __construct(string $speaker, string $text, array $names) {
     $speaker = strtolower($speaker);
     if($speaker == "player" OR $speaker == "npc") {
       $this->speaker = $speaker;
@@ -30,12 +30,12 @@ class DialogueLine {
     $this->names = $names;
   }
   
-  function getText(): string {
+  public function getText(): string {
     $replace = ["#npcName#", "#playerName#"];
     return str_replace($replace, $this->names, $this->text);
   }
   
-  function getSpeaker(): string {
+  public function getSpeaker(): string {
     if($this->speaker === "npc") {
       return $this->names[0];
     } elseif($this->speaker === "player") {
@@ -46,7 +46,7 @@ class DialogueLine {
   /**
    * @return string[]
    */
-  function getNames(): array {
+  public function getNames(): array {
     return $this->names;
   }
 }

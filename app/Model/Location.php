@@ -30,23 +30,23 @@ class Location {
   /** @var \HeroesofAbenez\Model\NPC */
   protected $npcModel;
   
-  function __construct(\Nette\Caching\Cache $cache, ORM $orm) {
+  public function __construct(\Nette\Caching\Cache $cache, ORM $orm) {
     $this->cache = $cache;
     $this->orm = $orm;
   }
   
-  function setUser(\Nette\Security\User $user) {
+  public function setUser(\Nette\Security\User $user) {
     $this->user = $user;
   }
   
-  function setNpcModel(NPC $npcModel) {
+  public function setNpcModel(NPC $npcModel) {
     $this->npcModel = $npcModel;
   }
   
   /**
    * Gets data about specified stage
    */
-  function getStage(int $id): ?QuestStage {
+  public function getStage(int $id): ?QuestStage {
     return $this->orm->stages->getById($id);
   }
   
@@ -55,21 +55,21 @@ class Location {
    * 
    * @return ICollection|RoutesStage[]
    */
-  function stageRoutes(): ICollection {
+  public function stageRoutes(): ICollection {
     return $this->orm->stageRoutes->findAll();
   }
   
   /**
    * Gets data about specified area
    */
-  function getArea(int $id): ?QuestArea {
+  public function getArea(int $id): ?QuestArea {
     return $this->orm->areas->getById($id);
   }
   
   /**
    * Get name of specified stage
    */
-  function getStageName(int $id): string {
+  public function getStageName(int $id): string {
     $stage = $this->getStage($id);
     if(is_null($stage)) {
       return "";
@@ -81,7 +81,7 @@ class Location {
   /**
    * Get name of specified area
    */
-  function getAreaName(int $id): string {
+  public function getAreaName(int $id): string {
     $area = $this->getArea($id);
     if(is_null($area)) {
       return "";
@@ -96,7 +96,7 @@ class Location {
    * 
    * @return QuestStage[]
    */
-  function accessibleStages(): array {
+  public function accessibleStages(): array {
     $return = [];
     $stages = $this->orm->stages->findAll();
     $curr_stage = $this->getStage($this->user->identity->stage);
@@ -122,7 +122,7 @@ class Location {
    * @throws StageNotFoundException
    * @throws CannotTravelToStageException
    */
-  function travelToStage(int $id): void {
+  public function travelToStage(int $id): void {
     $stage = $this->getStage($id);
     if(is_null($stage)) {
       throw new StageNotFoundException;

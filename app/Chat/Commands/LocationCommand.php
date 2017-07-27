@@ -19,13 +19,13 @@ class LocationCommand extends \HeroesofAbenez\Chat\ChatCommand {
   /** @var ITranslator */
   protected $translator;
   
-  function __construct(\Nette\Security\User $user, ORM $orm, ITranslator $translator) {
+  public function __construct(\Nette\Security\User $user, ORM $orm, ITranslator $translator) {
     $this->user = $user;
     $this->orm = $orm;
     $this->translator = $translator;
   }
   
-  function execute(): string {
+  public function execute(): string {
     $stage = $this->orm->stages->getById($this->user->identity->stage);
     return $this->translator->translate("messages.chat.currentLocation", 0, ["stageName" => $stage->name, "areaName" => $stage->area->name]);
   }

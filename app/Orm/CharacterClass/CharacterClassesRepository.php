@@ -19,7 +19,7 @@ class CharacterClassesRepository extends \Nextras\Orm\Repository\Repository {
   /**
    * @param int $id
    */
-  function getById($id): ?CharacterClass {
+  public function getById($id): ?CharacterClass {
     return $this->getBy([
       "id" => $id
     ]);

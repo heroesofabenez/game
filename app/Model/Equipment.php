@@ -19,7 +19,7 @@ class Equipment {
   /** @var \Nette\Security\User */
   protected $user;
   
-  function __construct(ORM $orm, \Nette\Security\User $user) {
+  public function __construct(ORM $orm, \Nette\Security\User $user) {
     $this->orm = $orm;
     $this->user = $user;
   }
@@ -27,14 +27,14 @@ class Equipment {
   /**
    * Gets data about specified equipment
    */
-  function view(int $id): ?EquipmentEntity {
+  public function view(int $id): ?EquipmentEntity {
     return $this->orm->equipment->getById($id);
   }
   
   /**
    * Equip an item
    */
-  function equipItem(int $id): void {
+  public function equipItem(int $id): void {
     $item = $this->orm->characterEquipment->getById($id);
     if(is_null($item)) {
       throw new ItemNotFoundException;
@@ -58,7 +58,7 @@ class Equipment {
    * @throws ItemNotOwnedException
    * @throws ItemNotWornException
    */
-  function unequipItem(int $id): void {
+  public function unequipItem(int $id): void {
     $item = $this->orm->characterEquipment->getById($id);
     if(is_null($item)) {
       throw new ItemNotFoundException;

@@ -16,7 +16,7 @@ class QuestsRepository extends \Nextras\Orm\Repository\Repository {
   /**
    * @param int $id
    */
-  function getById($id): ?Quest {
+  public function getById($id): ?Quest {
     return $this->getBy([
       "id" => $id
     ]);

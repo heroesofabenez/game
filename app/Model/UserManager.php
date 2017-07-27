@@ -24,7 +24,7 @@ class UserManager implements NS\IAuthenticator {
   /** @var array */
   protected $devServers;
   
-  function __construct(ORM $orm, Permissions $permissionsModel, Profile $profileModel, SettingsRepository $sr) {
+  public function __construct(ORM $orm, Permissions $permissionsModel, Profile $profileModel, SettingsRepository $sr) {
     $this->orm = $orm;
     $this->permissionsModel = $permissionsModel;
     $this->profileModel = $profileModel;
@@ -49,7 +49,7 @@ class UserManager implements NS\IAuthenticator {
   /**
    * Logins the user
    */
-  function authenticate(array $credentials): NS\Identity {
+  public function authenticate(array $credentials): NS\Identity {
     $uid = $this->getRealId();
     if($uid == 0) {
       return new NS\Identity(0, "guest");
@@ -80,7 +80,7 @@ class UserManager implements NS\IAuthenticator {
    *
    * @return array|NULL Stats of new character
    */
-  function create(array $values): ?array {
+  public function create(array $values): ?array {
     $data = [
       "name" => $values["name"], "race" => $values["race"],
       "occupation" => $values["class"], "owner" => $this->getRealId(),

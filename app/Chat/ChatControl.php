@@ -32,7 +32,7 @@ abstract class ChatControl extends \Nette\Application\UI\Control {
   /** @var array */
   protected $names = [];
   
-  function __construct(ORM $orm, \Nette\Security\User $user, ChatCommandsProcessor  $processor, string $param, int $id, string $param2 = NULL, $id2 = NULL) {
+  public function __construct(ORM $orm, \Nette\Security\User $user, ChatCommandsProcessor  $processor, string $param, int $id, string $param2 = NULL, $id2 = NULL) {
     parent::__construct();
     $this->orm = $orm;
     $this->user = $user;
@@ -48,7 +48,7 @@ abstract class ChatControl extends \Nette\Application\UI\Control {
    * 
    * @return ICollection|ChatMessage[]
    */
-  function getTexts(): ICollection {
+  public function getTexts(): ICollection {
     $count = $this->orm->chatMessages->findBy([
       $this->param => $this->id,
     ])->countStored();
@@ -66,7 +66,7 @@ abstract class ChatControl extends \Nette\Application\UI\Control {
    * 
    * @return ICollection|ChatMessage[]
    */
-  function getCharacters(): ICollection {
+  public function getCharacters(): ICollection {
     return $this->orm->characters->findBy([
       $this->param2 => $this->id2
     ]);
@@ -75,7 +75,7 @@ abstract class ChatControl extends \Nette\Application\UI\Control {
   /**
    * Renders the chat
    */
-  function render(): void {
+  public function render(): void {
     $this->template->setFile(__DIR__ . "/chat.latte");
     $this->template->characters = $this->getCharacters();
     $this->template->texts = $this->getTexts();
@@ -85,7 +85,7 @@ abstract class ChatControl extends \Nette\Application\UI\Control {
   /**
    * Submits new message
    */
-  function newMessage(string $message): void {
+  public function newMessage(string $message): void {
     $result = $this->processor->parse($message);
     if($result) {
       $this->presenter->flashMessage($result);

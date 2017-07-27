@@ -19,7 +19,7 @@ class ArenaPVPControl extends ArenaControl {
   /**
    * @return ICollection|\HeroesofAbenez\Orm\Character
    */
-  function getOpponents(): ICollection {
+  public function getOpponents(): ICollection {
     $level = $this->user->identity->level;
     return $this->orm->characters->findBy([
       "currentStage" => $this->user->identity->stage,
@@ -47,7 +47,7 @@ class ArenaPVPControl extends ArenaControl {
   /**
    * Fight a player
    */
-  function handleFight(int $id): void {
+  public function handleFight(int $id): void {
     try {
       $enemy = $this->getPlayer($id);
     } catch (OpponentNotFoundException $e) {

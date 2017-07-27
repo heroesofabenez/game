@@ -20,7 +20,7 @@ class PostofficeControl extends \Nette\Application\UI\Control {
   /** @var \HeroesofAbenez\Model\Profile */
   protected $profileModel;
   
-  function __construct(ORM $orm, \Nette\Security\User $user, \HeroesofAbenez\Model\Profile $profileModel) {
+  public function __construct(ORM $orm, \Nette\Security\User $user, \HeroesofAbenez\Model\Profile $profileModel) {
     parent::__construct();
     $this->orm = $orm;
     $this->user = $user;
@@ -36,7 +36,7 @@ class PostofficeControl extends \Nette\Application\UI\Control {
     return $this->orm->messages->findByTo($this->user->id);
   }
   
-  function renderInbox(): void {
+  public function renderInbox(): void {
     $this->template->setFile(__DIR__ . "/postofficeInbox.latte");
     $this->template->messages = $this->getReceivedMessages();
     $this->template->render();
@@ -51,7 +51,7 @@ class PostofficeControl extends \Nette\Application\UI\Control {
     return $this->orm->messages->findByFrom($this->user->id);
   }
   
-  function renderOutbox(): void {
+  public function renderOutbox(): void {
     $this->template->setFile(__DIR__ . "/postofficeOutbox.latte");
     $this->template->messages = $this->getSentMessages();
     $this->template->render();
@@ -65,7 +65,7 @@ class PostofficeControl extends \Nette\Application\UI\Control {
     }
   }
   
-  function messageStatus(int $id): int {
+  public function messageStatus(int $id): int {
     $message = $this->orm->messages->getById($id);
     if(is_null($message)) {
       return 0;
@@ -82,7 +82,7 @@ class PostofficeControl extends \Nette\Application\UI\Control {
    * @throws MessageNotFoundException
    * @throws CannotShowMessageException
    */
-  function message(int $id): Message {
+  public function message(int $id): Message {
     $message = $this->orm->messages->getById($id);
     if(is_null($message)) {
       throw new MessageNotFoundException;
@@ -93,7 +93,7 @@ class PostofficeControl extends \Nette\Application\UI\Control {
     return $message;
   }
   
-  function renderMessage(int $id): void {
+  public function renderMessage(int $id): void {
     $this->template->setFile(__DIR__ . "/postofficeMessage.latte");
     try {
       $this->template->message = $this->message($id);
@@ -105,13 +105,13 @@ class PostofficeControl extends \Nette\Application\UI\Control {
     $this->template->render();
   }
   
-  function getRecipients(): array {
+  public function getRecipients(): array {
     return $this->orm->characters->findAll()
       ->orderBy("id")
       ->fetchPairs("id", "name");
   }
   
-  function sendMessage(array $data): void {
+  public function sendMessage(array $data): void {
     $message = new Message;
     $this->orm->messages->attach($message);
     foreach($data as $key => $value) {

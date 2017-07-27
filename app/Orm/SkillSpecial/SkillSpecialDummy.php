@@ -25,7 +25,7 @@ class SkillSpecialDummy extends BaseSkill {
   /** @var int */
   protected $duration;
   
-  function __construct(SkillSpecial $skill) {
+  public function __construct(SkillSpecial $skill) {
     $this->id = $skill->id;
     $this->name = $skill->name;
     $this->description = $skill->description;
@@ -41,27 +41,27 @@ class SkillSpecialDummy extends BaseSkill {
     $this->duration = $skill->duration;
   }
   
-  function getCooldown(): int {
+  public function getCooldown(): int {
     return 5;
   }
   
-  function getType(): string {
+  public function getType(): string {
     return $this->type;
   }
   
-  function getStat(): ?string {
+  public function getStat(): ?string {
     return $this->stat;
   }
   
-  function getValue(): int {
+  public function getValue(): int {
     return $this->value;
   }
   
-  function getValueGrowth(): int {
+  public function getValueGrowth(): int {
     return $this->valueGrowth;
   }
   
-  function getDuration(): int {
+  public function getDuration(): int {
     return $this->duration;
   }
 }

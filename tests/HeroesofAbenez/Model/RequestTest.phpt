@@ -17,21 +17,21 @@ class RequestTest extends \Tester\TestCase {
   
   use \Testbench\TCompiledContainer;
   
-  function setUp() {
+  public function setUp() {
     $this->model = $this->getService(Request::class);
   }
   
   /**
    * @return void
    */
-  function testCanShow() {
+  public function testCanShow() {
     $result = $this->model->canShow(1);
     Assert::true($result);
   }
   /**
    * @return void
    */
-  function testShow() {
+  public function testShow() {
     $request = $this->model->show(1);
     Assert::type(RequestEntity::class, $request);
   }

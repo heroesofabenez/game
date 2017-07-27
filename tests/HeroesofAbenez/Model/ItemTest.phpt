@@ -17,14 +17,14 @@ class ItemTest extends \Tester\TestCase {
   
   use \Testbench\TCompiledContainer;
   
-  function setUp() {
+  public function setUp() {
     $this->model = $this->getService(Item::class);
   }
   
   /**
    * @return void
    */
-  function testView() {
+  public function testView() {
     $item = $this->model->view(1);
     Assert::type(ItemEntity::class, $item);
   }
@@ -32,7 +32,7 @@ class ItemTest extends \Tester\TestCase {
   /**
    * @return void
    */
-  function testGetItemName() {
+  public function testGetItemName() {
     $actual = $this->model->getItemName(1);
     $expected = "Book ABC";
     Assert::type("string", $actual);

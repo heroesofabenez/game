@@ -19,7 +19,7 @@ class CombatsRepository extends \Nextras\Orm\Repository\Repository {
   /**
    * @param int $id
    */
-  function getById($id): ?Combat {
+  public function getById($id): ?Combat {
     return $this->getBy([
       "id" => $id
     ]);

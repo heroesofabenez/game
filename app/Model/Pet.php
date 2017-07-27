@@ -21,25 +21,25 @@ class Pet {
   /** @var \Nette\Security\User */
   protected $user;
   
-  function __construct(ORM $orm) {
+  public function __construct(ORM $orm) {
     $this->orm = $orm;
   }
   
-  function setUser(\Nette\Security\User $user) {
+  public function setUser(\Nette\Security\User $user) {
     $this->user = $user;
   }
   
   /**
    * Get info about specified pet type
    */
-  function viewType(int $id): ?PetType {
+  public function viewType(int $id): ?PetType {
     return $this->orm->petTypes->getById($id);
   }
   
   /**
    * Get specified user's active pet
    */
-  function getActivePet(int $user): ?PetEntity {
+  public function getActivePet(int $user): ?PetEntity {
     return $this->orm->pets->getActivePet($user);
   }
   
@@ -50,7 +50,7 @@ class Pet {
    * @throws PetNotOwnedException
    * @throws PetAlreadyDeployedException
    */
-  function deployPet(int $id): void {
+  public function deployPet(int $id): void {
     $pet = $this->orm->pets->getById($id);
     if(is_null($pet)) {
       throw new PetNotFoundException;
@@ -75,7 +75,7 @@ class Pet {
    * @throws PetNotOwnedException
    * @throws PetNotDeployedException
    */
-  function discardPet(int $id): void {
+  public function discardPet(int $id): void {
     $pet = $this->orm->pets->getById($id);
     if(is_null($pet)) {
       throw new PetNotFoundException;

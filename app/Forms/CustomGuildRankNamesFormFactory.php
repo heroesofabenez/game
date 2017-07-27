@@ -18,13 +18,13 @@ class CustomGuildRankNamesFormFactory extends BaseFormFactory {
   /** @var  \Nette\Security\User */
   protected $user;
   
-  function __construct(\Nette\Localization\ITranslator $translator, \HeroesofAbenez\Model\Guild $model, \Nette\Security\User $user) {
+  public function __construct(\Nette\Localization\ITranslator $translator, \HeroesofAbenez\Model\Guild $model, \Nette\Security\User $user) {
     parent::__construct($translator);
     $this->model = $model;
     $this->user = $user;
   }
   
-  function create(): Form {
+  public function create(): Form {
     $form = $this->createBase();
     $defaults = $this->model->getDefaultRankNames();
     $custom = $this->model->getCustomRankNames($this->user->identity->guild);
@@ -40,7 +40,7 @@ class CustomGuildRankNamesFormFactory extends BaseFormFactory {
     return $form;
   }
   
-  function submitted(Form $form, array $values): void {
+  public function submitted(Form $form, array $values): void {
     try {
       $this->model->setCustomRankNames($values);
     } catch(MissingPermissionsException $e) {

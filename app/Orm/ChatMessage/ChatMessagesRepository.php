@@ -19,7 +19,7 @@ class ChatMessagesRepository extends \Nextras\Orm\Repository\Repository {
   /**
    * @param int $id
    */
-  function getById($id): ?ChatMessage {
+  public function getById($id): ?ChatMessage {
     return $this->getBy([
       "id" => $id
     ]);

@@ -22,20 +22,20 @@ class TrainingPresenter extends BasePresenter {
   /** @var \HeroesofAbenez\Model\Skills @autowire */
   protected $skillsModel;
   
-  function __construct(\HeroesofAbenez\Model\Profile $model, \Nette\Security\User $user) {
+  public function __construct(\HeroesofAbenez\Model\Profile $model, \Nette\Security\User $user) {
     parent::__construct();
     $this->model = $model;
     $this->model->user = $user;
   }
   
-  function renderDefault(): void {
+  public function renderDefault(): void {
     $this->template->stat_points = $this->model->getStatPoints();
     $this->template->stats = $this->model->getStats();
     $this->template->skill_points = $this->skillsModel->getSkillPoints();
     $this->template->skills = $this->skillsModel->getAvailableSkills();
   }
   
-  function handleTrainStat(string $stat): void {
+  public function handleTrainStat(string $stat): void {
     try {
       $this->model->trainStat($stat);
     } catch(NoStatPointsAvailableException $e) {
@@ -46,7 +46,7 @@ class TrainingPresenter extends BasePresenter {
     $this->redirect("Training:");
   }
   
-  function handleTrainSkill(int $skillId, string $skillType): void {
+  public function handleTrainSkill(int $skillId, string $skillType): void {
     try {
       $this->skillsModel->trainSkill($skillId, $skillType);
     } catch(NoSkillPointsAvailableException $e) {

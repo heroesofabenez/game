@@ -21,7 +21,7 @@ class NpcsRepository extends \Nextras\Orm\Repository\Repository {
   /**
    * @param int $id
    */
-  function getById($id): ?Npc {
+  public function getById($id): ?Npc {
     return $this->getBy([
       "id" => $id
     ]);
@@ -31,7 +31,7 @@ class NpcsRepository extends \Nextras\Orm\Repository\Repository {
    * @param QuestStage|int $stage
    * @return ICollection|Npc[]
    */
-  function findByStage($stage): ICollection {
+  public function findByStage($stage): ICollection {
     return $this->findBy([
       "stage" => $stage
     ]);

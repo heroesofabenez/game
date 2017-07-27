@@ -15,12 +15,12 @@ class CreateGuildFormFactory extends BaseFormFactory {
   /** @var \HeroesofAbenez\Model\Guild */
   protected $model;
   
-  function __construct(\Nette\Localization\ITranslator $translator, \HeroesofAbenez\Model\Guild $model) {
+  public function __construct(\Nette\Localization\ITranslator $translator, \HeroesofAbenez\Model\Guild $model) {
     $this->model = $model;
     parent::__construct($translator);
   }
   
-  function create(): Form {
+  public function create(): Form {
     $form = parent::createBase();
     $form->addText("name", "forms.createGuild.nameField.label")
       ->setRequired("forms.createGuild.nameField.empty")
@@ -33,7 +33,7 @@ class CreateGuildFormFactory extends BaseFormFactory {
     return $form;
   }
   
-  function submitted(Form $form, array $values): void {
+  public function submitted(Form $form, array $values): void {
     $data = [
       "name" => $values["name"], "description" => $values["description"]
     ];

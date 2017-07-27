@@ -14,15 +14,15 @@ class CharacterSpecialSkillDummy extends BaseCharacterSkill {
   /** @var  SkillSpecialDummy */
   protected $skill;
   
-  function __construct(SkillSpecialDummy $skill, int $level) {
+  public function __construct(SkillSpecialDummy $skill, int $level) {
     parent::__construct($skill, $level);
   }
   
-  function getSkill(): SkillSpecialDummy {
+  public function getSkill(): SkillSpecialDummy {
     return $this->skill;
   }
   
-  function getValue(): int {
+  public function getValue(): int {
     if($this->skill->type === \HeroesofAbenez\Orm\SkillSpecial::TYPE_STUN) {
       return 0;
     }

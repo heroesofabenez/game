@@ -2,6 +2,6 @@
 namespace HeroesofAbenez\Postoffice;
 
 interface IPostofficeControlFactory {
-  function create(): PostofficeControl;
+  public function create(): PostofficeControl;
 }
 ?>

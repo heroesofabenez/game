@@ -22,7 +22,7 @@ class SkillAttackDummy extends BaseSkill {
   /** @var string|NULL */
   protected $hitRate;
   
-  function __construct(SkillAttack $skill) {
+  public function __construct(SkillAttack $skill) {
     $this->id = $skill->id;
     $this->name = $skill->name;
     $this->description = $skill->description;
@@ -37,23 +37,23 @@ class SkillAttackDummy extends BaseSkill {
     $this->hitRate = $skill->hitRate;
   }
   
-  function getCooldown(): int {
+  public function getCooldown(): int {
     return 3;
   }
   
-  function getBaseDamage(): string {
+  public function getBaseDamage(): string {
     return $this->baseDamage;
   }
   
-  function getDamageGrowth(): string {
+  public function getDamageGrowth(): string {
     return $this->damageGrowth;
   }
   
-  function getStrikes(): int {
+  public function getStrikes(): int {
     return $this->strikes;
   }
   
-  function getHitRate(): ?string {
+  public function getHitRate(): ?string {
     return $this->hitRate;
   }
   

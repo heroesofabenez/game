@@ -17,14 +17,14 @@ class UserManagerTest extends \Tester\TestCase {
   
   use \Testbench\TCompiledContainer;
   
-  function setUp() {
+  public function setUp() {
     $this->model = $this->getService(UserManager::class);
   }
   
   /**
    * @return void
    */
-  function testAuthenticate() {
+  public function testAuthenticate() {
     $identity = $this->model->authenticate([]);
     Assert::type(Identity::class, $identity);
     Assert::same(1, $identity->id);

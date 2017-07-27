@@ -19,14 +19,14 @@ class LocationTest extends \Tester\TestCase {
   
   use \Testbench\TCompiledContainer;
   
-  function setUp() {
+  public function setUp() {
     $this->model = $this->getService(Location::class);
   }
   
   /**
    * @return void
    */
-  function testGetStage() {
+  public function testGetStage() {
     $stage = $this->model->getStage(1);
     Assert::type(QuestStage::class, $stage);
   }
@@ -34,7 +34,7 @@ class LocationTest extends \Tester\TestCase {
   /**
    * @return void
    */
-  function testStageRoutes() {
+  public function testStageRoutes() {
     $routes = $this->model->stageRoutes();
     Assert::type(ICollection::class, $routes);
   }
@@ -42,7 +42,7 @@ class LocationTest extends \Tester\TestCase {
   /**
    * @return void
    */
-  function testGetArea() {
+  public function testGetArea() {
     $stage = $this->model->getArea(1);
     Assert::type(QuestArea::class, $stage);
   }
@@ -50,7 +50,7 @@ class LocationTest extends \Tester\TestCase {
   /**
    * @return void
    */
-  function testGetStageName() {
+  public function testGetStageName() {
     $name = $this->model->getStageName(1);
     Assert::type("string", $name);
   }
@@ -58,7 +58,7 @@ class LocationTest extends \Tester\TestCase {
   /**
    * @return int[]
    */
-  function getAreaIds(): array {
+  public function getAreaIds(): array {
     return [
       [0, 1,]
     ];
@@ -68,7 +68,7 @@ class LocationTest extends \Tester\TestCase {
    * @param int $id
    * @dataProvider getAreaIds
    */
-  function testGetAreaName(int $id) {
+  public function testGetAreaName(int $id) {
     $name = $this->model->getAreaName($id);
     Assert::type("string", $name);
   }

@@ -28,7 +28,7 @@ class JournalPresenter extends BasePresenter {
   /** @var \HeroesofAbenez\Model\Pet @autowire */
   protected $petModel;
   
-  function renderDefault(): void {
+  public function renderDefault(): void {
     $stats = $this->model->basic();
     foreach($stats as $key => $value) {
       $this->template->$key = $value;
@@ -36,22 +36,22 @@ class JournalPresenter extends BasePresenter {
     $this->template->nextLevelExp = $this->profileModel->getLevelsRequirements()[$stats["level"]  + 1];
   }
   
-  function renderInventory(): void {
+  public function renderInventory(): void {
     $inventory = $this->model->inventory();
     foreach($inventory as $key => $value) {
       $this->template->$key = $value;
     }
   }
   
-  function renderQuests(): void {
+  public function renderQuests(): void {
     $this->template->quests = $this->model->quests();
   }
   
-  function renderPets(): void {
+  public function renderPets(): void {
     $this->template->pets = $this->model->pets();
   }
   
-  function handleEquipItem(int $itemId): void {
+  public function handleEquipItem(int $itemId): void {
     try {
       $this->equipmentModel->equipItem($itemId);
     } catch(ItemNotFoundException $e) {
@@ -64,7 +64,7 @@ class JournalPresenter extends BasePresenter {
     $this->redirect("Journal:inventory");
   }
   
-  function handleUnequipItem(int $itemId): void {
+  public function handleUnequipItem(int $itemId): void {
     try {
       $this->equipmentModel->unequipItem($itemId);
       $this->flashMessage($this->translator->translate("errors.equipment.unequiped"));
@@ -78,7 +78,7 @@ class JournalPresenter extends BasePresenter {
     $this->redirect("Journal:inventory");
   }
   
-  function handleLevelUp(): void {
+  public function handleLevelUp(): void {
     $this->profileModel->user = $this->user;
     try {
       $this->profileModel->levelUp();
@@ -89,7 +89,7 @@ class JournalPresenter extends BasePresenter {
     $this->redirect("Journal:");
   }
   
-  function handleDeployPet(int $petId): void {
+  public function handleDeployPet(int $petId): void {
     try {
       $this->petModel->user = $this->user;
       $this->petModel->deployPet($petId);
@@ -103,7 +103,7 @@ class JournalPresenter extends BasePresenter {
     $this->redirect("Journal:pets");
   }
   
-  function handleDiscardPet(int $petId): void {
+  public function handleDiscardPet(int $petId): void {
     try {
       $this->petModel->user = $this->user;
       $this->petModel->discardPet($petId);

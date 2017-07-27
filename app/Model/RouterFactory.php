@@ -14,7 +14,7 @@ use Nette\Application\Routers\RouteList,
 class RouterFactory {
   use \Nette\SmartObject;
   
-  function create(): RouteList {
+  public function create(): RouteList {
     $router = new RouteList;
     $router[] = new Route("ranking[/<action>][/<page=1 [0-9]+>]", "Ranking:characters");
     $router[] = new Route("<presenter map|tavern>[/<action=local>]");

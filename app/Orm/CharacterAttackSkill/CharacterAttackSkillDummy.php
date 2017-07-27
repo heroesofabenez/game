@@ -15,18 +15,18 @@ class CharacterAttackSkillDummy extends BaseCharacterSkill {
   /** @var SkillAttackDummy */
   protected $skill;
   
-  function __construct(SkillAttackDummy $skill, int $level) {
+  public function __construct(SkillAttackDummy $skill, int $level) {
     parent::__construct($skill, $level);
   }
   
   /**
    * @return SkillAttackDummy
    */
-  function getSkill(): SkillAttackDummy {
+  public function getSkill(): SkillAttackDummy {
     return $this->skill;
   }
   
-  function getDamage(): int {
+  public function getDamage(): int {
     $damage = 0;
     if(substr($this->skill->baseDamage, -1) === "%") {
       $damage += (int) $this->skill->baseDamage;
@@ -37,7 +37,7 @@ class CharacterAttackSkillDummy extends BaseCharacterSkill {
     return $damage;
   }
   
-  function getHitRate(): int {
+  public function getHitRate(): int {
     if(is_null($this->skill->hitRate)) {
       return 100;
     } elseif(substr($this->skill->hitRate, -1) === "%") {

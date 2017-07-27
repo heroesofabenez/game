@@ -63,7 +63,7 @@ class QuestDummy {
   /** @var bool */
   protected $progress = false;
   
-  function __construct(Quest $quest) {
+  public function __construct(Quest $quest) {
     $this->id = $quest->id;
     $this->name = $quest->name;
     $this->introduction = $quest->introduction;
@@ -82,75 +82,75 @@ class QuestDummy {
     $this->order = $quest->order;
   }
   
-  function getId(): int {
+  public function getId(): int {
     return $this->id;
   }
   
-  function getName(): string {
+  public function getName(): string {
     return $this->name;
   }
   
-  function getIntroduction(): string {
+  public function getIntroduction(): string {
     return $this->introduction;
   }
   
-  function getEndText(): string {
+  public function getEndText(): string {
     return $this->endText;
   }
   
-  function getCostMoney(): int {
+  public function getCostMoney(): int {
     return $this->costMoney;
   }
   
-  function getNeededItem(): ?int {
+  public function getNeededItem(): ?int {
     return $this->neededItem;
   }
   
-  function getNeededQuest(): ?int {
+  public function getNeededQuest(): ?int {
     return $this->neededQuest;
   }
   
-  function getNeededLevel(): ?int {
+  public function getNeededLevel(): ?int {
     return $this->neededLevel;
   }
   
-  function getItemAmount(): int {
+  public function getItemAmount(): int {
     return $this->itemAmount;
   }
   
-  function isItemLose(): bool {
+  public function isItemLose(): bool {
     return $this->itemLose;
   }
   
-  function getRewardMoney(): int {
+  public function getRewardMoney(): int {
     return $this->rewardMoney;
   }
   
-  function getRewardXp(): int {
+  public function getRewardXp(): int {
     return $this->rewardXp;
   }
   
-  function getRewardItem(): ?int {
+  public function getRewardItem(): ?int {
     return $this->rewardItem;
   }
   
-  function getNpcStart(): int {
+  public function getNpcStart(): int {
     return $this->npcStart;
   }
   
-  function getNpcEnd(): int {
+  public function getNpcEnd(): int {
     return $this->npcEnd;
   }
   
-  function getOrder(): int {
+  public function getOrder(): int {
     return $this->order;
   }
   
-  function isProgress(): bool {
+  public function isProgress(): bool {
     return $this->progress;
   }
   
-  function setProgress(bool $progress) {
+  public function setProgress(bool $progress) {
     $this->progress = $progress;
   }
 }

@@ -24,7 +24,7 @@ class Request {
   /** @var Guild */
   protected $guildModel;
   
-  function __construct(\Nette\Security\User $user, ORM $orm, Profile $profileModel, Guild $guildModel) {
+  public function __construct(\Nette\Security\User $user, ORM $orm, Profile $profileModel, Guild $guildModel) {
     $this->user = $user;
     $this->orm = $orm;
     $this->profileModel = $profileModel;
@@ -34,7 +34,7 @@ class Request {
   /**
    * Can player see the request?
    */
-  function canShow(int $requestId): bool {
+  public function canShow(int $requestId): bool {
     $request = $this->orm->requests->getById($requestId);
     switch($request->type) {
       case RequestEntity::TYPE_FRIENDSHIP:
@@ -76,7 +76,7 @@ class Request {
   /**
    * Can player accept/decline the request?
    */
-  function canChange(int $requestId): bool {
+  public function canChange(int $requestId): bool {
     $request = $this->orm->requests->getById($requestId);
     if($request->from->id == $this->user->id) {
       return false;
@@ -101,7 +101,7 @@ class Request {
    * @throws RequestNotFoundException
    * @throws CannotSeeRequestException
    */
-  function show(int $id): RequestEntity {
+  public function show(int $id): RequestEntity {
     $request = $this->orm->requests->getById($id);
     if(is_null($request)) {
       throw new RequestNotFoundException;
@@ -121,7 +121,7 @@ class Request {
    * @throws RequestAlreadyHandledException
    * @throws NotImplementedException
    */
-  function accept(int $id): void {
+  public function accept(int $id): void {
     try {
       $request = $this->show($id);
     } catch(RequestNotFoundException $e) {
@@ -164,7 +164,7 @@ class Request {
    * @throws CannotDeclineRequestException
    * @throws RequestAlreadyHandledException
    */
-  function decline(int $id): void {
+  public function decline(int $id): void {
     try {
       $request = $this->show($id);
     } catch(RequestNotFoundException $e) {

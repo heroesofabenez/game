@@ -29,7 +29,7 @@ class CharacterEffect {
   /** @var int|string */
   protected $duration;
   
-  function __construct(array $effect) {
+  public function __construct(array $effect) {
     $types = ["buff", "debuff", "stun"];
     $sources = ["pet", "skill", "equipment"];
     if(!in_array($effect["type"], $types)) {
@@ -65,30 +65,30 @@ class CharacterEffect {
     return ["combat", "forever"];
   }
   
-  function getId(): string {
+  public function getId(): string {
     return $this->id;
   }
   
-  function getType(): string {
+  public function getType(): string {
     return $this->type;
   }
   
-  function getStat(): string {
+  public function getStat(): string {
     return $this->stat;
   }
   
-  function getValue(): int {
+  public function getValue(): int {
     return $this->value;
   }
   
-  function getSource(): string {
+  public function getSource(): string {
     return $this->source;
   }
   
   /**
    * @return int|string
    */
-  function getDuration() {
+  public function getDuration() {
     return $this->duration;
   }
   
@@ -96,7 +96,7 @@ class CharacterEffect {
    * @param string|int $value
    * @throws \InvalidArgumentException
    */
-  function setDuration($value) {
+  public function setDuration($value) {
     if(!is_int($value) AND !in_array($value, self::getDurations())) {
       throw new \InvalidArgumentException("Invalid value set to CharacterEffect::\$duration. Expected string or integer.");
     }

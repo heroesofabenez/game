@@ -15,12 +15,12 @@ class CharactersRankingControl extends RankingControl {
   /** @var ORM */
   protected $orm;
   
-  function __construct(ORM $orm) {
+  public function __construct(ORM $orm) {
     $this->orm = $orm;
     parent::__construct("Characters", ["name", "level", "guild"], "Profile", "Profile");
   }
   
-  function getData(): array {
+  public function getData(): array {
     $this->paginator->itemCount = $this->orm->characters->findAll()->countStored();
     $characters = $this->orm->characters->findAll()
       ->orderBy("level", ICollection::DESC)

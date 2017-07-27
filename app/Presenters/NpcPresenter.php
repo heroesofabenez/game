@@ -22,7 +22,7 @@ class NpcPresenter extends BasePresenter {
   /** @var Npc */
   protected $npc;
   
-  function startup(): void {
+  public function startup(): void {
     parent::startup();
     if($this->action != "default" AND !in_array($this->action, ["notfound", "unavailable"])) {
       $this->npc = $this->model->view((int) $this->params["id"]);
@@ -40,16 +40,16 @@ class NpcPresenter extends BasePresenter {
    *
    * @throws \Nette\Application\BadRequestException
    */
-  function actionDefault(): void {
+  public function actionDefault(): void {
     throw new \Nette\Application\BadRequestException;
   }
   
-  function renderView(int $id): void {
+  public function renderView(int $id): void {
     $this->template->id = $id;
     $this->template->type = $this->npc->type;
   }
   
-  function actionTalk(int $id): void {
+  public function actionTalk(int $id): void {
     
   }
   
@@ -59,7 +59,7 @@ class NpcPresenter extends BasePresenter {
     return $component;
   }
   
-  function renderQuests(int $id): void {
+  public function renderQuests(int $id): void {
     $this->template->id = $id;
   }
   
@@ -69,7 +69,7 @@ class NpcPresenter extends BasePresenter {
     return $component;
   }
   
-  function actionTrade(int $id): void {
+  public function actionTrade(int $id): void {
     if($this->npc->type != Npc::TYPE_SHOP) {
       $this->flashMessage($this->translator->translate("errors.npc.noShop"));
       $this->redirect("view", $id);

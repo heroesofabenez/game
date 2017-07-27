@@ -2,6 +2,6 @@
 namespace HeroesofAbenez\Arena;
 
 interface IArenaPVEControlFactory {
-  function create(): ArenaPVEControl;
+  public function create(): ArenaPVEControl;
 }
 ?>

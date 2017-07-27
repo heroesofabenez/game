@@ -17,14 +17,14 @@ class GuildTest extends \Tester\TestCase {
   
   use \Testbench\TCompiledContainer;
   
-  function setUp() {
+  public function setUp() {
     $this->model = $this->getService(Guild::class);
   }
   
   /**
    * @return void
    */
-  function testView() {
+  public function testView() {
     $guild = $this->model->view(1);
     Assert::type(GuildEntity::class, $guild);
     Assert::same("Dawn", $guild->name);
@@ -35,7 +35,7 @@ class GuildTest extends \Tester\TestCase {
   /**
    * @return void
    */
-  function testCustomRankName() {
+  public function testCustomRankName() {
     $guildIds = [1, 2];
     $rankIds = [1, 7];
     foreach($guildIds as $guildId) {
@@ -55,7 +55,7 @@ class GuildTest extends \Tester\TestCase {
   /**
    * @return int[]
    */
-  function getIds(): array {
+  public function getIds(): array {
     return [
       [1, 2,]
     ];
@@ -66,7 +66,7 @@ class GuildTest extends \Tester\TestCase {
    * @dataProvider getIds
    * @return void
    */
-  function testGuildMembers(int $guild) {
+  public function testGuildMembers(int $guild) {
     $members = $this->model->guildMembers($guild, [], true);
     Assert::type("array", $members);
     Assert::type("stdClass", $members[0]);
@@ -81,7 +81,7 @@ class GuildTest extends \Tester\TestCase {
   /**
    * @return void
    */
-  function testGetDefaultRankNames() {
+  public function testGetDefaultRankNames() {
     $names = $this->model->getDefaultRankNames();
     Assert::type("array", $names);
     Assert::count(7, $names);
@@ -93,7 +93,7 @@ class GuildTest extends \Tester\TestCase {
    * @dataProvider getIds
     * @return void
     */
-  function testGetCustomRankNames(int $guild) {
+  public function testGetCustomRankNames(int $guild) {
     $names = $this->model->getCustomRankNames($guild);
     Assert::type("array", $names);
     if($guild > 1) {

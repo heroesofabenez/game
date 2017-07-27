@@ -14,11 +14,11 @@ class ProfilePresenter extends BasePresenter {
   /** @var \HeroesofAbenez\Model\Guild @autowire */
   protected $guildModel;
   
-  function actionDefault(): void {
+  public function actionDefault(): void {
     $this->forward("view", $this->user->id);
   }
   
-  function renderView(int $id): void {
+  public function renderView(int $id): void {
     $data = $this->model->view($id);
     if(is_null($data)) {
       $this->forward("notfound");

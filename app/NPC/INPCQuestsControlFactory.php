@@ -2,6 +2,6 @@
 namespace HeroesofAbenez\NPC;
 
 interface INPCQuestsControlFactory {
-  function create(): NPCQuestsControl;
+  public function create(): NPCQuestsControl;
 }
 ?>

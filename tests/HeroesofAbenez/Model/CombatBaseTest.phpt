@@ -20,7 +20,7 @@ class CombatBaseTest extends \Tester\TestCase {
   
   use \Testbench\TCompiledContainer;
   
-  function setUp() {
+  public function setUp() {
     $this->logger = $this->getService(CombatLogger::class);
     $this->helper = $this->getService(CombatHelper::class);
   }
@@ -28,7 +28,7 @@ class CombatBaseTest extends \Tester\TestCase {
   /**
    * @return void
    */
-  function testPostCombat() {
+  public function testPostCombat() {
     $combat = new CombatBase(clone $this->logger);
     $team1 = new Team("Team 1");
     $team1[] = $this->helper->getPlayer(1);

@@ -21,7 +21,7 @@ class CharacterQuestsRepository extends \Nextras\Orm\Repository\Repository {
   /**
    * @param int $id
    */
-  function getById($id): ?CharacterQuest {
+  public function getById($id): ?CharacterQuest {
     return $this->getBy([
       "id" => $id
     ]);
@@ -31,7 +31,7 @@ class CharacterQuestsRepository extends \Nextras\Orm\Repository\Repository {
    * @param Character|int $character
    * @param Quest|int $quest
    */
-  function getByCharacterAndQuest($character, $quest): ?CharacterQuest {
+  public function getByCharacterAndQuest($character, $quest): ?CharacterQuest {
     return $this->getBy([
       "character" => $character,
       "quest" => $quest
@@ -42,7 +42,7 @@ class CharacterQuestsRepository extends \Nextras\Orm\Repository\Repository {
    * @param Character|int $character
    * @return ICollection|CharacterQuest[]
    */
-  function findByCharacter($character): ICollection {
+  public function findByCharacter($character): ICollection {
     return $this->findBy([
       "character" => $character
     ]);

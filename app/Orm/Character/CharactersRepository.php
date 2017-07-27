@@ -21,19 +21,19 @@ class CharactersRepository extends \Nextras\Orm\Repository\Repository {
   /**
    * @param int $id
    */
-  function getById($id): ?Character {
+  public function getById($id): ?Character {
     return $this->getBy([
       "id" => $id
     ]);
   }
   
-  function getByName(string $name): ?Character {
+  public function getByName(string $name): ?Character {
     return $this->getBy([
       "name" => $name
     ]);
   }
   
-  function getByOwner(int $owner): ?Character {
+  public function getByOwner(int $owner): ?Character {
     return $this->getBy([
       "owner" => $owner
     ]);
@@ -43,7 +43,7 @@ class CharactersRepository extends \Nextras\Orm\Repository\Repository {
    * @param Guild|int $guild
    * @return ICollection|Character[]
    */
-  function findByGuild($guild): ICollection {
+  public function findByGuild($guild): ICollection {
     return $this->findBy([
       "guild" => $guild
     ])->orderBy("guildrank", ICollection::DESC)

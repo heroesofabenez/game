@@ -18,14 +18,14 @@ class PetTest extends \Tester\TestCase {
   
   use \Testbench\TCompiledContainer;
   
-  function setUp() {
+  public function setUp() {
     $this->model = $this->getService(Pet::class);
   }
   
   /**
    * @return int[]
    */
-  function getPetIds(): array {
+  public function getPetIds(): array {
     return [
       [1, 50,]
     ];
@@ -36,7 +36,7 @@ class PetTest extends \Tester\TestCase {
    * @dataProvider getPetIds
    * @return void
    */
-  function testViewType(int $id) {
+  public function testViewType(int $id) {
     $type = $this->model->viewType($id);
     if($id === 1) {
       Assert::type(PetType::class, $type);
@@ -48,7 +48,7 @@ class PetTest extends \Tester\TestCase {
   /**
    * @return int[]
    */
-  function getUserIds(): array {
+  public function getUserIds(): array {
     return [
       [1, 2,]
     ];
@@ -59,7 +59,7 @@ class PetTest extends \Tester\TestCase {
    * @dataProvider getUserIds
    * @return void
    */
-  function testGetActivePet(int $user) {
+  public function testGetActivePet(int $user) {
     $pet = $this->model->getActivePet($user);
     if($user === 1) {
       Assert::type(PetEntity::class, $pet);

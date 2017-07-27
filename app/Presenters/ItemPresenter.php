@@ -12,7 +12,7 @@ class ItemPresenter extends BasePresenter {
   /**  @var \HeroesofAbenez\Model\Item @autowire */
   protected $model;
   
-  function renderView(int $id): void {
+  public function renderView(int $id): void {
     $item = $this->model->view($id);
     if(!$item) {
       $this->forward("notfound");

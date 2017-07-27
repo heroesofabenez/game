@@ -17,14 +17,14 @@ class CombatLogManager {
   /** @var ORM */
   protected $orm;
   
-  function __construct(ORM $orm) {
+  public function __construct(ORM $orm) {
     $this->orm = $orm;
   }
   
   /**
    * Load specified combat from database
    */
-  function read(int $id): ?CombatEntity {
+  public function read(int $id): ?CombatEntity {
     return $this->orm->combats->getById($id);
   }
   
@@ -34,7 +34,7 @@ class CombatLogManager {
    * @param string $text Combat log
    * @return int New record's id
    */
-  function write(string $text): int {
+  public function write(string $text): int {
     $combat = new CombatEntity;
     $combat->text = $text;
     $this->orm->combats->persistAndFlush($combat);

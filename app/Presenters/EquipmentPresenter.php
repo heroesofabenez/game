@@ -14,7 +14,7 @@ class EquipmentPresenter extends BasePresenter {
   /** @var \HeroesofAbenez\Model\Profile @autowire */
   protected $profileModel;
   
-  function renderView(int $id): void {
+  public function renderView(int $id): void {
     $item = $this->model->view($id);
     if(!$item) {
       $this->forward("notfound");

@@ -33,7 +33,7 @@ class CombatAction {
   /** @var string */
   protected $message;
   
-  function __construct(string $action, bool $result, Character $character1, Character $character2, int $amount = 0, string $name = "") {
+  public function __construct(string $action, bool $result, Character $character1, Character $character2, int $amount = 0, string $name = "") {
     $actions = ["attack", "skill_attack", "skill_special", "healing"];
     if(!in_array($action, $actions)) {
       exit("Invalid value for action passed to CombatAction::__construct.");
@@ -47,31 +47,31 @@ class CombatAction {
     $this->parse();
   }
   
-  function getCharacter1(): Character {
+  public function getCharacter1(): Character {
     return $this->character1;
   }
   
-  function getCharacter2(): Character {
+  public function getCharacter2(): Character {
     return $this->character2;
   }
   
-  function getAction(): string {
+  public function getAction(): string {
     return $this->action;
   }
   
-  function getName(): string {
+  public function getName(): string {
     return $this->name;
   }
   
-  function isResult(): bool {
+  public function isResult(): bool {
     return $this->result;
   }
   
-  function getAmount(): int {
+  public function getAmount(): int {
     return $this->amount;
   }
   
-  function getMessage(): string {
+  public function getMessage(): string {
     return $this->message;
   }
   
@@ -112,7 +112,7 @@ class CombatAction {
     $this->message =  $text;
   }
   
-  function __toString(): string {
+  public function __toString(): string {
     return $this->message;
   }
 }

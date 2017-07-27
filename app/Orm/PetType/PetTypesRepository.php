@@ -19,7 +19,7 @@ class PetTypesRepository extends \Nextras\Orm\Repository\Repository {
   /**
    * @param int $id
    */
-  function getById($id): ?PetType {
+  public function getById($id): ?PetType {
     return $this->getBy([
       "id" => $id
     ]);

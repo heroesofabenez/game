@@ -19,19 +19,19 @@ class NPCDialogueControl extends \Nette\Application\UI\Control {
   /** @var Npc */
   protected $npc;
   
-  function __construct(\Nette\Security\User $user) {
+  public function __construct(\Nette\Security\User $user) {
     parent::__construct();
     $this->user = $user;
   }
   
-  function setNpc(Npc $npc) {
+  public function setNpc(Npc $npc) {
     $this->npc = $npc;
   }
   
   /**
    * @return string[]
    */
-  function getNames() {
+  public function getNames() {
     if(is_null($this->npc)) {
       $npcName = "";
     } else {
@@ -64,7 +64,7 @@ class NPCDialogueControl extends \Nette\Application\UI\Control {
     return $texts[rand(0, count($texts) - 1)];
   }
   
-  function render(): void {
+  public function render(): void {
     $this->template->setFile(__DIR__ . "/npcDialogue.latte");
     $this->template->npcName = $this->npc->name;
     $this->template->texts = [];

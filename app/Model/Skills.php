@@ -29,7 +29,7 @@ class Skills {
   /** @var \Nette\Security\User */
   protected $user;
   
-  function __construct(\Nette\Caching\Cache $cache, ORM $orm, \Nette\Security\User $user) {
+  public function __construct(\Nette\Caching\Cache $cache, ORM $orm, \Nette\Security\User $user) {
     $this->cache = $cache;
     $this->orm = $orm;
     $this->user = $user;
@@ -40,7 +40,7 @@ class Skills {
    * 
    * @return SkillAttackDummy[]
    */
-  function getListOfAttackSkills(): array {
+  public function getListOfAttackSkills(): array {
     $skillsList = $this->cache->load("attack_skills", function(& $dependencies) {
       $return = [];
       $skills = $this->orm->attackSkills->findAll();
@@ -53,12 +53,12 @@ class Skills {
     return $skillsList;
   }
   
-  function getAttackSkill(int $id): ?SkillAttackDummy {
+  public function getAttackSkill(int $id): ?SkillAttackDummy {
     $skills = $this->getListOfAttackSkills();
     return Arrays::get($skills, $id, NULL);
   }
   
-  function getCharacterAttackSkill(int $skillId, int $userId = 0): ?CharacterAttackSkillDummy {
+  public function getCharacterAttackSkill(int $skillId, int $userId = 0): ?CharacterAttackSkillDummy {
     if($userId === 0) {
       $userId = $this->user->id;
     }
@@ -80,7 +80,7 @@ class Skills {
    * 
    * @return SkillSpecialDummy[]
    */
-  function getListOfSpecialSkills(): array {
+  public function getListOfSpecialSkills(): array {
     $skillsList = $this->cache->load("special_skills", function(& $dependencies) {
       $return = [];
       $skills = $this->orm->specialSkills->findAll();
@@ -93,12 +93,12 @@ class Skills {
     return $skillsList;
   }
   
-  function getSpecialSkill(int $id): ?SkillSpecialDummy {
+  public function getSpecialSkill(int $id): ?SkillSpecialDummy {
     $skills = $this->getListOfSpecialSkills();
     return Arrays::get($skills, $id, NULL);
   }
   
-  function getCharacterSpecialSkill(int $skillId, int $userId = 0): ?CharacterSpecialSkillDummy {
+  public function getCharacterSpecialSkill(int $skillId, int $userId = 0): ?CharacterSpecialSkillDummy {
     if($userId === 0) {
       $userId = $this->user->id;
     }
@@ -118,7 +118,7 @@ class Skills {
   /**
    * @return BaseCharacterSkill[]
    */
-  function getAvailableSkills(): array {
+  public function getAvailableSkills(): array {
     $return = [];
     $skills = array_merge($this->getListOfAttackSkills(), $this->getListOfSpecialSkills());
     $char = $this->orm->characters->getById($this->user->id);
@@ -147,7 +147,7 @@ class Skills {
   /**
    * @return BaseCharacterSkill[]
    */
-  function getPlayerSkills(int $uid): array {
+  public function getPlayerSkills(int $uid): array {
     $return = [];
     $skills = array_merge($this->getListOfAttackSkills(), $this->getListOfSpecialSkills());
     $char = $this->orm->characters->getById($this->user->id);
@@ -179,7 +179,7 @@ class Skills {
   /**
    * Get amount of user's usable skill points
    */
-  function getSkillPoints(): int {
+  public function getSkillPoints(): int {
     return $this->orm->characters->getById($this->user->id)->skillPoints;
   }
   
@@ -192,7 +192,7 @@ class Skills {
    * @throws SkillMaxLevelReachedException
    * @throws CannotLearnSkillException
    */
-  function trainSkill(int $id, string $type) {
+  public function trainSkill(int $id, string $type) {
     if(!in_array($type, ["attack", "special"])) {
       throw new InvalidSkillTypeException;
     } elseif($this->getSkillPoints() < 1) {

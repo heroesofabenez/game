@@ -36,7 +36,7 @@ abstract class ArenaControl extends \Nette\Application\UI\Control {
   /** @var string */
   protected $arena;
   
-  function __construct(User $user, \HeroesofAbenez\Model\CombatHelper $combatHelper, CombatDuel $combat, CombatLogManager $log, ORM $orm, ITranslator $translator) {
+  public function __construct(User $user, \HeroesofAbenez\Model\CombatHelper $combatHelper, CombatDuel $combat, CombatLogManager $log, ORM $orm, ITranslator $translator) {
     parent::__construct();
     $this->user = $user;
     $this->combatHelper = $combatHelper;
@@ -62,7 +62,7 @@ abstract class ArenaControl extends \Nette\Application\UI\Control {
   
   abstract protected function getOpponents(): ICollection;
   
-  function render(): void {
+  public function render(): void {
     $this->template->setFile(__DIR__ . "/arena.latte");
     $this->template->opponents = $this->getOpponents();
     $this->template->arena = $this->arena;
@@ -104,7 +104,7 @@ abstract class ArenaControl extends \Nette\Application\UI\Control {
    *
    * @return int Combat's id
    */
-  function saveCombat(CombatLogger $logger): int {
+  public function saveCombat(CombatLogger $logger): int {
     $this->combatHelper->bumpNumberOfTodayArenaFights($this->user->id);
     $log = (string) $logger;
     return $this->log->write($log);

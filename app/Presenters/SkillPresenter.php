@@ -25,11 +25,11 @@ class SkillPresenter extends BasePresenter {
    *
    * @throws \Nette\Application\BadRequestException
    */
-  function actionDefault(): void {
+  public function actionDefault(): void {
     throw new \Nette\Application\BadRequestException;
   }
   
-  function renderAttack(int $id): void {
+  public function renderAttack(int $id): void {
     $skill = $this->model->getAttackSkill($id);
     if(!$skill) {
       $this->forward("notfound");
@@ -37,7 +37,7 @@ class SkillPresenter extends BasePresenter {
     $this->template->skill = $skill;
   }
   
-  function renderSpecial(int $id): void {
+  public function renderSpecial(int $id): void {
     $skill = $this->model->getSpecialSkill($id);
     if(!$skill) {
       $this->forward("notfound");

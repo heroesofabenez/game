@@ -18,7 +18,7 @@ class RankingPresenter extends BasePresenter {
   /**
    * Set up paginator
    */
-  function startup(): void {
+  public function startup(): void {
     parent::startup();
     $this->paginator = new \Nette\Utils\Paginator;
     $this->paginator->setItemsPerPage(self::ITEMS_PER_PAGE);
@@ -28,27 +28,27 @@ class RankingPresenter extends BasePresenter {
   /**
    * Use just one template for this presenter
    */
-  function formatTemplateFiles() {
+  public function formatTemplateFiles() {
     return [__DIR__ . "/../templates/Ranking.@layout.latte"];
   }
   
-  function actionCharacters(int $page = 1): void {
+  public function actionCharacters(int $page = 1): void {
     $this->template->title = "Ranking Characters";
     $this->template->ranking = "charactersRanking";
   }
   
-  function actionGuilds(int $page = 1): void {
+  public function actionGuilds(int $page = 1): void {
     $this->template->title = "Ranking Guilds";
     $this->template->ranking = "guildsRanking";
   }
   
-  function createComponentCharactersRanking(Ranking\ICharactersRankingControlFactory $factory): Ranking\CharactersRankingControl {
+  public function createComponentCharactersRanking(Ranking\ICharactersRankingControlFactory $factory): Ranking\CharactersRankingControl {
     $component = $factory->create();
     $component->paginator = $this->paginator;
     return $component;
   }
   
-  function createComponentGuildsRanking(Ranking\IGuildsRankingControlFactory $factory): Ranking\GuildsRankingControl {
+  public function createComponentGuildsRanking(Ranking\IGuildsRankingControlFactory $factory): Ranking\GuildsRankingControl {
     return $factory->create();
   }
 }

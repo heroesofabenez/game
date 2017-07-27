@@ -36,7 +36,7 @@ class GuildPresenter extends BasePresenter {
   /**
    * Redirect player to guild page if he is already in guild
    */
-  function inGuild(): void {
+  public function inGuild(): void {
     $guild = $this->user->identity->guild;
     if($guild > 0) {
       $this->flashMessage($this->translator->translate("errors.guild.inGuild"));
@@ -49,7 +49,7 @@ class GuildPresenter extends BasePresenter {
    * 
    * @param bool $warning Whetever to print a warning (via flash message)
   */
-  function notInGuild(bool $warning = true): void {
+  public function notInGuild(bool $warning = true): void {
     $guild = $this->user->identity->guild;
     if($guild == 0) {
       if($warning) {
@@ -59,17 +59,17 @@ class GuildPresenter extends BasePresenter {
     }
   }
   
-  function actionDefault(): void {
+  public function actionDefault(): void {
     $this->notInGuild(false);
   }
   
-  function renderDefault(): void {
+  public function renderDefault(): void {
     $this->template->guild = $this->model->view($this->user->identity->guild);
     $this->template->canManage = $this->user->isAllowed("guild", "manage");
     $this->template->canInvite = $this->user->isAllowed("guild", "invite");
   }
   
-  function renderView(int $id): void {
+  public function renderView(int $id): void {
     if($id == 0) {
       $this->forward("notfound");
     }
@@ -80,11 +80,11 @@ class GuildPresenter extends BasePresenter {
     $this->template->guild = $data;
   }
   
-  function actionMembers(): void {
+  public function actionMembers(): void {
     $this->notInGuild();
   }
   
-  function renderMembers(): void {
+  public function renderMembers(): void {
     $this->template->members = $this->model->guildMembers($this->user->identity->guild, [], true);
     $this->template->canPromote = $this->user->isAllowed("guild", "promote");
     $this->template->canKick = $this->user->isAllowed("guild", "kick");
@@ -111,12 +111,12 @@ class GuildPresenter extends BasePresenter {
     return $form;
   }
   
-  function actionCreate(): void {
+  public function actionCreate(): void {
     $this->inGuild();
     $this->template->haveForm = true;
   }
   
-  function actionJoin(int $id = NULL): void {
+  public function actionJoin(int $id = NULL): void {
     $this->inGuild();
     if(is_null($id)) {
       return;
@@ -130,7 +130,7 @@ class GuildPresenter extends BasePresenter {
     }
   }
   
-  function renderJoin(int $id = NULL): void {
+  public function renderJoin(int $id = NULL): void {
     $guilds = $this->model->listOfGuilds();
     $this->template->guilds = $guilds;
     $apps = $this->model->haveUnresolvedApplication();
@@ -139,7 +139,7 @@ class GuildPresenter extends BasePresenter {
     }
   }
   
-  function actionLeave(): void {
+  public function actionLeave(): void {
     $this->notInGuild();
     try {
       $this->model->leave();
@@ -155,7 +155,7 @@ class GuildPresenter extends BasePresenter {
     }
   }
   
-  function actionManage(): void {
+  public function actionManage(): void {
     $this->notInGuild();
     if(!$this->user->isAllowed("guild", "manage")) {
       $this->flashMessage($this->translator->translate("errors.guild.cannotManage"));
@@ -163,13 +163,13 @@ class GuildPresenter extends BasePresenter {
     }
   }
   
-  function renderManage(): void {
+  public function renderManage(): void {
     $this->template->canRename = $this->user->isAllowed("guild", "rename");
     $this->template->canDissolve = $this->user->isAllowed("guild", "dissolve");
     $this->template->canChangeRankNames = $this->user->isAllowed("guild", "changeRankNames");
   }
   
-  function actionRename(): void {
+  public function actionRename(): void {
     $this->notInGuild();
     if(!$this->user->isAllowed("guild", "rename")) {
       $this->flashMessage($this->translator->translate("errors.guild.cannotRename"));
@@ -178,7 +178,7 @@ class GuildPresenter extends BasePresenter {
     $this->template->haveForm = true;
   }
   
-  function actionDissolve(): void {
+  public function actionDissolve(): void {
     $this->notInGuild();
     if(!$this->user->isAllowed("guild", "dissolve")) {
       $this->flashMessage($this->translator->translate("errors.guild.cannotDissolve"));
@@ -212,7 +212,7 @@ class GuildPresenter extends BasePresenter {
     return $form;
   }
   
-  function actionPromote(int $id): void {
+  public function actionPromote(int $id): void {
     try{
       $this->model->promote($id);
       $this->flashMessage($this->translator->translate("messages.guild.promoted"));
@@ -234,7 +234,7 @@ class GuildPresenter extends BasePresenter {
     $this->redirect("Guild:");
   }
   
-  function actionDemote(int $id): void {
+  public function actionDemote(int $id): void {
     try{
       $this->model->demote($id);
       $this->flashMessage($this->translator->translate("messages.guild.demoted"));
@@ -254,7 +254,7 @@ class GuildPresenter extends BasePresenter {
     $this->redirect("Guild:");
   }
   
-  function actionKick(int $id): void {
+  public function actionKick(int $id): void {
     try {
       $this->model->kick($id);
       $this->flashMessage($this->translator->translate("messages.guild.kicked"));
@@ -272,7 +272,7 @@ class GuildPresenter extends BasePresenter {
     $this->redirect("Guild:");
   }
   
-  function actionDescription(): void {
+  public function actionDescription(): void {
     $this->notInGuild();
     if(!$this->user->isAllowed("guild", "manage")) {
       $this->flashMessage($this->translator->translate("errors.guild.cannotChangeDescription"));
@@ -293,7 +293,7 @@ class GuildPresenter extends BasePresenter {
     return $form;
   }
   
-  function actionApplications(): void {
+  public function actionApplications(): void {
     $this->notInGuild();
     if(!$this->user->isAllowed("guild", "invite")) {
       $this->flashMessage($this->translator->translate("errors.guild.cannotManageApps"));
@@ -301,11 +301,11 @@ class GuildPresenter extends BasePresenter {
     }
   }
   
-  function renderApplications(): void {
+  public function renderApplications(): void {
     $this->template->apps = $this->model->showApplications($this->user->identity->guild);
   }
   
-  function actionRankNames(): void {
+  public function actionRankNames(): void {
     $this->notInGuild();
     if(!$this->user->isAllowed("guild", "changeRankNames")) {
       $this->flashMessage($this->translator->translate("errors.guild.cannotChangeRankNames"));
