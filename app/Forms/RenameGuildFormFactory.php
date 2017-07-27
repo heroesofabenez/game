@@ -31,11 +31,11 @@ class RenameGuildFormFactory extends BaseFormFactory {
       ->setDefaultValue($currentName)
       ->setRequired();
     $form->addSubmit("rename", "forms.renameGuild.renameButton.label");
-    $form->onSuccess[] = [$this, "submitted"];
+    $form->onSuccess[] = [$this, "process"];
     return $form;
   }
   
-  public function submitted(Form $form, array $values): void {
+  public function process(Form $form, array $values): void {
     $gid = $this->user->identity->guild;
     $name = $values["name"];
     try {

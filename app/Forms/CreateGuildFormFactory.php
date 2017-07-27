@@ -29,11 +29,11 @@ class CreateGuildFormFactory extends BaseFormFactory {
       ->addRule(Form::MAX_LENGTH, "forms.createGuild.descriptionField.error", 200)
       ->setRequired();
     $form->addSubmit("create", "forms.createGuild.createButton.label");
-    $form->onSuccess[] = [$this, "submitted"];
+    $form->onSuccess[] = [$this, "process"];
     return $form;
   }
   
-  public function submitted(Form $form, array $values): void {
+  public function process(Form $form, array $values): void {
     $data = [
       "name" => $values["name"], "description" => $values["description"]
     ];

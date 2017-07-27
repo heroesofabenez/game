@@ -36,11 +36,11 @@ class CustomGuildRankNamesFormFactory extends BaseFormFactory {
       }
     }
     $form->addSubmit("submit", "forms.customGuildRankNames.sendButton.label");
-    $form->onSuccess[] = [$this, "submitted"];
+    $form->onSuccess[] = [$this, "process"];
     return $form;
   }
   
-  public function submitted(Form $form, array $values): void {
+  public function process(Form $form, array $values): void {
     try {
       $this->model->setCustomRankNames($values);
     } catch(MissingPermissionsException $e) {

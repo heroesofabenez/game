@@ -29,11 +29,11 @@ class GuildDescriptionFormFactory extends BaseFormFactory {
     $form->addTextArea("description", "forms.guildDescription.descriptionField.label")
       ->setDefaultValue($guild->description);
     $form->addSubmit("change", "forms.guildDescription.changeButton.label");
-    $form->onSuccess[] = [$this, "submitted"];
+    $form->onSuccess[] = [$this, "process"];
     return $form;
   }
   
-  public function submitted(Form $form, array $values): void {
+  public function process(Form $form, array $values): void {
     $guild = $this->user->identity->guild;
     $description = $values["description"];
     try {

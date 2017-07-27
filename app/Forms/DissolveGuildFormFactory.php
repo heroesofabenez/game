@@ -29,11 +29,11 @@ class DissolveGuildFormFactory extends BaseFormFactory {
       ->addRule(Form::EQUAL, "forms.dissolveGuild.nameField.error", $currentName)
       ->setRequired();
     $form->addSubmit("dissolve", "forms.dissolveGuild.dissolveButton.label");
-    $form->onSuccess[] = [$this, "submitted"];
+    $form->onSuccess[] = [$this, "process"];
     return $form;
   }
   
-  public function submitted(): void {
+  public function process(): void {
     $gid = $this->user->identity->guild;
     $this->model->dissolve($gid);
   }
