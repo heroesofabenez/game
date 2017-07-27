@@ -9,8 +9,7 @@ use HeroesofAbenez\Model\Guild,
     HeroesofAbenez\Model\PlayerNotFoundException,
     HeroesofAbenez\Model\PlayerNotInGuildException,
     HeroesofAbenez\Model\CannotKickHigherRanksException,
-    Nette\Localization\ITranslator,
-    Nette\Utils\Arrays;
+    Nette\Localization\ITranslator;
 
 /**
  * Chat Command Kick
@@ -28,12 +27,8 @@ class KickCommand extends \HeroesofAbenez\Chat\ChatCommand {
     $this->translator = $translator;
   }
   
-  /**
-   * @param int $id
-   */
-  public function execute(): string {
-    $id = Arrays::get(func_get_args(), 0, "");
-    if($id === "" OR !is_numeric($id)) {
+  public function execute(int $id = NULL): string {
+    if(is_null($id) OR !is_numeric($id)) {
       return "";
     }
     try {
