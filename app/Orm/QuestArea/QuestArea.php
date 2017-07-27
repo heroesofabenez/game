@@ -23,10 +23,6 @@ use Nextras\Orm\Relationships\OneHasMany;
  * @property OneHasMany|ChatMessage[] $chatMessages {1:m ChatMessage::$area}
  */
 class QuestArea extends \Nextras\Orm\Entity\Entity {
-  /**
-   * @param int $value
-   * @return int
-   */
   protected function setterRequiredLevel(int $value): int {
     if($value < 0) {
       return 0;

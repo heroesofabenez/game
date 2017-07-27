@@ -24,10 +24,6 @@ class PveArenaOpponent extends \Nextras\Orm\Entity\Entity {
   const GENDER_MALE = "male";
   const GENDER_FEMALE = "female";
   
-  /**
-   * @param int $value
-   * @return int
-   */
   protected function setterLevel(int $value): int {
     if($value < 1) {
       return 1;

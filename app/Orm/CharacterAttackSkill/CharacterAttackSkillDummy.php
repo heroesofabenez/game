@@ -26,9 +26,6 @@ class CharacterAttackSkillDummy extends BaseCharacterSkill {
     return $this->skill;
   }
   
-  /**
-   * @return int
-   */
   function getDamage(): int {
     $damage = 0;
     if(substr($this->skill->baseDamage, -1) === "%") {
@@ -40,9 +37,6 @@ class CharacterAttackSkillDummy extends BaseCharacterSkill {
     return $damage;
   }
   
-  /**
-   * @return int
-   */
   function getHitRate(): int {
     if(is_null($this->skill->hitRate)) {
       return 100;

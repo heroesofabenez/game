@@ -50,6 +50,7 @@ class CombatHelper {
   
   /**
    * Get data for specified player
+   *
    * @throws OpponentNotFoundException
    */
   function getPlayer(int $id): Character {
@@ -106,6 +107,7 @@ class CombatHelper {
   
   /**
    * Get data for specified npc
+   *
    * @throws OpponentNotFoundException
    */
   function getArenaNpc($id): Character {

@@ -13,10 +13,6 @@ namespace HeroesofAbenez\Orm;
  * @property int $order
  */
 class ShopItem extends \Nextras\Orm\Entity\Entity {
-  /**
-   * @param int $value
-   * @return int
-   */
   protected function setterOrder(int $value): int {
     if($value < 0) {
       return 0;

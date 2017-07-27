@@ -18,7 +18,6 @@ class ChatBansRepository extends \Nextras\Orm\Repository\Repository {
   
   /**
    * @param int $id
-   * @return ChatBan|NULL
    */
   function getById($id): ?ChatBan {
     return $this->getBy([

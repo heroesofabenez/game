@@ -112,8 +112,6 @@ class Team extends Collection {
   
   /**
    * Check whether the team has at least 1 active member
-   * 
-   * @return bool
    */
   function hasActiveMembers(): bool {
     return count($this->getActiveMembers()) > 0;
@@ -121,8 +119,6 @@ class Team extends Collection {
   
   /**
    * Check whether the team has at least 1 alive member
-   * 
-   * @return bool
    */
   function hasAliveMembers(): bool {
     return count($this->getAliveMembers()) > 0;

@@ -18,7 +18,6 @@ class ChatMessagesRepository extends \Nextras\Orm\Repository\Repository {
   
   /**
    * @param int $id
-   * @return ChatMessage|NULL
    */
   function getById($id): ?ChatMessage {
     return $this->getBy([

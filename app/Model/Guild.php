@@ -93,7 +93,6 @@ class Guild {
    * Creates a guild
    * 
    * @param array $data Name and description
-   * @return void
    * @throws NameInUseException
    */
   function create($data): void {
@@ -334,6 +333,7 @@ class Guild {
   
   /**
    * Rename guild
+   *
    * @throws NameInUseException
   */
   function rename(int $id, string $name): void {
@@ -382,7 +382,6 @@ class Guild {
   /**
    * Get custom rank names for a guild
    *
-   * @param int $id
    * @return string[]
    */
   function getCustomRankNames(int $id): array {

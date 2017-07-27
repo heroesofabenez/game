@@ -101,8 +101,7 @@ abstract class ArenaControl extends \Nette\Application\UI\Control {
   
   /**
    * Save log from combat
-   * 
-   * @param CombatLogger $logger
+   *
    * @return int Combat's id
    */
   function saveCombat(CombatLogger $logger): int {

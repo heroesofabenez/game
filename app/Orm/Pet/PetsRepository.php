@@ -20,7 +20,6 @@ class PetsRepository extends \Nextras\Orm\Repository\Repository {
   
   /**
    * @param int $id
-   * @return Pet|NULL
    */
   function getById($id): ?Pet {
     return $this->getBy([
@@ -30,7 +29,6 @@ class PetsRepository extends \Nextras\Orm\Repository\Repository {
   
   /**
    * @param Character|int $owner
-   * @return Pet|NULL
    */
   function getActivePet($owner): ?Pet {
     return $this->getBy([
@@ -41,7 +39,7 @@ class PetsRepository extends \Nextras\Orm\Repository\Repository {
   
   /**
    * @param Character|int $owner
-   * @return ICollection
+   * @return ICollection|Pet[]
    */
   function findByOwner($owner): ICollection {
     return $this->findBy([

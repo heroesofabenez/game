@@ -28,10 +28,6 @@ class SkillAttack extends \Nextras\Orm\Entity\Entity {
   const TARGET_ROW = "row";
   const TARGET_COLUMN = "column";
   
-  /**
-   * @param int $value
-   * @return int
-   */
   protected function setterStrikes(int $value): int {
     if($value < 1) {
       return 1;

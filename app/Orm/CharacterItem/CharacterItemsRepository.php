@@ -18,7 +18,6 @@ class CharacterItemsRepository extends \Nextras\Orm\Repository\Repository {
   
   /**
    * @param int $id
-   * @return CharacterItem|NULL
    */
   function getById($id): ?CharacterItem {
     return $this->getBy([
@@ -29,7 +28,6 @@ class CharacterItemsRepository extends \Nextras\Orm\Repository\Repository {
   /**
    * @param Character|int $character
    * @param Item|int $item
-   * @return CharacterItem|NULL
    */
   function getByCharacterAndItem($character, $item): ?CharacterItem {
     return $this->getBy([

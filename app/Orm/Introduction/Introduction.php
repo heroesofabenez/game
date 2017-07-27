@@ -14,10 +14,6 @@ namespace HeroesofAbenez\Orm;
  * @property string $text
  */
 class Introduction extends \Nextras\Orm\Entity\Entity {
-  /**
-   * @param int $value
-   * @return int
-   */
   protected function setterPart(int $value): int {
     if($value < 1) {
       return 1;

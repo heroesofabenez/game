@@ -39,10 +39,6 @@ class Equipment extends \Nextras\Orm\Entity\Entity {
   const TYPE_CROSSBOW = "crossbow";
   const TYPE_THROWING_KNIFE = "throwing knife";
   
-  /**
-   * @param string $value
-   * @return string|NULL
-   */
   protected function setterType(string $value): ?string {
     if($this->slot !== static::SLOT_WEAPON) {
       return NULL;
@@ -50,9 +46,7 @@ class Equipment extends \Nextras\Orm\Entity\Entity {
       return $value;
     }
   }
-  /**
-   * @return array params
-   */
+  
   protected function getterDeployParams(): array {
     $stat = [
       "weapon" => "damage", "armor" => "defense", "shield" => "dodge", "amulet" => "initiative"

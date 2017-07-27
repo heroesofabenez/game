@@ -37,63 +37,36 @@ abstract class BaseSkill {
   /** @var int */
   protected $levels;
   
-  /**
-   * @return int
-   */
   abstract function getCooldown(): int;
   
-  /**
-   * @return int
-   */
   function getId(): int {
     return $this->id;
   }
   
-  /**
-   * @return string
-   */
   function getName(): string {
     return $this->name;
   }
   
-  /**
-   * @return string
-   */
   function getDescription(): string {
     return $this->description;
   }
   
-  /**
-   * @return int
-   */
   function getNeededClass(): int {
     return $this->neededClass;
   }
   
-  /**
-   * @return int|NULL
-   */
   function getNeededSpecialization(): ?int {
     return $this->neededSpecialization;
   }
   
-  /**
-   * @return int
-   */
   function getNeededLevel(): int {
     return $this->neededLevel;
   }
   
-  /**
-   * @return string
-   */
   function getTarget(): string {
     return $this->target;
   }
   
-  /**
-   * @return int
-   */
   function getLevels(): int {
     return $this->levels;
   }

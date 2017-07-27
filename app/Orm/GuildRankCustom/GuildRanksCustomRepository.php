@@ -20,7 +20,6 @@ class GuildRanksCustomRepository extends \Nextras\Orm\Repository\Repository {
   
   /**
    * @param int $id
-   * @return GuildRankCustom|NULL
    */
   function getById($id): ?GuildRankCustom {
     return $this->getBy([
@@ -31,7 +30,6 @@ class GuildRanksCustomRepository extends \Nextras\Orm\Repository\Repository {
   /**
    * @param Guild|int $guild
    * @param GuildRank|int $rank
-   * @return GuildRankCustom|NULL
    */
   function getByGuildAndRank($guild, $rank): ?GuildRankCustom {
     return $this->getBy([

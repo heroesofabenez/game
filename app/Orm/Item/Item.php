@@ -20,10 +20,6 @@ use Nextras\Orm\Relationships\OneHasMany;
  * @property OneHasMany|Quest[] $rewardedForQuests {1:m Quest::$rewardItem}
  */
 class Item extends \Nextras\Orm\Entity\Entity {
-  /**
-   * @param int $value
-   * @return int
-   */
   protected function setterPrice(int $value): int {
     if($value < 0) {
       return 0;

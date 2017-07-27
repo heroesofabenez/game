@@ -77,8 +77,7 @@ class UserManager implements NS\IAuthenticator {
   
   /**
    * Creates new character
-   * 
-   * @param array $values
+   *
    * @return array|NULL Stats of new character
    */
   function create(array $values): ?array {

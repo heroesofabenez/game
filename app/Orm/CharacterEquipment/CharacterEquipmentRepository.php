@@ -20,7 +20,6 @@ class CharacterEquipmentRepository extends \Nextras\Orm\Repository\Repository {
   
   /**
    * @param int $id
-   * @return CharacterEquipment|NULL
    */
   function getById($id): ?CharacterEquipment {
     return $this->getBy([
@@ -30,7 +29,6 @@ class CharacterEquipmentRepository extends \Nextras\Orm\Repository\Repository {
   
   /**
    * @param Character|int $character
-   * @param string $slot
    * @return ICollection|CharacterEquipment[]
    */
   function findByCharacterAndSlot($character, string $slot): ICollection {

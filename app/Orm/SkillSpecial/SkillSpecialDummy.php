@@ -41,44 +41,26 @@ class SkillSpecialDummy extends BaseSkill {
     $this->duration = $skill->duration;
   }
   
-  /**
-   * @return int
-   */
   function getCooldown(): int {
     return 5;
   }
   
-  /**
-   * @return string
-   */
   function getType(): string {
     return $this->type;
   }
   
-  /**
-   * @return string|NULL
-   */
   function getStat(): ?string {
     return $this->stat;
   }
   
-  /**
-   * @return int
-   */
   function getValue(): int {
     return $this->value;
   }
   
-  /**
-   * @return int
-   */
   function getValueGrowth(): int {
     return $this->valueGrowth;
   }
   
-  /**
-   * @return int
-   */
   function getDuration(): int {
     return $this->duration;
   }

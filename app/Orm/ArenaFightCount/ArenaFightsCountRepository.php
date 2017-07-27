@@ -18,7 +18,6 @@ class ArenaFightsCountRepository extends \Nextras\Orm\Repository\Repository {
   
   /**
    * @param int $id
-   * @return ArenaFightCount|NULL
    */
   function getById($id): ?ArenaFightCount {
     return $this->getBy([
@@ -28,8 +27,6 @@ class ArenaFightsCountRepository extends \Nextras\Orm\Repository\Repository {
   
   /**
    * @param Character|int $character
-   * @param string $day
-   * @return ArenaFightCount|NULL
    */
   function getByCharacterAndDay($character, string $day): ?ArenaFightCount {
     return $this->getBy([

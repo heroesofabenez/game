@@ -26,10 +26,6 @@ class PetType extends \Nextras\Orm\Entity\Entity {
   const STAT_CON = "con";
   const STAT_INT = "int";
   
-  /**
-   * @param int $value
-   * @return int
-   */
   protected function setterBonusValue(int $value): int {
     if($value < 0) {
       return 0;
@@ -40,10 +36,6 @@ class PetType extends \Nextras\Orm\Entity\Entity {
     }
   }
   
-  /**
-   * @param int $value
-   * @return int
-   */
   protected function setterRequiredLevel(int $value): int {
     if($value < 0) {
       return 0;

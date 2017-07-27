@@ -18,7 +18,6 @@ class PveArenaOpponentsRepository extends \Nextras\Orm\Repository\Repository {
   
   /**
    * @param int $id
-   * @return PveArenaOpponent|NULL
    */
   function getById($id): ?PveArenaOpponent {
     return $this->getBy([

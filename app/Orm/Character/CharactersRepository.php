@@ -20,7 +20,6 @@ class CharactersRepository extends \Nextras\Orm\Repository\Repository {
   
   /**
    * @param int $id
-   * @return Character|NULL
    */
   function getById($id): ?Character {
     return $this->getBy([
@@ -28,20 +27,12 @@ class CharactersRepository extends \Nextras\Orm\Repository\Repository {
     ]);
   }
   
-  /**
-   * @param string $name
-   * @return Character|NULL
-   */
   function getByName(string $name): ?Character {
     return $this->getBy([
       "name" => $name
     ]);
   }
   
-  /**
-   * @param int $owner
-   * @return Character|NULL
-   */
   function getByOwner(int $owner): ?Character {
     return $this->getBy([
       "owner" => $owner

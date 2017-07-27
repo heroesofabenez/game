@@ -18,7 +18,6 @@ class IntroductionsRepository extends \Nextras\Orm\Repository\Repository {
   
   /**
    * @param int $id
-   * @return Introduction|NULL
    */
   function getById($id): ?Introduction {
     return $this->getBy([

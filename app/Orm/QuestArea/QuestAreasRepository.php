@@ -18,7 +18,6 @@ class QuestAreasRepository extends \Nextras\Orm\Repository\Repository {
   
   /**
    * @param int $id
-   * @return QuestArea|null
    */
   function getById($id): ?QuestArea {
     return $this->getBy([

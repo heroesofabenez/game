@@ -39,10 +39,6 @@ class SkillSpecial extends \Nextras\Orm\Entity\Entity {
   const STAT_DODGE = "dodge";
   const STAT_INITIATIVE = "initiative";
   
-  /**
-   * @param string|NULL $value
-   * @return string|NULL
-   */
   protected function setterStat(?string $value): ?string {
     if(is_null($value)) {
       return NULL;

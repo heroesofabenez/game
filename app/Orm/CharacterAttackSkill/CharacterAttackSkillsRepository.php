@@ -18,7 +18,6 @@ class CharacterAttackSkillsRepository extends \Nextras\Orm\Repository\Repository
   
   /**
    * @param int $id
-   * @return CharacterAttackSkill|NULL
    */
   function getById($id): ?CharacterAttackSkill {
     return $this->getBy([
@@ -29,7 +28,6 @@ class CharacterAttackSkillsRepository extends \Nextras\Orm\Repository\Repository
   /**
    * @param Character|int $character
    * @param SkillAttack|int $skill
-   * @return CharacterAttackSkill|NULL
    */
   function getByCharacterAndSkill($character, $skill): ?CharacterAttackSkill {
     return $this->getBy([

@@ -18,7 +18,6 @@ class CombatsRepository extends \Nextras\Orm\Repository\Repository {
   
   /**
    * @param int $id
-   * @return Combat|NULL
    */
   function getById($id): ?Combat {
     return $this->getBy([

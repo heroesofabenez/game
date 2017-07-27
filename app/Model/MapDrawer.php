@@ -31,8 +31,6 @@ class MapDrawer {
    * 
    * @param QuestStage[] $points
    * @param ICollection|RoutesStage[] $routes
-   * @param string $name
-   * @return void
    */
   function draw(array $points, ICollection $routes, string $name): void {
     $image = Image::fromBlank(250, 250, Image::rgb(204, 204, 153));

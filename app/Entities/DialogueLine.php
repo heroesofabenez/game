@@ -21,11 +21,6 @@ class DialogueLine {
   /** @var string[] */
   protected $names = [];
   
-  /**
-   * @param string $speaker
-   * @param string $text
-   * @param array $names
-   */
   function __construct(string $speaker, string $text, array $names) {
     $speaker = strtolower($speaker);
     if($speaker == "player" OR $speaker == "npc") {

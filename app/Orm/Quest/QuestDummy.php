@@ -82,128 +82,74 @@ class QuestDummy {
     $this->order = $quest->order;
   }
   
-  /**
-   * @return int
-   */
   function getId(): int {
     return $this->id;
   }
   
-  /**
-   * @return string
-   */
   function getName(): string {
     return $this->name;
   }
   
-  /**
-   * @return string
-   */
   function getIntroduction(): string {
     return $this->introduction;
   }
   
-  /**
-   * @return string
-   */
   function getEndText(): string {
     return $this->endText;
   }
   
-  /**
-   * @return int
-   */
   function getCostMoney(): int {
     return $this->costMoney;
   }
   
-  /**
-   * @return int|NULL
-   */
   function getNeededItem(): ?int {
     return $this->neededItem;
   }
   
-  /**
-   * @return int|NULL
-   */
   function getNeededQuest(): ?int {
     return $this->neededQuest;
   }
   
-  /**
-   * @return int|NULL
-   */
   function getNeededLevel(): ?int {
     return $this->neededLevel;
   }
   
-  /**
-   * @return int
-   */
   function getItemAmount(): int {
     return $this->itemAmount;
   }
   
-  /**
-   * @return bool
-   */
   function isItemLose(): bool {
     return $this->itemLose;
   }
   
-  /**
-   * @return int
-   */
   function getRewardMoney(): int {
     return $this->rewardMoney;
   }
   
-  /**
-   * @return int
-   */
   function getRewardXp(): int {
     return $this->rewardXp;
   }
   
-  /**
-   * @return int|NULL
-   */
   function getRewardItem(): ?int {
     return $this->rewardItem;
   }
   
-  /**
-   * @return int
-   */
   function getNpcStart(): int {
     return $this->npcStart;
   }
   
-  /**
-   * @return int
-   */
   function getNpcEnd(): int {
     return $this->npcEnd;
   }
   
-  /**
-   * @return int
-   */
   function getOrder(): int {
     return $this->order;
   }
   
-  /**
-   * @return bool
-   */
   function isProgress(): bool {
     return $this->progress;
   }
   
-  /**
-   * @param bool $progress
-   */
   function setProgress(bool $progress) {
     $this->progress = $progress;
   }

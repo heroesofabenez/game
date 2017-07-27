@@ -38,10 +38,6 @@ use Nextras\Orm\Relationships\OneHasMany;
 class CharacterClass extends \Nextras\Orm\Entity\Entity {
   const MAX_STATS = 99;
   
-  /**
-   * @param int $value
-   * @return int
-   */
   protected function setterStrength(int $value): int {
     if($value < 0) {
       return 0;
@@ -52,10 +48,6 @@ class CharacterClass extends \Nextras\Orm\Entity\Entity {
     }
   }
   
-  /**
-   * @param int $value
-   * @return int
-   */
   protected function setterDexterity(int $value): int {
     if($value < 0) {
       return 0;
@@ -66,10 +58,6 @@ class CharacterClass extends \Nextras\Orm\Entity\Entity {
     }
   }
   
-  /**
-   * @param int $value
-   * @return int
-   */
   protected function setterConstitution(int $value): int {
     if($value < 0) {
       return 0;
@@ -80,10 +68,6 @@ class CharacterClass extends \Nextras\Orm\Entity\Entity {
     }
   }
   
-  /**
-   * @param int $value
-   * @return int
-   */
   protected function setterIntelligence(int $value): int {
     if($value < 0) {
       return 0;
@@ -94,10 +78,6 @@ class CharacterClass extends \Nextras\Orm\Entity\Entity {
     }
   }
   
-  /**
-   * @param int $value
-   * @return int
-   */
   protected function setterCharisma(int $value): int {
     if($value < 0) {
       return 0;

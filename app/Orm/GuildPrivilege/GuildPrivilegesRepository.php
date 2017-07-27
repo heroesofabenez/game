@@ -18,7 +18,6 @@ class GuildPrivilegesRepository extends \Nextras\Orm\Repository\Repository {
   
   /**
    * @param int $id
-   * @return GuildPrivilege|NULL
    */
   function getById($id): ?GuildPrivilege {
     return $this->getBy([

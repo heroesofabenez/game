@@ -15,6 +15,5 @@ class RoutesAreasRepository extends \Nextras\Orm\Repository\Repository {
   static function getEntityClassNames(): array {
     return [RoutesArea::class];
   }
-  
 }
 ?>

@@ -37,37 +37,22 @@ class SkillAttackDummy extends BaseSkill {
     $this->hitRate = $skill->hitRate;
   }
   
-  /**
-   * @return int
-   */
   function getCooldown(): int {
     return 3;
   }
   
-  /**
-   * @return string
-   */
   function getBaseDamage(): string {
     return $this->baseDamage;
   }
   
-  /**
-   * @return string
-   */
   function getDamageGrowth(): string {
     return $this->damageGrowth;
   }
   
-  /**
-   * @return int
-   */
   function getStrikes(): int {
     return $this->strikes;
   }
   
-  /**
-   * @return string|NULL
-   */
   function getHitRate(): ?string {
     return $this->hitRate;
   }

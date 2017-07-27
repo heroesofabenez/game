@@ -145,7 +145,6 @@ class Skills {
   }
   
   /**
-   * @param int $uid
    * @return BaseCharacterSkill[]
    */
   function getPlayerSkills(int $uid): array {

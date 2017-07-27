@@ -17,23 +17,14 @@ namespace HeroesofAbenez\Orm;
  * @property-read array $deployParams {virtual}
  */
 class Pet extends \Nextras\Orm\Entity\Entity {
-  /**
-   * @return string
-   */
   protected function getterBonusStat(): string {
     return $this->type->bonusStat;
   }
   
-  /**
-   * @return int
-   */
   protected function getterBonusValue(): int {
     return $this->type->bonusValue;
   }
   
-  /**
-   * @return array
-   */
   protected function getterDeployParams(): array {
     $stats = [
       "str" => "strength", "dex" => "dexterity", "con" => "constitution", "int" => "intelligence", "char" => "charisma"

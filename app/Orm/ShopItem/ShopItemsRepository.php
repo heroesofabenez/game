@@ -20,7 +20,6 @@ class ShopItemsRepository extends \Nextras\Orm\Repository\Repository {
   
   /**
    * @param int $id
-   * @return ShopItem|NULL
    */
   function getById($id): ?ShopItem {
     return $this->getBy([
