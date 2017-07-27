@@ -9,9 +9,6 @@ use Tester\Assert,
 
 require __DIR__ . "/../../bootstrap.php";
 
-/**
- * @testCase
- */
 class PetTest extends \Tester\TestCase {
   /** @var Pet */
   protected $model;

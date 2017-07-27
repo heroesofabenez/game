@@ -8,9 +8,6 @@ use Tester\Assert,
 
 require __DIR__ . "/../../bootstrap.php";
 
-/**
- * @testCase
- */
 class NPCTest extends \Tester\TestCase {
   /** @var NPC */
   protected $model;

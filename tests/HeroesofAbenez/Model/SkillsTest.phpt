@@ -12,9 +12,6 @@ use Tester\Assert,
 
 require __DIR__ . "/../../bootstrap.php";
 
-/**
- * @testCase
- */
 class SkillsTest extends \Tester\TestCase {
   /** @var Skills */
   protected $model;

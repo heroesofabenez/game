@@ -10,9 +10,6 @@ use Tester\Assert,
 
 require __DIR__ . "/../../bootstrap.php";
 
-/**
- * @testCase
- */
 class RouterTest extends \Tester\TestCase {
   /** @var RouteList */
   protected $router;
