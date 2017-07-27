@@ -14,10 +14,6 @@ extensions:
     menu: Nexendrie\Menu\DI\MenuExtension
     dbal: Nextras\Dbal\Bridges\NetteDI\DbalExtension
     orm: Nextras\Orm\Bridges\NetteDI\OrmExtension
-services:
-    latte.latteFactory:
-        setup:
-            - addFilter("translate", [@translation.translator, "translate"])
 orm:
     model: HeroesofAbenez\Orm\Model
 translation:
