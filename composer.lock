@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "45001f8d0bf02df3e2a091f2cf72662f",
+    "content-hash": "3322dfbf9cf925cee4e234eacd4159ae",
     "packages": [
         {
             "name": "kdyby/autowired",
@@ -1391,21 +1391,21 @@
     "packages-dev": [
         {
             "name": "doctrine/annotations",
-            "version": "v1.4.0",
+            "version": "v1.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/annotations.git",
-                "reference": "54cacc9b81758b14e3ce750f205a393d52339e97"
+                "reference": "5beebb01b025c94e93686b7a0ed3edae81fe3e7f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/annotations/zipball/54cacc9b81758b14e3ce750f205a393d52339e97",
-                "reference": "54cacc9b81758b14e3ce750f205a393d52339e97",
+                "url": "https://api.github.com/repos/doctrine/annotations/zipball/5beebb01b025c94e93686b7a0ed3edae81fe3e7f",
+                "reference": "5beebb01b025c94e93686b7a0ed3edae81fe3e7f",
                 "shasum": ""
             },
             "require": {
                 "doctrine/lexer": "1.*",
-                "php": "^5.6 || ^7.0"
+                "php": "^7.1"
             },
             "require-dev": {
                 "doctrine/cache": "1.*",
@@ -1414,7 +1414,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.4.x-dev"
+                    "dev-master": "1.5.x-dev"
                 }
             },
             "autoload": {
@@ -1455,7 +1455,7 @@
                 "docblock",
                 "parser"
             ],
-            "time": "2017-02-24T16:22:25+00:00"
+            "time": "2017-07-22T10:58:02+00:00"
         },
         {
             "name": "doctrine/lexer",
@@ -1513,16 +1513,16 @@
         },
         {
             "name": "friendsofphp/php-cs-fixer",
-            "version": "v2.3.2",
+            "version": "v2.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/FriendsOfPHP/PHP-CS-Fixer.git",
-                "reference": "597745f744bcce1aed59dfd1bb4603de2a06cda9"
+                "reference": "63661f3add3609e90e4ab8115113e189ae547bb4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FriendsOfPHP/PHP-CS-Fixer/zipball/597745f744bcce1aed59dfd1bb4603de2a06cda9",
-                "reference": "597745f744bcce1aed59dfd1bb4603de2a06cda9",
+                "url": "https://api.github.com/repos/FriendsOfPHP/PHP-CS-Fixer/zipball/63661f3add3609e90e4ab8115113e189ae547bb4",
+                "reference": "63661f3add3609e90e4ab8115113e189ae547bb4",
                 "shasum": ""
             },
             "require": {
@@ -1538,25 +1538,22 @@
                 "symfony/finder": "^3.0",
                 "symfony/options-resolver": "^3.0",
                 "symfony/polyfill-php70": "^1.0",
-                "symfony/polyfill-xml": "^1.3",
+                "symfony/polyfill-php72": "^1.4",
                 "symfony/process": "^3.0",
                 "symfony/stopwatch": "^3.0"
             },
             "conflict": {
-                "hhvm": "<3.18"
+                "hhvm": "*"
             },
             "require-dev": {
                 "johnkary/phpunit-speedtrap": "^1.1",
                 "justinrainbow/json-schema": "^5.0",
-                "mi-schi/phpmd-extension": "^4.2",
-                "phpmd/phpmd": "^2.4.3",
                 "phpunit/phpunit": "^4.8.35 || ^5.4.3",
                 "satooshi/php-coveralls": "^1.0",
                 "symfony/phpunit-bridge": "^3.2.2"
             },
             "suggest": {
                 "ext-mbstring": "For handling non-UTF8 characters in cache signature.",
-                "ext-xml": "For better performance.",
                 "symfony/polyfill-mbstring": "When enabling `ext-mbstring` is not possible."
             },
             "bin": [
@@ -1565,13 +1562,20 @@
             "type": "application",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.3-dev"
+                    "dev-master": "2.4-dev"
                 }
             },
             "autoload": {
                 "psr-4": {
                     "PhpCsFixer\\": "src/"
-                }
+                },
+                "classmap": [
+                    "tests/Test/Assert/AssertTokensTrait.php",
+                    "tests/Test/AbstractFixerTestCase.php",
+                    "tests/Test/AbstractIntegrationTestCase.php",
+                    "tests/Test/IntegrationCase.php",
+                    "tests/Test/IntegrationCaseFactory.php"
+                ]
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -1588,7 +1592,7 @@
                 }
             ],
             "description": "A tool to automatically fix PHP code style",
-            "time": "2017-05-24T21:59:38+00:00"
+            "time": "2017-07-18T15:35:40+00:00"
         },
         {
             "name": "gecko-packages/gecko-php-unit",
@@ -1885,16 +1889,16 @@
         },
         {
             "name": "nette/robot-loader",
-            "version": "v3.0.1",
+            "version": "v3.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nette/robot-loader.git",
-                "reference": "f8f87c979be88e9b6ebd50df7975326423bbe99f"
+                "reference": "b703b4f5955831b0bcaacbd2f6af76021b056826"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nette/robot-loader/zipball/f8f87c979be88e9b6ebd50df7975326423bbe99f",
-                "reference": "f8f87c979be88e9b6ebd50df7975326423bbe99f",
+                "url": "https://api.github.com/repos/nette/robot-loader/zipball/b703b4f5955831b0bcaacbd2f6af76021b056826",
+                "reference": "b703b4f5955831b0bcaacbd2f6af76021b056826",
                 "shasum": ""
             },
             "require": {
@@ -1946,7 +1950,7 @@
                 "nette",
                 "trait"
             ],
-            "time": "2017-07-11T00:20:12+00:00"
+            "time": "2017-07-18T00:09:56+00:00"
         },
         {
             "name": "nette/safe-stream",
@@ -2015,12 +2019,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/nette/tester.git",
-                "reference": "c126385e78d9cf1437982550fed9c6869a07b329"
+                "reference": "df5e87ffef69c546a67dfada20977b4e0504119d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nette/tester/zipball/c126385e78d9cf1437982550fed9c6869a07b329",
-                "reference": "c126385e78d9cf1437982550fed9c6869a07b329",
+                "url": "https://api.github.com/repos/nette/tester/zipball/df5e87ffef69c546a67dfada20977b4e0504119d",
+                "reference": "df5e87ffef69c546a67dfada20977b4e0504119d",
                 "shasum": ""
             },
             "require": {
@@ -2069,7 +2073,7 @@
                 "testing",
                 "unit"
             ],
-            "time": "2017-07-18T07:08:56+00:00"
+            "time": "2017-07-24T14:21:38+00:00"
         },
         {
             "name": "nexendrie/code-quality",
@@ -2077,12 +2081,12 @@
             "source": {
                 "type": "git",
                 "url": "https://gitlab.com/nexendrie/code-quality.git",
-                "reference": "973f349724dc3ff75831d53c22e8865d6068ffe4"
+                "reference": "998a94358c278e8cc1078cedf4ec1e810bd21e30"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://gitlab.com/api/v3/projects/nexendrie%2Fcode-quality/repository/archive.zip?sha=973f349724dc3ff75831d53c22e8865d6068ffe4",
-                "reference": "973f349724dc3ff75831d53c22e8865d6068ffe4",
+                "url": "https://gitlab.com/api/v3/projects/nexendrie%2Fcode-quality/repository/archive.zip?sha=998a94358c278e8cc1078cedf4ec1e810bd21e30",
+                "reference": "998a94358c278e8cc1078cedf4ec1e810bd21e30",
                 "shasum": ""
             },
             "require": {
@@ -2090,7 +2094,7 @@
                 "jakub-onderka/php-parallel-lint": "^0.9.2",
                 "mrtnzlml/testbench": "^2.4.2",
                 "nette/tester": "2.0.x-dev",
-                "phpstan/phpstan": "^0.7",
+                "phpstan/phpstan": "^0.8",
                 "squizlabs/php_codesniffer": "^3.0.1"
             },
             "type": "library",
@@ -2111,7 +2115,7 @@
                 "quality",
                 "testing"
             ],
-            "time": "2017-06-28T15:56:43+00:00"
+            "time": "2017-07-24T09:53:01+00:00"
         },
         {
             "name": "nikic/php-parser",
@@ -2214,36 +2218,35 @@
         },
         {
             "name": "phpstan/phpstan",
-            "version": "0.7",
+            "version": "0.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan.git",
-                "reference": "8da03c084b2c8e4a92d48f6926f6191c2c7783ad"
+                "reference": "6e8812cd666246c394955bba6edaef2e49c6ac0f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/8da03c084b2c8e4a92d48f6926f6191c2c7783ad",
-                "reference": "8da03c084b2c8e4a92d48f6926f6191c2c7783ad",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/6e8812cd666246c394955bba6edaef2e49c6ac0f",
+                "reference": "6e8812cd666246c394955bba6edaef2e49c6ac0f",
                 "shasum": ""
             },
             "require": {
                 "nette/bootstrap": "^2.4 || ^3.0",
-                "nette/caching": "^2.4 || ^3.0",
                 "nette/di": "^2.4 || ^3.0",
-                "nette/robot-loader": "^2.4.2 || ^3.0",
+                "nette/robot-loader": "^3.0.1",
                 "nette/utils": "^2.4 || ^3.0",
-                "nikic/php-parser": "^2.1 || ^3.0.2",
+                "nikic/php-parser": "^3.0.2",
                 "php": "~7.0",
                 "symfony/console": "~2.7 || ~3.0",
                 "symfony/finder": "~2.7 || ~3.0"
             },
             "require-dev": {
-                "consistence/coding-standard": "~0.13.0",
+                "consistence/coding-standard": "^2.0.0",
                 "jakub-onderka/php-parallel-lint": "^0.9.2",
                 "phing/phing": "^2.16.0",
                 "phpunit/phpunit": "^6.0.7",
                 "satooshi/php-coveralls": "^1.0",
-                "slevomat/coding-standard": "^2.0"
+                "slevomat/coding-standard": "^3.0.0"
             },
             "bin": [
                 "bin/phpstan"
@@ -2251,7 +2254,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "0.7-dev"
+                    "dev-master": "0.8-dev"
                 }
             },
             "autoload": {
@@ -2264,20 +2267,20 @@
                 "MIT"
             ],
             "description": "PHPStan - PHP Static Analysis Tool",
-            "time": "2017-05-14T20:37:59+00:00"
+            "time": "2017-07-23T19:20:56+00:00"
         },
         {
             "name": "phpstan/phpstan-nette",
-            "version": "0.7",
+            "version": "0.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan-nette.git",
-                "reference": "aea27d521725a8899e18ace4afe6ee9df9ea27ab"
+                "reference": "d5b19fd2f72ee164a43b40ec072899d6c3a2f3e4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan-nette/zipball/aea27d521725a8899e18ace4afe6ee9df9ea27ab",
-                "reference": "aea27d521725a8899e18ace4afe6ee9df9ea27ab",
+                "url": "https://api.github.com/repos/phpstan/phpstan-nette/zipball/d5b19fd2f72ee164a43b40ec072899d6c3a2f3e4",
+                "reference": "d5b19fd2f72ee164a43b40ec072899d6c3a2f3e4",
                 "shasum": ""
             },
             "require": {
@@ -2286,20 +2289,20 @@
                 "nette/forms": "^2.3.0 || ^3.0.0",
                 "nette/utils": "^2.3.0 || ^3.0.0",
                 "php": "~7.0",
-                "phpstan/phpstan": "^0.7"
+                "phpstan/phpstan": "^0.8"
             },
             "require-dev": {
                 "consistence/coding-standard": "~0.13.0",
                 "jakub-onderka/php-parallel-lint": "^0.9.2",
                 "phing/phing": "^2.13.0",
-                "phpunit/phpunit": "^5.3",
+                "phpunit/phpunit": "^6.2",
                 "satooshi/php-coveralls": "^1.0",
                 "slevomat/coding-standard": "^2.0"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "0.7-dev"
+                    "dev-master": "0.8-dev"
                 }
             },
             "autoload": {
@@ -2312,7 +2315,7 @@
                 "MIT"
             ],
             "description": "Nette Framework class reflection extension for PHPStan",
-            "time": "2017-05-08T11:30:43+00:00"
+            "time": "2017-07-15T18:01:47+00:00"
         },
         {
             "name": "psr/container",
@@ -2461,6 +2464,43 @@
                 "diff"
             ],
             "time": "2017-05-22T07:24:03+00:00"
+        },
+        {
+            "name": "slevomat/coding-standard",
+            "version": "3.0.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/slevomat/coding-standard.git",
+                "reference": "2775628a208f6dd03fbdb6d5f0aeff56aab201a2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/slevomat/coding-standard/zipball/2775628a208f6dd03fbdb6d5f0aeff56aab201a2",
+                "reference": "2775628a208f6dd03fbdb6d5f0aeff56aab201a2",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.0",
+                "squizlabs/php_codesniffer": "^3.0.1"
+            },
+            "require-dev": {
+                "jakub-onderka/php-parallel-lint": "0.9.2",
+                "phing/phing": "2.16",
+                "phpstan/phpstan": "0.7.0",
+                "phpunit/phpunit": "6.2.2"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "SlevomatCodingStandard\\": "SlevomatCodingStandard"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Slevomat Coding Standard for PHP_CodeSniffer extends Consistence Coding Standard by providing sniffs with additional checks.",
+            "time": "2017-07-24T10:42:15+00:00"
         },
         {
             "name": "squizlabs/php_codesniffer",
@@ -3298,54 +3338,6 @@
             "time": "2017-06-09T08:25:21+00:00"
         },
         {
-            "name": "symfony/polyfill-xml",
-            "version": "v1.4.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/symfony/polyfill-xml.git",
-                "reference": "89326af9d173053826ae8fe26a6f49597ba4e9f3"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-xml/zipball/89326af9d173053826ae8fe26a6f49597ba4e9f3",
-                "reference": "89326af9d173053826ae8fe26a6f49597ba4e9f3",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.3",
-                "symfony/polyfill-php72": "~1.4"
-            },
-            "type": "metapackage",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.4-dev"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Nicolas Grekas",
-                    "email": "p@tchwork.com"
-                },
-                {
-                    "name": "Symfony Community",
-                    "homepage": "https://symfony.com/contributors"
-                }
-            ],
-            "description": "Symfony polyfill for xml's utf8_encode and utf8_decode functions",
-            "homepage": "https://symfony.com",
-            "keywords": [
-                "compatibility",
-                "polyfill",
-                "portable",
-                "shim"
-            ],
-            "time": "2017-06-09T08:25:21+00:00"
-        },
-        {
             "name": "symfony/process",
             "version": "v3.3.5",
             "source": {
@@ -3499,26 +3491,71 @@
             "time": "2017-06-15T12:58:50+00:00"
         },
         {
-            "name": "symplify/easy-coding-standard",
-            "version": "v2.1.6",
+            "name": "symplify/coding-standard",
+            "version": "v2.2.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/Symplify/EasyCodingStandard.git",
-                "reference": "bd584bdc6fca4984e03657b9c0bb5420947d4857"
+                "url": "https://github.com/Symplify/CodingStandard.git",
+                "reference": "b0cb54c630f824b7e19d233b1a8e84e726acdf54"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Symplify/EasyCodingStandard/zipball/bd584bdc6fca4984e03657b9c0bb5420947d4857",
-                "reference": "bd584bdc6fca4984e03657b9c0bb5420947d4857",
+                "url": "https://api.github.com/repos/Symplify/CodingStandard/zipball/b0cb54c630f824b7e19d233b1a8e84e726acdf54",
+                "reference": "b0cb54c630f824b7e19d233b1a8e84e726acdf54",
                 "shasum": ""
             },
             "require": {
                 "friendsofphp/php-cs-fixer": "^2.3",
+                "nette/finder": "^2.4|^3.0",
+                "nette/utils": "^2.4|^3.0",
+                "nikic/php-parser": "^3.0",
+                "php": "^7.1",
+                "slevomat/coding-standard": "^3.0",
+                "squizlabs/php_codesniffer": "^3.0.1"
+            },
+            "require-dev": {
+                "gecko-packages/gecko-php-unit": "dev-master#b32f1d8 as 2.1",
+                "phpunit/phpunit": "^6.0",
+                "symplify/easy-coding-standard": "^2.1",
+                "symplify/package-builder": "^2.1"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Symplify\\CodingStandard\\": "src",
+                    "Symplify\\CodingStandard\\TokenWrapper\\": "packages/TokenWrapper/src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Set of Symplify rules for PHP_CodeSniffer.",
+            "time": "2017-07-25T23:13:45+00:00"
+        },
+        {
+            "name": "symplify/easy-coding-standard",
+            "version": "v2.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Symplify/EasyCodingStandard.git",
+                "reference": "b6482c52e93f839aa31a808d9c8227f93ba05d47"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Symplify/EasyCodingStandard/zipball/b6482c52e93f839aa31a808d9c8227f93ba05d47",
+                "reference": "b6482c52e93f839aa31a808d9c8227f93ba05d47",
+                "shasum": ""
+            },
+            "require": {
+                "friendsofphp/php-cs-fixer": "^2.4",
                 "nette/caching": "^2.4|^3.0",
                 "nette/neon": "^2.4|^3.0",
                 "nette/robot-loader": "^3.0.1",
                 "nette/utils": "^2.4|^3.0",
                 "php": "^7.1",
+                "sebastian/diff": "^1.4",
+                "slevomat/coding-standard": "^3.0.1",
                 "squizlabs/php_codesniffer": "^3.0.1",
                 "symfony/config": "^3.3",
                 "symfony/console": "^3.3",
@@ -3526,13 +3563,12 @@
                 "symfony/finder": "^3.3",
                 "symfony/http-kernel": "^3.3",
                 "symfony/yaml": "^3.3",
+                "symplify/coding-standard": "^2.1",
                 "symplify/package-builder": "^2.1",
                 "tracy/tracy": "^2.4|^3.0"
             },
             "require-dev": {
-                "phpunit/phpunit": "^6.0",
-                "slevomat/coding-standard": "^3.0",
-                "symplify/coding-standard": "^2.1"
+                "phpunit/phpunit": "^6.0"
             },
             "bin": [
                 "bin/easy-coding-standard",
@@ -3542,6 +3578,7 @@
             "autoload": {
                 "psr-4": {
                     "Symplify\\EasyCodingStandard\\": "src",
+                    "Symplify\\EasyCodingStandard\\CheckerSetExtractor\\": "packages/CheckerSetExtractor/src",
                     "Symplify\\EasyCodingStandard\\ChangedFilesDetector\\": "packages/ChangedFilesDetector/src",
                     "Symplify\\EasyCodingStandard\\Configuration\\": "packages/Configuration/src",
                     "Symplify\\EasyCodingStandard\\FixerRunner\\": "packages/FixerRunner/src",
@@ -3553,20 +3590,20 @@
                 "MIT"
             ],
             "description": "Use Coding Standard with 0-knowledge of PHP-CS-Fixer and PHP_CodeSniffer.",
-            "time": "2017-07-16T16:07:16+00:00"
+            "time": "2017-07-25T22:47:29+00:00"
         },
         {
             "name": "symplify/package-builder",
-            "version": "v2.1.6",
+            "version": "v2.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Symplify/PackageBuilder.git",
-                "reference": "b97907b99508b73f5083ff0b01efd6fb4b61d837"
+                "reference": "d6c3c3a4f8aa6966f42af98098e711b7b81aa439"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Symplify/PackageBuilder/zipball/b97907b99508b73f5083ff0b01efd6fb4b61d837",
-                "reference": "b97907b99508b73f5083ff0b01efd6fb4b61d837",
+                "url": "https://api.github.com/repos/Symplify/PackageBuilder/zipball/d6c3c3a4f8aa6966f42af98098e711b7b81aa439",
+                "reference": "d6c3c3a4f8aa6966f42af98098e711b7b81aa439",
                 "shasum": ""
             },
             "require": {
@@ -3595,7 +3632,7 @@
             "license": [
                 "MIT"
             ],
-            "time": "2017-07-16T16:07:16+00:00"
+            "time": "2017-07-25T22:47:29+00:00"
         }
     ],
     "aliases": [],
