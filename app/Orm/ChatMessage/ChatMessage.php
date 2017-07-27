@@ -17,7 +17,7 @@ namespace HeroesofAbenez\Orm;
  * @property string $whenS
  */
 class ChatMessage extends \Nextras\Orm\Entity\Entity {
-  protected function getterWhenS() {
+  protected function getterWhenS(): string {
     return $this->when->format("Y-m-d H:i:s");
   }
   

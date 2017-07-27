@@ -24,7 +24,7 @@ class Request extends \Nextras\Orm\Entity\Entity {
   const STATUS_ACCEPTED = "accepted";
   const STATUS_DECLINED = "declined";
   
-  protected function getterSentAt() {
+  protected function getterSentAt(): string {
     return $this->sent->format("Y-m-d H:i:s");
   }
   
