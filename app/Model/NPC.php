@@ -35,9 +35,8 @@ class NPC {
     $npc = $this->view($id);
     if(is_null($npc)) {
       return "";
-    } else {
-      return $npc->name;
     }
+    return $npc->name;
   }
 }
 ?>

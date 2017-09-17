@@ -67,9 +67,8 @@ class Skills {
       return NULL;
     }
     $row = $this->orm->characterAttackSkills->getByCharacterAndSkill($userId, $skillId);
-    if(is_null($row)) {
-      $level = 0;
-    } else {
+    $level = 0;
+    if($row) {
       $level = $row->level;
     }
     return new CharacterAttackSkillDummy($skill, $level);
@@ -107,9 +106,8 @@ class Skills {
       return NULL;
     }
     $row = $this->orm->characterSpecialSkills->getByCharacterAndSkill($userId, $skillId);
-    if(is_null($row)) {
-      $level = 0;
-    } else {
+    $level = 0;
+    if($row) {
       $level = $row->level;
     }
     return new CharacterSpecialSkillDummy($skill, $level);
@@ -230,9 +228,9 @@ class Skills {
         $this->orm->characterAttackSkills->attach($record);
         $record->character = $character;
         $record->skill = $id;
-      } else {
-        $record->level++;
+        $record->level = 0;
       }
+      $record->level++;
       $this->orm->characterAttackSkills->persistAndFlush($record);
     } elseif($type === "special") {
       $record = $this->orm->characterSpecialSkills->getByCharacterAndSkill($this->user->id, $id);
@@ -241,9 +239,9 @@ class Skills {
         $this->orm->characterSpecialSkills->attach($record);
         $record->character = $character;
         $record->skill = $id;
-      } else {
-        $record->level++;
+        $record->level = 0;
       }
+      $record->level++;
       $this->orm->characterSpecialSkills->persistAndFlush($record);
     }
   }

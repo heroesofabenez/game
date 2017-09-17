@@ -350,9 +350,8 @@ class CombatBase {
     }
     if($lowestIndex === -1) {
       return NULL;
-    } else {
-      return $team->aliveMembers[$lowestIndex];
     }
+    return $team->aliveMembers[$lowestIndex];
   }
   
   /**
@@ -507,10 +506,9 @@ class CombatBase {
     $hit_chance = $this->calculateHitChance($attacker, $defender);
     $roll = rand(0, 100);
     $result["result"] = ($roll <= $hit_chance);
+    $result["amount"] = 0;
     if($result["result"]) {
       $result["amount"] = $attacker->damage - $defender->defense;
-    } else {
-      $result["amount"] = 0;
     }
     if($result["amount"] < 0) {
       $result["amount"] = 0;
@@ -534,11 +532,10 @@ class CombatBase {
     $hit_chance = $this->calculateHitChance($attacker, $defender, $skill);
     $roll = rand(0, 100);
     $result["result"] = ($roll <= $hit_chance);
+    $result["amount"] = 0;
     if($result["result"]) {
       $result["amount"] = $attacker->damage - $defender->defense;
       $result["amount"] = (int) ($result["amount"] / 100 * $skill->damage);
-    } else {
-      $result["amount"] = 0;
     }
     if($defender->hitpoints - $result["amount"] < 0) {
       $result["amount"] = $defender->hitpoints;

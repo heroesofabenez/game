@@ -166,29 +166,27 @@ class Character {
       }
     }
     foreach($stats as $key => $value) {
-      if(in_array($key, $all_stats)) {
-        switch($key) {
-          case "name":
-            $this->$key = (string) $value;
-  break;
-          case "strength":
-          case "dexterity":
-          case "constitution":
-          case "intelligence":
-          case "charisma":
-            if(!is_numeric($value)) {
-              exit("Invalid value for \$stats[\"$key\"] passed to method Character::__construct. Expected integer.");
-            } else {
-              $this->$key = (int) $value;
-              $this->{$key . "Base"} = (int) $value;
-            }
-  break;
-          default:
-            $this->$key = $value;
-  break;
-        }
-      } else {
+      if(!in_array($key, $all_stats)) {
         continue;
+      }
+      switch($key) {
+        case "name":
+          $this->$key = (string) $value;
+          break;
+        case "strength":
+        case "dexterity":
+        case "constitution":
+        case "intelligence":
+        case "charisma":
+          if(!is_numeric($value)) {
+            exit("Invalid value for \$stats[\"$key\"] passed to method Character::__construct. Expected integer.");
+          }
+          $this->$key = (int) $value;
+          $this->{$key . "Base"} = (int) $value;
+          break;
+        default:
+          $this->$key = $value;
+          break;
       }
     }
     $this->hitpoints = $this->maxHitpoints = $this->constitution * 5;
@@ -392,9 +390,8 @@ class Character {
   public function getItem(int $itemId): Equipment {
     if(isset($this->equipment[$itemId])) {
       return $this->equipment[$itemId];
-    } else {
-      throw new OutOfBoundsException("Item was not found.");
     }
+    throw new OutOfBoundsException("Item was not found.");
   }
   
   /**
@@ -435,9 +432,8 @@ class Character {
   public function getPet(int $petId): Pet {
     if(isset($this->pets[$petId]) AND $this->pets[$petId] instanceof Pet) {
       return $this->pets[$petId];
-    } else {
-      throw new OutOfBoundsException("Pet was not found.");
     }
+    throw new OutOfBoundsException("Pet was not found.");
   }
   
   /**

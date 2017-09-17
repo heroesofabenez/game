@@ -33,9 +33,8 @@ class AuthorizatorFactory {
     $permissions = $this->model->getPermissions();
     
     foreach($roles as $i => $row) {
-      if($row["id"] == 1) {
-        $parent = "player";
-      } else {
+      $parent = "player";
+      if($row["id"] !== 1) {
         $parentRow = $roles[$i-1];
         $parent = $parentRow["name"];
       }

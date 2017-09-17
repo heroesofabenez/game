@@ -61,9 +61,8 @@ class Profile {
     $race = $this->getRace($id);
     if(is_null($race)) {
       return "";
-    } else {
-      return $race->name;
     }
+    return $race->name;
   }
   
   /**
@@ -89,9 +88,8 @@ class Profile {
     $class = $this->getClass($id);
     if(is_null($class)) {
       return "";
-    } else {
-      return $class->name;
     }
+    return $class->name;
   }
   
   /**
@@ -108,9 +106,8 @@ class Profile {
     $specialization = $this->getSpecialization($id);
     if(is_null($specialization)) {
       return "";
-    } else {
-      return $specialization->name;
     }
+    return $specialization->name;
   }
   
   /**
@@ -120,9 +117,8 @@ class Profile {
     $character = $this->orm->characters->getByName($name);
     if(is_null($character)) {
       return 0;
-    } else {
-      return $character->id;
     }
+    return $character->id;
   }
   
   /**
@@ -132,9 +128,8 @@ class Profile {
     $character = $this->orm->characters->getById($id);
     if(is_null($character)) {
       return "";
-    } else {
-      return $character->name;
     }
+    return $character->name;
   }
   
   /**
@@ -146,9 +141,8 @@ class Profile {
       return 0;
     } elseif(is_null($char->guild)) {
       return 0;
-    } else {
-      return $char->guild->id;
     }
+    return $char->guild->id;
   }
   
   /**
@@ -171,11 +165,10 @@ class Profile {
         $return[$stat] = $char->$stat;
       }
     }
+    $return["guild"] = "";
     if(!is_null($char->guild)) {
       $return["guild"] = $char->guild->id;
       $return["guildrank"] = ($char->guildrank) ? $char->guildrank->id : NULL;
-    } else {
-      $return["guild"] = "";
     }
     $return["pet"] = $this->petModel->getActivePet($id);
     return $return;

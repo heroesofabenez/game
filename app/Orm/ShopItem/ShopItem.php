@@ -18,9 +18,8 @@ class ShopItem extends \Nextras\Orm\Entity\Entity {
       return 0;
     } elseif($value > 99) {
       return 99;
-    } else {
-      return $value;
     }
+    return $value;
   }
 }
 ?>

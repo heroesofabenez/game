@@ -58,9 +58,8 @@ class Character extends \Nextras\Orm\Entity\Entity {
       return 1;
     } elseif($value > 999) {
       return 999;
-    } else {
-      return $value;
     }
+    return $value;
   }
   
   protected function onBeforeInsert() {

@@ -42,9 +42,8 @@ class Equipment extends \Nextras\Orm\Entity\Entity {
   protected function setterType(string $value): ?string {
     if($this->slot !== static::SLOT_WEAPON) {
       return NULL;
-    } else {
-      return $value;
     }
+    return $value;
   }
   
   protected function getterDeployParams(): array {

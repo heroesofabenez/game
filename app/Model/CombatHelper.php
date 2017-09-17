@@ -43,9 +43,8 @@ class CombatHelper {
     $class = $this->profileModel->getClass($classId);
     if(is_null($class)) {
       return "0";
-    } else {
-      return $class->initiative;
     }
+    return $class->initiative;
   }
   
   /**
@@ -159,9 +158,8 @@ class CombatHelper {
     $row = $this->orm->arenaFightsCount->getByCharacterAndDay($uid, date("d.m.Y"));
     if(is_null($row)) {
       return 0;
-    } else {
-      return $row->amount;
     }
+    return $row->amount;
   }
   
   /**
@@ -175,9 +173,9 @@ class CombatHelper {
       $this->orm->arenaFightsCount->attach($row);
       $row->character = $uid;
       $row->day = $day;
-    } else {
-      $row->amount++;
+      $row->amount = 0;
     }
+    $row->amount++;
     $this->orm->arenaFightsCount->persistAndFlush($row);
   }
 }

@@ -33,9 +33,8 @@ class Item {
     $item = $this->view($id);
     if(is_null($item)) {
       return "";
-    } else {
-      return $item->name;
     }
+    return $item->name;
   }
   
   /**
@@ -54,9 +53,8 @@ class Item {
       return false;
     } elseif($item->amount < $amount) {
       return false;
-    } else {
-      return true;
     }
+    return true;
   }
   
   /**
@@ -69,10 +67,9 @@ class Item {
       $this->orm->characterItems->attach($item);
       $item->character = $this->user->id;
       $item->item = $id;
-      $item->amount = $amount;
-    } else {
-      $item->amount += $amount;
+      $item->amount = 0;
     }
+    $item->amount += $amount;
     $this->orm->characterItems->persistAndFlush($item);
   }
   

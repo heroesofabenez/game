@@ -69,9 +69,8 @@ class Quest {
     $row = $this->orm->characterQuests->getByCharacterAndQuest($this->user->id, $id);
     if(is_null($row)) {
       return 0;
-    } else {
-      return $row->progress;
     }
+    return $row->progress;
   }
   
   /**

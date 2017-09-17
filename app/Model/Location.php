@@ -71,9 +71,8 @@ class Location {
     $stage = $this->getStage($id);
     if(is_null($stage)) {
       return "";
-    } else {
-      return $stage->name;
     }
+    return $stage->name;
   }
   
   /**
@@ -83,9 +82,8 @@ class Location {
     $area = $this->getArea($id);
     if(is_null($area)) {
       return "";
-    } else {
-      return $area->name;
     }
+    return $area->name;
   }
   
   /**

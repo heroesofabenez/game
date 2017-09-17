@@ -19,9 +19,8 @@ class Introduction extends \Nextras\Orm\Entity\Entity {
       return 1;
     } elseif($value > 9) {
       return 9;
-    } else {
-      return $value;
     }
+    return $value;
   }
 }
 ?>

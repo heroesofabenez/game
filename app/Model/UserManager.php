@@ -36,13 +36,12 @@ class UserManager implements NS\IAuthenticator {
    */
   protected function getRealId(): int {
     if(in_array($_SERVER["SERVER_NAME"], $this->devServers)) {
-      $uid = 1;
-    } else {
-      $ch = curl_init("http://heroesofabenez.tk/auth.php");
-      curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-      $uid = curl_exec($ch);
-      curl_close($ch);
+      return 1;
     }
+    $ch = curl_init("http://heroesofabenez.tk/auth.php");
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    $uid = curl_exec($ch);
+    curl_close($ch);
     return $uid;
   }
   
@@ -65,12 +64,11 @@ class UserManager implements NS\IAuthenticator {
       "level" => $char->level,  "stage" => $char->currentStage->id,
       "white_karma" => $char->whiteKarma, "neutral_karma" => $char->neutralKarma, "dark_karma" => $char->darkKarma
     ];
+    $data["guild"] = 0;
+    $role = "player";
     if(!is_null($char->guild)) {
       $data["guild"] = $char->guild->id;
       $role = $char->guildrank->name;
-    } else {
-      $data["guild"] = 0;
-      $role = "player";
     }
     return new NS\Identity($char->id, $role, $data);
   }

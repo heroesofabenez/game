@@ -44,9 +44,8 @@ class SkillSpecial extends \Nextras\Orm\Entity\Entity {
       return NULL;
     } elseif($this->type === static::TYPE_STUN) {
       return NULL;
-    } else {
-      return $value;
     }
+    return $value;
   }
 }
 ?>

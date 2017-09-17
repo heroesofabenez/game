@@ -25,9 +25,8 @@ class Item extends \Nextras\Orm\Entity\Entity {
       return 0;
     } elseif($value > 999) {
       return 999;
-    } else {
-      return $value;
     }
+    return $value;
   }
 }
 ?>

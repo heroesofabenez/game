@@ -44,9 +44,8 @@ abstract class BaseCharacterSkill {
       return "attack";
     } elseif($this->skill instanceof SkillSpecialDummy) {
       return "special";
-    } else {
-      return "";
     }
+    return "";
   }
   
   public function canUse(): bool {

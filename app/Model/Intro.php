@@ -45,9 +45,8 @@ class Intro {
     ]);
     if(is_null($intro)) {
       return "";
-    } else {
-      return $intro->text;
     }
+    return $intro->text;
   }
   
   /**

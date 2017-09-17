@@ -32,9 +32,8 @@ class NPCDialogueControl extends \Nette\Application\UI\Control {
    * @return string[]
    */
   public function getNames() {
-    if(is_null($this->npc)) {
-      $npcName = "";
-    } else {
+    $npcName = "";
+    if($this->npc) {
       $npcName = $this->npc->name;
     }
     $playerName = $this->user->identity->name;

@@ -33,9 +33,8 @@ class CharacterRace extends \Nextras\Orm\Entity\Entity {
       return 0;
     } elseif($value > static::MAX_STATS) {
       return static::MAX_STATS;
-    } else {
-      return $value;
     }
+    return $value;
   }
   
   protected function setterDexterity(int $value): int {
@@ -43,9 +42,8 @@ class CharacterRace extends \Nextras\Orm\Entity\Entity {
       return 0;
     } elseif($value > static::MAX_STATS) {
       return static::MAX_STATS;
-    } else {
-      return $value;
     }
+    return $value;
   }
   
   protected function setterConstitution(int $value): int {
@@ -53,9 +51,8 @@ class CharacterRace extends \Nextras\Orm\Entity\Entity {
       return 0;
     } elseif($value > static::MAX_STATS) {
       return static::MAX_STATS;
-    } else {
-      return $value;
     }
+    return $value;
   }
   
   protected function setterIntelligence(int $value): int {
@@ -63,9 +60,8 @@ class CharacterRace extends \Nextras\Orm\Entity\Entity {
       return 0;
     } elseif($value > static::MAX_STATS) {
       return static::MAX_STATS;
-    } else {
-      return $value;
     }
+    return $value;
   }
   
   protected function setterCharisma(int $value): int {
@@ -73,9 +69,8 @@ class CharacterRace extends \Nextras\Orm\Entity\Entity {
       return 0;
     } elseif($value > static::MAX_STATS) {
       return static::MAX_STATS;
-    } else {
-      return $value;
     }
+    return $value;
   }
 }
 ?>

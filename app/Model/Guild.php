@@ -40,9 +40,8 @@ class Guild {
     $guild = $this->view($id);
     if(is_null($guild)) {
       return "";
-    } else {
-      return $guild->name;
     }
+    return $guild->name;
   }
   
   /**
@@ -59,9 +58,8 @@ class Guild {
     $customRank = $this->orm->guildRanksCustom->getByGuildAndRank($guild, $rank);
     if(is_null($customRank)) {
       return "";
-    } else {
-      return $customRank->name;
     }
+    return $customRank->name;
   }
   
   /**
@@ -411,10 +409,8 @@ class Guild {
         $this->orm->guildRanksCustom->attach($row);
         $row->guild = $gid;
         $row->rank = $rank;
-        $row->name = $name;
-      } else {
-        $row->name = $name;
       }
+      $row->name = $name;
       $this->orm->guildRanksCustom->persistAndFlush($row);
     }
   }

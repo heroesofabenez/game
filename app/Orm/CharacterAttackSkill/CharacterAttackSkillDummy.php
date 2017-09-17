@@ -42,9 +42,8 @@ class CharacterAttackSkillDummy extends BaseCharacterSkill {
       return 100;
     } elseif(substr($this->skill->hitRate, -1) === "%") {
       return (int) $this->skill->hitRate;
-    } else {
-      return 100;
     }
+    return 100;
   }
 }
 ?>
