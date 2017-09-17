@@ -1,4 +1,4 @@
-image: nexendrie/php
+image: nexendrie/php:7.1
 
 stages:
   - test
@@ -32,3 +32,8 @@ test:cc:
     name: "Code coverage"
     paths:
     - coverage.html
+
+test:php7.2:
+  <<: *test_job
+  image: nexendrie/php:7.2
+  allow_failure: true
