@@ -22,6 +22,10 @@ final class QuestTest extends \Tester\TestCase {
     $quests = $this->model->listOfQuests();
     Assert::type("array", $quests);
     Assert::type(QuestEntity::class, $quests[1]);
+    $quests = $this->model->listOfQuests(1);
+    Assert::type("array", $quests);
+    Assert::type(QuestEntity::class, $quests[1]);
+    Assert::same(1, $quests[1]->npcStart);
   }
   
   public function testView() {

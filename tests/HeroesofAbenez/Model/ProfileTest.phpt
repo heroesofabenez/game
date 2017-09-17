@@ -27,8 +27,8 @@ final class ProfileTest extends \Tester\TestCase {
   }
   
   public function testGetRace() {
-    $result = $this->model->getRace(1);
-    Assert::type(CharacterRace::class, $result);
+    Assert::type(CharacterRace::class, $this->model->getRace(1));
+    Assert::null($this->model->getRace(5000));
   }
   
   public function testGetRaceName() {
@@ -42,8 +42,8 @@ final class ProfileTest extends \Tester\TestCase {
   }
   
   public function testGetClass() {
-    $result = $this->model->getClass(1);
-    Assert::type(CharacterClass::class, $result);
+    Assert::type(CharacterClass::class, $this->model->getClass(1));
+    Assert::null($this->model->getClass(5000));
   }
   
   public function testGetClassName() {
@@ -52,8 +52,8 @@ final class ProfileTest extends \Tester\TestCase {
   }
   
   public function testGetSpecialization() {
-    $result = $this->model->getSpecialization(1);
-    Assert::type(CharacterSpecialization::class, $result);
+    Assert::type(CharacterSpecialization::class, $this->model->getSpecialization(1));
+    Assert::null($this->model->getSpecialization(5000));
   }
   
   public function testGetSpecializationName() {

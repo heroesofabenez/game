@@ -19,8 +19,8 @@ final class EquipmentTest extends \Tester\TestCase {
   }
   
   public function testView() {
-    $item = $this->model->view(1);
-    Assert::type(EquipmentEntity::class, $item);
+    Assert::type(EquipmentEntity::class, $this->model->view(1));
+    Assert::null($this->model->view(5000));
   }
 }
 

@@ -21,12 +21,12 @@ final class ItemTest extends \Tester\TestCase {
   public function testView() {
     $item = $this->model->view(1);
     Assert::type(ItemEntity::class, $item);
+    Assert::null($this->model->view(5000));
   }
   
   public function testGetItemName() {
-    $actual = $this->model->getItemName(1);
-    $expected = "Book ABC";
-    Assert::type("string", $actual);
+    Assert::notSame("", $this->model->getItemName(1));
+    Assert::same("", $this->model->getItemName(5000));
   }
 }
 
