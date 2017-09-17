@@ -113,6 +113,7 @@ class NPCQuestsControl extends \Nette\Application\UI\Control {
   protected function isCompleted(QuestEntity $quest): bool {
     $haveMoney = $haveItem = false;
     if($quest->costMoney > 0) {
+      /** @var \HeroesofAbenez\Orm\Character $char */
       $char = $this->orm->characters->getById($this->user->id);
       if($char->money >= $quest->costMoney) {
         $haveMoney = true;
@@ -149,6 +150,7 @@ class NPCQuestsControl extends \Nette\Application\UI\Control {
       $this->presenter->flashMessage($this->translator->translate("errors.quest.requirementsNotMet"));
       $this->presenter->redirect("Homepage:default");
     }
+    /** @var CharacterQuest $record */
     $record = $this->orm->characterQuests->getByCharacterAndQuest($this->user->id, $questId);
     $record->progress = 3;
     if($quest->itemLose) {

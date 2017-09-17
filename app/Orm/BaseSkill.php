@@ -28,7 +28,7 @@ abstract class BaseSkill {
   protected $description;
   /** @var int */
   protected $neededClass;
-  /** @var int */
+  /** @var int|NULL */
   protected $neededSpecialization;
   /** @var int */
   protected $neededLevel;

@@ -33,8 +33,8 @@ use Nextras\Orm\Relationships\OneHasMany;
  * @property int|NULL $darkKarma {default 0}
  * @property int|NULL $intro {default 1}
  * @property \DateTime|NULL $joined
- * @property float|NULL $statPoints {default 0}
- * @property int|NULL $skillPoints {default 0}
+ * @property float $statPoints {default 0}
+ * @property int $skillPoints {default 0}
  * @property OneHasMany|Request[] $sentRequests {1:m Request::$from}
  * @property OneHasMany|Request[] $receivedRequests {1:m Request::$to}
  * @property OneHasMany|Message[] $sentMessages {1:m Message::$from}

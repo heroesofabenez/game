@@ -104,6 +104,7 @@ class Guild {
     foreach($data as $key => $value) {
       $guild->$key = $value;
     }
+    /** @var \HeroesofAbenez\Orm\Character $character */
     $character = $this->orm->characters->getById($this->user->id);
     $character->guild = $guild;
     $character->guildrank = 7;
@@ -151,8 +152,7 @@ class Guild {
    */
   public function showApplications(int $id): ICollection {
     $guild = $this->view($id);
-    $leaderId = $this->profileModel->getCharacterId($guild->leader->name);
-    return $this->orm->requests->findUnresolvedGuildApplications($leaderId);
+    return $this->orm->requests->findUnresolvedGuildApplications($guild->leader->id);
   }
   
   /**
@@ -282,7 +282,7 @@ class Guild {
     if(is_null($character)) {
       throw new PlayerNotFoundException;
     }
-    if($character->guild->id !== $admin->identity->guild) {
+    if(is_null($character->guild) OR $character->guild->id !== $admin->identity->guild) {
       throw new PlayerNotInGuildException;
     }
     $roles = $this->permissionsModel->getRoles();
@@ -312,6 +312,7 @@ class Guild {
     if($this->user->isInRole("grandmaster")) {
       throw new GrandmasterCannotLeaveGuildException;
     }
+    /** @var \HeroesofAbenez\Orm\Character $character */
     $character = $this->orm->characters->getById($this->user->id);
     $character->guild = $character->guildrank = NULL;
     $this->orm->characters->persistAndFlush($character);
@@ -364,6 +365,7 @@ class Guild {
    * Join a guild
    */
   public function join(int $uid, int $gid): void {
+    /** @var \HeroesofAbenez\Orm\Character $character */
     $character = $this->orm->characters->getById($uid);
     $character->guild = $gid;
     $character->guildrank = 1;

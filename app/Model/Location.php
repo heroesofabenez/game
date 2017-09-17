@@ -7,9 +7,7 @@ use HeroesofAbenez\Orm\Model as ORM,
     HeroesofAbenez\Orm\QuestStage,
     HeroesofAbenez\Orm\QuestArea,
     HeroesofAbenez\Orm\RoutesStage,
-    Nextras\Orm\Collection\ICollection,
-    HeroesofAbenez\Orm\CharacterRace,
-    HeroesofAbenez\Orm\CharacterClass;
+    Nextras\Orm\Collection\ICollection;
 
 /**
  * Location Model
@@ -99,16 +97,16 @@ class Location {
   public function accessibleStages(): array {
     $return = [];
     $stages = $this->orm->stages->findAll();
+    /** @var QuestStage $curr_stage */
     $curr_stage = $this->getStage($this->user->identity->stage);
-    /** @var QuestStage $stage */
     foreach($stages as $stage) {
       if($stage->area->id !== $curr_stage->area->id) {
         continue;
       } elseif($this->user->identity->level < $stage->requiredLevel) {
         continue;
-      } elseif(is_a($stage->requiredRace, CharacterRace::class) AND $stage->requiredRace->id != $this->user->identity->race) {
+      } elseif($stage->requiredRace AND $stage->requiredRace->id != $this->user->identity->race) {
         continue;
-      } elseif(is_a($stage->requiredOccupation, CharacterClass::class) AND $stage->requiredOccupation->id != $this->user->identity->occupation) {
+      } elseif($stage->requiredOccupation AND $stage->requiredOccupation->id != $this->user->identity->occupation) {
         continue;
       }
       $return[$stage->id] = $stage;
@@ -142,6 +140,7 @@ class Location {
     if(!$foundRoute) {
       throw new CannotTravelToStageException;
     }
+    /** @var \HeroesofAbenez\Orm\Character $character */
     $character = $this->orm->characters->getById($this->user->id);
     $character->currentStage = $id;
     $this->orm->characters->persistAndFlush($character);

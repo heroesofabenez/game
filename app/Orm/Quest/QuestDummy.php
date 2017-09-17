@@ -38,7 +38,7 @@ class QuestDummy {
   protected $endText;
   /** @var int */
   protected $costMoney = 0;
-  /** @var int */
+  /** @var int|NULL */
   protected $neededLevel = 0;
   /** @var int|NULL */
   protected $neededQuest = NULL;

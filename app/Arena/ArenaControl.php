@@ -87,6 +87,7 @@ abstract class ArenaControl extends \Nette\Application\UI\Control {
     $winner = $this->combat->execute();
     if($winner === 1) {
       $rewards = $this->calculateRewards($player, $opponent);
+      /** @var \HeroesofAbenez\Orm\Character $character */
       $character = $this->orm->characters->getById($this->user->id);
       $character->money += $rewards["money"];
       $character->experience += $rewards["experience"];

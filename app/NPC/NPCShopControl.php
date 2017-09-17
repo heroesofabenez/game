@@ -81,6 +81,7 @@ class NPCShopControl extends \Nette\Application\UI\Control {
       $this->presenter->flashMessage($this->translator->translate("errors.shop.cannotBuyHere"));
       return;
     }
+    /** @var \HeroesofAbenez\Orm\Character $character */
     $character = $this->orm->characters->getById($this->user->id);
     if($character->money < $item->price) {
       $this->presenter->flashMessage($this->translator->translate("errors.shop.notEnoughMoney"));

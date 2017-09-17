@@ -26,18 +26,21 @@ class Intro {
   /**
    * Check in which part of intro the player is
    */
-  public function getIntroPosition(): int {
-    return $this->orm->characters->getById($this->user->id)->intro;
+  public function getIntroPosition(): ?int {
+    /** @var \HeroesofAbenez\Orm\Character $character */
+    $character = $this->orm->characters->getById($this->user->id);
+    return $character->intro;
   }
   
   /**
    * Get a part of introduction
    */
   public function getIntroPart(int $part): string {
-    $char = $this->orm->characters->getById($this->user->id);
+    /** @var \HeroesofAbenez\Orm\Character $character */
+    $character = $this->orm->characters->getById($this->user->id);
     $intro = $this->orm->introduction->getBy([
-      "race" => $char->race->id,
-      "class" => $char->occupation->id,
+      "race" => $character->race->id,
+      "class" => $character->occupation->id,
       "part" => $part
     ]);
     if(is_null($intro)) {
@@ -51,6 +54,7 @@ class Intro {
    * Move onto next part of introduction
    */
   public function moveToNextPart(int $part): void {
+    /** @var \HeroesofAbenez\Orm\Character $character */
     $character = $this->orm->characters->getById($this->user->id);
     $character->intro = $part;
     $this->orm->characters->persistAndFlush($character);
@@ -75,6 +79,7 @@ class Intro {
    */
   public function endIntro(): void {
     $startingLocation = $this->getStartingLocation();
+    /** @var \HeroesofAbenez\Orm\Character $character */
     $character = $this->orm->characters->getById($this->user->id);
     $character->currentStage = $startingLocation;
     $this->orm->characters->persistAndFlush($character);

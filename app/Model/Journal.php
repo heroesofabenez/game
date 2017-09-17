@@ -45,6 +45,7 @@ class Journal {
    * Gets basic info for character's journal
    */
   public function basic(): array {
+    /** @var \HeroesofAbenez\Orm\Character $character */
     $character = $this->orm->characters->getById($this->user->id);
     $stage = $character->currentStage;
     $return = [
@@ -70,14 +71,15 @@ class Journal {
    */
   public function inventory(): array {
     $return = [];
-    $char = $this->orm->characters->getById($this->user->id);
-    $return["money"] = $char->money;
+    /** @var \HeroesofAbenez\Orm\Character $character */
+    $character = $this->orm->characters->getById($this->user->id);
+    $return["money"] = $character->money;
     $return["items"] = [];
-    foreach($char->items as $item) {
+    foreach($character->items as $item) {
       $return["items"][] = (object) ["id" => $item->item->id, "name" => $item->item->name, "amount" => $item->amount];
     }
     $return["equipments"] = [];
-    foreach($char->equipment as $equipment) {
+    foreach($character->equipment as $equipment) {
       $i = $equipment->item;
       $return["equipments"][] = (object) ["id" => $i->id, "name" => $i->name, "amount" => $equipment->amount, "worn" => $equipment->worn, "eqid" => $equipment->id];
     }

@@ -120,7 +120,7 @@ class Profile {
     $character = $this->orm->characters->getByName($name);
     if(is_null($character)) {
       return 0;
-    }else {
+    } else {
       return $character->id;
     }
   }
@@ -200,6 +200,7 @@ class Profile {
    * @throws NotEnoughExperiencesException
    */
   public function levelUp(): void {
+    /** @var \HeroesofAbenez\Orm\Character $character */
     $character = $this->orm->characters->getById($this->user->id);
     if($character->experience < $this->getLevelsRequirements()[$character->level + 1]) {
       throw new NotEnoughExperiencesException;
@@ -225,7 +226,9 @@ class Profile {
    * Get amount of user's usable stat points
    */
   public function getStatPoints(): int {
-    return (int) $this->orm->characters->getById($this->user->id)->statPoints;
+    /** @var \HeroesofAbenez\Orm\Character $character */
+    $character = $this->orm->characters->getById($this->user->id);
+    return (int) $character->statPoints;
   }
   
   /**
@@ -255,6 +258,7 @@ class Profile {
     } elseif($this->getStatPoints() < 1) {
       throw new NoStatPointsAvailableException;
     }
+    /** @var \HeroesofAbenez\Orm\Character $character */
     $character = $this->orm->characters->getById($this->user->id);
     $character->{$stat}++;
     $character->statPoints--;

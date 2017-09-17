@@ -25,6 +25,7 @@ class GuildDescriptionFormFactory extends BaseFormFactory {
   
   public function create(): Form {
     $form = parent::createBase();
+    /** @var \HeroesofAbenez\Orm\Guild $guild */
     $guild = $this->model->view($this->user->identity->guild);
     $form->addTextArea("description", "forms.guildDescription.descriptionField.label")
       ->setDefaultValue($guild->description);

@@ -79,6 +79,7 @@ class CombatHelper {
       if(!$row->worn) {
         continue;
       }
+      /** @var \HeroesofAbenez\Orm\Equipment $item */
       $item = $this->equipmentModel->view($row->item->id);
       $item->worn = true;
     }

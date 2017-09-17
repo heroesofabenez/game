@@ -25,10 +25,11 @@ class NpcPresenter extends BasePresenter {
   public function startup(): void {
     parent::startup();
     if($this->action != "default" AND !in_array($this->action, ["notfound", "unavailable"])) {
-      $this->npc = $this->model->view((int) $this->params["id"]);
-      if(is_null($this->npc)) {
+      $npc = $this->model->view((int) $this->params["id"]);
+      if(is_null($npc)) {
         $this->forward("notfound");
       }
+      $this->npc = $npc;
       if($this->npc->stage->id !== $this->user->identity->stage) {
         $this->forward("unavailable");
       }

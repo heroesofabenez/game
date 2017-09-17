@@ -121,18 +121,19 @@ class Skills {
   public function getAvailableSkills(): array {
     $return = [];
     $skills = array_merge($this->getListOfAttackSkills(), $this->getListOfSpecialSkills());
-    $char = $this->orm->characters->getById($this->user->id);
+    /** @var \HeroesofAbenez\Orm\Character $character */
+    $character = $this->orm->characters->getById($this->user->id);
     /** @var BaseSkill $skill */
     foreach($skills as $skill) {
-      if($skill->neededClass != $char->occupation->id) {
+      if($skill->neededClass != $character->occupation->id) {
         continue;
       } elseif($skill->neededSpecialization) {
-        if(is_null($char->specialization)) {
+        if(is_null($character->specialization)) {
           continue;
-        } elseif($skill->neededSpecialization != $char->specialization) {
+        } elseif($skill->neededSpecialization != $character->specialization) {
           continue;
         }
-      } elseif($skill->neededLevel > $char->level) {
+      } elseif($skill->neededLevel > $character->level) {
         continue;
       }
       if($skill instanceof SkillAttackDummy) {
@@ -150,18 +151,19 @@ class Skills {
   public function getPlayerSkills(int $uid): array {
     $return = [];
     $skills = array_merge($this->getListOfAttackSkills(), $this->getListOfSpecialSkills());
-    $char = $this->orm->characters->getById($this->user->id);
+    /** @var \HeroesofAbenez\Orm\Character $character */
+    $character = $this->orm->characters->getById($this->user->id);
     /** @var BaseSkill $skill */
     foreach($skills as $skill) {
-      if($skill->neededClass != $char->occupation->id) {
+      if($skill->neededClass != $character->occupation->id) {
         continue;
       } elseif($skill->neededSpecialization) {
-        if(is_null($char->specialization)) {
+        if(is_null($character->specialization)) {
           continue;
-        } elseif($skill->neededSpecialization != $char->specialization) {
+        } elseif($skill->neededSpecialization != $character->specialization) {
           continue;
         }
-      } elseif($skill->neededLevel > $char->level) {
+      } elseif($skill->neededLevel > $character->level) {
         continue;
       }
       if($skill instanceof SkillAttackDummy) {
@@ -180,7 +182,9 @@ class Skills {
    * Get amount of user's usable skill points
    */
   public function getSkillPoints(): int {
-    return $this->orm->characters->getById($this->user->id)->skillPoints;
+    /** @var \HeroesofAbenez\Orm\Character $character */
+    $character = $this->orm->characters->getById($this->user->id);
+    return $character->skillPoints;
   }
   
   /**
@@ -205,19 +209,19 @@ class Skills {
     } elseif($skill->level +1 > $skill->skill->levels) {
       throw new SkillMaxLevelReachedException;
     }
-    $char = $this->orm->characters->getById($this->user->id);
-    if($skill->skill->needed_class != $char->occupation->id) {
+    /** @var \HeroesofAbenez\Orm\Character $character */
+    $character = $this->orm->characters->getById($this->user->id);
+    if($skill->skill->needed_class != $character->occupation->id) {
       throw new CannotLearnSkillException;
     } elseif($skill->skill->needed_specialization) {
-      if(is_null($char->specialization)) {
+      if(is_null($character->specialization)) {
         throw new CannotLearnSkillException;
-      } elseif($skill->skill->needed_specialization != $char->specialization->id) {
+      } elseif($skill->skill->needed_specialization != $character->specialization->id) {
         throw new CannotLearnSkillException;
       }
-    } elseif($skill->skill->needed_level > $char->level) {
+    } elseif($skill->skill->needed_level > $character->level) {
       throw new CannotLearnSkillException;
     }
-    $character = $this->orm->characters->getById($this->user->id);
     $character->skillPoints--;
     if($type === "attack") {
       $record = $this->orm->characterAttackSkills->getByCharacterAndSkill($this->user->id, $id);
