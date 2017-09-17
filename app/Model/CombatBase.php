@@ -42,7 +42,7 @@ class CombatBase {
   /** @var int Number of current round */
   protected $round = 0;
   /** @var int Round limit */
-  protected $round_limit = 30;
+  protected $roundLimit = 30;
   /** @var array Dealt damage by team */
   protected $damage = [1 => 0, 2 => 0];
   /** @var array Tasks to do at the start of the combat */
@@ -125,13 +125,13 @@ class CombatBase {
    */
   public function victoryConditionMoreDamage(CombatBase $combat): int {
     $result = 0;
-    if($combat->round <= $combat->round_limit) {
+    if($combat->round <= $combat->roundLimit) {
       if(!$combat->team1->hasAliveMembers()) {
         $result = 2;
       } elseif(!$combat->team2->hasAliveMembers()) {
         $result = 1;
       }
-    } elseif($combat->round > $combat->round_limit) {
+    } elseif($combat->round > $combat->roundLimit) {
       $result = ($combat->damage[1] > $combat->damage[2]) ? 1 : 2;
     }
     return $result;
@@ -143,13 +143,13 @@ class CombatBase {
    */
   public function victoryConditionEliminateSecondTeam(CombatBase $combat): int {
     $result = 0;
-    if($combat->round <= $combat->round_limit) {
+    if($combat->round <= $combat->roundLimit) {
       if(!$combat->team1->hasAliveMembers()) {
         $result = 2;
       } elseif(!$combat->team2->hasAliveMembers()) {
         $result = 1;
       }
-    } elseif($combat->round > $combat->round_limit) {
+    } elseif($combat->round > $combat->roundLimit) {
       $result = (!$combat->team2->hasAliveMembers()) ? 1 : 2;
     }
     return $result;
@@ -161,13 +161,13 @@ class CombatBase {
    */
   public function victoryConditionFirstTeamSurvives(CombatBase $combat): int {
     $result = 0;
-    if($combat->round <= $combat->round_limit) {
+    if($combat->round <= $combat->roundLimit) {
       if(!$combat->team1->hasAliveMembers()) {
         $result = 2;
       } elseif(!$combat->team2->hasAliveMembers()) {
         $result = 1;
       }
-    } elseif($combat->round > $combat->round_limit) {
+    } elseif($combat->round > $combat->roundLimit) {
       $result = ($combat->team1->hasAliveMembers()) ? 1 : 2;
     }
     return $result;
@@ -467,7 +467,7 @@ class CombatBase {
       throw new InvalidStateException("Teams are not set.");
     }
     $this->onCombatStart();
-    while($this->round <= $this->round_limit) {
+    while($this->round <= $this->roundLimit) {
       if($this->startRound() > 0) {
         break;
       }
