@@ -14,7 +14,7 @@ $connection = new Nextras\Dbal\Connection($config["dbal"]);
 $sqlsFolder = __DIR__ . "/../app/sqls";
 $files = ["structure", "data_basic", "data_test"];
 foreach($files as $file) {
-  echo "Executing file: $file.sql";
+  echo "Executing file: $file.sql ... ";
   Tracy\Debugger::timer($file);
   FileImporter::executeFile($connection, "$sqlsFolder/$file.sql");
   $time = round(Tracy\Debugger::timer($file), 2);
