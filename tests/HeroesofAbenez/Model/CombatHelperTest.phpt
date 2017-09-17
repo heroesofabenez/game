@@ -26,9 +26,8 @@ class CombatHelperTest extends \Tester\TestCase {
   }
   
   public function testGetInitiativeFormula() {
-    $result = $this->model->getInitiativeFormula(1);
-    Assert::type("string", $result);
-    Assert::true((strlen($result) > 1));
+    Assert::notSame("0", $this->model->getInitiativeFormula(1));
+    Assert::same("0", $this->model->getInitiativeFormula(5000));
   }
   
   public function testGetPlayer() {
@@ -37,6 +36,9 @@ class CombatHelperTest extends \Tester\TestCase {
     Assert::count(1, $player->pets);
     Assert::count(0, $player->equipment);
     Assert::count(1, $player->skills);
+    Assert::exception(function() {
+      $this->model->getPlayer(5000);
+    }, OpponentNotFoundException::class);
   }
   
   public function testGetArenaNpc() {
@@ -44,6 +46,9 @@ class CombatHelperTest extends \Tester\TestCase {
     Assert::type(Character::class, $player);
     Assert::count(0, $player->pets);
     Assert::count(1, $player->skills);
+    Assert::exception(function() {
+      $this->model->getArenaNpc(5000);
+    }, OpponentNotFoundException::class);
   }
   
   public function testGetNumberOfTodayArenaFights() {

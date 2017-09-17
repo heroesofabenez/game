@@ -36,25 +36,13 @@ class LocationTest extends \Tester\TestCase {
   }
   
   public function testGetStageName() {
-    $name = $this->model->getStageName(1);
-    Assert::type("string", $name);
+    Assert::notSame("", $this->model->getStageName(1));
+    Assert::same("", $this->model->getStageName(5000));
   }
   
-  /**
-   * @return int[]
-   */
-  public function getAreaIds(): array {
-    return [
-      [0, 1,]
-    ];
-  }
-  
-  /**
-   * @dataProvider getAreaIds
-   */
-  public function testGetAreaName(int $id) {
-    $name = $this->model->getAreaName($id);
-    Assert::type("string", $name);
+  public function testGetAreaName() {
+    Assert::notSame("", $this->model->getAreaName(1));
+    Assert::same("", $this->model->getAreaName(5000));
   }
 }
 

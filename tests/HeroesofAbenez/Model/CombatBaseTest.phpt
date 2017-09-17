@@ -5,7 +5,8 @@ namespace HeroesofAbenez\Model;
 
 use Tester\Assert,
     HeroesofAbenez\Entities\Character,
-    HeroesofAbenez\Entities\Team;
+    HeroesofAbenez\Entities\Team,
+    HeroesofAbenez\Utils\InvalidStateException;
 
 require __DIR__ . "/../../bootstrap.php";
 
@@ -20,6 +21,17 @@ class CombatBaseTest extends \Tester\TestCase {
   public function setUp() {
     $this->logger = $this->getService(CombatLogger::class);
     $this->helper = $this->getService(CombatHelper::class);
+  }
+  
+  public function testInvalidStates() {
+    $combat = new CombatBase(clone $this->logger);
+    Assert::exception(function() use($combat) {
+      $combat->execute();
+    }, InvalidStateException::class);
+    $combat->setTeams(new Team(""), new Team(""));
+    Assert::exception(function() use($combat) {
+      $combat->setTeams(new Team(""), new Team(""));
+    }, ImmutableException::class);
   }
   
   public function testPostCombat() {

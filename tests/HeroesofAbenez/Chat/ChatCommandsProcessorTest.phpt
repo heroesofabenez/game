@@ -38,12 +38,21 @@ class ChatCommandsProcessorTest extends \Tester\TestCase {
     $model = clone $this->model;
     $model->addCommand(new Test2Command);
     Assert::same("test", $model->parse("/" . Test2Command::NAME));
+    Assert::exception(function() use($model) {
+      $model->addCommand(new Test2Command);
+    }, CommandNameAlreadyUsedException::class);
   }
   
   public function testAddAlias() {
     $model = clone $this->model;
     $model->addAlias(self::COMMAND_NAME, "test");
     Assert::same("passed", $model->parse("/test"));
+    Assert::exception(function() use($model) {
+      $model->addAlias("abc", "test");
+    }, CommandNotFoundException::class);
+    Assert::exception(function() use($model) {
+      $model->addAlias(self::COMMAND_NAME, "test");
+    }, CommandNameAlreadyUsedException::class);
   }
   
   public function testExtractCommand() {
@@ -79,6 +88,13 @@ class ChatCommandsProcessorTest extends \Tester\TestCase {
   public function testHasCommand() {
     Assert::false($this->model->hasCommand("anagfdffd"));
     Assert::true($this->model->hasCommand(self::COMMAND_NAME));
+  }
+  
+  public function testGetCommand() {
+    Assert::type(ChatCommand::class, $this->model->getCommand(self::COMMAND_NAME));
+    Assert::exception(function() {
+      $this->model->getCommand("abc");
+    }, CommandNotFoundException::class);
   }
   
   public function testParse() {

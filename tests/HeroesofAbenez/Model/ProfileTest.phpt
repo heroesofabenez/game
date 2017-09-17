@@ -21,26 +21,6 @@ class ProfileTest extends \Tester\TestCase {
     $this->model = $this->getService(Profile::class);
   }
   
-  public function testIds() {
-    $expected = 0;
-    $actual = $this->model->getCharacterId("abc");
-    Assert::same($expected, $actual);
-    unset($expected, $actual);
-    $expected = 1;
-    $actual = $this->model->getCharacterGuild(1);
-    Assert::same($expected, $actual);
-  }
-  
-  public function testView() {
-    $result = $this->model->view(1);
-    Assert::type("array", $result);
-    Assert::count(16, $result);
-    Assert::same("male", $result["gender"]);
-    Assert::type("int", $result["guild"]);
-    Assert::null($result["specialization"]);
-    Assert::type(\HeroesofAbenez\Orm\Pet::class, $result["pet"]);
-  }
-  
   public function testGetRacesList() {
     $list = $this->model->getRacesList();
     Assert::type(ICollection::class, $list);
@@ -52,8 +32,8 @@ class ProfileTest extends \Tester\TestCase {
   }
   
   public function testGetRaceName() {
-    $result = $this->model->getRaceName(1);
-    Assert::type("string", $result);
+    Assert::notSame("", $this->model->getRaceName(1));
+    Assert::same("", $this->model->getRaceName(5000));
   }
   
   public function testGetClassesList() {
@@ -67,8 +47,8 @@ class ProfileTest extends \Tester\TestCase {
   }
   
   public function testGetClassName() {
-    $result = $this->model->getClassName(1);
-    Assert::type("string", $result);
+    Assert::notSame("", $this->model->getClassName(1));
+    Assert::same("", $this->model->getClassName(5000));
   }
   
   public function testGetSpecialization() {
@@ -77,8 +57,34 @@ class ProfileTest extends \Tester\TestCase {
   }
   
   public function testGetSpecializationName() {
-    $result = $this->model->getSpecializationName(1);
-    Assert::type("string", $result);
+    Assert::notSame("", $this->model->getSpecializationName(1));
+    Assert::same("", $this->model->getSpecializationName(5000));
+  }
+  
+  public function testGetCharacterId() {
+    Assert::same(0, $this->model->getCharacterId("abc"));
+    Assert::same(1, $this->model->getCharacterId("James The Invisible"));
+  }
+  
+  public function testGetCharacterName() {
+    Assert::same("", $this->model->getCharacterName(0));
+    Assert::same("James The Invisible", $this->model->getCharacterName(1));
+  }
+  
+  public function testGetCharacterGuild() {
+    Assert::same(0, $this->model->getCharacterGuild(0));
+    Assert::same(1, $this->model->getCharacterGuild(1));
+  }
+  
+  public function testView() {
+    Assert::null($this->model->view(5000));
+    $result = $this->model->view(1);
+    Assert::type("array", $result);
+    Assert::count(16, $result);
+    Assert::same("male", $result["gender"]);
+    Assert::type("int", $result["guild"]);
+    Assert::null($result["specialization"]);
+    Assert::type(\HeroesofAbenez\Orm\Pet::class, $result["pet"]);
   }
   
   public function testGetStats() {

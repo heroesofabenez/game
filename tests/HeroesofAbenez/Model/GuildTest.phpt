@@ -4,7 +4,8 @@ declare(strict_types=1);
 namespace HeroesofAbenez\Model;
 
 use Tester\Assert,
-    HeroesofAbenez\Orm\Guild as GuildEntity;
+    HeroesofAbenez\Orm\Guild as GuildEntity,
+    Nextras\Orm\Collection\ICollection;
 
 require __DIR__ . "/../../bootstrap.php";
 
@@ -18,7 +19,13 @@ class GuildTest extends \Tester\TestCase {
     $this->model = $this->getService(Guild::class);
   }
   
+  public function testGetGuildName() {
+    Assert::same("", $this->model->getGuildName(5000));
+    Assert::notSame("", $this->model->getGuildName(1));
+  }
+  
   public function testView() {
+    Assert::null($this->model->view(5000));
     $guild = $this->model->view(1);
     Assert::type(GuildEntity::class, $guild);
     Assert::same("Dawn", $guild->name);
@@ -65,6 +72,12 @@ class GuildTest extends \Tester\TestCase {
     } else {
       Assert::same("", $members[0]->customRankName);
     }
+  }
+  
+  public function testListOfGuilds() {
+    $guilds = $this->model->listOfGuilds();
+    Assert::type(ICollection::class, $guilds);
+    Assert::count(3, $guilds);
   }
   
   public function testGetDefaultRankNames() {
