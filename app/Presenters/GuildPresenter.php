@@ -36,7 +36,7 @@ class GuildPresenter extends BasePresenter {
   /**
    * Redirect player to guild page if he is already in guild
    */
-  public function inGuild(): void {
+  protected function inGuild(): void {
     $guild = $this->user->identity->guild;
     if($guild > 0) {
       $this->flashMessage($this->translator->translate("errors.guild.inGuild"));
@@ -47,9 +47,9 @@ class GuildPresenter extends BasePresenter {
   /**
    * Redirect player to noguild if he is not in guild
    * 
-   * @param bool $warning Whetever to print a warning (via flash message)
+   * @param bool $warning Whatever to print a warning (via flash message)
   */
-  public function notInGuild(bool $warning = true): void {
+  protected function notInGuild(bool $warning = true): void {
     $guild = $this->user->identity->guild;
     if($guild == 0) {
       if($warning) {
