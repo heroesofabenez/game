@@ -10,7 +10,7 @@ use Tester\Assert,
 
 require __DIR__ . "/../../bootstrap.php";
 
-class CombatBaseTest extends \Tester\TestCase {
+final class CombatBaseTest extends \Tester\TestCase {
   /** @var CombatLogger */
   protected $logger;
   /** @var CombatHelper */

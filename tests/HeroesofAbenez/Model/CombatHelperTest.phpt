@@ -9,7 +9,7 @@ use Tester\Assert,
 
 require __DIR__ . "/../../bootstrap.php";
 
-class CombatHelperTest extends \Tester\TestCase {
+final class CombatHelperTest extends \Tester\TestCase {
   /** @var CombatHelper */
   protected $model;
   /** @var \Nette\Security\User */

@@ -9,7 +9,7 @@ use Tester\Assert,
 
 require __DIR__ . "/../../bootstrap.php";
 
-class PetTest extends \Tester\TestCase {
+final class PetTest extends \Tester\TestCase {
   /** @var Pet */
   protected $model;
   

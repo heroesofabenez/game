@@ -7,7 +7,7 @@ use Tester\Assert;
 
 require __DIR__ . "/../../bootstrap.php";
 
-class PermissionsTest extends \Tester\TestCase {
+final class PermissionsTest extends \Tester\TestCase {
   /** @var Permissions */
   protected $model;
   

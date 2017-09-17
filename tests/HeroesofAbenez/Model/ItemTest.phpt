@@ -8,7 +8,7 @@ use Tester\Assert,
 
 require __DIR__ . "/../../bootstrap.php";
 
-class ItemTest extends \Tester\TestCase {
+final class ItemTest extends \Tester\TestCase {
   /** @var Item */
   protected $model;
   

@@ -5,7 +5,7 @@ namespace HeroesofAbenez\Presenters;
 
 require __DIR__ . "/../../bootstrap.php";
 
-class PostofficePresenterTest extends \Tester\TestCase {
+final class PostofficePresenterTest extends \Tester\TestCase {
   use TPresenter;
   
   public function testReceived() {

@@ -5,7 +5,7 @@ namespace HeroesofAbenez\Presenters;
 
 require __DIR__ . "/../../bootstrap.php";
 
-class JournalPresenterTest extends \Tester\TestCase {
+final class JournalPresenterTest extends \Tester\TestCase {
   use TPresenter;
   
   public function testDefault() {

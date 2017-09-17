@@ -5,7 +5,7 @@ namespace HeroesofAbenez\Presenters;
 
 require __DIR__ . "/../../bootstrap.php";
 
-class RankingPresenterTest extends \Tester\TestCase {
+final class RankingPresenterTest extends \Tester\TestCase {
   use TPresenter;
   
   public function testCharacters() {

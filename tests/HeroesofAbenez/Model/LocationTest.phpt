@@ -10,7 +10,7 @@ use Tester\Assert,
 
 require __DIR__ . "/../../bootstrap.php";
 
-class LocationTest extends \Tester\TestCase {
+final class LocationTest extends \Tester\TestCase {
   /** @var Location */
   protected $model;
   

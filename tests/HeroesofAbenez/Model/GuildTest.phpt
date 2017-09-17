@@ -9,7 +9,7 @@ use Tester\Assert,
 
 require __DIR__ . "/../../bootstrap.php";
 
-class GuildTest extends \Tester\TestCase {
+final class GuildTest extends \Tester\TestCase {
   /** @var Guild */
   protected $model;
   
