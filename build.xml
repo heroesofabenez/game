@@ -33,6 +33,8 @@
       <arg path="vendor"/>
       <arg value="--exclude"/>
       <arg path="temp"/>
+      <arg value="--exclude"/>
+      <arg path="tests/_temp"/>
     </exec>
   </target>
   <target name="cs" description="Coding standards compliance">
