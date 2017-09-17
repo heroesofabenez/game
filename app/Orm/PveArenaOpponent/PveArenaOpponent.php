@@ -21,8 +21,8 @@ namespace HeroesofAbenez\Orm;
  * @property Equipment|NULL $weapon {m:1 Equipment::$arenaNpcs}
  */
 class PveArenaOpponent extends \Nextras\Orm\Entity\Entity {
-  const GENDER_MALE = "male";
-  const GENDER_FEMALE = "female";
+  public const GENDER_MALE = "male";
+  public const GENDER_FEMALE = "female";
   
   protected function setterLevel(int $value): int {
     if($value < 1) {

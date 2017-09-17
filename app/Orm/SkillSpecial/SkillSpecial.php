@@ -25,19 +25,19 @@ use Nextras\Orm\Relationships\OneHasMany;
  * @property OneHasMany|CharacterSpecialSkill[] $characterSkills {1:m CharacterSpecialSkill::$skill}
  */
 class SkillSpecial extends \Nextras\Orm\Entity\Entity {
-  const TYPE_BUFF = "buff";
-  const TYPE_DEBUFF = "debuff";
-  const TYPE_STUN = "stun";
-  const TARGET_SELF = "self";
-  const TARGET_ENEMY = "enemy";
-  const TARGET_PARTY = "party";
-  const TARGET_ENEMY_PARTY = "enemy_party";
-  const STAT_HP = "hp";
-  const STAT_DAMAGE = "damage";
-  const STAT_DEFENSE = "defense";
-  const STAT_HIT = "hit";
-  const STAT_DODGE = "dodge";
-  const STAT_INITIATIVE = "initiative";
+  public const TYPE_BUFF = "buff";
+  public const TYPE_DEBUFF = "debuff";
+  public const TYPE_STUN = "stun";
+  public const TARGET_SELF = "self";
+  public const TARGET_ENEMY = "enemy";
+  public const TARGET_PARTY = "party";
+  public const TARGET_ENEMY_PARTY = "enemy_party";
+  public const STAT_HP = "hp";
+  public const STAT_DAMAGE = "damage";
+  public const STAT_DEFENSE = "defense";
+  public const STAT_HIT = "hit";
+  public const STAT_DODGE = "dodge";
+  public const STAT_INITIATIVE = "initiative";
   
   protected function setterStat(?string $value): ?string {
     if(is_null($value)) {

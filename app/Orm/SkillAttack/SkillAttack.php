@@ -24,9 +24,9 @@ use Nextras\Orm\Relationships\OneHasMany;
  * @property OneHasMany|CharacterAttackSkill[] $characterSkills {1:m CharacterAttackSkill::$skill}
  */
 class SkillAttack extends \Nextras\Orm\Entity\Entity {
-  const TARGET_SINGLE = "single";
-  const TARGET_ROW = "row";
-  const TARGET_COLUMN = "column";
+  public const TARGET_SINGLE = "single";
+  public const TARGET_ROW = "row";
+  public const TARGET_COLUMN = "column";
   
   protected function setterStrikes(int $value): int {
     if($value < 1) {

@@ -21,10 +21,10 @@ use Nextras\Orm\Relationships\OneHasMany;
  * @property OneHasMany|Pet[] $pets {1:m Pet::$type}
  */
 class PetType extends \Nextras\Orm\Entity\Entity {
-  const STAT_STR = "str";
-  const STAT_DEX = "dex";
-  const STAT_CON = "con";
-  const STAT_INT = "int";
+  public const STAT_STR = "str";
+  public const STAT_DEX = "dex";
+  public const STAT_CON = "con";
+  public const STAT_INT = "int";
   
   protected function setterBonusValue(int $value): int {
     if($value < 0) {

@@ -50,8 +50,8 @@ use Nextras\Orm\Relationships\OneHasMany;
  * @property OneHasMany|CharacterSpecialSkill $specialSkills {1:m CharacterSpecialSkill::$character}
  */
 class Character extends \Nextras\Orm\Entity\Entity {
-  const GENDER_MALE = "male";
-  const GENDER_FEMALE = "female";
+  public const GENDER_MALE = "male";
+  public const GENDER_FEMALE = "female";
   
   protected function setterLevel(int $value): int {
     if($value < 1) {

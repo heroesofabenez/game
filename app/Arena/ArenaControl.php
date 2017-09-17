@@ -19,7 +19,7 @@ use Nette\Security\User,
  * @author Jakub Konečný
  */
 abstract class ArenaControl extends \Nette\Application\UI\Control {
-  const DAILY_FIGHTS_LIMIT = 10;
+  protected const DAILY_FIGHTS_LIMIT = 10;
   
   /** @var User */
   protected $user;

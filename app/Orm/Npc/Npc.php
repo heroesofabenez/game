@@ -24,9 +24,9 @@ use Nextras\Orm\Relationships\OneHasMany;
  * @property OneHasMany|Quest $endQuests {1:m Quest::$npcEnd}
  */
 class Npc extends \Nextras\Orm\Entity\Entity {
-  const TYPE_QUEST = "quest";
-  const TYPE_SHOP = "shop";
-  const TYPE_COMMON = "common";
-  const TYPE_ENEMY = "enemy";
+  public const TYPE_QUEST = "quest";
+  public const TYPE_SHOP = "shop";
+  public const TYPE_COMMON = "common";
+  public const TYPE_ENEMY = "enemy";
 }
 ?>

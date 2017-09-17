@@ -16,13 +16,13 @@ namespace HeroesofAbenez\Orm;
  * @property string $status {enum self::STATUS_*} {default self::STATUS_NEW}
  */
 class Request extends \Nextras\Orm\Entity\Entity {
-  const TYPE_GUILD_JOIN = "guild_join";
-  const TYPE_GUILD_APP = "guild_app";
-  const TYPE_GROUP_JOIN = "group_join";
-  const TYPE_FRIENDSHIP = "friendship";
-  const STATUS_NEW = "new";
-  const STATUS_ACCEPTED = "accepted";
-  const STATUS_DECLINED = "declined";
+  public const TYPE_GUILD_JOIN = "guild_join";
+  public const TYPE_GUILD_APP = "guild_app";
+  public const TYPE_GROUP_JOIN = "group_join";
+  public const TYPE_FRIENDSHIP = "friendship";
+  public const STATUS_NEW = "new";
+  public const STATUS_ACCEPTED = "accepted";
+  public const STATUS_DECLINED = "declined";
   
   protected function getterSentAt(): string {
     return $this->sent->format("Y-m-d H:i:s");

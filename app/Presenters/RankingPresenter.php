@@ -11,7 +11,7 @@ use HeroesofAbenez\Ranking;
    * @author Jakub Konečný
    */
 class RankingPresenter extends BasePresenter {
-  const ITEMS_PER_PAGE = 15;
+  protected const ITEMS_PER_PAGE = 15;
   /** @var \Nette\Utils\Paginator */
   protected $paginator;
   

@@ -31,7 +31,7 @@ use HeroesofAbenez\Entities\Team,
 class CombatBase {
   use \Nette\SmartObject;
   
-  const LOWEST_HP_THRESHOLD = 0.5;
+  protected const LOWEST_HP_THRESHOLD = 0.5;
   
   /** @var Team First team */
   protected $team1;

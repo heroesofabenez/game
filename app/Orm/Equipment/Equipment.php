@@ -25,19 +25,19 @@ use Nextras\Orm\Relationships\OneHasMany;
  * @property bool $worn Is the item worn? {virtual}
  */
 class Equipment extends \Nextras\Orm\Entity\Entity {
-  const SLOT_WEAPON = "weapon";
-  const SLOT_ARMOR = "armor";
-  const SLOT_SHIELD = "shield";
-  const SLOT_AMULET = "amulet";
-  const TYPE_SWORD = "sword";
-  const TYPE_AXE = "axe";
-  const TYPE_CLUB = "club";
-  const TYPE_DAGGER = "dagger";
-  const TYPE_SPEAR = "spear";
-  const TYPE_STAFF = "staff";
-  const TYPE_BOW = "bow";
-  const TYPE_CROSSBOW = "crossbow";
-  const TYPE_THROWING_KNIFE = "throwing knife";
+  public const SLOT_WEAPON = "weapon";
+  public const SLOT_ARMOR = "armor";
+  public const SLOT_SHIELD = "shield";
+  public const SLOT_AMULET = "amulet";
+  public const TYPE_SWORD = "sword";
+  public const TYPE_AXE = "axe";
+  public const TYPE_CLUB = "club";
+  public const TYPE_DAGGER = "dagger";
+  public const TYPE_SPEAR = "spear";
+  public const TYPE_STAFF = "staff";
+  public const TYPE_BOW = "bow";
+  public const TYPE_CROSSBOW = "crossbow";
+  public const TYPE_THROWING_KNIFE = "throwing knife";
   
   protected function setterType(string $value): ?string {
     if($this->slot !== static::SLOT_WEAPON) {
