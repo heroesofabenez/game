@@ -32,8 +32,7 @@
     },
     "require-dev": {
         "nexendrie/code-quality": "dev-master",
-        "phpstan/phpstan-nette": "^0.8",
-        "symplify/easy-coding-standard": "^2.0"
+        "phpstan/phpstan-nette": "^0.8"
     },
     "autoload": {
         "psr-4": {

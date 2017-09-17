@@ -36,19 +36,12 @@
     </exec>
   </target>
   <target name="cs" description="Coding standards compliance">
-    <exec executable="vendor/bin/easy-coding-standard" logoutput="true" passthru="true" checkreturn="true">
-      <arg value="check"/>
-      <arg path="app"/>
-      <arg path="tests"/>
-      <arg path="ci"/>
-    </exec>
-  </target>
-  <target name="cs-old" description="Coding standards compliance">
     <exec executable="vendor/bin/phpcs" logoutput="true" passthru="true" checkreturn="true">
       <arg value="--extensions=php,phpt"/>
       <arg value="."/>
       <arg value="--standard=vendor/nexendrie/code-quality/ruleset.xml"/>
       <arg value="--colors"/>
+      <arg value="-p"/>
     </exec>
   </target>
   <target name="phpstan" description="PHPStan analyzes">
