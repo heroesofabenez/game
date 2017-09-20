@@ -47,8 +47,10 @@ class RequestPresenter extends BasePresenter {
       $this->forward("notfound");
     } catch(CannotSeeRequestException $e) {
       $this->flashMessage($this->translator->translate("errors.request.cannotSee"));
+      $this->forward("Homepage:");
     } catch(CannotAcceptRequestException $e) {
       $this->flashMessage($this->translator->translate("errors.request.cannotAccept"));
+      $this->forward("Homepage:");
     } catch(RequestAlreadyHandledException $e) {
       $this->flashMessage($this->translator->translate("errors.request.handled"));
       $this->forward("Homepage:");
@@ -67,8 +69,10 @@ class RequestPresenter extends BasePresenter {
       $this->forward("notfound");
     } catch(CannotSeeRequestException $e) {
       $this->flashMessage($this->translator->translate("errors.request.cannotSee"));
+      $this->forward("Homepage:");
     } catch(CannotDeclineRequestException $e) {
       $this->flashMessage($this->translator->translate("errors.request.cannotDecline"));
+      $this->forward("Homepage:");
     } catch(RequestAlreadyHandledException $e) {
       $this->flashMessage($this->translator->translate("errors.request.handled"));
       $this->forward("Homepage:");
