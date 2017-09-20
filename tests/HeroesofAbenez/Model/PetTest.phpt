@@ -17,49 +17,32 @@ final class PetTest extends \Tester\TestCase {
   
   public function setUp() {
     $this->model = $this->getService(Pet::class);
+    $this->model->user = $this->getService(\Nette\Security\User::class);
   }
   
-  /**
-   * @return int[]
-   */
-  public function getPetIds(): array {
-    return [
-      [1, 50,]
-    ];
+  public function testViewType() {
+    Assert::type(PetType::class, $this->model->viewType(1));
+    Assert::null($this->model->viewType(5000));
   }
   
-  /**
-   * @dataProvider getPetIds
-   */
-  public function testViewType(int $id) {
-    $type = $this->model->viewType($id);
-    if($id === 1) {
-      Assert::type(PetType::class, $type);
-    } elseif($id === 50) {
-      Assert::null($type);
-    }
+  public function testGetActivePet() {
+    Assert::type(PetEntity::class, $this->model->getActivePet(1));
+    Assert::null($this->model->getActivePet(5000));
   }
   
-  /**
-   * @return int[]
-   */
-  public function getUserIds(): array {
-    return [
-      [1, 2,]
-    ];
+  public function testDeployPet() {
+    Assert::exception(function() {
+      $this->model->deployPet(5000);
+    }, PetNotFoundException::class);
+    Assert::exception(function() {
+      $this->model->deployPet(1);
+    }, PetAlreadyDeployedException::class);
   }
   
-  /**
-   * @dataProvider getUserIds
-   */
-  public function testGetActivePet(int $user) {
-    $pet = $this->model->getActivePet($user);
-    if($user === 1) {
-      Assert::type(PetEntity::class, $pet);
-      Assert::null($pet->name);
-    } elseif($user === 2) {
-      Assert::null($pet);
-    }
+  public function testDiscardPet() {
+    Assert::exception(function() {
+      $this->model->discardPet(5000);
+    }, PetNotFoundException::class);
   }
 }
 

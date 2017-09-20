@@ -22,6 +22,14 @@ final class GuildPresenterTest extends \Tester\TestCase {
     $this->checkAction("Guild:members");
   }
   
+  public function testCreate() {
+    $this->checkForward("Guild:create", "Guild:default");
+  }
+  
+  public function testJoin() {
+    $this->checkForward("Guild:join", "Guild:default");
+  }
+  
   public function testManage() {
     $this->checkAction("Guild:manage");
   }

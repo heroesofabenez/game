@@ -71,14 +71,17 @@ class TavernPresenter extends BasePresenter {
   public function newMessageSucceeded(Form $form, array $values): void {
     switch($this->action) {
       case "guild":
+        /** @var Chat\IGuildChatControlFactory $factory */
         $factory = $this->context->getByType(Chat\IGuildChatControlFactory::class);
         $chat = $this->createComponentGuildChat($factory);
         break;
       case "local":
+        /** @var Chat\ILocalChatControlFactory $factory */
         $factory = $this->context->getByType(Chat\ILocalChatControlFactory::class);
         $chat = $this->createComponentLocalChat($factory);
         break;
       case "global":
+        /** @var Chat\IGlobalChatControlFactory $factory */
         $factory = $this->context->getByType(Chat\IGlobalChatControlFactory::class);
         $chat = $this->createComponentGlobalChat($factory);
         break;

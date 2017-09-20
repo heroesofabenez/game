@@ -44,6 +44,16 @@ final class LocationTest extends \Tester\TestCase {
     Assert::notSame("", $this->model->getAreaName(1));
     Assert::same("", $this->model->getAreaName(5000));
   }
+  
+  public function testAccessibleStages() {
+    $this->model->user = $this->getService(\Nette\Security\User::class);
+    $result = $this->model->accessibleStages();
+    Assert::type("array", $result);
+    Assert::count(3, $result);
+    foreach($result as $stage) {
+      Assert::type(QuestStage::class, $stage);
+    }
+  }
 }
 
 $test = new LocationTest;

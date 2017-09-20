@@ -26,6 +26,9 @@ final class RequestTest extends \Tester\TestCase {
   public function testShow() {
     $request = $this->model->show(1);
     Assert::type(RequestEntity::class, $request);
+    Assert::exception(function() {
+      $this->model->show(5000);
+    }, RequestNotFoundException::class);
   }
 }
 
