@@ -98,7 +98,7 @@ class NPCQuestsControl extends \Nette\Application\UI\Control {
       $this->presenter->flashMessage($this->translator->translate("errors.quest.cannotAcceptHere"));
       $this->presenter->redirect("Homepage:default");
     }
-    $record = new CharacterQuest;
+    $record = new CharacterQuest();
     $this->orm->characterQuests->attach($record);
     $record->character = $this->user->id;
     $record->quest = $questId;

@@ -28,6 +28,6 @@ final class RouterTest extends \Tester\TestCase {
   }
 }
 
-$test = new RouterTest;
+$test = new RouterTest();
 $test->run();
 ?>

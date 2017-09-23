@@ -56,6 +56,6 @@ final class LocationTest extends \Tester\TestCase {
   }
 }
 
-$test = new LocationTest;
+$test = new LocationTest();
 $test->run();
 ?>

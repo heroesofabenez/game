@@ -18,6 +18,6 @@ final class ProfilePresenterTest extends \Tester\TestCase {
   }
 }
 
-$test = new ProfilePresenterTest;
+$test = new ProfilePresenterTest();
 $test->run();
 ?>

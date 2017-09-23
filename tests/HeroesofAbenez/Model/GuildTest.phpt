@@ -106,6 +106,6 @@ final class GuildTest extends \Tester\TestCase {
   }
 }
 
-$test = new GuildTest;
+$test = new GuildTest();
 $test->run();
 ?>

@@ -53,11 +53,11 @@ class Pet {
   public function deployPet(int $id): void {
     $pet = $this->orm->pets->getById($id);
     if(is_null($pet)) {
-      throw new PetNotFoundException;
+      throw new PetNotFoundException();
     } elseif($pet->owner->id !== $this->user->id) {
-      throw new PetNotOwnedException;
+      throw new PetNotOwnedException();
     } elseif($pet->deployed) {
-      throw new PetAlreadyDeployedException;
+      throw new PetAlreadyDeployedException();
     }
     $pets = $this->orm->pets->findByOwner($this->user->id);
     /** @var \HeroesofAbenez\Orm\Pet $pet */
@@ -78,11 +78,11 @@ class Pet {
   public function discardPet(int $id): void {
     $pet = $this->orm->pets->getById($id);
     if(is_null($pet)) {
-      throw new PetNotFoundException;
+      throw new PetNotFoundException();
     } elseif($pet->owner->id !== $this->user->id) {
-      throw new PetNotOwnedException;
+      throw new PetNotOwnedException();
     } elseif(!$pet->deployed) {
-      throw new PetNotDeployedException;
+      throw new PetNotDeployedException();
     }
     $pet->deployed = false;
     $this->orm->pets->persistAndFlush($pet);

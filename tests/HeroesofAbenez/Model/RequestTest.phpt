@@ -32,6 +32,6 @@ final class RequestTest extends \Tester\TestCase {
   }
 }
 
-$test = new RequestTest;
+$test = new RequestTest();
 $test->run();
 ?>

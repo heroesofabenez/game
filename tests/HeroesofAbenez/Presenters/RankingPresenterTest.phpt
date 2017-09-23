@@ -17,6 +17,6 @@ final class RankingPresenterTest extends \Tester\TestCase {
   }
 }
 
-$test = new RankingPresenterTest;
+$test = new RankingPresenterTest();
 $test->run();
 ?>

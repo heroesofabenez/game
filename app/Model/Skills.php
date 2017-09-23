@@ -196,35 +196,35 @@ class Skills {
    */
   public function trainSkill(int $id, string $type) {
     if(!in_array($type, ["attack", "special"])) {
-      throw new InvalidSkillTypeException;
+      throw new InvalidSkillTypeException();
     } elseif($this->getSkillPoints() < 1) {
-      throw new NoSkillPointsAvailableException;
+      throw new NoSkillPointsAvailableException();
     }
     $method = "getCharacter" . ucfirst($type) . "Skill";
     $skill = $this->$method($id);
     if(!$skill) {
-      throw new SkillNotFoundException;
+      throw new SkillNotFoundException();
     } elseif($skill->level +1 > $skill->skill->levels) {
-      throw new SkillMaxLevelReachedException;
+      throw new SkillMaxLevelReachedException();
     }
     /** @var \HeroesofAbenez\Orm\Character $character */
     $character = $this->orm->characters->getById($this->user->id);
     if($skill->skill->needed_class != $character->occupation->id) {
-      throw new CannotLearnSkillException;
+      throw new CannotLearnSkillException();
     } elseif($skill->skill->needed_specialization) {
       if(is_null($character->specialization)) {
-        throw new CannotLearnSkillException;
+        throw new CannotLearnSkillException();
       } elseif($skill->skill->needed_specialization != $character->specialization->id) {
-        throw new CannotLearnSkillException;
+        throw new CannotLearnSkillException();
       }
     } elseif($skill->skill->needed_level > $character->level) {
-      throw new CannotLearnSkillException;
+      throw new CannotLearnSkillException();
     }
     $character->skillPoints--;
     if($type === "attack") {
       $record = $this->orm->characterAttackSkills->getByCharacterAndSkill($this->user->id, $id);
       if(is_null($record)) {
-        $record = new CharacterAttackSkill;
+        $record = new CharacterAttackSkill();
         $this->orm->characterAttackSkills->attach($record);
         $record->character = $character;
         $record->skill = $id;

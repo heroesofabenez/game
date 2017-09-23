@@ -39,6 +39,6 @@ final class PermissionsTest extends \Tester\TestCase {
   }
 }
 
-$test = new PermissionsTest;
+$test = new PermissionsTest();
 $test->run();
 ?>

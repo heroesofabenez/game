@@ -90,7 +90,7 @@ abstract class ChatControl extends \Nette\Application\UI\Control {
     if($result) {
       $this->presenter->flashMessage($result);
     } else {
-      $chatMessage = new ChatMessage;
+      $chatMessage = new ChatMessage();
       $chatMessage->message = $message;
       $this->orm->chatMessages->attach($chatMessage);
       $chatMessage->character = $this->user->id;

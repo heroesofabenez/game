@@ -94,7 +94,7 @@ class UserManager implements NS\IAuthenticator {
       return NULL;
     }
     
-    $character = new Character;
+    $character = new Character();
     $this->orm->characters->attach($character);
     foreach ($data as $key => $value) {
       $character->$key = $value;

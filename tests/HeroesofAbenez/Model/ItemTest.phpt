@@ -30,6 +30,6 @@ final class ItemTest extends \Tester\TestCase {
   }
 }
 
-$test = new ItemTest;
+$test = new ItemTest();
 $test->run();
 ?>

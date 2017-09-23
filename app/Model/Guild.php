@@ -96,7 +96,7 @@ class Guild {
   public function create($data): void {
     $guild = $this->orm->guilds->getByName($data["name"]);
     if(!is_null($guild)) {
-      throw new NameInUseException;
+      throw new NameInUseException();
     }
     $guild = new \HeroesofAbenez\Orm\Guild;
     foreach($data as $key => $value) {
@@ -117,12 +117,12 @@ class Guild {
   public function sendApplication(int $gid): void {
     $guild = $this->orm->guilds->getById($gid);
     if(is_null($guild)) {
-      throw new GuildNotFoundException;
+      throw new GuildNotFoundException();
     }
     $leader = $this->orm->characters->getBy([
       "guild" => $gid, "guildrank" => 7,
     ]);
-    $request = new RequestEntity;
+    $request = new RequestEntity();
     $this->orm->requests->attach($request);
     $request->from = $this->user->id;
     $request->to = $leader;
@@ -176,20 +176,20 @@ class Guild {
   public function promote(int $id): void {
     $admin = $this->user;
     if($admin->identity->guild == 0) {
-      throw new NotInGuildException;
+      throw new NotInGuildException();
     }
     if(!$admin->isAllowed("guild", "promote")) {
-      throw new MissingPermissionsException;
+      throw new MissingPermissionsException();
     }
     $character = $this->orm->characters->getById($id);
     if(is_null($character)) {
-      throw new PlayerNotFoundException;
+      throw new PlayerNotFoundException();
     }
     if(is_null($character->guild)) {
-      throw new PlayerNotInGuildException;
+      throw new PlayerNotInGuildException();
     }
     if($character->guild->id !== $admin->identity->guild) {
-      throw new PlayerNotInGuildException;
+      throw new PlayerNotInGuildException();
     }
     $roles = $this->permissionsModel->getRoles();
     foreach($roles as $role) {
@@ -199,15 +199,15 @@ class Guild {
       }
     }
     if($adminRole <= $character->guildrank->id) {
-      throw new CannotPromoteHigherRanksException;
+      throw new CannotPromoteHigherRanksException();
     }
     if($character->guildrank->id >= 6) {
-      throw new CannotPromoteToGrandmasterException;
+      throw new CannotPromoteToGrandmasterException();
     }
     if($character->guildrank->id == 5) {
       $deputy = $this->guildMembers($admin->identity->guild, [6]);
       if(count($deputy) > 0) {
-        throw new CannotHaveMoreDeputiesException;
+        throw new CannotHaveMoreDeputiesException();
       }
     }
     $character->guildrank = $character->guildrank->id + 1;
@@ -227,20 +227,20 @@ class Guild {
   public function demote(int $id): void {
     $admin = $this->user;
     if($admin->identity->guild == 0) {
-      throw new NotInGuildException;
+      throw new NotInGuildException();
     }
     if(!$admin->isAllowed("guild", "promote")) {
-      throw new MissingPermissionsException;
+      throw new MissingPermissionsException();
     }
     $character = $this->orm->characters->getById($id);
     if(is_null($character)) {
-      throw new PlayerNotFoundException;
+      throw new PlayerNotFoundException();
     }
     if(is_null($character->guild)) {
-      throw new PlayerNotInGuildException;
+      throw new PlayerNotInGuildException();
     }
     if($character->guild->id !== $admin->identity->guild) {
-      throw new PlayerNotInGuildException;
+      throw new PlayerNotInGuildException();
     }
     $roles = $this->permissionsModel->getRoles();
     foreach($roles as $role) {
@@ -250,10 +250,10 @@ class Guild {
       }
     }
     if($adminRole <= $character->guildrank->id) {
-      throw new CannotDemoteHigherRanksException;
+      throw new CannotDemoteHigherRanksException();
     }
     if($character->guildrank->id === 1) {
-      throw new CannotDemoteLowestRankException;
+      throw new CannotDemoteLowestRankException();
     }
     $character->guildrank = $character->guildrank->id - 1;
     $this->orm->characters->persistAndFlush($character);
@@ -271,17 +271,17 @@ class Guild {
   public function kick(int $id): void {
     $admin = $this->user;
     if($admin->identity->guild == 0) {
-      throw new NotInGuildException;
+      throw new NotInGuildException();
     }
     if(!$admin->isAllowed("guild", "kick")) {
-      throw new MissingPermissionsException;
+      throw new MissingPermissionsException();
     }
     $character = $this->orm->characters->getById($id);
     if(is_null($character)) {
-      throw new PlayerNotFoundException;
+      throw new PlayerNotFoundException();
     }
     if(is_null($character->guild) OR $character->guild->id !== $admin->identity->guild) {
-      throw new PlayerNotInGuildException;
+      throw new PlayerNotInGuildException();
     }
     $roles = $this->permissionsModel->getRoles();
     foreach($roles as $role) {
@@ -291,7 +291,7 @@ class Guild {
       }
     }
     if($adminRole <= $character->guildrank->id) {
-      throw new CannotKickHigherRanksException;
+      throw new CannotKickHigherRanksException();
     }
     $character->guild = $character->guildrank = NULL;
     $this->orm->characters->persistAndFlush($character);
@@ -305,10 +305,10 @@ class Guild {
   */
   public function leave(): void {
     if($this->user->identity->guild === 0) {
-      throw new NotInGuildException;
+      throw new NotInGuildException();
     }
     if($this->user->isInRole("grandmaster")) {
-      throw new GrandmasterCannotLeaveGuildException;
+      throw new GrandmasterCannotLeaveGuildException();
     }
     /** @var \HeroesofAbenez\Orm\Character $character */
     $character = $this->orm->characters->getById($this->user->id);
@@ -338,7 +338,7 @@ class Guild {
   public function rename(int $id, string $name): void {
     $guild = $this->orm->guilds->getByName($name);
     if(!is_null($guild) AND $guild->id !== $id) {
-      throw new NameInUseException;
+      throw new NameInUseException();
     }
     $guild = $this->orm->guilds->getById($id);
     $guild->name = $name;
@@ -353,7 +353,7 @@ class Guild {
   public function changeDescription(int $id, string $description): void {
     $guild = $this->orm->guilds->getById($id);
     if(is_null($guild)) {
-      throw new GuildNotFoundException;
+      throw new GuildNotFoundException();
     }
     $guild->description = $description;
     $this->orm->guilds->persistAndFlush($guild);
@@ -395,7 +395,7 @@ class Guild {
    */
   public function setCustomRankNames(array $names): void {
     if(!$this->user->isAllowed("guild", "changeRankNames")) {
-      throw new MissingPermissionsException;
+      throw new MissingPermissionsException();
     }
     $gid = $this->user->identity->guild;
     foreach($names as $rank => $name) {
@@ -405,7 +405,7 @@ class Guild {
       $rank = substr($rank, 4, 1);
       $row = $this->orm->guildRanksCustom->getByGuildAndRank($gid, $rank);
       if(is_null($row)) {
-        $row = new GuildRankCustom;
+        $row = new GuildRankCustom();
         $this->orm->guildRanksCustom->attach($row);
         $row->guild = $gid;
         $row->rank = $rank;

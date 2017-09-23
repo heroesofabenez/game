@@ -59,7 +59,7 @@ class TavernPresenter extends BasePresenter {
    * Creates form for writing new message
    */
   protected function createComponentNewMessageForm(): Form {
-    $form = new Form;
+    $form = new Form();
     $form->setTranslator($this->translator);
     $form->addText("message")
       ->setRequired("forms.tavernNewMessage.messageField.error");

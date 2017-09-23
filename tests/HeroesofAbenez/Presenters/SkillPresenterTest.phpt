@@ -28,6 +28,6 @@ final class SkillPresenterTest extends \Tester\TestCase {
   }
 }
 
-$test = new SkillPresenterTest;
+$test = new SkillPresenterTest();
 $test->run();
 ?>

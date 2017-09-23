@@ -84,10 +84,10 @@ class PostofficeControl extends \Nette\Application\UI\Control {
   public function message(int $id): Message {
     $message = $this->orm->messages->getById($id);
     if(is_null($message)) {
-      throw new MessageNotFoundException;
+      throw new MessageNotFoundException();
     }
     if(!$this->canShow($message)) {
-      throw new CannotShowMessageException;
+      throw new CannotShowMessageException();
     }
     return $message;
   }
@@ -111,7 +111,7 @@ class PostofficeControl extends \Nette\Application\UI\Control {
   }
   
   public function sendMessage(array $data): void {
-    $message = new Message;
+    $message = new Message();
     $this->orm->messages->attach($message);
     foreach($data as $key => $value) {
       $message->$key = $value;

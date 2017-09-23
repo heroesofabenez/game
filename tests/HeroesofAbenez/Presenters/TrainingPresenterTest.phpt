@@ -13,6 +13,6 @@ final class TrainingPresenterTest extends \Tester\TestCase {
   }
 }
 
-$test = new TrainingPresenterTest;
+$test = new TrainingPresenterTest();
 $test->run();
 ?>

@@ -22,6 +22,6 @@ final class CombatLogManagerTest extends \Tester\TestCase {
   }
 }
 
-$test = new CombatLogManagerTest;
+$test = new CombatLogManagerTest();
 $test->run();
 ?>

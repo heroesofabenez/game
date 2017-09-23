@@ -46,6 +46,6 @@ final class QuestTest extends \Tester\TestCase {
   }
 }
 
-$test = new QuestTest;
+$test = new QuestTest();
 $test->run();
 ?>

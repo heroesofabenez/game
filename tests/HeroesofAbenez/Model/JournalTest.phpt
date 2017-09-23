@@ -50,6 +50,6 @@ final class JournalTest extends \Tester\TestCase {
   }
 }
 
-$test = new JournalTest;
+$test = new JournalTest();
 $test->run();
 ?>

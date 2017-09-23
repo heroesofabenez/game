@@ -35,7 +35,7 @@ class CombatLogManager {
    * @return int New record's id
    */
   public function write(string $text): int {
-    $combat = new CombatEntity;
+    $combat = new CombatEntity();
     $combat->text = $text;
     $this->orm->combats->persistAndFlush($combat);
     return $combat->id;

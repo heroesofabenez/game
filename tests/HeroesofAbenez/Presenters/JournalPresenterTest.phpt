@@ -25,6 +25,6 @@ final class JournalPresenterTest extends \Tester\TestCase {
   }
 }
 
-$test = new JournalPresenterTest;
+$test = new JournalPresenterTest();
 $test->run();
 ?>

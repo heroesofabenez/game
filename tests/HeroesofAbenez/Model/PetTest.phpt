@@ -46,6 +46,6 @@ final class PetTest extends \Tester\TestCase {
   }
 }
 
-$test = new PetTest;
+$test = new PetTest();
 $test->run();
 ?>

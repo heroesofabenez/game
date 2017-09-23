@@ -104,10 +104,10 @@ class Request {
   public function show(int $id): RequestEntity {
     $request = $this->orm->requests->getById($id);
     if(is_null($request)) {
-      throw new RequestNotFoundException;
+      throw new RequestNotFoundException();
     }
     if(!$this->canShow($id)) {
-      throw new CannotSeeRequestException;
+      throw new CannotSeeRequestException();
     }
     return $request;
   }
@@ -128,18 +128,18 @@ class Request {
       throw $e;
     }
     if(!$this->canShow($id)) {
-      throw new CannotSeeRequestException;
+      throw new CannotSeeRequestException();
     }
     if(!$this->canChange($id)) {
-      throw new CannotAcceptRequestException;
+      throw new CannotAcceptRequestException();
     }
     if($request->status !== "new") {
-      throw new RequestAlreadyHandledException;
+      throw new RequestAlreadyHandledException();
     }
     switch($request->type) {
       case RequestEntity::TYPE_FRIENDSHIP:
       case RequestEntity::TYPE_GROUP_JOIN:
-        throw new NotImplementedException;
+        throw new NotImplementedException();
         break;
       case RequestEntity::TYPE_GUILD_APP:
         $uid = $request->from->id;
@@ -171,13 +171,13 @@ class Request {
       throw $e;
     }
     if(!$this->canShow($id)) {
-      throw new CannotSeeRequestException;
+      throw new CannotSeeRequestException();
     }
     if(!$this->canChange($id)) {
-      throw new CannotDeclineRequestException;
+      throw new CannotDeclineRequestException();
     }
     if($request->status !== RequestEntity::STATUS_NEW) {
-      throw new RequestAlreadyHandledException;
+      throw new RequestAlreadyHandledException();
     }
     $request->status = RequestEntity::STATUS_DECLINED;
     $this->orm->requests->persistAndFlush($request);

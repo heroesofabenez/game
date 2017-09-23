@@ -196,7 +196,7 @@ class Profile {
     /** @var \HeroesofAbenez\Orm\Character $character */
     $character = $this->orm->characters->getById($this->user->id);
     if($character->experience < $this->getLevelsRequirements()[$character->level + 1]) {
-      throw new NotEnoughExperiencesException;
+      throw new NotEnoughExperiencesException();
     }
     if(!is_null($character->specialization)) {
       $class = $character->specialization;
@@ -247,9 +247,9 @@ class Profile {
    */
   public function trainStat(string $stat): void {
     if(!in_array($stat, $this->stats)) {
-      throw new InvalidStatException;
+      throw new InvalidStatException();
     } elseif($this->getStatPoints() < 1) {
-      throw new NoStatPointsAvailableException;
+      throw new NoStatPointsAvailableException();
     }
     /** @var \HeroesofAbenez\Orm\Character $character */
     $character = $this->orm->characters->getById($this->user->id);

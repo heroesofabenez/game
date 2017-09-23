@@ -24,6 +24,6 @@ final class EquipmentTest extends \Tester\TestCase {
   }
 }
 
-$test = new EquipmentTest;
+$test = new EquipmentTest();
 $test->run();
 ?>

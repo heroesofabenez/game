@@ -13,6 +13,6 @@ final class HomepagePresenterTest extends \Tester\TestCase {
   }
 }
 
-$test = new HomepagePresenterTest;
+$test = new HomepagePresenterTest();
 $test->run();
 ?>

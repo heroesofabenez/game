@@ -25,6 +25,6 @@ final class UserManagerTest extends \Tester\TestCase {
   }
 }
 
-$test = new UserManagerTest;
+$test = new UserManagerTest();
 $test->run();
 ?>

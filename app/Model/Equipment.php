@@ -37,11 +37,11 @@ class Equipment {
   public function equipItem(int $id): void {
     $item = $this->orm->characterEquipment->getById($id);
     if(is_null($item)) {
-      throw new ItemNotFoundException;
+      throw new ItemNotFoundException();
     } elseif($item->character->id !== $this->user->id) {
-      throw new ItemNotOwnedException;
+      throw new ItemNotOwnedException();
     } elseif($item->worn) {
-      throw new ItemAlreadyEquippedException;
+      throw new ItemAlreadyEquippedException();
     }
     $items = $this->orm->characterEquipment->findByCharacterAndSlot($this->user->id, $item->item->slot);
     foreach($items as $item) {
@@ -61,11 +61,11 @@ class Equipment {
   public function unequipItem(int $id): void {
     $item = $this->orm->characterEquipment->getById($id);
     if(is_null($item)) {
-      throw new ItemNotFoundException;
+      throw new ItemNotFoundException();
     } elseif($item->character->id !== $this->user->id) {
-      throw new ItemNotOwnedException;
+      throw new ItemNotOwnedException();
     } elseif(!$item->worn) {
-      throw new ItemNotWornException;
+      throw new ItemNotWornException();
     }
     $item->worn = false;
     $this->orm->characterEquipment->persistAndFlush($item);

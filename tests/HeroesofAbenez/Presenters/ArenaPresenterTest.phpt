@@ -21,6 +21,6 @@ final class ArenaPresenterTest extends \Tester\TestCase {
   }
 }
 
-$test = new ArenaPresenterTest;
+$test = new ArenaPresenterTest();
 $test->run();
 ?>

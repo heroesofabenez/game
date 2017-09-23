@@ -63,7 +63,7 @@ class Item {
   public function giveItem(int $id, int $amount = 1): void {
     $item = $this->orm->characterItems->getByCharacterAndItem($this->user->id, $id);
     if(is_null($item)) {
-      $item = new CharacterItem;
+      $item = new CharacterItem();
       $this->orm->characterItems->attach($item);
       $item->character = $this->user->id;
       $item->item = $id;

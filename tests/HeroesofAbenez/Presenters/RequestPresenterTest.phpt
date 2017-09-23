@@ -23,6 +23,6 @@ final class RequestPresenterTest extends \Tester\TestCase {
   }
 }
 
-$test = new RequestPresenterTest;
+$test = new RequestPresenterTest();
 $test->run();
 ?>

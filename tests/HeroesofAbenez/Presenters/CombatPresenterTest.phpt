@@ -13,6 +13,6 @@ final class CombatPresenterTest extends \Tester\TestCase {
   }
 }
 
-$test = new CombatPresenterTest;
+$test = new CombatPresenterTest();
 $test->run();
 ?>

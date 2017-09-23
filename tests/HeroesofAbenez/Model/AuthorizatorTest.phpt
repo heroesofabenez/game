@@ -49,6 +49,6 @@ final class AuthorizatorTest extends \Tester\TestCase {
   }
 }
 
-$test = new AuthorizatorTest;
+$test = new AuthorizatorTest();
 $test->run();
 ?>

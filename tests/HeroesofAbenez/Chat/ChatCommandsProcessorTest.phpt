@@ -107,6 +107,6 @@ final class ChatCommandsProcessorTest extends \Tester\TestCase {
   }
 }
 
-$test = new ChatCommandsProcessorTest;
+$test = new ChatCommandsProcessorTest();
 $test->run();
 ?>

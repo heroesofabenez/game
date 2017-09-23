@@ -72,6 +72,6 @@ final class CombatHelperTest extends \Tester\TestCase {
   }
 }
 
-$test = new CombatHelperTest;
+$test = new CombatHelperTest();
 $test->run();
 ?>

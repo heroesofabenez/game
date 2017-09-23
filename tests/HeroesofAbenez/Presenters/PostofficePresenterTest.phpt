@@ -26,6 +26,6 @@ final class PostofficePresenterTest extends \Tester\TestCase {
   }
 }
 
-$test = new PostofficePresenterTest;
+$test = new PostofficePresenterTest();
 $test->run();
 ?>

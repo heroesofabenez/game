@@ -56,7 +56,7 @@ class CombatHelper {
     $data = $equipment = $pets = [];
     $character = $this->orm->characters->getById($id);
     if(is_null($character)) {
-      throw new OpponentNotFoundException;
+      throw new OpponentNotFoundException();
     }
     $stats = [
       "id", "name", "occupation", "level", "strength", "dexterity", "constitution", "intelligence",
@@ -114,7 +114,7 @@ class CombatHelper {
     $data = [];
     $npc = $this->orm->arenaNpcs->getById($id);
     if(is_null($npc)) {
-      throw new OpponentNotFoundException;
+      throw new OpponentNotFoundException();
     }
     $stats = [
       "id", "name", "occupation", "level", "strength", "dexterity", "constitution", "intelligence",
@@ -169,7 +169,7 @@ class CombatHelper {
     $day = date("d.m.Y");
     $row = $this->orm->arenaFightsCount->getByCharacterAndDay($uid, $day);
     if(is_null($row)) {
-      $row = new ArenaFightCount;
+      $row = new ArenaFightCount();
       $this->orm->arenaFightsCount->attach($row);
       $row->character = $uid;
       $row->day = $day;

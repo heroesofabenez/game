@@ -31,6 +31,6 @@ final class NPCTest extends \Tester\TestCase {
   }
 }
 
-$test = new NPCTest;
+$test = new NPCTest();
 $test->run();
 ?>

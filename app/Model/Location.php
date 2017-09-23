@@ -121,7 +121,7 @@ class Location {
   public function travelToStage(int $id): void {
     $stage = $this->getStage($id);
     if(is_null($stage)) {
-      throw new StageNotFoundException;
+      throw new StageNotFoundException();
     }
     $currentStage = $this->user->identity->stage;
     $foundRoute = false;
@@ -136,7 +136,7 @@ class Location {
       }
     }
     if(!$foundRoute) {
-      throw new CannotTravelToStageException;
+      throw new CannotTravelToStageException();
     }
     /** @var \HeroesofAbenez\Orm\Character $character */
     $character = $this->orm->characters->getById($this->user->id);
