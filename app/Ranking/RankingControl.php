@@ -33,7 +33,7 @@ abstract class RankingControl extends \Nette\Application\UI\Control {
     $this->paginator = $paginator;
   }
   
-  abstract function getData(): array;
+  abstract public function getData(): array;
   
   public function render(): void {
     $this->template->setFile(__DIR__ . "/ranking.latte");

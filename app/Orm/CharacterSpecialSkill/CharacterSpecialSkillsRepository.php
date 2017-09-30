@@ -12,7 +12,7 @@ class CharacterSpecialSkillsRepository extends \Nextras\Orm\Repository\Repositor
   /**
    * @return string[]
    */
-  static function getEntityClassNames(): array {
+  public static function getEntityClassNames(): array {
     return [CharacterSpecialSkill::class];
   }
   

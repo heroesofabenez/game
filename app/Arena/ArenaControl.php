@@ -98,7 +98,7 @@ abstract class ArenaControl extends \Nette\Application\UI\Control {
     $this->presenter->redirect("Combat:view", ["id" => $combatId]);
   }
   
-  abstract function handleFight(int $id): void;
+  abstract public function handleFight(int $id): void;
   
   /**
    * Save log from combat

@@ -10,7 +10,7 @@ class Arrays {
    * @author jimpoz jimpoz@jimpoz.com
    * @license http://creativecommons.org/licenses/by/3.0/ CC-BY-3.0
    */
-  static function orderby(): array {
+  public static function orderby(): array {
     $args = func_get_args();
     $data = array_shift($args);
     foreach ($args as $n => $field) {

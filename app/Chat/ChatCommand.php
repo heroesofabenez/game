@@ -31,6 +31,6 @@ abstract class ChatCommand {
     $this->name = $name;
   }
   
-  abstract function execute(): string;
+  abstract public function execute(): string;
 }
 ?>

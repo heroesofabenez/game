@@ -37,7 +37,7 @@ abstract class BaseSkill {
   /** @var int */
   protected $levels;
   
-  abstract function getCooldown(): int;
+  abstract public function getCooldown(): int;
   
   public function getId(): int {
     return $this->id;

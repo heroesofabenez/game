@@ -12,7 +12,7 @@ class CharacterSpecializationsRepository extends \Nextras\Orm\Repository\Reposit
   /**
    * @return string[]
    */
-  static function getEntityClassNames(): array {
+  public static function getEntityClassNames(): array {
     return [CharacterSpecialization::class];
   }
   

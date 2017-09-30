@@ -12,7 +12,7 @@ class QuestAreasRepository extends \Nextras\Orm\Repository\Repository {
   /**
    * @return string[]
    */
-  static function getEntityClassNames(): array {
+  public static function getEntityClassNames(): array {
     return [QuestArea::class];
   }
   

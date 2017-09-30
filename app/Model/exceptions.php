@@ -1,8 +1,12 @@
 <?php
+declare(strict_types=1);
+
 namespace HeroesofAbenez\Model;
 
 use HeroesofAbenez\Utils\InvalidStateException,
     HeroesofAbenez\Utils\AccessDeniedException;
+
+// @codingStandardsIgnoreFile
 
 class RecordNotFoundException extends \Exception {
   
