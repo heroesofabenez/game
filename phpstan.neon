@@ -5,7 +5,8 @@ parameters:
         - Nette\Security\IIdentity
     ignoreErrors:
         - "#Casting to [a-z\\_]+ something that's already [a-z\\_]+#"
-        - '#Undefined variable: \$[a-zA-Z0-9_]+#'
+        - '#Variable \$[a-zA-Z0-9_]+ might not be defined#'
         - '#Access to an undefined property Nextras\\Orm\\Entity\\IEntity::\$id#'
         - '#Method Nette\\Localization\\ITranslator::translate\(\) invoked with 3 parameters, 1-2 required#'
         - '#Property HeroesofAbenez\\Orm\\[a-zA-Z0-9_]+::\$[a-zA-Z0-9_]+ \(HeroesofAbenez\\Orm\\[a-zA-Z0-9_]+|null\) does not accept int#'
+        - '#Cannot call method [a-zA-Z]+\(\) on Nette\\Application\\UI\\ITemplate\|stdClass#'

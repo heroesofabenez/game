@@ -29,7 +29,7 @@ class SkillAttacksRepository extends \Nextras\Orm\Repository\Repository {
   
   /**
    * @param CharacterClass|int $class
-   * @return ICollection|SkillAttack
+   * @return ICollection|SkillAttack[]
    */
   public function findByClassAndLevel($class, int $level): ICollection {
     return $this->findBy([

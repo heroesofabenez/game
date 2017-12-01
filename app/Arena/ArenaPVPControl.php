@@ -17,7 +17,7 @@ class ArenaPVPControl extends ArenaControl {
   protected $arena = "heroes";
   
   /**
-   * @return ICollection|\HeroesofAbenez\Orm\Character
+   * @return ICollection|\HeroesofAbenez\Orm\Character[]
    */
   public function getOpponents(): ICollection {
     $level = $this->user->identity->level;

@@ -26,13 +26,13 @@
         "latte/latte": "~2.4",
         "kdyby/autowired": "^1.4",
         "nexendrie/translation": "^1.0",
-        "nexendrie/menu": "^1.0",
+        "nexendrie/menu": "^1.2",
         "nexendrie/utils": "^1.0",
         "nextras/orm": "^2.2"
     },
     "require-dev": {
         "nexendrie/code-quality": "dev-master",
-        "phpstan/phpstan-nette": "^0.8"
+        "phpstan/phpstan-nette": "^0.9"
     },
     "autoload": {
         "psr-4": {
