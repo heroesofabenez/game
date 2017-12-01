@@ -35,7 +35,7 @@ class Quest {
    * @return QuestEntity[]
    */
   public function listOfQuests(int $npc = 0): array {
-    $quests = $this->cache->load("quests", function(& $dependencies) {
+    $quests = $this->cache->load("quests", function() {
       $return = [];
       $quests = $this->orm->quests->findAll();
       /** @var \HeroesofAbenez\Orm\Quest $quest */

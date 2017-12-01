@@ -29,7 +29,7 @@ class Permissions {
    * Get roles (from db or cache)
    */
   public function getRoles(): array {
-    $roles = $this->cache->load("roles", function(& $dependencies) {
+    $roles = $this->cache->load("roles", function() {
       $roles = [];
       $rows = $this->orm->guildRanks->findAll()->orderBy("id");
       /** @var GuildRank $row */
@@ -56,7 +56,7 @@ class Permissions {
    */
   public function getPermissions(): array {
     $roles = $this->getRoles();
-    $permissions = $this->cache->load("permissions", function(& $dependencies) use($roles) {
+    $permissions = $this->cache->load("permissions", function() use($roles) {
       $permissions = [];
       $privileges = $this->orm->guildPrivileges->findAll();
       /** @var GuildPrivilege $privilege */

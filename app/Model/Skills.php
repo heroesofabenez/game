@@ -41,7 +41,7 @@ class Skills {
    * @return SkillAttackDummy[]
    */
   public function getListOfAttackSkills(): array {
-    $skillsList = $this->cache->load("attack_skills", function(& $dependencies) {
+    $skillsList = $this->cache->load("attack_skills", function() {
       $return = [];
       $skills = $this->orm->attackSkills->findAll();
       /** @var \HeroesofAbenez\Orm\SkillAttack $skill */
@@ -80,7 +80,7 @@ class Skills {
    * @return SkillSpecialDummy[]
    */
   public function getListOfSpecialSkills(): array {
-    $skillsList = $this->cache->load("special_skills", function(& $dependencies) {
+    $skillsList = $this->cache->load("special_skills", function() {
       $return = [];
       $skills = $this->orm->specialSkills->findAll();
       /** @var \HeroesofAbenez\Orm\SkillSpecial $skill */
