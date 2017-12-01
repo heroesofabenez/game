@@ -16,8 +16,8 @@ use HeroesofAbenez\Entities\DialogueLine,
 class NPCDialogueControl extends \Nette\Application\UI\Control {
   /** @var \Nette\Security\User */
   protected $user;
-  /** @var Npc */
-  protected $npc;
+  /** @var Npc|NULL */
+  protected $npc = NULL;
   
   public function __construct(\Nette\Security\User $user) {
     parent::__construct();
@@ -33,7 +33,7 @@ class NPCDialogueControl extends \Nette\Application\UI\Control {
    */
   public function getNames() {
     $npcName = "";
-    if($this->npc) {
+    if(!is_null($this->npc)) {
       $npcName = $this->npc->name;
     }
     $playerName = $this->user->identity->name;

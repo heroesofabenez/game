@@ -140,9 +140,9 @@ class CombatHelper {
       $skills[] = new CharacterSpecialSkillDummy(new SkillSpecialDummy($skillRow), 0);
     }
     $this->getArenaNpcSkillsLevels($data, $skills);
-    if($npc->weapon) {
+    if(!is_null($npc->weapon)) {
       $weapon = $this->equipmentModel->view($npc->weapon->id);
-      if($weapon) {
+      if(!is_null($weapon)) {
         $weapon->worn = true;
         $equipment[] = $weapon;
       }

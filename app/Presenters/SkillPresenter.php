@@ -31,7 +31,7 @@ class SkillPresenter extends BasePresenter {
   
   public function renderAttack(int $id): void {
     $skill = $this->model->getAttackSkill($id);
-    if(!$skill) {
+    if(is_null($skill)) {
       $this->forward("notfound");
     }
     $this->template->skill = $skill;
@@ -39,7 +39,7 @@ class SkillPresenter extends BasePresenter {
   
   public function renderSpecial(int $id): void {
     $skill = $this->model->getSpecialSkill($id);
-    if(!$skill) {
+    if(is_null($skill)) {
       $this->forward("notfound");
     }
     $this->template->skill = $skill;

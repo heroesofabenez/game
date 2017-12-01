@@ -36,7 +36,7 @@ class CombatLogger implements \Countable, \IteratorAggregate {
    * Set teams
    */
   public function setTeams(Team $team1, Team $team2): void {
-    if($this->team1) {
+    if(isset($this->team1)) {
       throw new ImmutableException("Teams has already been set.");
     }
     $this->team1 = $team1;

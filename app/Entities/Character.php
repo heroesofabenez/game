@@ -166,7 +166,7 @@ class Character {
       }
     }
     foreach($stats as $key => $value) {
-      if(!in_array($key, $all_stats)) {
+      if(!in_array($key, $all_stats, true)) {
         continue;
       }
       switch($key) {

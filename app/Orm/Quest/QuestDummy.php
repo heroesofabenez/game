@@ -70,13 +70,13 @@ class QuestDummy {
     $this->endText = $quest->endText;
     $this->costMoney = $quest->costMoney;
     $this->neededLevel = $quest->neededLevel;
-    $this->neededQuest = ($quest->neededQuest) ? $quest->neededQuest->id : NULL;
-    $this->neededItem = ($quest->neededItem) ? $quest->neededItem->id : NULL;
+    $this->neededQuest = (!is_null($quest->neededQuest)) ? $quest->neededQuest->id : NULL;
+    $this->neededItem = (!is_null($quest->neededItem)) ? $quest->neededItem->id : NULL;
     $this->itemAmount = $quest->itemAmount;
     $this->itemLose = $quest->itemLose;
     $this->rewardMoney = $quest->rewardMoney;
     $this->rewardXp = $quest->rewardXp;
-    $this->rewardItem = ($quest->rewardItem) ? $quest->rewardItem->id : NULL;
+    $this->rewardItem = (!is_null($quest->rewardItem)) ? $quest->rewardItem->id : NULL;
     $this->npcStart = $quest->npcStart->id;
     $this->npcEnd = $quest->npcEnd->id;
     $this->order = $quest->order;

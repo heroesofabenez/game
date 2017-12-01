@@ -51,7 +51,7 @@ class Journal {
     $return = [
       "name" => $character->name, "gender" => $character->gender, "race" => $character->race->id,
       "occupation" => $character->occupation->id,
-      "specialization" => ($character->specialization) ? $character->specialization->id : NULL,
+      "specialization" => (!is_null($character->specialization)) ? $character->specialization->id : NULL,
       "level" => $character->level, "whiteKarma" => $character->whiteKarma,
       "neutralKarma" => $character->neutralKarma, "darkKarma" => $character->darkKarma,
       "experiences" => $character->experience, "description" => $character->description,

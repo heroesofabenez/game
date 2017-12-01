@@ -73,7 +73,7 @@ class Guild {
   public function guildMembers(int $id, array $roles = [], bool $customRoleNames = false): array {
     $return = [];
     $members = $this->orm->characters->findByGuild($id);
-    if(count($roles)) {
+    if(count($roles) > 0) {
       $members = $members->findBy(["guildrank" => $roles]);
     }
     foreach($members as $member) {

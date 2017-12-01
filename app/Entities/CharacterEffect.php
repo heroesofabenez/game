@@ -32,13 +32,13 @@ class CharacterEffect {
   public function __construct(array $effect) {
     $types = ["buff", "debuff", "stun"];
     $sources = ["pet", "skill", "equipment"];
-    if(!in_array($effect["type"], $types)) {
+    if(!in_array($effect["type"], $types, true)) {
       exit("Invalid value for \$type passed to method CharacterEffect::__construct.");
     }
-    if(!in_array($effect["source"], $sources)) {
+    if(!in_array($effect["source"], $sources, true)) {
       exit("Invalid value for \$source passed to method CharacterEffect::__construct.");
     }
-    if(!in_array($effect["duration"], self::getDurations()) AND $effect["duration"] < 0) {
+    if(!in_array($effect["duration"], self::getDurations(), true) AND $effect["duration"] < 0) {
       exit("Invalid value for \$duration passed to method CharacterEffect::__construct.");
     }
     if($effect["type"] != "stun") {
@@ -46,7 +46,7 @@ class CharacterEffect {
       if(!is_int($effect["value"])) {
         exit("Invalid value for \$value passed to method CharacterEffect::__construct. Expected integer.");
       }
-      if(!in_array($effect["stat"], $stats) OR (is_null($effect["stat"]) AND $effect["type"] === "stun")) {
+      if(!in_array($effect["stat"], $stats, true) OR (is_null($effect["stat"]) AND $effect["type"] === "stun")) {
         exit("Invalid value for \$stat passed to method CharacterEffect::__construct.");
       }
       $this->stat = $effect["stat"];
@@ -97,7 +97,7 @@ class CharacterEffect {
    * @throws \InvalidArgumentException
    */
   public function setDuration($value) {
-    if(!is_int($value) AND !in_array($value, self::getDurations())) {
+    if(!is_int($value) AND !in_array($value, self::getDurations(), true)) {
       throw new \InvalidArgumentException("Invalid value set to CharacterEffect::\$duration. Expected string or integer.");
     }
     $this->duration = $value;

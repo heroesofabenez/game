@@ -27,7 +27,7 @@ class SkillAttackDummy extends BaseSkill {
     $this->name = $skill->name;
     $this->description = $skill->description;
     $this->neededClass = $skill->neededClass->id;
-    $this->neededSpecialization = ($skill->neededSpecialization) ? $skill->neededSpecialization->id : NULL;
+    $this->neededSpecialization = (!is_null($skill->neededSpecialization)) ? $skill->neededSpecialization->id : NULL;
     $this->neededLevel = $skill->neededLevel;
     $this->baseDamage = $skill->baseDamage;
     $this->damageGrowth = $skill->damageGrowth;

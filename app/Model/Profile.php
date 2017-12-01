@@ -26,12 +26,11 @@ class Profile {
   /** @var \Nette\Security\User */
   protected $user;
   /** @var string[] */
-  private $stats;
+  private $stats = ["strength", "dexterity", "constitution", "intelligence", "charisma"];
   
   public function __construct(ORM $orm, Pet $petModel) {
     $this->orm = $orm;
     $this->petModel = $petModel;
-    $this->stats = ["strength", "dexterity", "constitution", "intelligence", "charisma"];
   }
   
   public function setUser(\Nette\Security\User $user) {
@@ -168,7 +167,7 @@ class Profile {
     $return["guild"] = "";
     if(!is_null($char->guild)) {
       $return["guild"] = $char->guild->id;
-      $return["guildrank"] = ($char->guildrank) ? $char->guildrank->id : NULL;
+      $return["guildrank"] = (!is_null($char->guildrank)) ? $char->guildrank->id : NULL;
     }
     $return["pet"] = $this->petModel->getActivePet($id);
     return $return;
@@ -246,7 +245,7 @@ class Profile {
    * @throws NoStatPointsAvailableException
    */
   public function trainStat(string $stat): void {
-    if(!in_array($stat, $this->stats)) {
+    if(!in_array($stat, $this->stats, true)) {
       throw new InvalidStatException();
     } elseif($this->getStatPoints() < 1) {
       throw new NoStatPointsAvailableException();

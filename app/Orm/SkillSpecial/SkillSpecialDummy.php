@@ -30,7 +30,7 @@ class SkillSpecialDummy extends BaseSkill {
     $this->name = $skill->name;
     $this->description = $skill->description;
     $this->neededClass = $skill->neededClass->id;
-    $this->neededSpecialization = ($skill->neededSpecialization) ? $skill->neededSpecialization->id : NULL;
+    $this->neededSpecialization = (!is_null($skill->neededSpecialization)) ? $skill->neededSpecialization->id : NULL;
     $this->neededLevel = $skill->neededLevel;
     $this->type = $skill->type;
     $this->target = $skill->target;

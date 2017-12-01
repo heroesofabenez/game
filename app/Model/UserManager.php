@@ -35,7 +35,7 @@ class UserManager implements NS\IAuthenticator {
    * Return real user's id
    */
   protected function getRealId(): int {
-    if(in_array($_SERVER["SERVER_NAME"], $this->devServers)) {
+    if(in_array($_SERVER["SERVER_NAME"], $this->devServers, true)) {
       return 1;
     }
     $ch = curl_init("http://heroesofabenez.tk/auth.php");
@@ -59,8 +59,8 @@ class UserManager implements NS\IAuthenticator {
     }
     $data = [
       "name" => $char->name, "race" => $char->race->id, "gender" => $char->gender,
-      "occupation" => ($char->occupation) ? $char->occupation->id : NULL,
-      "specialization" => ($char->specialization) ? $char->specialization->id : NULL,
+      "occupation" => $char->occupation->id,
+      "specialization" => (!is_null($char->specialization)) ? $char->specialization->id : NULL,
       "level" => $char->level,  "stage" => $char->currentStage->id,
       "white_karma" => $char->whiteKarma, "neutral_karma" => $char->neutralKarma, "dark_karma" => $char->darkKarma
     ];

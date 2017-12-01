@@ -102,7 +102,7 @@ class CombatBase {
    * Set teams
    */
   public function setTeams(Team $team1, Team $team2): void {
-    if($this->team1) {
+    if(isset($this->team1)) {
       throw new ImmutableException("Teams has already been set.");
     }
     $this->team1 = & $team1;
@@ -203,7 +203,7 @@ class CombatBase {
     $characters = array_merge($this->team1->items, $this->team2->items);
     /** @var Character $character */
     foreach($characters as $character) {
-      if($character->activePet) {
+      if(!is_null($character->activePet)) {
         $effect = $character->getPet($character->activePet)->deployParams;
         $character->addEffect(new CharacterEffect($effect));
       }
@@ -403,9 +403,9 @@ class CombatBase {
       if($character->hitpoints < 1) {
         continue;
       }
-      if(in_array($character, $this->findHealers())) {
+      if(in_array($character, $this->findHealers(), true)) {
         $target = $this->selectHealingTarget($character);
-        if($target) {
+        if(!is_null($target)) {
           $this->onHeal($character, $target);
           continue;
         }
@@ -414,7 +414,7 @@ class CombatBase {
       if(is_null($target)) {
         break;
       }
-      if(count($character->usableSkills)) {
+      if(count($character->usableSkills) > 0) {
         $skill = $character->usableSkills[0];
         if($skill instanceof CharacterAttackSkillDummy) {
           for($i = 1; $i <= $skill->skill->strikes; $i++) {
@@ -462,7 +462,7 @@ class CombatBase {
    * @return int Winning team
    */
   public function execute(): int {
-    if(!$this->team1) {
+    if(!isset($this->team1)) {
       throw new InvalidStateException("Teams are not set.");
     }
     $this->onCombatStart();
@@ -483,7 +483,7 @@ class CombatBase {
    * Calculate hit chance for attack/skill attack
    */
   protected function calculateHitChance(Character $character1, Character $character2, CharacterAttackSkillDummy $skill = NULL): int {
-    if($skill) {
+    if(!is_null($skill)) {
       $hit_chance = ($character1->hit / 100 * $skill->hitRate) - $character2->dodge;
     } else {
       $hit_chance = $character1->hit - $character2->dodge;

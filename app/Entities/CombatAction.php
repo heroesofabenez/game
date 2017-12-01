@@ -35,7 +35,7 @@ class CombatAction {
   
   public function __construct(string $action, bool $result, Character $character1, Character $character2, int $amount = 0, string $name = "") {
     $actions = ["attack", "skill_attack", "skill_special", "healing"];
-    if(!in_array($action, $actions)) {
+    if(!in_array($action, $actions, true)) {
       exit("Invalid value for action passed to CombatAction::__construct.");
     }
     $this->action = $action;

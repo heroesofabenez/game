@@ -68,7 +68,7 @@ class Skills {
     }
     $row = $this->orm->characterAttackSkills->getByCharacterAndSkill($userId, $skillId);
     $level = 0;
-    if($row) {
+    if(!is_null($row)) {
       $level = $row->level;
     }
     return new CharacterAttackSkillDummy($skill, $level);
@@ -107,7 +107,7 @@ class Skills {
     }
     $row = $this->orm->characterSpecialSkills->getByCharacterAndSkill($userId, $skillId);
     $level = 0;
-    if($row) {
+    if(!is_null($row)) {
       $level = $row->level;
     }
     return new CharacterSpecialSkillDummy($skill, $level);
@@ -125,7 +125,7 @@ class Skills {
     foreach($skills as $skill) {
       if($skill->neededClass != $character->occupation->id) {
         continue;
-      } elseif($skill->neededSpecialization) {
+      } elseif(!is_null($skill->neededSpecialization)) {
         if(is_null($character->specialization)) {
           continue;
         } elseif($skill->neededSpecialization != $character->specialization) {
@@ -155,7 +155,7 @@ class Skills {
     foreach($skills as $skill) {
       if($skill->neededClass != $character->occupation->id) {
         continue;
-      } elseif($skill->neededSpecialization) {
+      } elseif(!is_null($skill->neededSpecialization)) {
         if(is_null($character->specialization)) {
           continue;
         } elseif($skill->neededSpecialization != $character->specialization) {
@@ -169,7 +169,7 @@ class Skills {
       } elseif($skill instanceof SkillSpecialDummy) {
         $s = $this->getCharacterSpecialSkill($skill->id, $uid);
       }
-      if($s->level) {
+      if($s->level > 0) {
         $return[] = $s;
       }
     }
@@ -195,7 +195,7 @@ class Skills {
    * @throws CannotLearnSkillException
    */
   public function trainSkill(int $id, string $type) {
-    if(!in_array($type, ["attack", "special"])) {
+    if(!in_array($type, ["attack", "special"], true)) {
       throw new InvalidSkillTypeException();
     } elseif($this->getSkillPoints() < 1) {
       throw new NoSkillPointsAvailableException();

@@ -50,7 +50,7 @@ class CharacterPresenter extends BasePresenter {
     $form = $factory->create($this->races, $this->classes);
     $form->onSuccess[] = function(Form $form, array $values) {
       $data = $this->userManager->create($values);
-      if(!$data) {
+      if(is_null($data)) {
         $this->forward("Character:exists");
       }
       $this->user->logout();
