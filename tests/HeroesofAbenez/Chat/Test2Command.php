@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Chat;
 
-class Test2Command extends ChatCommand {
+final class Test2Command extends ChatCommand {
   const NAME = "test2";
   
   public function execute() : string {
