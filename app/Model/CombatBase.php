@@ -18,15 +18,15 @@ use HeroesofAbenez\Entities\Team,
  * @property-read int $winner
  * @property-read int $round
  * @property callable $victoryCondition To evaluate the winner of combat. Gets CombatBase as first parameter, should return winning team (1/2) or 0 if there is not winner (yet)
- * @method void onCombatStart() Tasks to do at the start of the combat
- * @method void onCombatEnd() Tasks to do at the end of the combat
- * @method void onRoundStart() Tasks to do at the start of a round
- * @method void onRound() Tasks to do during a round
- * @method void onRoundEnd() Tasks to do at the end of a round
- * @method void onAttack(Character $attacker, Character $defender) Tasks to do at attack
- * @method void onSkillAttack(Character $attacker, Character $defender, CharacterAttackSkillDummy $skill) Tasks to do at skill attack
- * @method void onSkillSpecial(Character $character1, Character $target, CharacterSpecialSkillDummy $skill) Tasks to do when using special skill
- * @method void onHeal(Character $healer, Character $patient) Tasks to do at healing
+ * @method void onCombatStart()
+ * @method void onCombatEnd()
+ * @method void onRoundStart()
+ * @method void onRound()
+ * @method void onRoundEnd()
+ * @method void onAttack(Character $attacker, Character $defender)
+ * @method void onSkillAttack(Character $attacker, Character $defender, CharacterAttackSkillDummy $skill)
+ * @method void onSkillSpecial(Character $character1, Character $target, CharacterSpecialSkillDummy $skill)
+ * @method void onHeal(Character $healer, Character $patient)
  */
 class CombatBase {
   use \Nette\SmartObject;
@@ -45,23 +45,23 @@ class CombatBase {
   protected $roundLimit = 30;
   /** @var array Dealt damage by team */
   protected $damage = [1 => 0, 2 => 0];
-  /** @var array Tasks to do at the start of the combat */
+  /** @var callable[] */
   public $onCombatStart = [];
-  /** @var array Tasks to do at the end of the combat */
+  /** @var callable[] */
   public $onCombatEnd = [];
-  /** @var array Tasks to do at the start of a turn */
+  /** @var callable[] */
   public $onRoundStart = [];
-  /** @var array Tasks to do during a round */
+  /** @var callable[] */
   public $onRound = [];
-  /** @var array Tasks to do at the end of a turn */
+  /** @var callable[] */
   public $onRoundEnd = [];
-  /** @var array Tasks to do at attack */
+  /** @var callable[] */
   public $onAttack = [];
-  /** @var array Tasks to do at skill attack */
+  /** @var callable[] */
   public $onSkillAttack = [];
-  /** @var array Tasks to do when using special skill */
+  /** @var callable[] */
   public $onSkillSpecial = [];
-  /** @var array Tasks to do at healing */
+  /** @var callable[] */
   public $onHeal = [];
   /** @var array|NULL Temporary variable for results of an action */
   protected $results;
