@@ -9,10 +9,16 @@ namespace HeroesofAbenez\Presenters;
    * @author Jakub Konečný
    */
 class ProfilePresenter extends BasePresenter {
-  /** @var \HeroesofAbenez\Model\Profile @autowire */
+  /** @var \HeroesofAbenez\Model\Profile */
   protected $model;
-  /** @var \HeroesofAbenez\Model\Guild @autowire */
+  /** @var \HeroesofAbenez\Model\Guild */
   protected $guildModel;
+  
+  public function __construct(\HeroesofAbenez\Model\Profile $model, \HeroesofAbenez\Model\Guild $guildModel) {
+    parent::__construct();
+    $this->model = $model;
+    $this->guildModel = $guildModel;
+  }
   
   public function actionDefault(): void {
     $this->forward("view", $this->user->id);

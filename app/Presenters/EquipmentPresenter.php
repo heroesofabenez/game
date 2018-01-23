@@ -9,10 +9,16 @@ namespace HeroesofAbenez\Presenters;
  * @author Jakub Konečný
  */
 class EquipmentPresenter extends BasePresenter {
-  /** @var \HeroesofAbenez\Model\Equipment @autowire */
+  /** @var \HeroesofAbenez\Model\Equipment */
   protected $model;
-  /** @var \HeroesofAbenez\Model\Profile @autowire */
+  /** @var \HeroesofAbenez\Model\Profile */
   protected $profileModel;
+  
+  public function __construct(\HeroesofAbenez\Model\Equipment $model, \HeroesofAbenez\Model\Profile $profileModel) {
+    parent::__construct();
+    $this->model = $model;
+    $this->profileModel = $profileModel;
+  }
   
   public function renderView(int $id): void {
     $item = $this->model->view($id);

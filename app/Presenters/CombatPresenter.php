@@ -9,8 +9,13 @@ namespace HeroesofAbenez\Presenters;
  * @author Jakub Konečný
  */
 class CombatPresenter extends BasePresenter {
-  /** @var \HeroesofAbenez\Model\CombatLogManager @autowire */
+  /** @var \HeroesofAbenez\Model\CombatLogManager */
   protected $log;
+  
+  public function __construct(\HeroesofAbenez\Model\CombatLogManager $log) {
+    parent::__construct();
+    $this->log = $log;
+  }
   
   public function actionView(int $id): void {
     $combat = $this->log->read($id);

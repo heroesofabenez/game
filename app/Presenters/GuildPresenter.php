@@ -28,10 +28,18 @@ use Nette\Application\UI\Form,
    * @author Jakub Konečný
    */
 class GuildPresenter extends BasePresenter {
-  /** @var \HeroesofAbenez\Model\Guild @autowire */
+  /** @var \HeroesofAbenez\Model\Guild */
   protected $model;
-  /** @var \HeroesofAbenez\Model\Permissions @autowire */
+  /** @var \HeroesofAbenez\Model\Permissions */
   protected $permissionsModel;
+  
+  /**
+   */
+  public function __construct(\HeroesofAbenez\Model\Guild $model, \HeroesofAbenez\Model\Permissions $permissionsModel) {
+    parent::__construct();
+    $this->model = $model;
+    $this->permissionsModel = $permissionsModel;
+  }
   
   /**
    * Redirect player to guild page if he is already in guild

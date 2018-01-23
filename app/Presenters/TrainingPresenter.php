@@ -19,13 +19,14 @@ use HeroesofAbenez\Model\InvalidStatException,
 class TrainingPresenter extends BasePresenter {
   /** @var \HeroesofAbenez\Model\Profile */
   protected $model;
-  /** @var \HeroesofAbenez\Model\Skills @autowire */
+  /** @var \HeroesofAbenez\Model\Skills */
   protected $skillsModel;
   
-  public function __construct(\HeroesofAbenez\Model\Profile $model, \Nette\Security\User $user) {
+  public function __construct(\HeroesofAbenez\Model\Profile $model, \HeroesofAbenez\Model\Skills $skillsModel, \Nette\Security\User $user) {
     parent::__construct();
     $this->model = $model;
     $this->model->user = $user;
+    $this->skillsModel = $skillsModel;
   }
   
   public function renderDefault(): void {

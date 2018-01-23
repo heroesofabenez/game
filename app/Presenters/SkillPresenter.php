@@ -9,8 +9,13 @@ namespace HeroesofAbenez\Presenters;
  * @author Jakub Konečný
  */
 class SkillPresenter extends BasePresenter {
-  /** @var \HeroesofAbenez\Model\Skills @autowire */
+  /** @var \HeroesofAbenez\Model\Skills */
   protected $model;
+  
+  public function __construct(\HeroesofAbenez\Model\Skills $model) {
+    parent::__construct();
+    $this->model = $model;
+  }
   
   protected function startup(): void {
     parent::startup();

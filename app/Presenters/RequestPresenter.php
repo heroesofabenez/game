@@ -15,8 +15,13 @@ use HeroesofAbenez\Model\RequestNotFoundException,
  * @author Jakub Konečný
  */
 class RequestPresenter extends BasePresenter {
-  /** @var \HeroesofAbenez\Model\Request @autowire */
+  /** @var \HeroesofAbenez\Model\Request */
   protected $model;
+  
+  public function __construct(\HeroesofAbenez\Model\Request $model) {
+    parent::__construct();
+    $this->model = $model;
+  }
   
   /**
    * Page /request does not exist

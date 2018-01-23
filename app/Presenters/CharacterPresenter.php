@@ -13,14 +13,20 @@ use HeroesofAbenez\Forms\CreateCharacterFormFactory,
    * @author Jakub Konečný
    */
 class CharacterPresenter extends BasePresenter {
-  /** @var \HeroesofAbenez\Model\Profile @autowire */
+  /** @var \HeroesofAbenez\Model\Profile */
   protected $model;
-  /** @var \HeroesofAbenez\Model\UserManager @autowire */
+  /** @var \HeroesofAbenez\Model\UserManager */
   protected $userManager;
   /** @var ICollection|\HeroesofAbenez\Orm\CharacterClass[] */
   protected $classes;
   /** @var ICollection|\HeroesofAbenez\Orm\CharacterRace[] */
   protected $races;
+  
+  public function __construct(\HeroesofAbenez\Model\Profile $model, \HeroesofAbenez\Model\UserManager $userManager) {
+    parent::__construct();
+    $this->model = $model;
+    $this->userManager = $userManager;
+  }
   
   /**
    * Get list of races of classes

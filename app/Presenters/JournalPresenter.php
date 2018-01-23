@@ -19,14 +19,24 @@ use HeroesofAbenez\Model\NotEnoughExperiencesException,
  * @author Jakub Konečný
  */
 class JournalPresenter extends BasePresenter {
-  /** @var \HeroesofAbenez\Model\Journal @autowire */
+  /** @var \HeroesofAbenez\Model\Journal */
   protected $model;
-  /** @var \HeroesofAbenez\Model\Profile @autowire */
+  /** @var \HeroesofAbenez\Model\Profile */
   protected $profileModel;
-  /** @var \HeroesofAbenez\Model\Equipment @autowire */
+  /** @var \HeroesofAbenez\Model\Equipment */
   protected $equipmentModel;
-  /** @var \HeroesofAbenez\Model\Pet @autowire */
+  /** @var \HeroesofAbenez\Model\Pet */
   protected $petModel;
+  
+  /**
+   */
+  public function __construct(\HeroesofAbenez\Model\Journal $model, \HeroesofAbenez\Model\Profile $profileModel, \HeroesofAbenez\Model\Equipment $equipmentModel, \HeroesofAbenez\Model\Pet $petModel) {
+    parent::__construct();
+    $this->model = $model;
+    $this->profileModel = $profileModel;
+    $this->equipmentModel = $equipmentModel;
+    $this->petModel = $petModel;
+  }
   
   public function renderDefault(): void {
     $stats = $this->model->basic();

@@ -12,8 +12,13 @@ use HeroesofAbenez\Model\StageNotFoundException,
    * @author Jakub Konečný
    */
 class TravelPresenter extends BasePresenter {
-  /** @var \HeroesofAbenez\Model\Location @autowire */
+  /** @var \HeroesofAbenez\Model\Location */
   protected $model;
+  
+  public function __construct(\HeroesofAbenez\Model\Location $model) {
+    parent::__construct();
+    $this->model = $model;
+  }
   
   public function renderDefault(): void {
     $this->redirect("Map:local");

@@ -17,10 +17,15 @@ use HeroesofAbenez\NPC\INPCDialogueControlFactory,
  * @author Jakub Konečný
  */
 class NpcPresenter extends BasePresenter {
-  /** @var \HeroesofAbenez\Model\NPC @autowire */
+  /** @var \HeroesofAbenez\Model\NPC */
   protected $model;
   /** @var Npc */
   protected $npc;
+  
+  public function __construct(\HeroesofAbenez\Model\NPC $model) {
+    parent::__construct();
+    $this->model = $model;
+  }
   
   public function startup(): void {
     parent::startup();

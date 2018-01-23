@@ -9,8 +9,13 @@ namespace HeroesofAbenez\Presenters;
  * @author Jakub Konečný
  */
 class ItemPresenter extends BasePresenter {
-  /**  @var \HeroesofAbenez\Model\Item @autowire */
+  /**  @var \HeroesofAbenez\Model\Item */
   protected $model;
+  
+  public function __construct(\HeroesofAbenez\Model\Item $model) {
+    parent::__construct();
+    $this->model = $model;
+  }
   
   public function renderView(int $id): void {
     $item = $this->model->view($id);

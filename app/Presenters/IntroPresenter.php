@@ -11,8 +11,13 @@ namespace HeroesofAbenez\Presenters;
 class IntroPresenter extends BasePresenter {
   /** @var int In which part of intro we are */
   protected $part;
-  /** @var \HeroesofAbenez\Model\Intro @autowire */
+  /** @var \HeroesofAbenez\Model\Intro */
   protected $model;
+  
+  public function __construct(\HeroesofAbenez\Model\Intro $model) {
+    parent::__construct();
+    $this->model = $model;
+  }
   
   public function startup(): void {
     $this->user->logout();

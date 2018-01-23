@@ -9,8 +9,13 @@ namespace HeroesofAbenez\Presenters;
  * @author Jakub Konečný
  */
 class MapPresenter extends BasePresenter {
-  /** @var \HeroesofAbenez\Model\Map @autowire */
+  /** @var \HeroesofAbenez\Model\Map */
   protected $model;
+  
+  public function __construct(\HeroesofAbenez\Model\Map $model) {
+    parent::__construct();
+    $this->model = $model;
+  }
   
   public function actionLocal(): void {
     $data = $this->model->local();
