@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "f8f5b9c7526c3357daa7be4c5626db0e",
+    "content-hash": "ac22d10a454669590ab72af9658c344a",
     "packages": [
         {
             "name": "kdyby/autowired",
@@ -1760,7 +1760,7 @@
                 }
             ],
             "description": "Simple integration testing tool for Nette Framework applications",
-            "abandoned": true,
+            "abandoned": "mangoweb/presenter-tester",
             "time": "2017-10-14T13:41:39+00:00"
         },
         {
