@@ -24,10 +24,10 @@
         "nette/utils": "~2.4",
         "tracy/tracy": "~2.4",
         "latte/latte": "~2.4",
-        "kdyby/autowired": "^1.4",
-        "nexendrie/translation": "^1.0",
-        "nexendrie/menu": "^1.2",
-        "nexendrie/utils": "^1.0",
+        "kdyby/autowired": "^1.5",
+        "nexendrie/translation": "^1.1",
+        "nexendrie/menu": "^2.0",
+        "nexendrie/utils": "^1.1",
         "nextras/orm": "^2.2"
     },
     "require-dev": {
