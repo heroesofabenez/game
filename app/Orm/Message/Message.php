@@ -12,7 +12,7 @@ namespace HeroesofAbenez\Orm;
  * @property Character $to {m:1 Character::$receivedMessages}
  * @property string $subject
  * @property string $text
- * @property \DateTime $sent
+ * @property \DateTimeImmutable $sent
  * @property-read string $sentAt {virtual}
  * @property bool $read {default false}
  */
@@ -21,8 +21,8 @@ class Message extends \Nextras\Orm\Entity\Entity {
     return $this->sent->format("Y-m-d H:i:s");
   }
   
-  protected function onBeforeInsert() {
-    $this->sent = new \DateTime;
+  public function onBeforeInsert() {
+    $this->sent = new \DateTimeImmutable;
   }
 }
 ?>

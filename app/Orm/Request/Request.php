@@ -11,7 +11,7 @@ namespace HeroesofAbenez\Orm;
  * @property Character $from {m:1 Character::$sentRequests}
  * @property Character $to {m:1 Character::$receivedRequests}
  * @property string $type {enum self::TYPE_*}
- * @property \DateTime $sent
+ * @property \DateTimeImmutable $sent
  * @property-read string $sentAt {virtual}
  * @property string $status {enum self::STATUS_*} {default self::STATUS_NEW}
  */
@@ -28,8 +28,8 @@ class Request extends \Nextras\Orm\Entity\Entity {
     return $this->sent->format("Y-m-d H:i:s");
   }
   
-  protected function onBeforeInsert() {
-    $this->sent = new \DateTime;
+  public function onBeforeInsert() {
+    $this->sent = new \DateTimeImmutable;
   }
 }
 ?>

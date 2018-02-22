@@ -12,3 +12,4 @@ parameters:
         - '#Method Nette\\Localization\\ITranslator::translate\(\) invoked with 3 parameters, 1-2 required#'
         - '#Property HeroesofAbenez\\Orm\\[a-zA-Z0-9_]+::\$[a-zA-Z0-9_]+ \(HeroesofAbenez\\Orm\\[a-zA-Z0-9_]+|null\) does not accept int#'
         - '#Cannot call method [a-zA-Z]+\(\) on Nette\\Application\\UI\\ITemplate\|stdClass#'
+        - '#Method HeroesofAbenez\\Orm\[a-zA-Z0-9\\_]+::[a-zA-Z0-9_]+ should return HeroesofAbenez\\Orm[a-zA-Z0-9\\_]+|null but returns Nextras\\Orm\\IEntity|null#'

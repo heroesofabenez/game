@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "ac22d10a454669590ab72af9658c344a",
+    "content-hash": "5ef880dafeb9845286bc84db8712a50d",
     "packages": [
         {
             "name": "kdyby/autowired",
@@ -1272,32 +1272,33 @@
         },
         {
             "name": "nextras/dbal",
-            "version": "v2.1.0",
+            "version": "v3.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nextras/dbal.git",
-                "reference": "ffd312da8adf941376adf045567c9c021622cc11"
+                "reference": "a662e100ae6908711c5e255d2e4e93a11e363403"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nextras/dbal/zipball/ffd312da8adf941376adf045567c9c021622cc11",
-                "reference": "ffd312da8adf941376adf045567c9c021622cc11",
+                "url": "https://api.github.com/repos/nextras/dbal/zipball/a662e100ae6908711c5e255d2e4e93a11e363403",
+                "reference": "a662e100ae6908711c5e255d2e4e93a11e363403",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.5"
+                "php": ">=7.0"
             },
             "require-dev": {
-                "mockery/mockery": "~0.9",
+                "mockery/mockery": "~1.0@dev",
                 "nette/caching": "~2.2",
                 "nette/di": "~2.3",
-                "nette/tester": "~1.4 != 1.6.1",
+                "nette/tester": "~2.0.0",
+                "phpstan/phpstan-shim": "~0.9.1",
                 "tracy/tracy": "~2.3"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.1-dev"
+                    "dev-master": "3.0-dev"
                 }
             },
             "autoload": {
@@ -1325,40 +1326,41 @@
                 "dbal",
                 "nextras"
             ],
-            "time": "2016-12-09T13:10:17+00:00"
+            "time": "2017-12-23T22:30:44+00:00"
         },
         {
             "name": "nextras/orm",
-            "version": "v2.2.3",
+            "version": "v3.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nextras/orm.git",
-                "reference": "5ac3ab77bbc8710338ec9e273224269a297ef6b1"
+                "reference": "dfca60dee64a0cf345a6e1a4962749d397f74bf5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nextras/orm/zipball/5ac3ab77bbc8710338ec9e273224269a297ef6b1",
-                "reference": "5ac3ab77bbc8710338ec9e273224269a297ef6b1",
+                "url": "https://api.github.com/repos/nextras/orm/zipball/dfca60dee64a0cf345a6e1a4962749d397f74bf5",
+                "reference": "dfca60dee64a0cf345a6e1a4962749d397f74bf5",
                 "shasum": ""
             },
             "require": {
                 "nette/caching": "~2.2",
-                "nette/reflection": "~2.2",
                 "nette/tokenizer": "~2.2",
-                "nette/utils": "~2.2",
-                "nextras/dbal": "~2.0",
-                "php": ">=5.6"
+                "nette/utils": "~2.4 >=2.4.3",
+                "nextras/dbal": "~3.0@dev",
+                "php": ">=7.0"
             },
             "require-dev": {
-                "mockery/mockery": "~0.9",
+                "mockery/mockery": "~1.0@dev",
                 "nette/bootstrap": "~2.3",
-                "nette/tester": "~1.4",
+                "nette/tester": "~2.0.0",
+                "phpstan/phpstan-nette": "~0.9",
+                "phpstan/phpstan-shim": "~0.9.1",
                 "tracy/tracy": "~2.3"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.2-dev"
+                    "dev-master": "3.0-dev"
                 }
             },
             "autoload": {
@@ -1386,7 +1388,7 @@
                 "nextras",
                 "orm"
             ],
-            "time": "2017-02-19T22:29:06+00:00"
+            "time": "2018-02-21T16:04:32+00:00"
         },
         {
             "name": "tracy/tracy",

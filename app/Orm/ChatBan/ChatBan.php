@@ -9,14 +9,14 @@ namespace HeroesofAbenez\Orm;
  * @author Jakub Konečný
  * @property int $id {primary}
  * @property Character $character {m:1 Character::$chatBans}
- * @property \DateTime $since
- * @property \DateTime $till
+ * @property \DateTimeImmutable $since
+ * @property \DateTimeImmutable $till
  * @property string $reason
- * @property \DateTime|NULL $revoken {default NULL}
+ * @property \DateTimeImmutable|NULL $revoken {default NULL}
  */
 class ChatBan extends \Nextras\Orm\Entity\Entity {
-  protected function onBeforeInsert() {
-    $this->since = new \DateTime;
+  public function onBeforeInsert() {
+    $this->since = new \DateTimeImmutable;
   }
 }
 ?>

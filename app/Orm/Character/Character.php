@@ -32,7 +32,7 @@ use Nextras\Orm\Relationships\OneHasMany;
  * @property int|NULL $neutralKarma {default 0}
  * @property int|NULL $darkKarma {default 0}
  * @property int|NULL $intro {default 1}
- * @property \DateTime|NULL $joined
+ * @property \DateTimeImmutable|NULL $joined
  * @property float $statPoints {default 0}
  * @property int $skillPoints {default 0}
  * @property OneHasMany|Request[] $sentRequests {1:m Request::$from}
@@ -62,8 +62,8 @@ class Character extends \Nextras\Orm\Entity\Entity {
     return $value;
   }
   
-  protected function onBeforeInsert() {
-    $this->joined = new \DateTime;
+  public function onBeforeInsert() {
+    $this->joined = new \DateTimeImmutable;
   }
 }
 ?>
