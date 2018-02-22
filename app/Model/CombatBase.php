@@ -214,8 +214,8 @@ class CombatBase {
    * Apply effects from worn items
    */
   public function equipItems(): void {
+    /** @var Character[] $characters */
     $characters = array_merge($this->team1->items, $this->team2->items);
-    /** @var Character $character */
     foreach($characters as $character) {
       foreach($character->equipment as $item) {
         if($item->worn) {
@@ -229,8 +229,8 @@ class CombatBase {
    * Set skills' cooldowns
    */
   public function setSkillsCooldowns(): void {
+    /** @var Character[] $characters */
     $characters = array_merge($this->team1->items, $this->team2->items);
-    /** @var Character $character */
     foreach($characters as $character) {
       foreach($character->skills as $skill) {
         $skill->resetCooldown();
@@ -242,8 +242,8 @@ class CombatBase {
    * Decrease skills' cooldowns
    */
   public function decreaseSkillsCooldowns(): void {
+    /** @var Character[] $characters */
     $characters = array_merge($this->team1->items, $this->team2->items);
-    /** @var Character $character */
     foreach($characters as $character) {
       foreach($character->skills as $skill) {
         $skill->decreaseCooldown();
@@ -255,8 +255,8 @@ class CombatBase {
    * Remove combat effects from character at the end of the combat
    */
   public function removeCombatEffects(): void {
+    /** @var Character[] $characters */
     $characters = array_merge($this->team1->items, $this->team2->items);
-    /** @var Character $character */
     foreach($characters as $character) {
       foreach($character->effects as $effect) {
         if($effect->duration === "combat" OR is_int($effect->duration)) {
@@ -292,8 +292,8 @@ class CombatBase {
    * Decrease duration of effects and recalculate stats
    */
   public function recalculateStats(): void {
+    /** @var Character[] $characters */
     $characters = array_merge($this->team1->items, $this->team2->items);
-    /** @var Character $character */
     foreach($characters as $character) {
       $character->recalculateStats();
       if($character->hitpoints > 0) {
@@ -395,6 +395,7 @@ class CombatBase {
    * Main stage of a round
    */
   public function mainStage(): void {
+    /** @var Character[] $characters */
     $characters = array_merge($this->team1->usableMembers, $this->team2->usableMembers);
     usort($characters, function(Character $a, Character $b) {
       return -1 * strcmp((string) $a->initiative, (string) $b->initiative);
