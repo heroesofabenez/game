@@ -3,7 +3,8 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Entities;
 
-use Nexendrie\Utils\Collection;
+use Nexendrie\Utils\Collection,
+    Nette\Utils\Arrays;
 
 /**
  * Structure for a team in combat
@@ -57,12 +58,9 @@ class Team extends Collection {
    * @param string|int $id Character's id
    */
   public function hasMember($id): bool {
-    foreach($this->items as $member) {
-      if($member->id === $id) {
-        return true;
-      }
-    }
-    return false;
+    return Arrays::some($this->items, function(Character $value) use($id) {
+      return ($value->id === $id);
+    });
   }
   
   /**
@@ -71,13 +69,9 @@ class Team extends Collection {
    * @return Character[]
    */
   public function getActiveMembers(): array {
-    $return = [];
-    foreach($this->items as $member) {
-      if(!$member->stunned AND $member->hitpoints > 0) {
-        $return[] = $member;
-      }
-    }
-    return $return;
+    return array_values(array_filter($this->items, function(Character $value) {
+      return (!$value->stunned AND $value->hitpoints > 0);
+    }));
   }
   
   /**
@@ -86,13 +80,9 @@ class Team extends Collection {
    * @return Character[]
    */
   public function getAliveMembers(): array {
-    $return = [];
-    foreach($this->items as $member) {
-      if($member->hitpoints > 0) {
-        $return[] = $member;
-      }
-    }
-    return $return;
+    return array_values(array_filter($this->items, function(Character $value) {
+      return ($value->hitpoints > 0);
+    }));
   }
   
   /**
@@ -101,13 +91,9 @@ class Team extends Collection {
    * @return Character[]
    */
   public function getUsableMembers(): array {
-    $return = [];
-    foreach($this->items as $index => $member) {
-      if(!$member->stunned AND $member->hitpoints > 0) {
-        $return[] = $member;
-      }
-    }
-    return $return;
+    return array_values(array_filter($this->items, function(Character $value) {
+      return (!$value->stunned AND $value->hitpoints > 0);
+    }));
   }
   
   /**
