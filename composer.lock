@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "5ef880dafeb9845286bc84db8712a50d",
+    "content-hash": "c2c28fbe160ee54637bab18c2d258b12",
     "packages": [
         {
             "name": "kdyby/autowired",
@@ -2536,7 +2536,7 @@
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
-        "php": ">=7.1.0",
+        "php": ">=7.2.0",
         "lib-curl": "*",
         "ext-spl": "*"
     },
