@@ -5,6 +5,12 @@
   <p>{$champion->gender}, {_"texts.profile.level"} {$champion->level} {_"races.$champion->race.name"} {_"classes.$champion->occupation.name"}</p>
   <p>{_"texts.profile.baseStats"}<br>{_"texts.profile.strength"} {$champion->strength}, {_"texts.profile.dexterity"} {$champion->dexterity}, {_"texts.profile.constitution"} {$champion->constitution}<br>
 {_"texts.profile.intelligence"} {$champion->intelligence}, {_"texts.profile.charisma"} {$champion->charisma}</p>
+  {if count($champion->equipment) > 0}
+  <p>{_"texts.journal.equipment"}</p>
+  <ul n:inner-foreach="$champion->equipment as $equipment">
+    <li><a href="{plink Equipment:view $equipment->id}">{_"equipment.$equipment->id.name"}</a></li>
+  </ul>
+  {/if}
   {if $champion->skills}
   <p>{_"texts.arena.usesSkills"}</p>
   <ul n:inner-foreach="$champion->skills as $skill">
