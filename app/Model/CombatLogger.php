@@ -6,7 +6,8 @@ namespace HeroesofAbenez\Model;
 use HeroesofAbenez\Entities\Character as CharacterEntity,
     HeroesofAbenez\Entities\CombatAction,
     HeroesofAbenez\Entities\Team,
-    Nette\Bridges\ApplicationLatte\ILatteFactory;
+    Nette\Bridges\ApplicationLatte\ILatteFactory,
+    Nette\Localization\ITranslator;
 
 /**
  * Combat log
@@ -19,6 +20,8 @@ class CombatLogger implements \Countable, \IteratorAggregate {
   
   /** @var \Latte\Engine */
   protected $latte;
+  /** @var ITranslator */
+  protected $translator;
   /** @var Team First team */
   protected $team1;
   /** @var Team Second team */
@@ -28,8 +31,9 @@ class CombatLogger implements \Countable, \IteratorAggregate {
   /** @var int */
   protected $round;
   
-  public function __construct(ILatteFactory $latteFactory) {
+  public function __construct(ILatteFactory $latteFactory, ITranslator $translator) {
     $this->latte = $latteFactory->create();
+    $this->translator = $translator;
   }
   
   /**
@@ -55,7 +59,7 @@ class CombatLogger implements \Countable, \IteratorAggregate {
    * Adds new entry
    */
   public function log($action, $result, CharacterEntity $character1, CharacterEntity $character2, int $amount = 0, string $name = ""): void {
-    $this->actions[$this->round][] = new CombatAction($action, $result, $character1, $character2, $amount, $name);
+    $this->actions[$this->round][] = new CombatAction($this->translator, $action, $result, $character1, $character2, $amount, $name);
   }
   
   /**

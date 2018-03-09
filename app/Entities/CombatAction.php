@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Entities;
 
+use Nette\Localization\ITranslator;
+
 /**
  * Data structure for combat action
  *
@@ -18,6 +20,8 @@ namespace HeroesofAbenez\Entities;
 class CombatAction {
   use \Nette\SmartObject;
   
+  /** @var ITranslator */
+  protected $translator;
   /** @var Character */
   protected $character1;
   /** @var Character */
@@ -33,11 +37,12 @@ class CombatAction {
   /** @var string */
   protected $message;
   
-  public function __construct(string $action, bool $result, Character $character1, Character $character2, int $amount = 0, string $name = "") {
+  public function __construct(ITranslator $translator, string $action, bool $result, Character $character1, Character $character2, int $amount = 0, string $name = "") {
     $actions = ["attack", "skill_attack", "skill_special", "healing", "poison",];
     if(!in_array($action, $actions, true)) {
       exit("Invalid value for action passed to CombatAction::__construct.");
     }
+    $this->translator = $translator;
     $this->action = $action;
     $this->result = $result;
     $this->amount = $amount;
@@ -76,40 +81,46 @@ class CombatAction {
   }
   
   protected function parse(): void {
-    $text = $this->character1->name . " ";
+    $character1 = $this->character1->name;
+    $character2 = $this->character2->name;
+    $text = "";
     switch($this->action) {
       case "attack":
-      case "skill_attack":
-        if($this->action === "attack") {
-          $text .= "attacks {$this->character2->name} ";
-        } else {
-          $text .= "uses attack $this->name on {$this->character2->name} ";
-        }
         if($this->result) {
-          $text .= " and hits. {$this->character2->name} loses $this->amount hitpoint(s).";
+          $text = $this->translator->translate("texts.combatLog.attackHits", $this->amount, ["character1" => $character1, "character2" => $character2]);
           if($this->character2->hitpoints < 1) {
-            $text .= " He/she falls on the ground.";
+            $text .= $this->translator->translate("texts.combatLog.characterFalls");
           }
         } else {
-          $text .= "but misses.";
+          $text = $this->translator->translate("texts.combatLog.attackFails", $this->amount, ["character1" => $character1, "character2" => $character2]);
+        }
+        break;
+      case "skill_attack":
+        if($this->result) {
+          $text = $this->translator->translate("texts.combatLog.specialAttackHits", $this->amount, ["character1" => $character1, "character2" => $character2, "name" => $this->name]);
+          if($this->character2->hitpoints < 1) {
+            $text .= $this->translator->translate("texts.combatLog.characterFalls");
+          }
+        } else {
+          $text = $this->translator->translate("texts.combatLog.specialAttackFails", $this->amount, ["character1" => $character1, "character2" => $character2, "name" => $this->name]);
         }
         break;
       case "skill_special":
         if($this->result) {
-          $text .= "successfully casts $this->name on {$this->character2->name}.";
+          $text = $this->translator->translate("texts.combatLog.specialSkillSuccess", 0, ["character1" => $character1, "character2" => $character2, "name" => $this->name]);
         } else {
-          $text .= "tries to cast $this->name on {$this->character2->name} but fails.";
+          $text = $this->translator->translate("texts.combatLog.specialSKillFailure", 0, ["character1" => $character1, "character2" => $character2, "name" => $this->name]);
         }
         break;
       case "healing":
         if($this->result) {
-          $text .= "heals {$this->character2->name} for $this->amount hitpoint(s).";
+          $text = $this->translator->translate("texts.combatLog.healingSuccess", $this->amount, ["character1" => $character1, "character2" => $character2]);
         } else {
-          $text .= "tries to heal {$this->character2->name} but fails.";
+          $text = $this->translator->translate("texts.combatLog.healingFailure", $this->amount, ["character1" => $character1, "character2" => $character2]);
         }
         break;
       case "poison":
-        $text .= " loses $this->amount hitpoint(s) due to poison.";
+        $text = $this->translator->translate("texts.combatLog.poison", $this->amount, ["character1" => $character1]);
         break;
     }
     $this->message =  $text;
