@@ -105,7 +105,6 @@ INSERT INTO `quest_stages` (`id`, `name`, `description`, `required_level`, `requ
 (2,	'Hall',	'x',	0,	NULL,	3,	1,	115,	215),
 (3,	'Library',	'x',	0,	NULL,	3,	1,	119,	37);
 
-
 INSERT INTO `routes_stages` (`id`, `from`, `to`) VALUES
 (1,	1,	2),
 (2,	1,	3),

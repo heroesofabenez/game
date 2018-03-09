@@ -15,7 +15,6 @@ INSERT INTO `character_equipment` (`id`, `character`, `item`, `amount`, `worn`) 
 INSERT INTO `character_quests` (`id`, `character`, `quest`, `progress`) VALUES
 (1,	1,	1,	1);
 
-
 INSERT INTO `chat_messages` (`id`, `message`, `character`, `area`, `stage`, `guild`, `when`) VALUES
   (1,	'Test message',	1,	NULL,	NULL,	1,	'2015-06-10 16:13:06'),
   (2,	'Hello world!',	1,	NULL,	NULL,	1,	'2015-06-10 16:34:27'),
@@ -52,4 +51,3 @@ INSERT INTO `guild_ranks_custom` (`id`, `guild`, `rank`, `name`) VALUES
   (5,	1,	5,	'Sun noble'),
   (6,	1,	6,	'Sun prince'),
   (7,	1,	7,	'Sun ruler');
-

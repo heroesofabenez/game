@@ -47,7 +47,6 @@ CREATE TABLE `characters` (
   CONSTRAINT `characters_ibfk_9` FOREIGN KEY (`race`) REFERENCES `character_races` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-
 CREATE TABLE `character_attack_skills` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `character` int(11) NOT NULL,
@@ -59,7 +58,6 @@ CREATE TABLE `character_attack_skills` (
   CONSTRAINT `character_attack_skills_ibfk_1` FOREIGN KEY (`character`) REFERENCES `characters` (`id`),
   CONSTRAINT `character_attack_skills_ibfk_2` FOREIGN KEY (`skill`) REFERENCES `skills_attacks` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
 
 CREATE TABLE `character_classes` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -80,7 +78,6 @@ CREATE TABLE `character_classes` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-
 CREATE TABLE `character_equipment` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `character` int(11) NOT NULL,
@@ -94,7 +91,6 @@ CREATE TABLE `character_equipment` (
   CONSTRAINT `character_equipment_ibfk_3` FOREIGN KEY (`item`) REFERENCES `equipment` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
-
 CREATE TABLE `character_items` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `character` int(11) NOT NULL,
@@ -106,7 +102,6 @@ CREATE TABLE `character_items` (
   CONSTRAINT `character_items_ibfk_1` FOREIGN KEY (`character`) REFERENCES `characters` (`id`),
   CONSTRAINT `character_items_ibfk_2` FOREIGN KEY (`item`) REFERENCES `items` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
 
 CREATE TABLE `character_quests` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -120,7 +115,6 @@ CREATE TABLE `character_quests` (
   CONSTRAINT `character_quests_ibfk_2` FOREIGN KEY (`quest`) REFERENCES `quests` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
-
 CREATE TABLE `character_races` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(10) NOT NULL,
@@ -132,7 +126,6 @@ CREATE TABLE `character_races` (
   `charisma` int(2) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
 
 CREATE TABLE `character_specializations` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -149,7 +142,6 @@ CREATE TABLE `character_specializations` (
   CONSTRAINT `character_specializations_ibfk_1` FOREIGN KEY (`class`) REFERENCES `character_classes` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-
 CREATE TABLE `character_special_skills` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `character` int(11) NOT NULL,
@@ -162,7 +154,6 @@ CREATE TABLE `character_special_skills` (
   CONSTRAINT `character_special_skills_ibfk_2` FOREIGN KEY (`skill`) REFERENCES `skills_specials` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-
 CREATE TABLE `chat_bans` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `character` int(11) NOT NULL,
@@ -174,7 +165,6 @@ CREATE TABLE `chat_bans` (
   KEY `character` (`character`),
   CONSTRAINT `chat_bans_ibfk_1` FOREIGN KEY (`character`) REFERENCES `characters` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
 
 CREATE TABLE `chat_messages` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -195,14 +185,12 @@ CREATE TABLE `chat_messages` (
   CONSTRAINT `chat_messages_ibfk_4` FOREIGN KEY (`guild`) REFERENCES `guilds` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-
 CREATE TABLE `combats` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `text` longtext NOT NULL,
   `when` int(11) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
 
 CREATE TABLE `equipment` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -220,7 +208,6 @@ CREATE TABLE `equipment` (
   CONSTRAINT `equipment_ibfk_1` FOREIGN KEY (`required_class`) REFERENCES `character_classes` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-
 CREATE TABLE `guilds` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(20) NOT NULL,
@@ -228,7 +215,6 @@ CREATE TABLE `guilds` (
   `money` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
 
 CREATE TABLE `guild_privileges` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -240,14 +226,12 @@ CREATE TABLE `guild_privileges` (
   CONSTRAINT `guild_privileges_ibfk_1` FOREIGN KEY (`rank`) REFERENCES `guild_ranks` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
-
 CREATE TABLE `guild_ranks` (
   `id` int(1) NOT NULL AUTO_INCREMENT,
   `name` varchar(15) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
 
 CREATE TABLE `guild_ranks_custom` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -260,7 +244,6 @@ CREATE TABLE `guild_ranks_custom` (
   CONSTRAINT `guild_ranks_custom_ibfk_8` FOREIGN KEY (`rank`) REFERENCES `guild_ranks` (`id`),
   CONSTRAINT `guild_ranks_custom_ibfk_9` FOREIGN KEY (`guild`) REFERENCES `guilds` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
 
 CREATE TABLE `introduction` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -275,7 +258,6 @@ CREATE TABLE `introduction` (
   CONSTRAINT `introduction_ibfk_2` FOREIGN KEY (`class`) REFERENCES `character_classes` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
-
 CREATE TABLE `items` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(25) COLLATE utf8_unicode_ci NOT NULL,
@@ -284,7 +266,6 @@ CREATE TABLE `items` (
   `price` int(3) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
 
 CREATE TABLE `messages` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -300,7 +281,6 @@ CREATE TABLE `messages` (
   CONSTRAINT `messages_ibfk_1` FOREIGN KEY (`from`) REFERENCES `characters` (`id`),
   CONSTRAINT `messages_ibfk_2` FOREIGN KEY (`to`) REFERENCES `characters` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
 
 CREATE TABLE `npcs` (
   `id` int(3) NOT NULL AUTO_INCREMENT,
@@ -320,7 +300,6 @@ CREATE TABLE `npcs` (
   CONSTRAINT `npcs_ibfk_2` FOREIGN KEY (`race`) REFERENCES `character_races` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-
 CREATE TABLE `pets` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `type` int(2) NOT NULL,
@@ -333,7 +312,6 @@ CREATE TABLE `pets` (
   CONSTRAINT `pets_ibfk_1` FOREIGN KEY (`type`) REFERENCES `pet_types` (`id`),
   CONSTRAINT `pets_ibfk_2` FOREIGN KEY (`owner`) REFERENCES `characters` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
 
 CREATE TABLE `pet_types` (
   `id` int(2) NOT NULL AUTO_INCREMENT,
@@ -352,7 +330,6 @@ CREATE TABLE `pet_types` (
   CONSTRAINT `pet_types_ibfk_1` FOREIGN KEY (`required_class`) REFERENCES `character_classes` (`id`),
   CONSTRAINT `pet_types_ibfk_2` FOREIGN KEY (`required_race`) REFERENCES `character_races` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
 
 CREATE TABLE `pve_arena_opponents` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -375,7 +352,6 @@ CREATE TABLE `pve_arena_opponents` (
   CONSTRAINT `pve_arena_opponents_ibfk_2` FOREIGN KEY (`race`) REFERENCES `character_races` (`id`),
   CONSTRAINT `pve_arena_opponents_ibfk_3` FOREIGN KEY (`weapon`) REFERENCES `equipment` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
 
 CREATE TABLE `quests` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -403,7 +379,6 @@ CREATE TABLE `quests` (
   CONSTRAINT `quests_ibfk_3` FOREIGN KEY (`reward_item`) REFERENCES `items` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-
 CREATE TABLE `quest_areas` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(30) NOT NULL,
@@ -419,7 +394,6 @@ CREATE TABLE `quest_areas` (
   CONSTRAINT `quest_areas_ibfk_1` FOREIGN KEY (`required_occupation`) REFERENCES `character_classes` (`id`),
   CONSTRAINT `quest_areas_ibfk_2` FOREIGN KEY (`required_race`) REFERENCES `character_races` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
 
 CREATE TABLE `quest_stages` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -440,7 +414,6 @@ CREATE TABLE `quest_stages` (
   CONSTRAINT `quest_stages_ibfk_3` FOREIGN KEY (`required_race`) REFERENCES `character_races` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-
 CREATE TABLE `requests` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `from` int(11) NOT NULL,
@@ -453,7 +426,6 @@ CREATE TABLE `requests` (
   KEY `to` (`to`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-
 CREATE TABLE `routes_areas` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `from` int(11) NOT NULL,
@@ -464,7 +436,6 @@ CREATE TABLE `routes_areas` (
   CONSTRAINT `routes_areas_ibfk_1` FOREIGN KEY (`from`) REFERENCES `quest_areas` (`id`),
   CONSTRAINT `routes_areas_ibfk_2` FOREIGN KEY (`to`) REFERENCES `quest_areas` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
 
 CREATE TABLE `routes_stages` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -477,7 +448,6 @@ CREATE TABLE `routes_stages` (
   CONSTRAINT `routes_stages_ibfk_2` FOREIGN KEY (`to`) REFERENCES `quest_stages` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
-
 CREATE TABLE `shop_items` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `npc` int(3) NOT NULL,
@@ -489,7 +459,6 @@ CREATE TABLE `shop_items` (
   CONSTRAINT `shop_items_ibfk_1` FOREIGN KEY (`npc`) REFERENCES `npcs` (`id`),
   CONSTRAINT `shop_items_ibfk_2` FOREIGN KEY (`item`) REFERENCES `items` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
 
 CREATE TABLE `skills_attacks` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -510,7 +479,6 @@ CREATE TABLE `skills_attacks` (
   CONSTRAINT `skills_attacks_ibfk_1` FOREIGN KEY (`needed_class`) REFERENCES `character_classes` (`id`),
   CONSTRAINT `skills_attacks_ibfk_2` FOREIGN KEY (`needed_specialization`) REFERENCES `character_specializations` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
 
 CREATE TABLE `skills_specials` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
