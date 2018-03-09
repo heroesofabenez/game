@@ -34,7 +34,7 @@ class SkillAttacksRepository extends \Nextras\Orm\Repository\Repository {
   public function findByClassAndLevel($class, int $level): ICollection {
     return $this->findBy([
       "neededClass" => $class,
-      "neededLevel>=" => $level
+      "neededLevel<=" => $level
     ]);
   }
 }
