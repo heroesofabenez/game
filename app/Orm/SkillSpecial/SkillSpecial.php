@@ -38,11 +38,11 @@ class SkillSpecial extends \Nextras\Orm\Entity\Entity {
   public const STAT_HIT = "hit";
   public const STAT_DODGE = "dodge";
   public const STAT_INITIATIVE = "initiative";
+  /** @var string[] */
+  public const NO_STAT_TYPES = [self::TYPE_STUN,];
   
   protected function setterStat(?string $value): ?string {
-    if(is_null($value)) {
-      return NULL;
-    } elseif($this->type === static::TYPE_STUN) {
+    if(in_array($value, static::NO_STAT_TYPES, true)) {
       return NULL;
     }
     return $value;

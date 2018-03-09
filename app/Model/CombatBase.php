@@ -8,7 +8,8 @@ use HeroesofAbenez\Entities\Team,
     HeroesofAbenez\Entities\CharacterEffect,
     HeroesofAbenez\Orm\CharacterAttackSkillDummy,
     HeroesofAbenez\Orm\CharacterSpecialSkillDummy,
-    HeroesofAbenez\Utils\InvalidStateException;
+    HeroesofAbenez\Utils\InvalidStateException,
+    HeroesofAbenez\Orm\SkillSpecial;
 
 /**
  * Handles combat
@@ -561,7 +562,7 @@ class CombatBase {
     $effect = [
       "id" => "skill{$skill->skill->id}Effect",
       "type" => $skill->skill->type,
-      "stat" => (($skill->skill->type === "stun") ? NULL : $skill->skill->stat),
+      "stat" => ((in_array($skill->skill->type, SkillSpecial::NO_STAT_TYPES, true)) ? NULL : $skill->skill->stat),
       "value" => $skill->value,
       "source" => "skill",
       "duration" => $skill->skill->duration

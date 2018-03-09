@@ -6,7 +6,8 @@ namespace HeroesofAbenez\Entities;
 use OutOfBoundsException,
     HeroesofAbenez\Orm\Equipment,
     HeroesofAbenez\Orm\Pet,
-    HeroesofAbenez\Orm\BaseCharacterSkill;
+    HeroesofAbenez\Orm\BaseCharacterSkill,
+    HeroesofAbenez\Orm\SkillSpecial;
 
 /**
  * Structure for single character
@@ -550,12 +551,12 @@ class Character {
       switch($effect->source) {
         case "pet":
         case "skill":
-          if($type != "stun") {
+          if(!in_array($type, SkillSpecial::NO_STAT_TYPES, true)) {
             $bonus_value = $$stat / 100 * $effect->value;
           }
   break;
         case "equipment":
-          if($type != "stun") {
+          if(!in_array($type, SkillSpecial::NO_STAT_TYPES, true)) {
             $bonus_value = $effect->value;
           }
   break;

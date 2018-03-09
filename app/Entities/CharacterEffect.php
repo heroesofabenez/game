@@ -44,17 +44,18 @@ class CharacterEffect {
     if(!in_array($effect["duration"], self::getDurations(), true) AND $effect["duration"] < 0) {
       exit("Invalid value for \$duration passed to method CharacterEffect::__construct.");
     }
-    if($effect["type"] != "stun") {
+    if(!in_array($effect["type"], SkillSpecial::NO_STAT_TYPES, true)) {
       $stats = ["strength", "dexterity", "constitution", "intelligence", "charisma", "damage", "hit", "dodge", "initiative", "defense"];
       if(!is_int($effect["value"])) {
         exit("Invalid value for \$value passed to method CharacterEffect::__construct. Expected integer.");
       }
-      if(!in_array($effect["stat"], $stats, true) OR (is_null($effect["stat"]) AND $effect["type"] === "stun")) {
+      if(!in_array($effect["stat"], $stats, true) OR (is_null($effect["stat"]))) {
         exit("Invalid value for \$stat passed to method CharacterEffect::__construct.");
       }
       $this->stat = $effect["stat"];
       $this->value = $effect["value"];
     }
+    $this->value = (int) $effect["value"];
     $this->id = $effect["id"];
     $this->type = $effect["type"];
     $this->source = $effect["source"];
