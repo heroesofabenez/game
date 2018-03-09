@@ -3,6 +3,9 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Entities;
 
+use HeroesofAbenez\Orm\SkillSpecial,
+    Nette\Utils\Strings;
+
 /**
  * Data structure for effect on character
  *
@@ -30,7 +33,7 @@ class CharacterEffect {
   protected $duration;
   
   public function __construct(array $effect) {
-    $types = ["buff", "debuff", "stun"];
+    $types = $this->getAllowedTypes();
     $sources = ["pet", "skill", "equipment"];
     if(!in_array($effect["type"], $types, true)) {
       exit("Invalid value for \$type passed to method CharacterEffect::__construct.");
@@ -56,6 +59,20 @@ class CharacterEffect {
     $this->type = $effect["type"];
     $this->source = $effect["source"];
     $this->duration = $effect["duration"];
+  }
+  
+  /**
+   * @return string[]
+   */
+  protected function getAllowedTypes(): array {
+    $types = [];
+    $constants = (new \ReflectionClass(SkillSpecial::class))->getConstants();
+    foreach($constants as $name => $value) {
+      if(Strings::startsWith($name, "TYPE_")) {
+        $types[] = $value;
+      }
+    }
+    return $types;
   }
   
   /**
