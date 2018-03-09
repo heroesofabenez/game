@@ -27,12 +27,13 @@ class SkillAttack extends \Nextras\Orm\Entity\Entity {
   public const TARGET_SINGLE = "single";
   public const TARGET_ROW = "row";
   public const TARGET_COLUMN = "column";
+  public const MAX_STRIKES = 9;
   
   protected function setterStrikes(int $value): int {
     if($value < 1) {
       return 1;
-    } elseif($value > 9) {
-      return 9;
+    } elseif($value > static::MAX_STRIKES) {
+      return static::MAX_STRIKES;
     }
     return $value;
   }
