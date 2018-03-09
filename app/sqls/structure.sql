@@ -519,7 +519,7 @@ CREATE TABLE `skills_specials` (
   `needed_class` int(11) NOT NULL,
   `needed_specialization` int(11) DEFAULT NULL,
   `needed_level` int(2) NOT NULL,
-  `type` enum('buff','debuff','stun') NOT NULL,
+  `type` enum('buff','debuff','stun', 'poison') NOT NULL,
   `target` enum('self','enemy','party','enemy_party') NOT NULL,
   `stat` enum('hp','damage','defense','hit','dodge','initiative') DEFAULT NULL,
   `value` int(2) NOT NULL DEFAULT '0',

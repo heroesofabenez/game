@@ -79,6 +79,7 @@ class CombatBase {
     $this->onCombatEnd[] = [$this, "resetInitiative"];
     $this->onRoundStart[] = [$this ,"recalculateStats"];
     $this->onRoundStart[] = [$this, "logRoundNumber"];
+    $this->onRoundStart[] = [$this, "applyPoison"];
     $this->onRound[] = [$this, "mainStage"];
     $this->onRoundEnd[] = [$this, "decreaseSkillsCooldowns"];
     $this->onRoundEnd[] = [$this, "resetInitiative"];
@@ -590,6 +591,19 @@ class CombatBase {
     $result["action"] = "healing";
     $result["name"] = "";
     $this->results = $result;
+  }
+  
+  public function applyPoison(): void {
+    /** @var Character[] $characters */
+    $characters = array_merge($this->team1->aliveMembers, $this->team2->aliveMembers);
+    foreach($characters as $character) {
+      foreach($character->effects as $effect) {
+        if($effect->type === SkillSpecial::TYPE_POISON) {
+          $character->harm($effect->value);
+          $this->log->log("poison", true, $character, $character, $effect->value);
+        }
+      }
+    }
   }
   
   /**

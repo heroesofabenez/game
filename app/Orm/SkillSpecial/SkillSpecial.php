@@ -28,6 +28,7 @@ class SkillSpecial extends \Nextras\Orm\Entity\Entity {
   public const TYPE_BUFF = "buff";
   public const TYPE_DEBUFF = "debuff";
   public const TYPE_STUN = "stun";
+  public const TYPE_POISON = "poison";
   public const TARGET_SELF = "self";
   public const TARGET_ENEMY = "enemy";
   public const TARGET_PARTY = "party";
@@ -39,7 +40,7 @@ class SkillSpecial extends \Nextras\Orm\Entity\Entity {
   public const STAT_DODGE = "dodge";
   public const STAT_INITIATIVE = "initiative";
   /** @var string[] */
-  public const NO_STAT_TYPES = [self::TYPE_STUN,];
+  public const NO_STAT_TYPES = [self::TYPE_STUN, self::TYPE_POISON,];
   
   protected function setterStat(?string $value): ?string {
     if(in_array($value, static::NO_STAT_TYPES, true)) {
