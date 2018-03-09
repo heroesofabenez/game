@@ -500,7 +500,7 @@ class CombatBase {
   /**
    * Do an attack
    * Hit chance = Attacker's hit - Defender's dodge, but at least 15%
-   * Damage = Attacker's damage
+   * Damage = Attacker's damage - defender's defense
    */
   public function attackHarm(Character $attacker, Character $defender): void {
     $result = [];
