@@ -209,18 +209,17 @@ class Skills {
     }
     /** @var \HeroesofAbenez\Orm\Character $character */
     $character = $this->orm->characters->getById($this->user->id);
-    if($skill->skill->needed_class != $character->occupation->id) {
+    if($skill->skill->neededClass != $character->occupation->id) {
       throw new CannotLearnSkillException();
-    } elseif($skill->skill->needed_specialization) {
+    } elseif($skill->skill->neededSpecialization) {
       if(is_null($character->specialization)) {
         throw new CannotLearnSkillException();
-      } elseif($skill->skill->needed_specialization != $character->specialization->id) {
+      } elseif($skill->skill->neededSpecialization != $character->specialization->id) {
         throw new CannotLearnSkillException();
       }
-    } elseif($skill->skill->needed_level > $character->level) {
+    } elseif($skill->skill->neededLevel > $character->level) {
       throw new CannotLearnSkillException();
     }
-    $character->skillPoints--;
     if($type === "attack") {
       $record = $this->orm->characterAttackSkills->getByCharacterAndSkill($this->user->id, $id);
       if(is_null($record)) {
@@ -231,6 +230,7 @@ class Skills {
         $record->level = 0;
       }
       $record->level++;
+      $record->character->skillPoints--;
       $this->orm->characterAttackSkills->persistAndFlush($record);
     } elseif($type === "special") {
       $record = $this->orm->characterSpecialSkills->getByCharacterAndSkill($this->user->id, $id);
@@ -242,6 +242,7 @@ class Skills {
         $record->level = 0;
       }
       $record->level++;
+      $record->character->skillPoints--;
       $this->orm->characterSpecialSkills->persistAndFlush($record);
     }
   }
