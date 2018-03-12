@@ -113,6 +113,10 @@ class CombatBase {
     $this->log->setTeams($team1, $team2);
   }
   
+  /**
+   * Set participants for duel
+   * Creates teams named after the member
+   */
   public function setDuelParticipants(Character $player, Character $opponent): void {
     $team1 = new Team($player->name);
     $team1[] = $player;
@@ -211,8 +215,8 @@ class CombatBase {
    * Apply pet's effects to character at the start of the combat
    */
   public function deployPets(): void {
+    /** @var Character[] $characters */
     $characters = array_merge($this->team1->items, $this->team2->items);
-    /** @var Character $character */
     foreach($characters as $character) {
       if(!is_null($character->activePet)) {
         $effect = $character->getPet($character->activePet)->deployParams;
@@ -317,15 +321,15 @@ class CombatBase {
    * Reset characters' initiative
    */
   public function resetInitiative(): void {
+    /** @var Character[] $characters */
     $characters = array_merge($this->team1->items, $this->team2->items);
-    /** @var Character $character */
     foreach($characters as $character) {
       $character->resetInitiative();
     }
   }
   
   /**
-   * Select random character of the team
+   * Select random character from the team
    */
   protected function selectRandomCharacter(Team $team): ?Character {
     if(count($team->aliveMembers) === 0) {
@@ -602,6 +606,9 @@ class CombatBase {
     $this->results = $result;
   }
   
+  /**
+   * Harm poisoned characters at start of round
+   */
   public function applyPoison(): void {
     /** @var Character[] $characters */
     $characters = array_merge($this->team1->aliveMembers, $this->team2->aliveMembers);
