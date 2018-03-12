@@ -444,7 +444,7 @@ class Character {
    */
   public function deployPet(int $petId): void {
     try {
-      $pet = $this->getPet($petId);
+      $this->getPet($petId);
     } catch(OutOfBoundsException $e) {
       throw $e;
     }
