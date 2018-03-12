@@ -7,7 +7,8 @@ use OutOfBoundsException,
     HeroesofAbenez\Orm\Equipment,
     HeroesofAbenez\Orm\Pet,
     HeroesofAbenez\Orm\BaseCharacterSkill,
-    HeroesofAbenez\Orm\SkillSpecial;
+    HeroesofAbenez\Orm\SkillSpecial,
+    HeroesofAbenez\Utils\Numbers;
 
 /**
  * Structure for single character
@@ -475,14 +476,14 @@ class Character {
    * Harm the character
    */
   public function harm(int $amount): void {
-    $this->hitpoints -= $amount;
+    $this->hitpoints -= Numbers::range($amount, 0, $this->hitpoints);
   }
   
   /**
    * Heal the character
    */
   public function heal(int $amount): void {
-    $this->hitpoints += $amount;
+    $this->hitpoints += Numbers::range($amount, 0, $this->maxHitpoints - $this->hitpoints);
   }
   
   /**

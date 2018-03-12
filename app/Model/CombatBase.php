@@ -9,7 +9,8 @@ use HeroesofAbenez\Entities\Team,
     HeroesofAbenez\Orm\CharacterAttackSkillDummy,
     HeroesofAbenez\Orm\CharacterSpecialSkillDummy,
     HeroesofAbenez\Utils\InvalidStateException,
-    HeroesofAbenez\Orm\SkillSpecial;
+    HeroesofAbenez\Orm\SkillSpecial,
+    HeroesofAbenez\Utils\Numbers;
 
 /**
  * Handles combat
@@ -185,7 +186,7 @@ class CombatBase {
     static $result = 0;
     if($result === 0) {
       $result = call_user_func($this->victoryCondition, $this);
-      $result = min(max($result, 0), 2);
+      $result = Numbers::range($result, 0, 2);
     }
     return $result;
   }
