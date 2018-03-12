@@ -504,12 +504,7 @@ class CombatBase {
     } else {
       $hit_chance = $character1->hit - $character2->dodge;
     }
-    if($hit_chance < 15) {
-      $hit_chance = 15;
-    } elseif($hit_chance > 100) {
-      $hit_chance = 100;
-    }
-    return (int) $hit_chance;
+    return Numbers::range((int) $hit_chance, 15, 100);
   }
   
   /**
