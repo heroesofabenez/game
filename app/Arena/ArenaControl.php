@@ -9,7 +9,8 @@ use Nette\Security\User,
     HeroesofAbenez\Model\CombatLogger,
     Nette\Localization\ITranslator,
     HeroesofAbenez\Entities\Character,
-    HeroesofAbenez\Model\CombatDuel,
+    HeroesofAbenez\Model\CombatBase,
+    HeroesofAbenez\Model\CombatHelper,
     HeroesofAbenez\Model\OpponentNotFoundException,
     Nextras\Orm\Collection\ICollection;
 
@@ -23,9 +24,9 @@ abstract class ArenaControl extends \Nette\Application\UI\Control {
   
   /** @var User */
   protected $user;
-  /** @var \HeroesofAbenez\Model\CombatHelper */
+  /** @var CombatHelper */
   protected $combatHelper;
-  /** @var CombatDuel */
+  /** @var CombatBase */
   protected $combat;
   /** @var CombatLogManager */
   protected $log;
@@ -36,7 +37,7 @@ abstract class ArenaControl extends \Nette\Application\UI\Control {
   /** @var string */
   protected $arena;
   
-  public function __construct(User $user, \HeroesofAbenez\Model\CombatHelper $combatHelper, CombatDuel $combat, CombatLogManager $log, ORM $orm, ITranslator $translator) {
+  public function __construct(User $user, CombatHelper $combatHelper, CombatBase $combat, CombatLogManager $log, ORM $orm, ITranslator $translator) {
     parent::__construct();
     $this->user = $user;
     $this->combatHelper = $combatHelper;
@@ -83,7 +84,7 @@ abstract class ArenaControl extends \Nette\Application\UI\Control {
       $this->presenter->redirect("this");
     }
     $player = $this->getPlayer($this->user->id);
-    $this->combat->setParticipants($player, $opponent);
+    $this->combat->setDuelParticipants($player, $opponent);
     $winner = $this->combat->execute();
     if($winner === 1) {
       $rewards = $this->calculateRewards($player, $opponent);

@@ -113,6 +113,14 @@ class CombatBase {
     $this->log->setTeams($team1, $team2);
   }
   
+  public function setDuelParticipants(Character $player, Character $opponent): void {
+    $team1 = new Team($player->name);
+    $team1[] = $player;
+    $team2 = new Team($opponent->name);
+    $team2[] = $opponent;
+    $this->setTeams($team1, $team2);
+  }
+  
   public function getVictoryCondition(): callable {
     return $this->victoryCondition;
   }
