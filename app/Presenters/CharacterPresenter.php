@@ -31,7 +31,7 @@ class CharacterPresenter extends BasePresenter {
   /**
    * Get list of races of classes
    */
-  public function startup(): void {
+  protected function startup(): void {
     parent::startup();
     $this->classes = $this->model->getClassesList();
     $this->races = $this->model->getRacesList();

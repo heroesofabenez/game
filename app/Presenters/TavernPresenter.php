@@ -12,7 +12,7 @@ use Nette\Application\UI\Form,
  * @author Jakub Konečný
  */
 class TavernPresenter extends BasePresenter {
-  public function startup(): void {
+  protected function startup(): void {
     parent::startup();
     $this->template->haveForm = true;
     $this->template->canChat = true;

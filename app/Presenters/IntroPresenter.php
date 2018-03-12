@@ -19,7 +19,7 @@ class IntroPresenter extends BasePresenter {
     $this->model = $model;
   }
   
-  public function startup(): void {
+  protected function startup(): void {
     $this->user->logout();
     parent::startup();
     $this->part = $this->template->part = $this->model->getIntroPosition();

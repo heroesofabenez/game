@@ -27,7 +27,7 @@ class NpcPresenter extends BasePresenter {
     $this->model = $model;
   }
   
-  public function startup(): void {
+  protected function startup(): void {
     parent::startup();
     if($this->action != "default" AND !in_array($this->action, ["notfound", "unavailable"], true)) {
       $npc = $this->model->view((int) $this->params["id"]);
