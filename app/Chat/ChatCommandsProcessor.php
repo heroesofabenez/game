@@ -11,7 +11,7 @@ namespace HeroesofAbenez\Chat;
 class ChatCommandsProcessor {
   use \Nette\SmartObject;
   
-  /** @var ChatCommand[] */
+  /** @var IChatCommand[] */
   protected $commands = [];
   
   /**
@@ -19,9 +19,10 @@ class ChatCommandsProcessor {
    *
    * @throws CommandNameAlreadyUsedException
    */
-  public function addCommand(ChatCommand $command): void {
-    if($this->hasCommand($command->name)) {
-      throw new CommandNameAlreadyUsedException("Command $command->name is already defined.");
+  public function addCommand(IChatCommand $command): void {
+    $name = $command->getName();
+    if($this->hasCommand($name)) {
+      throw new CommandNameAlreadyUsedException("Command $name is already defined.");
     }
     $this->commands[] = $command;
   }
@@ -39,7 +40,7 @@ class ChatCommandsProcessor {
       throw $e;
     }
     $new = clone $command;
-    $new->name = $newName;
+    $new->setName($newName);
     try {
       $this->addCommand($new);
     } catch(CommandNameAlreadyUsedException $e) {
@@ -84,7 +85,7 @@ class ChatCommandsProcessor {
    */
   public function hasCommand(string $name): bool {
     foreach($this->commands as $command) {
-      if($command->name === $name) {
+      if($command->getName() === $name) {
         return true;
       }
     }
@@ -96,9 +97,9 @@ class ChatCommandsProcessor {
    *
    * @throws CommandNotFoundException
    */
-  public function getCommand(string $name): ChatCommand {
+  public function getCommand(string $name): IChatCommand {
     foreach($this->commands as $command) {
-      if($command->name === $name) {
+      if($command->getName() === $name) {
         return $command;
       }
     }

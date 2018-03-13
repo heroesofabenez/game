@@ -166,7 +166,7 @@ class HOAExtension extends \Nette\DI\CompilerExtension {
   public function beforeCompile(): void {
     $builder = $this->getContainerBuilder();
     $processor = $builder->getDefinition($this->prefix("chat.commandsProcessor"));
-    $chatCommands = $builder->findByType(HeroesofAbenez\Chat\ChatCommand::class);
+    $chatCommands = $builder->findByType(HeroesofAbenez\Chat\IChatCommand::class);
     foreach($chatCommands as $command) {
       $processor->addSetup("addCommand", [$command]);
     }

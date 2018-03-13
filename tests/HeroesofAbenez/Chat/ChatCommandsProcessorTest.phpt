@@ -91,7 +91,7 @@ final class ChatCommandsProcessorTest extends \Tester\TestCase {
   }
   
   public function testGetCommand() {
-    Assert::type(ChatCommand::class, $this->model->getCommand(self::COMMAND_NAME));
+    Assert::type(IChatCommand::class, $this->model->getCommand(self::COMMAND_NAME));
     Assert::exception(function() {
       $this->model->getCommand("abc");
     }, CommandNotFoundException::class);

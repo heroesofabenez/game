@@ -9,7 +9,7 @@ namespace HeroesofAbenez\Chat;
  * @author Jakub Konečný
  * @property string $name
  */
-abstract class ChatCommand {
+abstract class ChatCommand implements IChatCommand {
   use \Nette\SmartObject;
   
   /** @var string */
@@ -27,7 +27,7 @@ abstract class ChatCommand {
     return strtolower(str_replace("Command", "", $className));
   }
   
-  public function setName(string $name) {
+  public function setName(string $name): void {
     $this->name = $name;
   }
   
