@@ -555,12 +555,12 @@ class Character {
           if(!in_array($type, SkillSpecial::NO_STAT_TYPES, true)) {
             $bonus_value = $$stat / 100 * $effect->value;
           }
-  break;
+          break;
         case "equipment":
           if(!in_array($type, SkillSpecial::NO_STAT_TYPES, true)) {
             $bonus_value = $effect->value;
           }
-  break;
+          break;
       }
       if($type == "buff") {
         $$stat += $bonus_value;
