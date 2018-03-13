@@ -20,6 +20,7 @@ use HeroesofAbenez\Entities\Team,
  * @property-read int $winner
  * @property-read int $round
  * @property callable $victoryCondition To evaluate the winner of combat. Gets CombatBase as first parameter, should return winning team (1/2) or 0 if there is not winner (yet)
+ * @property callable $healers To determine characters that are supposed to heal their team. Gets team1 and team2 as parameters, should return Team
  * @method void onCombatStart()
  * @method void onCombatEnd()
  * @method void onRoundStart()
@@ -69,6 +70,8 @@ class CombatBase {
   protected $results;
   /** @var callable */
   protected $victoryCondition;
+  /** @var callable */
+  protected $healers;
   
   public function __construct(CombatLogger $logger) {
     $this->log = $logger;
@@ -95,6 +98,9 @@ class CombatBase {
     $this->onHeal[] = [$this, "heal"];
     $this->onHeal[] = [$this, "logResults"];
     $this->victoryCondition = [$this, "victoryConditionMoreDamage"];
+    $this->healers = function(): Team {
+      return new Team("healers");
+    };
   }
   
   public function getRound(): int {
@@ -131,6 +137,14 @@ class CombatBase {
   
   public function setVictoryCondition(callable $victoryCondition) {
     $this->victoryCondition = $victoryCondition;
+  }
+  
+  public function getHealers(): callable {
+    return $this->healers;
+  }
+  
+  public function setHealers(callable $healers) {
+    $this->healers = $healers;
   }
   
   /**
@@ -376,11 +390,12 @@ class CombatBase {
     return $this->findLowestHpCharacter($this->getTeam($healer));
   }
   
-  /**
-   * @return Character[]
-   */
-  protected function findHealers(): array {
-    return [];
+  protected function findHealers(): Team {
+    $healers = call_user_func($this->healers, $this->team1, $this->team2);
+    if($healers instanceof Team) {
+      return $healers;
+    }
+    return new Team("healers");
   }
   
   protected function doSpecialSkill(Character $character1, Character $character2, CharacterSpecialSkillDummy $skill): void {
@@ -419,7 +434,7 @@ class CombatBase {
       if($character->hitpoints < 1) {
         continue;
       }
-      if(in_array($character, $this->findHealers(), true)) {
+      if(in_array($character, $this->findHealers()->items, true)) {
         $target = $this->selectHealingTarget($character);
         if(!is_null($target)) {
           $this->onHeal($character, $target);
