@@ -14,6 +14,7 @@ use HeroesofAbenez\Model,
  * NPC Quests Control
  *
  * @author Jakub Konečný
+ * @property-read \Nette\Bridges\ApplicationLatte\Template $template
  * @property-write Npc $npc
  */
 class NPCQuestsControl extends \Nette\Application\UI\Control {

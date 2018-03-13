@@ -10,6 +10,7 @@ use HeroesofAbenez\Entities\DialogueLine,
  * A set of dialogue lines, simplify working with them
  * 
  * @author Jakub Konečný
+ * @property-read \Nette\Bridges\ApplicationLatte\Template $template
  * @property-read string[] $names
  * @property-write Npc $npc
  */

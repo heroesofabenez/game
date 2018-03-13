@@ -18,6 +18,7 @@ use Nette\Security\User,
  * Basic Arena Control
  *
  * @author Jakub Konečný
+ * @property-read \Nette\Bridges\ApplicationLatte\Template $template
  */
 abstract class ArenaControl extends \Nette\Application\UI\Control {
   protected const DAILY_FIGHTS_LIMIT = 10;

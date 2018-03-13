@@ -11,6 +11,7 @@ use HeroesofAbenez\Orm\Model as ORM,
  * Postoffice Control
  *
  * @author Jakub Konečný
+ * @property-read \Nette\Bridges\ApplicationLatte\Template $template
  */
 class PostofficeControl extends \Nette\Application\UI\Control {
   /** @var ORM */

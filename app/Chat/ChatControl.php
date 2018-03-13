@@ -11,6 +11,7 @@ use HeroesofAbenez\Orm\Model as ORM,
  * Basic Chat Control
  *
  * @author Jakub Konečný
+ * @property-read \Nette\Bridges\ApplicationLatte\Template $template
  */
 abstract class ChatControl extends \Nette\Application\UI\Control {
   /** @var ORM */
