@@ -30,11 +30,11 @@ class PromoteCommand extends \HeroesofAbenez\Chat\ChatCommand {
   }
   
   public function execute(int $id = NULL): string {
-    if(is_null($id) OR !is_numeric($id)) {
+    if(is_null($id)) {
       return "";
     }
     try {
-      $this->model->promote((int) $id);
+      $this->model->promote($id);
       $message = $this->translator->translate("messages.guild.promoted");
     } catch(NotInGuildException $e) {
       $message = $this->translator->translate("errors.guild.notInGuild");

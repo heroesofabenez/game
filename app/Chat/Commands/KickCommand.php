@@ -28,11 +28,11 @@ class KickCommand extends \HeroesofAbenez\Chat\ChatCommand {
   }
   
   public function execute(int $id = NULL): string {
-    if(is_null($id) OR !is_numeric($id)) {
+    if(is_null($id)) {
       return "";
     }
     try {
-      $this->model->kick((int) $id);
+      $this->model->kick($id);
       $message = $this->translator->translate("messages.guild.kicked");
     } catch(NotInGuildException $e) {
       $message = $this->translator->translate("errors.guild.notInGuild");
