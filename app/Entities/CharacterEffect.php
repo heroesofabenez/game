@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace HeroesofAbenez\Entities;
 
 use HeroesofAbenez\Orm\SkillSpecial,
-    Nette\Utils\Strings;
+    HeroesofAbenez\Utils\Constants;
 
 /**
  * Data structure for effect on character
@@ -71,42 +71,21 @@ class CharacterEffect {
    * @return string[]
    */
   protected function getAllowedSources(): array {
-    $sources = [];
-    $constants = (new \ReflectionClass(static::class))->getConstants();
-    foreach($constants as $name => $value) {
-      if(Strings::startsWith($name, "SOURCE_")) {
-        $sources[] = $value;
-      }
-    }
-    return $sources;
+    return Constants::getConstantsValues(static::class, "SOURCE_");
   }
   
   /**
    * @return string[]
    */
   protected function getAllowedTypes(): array {
-    $types = [];
-    $constants = (new \ReflectionClass(SkillSpecial::class))->getConstants();
-    foreach($constants as $name => $value) {
-      if(Strings::startsWith($name, "TYPE_")) {
-        $types[] = $value;
-      }
-    }
-    return $types;
+    return Constants::getConstantsValues(SkillSpecial::class, "TYPE_");
   }
   
   /**
    * @return string[]
    */
   public static function getDurations(): array {
-    $durations = [];
-    $constants = (new \ReflectionClass(static::class))->getConstants();
-    foreach($constants as $name => $value) {
-      if(Strings::startsWith($name, "DURATION_")) {
-        $durations[] = $value;
-      }
-    }
-    return $durations;
+    return Constants::getConstantsValues(static::class, "DURATION_");
   }
   
   public function getId(): string {

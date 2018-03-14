@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace HeroesofAbenez\Entities;
 
 use Nette\Localization\ITranslator,
-    Nette\Utils\Strings;
+    HeroesofAbenez\Utils\Constants;
 
 /**
  * Data structure for combat action
@@ -62,14 +62,7 @@ class CombatAction {
    * @return string[]
    */
   protected function getAllowedActions(): array {
-    $actions = [];
-    $constants = (new \ReflectionClass(static::class))->getConstants();
-    foreach($constants as $name => $value) {
-      if(Strings::startsWith($name, "ACTION_")) {
-        $actions[] = $value;
-      }
-    }
-    return $actions;
+    return Constants::getConstantsValues(static::class, "ACTION_");
   }
   
   public function getCharacter1(): Character {
