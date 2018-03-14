@@ -602,11 +602,18 @@ class CombatBase {
   }
   
   /**
+   * Calculate success chance of healing
+   */
+  protected function calculateHealingSuccessChance(Character $healer): int {
+    return $healer->intelligence * (int) round($healer->level / 5) + 30;
+  }
+  
+  /**
    * Heal a character
    */
   public function heal(Character $healer, Character $patient): void {
     $result = [];
-    $hitChance = $healer->intelligence * round($healer->level / 5) + 30;
+    $hitChance = $this->calculateHealingSuccessChance($healer);
     $result["result"] = $this->hasHit($hitChance);
     $amount = ($result["result"]) ? $healer->intelligence / 2 : 0;
     if($amount + $patient->hitpoints > $patient->maxHitpoints) {
