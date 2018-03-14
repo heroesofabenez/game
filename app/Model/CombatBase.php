@@ -400,19 +400,19 @@ class CombatBase {
   
   protected function doSpecialSkill(Character $character1, Character $character2, CharacterSpecialSkillDummy $skill): void {
     switch($skill->skill->target) {
-      case "enemy":
+      case SkillSpecial::TARGET_ENEMY:
         $this->onSkillSpecial($character1, $character2, $skill);
         break;
-      case "self":
+      case SkillSpecial::TARGET_SELF:
         $this->onSkillSpecial($character1, $character1, $skill);
         break;
-      case "party":
+      case SkillSpecial::TARGET_PARTY:
         $team = $this->getTeam($character1);
         foreach($team as $target) {
           $this->onSkillSpecial($character1, $target, $skill);
         }
         break;
-      case "enemy_party":
+      case SkillSpecial::TARGET_ENEMY_PARTY:
         $team = $this->getEnemyTeam($character1);
         foreach($team as $target) {
           $this->onSkillSpecial($character1, $target, $skill);
