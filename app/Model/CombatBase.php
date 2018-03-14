@@ -514,12 +514,12 @@ class CombatBase {
    * Calculate hit chance for attack/skill attack
    */
   protected function calculateHitChance(Character $character1, Character $character2, CharacterAttackSkillDummy $skill = NULL): int {
+    $hitRate = $character1->hit;
+    $dodgeRate = $character2->dodge;
     if(!is_null($skill)) {
-      $hit_chance = ($character1->hit / 100 * $skill->hitRate) - $character2->dodge;
-    } else {
-      $hit_chance = $character1->hit - $character2->dodge;
+      $hitRate = $hitRate / 100 * $skill->hitRate;
     }
-    return Numbers::range((int) $hit_chance, 15, 100);
+    return Numbers::range((int) ($hitRate - $dodgeRate), 15, 100);
   }
   
   /**
