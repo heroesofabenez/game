@@ -496,14 +496,14 @@ class Character {
         continue;
       }
       switch($item->type) {
-        case "staff":
+        case Equipment::TYPE_STAFF:
           $stat = "intelligence";
           break;
-        case "club":
+        case Equipment::TYPE_CLUB:
           $stat = "constitution";
           break;
-        case "bow":
-        case "throwing knife":
+        case Equipment::TYPE_BOW:
+        case Equipment::TYPE_THROWING_KNIFE:
           $stat = "dexterity";
           break;
       }
