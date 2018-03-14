@@ -523,15 +523,22 @@ class CombatBase {
   }
   
   /**
+   * Check whether action succeeded
+   */
+  protected function hasHit(int $hitChance): bool {
+    $roll = rand(0, 100);
+    return ($roll <= $hitChance);
+  }
+  
+  /**
    * Do an attack
    * Hit chance = Attacker's hit - Defender's dodge, but at least 15%
    * Damage = Attacker's damage - defender's defense
    */
   public function attackHarm(Character $attacker, Character $defender): void {
     $result = [];
-    $hit_chance = $this->calculateHitChance($attacker, $defender);
-    $roll = rand(0, 100);
-    $result["result"] = ($roll <= $hit_chance);
+    $hitChance = $this->calculateHitChance($attacker, $defender);
+    $result["result"] = $this->hasHit($hitChance);
     $result["amount"] = 0;
     if($result["result"]) {
       $result["amount"] = $attacker->damage - $defender->defense;
@@ -555,9 +562,8 @@ class CombatBase {
    */
   public function useAttackSkill(Character $attacker, Character $defender, CharacterAttackSkillDummy $skill): void {
     $result = [];
-    $hit_chance = $this->calculateHitChance($attacker, $defender, $skill);
-    $roll = rand(0, 100);
-    $result["result"] = ($roll <= $hit_chance);
+    $hitChance = $this->calculateHitChance($attacker, $defender, $skill);
+    $result["result"] = $this->hasHit($hitChance);
     $result["amount"] = 0;
     if($result["result"]) {
       $result["amount"] = $attacker->damage - $defender->defense;
@@ -600,9 +606,8 @@ class CombatBase {
    */
   public function heal(Character $healer, Character $patient): void {
     $result = [];
-    $hit_chance = $healer->intelligence * round($healer->level / 5) + 30;
-    $roll = rand(0, 100);
-    $result["result"] = ($roll <= $hit_chance);
+    $hitChance = $healer->intelligence * round($healer->level / 5) + 30;
+    $result["result"] = $this->hasHit($hitChance);
     $amount = ($result["result"]) ? $healer->intelligence / 2 : 0;
     if($amount + $patient->hitpoints > $patient->maxHitpoints) {
       $amount = $patient->maxHitpoints - $patient->hitpoints;
