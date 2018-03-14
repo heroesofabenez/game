@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Orm;
 
+use HeroesofAbenez\Entities\CharacterEffect;
+
 /**
  * Pet
  *
@@ -34,8 +36,8 @@ class Pet extends \Nextras\Orm\Entity\Entity {
       "type" => "buff",
       "stat" => str_replace(array_keys($stats), array_values($stats), $this->bonusStat),
       "value" => $this->bonusValue,
-      "source" => "pet",
-      "duration" => "combat"
+      "source" => CharacterEffect::SOURCE_PET,
+      "duration" => CharacterEffect::DURATION_COMBAT
     ];
   }
 }

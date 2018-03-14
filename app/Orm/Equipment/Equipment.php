@@ -3,7 +3,8 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Orm;
 
-use Nextras\Orm\Relationships\OneHasMany;
+use Nextras\Orm\Relationships\OneHasMany,
+    HeroesofAbenez\Entities\CharacterEffect;
 
 /**
  * Equipment
@@ -55,8 +56,8 @@ class Equipment extends \Nextras\Orm\Entity\Entity {
       "type" => "buff",
       "stat" => $stat[$this->slot],
       "value" => $this->strength,
-      "source" => "equipment",
-      "duration" => "combat"
+      "source" => CharacterEffect::SOURCE_EQUIPMENT,
+      "duration" => CharacterEffect::DURATION_COMBAT
     ];
     return $return;
   }

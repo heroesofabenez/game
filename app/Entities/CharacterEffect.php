@@ -19,6 +19,13 @@ use HeroesofAbenez\Orm\SkillSpecial,
  */
 class CharacterEffect {
   use \Nette\SmartObject;
+  
+  public const SOURCE_PET = "pet";
+  public const SOURCE_SKILL = "skill";
+  public const SOURCE_EQUIPMENT = "equipment";
+  public const DURATION_COMBAT = "combat";
+  public const DURATION_FOREVER = "forever";
+  
   /** @var string */
   protected $id;
   /** @var string */
@@ -33,12 +40,10 @@ class CharacterEffect {
   protected $duration;
   
   public function __construct(array $effect) {
-    $types = $this->getAllowedTypes();
-    $sources = ["pet", "skill", "equipment"];
-    if(!in_array($effect["type"], $types, true)) {
+    if(!in_array($effect["type"], $this->getAllowedTypes(), true)) {
       exit("Invalid value for \$type passed to method CharacterEffect::__construct.");
     }
-    if(!in_array($effect["source"], $sources, true)) {
+    if(!in_array($effect["source"], $this->getAllowedSources(), true)) {
       exit("Invalid value for \$source passed to method CharacterEffect::__construct.");
     }
     if(!in_array($effect["duration"], self::getDurations(), true) AND $effect["duration"] < 0) {
@@ -65,6 +70,20 @@ class CharacterEffect {
   /**
    * @return string[]
    */
+  protected function getAllowedSources(): array {
+    $sources = [];
+    $constants = (new \ReflectionClass(static::class))->getConstants();
+    foreach($constants as $name => $value) {
+      if(Strings::startsWith($name, "SOURCE_")) {
+        $sources[] = $value;
+      }
+    }
+    return $sources;
+  }
+  
+  /**
+   * @return string[]
+   */
   protected function getAllowedTypes(): array {
     $types = [];
     $constants = (new \ReflectionClass(SkillSpecial::class))->getConstants();
@@ -80,7 +99,14 @@ class CharacterEffect {
    * @return string[]
    */
   public static function getDurations(): array {
-    return ["combat", "forever"];
+    $durations = [];
+    $constants = (new \ReflectionClass(static::class))->getConstants();
+    foreach($constants as $name => $value) {
+      if(Strings::startsWith($name, "DURATION_")) {
+        $durations[] = $value;
+      }
+    }
+    return $durations;
   }
   
   public function getId(): string {

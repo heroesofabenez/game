@@ -595,7 +595,7 @@ class CombatBase {
       "type" => $skill->skill->type,
       "stat" => ((in_array($skill->skill->type, SkillSpecial::NO_STAT_TYPES, true)) ? NULL : $skill->skill->stat),
       "value" => $skill->value,
-      "source" => "skill",
+      "source" => CharacterEffect::SOURCE_SKILL,
       "duration" => $skill->skill->duration
     ];
     $target->addEffect(new CharacterEffect($effect));
