@@ -3,7 +3,8 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Entities;
 
-use Nette\Localization\ITranslator;
+use Nette\Localization\ITranslator,
+    Nette\Utils\Strings;
 
 /**
  * Data structure for combat action
@@ -19,6 +20,12 @@ use Nette\Localization\ITranslator;
  */
 class CombatAction {
   use \Nette\SmartObject;
+  
+  public const ACTION_ATTACK = "attack";
+  public const ACTION_SKILL_ATTACK = "skill_attack";
+  public const ACTION_SKILL_SPECIAL = "skill_special";
+  public const ACTION_HEALING = "healing";
+  public const ACTION_POISON = "poison";
   
   /** @var ITranslator */
   protected $translator;
@@ -38,8 +45,7 @@ class CombatAction {
   protected $message;
   
   public function __construct(ITranslator $translator, string $action, bool $result, Character $character1, Character $character2, int $amount = 0, string $name = "") {
-    $actions = ["attack", "skill_attack", "skill_special", "healing", "poison",];
-    if(!in_array($action, $actions, true)) {
+    if(!in_array($action, $this->getAllowedActions(), true)) {
       exit("Invalid value for action passed to CombatAction::__construct.");
     }
     $this->translator = $translator;
@@ -50,6 +56,20 @@ class CombatAction {
     $this->character2 = $character2;
     $this->name = $name;
     $this->parse();
+  }
+  
+  /**
+   * @return string[]
+   */
+  protected function getAllowedActions(): array {
+    $actions = [];
+    $constants = (new \ReflectionClass(static::class))->getConstants();
+    foreach($constants as $name => $value) {
+      if(Strings::startsWith($name, "ACTION_")) {
+        $actions[] = $value;
+      }
+    }
+    return $actions;
   }
   
   public function getCharacter1(): Character {
@@ -85,7 +105,7 @@ class CombatAction {
     $character2 = $this->character2->name;
     $text = "";
     switch($this->action) {
-      case "attack":
+      case static::ACTION_ATTACK:
         if($this->result) {
           $text = $this->translator->translate("texts.combatLog.attackHits", $this->amount, ["character1" => $character1, "character2" => $character2]);
           if($this->character2->hitpoints < 1) {
@@ -95,7 +115,7 @@ class CombatAction {
           $text = $this->translator->translate("texts.combatLog.attackFails", $this->amount, ["character1" => $character1, "character2" => $character2]);
         }
         break;
-      case "skill_attack":
+      case static::ACTION_SKILL_ATTACK:
         if($this->result) {
           $text = $this->translator->translate("texts.combatLog.specialAttackHits", $this->amount, ["character1" => $character1, "character2" => $character2, "name" => $this->name]);
           if($this->character2->hitpoints < 1) {
@@ -105,21 +125,21 @@ class CombatAction {
           $text = $this->translator->translate("texts.combatLog.specialAttackFails", $this->amount, ["character1" => $character1, "character2" => $character2, "name" => $this->name]);
         }
         break;
-      case "skill_special":
+      case static::ACTION_SKILL_SPECIAL:
         if($this->result) {
           $text = $this->translator->translate("texts.combatLog.specialSkillSuccess", 0, ["character1" => $character1, "character2" => $character2, "name" => $this->name]);
         } else {
           $text = $this->translator->translate("texts.combatLog.specialSKillFailure", 0, ["character1" => $character1, "character2" => $character2, "name" => $this->name]);
         }
         break;
-      case "healing":
+      case static::ACTION_HEALING:
         if($this->result) {
           $text = $this->translator->translate("texts.combatLog.healingSuccess", $this->amount, ["character1" => $character1, "character2" => $character2]);
         } else {
           $text = $this->translator->translate("texts.combatLog.healingFailure", $this->amount, ["character1" => $character1, "character2" => $character2]);
         }
         break;
-      case "poison":
+      case static::ACTION_POISON:
         $text = $this->translator->translate("texts.combatLog.poison", $this->amount, ["character1" => $character1]);
         break;
     }

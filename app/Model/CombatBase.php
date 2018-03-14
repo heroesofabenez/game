@@ -6,6 +6,7 @@ namespace HeroesofAbenez\Model;
 use HeroesofAbenez\Entities\Team,
     HeroesofAbenez\Entities\Character,
     HeroesofAbenez\Entities\CharacterEffect,
+    HeroesofAbenez\Entities\CombatAction,
     HeroesofAbenez\Orm\CharacterAttackSkillDummy,
     HeroesofAbenez\Orm\CharacterSpecialSkillDummy,
     HeroesofAbenez\Utils\InvalidStateException,
@@ -552,7 +553,7 @@ class CombatBase {
     if($result["amount"]) {
       $defender->harm($result["amount"]);
     }
-    $result["action"] = "attack";
+    $result["action"] = CombatAction::ACTION_ATTACK;
     $result["name"] = "";
     $this->results = $result;
   }
@@ -575,7 +576,7 @@ class CombatBase {
     if($result["amount"]) {
       $defender->harm($result["amount"]);
     }
-    $result["action"] = "skill_attack";
+    $result["action"] = CombatAction::ACTION_SKILL_ATTACK;
     $result["name"] = $skill->skill->name;
     $this->results = $result;
     $skill->resetCooldown();
@@ -586,7 +587,7 @@ class CombatBase {
    */
   public function useSpecialSkill(Character $character1, Character $target, CharacterSpecialSkillDummy $skill): void {
     $result = [
-      "result" => true, "amount" => 0, "action" => "skill_special", "name" => $skill->skill->name
+      "result" => true, "amount" => 0, "action" => CombatAction::ACTION_SKILL_SPECIAL, "name" => $skill->skill->name
     ];
     $this->results = $result;
     $effect = [
@@ -623,7 +624,7 @@ class CombatBase {
     if($result["amount"]) {
       $patient->heal($result["amount"]);
     }
-    $result["action"] = "healing";
+    $result["action"] = CombatAction::ACTION_HEALING;
     $result["name"] = "";
     $this->results = $result;
   }
@@ -638,7 +639,7 @@ class CombatBase {
       foreach($character->effects as $effect) {
         if($effect->type === SkillSpecial::TYPE_POISON) {
           $character->harm($effect->value);
-          $this->log->log("poison", true, $character, $character, $effect->value);
+          $this->log->log(CombatAction::ACTION_POISON, true, $character, $character, $effect->value);
         }
       }
     }
