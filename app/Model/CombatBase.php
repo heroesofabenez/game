@@ -360,7 +360,12 @@ class CombatBase {
    * Select target for attack
    */
   protected function selectAttackTarget(Character $attacker): ?Character {
-    return $this->selectRandomCharacter($this->getEnemyTeam($attacker));
+    $enemyTeam = $this->getEnemyTeam($attacker);
+    $target = $this->findLowestHpCharacter($enemyTeam);
+    if(!is_null($target)) {
+      return $target;
+    }
+    return $this->selectRandomCharacter($enemyTeam);
   }
   
   /**
