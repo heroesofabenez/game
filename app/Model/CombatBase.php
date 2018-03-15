@@ -457,7 +457,7 @@ class CombatBase {
           for($i = 1; $i <= $skill->skill->strikes; $i++) {
             $this->onSkillAttack($character, $target, $skill);
           }
-        } else {
+        } elseif($skill instanceof CharacterSpecialSkillDummy) {
           $this->doSpecialSkill($character, $target, $skill);
         }
       } else {
