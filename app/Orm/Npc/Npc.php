@@ -17,6 +17,7 @@ use Nextras\Orm\Relationships\OneHasMany;
  * @property string $sprite
  * @property string $portrait
  * @property QuestStage $stage {m:1 QuestStage::$npcs}
+ * @property string $karma {enum \HeroesofAbenez\Utils\Karma::KARMA_*}
  * @property int $posX
  * @property int $posY
  * @property OneHasMany|ShopItem[] $items {1:m ShopItem::$npc}

@@ -129,5 +129,5 @@ INSERT INTO `skills_specials` (`id`, `name`, `description`, `needed_class`, `nee
 (7,	'Entangle',	'',	3,	NULL,	10,	'debuff',	'enemy',	'initiative',	13,	2,	6,	4),
 (8,	'Evasion',	'',	4,	NULL,	10,	'buff',	'party',	'dodge',	10,	1,	6,	4);
 
-INSERT INTO `npcs` (`id`, `name`, `description`, `race`, `type`, `sprite`, `portrait`, `stage`, `pos_x`, `pos_y`) VALUES
-(1,	'Mentor',	'He\'s quite old for a human.',	2,	'quest',	'mentor.jpeg',	'mentor.jpeg',	1,	1,	1);
+INSERT INTO `npcs` (`id`, `name`, `description`, `race`, `type`, `sprite`, `portrait`, `stage`, `karma`, `pos_x`, `pos_y`) VALUES
+(1,	'Mentor',	'He\'s quite old for a human.',	2,	'quest',	'mentor.jpeg',	'mentor.jpeg',	1,	'neutral',	1,	1);
