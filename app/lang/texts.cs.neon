@@ -150,6 +150,7 @@ profile:
     moreInfo: "Další info:"
     notFoundTitle: "Postava nenalezena"
     notFound: "Požadovaná postava nebyla nalezena."
+    predominantKarma: "Převažující karma:"
 equipment:
     title: "Vybavení"
     notFoundTitle: "Vybavení nenalezeno"

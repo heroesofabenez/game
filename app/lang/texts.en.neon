@@ -150,6 +150,7 @@ profile:
     moreInfo: "More info:"
     notFoundTitle: "Character not found"
     notFound: "Requested character was not found."
+    predominantKarma: "Predominant karma:"
 equipment:
     title: "Equipment"
     notFoundTitle: "Equipment not found"

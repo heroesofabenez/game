@@ -31,6 +31,7 @@ use Nextras\Orm\Relationships\OneHasMany;
  * @property int|NULL $whiteKarma {default 0}
  * @property int|NULL $neutralKarma {default 0}
  * @property int|NULL $darkKarma {default 0}
+ * @property-read string $predominantKarma {virtual}
  * @property int|NULL $intro {default 1}
  * @property \DateTimeImmutable|NULL $joined
  * @property float $statPoints {default 0}
@@ -60,6 +61,13 @@ class Character extends \Nextras\Orm\Entity\Entity {
       return 999;
     }
     return $value;
+  }
+  
+  protected function getterPredominantKarma(): string {
+    $karma = [
+      "neutral" => $this->neutralKarma, "white" => $this->whiteKarma, "dark" => $this->darkKarma,
+    ];
+    return array_search(max($karma), $karma, true);
   }
   
   public function onBeforeInsert() {

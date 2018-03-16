@@ -155,7 +155,7 @@ class Profile {
     }
     $stats = [
       "id", "name", "gender", "level", "race", "description", "strength", "dexterity",
-      "constitution", "intelligence", "charisma", "occupation", "specialization",
+      "constitution", "intelligence", "charisma", "occupation", "specialization", "predominantKarma",
     ];
     foreach($stats as $stat) {
       if($char->$stat instanceof IEntity) {

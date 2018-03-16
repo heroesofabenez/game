@@ -80,7 +80,7 @@ final class ProfileTest extends \Tester\TestCase {
     Assert::null($this->model->view(5000));
     $result = $this->model->view(1);
     Assert::type("array", $result);
-    Assert::count(16, $result);
+    Assert::count(17, $result);
     Assert::same("male", $result["gender"]);
     Assert::type("int", $result["guild"]);
     Assert::null($result["specialization"]);
