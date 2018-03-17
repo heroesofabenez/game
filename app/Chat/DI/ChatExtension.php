@@ -8,9 +8,11 @@ use HeroesofAbenez\Chat\ChatCommandsProcessor,
     Nette\Utils\Validators,
     HeroesofAbenez\Chat\ChatControl,
     HeroesofAbenez\Chat\IChatMessageProcessor,
+    HeroesofAbenez\Chat\IDatabaseAdapter,
     Nette\DI\MissingServiceException,
     HeroesofAbenez\Chat\InvalidChatControlFactoryException,
-    HeroesofAbenez\Chat\InvalidMessageProcessorException;
+    HeroesofAbenez\Chat\InvalidMessageProcessorException,
+    HeroesofAbenez\Chat\InvalidDatabaseAdapterException;
 
 /**
  * ChatExtension
@@ -20,12 +22,15 @@ use HeroesofAbenez\Chat\ChatCommandsProcessor,
 class ChatExtension extends \Nette\DI\CompilerExtension {
   /** @internal */
   public const SERVICE_CHAT_COMMANDS_PROCESSOR = "commandsProcessor";
+  /** @internal */
+  public const SERVICE_DATABASE_ADAPTER = "databaseAdapter";
   
   protected $defaults = [
     "chats" => [],
     "messageProcessors" => [
       self::SERVICE_CHAT_COMMANDS_PROCESSOR => ChatCommandsProcessor::class,
     ],
+    "databaseAdapter" => "",
   ];
   
   /**
@@ -85,8 +90,23 @@ class ChatExtension extends \Nette\DI\CompilerExtension {
   
   /**
    * @throws \Nette\Utils\AssertionException
+   * @throws InvalidDatabaseAdapterException
+   */
+  protected function getDatabaseAdapter(): string {
+    $config = $this->getConfig($this->defaults);
+    Validators::assertField($config, "databaseAdapter", "string");
+    $adapter = $config["databaseAdapter"];
+    if(!class_exists($adapter) OR !is_subclass_of($adapter, IDatabaseAdapter::class)) {
+      throw new InvalidDatabaseAdapterException("Invalid database adapter $adapter.");
+    }
+    return $adapter;
+  }
+  
+  /**
+   * @throws \Nette\Utils\AssertionException
    * @throws InvalidChatControlFactoryException
    * @throws InvalidMessageProcessorException
+   * @throws InvalidDatabaseAdapterException
    */
   public function loadConfiguration(): void {
     $builder = $this->getContainerBuilder();
@@ -100,6 +120,9 @@ class ChatExtension extends \Nette\DI\CompilerExtension {
       $builder->addDefinition($this->prefix($name))
         ->setType($processor);
     }
+    $databaseAdapter = $this->getDatabaseAdapter();
+    $builder->addDefinition($this->prefix(static::SERVICE_DATABASE_ADAPTER))
+      ->setType($databaseAdapter);
   }
   
   protected function registerMessageProcessors(): void {

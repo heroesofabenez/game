@@ -3,9 +3,6 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Chat;
 
-use HeroesofAbenez\Orm\Model as ORM,
-    HeroesofAbenez\Orm\ChatMessage as ChatMessageEntity;
-
 /**
  * Basic Chat Control
  *
@@ -13,10 +10,8 @@ use HeroesofAbenez\Orm\Model as ORM,
  * @property-read \Nette\Bridges\ApplicationLatte\Template $template
  */
 abstract class ChatControl extends \Nette\Application\UI\Control {
-  /** @var ORM */
-  protected $orm;
-  /** @var \Nette\Security\User */
-  protected $user;
+  /** @var IDatabaseAdapter */
+  protected $database;
   /** @var IChatMessageProcessor[] */
   protected $messageProcessors = [];
   /** @var string*/
@@ -27,11 +22,12 @@ abstract class ChatControl extends \Nette\Application\UI\Control {
   protected $textValue;
   /** @var int */
   protected $characterValue;
+  /** @var int */
+  protected $messagesPerPage = 25;
   
-  public function __construct(ORM $orm, \Nette\Security\User $user,  string $textColumn, int $textValue, string $characterColumn = NULL, $characterValue = NULL) {
+  public function __construct(IDatabaseAdapter $databaseAdapter, string $textColumn, int $textValue, string $characterColumn = NULL, $characterValue = NULL) {
     parent::__construct();
-    $this->orm = $orm;
-    $this->user = $user;
+    $this->database = $databaseAdapter;
     $this->textColumn = $textColumn;
     $this->characterColumn = $characterColumn ?? $textColumn;
     $this->textValue = $textValue;
@@ -46,36 +42,14 @@ abstract class ChatControl extends \Nette\Application\UI\Control {
    * Gets texts for the current chat
    */
   public function getTexts(): ChatMessagesCollection {
-    $count = $this->orm->chatMessages->findBy([
-      $this->textColumn => $this->textValue,
-    ])->countStored();
-    $paginator = new \Nette\Utils\Paginator;
-    $paginator->setItemCount($count);
-    $paginator->setItemsPerPage(25);
-    $paginator->setPage($paginator->pageCount);
-    $messages = $this->orm->chatMessages->findBy([
-      $this->textColumn => $this->textValue,
-    ])->limitBy($paginator->length, $paginator->offset);
-    $collection = new ChatMessagesCollection();
-    foreach($messages as $message) {
-      $character = new ChatCharacter($message->character->id, $message->character->name);
-      $collection[] = new ChatMessage($message->id, $message->message, $message->whenS, $character);
-    }
-    return $collection;
+    return $this->database->getTexts($this->textColumn, $this->textValue, $this->messagesPerPage);
   }
   
   /**
    * Gets characters in the current chat
    */
   public function getCharacters(): ChatCharactersCollection {
-    $characters = $this->orm->characters->findBy([
-      $this->characterColumn => $this->characterValue
-    ]);
-    $collection = new ChatCharactersCollection();
-    foreach($characters as $character) {
-      $collection[] = new ChatCharacter($character->id, $character->name);
-    }
-    return $collection;
+    return $this->database->getCharacters($this->characterColumn, $this->characterValue);
   }
   
   /**
@@ -106,12 +80,7 @@ abstract class ChatControl extends \Nette\Application\UI\Control {
     if(!is_null($result)) {
       $this->presenter->flashMessage($result);
     } else {
-      $chatMessage = new ChatMessageEntity();
-      $chatMessage->message = $message;
-      $this->orm->chatMessages->attach($chatMessage);
-      $chatMessage->character = $this->user->id;
-      $chatMessage->{$this->textColumn} = $this->textValue;
-      $this->orm->chatMessages->persistAndFlush($chatMessage);
+      $this->database->addMessage($message, $this->textColumn, $this->textValue);
     }
     $this->presenter->redirect("this");
   }

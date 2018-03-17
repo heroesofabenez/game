@@ -37,3 +37,4 @@ hoa.chat:
         global: HeroesofAbenez\Chat\IGlobalChatControlFactory
         guild: HeroesofAbenez\Chat\IGuildChatControlFactory
         local: HeroesofAbenez\Chat\ILocalChatControlFactory
+    databaseAdapter: HeroesofAbenez\Chat\NextrasOrmAdapter
