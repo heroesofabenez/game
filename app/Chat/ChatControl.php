@@ -22,25 +22,25 @@ abstract class ChatControl extends \Nette\Application\UI\Control {
   /** @var ChatCommandsProcessor */
   protected $processor;
   /** @var string*/
-  protected $param;
+  protected $textColumn;
   /** @var string */
-  protected $param2;
+  protected $characterColumn;
   /** @var int*/
-  protected $id;
+  protected $textValue;
   /** @var int */
-  protected $id2;
+  protected $characterValue;
   /** @var array */
   protected $names = [];
   
-  public function __construct(ORM $orm, \Nette\Security\User $user, ChatCommandsProcessor  $processor, string $param, int $id, string $param2 = NULL, $id2 = NULL) {
+  public function __construct(ORM $orm, \Nette\Security\User $user, ChatCommandsProcessor  $processor, string $textColumn, int $textValue, string $characterColumn = NULL, $characterValue = NULL) {
     parent::__construct();
     $this->orm = $orm;
     $this->user = $user;
     $this->processor = $processor;
-    $this->param = $param;
-    $this->param2 = $param2 ?? $param;
-    $this->id = $id;
-    $this->id2 = $id2 ?? $id;
+    $this->textColumn = $textColumn;
+    $this->characterColumn = $characterColumn ?? $textColumn;
+    $this->textValue = $textValue;
+    $this->characterValue = $characterValue ?? $textValue;
   }
   
   /**
@@ -50,14 +50,14 @@ abstract class ChatControl extends \Nette\Application\UI\Control {
    */
   public function getTexts(): ICollection {
     $count = $this->orm->chatMessages->findBy([
-      $this->param => $this->id,
+      $this->textColumn => $this->textValue,
     ])->countStored();
     $paginator = new \Nette\Utils\Paginator;
     $paginator->setItemCount($count);
     $paginator->setItemsPerPage(25);
     $paginator->setPage($paginator->pageCount);
     return $this->orm->chatMessages->findBy([
-      $this->param => $this->id,
+      $this->textColumn => $this->textValue,
     ])->limitBy($paginator->length, $paginator->offset);
   }
   
@@ -68,7 +68,7 @@ abstract class ChatControl extends \Nette\Application\UI\Control {
    */
   public function getCharacters(): ICollection {
     return $this->orm->characters->findBy([
-      $this->param2 => $this->id2
+      $this->characterColumn => $this->characterValue
     ]);
   }
   
@@ -94,7 +94,7 @@ abstract class ChatControl extends \Nette\Application\UI\Control {
       $chatMessage->message = $message;
       $this->orm->chatMessages->attach($chatMessage);
       $chatMessage->character = $this->user->id;
-      $chatMessage->{$this->param} = $this->id;
+      $chatMessage->{$this->textColumn} = $this->textValue;
       $this->orm->chatMessages->persistAndFlush($chatMessage);
     }
     $this->presenter->redirect("this");
