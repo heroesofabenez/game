@@ -4,9 +4,7 @@ declare(strict_types=1);
 namespace HeroesofAbenez\Chat;
 
 use HeroesofAbenez\Orm\Model as ORM,
-    HeroesofAbenez\Orm\ChatMessage,
-    HeroesofAbenez\Orm\Character,
-    Nextras\Orm\Collection\ICollection;
+    HeroesofAbenez\Orm\ChatMessage as ChatMessageEntity;
 
 /**
  * Basic Chat Control
@@ -46,10 +44,8 @@ abstract class ChatControl extends \Nette\Application\UI\Control {
   
   /**
    * Gets texts for the current chat
-   * 
-   * @return ICollection|ChatMessage[]
    */
-  public function getTexts(): ICollection {
+  public function getTexts(): ChatMessagesCollection {
     $count = $this->orm->chatMessages->findBy([
       $this->textColumn => $this->textValue,
     ])->countStored();
@@ -57,20 +53,29 @@ abstract class ChatControl extends \Nette\Application\UI\Control {
     $paginator->setItemCount($count);
     $paginator->setItemsPerPage(25);
     $paginator->setPage($paginator->pageCount);
-    return $this->orm->chatMessages->findBy([
+    $messages = $this->orm->chatMessages->findBy([
       $this->textColumn => $this->textValue,
     ])->limitBy($paginator->length, $paginator->offset);
+    $collection = new ChatMessagesCollection();
+    foreach($messages as $message) {
+      $character = new ChatCharacter($message->character->id, $message->character->name);
+      $collection[] = new ChatMessage($message->id, $message->message, $message->whenS, $character);
+    }
+    return $collection;
   }
   
   /**
    * Gets characters in the current chat
-   * 
-   * @return ICollection|Character[]
    */
-  public function getCharacters(): ICollection {
-    return $this->orm->characters->findBy([
+  public function getCharacters(): ChatCharactersCollection {
+    $characters = $this->orm->characters->findBy([
       $this->characterColumn => $this->characterValue
     ]);
+    $collection = new ChatCharactersCollection();
+    foreach($characters as $character) {
+      $collection[] = new ChatCharacter($character->id, $character->name);
+    }
+    return $collection;
   }
   
   /**
@@ -101,7 +106,7 @@ abstract class ChatControl extends \Nette\Application\UI\Control {
     if(!is_null($result)) {
       $this->presenter->flashMessage($result);
     } else {
-      $chatMessage = new ChatMessage();
+      $chatMessage = new ChatMessageEntity();
       $chatMessage->message = $message;
       $this->orm->chatMessages->attach($chatMessage);
       $chatMessage->character = $this->user->id;
