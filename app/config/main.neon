@@ -11,6 +11,7 @@ session:
 extensions:
     translation: Nexendrie\Translation\Bridges\NetteDI\TranslationExtension
     hoa: HeroesofAbenez\Model\DI\HOAExtension
+    hoa.chat: HeroesofAbenez\Chat\DI\ChatExtension
     menu: Nexendrie\Menu\DI\MenuExtension
     dbal: Nextras\Dbal\Bridges\NetteDI\DbalExtension
     orm: Nextras\Orm\Bridges\NetteDI\OrmExtension
@@ -31,3 +32,8 @@ menu:
             texts.arena.title: "Arena:"
             texts.ranking.title: "Ranking:characters"
             texts.map.title: "Map:local"
+hoa.chat:
+    chats:
+        global: HeroesofAbenez\Chat\IGlobalChatControlFactory
+        guild: HeroesofAbenez\Chat\IGuildChatControlFactory
+        local: HeroesofAbenez\Chat\ILocalChatControlFactory

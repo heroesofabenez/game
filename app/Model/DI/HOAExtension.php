@@ -24,7 +24,7 @@ class HOAExtension extends \Nette\DI\CompilerExtension {
     $this->addModels();
     $this->addCombat();
     $this->addArena();
-    $this->addChat();
+    $this->addChatCommands();
     $this->addNpc();
     $this->addPostOffice();
     $this->addRanking();
@@ -101,16 +101,8 @@ class HOAExtension extends \Nette\DI\CompilerExtension {
       ->setImplement(HeroesofAbenez\Arena\IArenaPVPControlFactory::class);
   }
   
-  protected function addChat(): void {
+  protected function addChatCommands(): void {
     $builder = $this->getContainerBuilder();
-    $builder->addDefinition($this->prefix("chat.global"))
-      ->setImplement(HeroesofAbenez\Chat\IGlobalChatControlFactory::class);
-    $builder->addDefinition($this->prefix("chat.local"))
-      ->setImplement(HeroesofAbenez\Chat\ILocalChatControlFactory::class);
-    $builder->addDefinition($this->prefix("chat.guild"))
-      ->setImplement(HeroesofAbenez\Chat\IGuildChatControlFactory::class);
-    $builder->addDefinition($this->prefix("chat.commandsProcessor"))
-      ->setType(HeroesofAbenez\Chat\ChatCommandsProcessor::class);
     $builder->addDefinition($this->prefix("chat.command.time"))
       ->setType(HeroesofAbenez\Chat\Commands\TimeCommand::class);
     $builder->addDefinition($this->prefix("chat.command.location"))
@@ -161,15 +153,6 @@ class HOAExtension extends \Nette\DI\CompilerExtension {
       ->setType(HeroesofAbenez\Forms\DissolveGuildFormFactory::class);
     $builder->addDefinition($this->prefix("form.customGuildRankNames"))
       ->setType(HeroesofAbenez\Forms\CustomGuildRankNamesFormFactory::class);
-  }
-  
-  public function beforeCompile(): void {
-    $builder = $this->getContainerBuilder();
-    $processor = $builder->getDefinition($this->prefix("chat.commandsProcessor"));
-    $chatCommands = $builder->findByType(HeroesofAbenez\Chat\IChatCommand::class);
-    foreach($chatCommands as $command) {
-      $processor->addSetup("addCommand", [$command]);
-    }
   }
   
   public function afterCompile(\Nette\PhpGenerator\ClassType $class): void {
