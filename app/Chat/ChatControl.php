@@ -5,6 +5,7 @@ namespace HeroesofAbenez\Chat;
 
 use HeroesofAbenez\Orm\Model as ORM,
     HeroesofAbenez\Orm\ChatMessage,
+    HeroesofAbenez\Orm\Character,
     Nextras\Orm\Collection\ICollection;
 
 /**
@@ -65,7 +66,7 @@ abstract class ChatControl extends \Nette\Application\UI\Control {
   /**
    * Gets characters in the current chat
    * 
-   * @return ICollection|ChatMessage[]
+   * @return ICollection|Character[]
    */
   public function getCharacters(): ICollection {
     return $this->orm->characters->findBy([
