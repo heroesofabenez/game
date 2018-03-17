@@ -24,6 +24,8 @@ abstract class ChatControl extends \Nette\Application\UI\Control {
   protected $characterValue;
   /** @var string */
   protected $characterProfileLink = "";
+  /** @var string */
+  protected $templateFile = __DIR__ . "/chat.latte";
   /** @var int */
   protected $messagesPerPage = 25;
   
@@ -58,7 +60,7 @@ abstract class ChatControl extends \Nette\Application\UI\Control {
    * Renders the chat
    */
   public function render(): void {
-    $this->template->setFile(__DIR__ . "/chat.latte");
+    $this->template->setFile($this->templateFile);
     $this->template->characters = $this->getCharacters();
     $this->template->texts = $this->getTexts();
     $this->template->characterProfileLink = $this->characterProfileLink;
