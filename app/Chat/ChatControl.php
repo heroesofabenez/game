@@ -22,8 +22,6 @@ abstract class ChatControl extends \Nette\Application\UI\Control {
   /** @var ChatCommandsProcessor */
   protected $processor;
   /** @var string*/
-  protected $table;
-  /** @var string*/
   protected $param;
   /** @var string */
   protected $param2;
