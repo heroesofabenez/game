@@ -29,8 +29,6 @@ abstract class ChatControl extends \Nette\Application\UI\Control {
   protected $textValue;
   /** @var int */
   protected $characterValue;
-  /** @var array */
-  protected $names = [];
   
   public function __construct(ORM $orm, \Nette\Security\User $user, ChatCommandsProcessor  $processor, string $textColumn, int $textValue, string $characterColumn = NULL, $characterValue = NULL) {
     parent::__construct();
