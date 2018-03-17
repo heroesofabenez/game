@@ -173,6 +173,8 @@ class Character {
       }
       switch($key) {
         case "name":
+        case "race":
+        case "occupation":
           $this->$key = (string) $value;
           break;
         case "strength":
@@ -213,11 +215,11 @@ class Character {
   }
   
   public function getRace(): string {
-    return (string) $this->race;
+    return $this->race;
   }
   
   public function getOccupation(): string {
-    return (string) $this->occupation;
+    return $this->occupation;
   }
   
   public function getLevel(): int {
