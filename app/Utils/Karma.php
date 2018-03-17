@@ -25,9 +25,8 @@ class Karma {
   /**
    * @throws \OutOfBoundsException
    */
-  protected static function validateKarma(): void {
+  protected static function validateKarma(string ...$values): void {
     $karmas = static::getKarmas();
-    $values = func_get_args();
     foreach($values as $value) {
       if(!in_array($value, $karmas, true)) {
         throw new \OutOfBoundsException("Invalid karma.");
