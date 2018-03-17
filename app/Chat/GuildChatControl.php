@@ -12,6 +12,7 @@ class GuildChatControl extends ChatControl {
   public function __construct(IDatabaseAdapter $databaseAdapter, \Nette\Security\User $user) {
     $gid = $user->identity->guild;
     parent::__construct($databaseAdapter, "guild", $gid);
+    $this->characterProfileLink = "Profile:view";
   }
 }
 ?>

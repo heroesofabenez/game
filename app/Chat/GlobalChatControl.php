@@ -16,6 +16,7 @@ class GlobalChatControl extends ChatControl {
     $stage = $orm->stages->getById($user->identity->stage);
     $stagesIds = $orm->stages->findByArea($stage->area)->fetchPairs(NULL, "id");
     parent::__construct($databaseAdapter, "area", $stage->area->id, "currentStage", $stagesIds);
+    $this->characterProfileLink = "Profile:view";
   }
 }
 ?>
