@@ -43,6 +43,9 @@ class Karma {
     return ($karma1 === $karma2);
   }
   
+  /**
+   * @throws \OutOfBoundsException
+   */
   public static function getOpposite(string $karma): ?string {
     static::validateKarma($karma);
     switch($karma) {
