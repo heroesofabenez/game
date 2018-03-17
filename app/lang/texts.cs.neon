@@ -184,8 +184,6 @@ character:
     noCharacterFound: "Zdá se, že nemáš postavu na tomto serveru. (Jsi si jistý, že jsi vybral správný?) Než začneš hrát, musíš si jí vytvořit."
     created: "Postava vytvořena. Její detaily:"
     exists: "Postava se zadaným jménem již existuje. Zkus nějaké jiné."
-chat:
-    charactersInRoom: "Postavy v této místnosti:"
 npcShop:
     noItems: "Je mi líto, ale nemám nic na prodej."
     offer: "Mohu ti nabídnout:"
