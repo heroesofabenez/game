@@ -7,7 +7,10 @@ use HeroesofAbenez\Chat\ChatCommandsProcessor,
     HeroesofAbenez\Chat\IChatCommand,
     Nette\Utils\Validators,
     HeroesofAbenez\Chat\ChatControl,
-    HeroesofAbenez\Chat\InvalidChatControlFactoryException;
+    HeroesofAbenez\Chat\IChatMessageProcessor,
+    Nette\DI\MissingServiceException,
+    HeroesofAbenez\Chat\InvalidChatControlFactoryException,
+    HeroesofAbenez\Chat\InvalidMessageProcessorException;
 
 /**
  * ChatExtension
@@ -20,6 +23,9 @@ class ChatExtension extends \Nette\DI\CompilerExtension {
   
   protected $defaults = [
     "chats" => [],
+    "messageProcessors" => [
+      self::SERVICE_CHAT_COMMANDS_PROCESSOR => ChatCommandsProcessor::class,
+    ],
   ];
   
   /**
@@ -62,26 +68,69 @@ class ChatExtension extends \Nette\DI\CompilerExtension {
   
   /**
    * @throws \Nette\Utils\AssertionException
+   * @throws InvalidMessageProcessorException
+   */
+  protected function getMessageProcessors(): array {
+    $messageProcessors = [];
+    $config = $this->getConfig($this->defaults);
+    Validators::assertField($config, "messageProcessors", "array");
+    foreach($config["messageProcessors"] as $name => $processor) {
+      if(!class_exists($processor) OR !is_subclass_of($processor, IChatMessageProcessor::class)) {
+        throw new InvalidMessageProcessorException("Invalid message processor $processor.");
+      }
+      $messageProcessors[$name] = $processor;
+    }
+    return $messageProcessors;
+  }
+  
+  /**
+   * @throws \Nette\Utils\AssertionException
    * @throws InvalidChatControlFactoryException
+   * @throws InvalidMessageProcessorException
    */
   public function loadConfiguration(): void {
     $builder = $this->getContainerBuilder();
-    $builder->addDefinition($this->prefix(static::SERVICE_CHAT_COMMANDS_PROCESSOR))
-      ->setType(ChatCommandsProcessor::class);
     $chats = $this->getChats();
     foreach($chats as $name => $interface) {
       $builder->addDefinition($this->prefix($name))
         ->setImplement($interface);
     }
+    $messageProcessors = $this->getMessageProcessors();
+    foreach($messageProcessors as $name => $processor) {
+      $builder->addDefinition($this->prefix($name))
+        ->setType($processor);
+    }
   }
   
-  public function beforeCompile(): void {
+  protected function registerMessageProcessors(): void {
     $builder = $this->getContainerBuilder();
-    $processor = $builder->getDefinition($this->prefix(static::SERVICE_CHAT_COMMANDS_PROCESSOR));
+    $chats = $this->getChats();
+    $messageProcessors = $this->getMessageProcessors();
+    foreach($chats as $chat => $chatClass) {
+      $chatService = $builder->getDefinition($this->prefix($chat));
+      foreach($messageProcessors as $processor => $processorClass) {
+        $processorService = $builder->getDefinition($this->prefix($processor));
+        $chatService->addSetup("addMessageProcessor", [$processorService]);
+      }
+    }
+  }
+  
+  protected function registerChatCommands(): void {
+    $builder = $this->getContainerBuilder();
+    try {
+      $processor = $builder->getDefinition($this->prefix(static::SERVICE_CHAT_COMMANDS_PROCESSOR));
+    } catch(MissingServiceException $e) {
+      return;
+    }
     $chatCommands = $builder->findByType(IChatCommand::class);
     foreach($chatCommands as $command) {
       $processor->addSetup("addCommand", [$command]);
     }
+  }
+  
+  public function beforeCompile(): void {
+    $this->registerMessageProcessors();
+    $this->registerChatCommands();
   }
 }
 ?>

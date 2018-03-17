@@ -8,7 +8,7 @@ namespace HeroesofAbenez\Chat;
  *
  * @author Jakub Konečný
  */
-class ChatCommandsProcessor {
+class ChatCommandsProcessor implements IChatMessageProcessor {
   use \Nette\SmartObject;
   
   /** @var IChatCommand[] */
@@ -107,7 +107,7 @@ class ChatCommandsProcessor {
   }
   
   /**
-   * @return string|null Result of the command/null when text text contains no (defined) command
+   * @return string|null Result of the command/null when text contains no (defined) command
    */
   public function parse(string $text): ?string {
     $commandName = $this->extractCommand($text);

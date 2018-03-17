@@ -19,8 +19,8 @@ abstract class ChatControl extends \Nette\Application\UI\Control {
   protected $orm;
   /** @var \Nette\Security\User */
   protected $user;
-  /** @var ChatCommandsProcessor */
-  protected $processor;
+  /** @var IChatMessageProcessor[] */
+  protected $messageProcessors = [];
   /** @var string*/
   protected $textColumn;
   /** @var string */
@@ -30,15 +30,18 @@ abstract class ChatControl extends \Nette\Application\UI\Control {
   /** @var int */
   protected $characterValue;
   
-  public function __construct(ORM $orm, \Nette\Security\User $user, ChatCommandsProcessor  $processor, string $textColumn, int $textValue, string $characterColumn = NULL, $characterValue = NULL) {
+  public function __construct(ORM $orm, \Nette\Security\User $user,  string $textColumn, int $textValue, string $characterColumn = NULL, $characterValue = NULL) {
     parent::__construct();
     $this->orm = $orm;
     $this->user = $user;
-    $this->processor = $processor;
     $this->textColumn = $textColumn;
     $this->characterColumn = $characterColumn ?? $textColumn;
     $this->textValue = $textValue;
     $this->characterValue = $characterValue ?? $textValue;
+  }
+  
+  public function addMessageProcessor(IChatMessageProcessor $processor): void {
+    $this->messageProcessors[] = $processor;
   }
   
   /**
@@ -80,11 +83,21 @@ abstract class ChatControl extends \Nette\Application\UI\Control {
     $this->template->render();
   }
   
+  protected function processMessage(string $message): ?string {
+    foreach($this->messageProcessors as $processor) {
+      $result = $processor->parse($message);
+      if(is_string($result)) {
+        return $result;
+      }
+    }
+    return NULL;
+  }
+  
   /**
    * Submits new message
    */
   public function newMessage(string $message): void {
-    $result = $this->processor->parse($message);
+    $result = $this->processMessage($message);
     if(!is_null($result)) {
       $this->presenter->flashMessage($result);
     } else {
