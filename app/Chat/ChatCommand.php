@@ -30,7 +30,5 @@ abstract class ChatCommand implements IChatCommand {
   public function setName(string $name): void {
     $this->name = $name;
   }
-  
-  abstract public function execute(): string;
 }
 ?>
