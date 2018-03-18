@@ -28,7 +28,8 @@
         "nexendrie/translation": "^1.1",
         "nexendrie/menu": "^2.0",
         "nexendrie/utils": "^1.1",
-        "nextras/orm": "^3.0"
+        "nextras/orm": "^3.0",
+        "symfony/options-resolver": "^4.0"
     },
     "require-dev": {
         "nexendrie/code-quality": "dev-master",

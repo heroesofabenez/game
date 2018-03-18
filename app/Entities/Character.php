@@ -8,7 +8,8 @@ use OutOfBoundsException,
     HeroesofAbenez\Orm\Pet,
     HeroesofAbenez\Orm\BaseCharacterSkill,
     HeroesofAbenez\Orm\SkillSpecial,
-    HeroesofAbenez\Utils\Numbers;
+    HeroesofAbenez\Utils\Numbers,
+    Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * Structure for single character
@@ -160,37 +161,35 @@ class Character {
   }
   
   protected function setStats(array $stats): void {
-    $required_stats = ["id", "name", "occupation", "level", "strength", "dexterity", "constitution", "intelligence", "charisma"];
-    $all_stats = array_merge($required_stats, ["race", "specialization", "gender", "experience", "initiativeFormula"]);
-    foreach($required_stats as $value) {
-      if(!isset($stats[$value])) {
-        exit("Not passed all needed elements for parameter stats for method Character::__construct. Missing at least $value.");
-      }
+    $requiredStats = ["id", "name", "occupation", "level", "strength", "dexterity", "constitution", "intelligence", "charisma"];
+    $allStats = array_merge($requiredStats, ["race", "specialization", "gender", "experience", "initiativeFormula"]);
+    $numberStats = ["strength", "dexterity", "constitution", "intelligence", "charisma",];
+    $textStats = ["name", "race", "occupation",];
+    $resolver = new OptionsResolver();
+    $resolver->setDefined($allStats);
+    $resolver->setAllowedTypes("id", ["integer", "string"]);
+    foreach($numberStats as $stat) {
+      $resolver->setAllowedTypes($stat, "numeric");
+      $resolver->setNormalizer($stat, function(OptionsResolver $resolver, $value) {
+        return (int) $value;
+      });
     }
+    foreach($textStats as $stat) {
+      $resolver->setNormalizer($stat, function(OptionsResolver $resolver, $value) {
+        return (string) $value;
+      });
+    }
+    $resolver->setRequired($requiredStats);
+    $stats = array_filter($stats, function($key) use($allStats) {
+      return in_array($key, $allStats, true);
+    }, ARRAY_FILTER_USE_KEY);
+    $stats = $resolver->resolve($stats);
     foreach($stats as $key => $value) {
-      if(!in_array($key, $all_stats, true)) {
-        continue;
-      }
-      switch($key) {
-        case "name":
-        case "race":
-        case "occupation":
-          $this->$key = (string) $value;
-          break;
-        case "strength":
-        case "dexterity":
-        case "constitution":
-        case "intelligence":
-        case "charisma":
-          if(!is_numeric($value)) {
-            exit("Invalid value for \$stats[\"$key\"] passed to method Character::__construct. Expected integer.");
-          }
-          $this->$key = (int) $value;
-          $this->{$key . "Base"} = (int) $value;
-          break;
-        default:
-          $this->$key = $value;
-          break;
+      if(in_array($key, $numberStats, true)) {
+        $this->$key = $value;
+        $this->{$key . "Base"} = $value;
+      } else {
+        $this->$key = $value;
       }
     }
     $this->hitpoints = $this->maxHitpoints = $this->constitution * 5;
