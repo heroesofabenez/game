@@ -1,0 +1,19 @@
+<?php
+declare(strict_types=1);
+
+namespace HeroesofAbenez\Model;
+
+/**
+ * User to character mapper for development
+ * Uses constant user id
+ *
+ * @author Jakub Konečný
+ */
+class DevelopmentUserToCharacterMapper implements IUserToCharacterMapper {
+  public const USER_ID = 1;
+  
+  public function getRealId(): int {
+    return static::USER_ID;
+  }
+}
+?>

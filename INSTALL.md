@@ -35,9 +35,11 @@ On live servers add the following lines at the end of the file:
 application:
     errorPresenter: "Error"
     catchExceptions: true
+hoa:
+    userToCharacterMapper: HeroesofAbenez\Model\ProductionUserToCharacterMapper
 ```
 
-. They enable our error handling.
+. They enable our error handling and production handling of user accounts.
 
 Dependencies
 ------------
@@ -61,13 +63,3 @@ RewriteBase /
 in /.htaccess and (optionally) set up a virtual host.
 ### NGINX
 If you have NGINX, you (currently) have to do all server configuration by yourself.
-### General
-It is advised to install the game to server's root and use localhost, <yourcomputername>, or hoa.local as server's name. If you wish to use your computer's name or in general something not previously mentioned, add the name to app/config/local.neon to section hoa - devServers as element of array:
-
-```
-hoa:
-    devServers:
-        - kobliha
-```
-
-.

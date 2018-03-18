@@ -21,28 +21,21 @@ class UserManager implements NS\IAuthenticator {
   protected $permissionsModel;
   /** @var Profile */
   protected $profileModel;
-  /** @var array */
-  protected $devServers;
+  /** @var IUserToCharacterMapper */
+  protected $userToCharacterMapper;
   
-  public function __construct(ORM $orm, Permissions $permissionsModel, Profile $profileModel, SettingsRepository $sr) {
+  public function __construct(ORM $orm, Permissions $permissionsModel, Profile $profileModel, IUserToCharacterMapper $userToCharacterMapper) {
     $this->orm = $orm;
     $this->permissionsModel = $permissionsModel;
     $this->profileModel = $profileModel;
-    $this->devServers = $sr->settings["devServers"];
+    $this->userToCharacterMapper = $userToCharacterMapper;
   }
   
   /**
    * Return real user's id
    */
   protected function getRealId(): int {
-    if(in_array($_SERVER["SERVER_NAME"], $this->devServers, true)) {
-      return 1;
-    }
-    $ch = curl_init("http://heroesofabenez.tk/auth.php");
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-    $uid = curl_exec($ch);
-    curl_close($ch);
-    return $uid;
+    return $this->userToCharacterMapper->getRealId();
   }
   
   /**

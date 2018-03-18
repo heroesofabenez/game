@@ -3,7 +3,10 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Model\DI;
 
-use HeroesofAbenez;
+use HeroesofAbenez,
+    Nette\Utils\Validators,
+    HeroesofAbenez\Model\IUserToCharacterMapper,
+    HeroesofAbenez\Model\DevelopmentUserToCharacterMapper;
 
 /**
  * HOA Extension
@@ -12,14 +15,16 @@ use HeroesofAbenez;
  */
 class HOAExtension extends \Nette\DI\CompilerExtension {
   protected $defaults = [
-    "devServers" => [
-      "localhost", "hoa.local",
-    ],
     "application" => [
       "server" => "",
-    ]
+    ],
+    "userToCharacterMapper" => DevelopmentUserToCharacterMapper::class,
   ];
   
+  /**
+   * @throws \Nette\Utils\AssertionException
+   * @throws \RuntimeException
+   */
   public function loadConfiguration(): void {
     $this->addModels();
     $this->addCombat();
@@ -31,9 +36,29 @@ class HOAExtension extends \Nette\DI\CompilerExtension {
     $this->addForms();
   }
   
+  /**
+   * @throws \Nette\Utils\AssertionException
+   * @throws \RuntimeException
+   */
+  protected function getUserToCharacterMapper(): string {
+    $config = $this->getConfig($this->defaults);
+    Validators::assertField($config, "userToCharacterMapper", "string");
+    $mapper = $config["userToCharacterMapper"];
+    if(!class_exists($mapper) OR !is_subclass_of($mapper, IUserToCharacterMapper::class)) {
+      throw new \RuntimeException("Invalid user to character mapper $mapper.");
+    }
+    return $mapper;
+  }
+  
+  /**
+   * @throws \Nette\Utils\AssertionException
+   * @throws \RuntimeException
+   */
   protected function addModels(): void {
     $builder = $this->getContainerBuilder();
     $config = $this->getConfig($this->defaults);
+    $builder->addDefinition($this->prefix("model.userToCharacterMapper"))
+      ->setType($this->getUserToCharacterMapper());
     $builder->addDefinition($this->prefix("model.settingsRepository"))
       ->setFactory(HeroesofAbenez\Model\SettingsRepository::class, [$config]);
     $builder->addDefinition($this->prefix("model.equipment"))
