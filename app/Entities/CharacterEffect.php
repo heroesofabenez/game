@@ -63,7 +63,7 @@ class CharacterEffect {
     $resolver->setDefault("value", 0);
     $resolver->setAllowedTypes("duration", ["string", "integer"]);
     $resolver->setAllowedValues("duration", function($value) {
-      return (in_array($value, self::getDurations(), true)) OR ($value > 0);
+      return (in_array($value, $this->getDurations(), true)) OR ($value > 0);
     });
     $effect = $resolver->resolve($effect);
     if(!in_array($effect["type"], SkillSpecial::NO_STAT_TYPES, true) AND $effect["stat"] === "") {
@@ -94,7 +94,7 @@ class CharacterEffect {
   /**
    * @return string[]
    */
-  public static function getDurations(): array {
+  protected function getDurations(): array {
     return Constants::getConstantsValues(static::class, "DURATION_");
   }
   
@@ -130,7 +130,7 @@ class CharacterEffect {
    * @throws \InvalidArgumentException
    */
   public function setDuration($value) {
-    if(!is_int($value) AND !in_array($value, self::getDurations(), true)) {
+    if(!is_int($value) AND !in_array($value, $this->getDurations(), true)) {
       throw new \InvalidArgumentException("Invalid value set to CharacterEffect::\$duration. Expected string or integer.");
     }
     $this->duration = $value;
