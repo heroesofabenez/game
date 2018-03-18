@@ -1,11 +1,11 @@
   <aside id="chat_characters">
-    <p>{_"texts.chat.charactersInRoom"}
+    <p>{_"chat.peopleInRoom"}
 {foreach $characters as $character}
-      <a href="{plink Profile:view $character->id}">{$character->name}</a>{if !$iterator->last}, {/if}
+      {if $characterProfileLink}<a href="{plink $characterProfileLink $character->id}">{$character->name}</a>{else}{$character->name}{/if}{if !$iterator->last}, {/if}
 {/foreach}    </p>
   </aside>
   <article id="chat_texts">
 {foreach $texts as $text}
-    <span id="chat_text_{$text->id}">{$text->character->name} ({$text->whenS}): {$text->message}</span><br>
+    <span id="chat_text_{$text->id}">{$text->character->name} ({$text->when}): {$text->message}</span><br>
 {/foreach}
   </article>

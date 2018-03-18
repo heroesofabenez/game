@@ -3,11 +3,6 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Chat;
 
-use HeroesofAbenez\Orm\Model as ORM,
-    HeroesofAbenez\Orm\ChatMessage,
-    HeroesofAbenez\Orm\Character,
-    Nextras\Orm\Collection\ICollection;
-
 /**
  * Basic Chat Control
  *
@@ -15,12 +10,10 @@ use HeroesofAbenez\Orm\Model as ORM,
  * @property-read \Nette\Bridges\ApplicationLatte\Template $template
  */
 abstract class ChatControl extends \Nette\Application\UI\Control {
-  /** @var ORM */
-  protected $orm;
-  /** @var \Nette\Security\User */
-  protected $user;
-  /** @var ChatCommandsProcessor */
-  protected $processor;
+  /** @var IDatabaseAdapter */
+  protected $database;
+  /** @var IChatMessageProcessor[] */
+  protected $messageProcessors = [];
   /** @var string*/
   protected $textColumn;
   /** @var string */
@@ -29,71 +22,70 @@ abstract class ChatControl extends \Nette\Application\UI\Control {
   protected $textValue;
   /** @var int */
   protected $characterValue;
+  /** @var string */
+  protected $characterProfileLink = "";
+  /** @var string */
+  protected $templateFile = __DIR__ . "/chat.latte";
+  /** @var int */
+  protected $messagesPerPage = 25;
   
-  public function __construct(ORM $orm, \Nette\Security\User $user, ChatCommandsProcessor  $processor, string $textColumn, int $textValue, string $characterColumn = NULL, $characterValue = NULL) {
+  public function __construct(IDatabaseAdapter $databaseAdapter, string $textColumn, int $textValue, string $characterColumn = NULL, $characterValue = NULL) {
     parent::__construct();
-    $this->orm = $orm;
-    $this->user = $user;
-    $this->processor = $processor;
+    $this->database = $databaseAdapter;
     $this->textColumn = $textColumn;
     $this->characterColumn = $characterColumn ?? $textColumn;
     $this->textValue = $textValue;
     $this->characterValue = $characterValue ?? $textValue;
   }
   
+  public function addMessageProcessor(IChatMessageProcessor $processor): void {
+    $this->messageProcessors[] = $processor;
+  }
+  
   /**
    * Gets texts for the current chat
-   * 
-   * @return ICollection|ChatMessage[]
    */
-  public function getTexts(): ICollection {
-    $count = $this->orm->chatMessages->findBy([
-      $this->textColumn => $this->textValue,
-    ])->countStored();
-    $paginator = new \Nette\Utils\Paginator;
-    $paginator->setItemCount($count);
-    $paginator->setItemsPerPage(25);
-    $paginator->setPage($paginator->pageCount);
-    return $this->orm->chatMessages->findBy([
-      $this->textColumn => $this->textValue,
-    ])->limitBy($paginator->length, $paginator->offset);
+  public function getTexts(): ChatMessagesCollection {
+    return $this->database->getTexts($this->textColumn, $this->textValue, $this->messagesPerPage);
   }
   
   /**
    * Gets characters in the current chat
-   * 
-   * @return ICollection|Character[]
    */
-  public function getCharacters(): ICollection {
-    return $this->orm->characters->findBy([
-      $this->characterColumn => $this->characterValue
-    ]);
+  public function getCharacters(): ChatCharactersCollection {
+    return $this->database->getCharacters($this->characterColumn, $this->characterValue);
   }
   
   /**
    * Renders the chat
    */
   public function render(): void {
-    $this->template->setFile(__DIR__ . "/chat.latte");
+    $this->template->setFile($this->templateFile);
     $this->template->characters = $this->getCharacters();
     $this->template->texts = $this->getTexts();
+    $this->template->characterProfileLink = $this->characterProfileLink;
     $this->template->render();
+  }
+  
+  protected function processMessage(string $message): ?string {
+    foreach($this->messageProcessors as $processor) {
+      $result = $processor->parse($message);
+      if(is_string($result)) {
+        return $result;
+      }
+    }
+    return NULL;
   }
   
   /**
    * Submits new message
    */
   public function newMessage(string $message): void {
-    $result = $this->processor->parse($message);
+    $result = $this->processMessage($message);
     if(!is_null($result)) {
       $this->presenter->flashMessage($result);
     } else {
-      $chatMessage = new ChatMessage();
-      $chatMessage->message = $message;
-      $this->orm->chatMessages->attach($chatMessage);
-      $chatMessage->character = $this->user->id;
-      $chatMessage->{$this->textColumn} = $this->textValue;
-      $this->orm->chatMessages->persistAndFlush($chatMessage);
+      $this->database->addMessage($message, $this->textColumn, $this->textValue);
     }
     $this->presenter->redirect("this");
   }

@@ -184,8 +184,6 @@ character:
     noCharacterFound: "It seems you have no character on this server. (Are you sure you selected the right one?) Before you can start playing, you have to create one."
     created: "Character created. Details follow:"
     exists: "Character with entered name already exists. Try different name."
-chat:
-    charactersInRoom: "Characters in this room:"
 npcShop:
     noItems: "Sorry but I have nothing to sell."
     offer: "I can offer you:"

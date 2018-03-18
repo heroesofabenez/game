@@ -3,17 +3,16 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Chat;
 
-use HeroesofAbenez\Orm\Model as ORM;
-
 /**
  * Local Chat Control
  *
  * @author Jakub Konečný
  */
 class LocalChatControl extends ChatControl {
-  public function __construct(ORM $orm, \Nette\Security\User $user, ChatCommandsProcessor  $processor) {
+  public function __construct(IDatabaseAdapter $databaseAdapter, \Nette\Security\User $user) {
     $stage = $user->identity->stage;
-    parent::__construct($orm, $user, $processor, "stage", $stage, "currentStage");
+    parent::__construct($databaseAdapter, "stage", $stage, "currentStage");
+    $this->characterProfileLink = "Profile:view";
   }
 }
 ?>
