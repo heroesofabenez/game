@@ -4,7 +4,8 @@ declare(strict_types=1);
 namespace HeroesofAbenez\Entities;
 
 use HeroesofAbenez\Orm\SkillSpecial,
-    HeroesofAbenez\Utils\Constants;
+    HeroesofAbenez\Utils\Constants,
+    Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * Data structure for effect on character
@@ -40,29 +41,38 @@ class CharacterEffect {
   protected $duration;
   
   public function __construct(array $effect) {
-    if(!in_array($effect["type"], $this->getAllowedTypes(), true)) {
-      exit("Invalid value for \$type passed to method CharacterEffect::__construct.");
+    $allStats = ["id", "type", "source", "value", "duration", "stat",];
+    $resolver = new OptionsResolver();
+    $resolver->setDefined($allStats);
+    $resolver->setRequired($allStats);
+    $resolver->setAllowedTypes("id", "string");
+    $resolver->setAllowedTypes("type", "string");
+    $resolver->setAllowedValues("type", function(string $value) {
+      return in_array($value, $this->getAllowedTypes(), true);
+    });
+    $resolver->setAllowedTypes("stat", "string");
+    $resolver->setDefault("stat", "");
+    $resolver->setAllowedValues("stat", function(string $value) {
+      return in_array($value, ["strength", "dexterity", "constitution", "intelligence", "charisma", "damage", "hit", "dodge", "initiative", "defense", ""], true);
+    });
+    $resolver->setAllowedTypes("source", "string");
+    $resolver->setAllowedValues("source", function(string $value) {
+      return in_array($value, $this->getAllowedSources(), true);
+    });
+    $resolver->setAllowedTypes("value", "integer");
+    $resolver->setDefault("value", 0);
+    $resolver->setAllowedTypes("duration", ["string", "integer"]);
+    $resolver->setAllowedValues("duration", function($value) {
+      return (in_array($value, self::getDurations(), true)) OR ($value > 0);
+    });
+    $effect = $resolver->resolve($effect);
+    if(!in_array($effect["type"], SkillSpecial::NO_STAT_TYPES, true) AND $effect["stat"] === "") {
+      exit("Invalid value for \$stat passed to method " . __METHOD__ . ".");
     }
-    if(!in_array($effect["source"], $this->getAllowedSources(), true)) {
-      exit("Invalid value for \$source passed to method CharacterEffect::__construct.");
-    }
-    if(!in_array($effect["duration"], self::getDurations(), true) AND $effect["duration"] < 0) {
-      exit("Invalid value for \$duration passed to method CharacterEffect::__construct.");
-    }
-    if(!in_array($effect["type"], SkillSpecial::NO_STAT_TYPES, true)) {
-      $stats = ["strength", "dexterity", "constitution", "intelligence", "charisma", "damage", "hit", "dodge", "initiative", "defense"];
-      if(!is_int($effect["value"])) {
-        exit("Invalid value for \$value passed to method CharacterEffect::__construct. Expected integer.");
-      }
-      if(!in_array($effect["stat"], $stats, true) OR (is_null($effect["stat"]))) {
-        exit("Invalid value for \$stat passed to method CharacterEffect::__construct.");
-      }
-      $this->stat = $effect["stat"];
-      $this->value = $effect["value"];
-    }
-    $this->value = (int) $effect["value"];
     $this->id = $effect["id"];
     $this->type = $effect["type"];
+    $this->stat = $effect["stat"];
+    $this->value = $effect["value"];
     $this->source = $effect["source"];
     $this->duration = $effect["duration"];
   }
