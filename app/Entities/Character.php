@@ -96,9 +96,9 @@ class Character {
   protected $maxHitpoints;
   /** @var int */
   protected $hitpoints;
-  /** @var float */
+  /** @var int */
   protected $damage = 0;
-  /** @var float */
+  /** @var int */
   protected $damageBase = 0;
   /** @var int */
   protected $hit = 0;
@@ -270,11 +270,11 @@ class Character {
   }
   
   public function getDamage(): int {
-    return (int) $this->damage;
+    return $this->damage;
   }
   
   public function getDamageBase(): int {
-    return (int) $this->damageBase;
+    return $this->damageBase;
   }
   
   public function getHit(): int {
@@ -520,7 +520,7 @@ class Character {
     foreach($stats as $secondary => $primary) {
       $gain = $this->$secondary - $this->{$secondary . "Base"};
       if($secondary === "damage") {
-        $base = round($this->$primary / 2) + 1;
+        $base = (int) round($this->$primary / 2) + 1;
       } else {
         $base = $this->$primary * 3;
       }
