@@ -46,7 +46,7 @@ class CombatAction {
   
   public function __construct(ITranslator $translator, string $action, bool $result, Character $character1, Character $character2, int $amount = 0, string $name = "") {
     if(!in_array($action, $this->getAllowedActions(), true)) {
-      exit("Invalid value for action passed to CombatAction::__construct.");
+      throw new \InvalidArgumentException("Invalid value for argument action.");
     }
     $this->translator = $translator;
     $this->action = $action;

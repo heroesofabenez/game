@@ -67,7 +67,7 @@ class CharacterEffect {
     });
     $effect = $resolver->resolve($effect);
     if(!in_array($effect["type"], SkillSpecial::NO_STAT_TYPES, true) AND $effect["stat"] === "") {
-      exit("Invalid value for \$stat passed to method " . __METHOD__ . ".");
+      throw new \InvalidArgumentException("The option stat with value '' is invalid.");
     }
     $this->id = $effect["id"];
     $this->type = $effect["type"];
