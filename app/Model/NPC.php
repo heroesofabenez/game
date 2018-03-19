@@ -27,16 +27,5 @@ class NPC {
   public function view(int $id): ?NPCEntity {
     return $this->orm->npcs->getById($id);
   }
-  
-  /**
-   * Get name of specified npc
-   */
-  public function getNpcName(int $id): string {
-    $npc = $this->view($id);
-    if(is_null($npc)) {
-      return "";
-    }
-    return $npc->name;
-  }
 }
 ?>

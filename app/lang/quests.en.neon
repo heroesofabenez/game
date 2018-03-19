@@ -1,0 +1,4 @@
+1:
+    name: "Find a book"
+    introduction: "You need to find book ABC."
+    end_text: "Well done, my apprentice."

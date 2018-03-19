@@ -27,17 +27,6 @@ class Item {
   }
   
   /**
-   * Gets name of specified item
-   */
-  public function getItemName(int $id): string {
-    $item = $this->view($id);
-    if(is_null($item)) {
-      return "";
-    }
-    return $item->name;
-  }
-  
-  /**
    * Get info about specified item
    */
   public function view(int $id): ?ItemEntity {

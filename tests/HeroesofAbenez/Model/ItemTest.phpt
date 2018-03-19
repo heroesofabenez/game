@@ -23,11 +23,6 @@ final class ItemTest extends \Tester\TestCase {
     Assert::type(ItemEntity::class, $item);
     Assert::null($this->model->view(5000));
   }
-  
-  public function testGetItemName() {
-    Assert::notSame("", $this->model->getItemName(1));
-    Assert::same("", $this->model->getItemName(5000));
-  }
 }
 
 $test = new ItemTest();

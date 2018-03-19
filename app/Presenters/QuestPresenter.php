@@ -38,34 +38,35 @@ class QuestPresenter extends BasePresenter {
       $this->forward("notfound");
     }
     $this->template->id = $quest->id;
-    $this->template->name = $quest->name;
-    $this->template->introduction = $quest->introduction;
-    $this->template->end_text = $quest->endText;
     $this->template->finished = $this->model->isFinished($id);
-    $this->template->npcStart = $this->npcModel->getNpcName($quest->npcStart);
-    $this->template->npcEnd = $this->npcModel->getNpcName($quest->npcEnd);
+    $this->template->npcStart = $quest->npcStart;
+    $this->template->npcEnd = $this->translator->translate("npcs.a$quest->npcEnd.name");
     $requirements = [];
     if($quest->costMoney > 0) {
       $requirements[] = (object) [
-        "text" => "pay {$quest->costMoney} silver marks", "met" => false
+        "text" => $this->translator->translate("texts.quest.requirementPayMoney", $quest->costMoney),
+        "met" => false
       ];
     }
     if(is_int($quest->neededItem)) {
-      $itemName = $this->itemModel->getItemName($quest->neededItem);
+      $itemName = $this->translator->translate("items.a$quest->neededItem.name");
       $itemLink = $this->link("Item:view", $quest->neededItem);
       $haveItem = $this->itemModel->haveItem($quest->neededItem, $quest->itemAmount);
       $requirements[] = (object) [
-        "text" => "get {$quest->itemAmount}x <a href=\"$itemLink\">$itemName</a>", "met" => $haveItem
+        "text" => $this->translator->translate("texts.quest.requirementGetItem", $quest->itemAmount, ["item" => "<a href=\"$itemLink\">$itemName</a>"]),
+        "met" => $haveItem
       ];
     }
     $npcLink = $this->link("Npc:view", $quest->npcEnd);
     if($quest->npcStart != $quest->npcEnd) {
       $requirements[] = (object) [
-        "text" => "talk to <a href=\"$npcLink\">{$this->template->npcEnd}</a>", "met" => false
+        "text" => $this->translator->translate("texts.quest.requirementTalkToNpc", 0, ["npc" => "<a href=\"$npcLink\">{$this->template->npcEnd}</a>"]),
+        "met" => false
       ];
     } else {
       $requirements[] = (object) [
-        "text" => "report back to <a href=\"$npcLink\">{$this->template->npcEnd}</a>", "met" => false
+        "text" => $this->translator->translate("texts.quest.requirementReportBackToNpc", 0, ["npc" => "<a href=\"$npcLink\">{$this->template->npcEnd}</a>"]),
+        "met" => false
       ];
     }
     $this->template->requirements = $requirements;
