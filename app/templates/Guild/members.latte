@@ -2,5 +2,5 @@
 {block title}{_"texts.guild.membersTitle"}{/block}
 {block content}
   <h1>{_"texts.guild.membersTitle"}</h1>
-  {foreach $members as $member}{if $member->customRankName}{$member->customRankName}{else}{_"guildranks.a$member->rank.name"|firstUpper}{/if} {$member->name} <a n:href="Profile:view $member->id">{_"texts.common.profile"}</a> {if $canPromote and $member->rankId < $rankId} <a n:href="Guild:promote $member->id">{_"texts.guild.promote"}</a> <a n:href="Guild:demote $member->id">{_"texts.guild.demote"}</a>{/if}{if $canKick and $member->rankId < $rankId} <a n:href="Guild:kick $member->id">{_"texts.guild.kick"}</a>{/if}{if !$iterator->isLast()}<br>{/if}{/foreach}
+  {foreach $members as $member}{if $member->customRankName}{$member->customRankName}{else}{_"guildranks.$member->rank.name"|firstUpper}{/if} {$member->name} <a n:href="Profile:view $member->id">{_"texts.common.profile"}</a> {if $canPromote and $member->rankId < $rankId} <a n:href="Guild:promote $member->id">{_"texts.guild.promote"}</a> <a n:href="Guild:demote $member->id">{_"texts.guild.demote"}</a>{/if}{if $canKick and $member->rankId < $rankId} <a n:href="Guild:kick $member->id">{_"texts.guild.kick"}</a>{/if}{if !$iterator->isLast()}<br>{/if}{/foreach}
 {/block}

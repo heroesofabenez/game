@@ -5,6 +5,6 @@
   <p>{_"texts.common.description"}: {$guild->description}</p>
   <h2>{_"texts.common.members"}</h2>
   {foreach $guild->members as $member}
-    {_"guildranks.a{$member->guildrank->id}.name"|firstUpper}: <a n:href="Profile:view $member->id">{$member->name}</a><br>
+    {_"guildranks.{$member->guildrank->id}.name"|firstUpper}: <a n:href="Profile:view $member->id">{$member->name}</a><br>
   {/foreach}
 {/block}

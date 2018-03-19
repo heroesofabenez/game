@@ -40,7 +40,7 @@ class QuestPresenter extends BasePresenter {
     $this->template->id = $quest->id;
     $this->template->finished = $this->model->isFinished($id);
     $this->template->npcStart = $quest->npcStart;
-    $this->template->npcEnd = $this->translator->translate("npcs.a$quest->npcEnd.name");
+    $this->template->npcEnd = $this->translator->translate("npcs.$quest->npcEnd.name");
     $requirements = [];
     if($quest->costMoney > 0) {
       $requirements[] = (object) [
@@ -49,7 +49,7 @@ class QuestPresenter extends BasePresenter {
       ];
     }
     if(is_int($quest->neededItem)) {
-      $itemName = $this->translator->translate("items.a$quest->neededItem.name");
+      $itemName = $this->translator->translate("items.$quest->neededItem.name");
       $itemLink = $this->link("Item:view", $quest->neededItem);
       $haveItem = $this->itemModel->haveItem($quest->neededItem, $quest->itemAmount);
       $requirements[] = (object) [
