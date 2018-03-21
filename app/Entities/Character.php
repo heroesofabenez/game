@@ -3,8 +3,7 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Entities;
 
-use OutOfBoundsException,
-    HeroesofAbenez\Orm\Equipment,
+use HeroesofAbenez\Orm\Equipment,
     HeroesofAbenez\Orm\Pet,
     HeroesofAbenez\Orm\BaseCharacterSkill,
     HeroesofAbenez\Orm\SkillSpecial,
@@ -372,7 +371,7 @@ class Character {
   /**
    * Removes specified effect from the character
    *
-   * @throws OutOfBoundsException
+   * @throws \OutOfBoundsException
    */
   public function removeEffect(string $effectId): void {
     foreach($this->effects as $i => $effect) {
@@ -382,30 +381,30 @@ class Character {
         return;
       }
     }
-    throw new OutOfBoundsException("Effect to remove was not found.");
+    throw new \OutOfBoundsException("Effect to remove was not found.");
   }
   
   /**
    * Get specified equipment of the character
    *
-   * @throws OutOfBoundsException
+   * @throws \OutOfBoundsException
    */
   public function getItem(int $itemId): Equipment {
     if(isset($this->equipment[$itemId])) {
       return $this->equipment[$itemId];
     }
-    throw new OutOfBoundsException("Item was not found.");
+    throw new \OutOfBoundsException("Item was not found.");
   }
   
   /**
    * Equips an owned item
    *
-   * @throws OutOfBoundsException
+   * @throws \OutOfBoundsException
    */
   public function equipItem(int $itemId): void {
     try {
       $item = $this->getItem($itemId);
-    } catch (OutOfBoundsException $e) {
+    } catch (\OutOfBoundsException $e) {
       throw $e;
     }
     $itemBonus = new CharacterEffect($item->deployParams);
@@ -415,12 +414,12 @@ class Character {
   /**
    * Unequips an item
    *
-   * @throws OutOfBoundsException
+   * @throws \OutOfBoundsException
    */
   public function unequipItem(int $itemId): void {
     try {
       $item = $this->getItem($itemId);
-    } catch (OutOfBoundsException $e) {
+    } catch (\OutOfBoundsException $e) {
       throw $e;
     }
     $itemBonus = $item->deployParams;
@@ -430,24 +429,24 @@ class Character {
   /**
    * Get specified pet
    *
-   * @throws OutOfBoundsException
+   * @throws \OutOfBoundsException
    */
   public function getPet(int $petId): Pet {
     if(isset($this->pets[$petId]) AND $this->pets[$petId] instanceof Pet) {
       return $this->pets[$petId];
     }
-    throw new OutOfBoundsException("Pet was not found.");
+    throw new \OutOfBoundsException("Pet was not found.");
   }
   
   /**
    * Deploy specified pet (for bonuses)
    *
-   * @throws OutOfBoundsException
+   * @throws \OutOfBoundsException
    */
   public function deployPet(int $petId): void {
     try {
       $this->getPet($petId);
-    } catch(OutOfBoundsException $e) {
+    } catch(\OutOfBoundsException $e) {
       throw $e;
     }
     $this->activePet = $petId;
