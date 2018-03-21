@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "bb65b95b47999c7b3e53990a6342a300",
+    "content-hash": "6ca39c7ec388a027a5f80b857627a8cf",
     "packages": [
         {
             "name": "kdyby/autowired",
@@ -320,16 +320,16 @@
         },
         {
             "name": "nette/caching",
-            "version": "v2.5.6",
+            "version": "v2.5.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nette/caching.git",
-                "reference": "1231735b5135ca02bd381b70482c052d2a90bdc9"
+                "reference": "7fba7c7ab2585fafb7b31152f2595e1551120555"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nette/caching/zipball/1231735b5135ca02bd381b70482c052d2a90bdc9",
-                "reference": "1231735b5135ca02bd381b70482c052d2a90bdc9",
+                "url": "https://api.github.com/repos/nette/caching/zipball/7fba7c7ab2585fafb7b31152f2595e1551120555",
+                "reference": "7fba7c7ab2585fafb7b31152f2595e1551120555",
                 "shasum": ""
             },
             "require": {
@@ -385,24 +385,24 @@
                 "nette",
                 "sqlite"
             ],
-            "time": "2017-08-30T12:12:25+00:00"
+            "time": "2018-03-21T11:04:32+00:00"
         },
         {
             "name": "nette/component-model",
-            "version": "v2.3.1",
+            "version": "v2.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nette/component-model.git",
-                "reference": "b6197fa6867d816b08457ac73b04ba70f78682e3"
+                "reference": "6e7980f5ddec31f68a39e767799b1b0be9dd1014"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nette/component-model/zipball/b6197fa6867d816b08457ac73b04ba70f78682e3",
-                "reference": "b6197fa6867d816b08457ac73b04ba70f78682e3",
+                "url": "https://api.github.com/repos/nette/component-model/zipball/6e7980f5ddec31f68a39e767799b1b0be9dd1014",
+                "reference": "6e7980f5ddec31f68a39e767799b1b0be9dd1014",
                 "shasum": ""
             },
             "require": {
-                "nette/utils": "^2.4 || ~3.0.0",
+                "nette/utils": "^2.5 || ~3.0.0",
                 "php": ">=5.6.0"
             },
             "conflict": {
@@ -416,7 +416,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.3-dev"
+                    "dev-master": "2.4-dev"
                 }
             },
             "autoload": {
@@ -440,9 +440,13 @@
                     "homepage": "https://nette.org/contributors"
                 }
             ],
-            "description": "Nette Component Model",
+            "description": "⚛ Nette Component Model",
             "homepage": "https://nette.org",
-            "time": "2017-07-11T08:59:35+00:00"
+            "keywords": [
+                "components",
+                "nette"
+            ],
+            "time": "2018-03-20T16:32:50+00:00"
         },
         {
             "name": "nette/di",
@@ -1147,16 +1151,16 @@
         },
         {
             "name": "nexendrie/translation",
-            "version": "1.1.0",
+            "version": "1.1.1",
             "source": {
                 "type": "git",
                 "url": "https://gitlab.com/nexendrie/translation.git",
-                "reference": "735fafc7ab5ded604fddf629098d5db1d4a3bf72"
+                "reference": "b080c25e806706a83a323f81bc25d937ae2e3e66"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://gitlab.com/api/v4/projects/nexendrie%2Ftranslation/repository/archive.zip?sha=735fafc7ab5ded604fddf629098d5db1d4a3bf72",
-                "reference": "735fafc7ab5ded604fddf629098d5db1d4a3bf72",
+                "url": "https://gitlab.com/api/v4/projects/nexendrie%2Ftranslation/repository/archive.zip?sha=b080c25e806706a83a323f81bc25d937ae2e3e66",
+                "reference": "b080c25e806706a83a323f81bc25d937ae2e3e66",
                 "shasum": ""
             },
             "require": {
@@ -1217,7 +1221,7 @@
                 "translation",
                 "yaml"
             ],
-            "time": "2018-01-22T14:17:59+00:00"
+            "time": "2018-03-21T20:43:49+00:00"
         },
         {
             "name": "nexendrie/utils",
