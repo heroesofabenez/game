@@ -14,7 +14,7 @@ namespace HeroesofAbenez\Orm;
  * @property QuestStage|NULL $stage {m:1 QuestStage::$chatMessages} {default NULL}
  * @property Guild|NULL $guild {m:1 Guild::$chatMessages} {default NULL}
  * @property \DateTimeImmutable $when
- * @property string $whenS
+ * @property string $whenS {virtual}
  */
 class ChatMessage extends \Nextras\Orm\Entity\Entity {
   protected function getterWhenS(): string {
