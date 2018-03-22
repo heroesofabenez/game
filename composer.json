@@ -29,7 +29,8 @@
         "nexendrie/menu": "^2.0",
         "nexendrie/utils": "^1.2",
         "nextras/orm": "^3.0",
-        "symfony/options-resolver": "^4.0"
+        "symfony/options-resolver": "^4.0",
+        "heroesofabenez/chat": "^1.0"
     },
     "require-dev": {
         "nexendrie/code-quality": "dev-master",
