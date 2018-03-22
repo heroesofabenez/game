@@ -12,12 +12,12 @@
             "source": {
                 "type": "git",
                 "url": "https://gitlab.com/heroesofabenez/chat.git",
-                "reference": "97ebcd8217821280b5d7b0ba9999f75ef6dca495"
+                "reference": "2a100ff839aaf975d94579f5d59585a38340a67c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://gitlab.com/api/v4/projects/heroesofabenez%2Fchat/repository/archive.zip?sha=97ebcd8217821280b5d7b0ba9999f75ef6dca495",
-                "reference": "97ebcd8217821280b5d7b0ba9999f75ef6dca495",
+                "url": "https://gitlab.com/api/v4/projects/heroesofabenez%2Fchat/repository/archive.zip?sha=2a100ff839aaf975d94579f5d59585a38340a67c",
+                "reference": "2a100ff839aaf975d94579f5d59585a38340a67c",
                 "shasum": ""
             },
             "require": {
@@ -63,7 +63,7 @@
                 "component",
                 "nette"
             ],
-            "time": "2018-03-22T09:53:14+00:00"
+            "time": "2018-03-22T13:19:01+00:00"
         },
         {
             "name": "kdyby/autowired",

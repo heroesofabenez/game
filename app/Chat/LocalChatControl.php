@@ -12,7 +12,6 @@ class LocalChatControl extends ChatControl {
   public function __construct(IDatabaseAdapter $databaseAdapter, \Nette\Security\User $user) {
     $stage = $user->identity->stage;
     parent::__construct($databaseAdapter, "stage", $stage, "currentStage");
-    $this->characterProfileLink = "Profile:view";
   }
 }
 ?>
