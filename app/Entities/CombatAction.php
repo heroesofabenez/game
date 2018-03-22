@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace HeroesofAbenez\Entities;
 
 use Nette\Localization\ITranslator,
-    HeroesofAbenez\Utils\Constants;
+    Nexendrie\Utils\Constants;
 
 /**
  * Data structure for combat action

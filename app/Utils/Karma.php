@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Utils;
 
+use Nexendrie\Utils\Constants;
+
 /**
  * Karma
  *

@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace HeroesofAbenez\Entities;
 
 use HeroesofAbenez\Orm\SkillSpecial,
-    HeroesofAbenez\Utils\Constants,
+    Nexendrie\Utils\Constants,
     Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
