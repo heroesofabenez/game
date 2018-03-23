@@ -560,6 +560,8 @@ class CombatBase {
     }
     $result["action"] = CombatAction::ACTION_ATTACK;
     $result["name"] = "";
+    $result["character1"] = $attacker;
+    $result["character2"] = $defender;
     $this->results = $result;
   }
   
@@ -583,6 +585,8 @@ class CombatBase {
     }
     $result["action"] = CombatAction::ACTION_SKILL_ATTACK;
     $result["name"] = $skill->skill->name;
+    $result["character1"] = $attacker;
+    $result["character2"] = $defender;
     $this->results = $result;
     $skill->resetCooldown();
   }
@@ -592,7 +596,8 @@ class CombatBase {
    */
   public function useSpecialSkill(Character $character1, Character $target, CharacterSpecialSkillDummy $skill): void {
     $result = [
-      "result" => true, "amount" => 0, "action" => CombatAction::ACTION_SKILL_SPECIAL, "name" => $skill->skill->name
+      "result" => true, "amount" => 0, "action" => CombatAction::ACTION_SKILL_SPECIAL, "name" => $skill->skill->name,
+      "character1" => $character1, "character2" => $target,
     ];
     $this->results = $result;
     $effect = [
@@ -631,6 +636,8 @@ class CombatBase {
     }
     $result["action"] = CombatAction::ACTION_HEALING;
     $result["name"] = "";
+    $result["character1"] = $healer;
+    $result["character2"] = $patient;
     $this->results = $result;
   }
   
@@ -657,9 +664,7 @@ class CombatBase {
   /**
    * Log results of an action
    */
-  public function logResults(Character $character1, Character $character2): void {
-    $this->results["character1"] = $character1;
-    $this->results["character2"] = $character2;
+  public function logResults(): void {
     $this->log->log($this->results);
     $this->results = NULL;
   }
