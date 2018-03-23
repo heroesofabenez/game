@@ -4,7 +4,8 @@ declare(strict_types=1);
 namespace HeroesofAbenez\Entities;
 
 use Nette\Localization\ITranslator,
-    Nexendrie\Utils\Constants;
+    Nexendrie\Utils\Constants,
+    Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * Data structure for combat action
@@ -44,17 +45,31 @@ class CombatAction {
   /** @var string */
   protected $message;
   
-  public function __construct(ITranslator $translator, string $action, bool $result, Character $character1, Character $character2, int $amount = 0, string $name = "") {
-    if(!in_array($action, $this->getAllowedActions(), true)) {
-      throw new \InvalidArgumentException("Invalid value for argument action.");
-    }
+  public function __construct(ITranslator $translator, array $action) {
+    $requiredStats = ["action", "result", "character1", "character2",];
+    $allStats = array_merge($requiredStats, ["amount", "name",]);
+    $resolver = new OptionsResolver();
+    $resolver->setDefined($allStats);
+    $resolver->setRequired($requiredStats);
+    $resolver->setAllowedTypes("action", "string");
+    $resolver->setAllowedValues("action", function(string $value) {
+      return in_array($value, $this->getAllowedActions(), true);
+    });
+    $resolver->setAllowedTypes("result", "bool");
+    $resolver->setAllowedTypes("amount", "integer");
+    $resolver->setDefault("amount", 0);
+    $resolver->setAllowedTypes("name", "string");
+    $resolver->setDefault("name", "");
+    $resolver->setAllowedTypes("character1", Character::class);
+    $resolver->setAllowedTypes("character2", Character::class);
+    $action = $resolver->resolve($action);
     $this->translator = $translator;
-    $this->action = $action;
-    $this->result = $result;
-    $this->amount = $amount;
-    $this->character1 = $character1;
-    $this->character2 = $character2;
-    $this->name = $name;
+    $this->action = $action["action"];
+    $this->result = $action["result"];
+    $this->amount = $action["amount"];
+    $this->character1 = $action["character1"];
+    $this->character2 = $action["character2"];
+    $this->name = $action["name"];
     $this->parse();
   }
   

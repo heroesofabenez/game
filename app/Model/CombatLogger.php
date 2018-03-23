@@ -3,8 +3,7 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Model;
 
-use HeroesofAbenez\Entities\Character as CharacterEntity,
-    HeroesofAbenez\Entities\CombatAction,
+use HeroesofAbenez\Entities\CombatAction,
     HeroesofAbenez\Entities\Team,
     Nette\Bridges\ApplicationLatte\ILatteFactory,
     Nette\Localization\ITranslator;
@@ -58,8 +57,8 @@ class CombatLogger implements \Countable, \IteratorAggregate {
   /**
    * Adds new entry
    */
-  public function log($action, $result, CharacterEntity $character1, CharacterEntity $character2, int $amount = 0, string $name = ""): void {
-    $this->actions[$this->round][] = new CombatAction($this->translator, $action, $result, $character1, $character2, $amount, $name);
+  public function log(array $action): void {
+    $this->actions[$this->round][] = new CombatAction($this->translator, $action);
   }
   
   /**

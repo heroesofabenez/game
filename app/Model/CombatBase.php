@@ -644,7 +644,11 @@ class CombatBase {
       foreach($character->effects as $effect) {
         if($effect->type === SkillSpecial::TYPE_POISON) {
           $character->harm($effect->value);
-          $this->log->log(CombatAction::ACTION_POISON, true, $character, $character, $effect->value);
+          $action = [
+            "action" => CombatAction::ACTION_POISON, "result" => true, "amount" => $effect->value,
+            "character1" => $character, "character2" => $character,
+          ];
+          $this->log->log($action);
         }
       }
     }
@@ -654,8 +658,9 @@ class CombatBase {
    * Log results of an action
    */
   public function logResults(Character $character1, Character $character2): void {
-    $results = $this->results;
-    $this->log->log($results["action"], $results["result"], $character1, $character2, $results["amount"], $results["name"]);
+    $this->results["character1"] = $character1;
+    $this->results["character2"] = $character2;
+    $this->log->log($this->results);
     $this->results = NULL;
   }
   
