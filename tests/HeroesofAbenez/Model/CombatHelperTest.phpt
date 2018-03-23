@@ -34,7 +34,7 @@ final class CombatHelperTest extends \Tester\TestCase {
     $player = $this->model->getPlayer(1);
     Assert::type(Character::class, $player);
     Assert::count(1, $player->pets);
-    Assert::count(0, $player->equipment);
+    Assert::count(1, $player->equipment);
     Assert::count(1, $player->skills);
     Assert::exception(function() {
       $this->model->getPlayer(5000);
