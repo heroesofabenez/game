@@ -81,6 +81,7 @@ class CombatHelper {
       /** @var \HeroesofAbenez\Orm\Equipment $item */
       $item = $this->equipmentModel->view($row->item->id);
       $item->worn = true;
+      $equipment[] = $item;
     }
     $skills = $this->skillsModel->getPlayerSkills($id);
     $player = new Character($data, $equipment, $pets, $skills);
