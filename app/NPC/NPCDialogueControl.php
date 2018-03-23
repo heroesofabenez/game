@@ -3,8 +3,7 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\NPC;
 
-use HeroesofAbenez\Entities\DialogueLine,
-    HeroesofAbenez\Orm\Npc;
+use HeroesofAbenez\Orm\Npc;
 
 /**
  * A set of dialogue lines, simplify working with them
