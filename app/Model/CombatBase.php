@@ -672,7 +672,7 @@ class CombatBase {
   /**
    * Log dealt damage
    */
-  public function logDamage(Character $attacker, Character $defender): void {
+  public function logDamage(Character $attacker): void {
     $team = $this->team1->hasMember($attacker->id) ? 1 : 2;
     $this->damage[$team] += $this->results["amount"];
   }

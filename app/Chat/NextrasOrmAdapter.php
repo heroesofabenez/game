@@ -28,7 +28,7 @@ class NextrasOrmAdapter implements IDatabaseAdapter {
     ])->countStored();
     $paginator = new \Nette\Utils\Paginator;
     $paginator->setItemCount($count);
-    $paginator->setItemsPerPage(25);
+    $paginator->setItemsPerPage($limit);
     $paginator->setPage($paginator->pageCount);
     $messages = $this->orm->chatMessages->findBy([
       $column => $value,
