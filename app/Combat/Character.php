@@ -5,7 +5,7 @@ namespace HeroesofAbenez\Combat;
 
 use HeroesofAbenez\Orm\BaseCharacterSkill,
     HeroesofAbenez\Orm\SkillSpecial,
-    HeroesofAbenez\Utils\Numbers,
+    Nexendrie\Utils\Numbers,
     Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**

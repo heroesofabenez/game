@@ -6,7 +6,7 @@ namespace HeroesofAbenez\Combat;
 use HeroesofAbenez\Orm\CharacterAttackSkillDummy,
     HeroesofAbenez\Orm\CharacterSpecialSkillDummy,
     HeroesofAbenez\Orm\SkillSpecial,
-    HeroesofAbenez\Utils\Numbers;
+    Nexendrie\Utils\Numbers;
 
 /**
  * Handles combat

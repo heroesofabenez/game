@@ -1288,12 +1288,12 @@
             "source": {
                 "type": "git",
                 "url": "https://gitlab.com/nexendrie/utils.git",
-                "reference": "4373637e025b732c2ea979a3f9d70debf43967ac"
+                "reference": "c9c2043297c288878bf7cbc4be7eacd1cb0cf2d4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://gitlab.com/api/v4/projects/nexendrie%2Futils/repository/archive.zip?sha=4373637e025b732c2ea979a3f9d70debf43967ac",
-                "reference": "4373637e025b732c2ea979a3f9d70debf43967ac",
+                "url": "https://gitlab.com/api/v4/projects/nexendrie%2Futils/repository/archive.zip?sha=c9c2043297c288878bf7cbc4be7eacd1cb0cf2d4",
+                "reference": "c9c2043297c288878bf7cbc4be7eacd1cb0cf2d4",
                 "shasum": ""
             },
             "require": {
@@ -1330,10 +1330,13 @@
             "homepage": "https://nexendrie.gitlab.io",
             "keywords": [
                 "collections",
+                "constants",
                 "intervals",
+                "numbers",
+                "range",
                 "utils"
             ],
-            "time": "2018-03-22T09:45:21+00:00"
+            "time": "2018-03-24T13:07:53+00:00"
         },
         {
             "name": "nextras/dbal",
