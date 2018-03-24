@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace HeroesofAbenez\Entities;
+namespace HeroesofAbenez\Combat;
 
 use Nexendrie\Utils\Collection,
     Nette\Utils\Arrays;

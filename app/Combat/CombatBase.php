@@ -1,15 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace HeroesofAbenez\Model;
+namespace HeroesofAbenez\Combat;
 
-use HeroesofAbenez\Entities\Team,
-    HeroesofAbenez\Entities\Character,
-    HeroesofAbenez\Entities\CharacterEffect,
-    HeroesofAbenez\Entities\CombatAction,
-    HeroesofAbenez\Orm\CharacterAttackSkillDummy,
+use HeroesofAbenez\Orm\CharacterAttackSkillDummy,
     HeroesofAbenez\Orm\CharacterSpecialSkillDummy,
-    HeroesofAbenez\Utils\InvalidStateException,
     HeroesofAbenez\Orm\SkillSpecial,
     HeroesofAbenez\Utils\Numbers;
 

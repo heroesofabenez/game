@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Orm;
 
-use HeroesofAbenez\Entities\CharacterEffect;
+use HeroesofAbenez\Combat\CharacterEffect;
 
 /**
  * Pet

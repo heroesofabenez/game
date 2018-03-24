@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Arena;
 
-use HeroesofAbenez\Entities\Character,
+use HeroesofAbenez\Combat\Character,
     HeroesofAbenez\Model\OpponentNotFoundException,
     Nextras\Orm\Collection\ICollection,
     HeroesofAbenez\Orm\PveArenaOpponent;

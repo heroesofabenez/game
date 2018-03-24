@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Model;
 
-use HeroesofAbenez\Entities\Character,
+use HeroesofAbenez\Combat\Character,
     HeroesofAbenez\Orm\CharacterAttackSkillDummy,
     HeroesofAbenez\Orm\SkillAttackDummy,
     HeroesofAbenez\Orm\CharacterSpecialSkillDummy,

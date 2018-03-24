@@ -109,9 +109,9 @@ class HOAExtension extends \Nette\DI\CompilerExtension {
   protected function addCombat(): void {
     $builder = $this->getContainerBuilder();
     $builder->addDefinition($this->prefix("combat.combat"))
-      ->setType(HeroesofAbenez\Model\CombatBase::class);
+      ->setType(HeroesofAbenez\Combat\CombatBase::class);
     $builder->addDefinition($this->prefix("combat.logger"))
-      ->setType(HeroesofAbenez\Model\CombatLogger::class);
+      ->setType(HeroesofAbenez\Combat\CombatLogger::class);
     $builder->addDefinition($this->prefix("combat.logManager"))
       ->setType(HeroesofAbenez\Model\CombatLogManager::class);
     $builder->addDefinition($this->prefix("combat.helper"))

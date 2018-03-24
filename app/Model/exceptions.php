@@ -3,8 +3,7 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Model;
 
-use HeroesofAbenez\Utils\InvalidStateException,
-    HeroesofAbenez\Utils\AccessDeniedException;
+use HeroesofAbenez\Utils\AccessDeniedException;
 
 // @codingStandardsIgnoreFile
 
@@ -24,8 +23,8 @@ class NameInUseException extends AccessDeniedException {
   
 }
 
-class ImmutableException extends InvalidStateException {
-  
+class InvalidStateException extends \RuntimeException {
+
 }
 
 class OpponentNotFoundException extends RecordNotFoundException {

@@ -6,10 +6,10 @@ namespace HeroesofAbenez\Arena;
 use Nette\Security\User,
     HeroesofAbenez\Orm\Model as ORM,
     HeroesofAbenez\Model\CombatLogManager,
-    HeroesofAbenez\Model\CombatLogger,
+    HeroesofAbenez\Combat\CombatLogger,
     Nette\Localization\ITranslator,
-    HeroesofAbenez\Entities\Character,
-    HeroesofAbenez\Model\CombatBase,
+    HeroesofAbenez\Combat\Character,
+    HeroesofAbenez\Combat\CombatBase,
     HeroesofAbenez\Model\CombatHelper,
     HeroesofAbenez\Model\OpponentNotFoundException,
     Nextras\Orm\Collection\ICollection;

@@ -1,11 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace HeroesofAbenez\Model;
+namespace HeroesofAbenez\Combat;
 
-use HeroesofAbenez\Entities\CombatAction,
-    HeroesofAbenez\Entities\Team,
-    Nette\Bridges\ApplicationLatte\ILatteFactory,
+use Nette\Bridges\ApplicationLatte\ILatteFactory,
     Nette\Localization\ITranslator;
 
 /**
@@ -73,7 +71,7 @@ class CombatLogger implements \Countable, \IteratorAggregate {
       "team1" => $this->team1, "team2" => $this->team2, "actions" => $this->actions
     ];
     $this->latte->setTempDirectory(__DIR__ . "/../../temp/combats");
-    return $this->latte->renderToString(__DIR__ . "/../templates/CombatLog.latte", $params);
+    return $this->latte->renderToString(__DIR__ . "/CombatLog.latte", $params);
   }
   
   public function count(): int {

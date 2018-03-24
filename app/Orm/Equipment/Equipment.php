@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace HeroesofAbenez\Orm;
 
 use Nextras\Orm\Relationships\OneHasMany,
-    HeroesofAbenez\Entities\CharacterEffect;
+    HeroesofAbenez\Combat\CharacterEffect;
 
 /**
  * Equipment
