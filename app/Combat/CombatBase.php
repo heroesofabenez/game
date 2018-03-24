@@ -20,11 +20,11 @@ use HeroesofAbenez\Orm\CharacterAttackSkillDummy,
  * @property-read Team $team2
  * @property callable $victoryCondition To evaluate the winner of combat. Gets combat as parameter, should return winning team (1/2) or 0 if there is not winner (yet)
  * @property callable $healers To determine characters that are supposed to heal their team. Gets team1 and team2 as parameters, should return Team
- * @method void onCombatStart()
- * @method void onCombatEnd()
- * @method void onRoundStart()
- * @method void onRound()
- * @method void onRoundEnd()
+ * @method void onCombatStart(CombatBase $combat)
+ * @method void onCombatEnd(CombatBase $combat)
+ * @method void onRoundStart(CombatBase $combat)
+ * @method void onRound(CombatBase $combat)
+ * @method void onRoundEnd(CombatBase $combat)
  * @method void onAttack(Character $attacker, Character $defender)
  * @method void onSkillAttack(Character $attacker, Character $defender, CharacterAttackSkillDummy $skill)
  * @method void onSkillSpecial(Character $character1, Character $target, CharacterSpecialSkillDummy $skill)
@@ -239,9 +239,9 @@ class CombatBase {
   /**
    * Apply pet's effects to character at the start of the combat
    */
-  public function deployPets(): void {
+  public function deployPets(CombatBase $combat): void {
     /** @var Character[] $characters */
-    $characters = array_merge($this->team1->items, $this->team2->items);
+    $characters = array_merge($combat->team1->items, $combat->team2->items);
     foreach($characters as $character) {
       if(!is_null($character->activePet)) {
         $effect = $character->getPet($character->activePet)->deployParams;
@@ -253,9 +253,9 @@ class CombatBase {
   /**
    * Apply effects from worn items
    */
-  public function equipItems(): void {
+  public function equipItems(CombatBase $combat): void {
     /** @var Character[] $characters */
-    $characters = array_merge($this->team1->items, $this->team2->items);
+    $characters = array_merge($combat->team1->items, $combat->team2->items);
     foreach($characters as $character) {
       foreach($character->equipment as $item) {
         if($item->worn) {
@@ -268,9 +268,9 @@ class CombatBase {
   /**
    * Set skills' cooldowns
    */
-  public function setSkillsCooldowns(): void {
+  public function setSkillsCooldowns(CombatBase $combat): void {
     /** @var Character[] $characters */
-    $characters = array_merge($this->team1->items, $this->team2->items);
+    $characters = array_merge($combat->team1->items, $combat->team2->items);
     foreach($characters as $character) {
       foreach($character->skills as $skill) {
         $skill->resetCooldown();
@@ -281,9 +281,9 @@ class CombatBase {
   /**
    * Decrease skills' cooldowns
    */
-  public function decreaseSkillsCooldowns(): void {
+  public function decreaseSkillsCooldowns(CombatBase $combat): void {
     /** @var Character[] $characters */
-    $characters = array_merge($this->team1->items, $this->team2->items);
+    $characters = array_merge($combat->team1->items, $combat->team2->items);
     foreach($characters as $character) {
       foreach($character->skills as $skill) {
         $skill->decreaseCooldown();
@@ -294,9 +294,9 @@ class CombatBase {
   /**
    * Remove combat effects from character at the end of the combat
    */
-  public function removeCombatEffects(): void {
+  public function removeCombatEffects(CombatBase $combat): void {
     /** @var Character[] $characters */
-    $characters = array_merge($this->team1->items, $this->team2->items);
+    $characters = array_merge($combat->team1->items, $combat->team2->items);
     foreach($characters as $character) {
       foreach($character->effects as $effect) {
         if($effect->duration === "combat" OR is_int($effect->duration)) {
@@ -309,31 +309,31 @@ class CombatBase {
   /**
    * Add winner to the log
    */
-  public function logCombatResult(): void {
-    $this->log->round = 5000;
-    $text = "Combat ends. {$this->team1->name} dealt {$this->damage[1]} damage, {$this->team2->name} dealt {$this->damage[2]} damage. ";
-    if($this->getWinner() === 1) {
-      $text .= $this->team1->name;
+  public function logCombatResult(CombatBase $combat): void {
+    $combat->log->round = 5000;
+    $text = "Combat ends. {$combat->team1->name} dealt {$combat->damage[1]} damage, {$combat->team2->name} dealt {$combat->damage[2]} damage. ";
+    if($combat->winner === 1) {
+      $text .= $combat->team1->name;
     } else {
-      $text .= $this->team2->name;
+      $text .= $combat->team2->name;
     }
     $text .= " wins.";
-    $this->log->logText($text);
+    $combat->log->logText($text);
   }
   
   /**
    * Log start of a round
    */
-  public function logRoundNumber(): void {
-    $this->log->round = ++$this->round;
+  public function logRoundNumber(CombatBase $combat): void {
+    $combat->log->round = ++$this->round;
   }
   
   /**
    * Decrease duration of effects and recalculate stats
    */
-  public function recalculateStats(): void {
+  public function recalculateStats(CombatBase $combat): void {
     /** @var Character[] $characters */
-    $characters = array_merge($this->team1->items, $this->team2->items);
+    $characters = array_merge($combat->team1->items, $combat->team2->items);
     foreach($characters as $character) {
       $character->recalculateStats();
       if($character->hitpoints > 0) {
@@ -345,9 +345,9 @@ class CombatBase {
   /**
    * Reset characters' initiative
    */
-  public function resetInitiative(): void {
+  public function resetInitiative(CombatBase $combat): void {
     /** @var Character[] $characters */
-    $characters = array_merge($this->team1->items, $this->team2->items);
+    $characters = array_merge($combat->team1->items, $combat->team2->items);
     foreach($characters as $character) {
       $character->resetInitiative();
     }
@@ -440,9 +440,9 @@ class CombatBase {
   /**
    * Main stage of a round
    */
-  public function mainStage(): void {
+  public function mainStage(CombatBase $combat): void {
     /** @var Character[] $characters */
-    $characters = array_merge($this->team1->usableMembers, $this->team2->usableMembers);
+    $characters = array_merge($combat->team1->usableMembers, $combat->team2->usableMembers);
     usort($characters, function(Character $a, Character $b) {
       return -1 * strcmp((string) $a->initiative, (string) $b->initiative);
     });
@@ -450,14 +450,14 @@ class CombatBase {
       if($character->hitpoints < 1) {
         continue;
       }
-      if(in_array($character, $this->findHealers()->items, true)) {
-        $target = $this->selectHealingTarget($character);
+      if(in_array($character, $combat->findHealers()->items, true)) {
+        $target = $combat->selectHealingTarget($character);
         if(!is_null($target)) {
-          $this->onHeal($character, $target);
+          $combat->onHeal($character, $target);
           continue;
         }
       }
-      $target = $this->selectAttackTarget($character);
+      $target = $combat->selectAttackTarget($character);
       if(is_null($target)) {
         break;
       }
@@ -465,13 +465,13 @@ class CombatBase {
         $skill = $character->usableSkills[0];
         if($skill instanceof CharacterAttackSkillDummy) {
           for($i = 1; $i <= $skill->skill->strikes; $i++) {
-            $this->onSkillAttack($character, $target, $skill);
+            $combat->onSkillAttack($character, $target, $skill);
           }
         } elseif($skill instanceof CharacterSpecialSkillDummy) {
-          $this->doSpecialSkill($character, $target, $skill);
+          $combat->doSpecialSkill($character, $target, $skill);
         }
       } else {
-        $this->onAttack($character, $target);
+        $combat->onAttack($character, $target);
       }
     }
   }
@@ -482,7 +482,7 @@ class CombatBase {
    * @return int Winning team/0
    */
   protected function startRound(): int {
-    $this->onRoundStart();
+    $this->onRoundStart($this);
     return $this->getWinner();
   }
   
@@ -490,7 +490,7 @@ class CombatBase {
    * Do a round
    */
   protected function doRound(): void {
-    $this->onRound();
+    $this->onRound($this);
   }
   
   /**
@@ -499,7 +499,7 @@ class CombatBase {
    * @return int Winning team/0
    */
   protected function endRound(): int {
-    $this->onRoundEnd();
+    $this->onRoundEnd($this);
     return $this->getWinner();
   }
   
@@ -512,7 +512,7 @@ class CombatBase {
     if(!isset($this->team1)) {
       throw new InvalidStateException("Teams are not set.");
     }
-    $this->onCombatStart();
+    $this->onCombatStart($this);
     while($this->round <= $this->roundLimit) {
       if($this->startRound() > 0) {
         break;
@@ -522,7 +522,7 @@ class CombatBase {
         break;
       }
     }
-    $this->onCombatEnd();
+    $this->onCombatEnd($this);
     return $this->getWinner();
   }
   
@@ -654,9 +654,9 @@ class CombatBase {
   /**
    * Harm poisoned characters at start of round
    */
-  public function applyPoison(): void {
+  public function applyPoison(CombatBase $combat): void {
     /** @var Character[] $characters */
-    $characters = array_merge($this->team1->aliveMembers, $this->team2->aliveMembers);
+    $characters = array_merge($combat->team1->aliveMembers, $combat->team2->aliveMembers);
     foreach($characters as $character) {
       foreach($character->effects as $effect) {
         if($effect->type === SkillSpecial::TYPE_POISON) {
@@ -665,7 +665,7 @@ class CombatBase {
             "action" => CombatAction::ACTION_POISON, "result" => true, "amount" => $effect->value,
             "character1" => $character, "character2" => $character,
           ];
-          $this->log->log($action);
+          $combat->log->log($action);
         }
       }
     }
