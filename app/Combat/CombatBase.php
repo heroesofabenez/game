@@ -6,7 +6,8 @@ namespace HeroesofAbenez\Combat;
 use HeroesofAbenez\Orm\CharacterAttackSkillDummy,
     HeroesofAbenez\Orm\CharacterSpecialSkillDummy,
     HeroesofAbenez\Orm\SkillSpecial,
-    Nexendrie\Utils\Numbers;
+    Nexendrie\Utils\Numbers,
+    Nexendrie\Utils\Constants;
 
 /**
  * Handles combat
@@ -437,6 +438,27 @@ class CombatBase {
     }
   }
   
+  protected function chooseAction(CombatBase $combat, Character $character): ?string {
+    if($character->hitpoints < 1) {
+      return NULL;
+    } elseif(in_array($character, $combat->findHealers()->items, true) AND !is_null($combat->selectHealingTarget($character))) {
+      return CombatAction::ACTION_HEALING;
+    }
+    $attackTarget = $combat->selectAttackTarget($character);
+    if(is_null($attackTarget)) {
+      return NULL;
+    }
+    if(count($character->usableSkills) > 0) {
+      $skill = $character->usableSkills[0];
+      if($skill instanceof CharacterAttackSkillDummy) {
+        return CombatAction::ACTION_SKILL_ATTACK;
+      } elseif($skill instanceof  CharacterSpecialSkillDummy) {
+        return CombatAction::ACTION_SKILL_SPECIAL;
+      }
+    }
+    return CombatAction::ACTION_ATTACK;
+  }
+  
   /**
    * Main stage of a round
    */
@@ -447,31 +469,28 @@ class CombatBase {
       return -1 * strcmp((string) $a->initiative, (string) $b->initiative);
     });
     foreach($characters as $character) {
-      if($character->hitpoints < 1) {
+      $action = $combat->chooseAction($combat, $character);
+      $allowedActions = Constants::getConstantsValues(CombatAction::class, "ACTION_");
+      if(!in_array($action, $allowedActions, true) OR $action === CombatAction::ACTION_POISON) {
         continue;
       }
-      if(in_array($character, $combat->findHealers()->items, true)) {
-        $target = $combat->selectHealingTarget($character);
-        if(!is_null($target)) {
-          $combat->onHeal($character, $target);
-          continue;
-        }
-      }
-      $target = $combat->selectAttackTarget($character);
-      if(is_null($target)) {
-        break;
-      }
-      if(count($character->usableSkills) > 0) {
-        $skill = $character->usableSkills[0];
-        if($skill instanceof CharacterAttackSkillDummy) {
-          for($i = 1; $i <= $skill->skill->strikes; $i++) {
-            $combat->onSkillAttack($character, $target, $skill);
-          }
-        } elseif($skill instanceof CharacterSpecialSkillDummy) {
-          $combat->doSpecialSkill($character, $target, $skill);
-        }
-      } else {
-        $combat->onAttack($character, $target);
+      switch($action) {
+        case CombatAction::ACTION_ATTACK:
+          $combat->onAttack($character, $combat->selectAttackTarget($character));
+          break;
+        case CombatAction::ACTION_SKILL_ATTACK:
+          /** @var CharacterAttackSkillDummy $skill */
+          $skill = $character->usableSkills[0];
+          $combat->onSkillAttack($character, $combat->selectAttackTarget($character), $skill);
+          break;
+        case CombatAction::ACTION_SKILL_SPECIAL:
+          /** @var CharacterSpecialSkillDummy $skill */
+          $skill = $character->usableSkills[0];
+          $combat->doSpecialSkill($character, $combat->selectAttackTarget($character), $skill);
+          break;
+        case CombatAction::ACTION_HEALING:
+          $combat->onHeal($character, $combat->selectHealingTarget($character));
+          break;
       }
     }
   }
