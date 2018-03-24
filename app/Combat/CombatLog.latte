@@ -2,16 +2,16 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>HeroesofAbenez - {_"texts.combatLog.title"}</title>
+  <title>HeroesofAbenez - {_"combat.log.title"}</title>
 </head>
 <body>
 <article id="main">
-  <h1>{_"texts.combatLog.title"}</h1>
+  <h1>{_"combat.log.title"}</h1>
   <div id="team1">
     <h3 class="teamName">{$team1->name}</h3>
     <div class="members">
       {foreach $team1 as $member}
-      {_"texts.combatLog.participant", 0, ["name" => $member->name, "level" => $member->level]}{if !$iterator->last}<br>{/if}
+      {_"combat.log.participant", 0, ["name" => $member->name, "level" => $member->level]}{if !$iterator->last}<br>{/if}
       {/foreach}
     </div>
   </div>
@@ -19,14 +19,14 @@
     <h3 class="teamName">{$team2->name}</h3>
     <div class="members">
       {foreach $team2 as $member}
-      {_"texts.combatLog.participant", 0, ["name" => $member->name, "level" => $member->level]}{if !$iterator->last}<br>{/if}
+      {_"combat.log.participant", 0, ["name" => $member->name, "level" => $member->level]}{if !$iterator->last}<br>{/if}
       {/foreach}
     </div>
   </div>
   <div id="combat">
     <h3>Battle</h3>
     {foreach $actions as $i => $round}
-      {if $i != 5000}<h4>{_"texts.combatLog.round", $i}</h4>{else}<h4>{_"texts.combatLog.results"}</h4>{/if}
+      {if $i != 5000}<h4>{_"combat.log.round", $i}</h4>{else}<h4>{_"combat.log.results"}</h4>{/if}
       {foreach $round as $action}
       {$action}{if !$iterator->last}<br>{/if}
       {/foreach}

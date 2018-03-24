@@ -115,40 +115,40 @@ class CombatAction {
     switch($this->action) {
       case static::ACTION_ATTACK:
         if($this->result) {
-          $text = $this->translator->translate("texts.combatLog.attackHits", $this->amount, ["character1" => $character1, "character2" => $character2]);
+          $text = $this->translator->translate("combat.log.attackHits", $this->amount, ["character1" => $character1, "character2" => $character2]);
           if($this->character2->hitpoints < 1) {
-            $text .= $this->translator->translate("texts.combatLog.characterFalls");
+            $text .= $this->translator->translate("combat.log.characterFalls");
           }
         } else {
-          $text = $this->translator->translate("texts.combatLog.attackFails", $this->amount, ["character1" => $character1, "character2" => $character2]);
+          $text = $this->translator->translate("combat.log.attackFails", $this->amount, ["character1" => $character1, "character2" => $character2]);
         }
         break;
       case static::ACTION_SKILL_ATTACK:
         if($this->result) {
-          $text = $this->translator->translate("texts.combatLog.specialAttackHits", $this->amount, ["character1" => $character1, "character2" => $character2, "name" => $this->name]);
+          $text = $this->translator->translate("combat.log.specialAttackHits", $this->amount, ["character1" => $character1, "character2" => $character2, "name" => $this->name]);
           if($this->character2->hitpoints < 1) {
-            $text .= $this->translator->translate("texts.combatLog.characterFalls");
+            $text .= $this->translator->translate("combat.log.characterFalls");
           }
         } else {
-          $text = $this->translator->translate("texts.combatLog.specialAttackFails", $this->amount, ["character1" => $character1, "character2" => $character2, "name" => $this->name]);
+          $text = $this->translator->translate("combat.log.specialAttackFails", $this->amount, ["character1" => $character1, "character2" => $character2, "name" => $this->name]);
         }
         break;
       case static::ACTION_SKILL_SPECIAL:
         if($this->result) {
-          $text = $this->translator->translate("texts.combatLog.specialSkillSuccess", 0, ["character1" => $character1, "character2" => $character2, "name" => $this->name]);
+          $text = $this->translator->translate("combat.log.specialSkillSuccess", 0, ["character1" => $character1, "character2" => $character2, "name" => $this->name]);
         } else {
-          $text = $this->translator->translate("texts.combatLog.specialSKillFailure", 0, ["character1" => $character1, "character2" => $character2, "name" => $this->name]);
+          $text = $this->translator->translate("combat.log.specialSKillFailure", 0, ["character1" => $character1, "character2" => $character2, "name" => $this->name]);
         }
         break;
       case static::ACTION_HEALING:
         if($this->result) {
-          $text = $this->translator->translate("texts.combatLog.healingSuccess", $this->amount, ["character1" => $character1, "character2" => $character2]);
+          $text = $this->translator->translate("combat.log.healingSuccess", $this->amount, ["character1" => $character1, "character2" => $character2]);
         } else {
-          $text = $this->translator->translate("texts.combatLog.healingFailure", $this->amount, ["character1" => $character1, "character2" => $character2]);
+          $text = $this->translator->translate("combat.log.healingFailure", $this->amount, ["character1" => $character1, "character2" => $character2]);
         }
         break;
       case static::ACTION_POISON:
-        $text = $this->translator->translate("texts.combatLog.poison", $this->amount, ["character1" => $character1]);
+        $text = $this->translator->translate("combat.log.poison", $this->amount, ["character1" => $character1]);
         break;
     }
     $this->message =  $text;
