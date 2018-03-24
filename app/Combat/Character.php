@@ -3,9 +3,7 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Combat;
 
-use HeroesofAbenez\Orm\Equipment,
-    HeroesofAbenez\Orm\Pet,
-    HeroesofAbenez\Orm\BaseCharacterSkill,
+use HeroesofAbenez\Orm\BaseCharacterSkill,
     HeroesofAbenez\Orm\SkillSpecial,
     HeroesofAbenez\Utils\Numbers,
     Symfony\Component\OptionsResolver\OptionsResolver;

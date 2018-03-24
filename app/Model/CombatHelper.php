@@ -72,7 +72,7 @@ class CombatHelper {
     $data["initiativeFormula"] = $this->getInitiativeFormula($data["occupation"]);
     $pet = $this->orm->pets->getActivePet($character);
     if(!is_null($pet)) {
-      $pets[] = $pet;
+      $pets[] = $pet->toCombatPet();
     }
     foreach($character->equipment as $row) {
       if(!$row->worn) {
@@ -81,7 +81,7 @@ class CombatHelper {
       /** @var \HeroesofAbenez\Orm\Equipment $item */
       $item = $this->equipmentModel->view($row->item->id);
       $item->worn = true;
-      $equipment[] = $item;
+      $equipment[] = $item->toCombatEquipment();
     }
     $skills = $this->skillsModel->getPlayerSkills($id);
     $player = new Character($data, $equipment, $pets, $skills);
@@ -145,7 +145,7 @@ class CombatHelper {
       $weapon = $this->equipmentModel->view($npc->weapon->id);
       if(!is_null($weapon)) {
         $weapon->worn = true;
-        $equipment[] = $weapon;
+        $equipment[] = $weapon->toCombatEquipment();
       }
     }
     $npc = new Character($data, $equipment, [], $skills);

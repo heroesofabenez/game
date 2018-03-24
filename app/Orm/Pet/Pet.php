@@ -3,8 +3,6 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Orm;
 
-use HeroesofAbenez\Combat\CharacterEffect;
-
 /**
  * Pet
  *
@@ -16,7 +14,6 @@ use HeroesofAbenez\Combat\CharacterEffect;
  * @property bool $deployed {default false}
  * @property-read string $bonusStat {virtual}
  * @property-read int $bonusValue {virtual}
- * @property-read array $deployParams {virtual}
  */
 class Pet extends \Nextras\Orm\Entity\Entity {
   protected function getterBonusStat(): string {
@@ -27,18 +24,21 @@ class Pet extends \Nextras\Orm\Entity\Entity {
     return $this->type->bonusValue;
   }
   
-  protected function getterDeployParams(): array {
-    $stats = [
-      "str" => "strength", "dex" => "dexterity", "con" => "constitution", "int" => "intelligence", "char" => "charisma"
-    ];
-    return [
-      "id" => "pet" . $this->id . "bonusEffect",
-      "type" => "buff",
-      "stat" => str_replace(array_keys($stats), array_values($stats), $this->bonusStat),
-      "value" => $this->bonusValue,
-      "source" => CharacterEffect::SOURCE_PET,
-      "duration" => CharacterEffect::DURATION_COMBAT
-    ];
+  public function toCombatPet(): \HeroesofAbenez\Combat\Pet {
+    $data = [];
+    $stats = ["id", "deployed", "bonusStat", "bonusValue",];
+    foreach($stats as $stat) {
+      if($stat === "bonusStat") {
+        $bonusStats = [
+          "str" => "strength", "dex" => "dexterity", "con" => "constitution", "int" => "intelligence", "char" => "charisma"
+        ];
+        $data[$stat] = str_replace(array_keys($bonusStats), array_values($bonusStats), $this->bonusStat);
+      } else {
+        $data[$stat] = $this->$stat;
+      }
+    }
+    
+    return new \HeroesofAbenez\Combat\Pet($data);
   }
 }
 ?>
