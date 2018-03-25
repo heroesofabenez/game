@@ -156,8 +156,8 @@ class Character {
   }
   
   protected function setStats(array $stats): void {
-    $requiredStats = ["id", "name", "occupation", "level", "strength", "dexterity", "constitution", "intelligence", "charisma"];
-    $allStats = array_merge($requiredStats, ["race", "specialization", "gender", "experience", "initiativeFormula"]);
+    $requiredStats = ["id", "name", "level", "strength", "dexterity", "constitution", "intelligence", "charisma", "initiativeFormula",];
+    $allStats = array_merge($requiredStats, ["occupation", "race", "specialization", "gender", "experience",]);
     $numberStats = ["strength", "dexterity", "constitution", "intelligence", "charisma",];
     $textStats = ["name", "race", "occupation",];
     $resolver = new OptionsResolver();
