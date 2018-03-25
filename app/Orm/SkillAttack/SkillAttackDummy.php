@@ -13,6 +13,10 @@ namespace HeroesofAbenez\Orm;
  * @property-read string|NULL $hitRate
  */
 class SkillAttackDummy extends BaseSkill {
+  public const TARGET_SINGLE = "single";
+  public const TARGET_ROW = "row";
+  public const TARGET_COLUMN = "column";
+  
   /** @var string */
   protected $baseDamage;
   /** @var string */

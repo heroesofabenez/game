@@ -18,15 +18,12 @@ use Nextras\Orm\Relationships\OneHasMany;
  * @property string $baseDamage
  * @property string $damageGrowth
  * @property int $levels
- * @property string $target {enum self::TARGET_*} {default self::TARGET_SINGLE}
+ * @property string $target {enum SkillAttackDummy::TARGET_*} {default SkillAttackDummy::TARGET_SINGLE}
  * @property int $strikes {default 1}
  * @property string|NULL $hitRate
  * @property OneHasMany|CharacterAttackSkill[] $characterSkills {1:m CharacterAttackSkill::$skill}
  */
 class SkillAttack extends \Nextras\Orm\Entity\Entity {
-  public const TARGET_SINGLE = "single";
-  public const TARGET_ROW = "row";
-  public const TARGET_COLUMN = "column";
   public const MAX_STRIKES = 9;
   
   protected function setterStrikes(int $value): int {
