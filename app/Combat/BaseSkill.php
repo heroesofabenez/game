@@ -1,7 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace HeroesofAbenez\Orm;
+namespace HeroesofAbenez\Combat;
+
+use Symfony\Component\OptionsResolver\OptionsResolver,
+    Nexendrie\Utils\Constants;
 
 /**
  * Base Skill
@@ -36,6 +39,31 @@ abstract class BaseSkill {
   protected $target;
   /** @var int */
   protected $levels;
+  
+  protected function configureOptions(OptionsResolver $resolver): void {
+    $allStats = [
+      "id", "name", "description", "neededClass", "neededSpecialization", "neededLevel", "target", "levels",
+    ];
+    $resolver->setRequired($allStats);
+    $resolver->setAllowedTypes("id", "int");
+    $resolver->setAllowedTypes("name", "string");
+    $resolver->setAllowedTypes("description", "string");
+    $resolver->setAllowedTypes("neededClass", "integer");
+    $resolver->setAllowedTypes("neededSpecialization", ["integer", "null"]);
+    $resolver->setAllowedTypes("neededLevel", "integer");
+    $resolver->setAllowedTypes("target", "string");
+    $resolver->setAllowedValues("target", function(string $value) {
+      return in_array($value, $this->getAllowedTargets(), true);
+    });
+    $resolver->setAllowedTypes("levels", "integer");
+    $resolver->setAllowedValues("levels", function(int $value) {
+      return ($value > 0);
+    });
+  }
+  
+  protected function getAllowedTargets(): array {
+    return Constants::getConstantsValues(static::class, "TARGET_");
+  }
   
   abstract public function getCooldown(): int;
   

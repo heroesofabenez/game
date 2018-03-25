@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace HeroesofAbenez\Model;
 
 use Tester\Assert,
-    HeroesofAbenez\Entities\Character,
+    HeroesofAbenez\Combat\Character,
     HeroesofAbenez\Orm\Model as ORM;
 
 require __DIR__ . "/../../bootstrap.php";

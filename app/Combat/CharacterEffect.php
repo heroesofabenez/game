@@ -1,10 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace HeroesofAbenez\Entities;
+namespace HeroesofAbenez\Combat;
 
-use HeroesofAbenez\Orm\SkillSpecial,
-    Nexendrie\Utils\Constants,
+use Nexendrie\Utils\Constants,
     Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**

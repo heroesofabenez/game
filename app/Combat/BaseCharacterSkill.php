@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace HeroesofAbenez\Orm;
+namespace HeroesofAbenez\Combat;
 
 /**
  * Base character skill
@@ -40,9 +40,9 @@ abstract class BaseCharacterSkill {
   }
   
   public function getSkillType(): string {
-    if($this->skill instanceof SkillAttackDummy) {
+    if($this->skill instanceof SkillAttack) {
       return "attack";
-    } elseif($this->skill instanceof SkillSpecialDummy) {
+    } elseif($this->skill instanceof SkillSpecial) {
       return "special";
     }
     return "";

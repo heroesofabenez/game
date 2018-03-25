@@ -1,12 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace HeroesofAbenez\Model;
+namespace HeroesofAbenez\Combat;
 
 use Tester\Assert,
-    HeroesofAbenez\Entities\Character,
-    HeroesofAbenez\Entities\Team,
-    HeroesofAbenez\Utils\InvalidStateException;
+    HeroesofAbenez\Model\CombatHelper;
 
 require __DIR__ . "/../../bootstrap.php";
 

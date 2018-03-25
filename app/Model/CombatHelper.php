@@ -3,11 +3,9 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Model;
 
-use HeroesofAbenez\Entities\Character,
-    HeroesofAbenez\Orm\CharacterAttackSkillDummy,
-    HeroesofAbenez\Orm\SkillAttackDummy,
-    HeroesofAbenez\Orm\CharacterSpecialSkillDummy,
-    HeroesofAbenez\Orm\SkillSpecialDummy,
+use HeroesofAbenez\Combat\Character,
+    HeroesofAbenez\Combat\CharacterAttackSkill,
+    HeroesofAbenez\Combat\CharacterSpecialSkill,
     HeroesofAbenez\Orm\Model as ORM,
     HeroesofAbenez\Orm\ArenaFightCount,
     Nextras\Orm\Entity\IEntity;
@@ -72,7 +70,7 @@ class CombatHelper {
     $data["initiativeFormula"] = $this->getInitiativeFormula($data["occupation"]);
     $pet = $this->orm->pets->getActivePet($character);
     if(!is_null($pet)) {
-      $pets[] = $pet;
+      $pets[] = $pet->toCombatPet();
     }
     foreach($character->equipment as $row) {
       if(!$row->worn) {
@@ -81,7 +79,7 @@ class CombatHelper {
       /** @var \HeroesofAbenez\Orm\Equipment $item */
       $item = $this->equipmentModel->view($row->item->id);
       $item->worn = true;
-      $equipment[] = $item;
+      $equipment[] = $item->toCombatEquipment();
     }
     $skills = $this->skillsModel->getPlayerSkills($id);
     $player = new Character($data, $equipment, $pets, $skills);
@@ -133,19 +131,19 @@ class CombatHelper {
     $skills = $equipment = [];
     $skillRows = $this->orm->attackSkills->findByClassAndLevel($data["occupation"], $data["level"]);
     foreach($skillRows as $skillRow) {
-      $skills[] = new CharacterAttackSkillDummy(new SkillAttackDummy($skillRow), 0);
+      $skills[] = new CharacterAttackSkill($skillRow->toDummy(), 0);
     }
     unset($skillRow);
     $skillRows = $this->orm->specialSkills->findByClassAndLevel($data["occupation"], $data["level"]);
     foreach($skillRows as $skillRow) {
-      $skills[] = new CharacterSpecialSkillDummy(new SkillSpecialDummy($skillRow), 0);
+      $skills[] = new CharacterSpecialSkill($skillRow->toDummy(), 0);
     }
     $this->getArenaNpcSkillsLevels($data, $skills);
     if(!is_null($npc->weapon)) {
       $weapon = $this->equipmentModel->view($npc->weapon->id);
       if(!is_null($weapon)) {
         $weapon->worn = true;
-        $equipment[] = $weapon;
+        $equipment[] = $weapon->toCombatEquipment();
       }
     }
     $npc = new Character($data, $equipment, [], $skills);

@@ -1,13 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace HeroesofAbenez\Entities;
+namespace HeroesofAbenez\Combat;
 
-use HeroesofAbenez\Orm\Equipment,
-    HeroesofAbenez\Orm\Pet,
-    HeroesofAbenez\Orm\BaseCharacterSkill,
-    HeroesofAbenez\Orm\SkillSpecial,
-    HeroesofAbenez\Utils\Numbers,
+use Nexendrie\Utils\Numbers,
     Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
@@ -160,15 +156,16 @@ class Character {
   }
   
   protected function setStats(array $stats): void {
-    $requiredStats = ["id", "name", "occupation", "level", "strength", "dexterity", "constitution", "intelligence", "charisma"];
-    $allStats = array_merge($requiredStats, ["race", "specialization", "gender", "experience", "initiativeFormula"]);
+    $requiredStats = ["id", "name", "level", "strength", "dexterity", "constitution", "intelligence", "charisma", "initiativeFormula",];
+    $allStats = array_merge($requiredStats, ["occupation", "race", "specialization", "gender", "experience",]);
     $numberStats = ["strength", "dexterity", "constitution", "intelligence", "charisma",];
-    $textStats = ["name", "race", "occupation",];
+    $textStats = ["name", "race", "occupation", "initiativeFormula",];
     $resolver = new OptionsResolver();
     $resolver->setDefined($allStats);
     $resolver->setAllowedTypes("id", ["integer", "string"]);
+    $resolver->setAllowedTypes("experience", "integer");
     foreach($numberStats as $stat) {
-      $resolver->setAllowedTypes($stat, "numeric");
+      $resolver->setAllowedTypes($stat, ["integer", "float"]);
       $resolver->setNormalizer($stat, function(OptionsResolver $resolver, $value) {
         return (int) $value;
       });
@@ -492,7 +489,7 @@ class Character {
   public function damageStat(): string {
     $stat = "strength";
     foreach($this->equipment as $item) {
-      if(!$item->worn OR $item->slot != "weapon") {
+      if(!$item->worn OR $item->slot != Equipment::SLOT_WEAPON) {
         continue;
       }
       switch($item->type) {
@@ -550,23 +547,23 @@ class Character {
         continue;
       }
       switch($effect->source) {
-        case "pet":
-        case "skill":
+        case CharacterEffect::SOURCE_PET:
+        case CharacterEffect::SOURCE_SKILL:
           if(!in_array($type, SkillSpecial::NO_STAT_TYPES, true)) {
             $bonus_value = $$stat / 100 * $effect->value;
           }
           break;
-        case "equipment":
+        case CharacterEffect::SOURCE_EQUIPMENT:
           if(!in_array($type, SkillSpecial::NO_STAT_TYPES, true)) {
             $bonus_value = $effect->value;
           }
           break;
       }
-      if($type == "buff") {
+      if($type == SkillSpecial::TYPE_BUFF) {
         $$stat += $bonus_value;
-      } elseif($type == "debuff") {
+      } elseif($type == SkillSpecial::TYPE_DEBUFF) {
         $debuffs[$stat] += $bonus_value;
-      } elseif($type == "stun") {
+      } elseif($type == SkillSpecial::TYPE_STUN) {
         $stunned = true;
       }
       unset($stat, $type, $duration, $bonus_value);
