@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Combat;
 
-use HeroesofAbenez\Orm\SkillSpecial,
+use HeroesofAbenez\Orm\SkillSpecialDummy,
     Nexendrie\Utils\Constants,
     Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -66,7 +66,7 @@ class CharacterEffect {
       return (in_array($value, $this->getDurations(), true)) OR ($value > 0);
     });
     $effect = $resolver->resolve($effect);
-    if(!in_array($effect["type"], SkillSpecial::NO_STAT_TYPES, true) AND $effect["stat"] === "") {
+    if(!in_array($effect["type"], SkillSpecialDummy::NO_STAT_TYPES, true) AND $effect["stat"] === "") {
       throw new \InvalidArgumentException("The option stat with value '' is invalid.");
     }
     $this->id = $effect["id"];
@@ -88,7 +88,7 @@ class CharacterEffect {
    * @return string[]
    */
   protected function getAllowedTypes(): array {
-    return Constants::getConstantsValues(SkillSpecial::class, "TYPE_");
+    return Constants::getConstantsValues(SkillSpecialDummy::class, "TYPE_");
   }
   
   /**

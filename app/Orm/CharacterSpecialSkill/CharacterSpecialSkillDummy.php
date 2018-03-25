@@ -23,7 +23,7 @@ class CharacterSpecialSkillDummy extends BaseCharacterSkill {
   }
   
   public function getValue(): int {
-    if($this->skill->type === \HeroesofAbenez\Orm\SkillSpecial::TYPE_STUN) {
+    if($this->skill->type === \HeroesofAbenez\Orm\SkillSpecialDummy::TYPE_STUN) {
       return 0;
     }
     $value = $this->skill->value;

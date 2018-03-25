@@ -14,6 +14,23 @@ namespace HeroesofAbenez\Orm;
  * @property-read int $duration
  */
 class SkillSpecialDummy extends BaseSkill {
+  public const TYPE_BUFF = "buff";
+  public const TYPE_DEBUFF = "debuff";
+  public const TYPE_STUN = "stun";
+  public const TYPE_POISON = "poison";
+  public const TARGET_SELF = "self";
+  public const TARGET_ENEMY = "enemy";
+  public const TARGET_PARTY = "party";
+  public const TARGET_ENEMY_PARTY = "enemy_party";
+  public const STAT_HP = "hp";
+  public const STAT_DAMAGE = "damage";
+  public const STAT_DEFENSE = "defense";
+  public const STAT_HIT = "hit";
+  public const STAT_DODGE = "dodge";
+  public const STAT_INITIATIVE = "initiative";
+  /** @var string[] */
+  public const NO_STAT_TYPES = [self::TYPE_STUN, self::TYPE_POISON,];
+  
   /** @var string */
   protected $type;
   /** @var string|NULL */

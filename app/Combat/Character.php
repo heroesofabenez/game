@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace HeroesofAbenez\Combat;
 
 use HeroesofAbenez\Orm\BaseCharacterSkill,
-    HeroesofAbenez\Orm\SkillSpecial,
+    HeroesofAbenez\Orm\SkillSpecialDummy,
     Nexendrie\Utils\Numbers,
     Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -550,12 +550,12 @@ class Character {
       switch($effect->source) {
         case "pet":
         case "skill":
-          if(!in_array($type, SkillSpecial::NO_STAT_TYPES, true)) {
+          if(!in_array($type, SkillSpecialDummy::NO_STAT_TYPES, true)) {
             $bonus_value = $$stat / 100 * $effect->value;
           }
           break;
         case "equipment":
-          if(!in_array($type, SkillSpecial::NO_STAT_TYPES, true)) {
+          if(!in_array($type, SkillSpecialDummy::NO_STAT_TYPES, true)) {
             $bonus_value = $effect->value;
           }
           break;

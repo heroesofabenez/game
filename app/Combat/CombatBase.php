@@ -5,7 +5,7 @@ namespace HeroesofAbenez\Combat;
 
 use HeroesofAbenez\Orm\CharacterAttackSkillDummy,
     HeroesofAbenez\Orm\CharacterSpecialSkillDummy,
-    HeroesofAbenez\Orm\SkillSpecial,
+    HeroesofAbenez\Orm\SkillSpecialDummy,
     Nexendrie\Utils\Numbers,
     Nexendrie\Utils\Constants;
 
@@ -417,19 +417,19 @@ class CombatBase {
   
   protected function doSpecialSkill(Character $character1, Character $character2, CharacterSpecialSkillDummy $skill): void {
     switch($skill->skill->target) {
-      case SkillSpecial::TARGET_ENEMY:
+      case SkillSpecialDummy::TARGET_ENEMY:
         $this->onSkillSpecial($character1, $character2, $skill);
         break;
-      case SkillSpecial::TARGET_SELF:
+      case SkillSpecialDummy::TARGET_SELF:
         $this->onSkillSpecial($character1, $character1, $skill);
         break;
-      case SkillSpecial::TARGET_PARTY:
+      case SkillSpecialDummy::TARGET_PARTY:
         $team = $this->getTeam($character1);
         foreach($team as $target) {
           $this->onSkillSpecial($character1, $target, $skill);
         }
         break;
-      case SkillSpecial::TARGET_ENEMY_PARTY:
+      case SkillSpecialDummy::TARGET_ENEMY_PARTY:
         $team = $this->getEnemyTeam($character1);
         foreach($team as $target) {
           $this->onSkillSpecial($character1, $target, $skill);
@@ -632,7 +632,7 @@ class CombatBase {
     $effect = [
       "id" => "skill{$skill->skill->id}Effect",
       "type" => $skill->skill->type,
-      "stat" => ((in_array($skill->skill->type, SkillSpecial::NO_STAT_TYPES, true)) ? NULL : $skill->skill->stat),
+      "stat" => ((in_array($skill->skill->type, SkillSpecialDummy::NO_STAT_TYPES, true)) ? NULL : $skill->skill->stat),
       "value" => $skill->value,
       "source" => CharacterEffect::SOURCE_SKILL,
       "duration" => $skill->skill->duration
@@ -678,7 +678,7 @@ class CombatBase {
     $characters = array_merge($combat->team1->aliveMembers, $combat->team2->aliveMembers);
     foreach($characters as $character) {
       foreach($character->effects as $effect) {
-        if($effect->type === SkillSpecial::TYPE_POISON) {
+        if($effect->type === SkillSpecialDummy::TYPE_POISON) {
           $character->harm($effect->value);
           $action = [
             "action" => CombatAction::ACTION_POISON, "result" => true, "amount" => $effect->value,
