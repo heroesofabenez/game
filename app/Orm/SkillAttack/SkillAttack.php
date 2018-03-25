@@ -3,7 +3,8 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Orm;
 
-use Nextras\Orm\Relationships\OneHasMany;
+use Nextras\Orm\Relationships\OneHasMany,
+    Nextras\Orm\Entity\ToArrayConverter;
 
 /**
  * SkillAttack
@@ -33,6 +34,12 @@ class SkillAttack extends \Nextras\Orm\Entity\Entity {
       return static::MAX_STRIKES;
     }
     return $value;
+  }
+  
+  public function toDummy(): SkillAttackDummy {
+    $data = $this->toArray(ToArrayConverter::RELATIONSHIP_AS_ID);
+    unset($data["characterSkills"]);
+    return new SkillAttackDummy($data);
   }
 }
 ?>

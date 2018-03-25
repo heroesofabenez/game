@@ -3,6 +3,9 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Orm;
 
+use Symfony\Component\OptionsResolver\OptionsResolver,
+    Nexendrie\Utils\Constants;
+
 /**
  * SkillSpecialDummy
  *
@@ -42,20 +45,57 @@ class SkillSpecialDummy extends BaseSkill {
   /** @var int */
   protected $duration;
   
-  public function __construct(SkillSpecial $skill) {
-    $this->id = $skill->id;
-    $this->name = $skill->name;
-    $this->description = $skill->description;
-    $this->neededClass = $skill->neededClass->id;
-    $this->neededSpecialization = (!is_null($skill->neededSpecialization)) ? $skill->neededSpecialization->id : NULL;
-    $this->neededLevel = $skill->neededLevel;
-    $this->type = $skill->type;
-    $this->target = $skill->target;
-    $this->stat = $skill->stat;
-    $this->value = $skill->value;
-    $this->valueGrowth = $skill->valueGrowth;
-    $this->levels = $skill->levels;
-    $this->duration = $skill->duration;
+  public function __construct(array $data) {
+    $resolver = new OptionsResolver();
+    $this->configureOptions($resolver);
+    $data = $resolver->resolve($data);
+    $this->id = $data["id"];
+    $this->name = $data["name"];
+    $this->description = $data["description"];
+    $this->neededClass = $data["neededClass"];
+    $this->neededSpecialization = $data["neededSpecialization"];
+    $this->neededLevel = $data["neededLevel"];
+    $this->type = $data["type"];
+    $this->target = $data["target"];
+    $this->stat = $data["stat"];
+    $this->value = $data["value"];
+    $this->valueGrowth = $data["valueGrowth"];
+    $this->levels = $data["levels"];
+    $this->duration = $data["duration"];
+  }
+  
+  protected function configureOptions(OptionsResolver $resolver): void {
+    parent::configureOptions($resolver);
+    $allStats = ["type", "stat", "value", "valueGrowth", "duration",];
+    $resolver->setRequired($allStats);
+    $resolver->setAllowedTypes("type", "string");
+    $resolver->setAllowedValues("type", function(string $value) {
+      return in_array($value, $this->getAllowedTypes(), true);
+    });
+    $resolver->setAllowedTypes("stat", ["string", "null"]);
+    $resolver->setAllowedValues("stat", function(string $value) {
+      return is_null($value) OR in_array($value, $this->getAllowedStats(), true);
+    });
+    $resolver->setAllowedTypes("value", "integer");
+    $resolver->setAllowedValues("value", function(int $value) {
+      return ($value >= 0);
+    });
+    $resolver->setAllowedTypes("valueGrowth", "integer");
+    $resolver->setAllowedValues("valueGrowth", function(int $value) {
+      return ($value >= 0);
+    });
+    $resolver->setAllowedTypes("duration", "integer");
+    $resolver->setAllowedValues("duration", function(int $value) {
+      return ($value >= 0);
+    });
+  }
+  
+  protected function getAllowedTypes(): array {
+    return Constants::getConstantsValues(static::class, "TYPE_");
+  }
+  
+  protected function getAllowedStats(): array {
+    return Constants::getConstantsValues(static::class, "STAT_");
   }
   
   public function getCooldown(): int {

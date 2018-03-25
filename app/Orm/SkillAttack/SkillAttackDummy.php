@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Orm;
 
+use Symfony\Component\OptionsResolver\OptionsResolver;
+
 /**
  * SkillAttackDummy
  *
@@ -26,19 +28,35 @@ class SkillAttackDummy extends BaseSkill {
   /** @var string|NULL */
   protected $hitRate;
   
-  public function __construct(SkillAttack $skill) {
-    $this->id = $skill->id;
-    $this->name = $skill->name;
-    $this->description = $skill->description;
-    $this->neededClass = $skill->neededClass->id;
-    $this->neededSpecialization = (!is_null($skill->neededSpecialization)) ? $skill->neededSpecialization->id : NULL;
-    $this->neededLevel = $skill->neededLevel;
-    $this->baseDamage = $skill->baseDamage;
-    $this->damageGrowth = $skill->damageGrowth;
-    $this->levels = $skill->levels;
-    $this->target = $skill->target;
-    $this->strikes = $skill->strikes;
-    $this->hitRate = $skill->hitRate;
+  public function __construct(array $data) {
+    $resolver = new OptionsResolver();
+    $this->configureOptions($resolver);
+    $data = $resolver->resolve($data);
+    $this->id = $data["id"];
+    $this->name = $data["name"];
+    $this->description = $data["description"];
+    $this->neededClass = $data["neededClass"];
+    $this->neededSpecialization = $data["neededSpecialization"];
+    $this->neededLevel = $data["neededLevel"];
+    $this->baseDamage = $data["baseDamage"];
+    $this->damageGrowth = $data["damageGrowth"];
+    $this->levels = $data["levels"];
+    $this->target = $data["target"];
+    $this->strikes = $data["strikes"];
+    $this->hitRate = $data["hitRate"];
+  }
+  
+  protected function configureOptions(OptionsResolver $resolver): void {
+    parent::configureOptions($resolver);
+    $allStats = ["baseDamage", "damageGrowth", "strikes", "hitRate",];
+    $resolver->setRequired($allStats);
+    $resolver->setAllowedTypes("baseDamage", "string");
+    $resolver->setAllowedTypes("damageGrowth", "string");
+    $resolver->setAllowedTypes("strikes", "integer");
+    $resolver->setAllowedValues("strikes", function(int $value) {
+      return ($value > 0);
+    });
+    $resolver->setAllowedTypes("hitRate", ["string", "null"]);
   }
   
   public function getCooldown(): int {
@@ -60,7 +78,5 @@ class SkillAttackDummy extends BaseSkill {
   public function getHitRate(): ?string {
     return $this->hitRate;
   }
-  
-  
 }
 ?>

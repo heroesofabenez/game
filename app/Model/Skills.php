@@ -46,7 +46,7 @@ class Skills {
       $skills = $this->orm->attackSkills->findAll();
       /** @var \HeroesofAbenez\Orm\SkillAttack $skill */
       foreach($skills as $skill) {
-        $return[$skill->id] = new SkillAttackDummy($skill);
+        $return[$skill->id] = $skill->toDummy();
       }
       return $return;
     });
@@ -85,7 +85,7 @@ class Skills {
       $skills = $this->orm->specialSkills->findAll();
       /** @var \HeroesofAbenez\Orm\SkillSpecial $skill */
       foreach($skills as $skill) {
-        $return[$skill->id] = new SkillSpecialDummy($skill);
+        $return[$skill->id] = $skill->toDummy();
       }
       return $return;
     });
