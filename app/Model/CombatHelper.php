@@ -4,8 +4,8 @@ declare(strict_types=1);
 namespace HeroesofAbenez\Model;
 
 use HeroesofAbenez\Combat\Character,
-    HeroesofAbenez\Orm\CharacterAttackSkillDummy,
-    HeroesofAbenez\Orm\CharacterSpecialSkillDummy,
+    HeroesofAbenez\Combat\CharacterAttackSkill,
+    HeroesofAbenez\Combat\CharacterSpecialSkill,
     HeroesofAbenez\Orm\Model as ORM,
     HeroesofAbenez\Orm\ArenaFightCount,
     Nextras\Orm\Entity\IEntity;
@@ -131,12 +131,12 @@ class CombatHelper {
     $skills = $equipment = [];
     $skillRows = $this->orm->attackSkills->findByClassAndLevel($data["occupation"], $data["level"]);
     foreach($skillRows as $skillRow) {
-      $skills[] = new CharacterAttackSkillDummy($skillRow->toDummy(), 0);
+      $skills[] = new CharacterAttackSkill($skillRow->toDummy(), 0);
     }
     unset($skillRow);
     $skillRows = $this->orm->specialSkills->findByClassAndLevel($data["occupation"], $data["level"]);
     foreach($skillRows as $skillRow) {
-      $skills[] = new CharacterSpecialSkillDummy($skillRow->toDummy(), 0);
+      $skills[] = new CharacterSpecialSkill($skillRow->toDummy(), 0);
     }
     $this->getArenaNpcSkillsLevels($data, $skills);
     if(!is_null($npc->weapon)) {

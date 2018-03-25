@@ -4,7 +4,8 @@ declare(strict_types=1);
 namespace HeroesofAbenez\Orm;
 
 use Nextras\Orm\Relationships\OneHasMany,
-    Nextras\Orm\Entity\ToArrayConverter;
+    Nextras\Orm\Entity\ToArrayConverter,
+    HeroesofAbenez\Combat\SkillAttack as SkillAttackDummy;
 
 /**
  * SkillAttack

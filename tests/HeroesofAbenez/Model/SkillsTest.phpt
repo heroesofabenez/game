@@ -4,11 +4,11 @@ declare(strict_types=1);
 namespace HeroesofAbenez\Model;
 
 use Tester\Assert,
-    HeroesofAbenez\Orm\SkillAttackDummy,
-    HeroesofAbenez\Orm\SkillSpecialDummy,
-    HeroesofAbenez\Orm\CharacterAttackSkillDummy,
-    HeroesofAbenez\Orm\CharacterSpecialSkillDummy,
-    HeroesofAbenez\Orm\BaseCharacterSkill;
+    HeroesofAbenez\Combat\SkillAttack,
+    HeroesofAbenez\Combat\SkillSpecial,
+    HeroesofAbenez\Combat\CharacterAttackSkill,
+    HeroesofAbenez\Combat\CharacterSpecialSkill,
+    HeroesofAbenez\Combat\BaseCharacterSkill;
 
 require __DIR__ . "/../../bootstrap.php";
 
@@ -25,17 +25,17 @@ final class SkillsTest extends \Tester\TestCase {
   public function testGetListOfAttackSkills() {
     $result = $this->model->getListOfAttackSkills();
     Assert::type("array", $result);
-    Assert::type(SkillAttackDummy::class, $result[1]);
+    Assert::type(SkillAttack::class, $result[1]);
   }
   
   public function testGetAttackSkill() {
     $skill = $this->model->getAttackSkill(1);
-    Assert::type(SkillAttackDummy::class, $skill);
+    Assert::type(SkillAttack::class, $skill);
   }
   
   public function testGetCharacterAttackSkill() {
     $skill = $this->model->getCharacterAttackSkill(1);
-    Assert::type(CharacterAttackSkillDummy::class, $skill);
+    Assert::type(CharacterAttackSkill::class, $skill);
     Assert::type("int", $skill->damage);
     Assert::type("int", $skill->hitRate);
     Assert::type("int", $skill->cooldown);
@@ -47,17 +47,17 @@ final class SkillsTest extends \Tester\TestCase {
   public function testGetListOfSpecialSkills() {
     $result = $this->model->getListOfSpecialSkills();
     Assert::type("array", $result);
-    Assert::type(SkillSpecialDummy::class, $result[1]);
+    Assert::type(SkillSpecial::class, $result[1]);
   }
   
   public function testGetSpecialSkill() {
     $skill = $this->model->getSpecialSkill(1);
-    Assert::type(SkillSpecialDummy::class, $skill);
+    Assert::type(SkillSpecial::class, $skill);
   }
   
   public function testGetCharacterSpecialSkill() {
     $skill = $this->model->getCharacterSpecialSkill(1);
-    Assert::type(CharacterSpecialSkillDummy::class, $skill);
+    Assert::type(CharacterSpecialSkill::class, $skill);
     Assert::type("int", $skill->value);
     Assert::type("int", $skill->cooldown);
     Assert::same(0, $skill->cooldown);

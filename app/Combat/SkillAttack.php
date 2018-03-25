@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace HeroesofAbenez\Orm;
+namespace HeroesofAbenez\Combat;
 
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -14,7 +14,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  * @property-read int $strikes
  * @property-read string|NULL $hitRate
  */
-class SkillAttackDummy extends BaseSkill {
+class SkillAttack extends BaseSkill {
   public const TARGET_SINGLE = "single";
   public const TARGET_ROW = "row";
   public const TARGET_COLUMN = "column";

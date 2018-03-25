@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace HeroesofAbenez\Orm;
+namespace HeroesofAbenez\Combat;
 
 use Symfony\Component\OptionsResolver\OptionsResolver,
     Nexendrie\Utils\Constants;
@@ -16,7 +16,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver,
  * @property-read int $valueGrowth
  * @property-read int $duration
  */
-class SkillSpecialDummy extends BaseSkill {
+class SkillSpecial extends BaseSkill {
   public const TYPE_BUFF = "buff";
   public const TYPE_DEBUFF = "debuff";
   public const TYPE_STUN = "stun";

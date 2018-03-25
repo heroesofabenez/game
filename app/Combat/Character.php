@@ -3,9 +3,7 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Combat;
 
-use HeroesofAbenez\Orm\BaseCharacterSkill,
-    HeroesofAbenez\Orm\SkillSpecialDummy,
-    Nexendrie\Utils\Numbers,
+use Nexendrie\Utils\Numbers,
     Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
@@ -550,21 +548,21 @@ class Character {
       switch($effect->source) {
         case CharacterEffect::SOURCE_PET:
         case CharacterEffect::SOURCE_SKILL:
-          if(!in_array($type, SkillSpecialDummy::NO_STAT_TYPES, true)) {
+          if(!in_array($type, SkillSpecial::NO_STAT_TYPES, true)) {
             $bonus_value = $$stat / 100 * $effect->value;
           }
           break;
         case CharacterEffect::SOURCE_EQUIPMENT:
-          if(!in_array($type, SkillSpecialDummy::NO_STAT_TYPES, true)) {
+          if(!in_array($type, SkillSpecial::NO_STAT_TYPES, true)) {
             $bonus_value = $effect->value;
           }
           break;
       }
-      if($type == SkillSpecialDummy::TYPE_BUFF) {
+      if($type == SkillSpecial::TYPE_BUFF) {
         $$stat += $bonus_value;
-      } elseif($type == SkillSpecialDummy::TYPE_DEBUFF) {
+      } elseif($type == SkillSpecial::TYPE_DEBUFF) {
         $debuffs[$stat] += $bonus_value;
-      } elseif($type == SkillSpecialDummy::TYPE_STUN) {
+      } elseif($type == SkillSpecial::TYPE_STUN) {
         $stunned = true;
       }
       unset($stat, $type, $duration, $bonus_value);

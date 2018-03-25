@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace HeroesofAbenez\Orm;
+namespace HeroesofAbenez\Combat;
 
 use Symfony\Component\OptionsResolver\OptionsResolver,
     Nexendrie\Utils\Constants;

@@ -3,10 +3,7 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Combat;
 
-use HeroesofAbenez\Orm\CharacterAttackSkillDummy,
-    HeroesofAbenez\Orm\CharacterSpecialSkillDummy,
-    HeroesofAbenez\Orm\SkillSpecialDummy,
-    Nexendrie\Utils\Numbers,
+use Nexendrie\Utils\Numbers,
     Nexendrie\Utils\Constants;
 
 /**
@@ -27,8 +24,8 @@ use HeroesofAbenez\Orm\CharacterAttackSkillDummy,
  * @method void onRound(CombatBase $combat)
  * @method void onRoundEnd(CombatBase $combat)
  * @method void onAttack(Character $attacker, Character $defender)
- * @method void onSkillAttack(Character $attacker, Character $defender, CharacterAttackSkillDummy $skill)
- * @method void onSkillSpecial(Character $character1, Character $target, CharacterSpecialSkillDummy $skill)
+ * @method void onSkillAttack(Character $attacker, Character $defender, CharacterAttackSkill $skill)
+ * @method void onSkillSpecial(Character $character1, Character $target, CharacterSpecialSkill $skill)
  * @method void onHeal(Character $healer, Character $patient)
  */
 class CombatBase {
@@ -415,21 +412,21 @@ class CombatBase {
     return new Team("healers");
   }
   
-  protected function doSpecialSkill(Character $character1, Character $character2, CharacterSpecialSkillDummy $skill): void {
+  protected function doSpecialSkill(Character $character1, Character $character2, CharacterSpecialSkill $skill): void {
     switch($skill->skill->target) {
-      case SkillSpecialDummy::TARGET_ENEMY:
+      case SkillSpecial::TARGET_ENEMY:
         $this->onSkillSpecial($character1, $character2, $skill);
         break;
-      case SkillSpecialDummy::TARGET_SELF:
+      case SkillSpecial::TARGET_SELF:
         $this->onSkillSpecial($character1, $character1, $skill);
         break;
-      case SkillSpecialDummy::TARGET_PARTY:
+      case SkillSpecial::TARGET_PARTY:
         $team = $this->getTeam($character1);
         foreach($team as $target) {
           $this->onSkillSpecial($character1, $target, $skill);
         }
         break;
-      case SkillSpecialDummy::TARGET_ENEMY_PARTY:
+      case SkillSpecial::TARGET_ENEMY_PARTY:
         $team = $this->getEnemyTeam($character1);
         foreach($team as $target) {
           $this->onSkillSpecial($character1, $target, $skill);
@@ -450,9 +447,9 @@ class CombatBase {
     }
     if(count($character->usableSkills) > 0) {
       $skill = $character->usableSkills[0];
-      if($skill instanceof CharacterAttackSkillDummy) {
+      if($skill instanceof CharacterAttackSkill) {
         return CombatAction::ACTION_SKILL_ATTACK;
-      } elseif($skill instanceof  CharacterSpecialSkillDummy) {
+      } elseif($skill instanceof  CharacterSpecialSkill) {
         return CombatAction::ACTION_SKILL_SPECIAL;
       }
     }
@@ -479,12 +476,12 @@ class CombatBase {
           $combat->onAttack($character, $combat->selectAttackTarget($character));
           break;
         case CombatAction::ACTION_SKILL_ATTACK:
-          /** @var CharacterAttackSkillDummy $skill */
+          /** @var CharacterAttackSkill $skill */
           $skill = $character->usableSkills[0];
           $combat->onSkillAttack($character, $combat->selectAttackTarget($character), $skill);
           break;
         case CombatAction::ACTION_SKILL_SPECIAL:
-          /** @var CharacterSpecialSkillDummy $skill */
+          /** @var CharacterSpecialSkill $skill */
           $skill = $character->usableSkills[0];
           $combat->doSpecialSkill($character, $combat->selectAttackTarget($character), $skill);
           break;
@@ -548,7 +545,7 @@ class CombatBase {
   /**
    * Calculate hit chance for attack/skill attack
    */
-  protected function calculateHitChance(Character $character1, Character $character2, CharacterAttackSkillDummy $skill = NULL): int {
+  protected function calculateHitChance(Character $character1, Character $character2, CharacterAttackSkill $skill = NULL): int {
     $hitRate = $character1->hit;
     $dodgeRate = $character2->dodge;
     if(!is_null($skill)) {
@@ -597,7 +594,7 @@ class CombatBase {
   /**
    * Use an attack skill
    */
-  public function useAttackSkill(Character $attacker, Character $defender, CharacterAttackSkillDummy $skill): void {
+  public function useAttackSkill(Character $attacker, Character $defender, CharacterAttackSkill $skill): void {
     $result = [];
     $hitChance = $this->calculateHitChance($attacker, $defender, $skill);
     $result["result"] = $this->hasHit($hitChance);
@@ -623,7 +620,7 @@ class CombatBase {
   /**
    * Use a special skill
    */
-  public function useSpecialSkill(Character $character1, Character $target, CharacterSpecialSkillDummy $skill): void {
+  public function useSpecialSkill(Character $character1, Character $target, CharacterSpecialSkill $skill): void {
     $result = [
       "result" => true, "amount" => 0, "action" => CombatAction::ACTION_SKILL_SPECIAL, "name" => $skill->skill->name,
       "character1" => $character1, "character2" => $target,
@@ -632,7 +629,7 @@ class CombatBase {
     $effect = [
       "id" => "skill{$skill->skill->id}Effect",
       "type" => $skill->skill->type,
-      "stat" => ((in_array($skill->skill->type, SkillSpecialDummy::NO_STAT_TYPES, true)) ? NULL : $skill->skill->stat),
+      "stat" => ((in_array($skill->skill->type, SkillSpecial::NO_STAT_TYPES, true)) ? NULL : $skill->skill->stat),
       "value" => $skill->value,
       "source" => CharacterEffect::SOURCE_SKILL,
       "duration" => $skill->skill->duration
@@ -678,7 +675,7 @@ class CombatBase {
     $characters = array_merge($combat->team1->aliveMembers, $combat->team2->aliveMembers);
     foreach($characters as $character) {
       foreach($character->effects as $effect) {
-        if($effect->type === SkillSpecialDummy::TYPE_POISON) {
+        if($effect->type === SkillSpecial::TYPE_POISON) {
           $character->harm($effect->value);
           $action = [
             "action" => CombatAction::ACTION_POISON, "result" => true, "amount" => $effect->value,

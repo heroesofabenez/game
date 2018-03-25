@@ -1,28 +1,28 @@
 <?php
 declare(strict_types=1);
 
-namespace HeroesofAbenez\Orm;
+namespace HeroesofAbenez\Combat;
 
 /**
  * Character skill attack
  *
  * @author Jakub Konečný
- * @property-read SkillAttackDummy $skill
+ * @property-read SkillAttack $skill
  * @property-read int $damage
  * @property-read int $hitRate
  */
-class CharacterAttackSkillDummy extends BaseCharacterSkill {
-  /** @var SkillAttackDummy */
+class CharacterAttackSkill extends BaseCharacterSkill {
+  /** @var SkillAttack */
   protected $skill;
   
-  public function __construct(SkillAttackDummy $skill, int $level) {
+  public function __construct(SkillAttack $skill, int $level) {
     parent::__construct($skill, $level);
   }
   
   /**
-   * @return SkillAttackDummy
+   * @return SkillAttack
    */
-  public function getSkill(): SkillAttackDummy {
+  public function getSkill(): SkillAttack {
     return $this->skill;
   }
   

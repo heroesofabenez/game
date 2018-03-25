@@ -1,29 +1,29 @@
 <?php
 declare(strict_types=1);
 
-namespace HeroesofAbenez\Orm;
+namespace HeroesofAbenez\Combat;
 
 /**
  * Character skill special
  *
  * @author Jakub Konečný
- * @property-read SkillSpecialDummy $skill
+ * @property-read SkillSpecial $skill
  * @property-read int $value
  */
-class CharacterSpecialSkillDummy extends BaseCharacterSkill {
-  /** @var  SkillSpecialDummy */
+class CharacterSpecialSkill extends BaseCharacterSkill {
+  /** @var SkillSpecial */
   protected $skill;
   
-  public function __construct(SkillSpecialDummy $skill, int $level) {
+  public function __construct(SkillSpecial $skill, int $level) {
     parent::__construct($skill, $level);
   }
   
-  public function getSkill(): SkillSpecialDummy {
+  public function getSkill(): SkillSpecial {
     return $this->skill;
   }
   
   public function getValue(): int {
-    if($this->skill->type === \HeroesofAbenez\Orm\SkillSpecialDummy::TYPE_STUN) {
+    if($this->skill->type === \HeroesofAbenez\Combat\SkillSpecial::TYPE_STUN) {
       return 0;
     }
     $value = $this->skill->value;
