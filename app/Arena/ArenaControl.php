@@ -94,7 +94,8 @@ abstract class ArenaControl extends \Nette\Application\UI\Control {
       $character->money += $rewards["money"];
       $character->experience += $rewards["experience"];
       $this->orm->characters->persistAndFlush($character);
-      $this->combat->log->logText("$player->name gets {$rewards["money"]} silver marks and {$rewards["experience"]} experiences.");
+      $params = ["playerName" => $player->name, "rewardMoney" => $rewards["money"], "rewardExperiences" => $rewards["experience"]];
+      $this->combat->log->logText("texts.arena.fightRewards", $params);
     }
     $combatId = $this->saveCombat($this->combat->log);
     $this->presenter->redirect("Combat:view", ["id" => $combatId]);

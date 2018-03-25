@@ -211,6 +211,7 @@ arena:
     championNotFound: "Šampión nenalezen"
     usesSkills: "Používá následující dovednosti"
     skillOnLevel: "na úrovni %count%"
+    fightRewards: "%playerName% získává %rewardMoney% stříbrňáků a %rewardExperiences% zkušeností."
 training:
    title: "Cvičiště"
    train: "Trénovat"

@@ -62,8 +62,8 @@ class CombatLogger implements \Countable, \IteratorAggregate {
   /**
    * Adds text entry
    */
-  public function logText(string $text): void {
-    $this->actions[$this->round][] = $text;
+  public function logText(string $text, array $params = []): void {
+    $this->actions[$this->round][] = $this->translator->translate($text, 0, $params);
   }
   
   public function __toString(): string {

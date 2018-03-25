@@ -13,3 +13,4 @@ log:
     healingFailure: "%character1% tries to heal %character2% but fails."
     poison: "%character1% loses %count% hitpoint(s) due to poison."
     characterFalls: " He/she falls on the ground."
+    combatEnd: "Combat ends. %team1name% dealt %team1damage% damage, %team2name% dealt %team2damage% damage. %winner% wins."

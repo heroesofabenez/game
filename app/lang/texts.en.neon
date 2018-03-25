@@ -211,6 +211,7 @@ arena:
     championNotFound: "Champion not found"
     usesSkills: "Uses the following skills:"
     skillOnLevel: "on level %count%"
+    fightRewards: "%playerName% gets %rewardMoney% silver marks and %rewardExperiences% experiences."
 training:
    title: "Training grounds"
    train: "Train"

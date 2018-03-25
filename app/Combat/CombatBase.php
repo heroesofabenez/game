@@ -309,14 +309,16 @@ class CombatBase {
    */
   public function logCombatResult(CombatBase $combat): void {
     $combat->log->round = 5000;
-    $text = "Combat ends. {$combat->team1->name} dealt {$combat->damage[1]} damage, {$combat->team2->name} dealt {$combat->damage[2]} damage. ";
+    $params = [
+      "team1name" => $combat->team1->name, "team1damage" => $combat->damage[1],
+      "team2name" => $combat->team2->name, "team2damage" => $combat->damage[2],
+    ];
     if($combat->winner === 1) {
-      $text .= $combat->team1->name;
+      $params["winner"] = $combat->team1->name;
     } else {
-      $text .= $combat->team2->name;
+      $params["winner"] = $combat->team2->name;
     }
-    $text .= " wins.";
-    $combat->log->logText($text);
+    $combat->log->logText("combat.log.combatEnd", $params);
   }
   
   /**

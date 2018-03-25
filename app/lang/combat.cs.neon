@@ -13,3 +13,4 @@ log:
     healingFailure: "%character1% se pokouší léčit %character2%, ale selhává."
     poison: "%character1% ztrácí %count% životů kvůli jedu."
     characterFalls: " Padá na zem."
+    combatEnd: "Souboj končí. %team1name% způsobil %team1damage% poškození, %team2name% způsobil %team2damage% poškození. %winner% vítězí."
