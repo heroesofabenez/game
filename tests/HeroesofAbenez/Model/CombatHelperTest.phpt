@@ -25,11 +25,6 @@ final class CombatHelperTest extends \Tester\TestCase {
     $this->orm = $this->getService(ORM::class);
   }
   
-  public function testGetInitiativeFormula() {
-    Assert::notSame("0", $this->model->getInitiativeFormula(1));
-    Assert::same("0", $this->model->getInitiativeFormula(5000));
-  }
-  
   public function testGetPlayer() {
     $player = $this->model->getPlayer(1);
     Assert::type(Character::class, $player);

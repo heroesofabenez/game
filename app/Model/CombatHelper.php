@@ -35,17 +35,6 @@ class CombatHelper {
   }
   
   /**
-   * Get initiative formula for given class
-   */
-  public function getInitiativeFormula(int $classId): string {
-    $class = $this->profileModel->getClass($classId);
-    if(is_null($class)) {
-      return "0";
-    }
-    return $class->initiative;
-  }
-  
-  /**
    * Get data for specified player
    *
    * @throws OpponentNotFoundException
@@ -67,7 +56,7 @@ class CombatHelper {
         $data[$stat] = $character->$stat;
       }
     }
-    $data["initiativeFormula"] = $this->getInitiativeFormula($data["occupation"]);
+    $data["initiativeFormula"] = $character->occupation->initiative;
     $pet = $this->orm->pets->getActivePet($character);
     if(!is_null($pet)) {
       $pets[] = $pet->toCombatPet();
@@ -127,14 +116,15 @@ class CombatHelper {
       }
     }
     $data["id"] = "pveArenaNpc" . $npc->id;
-    $data["initiativeFormula"] = $this->getInitiativeFormula($data["occupation"]);
+    $occupation = $npc->occupation;
+    $data["initiativeFormula"] = $occupation->initiative;
     $skills = $equipment = [];
-    $skillRows = $this->orm->attackSkills->findByClassAndLevel($data["occupation"], $data["level"]);
+    $skillRows = $this->orm->attackSkills->findByClassAndLevel($occupation, $data["level"]);
     foreach($skillRows as $skillRow) {
       $skills[] = new CharacterAttackSkill($skillRow->toDummy(), 0);
     }
     unset($skillRow);
-    $skillRows = $this->orm->specialSkills->findByClassAndLevel($data["occupation"], $data["level"]);
+    $skillRows = $this->orm->specialSkills->findByClassAndLevel($occupation, $data["level"]);
     foreach($skillRows as $skillRow) {
       $skills[] = new CharacterSpecialSkill($skillRow->toDummy(), 0);
     }
