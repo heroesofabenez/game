@@ -159,12 +159,13 @@ class Character {
     $requiredStats = ["id", "name", "level", "strength", "dexterity", "constitution", "intelligence", "charisma", "initiativeFormula",];
     $allStats = array_merge($requiredStats, ["occupation", "race", "specialization", "gender", "experience",]);
     $numberStats = ["strength", "dexterity", "constitution", "intelligence", "charisma",];
-    $textStats = ["name", "race", "occupation",];
+    $textStats = ["name", "race", "occupation", "initiativeFormula",];
     $resolver = new OptionsResolver();
     $resolver->setDefined($allStats);
     $resolver->setAllowedTypes("id", ["integer", "string"]);
+    $resolver->setAllowedTypes("experience", "integer");
     foreach($numberStats as $stat) {
-      $resolver->setAllowedTypes($stat, "numeric");
+      $resolver->setAllowedTypes($stat, ["integer", "float"]);
       $resolver->setNormalizer($stat, function(OptionsResolver $resolver, $value) {
         return (int) $value;
       });
