@@ -300,7 +300,7 @@ class CombatBase {
     $characters = array_merge($combat->team1->items, $combat->team2->items);
     foreach($characters as $character) {
       foreach($character->effects as $effect) {
-        if($effect->duration === "combat" OR is_int($effect->duration)) {
+        if($effect->duration === CharacterEffect::DURATION_COMBAT OR is_int($effect->duration)) {
           $character->removeEffect($effect->id);
         }
       }

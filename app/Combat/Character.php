@@ -490,7 +490,7 @@ class Character {
   public function damageStat(): string {
     $stat = "strength";
     foreach($this->equipment as $item) {
-      if(!$item->worn OR $item->slot != "weapon") {
+      if(!$item->worn OR $item->slot != Equipment::SLOT_WEAPON) {
         continue;
       }
       switch($item->type) {
@@ -548,23 +548,23 @@ class Character {
         continue;
       }
       switch($effect->source) {
-        case "pet":
-        case "skill":
+        case CharacterEffect::SOURCE_PET:
+        case CharacterEffect::SOURCE_SKILL:
           if(!in_array($type, SkillSpecialDummy::NO_STAT_TYPES, true)) {
             $bonus_value = $$stat / 100 * $effect->value;
           }
           break;
-        case "equipment":
+        case CharacterEffect::SOURCE_EQUIPMENT:
           if(!in_array($type, SkillSpecialDummy::NO_STAT_TYPES, true)) {
             $bonus_value = $effect->value;
           }
           break;
       }
-      if($type == "buff") {
+      if($type == SkillSpecialDummy::TYPE_BUFF) {
         $$stat += $bonus_value;
-      } elseif($type == "debuff") {
+      } elseif($type == SkillSpecialDummy::TYPE_DEBUFF) {
         $debuffs[$stat] += $bonus_value;
-      } elseif($type == "stun") {
+      } elseif($type == SkillSpecialDummy::TYPE_STUN) {
         $stunned = true;
       }
       unset($stat, $type, $duration, $bonus_value);
