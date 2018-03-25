@@ -456,6 +456,13 @@ class CombatBase {
     return CombatAction::ACTION_ATTACK;
   }
   
+  protected function getAllowedActions(): array {
+    $allowedActions = Constants::getConstantsValues(CombatAction::class, "ACTION_");
+    return array_values(array_filter($allowedActions, function(string $value) {
+      return ($value !== CombatAction::ACTION_POISON);
+    }));
+  }
+  
   /**
    * Main stage of a round
    */
@@ -467,8 +474,7 @@ class CombatBase {
     });
     foreach($characters as $character) {
       $action = $combat->chooseAction($combat, $character);
-      $allowedActions = Constants::getConstantsValues(CombatAction::class, "ACTION_");
-      if(!in_array($action, $allowedActions, true) OR $action === CombatAction::ACTION_POISON) {
+      if(!in_array($action, $this->getAllowedActions(), true)) {
         continue;
       }
       switch($action) {
