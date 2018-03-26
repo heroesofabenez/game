@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "cced00b24fc0957ca3ad7a0e24143f35",
+    "content-hash": "85ed5492842828f444e12ecce289afee",
     "packages": [
         {
             "name": "heroesofabenez/chat",
@@ -64,6 +64,61 @@
                 "nette"
             ],
             "time": "2018-03-22T13:19:01+00:00"
+        },
+        {
+            "name": "heroesofabenez/combat",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://gitlab.com/heroesofabenez/combat.git",
+                "reference": "25ba12268b4d9d2f7166b54ce01e82746afffd64"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://gitlab.com/api/v4/projects/heroesofabenez%2Fcombat/repository/archive.zip?sha=25ba12268b4d9d2f7166b54ce01e82746afffd64",
+                "reference": "25ba12268b4d9d2f7166b54ce01e82746afffd64",
+                "shasum": ""
+            },
+            "require": {
+                "latte/latte": "^2.4",
+                "nette/utils": "^2.4",
+                "nexendrie/translation": "^1.1.1",
+                "nexendrie/utils": "^1.2",
+                "php": ">=7.1.0"
+            },
+            "require-dev": {
+                "nexendrie/code-quality": "dev-master",
+                "nexendrie/site-generator": "1.0.x-dev",
+                "phpstan/phpstan-nette": "^0.9"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "HeroesofAbenez\\Combat\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Jakub Konečný",
+                    "email": "jakub.konecny2@centrum.cz",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Combat library for PHP applications",
+            "homepage": "https://heroesofabenez.gitlab.io",
+            "keywords": [
+                "combat"
+            ],
+            "time": "2018-03-26T17:45:51+00:00"
         },
         {
             "name": "kdyby/autowired",

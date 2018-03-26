@@ -19,6 +19,9 @@ orm:
     model: HeroesofAbenez\Orm\Model
 translation:
     localeResolver: header
+    loader:
+        folders:
+            - %appDir%/../vendor/heroesofabenez/combat/src/lang
 menu:
     default:
         htmlId: navigation
