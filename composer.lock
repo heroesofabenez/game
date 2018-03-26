@@ -1284,16 +1284,16 @@
         },
         {
             "name": "nexendrie/utils",
-            "version": "dev-master",
+            "version": "1.2.0",
             "source": {
                 "type": "git",
                 "url": "https://gitlab.com/nexendrie/utils.git",
-                "reference": "c9c2043297c288878bf7cbc4be7eacd1cb0cf2d4"
+                "reference": "3826b4283396187190b9a2cd91a3e53c1d67610b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://gitlab.com/api/v4/projects/nexendrie%2Futils/repository/archive.zip?sha=c9c2043297c288878bf7cbc4be7eacd1cb0cf2d4",
-                "reference": "c9c2043297c288878bf7cbc4be7eacd1cb0cf2d4",
+                "url": "https://gitlab.com/api/v4/projects/nexendrie%2Futils/repository/archive.zip?sha=3826b4283396187190b9a2cd91a3e53c1d67610b",
+                "reference": "3826b4283396187190b9a2cd91a3e53c1d67610b",
                 "shasum": ""
             },
             "require": {
@@ -1336,7 +1336,7 @@
                 "range",
                 "utils"
             ],
-            "time": "2018-03-24T13:07:53+00:00"
+            "time": "2018-03-26T14:00:45+00:00"
         },
         {
             "name": "nextras/dbal",
