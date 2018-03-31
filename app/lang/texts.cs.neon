@@ -200,6 +200,17 @@ npcQuests:
     active: "(Aktivní)"
 ranking:
     title: "Hodnocení"
+    charactersTitle: "Hodnocení postav"
+    guildsTitle: "Hodnocení cechů"
+    characters: "Postavy"
+    guilds: "Cechy"
+    number: "Č."
+    name: "Jméno"
+    level: "Úroveň"
+    guild: "Cech"
+    members: "Členové"
+    profile: "Profil"
+    details: "Detaily"
     previous: "Předchozí"
     next: "Následující"
 arena:

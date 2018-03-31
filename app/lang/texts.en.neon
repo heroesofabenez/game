@@ -200,6 +200,17 @@ npcQuests:
     active: "(Active)"
 ranking:
     title: "Ranking"
+    charactersTitle: "Ranking Characters"
+    guildsTitle: "Ranking Guilds"
+    characters: "Characters"
+    guilds: "Guilds"
+    number: "Nm."
+    name: "Name"
+    level: "Level"
+    guild: "Guild"
+    members: "Members"
+    profile: "Profile"
+    details: "Details"
     previous: "Previous"
     next: "Next"
 arena:

@@ -33,12 +33,12 @@ class RankingPresenter extends BasePresenter {
   }
   
   public function actionCharacters(int $page = 1): void {
-    $this->template->title = "Ranking Characters";
+    $this->template->title = $this->translator->translate("texts.ranking.charactersTitle");
     $this->template->ranking = "charactersRanking";
   }
   
   public function actionGuilds(int $page = 1): void {
-    $this->template->title = "Ranking Guilds";
+    $this->template->title = $this->translator->translate("texts.ranking.guildsTitle");
     $this->template->ranking = "guildsRanking";
   }
   

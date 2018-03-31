@@ -1,9 +1,9 @@
-  <h1>{_"texts.ranking.title"} {$name}</h1>
-  <h3>{foreach $rankings as $ranking}{if ucfirst($ranking) === $name}{$ranking|firstUpper}{else}<a href="{plink Ranking:$ranking}">{$ranking|firstUpper}</a>{/if} {/foreach}</h3>
+  <h1>{_"texts.ranking." . strtolower($name) . "Title"}</h1>
+  <h3>{foreach $rankings as $ranking}{if ucfirst($ranking) === $name}{_"texts.ranking." . strtolower($ranking)}{else}<a href="{plink Ranking:$ranking}">{_"texts.ranking." . strtolower($ranking)}</a>{/if} {/foreach}</h3>
   <table>
-    <tr><th>Nm.</th>{foreach $cols as $col}<th>{$col|firstUpper}</th>{/foreach}<th></th></tr>
+    <tr><th>{_"texts.ranking.number"}</th>{foreach $cols as $col}<th>{_"texts.ranking.$col"}</th>{/foreach}<th></th></tr>
     {foreach $rows as $row}
-    <tr><td>{$iterator->counter}.</td>{foreach $cols as $col}<td>{$row->$col}</td>{/foreach}<td><a href="{plink {$presenter}:view $row->id}">{$lastCol}</a></td></tr>
+    <tr><td>{$iterator->counter}.</td>{foreach $cols as $col}<td>{$row->$col}</td>{/foreach}<td><a href="{plink {$presenter}:view $row->id}">{_"texts.ranking.$lastCol"}</a></td></tr>
     {/foreach}
   </table>
   {if $paginator}

@@ -17,7 +17,7 @@ class CharactersRankingControl extends RankingControl {
   
   public function __construct(ORM $orm) {
     $this->orm = $orm;
-    parent::__construct("Characters", ["name", "level", "guild"], "Profile", "Profile");
+    parent::__construct("Characters", ["name", "level", "guild"], "Profile", "profile");
   }
   
   public function getData(): array {
