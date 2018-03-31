@@ -3,7 +3,8 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Orm;
 
-use Nextras\Orm\Relationships\OneHasMany;
+use Nextras\Orm\Relationships\OneHasMany,
+    Nexendrie\Utils\Numbers;
 
 /**
  * CharacterClass
@@ -39,48 +40,23 @@ class CharacterClass extends \Nextras\Orm\Entity\Entity {
   protected const MAX_STATS = 99;
   
   protected function setterStrength(int $value): int {
-    if($value < 0) {
-      return 0;
-    } elseif($value > static::MAX_STATS) {
-      return static::MAX_STATS;
-    }
-    return $value;
+    return Numbers::range($value, 0, static::MAX_STATS);
   }
   
   protected function setterDexterity(int $value): int {
-    if($value < 0) {
-      return 0;
-    } elseif($value > static::MAX_STATS) {
-      return static::MAX_STATS;
-    }
-    return $value;
+    return Numbers::range($value, 0, static::MAX_STATS);
   }
   
   protected function setterConstitution(int $value): int {
-    if($value < 0) {
-      return 0;
-    } elseif($value > static::MAX_STATS) {
-      return static::MAX_STATS;
-    }
-    return $value;
+    return Numbers::range($value, 0, static::MAX_STATS);
   }
   
   protected function setterIntelligence(int $value): int {
-    if($value < 0) {
-      return 0;
-    } elseif($value > static::MAX_STATS) {
-      return static::MAX_STATS;
-    }
-    return $value;
+    return Numbers::range($value, 0, static::MAX_STATS);
   }
   
   protected function setterCharisma(int $value): int {
-    if($value < 0) {
-      return 0;
-    } elseif($value > static::MAX_STATS) {
-      return static::MAX_STATS;
-    }
-    return $value;
+    return Numbers::range($value, 0, static::MAX_STATS);
   }
 }
 ?>

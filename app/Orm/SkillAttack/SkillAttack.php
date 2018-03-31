@@ -5,7 +5,8 @@ namespace HeroesofAbenez\Orm;
 
 use Nextras\Orm\Relationships\OneHasMany,
     Nextras\Orm\Entity\ToArrayConverter,
-    HeroesofAbenez\Combat\SkillAttack as SkillAttackDummy;
+    HeroesofAbenez\Combat\SkillAttack as SkillAttackDummy,
+    Nexendrie\Utils\Numbers;
 
 /**
  * SkillAttack
@@ -29,12 +30,7 @@ class SkillAttack extends \Nextras\Orm\Entity\Entity {
   public const MAX_STRIKES = 9;
   
   protected function setterStrikes(int $value): int {
-    if($value < 1) {
-      return 1;
-    } elseif($value > static::MAX_STRIKES) {
-      return static::MAX_STRIKES;
-    }
-    return $value;
+    return Numbers::range($value, 1, static::MAX_STRIKES);
   }
   
   public function toDummy(): SkillAttackDummy {

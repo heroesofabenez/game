@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Orm;
 
+use Nexendrie\Utils\Numbers;
+
 /**
  * Introduction
  *
@@ -15,12 +17,7 @@ namespace HeroesofAbenez\Orm;
  */
 class Introduction extends \Nextras\Orm\Entity\Entity {
   protected function setterPart(int $value): int {
-    if($value < 1) {
-      return 1;
-    } elseif($value > 9) {
-      return 9;
-    }
-    return $value;
+    return Numbers::range($value, 1, 9);
   }
 }
 ?>

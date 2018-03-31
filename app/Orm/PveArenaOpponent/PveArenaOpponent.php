@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Orm;
 
+use Nexendrie\Utils\Numbers;
+
 /**
  * PveArenaOpponent
  *
@@ -25,12 +27,7 @@ class PveArenaOpponent extends \Nextras\Orm\Entity\Entity {
   public const GENDER_FEMALE = "female";
   
   protected function setterLevel(int $value): int {
-    if($value < 1) {
-      return 1;
-    } elseif($value > 999) {
-      return 999;
-    }
-    return $value;
+    return Numbers::range($value, 1, 999);
   }
 }
 ?>

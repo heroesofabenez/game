@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Orm;
 
+use Nexendrie\Utils\Numbers;
+
 /**
  * ShopItem
  *
@@ -14,12 +16,7 @@ namespace HeroesofAbenez\Orm;
  */
 class ShopItem extends \Nextras\Orm\Entity\Entity {
   protected function setterOrder(int $value): int {
-    if($value < 0) {
-      return 0;
-    } elseif($value > 99) {
-      return 99;
-    }
-    return $value;
+    return Numbers::range($value, 0, 99);
   }
 }
 ?>

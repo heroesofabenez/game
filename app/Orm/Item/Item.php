@@ -3,7 +3,8 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Orm;
 
-use Nextras\Orm\Relationships\OneHasMany;
+use Nextras\Orm\Relationships\OneHasMany,
+    Nexendrie\Utils\Numbers;
 
 /**
  * Item
@@ -21,12 +22,7 @@ use Nextras\Orm\Relationships\OneHasMany;
  */
 class Item extends \Nextras\Orm\Entity\Entity {
   protected function setterPrice(int $value): int {
-    if($value < 0) {
-      return 0;
-    } elseif($value > 999) {
-      return 999;
-    }
-    return $value;
+    return Numbers::range($value, 0, 999);
   }
 }
 ?>

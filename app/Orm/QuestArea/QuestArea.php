@@ -3,7 +3,8 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Orm;
 
-use Nextras\Orm\Relationships\OneHasMany;
+use Nextras\Orm\Relationships\OneHasMany,
+    Nexendrie\Utils\Numbers;
 
 /**
  * QuestArea
@@ -24,12 +25,7 @@ use Nextras\Orm\Relationships\OneHasMany;
  */
 class QuestArea extends \Nextras\Orm\Entity\Entity {
   protected function setterRequiredLevel(int $value): int {
-    if($value < 0) {
-      return 0;
-    } elseif($value > 99) {
-      return 99;
-    }
-    return $value;
+    return Numbers::range($value, 0, 99);
   }
 }
 ?>
