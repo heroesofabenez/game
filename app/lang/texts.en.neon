@@ -191,6 +191,8 @@ character:
 npcShop:
     noItems: "Sorry but I have nothing to sell."
     offer: "I can offer you:"
+    itemPrice: "{1}for %count% silver mark|[0,+Inf[for %count% silver marks"
+    buy: "Buy"
 npcQuests:
     available: "Available quests:"
     noQuests: "No quests"

@@ -191,6 +191,8 @@ character:
 npcShop:
     noItems: "Je mi líto, ale nemám nic na prodej."
     offer: "Mohu ti nabídnout:"
+    itemPrice: "{0}za %count% stříbrňáků|{1}za %count% stříbrňák|[2,4]za %count% stříbrňáky|[5,+Inf]za %count% stříbrňáků"
+    buy: "Koupit"
 npcQuests:
     available: "Dostupné úkoly:"
     noQuests: "Žádné úkoly"

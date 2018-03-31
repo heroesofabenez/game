@@ -4,6 +4,6 @@
   {else}
   <p>{_"texts.npcShop.offer"}</p>
   {foreach $items as $item}
-  <a href="{plink Item:view $item->id}">{$item->name}</a> for {$item->price} silver marks. <a n:href="buy! $item->id">Buy</a><br>
+  <a href="{plink Item:view $item->id}">{$item->name}</a> {_"texts.npcShop.itemPrice", $item->price}. <a n:href="buy! $item->id">{_"texts.npcShop.buy"}</a><br>
   {/foreach}
   {/if}
