@@ -60,6 +60,17 @@ final class KarmaTest extends \Tester\TestCase {
       Karma::isOpposite(Karma::KARMA_WHITE, "a");
     }, \OutOfBoundsException::class);
   }
+  
+  public function testGetPredominant() {
+    $karma = [0, 0, 0];
+    Assert::same(Karma::KARMA_NEUTRAL, Karma::getPredominant(... $karma));
+    $karma[2] = 2;
+    Assert::same(Karma::KARMA_NEUTRAL, Karma::getPredominant(... $karma));
+    $karma[0] = 5;
+    Assert::same(Karma::KARMA_WHITE, Karma::getPredominant(... $karma));
+    $karma[1] = 10;
+    Assert::same(Karma::KARMA_DARK, Karma::getPredominant(... $karma));
+  }
 }
 
 $test = new KarmaTest();

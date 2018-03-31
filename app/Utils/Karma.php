@@ -66,5 +66,12 @@ class Karma {
     static::validateKarma($karma1, $karma2);
     return ($karma2 === static::getOpposite($karma1));
   }
+  
+  public static function getPredominant(int $white, int $dark, int $neutral): string {
+    $karma = [
+      static::KARMA_NEUTRAL => $neutral, static::KARMA_WHITE => $white, static::KARMA_DARK => $dark,
+    ];
+    return array_search(max($karma), $karma, true);
+  }
 }
 ?>

@@ -3,7 +3,8 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Orm;
 
-use Nextras\Orm\Relationships\OneHasMany;
+use Nextras\Orm\Relationships\OneHasMany,
+    HeroesofAbenez\Utils\Karma;
 
 /**
  * Character
@@ -64,10 +65,7 @@ class Character extends \Nextras\Orm\Entity\Entity {
   }
   
   protected function getterPredominantKarma(): string {
-    $karma = [
-      "neutral" => $this->neutralKarma, "white" => $this->whiteKarma, "dark" => $this->darkKarma,
-    ];
-    return array_search(max($karma), $karma, true);
+    return Karma::getPredominant($this->whiteKarma, $this->darkKarma, $this->neutralKarma);
   }
   
   public function onBeforeInsert() {
