@@ -21,6 +21,7 @@ guild:
     cannotChangeRankNames: "You can't change rank names."
 npc:
     noShop: "This npc doesn't have shop."
+    notEnemy: "You cannot challange this npc."
 quest:
     workingOn: "You are already working on this quest."
     notWorkingOn: "You aren't working on this quest."

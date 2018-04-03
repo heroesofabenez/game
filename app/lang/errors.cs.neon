@@ -21,6 +21,7 @@ guild:
     cannotChangeRankNames: "Nemůžeš měnit jména hodností."
 npc:
     noShop: "Toto npc nemá obchod."
+    notEnemy: "Nemůžeš vyzvat toto npc na souboj."
 quest:
     workingOn: "Už pracuješ na tomto úkolu."
     notWorkingOn: "Nepracuješ na tomto úkolu."

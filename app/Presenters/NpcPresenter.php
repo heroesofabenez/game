@@ -69,6 +69,13 @@ class NpcPresenter extends BasePresenter {
     $this->template->id = $id;
   }
   
+  public function actionFight(int $id): void {
+    if($this->npc->type != Npc::TYPE_ENEMY) {
+      $this->flashMessage($this->translator->translate("errors.npc.notEnemy"));
+      $this->redirect("view", $id);
+    }
+  }
+  
   protected function createComponentNpcQuests(INPCQuestsControlFactory $factory): NPCQuestsControl {
     $component = $factory->create();
     $component->npc = $this->npc;

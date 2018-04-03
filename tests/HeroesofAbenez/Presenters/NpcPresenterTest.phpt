@@ -35,6 +35,10 @@ final class NpcPresenterTest extends \Tester\TestCase {
   public function testTrade() {
     $this->checkRedirect("Npc:trade", "/npc/1", ["id" => 1]);
   }
+  
+  public function testFight() {
+    $this->checkRedirect("Npc:fight", "/npc/1", ["id" => 1]);
+  }
 }
 
 $test = new NpcPresenterTest();
