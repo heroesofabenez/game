@@ -34,7 +34,7 @@ abstract class BasePresenter extends \Nette\Application\UI\Presenter {
    */
   public function tryLogin(): void {
     if(!$this->user->isLoggedIn()) {
-      $this->user->login();
+      $this->user->login("");
     }
     $uid = $this->user->id;
     if($this instanceof CharacterPresenter AND $uid == -1) {
