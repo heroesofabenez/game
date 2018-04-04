@@ -8,7 +8,8 @@ use HeroesofAbenez\Combat\Character,
     HeroesofAbenez\Combat\CharacterSpecialSkill,
     HeroesofAbenez\Orm\Model as ORM,
     HeroesofAbenez\Orm\ArenaFightCount,
-    Nextras\Orm\Entity\IEntity;
+    Nextras\Orm\Entity\IEntity,
+    HeroesofAbenez\Combat\BaseCharacterSkill;
 
 /**
  * Combat Helper
@@ -32,6 +33,20 @@ class CombatHelper {
     $this->equipmentModel = $equipmentModel;
     $this->skillsModel = $skillsModel;
     $this->orm = $orm;
+  }
+  
+  /**
+   * @return BaseCharacterSkill[]
+   */
+  protected function getPlayerSkills(\HeroesofAbenez\Orm\Character $character): array {
+    $skills = [];
+    foreach($character->attackSkills as $skill) {
+      $skills[] = new CharacterAttackSkill($skill->skill->toDummy(), $skill->level);
+    }
+    foreach($character->specialSkills as $skill) {
+      $skills[] = new CharacterSpecialSkill($skill->skill->toDummy(), $skill->level);
+    }
+    return $skills;
   }
   
   /**
@@ -70,7 +85,7 @@ class CombatHelper {
       $item->worn = true;
       $equipment[] = $item->toCombatEquipment();
     }
-    $skills = $this->skillsModel->getPlayerSkills($id);
+    $skills = $this->getPlayerSkills($character);
     $player = new Character($data, $equipment, $pets, $skills);
     return $player;
   }

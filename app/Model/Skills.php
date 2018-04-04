@@ -144,39 +144,6 @@ class Skills {
   }
   
   /**
-   * @return BaseCharacterSkill[]
-   */
-  public function getPlayerSkills(int $uid): array {
-    $return = [];
-    $skills = array_merge($this->getListOfAttackSkills(), $this->getListOfSpecialSkills());
-    /** @var \HeroesofAbenez\Orm\Character $character */
-    $character = $this->orm->characters->getById($this->user->id);
-    /** @var BaseSkill $skill */
-    foreach($skills as $skill) {
-      if($skill->neededClass != $character->occupation->id) {
-        continue;
-      } elseif(!is_null($skill->neededSpecialization)) {
-        if(is_null($character->specialization)) {
-          continue;
-        } elseif($skill->neededSpecialization != $character->specialization) {
-          continue;
-        }
-      } elseif($skill->neededLevel > $character->level) {
-        continue;
-      }
-      if($skill instanceof SkillAttack) {
-        $s = $this->getCharacterAttackSkill($skill->id, $uid);
-      } elseif($skill instanceof SkillSpecial) {
-        $s = $this->getCharacterSpecialSkill($skill->id, $uid);
-      }
-      if($s->level > 0) {
-        $return[] = $s;
-      }
-    }
-    return $return;
-  }
-  
-  /**
    * Get amount of user's usable skill points
    */
   public function getSkillPoints(): int {

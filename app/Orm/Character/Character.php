@@ -49,8 +49,8 @@ use Nextras\Orm\Relationships\OneHasMany,
  * @property OneHasMany|CharacterQuest[] $quests {1:m CharacterQuest::$character}
  * @property OneHasMany|ChatBan[] $chatBans {1:m ChatBan::$character}
  * @property OneHasMany|ChatMessage[] $chatMessages {1:m ChatMessage::$character}
- * @property OneHasMany|CharacterAttackSkill $attackSkills {1:m CharacterAttackSkill::$character}
- * @property OneHasMany|CharacterSpecialSkill $specialSkills {1:m CharacterSpecialSkill::$character}
+ * @property OneHasMany|CharacterAttackSkill[] $attackSkills {1:m CharacterAttackSkill::$character}
+ * @property OneHasMany|CharacterSpecialSkill[] $specialSkills {1:m CharacterSpecialSkill::$character}
  */
 class Character extends \Nextras\Orm\Entity\Entity {
   public const GENDER_MALE = "male";
