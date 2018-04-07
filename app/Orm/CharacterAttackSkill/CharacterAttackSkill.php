@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Orm;
 
+use HeroesofAbenez\Combat\CharacterAttackSkill as CombatSkill;
+
 /**
  * CharacterAttackSkill
  *
@@ -13,6 +15,8 @@ namespace HeroesofAbenez\Orm;
  * @property int $level {default 1}
  */
 class CharacterAttackSkill extends \Nextras\Orm\Entity\Entity {
-  
+  public function toCombatSkill(): CombatSkill {
+    return new CombatSkill($this->skill->toDummy(), $this->level);
+  }
 }
 ?>

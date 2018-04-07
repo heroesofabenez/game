@@ -41,10 +41,10 @@ class CombatHelper {
   protected function getPlayerSkills(\HeroesofAbenez\Orm\Character $character): array {
     $skills = [];
     foreach($character->attackSkills as $skill) {
-      $skills[] = new CharacterAttackSkill($skill->skill->toDummy(), $skill->level);
+      $skills[] = $skill->toCombatSkill();
     }
     foreach($character->specialSkills as $skill) {
-      $skills[] = new CharacterSpecialSkill($skill->skill->toDummy(), $skill->level);
+      $skills[] = $skill->toCombatSkill();
     }
     return $skills;
   }
@@ -90,11 +90,23 @@ class CombatHelper {
     return $player;
   }
   
-  protected function getArenaNpcSkillsLevels(array $data, array &$skills): void {
-    if($data["level"] < 2) {
+  /**
+   * @return BaseCharacterSkill[]
+   */
+  protected function getArenaNpcSkills(\HeroesofAbenez\Orm\PveArenaOpponent $npc): array {
+    $skills = [];
+    $skillRows = $this->orm->attackSkills->findByClassAndLevel($npc->occupation, $npc->level);
+    foreach($skillRows as $skillRow) {
+      $skills[] = new CharacterAttackSkill($skillRow->toDummy(), 0);
+    }
+    $skillRows = $this->orm->specialSkills->findByClassAndLevel($npc->occupation, $npc->level);
+    foreach($skillRows as $skillRow) {
+      $skills[] = new CharacterSpecialSkill($skillRow->toDummy(), 0);
+    }
+    if($npc->level < 2) {
       $skills = [$skills[0]];
     }
-    $skillPoints = $data["level"];
+    $skillPoints = $npc->level;
     for($i = 1; $skillPoints > 0; $i++) {
       foreach($skills as $skill) {
         if($skillPoints < 1) {
@@ -106,6 +118,7 @@ class CombatHelper {
         $skillPoints--;
       }
     }
+    return $skills;
   }
   
   /**
@@ -133,17 +146,8 @@ class CombatHelper {
     $data["id"] = "pveArenaNpc" . $npc->id;
     $occupation = $npc->occupation;
     $data["initiativeFormula"] = $occupation->initiative;
-    $skills = $equipment = [];
-    $skillRows = $this->orm->attackSkills->findByClassAndLevel($occupation, $data["level"]);
-    foreach($skillRows as $skillRow) {
-      $skills[] = new CharacterAttackSkill($skillRow->toDummy(), 0);
-    }
-    unset($skillRow);
-    $skillRows = $this->orm->specialSkills->findByClassAndLevel($occupation, $data["level"]);
-    foreach($skillRows as $skillRow) {
-      $skills[] = new CharacterSpecialSkill($skillRow->toDummy(), 0);
-    }
-    $this->getArenaNpcSkillsLevels($data, $skills);
+    $equipment = [];
+    $skills = $this->getArenaNpcSkills($npc);
     if(!is_null($npc->weapon)) {
       $weapon = $this->equipmentModel->view($npc->weapon->id);
       if(!is_null($weapon)) {
