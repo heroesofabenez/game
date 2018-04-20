@@ -11,7 +11,7 @@ cache:
   stage: test
 
   services:
-  - mysql
+  - mariadb
 
   variables:
     MYSQL_DATABASE: heroesofabenez

@@ -1,6 +1,6 @@
 dbal:
     driver: mysqli
-    host: mysql
+    host: mariadb
     username: root
     password: root
     database: heroesofabenez
