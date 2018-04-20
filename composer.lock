@@ -1,7 +1,7 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
     "content-hash": "d12f7182beee5f7e77a0851d9fa11e09",
@@ -71,12 +71,12 @@
             "source": {
                 "type": "git",
                 "url": "https://gitlab.com/heroesofabenez/combat.git",
-                "reference": "10c9e5e355df7103551c55edc2c095530740c2fa"
+                "reference": "cb21fe6b3fe534ab1c3e0344dc80fea724ac393a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://gitlab.com/api/v4/projects/heroesofabenez%2Fcombat/repository/archive.zip?sha=10c9e5e355df7103551c55edc2c095530740c2fa",
-                "reference": "10c9e5e355df7103551c55edc2c095530740c2fa",
+                "url": "https://gitlab.com/api/v4/projects/heroesofabenez%2Fcombat/repository/archive.zip?sha=cb21fe6b3fe534ab1c3e0344dc80fea724ac393a",
+                "reference": "cb21fe6b3fe534ab1c3e0344dc80fea724ac393a",
                 "shasum": ""
             },
             "require": {
@@ -118,7 +118,7 @@
             "keywords": [
                 "combat"
             ],
-            "time": "2018-04-13T16:55:45+00:00"
+            "time": "2018-04-14T10:07:23+00:00"
         },
         {
             "name": "kdyby/autowired",
@@ -2141,12 +2141,12 @@
             "source": {
                 "type": "git",
                 "url": "https://gitlab.com/nexendrie/code-quality.git",
-                "reference": "a9f39e1f35baa646e0c30cc08da1c5ca1e864f5e"
+                "reference": "ae196da439075efef36fd1b23b9d4a5c94827e4b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://gitlab.com/api/v4/projects/nexendrie%2Fcode-quality/repository/archive.zip?sha=a9f39e1f35baa646e0c30cc08da1c5ca1e864f5e",
-                "reference": "a9f39e1f35baa646e0c30cc08da1c5ca1e864f5e",
+                "url": "https://gitlab.com/api/v4/projects/nexendrie%2Fcode-quality/repository/archive.zip?sha=ae196da439075efef36fd1b23b9d4a5c94827e4b",
+                "reference": "ae196da439075efef36fd1b23b9d4a5c94827e4b",
                 "shasum": ""
             },
             "require": {
@@ -2175,7 +2175,7 @@
                 "quality",
                 "testing"
             ],
-            "time": "2018-03-02T12:44:18+00:00"
+            "time": "2018-04-20T11:06:53+00:00"
         },
         {
             "name": "nikic/php-parser",

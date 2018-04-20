@@ -41,7 +41,7 @@ class TrainingPresenter extends BasePresenter {
       $this->model->trainStat($stat);
     } catch(NoStatPointsAvailableException $e) {
       $this->flashMessage($this->translator->translate("errors.training.noStatPointsAvailable"));
-    } catch(InvalidStatException $e) { // @codingStandardsIgnoreLine
+    } catch(InvalidStatException $e) {
       
     }
     $this->redirect("Training:");
@@ -56,9 +56,9 @@ class TrainingPresenter extends BasePresenter {
       $this->flashMessage($this->translator->translate("errors.training.skillMaxLevelReached"));
     } catch(CannotLearnSkillException $e) {
       $this->flashMessage($this->translator->translate("errors.training.cannotLearnSkill"));
-    } catch(InvalidSkillTypeException $e) { // @codingStandardsIgnoreLine
+    } catch(InvalidSkillTypeException $e) {
       
-    } catch(SkillNotFoundException $e) { // @codingStandardsIgnoreLine
+    } catch(SkillNotFoundException $e) {
       
     }
     $this->redirect("Training:");
