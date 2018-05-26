@@ -5,7 +5,8 @@ namespace HeroesofAbenez\Orm;
 
 use Nextras\Orm\Relationships\OneHasMany,
     Nextras\Orm\Entity\ToArrayConverter,
-    HeroesofAbenez\Combat\SkillSpecial as SkillSpecialDummy;
+    HeroesofAbenez\Combat\SkillSpecial as SkillSpecialDummy,
+    HeroesofAbenez\Combat\Character as CharacterDummy;
 
 /**
  * SkillSpecial
@@ -19,7 +20,7 @@ use Nextras\Orm\Relationships\OneHasMany,
  * @property int $neededLevel
  * @property string $type {enum SkillSpecialDummy::TYPE_*}
  * @property string $target {enum SkillSpecialDummy::TARGET_*}
- * @property string|NULL $stat {enum SkillSpecialDummy::STAT_*}
+ * @property string|NULL $stat {enum static::STAT_*}
  * @property int $value {default 0}
  * @property int $valueGrowth
  * @property int $levels
@@ -27,6 +28,19 @@ use Nextras\Orm\Relationships\OneHasMany,
  * @property OneHasMany|CharacterSpecialSkill[] $characterSkills {1:m CharacterSpecialSkill::$skill}
  */
 class SkillSpecial extends \Nextras\Orm\Entity\Entity {
+  /** @internal */
+  public const STAT_MAX_HITPOINTS = CharacterDummy::STAT_MAX_HITPOINTS;
+  /** @internal */
+  public const STAT_DAMAGE = CharacterDummy::STAT_DAMAGE;
+  /** @internal */
+  public const STAT_DEFENSE = CharacterDummy::STAT_DEFENSE;
+  /** @internal */
+  public const STAT_HIT = CharacterDummy::STAT_HIT;
+  /** @internal */
+  public const STAT_DODGE = CharacterDummy::STAT_DODGE;
+  /** @internal */
+  public const STAT_INITIATIVE = CharacterDummy::STAT_INITIATIVE;
+  
   protected function setterStat(?string $value): ?string {
     if(in_array($value, SkillSpecialDummy::NO_STAT_TYPES, true)) {
       return NULL;
