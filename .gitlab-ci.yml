@@ -32,3 +32,11 @@ test:cc:
     name: "Code coverage"
     paths:
     - coverage.html
+
+test:css:
+  stage: test
+  image: node:9
+  before_script:
+  - npm install -g csslint
+  script:
+  - csslint styles
