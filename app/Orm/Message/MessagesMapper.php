@@ -8,7 +8,7 @@ namespace HeroesofAbenez\Orm;
  *
  * @author Jakub Konečný
  */
-class MessagesMapper extends \Nextras\Orm\Mapper\Mapper {
+final class MessagesMapper extends \Nextras\Orm\Mapper\Mapper {
   
 }
 ?>

@@ -28,7 +28,7 @@ use Nextras\Orm\Relationships\OneHasMany;
  * @property int $order
  * @property OneHasMany|CharacterQuest[] $characterQuests {1:m CharacterQuest::$quest}
  */
-class Quest extends \Nextras\Orm\Entity\Entity {
+final class Quest extends \Nextras\Orm\Entity\Entity {
   
 }
 ?>

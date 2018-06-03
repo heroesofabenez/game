@@ -8,7 +8,7 @@ namespace HeroesofAbenez\Chat\Commands;
  *
  * @author Jakub Konečný
  */
-class TimeCommand extends \HeroesofAbenez\Chat\ChatCommand {
+final class TimeCommand extends \HeroesofAbenez\Chat\ChatCommand {
   /** @var \Nette\Localization\ITranslator */
   protected $translator;
   

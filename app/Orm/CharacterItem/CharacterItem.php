@@ -12,7 +12,7 @@ namespace HeroesofAbenez\Orm;
  * @property Item $item {m:1 Item::$characterItems}
  * @property int $amount {default 1}
  */
-class CharacterItem extends \Nextras\Orm\Entity\Entity {
+final class CharacterItem extends \Nextras\Orm\Entity\Entity {
   
 }
 ?>

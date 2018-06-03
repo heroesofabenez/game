@@ -10,7 +10,7 @@ use Tracy\ILogger;
  *
  * @author Jakub Konečný
  */
-class ErrorPresenter extends BasePresenter {
+final class ErrorPresenter extends BasePresenter {
   /** @var ILogger|NULL */
   private $logger;
   

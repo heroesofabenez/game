@@ -12,7 +12,7 @@ use HeroesofAbenez\Orm\Pet as PetEntity,
  *
  * @author Jakub Konečný
  */
-class Journal {
+final class Journal {
   use \Nette\SmartObject;
   
   /** @var \Nette\Security\User */

@@ -19,7 +19,7 @@ use Nette\Utils\Arrays,
  *
  * @author Jakub Konečný
  */
-class Skills {
+final class Skills {
   use \Nette\SmartObject;
   
   /** @var \Nette\Caching\Cache */

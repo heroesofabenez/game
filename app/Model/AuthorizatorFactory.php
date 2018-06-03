@@ -10,7 +10,7 @@ use Nette\Security\Permission;
  *
  * @author Jakub Konečný
  */
-class AuthorizatorFactory {
+final class AuthorizatorFactory {
   use \Nette\SmartObject;
   
   /** @var Permissions */

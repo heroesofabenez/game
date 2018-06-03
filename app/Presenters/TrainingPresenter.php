@@ -16,7 +16,7 @@ use HeroesofAbenez\Model\InvalidStatException,
  *
  * @author Jakub Konečný
  */
-class TrainingPresenter extends BasePresenter {
+final class TrainingPresenter extends BasePresenter {
   /** @var \HeroesofAbenez\Model\Profile */
   protected $model;
   /** @var \HeroesofAbenez\Model\Skills */

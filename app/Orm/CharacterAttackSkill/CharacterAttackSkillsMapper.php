@@ -8,7 +8,7 @@ namespace HeroesofAbenez\Orm;
  *
  * @author Jakub Konečný
  */
-class CharacterAttackSkillsMapper extends \Nextras\Orm\Mapper\Mapper {
+final class CharacterAttackSkillsMapper extends \Nextras\Orm\Mapper\Mapper {
   
 }
 ?>

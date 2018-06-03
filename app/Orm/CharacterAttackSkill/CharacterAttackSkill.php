@@ -14,7 +14,7 @@ use HeroesofAbenez\Combat\CharacterAttackSkill as CombatSkill;
  * @property SkillAttack $skill {m:1 SkillAttack::$characterSkills}
  * @property int $level {default 1}
  */
-class CharacterAttackSkill extends \Nextras\Orm\Entity\Entity {
+final class CharacterAttackSkill extends \Nextras\Orm\Entity\Entity {
   public function toCombatSkill(): CombatSkill {
     return new CombatSkill($this->skill->toDummy(), $this->level);
   }

@@ -10,7 +10,7 @@ use Nextras\Orm\Collection\ICollection;
  *
  * @author Jakub Konečný
  */
-class GuildRanksCustomRepository extends \Nextras\Orm\Repository\Repository {
+final class GuildRanksCustomRepository extends \Nextras\Orm\Repository\Repository {
   /**
    * @return string[]
    */

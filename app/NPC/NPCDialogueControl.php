@@ -13,7 +13,7 @@ use HeroesofAbenez\Orm\Npc;
  * @property-read string[] $names
  * @property-write Npc $npc
  */
-class NPCDialogueControl extends \Nette\Application\UI\Control {
+final class NPCDialogueControl extends \Nette\Application\UI\Control {
   /** @var \Nette\Security\User */
   protected $user;
   /** @var Npc|NULL */

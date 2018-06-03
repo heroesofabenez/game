@@ -8,7 +8,7 @@ namespace HeroesofAbenez\Orm;
  *
  * @author Jakub Konečný
  */
-class ArenaFightsCountRepository extends \Nextras\Orm\Repository\Repository {
+final class ArenaFightsCountRepository extends \Nextras\Orm\Repository\Repository {
   /**
    * @return string[]
    */

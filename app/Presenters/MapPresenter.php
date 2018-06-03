@@ -8,7 +8,7 @@ namespace HeroesofAbenez\Presenters;
  *
  * @author Jakub Konečný
  */
-class MapPresenter extends BasePresenter {
+final class MapPresenter extends BasePresenter {
   /** @var \HeroesofAbenez\Model\Map */
   protected $model;
   

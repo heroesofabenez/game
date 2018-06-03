@@ -12,7 +12,7 @@ use HeroesofAbenez\Orm\Request as RequestEntity,
  * 
  * @author Jakub Konečný
  */
-class Request {
+final class Request {
   use \Nette\SmartObject;
   
    /** @var \Nette\Security\User */

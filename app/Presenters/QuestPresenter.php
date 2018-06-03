@@ -8,7 +8,7 @@ namespace HeroesofAbenez\Presenters;
  *
  * @author Jakub Konečný
  */
-class QuestPresenter extends BasePresenter {
+final class QuestPresenter extends BasePresenter {
   /** @var \HeroesofAbenez\Model\Quest */
   protected $model;
   /** @var \HeroesofAbenez\Model\Item */

@@ -12,7 +12,7 @@ use Nette\Security as NS,
    * 
    * @author Jakub Konečný
    */
-class UserManager implements NS\IAuthenticator {
+final class UserManager implements NS\IAuthenticator {
   use \Nette\SmartObject;
   
   /** @var ORM */

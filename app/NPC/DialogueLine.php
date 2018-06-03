@@ -11,7 +11,7 @@ namespace HeroesofAbenez\NPC;
  * @property-read string $text
  * @property-read string[] $names
  */
-class DialogueLine {
+final class DialogueLine {
   use \Nette\SmartObject;
   
   /** @var string */

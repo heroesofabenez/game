@@ -26,7 +26,7 @@ use Nextras\Orm\Relationships\OneHasMany,
  * @property string|NULL $hitRate
  * @property OneHasMany|CharacterAttackSkill[] $characterSkills {1:m CharacterAttackSkill::$skill}
  */
-class SkillAttack extends \Nextras\Orm\Entity\Entity {
+final class SkillAttack extends \Nextras\Orm\Entity\Entity {
   public const MAX_STRIKES = 9;
   
   protected function setterStrikes(int $value): int {

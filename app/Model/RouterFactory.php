@@ -11,7 +11,7 @@ use Nette\Application\Routers\RouteList,
  *
  * @author Jakub Konečný
  */
-class RouterFactory {
+final class RouterFactory {
   use \Nette\SmartObject;
   
   public function create(): RouteList {

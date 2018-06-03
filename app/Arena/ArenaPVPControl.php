@@ -12,7 +12,7 @@ use HeroesofAbenez\Combat\Character,
  *
  * @author Jakub Konečný
  */
-class ArenaPVPControl extends ArenaControl {
+final class ArenaPVPControl extends ArenaControl {
   /** @var string */
   protected $arena = "heroes";
   

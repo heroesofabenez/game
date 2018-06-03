@@ -27,7 +27,7 @@ use Nette\Application\UI\Form,
    * 
    * @author Jakub Konečný
    */
-class GuildPresenter extends BasePresenter {
+final class GuildPresenter extends BasePresenter {
   /** @var \HeroesofAbenez\Model\Guild */
   protected $model;
   /** @var \HeroesofAbenez\Model\Permissions */

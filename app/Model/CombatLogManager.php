@@ -11,7 +11,7 @@ use HeroesofAbenez\Orm\Model as ORM,
  *
  * @author Jakub Konečný
  */
-class CombatLogManager {
+final class CombatLogManager {
   use \Nette\SmartObject;
   
   /** @var ORM */

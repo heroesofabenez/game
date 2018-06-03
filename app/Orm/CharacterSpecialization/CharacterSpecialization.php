@@ -22,7 +22,7 @@ use Nextras\Orm\Relationships\OneHasMany;
  * @property OneHasMany|SkillAttack[] $attackSkills {1:m SkillAttack::$neededSpecialization}
  * @property OneHasMany|SkillSpecial[] $specialSkills {1:m SkillSpecial::$neededSpecialization}
  */
-class CharacterSpecialization extends \Nextras\Orm\Entity\Entity {
+final class CharacterSpecialization extends \Nextras\Orm\Entity\Entity {
   
 }
 ?>

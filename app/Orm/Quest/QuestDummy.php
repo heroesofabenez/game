@@ -25,7 +25,7 @@ namespace HeroesofAbenez\Orm;
  * @property-read int $order
  * @property bool $progress
  */
-class QuestDummy {
+final class QuestDummy {
   use \Nette\SmartObject;
   
   /** @var int */

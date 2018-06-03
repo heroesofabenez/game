@@ -14,7 +14,7 @@ use HeroesofAbenez\Orm\Request as RequestEntity,
    * 
    * @author Jakub Konečný
    */
-class Guild {
+final class Guild {
   use \Nette\SmartObject;
   
   /** @var ORM */

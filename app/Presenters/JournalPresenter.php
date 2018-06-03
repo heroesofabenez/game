@@ -18,7 +18,7 @@ use HeroesofAbenez\Model\NotEnoughExperiencesException,
  *
  * @author Jakub Konečný
  */
-class JournalPresenter extends BasePresenter {
+final class JournalPresenter extends BasePresenter {
   /** @var \HeroesofAbenez\Model\Journal */
   protected $model;
   /** @var \HeroesofAbenez\Model\Profile */

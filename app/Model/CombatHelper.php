@@ -16,7 +16,7 @@ use HeroesofAbenez\Combat\Character,
  *
  * @author Jakub Konečný
  */
-class CombatHelper {
+final class CombatHelper {
   use \Nette\SmartObject;
   
   /** @var Profile */

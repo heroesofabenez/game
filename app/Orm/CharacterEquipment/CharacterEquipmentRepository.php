@@ -10,7 +10,7 @@ use Nextras\Orm\Collection\ICollection;
  *
  * @author Jakub Konečný
  */
-class CharacterEquipmentRepository extends \Nextras\Orm\Repository\Repository {
+final class CharacterEquipmentRepository extends \Nextras\Orm\Repository\Repository {
   /**
    * @return string[]
    */

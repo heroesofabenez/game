@@ -8,7 +8,7 @@ namespace HeroesofAbenez\Orm;
  *
  * @author Jakub Konečný
  */
-class RoutesStagesRepository extends \Nextras\Orm\Repository\Repository {
+final class RoutesStagesRepository extends \Nextras\Orm\Repository\Repository {
   /**
    * @return string[]
    */

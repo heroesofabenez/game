@@ -11,7 +11,7 @@ use HeroesofAbenez\Orm\Npc as NPCEntity,
  *
  * @author Jakub Konečný
  */
-class NPC {
+final class NPC {
   use \Nette\SmartObject;
   
   /** @var ORM */

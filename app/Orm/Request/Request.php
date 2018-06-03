@@ -15,7 +15,7 @@ namespace HeroesofAbenez\Orm;
  * @property-read string $sentAt {virtual}
  * @property string $status {enum self::STATUS_*} {default self::STATUS_NEW}
  */
-class Request extends \Nextras\Orm\Entity\Entity {
+final class Request extends \Nextras\Orm\Entity\Entity {
   public const TYPE_GUILD_JOIN = "guild_join";
   public const TYPE_GUILD_APP = "guild_app";
   public const TYPE_GROUP_JOIN = "group_join";

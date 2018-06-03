@@ -8,7 +8,7 @@ namespace HeroesofAbenez\Presenters;
  *
  * @author Jakub Konečný
  */
-class EquipmentPresenter extends BasePresenter {
+final class EquipmentPresenter extends BasePresenter {
   /** @var \HeroesofAbenez\Model\Equipment */
   protected $model;
   /** @var \HeroesofAbenez\Model\Profile */

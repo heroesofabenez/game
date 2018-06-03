@@ -8,7 +8,7 @@ namespace HeroesofAbenez\Orm;
  *
  * @author Jakub Konečný
  */
-class PetTypesMapper extends \Nextras\Orm\Mapper\Mapper {
+final class PetTypesMapper extends \Nextras\Orm\Mapper\Mapper {
   
 }
 ?>

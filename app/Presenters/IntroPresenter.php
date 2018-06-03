@@ -8,7 +8,7 @@ namespace HeroesofAbenez\Presenters;
  *
  * @author Jakub Konečný
  */
-class IntroPresenter extends BasePresenter {
+final class IntroPresenter extends BasePresenter {
   /** @var int In which part of intro we are */
   protected $part;
   /** @var \HeroesofAbenez\Model\Intro */

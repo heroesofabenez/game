@@ -8,7 +8,7 @@ namespace HeroesofAbenez\Orm;
  *
  * @author Jakub Konečný
  */
-class SkillAttacksMapper extends \Nextras\Orm\Mapper\Mapper {
+final class SkillAttacksMapper extends \Nextras\Orm\Mapper\Mapper {
   /**
    * @return string
    */

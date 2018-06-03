@@ -11,7 +11,7 @@ use Nette\Application\UI\Form,
  *
  * @author Jakub Konečný
  */
-class CreateCharacterFormFactory extends BaseFormFactory {
+final class CreateCharacterFormFactory extends BaseFormFactory {
   /**
    * @param ICollection|\HeroesofAbenez\Orm\CharacterRace[] $races
    * @param ICollection|\HeroesofAbenez\Orm\CharacterClass[] $classes

@@ -12,7 +12,7 @@ use HeroesofAbenez\Orm\Model as ORM,
  *
  * @author Jakub Konečný
  */
-class Permissions {
+final class Permissions {
   use \Nette\SmartObject;
   
   /** @var ORM */

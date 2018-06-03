@@ -11,7 +11,7 @@ use Nette\Application\UI\Form,
  *
  * @author Jakub Konečný
  */
-class RenameGuildFormFactory extends BaseFormFactory {
+final class RenameGuildFormFactory extends BaseFormFactory {
   /** @var \HeroesofAbenez\Model\Guild */
   protected $model;
   /** @var \Nette\Security\User */

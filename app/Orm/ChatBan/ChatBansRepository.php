@@ -8,7 +8,7 @@ namespace HeroesofAbenez\Orm;
  *
  * @author Jakub Konečný
  */
-class ChatBansRepository extends \Nextras\Orm\Repository\Repository {
+final class ChatBansRepository extends \Nextras\Orm\Repository\Repository {
   /**
    * @return string[]
    */

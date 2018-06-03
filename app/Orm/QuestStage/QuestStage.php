@@ -24,7 +24,7 @@ use Nextras\Orm\Relationships\OneHasMany;
  * @property OneHasMany|ChatMessage[] $chatMessages {1:m ChatMessage::$stage}
  * @property OneHasMany|Character[] $characters {1:m Character::$currentStage}
  */
-class QuestStage extends \Nextras\Orm\Entity\Entity {
+final class QuestStage extends \Nextras\Orm\Entity\Entity {
   
 }
 ?>

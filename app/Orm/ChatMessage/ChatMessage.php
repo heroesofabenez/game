@@ -16,7 +16,7 @@ namespace HeroesofAbenez\Orm;
  * @property \DateTimeImmutable $when
  * @property string $whenS {virtual}
  */
-class ChatMessage extends \Nextras\Orm\Entity\Entity {
+final class ChatMessage extends \Nextras\Orm\Entity\Entity {
   protected function getterWhenS(): string {
     return $this->when->format("Y-m-d H:i:s");
   }

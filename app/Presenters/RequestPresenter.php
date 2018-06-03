@@ -14,7 +14,7 @@ use HeroesofAbenez\Model\RequestNotFoundException,
  *
  * @author Jakub Konečný
  */
-class RequestPresenter extends BasePresenter {
+final class RequestPresenter extends BasePresenter {
   /** @var \HeroesofAbenez\Model\Request */
   protected $model;
   

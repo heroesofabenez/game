@@ -10,7 +10,7 @@ use Nextras\Orm\Collection\ICollection;
  *
  * @author Jakub Konečný
  */
-class ShopItemsRepository extends \Nextras\Orm\Repository\Repository {
+final class ShopItemsRepository extends \Nextras\Orm\Repository\Repository {
   /**
    * @return string[]
    */

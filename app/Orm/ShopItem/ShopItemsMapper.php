@@ -8,7 +8,7 @@ namespace HeroesofAbenez\Orm;
  *
  * @author Jakub Konečný
  */
-class ShopItemsMapper extends \Nextras\Orm\Mapper\Mapper {
+final class ShopItemsMapper extends \Nextras\Orm\Mapper\Mapper {
   
 }
 ?>

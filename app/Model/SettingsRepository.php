@@ -9,7 +9,7 @@ namespace HeroesofAbenez\Model;
  * @author Jakub Konečný
  * @property-read array $settings
  */
-class SettingsRepository {
+final class SettingsRepository {
   /** @var array */
   protected $settings = [];
   

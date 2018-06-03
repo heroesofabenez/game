@@ -26,7 +26,7 @@ use Nextras\Orm\Relationships\OneHasMany,
  * @property OneHasMany|Introduction[] $intro {1:m Introduction::$race}
  * @property OneHasMany|PveArenaOpponent[] $arenaNpcs {1:m PveArenaOpponent::$race}
  */
-class CharacterRace extends \Nextras\Orm\Entity\Entity {
+final class CharacterRace extends \Nextras\Orm\Entity\Entity {
   protected const MAX_STATS = 99;
   
   protected function setterStrength(int $value): int {

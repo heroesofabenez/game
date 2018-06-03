@@ -13,7 +13,7 @@ use Nette\Utils\Image,
  *
  * @author Jakub Konečný
  */
-class MapDrawer {
+final class MapDrawer {
   use \Nette\SmartObject;
   
   /** @var Location */

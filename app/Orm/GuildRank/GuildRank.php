@@ -15,7 +15,7 @@ use Nextras\Orm\Relationships\OneHasMany;
  * @property OneHasMany|GuildPrivilege[] $privileges {1:m GuildPrivilege::$rank}
  * @property OneHasMany|Character[] $characters {1:m Character::$guildrank}
  */
-class GuildRank extends \Nextras\Orm\Entity\Entity {
+final class GuildRank extends \Nextras\Orm\Entity\Entity {
   public function __toString() {
     return (string) $this->id;
   }

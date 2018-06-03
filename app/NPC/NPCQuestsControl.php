@@ -17,7 +17,7 @@ use HeroesofAbenez\Model,
  * @property-read \Nette\Bridges\ApplicationLatte\Template $template
  * @property-write Npc $npc
  */
-class NPCQuestsControl extends \Nette\Application\UI\Control {
+final class NPCQuestsControl extends \Nette\Application\UI\Control {
   /** @var \HeroesofAbenez\Model\Quest */
   protected $questModel;
   /** @var \HeroesofAbenez\Model\Item */

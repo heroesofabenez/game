@@ -11,7 +11,7 @@ use HeroesofAbenez\Orm\Equipment as EquipmentEntity,
  *
  * @author Jakub Konečný
  */
-class Equipment {
+final class Equipment {
   use \Nette\SmartObject;
   
   /** @var ORM */

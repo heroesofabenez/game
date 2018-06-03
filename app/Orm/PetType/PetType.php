@@ -21,7 +21,7 @@ use Nextras\Orm\Relationships\OneHasMany,
  * @property int $cost {default 0}
  * @property OneHasMany|Pet[] $pets {1:m Pet::$type}
  */
-class PetType extends \Nextras\Orm\Entity\Entity {
+final class PetType extends \Nextras\Orm\Entity\Entity {
   public const STAT_STR = "str";
   public const STAT_DEX = "dex";
   public const STAT_CON = "con";

@@ -16,7 +16,7 @@ use HeroesofAbenez\Orm\CharacterRace,
    * @author Jakub Konečný
    * @property-write \Nette\Security\User $user
    */
-class Profile {
+final class Profile {
   use \Nette\SmartObject;
   
   /** @var ORM */

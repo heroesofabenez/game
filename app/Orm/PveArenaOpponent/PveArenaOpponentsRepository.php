@@ -8,7 +8,7 @@ namespace HeroesofAbenez\Orm;
  *
  * @author Jakub Konečný
  */
-class PveArenaOpponentsRepository extends \Nextras\Orm\Repository\Repository {
+final class PveArenaOpponentsRepository extends \Nextras\Orm\Repository\Repository {
   /**
    * @return string[]
    */

@@ -10,7 +10,7 @@ use HeroesofAbenez\Model;
    * 
    * @author Jakub Konečný
    */
-class HomepagePresenter extends BasePresenter {
+final class HomepagePresenter extends BasePresenter {
   /** @var \HeroesofAbenez\Model\Location */
   protected $model;
   

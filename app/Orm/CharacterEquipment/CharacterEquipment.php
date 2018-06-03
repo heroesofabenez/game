@@ -13,7 +13,7 @@ namespace HeroesofAbenez\Orm;
  * @property int $amount {default 1}
  * @property bool $worn {default 0}
  */
-class CharacterEquipment extends \Nextras\Orm\Entity\Entity {
+final class CharacterEquipment extends \Nextras\Orm\Entity\Entity {
   
 }
 ?>

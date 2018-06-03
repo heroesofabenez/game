@@ -52,7 +52,7 @@ use Nextras\Orm\Relationships\OneHasMany,
  * @property OneHasMany|CharacterAttackSkill[] $attackSkills {1:m CharacterAttackSkill::$character}
  * @property OneHasMany|CharacterSpecialSkill[] $specialSkills {1:m CharacterSpecialSkill::$character}
  */
-class Character extends \Nextras\Orm\Entity\Entity {
+final class Character extends \Nextras\Orm\Entity\Entity {
   public const GENDER_MALE = "male";
   public const GENDER_FEMALE = "female";
   

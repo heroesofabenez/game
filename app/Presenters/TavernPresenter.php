@@ -11,7 +11,7 @@ use Nette\Application\UI\Form,
  *
  * @author Jakub Konečný
  */
-class TavernPresenter extends BasePresenter {
+final class TavernPresenter extends BasePresenter {
   protected function startup(): void {
     parent::startup();
     $this->template->haveForm = true;

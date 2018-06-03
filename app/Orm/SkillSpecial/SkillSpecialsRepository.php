@@ -10,7 +10,7 @@ use Nextras\Orm\Collection\ICollection;
  *
  * @author Jakub Konečný
  */
-class SkillSpecialsRepository extends \Nextras\Orm\Repository\Repository {
+final class SkillSpecialsRepository extends \Nextras\Orm\Repository\Repository {
   /**
    * @return string[]
    */

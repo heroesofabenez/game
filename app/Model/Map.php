@@ -8,7 +8,7 @@ namespace HeroesofAbenez\Model;
  *
  * @author Jakub Konečný
  */
-class Map {
+final class Map {
   use \Nette\SmartObject;
   
   /** @var \HeroesofAbenez\Model\Location */

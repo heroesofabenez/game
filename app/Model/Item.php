@@ -11,9 +11,8 @@ use HeroesofAbenez\Orm\Item as ItemEntity,
  * Item Model
  *
  * @author Jakub Konečný
- * @property-write \Nette\Application\LinkGenerator $linkGenerator
  */
-class Item {
+final class Item {
   use \Nette\SmartObject;
   
   /** @var ORM */

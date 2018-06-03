@@ -11,7 +11,7 @@ use HeroesofAbenez\Utils\Arrays;
  *
  * @author Jakub Konečný
  */
-class GuildsRankingControl extends RankingControl {
+final class GuildsRankingControl extends RankingControl {
   /** @var \HeroesofAbenez\Model\Guild */
   protected $model;
   

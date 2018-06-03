@@ -9,7 +9,7 @@ namespace HeroesofAbenez\Model;
  *
  * @author Jakub Konečný
  */
-class ProductionUserToCharacterMapper implements IUserToCharacterMapper {
+final class ProductionUserToCharacterMapper implements IUserToCharacterMapper {
   public function getRealId(): int {
     $ch = curl_init("http://heroesofabenez.tk/auth.php");
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);

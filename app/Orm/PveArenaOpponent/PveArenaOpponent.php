@@ -22,7 +22,7 @@ use Nexendrie\Utils\Numbers;
  * @property int $charisma
  * @property Equipment|NULL $weapon {m:1 Equipment::$arenaNpcs}
  */
-class PveArenaOpponent extends \Nextras\Orm\Entity\Entity {
+final class PveArenaOpponent extends \Nextras\Orm\Entity\Entity {
   public const GENDER_MALE = "male";
   public const GENDER_FEMALE = "female";
   

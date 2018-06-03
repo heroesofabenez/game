@@ -36,7 +36,7 @@ use Nextras\Orm\Relationships\OneHasMany,
  * @property OneHasMany|SkillAttack[] $attackSkills {1:m SkillAttack::$neededClass}
  * @property OneHasMany|SkillSpecial[] $specialSkills {1:m SkillSpecial::$neededClass}
  */
-class CharacterClass extends \Nextras\Orm\Entity\Entity {
+final class CharacterClass extends \Nextras\Orm\Entity\Entity {
   protected const MAX_STATS = 99;
   
   protected function setterStrength(int $value): int {

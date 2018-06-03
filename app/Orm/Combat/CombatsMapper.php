@@ -8,7 +8,7 @@ namespace HeroesofAbenez\Orm;
  *
  * @author Jakub Konečný
  */
-class CombatsMapper extends \Nextras\Orm\Mapper\Mapper {
+final class CombatsMapper extends \Nextras\Orm\Mapper\Mapper {
   
 }
 ?>

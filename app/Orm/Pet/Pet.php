@@ -15,7 +15,7 @@ namespace HeroesofAbenez\Orm;
  * @property-read string $bonusStat {virtual}
  * @property-read int $bonusValue {virtual}
  */
-class Pet extends \Nextras\Orm\Entity\Entity {
+final class Pet extends \Nextras\Orm\Entity\Entity {
   protected function getterBonusStat(): string {
     return $this->type->bonusStat;
   }

@@ -11,7 +11,7 @@ use HeroesofAbenez\Orm\Model as ORM,
  *
  * @author Jakub Konečný
  */
-class NextrasOrmAdapter implements IDatabaseAdapter {
+final class NextrasOrmAdapter implements IDatabaseAdapter {
   /** @var ORM */
   protected $orm;
   /** @var \Nette\Security\User */

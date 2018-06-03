@@ -10,7 +10,7 @@ use Nexendrie\Utils\Constants;
  *
  * @author Jakub Konečný
  */
-class Karma {
+final class Karma {
   use \Nette\StaticClass;
   
   public const KARMA_WHITE = "white";

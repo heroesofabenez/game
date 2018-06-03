@@ -3,12 +3,12 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Presenters;
 
-  /**
-   * Presenter Profile
-   * 
-   * @author Jakub Konečný
-   */
-class ProfilePresenter extends BasePresenter {
+/**
+ * Presenter Profile
+ *
+ * @author Jakub Konečný
+ */
+final class ProfilePresenter extends BasePresenter {
   /** @var \HeroesofAbenez\Model\Profile */
   protected $model;
   /** @var \HeroesofAbenez\Model\Guild */

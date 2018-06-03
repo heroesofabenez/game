@@ -15,7 +15,7 @@ use Nette\Localization\ITranslator,
  * @property-read \Nette\Bridges\ApplicationLatte\Template $template
  * @property-write Npc $npc
  */
-class NPCShopControl extends \Nette\Application\UI\Control {
+final class NPCShopControl extends \Nette\Application\UI\Control {
   /** @var ORM */
   protected $orm;
   /** @var \HeroesofAbenez\Model\Item */

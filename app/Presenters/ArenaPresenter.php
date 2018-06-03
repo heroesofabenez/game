@@ -10,7 +10,7 @@ use HeroesofAbenez\Arena;
  *
  * @author Jakub Konečný
  */
-class ArenaPresenter extends BasePresenter {
+final class ArenaPresenter extends BasePresenter {
   /** @var int */
   protected $min_level = 3;
   

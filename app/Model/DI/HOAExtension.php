@@ -13,7 +13,7 @@ use HeroesofAbenez,
  *
  * @author Jakub Konečný
  */
-class HOAExtension extends \Nette\DI\CompilerExtension {
+final class HOAExtension extends \Nette\DI\CompilerExtension {
   protected $defaults = [
     "application" => [
       "server" => "",

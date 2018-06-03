@@ -16,7 +16,7 @@ use HeroesofAbenez\Orm\Model as ORM,
  * @property-write \Nette\Security\User $user
  * @property-write NPC $npcModel
  */
-class Location {
+final class Location {
   use \Nette\SmartObject;
   
   /** @var \Nette\Caching\Cache */

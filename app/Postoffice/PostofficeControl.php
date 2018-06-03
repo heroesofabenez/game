@@ -13,7 +13,7 @@ use HeroesofAbenez\Orm\Model as ORM,
  * @author Jakub Konečný
  * @property-read \Nette\Bridges\ApplicationLatte\Template $template
  */
-class PostofficeControl extends \Nette\Application\UI\Control {
+final class PostofficeControl extends \Nette\Application\UI\Control {
   /** @var ORM */
   protected $orm;
   /** @var \Nette\Security\User */

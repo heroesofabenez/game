@@ -8,7 +8,7 @@ namespace HeroesofAbenez\Orm;
  *
  * @author Jakub Konečný
  */
-class GuildPrivilegesRepository extends \Nextras\Orm\Repository\Repository {
+final class GuildPrivilegesRepository extends \Nextras\Orm\Repository\Repository {
   /**
    * @return string[]
    */

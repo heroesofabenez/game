@@ -13,7 +13,7 @@ use HeroesofAbenez\Orm\PetType,
  * @author Jakub Konečný
  * @property-write \Nette\Security\User $user
  */
-class Pet {
+final class Pet {
   use \Nette\SmartObject;
   
   /** @var ORM */

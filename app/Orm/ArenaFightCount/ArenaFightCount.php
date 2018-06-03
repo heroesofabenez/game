@@ -12,7 +12,7 @@ namespace HeroesofAbenez\Orm;
  * @property string $day
  * @property int $amount {default 1}
  */
-class ArenaFightCount extends \Nextras\Orm\Entity\Entity {
+final class ArenaFightCount extends \Nextras\Orm\Entity\Entity {
   
 }
 ?>

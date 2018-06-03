@@ -8,7 +8,7 @@ namespace HeroesofAbenez\Orm;
  *
  * @author Jakub Konečný
  */
-class EquipmentMapper extends \Nextras\Orm\Mapper\Mapper {
+final class EquipmentMapper extends \Nextras\Orm\Mapper\Mapper {
   public function getTableName(): string {
     return "equipment";
   }

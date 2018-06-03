@@ -10,7 +10,7 @@ use Nette\Application\UI\Form;
  *
  * @author Jakub Konečný
  */
-class DissolveGuildFormFactory extends BaseFormFactory {
+final class DissolveGuildFormFactory extends BaseFormFactory {
   /** @var \HeroesofAbenez\Model\Guild */
   protected $model;
   /** @var \Nette\Security\User */

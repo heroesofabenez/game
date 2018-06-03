@@ -10,7 +10,7 @@ use HeroesofAbenez\Orm\Model as ORM;
  *
  * @author Jakub Konečný
  */
-class Intro {
+final class Intro {
   use \Nette\SmartObject;
   
   /** @var \Nette\Security\User */

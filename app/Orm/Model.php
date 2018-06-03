@@ -42,7 +42,7 @@ namespace HeroesofAbenez\Orm;
  * @property-read CharacterAttackSkillsRepository $characterAttackSkills
  * @property-read CharacterSpecialSkillsRepository $characterSpecialSkills
  */
-class Model extends \Nextras\Orm\Model\Model {
+final class Model extends \Nextras\Orm\Model\Model {
   
 }
 ?>

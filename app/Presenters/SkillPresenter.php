@@ -8,7 +8,7 @@ namespace HeroesofAbenez\Presenters;
  *
  * @author Jakub Konečný
  */
-class SkillPresenter extends BasePresenter {
+final class SkillPresenter extends BasePresenter {
   /** @var \HeroesofAbenez\Model\Skills */
   protected $model;
   

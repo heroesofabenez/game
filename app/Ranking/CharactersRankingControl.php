@@ -11,7 +11,7 @@ use HeroesofAbenez\Orm\Model as ORM,
  * 
  * @author Jakub Konečný
  */
-class CharactersRankingControl extends RankingControl {
+final class CharactersRankingControl extends RankingControl {
   /** @var ORM */
   protected $orm;
   

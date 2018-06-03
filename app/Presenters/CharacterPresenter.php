@@ -12,7 +12,7 @@ use HeroesofAbenez\Forms\CreateCharacterFormFactory,
    * 
    * @author Jakub Konečný
    */
-class CharacterPresenter extends BasePresenter {
+final class CharacterPresenter extends BasePresenter {
   /** @var \HeroesofAbenez\Model\Profile */
   protected $model;
   /** @var \HeroesofAbenez\Model\UserManager */

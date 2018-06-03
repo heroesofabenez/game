@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Utils;
 
-class Arrays {
+final class Arrays {
   use \Nette\StaticClass;
   
   /**

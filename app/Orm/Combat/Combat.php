@@ -11,7 +11,7 @@ namespace HeroesofAbenez\Orm;
  * @property string $text
  * @property int $when
  */
-class Combat extends \Nextras\Orm\Entity\Entity {
+final class Combat extends \Nextras\Orm\Entity\Entity {
   public function onBeforeInsert() {
     $this->when = time();
   }

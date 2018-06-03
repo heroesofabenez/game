@@ -23,7 +23,7 @@ use Nextras\Orm\Relationships\OneHasMany,
  * @property OneHasMany|RoutesArea[] $routesIncoming {1:m RoutesArea::$to}
  * @property OneHasMany|ChatMessage[] $chatMessages {1:m ChatMessage::$area}
  */
-class QuestArea extends \Nextras\Orm\Entity\Entity {
+final class QuestArea extends \Nextras\Orm\Entity\Entity {
   protected function setterRequiredLevel(int $value): int {
     return Numbers::range($value, 0, 99);
   }

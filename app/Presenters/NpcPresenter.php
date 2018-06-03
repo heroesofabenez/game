@@ -16,7 +16,7 @@ use HeroesofAbenez\NPC\INPCDialogueControlFactory,
  *
  * @author Jakub Konečný
  */
-class NpcPresenter extends BasePresenter {
+final class NpcPresenter extends BasePresenter {
   /** @var \HeroesofAbenez\Model\NPC */
   protected $model;
   /** @var Npc */

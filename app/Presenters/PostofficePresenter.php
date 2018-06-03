@@ -11,7 +11,7 @@ use HeroesofAbenez\Postoffice\{IPostofficeControlFactory,PostofficeControl};
  *
  * @author Jakub Konečný
  */
-class PostofficePresenter extends BasePresenter {
+final class PostofficePresenter extends BasePresenter {
   /** @var IPostofficeControlFactory */
   protected $poFactory;
   

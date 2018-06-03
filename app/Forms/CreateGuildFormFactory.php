@@ -11,7 +11,7 @@ use Nette\Application\UI\Form,
  *
  * @author Jakub Konečný
  */
-class CreateGuildFormFactory extends BaseFormFactory {
+final class CreateGuildFormFactory extends BaseFormFactory {
   /** @var \HeroesofAbenez\Model\Guild */
   protected $model;
   

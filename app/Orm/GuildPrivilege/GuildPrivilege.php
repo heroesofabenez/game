@@ -11,7 +11,7 @@ namespace HeroesofAbenez\Orm;
  * @property string $action
  * @property GuildRank $rank {m:1 GuildRank::$privileges}
  */
-class GuildPrivilege extends \Nextras\Orm\Entity\Entity {
+final class GuildPrivilege extends \Nextras\Orm\Entity\Entity {
   
 }
 ?>

@@ -12,7 +12,7 @@ namespace HeroesofAbenez\Orm;
  * @property Quest $quest {m:1 Quest::$characterQuests}
  * @property int $progress {default 1}
  */
-class CharacterQuest extends \Nextras\Orm\Entity\Entity {
+final class CharacterQuest extends \Nextras\Orm\Entity\Entity {
   
 }
 ?>

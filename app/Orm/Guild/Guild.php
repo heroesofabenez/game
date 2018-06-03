@@ -18,7 +18,7 @@ use Nextras\Orm\Relationships\OneHasMany;
  * @property OneHasMany|ChatMessage[] $chatMessages {1:m ChatMessage::$guild}
  * @property-read Character|NULL $leader {virtual}
  */
-class Guild extends \Nextras\Orm\Entity\Entity {
+final class Guild extends \Nextras\Orm\Entity\Entity {
   protected function getterLeader(): ?Character {
     return $this->members->get()->getBy([
       "guildrank" => 7

@@ -5,12 +5,12 @@ namespace HeroesofAbenez\Presenters;
 
 use HeroesofAbenez\Ranking;
 
-  /**
-   * Presenter Ranking
-   * 
-   * @author Jakub Konečný
-   */
-class RankingPresenter extends BasePresenter {
+/**
+ * Presenter Ranking
+ *
+ * @author Jakub Konečný
+ */
+final class RankingPresenter extends BasePresenter {
   protected const ITEMS_PER_PAGE = 15;
   /** @var \Nette\Utils\Paginator */
   protected $paginator;

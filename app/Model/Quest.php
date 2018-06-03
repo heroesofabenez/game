@@ -12,7 +12,7 @@ use Nette\Utils\Arrays,
  * 
  * @author Jakub Konečný
  */
-class Quest {
+final class Quest {
   use \Nette\SmartObject;
   
   /** @var ORM */

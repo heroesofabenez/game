@@ -11,7 +11,7 @@ use HeroesofAbenez\Orm\Model as ORM,
  *
  * @author Jakub Konečný
  */
-class LocationCommand extends \HeroesofAbenez\Chat\ChatCommand {
+final class LocationCommand extends \HeroesofAbenez\Chat\ChatCommand {
   /** @var \Nette\Security\User */
   protected $user;
   /** @var ORM */

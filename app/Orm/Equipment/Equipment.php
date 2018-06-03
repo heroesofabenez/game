@@ -23,7 +23,7 @@ use Nextras\Orm\Relationships\OneHasMany;
  * @property OneHasMany|CharacterEquipment[] $characterEquipment {1:m CharacterEquipment::$item}
  * @property bool $worn Is the item worn? {virtual}
  */
-class Equipment extends \Nextras\Orm\Entity\Entity {
+final class Equipment extends \Nextras\Orm\Entity\Entity {
   protected function setterType(string $value): ?string {
     if($this->slot !== \HeroesofAbenez\Combat\Equipment::SLOT_WEAPON) {
       return NULL;

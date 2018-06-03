@@ -11,7 +11,7 @@ use HeroesofAbenez\Model\StageNotFoundException,
    * 
    * @author Jakub Konečný
    */
-class TravelPresenter extends BasePresenter {
+final class TravelPresenter extends BasePresenter {
   /** @var \HeroesofAbenez\Model\Location */
   protected $model;
   

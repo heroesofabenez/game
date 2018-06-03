@@ -27,7 +27,7 @@ use Nextras\Orm\Relationships\OneHasMany,
  * @property int $duration
  * @property OneHasMany|CharacterSpecialSkill[] $characterSkills {1:m CharacterSpecialSkill::$skill}
  */
-class SkillSpecial extends \Nextras\Orm\Entity\Entity {
+final class SkillSpecial extends \Nextras\Orm\Entity\Entity {
   /** @internal */
   public const STAT_MAX_HITPOINTS = CharacterDummy::STAT_MAX_HITPOINTS;
   /** @internal */

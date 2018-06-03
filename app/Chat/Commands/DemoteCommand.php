@@ -18,7 +18,7 @@ use HeroesofAbenez\Model\Guild,
  *
  * @author Jakub Konečný
  */
-class DemoteCommand extends \HeroesofAbenez\Chat\ChatCommand {
+final class DemoteCommand extends \HeroesofAbenez\Chat\ChatCommand {
   /** @var Guild */
   protected $model;
   /** @var ITranslator */

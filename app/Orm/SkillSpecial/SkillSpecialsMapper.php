@@ -8,7 +8,7 @@ namespace HeroesofAbenez\Orm;
  *
  * @author Jakub Konečný
  */
-class SkillSpecialsMapper extends \Nextras\Orm\Mapper\Mapper {
+final class SkillSpecialsMapper extends \Nextras\Orm\Mapper\Mapper {
   public function getTableName(): string {
     return "skills_specials";
   }

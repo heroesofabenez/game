@@ -8,7 +8,7 @@ namespace HeroesofAbenez\Orm;
  *
  * @author Jakub Konečný
  */
-class GuildRanksMapper extends \Nextras\Orm\Mapper\Mapper {
+final class GuildRanksMapper extends \Nextras\Orm\Mapper\Mapper {
   
 }
 ?>
