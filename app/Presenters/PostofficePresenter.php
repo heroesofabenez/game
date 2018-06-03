@@ -3,8 +3,8 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Presenters;
 
-use Nette\Application\UI\Form,
-    HeroesofAbenez\Postoffice;
+use Nette\Application\UI\Form;
+use HeroesofAbenez\Postoffice\{IPostofficeControlFactory,PostofficeControl};
 
 /**
  * Presenter Postoffice
@@ -12,8 +12,12 @@ use Nette\Application\UI\Form,
  * @author Jakub Konečný
  */
 class PostofficePresenter extends BasePresenter {
-  /** @var Postoffice\IPostofficeControlFactory @autowire */
+  /** @var IPostofficeControlFactory */
   protected $poFactory;
+  
+  public function injectPoFactory(IPostofficeControlFactory $factory): void {
+    $this->poFactory = $factory;
+  }
   
   public function renderNew(): void {
     $this->template->haveForm = true;
@@ -29,7 +33,7 @@ class PostofficePresenter extends BasePresenter {
     $this->template->id = $id;
   }
   
-  protected function createComponentPostoffice(): Postoffice\PostofficeControl {
+  protected function createComponentPostoffice(): PostofficeControl {
     return $this->poFactory->create();
   }
   

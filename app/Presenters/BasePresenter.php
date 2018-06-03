@@ -12,13 +12,20 @@ use Nexendrie\Menu\IMenuControlFactory,
    * @author Jakub Konečný
    */
 abstract class BasePresenter extends \Nette\Application\UI\Presenter {
-  /** @var \Nette\Localization\ITranslator @autowire */
+  /** @var \Nette\Localization\ITranslator */
   protected $translator;
-  /** @var \HeroesofAbenez\Model\SettingsRepository @autowire */
+  /** @var \HeroesofAbenez\Model\SettingsRepository */
   protected $sr;
   
-  use \Kdyby\Autowired\AutowireProperties;
   use \Kdyby\Autowired\AutowireComponentFactories;
+  
+  public function injectTranslator(\Nette\Localization\ITranslator $translator): void {
+    $this->translator = $translator;
+  }
+  
+  public function injectSettingsRepository(\HeroesofAbenez\Model\SettingsRepository $sr): void {
+    $this->sr = $sr;
+  }
   
   /**
    * Login user and set server number for template
