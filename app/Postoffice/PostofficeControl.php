@@ -3,9 +3,9 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Postoffice;
 
-use HeroesofAbenez\Orm\Model as ORM,
-    Nextras\Orm\Collection\ICollection,
-    HeroesofAbenez\Orm\Message;
+use HeroesofAbenez\Orm\Model as ORM;
+use Nextras\Orm\Collection\ICollection;
+use HeroesofAbenez\Orm\Message;
 
 /**
  * Postoffice Control

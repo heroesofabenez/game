@@ -3,8 +3,8 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Forms;
 
-use Nette\Application\UI\Form,
-    Nette\Localization\ITranslator;
+use Nette\Application\UI\Form;
+use Nette\Localization\ITranslator;
 
 /**
  * BaseFormFactory

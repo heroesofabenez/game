@@ -3,9 +3,9 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Model;
 
-use HeroesofAbenez\Orm\Request as RequestEntity,
-    Nette\NotImplementedException,
-    HeroesofAbenez\Orm\Model as ORM;
+use HeroesofAbenez\Orm\Request as RequestEntity;
+use Nette\NotImplementedException;
+use HeroesofAbenez\Orm\Model as ORM;
 
 /**
  * Request Model

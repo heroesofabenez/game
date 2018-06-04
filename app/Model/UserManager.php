@@ -3,9 +3,9 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Model;
 
-use Nette\Security as NS,
-    HeroesofAbenez\Orm\Model as ORM,
-    HeroesofAbenez\Orm\Character;
+use Nette\Security as NS;
+use HeroesofAbenez\Orm\Model as ORM;
+use HeroesofAbenez\Orm\Character;
 
   /**
    * Authenticator for the game

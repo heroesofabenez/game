@@ -3,11 +3,11 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Model;
 
-use Tester\Assert,
-    HeroesofAbenez\Orm\CharacterRace,
-    HeroesofAbenez\Orm\CharacterClass,
-    HeroesofAbenez\Orm\CharacterSpecialization,
-    Nextras\Orm\Collection\ICollection;
+use Tester\Assert;
+use HeroesofAbenez\Orm\CharacterRace;
+use HeroesofAbenez\Orm\CharacterClass;
+use HeroesofAbenez\Orm\CharacterSpecialization;
+use Nextras\Orm\Collection\ICollection;
 
 require __DIR__ . "/../../bootstrap.php";
 

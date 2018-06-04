@@ -3,12 +3,12 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Model;
 
-use HeroesofAbenez\Orm\CharacterRace,
-    HeroesofAbenez\Orm\CharacterClass,
-    HeroesofAbenez\Orm\Model as ORM,
-    HeroesofAbenez\Orm\CharacterSpecialization,
-    Nextras\Orm\Entity\IEntity,
-    Nextras\Orm\Collection\ICollection;
+use HeroesofAbenez\Orm\CharacterRace;
+use HeroesofAbenez\Orm\CharacterClass;
+use HeroesofAbenez\Orm\Model as ORM;
+use HeroesofAbenez\Orm\CharacterSpecialization;
+use Nextras\Orm\Entity\IEntity;
+use Nextras\Orm\Collection\ICollection;
 
   /**
    * Model Profile

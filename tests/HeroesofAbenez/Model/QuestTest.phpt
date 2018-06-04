@@ -3,8 +3,8 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Model;
 
-use Tester\Assert,
-    HeroesofAbenez\Orm\QuestDummy as QuestEntity;
+use Tester\Assert;
+use HeroesofAbenez\Orm\QuestDummy as QuestEntity;
 
 require __DIR__ . "/../../bootstrap.php";
 

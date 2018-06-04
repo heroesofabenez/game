@@ -1,8 +1,8 @@
 <?php
 declare(strict_types=1);
 
-use Nette\Neon\Neon,
-    Nextras\Dbal\Utils\FileImporter;
+use Nette\Neon\Neon;
+use Nextras\Dbal\Utils\FileImporter;
 
 require __DIR__ . "/../vendor/autoload.php";
 

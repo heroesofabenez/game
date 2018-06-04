@@ -3,16 +3,16 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Arena;
 
-use Nette\Security\User,
-    HeroesofAbenez\Orm\Model as ORM,
-    HeroesofAbenez\Model\CombatLogManager,
-    HeroesofAbenez\Combat\CombatLogger,
-    Nette\Localization\ITranslator,
-    HeroesofAbenez\Combat\Character,
-    HeroesofAbenez\Combat\CombatBase,
-    HeroesofAbenez\Model\CombatHelper,
-    HeroesofAbenez\Model\OpponentNotFoundException,
-    Nextras\Orm\Collection\ICollection;
+use Nette\Security\User;
+use HeroesofAbenez\Orm\Model as ORM;
+use HeroesofAbenez\Model\CombatLogManager;
+use HeroesofAbenez\Combat\CombatLogger;
+use Nette\Localization\ITranslator;
+use HeroesofAbenez\Combat\Character;
+use HeroesofAbenez\Combat\CombatBase;
+use HeroesofAbenez\Model\CombatHelper;
+use HeroesofAbenez\Model\OpponentNotFoundException;
+use Nextras\Orm\Collection\ICollection;
 
 /**
  * Basic Arena Control

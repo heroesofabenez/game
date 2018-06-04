@@ -3,9 +3,9 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Model;
 
-use Tester\Assert,
-    Nextras\Orm\Collection\ICollection,
-    HeroesofAbenez\Orm\Pet as PetEntity;
+use Tester\Assert;
+use Nextras\Orm\Collection\ICollection;
+use HeroesofAbenez\Orm\Pet as PetEntity;
 
 require __DIR__ . "/../../bootstrap.php";
 

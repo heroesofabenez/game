@@ -3,10 +3,10 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Model\DI;
 
-use HeroesofAbenez,
-    Nette\Utils\Validators,
-    HeroesofAbenez\Model\IUserToCharacterMapper,
-    HeroesofAbenez\Model\DevelopmentUserToCharacterMapper;
+use HeroesofAbenez;
+use Nette\Utils\Validators;
+use HeroesofAbenez\Model\IUserToCharacterMapper;
+use HeroesofAbenez\Model\DevelopmentUserToCharacterMapper;
 
 /**
  * HOA Extension

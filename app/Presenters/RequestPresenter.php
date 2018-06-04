@@ -3,11 +3,11 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Presenters;
 
-use HeroesofAbenez\Model\RequestNotFoundException,
-    HeroesofAbenez\Model\CannotSeeRequestException,
-    HeroesofAbenez\Model\CannotAcceptRequestException,
-    HeroesofAbenez\Model\CannotDeclineRequestException,
-    HeroesofAbenez\Model\RequestAlreadyHandledException;
+use HeroesofAbenez\Model\RequestNotFoundException;
+use HeroesofAbenez\Model\CannotSeeRequestException;
+use HeroesofAbenez\Model\CannotAcceptRequestException;
+use HeroesofAbenez\Model\CannotDeclineRequestException;
+use HeroesofAbenez\Model\RequestAlreadyHandledException;
 
 /**
  * Presenter Request

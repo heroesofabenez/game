@@ -3,8 +3,8 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Model;
 
-use HeroesofAbenez\Orm\Model as ORM,
-    HeroesofAbenez\Orm\Combat as CombatEntity;
+use HeroesofAbenez\Orm\Model as ORM;
+use HeroesofAbenez\Orm\Combat as CombatEntity;
 
 /**
  * Combat Log

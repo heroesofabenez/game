@@ -3,9 +3,9 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Orm;
 
-use Nextras\Orm\Relationships\OneHasMany,
-    HeroesofAbenez\Utils\Karma,
-    Nexendrie\Utils\Numbers;
+use Nextras\Orm\Relationships\OneHasMany;
+use HeroesofAbenez\Utils\Karma;
+use Nexendrie\Utils\Numbers;
 
 /**
  * Character

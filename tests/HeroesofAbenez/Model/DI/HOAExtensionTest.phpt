@@ -5,10 +5,10 @@ namespace HeroesofAbenez\Model\DI;
 
 require __DIR__ . "/../../../bootstrap.php";
 
-use Tester\Assert,
-    HeroesofAbenez\Model\IUserToCharacterMapper,
-    HeroesofAbenez\Model\TestingUserToCharacterMapper,
-    HeroesofAbenez\Model\DevelopmentUserToCharacterMapper;
+use Tester\Assert;
+use HeroesofAbenez\Model\IUserToCharacterMapper;
+use HeroesofAbenez\Model\TestingUserToCharacterMapper;
+use HeroesofAbenez\Model\DevelopmentUserToCharacterMapper;
 
 final class HOAExtensionTest extends \Tester\TestCase {
   use \Testbench\TCompiledContainer;

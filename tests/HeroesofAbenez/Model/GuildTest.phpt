@@ -3,9 +3,9 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Model;
 
-use Tester\Assert,
-    HeroesofAbenez\Orm\Guild as GuildEntity,
-    Nextras\Orm\Collection\ICollection;
+use Tester\Assert;
+use HeroesofAbenez\Orm\Guild as GuildEntity;
+use Nextras\Orm\Collection\ICollection;
 
 require __DIR__ . "/../../bootstrap.php";
 

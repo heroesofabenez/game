@@ -3,9 +3,9 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Presenters;
 
-use HeroesofAbenez\Forms\CreateCharacterFormFactory,
-    Nette\Application\UI\Form,
-    Nextras\Orm\Collection\ICollection;
+use HeroesofAbenez\Forms\CreateCharacterFormFactory;
+use Nette\Application\UI\Form;
+use Nextras\Orm\Collection\ICollection;
 
   /**
    * Presenter Character

@@ -3,9 +3,8 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Forms;
 
-use Nette\Application\UI\Form,
-    HeroesofAbenez\Model\MissingPermissionsException;
-
+use Nette\Application\UI\Form;
+use HeroesofAbenez\Model\MissingPermissionsException;
 
 /**
  * Factory for form CustomGuildRankNames

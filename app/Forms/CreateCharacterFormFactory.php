@@ -3,8 +3,8 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Forms;
 
-use Nette\Application\UI\Form,
-    Nextras\Orm\Collection\ICollection;
+use Nette\Application\UI\Form;
+use Nextras\Orm\Collection\ICollection;
 
 /**
  * Factory for form CreateCharacter

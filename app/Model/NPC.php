@@ -3,8 +3,8 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Model;
 
-use HeroesofAbenez\Orm\Npc as NPCEntity,
-    HeroesofAbenez\Orm\Model as ORM;
+use HeroesofAbenez\Orm\Npc as NPCEntity;
+use HeroesofAbenez\Orm\Model as ORM;
 
 /**
  * Npc model

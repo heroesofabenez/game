@@ -3,13 +3,13 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Chat\Commands;
 
-use HeroesofAbenez\Model\Guild,
-    HeroesofAbenez\Model\NotInGuildException,
-    HeroesofAbenez\Model\MissingPermissionsException,
-    HeroesofAbenez\Model\PlayerNotFoundException,
-    HeroesofAbenez\Model\PlayerNotInGuildException,
-    HeroesofAbenez\Model\CannotKickHigherRanksException,
-    Nette\Localization\ITranslator;
+use HeroesofAbenez\Model\Guild;
+use HeroesofAbenez\Model\NotInGuildException;
+use HeroesofAbenez\Model\MissingPermissionsException;
+use HeroesofAbenez\Model\PlayerNotFoundException;
+use HeroesofAbenez\Model\PlayerNotInGuildException;
+use HeroesofAbenez\Model\CannotKickHigherRanksException;
+use Nette\Localization\ITranslator;
 
 /**
  * Chat Command Kick

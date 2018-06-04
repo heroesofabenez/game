@@ -3,9 +3,9 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Model;
 
-use HeroesofAbenez\Orm\Item as ItemEntity,
-    HeroesofAbenez\Orm\Model as ORM,
-    HeroesofAbenez\Orm\CharacterItem;
+use HeroesofAbenez\Orm\Item as ItemEntity;
+use HeroesofAbenez\Orm\Model as ORM;
+use HeroesofAbenez\Orm\CharacterItem;
 
 /**
  * Item Model

@@ -3,11 +3,11 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Model;
 
-use HeroesofAbenez\Orm\Request as RequestEntity,
-    HeroesofAbenez\Orm\Guild as GuildEntity,
-    HeroesofAbenez\Orm\Model as ORM,
-    HeroesofAbenez\Orm\GuildRankCustom,
-    Nextras\Orm\Collection\ICollection;
+use HeroesofAbenez\Orm\Request as RequestEntity;
+use HeroesofAbenez\Orm\Guild as GuildEntity;
+use HeroesofAbenez\Orm\Model as ORM;
+use HeroesofAbenez\Orm\GuildRankCustom;
+use Nextras\Orm\Collection\ICollection;
 
   /**
    * Model Guild

@@ -3,8 +3,8 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Model;
 
-use HeroesofAbenez\Orm\Equipment as EquipmentEntity,
-    HeroesofAbenez\Orm\Model as ORM;
+use HeroesofAbenez\Orm\Equipment as EquipmentEntity;
+use HeroesofAbenez\Orm\Model as ORM;
 
 /**
  * Equipment Model

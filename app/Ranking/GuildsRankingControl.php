@@ -5,7 +5,6 @@ namespace HeroesofAbenez\Ranking;
 
 use HeroesofAbenez\Utils\Arrays;
 
-
 /**
  * Guilds Ranking Control
  *

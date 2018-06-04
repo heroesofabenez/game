@@ -3,8 +3,8 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Orm;
 
-use Nextras\Orm\Relationships\OneHasMany,
-    Nexendrie\Utils\Numbers;
+use Nextras\Orm\Relationships\OneHasMany;
+use Nexendrie\Utils\Numbers;
 
 /**
  * QuestArea

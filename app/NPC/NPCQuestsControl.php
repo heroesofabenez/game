@@ -3,12 +3,12 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\NPC;
 
-use HeroesofAbenez\Model,
-    Nette\Localization\ITranslator,
-    HeroesofAbenez\Orm\Npc,
-    HeroesofAbenez\Orm\QuestDummy as QuestEntity,
-    HeroesofAbenez\Orm\Model as ORM,
-    HeroesofAbenez\Orm\CharacterQuest;
+use HeroesofAbenez\Model;
+use Nette\Localization\ITranslator;
+use HeroesofAbenez\Orm\Npc;
+use HeroesofAbenez\Orm\QuestDummy as QuestEntity;
+use HeroesofAbenez\Orm\Model as ORM;
+use HeroesofAbenez\Orm\CharacterQuest;
 
 /**
  * NPC Quests Control

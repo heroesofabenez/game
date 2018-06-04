@@ -3,9 +3,9 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Model;
 
-use Nette\Utils\Arrays,
-    HeroesofAbenez\Orm\QuestDummy as QuestEntity,
-    HeroesofAbenez\Orm\Model as ORM;
+use Nette\Utils\Arrays;
+use HeroesofAbenez\Orm\QuestDummy as QuestEntity;
+use HeroesofAbenez\Orm\Model as ORM;
 
 /**
  * Quest Model

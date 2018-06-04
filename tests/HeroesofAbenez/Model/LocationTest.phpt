@@ -3,10 +3,10 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Model;
 
-use Tester\Assert,
-    HeroesofAbenez\Orm\QuestArea,
-    HeroesofAbenez\Orm\QuestStage,
-    Nextras\Orm\Collection\ICollection;
+use Tester\Assert;
+use HeroesofAbenez\Orm\QuestArea;
+use HeroesofAbenez\Orm\QuestStage;
+use Nextras\Orm\Collection\ICollection;
 
 require __DIR__ . "/../../bootstrap.php";
 

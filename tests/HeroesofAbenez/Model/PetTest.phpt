@@ -3,9 +3,9 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Model;
 
-use Tester\Assert,
-    HeroesofAbenez\Orm\Pet as PetEntity,
-    HeroesofAbenez\Orm\PetType;
+use Tester\Assert;
+use HeroesofAbenez\Orm\Pet as PetEntity;
+use HeroesofAbenez\Orm\PetType;
 
 require __DIR__ . "/../../bootstrap.php";
 

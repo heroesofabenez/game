@@ -3,10 +3,10 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\NPC;
 
-use Nette\Localization\ITranslator,
-    HeroesofAbenez\Orm\Item,
-    HeroesofAbenez\Orm\Npc,
-    HeroesofAbenez\Orm\Model as ORM;
+use Nette\Localization\ITranslator;
+use HeroesofAbenez\Orm\Item;
+use HeroesofAbenez\Orm\Npc;
+use HeroesofAbenez\Orm\Model as ORM;
 
 /**
  * Shop Control

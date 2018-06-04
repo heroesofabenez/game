@@ -3,10 +3,10 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Orm;
 
-use Nextras\Orm\Relationships\OneHasMany,
-    Nextras\Orm\Entity\ToArrayConverter,
-    HeroesofAbenez\Combat\SkillSpecial as SkillSpecialDummy,
-    HeroesofAbenez\Combat\Character as CharacterDummy;
+use Nextras\Orm\Relationships\OneHasMany;
+use Nextras\Orm\Entity\ToArrayConverter;
+use HeroesofAbenez\Combat\SkillSpecial as SkillSpecialDummy;
+use HeroesofAbenez\Combat\Character as CharacterDummy;
 
 /**
  * SkillSpecial

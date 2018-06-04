@@ -3,16 +3,16 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Model;
 
-use Nette\Utils\Arrays,
-    HeroesofAbenez\Orm\Model as ORM,
-    HeroesofAbenez\Combat\BaseSkill,
-    HeroesofAbenez\Combat\SkillAttack,
-    HeroesofAbenez\Combat\SkillSpecial,
-    HeroesofAbenez\Combat\BaseCharacterSkill,
-    HeroesofAbenez\Combat\CharacterAttackSkill as CharacterAttackSkillDummy,
-    HeroesofAbenez\Combat\CharacterSpecialSkill as CharacterSpecialSkillDummy,
-    HeroesofAbenez\Orm\CharacterAttackSkill,
-    HeroesofAbenez\Orm\CharacterSpecialSkill;
+use Nette\Utils\Arrays;
+use HeroesofAbenez\Orm\Model as ORM;
+use HeroesofAbenez\Combat\BaseSkill;
+use HeroesofAbenez\Combat\SkillAttack;
+use HeroesofAbenez\Combat\SkillSpecial;
+use HeroesofAbenez\Combat\BaseCharacterSkill;
+use HeroesofAbenez\Combat\CharacterAttackSkill as CharacterAttackSkillDummy;
+use HeroesofAbenez\Combat\CharacterSpecialSkill as CharacterSpecialSkillDummy;
+use HeroesofAbenez\Orm\CharacterAttackSkill;
+use HeroesofAbenez\Orm\CharacterSpecialSkill;
 
 /**
  * Skills Model

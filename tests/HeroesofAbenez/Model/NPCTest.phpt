@@ -3,8 +3,8 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Model;
 
-use Tester\Assert,
-    HeroesofAbenez\Orm\Npc as NpcEntity;
+use Tester\Assert;
+use HeroesofAbenez\Orm\Npc as NpcEntity;
 
 require __DIR__ . "/../../bootstrap.php";
 

@@ -3,8 +3,8 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Chat;
 
-use HeroesofAbenez\Orm\Model as ORM,
-    HeroesofAbenez\Orm\ChatMessage as ChatMessageEntity;
+use HeroesofAbenez\Orm\Model as ORM;
+use HeroesofAbenez\Orm\ChatMessage as ChatMessageEntity;
 
 /**
  * NextrasOrmAdapter

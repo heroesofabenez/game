@@ -3,9 +3,9 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Model;
 
-use HeroesofAbenez\Orm\Model as ORM,
-    HeroesofAbenez\Orm\GuildRank,
-    HeroesofAbenez\Orm\GuildPrivilege;
+use HeroesofAbenez\Orm\Model as ORM;
+use HeroesofAbenez\Orm\GuildRank;
+use HeroesofAbenez\Orm\GuildPrivilege;
 
 /**
  * Permissions Model

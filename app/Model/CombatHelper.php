@@ -3,13 +3,13 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Model;
 
-use HeroesofAbenez\Combat\Character,
-    HeroesofAbenez\Combat\CharacterAttackSkill,
-    HeroesofAbenez\Combat\CharacterSpecialSkill,
-    HeroesofAbenez\Orm\Model as ORM,
-    HeroesofAbenez\Orm\ArenaFightCount,
-    Nextras\Orm\Entity\IEntity,
-    HeroesofAbenez\Combat\BaseCharacterSkill;
+use HeroesofAbenez\Combat\Character;
+use HeroesofAbenez\Combat\CharacterAttackSkill;
+use HeroesofAbenez\Combat\CharacterSpecialSkill;
+use HeroesofAbenez\Orm\Model as ORM;
+use HeroesofAbenez\Orm\ArenaFightCount;
+use Nextras\Orm\Entity\IEntity;
+use HeroesofAbenez\Combat\BaseCharacterSkill;
 
 /**
  * Combat Helper

@@ -3,8 +3,8 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Model;
 
-use Tester\Assert,
-    Nette\Security\Identity;
+use Tester\Assert;
+use Nette\Security\Identity;
 
 require __DIR__ . "/../../bootstrap.php";
 

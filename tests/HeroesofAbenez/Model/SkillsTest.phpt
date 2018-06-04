@@ -3,12 +3,12 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Model;
 
-use Tester\Assert,
-    HeroesofAbenez\Combat\SkillAttack,
-    HeroesofAbenez\Combat\SkillSpecial,
-    HeroesofAbenez\Combat\CharacterAttackSkill,
-    HeroesofAbenez\Combat\CharacterSpecialSkill,
-    HeroesofAbenez\Combat\BaseCharacterSkill;
+use Tester\Assert;
+use HeroesofAbenez\Combat\SkillAttack;
+use HeroesofAbenez\Combat\SkillSpecial;
+use HeroesofAbenez\Combat\CharacterAttackSkill;
+use HeroesofAbenez\Combat\CharacterSpecialSkill;
+use HeroesofAbenez\Combat\BaseCharacterSkill;
 
 require __DIR__ . "/../../bootstrap.php";
 

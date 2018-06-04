@@ -4,23 +4,23 @@ declare(strict_types=1);
 namespace HeroesofAbenez\Presenters;
 
 use HeroesofAbenez\Forms\CustomGuildRankNamesFormFactory;
-use Nette\Application\UI\Form,
-    HeroesofAbenez\Model\GuildNotFoundException,
-    HeroesofAbenez\Model\NotInGuildException,
-    HeroesofAbenez\Model\GrandmasterCannotLeaveGuildException,
-    HeroesofAbenez\Model\MissingPermissionsException,
-    HeroesofAbenez\Model\PlayerNotFoundException,
-    HeroesofAbenez\Model\PlayerNotInGuildException,
-    HeroesofAbenez\Model\CannotPromoteHigherRanksException,
-    HeroesofAbenez\Model\CannotPromoteToGrandmasterException,
-    HeroesofAbenez\Model\CannotHaveMoreDeputiesException,
-    HeroesofAbenez\Model\CannotDemoteHigherRanksException,
-    HeroesofAbenez\Model\CannotDemoteLowestRankException,
-    HeroesofAbenez\Model\CannotKickHigherRanksException,
-    HeroesofAbenez\Forms\CreateGuildFormFactory,
-    HeroesofAbenez\Forms\RenameGuildFormFactory,
-    HeroesofAbenez\Forms\GuildDescriptionFormFactory,
-    HeroesofAbenez\Forms\DissolveGuildFormFactory;
+use Nette\Application\UI\Form;
+use HeroesofAbenez\Model\GuildNotFoundException;
+use HeroesofAbenez\Model\NotInGuildException;
+use HeroesofAbenez\Model\GrandmasterCannotLeaveGuildException;
+use HeroesofAbenez\Model\MissingPermissionsException;
+use HeroesofAbenez\Model\PlayerNotFoundException;
+use HeroesofAbenez\Model\PlayerNotInGuildException;
+use HeroesofAbenez\Model\CannotPromoteHigherRanksException;
+use HeroesofAbenez\Model\CannotPromoteToGrandmasterException;
+use HeroesofAbenez\Model\CannotHaveMoreDeputiesException;
+use HeroesofAbenez\Model\CannotDemoteHigherRanksException;
+use HeroesofAbenez\Model\CannotDemoteLowestRankException;
+use HeroesofAbenez\Model\CannotKickHigherRanksException;
+use HeroesofAbenez\Forms\CreateGuildFormFactory;
+use HeroesofAbenez\Forms\RenameGuildFormFactory;
+use HeroesofAbenez\Forms\GuildDescriptionFormFactory;
+use HeroesofAbenez\Forms\DissolveGuildFormFactory;
 
   /**
    * Presenter Guild

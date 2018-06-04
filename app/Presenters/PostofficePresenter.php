@@ -4,7 +4,8 @@ declare(strict_types=1);
 namespace HeroesofAbenez\Presenters;
 
 use Nette\Application\UI\Form;
-use HeroesofAbenez\Postoffice\{IPostofficeControlFactory,PostofficeControl};
+use HeroesofAbenez\Postoffice\IPostofficeControlFactory;
+use HeroesofAbenez\Postoffice\PostofficeControl;
 
 /**
  * Presenter Postoffice

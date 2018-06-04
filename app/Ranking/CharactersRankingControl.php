@@ -3,8 +3,8 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Ranking;
 
-use HeroesofAbenez\Orm\Model as ORM,
-    Nextras\Orm\Collection\ICollection;
+use HeroesofAbenez\Orm\Model as ORM;
+use Nextras\Orm\Collection\ICollection;
 
 /**
  * Characters Ranking Control

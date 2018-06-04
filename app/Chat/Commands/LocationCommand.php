@@ -3,8 +3,8 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Chat\Commands;
 
-use HeroesofAbenez\Orm\Model as ORM,
-    Nette\Localization\ITranslator;
+use HeroesofAbenez\Orm\Model as ORM;
+use Nette\Localization\ITranslator;
 
 /**
  * Chat Command Location

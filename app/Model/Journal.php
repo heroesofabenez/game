@@ -3,9 +3,9 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Model;
 
-use HeroesofAbenez\Orm\Pet as PetEntity,
-    HeroesofAbenez\Orm\Model as ORM,
-    Nextras\Orm\Collection\ICollection;
+use HeroesofAbenez\Orm\Pet as PetEntity;
+use HeroesofAbenez\Orm\Model as ORM;
+use Nextras\Orm\Collection\ICollection;
 
 /**
  * Journal Model

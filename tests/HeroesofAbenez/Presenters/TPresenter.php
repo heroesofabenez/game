@@ -3,8 +3,8 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Presenters;
 
-use Tester\Assert,
-    Nette\Application\Responses\ForwardResponse;
+use Tester\Assert;
+use Nette\Application\Responses\ForwardResponse;
 
 /**
  * TPresenter

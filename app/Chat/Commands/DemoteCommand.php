@@ -3,15 +3,15 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Chat\Commands;
 
-use HeroesofAbenez\Model\Guild,
-    HeroesofAbenez\Model\NotInGuildException,
-    HeroesofAbenez\Model\MissingPermissionsException,
-    HeroesofAbenez\Model\PlayerNotFoundException,
-    HeroesofAbenez\Model\PlayerNotInGuildException,
-    HeroesofAbenez\Model\CannotDemoteHigherRanksException,
-    HeroesofAbenez\Model\CannotDemoteLowestRankException,
-    HeroesofAbenez\Model\CannotPromoteToGrandmasterException,
-    Nette\Localization\ITranslator;
+use HeroesofAbenez\Model\Guild;
+use HeroesofAbenez\Model\NotInGuildException;
+use HeroesofAbenez\Model\MissingPermissionsException;
+use HeroesofAbenez\Model\PlayerNotFoundException;
+use HeroesofAbenez\Model\PlayerNotInGuildException;
+use HeroesofAbenez\Model\CannotDemoteHigherRanksException;
+use HeroesofAbenez\Model\CannotDemoteLowestRankException;
+use HeroesofAbenez\Model\CannotPromoteToGrandmasterException;
+use Nette\Localization\ITranslator;
 
 /**
  * Chat Command Demote

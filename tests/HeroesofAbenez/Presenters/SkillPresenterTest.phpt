@@ -5,8 +5,8 @@ namespace HeroesofAbenez\Presenters;
 
 require __DIR__ . "/../../bootstrap.php";
 
-use Tester\Assert,
-    Nette\Application\BadRequestException;
+use Tester\Assert;
+use Nette\Application\BadRequestException;
 
 final class SkillPresenterTest extends \Tester\TestCase {
   use TPresenter;

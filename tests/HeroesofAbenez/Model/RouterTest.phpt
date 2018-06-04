@@ -3,10 +3,10 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Model;
 
-use Tester\Assert,
-    Nette\Application\IRouter,
-    Nette\Application\Routers\Route,
-    Nette\Application\Routers\RouteList;
+use Tester\Assert;
+use Nette\Application\IRouter;
+use Nette\Application\Routers\Route;
+use Nette\Application\Routers\RouteList;
 
 require __DIR__ . "/../../bootstrap.php";
 

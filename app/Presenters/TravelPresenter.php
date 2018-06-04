@@ -3,8 +3,8 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Presenters;
 
-use HeroesofAbenez\Model\StageNotFoundException,
-    HeroesofAbenez\Model\CannotTravelToStageException;
+use HeroesofAbenez\Model\StageNotFoundException;
+use HeroesofAbenez\Model\CannotTravelToStageException;
 
   /**
    * Presenter Travel

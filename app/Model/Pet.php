@@ -3,9 +3,9 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Model;
 
-use HeroesofAbenez\Orm\PetType,
-    HeroesofAbenez\Orm\Pet as PetEntity,
-    HeroesofAbenez\Orm\Model as ORM;
+use HeroesofAbenez\Orm\PetType;
+use HeroesofAbenez\Orm\Pet as PetEntity;
+use HeroesofAbenez\Orm\Model as ORM;
 
 /**
  * Pet Model

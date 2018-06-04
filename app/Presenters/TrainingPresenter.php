@@ -3,13 +3,13 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Presenters;
 
-use HeroesofAbenez\Model\InvalidStatException,
-    HeroesofAbenez\Model\NoStatPointsAvailableException,
-    HeroesofAbenez\Model\InvalidSkillTypeException,
-    HeroesofAbenez\Model\NoSkillPointsAvailableException,
-    HeroesofAbenez\Model\SkillNotFoundException,
-    HeroesofAbenez\Model\SkillMaxLevelReachedException,
-    HeroesofAbenez\Model\CannotLearnSkillException;
+use HeroesofAbenez\Model\InvalidStatException;
+use HeroesofAbenez\Model\NoStatPointsAvailableException;
+use HeroesofAbenez\Model\InvalidSkillTypeException;
+use HeroesofAbenez\Model\NoSkillPointsAvailableException;
+use HeroesofAbenez\Model\SkillNotFoundException;
+use HeroesofAbenez\Model\SkillMaxLevelReachedException;
+use HeroesofAbenez\Model\CannotLearnSkillException;
 
 /**
  * Presenter Training

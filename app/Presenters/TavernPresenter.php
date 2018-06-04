@@ -3,8 +3,8 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Presenters;
 
-use Nette\Application\UI\Form,
-    HeroesofAbenez\Chat;
+use Nette\Application\UI\Form;
+use HeroesofAbenez\Chat;
 
 /**
  * Presenter Tavern

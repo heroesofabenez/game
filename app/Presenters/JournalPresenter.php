@@ -3,15 +3,15 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Presenters;
 
-use HeroesofAbenez\Model\NotEnoughExperiencesException,
-    HeroesofAbenez\Model\ItemNotFoundException,
-    HeroesofAbenez\Model\ItemNotOwnedException,
-    HeroesofAbenez\Model\ItemAlreadyEquippedException,
-    HeroesofAbenez\Model\ItemNotWornException,
-    HeroesofAbenez\Model\PetNotFoundException,
-    HeroesofAbenez\Model\PetNotOwnedException,
-    HeroesofAbenez\Model\PetNotDeployedException,
-    HeroesofAbenez\Model\PetAlreadyDeployedException;
+use HeroesofAbenez\Model\NotEnoughExperiencesException;
+use HeroesofAbenez\Model\ItemNotFoundException;
+use HeroesofAbenez\Model\ItemNotOwnedException;
+use HeroesofAbenez\Model\ItemAlreadyEquippedException;
+use HeroesofAbenez\Model\ItemNotWornException;
+use HeroesofAbenez\Model\PetNotFoundException;
+use HeroesofAbenez\Model\PetNotOwnedException;
+use HeroesofAbenez\Model\PetNotDeployedException;
+use HeroesofAbenez\Model\PetAlreadyDeployedException;
 
 /**
  * Presenter Journal

@@ -3,10 +3,10 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Model;
 
-use Nette\Utils\Image,
-    HeroesofAbenez\Orm\QuestStage,
-    Nextras\Orm\Collection\ICollection,
-    HeroesofAbenez\Orm\RoutesStage;
+use Nette\Utils\Image;
+use HeroesofAbenez\Orm\QuestStage;
+use Nextras\Orm\Collection\ICollection;
+use HeroesofAbenez\Orm\RoutesStage;
 
 /**
  * Map Drawer Model

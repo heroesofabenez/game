@@ -3,11 +3,11 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Model;
 
-use HeroesofAbenez\Orm\Model as ORM,
-    HeroesofAbenez\Orm\QuestStage,
-    HeroesofAbenez\Orm\QuestArea,
-    HeroesofAbenez\Orm\RoutesStage,
-    Nextras\Orm\Collection\ICollection;
+use HeroesofAbenez\Orm\Model as ORM;
+use HeroesofAbenez\Orm\QuestStage;
+use HeroesofAbenez\Orm\QuestArea;
+use HeroesofAbenez\Orm\RoutesStage;
+use Nextras\Orm\Collection\ICollection;
 
 /**
  * Location Model

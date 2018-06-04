@@ -3,8 +3,8 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Model;
 
-use Tester\Assert,
-    HeroesofAbenez\Orm\Equipment as EquipmentEntity;
+use Tester\Assert;
+use HeroesofAbenez\Orm\Equipment as EquipmentEntity;
 
 require __DIR__ . "/../../bootstrap.php";
 

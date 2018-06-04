@@ -3,13 +3,13 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Presenters;
 
-use HeroesofAbenez\NPC\INPCDialogueControlFactory,
-    HeroesofAbenez\NPC\NPCDialogueControl,
-    HeroesofAbenez\NPC\INPCQuestsControlFactory,
-    HeroesofAbenez\NPC\NPCQuestsControl,
-    HeroesofAbenez\NPC\INPCShopControlFactory,
-    HeroesofAbenez\NPC\NPCShopControl,
-    HeroesofAbenez\Orm\Npc;
+use HeroesofAbenez\NPC\INPCDialogueControlFactory;
+use HeroesofAbenez\NPC\NPCDialogueControl;
+use HeroesofAbenez\NPC\INPCQuestsControlFactory;
+use HeroesofAbenez\NPC\NPCQuestsControl;
+use HeroesofAbenez\NPC\INPCShopControlFactory;
+use HeroesofAbenez\NPC\NPCShopControl;
+use HeroesofAbenez\Orm\Npc;
 
 /**
  * Presenter Npc

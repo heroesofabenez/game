@@ -3,10 +3,10 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Orm;
 
-use Nextras\Orm\Relationships\OneHasMany,
-    Nextras\Orm\Entity\ToArrayConverter,
-    HeroesofAbenez\Combat\SkillAttack as SkillAttackDummy,
-    Nexendrie\Utils\Numbers;
+use Nextras\Orm\Relationships\OneHasMany;
+use Nextras\Orm\Entity\ToArrayConverter;
+use HeroesofAbenez\Combat\SkillAttack as SkillAttackDummy;
+use Nexendrie\Utils\Numbers;
 
 /**
  * SkillAttack

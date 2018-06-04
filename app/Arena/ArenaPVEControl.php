@@ -3,10 +3,10 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Arena;
 
-use HeroesofAbenez\Combat\Character,
-    HeroesofAbenez\Model\OpponentNotFoundException,
-    Nextras\Orm\Collection\ICollection,
-    HeroesofAbenez\Orm\PveArenaOpponent;
+use HeroesofAbenez\Combat\Character;
+use HeroesofAbenez\Model\OpponentNotFoundException;
+use Nextras\Orm\Collection\ICollection;
+use HeroesofAbenez\Orm\PveArenaOpponent;
 
 /**
  *  PVE Arena Control
