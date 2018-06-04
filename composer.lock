@@ -12,12 +12,12 @@
             "source": {
                 "type": "git",
                 "url": "https://gitlab.com/heroesofabenez/chat.git",
-                "reference": "7e2f483e5f71fe9ee7ab598869fa48d4a28dd309"
+                "reference": "de34076d6f194ece3572af4e0cb517a6402ca757"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://gitlab.com/api/v4/projects/heroesofabenez%2Fchat/repository/archive.zip?sha=7e2f483e5f71fe9ee7ab598869fa48d4a28dd309",
-                "reference": "7e2f483e5f71fe9ee7ab598869fa48d4a28dd309",
+                "url": "https://gitlab.com/api/v4/projects/heroesofabenez%2Fchat/repository/archive.zip?sha=de34076d6f194ece3572af4e0cb517a6402ca757",
+                "reference": "de34076d6f194ece3572af4e0cb517a6402ca757",
                 "shasum": ""
             },
             "require": {
@@ -63,7 +63,7 @@
                 "component",
                 "nette"
             ],
-            "time": "2018-05-26T12:29:57+00:00"
+            "time": "2018-06-04T18:15:01+00:00"
         },
         {
             "name": "heroesofabenez/combat",
@@ -71,12 +71,12 @@
             "source": {
                 "type": "git",
                 "url": "https://gitlab.com/heroesofabenez/combat.git",
-                "reference": "a5d74c1f2addfd34a838436c0c4deec0c74716ef"
+                "reference": "843ccdb57e8a8bfbc6933032c2d5e0f22888b4b2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://gitlab.com/api/v4/projects/heroesofabenez%2Fcombat/repository/archive.zip?sha=a5d74c1f2addfd34a838436c0c4deec0c74716ef",
-                "reference": "a5d74c1f2addfd34a838436c0c4deec0c74716ef",
+                "url": "https://gitlab.com/api/v4/projects/heroesofabenez%2Fcombat/repository/archive.zip?sha=843ccdb57e8a8bfbc6933032c2d5e0f22888b4b2",
+                "reference": "843ccdb57e8a8bfbc6933032c2d5e0f22888b4b2",
                 "shasum": ""
             },
             "require": {
@@ -118,7 +118,7 @@
             "keywords": [
                 "combat"
             ],
-            "time": "2018-05-26T12:27:38+00:00"
+            "time": "2018-06-04T18:08:55+00:00"
         },
         {
             "name": "kdyby/autowired",
@@ -199,16 +199,16 @@
         },
         {
             "name": "latte/latte",
-            "version": "v2.4.7",
+            "version": "v2.4.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nette/latte.git",
-                "reference": "f989b018ec12f9492132515cd47f83f98429c513"
+                "reference": "95ca6bab6caaa3efa3b5d7d4537f9a45cb89ed90"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nette/latte/zipball/f989b018ec12f9492132515cd47f83f98429c513",
-                "reference": "f989b018ec12f9492132515cd47f83f98429c513",
+                "url": "https://api.github.com/repos/nette/latte/zipball/95ca6bab6caaa3efa3b5d7d4537f9a45cb89ed90",
+                "reference": "95ca6bab6caaa3efa3b5d7d4537f9a45cb89ed90",
                 "shasum": ""
             },
             "require": {
@@ -267,7 +267,7 @@
                 "template",
                 "twig"
             ],
-            "time": "2018-02-06T14:42:33+00:00"
+            "time": "2018-06-03T17:34:15+00:00"
         },
         {
             "name": "nette/application",
@@ -2141,12 +2141,12 @@
             "source": {
                 "type": "git",
                 "url": "https://gitlab.com/nexendrie/code-quality.git",
-                "reference": "ae196da439075efef36fd1b23b9d4a5c94827e4b"
+                "reference": "7660cb286833b53bd3632ae699564b2c51872941"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://gitlab.com/api/v4/projects/nexendrie%2Fcode-quality/repository/archive.zip?sha=ae196da439075efef36fd1b23b9d4a5c94827e4b",
-                "reference": "ae196da439075efef36fd1b23b9d4a5c94827e4b",
+                "url": "https://gitlab.com/api/v4/projects/nexendrie%2Fcode-quality/repository/archive.zip?sha=7660cb286833b53bd3632ae699564b2c51872941",
+                "reference": "7660cb286833b53bd3632ae699564b2c51872941",
                 "shasum": ""
             },
             "require": {
@@ -2175,7 +2175,7 @@
                 "quality",
                 "testing"
             ],
-            "time": "2018-04-20T11:06:53+00:00"
+            "time": "2018-06-04T17:36:29+00:00"
         },
         {
             "name": "nikic/php-parser",
