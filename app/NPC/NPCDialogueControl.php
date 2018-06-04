@@ -16,8 +16,8 @@ use HeroesofAbenez\Orm\Npc;
 final class NPCDialogueControl extends \Nette\Application\UI\Control {
   /** @var \Nette\Security\User */
   protected $user;
-  /** @var Npc|NULL */
-  protected $npc = NULL;
+  /** @var Npc|null */
+  protected $npc = null;
   
   public function __construct(\Nette\Security\User $user) {
     parent::__construct();

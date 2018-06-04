@@ -51,7 +51,7 @@ final class Karma {
     static::validateKarma($karma);
     switch($karma) {
       case static::KARMA_NEUTRAL:
-        return NULL;
+        return null;
       case static::KARMA_WHITE:
         return static::KARMA_DARK;
       case static::KARMA_DARK:

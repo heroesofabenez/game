@@ -16,7 +16,7 @@ use Nextras\Orm\Relationships\OneHasMany,
  * @property CharacterRace $race {m:1 CharacterRace::$characters}
  * @property string $gender {enum self::GENDER_*}
  * @property CharacterClass $occupation {m:1 CharacterClass::$characters}
- * @property CharacterSpecialization|NULL $specialization {m:1 CharacterSpecialization::$characters}
+ * @property CharacterSpecialization|null $specialization {m:1 CharacterSpecialization::$characters}
  * @property int $level {default 1}
  * @property int $money {default 0}
  * @property int $experience {default 0}
@@ -25,17 +25,17 @@ use Nextras\Orm\Relationships\OneHasMany,
  * @property float $constitution
  * @property float $intelligence
  * @property float $charisma
- * @property string|NULL $description
- * @property Guild|NULL $guild {m:1 Guild::$members} {default NULL}
- * @property GuildRank|NULL $guildrank {m:1 GuildRank::$characters} {default NULL}
+ * @property string|null $description
+ * @property Guild|null $guild {m:1 Guild::$members} {default null}
+ * @property GuildRank|null $guildrank {m:1 GuildRank::$characters} {default null}
  * @property int $owner
- * @property QuestStage|NULL $currentStage {m:1 QuestStage::$characters} {default NULL}
- * @property int|NULL $whiteKarma {default 0}
- * @property int|NULL $neutralKarma {default 0}
- * @property int|NULL $darkKarma {default 0}
+ * @property QuestStage|null $currentStage {m:1 QuestStage::$characters} {default null}
+ * @property int|null $whiteKarma {default 0}
+ * @property int|null $neutralKarma {default 0}
+ * @property int|null $darkKarma {default 0}
  * @property-read string $predominantKarma {virtual}
- * @property int|NULL $intro {default 1}
- * @property \DateTimeImmutable|NULL $joined
+ * @property int|null $intro {default 1}
+ * @property \DateTimeImmutable|null $joined
  * @property float $statPoints {default 0}
  * @property int $skillPoints {default 0}
  * @property OneHasMany|Request[] $sentRequests {1:m Request::$from}

@@ -13,9 +13,9 @@ use Nextras\Orm\Relationships\OneHasMany;
  * @property string $name
  * @property string $description
  * @property string $slot {enum \HeroesofAbenez\Combat\Equipment::SLOT_*}
- * @property string|NULL $type {enum \HeroesofAbenez\Combat\Equipment::TYPE_*}
+ * @property string|null $type {enum \HeroesofAbenez\Combat\Equipment::TYPE_*}
  * @property int $requiredLevel {default 1}
- * @property CharacterClass|NULL $requiredClass {m:1 CharacterClass::$equipment}
+ * @property CharacterClass|null $requiredClass {m:1 CharacterClass::$equipment}
  * @property int $price {default 0}
  * @property int $strength
  * @property int $durability
@@ -26,7 +26,7 @@ use Nextras\Orm\Relationships\OneHasMany;
 final class Equipment extends \Nextras\Orm\Entity\Entity {
   protected function setterType(string $value): ?string {
     if($this->slot !== \HeroesofAbenez\Combat\Equipment::SLOT_WEAPON) {
-      return NULL;
+      return null;
     }
     return $value;
   }

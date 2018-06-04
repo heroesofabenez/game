@@ -151,7 +151,7 @@ final class Profile {
     $return = [];
     $char = $this->orm->characters->getById($id);
     if(is_null($char)) {
-      return NULL;
+      return null;
     }
     $stats = [
       "id", "name", "gender", "level", "race", "description", "strength", "dexterity",
@@ -167,7 +167,7 @@ final class Profile {
     $return["guild"] = "";
     if(!is_null($char->guild)) {
       $return["guild"] = $char->guild->id;
-      $return["guildrank"] = (!is_null($char->guildrank)) ? $char->guildrank->id : NULL;
+      $return["guildrank"] = (!is_null($char->guildrank)) ? $char->guildrank->id : null;
     }
     $return["pet"] = $this->petModel->getActivePet($id);
     return $return;

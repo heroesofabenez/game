@@ -27,7 +27,7 @@ final class KickCommand extends \HeroesofAbenez\Chat\ChatCommand {
     $this->translator = $translator;
   }
   
-  public function execute(int $id = NULL): string {
+  public function execute(int $id = null): string {
     if(is_null($id)) {
       return "";
     }

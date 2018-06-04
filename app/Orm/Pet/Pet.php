@@ -9,7 +9,7 @@ namespace HeroesofAbenez\Orm;
  * @author Jakub Konečný
  * @property int $id {primary}
  * @property PetType $type {m:1 PetType::$pets}
- * @property string|NULL $name
+ * @property string|null $name
  * @property Character $owner {m:1 Character::$pets}
  * @property bool $deployed {default false}
  * @property-read string $bonusStat {virtual}

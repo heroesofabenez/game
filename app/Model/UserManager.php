@@ -53,7 +53,7 @@ final class UserManager implements NS\IAuthenticator {
     $data = [
       "name" => $char->name, "race" => $char->race->id, "gender" => $char->gender,
       "occupation" => $char->occupation->id,
-      "specialization" => (!is_null($char->specialization)) ? $char->specialization->id : NULL,
+      "specialization" => (!is_null($char->specialization)) ? $char->specialization->id : null,
       "level" => $char->level,  "stage" => $char->currentStage->id,
       "white_karma" => $char->whiteKarma, "neutral_karma" => $char->neutralKarma, "dark_karma" => $char->darkKarma
     ];
@@ -69,7 +69,7 @@ final class UserManager implements NS\IAuthenticator {
   /**
    * Creates new character
    *
-   * @return array|NULL Stats of new character
+   * @return array|null Stats of new character
    */
   public function create(array $values): ?array {
     $data = [
@@ -84,7 +84,7 @@ final class UserManager implements NS\IAuthenticator {
     
     $character = $this->orm->characters->getByName($data["name"]);
     if(!is_null($character)) {
-      return NULL;
+      return null;
     }
     
     $character = new Character();

@@ -50,7 +50,7 @@ final class Request {
           return true;
         }
         $leader = $this->orm->characters->getById($request->from->id);
-        $guild = (!is_null($leader->guild)) ? $leader->guild->id : NULL;
+        $guild = (!is_null($leader->guild)) ? $leader->guild->id : null;
         if($this->user->identity->guild == $guild AND $this->user->isAllowed("guild", "invite")) {
           return true;
         } else {
@@ -62,7 +62,7 @@ final class Request {
           return true;
         }
         $leader = $this->orm->characters->getById($request->to->id);
-        $guild = (!is_null($leader->guild)) ? $leader->guild->id : NULL;
+        $guild = (!is_null($leader->guild)) ? $leader->guild->id : null;
         if($this->user->identity->guild == $guild AND $this->user->isAllowed("guild", "invite")) {
           return true;
         } else {
@@ -85,7 +85,7 @@ final class Request {
       return true;
     }
     if($request->type == "guild_app") {
-      $guild = (!is_null($request->to->guild)) ? $request->to->guild->id : NULL;
+      $guild = (!is_null($request->to->guild)) ? $request->to->guild->id : null;
       if($this->user->identity->guild == $guild AND $this->user->isAllowed("guild", "invite")) {
         return true;
       } else {
@@ -143,12 +143,12 @@ final class Request {
         break;
       case RequestEntity::TYPE_GUILD_APP:
         $uid = $request->from->id;
-        $gid = (!is_null($request->to->guild)) ? $request->to->guild->id : NULL;
+        $gid = (!is_null($request->to->guild)) ? $request->to->guild->id : null;
         $this->guildModel->join($uid, $gid);
         break;
       case RequestEntity::TYPE_GUILD_JOIN:
         $uid = $request->to->id;
-        $gid = (!is_null($request->from->guild)) ? $request->from->guild->id : NULL;
+        $gid = (!is_null($request->from->guild)) ? $request->from->guild->id : null;
         $this->guildModel->join($uid, $gid);
         break;
     }

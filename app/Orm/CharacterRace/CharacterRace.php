@@ -12,7 +12,7 @@ use Nextras\Orm\Relationships\OneHasMany,
  * @author Jakub Konečný
  * @property int $id {primary}
  * @property string $name
- * @property string|NULL $description
+ * @property string|null $description
  * @property int $strength {default 0}
  * @property int $dexterity {default 0}
  * @property int $constitution {default 0}

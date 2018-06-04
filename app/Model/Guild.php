@@ -293,7 +293,7 @@ final class Guild {
     if($adminRole <= $character->guildrank->id) {
       throw new CannotKickHigherRanksException();
     }
-    $character->guild = $character->guildrank = NULL;
+    $character->guild = $character->guildrank = null;
     $this->orm->characters->persistAndFlush($character);
   }
   
@@ -312,7 +312,7 @@ final class Guild {
     }
     /** @var \HeroesofAbenez\Orm\Character $character */
     $character = $this->orm->characters->getById($this->user->id);
-    $character->guild = $character->guildrank = NULL;
+    $character->guild = $character->guildrank = null;
     $this->orm->characters->persistAndFlush($character);
   }
   
@@ -322,7 +322,7 @@ final class Guild {
   public function dissolve(int $id): void {
     $guild = $this->orm->guilds->getById($id);
     foreach($guild->members as $member) {
-      $member->guild = $member->guildrank = NULL;
+      $member->guild = $member->guildrank = null;
       $this->orm->characters->persist($member);
     }
     $guild = $this->orm->guilds->getById($id);

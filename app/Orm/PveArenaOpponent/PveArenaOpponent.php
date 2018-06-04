@@ -20,7 +20,7 @@ use Nexendrie\Utils\Numbers;
  * @property int $constitution
  * @property int $intelligence
  * @property int $charisma
- * @property Equipment|NULL $weapon {m:1 Equipment::$arenaNpcs}
+ * @property Equipment|null $weapon {m:1 Equipment::$arenaNpcs}
  */
 final class PveArenaOpponent extends \Nextras\Orm\Entity\Entity {
   public const GENDER_MALE = "male";

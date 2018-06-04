@@ -59,7 +59,7 @@ final class Quest {
    */
   public function view(int $id): ?QuestEntity {
     $quests = $this->listOfQuests();
-    return Arrays::get($quests, $id, NULL);
+    return Arrays::get($quests, $id, null);
   }
   
   /**

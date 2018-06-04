@@ -55,7 +55,7 @@ final class Skills {
   
   public function getAttackSkill(int $id): ?SkillAttack {
     $skills = $this->getListOfAttackSkills();
-    return Arrays::get($skills, $id, NULL);
+    return Arrays::get($skills, $id, null);
   }
   
   public function getCharacterAttackSkill(int $skillId, int $userId = 0): ?CharacterAttackSkillDummy {
@@ -64,7 +64,7 @@ final class Skills {
     }
     $skill = $this->getAttackSkill($skillId);
     if(is_null($skill)) {
-      return NULL;
+      return null;
     }
     $row = $this->orm->characterAttackSkills->getByCharacterAndSkill($userId, $skillId);
     $level = 0;
@@ -94,7 +94,7 @@ final class Skills {
   
   public function getSpecialSkill(int $id): ?SkillSpecial {
     $skills = $this->getListOfSpecialSkills();
-    return Arrays::get($skills, $id, NULL);
+    return Arrays::get($skills, $id, null);
   }
   
   public function getCharacterSpecialSkill(int $skillId, int $userId = 0): ?CharacterSpecialSkillDummy {
@@ -103,7 +103,7 @@ final class Skills {
     }
     $skill = $this->getSpecialSkill($skillId);
     if(is_null($skill)) {
-      return NULL;
+      return null;
     }
     $row = $this->orm->characterSpecialSkills->getByCharacterAndSkill($userId, $skillId);
     $level = 0;

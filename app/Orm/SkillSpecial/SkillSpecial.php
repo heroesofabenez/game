@@ -16,11 +16,11 @@ use Nextras\Orm\Relationships\OneHasMany,
  * @property string $name
  * @property string $description
  * @property CharacterClass $neededClass {m:1 CharacterClass::$specialSkills}
- * @property CharacterSpecialization|NULL $neededSpecialization {m:1 CharacterSpecialization::$specialSkills}
+ * @property CharacterSpecialization|null $neededSpecialization {m:1 CharacterSpecialization::$specialSkills}
  * @property int $neededLevel
  * @property string $type {enum SkillSpecialDummy::TYPE_*}
  * @property string $target {enum SkillSpecialDummy::TARGET_*}
- * @property string|NULL $stat {enum static::STAT_*}
+ * @property string|null $stat {enum static::STAT_*}
  * @property int $value {default 0}
  * @property int $valueGrowth
  * @property int $levels
@@ -43,7 +43,7 @@ final class SkillSpecial extends \Nextras\Orm\Entity\Entity {
   
   protected function setterStat(?string $value): ?string {
     if(in_array($value, SkillSpecialDummy::NO_STAT_TYPES, true)) {
-      return NULL;
+      return null;
     }
     return $value;
   }

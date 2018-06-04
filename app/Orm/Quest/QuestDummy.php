@@ -12,14 +12,14 @@ namespace HeroesofAbenez\Orm;
  * @property-read string $introduction
  * @property-read string $endText
  * @property-read int $costMoney
- * @property-read int|NULL $neededItem
- * @property-read int|NULL $neededQuest
- * @property-read int|NULL $neededLevel
+ * @property-read int|null $neededItem
+ * @property-read int|null $neededQuest
+ * @property-read int|null $neededLevel
  * @property-read int $itemAmount
  * @property-read bool $itemLose
  * @property-read int $rewardMoney
  * @property-read int $rewardXp
- * @property-read int|NULL $rewardItem
+ * @property-read int|null $rewardItem
  * @property-read int $npcStart
  * @property-read int $npcEnd
  * @property-read int $order
@@ -38,12 +38,12 @@ final class QuestDummy {
   protected $endText;
   /** @var int */
   protected $costMoney = 0;
-  /** @var int|NULL */
+  /** @var int|null */
   protected $neededLevel = 0;
-  /** @var int|NULL */
-  protected $neededQuest = NULL;
-  /** @var int|NULL */
-  protected $neededItem = NULL;
+  /** @var int|null */
+  protected $neededQuest = null;
+  /** @var int|null */
+  protected $neededItem = null;
   /** @var int */
   protected $itemAmount;
   /** @var bool */
@@ -52,7 +52,7 @@ final class QuestDummy {
   protected $rewardMoney;
   /** @var int */
   protected $rewardXp;
-  /** @var int|NULL */
+  /** @var int|null */
   protected $rewardItem;
   /** @var int */
   protected $npcStart;
@@ -70,13 +70,13 @@ final class QuestDummy {
     $this->endText = $quest->endText;
     $this->costMoney = $quest->costMoney;
     $this->neededLevel = $quest->neededLevel;
-    $this->neededQuest = (!is_null($quest->neededQuest)) ? $quest->neededQuest->id : NULL;
-    $this->neededItem = (!is_null($quest->neededItem)) ? $quest->neededItem->id : NULL;
+    $this->neededQuest = (!is_null($quest->neededQuest)) ? $quest->neededQuest->id : null;
+    $this->neededItem = (!is_null($quest->neededItem)) ? $quest->neededItem->id : null;
     $this->itemAmount = $quest->itemAmount;
     $this->itemLose = $quest->itemLose;
     $this->rewardMoney = $quest->rewardMoney;
     $this->rewardXp = $quest->rewardXp;
-    $this->rewardItem = (!is_null($quest->rewardItem)) ? $quest->rewardItem->id : NULL;
+    $this->rewardItem = (!is_null($quest->rewardItem)) ? $quest->rewardItem->id : null;
     $this->npcStart = $quest->npcStart->id;
     $this->npcEnd = $quest->npcEnd->id;
     $this->order = $quest->order;

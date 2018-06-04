@@ -12,7 +12,7 @@ namespace HeroesofAbenez\Orm;
  * @property \DateTimeImmutable $since
  * @property \DateTimeImmutable $till
  * @property string $reason
- * @property \DateTimeImmutable|NULL $revoken {default NULL}
+ * @property \DateTimeImmutable|null $revoken {default null}
  */
 final class ChatBan extends \Nextras\Orm\Entity\Entity {
   public function onBeforeInsert() {

@@ -16,8 +16,8 @@ use Nextras\Orm\Relationships\OneHasMany,
  * @property int $bonusValue
  * @property string $image
  * @property int $requiredLevel
- * @property CharacterClass|NULL $requiredClass {m:1 CharacterClass::$petTypes}
- * @property CharacterRace|NULL $requiredRace {m:1 CharacterRace::$petTypes}
+ * @property CharacterClass|null $requiredClass {m:1 CharacterClass::$petTypes}
+ * @property CharacterRace|null $requiredRace {m:1 CharacterRace::$petTypes}
  * @property int $cost {default 0}
  * @property OneHasMany|Pet[] $pets {1:m Pet::$type}
  */

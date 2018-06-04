@@ -124,7 +124,7 @@ final class GuildPresenter extends BasePresenter {
     $this->template->haveForm = true;
   }
   
-  public function actionJoin(int $id = NULL): void {
+  public function actionJoin(int $id = null): void {
     $this->inGuild();
     if(is_null($id)) {
       return;
@@ -138,7 +138,7 @@ final class GuildPresenter extends BasePresenter {
     }
   }
   
-  public function renderJoin(int $id = NULL): void {
+  public function renderJoin(int $id = null): void {
     $guilds = $this->model->listOfGuilds();
     $this->template->guilds = $guilds;
     $apps = $this->model->haveUnresolvedApplication();

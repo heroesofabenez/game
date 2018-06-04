@@ -10,9 +10,9 @@ namespace HeroesofAbenez\Orm;
  * @property int $id {primary}
  * @property string $message
  * @property Character $character {m:1 Character::$chatMessages}
- * @property QuestArea|NULL $area {m:1 QuestArea::$chatMessages} {default NULL}
- * @property QuestStage|NULL $stage {m:1 QuestStage::$chatMessages} {default NULL}
- * @property Guild|NULL $guild {m:1 Guild::$chatMessages} {default NULL}
+ * @property QuestArea|null $area {m:1 QuestArea::$chatMessages} {default null}
+ * @property QuestStage|null $stage {m:1 QuestStage::$chatMessages} {default null}
+ * @property Guild|null $guild {m:1 Guild::$chatMessages} {default null}
  * @property \DateTimeImmutable $when
  * @property string $whenS {virtual}
  */

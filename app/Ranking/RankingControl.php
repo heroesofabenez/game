@@ -19,8 +19,8 @@ abstract class RankingControl extends \Nette\Application\UI\Control {
   protected $lastCol;
   /** @var string */
   protected $presenter;
-  /** @var \Nette\Utils\Paginator|NULL */
-  protected $paginator = NULL;
+  /** @var \Nette\Utils\Paginator|null */
+  protected $paginator = null;
   
   public function __construct(string $name, array $cols, string $presenter, string $lastCol) {
     parent::__construct();

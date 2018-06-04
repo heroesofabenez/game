@@ -13,11 +13,11 @@ use Nextras\Orm\Relationships\OneHasMany,
  * @property int $id {primary}
  * @property string $name
  * @property string $description
- * @property int|NULL $requiredLevel {default 0}
- * @property CharacterRace|NULL $requiredRace {m:1 CharacterRace::$areas}
- * @property CharacterClass|NULL $requiredOccupation {m:1 CharacterClass::$areas}
- * @property int|NULL $posX
- * @property int|NULL $posY
+ * @property int|null $requiredLevel {default 0}
+ * @property CharacterRace|null $requiredRace {m:1 CharacterRace::$areas}
+ * @property CharacterClass|null $requiredOccupation {m:1 CharacterClass::$areas}
+ * @property int|null $posX
+ * @property int|null $posY
  * @property OneHasMany|QuestStage[] $stages {1:m QuestStage::$area}
  * @property OneHasMany|RoutesArea[] $routesOutgoing {1:m RoutesArea::$from}
  * @property OneHasMany|RoutesArea[] $routesIncoming {1:m RoutesArea::$to}

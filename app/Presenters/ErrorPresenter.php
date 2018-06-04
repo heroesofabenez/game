@@ -11,10 +11,10 @@ use Tracy\ILogger;
  * @author Jakub Konečný
  */
 final class ErrorPresenter extends BasePresenter {
-  /** @var ILogger|NULL */
+  /** @var ILogger|null */
   private $logger;
   
-  public function __construct(ILogger $logger = NULL) {
+  public function __construct(ILogger $logger = null) {
     parent::__construct();
     $this->logger = $logger;
   }
