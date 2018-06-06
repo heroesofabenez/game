@@ -13,7 +13,7 @@ use Nextras\Orm\Relationships\OneHasMany;
  * @property string $name
  * @property string $description
  * @property string $slot {enum \HeroesofAbenez\Combat\Equipment::SLOT_*}
- * @property string|null $type {enum \HeroesofAbenez\Combat\Equipment::TYPE_*}
+ * @property string|null $type {enum \HeroesofAbenez\Combat\Weapon::TYPE_*}
  * @property int $requiredLevel {default 1}
  * @property CharacterClass|null $requiredClass {m:1 CharacterClass::$equipment}
  * @property int $price {default 0}
@@ -36,6 +36,9 @@ final class Equipment extends \Nextras\Orm\Entity\Entity {
     $stats = ["id", "name", "slot", "type", "strength", "worn",];
     foreach($stats as $stat) {
       $data[$stat] = $this->$stat;
+    }
+    if($data["slot"] === \HeroesofAbenez\Combat\Equipment::SLOT_WEAPON) {
+      return new \HeroesofAbenez\Combat\Weapon($data);
     }
     return new \HeroesofAbenez\Combat\Equipment($data);
   }
