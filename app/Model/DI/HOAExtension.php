@@ -185,15 +185,6 @@ final class HOAExtension extends \Nette\DI\CompilerExtension {
       ->setType(HeroesofAbenez\Forms\CustomGuildRankNamesFormFactory::class);
   }
   
-  public function beforeCompile() {
-    $builder = $this->getContainerBuilder();
-    $chats = $builder->findByTag(HeroesofAbenez\Chat\DI\ChatExtension::TAG_CHAT);
-    foreach($chats as $chat => $tags) {
-      $service = $builder->getDefinition($chat);
-      $service->addSetup("setTranslator");
-    }
-  }
-  
   public function afterCompile(\Nette\PhpGenerator\ClassType $class): void {
     $initialize = $class->methods["initialize"];
     $initialize->addBody('$user = $this->getByType(?);
