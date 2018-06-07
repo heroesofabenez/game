@@ -181,7 +181,7 @@ final class Profile {
   public function getLevelsRequirements(): array {
     $xps = [2 => 65];
     for($i = 3; $i <= 100; $i++) {
-      $xps[$i] = (int) ($xps[$i-1] * 1.35) + 15;
+      $xps[$i] = (int) ($xps[$i - 1] * 1.35) + 15;
     }
     return $xps;
   }

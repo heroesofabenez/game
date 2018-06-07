@@ -29,7 +29,7 @@ final class Request extends \Nextras\Orm\Entity\Entity {
   }
   
   public function onBeforeInsert() {
-    $this->sent = new \DateTimeImmutable;
+    $this->sent = new \DateTimeImmutable();
   }
 }
 ?>

@@ -29,7 +29,7 @@ final class QuestPresenter extends BasePresenter {
    * @throws \Nette\Application\BadRequestException
    */
   public function actionDefault(): void {
-    throw new \Nette\Application\BadRequestException;
+    throw new \Nette\Application\BadRequestException();
   }
   
   public function renderView(int $id): void {

@@ -98,7 +98,7 @@ final class HOAExtension extends \Nette\DI\CompilerExtension {
     $builder->addDefinition($this->prefix("model.authorizatorFactory"))
       ->setType(HeroesofAbenez\Model\AuthorizatorFactory::class);
     $builder->addDefinition($this->prefix("model.authorizator"))
-      ->setFactory("@". HeroesofAbenez\Model\AuthorizatorFactory::class . "::create");
+      ->setFactory("@" . HeroesofAbenez\Model\AuthorizatorFactory::class . "::create");
     $builder->removeDefinition("router");
     $builder->addDefinition($this->prefix("model.routerFactory"))
       ->setType(HeroesofAbenez\Model\RouterFactory::class);
@@ -190,7 +190,6 @@ final class HOAExtension extends \Nette\DI\CompilerExtension {
     $chats = $builder->findByTag(HeroesofAbenez\Chat\DI\ChatExtension::TAG_CHAT);
     foreach($chats as $chat => $tags) {
       $service = $builder->getDefinition($chat);
-      $service->addSetup("setCharacterProfileLink", ["Profile:view"]);
       $service->addSetup("setTranslator");
     }
   }

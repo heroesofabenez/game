@@ -42,3 +42,4 @@ hoa.chat:
         guild: HeroesofAbenez\Chat\IGuildChatControlFactory
         local: HeroesofAbenez\Chat\ILocalChatControlFactory
     databaseAdapter: HeroesofAbenez\Chat\NextrasOrmAdapter
+    setCharacterProfileLink: "Profile:view"

@@ -171,7 +171,7 @@ final class Skills {
     $skill = $this->$method($id);
     if(!$skill) {
       throw new SkillNotFoundException();
-    } elseif($skill->level +1 > $skill->skill->levels) {
+    } elseif($skill->level + 1 > $skill->skill->levels) {
       throw new SkillMaxLevelReachedException();
     }
     /** @var \HeroesofAbenez\Orm\Character $character */

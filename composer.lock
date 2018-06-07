@@ -12,12 +12,12 @@
             "source": {
                 "type": "git",
                 "url": "https://gitlab.com/heroesofabenez/chat.git",
-                "reference": "de34076d6f194ece3572af4e0cb517a6402ca757"
+                "reference": "f8e66af6adb0a6567cf006a8fd375c07eba9edb4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://gitlab.com/api/v4/projects/heroesofabenez%2Fchat/repository/archive.zip?sha=de34076d6f194ece3572af4e0cb517a6402ca757",
-                "reference": "de34076d6f194ece3572af4e0cb517a6402ca757",
+                "url": "https://gitlab.com/api/v4/projects/heroesofabenez%2Fchat/repository/archive.zip?sha=f8e66af6adb0a6567cf006a8fd375c07eba9edb4",
+                "reference": "f8e66af6adb0a6567cf006a8fd375c07eba9edb4",
                 "shasum": ""
             },
             "require": {
@@ -63,7 +63,7 @@
                 "component",
                 "nette"
             ],
-            "time": "2018-06-04T18:15:01+00:00"
+            "time": "2018-06-07T13:37:36+00:00"
         },
         {
             "name": "heroesofabenez/combat",
@@ -71,12 +71,12 @@
             "source": {
                 "type": "git",
                 "url": "https://gitlab.com/heroesofabenez/combat.git",
-                "reference": "b2206c0e3c40f0264c7d844920fdacb975be836f"
+                "reference": "5f69d87780884ddeda9f20bb09944ee8c40ace88"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://gitlab.com/api/v4/projects/heroesofabenez%2Fcombat/repository/archive.zip?sha=b2206c0e3c40f0264c7d844920fdacb975be836f",
-                "reference": "b2206c0e3c40f0264c7d844920fdacb975be836f",
+                "url": "https://gitlab.com/api/v4/projects/heroesofabenez%2Fcombat/repository/archive.zip?sha=5f69d87780884ddeda9f20bb09944ee8c40ace88",
+                "reference": "5f69d87780884ddeda9f20bb09944ee8c40ace88",
                 "shasum": ""
             },
             "require": {
@@ -118,7 +118,7 @@
             "keywords": [
                 "combat"
             ],
-            "time": "2018-06-06T14:25:53+00:00"
+            "time": "2018-06-07T10:16:28+00:00"
         },
         {
             "name": "kdyby/autowired",
@@ -2075,16 +2075,16 @@
         },
         {
             "name": "nette/tester",
-            "version": "v2.0.1",
+            "version": "v2.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nette/tester.git",
-                "reference": "93f70b53f7b87b44334d98219302939eda2a423b"
+                "reference": "3f273cf0ef82939e5ed07baaa5cf21ea6f657fc2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nette/tester/zipball/93f70b53f7b87b44334d98219302939eda2a423b",
-                "reference": "93f70b53f7b87b44334d98219302939eda2a423b",
+                "url": "https://api.github.com/repos/nette/tester/zipball/3f273cf0ef82939e5ed07baaa5cf21ea6f657fc2",
+                "reference": "3f273cf0ef82939e5ed07baaa5cf21ea6f657fc2",
                 "shasum": ""
             },
             "require": {
@@ -2133,7 +2133,7 @@
                 "testing",
                 "unit"
             ],
-            "time": "2018-02-07T12:55:20+00:00"
+            "time": "2018-06-07T11:24:40+00:00"
         },
         {
             "name": "nexendrie/code-quality",
@@ -2141,12 +2141,12 @@
             "source": {
                 "type": "git",
                 "url": "https://gitlab.com/nexendrie/code-quality.git",
-                "reference": "7660cb286833b53bd3632ae699564b2c51872941"
+                "reference": "698084b6f2ba21cdf9b10f166d963d1ed5e8f289"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://gitlab.com/api/v4/projects/nexendrie%2Fcode-quality/repository/archive.zip?sha=7660cb286833b53bd3632ae699564b2c51872941",
-                "reference": "7660cb286833b53bd3632ae699564b2c51872941",
+                "url": "https://gitlab.com/api/v4/projects/nexendrie%2Fcode-quality/repository/archive.zip?sha=698084b6f2ba21cdf9b10f166d963d1ed5e8f289",
+                "reference": "698084b6f2ba21cdf9b10f166d963d1ed5e8f289",
                 "shasum": ""
             },
             "require": {
@@ -2155,7 +2155,7 @@
                 "mrtnzlml/testbench": "dev-master",
                 "phpstan/phpstan": "^0.9",
                 "phpstan/phpstan-strict-rules": "^0.9",
-                "squizlabs/php_codesniffer": "^3.2.2"
+                "squizlabs/php_codesniffer": "^3.3"
             },
             "type": "library",
             "notification-url": "https://packagist.org/downloads/",
@@ -2175,7 +2175,7 @@
                 "quality",
                 "testing"
             ],
-            "time": "2018-06-04T17:36:29+00:00"
+            "time": "2018-06-07T13:29:32+00:00"
         },
         {
             "name": "nikic/php-parser",
@@ -2482,16 +2482,16 @@
         },
         {
             "name": "squizlabs/php_codesniffer",
-            "version": "3.2.3",
+            "version": "3.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/squizlabs/PHP_CodeSniffer.git",
-                "reference": "4842476c434e375f9d3182ff7b89059583aa8b27"
+                "reference": "d86873af43b4aa9d1f39a3601cc0cfcf02b25266"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/squizlabs/PHP_CodeSniffer/zipball/4842476c434e375f9d3182ff7b89059583aa8b27",
-                "reference": "4842476c434e375f9d3182ff7b89059583aa8b27",
+                "url": "https://api.github.com/repos/squizlabs/PHP_CodeSniffer/zipball/d86873af43b4aa9d1f39a3601cc0cfcf02b25266",
+                "reference": "d86873af43b4aa9d1f39a3601cc0cfcf02b25266",
                 "shasum": ""
             },
             "require": {
@@ -2529,7 +2529,7 @@
                 "phpcs",
                 "standards"
             ],
-            "time": "2018-02-20T21:35:23+00:00"
+            "time": "2018-06-06T23:58:19+00:00"
         },
         {
             "name": "symfony/console",

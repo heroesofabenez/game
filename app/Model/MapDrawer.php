@@ -37,7 +37,7 @@ final class MapDrawer {
     $image->rectangle(0, 0, 249, 249, Image::rgb(204, 102, 0));
     foreach($points as $point) {
       $image->filledEllipse($point->posX, $point->posY, 4, 4, Image::rgb(51, 102, 0));
-      $image->ttfText(8, 0, $point->posX-18, $point->posY+11, Image::rgb(51, 51, 0), __DIR__ . "/../arial.ttf", $point->name);
+      $image->ttfText(8, 0, $point->posX - 18, $point->posY + 11, Image::rgb(51, 51, 0), __DIR__ . "/../arial.ttf", $point->name);
     }
     foreach($routes as $route) {
       $image->line($points[$route->from->id]->posX, $points[$route->from->id]->posY, $points[$route->to->id]->posX, $points[$route->to->id]->posY, Image::rgb(51, 153, 255));

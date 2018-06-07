@@ -31,7 +31,7 @@ final class SkillPresenter extends BasePresenter {
    * @throws \Nette\Application\BadRequestException
    */
   public function actionDefault(): void {
-    throw new \Nette\Application\BadRequestException;
+    throw new \Nette\Application\BadRequestException();
   }
   
   public function renderAttack(int $id): void {

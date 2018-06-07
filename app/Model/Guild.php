@@ -98,7 +98,7 @@ final class Guild {
     if(!is_null($guild)) {
       throw new NameInUseException();
     }
-    $guild = new \HeroesofAbenez\Orm\Guild;
+    $guild = new \HeroesofAbenez\Orm\Guild();
     foreach($data as $key => $value) {
       $guild->$key = $value;
     }

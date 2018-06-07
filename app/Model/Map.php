@@ -37,10 +37,10 @@ final class Map {
       $this->drawer->localMap();
     }
     foreach($stages as $stage) {
-      $c1 = $stage->posX-15;
-      $c2 = $stage->posY-15;
-      $c3 = $stage->posX+15;
-      $c4 = $stage->posY+15;
+      $c1 = $stage->posX - 15;
+      $c2 = $stage->posY - 15;
+      $c3 = $stage->posX + 15;
+      $c4 = $stage->posY + 15;
       $return["areas"][] = (object) [
         "href" => "", "shape" => "rect", "title" => $stage->name,
         "coords" => "$c1,$c2,$c3,$c4", "stage" => $stage->id

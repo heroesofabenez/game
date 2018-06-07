@@ -35,7 +35,7 @@ final class AuthorizatorFactory {
     foreach($roles as $i => $row) {
       $parent = "player";
       if($row["id"] !== 1) {
-        $parentRow = $roles[$i-1];
+        $parentRow = $roles[$i - 1];
         $parent = $parentRow["name"];
       }
       $permission->addRole($row["name"], $parent);

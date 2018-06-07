@@ -65,7 +65,7 @@ final class Character extends \Nextras\Orm\Entity\Entity {
   }
   
   public function onBeforeInsert() {
-    $this->joined = new \DateTimeImmutable;
+    $this->joined = new \DateTimeImmutable();
   }
 }
 ?>
