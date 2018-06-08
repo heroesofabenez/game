@@ -54,7 +54,7 @@ final class MapDrawer {
     $stages = $this->locationModel->accessibleStages();
     $curr_stage = $stages[$this->user->identity->stage];
     $routes = $this->locationModel->stageRoutes();
-    $this->draw($stages, $routes, "local-$curr_stage->area");
+    $this->draw($stages, $routes, "local-{$curr_stage->area->id}");
   }
 }
 ?>

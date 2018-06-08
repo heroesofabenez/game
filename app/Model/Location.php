@@ -87,26 +87,16 @@ final class Location {
   }
   
   /**
-   * Returns list of accessible stages (in player's current area,
-   * player meets conditions for entering them)
+   * Returns list of accessible stages (in player's current area)
    * 
    * @return QuestStage[]
    */
   public function accessibleStages(): array {
     $return = [];
-    $stages = $this->orm->stages->findAll();
-    /** @var QuestStage $curr_stage */
-    $curr_stage = $this->getStage($this->user->identity->stage);
+    /** @var QuestStage $currentStage */
+    $currentStage = $this->getStage($this->user->identity->stage);
+    $stages = $this->orm->stages->findByArea($currentStage->area->id);
     foreach($stages as $stage) {
-      if($stage->area->id !== $curr_stage->area->id) {
-        continue;
-      } elseif($this->user->identity->level < $stage->requiredLevel) {
-        continue;
-      } elseif($stage->requiredRace AND $stage->requiredRace->id != $this->user->identity->race) {
-        continue;
-      } elseif($stage->requiredOccupation AND $stage->requiredOccupation->id != $this->user->identity->occupation) {
-        continue;
-      }
       $return[$stage->id] = $stage;
     }
     return $return;
