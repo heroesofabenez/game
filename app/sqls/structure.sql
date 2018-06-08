@@ -345,13 +345,16 @@ CREATE TABLE `pve_arena_opponents` (
   `intelligence` int(2) NOT NULL,
   `charisma` int(2) NOT NULL,
   `weapon` int(11) DEFAULT NULL,
+  `armor` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `occupation` (`occupation`),
   KEY `race` (`race`),
   KEY `weapon` (`weapon`),
+  KEY `armor` (`armor`),
   CONSTRAINT `pve_arena_opponents_ibfk_1` FOREIGN KEY (`occupation`) REFERENCES `character_classes` (`id`),
   CONSTRAINT `pve_arena_opponents_ibfk_2` FOREIGN KEY (`race`) REFERENCES `character_races` (`id`),
-  CONSTRAINT `pve_arena_opponents_ibfk_3` FOREIGN KEY (`weapon`) REFERENCES `equipment` (`id`)
+  CONSTRAINT `pve_arena_opponents_ibfk_3` FOREIGN KEY (`weapon`) REFERENCES `equipment` (`id`),
+  CONSTRAINT `pve_arena_opponents_ibfk_4` FOREIGN KEY (`armor`) REFERENCES `equipment` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `quests` (

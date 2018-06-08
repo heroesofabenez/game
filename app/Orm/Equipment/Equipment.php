@@ -19,7 +19,8 @@ use Nextras\Orm\Relationships\OneHasMany;
  * @property int $price {default 0}
  * @property int $strength
  * @property int $durability
- * @property OneHasMany|PveArenaOpponent[] $arenaNpcs {1:m PveArenaOpponent::$weapon}
+ * @property OneHasMany|PveArenaOpponent[] $arenaNpcsWeapon {1:m PveArenaOpponent::$weapon}
+ * @property OneHasMany|PveArenaOpponent[] $arenaNpcsArmor {1:m PveArenaOpponent::$armor}
  * @property OneHasMany|CharacterEquipment[] $characterEquipment {1:m CharacterEquipment::$item}
  * @property bool $worn Is the item worn? {virtual}
  */

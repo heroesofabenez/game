@@ -84,12 +84,12 @@ INSERT INTO `pet_types` (`id`, `name`, `bonus_stat`, `bonus_value`, `image`, `re
 (18,	'Royal Owl',	'int',	20,	'',	45,	3,	NULL,	0),
 (19,	'Royal Hawk',	'dex',	20,	'',	45,	4,	NULL,	0);
 
-INSERT INTO `pve_arena_opponents` (`id`, `name`, `race`, `gender`, `occupation`, `level`, `strength`, `dexterity`, `constitution`, `intelligence`, `charisma`, `weapon`) VALUES
-(1,	'Div Fast-hands',	2,	'male',	2,	2,	11,	13,	8,	10,	10,	3),
-(2,	'El-Tovil',	4,	'male',	1,	2,	13,	9,	14,	8,	8,	2),
-(3,	'Valiana',	3,	'female',	3,	2,	8,	11,	7,	15,	13,	5),
-(4,	'Alinia',	3,	'female',	4,	3,	8,	14,	8,	12,	12,	6),
-(5,	'Eldan',	1,	'male',	1,	5,	13,	10,	15,	8,	8,	1);
+INSERT INTO `pve_arena_opponents` (`id`, `name`, `race`, `gender`, `occupation`, `level`, `strength`, `dexterity`, `constitution`, `intelligence`, `charisma`, `weapon`, `armor`) VALUES
+  (1,	'Div Fast-hands',	2,	'male',	2,	2,	11,	13,	8,	10,	10,	3,	8),
+  (2,	'El-Tovil',	4,	'male',	1,	2,	13,	9,	14,	8,	8,	2,	7),
+  (3,	'Valiana',	3,	'female',	3,	2,	8,	11,	7,	15,	13,	5,	9),
+  (4,	'Alinia',	3,	'female',	4,	3,	8,	14,	8,	12,	12,	6,	10),
+  (5,	'Eldan',	1,	'male',	1,	5,	13,	10,	15,	8,	8,	1,	7);
 
 INSERT INTO `quests` (`id`, `name`, `introduction`, `end_text`, `cost_money`, `needed_item`, `needed_quest`, `needed_level`, `item_amount`, `item_lose`, `reward_money`, `reward_xp`, `reward_item`, `npc_start`, `npc_end`, `order`) VALUES
   (1,	'Find a book',	'To continue in your training, you need to get book ABC. Ask the librarian about it.',	'Well done, my apprentice.',	0,	1,	NULL,	NULL,	1,	0,	0,	10,	NULL,	1,	1,	1);

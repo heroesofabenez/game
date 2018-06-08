@@ -155,6 +155,13 @@ final class CombatHelper {
         $equipment[] = $weapon->toCombatEquipment();
       }
     }
+    if(!is_null($npc->armor)) {
+      $armor = $this->equipmentModel->view($npc->armor->id);
+      if(!is_null($armor)) {
+        $armor->worn = true;
+        $equipment[] = $armor->toCombatEquipment();
+      }
+    }
     $npc = new Character($data, $equipment, [], $skills);
     return $npc;
   }
