@@ -92,6 +92,7 @@ final class NPCShopControl extends \Nette\Application\UI\Control {
     $character->money -= $item->price;
     $this->orm->characters->persistAndFlush($character);
     $this->presenter->flashMessage($this->translator->translate("messages.shop.itemBought"));
+    $this->presenter->redirect("this");
   }
 }
 ?>
