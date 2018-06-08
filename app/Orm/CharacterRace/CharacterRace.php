@@ -27,26 +27,27 @@ use Nexendrie\Utils\Numbers;
  * @property OneHasMany|PveArenaOpponent[] $arenaNpcs {1:m PveArenaOpponent::$race}
  */
 final class CharacterRace extends \Nextras\Orm\Entity\Entity {
-  protected const MAX_STATS = 99;
+  protected const MIN_STATS = -5;
+  protected const MAX_STATS = 5;
   
   protected function setterStrength(int $value): int {
-    return Numbers::range($value, 0, static::MAX_STATS);
+    return Numbers::range($value, static::MIN_STATS, static::MAX_STATS);
   }
   
   protected function setterDexterity(int $value): int {
-    return Numbers::range($value, 0, static::MAX_STATS);
+    return Numbers::range($value, static::MIN_STATS, static::MAX_STATS);
   }
   
   protected function setterConstitution(int $value): int {
-    return Numbers::range($value, 0, static::MAX_STATS);
+    return Numbers::range($value, static::MIN_STATS, static::MAX_STATS);
   }
   
   protected function setterIntelligence(int $value): int {
-    return Numbers::range($value, 0, static::MAX_STATS);
+    return Numbers::range($value, static::MIN_STATS, static::MAX_STATS);
   }
   
   protected function setterCharisma(int $value): int {
-    return Numbers::range($value, 0, static::MAX_STATS);
+    return Numbers::range($value, static::MIN_STATS, static::MAX_STATS);
   }
 }
 ?>
