@@ -1,4 +1,4 @@
 1:
     name: "Find a book"
-    introduction: "You need to find book ABC."
+    introduction: "To continue in your training, you need to get book ABC. Ask the librarian about it."
     end_text: "Well done, my apprentice."

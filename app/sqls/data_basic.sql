@@ -92,7 +92,7 @@ INSERT INTO `pve_arena_opponents` (`id`, `name`, `race`, `gender`, `occupation`,
 (5,	'Eldan',	1,	'male',	1,	5,	13,	10,	15,	8,	8,	1);
 
 INSERT INTO `quests` (`id`, `name`, `introduction`, `end_text`, `cost_money`, `needed_item`, `needed_quest`, `needed_level`, `item_amount`, `item_lose`, `reward_money`, `reward_xp`, `reward_item`, `npc_start`, `npc_end`, `order`) VALUES
-(1,	'Find a book',	'You need to find book ABC.',	'Well done, my apprentice.',	0,	1,	NULL,	NULL,	1,	0,	0,	10,	NULL,	1,	1,	1);
+  (1,	'Find a book',	'To continue in your training, you need to get book ABC. Ask the librarian about it.',	'Well done, my apprentice.',	0,	1,	NULL,	NULL,	1,	0,	0,	10,	NULL,	1,	1,	1);
 
 INSERT INTO `quest_areas` (`id`, `name`, `description`, `required_level`, `required_race`, `required_occupation`, `pos_x`, `pos_y`) VALUES
 (1,	'Academy of Magic',	'm',	0,	NULL,	3,	220,	35),
@@ -111,7 +111,7 @@ INSERT INTO `routes_stages` (`id`, `from`, `to`) VALUES
 (3,	2,	3);
 
 INSERT INTO `shop_items` (`id`, `npc`, `item`, `order`) VALUES
-(1,	1,	1,	1);
+  (1,	2,	1,	1);
 
 INSERT INTO `skills_attacks` (`id`, `name`, `description`, `needed_class`, `needed_specialization`, `needed_level`, `base_damage`, `damage_growth`, `levels`, `target`, `strikes`, `hit_rate`) VALUES
 (1,	'Assault',	'',	1,	NULL,	1,	'110%',	'5%',	5,	'single',	1,	NULL),
@@ -130,4 +130,5 @@ INSERT INTO `skills_specials` (`id`, `name`, `description`, `needed_class`, `nee
 (8,	'Evasion',	'',	4,	NULL,	10,	'buff',	'party',	'dodge',	10,	1,	6,	4);
 
 INSERT INTO `npcs` (`id`, `name`, `description`, `race`, `type`, `sprite`, `portrait`, `stage`, `karma`, `pos_x`, `pos_y`) VALUES
-(1,	'Mentor',	'He\'s quite old for a human.',	2,	'quest',	'mentor.jpeg',	'mentor.jpeg',	1,	'neutral',	1,	1);
+  (1,	'Mentor',	'He\'s quite old for a human.',	2,	'quest',	'mentor.jpeg',	'mentor.jpeg',	1,	'neutral',	1,	1),
+  (2,	'Librarian',	'She look like a typical middle-aged female librarian. She sells books for wizards.',	2,	'shop',	'librarian.jpeg',	'librarian.jpeg',	3,	'neutral',	1,	1);
