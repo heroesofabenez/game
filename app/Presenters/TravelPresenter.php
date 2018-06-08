@@ -25,7 +25,6 @@ final class TravelPresenter extends BasePresenter {
   }
   
   public function actionArea(int $id): void {
-    
   }
   
   public function actionStage(int $id): void {

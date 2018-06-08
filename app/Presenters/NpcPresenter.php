@@ -56,7 +56,6 @@ final class NpcPresenter extends BasePresenter {
   }
   
   public function actionTalk(int $id): void {
-    
   }
   
   protected function createComponentNpcDialogue(INPCDialogueControlFactory $factory): NPCDialogueControl {

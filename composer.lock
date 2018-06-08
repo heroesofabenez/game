@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d12f7182beee5f7e77a0851d9fa11e09",
+    "content-hash": "4b81bd0aeaeba64ffc8a2f2be8a45511",
     "packages": [
         {
             "name": "heroesofabenez/chat",
@@ -12,12 +12,12 @@
             "source": {
                 "type": "git",
                 "url": "https://gitlab.com/heroesofabenez/chat.git",
-                "reference": "f8e66af6adb0a6567cf006a8fd375c07eba9edb4"
+                "reference": "84118f01dcb6d1b60faad556969f7694428349f1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://gitlab.com/api/v4/projects/heroesofabenez%2Fchat/repository/archive.zip?sha=f8e66af6adb0a6567cf006a8fd375c07eba9edb4",
-                "reference": "f8e66af6adb0a6567cf006a8fd375c07eba9edb4",
+                "url": "https://gitlab.com/api/v4/projects/heroesofabenez%2Fchat/repository/archive.zip?sha=84118f01dcb6d1b60faad556969f7694428349f1",
+                "reference": "84118f01dcb6d1b60faad556969f7694428349f1",
                 "shasum": ""
             },
             "require": {
@@ -63,7 +63,7 @@
                 "component",
                 "nette"
             ],
-            "time": "2018-06-07T13:37:36+00:00"
+            "time": "2018-06-08T15:36:20+00:00"
         },
         {
             "name": "heroesofabenez/combat",
@@ -1271,16 +1271,16 @@
         },
         {
             "name": "nexendrie/translation",
-            "version": "1.1.1",
+            "version": "1.1.2",
             "source": {
                 "type": "git",
                 "url": "https://gitlab.com/nexendrie/translation.git",
-                "reference": "b080c25e806706a83a323f81bc25d937ae2e3e66"
+                "reference": "8d0f243bbd7baffd34af8eb7f4d90ea034724b26"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://gitlab.com/api/v4/projects/nexendrie%2Ftranslation/repository/archive.zip?sha=b080c25e806706a83a323f81bc25d937ae2e3e66",
-                "reference": "b080c25e806706a83a323f81bc25d937ae2e3e66",
+                "url": "https://gitlab.com/api/v4/projects/nexendrie%2Ftranslation/repository/archive.zip?sha=8d0f243bbd7baffd34af8eb7f4d90ea034724b26",
+                "reference": "8d0f243bbd7baffd34af8eb7f4d90ea034724b26",
                 "shasum": ""
             },
             "require": {
@@ -1341,7 +1341,7 @@
                 "translation",
                 "yaml"
             ],
-            "time": "2018-03-21T20:43:49+00:00"
+            "time": "2018-06-08T15:45:14+00:00"
         },
         {
             "name": "nexendrie/utils",
@@ -2141,12 +2141,12 @@
             "source": {
                 "type": "git",
                 "url": "https://gitlab.com/nexendrie/code-quality.git",
-                "reference": "698084b6f2ba21cdf9b10f166d963d1ed5e8f289"
+                "reference": "a090c2874da03eaeb3ad1c0160bf20b7fddf3094"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://gitlab.com/api/v4/projects/nexendrie%2Fcode-quality/repository/archive.zip?sha=698084b6f2ba21cdf9b10f166d963d1ed5e8f289",
-                "reference": "698084b6f2ba21cdf9b10f166d963d1ed5e8f289",
+                "url": "https://gitlab.com/api/v4/projects/nexendrie%2Fcode-quality/repository/archive.zip?sha=a090c2874da03eaeb3ad1c0160bf20b7fddf3094",
+                "reference": "a090c2874da03eaeb3ad1c0160bf20b7fddf3094",
                 "shasum": ""
             },
             "require": {
@@ -2175,7 +2175,7 @@
                 "quality",
                 "testing"
             ],
-            "time": "2018-06-07T13:29:32+00:00"
+            "time": "2018-06-08T15:31:32+00:00"
         },
         {
             "name": "nikic/php-parser",
