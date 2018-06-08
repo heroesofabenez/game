@@ -21,12 +21,15 @@ final class TrainingPresenter extends BasePresenter {
   protected $model;
   /** @var \HeroesofAbenez\Model\Skills */
   protected $skillsModel;
+  /** @var \HeroesofAbenez\Model\CombatHelper */
+  protected $combatHelper;
   
-  public function __construct(\HeroesofAbenez\Model\Profile $model, \HeroesofAbenez\Model\Skills $skillsModel, \Nette\Security\User $user) {
+  public function __construct(\HeroesofAbenez\Model\Profile $model, \HeroesofAbenez\Model\Skills $skillsModel, \Nette\Security\User $user, \HeroesofAbenez\Model\CombatHelper $combatHelper) {
     parent::__construct();
     $this->model = $model;
     $this->model->user = $user;
     $this->skillsModel = $skillsModel;
+    $this->combatHelper = $combatHelper;
   }
   
   public function renderDefault(): void {
@@ -34,6 +37,9 @@ final class TrainingPresenter extends BasePresenter {
     $this->template->stats = $this->model->getStats();
     $this->template->skill_points = $this->skillsModel->getSkillPoints();
     $this->template->skills = $this->skillsModel->getAvailableSkills();
+    $character = $this->combatHelper->getPlayer($this->user->id);
+    $character->applyEffectProviders();
+    $this->template->character = $character;
   }
   
   public function handleTrainStat(string $stat): void {

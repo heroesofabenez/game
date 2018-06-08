@@ -155,6 +155,11 @@ profile:
     notFoundTitle: "Postava nenalezena"
     notFound: "Požadovaná postava nebyla nalezena."
     predominantKarma: "Převažující karma:"
+    maxHitpoints: "Maximum životů"
+    damage: "Poškození"
+    defense: "Obrana"
+    hitChance: "Šance na zásah"
+    dodgeChance: "Šance na vyhnutí se zásahu"
 equipment:
     title: "Vybavení"
     notFoundTitle: "Vybavení nenalezeno"
@@ -228,7 +233,8 @@ arena:
 training:
    title: "Cvičiště"
    train: "Trénovat"
-   currentStats: "Tvé současné vlastnosti:"
+   primaryStats: "Tvé primární vlastnosti:"
+   secondaryStats: "Tvé sekundární vlastnosti:"
    usableStatPoints: "Použitelné body vlastností: %count%"
    skills: "Dovednosti"
    skillCurrentLevel: "Současná úroveň: %count%"

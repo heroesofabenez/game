@@ -155,6 +155,11 @@ profile:
     notFoundTitle: "Character not found"
     notFound: "Requested character was not found."
     predominantKarma: "Predominant karma:"
+    maxHitpoints: "Max hitpoints"
+    damage: "Damage"
+    defense: "Defense"
+    hitChance: "Hit chance"
+    dodgeChance: "Dodge chance"
 equipment:
     title: "Equipment"
     notFoundTitle: "Equipment not found"
@@ -228,8 +233,9 @@ arena:
 training:
    title: "Training grounds"
    train: "Train"
-   currentStats: "Your current stats:"
+   primaryStats: "Your primary stats:"
    usableStatPoints: "Usable stat points: %count%"
+   secondaryStats: "Your secondary stats:"
    skills: "Skills"
    skillCurrentLevel: "Current level: %count%"
    usableSkillPoints: "Usable skill points: %count%"
