@@ -142,6 +142,7 @@ profile:
     title: "Profile"
     level: "level"
     baseStats: "Base stats:"
+    combatStats: "Combat stats:"
     strength: "Strength"
     dexterity: "Dexterity"
     constitution: "Constitution"

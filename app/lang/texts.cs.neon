@@ -142,6 +142,7 @@ profile:
     title: "Profil"
     level: "úroveň"
     baseStats: "Základní vlastnosti:"
+    combatStats: "Vlastnosti v boji:"
     strength: "Síla"
     dexterity: "Obratnost"
     constitution: "Odolnost"
