@@ -50,6 +50,7 @@ final class ArenaPVEControl extends ArenaControl {
     $template->setFile(__DIR__ . "/arenaChampion.latte");
     try {
       $template->champion = $this->getNpc($id);
+      $template->champion->applyEffectProviders();
     } catch(OpponentNotFoundException $e) {
       $template->champion = false;
     }
