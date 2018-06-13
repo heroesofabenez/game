@@ -402,7 +402,7 @@ final class Guild {
       if($name === "") {
         continue;
       }
-      $rank = substr($rank, 4, 1);
+      $rank = (int) substr($rank, 4, 1);
       $row = $this->orm->guildRanksCustom->getByGuildAndRank($gid, $rank);
       if(is_null($row)) {
         $row = new GuildRankCustom();
@@ -411,8 +411,9 @@ final class Guild {
         $row->rank = $rank;
       }
       $row->name = $name;
-      $this->orm->guildRanksCustom->persistAndFlush($row);
+      $this->orm->guildRanksCustom->persist($row);
     }
+    $this->orm->guildRanksCustom->flush();
   }
 }
 ?>
