@@ -66,8 +66,8 @@ final class ArenaPVEControl extends ArenaControl {
     $experience = round($opponent->level / 10) + 1;
     $money = round($opponent->level / 5) + 1;
     if($opponent->level > $player->level) {
-      $experience += 1;
-      $money += 1;
+      $experience++;
+      $money++;
     }
     return ["money" => $money, "experience" => $experience];
   }
