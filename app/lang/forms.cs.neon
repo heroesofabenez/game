@@ -57,11 +57,6 @@ postOfficeNewMessage:
         error: "Zadej zprávu."
     sendButton:
         label: "Odeslat"
-tavernNewMessage:
-    messageField:
-        error: "Zadej zprávu."
-    sendButton:
-        label: "Odeslat"
 customGuildRankNames:
     sendButton:
         label: "Nastavit"

@@ -4,26 +4,27 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4b81bd0aeaeba64ffc8a2f2be8a45511",
+    "content-hash": "7f7dc74a62ffbc4aaca5d6f920fba8d2",
     "packages": [
         {
             "name": "heroesofabenez/chat",
-            "version": "dev-master",
+            "version": "1.0.0",
             "source": {
                 "type": "git",
                 "url": "https://gitlab.com/heroesofabenez/chat.git",
-                "reference": "84118f01dcb6d1b60faad556969f7694428349f1"
+                "reference": "793af2d98593774405e61c045222115832dfe4d2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://gitlab.com/api/v4/projects/heroesofabenez%2Fchat/repository/archive.zip?sha=84118f01dcb6d1b60faad556969f7694428349f1",
-                "reference": "84118f01dcb6d1b60faad556969f7694428349f1",
+                "url": "https://gitlab.com/api/v4/projects/heroesofabenez%2Fchat/repository/archive.zip?sha=793af2d98593774405e61c045222115832dfe4d2",
+                "reference": "793af2d98593774405e61c045222115832dfe4d2",
                 "shasum": ""
             },
             "require": {
                 "latte/latte": "^2.4",
                 "nette/application": "^2.4",
                 "nette/di": "^2.4.10",
+                "nette/forms": "^2.4",
                 "nette/utils": "^2.4",
                 "nexendrie/translation": "^1.1.1",
                 "nexendrie/utils": "^1.1",
@@ -63,7 +64,7 @@
                 "component",
                 "nette"
             ],
-            "time": "2018-06-08T15:36:20+00:00"
+            "time": "2018-06-09T13:58:55+00:00"
         },
         {
             "name": "heroesofabenez/combat",
@@ -71,12 +72,12 @@
             "source": {
                 "type": "git",
                 "url": "https://gitlab.com/heroesofabenez/combat.git",
-                "reference": "6bc0bb47c4cfd02a01245825e5f121702d7409b9"
+                "reference": "552c924c987c6a868cddcd370359d8a78419b69d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://gitlab.com/api/v4/projects/heroesofabenez%2Fcombat/repository/archive.zip?sha=6bc0bb47c4cfd02a01245825e5f121702d7409b9",
-                "reference": "6bc0bb47c4cfd02a01245825e5f121702d7409b9",
+                "url": "https://gitlab.com/api/v4/projects/heroesofabenez%2Fcombat/repository/archive.zip?sha=552c924c987c6a868cddcd370359d8a78419b69d",
+                "reference": "552c924c987c6a868cddcd370359d8a78419b69d",
                 "shasum": ""
             },
             "require": {
@@ -118,7 +119,7 @@
             "keywords": [
                 "combat"
             ],
-            "time": "2018-06-08T13:45:01+00:00"
+            "time": "2018-06-09T10:02:04+00:00"
         },
         {
             "name": "kdyby/autowired",

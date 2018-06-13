@@ -5,6 +5,7 @@ namespace HeroesofAbenez\Presenters;
 
 use Nette\Application\UI\Form;
 use HeroesofAbenez\Chat;
+use HeroesofAbenez\Chat\NewChatMessageFormFactory;
 
 /**
  * Presenter Tavern
@@ -58,36 +59,25 @@ final class TavernPresenter extends BasePresenter {
   /**
    * Creates form for writing new message
    */
-  protected function createComponentNewMessageForm(): Form {
-    $form = new Form();
-    $form->setTranslator($this->translator);
-    $form->addText("message")
-      ->setRequired("forms.tavernNewMessage.messageField.error");
-    $form->addSubmit("send", "forms.tavernNewMessage.sendButton.label");
-    $form->onSuccess[] = [$this, "newMessageSucceeded"];
-    return $form;
-  }
-  
-  public function newMessageSucceeded(Form $form, array $values): void {
+  protected function createComponentNewMessageForm(NewChatMessageFormFactory $factory): Form {
     switch($this->action) {
       case "guild":
-        /** @var Chat\IGuildChatControlFactory $factory */
-        $factory = $this->context->getByType(Chat\IGuildChatControlFactory::class);
-        $chat = $this->createComponentGuildChat($factory);
+        /** @var Chat\IGuildChatControlFactory $chatFactory */
+        $chatFactory = $this->context->getByType(Chat\IGuildChatControlFactory::class);
+        $chat = $this->createComponentGuildChat($chatFactory);
         break;
       case "local":
-        /** @var Chat\ILocalChatControlFactory $factory */
-        $factory = $this->context->getByType(Chat\ILocalChatControlFactory::class);
-        $chat = $this->createComponentLocalChat($factory);
+        /** @var Chat\ILocalChatControlFactory $chatFactory */
+        $chatFactory = $this->context->getByType(Chat\ILocalChatControlFactory::class);
+        $chat = $this->createComponentLocalChat($chatFactory);
         break;
       case "global":
-        /** @var Chat\IGlobalChatControlFactory $factory */
-        $factory = $this->context->getByType(Chat\IGlobalChatControlFactory::class);
-        $chat = $this->createComponentGlobalChat($factory);
+        /** @var Chat\IGlobalChatControlFactory $chatFactory */
+        $chatFactory = $this->context->getByType(Chat\IGlobalChatControlFactory::class);
+        $chat = $this->createComponentGlobalChat($chatFactory);
         break;
     }
-    $this->addComponent($chat, "chat");
-    $chat->newMessage($values["message"]);
+    return $factory->create($chat);
   }
 }
 ?>
