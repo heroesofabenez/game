@@ -63,8 +63,8 @@ final class ArenaPVEControl extends ArenaControl {
    * @return int[]
    */
   protected function calculateRewards(Character $player, Character $opponent): array {
-    $experience = round($opponent->level / 10) + 1;
-    $money = round($opponent->level / 5) + 1;
+    $experience = (int) round($opponent->level / 10) + 1;
+    $money = (int) round($opponent->level / 5) + 1;
     if($opponent->level > $player->level) {
       $experience++;
       $money++;
