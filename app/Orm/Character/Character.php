@@ -30,9 +30,9 @@ use Nexendrie\Utils\Numbers;
  * @property GuildRank|null $guildrank {m:1 GuildRank::$characters} {default null}
  * @property int $owner
  * @property QuestStage|null $currentStage {m:1 QuestStage::$characters} {default null}
- * @property int|null $whiteKarma {default 0}
- * @property int|null $neutralKarma {default 0}
- * @property int|null $darkKarma {default 0}
+ * @property int $whiteKarma {default 0}
+ * @property int $neutralKarma {default 0}
+ * @property int $darkKarma {default 0}
  * @property-read string $predominantKarma {virtual}
  * @property int|null $intro {default 1}
  * @property \DateTimeImmutable|null $joined
