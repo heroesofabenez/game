@@ -31,7 +31,6 @@ use Nexendrie\Utils\Numbers;
  * @property int $owner
  * @property QuestStage|null $currentStage {m:1 QuestStage::$characters} {default null}
  * @property int $whiteKarma {default 0}
- * @property int $neutralKarma {default 0}
  * @property int $darkKarma {default 0}
  * @property-read string $predominantKarma {virtual}
  * @property int|null $intro {default 1}
@@ -61,7 +60,7 @@ final class Character extends \Nextras\Orm\Entity\Entity {
   }
   
   protected function getterPredominantKarma(): string {
-    return Karma::getPredominant($this->whiteKarma, $this->darkKarma, $this->neutralKarma);
+    return Karma::getPredominant($this->whiteKarma, $this->darkKarma);
   }
   
   public function onBeforeInsert() {

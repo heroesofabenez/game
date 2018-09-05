@@ -55,7 +55,7 @@ final class UserManager implements NS\IAuthenticator {
       "occupation" => $char->occupation->id,
       "specialization" => (!is_null($char->specialization)) ? $char->specialization->id : null,
       "level" => $char->level,  "stage" => $char->currentStage->id,
-      "white_karma" => $char->whiteKarma, "neutral_karma" => $char->neutralKarma, "dark_karma" => $char->darkKarma
+      "white_karma" => $char->whiteKarma, "dark_karma" => $char->darkKarma,
     ];
     $data["guild"] = 0;
     $role = "player";

@@ -16,6 +16,7 @@ final class Karma {
   public const KARMA_WHITE = "white";
   public const KARMA_NEUTRAL = "neutral";
   public const KARMA_DARK = "dark";
+  public const THRESHOLD = 5;
   
   /**
    * @return string[]
@@ -67,11 +68,13 @@ final class Karma {
     return ($karma2 === static::getOpposite($karma1));
   }
   
-  public static function getPredominant(int $white, int $dark, int $neutral): string {
-    $karma = [
-      static::KARMA_NEUTRAL => $neutral, static::KARMA_WHITE => $white, static::KARMA_DARK => $dark,
-    ];
-    return array_search(max($karma), $karma, true);
+  public static function getPredominant(int $white, int $dark): string {
+    if($white > $dark + static::THRESHOLD) {
+      return static::KARMA_WHITE;
+    } elseif($dark > $white + static::THRESHOLD) {
+      return static::KARMA_DARK;
+    }
+    return static::KARMA_NEUTRAL;
   }
 }
 ?>

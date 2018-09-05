@@ -52,8 +52,7 @@ final class Journal {
       "name" => $character->name, "gender" => $character->gender, "race" => $character->race->id,
       "occupation" => $character->occupation->id,
       "specialization" => (!is_null($character->specialization)) ? $character->specialization->id : null,
-      "level" => $character->level, "whiteKarma" => $character->whiteKarma,
-      "neutralKarma" => $character->neutralKarma, "darkKarma" => $character->darkKarma,
+      "level" => $character->level, "whiteKarma" => $character->whiteKarma, "darkKarma" => $character->darkKarma,
       "experiences" => $character->experience, "description" => $character->description,
       "stageName" => $character->currentStage->name, "areaName" => $stage->area->name
     ];

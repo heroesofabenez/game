@@ -5,7 +5,7 @@
   <p>{$gender} {_"races.$race.name"} {_"classes.$occupation.name"}{if $specialization}-{_"subclasses.$specialization.name"}{/if}</p>
   <p>{_"texts.journal.level"} {$level}, {_"texts.journal.experiences", $experiences}/{$nextLevelExp} {if $experiences >= $nextLevelExp}<a n:href="levelUp!">{_"texts.journal.levelUp"}</a>{/if} {if $level > 1}<a n:href="Training:">{_"texts.training.train"}</a>{/if}</p>
   <p>{_"texts.journal.guild"}<br>{if $guild}{_"guildranks.$guildRank.name"|firstUpper} {_"texts.journal.ofGuild"} {$guild}{else}{_"texts.journal.notInGuild"}{/if}</p>
-  <p>{_"texts.journal.karma"}<br>{_"texts.journal.white"} {$whiteKarma}, {_"texts.journal.neutral"} {$neutralKarma}, {_"texts.journal.dark"} {$darkKarma}</p>
+  <p>{_"texts.journal.karma"}<br>{_"texts.journal.white"} {$whiteKarma}, {_"texts.journal.dark"} {$darkKarma}</p>
   <p>{_"texts.journal.position"}<br>{$stageName} {_"texts.journal.at"} {$areaName}</p>
   <p>{_"texts.profile.moreInfo"}<br>{$description}</p>
   <p>{_"texts.journal.chapters"} {_"texts.journal.basic"} <a n:href="Journal:inventory">{_"texts.journal.inventory"}</a> <a n:href="Journal:pets">{_"texts.journal.pets"}</a> <a n:href="Journal:quests">{_"texts.journal.quests"}</a></p>

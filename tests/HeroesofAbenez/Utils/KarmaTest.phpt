@@ -62,14 +62,16 @@ final class KarmaTest extends \Tester\TestCase {
   }
   
   public function testGetPredominant() {
-    $karma = [0, 0, 0];
-    Assert::same(Karma::KARMA_NEUTRAL, Karma::getPredominant(... $karma));
-    $karma[2] = 2;
-    Assert::same(Karma::KARMA_NEUTRAL, Karma::getPredominant(... $karma));
-    $karma[0] = 5;
-    Assert::same(Karma::KARMA_WHITE, Karma::getPredominant(... $karma));
-    $karma[1] = 10;
-    Assert::same(Karma::KARMA_DARK, Karma::getPredominant(... $karma));
+    $whiteKarma = $darkKarma = 0;
+    Assert::same(Karma::KARMA_NEUTRAL, Karma::getPredominant($whiteKarma, $darkKarma));
+    $whiteKarma = 5;
+    Assert::same(Karma::KARMA_NEUTRAL, Karma::getPredominant($whiteKarma, $darkKarma));
+    $whiteKarma = 6;
+    Assert::same(Karma::KARMA_WHITE, Karma::getPredominant($whiteKarma, $darkKarma));
+    $darkKarma = 11;
+    Assert::same(Karma::KARMA_NEUTRAL, Karma::getPredominant($whiteKarma, $darkKarma));
+    $darkKarma = 12;
+    Assert::same(Karma::KARMA_DARK, Karma::getPredominant($whiteKarma, $darkKarma));
   }
 }
 

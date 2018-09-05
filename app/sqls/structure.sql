@@ -24,7 +24,6 @@ CREATE TABLE `characters` (
   `owner` int(11) NOT NULL,
   `current_stage` int(11) DEFAULT NULL,
   `white_karma` int(2) DEFAULT '0',
-  `neutral_karma` int(2) DEFAULT '0',
   `dark_karma` int(2) DEFAULT '0',
   `intro` int(2) DEFAULT '1',
   `joined` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
