@@ -48,14 +48,31 @@ final class CombatHelper {
     }
     return $skills;
   }
-  
+
+  /**
+   * @return \HeroesofAbenez\Combat\Equipment[]
+   */
+  protected function getPlayerEquipment(\HeroesofAbenez\Orm\Character $character): array {
+    $equipment = [];
+    foreach($character->equipment as $row) {
+      if(!$row->worn) {
+        continue;
+      }
+      /** @var \HeroesofAbenez\Orm\Equipment $item */
+      $item = $this->equipmentModel->view($row->item->id);
+      $item->worn = true;
+      $equipment[] = $item->toCombatEquipment();
+    }
+    return $equipment;
+  }
+
   /**
    * Get data for specified player
    *
    * @throws OpponentNotFoundException
    */
   public function getPlayer(int $id): Character {
-    $data = $equipment = $pets = [];
+    $data = $pets = [];
     $character = $this->orm->characters->getById($id);
     if(is_null($character)) {
       throw new OpponentNotFoundException();
@@ -76,16 +93,8 @@ final class CombatHelper {
     if(!is_null($pet)) {
       $pets[] = $pet->toCombatPet();
     }
-    foreach($character->equipment as $row) {
-      if(!$row->worn) {
-        continue;
-      }
-      /** @var \HeroesofAbenez\Orm\Equipment $item */
-      $item = $this->equipmentModel->view($row->item->id);
-      $item->worn = true;
-      $equipment[] = $item->toCombatEquipment();
-    }
     $skills = $this->getPlayerSkills($character);
+    $equipment = $this->getPlayerEquipment($character);
     $player = new Character($data, $equipment, $pets, $skills);
     return $player;
   }
@@ -123,6 +132,28 @@ final class CombatHelper {
     });
     return $skills;
   }
+
+  /**
+   * @return \HeroesofAbenez\Combat\Equipment[]
+   */
+  protected function getArenaNpcEquipment(\HeroesofAbenez\Orm\PveArenaOpponent $npc): array {
+    $equipment = [];
+    if(!is_null($npc->weapon)) {
+      $weapon = $this->equipmentModel->view($npc->weapon->id);
+      if(!is_null($weapon)) {
+        $weapon->worn = true;
+        $equipment[] = $weapon->toCombatEquipment();
+      }
+    }
+    if(!is_null($npc->armor)) {
+      $armor = $this->equipmentModel->view($npc->armor->id);
+      if(!is_null($armor)) {
+        $armor->worn = true;
+        $equipment[] = $armor->toCombatEquipment();
+      }
+    }
+    return $equipment;
+  }
   
   /**
    * Get data for specified npc
@@ -149,22 +180,8 @@ final class CombatHelper {
     $data["id"] = "pveArenaNpc" . $npc->id;
     $occupation = $npc->occupation;
     $data["initiativeFormula"] = $occupation->initiative;
-    $equipment = [];
+    $equipment = $this->getArenaNpcEquipment($npc);
     $skills = $this->getArenaNpcSkills($npc);
-    if(!is_null($npc->weapon)) {
-      $weapon = $this->equipmentModel->view($npc->weapon->id);
-      if(!is_null($weapon)) {
-        $weapon->worn = true;
-        $equipment[] = $weapon->toCombatEquipment();
-      }
-    }
-    if(!is_null($npc->armor)) {
-      $armor = $this->equipmentModel->view($npc->armor->id);
-      if(!is_null($armor)) {
-        $armor->worn = true;
-        $equipment[] = $armor->toCombatEquipment();
-      }
-    }
     $npc = new Character($data, $equipment, [], $skills);
     return $npc;
   }
