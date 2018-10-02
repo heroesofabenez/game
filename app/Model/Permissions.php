@@ -52,7 +52,7 @@ final class Permissions {
   /**
    * Get permissions (from db or cache)
    * 
-   * @return \stdClass[]
+   * @return array[]
    */
   public function getPermissions(): array {
     $roles = $this->getRoles();
