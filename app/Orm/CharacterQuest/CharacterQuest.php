@@ -10,9 +10,11 @@ namespace HeroesofAbenez\Orm;
  * @property int $id {primary}
  * @property Character $character {m:1 Character::$quests}
  * @property Quest $quest {m:1 Quest::$characterQuests}
- * @property int $progress {default 1}
+ * @property int $progress {default static::PROGRESS_STARTED}
  */
 final class CharacterQuest extends \Nextras\Orm\Entity\Entity {
-  
+  public const PROGRESS_OFFERED = 0;
+  public const PROGRESS_STARTED = 1;
+  public const PROGRESS_FINISHED = 3;
 }
 ?>

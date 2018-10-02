@@ -68,7 +68,7 @@ final class Quest {
   public function status(int $id): int {
     $row = $this->orm->characterQuests->getByCharacterAndQuest($this->user->id, $id);
     if(is_null($row)) {
-      return 0;
+      return \HeroesofAbenez\Orm\CharacterQuest::PROGRESS_OFFERED;
     }
     return $row->progress;
   }
@@ -78,7 +78,7 @@ final class Quest {
    */
   public function isFinished(int $id): bool {
     $status = $this->status($id);
-    return ($status > 2);
+    return ($status >= \HeroesofAbenez\Orm\CharacterQuest::PROGRESS_FINISHED);
   }
 }
 ?>

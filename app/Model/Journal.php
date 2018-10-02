@@ -102,7 +102,7 @@ final class Journal {
     $return = [];
     $quests = $this->orm->characterQuests->findByCharacter($this->user->id);
     foreach($quests as $quest) {
-      if($quest->progress < 3) {
+      if($quest->progress < \HeroesofAbenez\Orm\CharacterQuest::PROGRESS_FINISHED) {
         $return[] = (object) [
           "id" => $quest->quest->id, "name" => $quest->quest->name
         ];

@@ -153,7 +153,7 @@ final class NPCQuestsControl extends \Nette\Application\UI\Control {
     }
     /** @var CharacterQuest $record */
     $record = $this->orm->characterQuests->getByCharacterAndQuest($this->user->id, $questId);
-    $record->progress = 3;
+    $record->progress = CharacterQuest::PROGRESS_FINISHED;
     if($quest->itemLose) {
       $this->itemModel->loseItem($quest->neededItem, $quest->itemAmount);
     }
