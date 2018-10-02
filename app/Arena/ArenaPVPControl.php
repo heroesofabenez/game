@@ -35,8 +35,8 @@ final class ArenaPVPControl extends ArenaControl {
    * @return int[]
    */
   protected function calculateRewards(Character $player, Character $opponent): array {
-    $experience = round($opponent->level / 5) + 1;
-    $money = round($opponent->level / 2) + 3;
+    $experience = (int) round($opponent->level / 5) + 1;
+    $money = (int) round($opponent->level / 2) + 3;
     if($opponent->level > $player->level) {
       $experience += 2;
       $money += 3;

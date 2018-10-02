@@ -22,7 +22,7 @@ final class ChatMessage extends \Nextras\Orm\Entity\Entity {
   }
   
   public function onBeforeInsert(): void {
-    $this->when = time();
+    $this->when = new \DateTimeImmutable();
   }
 }
 ?>

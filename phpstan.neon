@@ -11,3 +11,8 @@ parameters:
         - '#Method Nette\\Localization\\ITranslator::translate\(\) invoked with 3 parameters, 1-2 required#'
         - '#Property HeroesofAbenez\\Orm\\[a-zA-Z0-9_]+::\$[a-zA-Z0-9_]+ \(HeroesofAbenez\\Orm\\[a-zA-Z0-9_]+|null\) does not accept int#'
         - '#Method HeroesofAbenez\\Orm\[a-zA-Z0-9\\_]+::[a-zA-Z0-9_]+ should return HeroesofAbenez\\Orm[a-zA-Z0-9\\_]+|null but returns Nextras\\Orm\\IEntity|null#'
+        - '#Parameter \#1 \$input of static method Nette\\Neon\\Neon::decode\(\) expects string, string\|false given#'
+        - '#Method HeroesofAbenez\\Model\\DI\\HOAExtension::getUserToCharacterMapper\(\) should return string but returns HeroesofAbenez\\Model\\IUserToCharacterMapper#'
+        - '#Call to an undefined method Nette\\ComponentModel\\IComponent::getControlPrototype\(\)#'
+        - '#Access to an undefined property Nette\\ComponentModel\\IComponent::\$value#'
+        - "#Strict comparison using === between 'special' and 'special' will always evaluate to true#"

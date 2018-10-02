@@ -15,7 +15,7 @@ final class ProductionUserToCharacterMapper implements IUserToCharacterMapper {
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     $uid = curl_exec($ch);
     curl_close($ch);
-    return $uid;
+    return (int) $uid;
   }
 }
 ?>
