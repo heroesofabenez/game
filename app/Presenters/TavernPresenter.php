@@ -22,7 +22,7 @@ final class TavernPresenter extends BasePresenter {
   /**
    * Use just one template for this presenter
    */
-  public function formatTemplateFiles() {
+  public function formatTemplateFiles(): array {
     return [__DIR__ . "/../templates/Tavern.@layout.latte"];
   }
   

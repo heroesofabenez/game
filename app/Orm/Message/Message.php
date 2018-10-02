@@ -21,7 +21,7 @@ final class Message extends \Nextras\Orm\Entity\Entity {
     return $this->sent->format("Y-m-d H:i:s");
   }
   
-  public function onBeforeInsert() {
+  public function onBeforeInsert(): void {
     $this->sent = new \DateTimeImmutable();
   }
 }

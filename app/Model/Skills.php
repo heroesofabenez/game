@@ -161,7 +161,7 @@ final class Skills {
    * @throws SkillMaxLevelReachedException
    * @throws CannotLearnSkillException
    */
-  public function trainSkill(int $id, string $type) {
+  public function trainSkill(int $id, string $type): void {
     if(!in_array($type, ["attack", "special"], true)) {
       throw new InvalidSkillTypeException();
     } elseif($this->getSkillPoints() < 1) {

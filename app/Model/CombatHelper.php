@@ -129,7 +129,7 @@ final class CombatHelper {
    *
    * @throws OpponentNotFoundException
    */
-  public function getArenaNpc($id): Character {
+  public function getArenaNpc(int $id): Character {
     $data = [];
     $npc = $this->orm->arenaNpcs->getById($id);
     if(is_null($npc)) {

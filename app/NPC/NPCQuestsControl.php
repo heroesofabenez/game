@@ -40,7 +40,7 @@ final class NPCQuestsControl extends \Nette\Application\UI\Control {
     $this->translator = $translator;
   }
   
-  public function setNpc(Npc $npc) {
+  public function setNpc(Npc $npc): void {
     $this->npc = $npc;
   }
   

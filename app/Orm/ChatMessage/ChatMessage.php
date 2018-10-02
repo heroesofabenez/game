@@ -21,7 +21,7 @@ final class ChatMessage extends \Nextras\Orm\Entity\Entity {
     return $this->when->format("Y-m-d H:i:s");
   }
   
-  public function onBeforeInsert() {
+  public function onBeforeInsert(): void {
     $this->when = time();
   }
 }

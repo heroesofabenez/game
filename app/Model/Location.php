@@ -33,11 +33,11 @@ final class Location {
     $this->orm = $orm;
   }
   
-  public function setUser(\Nette\Security\User $user) {
+  public function setUser(\Nette\Security\User $user): void {
     $this->user = $user;
   }
   
-  public function setNpcModel(NPC $npcModel) {
+  public function setNpcModel(NPC $npcModel): void {
     $this->npcModel = $npcModel;
   }
   

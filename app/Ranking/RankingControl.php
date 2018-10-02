@@ -30,7 +30,7 @@ abstract class RankingControl extends \Nette\Application\UI\Control {
     $this->lastCol = $lastCol;
   }
   
-  public function setPaginator(\Nette\Utils\Paginator $paginator) {
+  public function setPaginator(\Nette\Utils\Paginator $paginator): void {
     $this->paginator = $paginator;
   }
   

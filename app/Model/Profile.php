@@ -33,7 +33,7 @@ final class Profile {
     $this->petModel = $petModel;
   }
   
-  public function setUser(\Nette\Security\User $user) {
+  public function setUser(\Nette\Security\User $user): void {
     $this->user = $user;
   }
   

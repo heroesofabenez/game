@@ -25,7 +25,7 @@ final class Pet {
     $this->orm = $orm;
   }
   
-  public function setUser(\Nette\Security\User $user) {
+  public function setUser(\Nette\Security\User $user): void {
     $this->user = $user;
   }
   

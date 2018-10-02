@@ -24,7 +24,7 @@ final class NPCDialogueControl extends \Nette\Application\UI\Control {
     $this->user = $user;
   }
   
-  public function setNpc(Npc $npc) {
+  public function setNpc(Npc $npc): void {
     $this->npc = $npc;
   }
   

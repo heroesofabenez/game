@@ -63,7 +63,7 @@ final class Character extends \Nextras\Orm\Entity\Entity {
     return Karma::getPredominant($this->whiteKarma, $this->darkKarma);
   }
   
-  public function onBeforeInsert() {
+  public function onBeforeInsert(): void {
     $this->joined = new \DateTimeImmutable();
   }
 }

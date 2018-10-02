@@ -18,11 +18,11 @@ final class ArenaPresenter extends BasePresenter {
     $this->template->id = $id;
   }
   
-  protected function createComponentArenaPVE(Arena\IArenaPVEControlFactory $factory) {
+  protected function createComponentArenaPVE(Arena\IArenaPVEControlFactory $factory): Arena\ArenaPVEControl {
     return $factory->create();
   }
   
-  protected function createComponentArenaPVP(Arena\IArenaPVPControlFactory $factory) {
+  protected function createComponentArenaPVP(Arena\IArenaPVPControlFactory $factory): Arena\ArenaPVPControl {
     return $factory->create();
   }
 }

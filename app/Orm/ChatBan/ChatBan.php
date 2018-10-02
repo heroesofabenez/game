@@ -15,7 +15,7 @@ namespace HeroesofAbenez\Orm;
  * @property \DateTimeImmutable|null $revoken {default null}
  */
 final class ChatBan extends \Nextras\Orm\Entity\Entity {
-  public function onBeforeInsert() {
+  public function onBeforeInsert(): void {
     $this->since = new \DateTimeImmutable();
   }
 }

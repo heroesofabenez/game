@@ -14,6 +14,7 @@ use HeroesofAbenez\Model\DevelopmentUserToCharacterMapper;
  * @author Jakub Konečný
  */
 final class HOAExtension extends \Nette\DI\CompilerExtension {
+  /** @var array */
   protected $defaults = [
     "application" => [
       "server" => "",

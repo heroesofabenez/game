@@ -150,7 +150,7 @@ final class QuestDummy {
     return $this->progress;
   }
   
-  public function setProgress(bool $progress) {
+  public function setProgress(bool $progress): void {
     $this->progress = $progress;
   }
 }
