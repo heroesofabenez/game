@@ -19,6 +19,8 @@ namespace HeroesofAbenez\Orm;
  * @property-read bool $itemLose
  * @property-read int $rewardMoney
  * @property-read int $rewardXp
+ * @property-read int $rewardWhiteKarma
+ * @property-read int $rewardDarkKarma
  * @property-read int|null $rewardItem
  * @property-read int $npcStart
  * @property-read int $npcEnd
@@ -55,6 +57,10 @@ final class QuestDummy {
   /** @var int|null */
   protected $rewardItem;
   /** @var int */
+  protected $rewardWhiteKarma;
+  /** @var int */
+  protected $rewardDarkKarma;
+  /** @var int */
   protected $npcStart;
   /** @var int */
   protected $npcEnd;
@@ -77,6 +83,8 @@ final class QuestDummy {
     $this->rewardMoney = $quest->rewardMoney;
     $this->rewardXp = $quest->rewardXp;
     $this->rewardItem = (!is_null($quest->rewardItem)) ? $quest->rewardItem->id : null;
+    $this->rewardWhiteKarma = $quest->rewardWhiteKarma;
+    $this->rewardDarkKarma = $quest->rewardDarkKarma;
     $this->npcStart = $quest->npcStart->id;
     $this->npcEnd = $quest->npcEnd->id;
     $this->order = $quest->order;
@@ -133,7 +141,15 @@ final class QuestDummy {
   public function getRewardItem(): ?int {
     return $this->rewardItem;
   }
-  
+
+  public function getRewardWhiteKarma(): int {
+    return $this->rewardWhiteKarma;
+  }
+
+  public function getRewardDarkKarma(): int {
+    return $this->rewardDarkKarma;
+  }
+
   public function getNpcStart(): int {
     return $this->npcStart;
   }

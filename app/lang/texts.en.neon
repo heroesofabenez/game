@@ -136,6 +136,7 @@ quest:
     rewards: "Rewards:"
     rewardMoney: "{1} 1 silver mark|[0,+Inf[ %count% silver marks"
     rewardXP: "{1} 1 experience|]1,+Inf[ %count% experiences"
+    rewardKarma: "%whiteKarma% white karma, %darkKarma% dark karma"
     notFoundTitle: "Quest not found"
     notFound: "Requested quest was not found."
 profile: 

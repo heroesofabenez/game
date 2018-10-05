@@ -370,6 +370,8 @@ CREATE TABLE `quests` (
   `reward_money` int(4) NOT NULL,
   `reward_xp` int(4) NOT NULL,
   `reward_item` int(11) DEFAULT NULL,
+  `reward_white_karma` int(2) NULL DEFAULT '0',
+  `reward_dark_karma` int(2) NULL DEFAULT '0',
   `npc_start` int(3) NOT NULL,
   `npc_end` int(3) NOT NULL,
   `order` int(2) NOT NULL,

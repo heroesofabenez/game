@@ -136,6 +136,7 @@ quest:
     rewards: "Odměny:"
     rewardMoney: "{0} 0 stříbrňáků|{1} 1 stříbrňák|[2,4] %count% stříbrňáky|[5,+Inf] %count% stříbrňáků"
     rewardXP: "{0} 0 zkušeností|{1} 1 zkušenost|[2,4] %count% zkušenosti|[5,+Inf] %count% zkušeností"
+    rewardKarma: "%whiteKarma% bílé karma, %darkKarma% temné karmy"
     notFoundTitle: "Úkol nenelezen"
     notFound: "Požadovaný úkol nebyl nalezen."
 profile: 

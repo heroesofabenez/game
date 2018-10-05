@@ -166,6 +166,12 @@ final class NPCQuestsControl extends \Nette\Application\UI\Control {
     if($quest->rewardItem > 0) {
       $this->itemModel->giveItem($quest->rewardItem);
     }
+    if($quest->rewardWhiteKarma > 0) {
+      $record->character->whiteKarma += $quest->rewardWhiteKarma;
+    }
+    if($quest->rewardDarkKarma > 0) {
+      $record->character->darkKarma += $quest->rewardDarkKarma;
+    }
     $this->orm->characterQuests->persistAndFlush($record);
     $this->presenter->flashMessage($this->translator->translate("messages.quest.finished"));
     $this->presenter->redirect("Quest:view", $quest->id);

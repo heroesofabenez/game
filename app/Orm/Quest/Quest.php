@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace HeroesofAbenez\Orm;
 
 use Nextras\Orm\Relationships\OneHasMany;
+use Nexendrie\Utils\Numbers;
 
 /**
  * Quest
@@ -22,6 +23,8 @@ use Nextras\Orm\Relationships\OneHasMany;
  * @property bool $itemLose {default true}
  * @property int $rewardMoney
  * @property int $rewardXp
+ * @property int $rewardWhiteKarma {default 0}
+ * @property int $rewardDarkKarma {default 0}
  * @property Item|null $rewardItem {m:1 Item::$rewardedForQuests}
  * @property Npc $npcStart {m:1 Npc::$startQuests}
  * @property Npc $npcEnd {m:1 Npc::$endQuests}
@@ -29,6 +32,13 @@ use Nextras\Orm\Relationships\OneHasMany;
  * @property OneHasMany|CharacterQuest[] $characterQuests {1:m CharacterQuest::$quest}
  */
 final class Quest extends \Nextras\Orm\Entity\Entity {
-  
+  public function setterRewardWhiteKarma(int $value): int {
+    return $this->rewardWhiteKarma = Numbers::range($value, 0, 99);
+  }
+
+  public function setterRewardDarkKarma(int $value): int {
+    return $this->rewardDarkKarma = Numbers::range($value, 0, 99);
+  }
+
 }
 ?>
