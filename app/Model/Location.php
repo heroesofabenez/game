@@ -18,9 +18,7 @@ use Nextras\Orm\Collection\ICollection;
  */
 final class Location {
   use \Nette\SmartObject;
-  
-  /** @var \Nette\Caching\Cache */
-  protected $cache;
+
   /** @var ORM */
   protected $orm;
   /** @var \Nette\Security\User */
@@ -28,8 +26,7 @@ final class Location {
   /** @var \HeroesofAbenez\Model\NPC */
   protected $npcModel;
   
-  public function __construct(\Nette\Caching\Cache $cache, ORM $orm) {
-    $this->cache = $cache;
+  public function __construct(ORM $orm) {
     $this->orm = $orm;
   }
   
