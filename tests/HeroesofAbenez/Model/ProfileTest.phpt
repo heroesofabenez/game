@@ -4,9 +4,6 @@ declare(strict_types=1);
 namespace HeroesofAbenez\Model;
 
 use Tester\Assert;
-use HeroesofAbenez\Orm\CharacterRace;
-use HeroesofAbenez\Orm\CharacterClass;
-use HeroesofAbenez\Orm\CharacterSpecialization;
 use Nextras\Orm\Collection\ICollection;
 
 require __DIR__ . "/../../bootstrap.php";
@@ -26,54 +23,9 @@ final class ProfileTest extends \Tester\TestCase {
     Assert::type(ICollection::class, $list);
   }
   
-  public function testGetRace() {
-    Assert::type(CharacterRace::class, $this->model->getRace(1));
-    Assert::null($this->model->getRace(5000));
-  }
-  
-  public function testGetRaceName() {
-    Assert::notSame("", $this->model->getRaceName(1));
-    Assert::same("", $this->model->getRaceName(5000));
-  }
-  
   public function testGetClassesList() {
     $list = $this->model->getClassesList();
     Assert::type(ICollection::class, $list);
-  }
-  
-  public function testGetClass() {
-    Assert::type(CharacterClass::class, $this->model->getClass(1));
-    Assert::null($this->model->getClass(5000));
-  }
-  
-  public function testGetClassName() {
-    Assert::notSame("", $this->model->getClassName(1));
-    Assert::same("", $this->model->getClassName(5000));
-  }
-  
-  public function testGetSpecialization() {
-    Assert::type(CharacterSpecialization::class, $this->model->getSpecialization(1));
-    Assert::null($this->model->getSpecialization(5000));
-  }
-  
-  public function testGetSpecializationName() {
-    Assert::notSame("", $this->model->getSpecializationName(1));
-    Assert::same("", $this->model->getSpecializationName(5000));
-  }
-  
-  public function testGetCharacterId() {
-    Assert::same(0, $this->model->getCharacterId("abc"));
-    Assert::same(1, $this->model->getCharacterId("James The Invisible"));
-  }
-  
-  public function testGetCharacterName() {
-    Assert::same("", $this->model->getCharacterName(0));
-    Assert::same("James The Invisible", $this->model->getCharacterName(1));
-  }
-  
-  public function testGetCharacterGuild() {
-    Assert::same(0, $this->model->getCharacterGuild(0));
-    Assert::same(1, $this->model->getCharacterGuild(1));
   }
   
   public function testView() {

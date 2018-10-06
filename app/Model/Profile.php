@@ -6,7 +6,6 @@ namespace HeroesofAbenez\Model;
 use HeroesofAbenez\Orm\CharacterRace;
 use HeroesofAbenez\Orm\CharacterClass;
 use HeroesofAbenez\Orm\Model as ORM;
-use HeroesofAbenez\Orm\CharacterSpecialization;
 use Nextras\Orm\Entity\IEntity;
 use Nextras\Orm\Collection\ICollection;
 
@@ -47,101 +46,12 @@ final class Profile {
   }
   
   /**
-   * Get data about specified race
-   */
-  public function getRace(int $id): ?CharacterRace {
-    return $this->orm->races->getById($id);
-  }
-  
-  /**
-   * Get name of specified race
-   */
-  public function getRaceName(int $id): string {
-    $race = $this->getRace($id);
-    if(is_null($race)) {
-      return "";
-    }
-    return $race->name;
-  }
-  
-  /**
    * Get list of classes
    * 
    * @return ICollection|CharacterClass[]
    */
   public function getClassesList(): ICollection {
     return $this->orm->classes->findAll();
-  }
-  
-  /**
-   * Get data about specified class
-   */
-  public function getClass(int $id): ?CharacterClass {
-    return $this->orm->classes->getById($id);
-  }
-  
-  /**
-   * Get name of specified class
-   */
-  public function getClassName(int $id): string {
-    $class = $this->getClass($id);
-    if(is_null($class)) {
-      return "";
-    }
-    return $class->name;
-  }
-  
-  /**
-   * Get data about specified specialization
-   */
-  public function getSpecialization(int $id): ?CharacterSpecialization {
-    return $this->orm->specializations->getById($id);
-  }
-  
-  /**
-   * Get name of specified specialization
-   */
-  public function getSpecializationName(int $id): string {
-    $specialization = $this->getSpecialization($id);
-    if(is_null($specialization)) {
-      return "";
-    }
-    return $specialization->name;
-  }
-  
-  /**
-   * Get character's id
-   */
-  public function getCharacterId(string $name): int {
-    $character = $this->orm->characters->getByName($name);
-    if(is_null($character)) {
-      return 0;
-    }
-    return $character->id;
-  }
-  
-  /**
-   * Get character's name
-   */
-  public function getCharacterName(int $id): string {
-    $character = $this->orm->characters->getById($id);
-    if(is_null($character)) {
-      return "";
-    }
-    return $character->name;
-  }
-  
-  /**
-   * Get character's guild
-   */
-  public function getCharacterGuild(int $id): int {
-    $char = $this->orm->characters->getById($id);
-    if(is_null($char)) {
-      return 0;
-    } elseif(is_null($char->guild)) {
-      return 0;
-    }
-    return $char->guild->id;
   }
   
   /**
@@ -213,7 +123,7 @@ final class Profile {
     }
     $this->orm->characters->persistAndFlush($character);
   }
-  
+
   /**
    * Get amount of user's usable stat points
    */
@@ -222,7 +132,7 @@ final class Profile {
     $character = $this->orm->characters->getById($this->user->id);
     return (int) $character->statPoints;
   }
-  
+
   /**
    * Get user's stats
    * 
