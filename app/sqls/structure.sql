@@ -291,6 +291,7 @@ CREATE TABLE `npcs` (
   `portrait` varchar(35) NOT NULL,
   `stage` int(11) NOT NULL,
   `karma` enum('white','neutral','dark') NOT NULL,
+  `personality` enum('friendly','crazy', 'shy') NOT NULL,
   `pos_x` int(3) NOT NULL,
   `pos_y` int(3) NOT NULL,
   PRIMARY KEY (`id`),

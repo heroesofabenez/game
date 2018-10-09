@@ -18,16 +18,20 @@ use Nextras\Orm\Relationships\OneHasMany;
  * @property string $portrait
  * @property QuestStage $stage {m:1 QuestStage::$npcs}
  * @property string $karma {enum \HeroesofAbenez\Utils\Karma::KARMA_*}
+ * @property string $personality {enum static::PERSONALITY_*}
  * @property int $posX
  * @property int $posY
  * @property OneHasMany|ShopItem[] $items {1:m ShopItem::$npc}
  * @property OneHasMany|Quest[] $startQuests {1:m Quest::$npcStart}
- * @property OneHasMany|Quest $endQuests {1:m Quest::$npcEnd}
+ * @property OneHasMany|Quest[] $endQuests {1:m Quest::$npcEnd}
  */
 final class Npc extends \Nextras\Orm\Entity\Entity {
   public const TYPE_QUEST = "quest";
   public const TYPE_SHOP = "shop";
   public const TYPE_COMMON = "common";
   public const TYPE_ENEMY = "enemy";
+  public const PERSONALITY_FRIENDLY = "friendly";
+  public const PERSONALITY_CRAZY = "crazy";
+  public const PERSONALITY_SHY = "shy";
 }
 ?>

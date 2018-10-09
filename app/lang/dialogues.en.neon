@@ -9,3 +9,17 @@ friendly:
         - "npc: Oh, #playerName#, long time one see. How are you doing?"
         - "player: Hail, #npcName#. I am fine and you?"
         - "npc: Everything is alright here."
+crazy:
+    -
+        - "npc: Hey there, #playerName#. What's up?"
+        - "player: Not much, #npcName#. Just killing time. Anything interesting happening here?"
+        - "npc: I wish but nay."
+    -
+        - "npc: Hi, #playerName#! I'm going to blow something up. What do you say?"
+        - "player: Sorry, #npcName#. I'm quite tired at the moment. Maybe later?"
+        - "npc: Oh, I see. Alright then."
+shy:
+    -
+        - "player: Hi, #npcName#. How are you?"
+        - "npc: Oh, #playerName#. H-hello. I-I am fine. And you?"
+        - "player: I am fine too."

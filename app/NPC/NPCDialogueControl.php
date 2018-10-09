@@ -48,11 +48,10 @@ final class NPCDialogueControl extends \Nette\Application\UI\Control {
   /**
    * Gets texts for current npc
    *
-   * @todo make it depend on player's identity and npc
+   * @todo make it depend also on player's identity
    */
   protected function getTexts(): array {
-    $personality = "friendly";
-    $texts = $this->loader->getTexts()["dialogues"][$personality];
+    $texts = $this->loader->getTexts()["dialogues"][$this->npc->personality];
     $texts = $texts[rand(0, count($texts) - 1)];
     array_walk($texts, function(&$value) {
       $speaker = Strings::before($value, ": ");

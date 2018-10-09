@@ -1,7 +1,7 @@
 friendly:
     -
         - "npc: Zdravíčko, #playerName#. Můžu ti s něčím pomoc?"
-        - "player: Zdravím, #npcName#. Teď ne ale díky."
+        - "player: Zdravím, #npcName#. Teď ne, ale díky."
     -
         - "npc: Zdravím, #playerName#. Jsem teď trochu zaneprázdněn. Můžeš přijít později?"
         - "player: Samozřejmě."
@@ -9,3 +9,17 @@ friendly:
         - "npc: Á, #playerName#, dlouho jsme se neviděli. Jak se vede?"
         - "player: Zdravím, #npcName#. Mám se fajn. Co ty?"
         - "npc: Všechno je tu v pořádku."
+crazy:
+    -
+        - "npc: Nazdar, #playerName#. Co se děje?"
+        - "player: Nic moc, #npcName#, jenom zabíjím čas. Děje se tu něco zajímavého?"
+        - "npc: Kéžby, ale ne."
+    -
+        - "npc: Ahoj, #playerName#! Chci něco vyhodit do vzduchu. Co říkáš?"
+        - "player: Promiň, #npcName#, jsem celkem unavený. Možná později?"
+        - "npc: Aha, chápu. Tak dobře."
+shy:
+    -
+        - "player: Ahoj, #npcName#. Jak se máš?"
+        - "npc: Ó, #playerName#. A-ahoj. M-mám se dobře. A ty?"
+        - "player: Taky se mám dobře."
