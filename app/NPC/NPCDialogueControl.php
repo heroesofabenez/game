@@ -4,6 +4,8 @@ declare(strict_types=1);
 namespace HeroesofAbenez\NPC;
 
 use HeroesofAbenez\Orm\Npc;
+use Nexendrie\Translation\Loaders\ILoader;
+use Nette\Utils\Strings;
 
 /**
  * A set of dialogue lines, simplify working with them
@@ -16,12 +18,15 @@ use HeroesofAbenez\Orm\Npc;
 final class NPCDialogueControl extends \Nette\Application\UI\Control {
   /** @var \Nette\Security\User */
   protected $user;
+  /** @var ILoader */
+  protected $loader;
   /** @var Npc|null */
   protected $npc = null;
   
-  public function __construct(\Nette\Security\User $user) {
+  public function __construct(\Nette\Security\User $user, ILoader $loader) {
     parent::__construct();
     $this->user = $user;
+    $this->loader = $loader;
   }
   
   public function setNpc(Npc $npc): void {
@@ -43,24 +48,20 @@ final class NPCDialogueControl extends \Nette\Application\UI\Control {
   /**
    * Gets texts for current npc
    *
-   * @todo make it depend on player's identity and npc   
+   * @todo make it depend on player's identity and npc
    */
   protected function getTexts(): array {
-    $texts = [];
-    $texts[] = [
-      ["npc", "Greetings, #playerName#. Can I help you with anything?"],
-      ["player", "Hail, #npcName#. Not now but thank you."],
-    ];
-    $texts[] = [
-      ["npc", "Hail, #playerName#. I am quite busy at the moment. Can you come some other time?"],
-      ["player", "Of course."],
-    ];
-    $texts[] = [
-      ["npc", "Oh, #playerName#, long time one see. How are you doing?"],
-      ["player", "Hail, #npcName#. I am fine and you?"],
-      ["npc", "Everything is alright here."],
-    ];
-    return $texts[rand(0, count($texts) - 1)];
+    $personality = "friendly";
+    $texts = $this->loader->getTexts()["dialogues"][$personality];
+    $texts = $texts[rand(0, count($texts) - 1)];
+    array_walk($texts, function(&$value) {
+      $speaker = Strings::before($value, ": ");
+      $message = Strings::after($value, ": ");
+      $value = [
+        "speaker" => $speaker, "message" => $message,
+      ];
+    });
+    return $texts;
   }
   
   public function render(): void {
@@ -69,7 +70,7 @@ final class NPCDialogueControl extends \Nette\Application\UI\Control {
     $this->template->texts = [];
     $texts = $this->getTexts();
     foreach($texts as $text) {
-      $this->template->texts[] = new DialogueLine($text[0], $text[1], $this->names);
+      $this->template->texts[] = new DialogueLine($text["speaker"], $text["message"], $this->names);
     }
     $this->template->render();
   }

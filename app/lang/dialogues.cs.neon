@@ -1,0 +1,11 @@
+friendly:
+    -
+        - "npc: Zdravíčko, #playerName#. Můžu ti s něčím pomoc?"
+        - "player: Zdravím, #npcName#. Teď ne ale díky."
+    -
+        - "npc: Zdravím, #playerName#. Jsem teď trochu zaneprázdněn. Můžeš přijít později?"
+        - "player: Samozřejmě."
+    -
+        - "npc: Á, #playerName#, dlouho jsme se neviděli. Jak se vede?"
+        - "player: Zdravím, #npcName#. Mám se fajn. Co ty?"
+        - "npc: Všechno je tu v pořádku."
