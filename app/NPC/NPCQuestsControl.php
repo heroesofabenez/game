@@ -136,7 +136,7 @@ final class NPCQuestsControl extends \Nette\Application\UI\Control {
       $this->presenter->forward("notfound");
     }
     $status = $this->questModel->status($questId);
-    if($status === CharacterQuest::PROGRESS_OFFERED) {
+    if($status === CharacterQuest::PROGRESS_OFFERED OR $status === CharacterQuest::PROGRESS_FINISHED) {
       $this->presenter->flashMessage($this->translator->translate("errors.quest.notWorkingOn"));
       $this->presenter->redirect("Npc:quests", $quest->npcStart);
     }
