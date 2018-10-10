@@ -157,11 +157,8 @@ final class NPCQuestsControl extends \Nette\Application\UI\Control {
     if($quest->itemLose) {
       $this->itemModel->loseItem($quest->neededItem, $quest->itemAmount);
     }
-    if($quest->costMoney > 0) {
-      $record->character->money -= $quest->costMoney;
-    } else {
-      $record->character->money += $quest->rewardMoney;
-    }
+    $record->character->money -= $quest->costMoney;
+    $record->character->money += $quest->rewardMoney;
     $record->character->experience += $quest->rewardXp;
     if($quest->rewardItem > 0) {
       $this->itemModel->giveItem($quest->rewardItem);
