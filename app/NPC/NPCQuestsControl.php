@@ -112,22 +112,19 @@ final class NPCQuestsControl extends \Nette\Application\UI\Control {
    * Checks if the player accomplished specified quest's goals
    */
   protected function isCompleted(QuestEntity $quest): bool {
-    $haveMoney = $haveItem = false;
     if($quest->costMoney > 0) {
       /** @var \HeroesofAbenez\Orm\Character $char */
       $char = $this->orm->characters->getById($this->user->id);
-      if($char->money >= $quest->costMoney) {
-        $haveMoney = true;
+      if($quest->costMoney >= $char->money) {
+        return false;
       }
-    } else {
-      $haveMoney = true;
     }
-    if(is_int($quest->neededItem)) {
-      $haveItem = $this->itemModel->haveItem($quest->neededItem, $quest->itemAmount);
-    } else {
-      $haveItem = true;
+    if(!is_null($quest->neededItem)) {
+      if(!$this->itemModel->haveItem($quest->neededItem, $quest->itemAmount)) {
+        return false;
+      }
     }
-    return ($haveMoney AND $haveItem);
+    return true;
   }
   
   /**
