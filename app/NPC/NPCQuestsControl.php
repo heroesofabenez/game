@@ -174,6 +174,7 @@ final class NPCQuestsControl extends \Nette\Application\UI\Control {
     }
     $this->orm->characterQuests->persistAndFlush($record);
     $this->presenter->flashMessage($this->translator->translate("messages.quest.finished"));
+    $this->user->logout();
     $this->presenter->redirect("Quest:view", $quest->id);
   }
 }
