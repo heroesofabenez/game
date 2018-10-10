@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Orm;
 
+use Nexendrie\Utils\Numbers;
+
 /**
  * CharacterQuest
  *
@@ -16,5 +18,9 @@ final class CharacterQuest extends \Nextras\Orm\Entity\Entity {
   public const PROGRESS_OFFERED = 0;
   public const PROGRESS_STARTED = 1;
   public const PROGRESS_FINISHED = 3;
+
+  protected function setterProgress(int $value): int {
+    return Numbers::range($value, static::PROGRESS_OFFERED, static::PROGRESS_FINISHED);
+  }
 }
 ?>
