@@ -31,6 +31,7 @@ use Nexendrie\Utils\Numbers;
  * @property Npc $npcEnd {m:1 Npc::$endQuests}
  * @property int $order
  * @property OneHasMany|CharacterQuest[] $characterQuests {1:m CharacterQuest::$quest}
+ * @property bool $progress {default false} {virtual}
  */
 final class Quest extends \Nextras\Orm\Entity\Entity {
   public function setterRewardWhiteKarma(int $value): int {

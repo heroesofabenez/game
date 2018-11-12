@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace HeroesofAbenez\Model;
 
 use Tester\Assert;
-use HeroesofAbenez\Orm\QuestDummy as QuestEntity;
+use HeroesofAbenez\Orm\Quest as QuestEntity;
 
 require __DIR__ . "/../../bootstrap.php";
 
@@ -25,12 +25,13 @@ final class QuestTest extends \Tester\TestCase {
     $quests = $this->model->listOfQuests(1);
     Assert::type("array", $quests);
     Assert::type(QuestEntity::class, $quests[1]);
-    Assert::same(1, $quests[1]->npcStart);
+    Assert::same(1, $quests[1]->npcStart->id);
   }
   
   public function testView() {
     $quest = $this->model->view(1);
     Assert::type(QuestEntity::class, $quest);
+    Assert::null($this->model->view(5000));
   }
   
   public function testStatus() {

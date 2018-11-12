@@ -39,8 +39,8 @@ final class QuestPresenter extends BasePresenter {
     }
     $this->template->id = $quest->id;
     $this->template->finished = $this->model->isFinished($id);
-    $this->template->npcStart = $quest->npcStart;
-    $this->template->npcEnd = $this->translator->translate("npcs.$quest->npcEnd.name");
+    $this->template->npcStart = $quest->npcStart->id;
+    $this->template->npcEnd = $this->translator->translate("npcs.{$quest->npcEnd->id}.name");
     $requirements = [];
     if($quest->costMoney > 0) {
       $requirements[] = (object) [
@@ -48,17 +48,17 @@ final class QuestPresenter extends BasePresenter {
         "met" => false
       ];
     }
-    if(is_int($quest->neededItem)) {
-      $itemName = $this->translator->translate("items.$quest->neededItem.name");
-      $itemLink = $this->link("Item:view", $quest->neededItem);
-      $haveItem = $this->itemModel->haveItem($quest->neededItem, $quest->itemAmount);
+    if(!is_null($quest->neededItem)) {
+      $itemName = $this->translator->translate("items.{$quest->neededItem->id}.name");
+      $itemLink = $this->link("Item:view", $quest->neededItem->id);
+      $haveItem = $this->itemModel->haveItem($quest->neededItem->id, $quest->itemAmount);
       $requirements[] = (object) [
         "text" => $this->translator->translate("texts.quest.requirementGetItem", $quest->itemAmount, ["item" => "<a href=\"$itemLink\">$itemName</a>"]),
         "met" => $haveItem
       ];
     }
-    $npcLink = $this->link("Npc:view", $quest->npcEnd);
-    if($quest->npcStart != $quest->npcEnd) {
+    $npcLink = $this->link("Npc:view", $quest->npcEnd->id);
+    if($quest->npcStart->id != $quest->npcEnd->id) {
       $requirements[] = (object) [
         "text" => $this->translator->translate("texts.quest.requirementTalkToNpc", 0, ["npc" => "<a href=\"$npcLink\">{$this->template->npcEnd}</a>"]),
         "met" => false
@@ -72,10 +72,10 @@ final class QuestPresenter extends BasePresenter {
     $this->template->requirements = $requirements;
     $this->template->rewardMoney = $quest->rewardMoney;
     $this->template->rewardXp = $quest->rewardXp;
-    $this->template->rewardItem = (is_int($quest->rewardItem)) ? $quest->rewardItem : false;
+    $this->template->rewardItem = (!is_null($quest->rewardItem)) ? $quest->rewardItem->id : false;
     $this->template->rewardWhiteKarma = $quest->rewardWhiteKarma;
     $this->template->rewardDarkKarma = $quest->rewardDarkKarma;
-    $this->template->rewardPet = $quest->rewardPet;
+    $this->template->rewardPet = (!is_null($quest->rewardPet)) ? $quest->rewardPet->id : null;
   }
 }
 ?>

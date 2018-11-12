@@ -6,7 +6,7 @@ namespace HeroesofAbenez\NPC;
 use HeroesofAbenez\Model;
 use Nette\Localization\ITranslator;
 use HeroesofAbenez\Orm\Npc;
-use HeroesofAbenez\Orm\QuestDummy as QuestEntity;
+use HeroesofAbenez\Orm\Quest as QuestEntity;
 use HeroesofAbenez\Orm\Model as ORM;
 use HeroesofAbenez\Orm\CharacterQuest;
 
@@ -70,8 +70,8 @@ final class NPCQuestsControl extends \Nette\Application\UI\Control {
         if($this->user->identity->level < $quest->neededLevel) {
           unset($return[$key]);
         }
-      } elseif($quest->neededQuest > 0) {
-        if(!$this->questModel->isFinished($quest->id)) {
+      } elseif(!is_null($quest->neededQuest)) {
+        if(!$this->questModel->isFinished($quest->neededQuest->id)) {
           unset($return[$key]);
         }
       }
@@ -97,9 +97,9 @@ final class NPCQuestsControl extends \Nette\Application\UI\Control {
     $status = $this->questModel->status($questId);
     if($status > 0) {
       $this->presenter->flashMessage($this->translator->translate("errors.quest.workingOn"));
-      $this->presenter->redirect("Npc:quests", $quest->npcStart);
+      $this->presenter->redirect("Npc:quests", $quest->npcStart->id);
     }
-    if($quest->npcStart != $this->npc->id) {
+    if($quest->npcStart->id != $this->npc->id) {
       $this->presenter->flashMessage($this->translator->translate("errors.quest.cannotAcceptHere"));
       $this->presenter->redirect("Homepage:default");
     }
@@ -115,7 +115,7 @@ final class NPCQuestsControl extends \Nette\Application\UI\Control {
   /**
    * Checks if the player accomplished specified quest's goals
    */
-  protected function isCompleted(QuestEntity $quest): bool {
+  protected function isCompleted(\HeroesofAbenez\Orm\Quest $quest): bool {
     if($quest->costMoney > 0) {
       /** @var \HeroesofAbenez\Orm\Character $char */
       $char = $this->orm->characters->getById($this->user->id);
@@ -124,7 +124,7 @@ final class NPCQuestsControl extends \Nette\Application\UI\Control {
       }
     }
     if(!is_null($quest->neededItem)) {
-      if(!$this->itemModel->haveItem($quest->neededItem, $quest->itemAmount)) {
+      if(!$this->itemModel->haveItem($quest->neededItem->id, $quest->itemAmount)) {
         return false;
       }
     }
@@ -142,9 +142,9 @@ final class NPCQuestsControl extends \Nette\Application\UI\Control {
     $status = $this->questModel->status($questId);
     if($status === CharacterQuest::PROGRESS_OFFERED OR $status === CharacterQuest::PROGRESS_FINISHED) {
       $this->presenter->flashMessage($this->translator->translate("errors.quest.notWorkingOn"));
-      $this->presenter->redirect("Npc:quests", $quest->npcStart);
+      $this->presenter->redirect("Npc:quests", $quest->npcStart->id);
     }
-    if($quest->npcEnd != $this->npc->id) {
+    if($quest->npcEnd->id != $this->npc->id) {
       $this->presenter->flashMessage($this->translator->translate("errors.quest.cannotFinishHere"));
       $this->presenter->redirect("Homepage:default");
     }
@@ -156,16 +156,16 @@ final class NPCQuestsControl extends \Nette\Application\UI\Control {
     $record = $this->orm->characterQuests->getByCharacterAndQuest($this->user->id, $questId);
     $record->progress = CharacterQuest::PROGRESS_FINISHED;
     if($quest->itemLose) {
-      $this->itemModel->loseItem($quest->neededItem, $quest->itemAmount);
+      $this->itemModel->loseItem($quest->neededItem->id, $quest->itemAmount);
     }
     $record->character->money -= $quest->costMoney;
     $record->character->money += $quest->rewardMoney;
     $record->character->experience += $quest->rewardXp;
-    if($quest->rewardItem > 0) {
-      $this->itemModel->giveItem($quest->rewardItem);
+    if(!is_null($quest->rewardItem)) {
+      $this->itemModel->giveItem($quest->rewardItem->id);
     }
-    if($quest->rewardPet > 0) {
-      $this->petModel->givePet($quest->rewardPet);
+    if(!is_null($quest->rewardPet)) {
+      $this->petModel->givePet($quest->rewardPet->id);
     }
     $record->character->whiteKarma += $quest->rewardWhiteKarma;
     $record->character->darkKarma += $quest->rewardDarkKarma;

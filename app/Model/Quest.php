@@ -3,8 +3,7 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Model;
 
-use Nette\Utils\Arrays;
-use HeroesofAbenez\Orm\QuestDummy as QuestEntity;
+use HeroesofAbenez\Orm\Quest as QuestEntity;
 use HeroesofAbenez\Orm\Model as ORM;
 
 /**
@@ -35,18 +34,14 @@ final class Quest {
    * @return QuestEntity[]
    */
   public function listOfQuests(int $npc = 0): array {
-    $quests = $this->cache->load("quests", function() {
-      $return = [];
-      $quests = $this->orm->quests->findAll();
-      /** @var \HeroesofAbenez\Orm\Quest $quest */
-      foreach($quests as $quest) {
-        $return[$quest->id] = new QuestEntity($quest);
-      }
-      return $return;
-    });
+    $quests = [];
+    $records = $this->orm->quests->findAll();
+    foreach($records as $record) {
+      $quests[$record->id] = $record;
+    }
     if($npc > 0) {
       foreach($quests as $quest) {
-        if($quest->npcStart !== $npc OR $quest->npcEnd !== $npc) {
+        if($quest->npcStart->id !== $npc OR $quest->npcEnd->id !== $npc) {
           unset($quests[$quest->id]);
         }
       }
@@ -58,8 +53,7 @@ final class Quest {
    * Gets info about specified quest
    */
   public function view(int $id): ?QuestEntity {
-    $quests = $this->listOfQuests();
-    return Arrays::get($quests, $id, null);
+    return $this->orm->quests->getById($id);
   }
   
   /**
