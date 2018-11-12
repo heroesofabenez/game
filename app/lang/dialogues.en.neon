@@ -23,3 +23,16 @@ shy:
         - "player: Hi, #npcName#. How are you?"
         - "npc: Oh, #playerName#. H-hello. I-I am fine. And you?"
         - "player: I am fine too."
+hostile:
+    -
+        - "npc: Go away, #playerName#. I don't want to talk to you."
+        - "player: Fine, fine."
+reserved:
+    -
+        - "npc: #playerName#, please, leave me alone."
+        - "player: As you wish."
+teaching:
+    -
+        - "npc: Hail, #playerName#. Ready for the next leason?"
+        - "player: Greetings, #npcName#. I am quite tired at the moment. Maybe later."
+        - "npc: Sure, no problem."

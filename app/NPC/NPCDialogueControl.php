@@ -6,6 +6,7 @@ namespace HeroesofAbenez\NPC;
 use HeroesofAbenez\Orm\Npc;
 use Nexendrie\Translation\Loaders\ILoader;
 use Nette\Utils\Strings;
+use HeroesofAbenez\Utils\Karma;
 
 /**
  * A set of dialogue lines, simplify working with them
@@ -44,14 +45,55 @@ final class NPCDialogueControl extends \Nette\Application\UI\Control {
     $playerName = $this->user->identity->name;
     return [$npcName, $playerName];
   }
-  
+
+  protected function getNpcMood(): string {
+    $userKarma = Karma::getPredominant($this->user->identity->white_karma, $this->user->identity->dark_karma);
+    $userLevel = $this->user->identity->level;
+    $personality = $this->npc->personality;
+    $npcKarma = $this->npc->karma;
+    switch($personality) {
+      case Npc::PERSONALITY_FRIENDLY:
+      case Npc::PERSONALITY_CRAZY:
+        if(Karma::isOpposite($npcKarma, $userKarma)) {
+          return Npc::PERSONALITY_HOSTILE;
+        }
+        return $personality;
+      case Npc::PERSONALITY_SHY:
+        if(Karma::isOpposite($npcKarma, $userKarma)) {
+          return Npc::PERSONALITY_RESERVED;
+        }
+        return $personality;
+      case Npc::PERSONALITY_ELITIST:
+        if($userLevel < 15) {
+          return Npc::PERSONALITY_HOSTILE;
+        }
+        return Npc::PERSONALITY_FRIENDLY;
+      case Npc::PERSONALITY_TEACHING:
+        if($userLevel > 15) {
+          return Npc::PERSONALITY_FRIENDLY;
+        }
+        return $personality;
+      case Npc::PERSONALITY_RACIST:
+        if($this->user->identity->race !== $this->npc->race->id) {
+          return Npc::PERSONALITY_HOSTILE;
+        }
+        return Npc::PERSONALITY_CRAZY;
+      case Npc::PERSONALITY_MISOGYNIST:
+        if($this->user->identity->gender !== \HeroesofAbenez\Orm\Character::GENDER_MALE) {
+          return Npc::PERSONALITY_HOSTILE;
+        }
+        return Npc::PERSONALITY_CRAZY;
+      default:
+        return $personality;
+    }
+  }
+
   /**
    * Gets texts for current npc
-   *
-   * @todo make it depend also on player's identity
    */
   protected function getTexts(): array {
-    $texts = $this->loader->getTexts()["dialogues"][$this->npc->personality];
+    $mood = $this->getNpcMood();
+    $texts = $this->loader->getTexts()["dialogues"][$mood];
     $texts = $texts[rand(0, count($texts) - 1)];
     array_walk($texts, function(&$value) {
       $speaker = Strings::before($value, ": ");

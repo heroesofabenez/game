@@ -23,3 +23,16 @@ shy:
         - "player: Ahoj, #npcName#. Jak se máš?"
         - "npc: Ó, #playerName#. A-ahoj. M-mám se dobře. A ty?"
         - "player: Taky se mám dobře."
+hostile:
+    -
+        - "npc: Běž pryč, #playerName#. Nechci s tebou mluvit."
+        - "player: Dobrá, dobrá."
+reserved:
+    -
+        - "npc: #playerName#, prosím, nech mne být."
+        - "player: Jak si přeješ."
+teaching:
+    -
+        - "npc: Zdravím, #playerName#. Připraven na další lekci?"
+        - "player: Zdravíčko, #npcName#. Jsem celkem unavený. Možná později."
+        - "npc: Jistě, v pořádku."

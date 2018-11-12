@@ -33,5 +33,11 @@ final class Npc extends \Nextras\Orm\Entity\Entity {
   public const PERSONALITY_FRIENDLY = "friendly";
   public const PERSONALITY_CRAZY = "crazy";
   public const PERSONALITY_SHY = "shy";
+  public const PERSONALITY_HOSTILE = "hostile";
+  public const PERSONALITY_RESERVED = "reserved";
+  public const PERSONALITY_ELITIST = "elitist";
+  public const PERSONALITY_TEACHING = "teaching";
+  public const PERSONALITY_RACIST = "racist";
+  public const PERSONALITY_MISOGYNIST = "misogynist";
 }
 ?>
