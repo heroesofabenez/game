@@ -12,7 +12,6 @@ use Nexendrie\Utils\Numbers;
  * @author Jakub Konečný
  * @property int $id {primary}
  * @property string $name
- * @property string $description
  * @property int $strength
  * @property float $strengthGrow
  * @property int $dexterity

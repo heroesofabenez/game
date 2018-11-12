@@ -96,16 +96,14 @@ final class Journal {
    /**
    * Gets character's quests
    * 
-   * @return \stdClass[]
+   * @return int[]
    */
   public function quests(): array {
     $return = [];
     $quests = $this->orm->characterQuests->findByCharacter($this->user->id);
     foreach($quests as $quest) {
       if($quest->progress < \HeroesofAbenez\Orm\CharacterQuest::PROGRESS_FINISHED) {
-        $return[] = (object) [
-          "id" => $quest->quest->id, "name" => $quest->quest->name
-        ];
+        $return[] = $quest->quest->id;
       }
     }
     return $return;

@@ -12,7 +12,6 @@ use Nexendrie\Utils\Numbers;
  * @author Jakub Konečný
  * @property int $id {primary}
  * @property string $name
- * @property string $description
  * @property CharacterRace $race {m:1 CharacterRace::$npcs}
  * @property string $type {enum self::TYPE_*}
  * @property string $sprite

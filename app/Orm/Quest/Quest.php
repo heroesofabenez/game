@@ -12,8 +12,6 @@ use Nexendrie\Utils\Numbers;
  * @author Jakub Konečný
  * @property int $id {primary}
  * @property string $name
- * @property string $introduction
- * @property string $endText
  * @property int $costMoney {default 0}
  * @property Item|null $neededItem {m:1 Item::$neededForQuests}
  * @property Quest|null $neededQuest {m:1 Quest::$children}
@@ -41,6 +39,5 @@ final class Quest extends \Nextras\Orm\Entity\Entity {
   public function setterRewardDarkKarma(int $value): int {
     return $this->rewardDarkKarma = Numbers::range($value, 0, 99);
   }
-
 }
 ?>

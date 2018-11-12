@@ -46,7 +46,7 @@ final class JournalTest extends \Tester\TestCase {
     $quests = $this->model->quests();
     Assert::type("array", $quests);
     Assert::count(1, $quests);
-    Assert::type(\stdClass::class, $quests[0]);
+    Assert::type("int", $quests[0]);
   }
 }
 

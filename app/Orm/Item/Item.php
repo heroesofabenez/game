@@ -12,7 +12,6 @@ use Nexendrie\Utils\Numbers;
  * @author Jakub Konečný
  * @property int $id {primary}
  * @property string $name
- * @property string $description
  * @property string $image
  * @property int $price
  * @property OneHasMany|ShopItem[] $inShops {1:m ShopItem::$item}

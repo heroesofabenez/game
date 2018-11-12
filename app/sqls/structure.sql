@@ -61,7 +61,6 @@ CREATE TABLE `character_attack_skills` (
 CREATE TABLE `character_classes` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(7) NOT NULL,
-  `description` text NOT NULL,
   `strength` int(2) NOT NULL,
   `strength_grow` float NOT NULL,
   `dexterity` int(2) NOT NULL,
@@ -117,7 +116,6 @@ CREATE TABLE `character_quests` (
 CREATE TABLE `character_races` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(10) NOT NULL,
-  `description` text,
   `strength` int(2) NOT NULL DEFAULT '0',
   `dexterity` int(2) NOT NULL DEFAULT '0',
   `constitution` int(2) NOT NULL DEFAULT '0',
@@ -194,7 +192,6 @@ CREATE TABLE `combats` (
 CREATE TABLE `equipment` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(20) NOT NULL,
-  `description` text NOT NULL,
   `slot` enum('weapon','armor','shield','amulet', 'helmet') NOT NULL,
   `type` enum('sword','axe','club','dagger','spear','staff','bow','crossbow','throwing knife') DEFAULT NULL,
   `required_level` int(11) NOT NULL DEFAULT '1',
@@ -260,7 +257,6 @@ CREATE TABLE `introduction` (
 CREATE TABLE `items` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(25) COLLATE utf8_unicode_ci NOT NULL,
-  `description` text COLLATE utf8_unicode_ci NOT NULL,
   `image` varchar(25) COLLATE utf8_unicode_ci NOT NULL,
   `price` int(3) NOT NULL,
   PRIMARY KEY (`id`)
@@ -284,7 +280,6 @@ CREATE TABLE `messages` (
 CREATE TABLE `npcs` (
   `id` int(3) NOT NULL AUTO_INCREMENT,
   `name` varchar(20) NOT NULL,
-  `description` text NOT NULL,
   `race` int(11) NOT NULL,
   `type` enum('quest','shop','common','enemy') NOT NULL,
   `sprite` varchar(35) NOT NULL,
@@ -361,8 +356,6 @@ CREATE TABLE `pve_arena_opponents` (
 CREATE TABLE `quests` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(25) NOT NULL,
-  `introduction` text NOT NULL,
-  `end_text` text NOT NULL,
   `cost_money` int(3) NOT NULL DEFAULT '0',
   `needed_item` int(11) DEFAULT NULL,
   `needed_quest` int(3) DEFAULT NULL,

@@ -11,7 +11,6 @@ use Nextras\Orm\Relationships\OneHasMany;
  * @author Jakub Konečný
  * @property int $id {primary}
  * @property string $name
- * @property string $description
  * @property string $slot {enum \HeroesofAbenez\Combat\Equipment::SLOT_*}
  * @property string|null $type {enum \HeroesofAbenez\Combat\Weapon::TYPE_*}
  * @property int $requiredLevel {default 1}

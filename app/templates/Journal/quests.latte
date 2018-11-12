@@ -6,7 +6,7 @@
   {if count($quests) == 0}
   {else}
     {foreach $quests as $quest}
-  <a n:href="Quest:view $quest->id">{_"quests.$quest->id.name"}</a><br>
+  <a n:href="Quest:view $quest">{_"quests.$quest.name"}</a><br>
     {/foreach}
   {/if}
   <p>{_"texts.journal.chapters"} <a n:href="Journal:">{_"texts.journal.basic"}</a> <a n:href="Journal:inventory">{_"texts.journal.inventory"}</a> <a n:href="Journal:pets">{_"texts.journal.pets"}</a> {_"texts.journal.quests"}</p>
