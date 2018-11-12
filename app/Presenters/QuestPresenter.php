@@ -75,6 +75,7 @@ final class QuestPresenter extends BasePresenter {
     $this->template->rewardItem = (is_int($quest->rewardItem)) ? $quest->rewardItem : false;
     $this->template->rewardWhiteKarma = $quest->rewardWhiteKarma;
     $this->template->rewardDarkKarma = $quest->rewardDarkKarma;
+    $this->template->rewardPet = $quest->rewardPet;
   }
 }
 ?>

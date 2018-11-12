@@ -22,6 +22,8 @@ final class NPCQuestsControl extends \Nette\Application\UI\Control {
   protected $questModel;
   /** @var \HeroesofAbenez\Model\Item */
   protected $itemModel;
+  /** @var \HeroesofAbenez\Model\Pet */
+  protected $petModel;
   /** @var ORM */
   protected $orm;
   /** @var \Nette\Security\User */
@@ -31,11 +33,13 @@ final class NPCQuestsControl extends \Nette\Application\UI\Control {
   /** @var Npc */
   protected $npc;
   
-  public function __construct(Model\Quest $questModel, Model\Item $itemModel, ORM $orm, \Nette\Security\User $user, ITranslator $translator) {
+  public function __construct(Model\Quest $questModel, Model\Item $itemModel, Model\Pet $petModel, ORM $orm, \Nette\Security\User $user, ITranslator $translator) {
     parent::__construct();
     $this->questModel = $questModel;
     $this->itemModel = $itemModel;
+    $this->petModel = $petModel;
     $this->user = $user;
+    $this->petModel->user = $user;
     $this->orm = $orm;
     $this->translator = $translator;
   }
@@ -159,6 +163,9 @@ final class NPCQuestsControl extends \Nette\Application\UI\Control {
     $record->character->experience += $quest->rewardXp;
     if($quest->rewardItem > 0) {
       $this->itemModel->giveItem($quest->rewardItem);
+    }
+    if($quest->rewardPet > 0) {
+      $this->petModel->givePet($quest->rewardPet);
     }
     $record->character->whiteKarma += $quest->rewardWhiteKarma;
     $record->character->darkKarma += $quest->rewardDarkKarma;

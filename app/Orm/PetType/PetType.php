@@ -20,6 +20,7 @@ use Nexendrie\Utils\Numbers;
  * @property CharacterRace|null $requiredRace {m:1 CharacterRace::$petTypes}
  * @property int $cost {default 0}
  * @property OneHasMany|Pet[] $pets {1:m Pet::$type}
+ * @property OneHasMany|Quest[] $rewardedForQuests {1:m Quest::$rewardPet}
  */
 final class PetType extends \Nextras\Orm\Entity\Entity {
   public const STAT_STR = "str";

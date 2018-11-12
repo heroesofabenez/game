@@ -87,5 +87,23 @@ final class Pet {
     $pet->deployed = false;
     $this->orm->pets->persistAndFlush($pet);
   }
+
+  /**
+   * Give the player a pet of specified type (if they do not own one already)
+   */
+  public function givePet(int $type): void {
+    $petType = $this->viewType($type);
+    if(is_null($petType)) {
+      return;
+    }
+    if(!is_null($this->orm->pets->getByTypeAndOwner($petType, $this->user->id))) {
+      return;
+    }
+    $pet = new \HeroesofAbenez\Orm\Pet();
+    $this->orm->pets->attach($pet);
+    $pet->owner = $this->user->id;
+    $pet->type = $petType;
+    $this->orm->pets->persistAndFlush($pet);
+  }
 }
 ?>

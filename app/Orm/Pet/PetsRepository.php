@@ -46,5 +46,16 @@ final class PetsRepository extends \Nextras\Orm\Repository\Repository {
       "owner" => $owner
     ]);
   }
+
+  /**
+   * @param PetType|int $type
+   * @param Character|int $owner
+   */
+  public function getByTypeAndOwner($type, $owner): ?Pet {
+    return $this->getBy([
+      "type" => $type,
+      "owner" => $owner
+    ]);
+  }
 }
 ?>

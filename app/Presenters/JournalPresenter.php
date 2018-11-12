@@ -101,7 +101,6 @@ final class JournalPresenter extends BasePresenter {
   
   public function handleDeployPet(int $petId): void {
     try {
-      $this->petModel->user = $this->user;
       $this->petModel->deployPet($petId);
     } catch(PetNotFoundException $e) {
       $this->flashMessage($this->translator->translate("errors.pet.notFound"));

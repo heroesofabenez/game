@@ -26,6 +26,7 @@ use Nexendrie\Utils\Numbers;
  * @property int $rewardWhiteKarma {default 0}
  * @property int $rewardDarkKarma {default 0}
  * @property Item|null $rewardItem {m:1 Item::$rewardedForQuests}
+ * @property PetType|null $rewardPet {m:1 PetType::$rewardedForQuests}
  * @property Npc $npcStart {m:1 Npc::$startQuests}
  * @property Npc $npcEnd {m:1 Npc::$endQuests}
  * @property int $order

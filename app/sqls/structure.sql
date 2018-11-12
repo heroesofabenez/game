@@ -373,6 +373,7 @@ CREATE TABLE `quests` (
   `reward_item` int(11) DEFAULT NULL,
   `reward_white_karma` int(2) NULL DEFAULT '0',
   `reward_dark_karma` int(2) NULL DEFAULT '0',
+  `reward_pet` int(2) DEFAULT NULL,
   `npc_start` int(3) NOT NULL,
   `npc_end` int(3) NOT NULL,
   `order` int(2) NOT NULL,
@@ -382,7 +383,8 @@ CREATE TABLE `quests` (
   KEY `reward_item1` (`reward_item`),
   CONSTRAINT `quests_ibfk_1` FOREIGN KEY (`npc_start`) REFERENCES `npcs` (`id`),
   CONSTRAINT `quests_ibfk_2` FOREIGN KEY (`npc_end`) REFERENCES `npcs` (`id`),
-  CONSTRAINT `quests_ibfk_3` FOREIGN KEY (`reward_item`) REFERENCES `items` (`id`)
+  CONSTRAINT `quests_ibfk_3` FOREIGN KEY (`reward_item`) REFERENCES `items` (`id`),
+  CONSTRAINT `quests_ibfk_4` FOREIGN KEY (`reward_pet`) REFERENCES `pet_types` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `quest_areas` (
