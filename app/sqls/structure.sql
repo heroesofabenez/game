@@ -292,6 +292,7 @@ CREATE TABLE `npcs` (
   `stage` int(11) NOT NULL,
   `karma` enum('white','neutral','dark') NOT NULL,
   `personality` enum('friendly','crazy', 'shy', 'hostile', 'reserved', 'elitist', 'teaching', 'racist', 'misogynist') NOT NULL,
+  `level` int(3) NOT NULL DEFAULT '1',
   `pos_x` int(3) NOT NULL,
   `pos_y` int(3) NOT NULL,
   PRIMARY KEY (`id`),

@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace HeroesofAbenez\Orm;
 
 use Nextras\Orm\Relationships\OneHasMany;
+use Nexendrie\Utils\Numbers;
 
 /**
  * Npc
@@ -19,6 +20,7 @@ use Nextras\Orm\Relationships\OneHasMany;
  * @property QuestStage $stage {m:1 QuestStage::$npcs}
  * @property string $karma {enum \HeroesofAbenez\Utils\Karma::KARMA_*}
  * @property string $personality {enum static::PERSONALITY_*}
+ * @property int $level {default 1}
  * @property int $posX
  * @property int $posY
  * @property OneHasMany|ShopItem[] $items {1:m ShopItem::$npc}
@@ -39,5 +41,9 @@ final class Npc extends \Nextras\Orm\Entity\Entity {
   public const PERSONALITY_TEACHING = "teaching";
   public const PERSONALITY_RACIST = "racist";
   public const PERSONALITY_MISOGYNIST = "misogynist";
+
+  protected function setterLevel(int $value): int {
+    return Numbers::range($value, 1, 999);
+  }
 }
 ?>

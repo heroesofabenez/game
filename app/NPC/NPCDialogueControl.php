@@ -64,12 +64,12 @@ final class NPCDialogueControl extends \Nette\Application\UI\Control {
         }
         return $personality;
       case Npc::PERSONALITY_ELITIST:
-        if($userLevel < 15) {
+        if($userLevel < $this->npc->level) {
           return Npc::PERSONALITY_HOSTILE;
         }
         return Npc::PERSONALITY_FRIENDLY;
       case Npc::PERSONALITY_TEACHING:
-        if($userLevel > 15) {
+        if($userLevel > $this->npc->level) {
           return Npc::PERSONALITY_FRIENDLY;
         }
         return $personality;
