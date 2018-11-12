@@ -39,7 +39,7 @@ test:cc:
 
 test:css:
   stage: test
-  image: node:9
+  image: node:10
   before_script:
   - npm install -g csslint
   script:
