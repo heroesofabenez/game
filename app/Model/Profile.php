@@ -139,10 +139,9 @@ final class Profile {
    * @return int[]
    */
   public function getStats(): array {
-    $stats = ["strength", "dexterity", "constitution", "intelligence", "charisma",];
     $return = [];
     $char = $this->orm->characters->getById($this->user->id);
-    foreach($stats as $stat) {
+    foreach($this->stats as $stat) {
       $return[$stat] = $char->$stat;
     }
     return $return;
