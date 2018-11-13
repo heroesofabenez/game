@@ -13,7 +13,9 @@ use Nexendrie\Utils\Numbers;
  * @property int $id {primary}
  * @property string $name
  * @property CharacterRace $race {m:1 CharacterRace::$npcs}
- * @property string $type {enum self::TYPE_*}
+ * @property bool $quests {default false}
+ * @property bool $shop {default false}
+ * @property bool $fight {default false}
  * @property string $sprite
  * @property string $portrait
  * @property QuestStage $stage {m:1 QuestStage::$npcs}
@@ -27,10 +29,6 @@ use Nexendrie\Utils\Numbers;
  * @property OneHasMany|Quest[] $endQuests {1:m Quest::$npcEnd}
  */
 final class Npc extends \Nextras\Orm\Entity\Entity {
-  public const TYPE_QUEST = "quest";
-  public const TYPE_SHOP = "shop";
-  public const TYPE_COMMON = "common";
-  public const TYPE_ENEMY = "enemy";
   public const PERSONALITY_FRIENDLY = "friendly";
   public const PERSONALITY_CRAZY = "crazy";
   public const PERSONALITY_SHY = "shy";

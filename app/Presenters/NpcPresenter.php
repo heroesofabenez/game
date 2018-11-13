@@ -52,7 +52,9 @@ final class NpcPresenter extends BasePresenter {
   
   public function renderView(int $id): void {
     $this->template->id = $id;
-    $this->template->type = $this->npc->type;
+    $this->template->quests = $this->npc->quests;
+    $this->template->shop = $this->npc->shop;
+    $this->template->fight = $this->npc->fight;
   }
   
   public function actionTalk(int $id): void {
@@ -69,7 +71,7 @@ final class NpcPresenter extends BasePresenter {
   }
   
   public function actionFight(int $id): void {
-    if($this->npc->type != Npc::TYPE_ENEMY) {
+    if(!$this->npc->fight) {
       $this->flashMessage($this->translator->translate("errors.npc.notEnemy"));
       $this->redirect("view", $id);
     }
@@ -82,7 +84,7 @@ final class NpcPresenter extends BasePresenter {
   }
   
   public function actionTrade(int $id): void {
-    if($this->npc->type != Npc::TYPE_SHOP) {
+    if(!$this->npc->shop) {
       $this->flashMessage($this->translator->translate("errors.npc.noShop"));
       $this->redirect("view", $id);
     }
