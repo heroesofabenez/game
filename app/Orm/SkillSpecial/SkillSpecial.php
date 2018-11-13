@@ -50,7 +50,7 @@ final class SkillSpecial extends \Nextras\Orm\Entity\Entity {
   
   public function toDummy(): SkillSpecialDummy {
     $data = $this->toArray(ToArrayConverter::RELATIONSHIP_AS_ID);
-    unset($data["characterSkills"]);
+    unset($data["characterSkills"], $data["description"], $data["neededClass"], $data["neededSpecialization"], $data["neededLevel"]);
     return new SkillSpecialDummy($data);
   }
 }

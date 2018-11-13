@@ -35,7 +35,7 @@ final class SkillAttack extends \Nextras\Orm\Entity\Entity {
   
   public function toDummy(): SkillAttackDummy {
     $data = $this->toArray(ToArrayConverter::RELATIONSHIP_AS_ID);
-    unset($data["characterSkills"]);
+    unset($data["characterSkills"], $data["description"], $data["neededClass"], $data["neededSpecialization"], $data["neededLevel"]);
     return new SkillAttackDummy($data);
   }
 }
