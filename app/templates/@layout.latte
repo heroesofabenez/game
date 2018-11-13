@@ -11,6 +11,10 @@
 {control menu}
 <article id="main">
 {include #content}</article>
-{include "footer.latte"}
+<footer>
+  {foreach $flashes as $flash}
+    <div class="flash {$flash->type}">{$flash->message}</div>
+  {/foreach}
+</footer>
 </body>
 </html>
