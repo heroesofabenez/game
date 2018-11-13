@@ -4,8 +4,8 @@ declare(strict_types=1);
 namespace HeroesofAbenez\Model;
 
 use Tester\Assert;
-use HeroesofAbenez\Combat\SkillAttack;
-use HeroesofAbenez\Combat\SkillSpecial;
+use HeroesofAbenez\Orm\SkillAttack;
+use HeroesofAbenez\Orm\SkillSpecial;
 use HeroesofAbenez\Combat\CharacterAttackSkill;
 use HeroesofAbenez\Combat\CharacterSpecialSkill;
 use HeroesofAbenez\Combat\BaseCharacterSkill;

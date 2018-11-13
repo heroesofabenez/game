@@ -3,11 +3,9 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Model;
 
-use Nette\Utils\Arrays;
 use HeroesofAbenez\Orm\Model as ORM;
-use HeroesofAbenez\Combat\BaseSkill;
-use HeroesofAbenez\Combat\SkillAttack;
-use HeroesofAbenez\Combat\SkillSpecial;
+use HeroesofAbenez\Orm\SkillAttack;
+use HeroesofAbenez\Orm\SkillSpecial;
 use HeroesofAbenez\Combat\BaseCharacterSkill;
 use HeroesofAbenez\Combat\CharacterAttackSkill as CharacterAttackSkillDummy;
 use HeroesofAbenez\Combat\CharacterSpecialSkill as CharacterSpecialSkillDummy;
@@ -21,16 +19,13 @@ use HeroesofAbenez\Orm\CharacterSpecialSkill;
  */
 final class Skills {
   use \Nette\SmartObject;
-  
-  /** @var \Nette\Caching\Cache */
-  protected $cache;
+
   /** @var ORM */
   protected $orm;
   /** @var \Nette\Security\User */
   protected $user;
   
-  public function __construct(\Nette\Caching\Cache $cache, ORM $orm, \Nette\Security\User $user) {
-    $this->cache = $cache;
+  public function __construct(ORM $orm, \Nette\Security\User $user) {
     $this->orm = $orm;
     $this->user = $user;
   }
@@ -41,21 +36,16 @@ final class Skills {
    * @return SkillAttack[]
    */
   public function getListOfAttackSkills(): array {
-    $skillsList = $this->cache->load("attack_skills", function() {
-      $return = [];
-      $skills = $this->orm->attackSkills->findAll();
-      /** @var \HeroesofAbenez\Orm\SkillAttack $skill */
-      foreach($skills as $skill) {
-        $return[$skill->id] = $skill->toDummy();
-      }
-      return $return;
-    });
-    return $skillsList;
+    $return = [];
+    $skills = $this->orm->attackSkills->findAll();
+    foreach($skills as $skill) {
+      $return[] = $skill;
+    }
+    return $return;
   }
   
   public function getAttackSkill(int $id): ?SkillAttack {
-    $skills = $this->getListOfAttackSkills();
-    return Arrays::get($skills, $id, null);
+    return $this->orm->attackSkills->getById($id);
   }
   
   public function getCharacterAttackSkill(int $skillId, int $userId = 0): ?CharacterAttackSkillDummy {
@@ -71,7 +61,7 @@ final class Skills {
     if(!is_null($row)) {
       $level = $row->level;
     }
-    return new CharacterAttackSkillDummy($skill, $level);
+    return new CharacterAttackSkillDummy($skill->toDummy(), $level);
   }
   
   /**
@@ -80,21 +70,16 @@ final class Skills {
    * @return SkillSpecial[]
    */
   public function getListOfSpecialSkills(): array {
-    $skillsList = $this->cache->load("special_skills", function() {
-      $return = [];
-      $skills = $this->orm->specialSkills->findAll();
-      /** @var \HeroesofAbenez\Orm\SkillSpecial $skill */
-      foreach($skills as $skill) {
-        $return[$skill->id] = $skill->toDummy();
-      }
-      return $return;
-    });
-    return $skillsList;
+    $return = [];
+    $skills = $this->orm->specialSkills->findAll();
+    foreach($skills as $skill) {
+      $return[] = $skill;
+    }
+    return $return;
   }
   
   public function getSpecialSkill(int $id): ?SkillSpecial {
-    $skills = $this->getListOfSpecialSkills();
-    return Arrays::get($skills, $id, null);
+    return $this->orm->specialSkills->getById($id);
   }
   
   public function getCharacterSpecialSkill(int $skillId, int $userId = 0): ?CharacterSpecialSkillDummy {
@@ -110,7 +95,7 @@ final class Skills {
     if(!is_null($row)) {
       $level = $row->level;
     }
-    return new CharacterSpecialSkillDummy($skill, $level);
+    return new CharacterSpecialSkillDummy($skill->toDummy(), $level);
   }
   
   /**
@@ -121,14 +106,13 @@ final class Skills {
     $skills = array_merge($this->getListOfAttackSkills(), $this->getListOfSpecialSkills());
     /** @var \HeroesofAbenez\Orm\Character $character */
     $character = $this->orm->characters->getById($this->user->id);
-    /** @var BaseSkill $skill */
     foreach($skills as $skill) {
-      if($skill->neededClass != $character->occupation->id) {
+      if($skill->neededClass->id != $character->occupation->id) {
         continue;
       } elseif(!is_null($skill->neededSpecialization)) {
         if(is_null($character->specialization)) {
           continue;
-        } elseif($skill->neededSpecialization != $character->specialization) {
+        } elseif($skill->neededSpecialization->id != $character->specialization) {
           continue;
         }
       } elseif($skill->neededLevel > $character->level) {
@@ -136,7 +120,7 @@ final class Skills {
       }
       if($skill instanceof SkillAttack) {
         $return[] = $this->getCharacterAttackSkill($skill->id);
-      } elseif($skill instanceof SkillSpecial) {
+      } else {
         $return[] = $this->getCharacterSpecialSkill($skill->id);
       }
     }
