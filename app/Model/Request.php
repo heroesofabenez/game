@@ -133,7 +133,7 @@ final class Request {
     if(!$this->canChange($id)) {
       throw new CannotAcceptRequestException();
     }
-    if($request->status !== "new") {
+    if($request->status !== RequestEntity::STATUS_NEW) {
       throw new RequestAlreadyHandledException();
     }
     switch($request->type) {
