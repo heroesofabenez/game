@@ -113,21 +113,21 @@ INSERT INTO `routes_stages` (`id`, `from`, `to`) VALUES
 INSERT INTO `shop_items` (`id`, `npc`, `item`, `order`) VALUES
   (1,	2,	1,	1);
 
-INSERT INTO `skills_attacks` (`id`, `name`, `description`, `needed_class`, `needed_specialization`, `needed_level`, `base_damage`, `damage_growth`, `levels`, `target`, `strikes`, `hit_rate`) VALUES
-(1,	'Assault',	'',	1,	NULL,	1,	'110%',	'5%',	5,	'single',	1,	NULL),
-(2,	'Shadow strike',	'',	2,	NULL,	1,	'61%',	'2%',	5,	'single',	2,	NULL),
-(3,	'Blast',	'',	3,	NULL,	1,	'115%',	'5%',	5,	'single',	1,	NULL),
-(4,	'Rain of arrows',	'',	4,	NULL,	1,	'35%',	'2%',	5,	'single',	3,	NULL);
+INSERT INTO `skills_attacks` (`id`, `name`, `needed_class`, `needed_specialization`, `needed_level`, `base_damage`, `damage_growth`, `levels`, `target`, `strikes`, `hit_rate`) VALUES
+(1,	'Assault',	1,	NULL,	1,	'110%',	'5%',	5,	'single',	1,	NULL),
+(2,	'Shadow strike',	2,	NULL,	1,	'61%',	'2%',	5,	'single',	2,	NULL),
+(3,	'Blast',	3,	NULL,	1,	'115%',	'5%',	5,	'single',	1,	NULL),
+(4,	'Rain of arrows',	4,	NULL,	1,	'35%',	'2%',	5,	'single',	3,	NULL);
 
-INSERT INTO `skills_specials` (`id`, `name`, `description`, `needed_class`, `needed_specialization`, `needed_level`, `type`, `target`, `stat`, `value`, `value_growth`, `levels`, `duration`) VALUES
-(1,	'Shield',	'',	1,	NULL,	1,	'buff',	'self',	'defense',	12,	2,	5,	3),
-(2,	'Shadow protection',	'',	2,	NULL,	1,	'buff',	'self',	'dodge',	15,	2,	5,	3),
-(3,	'Quicken spell',	'',	3,	NULL,	1,	'buff',	'self',	'initiative',	18,	2,	5,	3),
-(4,	'Precision',	'',	4,	NULL,	1,	'buff',	'self',	'hit',	15,	2,	5,	3),
-(5,	'Cover',	'',	1,	NULL,	10,	'buff',	'party',	'defense',	14,	1,	6,	4),
-(6,	'Smoke',	'',	2,	NULL,	10,	'debuff',	'enemy_party',	'hit',	14,	1,	6,	4),
-(7,	'Entangle',	'',	3,	NULL,	10,	'debuff',	'enemy',	'initiative',	13,	2,	6,	4),
-(8,	'Evasion',	'',	4,	NULL,	10,	'buff',	'party',	'dodge',	10,	1,	6,	4);
+INSERT INTO `skills_specials` (`id`, `name`, `needed_class`, `needed_specialization`, `needed_level`, `type`, `target`, `stat`, `value`, `value_growth`, `levels`, `duration`) VALUES
+(1,	'Shield',	1,	NULL,	1,	'buff',	'self',	'defense',	12,	2,	5,	3),
+(2,	'Shadow protection',	2,	NULL,	1,	'buff',	'self',	'dodge',	15,	2,	5,	3),
+(3,	'Quicken spell',	3,	NULL,	1,	'buff',	'self',	'initiative',	18,	2,	5,	3),
+(4,	'Precision',	4,	NULL,	1,	'buff',	'self',	'hit',	15,	2,	5,	3),
+(5,	'Cover',	1,	NULL,	10,	'buff',	'party',	'defense',	14,	1,	6,	4),
+(6,	'Smoke',	2,	NULL,	10,	'debuff',	'enemy_party',	'hit',	14,	1,	6,	4),
+(7,	'Entangle',	3,	NULL,	10,	'debuff',	'enemy',	'initiative',	13,	2,	6,	4),
+(8,	'Evasion',	4,	NULL,	10,	'buff',	'party',	'dodge',	10,	1,	6,	4);
 
 INSERT INTO `npcs` (`id`, `name`, `race`, `type`, `sprite`, `portrait`, `stage`, `karma`, `personality`, `level`, `pos_x`, `pos_y`) VALUES
   (1,	'Mentor',	2,	'quest',	'mentor.jpeg',	'mentor.jpeg',	1,	'neutral', 'teaching', 10,	1,	1),

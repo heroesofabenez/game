@@ -465,7 +465,6 @@ CREATE TABLE `shop_items` (
 CREATE TABLE `skills_attacks` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(15) NOT NULL,
-  `description` varchar(30) NOT NULL,
   `needed_class` int(11) NOT NULL,
   `needed_specialization` int(11) DEFAULT NULL,
   `needed_level` int(2) NOT NULL,
@@ -485,7 +484,6 @@ CREATE TABLE `skills_attacks` (
 CREATE TABLE `skills_specials` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(20) NOT NULL,
-  `description` varchar(30) NOT NULL,
   `needed_class` int(11) NOT NULL,
   `needed_specialization` int(11) DEFAULT NULL,
   `needed_level` int(2) NOT NULL,
