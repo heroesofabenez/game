@@ -57,8 +57,7 @@ INSERT INTO `guild_ranks` (`id`, `name`) VALUES
 (7,	'grandmaster');
 
 INSERT INTO `introduction` (`id`, `race`, `class`, `part`, `text`) VALUES
-(1,	2,	3,	1,	'Part 1'),
-(2,	2,	3,	2,	'ENDOFINTRO');
+(1,	2,	3,	1,	'Part 1');
 
 INSERT INTO `items` (`id`, `name`, `image`, `price`) VALUES
 (1,	'Book ABC',	'book-abc.jpeg',	0);
