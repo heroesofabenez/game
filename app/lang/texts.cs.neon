@@ -162,6 +162,7 @@ profile:
     defense: "Obrana"
     hitChance: "Šance na zásah"
     dodgeChance: "Šance na vyhnutí se zásahu"
+    sendMessage: "Poslat zprávu"
 equipment:
     title: "Vybavení"
     notFoundTitle: "Vybavení nenalezeno"

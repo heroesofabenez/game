@@ -9,5 +9,6 @@
   <p>{if $guildId}{_"texts.guild.title"} <a n:href="Guild:view $guildId">{$guildName}</a><br>{_"texts.profile.position"} {_"guildranks.$guildRank.name"|firstUpper}{else}{_"texts.profile.notInGuild"}{/if}</p>
   <p>{if $pet}{_"texts.profile.activePet"} {$pet->name ?? "Unnamed"} {_"pets.{$pet->type->id}.name"}, +{$pet->bonusValue}% {$pet->bonusStat}
   {else}{_"texts.profile.noActivePet"}{/if}</p>
+  <p><a n:href="Postoffice:new $id">{_"texts.profile.sendMessage"}</a></p>
   <p>{_"texts.profile.moreInfo"} {$description}</p>
 {/block}

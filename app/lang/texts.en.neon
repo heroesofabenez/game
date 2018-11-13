@@ -162,6 +162,7 @@ profile:
     defense: "Defense"
     hitChance: "Hit chance"
     dodgeChance: "Dodge chance"
+    sendMessage: "Send message"
 equipment:
     title: "Equipment"
     notFoundTitle: "Equipment not found"

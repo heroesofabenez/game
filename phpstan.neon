@@ -13,6 +13,6 @@ parameters:
         - '#Method HeroesofAbenez\\Orm\[a-zA-Z0-9\\_]+::[a-zA-Z0-9_]+ should return HeroesofAbenez\\Orm[a-zA-Z0-9\\_]+|null but returns Nextras\\Orm\\IEntity|null#'
         - '#Parameter \#1 \$input of static method Nette\\Neon\\Neon::decode\(\) expects string, string\|false given#'
         - '#Method HeroesofAbenez\\Model\\DI\\HOAExtension::getUserToCharacterMapper\(\) should return string but returns HeroesofAbenez\\Model\\IUserToCharacterMapper#'
-        - '#Call to an undefined method Nette\\ComponentModel\\IComponent::getControlPrototype\(\)#'
+        - '#Call to an undefined method Nette\\ComponentModel\\IComponent::(getControlPrototype|setDefaultValue)\(\)#'
         - '#Access to an undefined property Nette\\ComponentModel\\IComponent::\$value#'
         - "#Strict comparison using === between 'special' and 'special' will always evaluate to true#"

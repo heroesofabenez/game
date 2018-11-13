@@ -20,7 +20,7 @@ final class PostofficePresenter extends BasePresenter {
     $this->poFactory = $factory;
   }
   
-  public function renderNew(): void {
+  public function renderNew(int $id = null): void {
     $this->template->haveForm = true;
   }
   
@@ -55,6 +55,12 @@ final class PostofficePresenter extends BasePresenter {
       ->setRequired("forms.postOfficeNewMessage.messageField.error");
     $form->addSubmit("send", "forms.postOfficeNewMessage.sendButton.label");
     $form->onSuccess[] = [$this, "newMessageFormSucceeded"];
+    try {
+      $uid = $this->getParameter("id", null);
+      $form["to"]->setDefaultValue($uid);
+    } catch(\Nette\InvalidArgumentException $e) {
+
+    }
     return $form;
   }
   
