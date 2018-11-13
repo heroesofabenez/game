@@ -32,7 +32,7 @@ final class Karma {
     $karmas = static::getKarmas();
     foreach($values as $value) {
       if(!in_array($value, $karmas, true)) {
-        throw new \OutOfBoundsException("Invalid karma.");
+        throw new \OutOfBoundsException("Invalid karma $value.");
       }
     }
   }
