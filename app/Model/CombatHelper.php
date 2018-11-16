@@ -127,9 +127,6 @@ final class CombatHelper {
         $skillPoints--;
       }
     }
-    array_walk($skills, function(BaseCharacterSkill &$value) {
-      $value->level--;
-    });
     return $skills;
   }
 
