@@ -28,6 +28,9 @@ item:
     worn: "(Worn)"
     equip: "Equip item"
     unequip: "Take off item"
+    soldBy: "Sold by:"
+    neededForQuests: "Needed for quests:"
+    rewardedForQuests: "Reward for quests:"
 tavern:
     title: "Tavern"
     rooms: "Rooms:"

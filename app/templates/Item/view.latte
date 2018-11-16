@@ -7,4 +7,16 @@
   <p>{_"texts.item.strength"}: {$item->strength}, {_"texts.item.durability"}: {$item->durability}</p>
   <p>{_"texts.item.requires"}: {_"texts.item.level"} <span class="{if $level >= $item->requiredLevel}green{else}red{/if}">{$item->requiredLevel}</span>{if !is_null($item->requiredClass)}, {_"texts.item.class"} <span class="{if $class == $item->requiredClass->id}green{else}red{/if}">{_"classes.{$item->requiredClass->id}.name"}{/if}</span></p>
   <p>{_"texts.item.price", $item->price}</p>
+  {if $item->inShops->count() > 0}<p>
+    {_"texts.item.soldBy"}
+    {foreach $item->inShops as $shop}<a n:href="Npc:view $shop->npc->id">{_"npcs.{$shop->npc->id}.name"}</a>{if $iterator->isLast()}.{else}, {/if}{/foreach}
+  </p>{/if}
+  {if $item->rewardedForQuests->count() > 0}<p>
+  {_"texts.item.rewardedForQuests"}
+    {foreach $item->rewardedForQuests as $quest}<a n:href="Quest:view $quest->id">{_"quests.{$quest->id}.name"}</a>{if $iterator->isLast()}.{else}, {/if}{/foreach}
+    </p>{/if}
+  {if $item->neededForQuests->count() > 0}<p>
+    {_"texts.item.neededForQuests"}
+    {foreach $item->neededForQuests as $quest}<a n:href="Quest:view $quest->id">{_"quests.{$quest->id}.name"}</a>{if $iterator->isLast()}.{else}, {/if}{/foreach}
+  </p>{/if}
 {/block}

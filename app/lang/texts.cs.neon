@@ -28,6 +28,9 @@ item:
     worn: "(Nošeno)"
     equip: "Nasadit věc"
     unequip: "Sundat věc"
+    soldBy: "Prodáváno:"
+    neededForQuests: "Vyžadováno pro úkoly:"
+    rewardedForQuests: "Odměna za úkoly:"
 tavern:
     title: "Krčma"
     rooms: "Místnosti:"
