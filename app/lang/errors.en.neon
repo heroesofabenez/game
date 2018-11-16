@@ -55,6 +55,7 @@ equipment:
     unequiped: "Item was taken off."
     notWorn: "You are not wearing this item."
     alreadyWorn: "You are already wearing this item."
+    notEquipable: "This item cannot be equipped."
 pet:
     notFound: "Specified pet was not found."
     notOwned: "Specified pet is not yours."

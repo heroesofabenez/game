@@ -26,18 +26,6 @@ INSERT INTO `character_specializations` (`id`, `name`, `class`, `strength_grow`,
 (8,	'sorcerer',	3,	0,	0.2,	0.2,	0.75,	0.25,	1.1),
 (9,	'mystic',	3,	0.1,	0.3,	0.3,	0.6,	0.2,	1);
 
-INSERT INTO `equipment` (`id`, `name`, `slot`, `type`, `required_level`, `required_class`, `price`, `strength`, `durability`) VALUES
-(1,	'Novice\'s Sword',	'weapon',	'sword',	1,	1,	0,	1,	10),
-(2,	'Novice\'s Axe',	'weapon',	'axe',	1,	1,	0,	2,	10),
-(3,	'Rookie\'s Dagger',	'weapon',	'dagger',	1,	2,	0,	1,	10),
-(4,	'Rookie\'s Knife',	'weapon',	'throwing knife',	1,	2,	0,	1,	10),
-(5,	'Apprentice\'s Wand',	'weapon',	'staff',	1,	3,	0,	1,	10),
-(6,	'Novice\'s Bow',	'weapon',	'bow',	1,	4,	0,	1,	10),
-(7,	'Leather Armor',	'armor',	'',	1,	1,	0,	2,	15),
-(8,	'Rookie\'s Cloak',	'armor',	'',	1,	2,	0,	1,	10),
-(9,	'Apprentice\'s Robe',	'armor',	'',	1,	3,	0,	1,	10),
-(10,	'Green Cloak',	'armor',	'',	1,	4,	0,	1,	10);
-
 INSERT INTO `guild_privileges` (`id`, `action`, `rank`) VALUES
 (1,	'manage',	5),
 (2,	'invite',	4),
@@ -59,8 +47,18 @@ INSERT INTO `guild_ranks` (`id`, `name`) VALUES
 INSERT INTO `introduction` (`id`, `race`, `class`, `part`, `text`) VALUES
 (1,	2,	3,	1,	'Part 1');
 
-INSERT INTO `items` (`id`, `name`, `image`, `price`) VALUES
-(1,	'Book ABC',	'book-abc.jpeg',	0);
+INSERT INTO `items` (`id`, `name`, `slot`, `type`, `required_level`, `required_class`, `price`, `strength`, `durability`) VALUES
+(1,	'Book ABC',	'item', NULL, 1, NULL, 0, 0, 1),
+(2,	'Novice\'s Sword',	'weapon',	'sword',	1,	1,	0,	1,	10),
+(3,	'Novice\'s Axe',	'weapon',	'axe',	1,	1,	0,	2,	10),
+(4,	'Rookie\'s Dagger',	'weapon',	'dagger',	1,	2,	0,	1,	10),
+(5,	'Rookie\'s Knife',	'weapon',	'throwing knife',	1,	2,	0,	1,	10),
+(6,	'Apprentice\'s Wand',	'weapon',	'staff',	1,	3,	0,	1,	10),
+(7,	'Novice\'s Bow',	'weapon',	'bow',	1,	4,	0,	1,	10),
+(8,	'Leather Armor',	'armor',	'',	1,	1,	0,	2,	15),
+(9,	'Rookie\'s Cloak',	'armor',	'',	1,	2,	0,	1,	10),
+(10,	'Apprentice\'s Robe',	'armor',	'',	1,	3,	0,	1,	10),
+(11,	'Green Cloak',	'armor',	'',	1,	4,	0,	1,	10);
 
 INSERT INTO `pet_types` (`id`, `name`, `bonus_stat`, `bonus_value`, `image`, `required_level`, `required_class`, `required_race`, `cost`) VALUES
 (1,	'Rescued Lion',	'con',	5,	'',	8,	1,	NULL,	0),

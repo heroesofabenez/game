@@ -22,7 +22,10 @@ final class ItemPresenter extends BasePresenter {
     if(is_null($item)) {
       $this->forward("notfound");
     }
-    $this->template->item = $item->id;
+    $this->template->item = $item;
+    \Tracy\Debugger::barDump($item);
+    $this->template->level = $this->user->identity->level;
+    $this->template->class = $this->user->identity->occupation;
   }
 }
 ?>

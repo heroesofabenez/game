@@ -31,7 +31,7 @@ use Nexendrie\Utils\Numbers;
  * @property OneHasMany|Character[] $characters {1:m Character::$occupation}
  * @property OneHasMany|Introduction[] $intro {1:m Introduction::$class}
  * @property OneHasMany|PveArenaOpponent[] $arenaNpcs {1:m PveArenaOpponent::$occupation}
- * @property OneHasMany|Equipment[] $equipment {1:m Equipment::$requiredClass}
+ * @property OneHasMany|Item[] $items {1:m Item::$requiredClass}
  * @property OneHasMany|SkillAttack[] $attackSkills {1:m SkillAttack::$neededClass}
  * @property OneHasMany|SkillSpecial[] $specialSkills {1:m SkillSpecial::$neededClass}
  */

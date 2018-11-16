@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Orm;
 
+use Nextras\Orm\Collection\ICollection;
+
 /**
  * CharacterItemsRepository
  *
@@ -33,6 +35,28 @@ final class CharacterItemsRepository extends \Nextras\Orm\Repository\Repository 
     return $this->getBy([
       "character" => $character,
       "item" => $item
+    ]);
+  }
+
+  /**
+   * @param Character|int $character
+   * @return ICollection|CharacterItem[]
+   */
+  public function findByCharacterAndSlot($character, string $slot): ICollection {
+    return $this->findBy([
+      "character" => $character,
+      "this->item->slot" => $slot
+    ]);
+  }
+
+  /**
+   * @param Character|int $character
+   * @return ICollection|CharacterItem[]
+   */
+  public function findCharactersEquipment($character): ICollection {
+    return $this->findBy([
+      "character" => $character,
+      "worn" => true
     ]);
   }
 }

@@ -76,24 +76,12 @@ CREATE TABLE `character_classes` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-CREATE TABLE `character_equipment` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `character` int(11) NOT NULL,
-  `item` int(11) NOT NULL,
-  `amount` int(2) NOT NULL DEFAULT '1',
-  `worn` int(1) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `character` (`character`),
-  KEY `item` (`item`),
-  CONSTRAINT `character_equipment_ibfk_1` FOREIGN KEY (`character`) REFERENCES `characters` (`id`),
-  CONSTRAINT `character_equipment_ibfk_3` FOREIGN KEY (`item`) REFERENCES `equipment` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
 CREATE TABLE `character_items` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `character` int(11) NOT NULL,
   `item` int(11) NOT NULL,
   `amount` int(11) NOT NULL DEFAULT '1',
+  `worn` int(1) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `character_item` (`character`,`item`),
   KEY `item` (`item`),
@@ -189,21 +177,6 @@ CREATE TABLE `combats` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-CREATE TABLE `equipment` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(20) NOT NULL,
-  `slot` enum('weapon','armor','shield','amulet', 'helmet') NOT NULL,
-  `type` enum('sword','axe','club','dagger','spear','staff','bow','crossbow','throwing knife') DEFAULT NULL,
-  `required_level` int(11) NOT NULL DEFAULT '1',
-  `required_class` int(11) DEFAULT NULL,
-  `price` int(11) NOT NULL DEFAULT '0',
-  `strength` int(3) NOT NULL,
-  `durability` int(3) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `required_class` (`required_class`),
-  CONSTRAINT `equipment_ibfk_1` FOREIGN KEY (`required_class`) REFERENCES `character_classes` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
 CREATE TABLE `guilds` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(20) NOT NULL,
@@ -256,11 +229,18 @@ CREATE TABLE `introduction` (
 
 CREATE TABLE `items` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(25) COLLATE utf8_unicode_ci NOT NULL,
-  `image` varchar(25) COLLATE utf8_unicode_ci NOT NULL,
-  `price` int(3) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `name` varchar(20) NOT NULL,
+  `slot` enum('weapon','armor','shield','amulet', 'helmet', 'item') NOT NULL,
+  `type` enum('sword','axe','club','dagger','spear','staff','bow','crossbow','throwing knife') DEFAULT NULL,
+  `required_level` int(11) NOT NULL DEFAULT '1',
+  `required_class` int(11) DEFAULT NULL,
+  `price` int(11) NOT NULL DEFAULT '0',
+  `strength` int(3) NOT NULL DEFAULT '0',
+  `durability` int(3) NOT NULL DEFAULT '1',
+  PRIMARY KEY (`id`),
+  KEY `required_class` (`required_class`),
+  CONSTRAINT `equipment_ibfk_1` FOREIGN KEY (`required_class`) REFERENCES `character_classes` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `messages` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -351,8 +331,8 @@ CREATE TABLE `pve_arena_opponents` (
   KEY `armor` (`armor`),
   CONSTRAINT `pve_arena_opponents_ibfk_1` FOREIGN KEY (`occupation`) REFERENCES `character_classes` (`id`),
   CONSTRAINT `pve_arena_opponents_ibfk_2` FOREIGN KEY (`race`) REFERENCES `character_races` (`id`),
-  CONSTRAINT `pve_arena_opponents_ibfk_3` FOREIGN KEY (`weapon`) REFERENCES `equipment` (`id`),
-  CONSTRAINT `pve_arena_opponents_ibfk_4` FOREIGN KEY (`armor`) REFERENCES `equipment` (`id`)
+  CONSTRAINT `pve_arena_opponents_ibfk_3` FOREIGN KEY (`weapon`) REFERENCES `items` (`id`),
+  CONSTRAINT `pve_arena_opponents_ibfk_4` FOREIGN KEY (`armor`) REFERENCES `items` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `quests` (

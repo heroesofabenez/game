@@ -21,16 +21,16 @@ final class CombatHelper {
   
   /** @var Profile */
   protected $profileModel;
-  /** @var Equipment */
-  protected $equipmentModel;
+  /** @var Item */
+  protected $itemModel;
   /** @var Skills */
   protected $skillsModel;
   /** @var ORM */
   protected $orm;
   
-  public function __construct(Profile $profileModel, Equipment $equipmentModel, Skills $skillsModel, ORM $orm) {
+  public function __construct(Profile $profileModel, Item $itemModel, Skills $skillsModel, ORM $orm) {
     $this->profileModel = $profileModel;
-    $this->equipmentModel = $equipmentModel;
+    $this->itemModel = $itemModel;
     $this->skillsModel = $skillsModel;
     $this->orm = $orm;
   }
@@ -54,12 +54,12 @@ final class CombatHelper {
    */
   protected function getPlayerEquipment(\HeroesofAbenez\Orm\Character $character): array {
     $equipment = [];
-    foreach($character->equipment as $row) {
+    foreach($character->items as $row) {
       if(!$row->worn) {
         continue;
       }
-      /** @var \HeroesofAbenez\Orm\Equipment $item */
-      $item = $this->equipmentModel->view($row->item->id);
+      /** @var \HeroesofAbenez\Orm\Item $item */
+      $item = $this->itemModel->view($row->item->id);
       $item->worn = true;
       $equipment[] = $item->toCombatEquipment();
     }
@@ -136,14 +136,14 @@ final class CombatHelper {
   protected function getArenaNpcEquipment(\HeroesofAbenez\Orm\PveArenaOpponent $npc): array {
     $equipment = [];
     if(!is_null($npc->weapon)) {
-      $weapon = $this->equipmentModel->view($npc->weapon->id);
+      $weapon = $this->itemModel->view($npc->weapon->id);
       if(!is_null($weapon)) {
         $weapon->worn = true;
         $equipment[] = $weapon->toCombatEquipment();
       }
     }
     if(!is_null($npc->armor)) {
-      $armor = $this->equipmentModel->view($npc->armor->id);
+      $armor = $this->itemModel->view($npc->armor->id);
       if(!is_null($armor)) {
         $armor->worn = true;
         $equipment[] = $armor->toCombatEquipment();

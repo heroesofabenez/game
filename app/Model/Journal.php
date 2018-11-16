@@ -27,17 +27,17 @@ final class Journal {
   protected $guildModel;
   /** @var Pet */
   protected $petModel;
-  /** @var Equipment */
-  protected $equipmentModel;
+  /** @var Item */
+  protected $itemModel;
   
-  public function __construct(\Nette\Security\User $user, ORM $orm, Quest $questModel, Location $locationModel, Guild $guildModel, Pet $petModel, Equipment $equipmentModel) {
+  public function __construct(\Nette\Security\User $user, ORM $orm, Quest $questModel, Location $locationModel, Guild $guildModel, Pet $petModel, Item $itemModel) {
     $this->user = $user;
     $this->orm = $orm;
     $this->questModel = $questModel;
     $this->locationModel = $locationModel;
     $this->guildModel = $guildModel;
     $this->petModel = $petModel;
-    $this->equipmentModel = $equipmentModel;
+    $this->itemModel = $itemModel;
   }
 
   
@@ -74,12 +74,8 @@ final class Journal {
     $return["money"] = $character->money;
     $return["items"] = [];
     foreach($character->items as $item) {
-      $return["items"][] = (object) ["id" => $item->item->id, "name" => $item->item->name, "amount" => $item->amount];
-    }
-    $return["equipments"] = [];
-    foreach($character->equipment as $equipment) {
-      $i = $equipment->item;
-      $return["equipments"][] = (object) ["id" => $i->id, "name" => $i->name, "amount" => $equipment->amount, "worn" => $equipment->worn, "eqid" => $equipment->id];
+      $i = $item->item;
+      $return["items"][] = (object) ["id" => $i->id, "name" => $i->name, "amount" => $item->amount, "worn" => $item->worn, "eqid" => $item->id];
     }
     return $return;
   }

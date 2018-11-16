@@ -14,7 +14,7 @@
   {if count($champion->equipment) > 0}
   <p>{_"texts.journal.equipment"}</p>
   <ul n:inner-foreach="$champion->equipment as $equipment">
-    <li><a href="{plink Equipment:view $equipment->id}">{_"equipment.$equipment->id.name"}</a></li>
+    <li><a href="{plink Item:view $equipment->id}">{_"items.$equipment->id.name"}</a></li>
   </ul>
   {/if}
   {if $champion->skills}

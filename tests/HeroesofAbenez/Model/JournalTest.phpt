@@ -27,12 +27,10 @@ final class JournalTest extends \Tester\TestCase {
   public function testInventory() {
     $inventory = $this->model->inventory();
     Assert::type("array", $inventory);
-    Assert::count(3, $inventory);
+    Assert::count(2, $inventory);
     Assert::type("int", $inventory["money"]);
-    Assert::count(0, $inventory["items"]);
-    Assert::type("array", $inventory["equipments"]);
-    Assert::count(1, $inventory["equipments"]);
-    Assert::type(\stdClass::class, $inventory["equipments"][0]);
+    Assert::count(1, $inventory["items"]);
+    Assert::type(\stdClass::class, $inventory["items"][0]);
   }
   
   public function testPets() {

@@ -44,7 +44,6 @@ use Nexendrie\Utils\Numbers;
  * @property OneHasMany|Pet[] $pets {1:m Pet::$owner}
  * @property OneHasMany|ArenaFightCount[] $arenaFights {1:m ArenaFightCount::$character}
  * @property OneHasMany|CharacterItem[] $items {1:m CharacterItem::$character}
- * @property OneHasMany|CharacterEquipment[] $equipment {1:m CharacterEquipment::$character}
  * @property OneHasMany|CharacterQuest[] $quests {1:m CharacterQuest::$character}
  * @property OneHasMany|ChatBan[] $chatBans {1:m ChatBan::$character}
  * @property OneHasMany|ChatMessage[] $chatMessages {1:m ChatMessage::$character}

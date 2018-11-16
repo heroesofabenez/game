@@ -71,5 +71,52 @@ final class Item {
       $this->orm->characterItems->persistAndFlush($item);
     }
   }
+
+  /**
+   * Equip an item
+   *
+   * @throws ItemNotFoundException
+   * @throws ItemNotOwnedException
+   * @throws ItemNotEquipableException
+   * @throws ItemAlreadyEquippedException
+   */
+  public function equipItem(int $id): void {
+    $item = $this->orm->characterItems->getById($id);
+    if(is_null($item)) {
+      throw new ItemNotFoundException();
+    } elseif($item->character->id !== $this->user->id) {
+      throw new ItemNotOwnedException();
+    } elseif(!in_array($item->item->slot, ItemEntity::getEquipmentTypes(), true)) {
+      throw new ItemNotEquipableException();
+    } elseif($item->worn) {
+      throw new ItemAlreadyEquippedException();
+    }
+    $items = $this->orm->characterItems->findByCharacterAndSlot($this->user->id, $item->item->slot);
+    foreach($items as $item) {
+      $item->worn = ($item->id === $id);
+      $this->orm->characterItems->persist($item);
+    }
+    $this->orm->characterItems->flush();
+  }
+
+  /**
+   * Unequip an item
+   *
+   * @throws ItemNotFoundException
+   * @throws ItemNotOwnedException
+   * @throws ItemNotWornException
+   */
+  public function unequipItem(int $id): void {
+    $item = $this->orm->characterItems->getById($id);
+    if(is_null($item)) {
+      throw new ItemNotFoundException();
+    } elseif($item->character->id !== $this->user->id) {
+      throw new ItemNotOwnedException();
+    } elseif(!$item->worn) {
+      throw new ItemNotWornException();
+    }
+    $item->worn = false;
+    $this->orm->characterItems->persistAndFlush($item);
+  }
 }
 ?>

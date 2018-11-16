@@ -1,3 +1,33 @@
 1:
     name: "Kniha ABC"
     description: "Kniha."
+2:
+    name: "Nováčkův meč"
+    description: "Meč dávaný čerstvým rekrutům. Působí velmi malé poškození."
+3:
+    name: "Nováčkova sekera"
+    description: "Sekera dávaná čerstvým rekrutům. Působí velmi malé poškození."
+4:
+    name: "Zelenáčova dýka"
+    #description: "Dagger used by new rogues. Its usefulness in combat is questionable."
+5:
+    name: "Zelenáčův nůž"
+    #description: "Some rogues prefer to use ranged weapons like knives or crossbows. This light knive is used by newcomers."
+6:
+    name: "Učedníkova hůlka"
+    description: "Hůlka používaná mágy učedníky."
+7:
+    name: "Nováčkův luk"
+    description: "Malý, obyčejný luk používaný při výcviku lučištníků."
+8:
+    name: "Kožená zbroj"
+    description: "Brnění pro rekruty. Nechrání tak dobře před poškozením, ale je lepší než vůbec nic."
+9:
+    name: "Zelenáčův plášť"
+    #description: "This cloak identifies a new rogue. It itches a bit but does not slow the rogue down."
+10:
+    name: "Učedníkova róba"
+    description: "Róba mága učedníka. Chrání jen před zimou."
+11:
+    name: "Zelený plášť"
+    description: "Lučištníci používají různé barvy pláštů k vyjádření úrovně jejich dovedností a zkušeností. Začínající lučištníci nosí zelené plášťě."

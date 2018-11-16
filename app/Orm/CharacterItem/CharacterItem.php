@@ -11,8 +11,14 @@ namespace HeroesofAbenez\Orm;
  * @property Character $character {m:1 Character::$items}
  * @property Item $item {m:1 Item, oneSided=true}
  * @property int $amount {default 1}
+ * @property bool $worn {default 0}
  */
 final class CharacterItem extends \Nextras\Orm\Entity\Entity {
-  
+  protected function setterWorn(bool $value): bool {
+    if(!in_array($this->item->slot, Item::getEquipmentTypes(), true)) {
+      return false;
+    }
+    return $value;
+  }
 }
 ?>

@@ -6,6 +6,7 @@ namespace HeroesofAbenez\Presenters;
 use HeroesofAbenez\Model\NotEnoughExperiencesException;
 use HeroesofAbenez\Model\ItemNotFoundException;
 use HeroesofAbenez\Model\ItemNotOwnedException;
+use HeroesofAbenez\Model\ItemNotEquipableException;
 use HeroesofAbenez\Model\ItemAlreadyEquippedException;
 use HeroesofAbenez\Model\ItemNotWornException;
 use HeroesofAbenez\Model\PetNotFoundException;
@@ -23,18 +24,16 @@ final class JournalPresenter extends BasePresenter {
   protected $model;
   /** @var \HeroesofAbenez\Model\Profile */
   protected $profileModel;
-  /** @var \HeroesofAbenez\Model\Equipment */
-  protected $equipmentModel;
+  /** @var \HeroesofAbenez\Model\Item */
+  protected $itemModel;
   /** @var \HeroesofAbenez\Model\Pet */
   protected $petModel;
-  
-  /**
-   */
-  public function __construct(\HeroesofAbenez\Model\Journal $model, \HeroesofAbenez\Model\Profile $profileModel, \HeroesofAbenez\Model\Equipment $equipmentModel, \HeroesofAbenez\Model\Pet $petModel) {
+
+  public function __construct(\HeroesofAbenez\Model\Journal $model, \HeroesofAbenez\Model\Profile $profileModel, \HeroesofAbenez\Model\Item $itemModel, \HeroesofAbenez\Model\Pet $petModel) {
     parent::__construct();
     $this->model = $model;
     $this->profileModel = $profileModel;
-    $this->equipmentModel = $equipmentModel;
+    $this->itemModel = $itemModel;
     $this->petModel = $petModel;
   }
   
@@ -63,11 +62,13 @@ final class JournalPresenter extends BasePresenter {
   
   public function handleEquipItem(int $itemId): void {
     try {
-      $this->equipmentModel->equipItem($itemId);
+      $this->itemModel->equipItem($itemId);
     } catch(ItemNotFoundException $e) {
       $this->redirect("Equipment:notfound");
     } catch(ItemNotOwnedException $e) {
       $this->redirect("Equipment:notfound");
+    } catch(ItemNotEquipableException $e) {
+      $this->flashMessage($this->translator->translate("errors.equipment.notEquipable"));
     } catch(ItemAlreadyEquippedException $e) {
       $this->flashMessage($this->translator->translate("errors.equipment.alreadyWorn"));
     }
@@ -76,7 +77,7 @@ final class JournalPresenter extends BasePresenter {
   
   public function handleUnequipItem(int $itemId): void {
     try {
-      $this->equipmentModel->unequipItem($itemId);
+      $this->itemModel->unequipItem($itemId);
       $this->flashMessage($this->translator->translate("errors.equipment.unequiped"));
     } catch(ItemNotFoundException $e) {
       $this->redirect("Equipment:notfound");

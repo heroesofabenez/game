@@ -39,6 +39,10 @@ class ItemNotOwnedException extends AccessDeniedException {
   
 }
 
+class ItemNotEquipableException extends AccessDeniedException {
+
+}
+
 class ItemAlreadyEquippedException extends InvalidStateException {
   
 }

@@ -62,8 +62,6 @@ final class HOAExtension extends \Nette\DI\CompilerExtension {
       ->setType($this->getUserToCharacterMapper());
     $builder->addDefinition($this->prefix("model.settingsRepository"))
       ->setFactory(HeroesofAbenez\Model\SettingsRepository::class, [$config]);
-    $builder->addDefinition($this->prefix("model.equipment"))
-      ->setType(HeroesofAbenez\Model\Equipment::class);
     $builder->addDefinition($this->prefix("model.guild"))
       ->setType(HeroesofAbenez\Model\Guild::class);
     $builder->addDefinition($this->prefix("model.intro"))
