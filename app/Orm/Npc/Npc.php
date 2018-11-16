@@ -25,8 +25,6 @@ use Nexendrie\Utils\Numbers;
  * @property int $posX
  * @property int $posY
  * @property OneHasMany|ShopItem[] $items {1:m ShopItem::$npc}
- * @property OneHasMany|Quest[] $startQuests {1:m Quest::$npcStart}
- * @property OneHasMany|Quest[] $endQuests {1:m Quest::$npcEnd}
  */
 final class Npc extends \Nextras\Orm\Entity\Entity {
   public const PERSONALITY_FRIENDLY = "friendly";

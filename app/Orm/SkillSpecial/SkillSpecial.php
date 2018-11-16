@@ -3,7 +3,6 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Orm;
 
-use Nextras\Orm\Relationships\OneHasMany;
 use Nextras\Orm\Entity\ToArrayConverter;
 use HeroesofAbenez\Combat\SkillSpecial as SkillSpecialDummy;
 use HeroesofAbenez\Combat\Character as CharacterDummy;
@@ -25,7 +24,6 @@ use HeroesofAbenez\Combat\Character as CharacterDummy;
  * @property int $valueGrowth
  * @property int $levels
  * @property int $duration
- * @property OneHasMany|CharacterSpecialSkill[] $characterSkills {1:m CharacterSpecialSkill::$skill}
  */
 final class SkillSpecial extends \Nextras\Orm\Entity\Entity {
   /** @internal */

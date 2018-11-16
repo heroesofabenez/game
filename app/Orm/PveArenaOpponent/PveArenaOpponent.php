@@ -20,8 +20,8 @@ use Nexendrie\Utils\Numbers;
  * @property int $constitution
  * @property int $intelligence
  * @property int $charisma
- * @property Equipment|null $weapon {m:1 Equipment::$arenaNpcsWeapon}
- * @property Equipment|null $armor {m:1 Equipment::$arenaNpcsArmor}
+ * @property Equipment|null $weapon {m:1 Equipment, oneSided=true}
+ * @property Equipment|null $armor {m:1 Equipment, oneSided=true}
  */
 final class PveArenaOpponent extends \Nextras\Orm\Entity\Entity {
   public const GENDER_MALE = "male";

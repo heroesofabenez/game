@@ -11,7 +11,7 @@ use Nexendrie\Utils\Numbers;
  * @author Jakub Konečný
  * @property int $id {primary}
  * @property Character $character {m:1 Character::$quests}
- * @property Quest $quest {m:1 Quest::$characterQuests}
+ * @property Quest $quest {m:1 Quest, oneSided=true}
  * @property int $progress {default static::PROGRESS_STARTED}
  */
 final class CharacterQuest extends \Nextras\Orm\Entity\Entity {

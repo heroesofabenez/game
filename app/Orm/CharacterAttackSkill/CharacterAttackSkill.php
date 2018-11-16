@@ -11,7 +11,7 @@ use HeroesofAbenez\Combat\CharacterAttackSkill as CombatSkill;
  * @author Jakub Konečný
  * @property int $id {primary}
  * @property Character $character {m:1 Character::$attackSkills}
- * @property SkillAttack $skill {m:1 SkillAttack::$characterSkills}
+ * @property SkillAttack $skill {m:1 SkillAttack, oneSided=true}
  * @property int $level {default 1}
  */
 final class CharacterAttackSkill extends \Nextras\Orm\Entity\Entity {

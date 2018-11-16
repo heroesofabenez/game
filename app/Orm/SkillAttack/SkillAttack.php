@@ -3,7 +3,6 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Orm;
 
-use Nextras\Orm\Relationships\OneHasMany;
 use Nextras\Orm\Entity\ToArrayConverter;
 use HeroesofAbenez\Combat\SkillAttack as SkillAttackDummy;
 use Nexendrie\Utils\Numbers;
@@ -24,7 +23,6 @@ use Nexendrie\Utils\Numbers;
  * @property string $target {enum SkillAttackDummy::TARGET_*} {default SkillAttackDummy::TARGET_SINGLE}
  * @property int $strikes {default 1}
  * @property string|null $hitRate
- * @property OneHasMany|CharacterAttackSkill[] $characterSkills {1:m CharacterAttackSkill::$skill}
  */
 final class SkillAttack extends \Nextras\Orm\Entity\Entity {
   public const MAX_STRIKES = 9;

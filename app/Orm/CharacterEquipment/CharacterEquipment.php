@@ -9,7 +9,7 @@ namespace HeroesofAbenez\Orm;
  * @author Jakub Konečný
  * @property int $id {primary}
  * @property Character $character {m:1 Character::$equipment}
- * @property Equipment $item {m:1 Equipment::$characterEquipment}
+ * @property Equipment $item {m:1 Equipment, oneSided=true}
  * @property int $amount {default 1}
  * @property bool $worn {default 0}
  */

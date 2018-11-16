@@ -11,7 +11,7 @@ use HeroesofAbenez\Combat\CharacterSpecialSkill as CombatSkill;
  * @author Jakub Konečný
  * @property int $id {primary}
  * @property Character $character {m:1 Character::$specialSkills}
- * @property SkillSpecial $skill {m:1 SkillSpecial::$characterSkills}
+ * @property SkillSpecial $skill {m:1 SkillSpecial, oneSided=true}
  * @property int $level {default 1}
  */
 final class CharacterSpecialSkill extends \Nextras\Orm\Entity\Entity {

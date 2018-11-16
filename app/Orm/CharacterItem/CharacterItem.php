@@ -9,7 +9,7 @@ namespace HeroesofAbenez\Orm;
  * @author Jakub Konečný
  * @property int $id {primary}
  * @property Character $character {m:1 Character::$items}
- * @property Item $item {m:1 Item::$characterItems}
+ * @property Item $item {m:1 Item, oneSided=true}
  * @property int $amount {default 1}
  */
 final class CharacterItem extends \Nextras\Orm\Entity\Entity {
