@@ -39,10 +39,8 @@ final class Item {
     $item = $this->orm->characterItems->getByCharacterAndItem($this->user->id, $id);
     if(is_null($item)) {
       return false;
-    } elseif($item->amount < $amount) {
-      return false;
     }
-    return true;
+    return ($item->amount >= $amount);
   }
   
   /**
