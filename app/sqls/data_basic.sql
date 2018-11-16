@@ -108,7 +108,9 @@ INSERT INTO `routes_stages` (`id`, `from`, `to`) VALUES
 (3,	2,	3);
 
 INSERT INTO `shop_items` (`id`, `npc`, `item`, `order`) VALUES
-  (1,	2,	1,	1);
+  (1,	2,	1,	1),
+  (2, 2, 6, 2),
+  (3, 2, 10, 3);
 
 INSERT INTO `skills_attacks` (`id`, `name`, `needed_class`, `needed_specialization`, `needed_level`, `base_damage`, `damage_growth`, `levels`, `target`, `strikes`, `hit_rate`) VALUES
 (1,	'Assault',	1,	NULL,	1,	'110%',	'5%',	5,	'single',	1,	NULL),
