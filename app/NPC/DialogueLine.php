@@ -15,7 +15,7 @@ final class DialogueLine {
   use \Nette\SmartObject;
   
   /** @var string */
-  protected $speaker;
+  protected $speaker = "player";
   /** @var string */
   protected $text;
   /** @var string[] */
@@ -38,9 +38,8 @@ final class DialogueLine {
   public function getSpeaker(): string {
     if($this->speaker === "npc") {
       return $this->names[0];
-    } elseif($this->speaker === "player") {
-      return $this->names[1];
     }
+    return $this->names[1];
   }
   
   /**
