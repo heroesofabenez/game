@@ -2,7 +2,7 @@
 {block title}{_"texts.quest.title"}{/block}
 {block content}
   <h1>{_"quests.$id.name"}</h1>
-  <p>{_"texts.quest.from"} {_"npcs.$npcStart.name"}</p>
+  <p>{_"texts.quest.from"} <a n:href="Npc:view $npcStart">{_"npcs.$npcStart.name"}</a></p>
   <p{if $finished} class="crossout"{/if}>{_"quests.$id.introduction"}</p>
   <p{if $finished} class="crossout"{/if}>{_"texts.quest.requirementsHeader"}</p>
   <ul>
