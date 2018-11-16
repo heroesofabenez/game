@@ -140,7 +140,6 @@ final class Request {
       case RequestEntity::TYPE_FRIENDSHIP:
       case RequestEntity::TYPE_GROUP_JOIN:
         throw new NotImplementedException();
-        break;
       case RequestEntity::TYPE_GUILD_APP:
         $uid = $request->from->id;
         $gid = (!is_null($request->to->guild)) ? $request->to->guild->id : null;
