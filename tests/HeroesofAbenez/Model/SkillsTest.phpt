@@ -34,14 +34,21 @@ final class SkillsTest extends \Tester\TestCase {
   }
   
   public function testGetCharacterAttackSkill() {
+    $skill = $this->model->getCharacterAttackSkill(3);
+    Assert::type(CharacterAttackSkill::class, $skill);
+    Assert::type("int", $skill->damage);
+    Assert::type("int", $skill->hitRate);
+    Assert::same(0, $skill->cooldown);
+    Assert::same("attack", $skill->skillType);
+    Assert::same(2, $skill->level);
     $skill = $this->model->getCharacterAttackSkill(1);
     Assert::type(CharacterAttackSkill::class, $skill);
     Assert::type("int", $skill->damage);
     Assert::type("int", $skill->hitRate);
-    Assert::type("int", $skill->cooldown);
     Assert::same(0, $skill->cooldown);
-    Assert::type("string", $skill->skillType);
     Assert::same("attack", $skill->skillType);
+    Assert::same(0, $skill->level);
+    Assert::null($this->model->getCharacterAttackSkill(5000));
   }
   
   public function testGetListOfSpecialSkills() {
@@ -54,15 +61,15 @@ final class SkillsTest extends \Tester\TestCase {
     $skill = $this->model->getSpecialSkill(1);
     Assert::type(SkillSpecial::class, $skill);
   }
-  
+
   public function testGetCharacterSpecialSkill() {
     $skill = $this->model->getCharacterSpecialSkill(1);
     Assert::type(CharacterSpecialSkill::class, $skill);
     Assert::type("int", $skill->value);
-    Assert::type("int", $skill->cooldown);
     Assert::same(0, $skill->cooldown);
-    Assert::type("string", $skill->skillType);
     Assert::same("special", $skill->skillType);
+    Assert::same(0, $skill->level);
+    Assert::null($this->model->getCharacterSpecialSkill(5000));
   }
   
   public function testGetAvailableSkills() {
@@ -74,6 +81,15 @@ final class SkillsTest extends \Tester\TestCase {
   public function testGetSkillPoints() {
     $result = $this->model->getSkillPoints();
     Assert::type("int", $result);
+  }
+
+  public function testTrainSkill() {
+    Assert::exception(function() {
+      $this->model->trainSkill(5000, "abc");
+    }, InvalidSkillTypeException::class);
+    Assert::exception(function() {
+      $this->model->trainSkill(5000, "attack");
+    }, NoSkillPointsAvailableException::class);
   }
 }
 

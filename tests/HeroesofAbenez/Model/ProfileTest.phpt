@@ -45,6 +45,15 @@ final class ProfileTest extends \Tester\TestCase {
     Assert::type("array", $result);
     Assert::count(5, $result);
   }
+
+  public function testTrainStat() {
+    Assert::exception(function() {
+      $this->model->trainStat("abc");
+    }, InvalidStatException::class);
+    Assert::exception(function() {
+      $this->model->trainStat("charisma");
+    }, NoStatPointsAvailableException::class);
+  }
 }
 
 $test = new ProfileTest();

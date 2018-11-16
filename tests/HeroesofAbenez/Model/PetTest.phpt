@@ -44,6 +44,22 @@ final class PetTest extends \Tester\TestCase {
       $this->model->discardPet(5000);
     }, PetNotFoundException::class);
   }
+
+  public function testGivePet() {
+    Assert::noError(function() {
+      $this->model->givePet(5000);
+    });
+    /** @var \HeroesofAbenez\Orm\Model $orm */
+    $orm = $this->getService(\HeroesofAbenez\Orm\Model::class);
+    $oldPetCount = $orm->pets->findAll()->countStored();
+    $this->model->givePet(3);
+    $newPetCount = $orm->pets->findAll()->countStored();
+    Assert::same($oldPetCount, $newPetCount);
+    $this->model->givePet(1);
+    $pet = $orm->pets->getByTypeAndOwner(1, 1);
+    Assert::type(PetEntity::class, $pet);
+    $orm->pets->removeAndFlush($pet);
+  }
 }
 
 $test = new PetTest();

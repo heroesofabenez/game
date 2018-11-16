@@ -65,19 +65,50 @@ final class GuildTest extends \Tester\TestCase {
   public function testGuildMembers(int $guild) {
     $members = $this->model->guildMembers($guild, [], true);
     Assert::type("array", $members);
-    Assert::type("stdClass", $members[0]);
+    Assert::type(\stdClass::class, $members[0]);
     Assert::type("string", $members[0]->customRankName);
     if($guild === 1) {
       Assert::same("Sun ruler", $members[0]->customRankName);
+      Assert::count(2, $members);
     } else {
       Assert::same("", $members[0]->customRankName);
+      Assert::count(1, $members);
     }
+    $members = $this->model->guildMembers($guild, [1]);
+    Assert::type("array", $members);
+    Assert::count(1, $members);
   }
   
   public function testListOfGuilds() {
     $guilds = $this->model->listOfGuilds();
     Assert::type(ICollection::class, $guilds);
     Assert::count(3, $guilds);
+  }
+
+  public function testRenameGuild() {
+    Assert::exception(function() {
+      /** @var GuildEntity $guild */
+      $guild = $this->model->view(2);
+      $this->model->rename(1, $guild->name);
+    }, NameInUseException::class);
+    /** @var GuildEntity $guild */
+    $guild = $this->model->view(1);
+    $oldName = $guild->name;
+    $this->model->rename($guild->id, "abc");
+    Assert::same("abc", $guild->name);
+    $this->model->rename($guild->id, $oldName);
+  }
+
+  public function testChangeDescription() {
+    Assert::exception(function() {
+      $this->model->changeDescription(50, "abc");
+    }, GuildNotFoundException::class);
+    /** @var GuildEntity $guild */
+    $guild = $this->model->view(1);
+    $oldDescription = $guild->description;
+    $this->model->changeDescription($guild->id, "abc");
+    Assert::same("abc", $guild->description);
+    $this->model->changeDescription($guild->id, $oldDescription);
   }
   
   public function testGetDefaultRankNames() {

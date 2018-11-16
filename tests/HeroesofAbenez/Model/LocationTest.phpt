@@ -54,6 +54,12 @@ final class LocationTest extends \Tester\TestCase {
       Assert::type(QuestStage::class, $stage);
     }
   }
+
+  public function testTravelToStage() {
+    Assert::exception(function() {
+      $this->model->travelToStage(5000);
+    }, StageNotFoundException::class);
+  }
 }
 
 $test = new LocationTest();
