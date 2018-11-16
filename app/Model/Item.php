@@ -65,7 +65,11 @@ final class Item {
       return;
     }
     $item->amount -= $amount;
-    $this->orm->characterItems->persistAndFlush($item);
+    if($item->amount < 1) {
+      $this->orm->characterItems->removeAndFlush($item);
+    } else {
+      $this->orm->characterItems->persistAndFlush($item);
+    }
   }
 }
 ?>
