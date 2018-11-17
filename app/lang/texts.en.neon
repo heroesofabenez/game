@@ -125,6 +125,7 @@ journal:
     money: "{1} You have 1 silver mark.|]1,+Inf[ You have %count% silver marks."
     items: "Items:"
     noItems: "No items"
+    equipment: "Equipment:"
     questsTitle: "Quests Journal"
     activeQuests: "{1} You have 1 active quest.|]1,+Inf[ You have %count% active quests."
     petsNumber: "{1} You have 1 pet.|]1,+Inf[ You have %count% pets."
