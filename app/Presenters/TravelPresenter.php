@@ -35,9 +35,9 @@ final class TravelPresenter extends BasePresenter {
       $this->user->logout();
       $this->flashMessage($this->translator->translate("messages.travel.movedToStage", 0, ["stageName" => $stageName]));
     } catch(CannotTravelToStageException $e) {
-      $this->flashMessage($this->translator->translate("error.travel.cannotTravelToStage"));
+      $this->flashMessage($this->translator->translate("errors.travel.cannotTravelToStage"));
     } catch(StageNotFoundException $e) {
-      $this->flashMessage($this->translator->translate("error.travel.stageDoesNotExist"));
+      $this->flashMessage($this->translator->translate("errors.travel.stageDoesNotExist"));
     }
     $this->redirect("Homepage:");
   }
