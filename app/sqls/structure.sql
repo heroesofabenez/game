@@ -295,7 +295,7 @@ CREATE TABLE `pets` (
 CREATE TABLE `pet_types` (
   `id` int(2) NOT NULL AUTO_INCREMENT,
   `name` varchar(15) NOT NULL,
-  `bonus_stat` enum('str','dex','con','int') NOT NULL,
+  `bonus_stat` enum('strength','dexterity','constitution','intelligence') NOT NULL,
   `bonus_value` int(2) NOT NULL,
   `image` varchar(50) NOT NULL,
   `required_level` int(2) NOT NULL,

@@ -28,14 +28,7 @@ final class Pet extends \Nextras\Orm\Entity\Entity {
     $data = [];
     $stats = ["id", "deployed", "bonusStat", "bonusValue",];
     foreach($stats as $stat) {
-      if($stat === "bonusStat") {
-        $bonusStats = [
-          "str" => "strength", "dex" => "dexterity", "con" => "constitution", "int" => "intelligence", "char" => "charisma"
-        ];
-        $data[$stat] = str_replace(array_keys($bonusStats), array_values($bonusStats), $this->bonusStat);
-      } else {
-        $data[$stat] = $this->$stat;
-      }
+      $data[$stat] = $this->$stat;
     }
     
     return new \HeroesofAbenez\Combat\Pet($data);

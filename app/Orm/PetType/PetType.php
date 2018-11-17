@@ -23,10 +23,10 @@ use Nexendrie\Utils\Numbers;
  * @property OneHasMany|Quest[] $rewardedForQuests {1:m Quest::$rewardPet}
  */
 final class PetType extends \Nextras\Orm\Entity\Entity {
-  public const STAT_STR = "str";
-  public const STAT_DEX = "dex";
-  public const STAT_CON = "con";
-  public const STAT_INT = "int";
+  public const STAT_STR = "strength";
+  public const STAT_DEX = "dexterity";
+  public const STAT_CON = "constitution";
+  public const STAT_INT = "intelligence";
   
   protected function setterBonusValue(int $value): int {
     return Numbers::range($value, 0, 99);
