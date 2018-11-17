@@ -97,25 +97,33 @@ final class Skills {
     }
     return new CharacterSpecialSkillDummy($skill->toDummy(), $level);
   }
-  
+
+  /**
+   * @param SkillAttack|SkillSpecial $skill
+   */
+  protected function canLearnSkill($skill): bool {
+    if($skill->neededClass->id != $this->user->identity->occupation) {
+      return false;
+    } elseif(!is_null($skill->neededSpecialization)) {
+      if(is_null($this->user->identity->specialization)) {
+        return false;
+      } elseif($skill->neededSpecialization->id != $this->user->identity->specialization) {
+        return false;
+      }
+    } elseif($skill->neededLevel > $this->user->identity->level) {
+      return false;
+    }
+    return true;
+  }
+
   /**
    * @return BaseCharacterSkill[]
    */
   public function getAvailableSkills(): array {
     $return = [];
     $skills = array_merge($this->getListOfAttackSkills(), $this->getListOfSpecialSkills());
-    /** @var \HeroesofAbenez\Orm\Character $character */
-    $character = $this->orm->characters->getById($this->user->id);
     foreach($skills as $skill) {
-      if($skill->neededClass->id != $character->occupation->id) {
-        continue;
-      } elseif(!is_null($skill->neededSpecialization)) {
-        if(is_null($character->specialization)) {
-          continue;
-        } elseif($skill->neededSpecialization->id != $character->specialization) {
-          continue;
-        }
-      } elseif($skill->neededLevel > $character->level) {
+      if(!$this->canLearnSkill($skill)) {
         continue;
       }
       if($skill instanceof SkillAttack) {
@@ -160,15 +168,7 @@ final class Skills {
     }
     /** @var \HeroesofAbenez\Orm\Character $character */
     $character = $this->orm->characters->getById($this->user->id);
-    if($skill->skill->neededClass != $character->occupation->id) {
-      throw new CannotLearnSkillException();
-    } elseif($skill->skill->neededSpecialization) {
-      if(is_null($character->specialization)) {
-        throw new CannotLearnSkillException();
-      } elseif($skill->skill->neededSpecialization != $character->specialization->id) {
-        throw new CannotLearnSkillException();
-      }
-    } elseif($skill->skill->neededLevel > $character->level) {
+    if(!$this->canLearnSkill($skill)) {
       throw new CannotLearnSkillException();
     }
     if($type === "attack") {
