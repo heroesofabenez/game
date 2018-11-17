@@ -234,9 +234,8 @@ arena:
 training:
    title: "Training grounds"
    train: "Train"
-   primaryStats: "Your primary stats:"
+   stats: "Your stats:"
    usableStatPoints: "Usable stat points: %count%"
-   secondaryStats: "Your secondary stats:"
    skills: "Skills"
    skillCurrentLevel: "Current level: %count%"
    usableSkillPoints: "Usable skill points: %count%"

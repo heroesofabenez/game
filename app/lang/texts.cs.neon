@@ -234,8 +234,7 @@ arena:
 training:
    title: "Cvičiště"
    train: "Trénovat"
-   primaryStats: "Tvé primární vlastnosti:"
-   secondaryStats: "Tvé sekundární vlastnosti:"
+   stats: "Tvé vlastnosti:"
    usableStatPoints: "Použitelné body vlastností: %count%"
    skills: "Dovednosti"
    skillCurrentLevel: "Současná úroveň: %count%"

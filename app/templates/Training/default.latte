@@ -2,23 +2,15 @@
 {block title}{_"texts.training.title"}{/block}
 {block content}
   <h1>{_"texts.training.title"}</h1>
-  <h2>{_"texts.training.primaryStats"}</h2>
+  <h2>{_"texts.training.stats"}</h2>
   <ul>
-    <li>{_"texts.profile.strength"}: {$stats["strength"]} {if $stat_points}<a n:href="trainStat! strength">{_"texts.training.train"}</a>{/if}</li>
-    <li>{_"texts.profile.dexterity"}: {$stats["dexterity"]} {if $stat_points}<a n:href="trainStat! dexterity">{_"texts.training.train"}</a>{/if}</li>
-    <li>{_"texts.profile.constitution"}: {$stats["constitution"]} {if $stat_points}<a n:href="trainStat! constitution">{_"texts.training.train"}</a>{/if}</li>
+    <li>{_"texts.profile.strength"}: {$stats["strength"]} - {_"texts.profile.damage"}: {$character->damage} {if $stat_points}<a n:href="trainStat! strength">{_"texts.training.train"}</a>{/if}</li>
+    <li>{_"texts.profile.dexterity"}: {$stats["dexterity"]} - {_"texts.profile.hitChance"}: {$character->hit}, {_"texts.profile.dodgeChance"}: {$character->dodge} {if $stat_points}<a n:href="trainStat! dexterity">{_"texts.training.train"}</a>{/if}</li>
+    <li>{_"texts.profile.constitution"}: {$stats["constitution"]} - {_"texts.profile.maxHitpoints"}: {$character->maxHitpoints}, {_"texts.profile.defense"}: {$character->defense} {if $stat_points}<a n:href="trainStat! constitution">{_"texts.training.train"}</a>{/if}</li>
     <li>{_"texts.profile.intelligence"}: {$stats["intelligence"]} {if $stat_points}<a n:href="trainStat! intelligence">{_"texts.training.train"}</a>{/if}</li>
     <li>{_"texts.profile.charisma"}: {$stats["charisma"]} {if $stat_points}<a n:href="trainStat! charisma">{_"texts.training.train"}</a>{/if}</li>
   </ul>
   <p>{_"texts.training.usableStatPoints", $stat_points}</p>
-  <h2>{_"texts.training.secondaryStats"}</h2>
-  <ul>
-    <li>{_"texts.profile.maxHitpoints"}: {$character->maxHitpoints}</li>
-    <li>{_"texts.profile.damage"}: {$character->damage}</li>
-    <li>{_"texts.profile.defense"}: {$character->defense}</li>
-    <li>{_"texts.profile.hitChance"}: {$character->hit}</li>
-    <li>{_"texts.profile.dodgeChance"}: {$character->dodge}</li>
-  </ul>
   <h2>{_"texts.training.skills"}</h2>
   <ul n:inner-foreach="$skills as $skill">
     <li><a n:href="Skill:$skill->skillType $skill->skill->id">{_"skills_{$skill->skillType}.{$skill->skill->id}.name"}</a> {_"texts.training.skillCurrentLevel", $skill->level} {if $skill_points and $skill->level < $skill->skill->levels}<a n:href="trainSkill! $skill->skill->id, $skill->skillType">{_"texts.training.train"}</a>{/if}</li>
