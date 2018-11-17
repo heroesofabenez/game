@@ -55,6 +55,28 @@ final class LocationTest extends \Tester\TestCase {
     }
   }
 
+  public function testCanEnterStage() {
+    $this->model->user = $this->getService(\Nette\Security\User::class);
+    /** @var QuestStage $stage */
+    $stage = $this->model->getStage(1);
+    Assert::true($this->model->canEnterStage($stage));
+    $oldLevel = $stage->requiredLevel;
+    $oldRace = $stage->requiredRace;
+    $oldOccupation = $stage->requiredOccupation;
+    $stage->requiredLevel = 999;
+    Assert::false($this->model->canEnterStage($stage));
+    $stage->requiredLevel = $oldLevel;
+    $stage->requiredRace = 1;
+    Assert::false($this->model->canEnterStage($stage));
+    $stage->requiredRace = $oldRace;
+    $stage->requiredOccupation = 1;
+    Assert::false($this->model->canEnterStage($stage));
+    $stage->requiredOccupation = $oldOccupation;
+    /** @var \HeroesofAbenez\Orm\Model $orm */
+    $orm = $this->getService(\HeroesofAbenez\Orm\Model::class);
+    $orm->stages->persistAndFlush($stage);
+  }
+
   public function testTravelToStage() {
     Assert::exception(function() {
       $this->model->travelToStage(5000);

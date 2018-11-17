@@ -98,7 +98,20 @@ final class Location {
     }
     return $return;
   }
-  
+
+  public function canEnterStage(QuestStage $stage): bool {
+    if($stage->requiredLevel > $this->user->identity->level) {
+      return false;
+    }
+    if(!is_null($stage->requiredRace) AND $stage->requiredRace->id !== $this->user->identity->race) {
+      return false;
+    }
+    if(!is_null($stage->requiredOccupation) AND $stage->requiredOccupation->id !== $this->user->identity->occupation) {
+      return false;
+    }
+    return true;
+  }
+
   /**
    * Try to travel to specified stage
    *
@@ -122,7 +135,7 @@ final class Location {
         break;
       }
     }
-    if(!$foundRoute) {
+    if(!$foundRoute OR !$this->canEnterStage($stage)) {
       throw new CannotTravelToStageException();
     }
     /** @var \HeroesofAbenez\Orm\Character $character */
