@@ -41,6 +41,8 @@ request:
 travel:
     stageDoesNotExist: "Specified stage doesn't exist."
     cannotTravelToStage: "You can't travel to specified stage."
+    areaDoesNotExist: "Specified area doesn't exist."
+    cannotTravelToArea: "You can't travel to specified area."
 arena:
     lowLevel: "You need to reach level %count% to enter Arena."
     cannotFightToday: "You cannot fight more than %count% times in Arena in one day."

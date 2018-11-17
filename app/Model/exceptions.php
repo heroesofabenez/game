@@ -99,8 +99,16 @@ class StageNotFoundException extends RecordNotFoundException {
   
 }
 
+class AreaNotFoundException extends RecordNotFoundException {
+
+}
+
 class CannotTravelToStageException extends AccessDeniedException {
   
+}
+
+class CannotTravelToAreaException extends AccessDeniedException {
+
 }
 
 class NotEnoughExperiencesException extends AccessDeniedException {

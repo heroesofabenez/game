@@ -82,6 +82,34 @@ final class LocationTest extends \Tester\TestCase {
       $this->model->travelToStage(5000);
     }, StageNotFoundException::class);
   }
+
+  public function testCanEnterArea() {
+    $this->model->user = $this->getService(\Nette\Security\User::class);
+    /** @var QuestArea $area */
+    $area = $this->model->getArea(1);
+    Assert::true($this->model->canEnterArea($area));
+    $oldLevel = $area->requiredLevel;
+    $oldRace = $area->requiredRace;
+    $oldOccupation = $area->requiredOccupation;
+    $area->requiredLevel = 999;
+    Assert::false($this->model->canEnterArea($area));
+    $area->requiredLevel = $oldLevel;
+    $area->requiredRace = 1;
+    Assert::false($this->model->canEnterArea($area));
+    $area->requiredRace = $oldRace;
+    $area->requiredOccupation = 1;
+    Assert::false($this->model->canEnterArea($area));
+    $area->requiredOccupation = $oldOccupation;
+    /** @var \HeroesofAbenez\Orm\Model $orm */
+    $orm = $this->getService(\HeroesofAbenez\Orm\Model::class);
+    $orm->areas->persistAndFlush($area);
+  }
+
+  public function testTravelToArea() {
+    Assert::exception(function() {
+      $this->model->travelToArea(5000);
+    }, AreaNotFoundException::class);
+  }
 }
 
 $test = new LocationTest();

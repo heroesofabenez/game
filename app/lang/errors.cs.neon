@@ -41,6 +41,8 @@ request:
 travel:
     #stageDoesNotExist: "Specified stage doesn't exist."
     #cannotTravelToStage: "You can't travel to specified stage."
+    areaDoesNotExist: "Zadaná oblast neexistuje."
+    cannotTravelToArea: "Nemůžeš cestovat do zadané oblasti."
 arena:
     lowLevel: "Musíš dosáhnout úroveň %count%, aby jsi mohl vstoupit do arény."
     cannotFightToday: "Nemůžeš bojovat více než %count% krát v Aréně za den."

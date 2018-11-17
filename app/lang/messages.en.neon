@@ -5,6 +5,7 @@ shop:
     itemBought: "Item bought."
 travel:
     movedToStage: "You moved to %stageName%."
+    movedToSArea: "You moved to %areaName%."
 request:
     accepted: "Request accepted."
     declined: "Request declined."

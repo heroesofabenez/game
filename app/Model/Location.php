@@ -7,6 +7,7 @@ use HeroesofAbenez\Orm\Model as ORM;
 use HeroesofAbenez\Orm\QuestStage;
 use HeroesofAbenez\Orm\QuestArea;
 use HeroesofAbenez\Orm\RoutesStage;
+use HeroesofAbenez\Orm\RoutesArea;
 use Nextras\Orm\Collection\ICollection;
 
 /**
@@ -52,6 +53,15 @@ final class Location {
    */
   public function stageRoutes(): ICollection {
     return $this->orm->stageRoutes->findAll();
+  }
+
+  /**
+   * Gets routes between areas
+   *
+   * @return ICollection|RoutesArea[]
+   */
+  public function areaRoutes(): ICollection {
+    return $this->orm->areaRoutes->findAll();
   }
   
   /**
@@ -137,6 +147,53 @@ final class Location {
     }
     if(!$foundRoute OR !$this->canEnterStage($stage)) {
       throw new CannotTravelToStageException();
+    }
+    /** @var \HeroesofAbenez\Orm\Character $character */
+    $character = $this->orm->characters->getById($this->user->id);
+    $character->currentStage = $id;
+    $this->orm->characters->persistAndFlush($character);
+  }
+
+  public function canEnterArea(QuestArea $area): bool {
+    if($area->requiredLevel > $this->user->identity->level) {
+      return false;
+    }
+    if(!is_null($area->requiredRace) AND $area->requiredRace->id !== $this->user->identity->race) {
+      return false;
+    }
+    if(!is_null($area->requiredOccupation) AND $area->requiredOccupation->id !== $this->user->identity->occupation) {
+      return false;
+    }
+    return true;
+  }
+
+  /**
+   * Try to travel to specified area
+   *
+   * @throws AreaNotFoundException
+   * @throws CannotTravelToAreaException
+   */
+  public function travelToArea(int $id): void {
+    $area = $this->getArea($id);
+    if(is_null($area)) {
+      throw new AreaNotFoundException();
+    }
+    /** @var QuestStage $currentStage */
+    $currentStage = $this->orm->stages->getById($this->user->identity->stage);
+    $currentArea = $currentStage->area->id;
+    $foundRoute = false;
+    $routes = $this->areaRoutes();
+    foreach($routes as $route) {
+      if($route->from->id == $id AND $route->to->id == $currentArea) {
+        $foundRoute = true;
+        break;
+      } elseif($route->from->id == $currentArea AND $route->to->id == $id) {
+        $foundRoute = true;
+        break;
+      }
+    }
+    if(!$foundRoute OR !$this->canEnterArea($area)) {
+      throw new CannotTravelToAreaException();
     }
     /** @var \HeroesofAbenez\Orm\Character $character */
     $character = $this->orm->characters->getById($this->user->id);

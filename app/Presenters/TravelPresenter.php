@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Presenters;
 
+use HeroesofAbenez\Model\AreaNotFoundException;
+use HeroesofAbenez\Model\CannotTravelToAreaException;
 use HeroesofAbenez\Model\StageNotFoundException;
 use HeroesofAbenez\Model\CannotTravelToStageException;
 
@@ -25,6 +27,18 @@ final class TravelPresenter extends BasePresenter {
   }
   
   public function actionArea(int $id): void {
+    $this->model->user = $this->user;
+    try {
+      $this->model->travelToArea($id);
+      $areaName = $this->model->getAreaName($id);
+      $this->user->logout();
+      $this->flashMessage($this->translator->translate("messages.travel.movedToArea", 0, ["areaName" => $areaName]));
+    } catch(CannotTravelToAreaException $e) {
+      $this->flashMessage($this->translator->translate("errors.travel.cannotTravelToArea"));
+    } catch(AreaNotFoundException $e) {
+      $this->flashMessage($this->translator->translate("errors.travel.areaDoesNotExist"));
+    }
+    $this->redirect("Homepage:");
   }
   
   public function actionStage(int $id): void {
