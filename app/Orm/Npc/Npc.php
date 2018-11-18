@@ -24,7 +24,7 @@ use Nexendrie\Utils\Numbers;
  * @property int $level {default 1}
  * @property int $posX
  * @property int $posY
- * @property OneHasMany|ShopItem[] $items {1:m ShopItem::$npc}
+ * @property OneHasMany|ShopItem[] $items {1:m ShopItem::$npc, orderBy=order}
  */
 final class Npc extends \Nextras\Orm\Entity\Entity {
   public const PERSONALITY_FRIENDLY = "friendly";
