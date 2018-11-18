@@ -38,6 +38,23 @@ final class ItemTest extends \Tester\TestCase {
     $this->model->loseItem(1);
     Assert::false($this->model->haveItem(1));
   }
+
+  public function testCanEquipItem() {
+    /** @var \HeroesofAbenez\Orm\Model $orm */
+    $orm = $this->getService(\HeroesofAbenez\Orm\Model::class);
+    /** @var ItemEntity $item */
+    $item = $this->model->view(6);
+    $oldLevel = $item->requiredLevel;
+    $oldClass = $item->requiredClass;
+    Assert::true($this->model->canEquipItem($item));
+    $item->requiredLevel = 999;
+    Assert::false($this->model->canEquipItem($item));
+    $item->requiredLevel = $oldLevel;
+    $item->requiredClass = 1;
+    Assert::false($this->model->canEquipItem($item));
+    $item->requiredClass = $oldClass;
+    $orm->items->persistAndFlush($item);
+  }
 }
 
 $test = new ItemTest();
