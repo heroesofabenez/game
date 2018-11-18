@@ -63,3 +63,4 @@ pet:
     notOwned: "Specified pet is not yours."
     notDeployed: "Specified pet is not deployed."
     alreadyDeployed: "The pet is already deployed."
+    notDeployable: "You cannot deploy this pet."

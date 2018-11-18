@@ -29,7 +29,30 @@ final class PetTest extends \Tester\TestCase {
     Assert::type(PetEntity::class, $this->model->getActivePet(1));
     Assert::null($this->model->getActivePet(5000));
   }
-  
+
+  public function testCanDeployPet() {
+    /** @var \HeroesofAbenez\Orm\Model $orm */
+    $orm = $this->getService(\HeroesofAbenez\Orm\Model::class);
+    /** @var PetEntity $pet */
+    $pet = $orm->pets->getById(1);
+    $oldLevel = $pet->type->requiredLevel;
+    $oldClass = $pet->type->requiredClass;
+    $oldRace = $pet->type->requiredRace;
+    $pet->type->requiredLevel = 1;
+    Assert::true($this->model->canDeployPet($pet));
+    $pet->type->requiredLevel = 999;
+    Assert::false($this->model->canDeployPet($pet));
+    $pet->type->requiredLevel = 1;
+    $pet->type->requiredClass = 1;
+    Assert::false($this->model->canDeployPet($pet));
+    $pet->type->requiredClass = $oldClass;
+    $pet->type->requiredRace = 1;
+    Assert::false($this->model->canDeployPet($pet));
+    $pet->type->requiredLevel = $oldLevel;
+    $pet->type->requiredRace = $oldRace;
+    $orm->petTypes->persistAndFlush($pet->type);
+  }
+
   public function testDeployPet() {
     Assert::exception(function() {
       $this->model->deployPet(5000);

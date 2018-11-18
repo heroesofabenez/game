@@ -13,6 +13,7 @@ use HeroesofAbenez\Model\PetNotFoundException;
 use HeroesofAbenez\Model\PetNotOwnedException;
 use HeroesofAbenez\Model\PetNotDeployedException;
 use HeroesofAbenez\Model\PetAlreadyDeployedException;
+use HeroesofAbenez\Model\PetNotDeployableException;
 
 /**
  * Presenter Journal
@@ -110,6 +111,8 @@ final class JournalPresenter extends BasePresenter {
       $this->flashMessage($this->translator->translate("errors.pet.notOwned"));
     } catch(PetAlreadyDeployedException $e) {
       $this->flashMessage($this->translator->translate("errors.pet.alreadyDeployed"));
+    } catch(PetNotDeployableException $e) {
+      $this->flashMessage($this->translator->translate("errors.pet.notDeployable"));
     }
     $this->redirect("Journal:pets");
   }

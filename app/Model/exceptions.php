@@ -178,4 +178,8 @@ class PetNotDeployedException extends InvalidStateException {
 class PetAlreadyDeployedException extends InvalidStateException {
   
 }
+
+class PetNotDeployableException extends AccessDeniedException {
+
+}
 ?>

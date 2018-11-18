@@ -43,12 +43,24 @@ final class Pet {
     return $this->orm->pets->getActivePet($user);
   }
   
+  public function canDeployPet(PetEntity $pet): bool {
+    if($this->user->identity->level < $pet->type->requiredLevel) {
+      return false;
+    } elseif(!is_null($pet->type->requiredClass) AND $pet->type->requiredClass->id !== $this->user->identity->occupation) {
+      return false;
+    } elseif(!is_null($pet->type->requiredRace) AND $pet->type->requiredRace->id !== $this->user->identity->race) {
+      return false;
+    }
+    return true;
+  }
+  
   /**
    * Deploy a pet
    *
    * @throws PetNotFoundException
    * @throws PetNotOwnedException
    * @throws PetAlreadyDeployedException
+   * @throws PetNotDeployableException
    */
   public function deployPet(int $id): void {
     $pet = $this->orm->pets->getById($id);
@@ -58,6 +70,8 @@ final class Pet {
       throw new PetNotOwnedException();
     } elseif($pet->deployed) {
       throw new PetAlreadyDeployedException();
+    } elseif(!$this->canDeployPet($pet)) {
+      throw new PetNotDeployableException();
     }
     $pets = $this->orm->pets->findByOwner($this->user->id);
     /** @var \HeroesofAbenez\Orm\Pet $pet */
