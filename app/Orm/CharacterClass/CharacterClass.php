@@ -34,6 +34,7 @@ use Nexendrie\Utils\Numbers;
  * @property OneHasMany|Item[] $items {1:m Item::$requiredClass}
  * @property OneHasMany|SkillAttack[] $attackSkills {1:m SkillAttack::$neededClass}
  * @property OneHasMany|SkillSpecial[] $specialSkills {1:m SkillSpecial::$neededClass}
+ * @property-read string $mainStat {virtual}
  */
 final class CharacterClass extends \Nextras\Orm\Entity\Entity {
   protected const MAX_STATS = 99;
@@ -56,6 +57,14 @@ final class CharacterClass extends \Nextras\Orm\Entity\Entity {
   
   protected function setterCharisma(int $value): int {
     return Numbers::range($value, 0, static::MAX_STATS);
+  }
+
+  protected function getterMainStat(): string {
+    $stats = [
+      "strength" => $this->strength, "dexterity" => $this->dexterity, "constitution" => $this->constitution,
+      "intelligence" => $this->intelligence, "charisma" => $this->charisma,
+    ];
+    return array_search(max($stats), $stats, true);
   }
 }
 ?>
