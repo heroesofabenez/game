@@ -23,7 +23,7 @@ final class DissolveGuildFormFactory extends BaseFormFactory {
   }
   
   public function  create(): Form {
-    $form = parent::createBase();
+    $form = $this->createBase();
     $currentName = $this->model->getGuildName($this->user->identity->guild);
     $form->addText("name", "forms.dissolveGuild.nameField.label")
       ->addRule(Form::EQUAL, "forms.dissolveGuild.nameField.error", $currentName)

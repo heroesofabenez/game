@@ -17,7 +17,7 @@ final class CreateCharacterFormFactory extends BaseFormFactory {
    * @param ICollection|\HeroesofAbenez\Orm\CharacterClass[] $classes
    */
   public function create(ICollection $races, ICollection $classes): Form {
-    $form = parent::createBase();
+    $form = $this->createBase();
     $racesList = $classesList = [];
     $form->addText("name", "forms.createCharacter.nameField.label")
       ->setRequired("forms.createCharacter.nameField.empty")
