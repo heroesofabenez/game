@@ -18,7 +18,7 @@ abstract class RankingControl extends \Nette\Application\UI\Control {
   /** @var string */
   protected $lastCol;
   /** @var string */
-  protected $presenter;
+  protected $presenterName;
   /** @var \Nette\Utils\Paginator|null */
   protected $paginator = null;
   
@@ -26,7 +26,7 @@ abstract class RankingControl extends \Nette\Application\UI\Control {
     parent::__construct();
     $this->name = $name;
     $this->cols = $cols;
-    $this->presenter = $presenter;
+    $this->presenterName = $presenter;
     $this->lastCol = $lastCol;
   }
   
@@ -41,7 +41,7 @@ abstract class RankingControl extends \Nette\Application\UI\Control {
     $this->template->name = $this->name;
     $this->template->rankings = ["characters", "guilds"];
     $this->template->cols = $this->cols;
-    $this->template->presenter = $this->presenter;
+    $this->template->presenter = $this->presenterName;
     $this->template->lastCol = $this->lastCol;
     $this->template->rows = $this->getData();
     $this->template->paginator = $this->paginator;
