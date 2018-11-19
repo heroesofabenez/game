@@ -46,7 +46,7 @@ final class TrainingPresenter extends BasePresenter {
     try {
       $this->model->trainStat($stat);
     } catch(NoStatPointsAvailableException $e) {
-      $this->flashMessage($this->translator->translate("errors.training.noStatPointsAvailable"));
+      $this->flashMessage("errors.training.noStatPointsAvailable");
     } catch(InvalidStatException $e) {
       
     }
@@ -57,11 +57,11 @@ final class TrainingPresenter extends BasePresenter {
     try {
       $this->skillsModel->trainSkill($skillId, $skillType);
     } catch(NoSkillPointsAvailableException $e) {
-      $this->flashMessage($this->translator->translate("errors.training.noSkillPointsAvailable"));
+      $this->flashMessage("errors.training.noSkillPointsAvailable");
     } catch(SkillMaxLevelReachedException $e) {
-      $this->flashMessage($this->translator->translate("errors.training.skillMaxLevelReached"));
+      $this->flashMessage("errors.training.skillMaxLevelReached");
     } catch(CannotLearnSkillException $e) {
-      $this->flashMessage($this->translator->translate("errors.training.cannotLearnSkill"));
+      $this->flashMessage("errors.training.cannotLearnSkill");
     } catch(InvalidSkillTypeException $e) {
       
     } catch(SkillNotFoundException $e) {

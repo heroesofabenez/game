@@ -96,11 +96,11 @@ final class NPCQuestsControl extends \Nette\Application\UI\Control {
     }
     $status = $this->questModel->status($questId);
     if($status > 0) {
-      $this->presenter->flashMessage($this->translator->translate("errors.quest.workingOn"));
+      $this->presenter->flashMessage("errors.quest.workingOn");
       $this->presenter->redirect("Npc:quests", $quest->npcStart->id);
     }
     if($quest->npcStart->id != $this->npc->id) {
-      $this->presenter->flashMessage($this->translator->translate("errors.quest.cannotAcceptHere"));
+      $this->presenter->flashMessage("errors.quest.cannotAcceptHere");
       $this->presenter->redirect("Homepage:default");
     }
     $record = new CharacterQuest();
@@ -108,7 +108,7 @@ final class NPCQuestsControl extends \Nette\Application\UI\Control {
     $record->character = $this->user->id;
     $record->quest = $questId;
     $this->orm->characterQuests->persistAndFlush($record);
-    $this->presenter->flashMessage($this->translator->translate("messages.quest.accepted"));
+    $this->presenter->flashMessage("messages.quest.accepted");
     $this->presenter->redirect("Quest:view", $quest->id);
   }
   
@@ -141,15 +141,15 @@ final class NPCQuestsControl extends \Nette\Application\UI\Control {
     }
     $status = $this->questModel->status($questId);
     if($status === CharacterQuest::PROGRESS_OFFERED OR $status === CharacterQuest::PROGRESS_FINISHED) {
-      $this->presenter->flashMessage($this->translator->translate("errors.quest.notWorkingOn"));
+      $this->presenter->flashMessage("errors.quest.notWorkingOn");
       $this->presenter->redirect("Npc:quests", $quest->npcStart->id);
     }
     if($quest->npcEnd->id != $this->npc->id) {
-      $this->presenter->flashMessage($this->translator->translate("errors.quest.cannotFinishHere"));
+      $this->presenter->flashMessage("errors.quest.cannotFinishHere");
       $this->presenter->redirect("Homepage:default");
     }
     if(!$this->isCompleted($quest)) {
-      $this->presenter->flashMessage($this->translator->translate("errors.quest.requirementsNotMet"));
+      $this->presenter->flashMessage("errors.quest.requirementsNotMet");
       $this->presenter->redirect("Homepage:default");
     }
     /** @var CharacterQuest $record */
@@ -170,7 +170,7 @@ final class NPCQuestsControl extends \Nette\Application\UI\Control {
     $record->character->whiteKarma += $quest->rewardWhiteKarma;
     $record->character->darkKarma += $quest->rewardDarkKarma;
     $this->orm->characterQuests->persistAndFlush($record);
-    $this->presenter->flashMessage($this->translator->translate("messages.quest.finished"));
+    $this->presenter->flashMessage("messages.quest.finished");
     $this->user->logout();
     $this->presenter->redirect("Quest:view", $quest->id);
   }

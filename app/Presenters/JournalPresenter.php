@@ -69,9 +69,9 @@ final class JournalPresenter extends BasePresenter {
     } catch(ItemNotOwnedException $e) {
       $this->redirect("Equipment:notfound");
     } catch(ItemNotEquipableException $e) {
-      $this->flashMessage($this->translator->translate("errors.equipment.notEquipable"));
+      $this->flashMessage("errors.equipment.notEquipable");
     } catch(ItemAlreadyEquippedException $e) {
-      $this->flashMessage($this->translator->translate("errors.equipment.alreadyWorn"));
+      $this->flashMessage("errors.equipment.alreadyWorn");
     }
     $this->redirect("Journal:inventory");
   }
@@ -79,13 +79,13 @@ final class JournalPresenter extends BasePresenter {
   public function handleUnequipItem(int $itemId): void {
     try {
       $this->itemModel->unequipItem($itemId);
-      $this->flashMessage($this->translator->translate("errors.equipment.unequiped"));
+      $this->flashMessage("errors.equipment.unequiped");
     } catch(ItemNotFoundException $e) {
       $this->redirect("Equipment:notfound");
     } catch(ItemNotOwnedException $e) {
       $this->redirect("Equipment:notfound");
     } catch(ItemNotWornException $e) {
-      $this->flashMessage($this->translator->translate("errors.equipment.notWorn"));
+      $this->flashMessage("errors.equipment.notWorn");
     }
     $this->redirect("Journal:inventory");
   }
@@ -96,7 +96,7 @@ final class JournalPresenter extends BasePresenter {
       $this->profileModel->levelUp();
       $this->user->logout();
     } catch(NotEnoughExperiencesException $e) {
-      $this->flashMessage($this->translator->translate("errors.journal.cannotLevelUp"));
+      $this->flashMessage("errors.journal.cannotLevelUp");
     }
     $this->redirect("Journal:");
   }
@@ -106,13 +106,13 @@ final class JournalPresenter extends BasePresenter {
       $this->petModel->user = $this->user;
       $this->petModel->deployPet($petId);
     } catch(PetNotFoundException $e) {
-      $this->flashMessage($this->translator->translate("errors.pet.notFound"));
+      $this->flashMessage("errors.pet.notFound");
     } catch(PetNotOwnedException $e) {
-      $this->flashMessage($this->translator->translate("errors.pet.notOwned"));
+      $this->flashMessage("errors.pet.notOwned");
     } catch(PetAlreadyDeployedException $e) {
-      $this->flashMessage($this->translator->translate("errors.pet.alreadyDeployed"));
+      $this->flashMessage("errors.pet.alreadyDeployed");
     } catch(PetNotDeployableException $e) {
-      $this->flashMessage($this->translator->translate("errors.pet.notDeployable"));
+      $this->flashMessage("errors.pet.notDeployable");
     }
     $this->redirect("Journal:pets");
   }
@@ -121,13 +121,13 @@ final class JournalPresenter extends BasePresenter {
     try {
       $this->petModel->user = $this->user;
       $this->petModel->discardPet($petId);
-      $this->flashMessage($this->translator->translate("messages.pet.discarded"));
+      $this->flashMessage("messages.pet.discarded");
     } catch(PetNotFoundException $e) {
-      $this->flashMessage($this->translator->translate("errors.pet.notFound"));
+      $this->flashMessage("errors.pet.notFound");
     } catch(PetNotOwnedException $e) {
-      $this->flashMessage($this->translator->translate("errors.pet.notOwned"));
+      $this->flashMessage("errors.pet.notOwned");
     } catch(PetNotDeployedException $e) {
-      $this->flashMessage($this->translator->translate("errors.pet.notDeployed"));
+      $this->flashMessage("errors.pet.notDeployed");
     }
     $this->redirect("Journal:pets");
   }

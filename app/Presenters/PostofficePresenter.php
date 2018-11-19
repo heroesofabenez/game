@@ -69,7 +69,7 @@ final class PostofficePresenter extends BasePresenter {
       "from" => $this->user->id, "to" => $values["to"], "subject" => $values["subject"], "text" => $values["message"]
     ];
     $this->createComponentPostoffice()->sendMessage($data);
-    $this->flashMessage($this->translator->translate("messages.postoffice.messageSent"));
+    $this->flashMessage("messages.postoffice.messageSent");
     $this->redirect("Postoffice:sent");
   }
 }

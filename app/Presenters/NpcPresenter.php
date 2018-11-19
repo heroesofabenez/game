@@ -72,7 +72,7 @@ final class NpcPresenter extends BasePresenter {
   
   public function actionFight(int $id): void {
     if(!$this->npc->fight) {
-      $this->flashMessage($this->translator->translate("errors.npc.notEnemy"));
+      $this->flashMessage("errors.npc.notEnemy");
       $this->redirect("view", $id);
     }
   }
@@ -85,7 +85,7 @@ final class NpcPresenter extends BasePresenter {
   
   public function actionTrade(int $id): void {
     if(!$this->npc->shop) {
-      $this->flashMessage($this->translator->translate("errors.npc.noShop"));
+      $this->flashMessage("errors.npc.noShop");
       $this->redirect("view", $id);
     }
   }

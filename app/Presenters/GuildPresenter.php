@@ -47,7 +47,7 @@ final class GuildPresenter extends BasePresenter {
   protected function inGuild(): void {
     $guild = $this->user->identity->guild;
     if($guild > 0) {
-      $this->flashMessage($this->translator->translate("errors.guild.inGuild"));
+      $this->flashMessage("errors.guild.inGuild");
       $this->forward("default");
     }
   }
@@ -61,7 +61,7 @@ final class GuildPresenter extends BasePresenter {
     $guild = $this->user->identity->guild;
     if($guild == 0) {
       if($warning) {
-        $this->flashMessage($this->translator->translate("errors.guild.notInGuild"));
+        $this->flashMessage("errors.guild.notInGuild");
       }
       $this->forward("noguild");
     }
@@ -113,7 +113,7 @@ final class GuildPresenter extends BasePresenter {
     $form = $factory->create();
     $form->onSuccess[] = function() {
       $this->user->logout();
-      $this->flashMessage($this->translator->translate("messages.guild.created"));
+      $this->flashMessage("messages.guild.created");
       $this->redirect("Guild:");
     };
     return $form;
@@ -131,7 +131,7 @@ final class GuildPresenter extends BasePresenter {
     }
     try {
       $this->model->sendApplication($id);
-      $this->flashMessage($this->translator->translate("messages.guild.applicationSent"));
+      $this->flashMessage("messages.guild.applicationSent");
       $this->redirect("Guild:");
     } catch(GuildNotFoundException $e) {
       $this->forward("notfound");
@@ -143,7 +143,7 @@ final class GuildPresenter extends BasePresenter {
     $this->template->guilds = $guilds;
     $apps = $this->model->haveUnresolvedApplication();
     if($apps) {
-      $this->flashMessage($this->translator->translate("messages.guild.unresolvedApplication"));
+      $this->flashMessage("messages.guild.unresolvedApplication");
     }
   }
   
@@ -151,14 +151,14 @@ final class GuildPresenter extends BasePresenter {
     $this->notInGuild();
     try {
       $this->model->leave();
-      $this->flashMessage($this->translator->translate("messages.guild.left"));
+      $this->flashMessage("messages.guild.left");
       $this->user->logout();
       $this->forward("default");
     } catch(NotInGuildException $e) {
-      $this->flashMessage($this->translator->translate("errors.guild.notInGuild"));
+      $this->flashMessage("errors.guild.notInGuild");
       $this->redirect("Guild:");
     } catch(GrandmasterCannotLeaveGuildException $e) {
-      $this->flashMessage($this->translator->translate("errors.guild.grandmasterCannotLeave"));
+      $this->flashMessage("errors.guild.grandmasterCannotLeave");
       $this->redirect("Guild:");
     }
   }
@@ -166,7 +166,7 @@ final class GuildPresenter extends BasePresenter {
   public function actionManage(): void {
     $this->notInGuild();
     if(!$this->user->isAllowed("guild", "manage")) {
-      $this->flashMessage($this->translator->translate("errors.guild.cannotManage"));
+      $this->flashMessage("errors.guild.cannotManage");
       $this->redirect("Guild:");
     }
   }
@@ -180,7 +180,7 @@ final class GuildPresenter extends BasePresenter {
   public function actionRename(): void {
     $this->notInGuild();
     if(!$this->user->isAllowed("guild", "rename")) {
-      $this->flashMessage($this->translator->translate("errors.guild.cannotRename"));
+      $this->flashMessage("errors.guild.cannotRename");
       $this->redirect("Guild:");
     }
     $this->template->haveForm = true;
@@ -189,7 +189,7 @@ final class GuildPresenter extends BasePresenter {
   public function actionDissolve(): void {
     $this->notInGuild();
     if(!$this->user->isAllowed("guild", "dissolve")) {
-      $this->flashMessage($this->translator->translate("errors.guild.cannotDissolve"));
+      $this->flashMessage("errors.guild.cannotDissolve");
       $this->redirect("Guild:");
     }
     $this->template->haveForm = true;
@@ -201,7 +201,7 @@ final class GuildPresenter extends BasePresenter {
   protected function createComponentDissolveGuildForm(DissolveGuildFormFactory $factory): Form {
     $form = $factory->create();
     $form->onSuccess[] = function() {
-      $this->flashMessage($this->translator->translate("messages.guild.dissolved"));
+      $this->flashMessage("messages.guild.dissolved");
       $this->user->logout();
       $this->redirect("Guild:noguild");
     };
@@ -214,7 +214,7 @@ final class GuildPresenter extends BasePresenter {
   protected function createComponentRenameGuildForm(RenameGuildFormFactory $factory): Form {
     $form = $factory->create();
     $form->onSuccess[] = function() {
-      $this->flashMessage($this->translator->translate("messages.guild.renamed"));
+      $this->flashMessage("messages.guild.renamed");
       $this->redirect("Guild:");
     };
     return $form;
@@ -223,21 +223,21 @@ final class GuildPresenter extends BasePresenter {
   public function actionPromote(int $id): void {
     try{
       $this->model->promote($id);
-      $this->flashMessage($this->translator->translate("messages.guild.promoted"));
+      $this->flashMessage("messages.guild.promoted");
     } catch(NotInGuildException $e) {
-      $this->flashMessage($this->translator->translate("errors.guild.notInGuild"));
+      $this->flashMessage("errors.guild.notInGuild");
     } catch(MissingPermissionsException $e) {
-      $this->flashMessage($this->translator->translate("errors.guild.missingPermissions"));
+      $this->flashMessage("errors.guild.missingPermissions");
     } catch(PlayerNotFoundException $e) {
-      $this->flashMessage($this->translator->translate("errors.guild.playerDoesNotExist"));
+      $this->flashMessage("errors.guild.playerDoesNotExist");
     } catch(PlayerNotInGuildException $e) {
-      $this->flashMessage($this->translator->translate("errors.guild.playerNotInGuild"));
+      $this->flashMessage("errors.guild.playerNotInGuild");
     } catch(CannotPromoteHigherRanksException $e) {
-      $this->flashMessage($this->translator->translate("errors.guild.cannotPromoteHigherRanks"));
+      $this->flashMessage("errors.guild.cannotPromoteHigherRanks");
     } catch(CannotPromoteToGrandmasterException $e) {
-      $this->flashMessage($this->translator->translate("errors.guild.cannotPromoteToGrandmaster"));
+      $this->flashMessage("errors.guild.cannotPromoteToGrandmaster");
     } catch(CannotHaveMoreDeputiesException $e) {
-      $this->flashMessage($this->translator->translate("errors.guild.cannotHaveMoreDeputies"));
+      $this->flashMessage("errors.guild.cannotHaveMoreDeputies");
     }
     $this->redirect("Guild:");
   }
@@ -245,19 +245,19 @@ final class GuildPresenter extends BasePresenter {
   public function actionDemote(int $id): void {
     try{
       $this->model->demote($id);
-      $this->flashMessage($this->translator->translate("messages.guild.demoted"));
+      $this->flashMessage("messages.guild.demoted");
     } catch(NotInGuildException $e) {
-      $this->flashMessage($this->translator->translate("errors.guild.notInGuild"));
+      $this->flashMessage("errors.guild.notInGuild");
     } catch(MissingPermissionsException $e) {
-      $this->flashMessage($this->translator->translate("errors.guild.missingPermissions"));
+      $this->flashMessage("errors.guild.missingPermissions");
     } catch(PlayerNotFoundException $e) {
-      $this->flashMessage($this->translator->translate("errors.guild.playerDoesNotExist"));
+      $this->flashMessage("errors.guild.playerDoesNotExist");
     } catch(PlayerNotInGuildException $e) {
-      $this->flashMessage($this->translator->translate("errors.guild.playerNotInGuild"));
+      $this->flashMessage("errors.guild.playerNotInGuild");
     } catch(CannotDemoteHigherRanksException $e) {
-      $this->flashMessage($this->translator->translate("errors.guild.cannotDemoteHigherRanks"));
+      $this->flashMessage("errors.guild.cannotDemoteHigherRanks");
     } catch(CannotDemoteLowestRankException $e) {
-      $this->flashMessage($this->translator->translate("errors.guild.cannotDemoteLowestRank"));
+      $this->flashMessage("errors.guild.cannotDemoteLowestRank");
     }
     $this->redirect("Guild:");
   }
@@ -265,17 +265,17 @@ final class GuildPresenter extends BasePresenter {
   public function actionKick(int $id): void {
     try {
       $this->model->kick($id);
-      $this->flashMessage($this->translator->translate("messages.guild.kicked"));
+      $this->flashMessage("messages.guild.kicked");
     } catch(NotInGuildException $e) {
-      $this->flashMessage($this->translator->translate("errors.guild.notInGuild"));
+      $this->flashMessage("errors.guild.notInGuild");
     } catch(MissingPermissionsException $e) {
-      $this->flashMessage($this->translator->translate("errors.guild.missingPermissions"));
+      $this->flashMessage("errors.guild.missingPermissions");
     } catch(PlayerNotFoundException $e) {
-      $this->flashMessage($this->translator->translate("errors.guild.playerDoesNotExist"));
+      $this->flashMessage("errors.guild.playerDoesNotExist");
     } catch(PlayerNotInGuildException $e) {
-      $this->flashMessage($this->translator->translate("errors.guild.playerNotInGuild"));
+      $this->flashMessage("errors.guild.playerNotInGuild");
     } catch(CannotKickHigherRanksException $e) {
-      $this->flashMessage($this->translator->translate("errors.guild.cannotKickHigherRanks"));
+      $this->flashMessage("errors.guild.cannotKickHigherRanks");
     }
     $this->redirect("Guild:");
   }
@@ -283,7 +283,7 @@ final class GuildPresenter extends BasePresenter {
   public function actionDescription(): void {
     $this->notInGuild();
     if(!$this->user->isAllowed("guild", "manage")) {
-      $this->flashMessage($this->translator->translate("errors.guild.cannotChangeDescription"));
+      $this->flashMessage("errors.guild.cannotChangeDescription");
       $this->redirect("Guild:");
     }
     $this->template->haveForm = true;
@@ -295,7 +295,7 @@ final class GuildPresenter extends BasePresenter {
   protected function createComponentGuildDescriptionForm(GuildDescriptionFormFactory $factory): Form {
     $form = $factory->create();
     $form->onSuccess[] = function() {
-      $this->flashMessage($this->translator->translate("messages.guild.descriptionChanged"));
+      $this->flashMessage("messages.guild.descriptionChanged");
       $this->redirect("Guild:");
     };
     return $form;
@@ -304,7 +304,7 @@ final class GuildPresenter extends BasePresenter {
   public function actionApplications(): void {
     $this->notInGuild();
     if(!$this->user->isAllowed("guild", "invite")) {
-      $this->flashMessage($this->translator->translate("errors.guild.cannotManageApps"));
+      $this->flashMessage("errors.guild.cannotManageApps");
       $this->redirect("Guild:");
     }
   }
@@ -316,7 +316,7 @@ final class GuildPresenter extends BasePresenter {
   public function actionRankNames(): void {
     $this->notInGuild();
     if(!$this->user->isAllowed("guild", "changeRankNames")) {
-      $this->flashMessage($this->translator->translate("errors.guild.cannotChangeRankNames"));
+      $this->flashMessage("errors.guild.cannotChangeRankNames");
       $this->redirect("Guild:");
     }
     $this->template->haveForm = true;
@@ -325,7 +325,7 @@ final class GuildPresenter extends BasePresenter {
   protected function createComponentCustomGuildRankNamesForm(CustomGuildRankNamesFormFactory $factory): Form {
     $form = $factory->create();
     $form->onSuccess[] = function() {
-      $this->flashMessage($this->translator->translate("messages.guild.customRankNamesSet"));
+      $this->flashMessage("messages.guild.customRankNamesSet");
       $this->redirect("Guild:");
     };
     return $form;

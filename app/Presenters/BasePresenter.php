@@ -71,5 +71,15 @@ abstract class BasePresenter extends \Nette\Application\UI\Presenter {
   protected function createComponentMenu(IMenuControlFactory $factory): MenuControl {
     return $factory->create();
   }
+
+  /**
+   * @param string $message
+   * @param string $type
+   * @return \stdClass
+   */
+  public function flashMessage($message, $type = "info") {
+    $message = $this->translator->translate($message);
+    return parent::flashMessage($message, $type);
+  }
 }
 ?>

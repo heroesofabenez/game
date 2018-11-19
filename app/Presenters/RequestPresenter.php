@@ -36,7 +36,7 @@ final class RequestPresenter extends BasePresenter {
     try {
       $this->template->request = $this->model->show($id);
     } catch(CannotSeeRequestException $e) {
-      $this->flashMessage($this->translator->translate("errors.request.cannotSee"));
+      $this->flashMessage("errors.request.cannotSee");
       $this->forward("Homepage:");
     } catch(RequestNotFoundException $e) {
       $this->forward("notfound");
@@ -46,21 +46,21 @@ final class RequestPresenter extends BasePresenter {
   public function actionAccept(int $id): void {
     try {
       $this->model->accept($id);
-      $this->flashMessage($this->translator->translate("messages.request.accepted"));
+      $this->flashMessage("messages.request.accepted");
       $this->redirect("Homepage:");
     } catch(RequestNotFoundException $e) {
       $this->forward("notfound");
     } catch(CannotSeeRequestException $e) {
-      $this->flashMessage($this->translator->translate("errors.request.cannotSee"));
+      $this->flashMessage("errors.request.cannotSee");
       $this->forward("Homepage:");
     } catch(CannotAcceptRequestException $e) {
-      $this->flashMessage($this->translator->translate("errors.request.cannotAccept"));
+      $this->flashMessage("errors.request.cannotAccept");
       $this->forward("Homepage:");
     } catch(RequestAlreadyHandledException $e) {
-      $this->flashMessage($this->translator->translate("errors.request.handled"));
+      $this->flashMessage("errors.request.handled");
       $this->forward("Homepage:");
     } catch(\Nette\NotImplementedException $e) {
-      $this->flashMessage($this->translator->translate("errors.request.typeNotImplemented"));
+      $this->flashMessage("errors.request.typeNotImplemented");
       $this->forward("Homepage:");
     }
   }
@@ -68,18 +68,18 @@ final class RequestPresenter extends BasePresenter {
   public function actionDecline(int $id): void {
     try {
       $this->model->decline($id);
-      $this->flashMessage($this->translator->translate("messages.request.declined"));
+      $this->flashMessage("messages.request.declined");
       $this->redirect("Homepage:");
     } catch(RequestNotFoundException $e) {
       $this->forward("notfound");
     } catch(CannotSeeRequestException $e) {
-      $this->flashMessage($this->translator->translate("errors.request.cannotSee"));
+      $this->flashMessage("errors.request.cannotSee");
       $this->forward("Homepage:");
     } catch(CannotDeclineRequestException $e) {
-      $this->flashMessage($this->translator->translate("errors.request.cannotDecline"));
+      $this->flashMessage("errors.request.cannotDecline");
       $this->forward("Homepage:");
     } catch(RequestAlreadyHandledException $e) {
-      $this->flashMessage($this->translator->translate("errors.request.handled"));
+      $this->flashMessage("errors.request.handled");
       $this->forward("Homepage:");
     }
   }

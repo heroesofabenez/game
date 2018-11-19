@@ -34,9 +34,9 @@ final class TravelPresenter extends BasePresenter {
       $this->user->logout();
       $this->flashMessage($this->translator->translate("messages.travel.movedToArea", 0, ["areaName" => $areaName]));
     } catch(CannotTravelToAreaException $e) {
-      $this->flashMessage($this->translator->translate("errors.travel.cannotTravelToArea"));
+      $this->flashMessage("errors.travel.cannotTravelToArea");
     } catch(AreaNotFoundException $e) {
-      $this->flashMessage($this->translator->translate("errors.travel.areaDoesNotExist"));
+      $this->flashMessage("errors.travel.areaDoesNotExist");
     }
     $this->redirect("Homepage:");
   }
@@ -49,9 +49,9 @@ final class TravelPresenter extends BasePresenter {
       $this->user->logout();
       $this->flashMessage($this->translator->translate("messages.travel.movedToStage", 0, ["stageName" => $stageName]));
     } catch(CannotTravelToStageException $e) {
-      $this->flashMessage($this->translator->translate("errors.travel.cannotTravelToStage"));
+      $this->flashMessage("errors.travel.cannotTravelToStage");
     } catch(StageNotFoundException $e) {
-      $this->flashMessage($this->translator->translate("errors.travel.stageDoesNotExist"));
+      $this->flashMessage("errors.travel.stageDoesNotExist");
     }
     $this->redirect("Homepage:");
   }
