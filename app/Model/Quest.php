@@ -17,8 +17,6 @@ final class Quest {
   
   /** @var ORM */
   protected $orm;
-  /** @var \Nette\Caching\Cache */
-  protected $cache;
   /** @var \Nette\Security\User */
   protected $user;
   /** @var Item */
@@ -26,9 +24,8 @@ final class Quest {
   /** @var Pet */
   protected $petModel;
   
-  public function __construct(\Nette\Caching\Cache $cache, ORM $orm,  \Nette\Security\User $user, Item $itemModel, Pet $petModel) {
+  public function __construct(ORM $orm,  \Nette\Security\User $user, Item $itemModel, Pet $petModel) {
     $this->orm = $orm;
-    $this->cache = $cache;
     $this->user = $user;
     $this->itemModel = $itemModel;
     $this->petModel = $petModel;
