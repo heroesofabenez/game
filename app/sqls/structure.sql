@@ -336,7 +336,7 @@ CREATE TABLE `quests` (
   `cost_money` int(3) NOT NULL DEFAULT '0',
   `needed_item` int(11) DEFAULT NULL,
   `needed_quest` int(3) DEFAULT NULL,
-  `needed_level` int(3) DEFAULT NULL,
+  `needed_level` int(3) NOT NULL DEFAULT '1',
   `item_amount` int(1) NOT NULL DEFAULT '1',
   `item_lose` int(1) NOT NULL DEFAULT '1',
   `reward_money` int(4) NOT NULL,

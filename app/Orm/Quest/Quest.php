@@ -16,7 +16,7 @@ use Nexendrie\Utils\Numbers;
  * @property Item|null $neededItem {m:1 Item::$neededForQuests}
  * @property Quest|null $neededQuest {m:1 Quest::$children}
  * @property OneHasMany|Quest[] $children {1:m Quest::$neededQuest}
- * @property int|null $neededLevel
+ * @property int $neededLevel {default 1}
  * @property int $itemAmount {default 1}
  * @property bool $itemLose {default true}
  * @property int $rewardMoney
