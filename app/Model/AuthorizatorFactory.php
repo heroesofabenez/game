@@ -19,10 +19,10 @@ final class AuthorizatorFactory {
   public function __construct(Permissions $model) {
     $this->model = $model;
   }
-  
+
   /**
-  * Factory for Authorizator
-  */
+   * Factory for Authorizator
+   */
   public function create(): Permission {
     $permission = new Permission();
     $permission->addResource("guild");

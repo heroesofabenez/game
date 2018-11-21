@@ -296,13 +296,13 @@ final class Guild {
     $character->guild = $character->guildrank = null;
     $this->orm->characters->persistAndFlush($character);
   }
-  
+
   /**
    * Leave the guild
    *
    * @throws NotInGuildException
    * @throws GrandmasterCannotLeaveGuildException
-  */
+   */
   public function leave(): void {
     if($this->user->identity->guild === 0) {
       throw new NotInGuildException();
@@ -329,12 +329,12 @@ final class Guild {
     $this->orm->guilds->remove($guild);
     $this->orm->flush();
   }
-  
+
   /**
    * Rename guild
    *
    * @throws NameInUseException
-  */
+   */
   public function rename(int $id, string $name): void {
     $guild = $this->orm->guilds->getByName($name);
     if(!is_null($guild) AND $guild->id !== $id) {

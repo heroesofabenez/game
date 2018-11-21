@@ -13,10 +13,10 @@ final class Arrays {
   public static function orderby(): array {
     $args = func_get_args();
     $data = array_shift($args);
-    foreach ($args as $n => $field) {
+    foreach($args as $n => $field) {
       if(is_string($field)) {
         $tmp = [];
-        foreach ($data as $key => $row) {
+        foreach($data as $key => $row) {
           $tmp[$key] = $row[$field];
         }
         $args[$n] = $tmp;

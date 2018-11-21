@@ -50,7 +50,7 @@ final class ArenaPVPControl extends ArenaControl {
   public function handleFight(int $id): void {
     try {
       $enemy = $this->getPlayer($id);
-    } catch (OpponentNotFoundException $e) {
+    } catch(OpponentNotFoundException $e) {
       $this->presenter->forward("Profile:notfound");
     }
     $this->doDuel($enemy);

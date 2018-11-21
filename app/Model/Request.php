@@ -14,8 +14,8 @@ use HeroesofAbenez\Orm\Model as ORM;
  */
 final class Request {
   use \Nette\SmartObject;
-  
-   /** @var \Nette\Security\User */
+
+  /** @var \Nette\Security\User */
   protected $user;
   /** @var ORM */
   protected $orm;

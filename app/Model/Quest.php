@@ -24,7 +24,7 @@ final class Quest {
   /** @var Pet */
   protected $petModel;
   
-  public function __construct(ORM $orm,  \Nette\Security\User $user, Item $itemModel, Pet $petModel) {
+  public function __construct(ORM $orm, \Nette\Security\User $user, Item $itemModel, Pet $petModel) {
     $this->orm = $orm;
     $this->user = $user;
     $this->itemModel = $itemModel;

@@ -51,12 +51,12 @@ final class GuildPresenter extends BasePresenter {
       $this->forward("default");
     }
   }
-  
+
   /**
    * Redirect player to noguild if he is not in guild
-   * 
+   *
    * @param bool $warning Whatever to print a warning (via flash message)
-  */
+   */
   protected function notInGuild(bool $warning = true): void {
     $guild = $this->user->identity->guild;
     if($guild == 0) {
@@ -221,7 +221,7 @@ final class GuildPresenter extends BasePresenter {
   }
   
   public function actionPromote(int $id): void {
-    try{
+    try {
       $this->model->promote($id);
       $this->flashMessage("messages.guild.promoted");
     } catch(NotInGuildException $e) {
@@ -243,7 +243,7 @@ final class GuildPresenter extends BasePresenter {
   }
   
   public function actionDemote(int $id): void {
-    try{
+    try {
       $this->model->demote($id);
       $this->flashMessage("messages.guild.demoted");
     } catch(NotInGuildException $e) {
@@ -288,10 +288,10 @@ final class GuildPresenter extends BasePresenter {
     }
     $this->template->haveForm = true;
   }
-  
+
   /**
    * Creates form for changing guild's description
-  */
+   */
   protected function createComponentGuildDescriptionForm(GuildDescriptionFormFactory $factory): Form {
     $form = $factory->create();
     $form->onSuccess[] = function() {

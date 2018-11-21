@@ -88,10 +88,10 @@ final class Journal {
   public function pets(): ICollection {
     return $this->orm->pets->findByOwner($this->user->id);
   }
-  
-   /**
+
+  /**
    * Gets character's quests
-   * 
+   *
    * @return int[]
    */
   public function quests(): array {

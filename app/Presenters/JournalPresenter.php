@@ -43,7 +43,7 @@ final class JournalPresenter extends BasePresenter {
     foreach($stats as $key => $value) {
       $this->template->$key = $value;
     }
-    $this->template->nextLevelExp = $this->profileModel->getLevelsRequirements()[$stats["level"]  + 1];
+    $this->template->nextLevelExp = $this->profileModel->getLevelsRequirements()[$stats["level"] + 1];
   }
   
   public function renderInventory(): void {

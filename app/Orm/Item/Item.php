@@ -53,7 +53,7 @@ final class Item extends \Nextras\Orm\Entity\Entity {
       return null;
     }
     $data = [];
-    $stats = ["id", "name", "slot", "type", "strength", "worn",];
+    $stats = ["id", "name", "slot", "type", "strength", "worn", ];
     foreach($stats as $stat) {
       $data[$stat] = $this->$stat;
     }
