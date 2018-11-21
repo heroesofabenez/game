@@ -45,6 +45,46 @@ final class QuestTest extends \Tester\TestCase {
     Assert::type("bool", $result);
     Assert::false($result);
   }
+
+  public function testIsCompleted() {
+    /** @var QuestEntity $quest */
+    $quest = $this->model->view(1);
+    $oldCostMoney = $quest->costMoney;
+    $oldNeededItem = $quest->neededItem;
+    /** @var \HeroesofAbenez\Orm\Model $orm */
+    $orm = $this->getService(\HeroesofAbenez\Orm\Model::class);
+    /** @var \HeroesofAbenez\Orm\Character $user */
+    $user = $orm->characters->getById(1);
+    $quest->costMoney = $user->money + 1;
+    Assert::false($this->model->isCompleted($quest));
+    $quest->costMoney = $oldCostMoney;
+    Assert::false($this->model->isCompleted($quest));
+    $quest->neededItem = null;
+    Assert::true($this->model->isCompleted($quest));
+    $quest->neededItem = $oldNeededItem;
+    $orm->quests->persistAndFlush($quest);
+  }
+
+  public function testFinish() {
+    Assert::exception(function() {
+      $this->model->finish(5000, 1);
+    }, QuestNotFoundException::class);
+    Assert::exception(function() {
+      $this->model->finish(1, 2);
+    }, CannotFinishQuestHereException::class);
+    Assert::exception(function() {
+      $this->model->finish(1, 1);
+    }, QuestNotFinishedException::class);
+  }
+
+  public function testAccept() {
+    Assert::exception(function() {
+      $this->model->accept(5000, 1);
+    }, QuestNotFoundException::class);
+    Assert::exception(function() {
+      $this->model->accept(1, 1);
+    }, QuestAlreadyStartedException::class);
+  }
 }
 
 $test = new QuestTest();

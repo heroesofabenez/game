@@ -5,6 +5,7 @@ namespace HeroesofAbenez\Model;
 
 use HeroesofAbenez\Orm\Quest as QuestEntity;
 use HeroesofAbenez\Orm\Model as ORM;
+use HeroesofAbenez\Orm\CharacterQuest;
 
 /**
  * Quest Model
@@ -20,11 +21,18 @@ final class Quest {
   protected $cache;
   /** @var \Nette\Security\User */
   protected $user;
+  /** @var Item */
+  protected $itemModel;
+  /** @var Pet */
+  protected $petModel;
   
-  public function __construct(\Nette\Caching\Cache $cache, ORM $orm,  \Nette\Security\User $user) {
+  public function __construct(\Nette\Caching\Cache $cache, ORM $orm,  \Nette\Security\User $user, Item $itemModel, Pet $petModel) {
     $this->orm = $orm;
     $this->cache = $cache;
     $this->user = $user;
+    $this->itemModel = $itemModel;
+    $this->petModel = $petModel;
+    $this->petModel->user = $user;
   }
   
   /**
@@ -62,7 +70,7 @@ final class Quest {
   public function status(int $id): int {
     $row = $this->orm->characterQuests->getByCharacterAndQuest($this->user->id, $id);
     if(is_null($row)) {
-      return \HeroesofAbenez\Orm\CharacterQuest::PROGRESS_OFFERED;
+      return CharacterQuest::PROGRESS_OFFERED;
     }
     return $row->progress;
   }
@@ -72,7 +80,91 @@ final class Quest {
    */
   public function isFinished(int $id): bool {
     $status = $this->status($id);
-    return ($status >= \HeroesofAbenez\Orm\CharacterQuest::PROGRESS_FINISHED);
+    return ($status >= CharacterQuest::PROGRESS_FINISHED);
+  }
+
+  /**
+   * Checks if the player accomplished specified quest's goals
+   */
+  public function isCompleted(QuestEntity $quest): bool {
+    if($quest->costMoney > 0) {
+      /** @var \HeroesofAbenez\Orm\Character $char */
+      $char = $this->orm->characters->getById($this->user->id);
+      if($quest->costMoney >= $char->money) {
+        return false;
+      }
+    }
+    if(!is_null($quest->neededItem)) {
+      if(!$this->itemModel->haveItem($quest->neededItem->id, $quest->itemAmount)) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  /**
+   * @throws QuestNotFoundException
+   * @throws QuestNotStartedException
+   * @throws CannotFinishQuestHereException
+   * @throws QuestNotFinishedException
+   */
+  public function finish(int $id, int $npcId): void {
+    $quest = $this->view($id);
+    if(is_null($quest)) {
+      throw new QuestNotFoundException();
+    }
+    $status = $this->status($id);
+    if($status === CharacterQuest::PROGRESS_OFFERED OR $status === CharacterQuest::PROGRESS_FINISHED) {
+      throw new QuestNotStartedException();
+    }
+    if($quest->npcEnd->id !== $npcId) {
+      throw new CannotFinishQuestHereException();
+    }
+    if(!$this->isCompleted($quest)) {
+      throw new QuestNotFinishedException();
+    }
+    /** @var CharacterQuest $record */
+    $record = $this->orm->characterQuests->getByCharacterAndQuest($this->user->id, $id);
+    $record->progress = CharacterQuest::PROGRESS_FINISHED;
+    if($quest->itemLose) {
+      $this->itemModel->loseItem($quest->neededItem->id, $quest->itemAmount);
+    }
+    $record->character->money -= $quest->costMoney;
+    $record->character->money += $quest->rewardMoney;
+    $record->character->experience += $quest->rewardXp;
+    if(!is_null($quest->rewardItem)) {
+      $this->itemModel->giveItem($quest->rewardItem->id);
+    }
+    if(!is_null($quest->rewardPet)) {
+      $this->petModel->givePet($quest->rewardPet->id);
+    }
+    $record->character->whiteKarma += $quest->rewardWhiteKarma;
+    $record->character->darkKarma += $quest->rewardDarkKarma;
+    $this->orm->characterQuests->persistAndFlush($record);
+  }
+
+  /**
+   * @throws QuestNotFoundException
+   * @throws QuestAlreadyStartedException
+   * @throws CannotAcceptQuestHereException
+   */
+  public function accept(int $id, int $npcId): void {
+    $quest = $this->view($id);
+    if(is_null($quest)) {
+      throw new QuestNotFoundException();
+    }
+    $status = $this->status($id);
+    if($status !== CharacterQuest::PROGRESS_OFFERED) {
+      throw new QuestAlreadyStartedException();
+    }
+    if($quest->npcStart->id !== $npcId) {
+      throw new CannotAcceptQuestHereException();
+    }
+    $record = new CharacterQuest();
+    $this->orm->characterQuests->attach($record);
+    $record->character = $this->user->id;
+    $record->quest = $id;
+    $this->orm->characterQuests->persistAndFlush($record);
   }
 }
 ?>

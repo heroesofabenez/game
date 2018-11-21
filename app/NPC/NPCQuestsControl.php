@@ -9,6 +9,12 @@ use HeroesofAbenez\Orm\Npc;
 use HeroesofAbenez\Orm\Quest as QuestEntity;
 use HeroesofAbenez\Orm\Model as ORM;
 use HeroesofAbenez\Orm\CharacterQuest;
+use HeroesofAbenez\Model\QuestNotFoundException;
+use HeroesofAbenez\Model\QuestNotStartedException;
+use HeroesofAbenez\Model\QuestAlreadyStartedException;
+use HeroesofAbenez\Model\CannotFinishQuestHereException;
+use HeroesofAbenez\Model\CannotAcceptQuestHereException;
+use HeroesofAbenez\Model\QuestNotFinishedException;
 
 /**
  * NPC Quests Control
@@ -20,10 +26,6 @@ use HeroesofAbenez\Orm\CharacterQuest;
 final class NPCQuestsControl extends \Nette\Application\UI\Control {
   /** @var \HeroesofAbenez\Model\Quest */
   protected $questModel;
-  /** @var \HeroesofAbenez\Model\Item */
-  protected $itemModel;
-  /** @var \HeroesofAbenez\Model\Pet */
-  protected $petModel;
   /** @var ORM */
   protected $orm;
   /** @var \Nette\Security\User */
@@ -32,22 +34,19 @@ final class NPCQuestsControl extends \Nette\Application\UI\Control {
   protected $translator;
   /** @var Npc */
   protected $npc;
-  
-  public function __construct(Model\Quest $questModel, Model\Item $itemModel, Model\Pet $petModel, ORM $orm, \Nette\Security\User $user, ITranslator $translator) {
+
+  public function __construct(Model\Quest $questModel, ORM $orm, \Nette\Security\User $user, ITranslator $translator) {
     parent::__construct();
     $this->questModel = $questModel;
-    $this->itemModel = $itemModel;
-    $this->petModel = $petModel;
     $this->user = $user;
-    $this->petModel->user = $user;
     $this->orm = $orm;
     $this->translator = $translator;
   }
-  
+
   public function setNpc(Npc $npc): void {
     $this->npc = $npc;
   }
-  
+
   /**
    * Gets list of available quests from the npc
    *
@@ -78,100 +77,59 @@ final class NPCQuestsControl extends \Nette\Application\UI\Control {
     }
     return $return;
   }
-  
+
   public function render(): void {
     $this->template->setFile(__DIR__ . "/npcQuests.latte");
     $this->template->id = $this->npc->id;
     $this->template->quests = $this->getQuests();
     $this->template->render();
   }
-  
+
   /**
    * Accept a quest
    */
   public function handleAccept(int $questId): void {
-    $quest = $this->questModel->view($questId);
-    if(is_null($quest)) {
+    try {
+      $this->questModel->accept($questId, $this->npc->id);
+    } catch(QuestNotFoundException $e) {
       $this->presenter->forward("notfound");
-    }
-    $status = $this->questModel->status($questId);
-    if($status > 0) {
+    } catch(QuestAlreadyStartedException $e) {
+      /** @var QuestEntity $quest */
+      $quest = $this->questModel->view($questId);
       $this->presenter->flashMessage("errors.quest.workingOn");
       $this->presenter->redirect("Npc:quests", $quest->npcStart->id);
-    }
-    if($quest->npcStart->id != $this->npc->id) {
+    } catch(CannotAcceptQuestHereException $e) {
       $this->presenter->flashMessage("errors.quest.cannotAcceptHere");
       $this->presenter->redirect("Homepage:default");
     }
-    $record = new CharacterQuest();
-    $this->orm->characterQuests->attach($record);
-    $record->character = $this->user->id;
-    $record->quest = $questId;
-    $this->orm->characterQuests->persistAndFlush($record);
     $this->presenter->flashMessage("messages.quest.accepted");
-    $this->presenter->redirect("Quest:view", $quest->id);
+    $this->presenter->redirect("Quest:view", $questId);
   }
-  
-  /**
-   * Checks if the player accomplished specified quest's goals
-   */
-  protected function isCompleted(\HeroesofAbenez\Orm\Quest $quest): bool {
-    if($quest->costMoney > 0) {
-      /** @var \HeroesofAbenez\Orm\Character $char */
-      $char = $this->orm->characters->getById($this->user->id);
-      if($quest->costMoney >= $char->money) {
-        return false;
-      }
-    }
-    if(!is_null($quest->neededItem)) {
-      if(!$this->itemModel->haveItem($quest->neededItem->id, $quest->itemAmount)) {
-        return false;
-      }
-    }
-    return true;
-  }
-  
+
   /**
    * Finish a quest
    */
   public function handleFinish(int $questId): void {
-    $quest = $this->questModel->view($questId);
-    if(is_null($quest)) {
+    try {
+      $this->questModel->finish($questId, $this->npc->id);
+    } catch(QuestNotFoundException $e) {
       $this->presenter->forward("notfound");
-    }
-    $status = $this->questModel->status($questId);
-    if($status === CharacterQuest::PROGRESS_OFFERED OR $status === CharacterQuest::PROGRESS_FINISHED) {
+    } catch(QuestNotStartedException $e) {
+      /** @var QuestEntity $quest */
+      $quest = $this->questModel->view($questId);
       $this->presenter->flashMessage("errors.quest.notWorkingOn");
       $this->presenter->redirect("Npc:quests", $quest->npcStart->id);
-    }
-    if($quest->npcEnd->id != $this->npc->id) {
+    } catch(CannotFinishQuestHereException $e) {
       $this->presenter->flashMessage("errors.quest.cannotFinishHere");
       $this->presenter->redirect("Homepage:default");
-    }
-    if(!$this->isCompleted($quest)) {
+    } catch(QuestNotFinishedException $e) {
       $this->presenter->flashMessage("errors.quest.requirementsNotMet");
       $this->presenter->redirect("Homepage:default");
     }
-    /** @var CharacterQuest $record */
-    $record = $this->orm->characterQuests->getByCharacterAndQuest($this->user->id, $questId);
-    $record->progress = CharacterQuest::PROGRESS_FINISHED;
-    if($quest->itemLose) {
-      $this->itemModel->loseItem($quest->neededItem->id, $quest->itemAmount);
-    }
-    $record->character->money -= $quest->costMoney;
-    $record->character->money += $quest->rewardMoney;
-    $record->character->experience += $quest->rewardXp;
-    if(!is_null($quest->rewardItem)) {
-      $this->itemModel->giveItem($quest->rewardItem->id);
-    }
-    if(!is_null($quest->rewardPet)) {
-      $this->petModel->givePet($quest->rewardPet->id);
-    }
-    $record->character->whiteKarma += $quest->rewardWhiteKarma;
-    $record->character->darkKarma += $quest->rewardDarkKarma;
-    $this->orm->characterQuests->persistAndFlush($record);
     $this->presenter->flashMessage("messages.quest.finished");
     $this->user->logout();
+    /** @var QuestEntity $quest */
+    $quest = $this->questModel->view($questId);
     $this->presenter->redirect("Quest:view", $quest->id);
   }
 }

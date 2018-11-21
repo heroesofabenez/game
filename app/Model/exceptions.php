@@ -182,4 +182,28 @@ class PetAlreadyDeployedException extends InvalidStateException {
 class PetNotDeployableException extends AccessDeniedException {
 
 }
+
+class QuestNotFoundException extends RecordNotFoundException {
+
+}
+
+class QuestNotStartedException extends InvalidStateException {
+
+}
+
+class QuestAlreadyStartedException extends InvalidStateException {
+
+}
+
+class QuestNotFinishedException extends InvalidStateException {
+
+}
+
+class CannotFinishQuestHereException extends AccessDeniedException {
+
+}
+
+class CannotAcceptQuestHereException extends AccessDeniedException {
+
+}
 ?>
