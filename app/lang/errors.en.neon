@@ -28,6 +28,7 @@ quest:
     cannotAcceptHere: "You can't accept the quest from this location."
     cannotFinishHere: "You can't finish the quest from this location."
     requirementsNotMet: "You don't meet requirements for this quest."
+    questNotAvailable: "This quest is not available (yet)."
 shop:
     itemDoesNotExist: "Specified item doesn't exist."
     cannotBuyHere: "You can't buy the item from this location."

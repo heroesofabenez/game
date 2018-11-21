@@ -28,6 +28,7 @@ quest:
     cannotAcceptHere: "Odtud nemůžeš přijmout úkol."
     cannotFinishHere: "Tady nemůžeš dokončit úkol."
     requirementsNotMet: "Nesplňuješ požadavky tohoto úkolu."
+    questNotAvailable: "Tento úkol (prozatím) není dostupný."
 shop:
     itemDoesNotExist: "Zadaná věc neexistuje."
     cannotBuyHere: "Odtud si nemůžeš koupit tuto věc."

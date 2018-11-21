@@ -199,6 +199,10 @@ class QuestNotFinishedException extends InvalidStateException {
 
 }
 
+class QuestNotAvailableException extends AccessDeniedException {
+
+}
+
 class CannotFinishQuestHereException extends AccessDeniedException {
 
 }

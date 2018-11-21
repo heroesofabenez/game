@@ -15,6 +15,7 @@ use HeroesofAbenez\Model\QuestAlreadyStartedException;
 use HeroesofAbenez\Model\CannotFinishQuestHereException;
 use HeroesofAbenez\Model\CannotAcceptQuestHereException;
 use HeroesofAbenez\Model\QuestNotFinishedException;
+use HeroesofAbenez\Model\QuestNotAvailableException;
 
 /**
  * NPC Quests Control
@@ -65,14 +66,8 @@ final class NPCQuestsControl extends \Nette\Application\UI\Control {
           continue 2;
         }
       }
-      if($quest->neededLevel > 0) {
-        if($this->user->identity->level < $quest->neededLevel) {
-          unset($return[$key]);
-        }
-      } elseif(!is_null($quest->neededQuest)) {
-        if(!$this->questModel->isFinished($quest->neededQuest->id)) {
-          unset($return[$key]);
-        }
+      if(!$this->questModel->isAvailable($quest)) {
+        unset($return[$key]);
       }
     }
     return $return;
@@ -100,6 +95,9 @@ final class NPCQuestsControl extends \Nette\Application\UI\Control {
       $this->presenter->redirect("Npc:quests", $quest->npcStart->id);
     } catch(CannotAcceptQuestHereException $e) {
       $this->presenter->flashMessage("errors.quest.cannotAcceptHere");
+      $this->presenter->redirect("Homepage:default");
+    } catch(QuestNotAvailableException $e) {
+      $this->presenter->flashMessage("errors.quest.questNotAvailable");
       $this->presenter->redirect("Homepage:default");
     }
     $this->presenter->flashMessage("messages.quest.accepted");

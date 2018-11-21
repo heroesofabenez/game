@@ -140,10 +140,24 @@ final class Quest {
     $this->orm->characterQuests->persistAndFlush($record);
   }
 
+  public function isAvailable(QuestEntity $quest): bool {
+    if($quest->neededLevel > 0) {
+      if($this->user->identity->level < $quest->neededLevel) {
+        return false;
+      }
+    } elseif(!is_null($quest->neededQuest)) {
+      if(!$this->isFinished($quest->neededQuest->id)) {
+        return false;
+      }
+    }
+    return true;
+  }
+
   /**
    * @throws QuestNotFoundException
    * @throws QuestAlreadyStartedException
    * @throws CannotAcceptQuestHereException
+   * @throws QuestNotAvailableException
    */
   public function accept(int $id, int $npcId): void {
     $quest = $this->view($id);
@@ -156,6 +170,9 @@ final class Quest {
     }
     if($quest->npcStart->id !== $npcId) {
       throw new CannotAcceptQuestHereException();
+    }
+    if(!$this->isAvailable($quest)) {
+      throw new QuestNotAvailableException();
     }
     $record = new CharacterQuest();
     $this->orm->characterQuests->attach($record);

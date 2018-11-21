@@ -77,6 +77,24 @@ final class QuestTest extends \Tester\TestCase {
     }, QuestNotFinishedException::class);
   }
 
+  public function testIsAvailable() {
+    /** @var QuestEntity $quest */
+    $quest = $this->model->view(1);
+    $oldNeededLevel = $quest->neededLevel;
+    $oldNeededQuest = $quest->neededQuest;
+    /** @var \HeroesofAbenez\Orm\Model $orm */
+    $orm = $this->getService(\HeroesofAbenez\Orm\Model::class);
+    /** @var \HeroesofAbenez\Orm\Character $user */
+    $user = $orm->characters->getById(1);
+    $quest->neededLevel = $user->level + 1;
+    Assert::false($this->model->isAvailable($quest));
+    $quest->neededLevel = $oldNeededLevel;
+    $quest->neededQuest = 1;
+    Assert::false($this->model->isAvailable($quest));
+    $quest->neededQuest = $oldNeededQuest;
+    Assert::true($this->model->isAvailable($quest));
+  }
+
   public function testAccept() {
     Assert::exception(function() {
       $this->model->accept(5000, 1);
