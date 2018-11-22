@@ -103,6 +103,9 @@ final class CombatHelper {
    * @return BaseCharacterSkill[]
    */
   protected function getArenaNpcSkills(\HeroesofAbenez\Orm\PveArenaOpponent $npc): array {
+    if($npc->level === 1) {
+      return [];
+    }
     $skills = [];
     $skillRows = $this->orm->attackSkills->findByClassAndLevel($npc->occupation, $npc->level);
     foreach($skillRows as $skillRow) {
@@ -112,10 +115,7 @@ final class CombatHelper {
     foreach($skillRows as $skillRow) {
       $skills[] = new CharacterSpecialSkill($skillRow->toDummy(), 0);
     }
-    if($npc->level < 2) {
-      $skills = [$skills[0]];
-    }
-    $skillPoints = $npc->level;
+    $skillPoints = $npc->level - 1;
     for($i = 1; $skillPoints > 0; $i++) {
       foreach($skills as $skill) {
         if($skillPoints < 1) {
@@ -127,7 +127,9 @@ final class CombatHelper {
         $skillPoints--;
       }
     }
-    return $skills;
+    return array_values(array_filter($skills, function(BaseCharacterSkill $value) {
+      return ($value->level > 0);
+    }));
   }
 
   /**

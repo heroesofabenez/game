@@ -40,7 +40,7 @@ final class CombatHelperTest extends \Tester\TestCase {
     $player = $this->model->getArenaNpc(1);
     Assert::type(Character::class, $player);
     Assert::count(0, $player->pets);
-    Assert::count(2, $player->skills);
+    Assert::count(1, $player->skills);
     Assert::exception(function() {
       $this->model->getArenaNpc(5000);
     }, OpponentNotFoundException::class);
