@@ -58,8 +58,7 @@ final class CombatHelper {
       if(!$row->worn) {
         continue;
       }
-      /** @var \HeroesofAbenez\Orm\Item $item */
-      $item = $this->itemModel->view($row->item->id);
+      $item = $row->item;
       $item->worn = true;
       $equipment[] = $item->toCombatEquipment();
     }
