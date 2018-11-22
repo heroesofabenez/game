@@ -6,6 +6,7 @@ namespace HeroesofAbenez\Model;
 use HeroesofAbenez\Orm\Pet as PetEntity;
 use HeroesofAbenez\Orm\Model as ORM;
 use Nextras\Orm\Collection\ICollection;
+use Nette\Localization\ITranslator;
 
 /**
  * Journal Model
@@ -29,8 +30,10 @@ final class Journal {
   protected $petModel;
   /** @var Item */
   protected $itemModel;
+  /** @var ITranslator */
+  protected $translator;
   
-  public function __construct(\Nette\Security\User $user, ORM $orm, Quest $questModel, Location $locationModel, Guild $guildModel, Pet $petModel, Item $itemModel) {
+  public function __construct(\Nette\Security\User $user, ORM $orm, Quest $questModel, Location $locationModel, Guild $guildModel, Pet $petModel, Item $itemModel, ITranslator $translator) {
     $this->user = $user;
     $this->orm = $orm;
     $this->questModel = $questModel;
@@ -38,6 +41,7 @@ final class Journal {
     $this->guildModel = $guildModel;
     $this->petModel = $petModel;
     $this->itemModel = $itemModel;
+    $this->translator = $translator;
   }
 
   
@@ -48,13 +52,15 @@ final class Journal {
     /** @var \HeroesofAbenez\Orm\Character $character */
     $character = $this->orm->characters->getById($this->user->id);
     $stage = $character->currentStage;
+    $stageName = $this->translator->translate("stages.{$stage->id}.name");
+    $areaName = $this->translator->translate("areas.{$stage->area->id}.name");
     $return = [
       "name" => $character->name, "gender" => $character->gender, "race" => $character->race->id,
       "occupation" => $character->occupation->id,
       "specialization" => (!is_null($character->specialization)) ? $character->specialization->id : null,
       "level" => $character->level, "whiteKarma" => $character->whiteKarma, "darkKarma" => $character->darkKarma,
       "experiences" => $character->experience, "description" => $character->description,
-      "stageName" => $character->currentStage->name, "areaName" => $stage->area->name
+      "stageName" => $stageName, "areaName" => $areaName,
     ];
     $return["guild"] = false;
     if(!is_null($character->guild)) {

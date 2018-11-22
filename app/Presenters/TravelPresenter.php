@@ -30,7 +30,7 @@ final class TravelPresenter extends BasePresenter {
     $this->model->user = $this->user;
     try {
       $this->model->travelToArea($id);
-      $areaName = $this->model->getAreaName($id);
+      $areaName = $this->translator->translate("areas.$id.name");
       $this->user->logout();
       $this->flashMessage($this->translator->translate("messages.travel.movedToArea", 0, ["areaName" => $areaName]));
     } catch(CannotTravelToAreaException $e) {
@@ -45,7 +45,7 @@ final class TravelPresenter extends BasePresenter {
     $this->model->user = $this->user;
     try {
       $this->model->travelToStage($id);
-      $stageName = $this->model->getStageName($id);
+      $stageName = $this->translator->translate("stages.$id.name");
       $this->user->logout();
       $this->flashMessage($this->translator->translate("messages.travel.movedToStage", 0, ["stageName" => $stageName]));
     } catch(CannotTravelToStageException $e) {

@@ -11,7 +11,6 @@ use Nextras\Orm\Relationships\OneHasMany;
  * @author Jakub Konečný
  * @property int $id {primary}
  * @property string $name
- * @property string $description
  * @property int $requiredLevel {default 0}
  * @property CharacterRace|null $requiredRace {m:1 CharacterRace::$stages}
  * @property CharacterClass|null $requiredOccupation {m:1 CharacterClass::$stages}

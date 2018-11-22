@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Model;
 
+use Nette\Localization\ITranslator;
+
 /**
  * Map Model
  *
@@ -11,17 +13,20 @@ namespace HeroesofAbenez\Model;
 final class Map {
   use \Nette\SmartObject;
   
-  /** @var \HeroesofAbenez\Model\Location */
+  /** @var Location */
   protected $locationModel;
   /** @var MapDrawer */
   protected $drawer;
   /** @var \Nette\Security\User */
   protected $user;
+  /** @var ITranslator */
+  protected $translator;
   
-  public function __construct(Location $locationModel, \Nette\Security\User $user, MapDrawer $drawer) {
+  public function __construct(Location $locationModel, \Nette\Security\User $user, MapDrawer $drawer, ITranslator $translator) {
     $this->locationModel = $locationModel;
     $this->drawer = $drawer;
     $this->user = $user;
+    $this->translator = $translator;
   }
   
   /**
@@ -41,8 +46,9 @@ final class Map {
       $c2 = $stage->posY - 15;
       $c3 = $stage->posX + 15;
       $c4 = $stage->posY + 15;
+      $stageName = $this->translator->translate("stages.{$stage->id}.name");
       $return["areas"][] = (object) [
-        "href" => "", "shape" => "rect", "title" => $stage->name,
+        "href" => "", "shape" => "rect", "title" => $stageName,
         "coords" => "$c1,$c2,$c3,$c4", "stage" => $stage->id
       ];
     }

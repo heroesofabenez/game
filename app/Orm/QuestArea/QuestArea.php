@@ -12,7 +12,6 @@ use Nexendrie\Utils\Numbers;
  * @author Jakub Konečný
  * @property int $id {primary}
  * @property string $name
- * @property string $description
  * @property int $requiredLevel {default 0}
  * @property CharacterRace|null $requiredRace {m:1 CharacterRace::$areas}
  * @property CharacterClass|null $requiredOccupation {m:1 CharacterClass::$areas}

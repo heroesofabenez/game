@@ -22,7 +22,10 @@ final class HomepagePresenter extends BasePresenter {
   }
   
   public function renderDefault(): void {
-    $this->template->stage = $this->model->getStage($this->user->identity->stage);
+    $stage = $this->model->getStage($this->user->identity->stage);
+    $this->template->stage = $stage;
+    $this->template->stageName = $this->translator->translate("stages.{$stage->id}.name");
+    $this->template->areaName = $this->translator->translate("areas.{$stage->area->id}.name");
   }
 }
 ?>

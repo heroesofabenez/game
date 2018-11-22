@@ -35,16 +35,6 @@ final class LocationTest extends \Tester\TestCase {
     Assert::type(QuestArea::class, $stage);
   }
   
-  public function testGetStageName() {
-    Assert::notSame("", $this->model->getStageName(1));
-    Assert::same("", $this->model->getStageName(5000));
-  }
-  
-  public function testGetAreaName() {
-    Assert::notSame("", $this->model->getAreaName(1));
-    Assert::same("", $this->model->getAreaName(5000));
-  }
-  
   public function testAccessibleStages() {
     $this->model->user = $this->getService(\Nette\Security\User::class);
     $result = $this->model->accessibleStages();

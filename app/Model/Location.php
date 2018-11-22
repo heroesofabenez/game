@@ -72,28 +72,6 @@ final class Location {
   }
   
   /**
-   * Get name of specified stage
-   */
-  public function getStageName(int $id): string {
-    $stage = $this->getStage($id);
-    if(is_null($stage)) {
-      return "";
-    }
-    return $stage->name;
-  }
-  
-  /**
-   * Get name of specified area
-   */
-  public function getAreaName(int $id): string {
-    $area = $this->getArea($id);
-    if(is_null($area)) {
-      return "";
-    }
-    return $area->name;
-  }
-  
-  /**
    * Returns list of accessible stages (in player's current area)
    * 
    * @return QuestStage[]

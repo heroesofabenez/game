@@ -91,16 +91,16 @@ INSERT INTO `pve_arena_opponents` (`id`, `name`, `race`, `gender`, `occupation`,
 INSERT INTO `quests` (`id`, `name`, `cost_money`, `needed_item`, `needed_quest`, `needed_level`, `item_amount`, `item_lose`, `reward_money`, `reward_xp`, `reward_item`, `reward_white_karma`, `reward_dark_karma`, `reward_pet`, `npc_start`, `npc_end`, `order`) VALUES
   (1,	'Find a book',	0,	1,	NULL,	1,	1,	0,	0,	10,	NULL, 0, 0, NULL,	1,	1,	1);
 
-INSERT INTO `quest_areas` (`id`, `name`, `description`, `required_level`, `required_race`, `required_occupation`, `pos_x`, `pos_y`) VALUES
-(1,	'Academy of Magic',	'm',	0,	NULL,	3,	220,	35),
-(2,	'Sands of Ramir - borderlands',	'sands',	0,	3,	NULL,	220,	153),
-(3,	'Border woods',	'b',	25,	NULL,	NULL,	80,	165),
-(4,	'North Great Horde',	'n',	30,	NULL,	NULL,	175,	109);
+INSERT INTO `quest_areas` (`id`, `name`, `required_level`, `required_race`, `required_occupation`, `pos_x`, `pos_y`) VALUES
+(1,	'Academy of Magic',	0,	NULL,	3,	220,	35),
+(2,	'Sands of Ramir - borderlands',	0,	3,	NULL,	220,	153),
+(3,	'Border woods',	25,	NULL,	NULL,	80,	165),
+(4,	'North Great Horde',	30,	NULL,	NULL,	175,	109);
 
-INSERT INTO `quest_stages` (`id`, `name`, `description`, `required_level`, `required_race`, `required_occupation`, `area`, `pos_x`, `pos_y`) VALUES
-(1,	'Your cell',	'y',	0,	NULL,	3,	1,	215,	65),
-(2,	'Hall',	'x',	0,	NULL,	3,	1,	115,	215),
-(3,	'Library',	'x',	0,	NULL,	3,	1,	119,	37);
+INSERT INTO `quest_stages` (`id`, `name`, `required_level`, `required_race`, `required_occupation`, `area`, `pos_x`, `pos_y`) VALUES
+(1,	'Your cell',	0,	NULL,	3,	1,	215,	65),
+(2,	'Hall',	0,	NULL,	3,	1,	115,	215),
+(3,	'Library',	0,	NULL,	3,	1,	119,	37);
 
 INSERT INTO `routes_stages` (`id`, `from`, `to`) VALUES
 (1,	1,	2),
