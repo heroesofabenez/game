@@ -79,6 +79,11 @@ final class Profile {
       $return["guild"] = $char->guild->id;
       $return["guildrank"] = (!is_null($char->guildrank)) ? $char->guildrank->id : null;
     }
+    $return["stage"] = $return["area"] = null;
+    if(!is_null($char->currentStage)) {
+      $return["stage"] = $char->currentStage->id;
+      $return["area"] = $char->currentStage->area->id;
+    }
     $return["pet"] = $this->petModel->getActivePet($id);
     return $return;
   }
