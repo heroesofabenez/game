@@ -55,10 +55,10 @@ INSERT INTO `items` (`id`, `name`, `slot`, `type`, `required_level`, `required_c
 (5,	'Rookie\'s Knife',	'weapon',	'throwing knife',	1,	2,	0,	1,	10),
 (6,	'Apprentice\'s Wand',	'weapon',	'staff',	1,	3,	0,	1,	10),
 (7,	'Novice\'s Bow',	'weapon',	'bow',	1,	4,	0,	1,	10),
-(8,	'Leather Armor',	'armor',	'',	1,	1,	0,	2,	15),
-(9,	'Rookie\'s Cloak',	'armor',	'',	1,	2,	0,	1,	10),
-(10,	'Apprentice\'s Robe',	'armor',	'',	1,	3,	0,	1,	10),
-(11,	'Green Cloak',	'armor',	'',	1,	4,	0,	1,	10);
+(8,	'Leather Armor',	'armor',	NULL,	1,	1,	0,	2,	15),
+(9,	'Rookie\'s Cloak',	'armor',	NULL,	1,	2,	0,	1,	10),
+(10,	'Apprentice\'s Robe',	'armor',	NULL,	1,	3,	0,	1,	10),
+(11,	'Green Cloak',	'armor',	NULL,	1,	4,	0,	1,	10);
 
 INSERT INTO `pet_types` (`id`, `name`, `bonus_stat`, `bonus_value`, `image`, `required_level`, `required_class`, `required_race`, `cost`) VALUES
 (1,	'Rescued Lion',	'constitution',	5,	'',	8,	1,	NULL,	0),
