@@ -139,7 +139,7 @@ final class Profile {
       throw new SpecializationAlreadyChosenException();
     } elseif(is_null($character->specialization) AND is_null($specialization)) {
       throw new SpecializationNotChosenException();
-    } elseif(!in_array($specialization, $this->getAvailableSpecializations(), true)) {
+    } elseif(!is_null($specialization) AND !in_array($specialization, $this->getAvailableSpecializations(), true)) {
       throw new SpecializationNofAvailableException();
     }
   }
