@@ -14,6 +14,10 @@ use HeroesofAbenez\Model\PetNotOwnedException;
 use HeroesofAbenez\Model\PetNotDeployedException;
 use HeroesofAbenez\Model\PetAlreadyDeployedException;
 use HeroesofAbenez\Model\PetNotDeployableException;
+use HeroesofAbenez\Model\CannotChooseSpecializationException;
+use HeroesofAbenez\Model\SpecializationAlreadyChosenException;
+use HeroesofAbenez\Model\SpecializationNotChosenException;
+use HeroesofAbenez\Model\SpecializationNofAvailableException;
 
 /**
  * Presenter Journal
@@ -44,6 +48,8 @@ final class JournalPresenter extends BasePresenter {
       $this->template->$key = $value;
     }
     $this->template->nextLevelExp = $this->profileModel->getLevelsRequirements()[$stats["level"] + 1];
+    $this->profileModel->user = $this->user;
+    $this->template->availableSpecializations = $this->profileModel->getAvailableSpecializations();
   }
   
   public function renderInventory(): void {
@@ -90,13 +96,21 @@ final class JournalPresenter extends BasePresenter {
     $this->redirect("Journal:inventory");
   }
   
-  public function handleLevelUp(): void {
+  public function handleLevelUp(int $specialization = null): void {
     $this->profileModel->user = $this->user;
     try {
-      $this->profileModel->levelUp();
+      $this->profileModel->levelUp($specialization);
       $this->user->logout();
     } catch(NotEnoughExperiencesException $e) {
       $this->flashMessage("errors.journal.cannotLevelUp");
+    } catch(CannotChooseSpecializationException $e) {
+      $this->flashMessage("errors.journal.cannotChooseSpecialization");
+    } catch(SpecializationAlreadyChosenException $e) {
+      $this->flashMessage("errors.journal.specializationAlreadyChosen");
+    } catch(SpecializationNotChosenException $e) {
+      $this->flashMessage("errors.journal.specializationNotChosen");
+    } catch(SpecializationNofAvailableException $e) {
+      $this->flashMessage("errors.journal.specializationNotAvailable");
     }
     $this->redirect("Journal:");
   }

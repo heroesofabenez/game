@@ -49,6 +49,10 @@ arena:
     cannotFightToday: "Nemůžeš bojovat více než %count% krát v Aréně za den."
 journal:
    cannotLevelUp: "Nemáš dostatek zkušeností pro postup na další úroveň."
+   cannotChooseSpecialization: "Ještě si nemůžeš vybrat specializaci."
+   specializationAlreadyChosen: "Už sis vybral(a) svou specializaci."
+   specializationNotChosen: "Nevybral(a) sis specializaci."
+   specializationNotAvailable: "Zvolená specializace ti není přístupná."
 training:
     noStatPointsAvailable: "Nemáš žádné body vlastností."
     noSkillPointsAvailable: "Nemáš žádné body dovedností."

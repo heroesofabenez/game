@@ -115,6 +115,22 @@ class NotEnoughExperiencesException extends AccessDeniedException {
   
 }
 
+class SpecializationAlreadyChosenException extends InvalidStateException {
+
+}
+
+class CannotChooseSpecializationException extends AccessDeniedException {
+
+}
+
+class SpecializationNotChosenException extends AccessDeniedException {
+
+}
+
+class SpecializationNofAvailableException extends \OutOfBoundsException {
+
+}
+
 class InvalidStatException extends \OutOfBoundsException {
   
 }

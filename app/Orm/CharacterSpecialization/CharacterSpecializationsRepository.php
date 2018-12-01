@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Orm;
 
+use Nextras\Orm\Collection\ICollection;
+
 /**
  * CharacterSpecializationsRepository
  *
@@ -23,6 +25,14 @@ final class CharacterSpecializationsRepository extends \Nextras\Orm\Repository\R
     return $this->getBy([
       "id" => $id
     ]);
+  }
+
+  /**
+   * @param int|CharacterClass $class
+   * @return ICollection|CharacterSpecialization[]
+   */
+  public function findByClass($class): ICollection {
+    return $this->findBy(["class" => $class]);
   }
 }
 ?>

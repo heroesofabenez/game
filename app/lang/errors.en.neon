@@ -49,6 +49,10 @@ arena:
     cannotFightToday: "You cannot fight more than %count% times in Arena in one day."
 journal:
     cannotLevelUp: "You do not have enough experiences for next level."
+    cannotChooseSpecialization: "You cannot choose specialization yet."
+    specializationAlreadyChosen: "You have already chosen your specialization."
+    specializationNotChosen: "You did not choose specialization."
+    specializationNotAvailable: "Chosen specialization is not available to you."
 training:
     noStatPointsAvailable: "You have no stat points available."
     noSkillPointsAvailable: "You have no skill points available."

@@ -132,6 +132,7 @@ journal:
     levelUp: "Level up!"
     deployPet: "Deploy"
     discardPet: "Discard"
+    chooseSpecialization: "Choose specialization:"
 map:
     title: "Map"
     travelTitle: "Travel"

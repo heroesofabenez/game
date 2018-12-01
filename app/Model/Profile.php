@@ -8,6 +8,7 @@ use HeroesofAbenez\Orm\CharacterClass;
 use HeroesofAbenez\Orm\Model as ORM;
 use Nextras\Orm\Entity\IEntity;
 use Nextras\Orm\Collection\ICollection;
+use HeroesofAbenez\Orm\Character;
 
   /**
    * Model Profile
@@ -17,6 +18,9 @@ use Nextras\Orm\Collection\ICollection;
    */
 final class Profile {
   use \Nette\SmartObject;
+
+  /** @var int */
+  public const SPECIALIZATION_LEVEL  = 15;
   
   /** @var ORM */
   protected $orm;
@@ -100,17 +104,64 @@ final class Profile {
     }
     return $xps;
   }
+
+  /**
+   * Get available specializations
+   * Returns nothing if level is too level or specialization was already chosen
+   *
+   * @return int[]
+   */
+  public function getAvailableSpecializations(): array {
+    /** @var Character $character */
+    $character = $this->orm->characters->getById($this->user->id);
+    if($character->level + 1 < static::SPECIALIZATION_LEVEL OR !is_null($character->specialization)) {
+      return [];
+    }
+    return $this->orm->specializations->findByClass($character->occupation)
+      ->fetchPairs(null, "id");
+  }
+
+  /**
+   * Check specialization choice on level up
+   *
+   * @throws CannotChooseSpecializationException
+   * @throws SpecializationAlreadyChosenException
+   * @throws SpecializationNotChosenException
+   * @throws SpecializationNofAvailableException
+   */
+  protected function checkSpecializationChoice(Character $character, int $specialization = null): void {
+    if($character->level + 1 < static::SPECIALIZATION_LEVEL) {
+      if(!is_null($specialization)) {
+        throw new CannotChooseSpecializationException();
+      }
+      return;
+    } elseif(!is_null($character->specialization) AND !is_null($specialization)) {
+      throw new SpecializationAlreadyChosenException();
+    } elseif(is_null($character->specialization) AND is_null($specialization)) {
+      throw new SpecializationNotChosenException();
+    } elseif(!in_array($specialization, $this->getAvailableSpecializations(), true)) {
+      throw new SpecializationNofAvailableException();
+    }
+  }
   
   /**
    * Level up your character
    *
    * @throws NotEnoughExperiencesException
+   * @throws CannotChooseSpecializationException
+   * @throws SpecializationAlreadyChosenException
+   * @throws SpecializationNotChosenException
+   * @throws SpecializationNofAvailableException
    */
-  public function levelUp(): void {
-    /** @var \HeroesofAbenez\Orm\Character $character */
+  public function levelUp(int $specialization = null): void {
+    /** @var Character $character */
     $character = $this->orm->characters->getById($this->user->id);
     if($character->experience < $this->getLevelsRequirements()[$character->level + 1]) {
       throw new NotEnoughExperiencesException();
+    }
+    $this->checkSpecializationChoice($character, $specialization);
+    if(!is_null($specialization)) {
+      $character->specialization = $specialization;
     }
     if(!is_null($character->specialization)) {
       $class = $character->specialization;
@@ -133,7 +184,7 @@ final class Profile {
    * Get amount of user's usable stat points
    */
   public function getStatPoints(): int {
-    /** @var \HeroesofAbenez\Orm\Character $character */
+    /** @var Character $character */
     $character = $this->orm->characters->getById($this->user->id);
     return (int) $character->statPoints;
   }
@@ -164,7 +215,7 @@ final class Profile {
     } elseif($this->getStatPoints() < 1) {
       throw new NoStatPointsAvailableException();
     }
-    /** @var \HeroesofAbenez\Orm\Character $character */
+    /** @var Character $character */
     $character = $this->orm->characters->getById($this->user->id);
     $character->{$stat}++;
     $character->statPoints--;
