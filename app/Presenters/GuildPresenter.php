@@ -96,14 +96,7 @@ final class GuildPresenter extends BasePresenter {
     $this->template->members = $this->model->guildMembers($this->user->identity->guild, [], true);
     $this->template->canPromote = $this->user->isAllowed("guild", "promote");
     $this->template->canKick = $this->user->isAllowed("guild", "kick");
-    $roles = $this->permissionsModel->getRoles();
-    foreach($roles as $role) {
-      if($role["name"] == $this->user->roles[0]) {
-        $rankId = $role["id"];
-        break;
-      }
-    }
-    $this->template->rankId = $rankId;
+    $this->template->rankId = $this->permissionsModel->getRankId($this->user->roles[0]);
   }
   
   /**

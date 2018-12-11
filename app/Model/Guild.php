@@ -191,13 +191,7 @@ final class Guild {
     if($character->guild->id !== $admin->identity->guild) {
       throw new PlayerNotInGuildException();
     }
-    $roles = $this->permissionsModel->getRoles();
-    foreach($roles as $role) {
-      if($role["name"] == $admin->roles[0]) {
-        $adminRole = $role["id"];
-        break;
-      }
-    }
+    $adminRole = $this->permissionsModel->getRankId($admin->roles[0]);
     if($adminRole <= $character->guildrank->id) {
       throw new CannotPromoteHigherRanksException();
     }
@@ -242,13 +236,7 @@ final class Guild {
     if($character->guild->id !== $admin->identity->guild) {
       throw new PlayerNotInGuildException();
     }
-    $roles = $this->permissionsModel->getRoles();
-    foreach($roles as $role) {
-      if($role["name"] == $admin->roles[0]) {
-        $adminRole = $role["id"];
-        break;
-      }
-    }
+    $adminRole = $this->permissionsModel->getRankId($admin->roles[0]);
     if($adminRole <= $character->guildrank->id) {
       throw new CannotDemoteHigherRanksException();
     }
@@ -283,13 +271,7 @@ final class Guild {
     if(is_null($character->guild) OR $character->guild->id !== $admin->identity->guild) {
       throw new PlayerNotInGuildException();
     }
-    $roles = $this->permissionsModel->getRoles();
-    foreach($roles as $role) {
-      if($role["name"] == $admin->roles[0]) {
-        $adminRole = $role["id"];
-        break;
-      }
-    }
+    $adminRole = $this->permissionsModel->getRankId($admin->roles[0]);
     if($adminRole <= $character->guildrank->id) {
       throw new CannotKickHigherRanksException();
     }

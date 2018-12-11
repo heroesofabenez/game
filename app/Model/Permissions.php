@@ -40,6 +40,16 @@ final class Permissions {
     });
     return $roles;
   }
+
+  public function getRankId(string $name): ?int {
+    $roles = $this->getRoles();
+    foreach($roles as $role) {
+      if($role["name"] == $name) {
+        return $role["id"];
+      }
+    }
+    return null;
+  }
   
   /**
    * Get permissions (from db or cache)

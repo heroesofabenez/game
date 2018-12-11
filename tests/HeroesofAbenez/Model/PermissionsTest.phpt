@@ -32,6 +32,11 @@ final class PermissionsTest extends \Tester\TestCase {
     Assert::type("int", $roles[1]["id"]);
     Assert::type("string", $roles[1]["name"]);
   }
+
+  public function testGetRankId() {
+    Assert::same(1, $this->model->getRankId("recruit"));
+    Assert::null($this->model->getRankId("abc"));
+  }
 }
 
 $test = new PermissionsTest();
