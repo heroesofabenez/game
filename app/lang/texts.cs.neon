@@ -151,6 +151,8 @@ quest:
     rewardKarma: "%whiteKarma% bílé karma, %darkKarma% temné karmy"
     notFoundTitle: "Úkol nenelezen"
     notFound: "Požadovaný úkol nebyl nalezen."
+    followupQuests: "Navazující úkoly:"
+    followsIn: "Navazuje na"
 profile: 
     title: "Profil"
     level: "úroveň"

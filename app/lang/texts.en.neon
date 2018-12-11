@@ -151,6 +151,8 @@ quest:
     rewardKarma: "%whiteKarma% white karma, %darkKarma% dark karma"
     notFoundTitle: "Quest not found"
     notFound: "Requested quest was not found."
+    followupQuests: "Follow-up quests:"
+    followsIn: "Follows in"
 profile: 
     title: "Profile"
     level: "level"
