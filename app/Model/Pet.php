@@ -74,7 +74,7 @@ final class Pet {
       throw new PetNotDeployableException();
     }
     $pets = $this->orm->pets->findByOwner($this->user->id);
-    /** @var \HeroesofAbenez\Orm\Pet $pet */
+    /** @var PetEntity $pet */
     foreach($pets as $pet) {
       $pet->deployed = ($pet->id === $id);
       $this->orm->pets->persist($pet);
@@ -113,7 +113,7 @@ final class Pet {
     if(!is_null($this->orm->pets->getByTypeAndOwner($petType, $this->user->id))) {
       return;
     }
-    $pet = new \HeroesofAbenez\Orm\Pet();
+    $pet = new PetEntity();
     $this->orm->pets->attach($pet);
     $pet->owner = $this->user->id;
     $pet->type = $petType;
