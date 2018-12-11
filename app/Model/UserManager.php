@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Model;
 
-use Nette\Security as NS;
+use Nette\Security\Identity;
 use HeroesofAbenez\Orm\Model as ORM;
 use HeroesofAbenez\Orm\Character;
 
@@ -12,7 +12,7 @@ use HeroesofAbenez\Orm\Character;
    * 
    * @author Jakub Konečný
    */
-final class UserManager implements NS\IAuthenticator {
+final class UserManager implements \Nette\Security\IAuthenticator {
   use \Nette\SmartObject;
   
   /** @var ORM */
@@ -41,14 +41,14 @@ final class UserManager implements NS\IAuthenticator {
   /**
    * Logins the user
    */
-  public function authenticate(array $credentials): NS\Identity {
+  public function authenticate(array $credentials): Identity {
     $uid = $this->getRealId();
     if($uid == 0) {
-      return new NS\Identity(0, "guest");
+      return new Identity(0, "guest");
     }
     $char = $this->orm->characters->getByOwner($uid);
     if(is_null($char)) {
-      return new NS\Identity(-1, "guest");
+      return new Identity(-1, "guest");
     }
     $data = [
       "name" => $char->name, "race" => $char->race->id, "gender" => $char->gender,
@@ -63,7 +63,7 @@ final class UserManager implements NS\IAuthenticator {
       $data["guild"] = $char->guild->id;
       $role = $char->guildrank->name;
     }
-    return new NS\Identity($char->id, $role, $data);
+    return new Identity($char->id, $role, $data);
   }
   
   /**
