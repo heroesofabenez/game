@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6e7edeefa4aedcf3e07144935d75b81a",
+    "content-hash": "a8dae053864cf14991879173ec44d235",
     "packages": [
         {
             "name": "heroesofabenez/chat",
@@ -2940,7 +2940,7 @@
     "prefer-lowest": false,
     "platform": {
         "php": ">=7.2.0",
-        "lib-curl": "*",
+        "ext-curl": "*",
         "ext-spl": "*"
     },
     "platform-dev": []

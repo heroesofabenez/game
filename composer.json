@@ -13,7 +13,7 @@
     ],
     "require": {
         "php": ">=7.2.0",
-        "lib-curl": "*",
+        "ext-curl": "*",
         "ext-spl": "*",
         "nette/application": "~2.4",
         "nette/bootstrap": "~2.4",
