@@ -42,14 +42,6 @@ final class Permissions {
   }
   
   /**
-   * Get name of specified rank
-   */
-  public function getRoleName(int $id): string {
-    $ranks = $this->getRoles();
-    return $ranks[$id]["name"];
-  }
-  
-  /**
    * Get permissions (from db or cache)
    * 
    * @return array[]

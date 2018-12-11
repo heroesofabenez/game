@@ -32,11 +32,6 @@ final class PermissionsTest extends \Tester\TestCase {
     Assert::type("int", $roles[1]["id"]);
     Assert::type("string", $roles[1]["name"]);
   }
-  
-  public function testGetRoleName() {
-    $name = $this->model->getRoleName(1);
-    Assert::type("string", $name);
-  }
 }
 
 $test = new PermissionsTest();
