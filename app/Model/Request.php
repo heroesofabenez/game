@@ -101,14 +101,7 @@ final class Request {
    * @throws NotImplementedException
    */
   public function accept(int $id): void {
-    try {
-      $request = $this->show($id);
-    } catch(RequestNotFoundException $e) {
-      throw $e;
-    }
-    if(!$this->canShow($request)) {
-      throw new CannotSeeRequestException();
-    }
+    $request = $this->show($id);
     if(!$this->canChange($request)) {
       throw new CannotAcceptRequestException();
     }
@@ -143,14 +136,7 @@ final class Request {
    * @throws RequestAlreadyHandledException
    */
   public function decline(int $id): void {
-    try {
-      $request = $this->show($id);
-    } catch(RequestNotFoundException $e) {
-      throw $e;
-    }
-    if(!$this->canShow($request)) {
-      throw new CannotSeeRequestException();
-    }
+    $request = $this->show($id);
     if(!$this->canChange($request)) {
       throw new CannotDeclineRequestException();
     }
