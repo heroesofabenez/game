@@ -44,7 +44,7 @@ final class Permissions {
   public function getRankId(string $name): ?int {
     $roles = $this->getRoles();
     foreach($roles as $role) {
-      if($role["name"] == $name) {
+      if($role["name"] === $name) {
         return $role["id"];
       }
     }

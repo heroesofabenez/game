@@ -2,18 +2,18 @@
 {block title}{_"texts.request.title"} {$request->id}{/block}
 {block content}
   <h1>{_"texts.request.title"} {$request->id}</h1>
-  {if $request->type == \HeroesofAbenez\Orm\Request::TYPE_GUILD_JOIN}
+  {if $request->type === \HeroesofAbenez\Orm\Request::TYPE_GUILD_JOIN}
   <p>{_"texts.request.invitedToGuild", 0, [from => $request->from->name, to => $request->to->name]}</p>
-  {elseif $request->type == \HeroesofAbenez\Orm\Request::TYPE_GUILD_APP}
+  {elseif $request->type === \HeroesofAbenez\Orm\Request::TYPE_GUILD_APP}
   <p>{_"texts.request.guildApp", 0, [from => $request->from->name, to => $request->to->name]}</p>
-  {elseif $request->type == \HeroesofAbenez\Orm\Request::TYPE_GROUP_JOIN}
+  {elseif $request->type === \HeroesofAbenez\Orm\Request::TYPE_GROUP_JOIN}
   <p>{_"texts.request.invitedToGroup", 0, [from => $request->from->name, to => $request->to->name]}</p>
-  {elseif $request->type == \HeroesofAbenez\Orm\Request::TYPE_FRIENDSHIP}
+  {elseif $request->type === \HeroesofAbenez\Orm\Request::TYPE_FRIENDSHIP}
   <p>{_"texts.request.friendship", 0, [from => $request->from->name, to => $request->to->name]}</p>
   {/if}
   {_"texts.request.sent"}: {$request->sentAt}<br>
   {_"texts.request.status"}: {$request->status}<br>
-  {if $request->status == \HeroesofAbenez\Orm\Request::STATUS_NEW}
+  {if $request->status === \HeroesofAbenez\Orm\Request::STATUS_NEW}
   <a n:href="Request:accept $request->id">{_"texts.request.accept"}</a> <a n:href="Request:decline $request->id">{_"texts.request.decline"}</a>
   {/if}
 {/block}

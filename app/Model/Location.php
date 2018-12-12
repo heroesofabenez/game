@@ -115,10 +115,10 @@ final class Location {
     $foundRoute = false;
     $routes = $this->stageRoutes();
     foreach($routes as $route) {
-      if($route->from->id == $id AND $route->to->id == $currentStage) {
+      if($route->from->id === $id AND $route->to->id === $currentStage) {
         $foundRoute = true;
         break;
-      } elseif($route->from->id == $currentStage AND $route->to->id == $id) {
+      } elseif($route->from->id === $currentStage AND $route->to->id === $id) {
         $foundRoute = true;
         break;
       }
@@ -162,10 +162,10 @@ final class Location {
     $foundRoute = false;
     $routes = $this->areaRoutes();
     foreach($routes as $route) {
-      if($route->from->id == $id AND $route->to->id == $currentArea) {
+      if($route->from->id === $id AND $route->to->id === $currentArea) {
         $foundRoute = true;
         break;
-      } elseif($route->from->id == $currentArea AND $route->to->id == $id) {
+      } elseif($route->from->id === $currentArea AND $route->to->id === $id) {
         $foundRoute = true;
         break;
       }

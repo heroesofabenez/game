@@ -59,7 +59,7 @@ final class GuildPresenter extends BasePresenter {
    */
   protected function notInGuild(bool $warning = true): void {
     $guild = $this->user->identity->guild;
-    if($guild == 0) {
+    if($guild === 0) {
       if($warning) {
         $this->flashMessage("errors.guild.notInGuild");
       }
@@ -78,7 +78,7 @@ final class GuildPresenter extends BasePresenter {
   }
   
   public function renderView(int $id): void {
-    if($id == 0) {
+    if($id === 0) {
       $this->forward("notfound");
     }
     $data = $this->model->view($id);

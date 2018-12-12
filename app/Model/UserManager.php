@@ -43,7 +43,7 @@ final class UserManager implements \Nette\Security\IAuthenticator {
    */
   public function authenticate(array $credentials): Identity {
     $uid = $this->getRealId();
-    if($uid == 0) {
+    if($uid === 0) {
       return new Identity(0, "guest");
     }
     $char = $this->orm->characters->getByOwner($uid);
@@ -76,7 +76,7 @@ final class UserManager implements \Nette\Security\IAuthenticator {
       "name" => $values["name"], "race" => $values["race"],
       "occupation" => $values["class"], "owner" => $this->getRealId(),
     ];
-    if($values["gender"] == 1) {
+    if($values["gender"] === 1) {
       $data["gender"] = "male";
     } else {
       $data["gender"] = "female";

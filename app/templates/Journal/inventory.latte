@@ -4,7 +4,7 @@
   <h1>{_"texts.journal.inventory"}</h1>
   <p>{_"texts.journal.money", $money}</p>
   <p>{_"texts.journal.items"}<br>
-  {if count($items) == 0}
+  {if count($items) === 0}
 {_"texts.journal.noItems"}
   {else}
     {foreach $items as $item}

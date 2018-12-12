@@ -27,7 +27,7 @@ final class IntroPresenter extends BasePresenter {
   
   public function renderDefault(): void {
     $text = $this->model->getIntroPart($this->part);
-    if($text == "") {
+    if($text === "") {
       $this->forward("Intro:end");
     }
     $this->template->intro = $text;

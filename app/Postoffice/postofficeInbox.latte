@@ -1,7 +1,7 @@
   <h1>{_"texts.postoffice.receivedTitle"}</h1>
   <p>{_"texts.postoffice.messages"} {_"texts.postoffice.received"} <a href="{plink Postoffice:sent}">{_"texts.postoffice.sent"}</a> <a href="{plink Postoffice:new}">{_"texts.postoffice.new"}</a></p>
   <article id="messages">
-  {if count($messages) == 0}
+  {if count($messages) === 0}
     {_"texts.postoffice.noMessages"}
   {else}
     <table>

@@ -175,7 +175,7 @@ final class Guild {
    */
   public function promote(int $id): void {
     $admin = $this->user;
-    if($admin->identity->guild == 0) {
+    if($admin->identity->guild === 0) {
       throw new NotInGuildException();
     }
     if(!$admin->isAllowed("guild", "promote")) {
@@ -198,7 +198,7 @@ final class Guild {
     if($character->guildrank->id >= 6) {
       throw new CannotPromoteToGrandmasterException();
     }
-    if($character->guildrank->id == 5) {
+    if($character->guildrank->id === 5) {
       $deputy = $this->guildMembers($admin->identity->guild, [6]);
       if(count($deputy) > 0) {
         throw new CannotHaveMoreDeputiesException();
@@ -220,7 +220,7 @@ final class Guild {
    */
   public function demote(int $id): void {
     $admin = $this->user;
-    if($admin->identity->guild == 0) {
+    if($admin->identity->guild === 0) {
       throw new NotInGuildException();
     }
     if(!$admin->isAllowed("guild", "promote")) {
@@ -258,7 +258,7 @@ final class Guild {
    */
   public function kick(int $id): void {
     $admin = $this->user;
-    if($admin->identity->guild == 0) {
+    if($admin->identity->guild === 0) {
       throw new NotInGuildException();
     }
     if(!$admin->isAllowed("guild", "kick")) {

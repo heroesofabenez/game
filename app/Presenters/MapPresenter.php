@@ -21,7 +21,7 @@ final class MapPresenter extends BasePresenter {
     $data = $this->model->local();
     $this->template->wwwDir = realpath(__DIR__ . "/../../");
     foreach($data as $key => $value) {
-      if($key == "areas") {
+      if($key === "areas") {
         foreach($value as $area) {
           $area->href = "";
           if($area->stage !== $this->user->identity->stage) {

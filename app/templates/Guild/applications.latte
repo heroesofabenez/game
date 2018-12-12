@@ -2,7 +2,7 @@
 {block title}{_"texts.guild.applicationsTitle"}{/block}
 {block content}
   <h1>{_"texts.guild.applicationsTitle"}</h1>
-  {if count($apps) == 0}
+  {if count($apps) === 0}
   <p>{_"texts.guild.noApplications"}</p>
   {else}
   {foreach $apps as $app}

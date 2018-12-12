@@ -30,16 +30,16 @@ final class ProfilePresenter extends BasePresenter {
       $this->forward("notfound");
     }
     foreach($data as $key => $value) {
-      if($key == "guild" AND is_int($value)) {
+      if($key === "guild" AND is_int($value)) {
         $this->template->guildId = $value;
         $this->template->guildName = $this->guildModel->getGuildName($value);
         $this->template->guildRank = $data["guildrank"];
         continue;
-      } elseif($key == "guild" AND $value === "") {
+      } elseif($key === "guild" AND $value === "") {
         $this->template->guildId = 0;
         continue;
       }
-      if($key == "guildrank") {
+      if($key === "guildrank") {
         continue;
       }
       $this->template->$key = $value;
