@@ -34,8 +34,7 @@ final class Request {
   /**
    * Can player see the request?
    */
-  public function canShow(int $requestId): bool {
-    $request = $this->orm->requests->getById($requestId);
+  public function canShow(RequestEntity $request): bool {
     switch($request->type) {
       case RequestEntity::TYPE_FRIENDSHIP:
       case RequestEntity::TYPE_GROUP_JOIN:
@@ -61,8 +60,7 @@ final class Request {
   /**
    * Can player accept/decline the request?
    */
-  public function canChange(int $requestId): bool {
-    $request = $this->orm->requests->getById($requestId);
+  public function canChange(RequestEntity $request): bool {
     if($request->from->id == $this->user->id) {
       return false;
     }
@@ -87,7 +85,7 @@ final class Request {
     if(is_null($request)) {
       throw new RequestNotFoundException();
     }
-    if(!$this->canShow($id)) {
+    if(!$this->canShow($request)) {
       throw new CannotSeeRequestException();
     }
     return $request;
@@ -108,10 +106,10 @@ final class Request {
     } catch(RequestNotFoundException $e) {
       throw $e;
     }
-    if(!$this->canShow($id)) {
+    if(!$this->canShow($request)) {
       throw new CannotSeeRequestException();
     }
-    if(!$this->canChange($id)) {
+    if(!$this->canChange($request)) {
       throw new CannotAcceptRequestException();
     }
     if($request->status !== RequestEntity::STATUS_NEW) {
@@ -150,10 +148,10 @@ final class Request {
     } catch(RequestNotFoundException $e) {
       throw $e;
     }
-    if(!$this->canShow($id)) {
+    if(!$this->canShow($request)) {
       throw new CannotSeeRequestException();
     }
-    if(!$this->canChange($id)) {
+    if(!$this->canChange($request)) {
       throw new CannotDeclineRequestException();
     }
     if($request->status !== RequestEntity::STATUS_NEW) {
