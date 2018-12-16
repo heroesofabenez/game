@@ -110,8 +110,7 @@ abstract class ArenaControl extends \Nette\Application\UI\Control {
    */
   public function saveCombat(CombatLogger $logger): int {
     $this->combatHelper->bumpNumberOfTodayArenaFights($this->user->id);
-    $log = (string) $logger;
-    return $this->log->write($log);
+    return $this->log->write((string) $logger);
   }
 }
 ?>
