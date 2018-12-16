@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace HeroesofAbenez\Orm;
 
 use Nexendrie\Utils\Numbers;
+use Nextras\Orm\Collection\ICollection;
 
 /**
  * PveArenaOpponent
@@ -20,8 +21,8 @@ use Nexendrie\Utils\Numbers;
  * @property-read int $constitution {virtual}
  * @property-read int $intelligence {virtual}
  * @property-read int $charisma {virtual}
- * @property Item|null $weapon {m:1 Item, oneSided=true}
- * @property Item|null $armor {m:1 Item, oneSided=true}
+ * @property-read Item|null $weapon {virtual}
+ * @property-read Item|null $armor {virtual}
  */
 final class PveArenaOpponent extends \Nextras\Orm\Entity\Entity {
   public const GENDER_MALE = "male";
@@ -71,6 +72,22 @@ final class PveArenaOpponent extends \Nextras\Orm\Entity\Entity {
     $growth = (int) ($this->occupation->charismaGrow * ($this->level - 1));
     $growth += $this->calculateMainStatGrow("charisma");
     return $base + $growth;
+  }
+
+  protected function getterWeapon(): ?Item {
+    return $this->occupation->items->get()->orderBy("requiredLevel", ICollection::DESC)
+      ->getBy([
+        "requiredLevel<=" => $this->level,
+        "slot" => Item::SLOT_WEAPON,
+      ]);
+  }
+
+  protected function getterArmor(): ?Item {
+    return $this->occupation->items->get()->orderBy("requiredLevel", ICollection::DESC)
+      ->getBy([
+        "requiredLevel<=" => $this->level,
+        "slot" => Item::SLOT_ARMOR,
+        ]);
   }
 }
 ?>
