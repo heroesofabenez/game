@@ -29,13 +29,13 @@ final class NpcPresenter extends BasePresenter {
   
   protected function startup(): void {
     parent::startup();
-    if($this->action != "default" AND !in_array($this->action, ["notfound", "unavailable"], true)) {
+    if($this->action !== "default" AND !in_array($this->action, ["notfound", "unavailable"], true)) {
       $npc = $this->model->view((int) $this->params["id"]);
       if(is_null($npc)) {
         $this->forward("notfound");
       }
       $this->npc = $npc;
-      if($this->npc->stage->id !== $this->user->identity->stage) {
+      if($this->npc->stage->id !== $this->user->identity->stage AND $this->action !== "view") {
         $this->forward("unavailable");
       }
     }
@@ -55,6 +55,11 @@ final class NpcPresenter extends BasePresenter {
     $this->template->quests = $this->npc->quests;
     $this->template->shop = $this->npc->shop;
     $this->template->fight = $this->npc->fight;
+    $this->template->canInteract = ($this->npc->stage->id === $this->user->identity->stage);
+    if(!$this->template->canInteract) {
+      $this->template->stage = $this->npc->stage->id;
+      $this->template->area = $this->npc->stage->area->id;
+    }
   }
   
   public function actionTalk(int $id): void {

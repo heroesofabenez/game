@@ -2,12 +2,15 @@
 {block title}{_"texts.npc.title"}{/block}
 {block content}
   <h1>{_"npcs.$id.name"}</h1>
-  <p>{_"texts.npc.steppedInFront"} {_"npcs.$id.name"}. {_"npcs.$id.description"}</p>
-  <p>{_"texts.npc.whatToDo"}<br>
+  <p>{if $canInteract}{_"texts.npc.steppedInFront"} {_"npcs.$id.name"}. {/if}{_"npcs.$id.description"}</p>
+  <p n:if="$canInteract">{_"texts.npc.whatToDo"}<br>
     <a n:href="Npc:talk $id">{_"texts.npc.talk"}</a><br>
     {if $quests}<a n:href="Npc:quests $id">{_"texts.npc.askForQuest"}</a><br>{/if}
     {if $shop}<a n:href="Npc:trade $id">{_"texts.npc.trade"}</a><br>{/if}
     {if $fight}<a n:href="Npc:fight $id">{_"texts.npc.fight"}</a><br>{/if}
     <a n:href="Homepage:default">{_"texts.npc.walkAway"}</a>
+  </p>
+  <p n:if="!$canInteract">
+    {_"texts.profile.currentLocation"} {_"areas.$area.name"} - {_"stages.$stage.name"}
   </p>
 {/block}
