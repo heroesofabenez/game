@@ -479,3 +479,14 @@ CREATE TABLE `arena_fights_count` (
   KEY `character` (`character`),
   CONSTRAINT `arena_fights_count_ibfk_1` FOREIGN KEY (`character`) REFERENCES `characters` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `pve_arena_opponent_equipment` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `npc` int(11) NOT NULL,
+  `item` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `npc` (`npc`),
+  KEY `item` (`item`),
+  CONSTRAINT `pve_arena_opponent_equipment_ibfk_1` FOREIGN KEY (`npc`) REFERENCES `pve_arena_opponents` (`id`),
+  CONSTRAINT `pve_arena_opponent_equipment_ibfk_2` FOREIGN KEY (`item`) REFERENCES `items` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;

@@ -5,6 +5,7 @@ namespace HeroesofAbenez\Orm;
 
 use Nexendrie\Utils\Numbers;
 use Nextras\Orm\Collection\ICollection;
+use Nextras\Orm\Relationships\OneHasMany;
 
 /**
  * PveArenaOpponent
@@ -21,6 +22,7 @@ use Nextras\Orm\Collection\ICollection;
  * @property-read int $constitution {virtual}
  * @property-read int $intelligence {virtual}
  * @property-read int $charisma {virtual}
+ * @property OneHasMany|PveArenaOpponentEquipment[] $equipment {1:m PveArenaOpponentEquipment::$npc}
  * @property-read Item|null $weapon {virtual}
  * @property-read Item|null $armor {virtual}
  */

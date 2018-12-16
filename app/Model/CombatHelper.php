@@ -10,6 +10,8 @@ use HeroesofAbenez\Orm\Model as ORM;
 use HeroesofAbenez\Orm\ArenaFightCount;
 use Nextras\Orm\Entity\IEntity;
 use HeroesofAbenez\Combat\BaseCharacterSkill;
+use Nexendrie\Utils\Collection;
+use HeroesofAbenez\Combat\Equipment;
 
 /**
  * Combat Helper
@@ -50,7 +52,7 @@ final class CombatHelper {
   }
 
   /**
-   * @return \HeroesofAbenez\Combat\Equipment[]
+   * @return Equipment[]
    */
   protected function getPlayerEquipment(\HeroesofAbenez\Orm\Character $character): array {
     $equipment = [];
@@ -132,19 +134,26 @@ final class CombatHelper {
   }
 
   /**
-   * @return \HeroesofAbenez\Combat\Equipment[]
+   * @return Equipment[]
    */
   protected function getArenaNpcEquipment(\HeroesofAbenez\Orm\PveArenaOpponent $npc): array {
-    $equipment = [];
-    if(!is_null($npc->weapon)) {
+    $equipment = new class extends Collection {
+      /** @var string */
+      protected $class = Equipment::class;
+    };
+    foreach($npc->equipment as $eq) {
+      $eq->item->worn = true;
+      $equipment[] = $eq->item->toCombatEquipment();
+    }
+    if(!$equipment->hasItems(["slot" => Equipment::SLOT_WEAPON]) AND !is_null($npc->weapon)) {
       $npc->weapon->worn = true;
       $equipment[] = $npc->weapon->toCombatEquipment();
     }
-    if(!is_null($npc->armor)) {
+    if(!$equipment->hasItems(["slot" => Equipment::SLOT_ARMOR]) AND !is_null($npc->armor)) {
       $npc->armor->worn = true;
       $equipment[] = $npc->armor->toCombatEquipment();
     }
-    return $equipment;
+    return $equipment->toArray();
   }
   
   /**

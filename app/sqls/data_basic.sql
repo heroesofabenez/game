@@ -131,3 +131,6 @@ INSERT INTO `skills_specials` (`id`, `name`, `needed_class`, `needed_specializat
 INSERT INTO `npcs` (`id`, `name`, `race`, `quests`, `shop`, `fight`, `sprite`, `portrait`, `stage`, `karma`, `personality`, `level`, `pos_x`, `pos_y`) VALUES
   (1,	'Mentor',	2,	1,	0,	0,	'mentor.jpeg',	'mentor.jpeg',	1,	'neutral',	'teaching',	10,	1,	1),
   (2,	'Librarian',	2,	0,	1,	0,	'librarian.jpeg',	'librarian.jpeg',	3,	'neutral',	'friendly',	10,	1,	1);
+
+INSERT INTO `pve_arena_opponent_equipment` (`id`, `npc`, `item`) VALUES
+(1,	2,	3);
