@@ -137,18 +137,12 @@ final class CombatHelper {
   protected function getArenaNpcEquipment(\HeroesofAbenez\Orm\PveArenaOpponent $npc): array {
     $equipment = [];
     if(!is_null($npc->weapon)) {
-      $weapon = $this->itemModel->view($npc->weapon->id);
-      if(!is_null($weapon)) {
-        $weapon->worn = true;
-        $equipment[] = $weapon->toCombatEquipment();
-      }
+      $npc->weapon->worn = true;
+      $equipment[] = $npc->weapon->toCombatEquipment();
     }
     if(!is_null($npc->armor)) {
-      $armor = $this->itemModel->view($npc->armor->id);
-      if(!is_null($armor)) {
-        $armor->worn = true;
-        $equipment[] = $armor->toCombatEquipment();
-      }
+      $npc->armor->worn = true;
+      $equipment[] = $npc->armor->toCombatEquipment();
     }
     return $equipment;
   }
