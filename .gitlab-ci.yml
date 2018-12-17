@@ -20,6 +20,8 @@ cache:
   script:
   - phing test-ci
 
+  retry: 2
+
 test:default:
   <<: *test_job
 
