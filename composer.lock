@@ -72,12 +72,12 @@
             "source": {
                 "type": "git",
                 "url": "https://gitlab.com/heroesofabenez/combat.git",
-                "reference": "cdb94c3dbe4b55f1e917ab0501fc188808f3107e"
+                "reference": "dd3471275d0701f4442e3aab5e8f3a391d63abb2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://gitlab.com/api/v4/projects/heroesofabenez%2Fcombat/repository/archive.zip?sha=cdb94c3dbe4b55f1e917ab0501fc188808f3107e",
-                "reference": "cdb94c3dbe4b55f1e917ab0501fc188808f3107e",
+                "url": "https://gitlab.com/api/v4/projects/heroesofabenez%2Fcombat/repository/archive.zip?sha=dd3471275d0701f4442e3aab5e8f3a391d63abb2",
+                "reference": "dd3471275d0701f4442e3aab5e8f3a391d63abb2",
                 "shasum": ""
             },
             "require": {
@@ -119,7 +119,7 @@
             "keywords": [
                 "combat"
             ],
-            "time": "2018-11-29T15:34:04+00:00"
+            "time": "2018-12-18T15:50:40+00:00"
         },
         {
             "name": "kdyby/autowired",
