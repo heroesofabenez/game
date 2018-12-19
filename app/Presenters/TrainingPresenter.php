@@ -40,6 +40,7 @@ final class TrainingPresenter extends BasePresenter {
     $character = $this->combatHelper->getPlayer($this->user->id);
     $character->applyEffectProviders();
     $this->template->character = $character;
+    $this->template->damageStat = $character->damageStat();
   }
   
   public function handleTrainStat(string $stat): void {
