@@ -36,6 +36,17 @@ menu:
             texts.arena.title: "Arena:"
             texts.ranking.title: "Ranking:characters"
             texts.map.title: "Map:local"
+    journal:
+        htmlId: journalChapters
+        translate: true
+        title: texts.journal.chapters
+        items:
+            texts.journal.basic: "Journal:"
+            texts.journal.inventory: "Journal:inventory"
+            texts.journal.pets: "Journal:pets"
+            texts.journal.quests: "Journal:quests"
+    menu_types:
+        chapters: %appDir%/templates/menuChapters.latte
 hoa.chat:
     chats:
         global: HeroesofAbenez\Chat\IGlobalChatControlFactory

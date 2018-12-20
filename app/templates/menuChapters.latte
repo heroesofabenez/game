@@ -1,0 +1,4 @@
+  <p id="{$menu->htmlId}">
+    {if $menu->title}{_$menu->title}{/if}
+    {foreach $menu->allowedItems as $item}{var $current = $presenter->isLinkCurrent($item->rawLink)} {if !$current}<a href="{$item->link}">{/if}{_$item->text}{if !$current}</a>{/if}{/foreach}
+  </p>
