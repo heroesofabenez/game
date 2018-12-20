@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a8dae053864cf14991879173ec44d235",
+    "content-hash": "69303e2bb43cdce0b3bf81f91162deec",
     "packages": [
         {
             "name": "heroesofabenez/chat",
@@ -1224,16 +1224,16 @@
         },
         {
             "name": "nexendrie/menu",
-            "version": "2.0.0",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://gitlab.com/nexendrie/menu.git",
-                "reference": "82679574fbb24a2faa9b8bc45fa51e6cf9843a4a"
+                "reference": "1a8f32010c81d96c7101c038e43a314c13a1e6a4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://gitlab.com/api/v4/projects/nexendrie%2Fmenu/repository/archive.zip?sha=82679574fbb24a2faa9b8bc45fa51e6cf9843a4a",
-                "reference": "82679574fbb24a2faa9b8bc45fa51e6cf9843a4a",
+                "url": "https://gitlab.com/api/v4/projects/nexendrie%2Fmenu/repository/archive.zip?sha=1a8f32010c81d96c7101c038e43a314c13a1e6a4",
+                "reference": "1a8f32010c81d96c7101c038e43a314c13a1e6a4",
                 "shasum": ""
             },
             "require": {
@@ -1254,7 +1254,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.0.x-dev"
+                    "dev-master": "2.1.x-dev"
                 }
             },
             "autoload": {
@@ -1281,7 +1281,7 @@
                 "menu",
                 "nette"
             ],
-            "time": "2018-01-22T14:27:05+00:00"
+            "time": "2018-12-20T13:38:14+00:00"
         },
         {
             "name": "nexendrie/translation",
@@ -2636,16 +2636,16 @@
         },
         {
             "name": "squizlabs/php_codesniffer",
-            "version": "3.3.2",
+            "version": "3.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/squizlabs/PHP_CodeSniffer.git",
-                "reference": "6ad28354c04b364c3c71a34e4a18b629cc3b231e"
+                "reference": "379deb987e26c7cd103a7b387aea178baec96e48"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/squizlabs/PHP_CodeSniffer/zipball/6ad28354c04b364c3c71a34e4a18b629cc3b231e",
-                "reference": "6ad28354c04b364c3c71a34e4a18b629cc3b231e",
+                "url": "https://api.github.com/repos/squizlabs/PHP_CodeSniffer/zipball/379deb987e26c7cd103a7b387aea178baec96e48",
+                "reference": "379deb987e26c7cd103a7b387aea178baec96e48",
                 "shasum": ""
             },
             "require": {
@@ -2683,7 +2683,7 @@
                 "phpcs",
                 "standards"
             ],
-            "time": "2018-09-23T23:08:17+00:00"
+            "time": "2018-12-19T23:57:18+00:00"
         },
         {
             "name": "symfony/console",

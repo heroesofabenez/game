@@ -26,7 +26,7 @@
         "latte/latte": "~2.4",
         "kdyby/autowired": "^1.5",
         "nexendrie/translation": "^1.1.2",
-        "nexendrie/menu": "^2.0",
+        "nexendrie/menu": "^2.1",
         "nexendrie/utils": "^1.4",
         "nextras/orm": "^3.0",
         "symfony/options-resolver": "^4.0",
