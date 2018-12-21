@@ -38,14 +38,14 @@ final class SkillsTest extends \Tester\TestCase {
     Assert::type(CharacterAttackSkill::class, $skill);
     Assert::type("int", $skill->damage);
     Assert::type("int", $skill->hitRate);
-    Assert::same(0, $skill->cooldown);
+    Assert::same(3, $skill->cooldown);
     Assert::same("attack", $skill->skillType);
     Assert::same(2, $skill->level);
     $skill = $this->model->getCharacterAttackSkill(1);
     Assert::type(CharacterAttackSkill::class, $skill);
     Assert::type("int", $skill->damage);
     Assert::type("int", $skill->hitRate);
-    Assert::same(0, $skill->cooldown);
+    Assert::same(3, $skill->cooldown);
     Assert::same("attack", $skill->skillType);
     Assert::same(0, $skill->level);
     Assert::null($this->model->getCharacterAttackSkill(5000));
@@ -66,7 +66,7 @@ final class SkillsTest extends \Tester\TestCase {
     $skill = $this->model->getCharacterSpecialSkill(1);
     Assert::type(CharacterSpecialSkill::class, $skill);
     Assert::type("int", $skill->value);
-    Assert::same(0, $skill->cooldown);
+    Assert::same(5, $skill->cooldown);
     Assert::same("special", $skill->skillType);
     Assert::same(0, $skill->level);
     Assert::null($this->model->getCharacterSpecialSkill(5000));
