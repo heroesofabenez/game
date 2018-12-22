@@ -58,7 +58,27 @@ INSERT INTO `items` (`id`, `name`, `slot`, `type`, `required_level`, `required_c
 (8,	'Leather Armor',	'armor',	NULL,	1,	1,	0,	2,	15),
 (9,	'Rookie\'s Cloak',	'armor',	NULL,	1,	2,	0,	1,	10),
 (10,	'Apprentice\'s Robe',	'armor',	NULL,	1,	3,	0,	1,	10),
-(11,	'Green Cloak',	'armor',	NULL,	1,	4,	0,	1,	10);
+(11,	'Green Cloak',	'armor',	NULL,	1,	4,	0,	1,	10),
+(12,	'Novice\'s Shield',	'shield',	NULL,	1,	1,	5,	2,	15),
+(13,	'Novice\'s Helmet',	'helmet',	NULL,	1,	1,	5,	3,	15),
+(14,	'Amulet of Swiftness',	'amulet',	NULL,	8,	NULL,	30,	2,	10),
+(15,	'Soldier\'s Sword',	'weapon',	'sword',	8,	1,	13,	3,	20),
+(16,	'Soldier\'s Axe',	'weapon',	'axe',	8,	1,	13,	3,	20),
+(17,	'Rogue\'s Dagger',	'weapon',	'dagger',	8,	2,	13,	2,	20),
+(18,	'Rogue\'s Knife',	'weapon',	'throwing knife',	8,	2,	13,	2,	20),
+(19,	'Soldier\'s Spear',	'weapon',	'spear',	8,	1,	13,	3,	20),
+(20,	'Rogue\'s Crossbow',	'weapon',	'crossbow',	8,	2,	17,	3,	20),
+(21,	'Wizard\'s Staff',	'weapon',	'staff',	8,	3,	17,	3,	20),
+(22,	'Archer\'s Bow',	'weapon',	'bow',	8,	4,	13,	2,	20),
+(23,	'Soldier\'s Armor',	'armor',	NULL,	8,	1,	21,	3,	25),
+(24,	'Rogue\'s Cloak',	'armor',	NULL,	8,	2,	18,	2,	20),
+(25,	'Wizard\'s Robe',	'armor',	NULL,	8,	3,	18,	2,	20),
+(26,	'Brown Cloak',	'armor',	NULL,	8,	4,	18,	2,	20),
+(27,	'Soldier\'s Helmet',	'helmet',	NULL,	8,	1,	18,	6,	25),
+(28,	'Wizard\'s Hat',	'helmet',	NULL,	8,	3,	18,	4,	20),
+(29,	'Soldier\'s Shield',	'shield',	NULL,	8,	1,	15,	4,	25),
+(30,	'Mallet',	'weapon',	'club',	8,	1,	20,	4,	15),
+(31,	'Ring of Accuracy',	'ring',	NULL,	8,	NULL,	30,	2,	10);
 
 INSERT INTO `pet_types` (`id`, `name`, `bonus_stat`, `bonus_value`, `image`, `required_level`, `required_class`, `required_race`, `cost`) VALUES
 (1,	'Rescued Lion',	'constitution',	5,	'',	8,	1,	NULL,	0),
@@ -86,7 +106,13 @@ INSERT INTO `pve_arena_opponents` (`id`, `name`, `race`, `gender`, `occupation`,
   (2,	'El-Tovil',	4,	'male',	1,	2),
   (3,	'Valiana',	3,	'female',	3,	2),
   (4,	'Alinia',	3,	'female',	4,	3),
-  (5,	'Eldan',	1,	'male',	1,	5);
+  (5,	'Eldan',	1,	'male',	1,	5),
+  (6,	'Remus',	2,	'male',	1,	8),
+  (7,	'Celia',	3,	'female',	2,	8),
+  (8,	'Salazar',	2,	'male',	3,	9),
+  (9,	'Durhana',	4,	'female',	2,	9),
+  (10,	'Il-Salah',	1,	'male',	4,	8),
+  (11,	'Murie',	1,	'female',	1,	10);
 
 INSERT INTO `quests` (`id`, `name`, `cost_money`, `needed_item`, `needed_quest`, `needed_level`, `item_amount`, `item_lose`, `reward_money`, `reward_xp`, `reward_item`, `reward_white_karma`, `reward_dark_karma`, `reward_pet`, `npc_start`, `npc_end`, `order`) VALUES
   (1,	'Find a book',	0,	1,	NULL,	1,	1,	0,	0,	10,	NULL, 0, 0, NULL,	1,	1,	1);
@@ -110,7 +136,9 @@ INSERT INTO `routes_stages` (`id`, `from`, `to`) VALUES
 INSERT INTO `shop_items` (`id`, `npc`, `item`, `order`) VALUES
   (1,	2,	1,	1),
   (2, 2, 6, 2),
-  (3, 2, 10, 3);
+  (3, 2, 10, 3),
+  (4,	2,	21,	4),
+  (5,	2,	25,	5);
 
 INSERT INTO `skills_attacks` (`id`, `name`, `needed_class`, `needed_specialization`, `needed_level`, `base_damage`, `damage_growth`, `levels`, `target`, `strikes`, `hit_rate`) VALUES
 (1,	'Assault',	1,	NULL,	1,	'110%',	'5%',	5,	'single',	1,	NULL),
@@ -133,4 +161,16 @@ INSERT INTO `npcs` (`id`, `name`, `race`, `quests`, `shop`, `fight`, `sprite`, `
   (2,	'Librarian',	2,	0,	1,	0,	'librarian.jpeg',	'librarian.jpeg',	3,	'neutral',	'friendly',	10,	1,	1);
 
 INSERT INTO `pve_arena_opponent_equipment` (`id`, `npc`, `item`) VALUES
-(1,	2,	3);
+(1,	2,	3),
+(2,	2,	12),
+(3,	5,	13),
+(4,	7,	18),
+(5,	9,	20),
+(6,	6,	19),
+(7,	8,	28),
+(8,	6,	27),
+(9,	6,	29),
+(10,	8,	14),
+(11,	11,	30),
+(12,	11,	8),
+(13,	8,	31);

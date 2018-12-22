@@ -31,3 +31,63 @@
 11:
     name: "Green Cloak"
     description: "Archers use different color of cloak to express their skill level and experience. Novice archers wear light-weight green cloak."
+12:
+    name: "Novice's Shield"
+    description: "Shield given to fresh recruits."
+13:
+    name: "Novice's Helmet"
+    description: "Helmet for recruits. Does little to protect head."
+14:
+    name: "Amulet of Swiftness"
+    description: "Improves the speed of attacks of its bearer a little."
+15:
+    name: "Soldier's Sword"
+    description: "Sword given to seasoned fighters."
+16:
+    name: "Soldier's Axe"
+    description: "Axe given to seasoned fighters."
+17:
+    name: "Rogue's Dagger"
+    description: "Dagger used by seasoned rogues."
+18:
+    name: "Rogue's Knife"
+    description: "Knife used by seasoned rogues."
+19:
+    name: "Soldier's Spear"
+    description: "Spear given to seasoned fighters."
+20:
+    name: "Rogue's Crossbow"
+    description: "Weapon of choice of some seasoned rogues."
+21:
+    name: "Wizard's Staff"
+    description: "Staff used by seasoned mages."
+22:
+    name: "Archer's Bow"
+    description: "Bigger bow used by seasoned archers."
+23:
+    name: "Soldier's Armor"
+    description: "Metal armor for seasoned fighters. Protects from light damage."
+24:
+    name: "Rogue's Cloak"
+    description: "Quite comfortable cloak used by seasoned rogues."
+25:
+    name: "Wizard's Robe"
+    description: "Green robe worn by seasoned mages. Does not provide much protection from damage."
+26:
+    name: "Brown Cloak"
+    description: "Cloak worn by seasoned archers."
+27:
+    name: "Soldier's Helmet"
+    description: "Metal helmet for seasoned fighters. Protects head from light damage."
+28:
+    name: "Wizard's Hat"
+    description: "Yellow hat for seasoned mages."
+29:
+    name: "Soldier's Shield"
+    description: "Small shield used by seasoned fighters."
+30:
+    name: "Mallet"
+    description: "Weapon of choice of some seasoned fighters."
+31:
+    name: "Ring of Accuracy"
+    description: "Improves precision of attacks of its bearer a little."

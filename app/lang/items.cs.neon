@@ -31,3 +31,63 @@
 11:
     name: "Zelený plášť"
     description: "Lučištníci používají různé barvy pláštů k vyjádření úrovně jejich dovedností a zkušeností. Začínající lučištníci nosí zelené plášťě."
+12:
+    name: "Nováčkův štít"
+    description: "Štít dávaný čerstvým rekrutům."
+13:
+    name: "Nováčkova helma"
+    description: "Helma pro rekruty. Chrání hlavu jen nepatrně."
+14:
+    name: "Amulet rychlosti"
+    description: "Mírně zvyšuje rychlost útoků svého nositele."
+15:
+    name: "Vojákův meč"
+    description: "Meč dávaný zkušeným bojovníkům."
+16:
+    name: "Vojákova sekera"
+    description: "Sekera dávaná zkušeným bojovníkům."
+17:
+    name: "Darebákova dýka"
+    description: "Dýka používaná zkušenými darebáky."
+18:
+    name: "Darebákův nůž"
+    description: "Nůž používaný zkušenými darebáky."
+19:
+    name: "Vojákovo kopí"
+    description: "Kopí dávaná zkušeným bojovníkům."
+20:
+    name: "Darebákova kuše"
+    description: "Oblíbená zbraň některých zkušených darebáků."
+21:
+    name: "Čarodějova hůl"
+    description: "Hůl používaná zkušenými mágy."
+22:
+    name: "Luk lučištníka"
+    description: "Větší luk používaný zkušenými lučištníky."
+23:
+    name: "Vojákovo brnění"
+    description: "Kovové brnění pro zkušené bojovníky. Chrání před lehkým poškozením."
+24:
+    name: "Darebákův plášť"
+    description: "Docela pohodlný plášť používaný zkušenými darebáky."
+25:
+    name: "Čarodějova róba"
+    description: "Zelená róba nošená zkušenými mágy. Neposkytuje příliš dobrou ochranu před poškozením."
+26:
+    name: "Hnědý plášť"
+    description: "Plášť nošený zkušenými lučištníky."
+27:
+    name: "Vojákova helma"
+    description: "Kovová helma pro zkušené bojovníky. Chrání hlavu před lehkým poškozením."
+28:
+    name: "Čarodějův klobouk"
+    description: "Žlutý klobouk pro zkušené mágy."
+29:
+    name: "Vojákův štít"
+    description: "Malý štít používaný zkušenými bojovníky."
+30:
+    name: "Palice"
+    description: "Oblíbená zbraň některých zkušených bojovníků."
+31:
+    name: "Prsten přesnosti"
+    description: "Mírně zvyšuje přesnost útoků svého nositele."
