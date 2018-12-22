@@ -32,6 +32,7 @@ final class Item extends \Nextras\Orm\Entity\Entity {
   public const SLOT_SHIELD = \HeroesofAbenez\Combat\Equipment::SLOT_SHIELD;
   public const SLOT_AMULET = \HeroesofAbenez\Combat\Equipment::SLOT_AMULET;
   public const SLOT_HELMET = \HeroesofAbenez\Combat\Equipment::SLOT_HELMET;
+  public const SLOT_RING = \HeroesofAbenez\Combat\Equipment::SLOT_RING;
 
   protected function setterPrice(int $value): int {
     return Numbers::range($value, 0, 999);

@@ -230,7 +230,7 @@ CREATE TABLE `introduction` (
 CREATE TABLE `items` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(20) NOT NULL,
-  `slot` enum('weapon','armor','shield','amulet', 'helmet', 'item') NOT NULL,
+  `slot` enum('weapon','armor','shield','amulet', 'helmet', 'ring', 'item') NOT NULL,
   `type` enum('sword','axe','club','dagger','spear','staff','bow','crossbow','throwing knife') DEFAULT NULL,
   `required_level` int(11) NOT NULL DEFAULT '1',
   `required_class` int(11) DEFAULT NULL,
