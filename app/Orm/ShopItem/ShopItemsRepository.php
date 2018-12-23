@@ -3,8 +3,6 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Orm;
 
-use Nextras\Orm\Collection\ICollection;
-
 /**
  * ShopItemsRepository
  *
@@ -25,16 +23,6 @@ final class ShopItemsRepository extends \Nextras\Orm\Repository\Repository {
     return $this->getBy([
       "id" => $id
     ]);
-  }
-  
-  /**
-   * @param Npc|int $npc
-   * @return ICollection|ShopItem[]
-   */
-  public function findByNpc($npc): ICollection {
-    return $this->findBy([
-      "npc" => $npc
-    ])->orderBy("order");
   }
 
   /**
