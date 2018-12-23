@@ -76,17 +76,17 @@ final class NPCShopControl extends \Nette\Application\UI\Control {
     $item = $this->orm->items->getById($itemId);
     if(is_null($item)) {
       $this->presenter->flashMessage("errors.shop.itemDoesNotExist");
-      return;
+      $this->presenter->redirect("this");
     }
     if(!$this->canBuyItem($itemId)) {
       $this->presenter->flashMessage("errors.shop.cannotBuyHere");
-      return;
+      $this->presenter->redirect("this");
     }
     /** @var \HeroesofAbenez\Orm\Character $character */
     $character = $this->orm->characters->getById($this->user->id);
     if($character->money < $item->price) {
       $this->presenter->flashMessage("errors.shop.notEnoughMoney");
-      return;
+      $this->presenter->redirect("this");
     }
     $this->itemModel->giveItem($itemId);
     $character->money -= $item->price;
