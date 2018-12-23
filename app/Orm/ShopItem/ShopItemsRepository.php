@@ -36,5 +36,17 @@ final class ShopItemsRepository extends \Nextras\Orm\Repository\Repository {
       "npc" => $npc
     ])->orderBy("order");
   }
+
+  /**
+   * @param Item|int $item
+   * @param Npc|int $npc
+   * @return ShopItem|null
+   */
+  public function getByItemAndNpc($item, $npc): ?ShopItem {
+    return $this->getBy([
+      "item" => $item,
+      "npc" => $npc,
+    ]);
+  }
 }
 ?>

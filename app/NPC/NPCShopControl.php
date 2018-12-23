@@ -65,8 +65,8 @@ final class NPCShopControl extends \Nette\Application\UI\Control {
    * Check if an item is in the shop
    */
   public function canBuyItem(int $id): bool {
-    $row = $this->orm->shopItems->getById($id);
-    return (!is_null($row) AND $row->npc->id === $this->npc->id);
+    $row = $this->orm->shopItems->getByItemAndNpc($id, $this->npc->id);
+    return (!is_null($row));
   }
   
   /**
