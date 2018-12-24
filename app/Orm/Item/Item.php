@@ -58,6 +58,7 @@ final class Item extends \Nextras\Orm\Entity\Entity {
     foreach($stats as $stat) {
       $data[$stat] = $this->$stat;
     }
+    $data["maxDurability"] = $this->durability;
     if($data["slot"] === \HeroesofAbenez\Combat\Equipment::SLOT_WEAPON) {
       return new \HeroesofAbenez\Combat\Weapon($data);
     }

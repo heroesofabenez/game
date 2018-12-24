@@ -60,9 +60,7 @@ final class CombatHelper {
       if(!$row->worn) {
         continue;
       }
-      $item = $row->item;
-      $item->worn = true;
-      $equipment[] = $item->toCombatEquipment();
+      $equipment[] = $row->toCombatEquipment();
     }
     return $equipment;
   }

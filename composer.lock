@@ -72,12 +72,12 @@
             "source": {
                 "type": "git",
                 "url": "https://gitlab.com/heroesofabenez/combat.git",
-                "reference": "7fb37fbd204f6b55226939b3ae1b3c70c168e06a"
+                "reference": "231da410b83ee426f3123b737e2e1aa32a206900"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://gitlab.com/api/v4/projects/heroesofabenez%2Fcombat/repository/archive.zip?sha=7fb37fbd204f6b55226939b3ae1b3c70c168e06a",
-                "reference": "7fb37fbd204f6b55226939b3ae1b3c70c168e06a",
+                "url": "https://gitlab.com/api/v4/projects/heroesofabenez%2Fcombat/repository/archive.zip?sha=231da410b83ee426f3123b737e2e1aa32a206900",
+                "reference": "231da410b83ee426f3123b737e2e1aa32a206900",
                 "shasum": ""
             },
             "require": {
@@ -85,7 +85,8 @@
                 "nette/utils": "^2.4",
                 "nexendrie/translation": "^1.1.1",
                 "nexendrie/utils": "^1.4",
-                "php": ">=7.1.0"
+                "php": ">=7.1.0",
+                "symfony/options-resolver": "^4.0"
             },
             "require-dev": {
                 "nexendrie/code-quality": "dev-master",
@@ -119,7 +120,7 @@
             "keywords": [
                 "combat"
             ],
-            "time": "2018-12-22T19:14:52+00:00"
+            "time": "2018-12-24T16:43:27+00:00"
         },
         {
             "name": "kdyby/autowired",

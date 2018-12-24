@@ -40,10 +40,16 @@ final class CharacterItem extends \Nextras\Orm\Entity\Entity {
     return (int) ($price / 100 * $damage * $this->amount);
   }
 
+  public function toCombatEquipment(): ?\HeroesofAbenez\Combat\Equipment {
+    $this->item->worn = $this->worn;
+    $equipment = $this->item->toCombatEquipment();
+    $equipment->durability = $this->durability;
+    return $equipment;
+  }
+
   public function onBeforeInsert(): void {
     parent::onBeforeInsert();
     $this->durability = $this->item->durability;
   }
-
 }
 ?>
