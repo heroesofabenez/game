@@ -83,7 +83,7 @@ final class Journal {
       $i = $item->item;
       $return["items"][] = (object) [
         "id" => $i->id, "name" => $i->name, "amount" => $item->amount, "worn" => $item->worn, "eqid" => $item->id,
-        "durability" => $item->durability, "maxDurability" => $item->maxDurability,
+        "durability" => $item->durability, "maxDurability" => $item->maxDurability, "repairPrice" => $item->repairPrice,
       ];
     }
     return $return;

@@ -265,6 +265,7 @@ CREATE TABLE `npcs` (
   `quests` int(1) NOT NULL DEFAULT '0',
   `shop` int(1) NOT NULL DEFAULT '0',
   `fight` int(1) NOT NULL DEFAULT '0',
+  `smith` int(1) NOT NULL DEFAULT '0',
   `sprite` varchar(35) NOT NULL,
   `portrait` varchar(35) NOT NULL,
   `stage` int(11) NOT NULL,

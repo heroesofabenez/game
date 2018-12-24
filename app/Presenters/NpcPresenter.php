@@ -10,6 +10,10 @@ use HeroesofAbenez\NPC\NPCQuestsControl;
 use HeroesofAbenez\NPC\INPCShopControlFactory;
 use HeroesofAbenez\NPC\NPCShopControl;
 use HeroesofAbenez\Orm\Npc;
+use HeroesofAbenez\Model\ItemNotFoundException;
+use HeroesofAbenez\Model\ItemNotOwnedException;
+use HeroesofAbenez\Model\InsufficientFundsException;
+use HeroesofAbenez\Model\ItemNotDamagedException;
 
 /**
  * Presenter Npc
@@ -19,14 +23,20 @@ use HeroesofAbenez\Orm\Npc;
 final class NpcPresenter extends BasePresenter {
   /** @var \HeroesofAbenez\Model\NPC */
   protected $model;
+  /** @var \HeroesofAbenez\Model\Journal */
+  protected $journalModel;
+  /** @var \HeroesofAbenez\Model\Item */
+  protected $itemModel;
   /** @var Npc */
   protected $npc;
-  
-  public function __construct(\HeroesofAbenez\Model\NPC $model) {
+
+  public function __construct(\HeroesofAbenez\Model\NPC $model, \HeroesofAbenez\Model\Journal $journalModel, \HeroesofAbenez\Model\Item $itemModel) {
     parent::__construct();
     $this->model = $model;
+    $this->journalModel = $journalModel;
+    $this->itemModel = $itemModel;
   }
-  
+
   protected function startup(): void {
     parent::startup();
     if($this->action !== "default" AND !in_array($this->action, ["notfound", "unavailable"], true)) {
@@ -55,6 +65,7 @@ final class NpcPresenter extends BasePresenter {
     $this->template->quests = $this->npc->quests;
     $this->template->shop = $this->npc->shop;
     $this->template->fight = $this->npc->fight;
+    $this->template->smith = $this->npc->smith;
     $this->template->canInteract = ($this->npc->stage->id === $this->user->identity->stage);
     if(!$this->template->canInteract) {
       $this->template->stage = $this->npc->stage->id;
@@ -99,6 +110,28 @@ final class NpcPresenter extends BasePresenter {
     $shop = $factory->create();
     $shop->npc = $this->npc;
     return $shop;
+  }
+
+  public function renderRepair(int $id): void {
+    if(!$this->npc->smith) {
+      $this->flashMessage("errors.npc.notSmith");
+      $this->redirect("view", $id);
+    }
+    $this->template->items = $this->journalModel->inventory()["items"];
+  }
+
+  public function handleRepair(int $itemId): void {
+    try {
+      $this->itemModel->repairItem($itemId);
+      $this->flashMessage("messages.equipment.repaired");
+    } catch(ItemNotFoundException | ItemNotOwnedException $e) {
+      $this->redirect("Item:notfound");
+    } catch(ItemNotDamagedException $e) {
+      $this->flashMessage("errors.equipment.notDamaged");
+    } catch(InsufficientFundsException $e) {
+      $this->flashMessage("errors.equipment.notEnoughMoney");
+    }
+    $this->redirect("this");
   }
 }
 ?>

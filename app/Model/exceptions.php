@@ -51,6 +51,14 @@ class ItemNotWornException extends InvalidStateException {
   
 }
 
+class ItemNotDamagedException extends AccessDeniedException {
+
+}
+
+class InsufficientFundsException extends AccessDeniedException {
+
+}
+
 class GuildNotFoundException extends RecordNotFoundException {
   
 }

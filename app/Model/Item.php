@@ -127,5 +127,29 @@ final class Item {
     $item->worn = false;
     $this->orm->characterItems->persistAndFlush($item);
   }
+
+  /**
+   * Repair an item
+   *
+   * @throws ItemNotFoundException
+   * @throws ItemNotOwnedException
+   * @throws ItemNotDamagedException
+   * @throws InsufficientFundsException
+   */
+  public function repairItem(int $id): void {
+    $item = $this->orm->characterItems->getById($id);
+    if(is_null($item)) {
+      throw new ItemNotFoundException();
+    } elseif($item->character->id !== $this->user->id) {
+      throw new ItemNotOwnedException();
+    } elseif($item->durability === $item->maxDurability) {
+      throw new ItemNotDamagedException();
+    } elseif($item->repairPrice > $item->character->money) {
+      throw new InsufficientFundsException();
+    }
+    $item->character->money -= $item->repairPrice;
+    $item->durability = $item->maxDurability;
+    $this->orm->characterItems->persistAndFlush($item);
+  }
 }
 ?>
