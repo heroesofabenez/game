@@ -81,7 +81,10 @@ final class Journal {
     $return["items"] = [];
     foreach($character->items as $item) {
       $i = $item->item;
-      $return["items"][] = (object) ["id" => $i->id, "name" => $i->name, "amount" => $item->amount, "worn" => $item->worn, "eqid" => $item->id];
+      $return["items"][] = (object) [
+        "id" => $i->id, "name" => $i->name, "amount" => $item->amount, "worn" => $item->worn, "eqid" => $item->id,
+        "durability" => $item->durability, "maxDurability" => $item->maxDurability,
+      ];
     }
     return $return;
   }

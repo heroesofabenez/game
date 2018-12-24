@@ -9,8 +9,8 @@ INSERT INTO `characters` (`id`, `name`, `race`, `gender`, `occupation`, `special
 (3,	'Amanda',	2,	'female',	3,	NULL,	1,	0,	0,	9,	10,	9,	12,	11,	NULL,	2,	7,	0,	1,	0,	0,	2,	'2015-05-10 14:32:22',	0,	0),
 (4,	'Alvid',	3,	'male',	1,	NULL,	1,	0,	0,	10,	11,	10,	10,	11,	NULL,	3,	7,	0,	1,	0,	0,	2,	'2015-05-12 17:47:55',	0,	0);
 
-INSERT INTO `character_items` (`id`, `character`, `item`, `amount`, `worn`) VALUES
-(1,	1,	6,	1,	1);
+INSERT INTO `character_items` (`id`, `character`, `item`, `amount`, `worn`, `durability`) VALUES
+(1,	1,	6,	1,	1,	10);
 
 INSERT INTO `character_quests` (`id`, `character`, `quest`, `progress`) VALUES
 (1,	1,	1,	1);
