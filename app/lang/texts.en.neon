@@ -31,6 +31,8 @@ item:
     soldBy: "Sold by:"
     neededForQuests: "Needed for quests:"
     rewardedForQuests: "Reward for quests:"
+    repair: "Repair"
+    repairPrice: "{1}for 1 silver mark|[0,+Inf[ for %count% silver marks"
 tavern:
     title: "Tavern"
     rooms: "Rooms:"
@@ -185,6 +187,7 @@ npc:
     talk: "Talk"
     askForQuest: "Ask for quests"
     trade: "Trade"
+    repair: "Repair items"
     fight: "Fight"
     walkAway: "Walk away"
     notFoundTitle: "NPC not found"
@@ -193,6 +196,7 @@ npc:
     notAvailable: "Requested npc is not available at the moment."
     shopTitle: "Shop"
     questsTitle: "Quests"
+    smithTitle: "Smithy"
 character:
     createTitle: "Create character"
     noCharacterFound: "It seems you have no character on this server. (Are you sure you selected the right one?) Before you can start playing, you have to create one."

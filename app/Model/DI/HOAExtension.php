@@ -108,7 +108,8 @@ final class HOAExtension extends \Nette\DI\CompilerExtension {
   protected function addCombat(): void {
     $builder = $this->getContainerBuilder();
     $builder->addDefinition($this->prefix("combat.combat"))
-      ->setType(HeroesofAbenez\Combat\CombatBase::class);
+      ->setType(HeroesofAbenez\Combat\CombatBase::class)
+      ->addSetup('$service->onCombatEnd[] = ?', [["@" . $this->prefix("combat.helper"), "wearOutEquipment"]]);
     $builder->addDefinition($this->prefix("combat.logger"))
       ->setType(HeroesofAbenez\Combat\CombatLogger::class)
       ->addSetup("setTitle", ["Heroes of Abenez -"]);

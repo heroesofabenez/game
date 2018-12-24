@@ -22,6 +22,7 @@ guild:
 npc:
     noShop: "This npc doesn't have shop."
     notEnemy: "You cannot challange this npc."
+    notSmith: "This npc doesn't repair items."
 quest:
     workingOn: "You are already working on this quest."
     notWorkingOn: "You aren't working on this quest."
@@ -63,6 +64,8 @@ equipment:
     notWorn: "You are not wearing this item."
     alreadyWorn: "You are already wearing this item."
     notEquipable: "This item cannot be equipped."
+    notDamaged: "This item is not damaged."
+    notEnoughMoney: "You do not have enough money for reparing this item."
 pet:
     notFound: "Specified pet was not found."
     notOwned: "Specified pet is not yours."

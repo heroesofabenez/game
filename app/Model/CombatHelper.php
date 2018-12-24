@@ -60,9 +60,7 @@ final class CombatHelper {
       if(!$row->worn) {
         continue;
       }
-      $item = $row->item;
-      $item->worn = true;
-      $equipment[] = $item->toCombatEquipment();
+      $equipment[] = $row->toCombatEquipment();
     }
     return $equipment;
   }
@@ -213,6 +211,26 @@ final class CombatHelper {
     }
     $row->amount++;
     $this->orm->arenaFightsCount->persistAndFlush($row);
+  }
+
+  public function wearOutEquipment(\HeroesofAbenez\Combat\CombatBase $combat): void {
+    /** @var Character[] $characters */
+    $characters = array_merge($combat->team1->toArray(), $combat->team2->toArray());
+    foreach($characters as $character) {
+      if(!is_int($character->id)) {
+        continue;
+      }
+      foreach($character->equipment as $equipment) {
+        if(!$equipment->worn) {
+          continue;
+        }
+        /** @var \HeroesofAbenez\Orm\CharacterItem $item */
+        $item = $this->orm->characterItems->getByCharacterAndItem($character->id, $equipment->id);
+        $item->durability--;
+        $this->orm->characterItems->persist($item);
+      }
+    }
+    $this->orm->characterItems->flush();
   }
 }
 ?>

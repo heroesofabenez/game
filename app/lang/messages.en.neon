@@ -28,3 +28,5 @@ pet:
 chat:
     currentTime: "Current time is %time%."
     currentLocation: "You're currently in %stageName% at %areaName%."
+equipment:
+    repaired: "Item repaired."

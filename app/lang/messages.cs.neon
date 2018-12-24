@@ -28,3 +28,5 @@ pet:
 chat:
     currentTime: "Aktuální čas je %time%."
     currentLocation: "Právě jsi v %stageName% v %areaName%."
+equipment:
+    repaired: "Věc opravena."

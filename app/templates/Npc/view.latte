@@ -7,6 +7,7 @@
     <a n:href="Npc:talk $id">{_"texts.npc.talk"}</a><br>
     {if $quests}<a n:href="Npc:quests $id">{_"texts.npc.askForQuest"}</a><br>{/if}
     {if $shop}<a n:href="Npc:trade $id">{_"texts.npc.trade"}</a><br>{/if}
+    {if $smith}<a n:href="Npc:repair $id">{_"texts.npc.repair"}</a>{/if}
     {if $fight}<a n:href="Npc:fight $id">{_"texts.npc.fight"}</a><br>{/if}
     <a n:href="Homepage:default">{_"texts.npc.walkAway"}</a>
   </p>

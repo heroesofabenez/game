@@ -16,6 +16,7 @@ use Nexendrie\Utils\Numbers;
  * @property bool $quests {default false}
  * @property bool $shop {default false}
  * @property bool $fight {default false}
+ * @property bool $smith {default false}
  * @property string $sprite
  * @property string $portrait
  * @property QuestStage $stage {m:1 QuestStage::$npcs}

@@ -22,6 +22,7 @@ guild:
 npc:
     noShop: "Toto npc nemá obchod."
     notEnemy: "Nemůžeš vyzvat toto npc na souboj."
+    notSmith: "Toto npc neopravuje věci."
 quest:
     workingOn: "Už pracuješ na tomto úkolu."
     notWorkingOn: "Nepracuješ na tomto úkolu."
@@ -63,6 +64,8 @@ equipment:
     notWorn: "Nenosíš tuto věc."
     alreadyWorn: "Už nosíš tuto věc."
     notEquipable: "Tato věc nemůže být nasazena."
+    notDamaged: "Tato věc není poškozená."
+    notEnoughMoney: "Nemáš dostatek peněz na opravu této věci."
 pet:
     notFound: "Zadaný mazlíček nebyl nalezen."
     notOwned: "Zadaný mazlíček ti nepatří."
