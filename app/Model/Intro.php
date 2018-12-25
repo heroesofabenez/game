@@ -67,7 +67,7 @@ final class Intro {
     if(!is_null($classSL)) {
       return $classSL->id;
     }
-    $raceSL = $this->orm->stages->getRaceStartingLocation($this->user->identity->occupation);
+    $raceSL = $this->orm->stages->getRaceStartingLocation($this->user->identity->race);
     if(!is_null($raceSL)) {
       return $raceSL->id;
     }
