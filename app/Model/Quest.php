@@ -7,6 +7,8 @@ use HeroesofAbenez\Orm\Quest as QuestEntity;
 use HeroesofAbenez\Orm\Model as ORM;
 use HeroesofAbenez\Orm\CharacterQuest;
 use Nextras\Orm\Collection\ICollection;
+use Nette\Localization\ITranslator;
+use Nette\Application\LinkGenerator;
 
 /**
  * Quest Model
@@ -24,13 +26,19 @@ final class Quest {
   protected $itemModel;
   /** @var Pet */
   protected $petModel;
+  /** @var ITranslator */
+  protected $translator;
+  /** @var LinkGenerator */
+  protected $linkGenerator;
   
-  public function __construct(ORM $orm, \Nette\Security\User $user, Item $itemModel, Pet $petModel) {
+  public function __construct(ORM $orm, \Nette\Security\User $user, Item $itemModel, Pet $petModel, ITranslator $translator, LinkGenerator $linkGenerator) {
     $this->orm = $orm;
     $this->user = $user;
     $this->itemModel = $itemModel;
     $this->petModel = $petModel;
     $this->petModel->user = $user;
+    $this->translator = $translator;
+    $this->linkGenerator = $linkGenerator;
   }
   
   /**
@@ -175,6 +183,42 @@ final class Quest {
     $record->character = $this->user->id;
     $record->quest = $id;
     $this->orm->characterQuests->persistAndFlush($record);
+  }
+
+  /**
+   * @return \stdClass[]
+   */
+  public function getRequirements(QuestEntity $quest): array {
+    $requirements = [];
+    if($quest->costMoney > 0) {
+      $requirements[] = (object) [
+        "text" => $this->translator->translate("texts.quest.requirementPayMoney", $quest->costMoney),
+        "met" => false
+      ];
+    }
+    if(!is_null($quest->neededItem)) {
+      $itemName = $this->translator->translate("items.{$quest->neededItem->id}.name");
+      $itemLink = $this->linkGenerator->link("Item:view", ["id" => $quest->neededItem->id]);
+      $haveItem = $this->itemModel->haveItem($quest->neededItem->id, $quest->itemAmount);
+      $requirements[] = (object) [
+        "text" => $this->translator->translate("texts.quest.requirementGetItem", $quest->itemAmount, ["item" => "<a href=\"$itemLink\">$itemName</a>"]),
+        "met" => $haveItem
+      ];
+    }
+    $npcLink = $this->linkGenerator->link("Npc:view", ["id" => $quest->npcEnd->id]);
+    $npcName = $this->translator->translate("npcs.{$quest->npcEnd->id}.name");
+    if($quest->npcStart->id != $quest->npcEnd->id) {
+      $requirements[] = (object) [
+        "text" => $this->translator->translate("texts.quest.requirementTalkToNpc", 0, ["npc" => "<a href=\"$npcLink\">{$npcName}</a>"]),
+        "met" => false
+      ];
+    } else {
+      $requirements[] = (object) [
+        "text" => $this->translator->translate("texts.quest.requirementReportBackToNpc", 0, ["npc" => "<a href=\"$npcLink\">{$npcName}</a>"]),
+        "met" => false
+      ];
+    }
+    return $requirements;
   }
 }
 ?>

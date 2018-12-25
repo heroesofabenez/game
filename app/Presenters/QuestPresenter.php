@@ -41,35 +41,7 @@ final class QuestPresenter extends BasePresenter {
     $this->template->finished = $this->model->isFinished($id);
     $this->template->npcStart = $quest->npcStart->id;
     $this->template->npcEnd = $this->translator->translate("npcs.{$quest->npcEnd->id}.name");
-    $requirements = [];
-    if($quest->costMoney > 0) {
-      $requirements[] = (object) [
-        "text" => $this->translator->translate("texts.quest.requirementPayMoney", $quest->costMoney),
-        "met" => false
-      ];
-    }
-    if(!is_null($quest->neededItem)) {
-      $itemName = $this->translator->translate("items.{$quest->neededItem->id}.name");
-      $itemLink = $this->link("Item:view", $quest->neededItem->id);
-      $haveItem = $this->itemModel->haveItem($quest->neededItem->id, $quest->itemAmount);
-      $requirements[] = (object) [
-        "text" => $this->translator->translate("texts.quest.requirementGetItem", $quest->itemAmount, ["item" => "<a href=\"$itemLink\">$itemName</a>"]),
-        "met" => $haveItem
-      ];
-    }
-    $npcLink = $this->link("Npc:view", $quest->npcEnd->id);
-    if($quest->npcStart->id != $quest->npcEnd->id) {
-      $requirements[] = (object) [
-        "text" => $this->translator->translate("texts.quest.requirementTalkToNpc", 0, ["npc" => "<a href=\"$npcLink\">{$this->template->npcEnd}</a>"]),
-        "met" => false
-      ];
-    } else {
-      $requirements[] = (object) [
-        "text" => $this->translator->translate("texts.quest.requirementReportBackToNpc", 0, ["npc" => "<a href=\"$npcLink\">{$this->template->npcEnd}</a>"]),
-        "met" => false
-      ];
-    }
-    $this->template->requirements = $requirements;
+    $this->template->requirements = $this->model->getRequirements($quest);
     $this->template->rewardMoney = $quest->rewardMoney;
     $this->template->rewardXp = $quest->rewardXp;
     $this->template->rewardItem = (!is_null($quest->rewardItem)) ? $quest->rewardItem->id : false;

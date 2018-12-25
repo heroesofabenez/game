@@ -103,6 +103,33 @@ final class QuestTest extends \Tester\TestCase {
       $this->model->accept(1, 1);
     }, QuestAlreadyStartedException::class);
   }
+
+  public function testGetRequirements() {
+    /** @var QuestEntity $quest */
+    $quest = $this->model->view(1);
+    $oldCostMoney = $quest->costMoney;
+    $oldNpcEnd = $quest->npcEnd;
+    /** @var \HeroesofAbenez\Orm\Model $orm */
+    $orm = $this->getService(\HeroesofAbenez\Orm\Model::class);
+    $requirements = $this->model->getRequirements($quest);
+    Assert::type("array", $requirements);
+    Assert::count(2, $requirements);
+    Assert::contains("get 1x ", $requirements[0]->text);
+    Assert::contains("Spell casting for dummies", $requirements[0]->text);
+    Assert::contains("report back to ", $requirements[1]->text);
+    Assert::contains("Mentor", $requirements[1]->text);
+    $quest->npcEnd = 2;
+    $requirements = $this->model->getRequirements($quest);
+    Assert::contains("talk to ", $requirements[1]->text);
+    Assert::contains("Librarian", $requirements[1]->text);
+    $quest->npcEnd = $oldNpcEnd;
+    $quest->costMoney = 1;
+    $requirements = $this->model->getRequirements($quest);
+    Assert::count(3, $requirements);
+    Assert::same("pay 1 silver mark", $requirements[0]->text);
+    $quest->costMoney = $oldCostMoney;
+    $orm->quests->persistAndFlush($quest);
+  }
 }
 
 $test = new QuestTest();
