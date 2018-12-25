@@ -190,20 +190,6 @@ final class Profile {
   }
 
   /**
-   * Get user's stats
-   * 
-   * @return int[]
-   */
-  public function getStats(): array {
-    $return = [];
-    $char = $this->orm->characters->getById($this->user->id);
-    foreach($this->stats as $stat) {
-      $return[$stat] = $char->$stat;
-    }
-    return $return;
-  }
-  
-  /**
    * Improve a stat
    *
    * @throws InvalidStatException
@@ -212,11 +198,12 @@ final class Profile {
   public function trainStat(string $stat): void {
     if(!in_array($stat, $this->stats, true)) {
       throw new InvalidStatException();
-    } elseif($this->getStatPoints() < 1) {
-      throw new NoStatPointsAvailableException();
     }
     /** @var Character $character */
     $character = $this->orm->characters->getById($this->user->id);
+    if($character->statPoints < 1) {
+      throw new NoStatPointsAvailableException();
+    }
     $character->{$stat}++;
     $character->statPoints--;
     $this->orm->characters->persistAndFlush($character);

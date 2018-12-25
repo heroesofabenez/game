@@ -56,13 +56,6 @@ final class ProfileTest extends \Tester\TestCase {
     $user->specialization = $oldSpecialization;
     $orm->characters->persistAndFlush($user);
   }
-  
-  public function testGetStats() {
-    $this->model->user = $this->getService(\Nette\Security\User::class);
-    $result = $this->model->getStats();
-    Assert::type("array", $result);
-    Assert::count(5, $result);
-  }
 
   public function testTrainStat() {
     Assert::exception(function() {
