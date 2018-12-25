@@ -71,9 +71,9 @@ final class JournalPresenter extends BasePresenter {
     try {
       $this->itemModel->equipItem($itemId);
     } catch(ItemNotFoundException $e) {
-      $this->redirect("Equipment:notfound");
+      $this->redirect("Item:notfound");
     } catch(ItemNotOwnedException $e) {
-      $this->redirect("Equipment:notfound");
+      $this->redirect("Item:notfound");
     } catch(ItemNotEquipableException $e) {
       $this->flashMessage("errors.equipment.notEquipable");
     } catch(ItemAlreadyEquippedException $e) {
@@ -87,9 +87,9 @@ final class JournalPresenter extends BasePresenter {
       $this->itemModel->unequipItem($itemId);
       $this->flashMessage("messages.equipment.unequiped");
     } catch(ItemNotFoundException $e) {
-      $this->redirect("Equipment:notfound");
+      $this->redirect("Item:notfound");
     } catch(ItemNotOwnedException $e) {
-      $this->redirect("Equipment:notfound");
+      $this->redirect("Item:notfound");
     } catch(ItemNotWornException $e) {
       $this->flashMessage("errors.equipment.notWorn");
     }
