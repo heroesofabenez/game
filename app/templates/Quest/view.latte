@@ -3,15 +3,15 @@
 {block content}
   <h1>{_"quests.$id.name"}</h1>
   <p>{_"texts.quest.from"} <a n:href="Npc:view $npcStart">{_"npcs.$npcStart.name"}</a></p>
-  <p{if $finished} class="crossout"{/if}>{_"quests.$id.introduction"}</p>
-  <p{if $finished} class="crossout"{/if}>{_"texts.quest.requirementsHeader"}</p>
+  <p n:class="$finished ? crossout">{_"quests.$id.introduction"}</p>
+  <p n:class="$finished ? crossout">{_"texts.quest.requirementsHeader"}</p>
   <ul>
     {foreach $requirements as $requirement}
     <li{if $finished OR $requirement->met} class="crossout"{/if}>{$requirement->text|noescape}{if $iterator->last}.{else},{/if}</li>
     {/foreach}
   </ul>
   {if $finished}<p>{_"quests.$id.end_text"}</p>{/if}
-  <p{if $finished} class="crossout"{/if}>{_"texts.quest.rewards"} {_"texts.quest.rewardMoney", $rewardMoney}, {_"texts.quest.rewardXP", $rewardXp}{if $rewardItem}, <a n:href="Item:view $rewardItem">{_"items.$rewardItem.name"}</a>{/if}, {_"texts.quest.rewardKarma", 0, ["whiteKarma" => $rewardWhiteKarma, "darkKarma" => $rewardDarkKarma]}{if $rewardPet}, {_"pets.$rewardPet.name"}{/if}.</p>
+  <p n:class="$finished ? crossout">{_"texts.quest.rewards"} {_"texts.quest.rewardMoney", $rewardMoney}, {_"texts.quest.rewardXP", $rewardXp}{if $rewardItem}, <a n:href="Item:view $rewardItem">{_"items.$rewardItem.name"}</a>{/if}, {_"texts.quest.rewardKarma", 0, ["whiteKarma" => $rewardWhiteKarma, "darkKarma" => $rewardDarkKarma]}{if $rewardPet}, {_"pets.$rewardPet.name"}{/if}.</p>
   {if $followupQuests->count() > 0}{_"texts.quest.followupQuests"} {foreach $followupQuests as $followupQuest}<a n:href="Quest:view $followupQuest->id">{_"quests.$followupQuest->id.name"}</a>{if $iterator->last}.{else}, {/if}{/foreach}{/if}
   {if $neededQuest}{_"texts.quest.followsIn"} <a n:href="Quest:view $neededQuest->id">{_"quests.$neededQuest->id.name"}</a>.{/if}
 {/block}
