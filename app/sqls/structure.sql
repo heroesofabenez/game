@@ -343,7 +343,6 @@ CREATE TABLE `quests` (
   `reward_pet` int(2) DEFAULT NULL,
   `npc_start` int(3) NOT NULL,
   `npc_end` int(3) NOT NULL,
-  `order` int(2) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `npc_start` (`npc_start`),
   KEY `npc_end` (`npc_end`),
