@@ -6,6 +6,7 @@ namespace HeroesofAbenez\Model;
 use HeroesofAbenez\Orm\Quest as QuestEntity;
 use HeroesofAbenez\Orm\Model as ORM;
 use HeroesofAbenez\Orm\CharacterQuest;
+use Nextras\Orm\Collection\ICollection;
 
 /**
  * Quest Model
@@ -39,19 +40,16 @@ final class Quest {
    * @return QuestEntity[]
    */
   public function listOfQuests(int $npc = 0): array {
-    $quests = [];
-    $records = $this->orm->quests->findAll();
-    foreach($records as $record) {
-      $quests[$record->id] = $record;
+    if($npc === 0) {
+      $quests = $this->orm->quests->findAll();
+    } else {
+      $quests = $this->orm->quests->findBy([
+        ICollection::OR,
+        "npcStart" => $npc,
+        "npcEnd" => $npc,
+      ]);
     }
-    if($npc > 0) {
-      foreach($quests as $quest) {
-        if($quest->npcStart->id !== $npc OR $quest->npcEnd->id !== $npc) {
-          unset($quests[$quest->id]);
-        }
-      }
-    }
-    return $quests;
+    return $quests->fetchPairs("id", null);
   }
   
   /**
