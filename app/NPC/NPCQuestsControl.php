@@ -57,6 +57,7 @@ final class NPCQuestsControl extends \Nette\Application\UI\Control {
     $return = $this->questModel->listOfQuests($this->npc->id);
     $playerQuests = $this->orm->characterQuests->findByCharacter($this->user->id);
     foreach($return as $key => $quest) {
+      $quest->progress = false;
       foreach($playerQuests as $pquest) {
         if($quest->id === $pquest->quest->id AND $pquest->progress >= CharacterQuest::PROGRESS_FINISHED) {
           unset($return[$key]);

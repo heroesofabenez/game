@@ -28,7 +28,7 @@ use Nexendrie\Utils\Numbers;
  * @property Npc $npcStart {m:1 Npc, oneSided=true}
  * @property Npc $npcEnd {m:1 Npc, oneSided=true}
  * @property int $order
- * @property bool $progress {default false} {virtual}
+ * @property bool $progress {virtual}
  */
 final class Quest extends \Nextras\Orm\Entity\Entity {
   public function setterRewardWhiteKarma(int $value): int {
