@@ -29,4 +29,5 @@ chat:
     currentTime: "Current time is %time%."
     currentLocation: "You're currently in %stageName% at %areaName%."
 equipment:
+    unequiped: "Item was taken off."
     repaired: "Item repaired."

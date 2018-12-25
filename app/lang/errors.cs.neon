@@ -60,7 +60,6 @@ training:
     skillMaxLevelReached: "Dosáhl(a) jsi maximální úrovně pro tuto dovednost"
     cannotLearnSkill: "Nemůžeš se naučit tuto dovednost."
 equipment:
-    unequiped: "Sundal(a) jsi věc."
     notWorn: "Nenosíš tuto věc."
     alreadyWorn: "Už nosíš tuto věc."
     notEquipable: "Tato věc nemůže být nasazena."

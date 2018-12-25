@@ -29,4 +29,5 @@ chat:
     currentTime: "Aktuální čas je %time%."
     currentLocation: "Právě jsi v %stageName% v %areaName%."
 equipment:
+    unequiped: "Sundal(a) jsi věc."
     repaired: "Věc opravena."

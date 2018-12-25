@@ -60,7 +60,6 @@ training:
     skillMaxLevelReached: "You reached max level for this skill."
     cannotLearnSkill: "You cannot learn this skill."
 equipment:
-    unequiped: "Item was taken off."
     notWorn: "You are not wearing this item."
     alreadyWorn: "You are already wearing this item."
     notEquipable: "This item cannot be equipped."

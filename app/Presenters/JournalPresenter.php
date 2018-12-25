@@ -85,7 +85,7 @@ final class JournalPresenter extends BasePresenter {
   public function handleUnequipItem(int $itemId): void {
     try {
       $this->itemModel->unequipItem($itemId);
-      $this->flashMessage("errors.equipment.unequiped");
+      $this->flashMessage("messages.equipment.unequiped");
     } catch(ItemNotFoundException $e) {
       $this->redirect("Equipment:notfound");
     } catch(ItemNotOwnedException $e) {
