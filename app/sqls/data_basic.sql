@@ -125,8 +125,8 @@ INSERT INTO `quest_areas` (`id`, `name`, `required_level`, `required_race`, `req
 
 INSERT INTO `quest_stages` (`id`, `name`, `required_level`, `required_race`, `required_occupation`, `area`, `pos_x`, `pos_y`) VALUES
 (1,	'Your cell',	0,	NULL,	3,	1,	215,	65),
-(2,	'Hall',	0,	NULL,	3,	1,	115,	215),
-(3,	'Library',	0,	NULL,	3,	1,	119,	37);
+(2,	'Hall',	1,	NULL,	3,	1,	115,	215),
+(3,	'Library',	1,	NULL,	3,	1,	119,	37);
 
 INSERT INTO `routes_stages` (`id`, `from`, `to`) VALUES
 (1,	1,	2),
