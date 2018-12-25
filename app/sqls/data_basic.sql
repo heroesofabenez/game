@@ -48,7 +48,7 @@ INSERT INTO `introduction` (`id`, `race`, `class`, `part`, `text`) VALUES
 (1,	2,	3,	1,	'Part 1');
 
 INSERT INTO `items` (`id`, `name`, `slot`, `type`, `required_level`, `required_class`, `price`, `strength`, `durability`) VALUES
-(1,	'Book ABC',	'item', NULL, 1, NULL, 0, 0, 1),
+(1,	'Spell casting for dummies',	'item', NULL, 1, NULL, 0, 0, 1),
 (2,	'Novice\'s Sword',	'weapon',	'sword',	1,	1,	0,	1,	10),
 (3,	'Novice\'s Axe',	'weapon',	'axe',	1,	1,	0,	2,	10),
 (4,	'Rookie\'s Dagger',	'weapon',	'dagger',	1,	2,	0,	1,	10),
@@ -115,7 +115,8 @@ INSERT INTO `pve_arena_opponents` (`id`, `name`, `race`, `gender`, `occupation`,
   (11,	'Murie',	1,	'female',	1,	10);
 
 INSERT INTO `quests` (`id`, `name`, `cost_money`, `needed_item`, `needed_quest`, `needed_level`, `item_amount`, `item_lose`, `reward_money`, `reward_xp`, `reward_item`, `reward_white_karma`, `reward_dark_karma`, `reward_pet`, `npc_start`, `npc_end`, `order`) VALUES
-  (1,	'Find a book',	0,	1,	NULL,	1,	1,	0,	0,	10,	NULL, 0, 0, NULL,	1,	1,	1);
+  (1,	'Find a book',	0,	1,	NULL,	1,	1,	0,	0,	10,	NULL, 0, 0, NULL,	1,	1,	1),
+  (2,	'Get your equipment',	0,	6,	1,	1,	1,	0,	0,	5,	10,	0,	0,	NULL,	1,	1,	2);
 
 INSERT INTO `quest_areas` (`id`, `name`, `required_level`, `required_race`, `required_occupation`, `pos_x`, `pos_y`) VALUES
 (1,	'Academy of Magic',	0,	NULL,	3,	220,	35),

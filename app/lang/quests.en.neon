@@ -1,4 +1,8 @@
 1:
     name: "Find a book"
-    introduction: "To continue in your training, you need to get book ABC. Ask the librarian about it."
-    end_text: "Well done, my apprentice."
+    introduction: "To continue in your training, you need to get book Spell casting for dummies. Ask the librarian about it."
+    end_text: "Well done, my apprentice. Spells are an important thing for any wizard. Every time you level up, you gain 1 skill point which you can you use in Journal - Train to learn a new skill or improve one you already know."
+2:
+    name: "Get your equipment"
+    introduction: "Let's talk about equipment now. It is very important when you get into a fight. You need at least a weapon and an armor. With a good weapon you'll deal a lot of damage and armor abosorb a part of enemy's damage. You can get a weapon for new adventurers from the librarian. Once you return, I'll give you an armor."
+    end_text: "Here is your armor. Remember that your equipment wears out a bit in every fight so from time to time you have to take it to a smith to repair it for you."
