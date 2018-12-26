@@ -77,14 +77,10 @@ final class Location {
    * @return QuestStage[]
    */
   public function accessibleStages(): array {
-    $return = [];
     /** @var QuestStage $currentStage */
     $currentStage = $this->getStage($this->user->identity->stage);
     $stages = $this->orm->stages->findByArea($currentStage->area->id);
-    foreach($stages as $stage) {
-      $return[$stage->id] = $stage;
-    }
-    return $return;
+    return $stages->fetchPairs("id", null);
   }
 
   public function canEnterStage(QuestStage $stage): bool {
