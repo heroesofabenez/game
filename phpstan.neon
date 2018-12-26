@@ -16,3 +16,4 @@ parameters:
         - '#Call to an undefined method Nette\\ComponentModel\\IComponent::(getControlPrototype|setDefaultValue)\(\)#'
         - '#Access to an undefined property Nette\\ComponentModel\\IComponent::\$value#'
         - "#Strict comparison using === between 'special' and 'special' will always evaluate to true#"
+        - '#Binary operation "-" between int\|string and 1 results in an error#'

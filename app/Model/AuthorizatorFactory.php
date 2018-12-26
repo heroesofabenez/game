@@ -32,17 +32,16 @@ final class AuthorizatorFactory {
     $roles = $this->model->getRoles();
     $permissions = $this->model->getPermissions();
     
-    foreach($roles as $i => $row) {
+    foreach($roles as $index => $role) {
       $parent = "player";
-      if($row["id"] !== 1) {
-        $parentRow = $roles[$i - 1];
-        $parent = $parentRow["name"];
+      if($index !== 1) {
+        $parent = $roles[$index - 1];
       }
-      $permission->addRole($row["name"], $parent);
+      $permission->addRole($role, $parent);
     }
     
-    foreach($permissions as $row) {
-      $permission->allow($row["role"], "guild", $row["action"]);
+    foreach($permissions as $role) {
+      $permission->allow($role["role"], "guild", $role["action"]);
     }
     return $permission;
   }

@@ -28,9 +28,7 @@ final class PermissionsTest extends \Tester\TestCase {
   public function testGetRoles() {
     $roles = $this->model->getRoles();
     Assert::type("array", $roles);
-    Assert::type("array", $roles[1]);
-    Assert::type("int", $roles[1]["id"]);
-    Assert::type("string", $roles[1]["name"]);
+    Assert::type("string", $roles[1]);
   }
 
   public function testGetRankId() {

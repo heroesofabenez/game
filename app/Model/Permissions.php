@@ -4,7 +4,6 @@ declare(strict_types=1);
 namespace HeroesofAbenez\Model;
 
 use HeroesofAbenez\Orm\Model as ORM;
-use HeroesofAbenez\Orm\GuildRank;
 use HeroesofAbenez\Orm\GuildPrivilege;
 
 /**
@@ -27,25 +26,23 @@ final class Permissions {
   
   /**
    * Get roles (from db or cache)
+   *
+   * @return string[]
    */
   public function getRoles(): array {
+    /** @var string[] $roles */
     $roles = $this->cache->load("roles", function() {
-      $roles = [];
       $rows = $this->orm->guildRanks->findAll()->orderBy("id");
-      /** @var GuildRank $row */
-      foreach($rows as $row) {
-        $roles[$row->id] = ["id" => $row->id, "name" => $row->name];
-      }
-      return $roles;
+      return $rows->fetchPairs("id", "name");
     });
     return $roles;
   }
 
   public function getRankId(string $name): ?int {
     $roles = $this->getRoles();
-    foreach($roles as $role) {
-      if($role["name"] === $name) {
-        return $role["id"];
+    foreach($roles as $index => $role) {
+      if($role === $name) {
+        return $index;
       }
     }
     return null;
@@ -64,7 +61,7 @@ final class Permissions {
       /** @var GuildPrivilege $privilege */
       foreach($privileges as $privilege) {
         $role = $roles[$privilege->rank->id];
-        $permissions[$privilege->id] = ["role" => $role["name"], "action" => $privilege->action];
+        $permissions[$privilege->id] = ["role" => $role, "action" => $privilege->action];
       }
       return $permissions;
     });
