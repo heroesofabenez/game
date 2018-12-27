@@ -38,6 +38,7 @@ final class UserManagerTest extends \Tester\TestCase {
     $result = $this->model->create($data);
     Assert::type("array", $result);
     Assert::same($oldCount + 1, $orm->characters->findAll()->countStored());
+    Assert::same("male", $result["gender"]);
     Assert::same(12, $result["strength"]);
     Assert::same(10, $result["dexterity"]);
     Assert::same(13, $result["constitution"]);

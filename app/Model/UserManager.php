@@ -76,11 +76,7 @@ final class UserManager implements \Nette\Security\IAuthenticator {
       "name" => $values["name"], "race" => $values["race"],
       "occupation" => $values["class"], "owner" => $this->getRealId(),
     ];
-    if($values["gender"] === 1) {
-      $data["gender"] = "male";
-    } else {
-      $data["gender"] = "female";
-    }
+    $data["gender"] = ($values["gender"] === 1) ? "male" : "female";
     
     $character = $this->orm->characters->getByName($data["name"]);
     if(!is_null($character)) {
