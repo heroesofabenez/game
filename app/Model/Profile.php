@@ -46,7 +46,7 @@ final class Profile {
    * @return ICollection|CharacterRace[]
    */
   public function getRacesList(): ICollection {
-    return $this->orm->races->findAll();
+    return $this->orm->races->findBy(["playable" => true]);
   }
   
   /**
@@ -55,7 +55,7 @@ final class Profile {
    * @return ICollection|CharacterClass[]
    */
   public function getClassesList(): ICollection {
-    return $this->orm->classes->findAll();
+    return $this->orm->classes->findBy(["playable" => true]);
   }
   
   /**

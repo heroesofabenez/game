@@ -10,3 +10,6 @@
 4:
     name: "trapaslík"
     description: "Trpaslíci jsou velmi robustní (vzhledem ke své velikosti). Tráví spoustu času v horách a pod horami vyráběním zbraní či vytvářením artefaktů. Mají velmi silná těla, ale mrštnost, inteligence nebo charisma rozhodně nepatří k jejich silným stránkám.<br>++ODO, +SÍL -OBR, -INT, -CHAR"
+5:
+    name: "skřet"
+    description: "Skřeti dorazili na kontinent před několika stoletími z neprozkoumaných zemí daleko na východě. Sdružují se v kmenech vedených válečníky či šamany. Většina z nich útočí na ostatní rasy od pohledu, pár však s nimi udržuje obchodní či přátelské vztahy.<br>+SÍL, +OBR, --CHAR, -INT"

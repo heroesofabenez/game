@@ -10,3 +10,6 @@
 4:
     name: "dwarf"
     description: "Dwarves are quite sturdy (given their size). They spend a lot of time in and under mountains crafting weapons or creating artifacts. They have unusually strong bodies but nimbleness, intelligence or charisma definitely do not belong to their fortes.<br>++CON, +STR, -DEX, -INT, -CHAR"
+5:
+    name: "orc"
+    description: "Orcs arrived in the continent a few centuries ago from unexplored lands in the distant east. They organize themselves in tribes led by warriors or shamans. Most of them attack other races at sight but a few keep businnes or friendly relationships with them.<br>+STR, +DEX, --CHAR, -INT"

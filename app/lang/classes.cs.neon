@@ -10,3 +10,6 @@
 4:
     name: "lučištník"
     description: "Ač fyzicky slabí, lučištníci jsou velmi obrantní (stejně jako darebáci) a dokonce se jim dostalo základního vzdělání. Nevynikají v souboji na blízko, ale zpacifikovat své nepřátelo luky, kušemi nebo (pokud je situace velmi zoufalá) vrhacími zbraněmi než se k nim vůbec dostanou blízko.<br>++OBR, +INT, -SÍL, -ODO"
+5:
+    name: "bard"
+    description: "Bardi cestují po světě a za peníze baví lidi zpěvem či hrou na hudební nástroje. Jen zřídka se zapojují do soboujů, ale když ano, tak se snaží vyhnout nepřítelovým útokům a zmást jej svýmy nástroji.<br>++CHAR, +OBR, -SÍL, -ODO"

@@ -3,17 +3,19 @@ SET time_zone = '+00:00';
 SET foreign_key_checks = 0;
 SET sql_mode = 'NO_AUTO_VALUE_ON_ZERO';
 
-INSERT INTO `character_classes` (`id`, `name`, `strength`, `strength_grow`, `dexterity`, `dexterity_grow`, `constitution`, `constitution_grow`, `intelligence`, `intelligence_grow`, `charisma`, `charisma_grow`, `stat_points_level`, `initiative`) VALUES
-(1,	'fighter',	11,	0.25,	10,	0.1,	12,	0.5,	9,	0.1,	9,	0.1,	1,	'1d5+DEX/4'),
-(2,	'rogue',	11,	0.25,	12,	0.5,	8,	0.1,	10,	0.1,	10,	0.1,	1,	'2d3+DEX/4'),
-(3,	'wizard',	9,	0,	10,	0.1,	9,	0.1,	12,	0.5,	11,	0.25,	1.1,	'5d2+INT/3'),
-(4,	'archer',	9,	0.1,	12,	0.5,	9,	0.1,	11,	0.25,	10,	0.1,	1,	'4d2+DEX/4');
+INSERT INTO `character_classes` (`id`, `name`, `strength`, `strength_grow`, `dexterity`, `dexterity_grow`, `constitution`, `constitution_grow`, `intelligence`, `intelligence_grow`, `charisma`, `charisma_grow`, `stat_points_level`, `initiative`, `playable`) VALUES
+(1,	'fighter',	11,	0.25,	10,	0.1,	12,	0.5,	9,	0.1,	9,	0.1,	1,	'1d5+DEX/4',	1),
+(2,	'rogue',	11,	0.25,	12,	0.5,	8,	0.1,	10,	0.1,	10,	0.1,	1,	'2d3+DEX/4',	1),
+(3,	'wizard',	9,	0,	10,	0.1,	9,	0.1,	12,	0.5,	11,	0.25,	1.1,	'5d2+INT/3',	1),
+(4,	'archer',	9,	0.1,	12,	0.5,	9,	0.1,	11,	0.25,	10,	0.1,	1,	'4d2+DEX/4',	1),
+(5,	'bard',	9,	0.1,	11,	0.25,	9,	0.1,	10,	0.1,	12,	0.5,	1,	'5d2+CHAR/3',	0);
 
-INSERT INTO `character_races` (`id`, `name`, `strength`, `dexterity`, `constitution`, `intelligence`, `charisma`) VALUES
-(1,	'barbarian',1,	0,	1,	-1,	-1),
-(2,	'human',	0,	0,	0,	0,	0),
-(3,	'elf',	-1,	1,	-2,	1,	2),
-(4,	'dwarf',	1,	-1,	2,	-1,	-1);
+INSERT INTO `character_races` (`id`, `name`, `strength`, `dexterity`, `constitution`, `intelligence`, `charisma`, `playable`) VALUES
+(1,	'barbarian',	1,	0,	1,	-1,	-1,	1),
+(2,	'human',	0,	0,	0,	0,	0,	1),
+(3,	'elf',	-1,	1,	-2,	1,	2,	1),
+(4,	'dwarf',	1,	-1,	2,	-1,	-1,	1),
+(5,	'orc',	1,	1,	0,	-1,	-2,	0);
 
 INSERT INTO `character_specializations` (`id`, `name`, `class`, `strength_grow`, `dexterity_grow`, `constitution_grow`, `intelligence_grow`, `charisma_grow`, `stat_points_level`) VALUES
 (1,	'warrior',	1,	0.6,	0.2,	0.3,	0.1,	0.1,	1.2),

@@ -17,6 +17,7 @@ use Nexendrie\Utils\Numbers;
  * @property int $constitution {default 0}
  * @property int $intelligence {default 0}
  * @property int $charisma {default 0}
+ * @property bool $playable {default true}
  * @property OneHasMany|PetType[] $petTypes {1:m PetType::$requiredRace}
  * @property OneHasMany|QuestArea[] $areas {1:m QuestArea::$requiredRace}
  * @property OneHasMany|QuestStage[] $stages {1:m QuestStage::$requiredRace}

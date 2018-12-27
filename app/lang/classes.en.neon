@@ -10,3 +10,6 @@
 4:
     name: "archer"
     description: "Albeit physical weak, archers are very nimble (just like rogues) and they even received basic education. They do not excel in close combat but they can pacify their enemies with bows, crossbows or (if the situation is very dire) throwing weapons before they even come close to them.<br>++DEX, +INT, -STR, -CON"
+5:
+    name: "bard"
+    description: "Bards travel the world and entertain people with singing and/or playing instruments for money. They seldom engage in combat but when they do, they try to avoid enemy's attacks and confuse them with their musical intruments.<br>++CHAR, +DEX, -STR, -CON"

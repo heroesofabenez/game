@@ -21,11 +21,13 @@ final class ProfileTest extends \Tester\TestCase {
   public function testGetRacesList() {
     $list = $this->model->getRacesList();
     Assert::type(ICollection::class, $list);
+    Assert::count(4, $list);
   }
   
   public function testGetClassesList() {
     $list = $this->model->getClassesList();
     Assert::type(ICollection::class, $list);
+    Assert::count(4, $list);
   }
   
   public function testView() {

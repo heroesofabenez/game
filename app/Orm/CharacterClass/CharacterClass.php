@@ -24,6 +24,7 @@ use Nexendrie\Utils\Numbers;
  * @property float $charismaGrow
  * @property float $statPointsLevel
  * @property string $initiative
+ * @property bool $playable {default true}
  * @property OneHasMany|CharacterSpecialization[] $specializations {1:m CharacterSpecialization::$class}
  * @property OneHasMany|PetType[] $petTypes {1:m PetType::$requiredClass}
  * @property OneHasMany|QuestArea[] $areas {1:m QuestArea::$requiredClass}

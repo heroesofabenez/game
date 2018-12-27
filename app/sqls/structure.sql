@@ -73,6 +73,7 @@ CREATE TABLE `character_classes` (
   `charisma_grow` float NOT NULL,
   `stat_points_level` float NOT NULL,
   `initiative` varchar(20) NOT NULL,
+  `playable` int(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -110,6 +111,7 @@ CREATE TABLE `character_races` (
   `constitution` int(2) NOT NULL DEFAULT '0',
   `intelligence` int(2) NOT NULL DEFAULT '0',
   `charisma` int(2) NOT NULL DEFAULT '0',
+  `playable` int(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
