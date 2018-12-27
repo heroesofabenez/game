@@ -49,7 +49,7 @@ final class QuestPresenter extends BasePresenter {
     $this->template->rewardDarkKarma = $quest->rewardDarkKarma;
     $this->template->rewardPet = (!is_null($quest->rewardPet)) ? $quest->rewardPet->id : null;
     $this->template->followupQuests = $quest->children;
-    $this->template->neededQuest = $quest->neededQuest;
+    $this->template->requiredQuest = $quest->requiredQuest;
   }
 }
 ?>

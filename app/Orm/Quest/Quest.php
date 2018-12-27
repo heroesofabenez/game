@@ -12,13 +12,13 @@ use Nexendrie\Utils\Numbers;
  * @author Jakub Konečný
  * @property int $id {primary}
  * @property string $name
- * @property int $costMoney {default 0}
+ * @property int $requiredLevel {default 1}
+ * @property Quest|null $requiredQuest {m:1 Quest::$children}
+ * @property OneHasMany|Quest[] $children {1:m Quest::$requiredQuest}
  * @property Item|null $neededItem {m:1 Item::$neededForQuests}
- * @property Quest|null $neededQuest {m:1 Quest::$children}
- * @property OneHasMany|Quest[] $children {1:m Quest::$neededQuest}
- * @property int $neededLevel {default 1}
  * @property int $itemAmount {default 1}
  * @property bool $itemLose {default true}
+ * @property int $neededMoney {default 0}
  * @property int $rewardMoney
  * @property int $rewardXp
  * @property int $rewardWhiteKarma {default 0}

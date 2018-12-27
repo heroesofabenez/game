@@ -90,10 +90,10 @@ final class Quest {
    * Checks if the player accomplished specified quest's goals
    */
   public function isCompleted(QuestEntity $quest): bool {
-    if($quest->costMoney > 0) {
+    if($quest->neededMoney > 0) {
       /** @var \HeroesofAbenez\Orm\Character $char */
       $char = $this->orm->characters->getById($this->user->id);
-      if($quest->costMoney >= $char->money) {
+      if($quest->neededMoney >= $char->money) {
         return false;
       }
     }
@@ -132,7 +132,7 @@ final class Quest {
     if($quest->itemLose) {
       $this->itemModel->loseItem($quest->neededItem->id, $quest->itemAmount);
     }
-    $record->character->money -= $quest->costMoney;
+    $record->character->money -= $quest->neededMoney;
     $record->character->money += $quest->rewardMoney;
     $record->character->experience += $quest->rewardXp;
     if(!is_null($quest->rewardItem)) {
@@ -147,10 +147,10 @@ final class Quest {
   }
 
   public function isAvailable(QuestEntity $quest): bool {
-    if($this->user->identity->level < $quest->neededLevel) {
+    if($this->user->identity->level < $quest->requiredLevel) {
       return false;
-    } elseif(!is_null($quest->neededQuest)) {
-      if(!$this->isFinished($quest->neededQuest->id)) {
+    } elseif(!is_null($quest->requiredQuest)) {
+      if(!$this->isFinished($quest->requiredQuest->id)) {
         return false;
       }
     }
@@ -190,9 +190,9 @@ final class Quest {
    */
   public function getRequirements(QuestEntity $quest): array {
     $requirements = [];
-    if($quest->costMoney > 0) {
+    if($quest->neededMoney > 0) {
       $requirements[] = (object) [
-        "text" => $this->translator->translate("texts.quest.requirementPayMoney", $quest->costMoney),
+        "text" => $this->translator->translate("texts.quest.requirementPayMoney", $quest->neededMoney),
         "met" => false
       ];
     }

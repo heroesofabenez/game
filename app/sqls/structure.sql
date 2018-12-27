@@ -329,12 +329,12 @@ CREATE TABLE `pve_arena_opponents` (
 CREATE TABLE `quests` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(25) NOT NULL,
-  `cost_money` int(3) NOT NULL DEFAULT '0',
+  `required_level` int(3) NOT NULL DEFAULT '1',
+  `required_quest` int(3) DEFAULT NULL,
   `needed_item` int(11) DEFAULT NULL,
-  `needed_quest` int(3) DEFAULT NULL,
-  `needed_level` int(3) NOT NULL DEFAULT '1',
   `item_amount` int(1) NOT NULL DEFAULT '1',
   `item_lose` int(1) NOT NULL DEFAULT '1',
+  `needed_money` int(3) NOT NULL DEFAULT '0',
   `reward_money` int(4) NOT NULL,
   `reward_xp` int(4) NOT NULL,
   `reward_item` int(11) DEFAULT NULL,
@@ -347,10 +347,15 @@ CREATE TABLE `quests` (
   KEY `npc_start` (`npc_start`),
   KEY `npc_end` (`npc_end`),
   KEY `reward_item1` (`reward_item`),
+  KEY `reward_pet` (`reward_pet`),
+  KEY `needed_item` (`needed_item`),
+  KEY `required_quest` (`required_quest`),
   CONSTRAINT `quests_ibfk_1` FOREIGN KEY (`npc_start`) REFERENCES `npcs` (`id`),
   CONSTRAINT `quests_ibfk_2` FOREIGN KEY (`npc_end`) REFERENCES `npcs` (`id`),
   CONSTRAINT `quests_ibfk_3` FOREIGN KEY (`reward_item`) REFERENCES `items` (`id`),
-  CONSTRAINT `quests_ibfk_4` FOREIGN KEY (`reward_pet`) REFERENCES `pet_types` (`id`)
+  CONSTRAINT `quests_ibfk_4` FOREIGN KEY (`reward_pet`) REFERENCES `pet_types` (`id`),
+  CONSTRAINT `quests_ibfk_5` FOREIGN KEY (`needed_item`) REFERENCES `items` (`id`),
+  CONSTRAINT `quests_ibfk_6` FOREIGN KEY (`required_quest`) REFERENCES `quests` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `quest_areas` (

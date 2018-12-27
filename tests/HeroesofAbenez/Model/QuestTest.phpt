@@ -49,15 +49,15 @@ final class QuestTest extends \Tester\TestCase {
   public function testIsCompleted() {
     /** @var QuestEntity $quest */
     $quest = $this->model->view(1);
-    $oldCostMoney = $quest->costMoney;
+    $oldCostMoney = $quest->neededMoney;
     $oldNeededItem = $quest->neededItem;
     /** @var \HeroesofAbenez\Orm\Model $orm */
     $orm = $this->getService(\HeroesofAbenez\Orm\Model::class);
     /** @var \HeroesofAbenez\Orm\Character $user */
     $user = $orm->characters->getById(1);
-    $quest->costMoney = $user->money + 1;
+    $quest->neededMoney = $user->money + 1;
     Assert::false($this->model->isCompleted($quest));
-    $quest->costMoney = $oldCostMoney;
+    $quest->neededMoney = $oldCostMoney;
     Assert::false($this->model->isCompleted($quest));
     $quest->neededItem = null;
     Assert::true($this->model->isCompleted($quest));
@@ -80,18 +80,18 @@ final class QuestTest extends \Tester\TestCase {
   public function testIsAvailable() {
     /** @var QuestEntity $quest */
     $quest = $this->model->view(1);
-    $oldNeededLevel = $quest->neededLevel;
-    $oldNeededQuest = $quest->neededQuest;
+    $oldRequiredLevel = $quest->requiredLevel;
+    $oldRequiredQuest = $quest->requiredQuest;
     /** @var \HeroesofAbenez\Orm\Model $orm */
     $orm = $this->getService(\HeroesofAbenez\Orm\Model::class);
     /** @var \HeroesofAbenez\Orm\Character $user */
     $user = $orm->characters->getById(1);
-    $quest->neededLevel = $user->level + 1;
+    $quest->requiredLevel = $user->level + 1;
     Assert::false($this->model->isAvailable($quest));
-    $quest->neededLevel = $oldNeededLevel;
-    $quest->neededQuest = 1;
+    $quest->requiredLevel = $oldRequiredLevel;
+    $quest->requiredQuest = 1;
     Assert::false($this->model->isAvailable($quest));
-    $quest->neededQuest = $oldNeededQuest;
+    $quest->requiredQuest = $oldRequiredQuest;
     Assert::true($this->model->isAvailable($quest));
   }
 
@@ -107,7 +107,7 @@ final class QuestTest extends \Tester\TestCase {
   public function testGetRequirements() {
     /** @var QuestEntity $quest */
     $quest = $this->model->view(1);
-    $oldCostMoney = $quest->costMoney;
+    $oldNeededMoney = $quest->neededMoney;
     $oldNpcEnd = $quest->npcEnd;
     /** @var \HeroesofAbenez\Orm\Model $orm */
     $orm = $this->getService(\HeroesofAbenez\Orm\Model::class);
@@ -123,11 +123,11 @@ final class QuestTest extends \Tester\TestCase {
     Assert::contains("talk to ", $requirements[1]->text);
     Assert::contains("Librarian", $requirements[1]->text);
     $quest->npcEnd = $oldNpcEnd;
-    $quest->costMoney = 1;
+    $quest->neededMoney = 1;
     $requirements = $this->model->getRequirements($quest);
     Assert::count(3, $requirements);
     Assert::same("pay 1 silver mark", $requirements[0]->text);
-    $quest->costMoney = $oldCostMoney;
+    $quest->neededMoney = $oldNeededMoney;
     $orm->quests->persistAndFlush($quest);
   }
 }
