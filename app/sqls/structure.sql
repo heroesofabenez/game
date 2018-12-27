@@ -8,7 +8,7 @@ CREATE TABLE `characters` (
   `name` varchar(30) NOT NULL,
   `race` int(11) NOT NULL,
   `gender` enum('male','female') NOT NULL,
-  `occupation` int(11) NOT NULL,
+  `class` int(11) NOT NULL,
   `specialization` int(11) DEFAULT NULL,
   `level` int(3) NOT NULL DEFAULT '1',
   `money` int(6) NOT NULL DEFAULT '0',
@@ -32,7 +32,7 @@ CREATE TABLE `characters` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`),
   KEY `current_stage` (`current_stage`),
-  KEY `occupation` (`occupation`),
+  KEY `class` (`class`),
   KEY `race` (`race`),
   KEY `guild_rank` (`guildrank`),
   KEY `specialization` (`specialization`),
@@ -42,7 +42,7 @@ CREATE TABLE `characters` (
   CONSTRAINT `characters_ibfk_14` FOREIGN KEY (`guild`) REFERENCES `guilds` (`id`),
   CONSTRAINT `characters_ibfk_15` FOREIGN KEY (`current_stage`) REFERENCES `quest_stages` (`id`),
   CONSTRAINT `characters_ibfk_6` FOREIGN KEY (`race`) REFERENCES `character_races` (`id`),
-  CONSTRAINT `characters_ibfk_7` FOREIGN KEY (`occupation`) REFERENCES `character_classes` (`id`),
+  CONSTRAINT `characters_ibfk_7` FOREIGN KEY (`class`) REFERENCES `character_classes` (`id`),
   CONSTRAINT `characters_ibfk_9` FOREIGN KEY (`race`) REFERENCES `character_races` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -317,12 +317,12 @@ CREATE TABLE `pve_arena_opponents` (
   `name` varchar(30) NOT NULL,
   `race` int(11) NOT NULL,
   `gender` enum('male','female') NOT NULL DEFAULT 'male',
-  `occupation` int(11) NOT NULL,
+  `class` int(11) NOT NULL,
   `level` int(3) NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`),
-  KEY `occupation` (`occupation`),
+  KEY `class` (`class`),
   KEY `race` (`race`),
-  CONSTRAINT `pve_arena_opponents_ibfk_1` FOREIGN KEY (`occupation`) REFERENCES `character_classes` (`id`),
+  CONSTRAINT `pve_arena_opponents_ibfk_1` FOREIGN KEY (`class`) REFERENCES `character_classes` (`id`),
   CONSTRAINT `pve_arena_opponents_ibfk_2` FOREIGN KEY (`race`) REFERENCES `character_races` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -363,13 +363,13 @@ CREATE TABLE `quest_areas` (
   `name` varchar(30) NOT NULL,
   `required_level` int(3) NOT NULL DEFAULT '0',
   `required_race` int(11) DEFAULT NULL,
-  `required_occupation` int(11) DEFAULT NULL,
+  `required_class` int(11) DEFAULT NULL,
   `pos_x` int(3) DEFAULT NULL,
   `pos_y` int(3) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `required_occupation` (`required_occupation`),
+  KEY `required_class` (`required_class`),
   KEY `required_race` (`required_race`),
-  CONSTRAINT `quest_areas_ibfk_1` FOREIGN KEY (`required_occupation`) REFERENCES `character_classes` (`id`),
+  CONSTRAINT `quest_areas_ibfk_1` FOREIGN KEY (`required_class`) REFERENCES `character_classes` (`id`),
   CONSTRAINT `quest_areas_ibfk_2` FOREIGN KEY (`required_race`) REFERENCES `character_races` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -378,16 +378,16 @@ CREATE TABLE `quest_stages` (
   `name` varchar(20) NOT NULL,
   `required_level` int(3) NOT NULL DEFAULT '0',
   `required_race` int(11) DEFAULT NULL,
-  `required_occupation` int(11) DEFAULT NULL,
+  `required_class` int(11) DEFAULT NULL,
   `area` int(11) NOT NULL,
   `pos_x` int(3) NOT NULL,
   `pos_y` int(3) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `area` (`area`),
-  KEY `required_occupation` (`required_occupation`),
+  KEY `required_class` (`required_class`),
   KEY `required_race` (`required_race`),
   CONSTRAINT `quest_stages_ibfk_1` FOREIGN KEY (`area`) REFERENCES `quest_areas` (`id`),
-  CONSTRAINT `quest_stages_ibfk_2` FOREIGN KEY (`required_occupation`) REFERENCES `character_classes` (`id`),
+  CONSTRAINT `quest_stages_ibfk_2` FOREIGN KEY (`required_class`) REFERENCES `character_classes` (`id`),
   CONSTRAINT `quest_stages_ibfk_3` FOREIGN KEY (`required_race`) REFERENCES `character_races` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 

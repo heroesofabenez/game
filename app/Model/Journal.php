@@ -56,7 +56,7 @@ final class Journal {
     $areaName = $this->translator->translate("areas.{$stage->area->id}.name");
     $return = [
       "name" => $character->name, "gender" => $character->gender, "race" => $character->race->id,
-      "occupation" => $character->occupation->id,
+      "class" => $character->class->id,
       "specialization" => (!is_null($character->specialization)) ? $character->specialization->id : null,
       "level" => $character->level, "whiteKarma" => $character->whiteKarma, "darkKarma" => $character->darkKarma,
       "experiences" => $character->experience, "description" => $character->description,

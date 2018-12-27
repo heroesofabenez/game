@@ -90,7 +90,7 @@ final class Location {
     if(!is_null($stage->requiredRace) AND $stage->requiredRace->id !== $this->user->identity->race) {
       return false;
     }
-    if(!is_null($stage->requiredOccupation) AND $stage->requiredOccupation->id !== $this->user->identity->occupation) {
+    if(!is_null($stage->requiredClass) AND $stage->requiredClass->id !== $this->user->identity->class) {
       return false;
     }
     return true;
@@ -135,7 +135,7 @@ final class Location {
     if(!is_null($area->requiredRace) AND $area->requiredRace->id !== $this->user->identity->race) {
       return false;
     }
-    if(!is_null($area->requiredOccupation) AND $area->requiredOccupation->id !== $this->user->identity->occupation) {
+    if(!is_null($area->requiredClass) AND $area->requiredClass->id !== $this->user->identity->class) {
       return false;
     }
     return true;

@@ -52,16 +52,16 @@ final class LocationTest extends \Tester\TestCase {
     Assert::true($this->model->canEnterStage($stage));
     $oldLevel = $stage->requiredLevel;
     $oldRace = $stage->requiredRace;
-    $oldOccupation = $stage->requiredOccupation;
+    $oldClass = $stage->requiredClass;
     $stage->requiredLevel = 999;
     Assert::false($this->model->canEnterStage($stage));
     $stage->requiredLevel = $oldLevel;
     $stage->requiredRace = 1;
     Assert::false($this->model->canEnterStage($stage));
     $stage->requiredRace = $oldRace;
-    $stage->requiredOccupation = 1;
+    $stage->requiredClass = 1;
     Assert::false($this->model->canEnterStage($stage));
-    $stage->requiredOccupation = $oldOccupation;
+    $stage->requiredClass = $oldClass;
     /** @var \HeroesofAbenez\Orm\Model $orm */
     $orm = $this->getService(\HeroesofAbenez\Orm\Model::class);
     $orm->stages->persistAndFlush($stage);
@@ -80,16 +80,16 @@ final class LocationTest extends \Tester\TestCase {
     Assert::true($this->model->canEnterArea($area));
     $oldLevel = $area->requiredLevel;
     $oldRace = $area->requiredRace;
-    $oldOccupation = $area->requiredOccupation;
+    $oldClass = $area->requiredClass;
     $area->requiredLevel = 999;
     Assert::false($this->model->canEnterArea($area));
     $area->requiredLevel = $oldLevel;
     $area->requiredRace = 1;
     Assert::false($this->model->canEnterArea($area));
     $area->requiredRace = $oldRace;
-    $area->requiredOccupation = 1;
+    $area->requiredClass = 1;
     Assert::false($this->model->canEnterArea($area));
-    $area->requiredOccupation = $oldOccupation;
+    $area->requiredClass = $oldClass;
     /** @var \HeroesofAbenez\Orm\Model $orm */
     $orm = $this->getService(\HeroesofAbenez\Orm\Model::class);
     $orm->areas->persistAndFlush($area);

@@ -102,7 +102,7 @@ final class Skills {
    * @param SkillAttack|SkillSpecial $skill
    */
   protected function canLearnSkill($skill): bool {
-    if($skill->neededClass->id != $this->user->identity->occupation) {
+    if($skill->neededClass->id != $this->user->identity->class) {
       return false;
     } elseif(!is_null($skill->neededSpecialization)) {
       if(is_null($this->user->identity->specialization)) {

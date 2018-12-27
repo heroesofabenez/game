@@ -15,7 +15,7 @@ use Nexendrie\Utils\Numbers;
  * @property string $name
  * @property CharacterRace $race {m:1 CharacterRace::$characters}
  * @property string $gender {enum self::GENDER_*}
- * @property CharacterClass $occupation {m:1 CharacterClass::$characters}
+ * @property CharacterClass $class {m:1 CharacterClass::$characters}
  * @property CharacterSpecialization|null $specialization {m:1 CharacterSpecialization::$characters}
  * @property int $level {default 1}
  * @property int $money {default 0}

@@ -75,7 +75,7 @@ final class Item {
   public function canEquipItem(ItemEntity $item): bool {
     if($this->user->identity->level < $item->requiredLevel) {
       return false;
-    } elseif(!is_null($item->requiredClass) AND $item->requiredClass->id !== $this->user->identity->occupation) {
+    } elseif(!is_null($item->requiredClass) AND $item->requiredClass->id !== $this->user->identity->class) {
       return false;
     }
     return true;

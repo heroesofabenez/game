@@ -77,7 +77,7 @@ final class CombatHelper {
       throw new OpponentNotFoundException();
     }
     $stats = [
-      "id", "name", "occupation", "level", "strength", "dexterity", "constitution", "intelligence",
+      "id", "name", "level", "strength", "dexterity", "constitution", "intelligence",
       "charisma", "race", "specialization", "gender", "experience",
     ];
     foreach($stats as $stat) {
@@ -87,7 +87,8 @@ final class CombatHelper {
         $data[$stat] = $character->$stat;
       }
     }
-    $data["initiativeFormula"] = $character->occupation->initiative;
+    $data["occupation"] = $character->class->id;
+    $data["initiativeFormula"] = $character->class->initiative;
     $pet = $this->orm->pets->getActivePet($character);
     if(!is_null($pet)) {
       $pets[] = $pet->toCombatPet();
@@ -106,11 +107,11 @@ final class CombatHelper {
       return [];
     }
     $skills = [];
-    $skillRows = $this->orm->attackSkills->findByClassAndLevel($npc->occupation, $npc->level);
+    $skillRows = $this->orm->attackSkills->findByClassAndLevel($npc->class, $npc->level);
     foreach($skillRows as $skillRow) {
       $skills[] = new CharacterAttackSkill($skillRow->toDummy(), 0);
     }
-    $skillRows = $this->orm->specialSkills->findByClassAndLevel($npc->occupation, $npc->level);
+    $skillRows = $this->orm->specialSkills->findByClassAndLevel($npc->class, $npc->level);
     foreach($skillRows as $skillRow) {
       $skills[] = new CharacterSpecialSkill($skillRow->toDummy(), 0);
     }
@@ -166,7 +167,7 @@ final class CombatHelper {
       throw new OpponentNotFoundException();
     }
     $stats = [
-      "id", "name", "occupation", "level", "strength", "dexterity", "constitution", "intelligence",
+      "id", "name", "level", "strength", "dexterity", "constitution", "intelligence",
       "charisma", "race", "gender",
     ];
     foreach($stats as $stat) {
@@ -177,8 +178,9 @@ final class CombatHelper {
       }
     }
     $data["id"] = "pveArenaNpc" . $npc->id;
-    $occupation = $npc->occupation;
-    $data["initiativeFormula"] = $occupation->initiative;
+    $class = $npc->class;
+    $data["initiativeFormula"] = $class->initiative;
+    $data["occupation"] = $class->id;
     $equipment = $this->getArenaNpcEquipment($npc);
     $skills = $this->getArenaNpcSkills($npc);
     $npc = new Character($data, $equipment, [], $skills);

@@ -14,7 +14,7 @@ use Nexendrie\Utils\Numbers;
  * @property string $name
  * @property int $requiredLevel {default 0}
  * @property CharacterRace|null $requiredRace {m:1 CharacterRace::$areas}
- * @property CharacterClass|null $requiredOccupation {m:1 CharacterClass::$areas}
+ * @property CharacterClass|null $requiredClass {m:1 CharacterClass::$areas}
  * @property int|null $posX
  * @property int|null $posY
  * @property OneHasMany|QuestStage[] $stages {1:m QuestStage::$area}

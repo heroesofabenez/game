@@ -40,7 +40,7 @@ final class Intro {
     $character = $this->orm->characters->getById($this->user->id);
     $intro = $this->orm->introduction->getBy([
       "race" => $character->race->id,
-      "class" => $character->occupation->id,
+      "class" => $character->class->id,
       "part" => $part
     ]);
     if(is_null($intro)) {
@@ -63,7 +63,7 @@ final class Intro {
    * Get starting location for the player
    */
   public function getStartingLocation(): int {
-    $classSL = $this->orm->stages->getClassStartingLocation($this->user->identity->occupation);
+    $classSL = $this->orm->stages->getClassStartingLocation($this->user->identity->class);
     if(!is_null($classSL)) {
       return $classSL->id;
     }

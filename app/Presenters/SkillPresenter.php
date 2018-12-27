@@ -21,7 +21,7 @@ final class SkillPresenter extends BasePresenter {
     parent::startup();
     if($this->action != "default") {
       $this->template->level = $this->user->identity->level;
-      $this->template->class = $this->user->identity->occupation;
+      $this->template->class = $this->user->identity->class;
     }
   }
   

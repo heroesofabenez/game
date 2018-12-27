@@ -13,7 +13,7 @@ use Nextras\Orm\Relationships\OneHasMany;
  * @property string $name
  * @property int $requiredLevel {default 0}
  * @property CharacterRace|null $requiredRace {m:1 CharacterRace::$stages}
- * @property CharacterClass|null $requiredOccupation {m:1 CharacterClass::$stages}
+ * @property CharacterClass|null $requiredClass {m:1 CharacterClass::$stages}
  * @property QuestArea $area {m:1 QuestArea::$stages}
  * @property int|null $posX
  * @property int|null $posY

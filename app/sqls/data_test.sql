@@ -3,7 +3,7 @@ SET time_zone = '+00:00';
 SET foreign_key_checks = 0;
 SET sql_mode = 'NO_AUTO_VALUE_ON_ZERO';
 
-INSERT INTO `characters` (`id`, `name`, `race`, `gender`, `occupation`, `specialization`, `level`, `money`, `experience`, `strength`, `dexterity`, `constitution`, `intelligence`, `charisma`, `description`, `guild`, `guildrank`, `owner`, `current_stage`, `white_karma`, `dark_karma`, `intro`, `joined`, `stat_points`, `skill_points`) VALUES
+INSERT INTO `characters` (`id`, `name`, `race`, `gender`, `class`, `specialization`, `level`, `money`, `experience`, `strength`, `dexterity`, `constitution`, `intelligence`, `charisma`, `description`, `guild`, `guildrank`, `owner`, `current_stage`, `white_karma`, `dark_karma`, `intro`, `joined`, `stat_points`, `skill_points`) VALUES
 (1,	'James The Invisible',	2,	'male',	3,	NULL,	3,	159,	143,	9,	10.2,	10.2,	14,	11.5,	NULL,	1,	7,	1,	1,	0,	0,	2,	'2015-05-10 13:42:10',	0.05,	0),
 (2,	'Ilivia',	3,	'female',	2,	NULL,	1,	0,	0,	10,	13,	6,	11,	12,	NULL,	1,	1,	1,	1,	0,	0,	1,	'2015-05-10 13:42:10',	0,	0),
 (3,	'Amanda',	2,	'female',	3,	NULL,	1,	0,	0,	9,	10,	9,	12,	11,	NULL,	2,	7,	0,	1,	0,	0,	2,	'2015-05-10 14:32:22',	0,	0),

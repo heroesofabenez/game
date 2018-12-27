@@ -101,7 +101,7 @@ INSERT INTO `pet_types` (`id`, `name`, `bonus_stat`, `bonus_value`, `image`, `re
 (18,	'Royal Owl',	'intelligence',	20,	'',	45,	3,	NULL,	0),
 (19,	'Royal Hawk',	'dexterity',	20,	'',	45,	4,	NULL,	0);
 
-INSERT INTO `pve_arena_opponents` (`id`, `name`, `race`, `gender`, `occupation`, `level`) VALUES
+INSERT INTO `pve_arena_opponents` (`id`, `name`, `race`, `gender`, `class`, `level`) VALUES
   (1,	'Div Fast-hands',	2,	'male',	2,	2),
   (2,	'El-Tovil',	4,	'male',	1,	2),
   (3,	'Valiana',	3,	'female',	3,	2),
@@ -118,13 +118,13 @@ INSERT INTO `quests` (`id`, `name`, `required_level`, `required_quest`, `needed_
   (1,	'Find a book',	1,	NULL,	1,	1,	0,	0,	0,	10,	NULL,	0,	0,	NULL,	1,	1),
   (2,	'Get your equipment',	1,	1,	6,	1,	0,	0,	0,	5,	10,	0,	0,	NULL,	1,	1);
 
-INSERT INTO `quest_areas` (`id`, `name`, `required_level`, `required_race`, `required_occupation`, `pos_x`, `pos_y`) VALUES
+INSERT INTO `quest_areas` (`id`, `name`, `required_level`, `required_race`, `required_class`, `pos_x`, `pos_y`) VALUES
 (1,	'Academy of Magic',	0,	NULL,	3,	220,	35),
 (2,	'Sands of Ramir - borderlands',	0,	3,	NULL,	220,	153),
 (3,	'Border woods',	25,	NULL,	NULL,	80,	165),
 (4,	'North Great Horde',	30,	NULL,	NULL,	175,	109);
 
-INSERT INTO `quest_stages` (`id`, `name`, `required_level`, `required_race`, `required_occupation`, `area`, `pos_x`, `pos_y`) VALUES
+INSERT INTO `quest_stages` (`id`, `name`, `required_level`, `required_race`, `required_class`, `area`, `pos_x`, `pos_y`) VALUES
 (1,	'Your cell',	0,	NULL,	3,	1,	215,	65),
 (2,	'Hall',	1,	NULL,	3,	1,	115,	215),
 (3,	'Library',	1,	NULL,	3,	1,	119,	37);

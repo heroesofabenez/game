@@ -69,7 +69,7 @@ final class Profile {
     }
     $stats = [
       "id", "name", "gender", "level", "race", "description", "strength", "dexterity",
-      "constitution", "intelligence", "charisma", "occupation", "specialization", "predominantKarma",
+      "constitution", "intelligence", "charisma", "class", "specialization", "predominantKarma",
     ];
     foreach($stats as $stat) {
       if($char->$stat instanceof IEntity) {
@@ -117,7 +117,7 @@ final class Profile {
     if($character->level + 1 < static::SPECIALIZATION_LEVEL OR !is_null($character->specialization)) {
       return [];
     }
-    return $this->orm->specializations->findByClass($character->occupation)
+    return $this->orm->specializations->findByClass($character->class)
       ->fetchPairs(null, "id");
   }
 
@@ -166,7 +166,7 @@ final class Profile {
     if(!is_null($character->specialization)) {
       $class = $character->specialization;
     } else {
-      $class = $character->occupation;
+      $class = $character->class;
     }
     $character->level++;
     $character->statPoints += $class->statPointsLevel;

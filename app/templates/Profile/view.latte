@@ -2,7 +2,7 @@
 {block title}{_"texts.profile.title"}{/block}
 {block content}
   <h1>{$name}</h1>
-  <p>{$gender}, {_"texts.profile.level"} {$level} {_"races.$race.name"} {_"classes.$occupation.name"}{if $specialization}-{_"subclasses.$specialization.name"}{/if}</p>
+  <p>{$gender}, {_"texts.profile.level"} {$level} {_"races.$race.name"} {_"classes.$class.name"}{if $specialization}-{_"subclasses.$specialization.name"}{/if}</p>
   <p>{_"texts.profile.predominantKarma"} {_"texts.journal.$predominantKarma"}</p>
   <p>{_"texts.profile.baseStats"}<br>{_"texts.profile.strength"} {$strength|number}, {_"texts.profile.dexterity"} {$dexterity|number}, {_"texts.profile.constitution"} {$constitution|number}, {_"texts.profile.intelligence"} {$intelligence|number}, {_"texts.profile.charisma"} {$charisma|number}</p>
   <p>{if $guildId}{_"texts.guild.title"} <a n:href="Guild:view $guildId">{$guildName}</a><br>{_"texts.profile.position"} {_"guildranks.$guildRank.name"|firstUpper}{else}{_"texts.profile.notInGuild"}{/if}</p>

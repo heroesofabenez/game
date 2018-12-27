@@ -52,7 +52,7 @@ final class UserManager implements \Nette\Security\IAuthenticator {
     }
     $data = [
       "name" => $char->name, "race" => $char->race->id, "gender" => $char->gender,
-      "occupation" => $char->occupation->id,
+      "class" => $char->class->id,
       "specialization" => (!is_null($char->specialization)) ? $char->specialization->id : null,
       "level" => $char->level, "stage" => $char->currentStage->id,
       "white_karma" => $char->whiteKarma, "dark_karma" => $char->darkKarma,
@@ -74,7 +74,7 @@ final class UserManager implements \Nette\Security\IAuthenticator {
   public function create(array $values): ?array {
     $data = [
       "name" => $values["name"], "race" => $values["race"],
-      "occupation" => $values["class"], "owner" => $this->getRealId(),
+      "class" => $values["class"], "owner" => $this->getRealId(),
     ];
     $data["gender"] = ($values["gender"] === 1) ? "male" : "female";
     
@@ -88,17 +88,16 @@ final class UserManager implements \Nette\Security\IAuthenticator {
     foreach ($data as $key => $value) {
       $character->$key = $value;
     }
-    $data["strength"] = $character->strength = $character->occupation->strength + $character->race->strength;
-    $data["dexterity"] = $character->dexterity = $character->occupation->dexterity + $character->race->dexterity;
-    $data["constitution"] = $character->constitution = $character->occupation->constitution + $character->race->constitution;
-    $data["intelligence"] = $character->intelligence = $character->occupation->intelligence + $character->race->intelligence;
-    $data["charisma"] = $character->charisma = $character->occupation->charisma + $character->race->charisma;
+    $data["strength"] = $character->strength = $character->class->strength + $character->race->strength;
+    $data["dexterity"] = $character->dexterity = $character->class->dexterity + $character->race->dexterity;
+    $data["constitution"] = $character->constitution = $character->class->constitution + $character->race->constitution;
+    $data["intelligence"] = $character->intelligence = $character->class->intelligence + $character->race->intelligence;
+    $data["charisma"] = $character->charisma = $character->class->charisma + $character->race->charisma;
     $this->orm->characters->persistAndFlush($character);
   
     $data["class"] = $values["class"];
     $data["race"] = $values["race"];
-  
-    unset($data["occupation"]);
+
     return $data;
   }
 }

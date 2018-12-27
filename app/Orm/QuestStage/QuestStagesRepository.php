@@ -43,7 +43,7 @@ final class QuestStagesRepository extends \Nextras\Orm\Repository\Repository {
   public function getClassStartingLocation($class): ?QuestStage {
     return $this->getBy([
       "requiredLevel" => 0,
-      "requiredOccupation" => $class
+      "requiredClass" => $class
     ]);
   }
   
