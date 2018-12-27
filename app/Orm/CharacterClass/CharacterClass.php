@@ -35,6 +35,7 @@ use Nexendrie\Utils\Numbers;
  * @property OneHasMany|Item[] $items {1:m Item::$requiredClass}
  * @property OneHasMany|SkillAttack[] $attackSkills {1:m SkillAttack::$neededClass}
  * @property OneHasMany|SkillSpecial[] $specialSkills {1:m SkillSpecial::$neededClass}
+ * @property OneHasMany|Npc[] $npcs {1:m Npc::$class}
  * @property-read string $mainStat {virtual}
  */
 final class CharacterClass extends \Nextras\Orm\Entity\Entity {

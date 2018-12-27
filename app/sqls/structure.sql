@@ -264,6 +264,7 @@ CREATE TABLE `npcs` (
   `id` int(3) NOT NULL AUTO_INCREMENT,
   `name` varchar(20) NOT NULL,
   `race` int(11) NOT NULL,
+  `class` int(11) NOT NULL,
   `quests` int(1) NOT NULL DEFAULT '0',
   `shop` int(1) NOT NULL DEFAULT '0',
   `fight` int(1) NOT NULL DEFAULT '0',
@@ -272,15 +273,17 @@ CREATE TABLE `npcs` (
   `portrait` varchar(35) NOT NULL,
   `stage` int(11) NOT NULL,
   `karma` enum('white','neutral','dark') NOT NULL,
-  `personality` enum('friendly','crazy', 'shy', 'hostile', 'reserved', 'elitist', 'teaching', 'racist', 'misogynist') NOT NULL,
+  `personality` enum('friendly','crazy','shy','hostile','reserved','elitist','teaching','racist','misogynist') NOT NULL,
   `level` int(3) NOT NULL DEFAULT '1',
   `pos_x` int(3) NOT NULL,
   `pos_y` int(3) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `stage` (`stage`),
   KEY `race` (`race`),
+  KEY `class` (`class`),
   CONSTRAINT `npcs_ibfk_1` FOREIGN KEY (`stage`) REFERENCES `quest_stages` (`id`),
-  CONSTRAINT `npcs_ibfk_2` FOREIGN KEY (`race`) REFERENCES `character_races` (`id`)
+  CONSTRAINT `npcs_ibfk_2` FOREIGN KEY (`race`) REFERENCES `character_races` (`id`),
+  CONSTRAINT `npcs_ibfk_3` FOREIGN KEY (`class`) REFERENCES `character_classes` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `pets` (

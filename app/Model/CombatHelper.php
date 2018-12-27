@@ -186,6 +186,34 @@ final class CombatHelper {
     $npc = new Character($data, $equipment, [], $skills);
     return $npc;
   }
+
+  /**
+   * Get data for specified npc
+   *
+   * @throws OpponentNotFoundException
+   */
+  public function getCommonNpc(int $id): Character {
+    $npc = $this->orm->npcs->getById($id);
+    if(is_null($npc)) {
+      throw new OpponentNotFoundException();
+    }
+    $data = $this->cb->create($npc->class, $npc->race, $npc->level);
+    $stats = [
+      "name", "level", "race",
+    ];
+    foreach($stats as $stat) {
+      if($npc->$stat instanceof IEntity) {
+        $data[$stat] = $npc->$stat->id;
+      } else {
+        $data[$stat] = $npc->$stat;
+      }
+    }
+    $data["id"] = "commonNpc" . $npc->id;
+    $class = $npc->class;
+    $data["initiativeFormula"] = $class->initiative;
+    $data["occupation"] = $class->id;
+    return new Character($data);
+  }
   
   /**
    * Get amount of fights a player has fought today in arena

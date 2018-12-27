@@ -51,6 +51,17 @@ final class CombatHelperTest extends \Tester\TestCase {
       $this->model->getArenaNpc(5000);
     }, OpponentNotFoundException::class);
   }
+
+  public function testGetCommonNpc() {
+    Assert::exception(function() {
+      $this->model->getCommonNpc(5000);
+    }, OpponentNotFoundException::class);
+    $player = $this->model->getCommonNpc(1);
+    Assert::type(Character::class, $player);
+    Assert::count(0, $player->pets);
+    Assert::count(0, $player->skills);
+    Assert::count(0, $player->equipment);
+  }
   
   public function testGetNumberOfTodayArenaFights() {
     $actual = $this->model->getNumberOfTodayArenaFights($this->user->id);

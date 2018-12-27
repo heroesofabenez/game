@@ -13,6 +13,7 @@ use Nexendrie\Utils\Numbers;
  * @property int $id {primary}
  * @property string $name
  * @property CharacterRace $race {m:1 CharacterRace::$npcs}
+ * @property CharacterClass $class {m:1 CharacterClass::$npcs}
  * @property bool $quests {default false}
  * @property bool $shop {default false}
  * @property bool $fight {default false}
