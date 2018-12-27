@@ -56,11 +56,9 @@ final class CombatHelper {
    */
   protected function getPlayerEquipment(\HeroesofAbenez\Orm\Character $character): array {
     $equipment = [];
-    foreach($character->items as $row) {
-      if(!$row->worn) {
-        continue;
-      }
-      $equipment[] = $row->toCombatEquipment();
+    $items = $character->items->get()->findBy(["worn" => true]);
+    foreach($items as $item) {
+      $equipment[] = $item->toCombatEquipment();
     }
     return $equipment;
   }
