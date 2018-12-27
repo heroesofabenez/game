@@ -81,6 +81,8 @@ final class QuestTest extends \Tester\TestCase {
     /** @var QuestEntity $quest */
     $quest = $this->model->view(1);
     $oldRequiredLevel = $quest->requiredLevel;
+    $oldRequiredClass = $quest->requiredClass;
+    $oldRequiredRace = $quest->requiredRace;
     $oldRequiredQuest = $quest->requiredQuest;
     /** @var \HeroesofAbenez\Orm\Model $orm */
     $orm = $this->getService(\HeroesofAbenez\Orm\Model::class);
@@ -89,6 +91,12 @@ final class QuestTest extends \Tester\TestCase {
     $quest->requiredLevel = $user->level + 1;
     Assert::false($this->model->isAvailable($quest));
     $quest->requiredLevel = $oldRequiredLevel;
+    $quest->requiredClass = 1;
+    Assert::false($this->model->isAvailable($quest));
+    $quest->requiredClass = $oldRequiredClass;
+    $quest->requiredRace = 1;
+    Assert::false($this->model->isAvailable($quest));
+    $quest->requiredRace = $oldRequiredRace;
     $quest->requiredQuest = 1;
     Assert::false($this->model->isAvailable($quest));
     $quest->requiredQuest = $oldRequiredQuest;

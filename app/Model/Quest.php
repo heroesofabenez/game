@@ -149,7 +149,18 @@ final class Quest {
   public function isAvailable(QuestEntity $quest): bool {
     if($this->user->identity->level < $quest->requiredLevel) {
       return false;
-    } elseif(!is_null($quest->requiredQuest)) {
+    }
+    if(!is_null($quest->requiredClass)) {
+      if($this->user->identity->class !== $quest->requiredClass->id) {
+        return false;
+      }
+    }
+    if(!is_null($quest->requiredRace)) {
+      if($this->user->identity->race !== $quest->requiredRace->id) {
+        return false;
+      }
+    }
+    if(!is_null($quest->requiredQuest)) {
       if(!$this->isFinished($quest->requiredQuest->id)) {
         return false;
       }

@@ -114,9 +114,9 @@ INSERT INTO `pve_arena_opponents` (`id`, `name`, `race`, `gender`, `class`, `lev
   (10,	'Il-Salah',	1,	'male',	4,	8),
   (11,	'Murie',	1,	'female',	1,	10);
 
-INSERT INTO `quests` (`id`, `name`, `required_level`, `required_quest`, `needed_item`, `item_amount`, `item_lose`, `needed_money`, `reward_money`, `reward_xp`, `reward_item`, `reward_white_karma`, `reward_dark_karma`, `reward_pet`, `npc_start`, `npc_end`) VALUES
-  (1,	'Find a book',	1,	NULL,	1,	1,	0,	0,	0,	10,	NULL,	0,	0,	NULL,	1,	1),
-  (2,	'Get your equipment',	1,	1,	6,	1,	0,	0,	0,	5,	10,	0,	0,	NULL,	1,	1);
+INSERT INTO `quests` (`id`, `name`, `required_level`, `required_class`, `required_race`, `required_quest`, `needed_item`, `item_amount`, `item_lose`, `needed_money`, `reward_money`, `reward_xp`, `reward_item`, `reward_white_karma`, `reward_dark_karma`, `reward_pet`, `npc_start`, `npc_end`) VALUES
+  (1,	'Find a book',	1,	3,	NULL,	NULL,	1,	1,	0,	0,	0,	10,	NULL,	0,	0,	NULL,	1,	1),
+  (2,	'Get your equipment',	1,	3,	NULL,	1,	6,	1,	0,	0,	0,	5,	10,	0,	0,	NULL,	1,	1);
 
 INSERT INTO `quest_areas` (`id`, `name`, `required_level`, `required_race`, `required_class`, `pos_x`, `pos_y`) VALUES
 (1,	'Academy of Magic',	0,	NULL,	3,	220,	35),

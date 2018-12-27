@@ -13,6 +13,8 @@ use Nexendrie\Utils\Numbers;
  * @property int $id {primary}
  * @property string $name
  * @property int $requiredLevel {default 1}
+ * @property CharacterClass|null $requiredClass {default null} {m:1 CharacterClass, oneSided=true}
+ * @property CharacterRace|null $requiredRace {default null} {m:1 CharacterRace, oneSided=true}
  * @property Quest|null $requiredQuest {m:1 Quest::$children}
  * @property OneHasMany|Quest[] $children {1:m Quest::$requiredQuest}
  * @property Item|null $neededItem {m:1 Item::$neededForQuests}

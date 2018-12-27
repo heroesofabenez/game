@@ -330,6 +330,8 @@ CREATE TABLE `quests` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(25) NOT NULL,
   `required_level` int(3) NOT NULL DEFAULT '1',
+  `required_class` int(11) DEFAULT NULL,
+  `required_race` int(11) DEFAULT NULL,
   `required_quest` int(3) DEFAULT NULL,
   `needed_item` int(11) DEFAULT NULL,
   `item_amount` int(1) NOT NULL DEFAULT '1',
@@ -350,12 +352,16 @@ CREATE TABLE `quests` (
   KEY `reward_pet` (`reward_pet`),
   KEY `needed_item` (`needed_item`),
   KEY `required_quest` (`required_quest`),
+  KEY `required_class` (`required_class`),
+  KEY `required_race` (`required_race`),
   CONSTRAINT `quests_ibfk_1` FOREIGN KEY (`npc_start`) REFERENCES `npcs` (`id`),
   CONSTRAINT `quests_ibfk_2` FOREIGN KEY (`npc_end`) REFERENCES `npcs` (`id`),
   CONSTRAINT `quests_ibfk_3` FOREIGN KEY (`reward_item`) REFERENCES `items` (`id`),
   CONSTRAINT `quests_ibfk_4` FOREIGN KEY (`reward_pet`) REFERENCES `pet_types` (`id`),
   CONSTRAINT `quests_ibfk_5` FOREIGN KEY (`needed_item`) REFERENCES `items` (`id`),
-  CONSTRAINT `quests_ibfk_6` FOREIGN KEY (`required_quest`) REFERENCES `quests` (`id`)
+  CONSTRAINT `quests_ibfk_6` FOREIGN KEY (`required_quest`) REFERENCES `quests` (`id`),
+  CONSTRAINT `quests_ibfk_7` FOREIGN KEY (`required_class`) REFERENCES `character_classes` (`id`),
+  CONSTRAINT `quests_ibfk_8` FOREIGN KEY (`required_race`) REFERENCES `character_races` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `quest_areas` (
