@@ -92,6 +92,8 @@ final class HOAExtension extends \Nette\DI\CompilerExtension {
       ->setType(HeroesofAbenez\Model\Skills::class);
     $builder->addDefinition($this->prefix("model.userManager"))
       ->setType(HeroesofAbenez\Model\UserManager::class);
+    $builder->addDefinition($this->prefix("model.characterBuilder"))
+      ->setType(HeroesofAbenez\Model\CharacterBuilder::class);
     $builder->addDefinition("cache.cache")
       ->setFactory(\Nette\Caching\Cache::class, ["@cache.storage", "data"]);
     $builder->addDefinition($this->prefix("model.authorizatorFactory"))

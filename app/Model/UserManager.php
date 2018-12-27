@@ -23,12 +23,15 @@ final class UserManager implements \Nette\Security\IAuthenticator {
   protected $profileModel;
   /** @var IUserToCharacterMapper */
   protected $userToCharacterMapper;
+  /** @var CharacterBuilder */
+  protected $cb;
   
-  public function __construct(ORM $orm, Permissions $permissionsModel, Profile $profileModel, IUserToCharacterMapper $userToCharacterMapper) {
+  public function __construct(ORM $orm, Permissions $permissionsModel, Profile $profileModel, IUserToCharacterMapper $userToCharacterMapper, CharacterBuilder $cb) {
     $this->orm = $orm;
     $this->permissionsModel = $permissionsModel;
     $this->profileModel = $profileModel;
     $this->userToCharacterMapper = $userToCharacterMapper;
+    $this->cb = $cb;
   }
   
   /**
@@ -72,27 +75,25 @@ final class UserManager implements \Nette\Security\IAuthenticator {
    * @return array|null Stats of new character
    */
   public function create(array $values): ?array {
-    $data = [
-      "name" => $values["name"], "race" => $values["race"],
-      "class" => $values["class"], "owner" => $this->getRealId(),
-    ];
-    $data["gender"] = ($values["gender"] === 1) ? "male" : "female";
-    
-    $character = $this->orm->characters->getByName($data["name"]);
+    $character = $this->orm->characters->getByName($values["name"]);
     if(!is_null($character)) {
       return null;
     }
+
+    $class = $this->orm->classes->getById($values["class"]);
+    $race = $this->orm->races->getById($values["race"]);
+    $data = $this->cb->create($class, $race);
+    $data["name"] = $values["name"];
+    $data["owner"] = $this->getRealId();
+    $data["gender"] = ($values["gender"] === 1) ? "male" : "female";
+    $data["class"] = $class;
+    $data["race"] = $race;
     
     $character = new Character();
     $this->orm->characters->attach($character);
     foreach ($data as $key => $value) {
       $character->$key = $value;
     }
-    $data["strength"] = $character->strength = $character->class->strength + $character->race->strength;
-    $data["dexterity"] = $character->dexterity = $character->class->dexterity + $character->race->dexterity;
-    $data["constitution"] = $character->constitution = $character->class->constitution + $character->race->constitution;
-    $data["intelligence"] = $character->intelligence = $character->class->intelligence + $character->race->intelligence;
-    $data["charisma"] = $character->charisma = $character->class->charisma + $character->race->charisma;
     $this->orm->characters->persistAndFlush($character);
   
     $data["class"] = $values["class"];

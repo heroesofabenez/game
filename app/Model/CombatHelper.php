@@ -27,13 +27,16 @@ final class CombatHelper {
   protected $itemModel;
   /** @var Skills */
   protected $skillsModel;
+  /** @var CharacterBuilder */
+  protected $cb;
   /** @var ORM */
   protected $orm;
   
-  public function __construct(Profile $profileModel, Item $itemModel, Skills $skillsModel, ORM $orm) {
+  public function __construct(Profile $profileModel, Item $itemModel, Skills $skillsModel, ORM $orm, CharacterBuilder $cb) {
     $this->profileModel = $profileModel;
     $this->itemModel = $itemModel;
     $this->skillsModel = $skillsModel;
+    $this->cb = $cb;
     $this->orm = $orm;
   }
   
@@ -159,14 +162,13 @@ final class CombatHelper {
    * @throws OpponentNotFoundException
    */
   public function getArenaNpc(int $id): Character {
-    $data = [];
     $npc = $this->orm->arenaNpcs->getById($id);
     if(is_null($npc)) {
       throw new OpponentNotFoundException();
     }
+    $data = $this->cb->create($npc->class, $npc->race, $npc->level);
     $stats = [
-      "id", "name", "level", "strength", "dexterity", "constitution", "intelligence",
-      "charisma", "race", "gender",
+      "name", "level", "race", "gender",
     ];
     foreach($stats as $stat) {
       if($npc->$stat instanceof IEntity) {
