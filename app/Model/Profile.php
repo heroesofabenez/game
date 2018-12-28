@@ -124,7 +124,7 @@ final class Profile {
    * @throws CannotChooseSpecializationException
    * @throws SpecializationAlreadyChosenException
    * @throws SpecializationNotChosenException
-   * @throws SpecializationNofAvailableException
+   * @throws SpecializationNotAvailableException
    */
   protected function checkSpecializationChoice(Character $character, int $specialization = null): void {
     if($character->level + 1 < CharacterBuilder::SPECIALIZATION_LEVEL) {
@@ -137,7 +137,7 @@ final class Profile {
     } elseif(is_null($character->specialization) AND is_null($specialization)) {
       throw new SpecializationNotChosenException();
     } elseif(!is_null($specialization) AND !in_array($specialization, $this->getAvailableSpecializations(), true)) {
-      throw new SpecializationNofAvailableException();
+      throw new SpecializationNotAvailableException();
     }
   }
   
@@ -148,7 +148,7 @@ final class Profile {
    * @throws CannotChooseSpecializationException
    * @throws SpecializationAlreadyChosenException
    * @throws SpecializationNotChosenException
-   * @throws SpecializationNofAvailableException
+   * @throws SpecializationNotAvailableException
    */
   public function levelUp(int $specialization = null): void {
     /** @var Character $character */

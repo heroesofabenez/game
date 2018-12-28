@@ -135,7 +135,7 @@ class SpecializationNotChosenException extends AccessDeniedException {
 
 }
 
-class SpecializationNofAvailableException extends \OutOfBoundsException {
+class SpecializationNotAvailableException extends \OutOfBoundsException {
 
 }
 

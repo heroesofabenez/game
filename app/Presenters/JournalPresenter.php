@@ -17,7 +17,7 @@ use HeroesofAbenez\Model\PetNotDeployableException;
 use HeroesofAbenez\Model\CannotChooseSpecializationException;
 use HeroesofAbenez\Model\SpecializationAlreadyChosenException;
 use HeroesofAbenez\Model\SpecializationNotChosenException;
-use HeroesofAbenez\Model\SpecializationNofAvailableException;
+use HeroesofAbenez\Model\SpecializationNotAvailableException;
 
 /**
  * Presenter Journal
@@ -109,7 +109,7 @@ final class JournalPresenter extends BasePresenter {
       $this->flashMessage("errors.journal.specializationAlreadyChosen");
     } catch(SpecializationNotChosenException $e) {
       $this->flashMessage("errors.journal.specializationNotChosen");
-    } catch(SpecializationNofAvailableException $e) {
+    } catch(SpecializationNotAvailableException $e) {
       $this->flashMessage("errors.journal.specializationNotAvailable");
     }
     $this->redirect("Journal:");
