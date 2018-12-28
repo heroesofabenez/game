@@ -21,8 +21,15 @@ use Nextras\Orm\Relationships\OneHasMany;
  * @property OneHasMany|Character[] $characters {1:m Character::$specialization}
  * @property OneHasMany|SkillAttack[] $attackSkills {1:m SkillAttack::$neededSpecialization}
  * @property OneHasMany|SkillSpecial[] $specialSkills {1:m SkillSpecial::$neededSpecialization}
+ * @property-read string $mainStat {virtual}
  */
 final class CharacterSpecialization extends \Nextras\Orm\Entity\Entity {
-  
+  protected function getterMainStat(): string {
+    $stats = [
+      "strength" => $this->strengthGrow, "dexterity" => $this->dexterityGrow, "constitution" => $this->constitutionGrow,
+      "intelligence" => $this->intelligenceGrow, "charisma" => $this->charismaGrow,
+    ];
+    return array_search(max($stats), $stats, true);
+  }
 }
 ?>
