@@ -18,9 +18,6 @@ use HeroesofAbenez\Orm\Character;
    */
 final class Profile {
   use \Nette\SmartObject;
-
-  /** @var int */
-  public const SPECIALIZATION_LEVEL  = 15;
   
   /** @var ORM */
   protected $orm;
@@ -114,7 +111,7 @@ final class Profile {
   public function getAvailableSpecializations(): array {
     /** @var Character $character */
     $character = $this->orm->characters->getById($this->user->id);
-    if($character->level + 1 < static::SPECIALIZATION_LEVEL OR !is_null($character->specialization)) {
+    if($character->level + 1 < CharacterBuilder::SPECIALIZATION_LEVEL OR !is_null($character->specialization)) {
       return [];
     }
     return $this->orm->specializations->findByClass($character->class)
@@ -130,7 +127,7 @@ final class Profile {
    * @throws SpecializationNofAvailableException
    */
   protected function checkSpecializationChoice(Character $character, int $specialization = null): void {
-    if($character->level + 1 < static::SPECIALIZATION_LEVEL) {
+    if($character->level + 1 < CharacterBuilder::SPECIALIZATION_LEVEL) {
       if(!is_null($specialization)) {
         throw new CannotChooseSpecializationException();
       }

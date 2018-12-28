@@ -50,7 +50,7 @@ final class ProfileTest extends \Tester\TestCase {
     $oldLevel = $user->level;
     $oldSpecialization = $user->specialization;
     Assert::same([], $this->model->getAvailableSpecializations());
-    $user->level = Profile::SPECIALIZATION_LEVEL - 1;
+    $user->level = CharacterBuilder::SPECIALIZATION_LEVEL - 1;
     Assert::same([8, 9], $this->model->getAvailableSpecializations());
     $user->specialization = 8;
     Assert::same([], $this->model->getAvailableSpecializations());

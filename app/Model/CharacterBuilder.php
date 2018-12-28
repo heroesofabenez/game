@@ -14,6 +14,9 @@ use HeroesofAbenez\Orm\CharacterRace;
 final class CharacterBuilder {
   use \Nette\SmartObject;
 
+  /** @var int */
+  public const SPECIALIZATION_LEVEL = 15;
+
   protected function calculateStat(string $stat, CharacterClass $class, CharacterRace $race, int $level): int {
     /** @var int $value */
     $value = $class->$stat + $race->$stat;
