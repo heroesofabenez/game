@@ -32,9 +32,9 @@ final class MapDrawer {
    * @param QuestStage[] $points
    * @param ICollection|RoutesStage[] $routes
    */
-  public function draw(array $points, ICollection $routes, string $name): void {
-    $image = Image::fromBlank(250, 250, Image::rgb(204, 204, 153));
-    $image->rectangle(0, 0, 249, 249, Image::rgb(204, 102, 0));
+  public function draw(array $points, ICollection $routes, string $name, int $width, int $height): void {
+    $image = Image::fromBlank($width, $height, Image::rgb(204, 204, 153));
+    $image->rectangle(0, 0, $width - 1, $height - 1, Image::rgb(204, 102, 0));
     foreach($points as $point) {
       $image->filledEllipse($point->posX, $point->posY, 4, 4, Image::rgb(51, 102, 0));
       $image->ttfText(8, 0, $point->posX - 18, $point->posY + 11, Image::rgb(51, 51, 0), __DIR__ . "/../arial.ttf", $point->name);
@@ -54,7 +54,7 @@ final class MapDrawer {
     $stages = $this->locationModel->accessibleStages();
     $curr_stage = $stages[$this->user->identity->stage];
     $routes = $this->locationModel->stageRoutes();
-    $this->draw($stages, $routes, "local-{$curr_stage->area->id}");
+    $this->draw($stages, $routes, "local-{$curr_stage->area->id}", 250, 250);
   }
 }
 ?>
