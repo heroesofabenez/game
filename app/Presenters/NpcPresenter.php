@@ -62,14 +62,15 @@ final class NpcPresenter extends BasePresenter {
   
   public function renderView(int $id): void {
     $this->template->id = $id;
-    $this->template->quests = $this->npc->quests;
-    $this->template->shop = $this->npc->shop;
-    $this->template->fight = $this->npc->fight;
-    $this->template->smith = $this->npc->smith;
     $this->template->canInteract = ($this->npc->stage->id === $this->user->identity->stage);
     if(!$this->template->canInteract) {
       $this->template->stage = $this->npc->stage->id;
       $this->template->area = $this->npc->stage->area->id;
+    } else {
+      $this->template->quests = $this->npc->quests;
+      $this->template->shop = $this->npc->shop;
+      $this->template->fight = $this->npc->fight;
+      $this->template->smith = $this->npc->smith;
     }
   }
   

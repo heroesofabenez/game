@@ -14,8 +14,8 @@ use Nexendrie\Utils\Numbers;
  * @property string $name
  * @property CharacterRace $race {m:1 CharacterRace::$npcs}
  * @property CharacterClass $class {m:1 CharacterClass::$npcs}
- * @property bool $quests {default false}
- * @property bool $shop {default false}
+ * @property-read bool $quests {virtual}
+ * @property-read bool $shop {virtual}
  * @property bool $fight {default false}
  * @property bool $smith {default false}
  * @property string $sprite
@@ -27,6 +27,8 @@ use Nexendrie\Utils\Numbers;
  * @property int $posX
  * @property int $posY
  * @property OneHasMany|ShopItem[] $items {1:m ShopItem::$npc, orderBy=order}
+ * @property OneHasMany|Quest[] $startQuests {1:m Quest::$npcStart}
+ * @property OneHasMany|Quest[] $endQuests {1:m Quest::$npcEnd}
  */
 final class Npc extends \Nextras\Orm\Entity\Entity {
   public const PERSONALITY_FRIENDLY = "friendly";
@@ -38,6 +40,14 @@ final class Npc extends \Nextras\Orm\Entity\Entity {
   public const PERSONALITY_TEACHING = "teaching";
   public const PERSONALITY_RACIST = "racist";
   public const PERSONALITY_MISOGYNIST = "misogynist";
+
+  protected function getterQuests(): bool {
+    return ($this->startQuests->countStored() > 0 OR $this->endQuests->countStored() > 0);
+  }
+
+  protected function getterShop(): bool {
+    return ($this->items->countStored() > 0);
+  }
 
   protected function setterLevel(int $value): int {
     return Numbers::range($value, 1, 999);

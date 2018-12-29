@@ -27,8 +27,8 @@ use Nexendrie\Utils\Numbers;
  * @property int $rewardDarkKarma {default 0}
  * @property Item|null $rewardItem {m:1 Item::$rewardedForQuests}
  * @property PetType|null $rewardPet {m:1 PetType::$rewardedForQuests}
- * @property Npc $npcStart {m:1 Npc, oneSided=true}
- * @property Npc $npcEnd {m:1 Npc, oneSided=true}
+ * @property Npc $npcStart {m:1 Npc::$startQuests}
+ * @property Npc $npcEnd {m:1 Npc::$endQuests}
  * @property bool $progress {virtual}
  */
 final class Quest extends \Nextras\Orm\Entity\Entity {
