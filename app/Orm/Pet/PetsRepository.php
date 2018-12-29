@@ -29,16 +29,6 @@ final class PetsRepository extends \Nextras\Orm\Repository\Repository {
   
   /**
    * @param Character|int $owner
-   */
-  public function getActivePet($owner): ?Pet {
-    return $this->getBy([
-      "owner" => $owner,
-      "deployed" => true
-    ]);
-  }
-  
-  /**
-   * @param Character|int $owner
    * @return ICollection|Pet[]
    */
   public function findByOwner($owner): ICollection {

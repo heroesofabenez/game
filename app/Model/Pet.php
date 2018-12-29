@@ -36,13 +36,6 @@ final class Pet {
     return $this->orm->petTypes->getById($id);
   }
   
-  /**
-   * Get specified user's active pet
-   */
-  public function getActivePet(int $user): ?PetEntity {
-    return $this->orm->pets->getActivePet($user);
-  }
-  
   public function canDeployPet(PetEntity $pet): bool {
     if($this->user->identity->level < $pet->type->requiredLevel) {
       return false;

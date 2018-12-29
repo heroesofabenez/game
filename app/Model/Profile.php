@@ -21,16 +21,13 @@ final class Profile {
   
   /** @var ORM */
   protected $orm;
-  /** @var \HeroesofAbenez\Model\Pet */
-  protected $petModel;
   /** @var \Nette\Security\User */
   protected $user;
   /** @var string[] */
   private $stats = ["strength", "dexterity", "constitution", "intelligence", "charisma"];
   
-  public function __construct(ORM $orm, Pet $petModel) {
+  public function __construct(ORM $orm) {
     $this->orm = $orm;
-    $this->petModel = $petModel;
   }
   
   public function setUser(\Nette\Security\User $user): void {
@@ -85,7 +82,7 @@ final class Profile {
       $return["stage"] = $char->currentStage->id;
       $return["area"] = $char->currentStage->area->id;
     }
-    $return["pet"] = $this->petModel->getActivePet($id);
+    $return["pet"] = $char->activePet;
     return $return;
   }
   

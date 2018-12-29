@@ -90,7 +90,7 @@ final class CombatHelper {
     }
     $data["occupation"] = $character->class->id;
     $data["initiativeFormula"] = $character->class->initiative;
-    $pet = $this->orm->pets->getActivePet($character);
+    $pet = $character->activePet;
     if(!is_null($pet)) {
       $pets[] = $pet->toCombatPet();
     }

@@ -42,6 +42,7 @@ use Nexendrie\Utils\Numbers;
  * @property OneHasMany|Message[] $sentMessages {1:m Message::$from}
  * @property OneHasMany|Message[] $receivedMessages {1:m Message::$to}
  * @property OneHasMany|Pet[] $pets {1:m Pet::$owner}
+ * @property-read Pet|null $activePet {virtual}
  * @property OneHasMany|ArenaFightCount[] $arenaFights {1:m ArenaFightCount::$character}
  * @property OneHasMany|CharacterItem[] $items {1:m CharacterItem::$character}
  * @property OneHasMany|CharacterQuest[] $quests {1:m CharacterQuest::$character}
@@ -60,6 +61,10 @@ final class Character extends \Nextras\Orm\Entity\Entity {
   
   protected function getterPredominantKarma(): string {
     return Karma::getPredominant($this->whiteKarma, $this->darkKarma);
+  }
+
+  protected function getterActivePet(): ?Pet {
+    return $this->pets->get()->getBy(["deployed" => true]);
   }
   
   public function onBeforeInsert(): void {

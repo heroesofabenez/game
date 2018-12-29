@@ -24,11 +24,6 @@ final class PetTest extends \Tester\TestCase {
     Assert::type(PetType::class, $this->model->viewType(1));
     Assert::null($this->model->viewType(5000));
   }
-  
-  public function testGetActivePet() {
-    Assert::type(PetEntity::class, $this->model->getActivePet(1));
-    Assert::null($this->model->getActivePet(5000));
-  }
 
   public function testCanDeployPet() {
     /** @var \HeroesofAbenez\Orm\Model $orm */
