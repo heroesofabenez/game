@@ -24,15 +24,15 @@ final class LocationTest extends \Tester\TestCase {
     $stage = $this->model->getStage(1);
     Assert::type(QuestStage::class, $stage);
   }
-  
-  public function testStageRoutes() {
-    $routes = $this->model->stageRoutes();
-    Assert::type(ICollection::class, $routes);
-  }
-  
+
   public function testGetArea() {
     $stage = $this->model->getArea(1);
     Assert::type(QuestArea::class, $stage);
+  }
+  
+  public function testStageRoutes() {
+    $routes = $this->model->stageRoutes($this->model->getArea(1));
+    Assert::type(ICollection::class, $routes);
   }
   
   public function testAccessibleStages() {

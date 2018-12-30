@@ -48,11 +48,11 @@ final class Location {
   
   /**
    * Gets routes between stages
-   * 
+   *
    * @return ICollection|RoutesStage[]
    */
-  public function stageRoutes(): ICollection {
-    return $this->orm->stageRoutes->findAll();
+  public function stageRoutes(QuestArea $area): ICollection {
+    return $this->orm->stageRoutes->findBy(["this->from->area" => $area]);
   }
 
   /**
@@ -109,7 +109,7 @@ final class Location {
     }
     $currentStage = $this->user->identity->stage;
     $foundRoute = false;
-    $routes = $this->stageRoutes();
+    $routes = $this->stageRoutes($stage->area);
     foreach($routes as $route) {
       if($route->from->id === $id AND $route->to->id === $currentStage) {
         $foundRoute = true;
