@@ -6,3 +6,11 @@
     name: "Získej vybavení"
     introduction: "Teď si promluvme o vybavení. To je velmi důležité, když se dostaneš do souboje. Potřebuješ minimálně zbraň a zbroj. S dobrou zbraní způsobíš velké poškození a zbroj pohlcuje část protivníkova poškození. Zbraň pro nové dobrodruhy můžeš dostat od knihovnice. Až se vrátíš, dám ti zbroj."
     end_text: "Tady je tvá zbroj. Pamatuj, že vybavení se v každém souboji trochu opotřebovává, takže s ním občas budeš muset zajít ke kováři, aby ti jej opravil."
+3:
+    name: "Najdi knihu"
+    introduction: "Abychom mohli pokračovat ve tvém výcviku, musíš získat knihu Pokročilé soubojové techniky. Zeptej se na ní kováře."
+    end_text: "Velmi dobře, mladý bojovníku. Dobrý bojovník se nespoléhá jen na svou zbraň, používá i speciální pohyby. Pokaždé, když postoupíš na vyšší úroveň, získáš 1 bod dovedností, který můžeš v Deník - Trénovat použít k naučení se nové dovedností nebo zlepšení nějaké, kterou už umíš."
+4:
+    name: "Získej vybavení"
+    introduction: "Teď si promluvme o vybavení. To je velmi důležité, když se dostaneš do souboje. Potřebuješ minimálně zbraň a zbroj. S dobrou zbraní způsobíš velké poškození a zbroj pohlcuje část protivníkova poškození. Zbraň pro nové dobrodruhy můžeš dostat od kováře. Až se vrátíš, dám ti zbroj."
+    end_text: "Tady je tvá zbroj. Pamatuj, že vybavení se v každém souboji trochu opotřebovává, takže s ním občas budeš muset zajít ke kováři, aby ti jej opravil."

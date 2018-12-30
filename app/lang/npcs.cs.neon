@@ -4,3 +4,9 @@
 2:
     name: "Knihovnice"
     description: "Vypadá jako typická knihovnice ve středním věku. Prodává knihy a vybavení pro čaroděje."
+3:
+    name: "Cvičitel"
+    description: "Je to barbarský válečník ve středním věku, který pomáhá s tréninkem nových dobrodruhů. Má několik jizev na hladě a na pažích, jsou nejspíš s bitev se skřety."
+4:
+    name: "Kovář"
+    description: "Je to vysoký barbar, který vyrábí a opravuje vybavení."

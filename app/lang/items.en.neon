@@ -91,3 +91,9 @@
 31:
     name: "Ring of Accuracy"
     description: "Improves precision of attacks of its bearer a little."
+32:
+    name: "Cunning combat moves"
+    description: "A book about useful combat moves for new rogues."
+33:
+    name: "Advanced combat techniques"
+    description: "A book about useful combat techniques for new fighters."

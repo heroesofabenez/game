@@ -50,7 +50,7 @@ INSERT INTO `introduction` (`id`, `race`, `class`, `part`, `text`) VALUES
 (1,	2,	3,	1,	'Part 1');
 
 INSERT INTO `items` (`id`, `name`, `slot`, `type`, `required_level`, `required_class`, `price`, `strength`, `durability`) VALUES
-(1,	'Spell casting for dummies',	'item', NULL, 1, NULL, 0, 0, 1),
+(1,	'Spell casting for dummies',	'item',	NULL,	1,	3,	0,	0,	1),
 (2,	'Novice\'s Sword',	'weapon',	'sword',	1,	1,	0,	1,	10),
 (3,	'Novice\'s Axe',	'weapon',	'axe',	1,	1,	0,	2,	10),
 (4,	'Rookie\'s Dagger',	'weapon',	'dagger',	1,	2,	0,	1,	10),
@@ -80,7 +80,9 @@ INSERT INTO `items` (`id`, `name`, `slot`, `type`, `required_level`, `required_c
 (28,	'Wizard\'s Hat',	'helmet',	NULL,	8,	3,	18,	4,	20),
 (29,	'Soldier\'s Shield',	'shield',	NULL,	8,	1,	15,	4,	25),
 (30,	'Mallet',	'weapon',	'club',	8,	1,	20,	4,	15),
-(31,	'Ring of Accuracy',	'ring',	NULL,	8,	NULL,	30,	2,	10);
+(31,	'Ring of Accuracy',	'ring',	NULL,	8,	NULL,	30,	2,	10),
+(32,	'Cunning combat moves',	'item',	NULL,	1,	2,	0,	0,	1),
+(33,	'Advanced combat techniques',	'item',	NULL,	1,	1,	0,	0,	1);
 
 INSERT INTO `pet_types` (`id`, `name`, `bonus_stat`, `bonus_value`, `image`, `required_level`, `required_class`, `required_race`, `cost`) VALUES
 (1,	'Rescued Lion',	'constitution',	5,	'',	8,	1,	NULL,	0),
@@ -118,23 +120,28 @@ INSERT INTO `pve_arena_opponents` (`id`, `name`, `race`, `gender`, `class`, `lev
 
 INSERT INTO `quests` (`id`, `name`, `required_level`, `required_class`, `required_race`, `required_quest`, `needed_item`, `item_amount`, `item_lose`, `needed_money`, `reward_money`, `reward_xp`, `reward_item`, `reward_white_karma`, `reward_dark_karma`, `reward_pet`, `npc_start`, `npc_end`) VALUES
   (1,	'Find a book',	1,	3,	NULL,	NULL,	1,	1,	0,	0,	0,	10,	NULL,	0,	0,	NULL,	1,	1),
-  (2,	'Get your equipment',	1,	3,	NULL,	1,	6,	1,	0,	0,	0,	5,	10,	0,	0,	NULL,	1,	1);
+  (2,	'Get your equipment',	1,	3,	NULL,	1,	6,	1,	0,	0,	0,	5,	10,	0,	0,	NULL,	1,	1),
+  (3,	'Find a book',	1,	1,	1,	NULL,	33,	1,	0,	0,	0,	10,	NULL,	0,	0,	NULL,	3,	3),
+  (4,	'Get your equipment',	1,	1,	1,	3,	2,	1,	0,	0,	0,	5,	8,	0,	0,	NULL,	3,	3);
 
 INSERT INTO `quest_areas` (`id`, `name`, `required_level`, `required_race`, `required_class`, `pos_x`, `pos_y`, `entry_stage`) VALUES
 (1,	'Academy of Magic',	0,	NULL,	3,	220,	35,	2),
-(2,	'Sands of Ramir - borderlands',	0,	3,	NULL,	220,	153,	NULL),
+(2,	'Sands of Ramir - borderlands',	0,	1,	NULL,	220,	153,	4),
 (3,	'Border woods',	25,	NULL,	NULL,	80,	165,	NULL),
 (4,	'North Great Horde',	30,	NULL,	NULL,	175,	109,	NULL);
 
 INSERT INTO `quest_stages` (`id`, `name`, `required_level`, `required_race`, `required_class`, `area`, `pos_x`, `pos_y`) VALUES
 (1,	'Your cell',	0,	NULL,	3,	1,	215,	65),
 (2,	'Hall',	1,	NULL,	3,	1,	115,	215),
-(3,	'Library',	1,	NULL,	3,	1,	119,	37);
+(3,	'Library',	1,	NULL,	3,	1,	119,	37),
+(4,	'Village 1 - Village Square',	0,	1,	NULL,	2,	100,	70),
+(5,	'Village 1 - Smithy',	1,	1,	NULL,	2,	70,	90);
 
 INSERT INTO `routes_stages` (`id`, `from`, `to`) VALUES
 (1,	1,	2),
 (2,	1,	3),
-(3,	2,	3);
+(3,	2,	3),
+(4,	4,	5);
 
 INSERT INTO `shop_items` (`id`, `npc`, `item`, `order`) VALUES
   (1,	2,	1,	1),
@@ -161,7 +168,9 @@ INSERT INTO `skills_specials` (`id`, `name`, `needed_class`, `needed_specializat
 
 INSERT INTO `npcs` (`id`, `name`, `race`, `class`, `fight`, `smith`, `sprite`, `portrait`, `stage`, `karma`, `personality`, `level`, `pos_x`, `pos_y`) VALUES
   (1,	'Mentor',	2,	3,	0,	0,	'mentor.jpeg',	'mentor.jpeg',	1,	'neutral',	'teaching',	10,	1,	1),
-  (2,	'Librarian',	2,	3,	0,	0,	'librarian.jpeg',	'librarian.jpeg',	3,	'neutral',	'friendly',	10,	1,	1);
+  (2,	'Librarian',	2,	3,	0,	1,	'librarian.jpeg',	'librarian.jpeg',	3,	'neutral',	'friendly',	10,	1,	1),
+  (3,	'Instructor',	1,	1,	0,	0,	'instructor.jpeg',	'instructor.jpeg',	4,	'neutral',	'teaching',	10,	1,	1),
+  (4,	'Blacksmith',	1,	1,	0,	1,	'blacksmith.jpeg',	'blacksmith.jpeg',	5,	'neutral',	'friendly',	10,	1,	1);
 
 INSERT INTO `pve_arena_opponent_equipment` (`id`, `npc`, `item`) VALUES
 (1,	2,	3),

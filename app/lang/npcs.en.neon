@@ -4,3 +4,9 @@
 2:
     name: "Librarian"
     description: "She look like a typical middle-aged female librarian. She sells books and equipment for wizards."
+3:
+    name: "Instructor"
+    description: "He is a middle-aged barbarian warrior who helps with training of new adventures. You can see some scars on him face and arms, they are probably from battles with orcs."
+4:
+    name: "Blacksmith"
+    description: "He is a tall barbarian who makes and repairs equipment."
