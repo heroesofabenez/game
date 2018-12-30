@@ -50,6 +50,12 @@ final class QuestPresenter extends BasePresenter {
     $this->template->rewardPet = (!is_null($quest->rewardPet)) ? $quest->rewardPet->id : null;
     $this->template->followupQuests = $quest->children;
     $this->template->requiredQuest = $quest->requiredQuest;
+    $this->template->level = $this->user->identity->level;
+    $this->template->requiredLevel = $quest->requiredLevel;
+    $this->template->class = $this->user->identity->class;
+    $this->template->requiredClass = (!is_null($quest->requiredClass)) ? $quest->requiredClass->id : null;
+    $this->template->race = $this->user->identity->race;
+    $this->template->requiredRace = (!is_null($quest->requiredRace)) ? $quest->requiredRace->id : null;
   }
 }
 ?>

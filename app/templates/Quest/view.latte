@@ -3,6 +3,7 @@
 {block content}
   <h1>{_"quests.$id.name"}</h1>
   <p>{_"texts.quest.from"} <a n:href="Npc:view $npcStart">{_"npcs.$npcStart.name"}</a></p>
+  <p>{_"texts.quest.for"} {_"texts.quest.level"} <span class="{if $level >= $requiredLevel}green{else}red{/if}">{$requiredLevel}</span>{if $requiredClass}, {_"texts.quest.class"} <span class="{if $class === $requiredClass}green{else}red{/if}">{_"classes.$requiredClass.name"}</span>{/if}{if $requiredRace}, {_"texts.quest.race"} <span class="{if $race === $requiredRace}green{else}red{/if}">{_"races.$requiredRace.name"}</span>{/if}</p>
   <p n:class="$finished ? crossout">{_"quests.$id.introduction"}</p>
   <p n:class="$finished ? crossout">{_"texts.quest.requirementsHeader"}</p>
   <ul>

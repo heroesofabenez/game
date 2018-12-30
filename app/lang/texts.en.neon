@@ -155,6 +155,10 @@ quest:
     notFound: "Requested quest was not found."
     followupQuests: "Follow-up quests:"
     followsIn: "Follows in"
+    for: "For:"
+    level: "level"
+    class: "class"
+    race: "race"
 profile: 
     title: "Profile"
     level: "level"

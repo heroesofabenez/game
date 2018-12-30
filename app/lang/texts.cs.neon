@@ -155,6 +155,10 @@ quest:
     notFound: "Požadovaný úkol nebyl nalezen."
     followupQuests: "Navazující úkoly:"
     followsIn: "Navazuje na"
+    for: "Pro:"
+    level: "úroveň"
+    class: "třídu"
+    race: "racu"
 profile: 
     title: "Profil"
     level: "úroveň"
