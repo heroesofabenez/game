@@ -131,7 +131,7 @@ INSERT INTO `quest_areas` (`id`, `name`, `required_level`, `required_race`, `req
 (4,	'North Great Horde',	30,	NULL,	NULL,	175,	109,	NULL);
 
 INSERT INTO `quest_stages` (`id`, `name`, `required_level`, `required_race`, `required_class`, `area`, `pos_x`, `pos_y`) VALUES
-(1,	'Your cell',	0,	NULL,	3,	1,	215,	65),
+(1,	'Study Room',	0,	NULL,	3,	1,	215,	65),
 (2,	'Hall',	1,	NULL,	3,	1,	115,	215),
 (3,	'Library',	1,	NULL,	3,	1,	119,	37),
 (4,	'Village 1 - Village Square',	0,	1,	NULL,	2,	100,	70),

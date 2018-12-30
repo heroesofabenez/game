@@ -387,7 +387,7 @@ CREATE TABLE `quest_areas` (
 
 CREATE TABLE `quest_stages` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(20) NOT NULL,
+  `name` varchar(30) NOT NULL,
   `required_level` int(3) NOT NULL DEFAULT '0',
   `required_race` int(11) DEFAULT NULL,
   `required_class` int(11) DEFAULT NULL,
