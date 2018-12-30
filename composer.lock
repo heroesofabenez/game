@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "69303e2bb43cdce0b3bf81f91162deec",
+    "content-hash": "c67db97c450e9fdab0f20bf1f77cabf4",
     "packages": [
         {
             "name": "heroesofabenez/chat",
@@ -72,19 +72,19 @@
             "source": {
                 "type": "git",
                 "url": "https://gitlab.com/heroesofabenez/combat.git",
-                "reference": "dc826946aaaa4ef17cf3029aa159bd0bffaabf3d"
+                "reference": "8291744ee0976d7261ca965ed24bc05b75790617"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://gitlab.com/api/v4/projects/heroesofabenez%2Fcombat/repository/archive.zip?sha=dc826946aaaa4ef17cf3029aa159bd0bffaabf3d",
-                "reference": "dc826946aaaa4ef17cf3029aa159bd0bffaabf3d",
+                "url": "https://gitlab.com/api/v4/projects/heroesofabenez%2Fcombat/repository/archive.zip?sha=8291744ee0976d7261ca965ed24bc05b75790617",
+                "reference": "8291744ee0976d7261ca965ed24bc05b75790617",
                 "shasum": ""
             },
             "require": {
                 "latte/latte": "^2.4",
                 "nette/utils": "^2.4",
                 "nexendrie/translation": "^1.1.1",
-                "nexendrie/utils": "^1.4",
+                "nexendrie/utils": "^1.5",
                 "php": ">=7.2.0",
                 "symfony/options-resolver": "^4.0"
             },
@@ -120,7 +120,7 @@
             "keywords": [
                 "combat"
             ],
-            "time": "2018-12-28T16:24:49+00:00"
+            "time": "2018-12-30T18:48:24+00:00"
         },
         {
             "name": "kdyby/autowired",
@@ -1360,30 +1360,30 @@
         },
         {
             "name": "nexendrie/utils",
-            "version": "1.4.0",
+            "version": "1.5.0",
             "source": {
                 "type": "git",
                 "url": "https://gitlab.com/nexendrie/utils.git",
-                "reference": "7fbbb4b71cb3fd7c546f576ba4bfbccdb7f163eb"
+                "reference": "28b33644eda9608773d123662248260e60b66bc9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://gitlab.com/api/v4/projects/nexendrie%2Futils/repository/archive.zip?sha=7fbbb4b71cb3fd7c546f576ba4bfbccdb7f163eb",
-                "reference": "7fbbb4b71cb3fd7c546f576ba4bfbccdb7f163eb",
+                "url": "https://gitlab.com/api/v4/projects/nexendrie%2Futils/repository/archive.zip?sha=28b33644eda9608773d123662248260e60b66bc9",
+                "reference": "28b33644eda9608773d123662248260e60b66bc9",
                 "shasum": ""
             },
             "require": {
                 "nette/utils": "^2.4",
-                "php": ">=7.1.0"
+                "php": ">=7.2.0"
             },
             "require-dev": {
                 "nexendrie/code-quality": "dev-master",
-                "nexendrie/site-generator": "1.0.x-dev"
+                "nexendrie/site-generator": "^1.0"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.4.x-dev"
+                    "dev-master": "1.5.x-dev"
                 }
             },
             "autoload": {
@@ -1412,7 +1412,7 @@
                 "range",
                 "utils"
             ],
-            "time": "2018-04-13T13:50:05+00:00"
+            "time": "2018-12-30T17:55:25+00:00"
         },
         {
             "name": "nextras/dbal",
