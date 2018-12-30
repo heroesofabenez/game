@@ -8,7 +8,7 @@
   {else}
   <p>{_"texts.homepage.canSee"}</p>
   {foreach $stage->npcs as $npc}
-  {$npc->name} - <a n:href="Npc:view $npc->id">{_"texts.homepage.approachNpc"}</a><br>
+  {_"npcs.$npc->id.name"} - <a n:href="Npc:view $npc->id">{_"texts.homepage.approachNpc"}</a><br>
   {/foreach}
   {/if}
 {/block}
