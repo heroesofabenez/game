@@ -120,11 +120,11 @@ INSERT INTO `quests` (`id`, `name`, `required_level`, `required_class`, `require
   (1,	'Find a book',	1,	3,	NULL,	NULL,	1,	1,	0,	0,	0,	10,	NULL,	0,	0,	NULL,	1,	1),
   (2,	'Get your equipment',	1,	3,	NULL,	1,	6,	1,	0,	0,	0,	5,	10,	0,	0,	NULL,	1,	1);
 
-INSERT INTO `quest_areas` (`id`, `name`, `required_level`, `required_race`, `required_class`, `pos_x`, `pos_y`) VALUES
-(1,	'Academy of Magic',	0,	NULL,	3,	220,	35),
-(2,	'Sands of Ramir - borderlands',	0,	3,	NULL,	220,	153),
-(3,	'Border woods',	25,	NULL,	NULL,	80,	165),
-(4,	'North Great Horde',	30,	NULL,	NULL,	175,	109);
+INSERT INTO `quest_areas` (`id`, `name`, `required_level`, `required_race`, `required_class`, `pos_x`, `pos_y`, `entry_stage`) VALUES
+(1,	'Academy of Magic',	0,	NULL,	3,	220,	35,	2),
+(2,	'Sands of Ramir - borderlands',	0,	3,	NULL,	220,	153,	NULL),
+(3,	'Border woods',	25,	NULL,	NULL,	80,	165,	NULL),
+(4,	'North Great Horde',	30,	NULL,	NULL,	175,	109,	NULL);
 
 INSERT INTO `quest_stages` (`id`, `name`, `required_level`, `required_race`, `required_class`, `area`, `pos_x`, `pos_y`) VALUES
 (1,	'Your cell',	0,	NULL,	3,	1,	215,	65),

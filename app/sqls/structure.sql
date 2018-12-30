@@ -375,11 +375,14 @@ CREATE TABLE `quest_areas` (
   `required_class` int(11) DEFAULT NULL,
   `pos_x` int(3) DEFAULT NULL,
   `pos_y` int(3) DEFAULT NULL,
+  `entry_stage` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `required_class` (`required_class`),
+  KEY `required_occupation` (`required_class`),
   KEY `required_race` (`required_race`),
+  KEY `entry_stage` (`entry_stage`),
   CONSTRAINT `quest_areas_ibfk_1` FOREIGN KEY (`required_class`) REFERENCES `character_classes` (`id`),
-  CONSTRAINT `quest_areas_ibfk_2` FOREIGN KEY (`required_race`) REFERENCES `character_races` (`id`)
+  CONSTRAINT `quest_areas_ibfk_2` FOREIGN KEY (`required_race`) REFERENCES `character_races` (`id`),
+  CONSTRAINT `quest_areas_ibfk_3` FOREIGN KEY (`entry_stage`) REFERENCES `quest_stages` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `quest_stages` (

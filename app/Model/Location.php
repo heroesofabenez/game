@@ -166,12 +166,12 @@ final class Location {
         break;
       }
     }
-    if(!$foundRoute OR !$this->canEnterArea($area)) {
+    if(!$foundRoute OR !$this->canEnterArea($area) OR is_null($area->entryStage)) {
       throw new CannotTravelToAreaException();
     }
     /** @var \HeroesofAbenez\Orm\Character $character */
     $character = $this->orm->characters->getById($this->user->id);
-    $character->currentStage = $id;
+    $character->currentStage = $area->entryStage->id;
     $this->orm->characters->persistAndFlush($character);
   }
 }
