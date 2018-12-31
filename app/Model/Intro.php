@@ -52,10 +52,10 @@ final class Intro {
   /**
    * Move onto next part of introduction
    */
-  public function moveToNextPart(int $part): void {
+  public function moveToNextPart(): void {
     /** @var \HeroesofAbenez\Orm\Character $character */
     $character = $this->orm->characters->getById($this->user->id);
-    $character->intro = $part;
+    $character->intro++;
     $this->orm->characters->persistAndFlush($character);
   }
   

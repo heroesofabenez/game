@@ -34,7 +34,7 @@ final class IntroPresenter extends BasePresenter {
   }
   
   public function actionNext(): void {
-    $this->model->moveToNextPart($this->part + 1);
+    $this->model->moveToNextPart();
     $this->redirect("Intro:");
   }
   
