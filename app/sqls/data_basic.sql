@@ -121,7 +121,13 @@ INSERT INTO `pve_arena_opponents` (`id`, `name`, `race`, `gender`, `class`, `lev
   (8,	'Salazar',	2,	'male',	3,	9),
   (9,	'Durhana',	4,	'female',	2,	9),
   (10,	'Il-Salah',	1,	'male',	4,	8),
-  (11,	'Murie',	1,	'female',	1,	10);
+  (11,	'Murie',	1,	'female',	1,	10),
+  (12,	'Tharna',	4,	'female',	3,	12),
+  (13,	'Skur-dah',	5,	'male',	1,	12),
+  (14,	'Lucia',	3,	'female',	5,	5),
+  (15,	'Amadeus',	2,	'male',	5,	10),
+  (16,	'Ra-dah',	5,	'male',	2,	14),
+  (17,	'Ignatius',	2,	'male',	4,	14);
 
 INSERT INTO `quests` (`id`, `name`, `required_level`, `required_class`, `required_race`, `required_quest`, `needed_item`, `item_amount`, `item_lose`, `needed_money`, `reward_money`, `reward_xp`, `reward_item`, `reward_white_karma`, `reward_dark_karma`, `reward_pet`, `npc_start`, `npc_end`) VALUES
   (1,	'Find a book',	1,	3,	NULL,	NULL,	1,	1,	0,	0,	0,	10,	NULL,	0,	0,	NULL,	1,	1),
@@ -193,4 +199,12 @@ INSERT INTO `pve_arena_opponent_equipment` (`id`, `npc`, `item`) VALUES
 (10,	8,	14),
 (11,	11,	30),
 (12,	11,	8),
-(13,	8,	31);
+(13,	8,	31),
+(14,	12,	31),
+(15,	13,	14),
+(16,	13,	16),
+(17,	13,	29),
+(18,	15,	37),
+(19,	17,	31),
+(20,	16,	14),
+(21,	16,	20);
