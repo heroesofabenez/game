@@ -26,7 +26,7 @@ final class ArenaPVPControl extends ArenaControl {
       "level>" => $level - 5,
       "level<" => $level + 5,
       "id!=" => $this->user->id
-    ]);
+    ])->orderBy("level");
   }
   
   /**

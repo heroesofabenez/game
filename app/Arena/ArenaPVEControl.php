@@ -25,7 +25,7 @@ final class ArenaPVEControl extends ArenaControl {
     return $this->orm->arenaNpcs->findBy([
       "level>" => $level - 5,
       "level<" => $level + 5
-    ]);
+    ])->orderBy("level");
   }
   
   /**
