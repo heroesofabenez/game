@@ -97,3 +97,18 @@
 33:
     name: "Advanced combat techniques"
     description: "A book about useful combat techniques for new fighters."
+34:
+    name: "Red shirt"
+    description: "A shirt popular among novice bards."
+35:
+    name: "Pipe"
+    description: "An instrument of choice of many novice bards."
+36:
+    name: "Flute"
+    description: "Favorite instrument of many seasoned bards."
+37:
+    name: "Drum"
+    description: "An instrument of some seasoned bards."
+38:
+    name: "Violet shirt"
+    description: "A shirt popular among seasoned bards."

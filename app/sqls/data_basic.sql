@@ -82,7 +82,12 @@ INSERT INTO `items` (`id`, `name`, `slot`, `type`, `required_level`, `required_c
 (30,	'Mallet',	'weapon',	'club',	8,	1,	20,	4,	15),
 (31,	'Ring of Accuracy',	'ring',	NULL,	8,	NULL,	30,	2,	10),
 (32,	'Cunning combat moves',	'item',	NULL,	1,	2,	0,	0,	1),
-(33,	'Advanced combat techniques',	'item',	NULL,	1,	1,	0,	0,	1);
+(33,	'Advanced combat techniques',	'item',	NULL,	1,	1,	0,	0,	1),
+(34,	'Red shirt',	'armor',	NULL,	1,	5,	0,	1,	10),
+(35,	'Pipe',	'weapon',	'instrument',	1,	5,	0,	1,	10),
+(36,	'Flute',	'weapon',	'instrument',	10,	5,	13,	2,	20),
+(37,	'Drum',	'weapon',	'instrument',	10,	5,	17,	3,	20),
+(38,	'Violet shirt',	'armor',	NULL,	10,	5,	0,	2,	20);
 
 INSERT INTO `pet_types` (`id`, `name`, `bonus_stat`, `bonus_value`, `image`, `required_level`, `required_class`, `required_race`, `cost`) VALUES
 (1,	'Rescued Lion',	'constitution',	5,	'',	8,	1,	NULL,	0),
@@ -154,7 +159,8 @@ INSERT INTO `skills_attacks` (`id`, `name`, `needed_class`, `needed_specializati
 (1,	'Assault',	1,	NULL,	1,	'110%',	'5%',	5,	'single',	1,	NULL),
 (2,	'Shadow strike',	2,	NULL,	1,	'61%',	'2%',	5,	'single',	2,	NULL),
 (3,	'Blast',	3,	NULL,	1,	'115%',	'5%',	5,	'single',	1,	NULL),
-(4,	'Rain of arrows',	4,	NULL,	1,	'35%',	'2%',	5,	'single',	3,	NULL);
+(4,	'Rain of arrows',	4,	NULL,	1,	'35%',	'2%',	5,	'single',	3,	NULL),
+(5,	'Sound wave',	5,	NULL,	1,	'80%',	'2%',	5,	'row',	1,	'NULL');
 
 INSERT INTO `skills_specials` (`id`, `name`, `needed_class`, `needed_specialization`, `needed_level`, `type`, `target`, `stat`, `value`, `value_growth`, `levels`, `duration`) VALUES
 (1,	'Shield',	1,	NULL,	1,	'buff',	'self',	'defense',	12,	2,	5,	3),
@@ -164,7 +170,9 @@ INSERT INTO `skills_specials` (`id`, `name`, `needed_class`, `needed_specializat
 (5,	'Cover',	1,	NULL,	10,	'buff',	'party',	'defense',	14,	1,	6,	4),
 (6,	'Smoke',	2,	NULL,	10,	'debuff',	'enemy_party',	'hit',	14,	1,	6,	4),
 (7,	'Entangle',	3,	NULL,	10,	'debuff',	'enemy',	'initiative',	13,	2,	6,	4),
-(8,	'Evasion',	4,	NULL,	10,	'buff',	'party',	'dodge',	10,	1,	6,	4);
+(8,	'Evasion',	4,	NULL,	10,	'buff',	'party',	'dodge',	10,	1,	6,	4),
+(9,	'Irksome noise',	5,	NULL,	1,	'debuff',	'enemy',	'damage',	15,	1,	5,	3),
+(10,	'Song of agility',	5,	NULL,	10,	'buff',	'party',	'dodge',	15,	2,	6,	4);
 
 INSERT INTO `npcs` (`id`, `name`, `race`, `class`, `fight`, `smith`, `sprite`, `portrait`, `stage`, `karma`, `personality`, `level`, `pos_x`, `pos_y`) VALUES
   (1,	'Mentor',	2,	3,	0,	0,	'mentor.jpeg',	'mentor.jpeg',	1,	'neutral',	'teaching',	10,	1,	1),
