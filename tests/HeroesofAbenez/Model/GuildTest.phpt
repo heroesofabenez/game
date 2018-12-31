@@ -10,10 +10,10 @@ use Nextras\Orm\Collection\ICollection;
 require __DIR__ . "/../../bootstrap.php";
 
 final class GuildTest extends \Tester\TestCase {
+  use TCharacterControl;
+
   /** @var Guild */
   protected $model;
-  
-  use \Testbench\TCompiledContainer;
   
   public function setUp() {
     $this->model = $this->getService(Guild::class);
@@ -78,6 +78,27 @@ final class GuildTest extends \Tester\TestCase {
     Assert::type("array", $members);
     Assert::count(1, $members);
   }
+
+  public function testCreate() {
+    /** @var \HeroesofAbenez\Orm\Model $orm */
+    $orm = $this->getService(\HeroesofAbenez\Orm\Model::class);
+    Assert::exception(function() use($orm) {
+      $guild = $orm->guilds->getById(1);
+      $this->model->create(["name" => $guild->name]);
+    }, NameInUseException::class);
+    $this->preserveStats(["guild", "guildrank"], function() {
+      /** @var \HeroesofAbenez\Orm\Model $orm */
+      $orm = $this->getService(\HeroesofAbenez\Orm\Model::class);
+      $user = $this->getCharacter();
+      $data = ["name" => "abc", "description" => "."];
+      $this->model->create($data);
+      $guild = $orm->guilds->getByName($data["name"]);
+      Assert::type(GuildEntity::class, $guild);
+      Assert::same($data["name"], $guild->name);
+      Assert::same($guild, $user->guild);
+      $orm->guilds->remove($guild);
+    });
+  }
   
   public function testListOfGuilds() {
     $guilds = $this->model->listOfGuilds();
@@ -85,7 +106,27 @@ final class GuildTest extends \Tester\TestCase {
     Assert::count(3, $guilds);
   }
 
-  public function testRenameGuild() {
+  public function testLeave() {
+    Assert::exception(function() {
+      $this->model->leave();
+    }, GrandmasterCannotLeaveGuildException::class);
+    $user = $this->getCharacter();
+    $guild = $user->guild;
+    $guildRank = $user->guildrank;
+    $this->modifyCharacter(["guild" => null, "guildrank" => $guildRank], function() {
+      Assert::exception(function() {
+        $this->model->leave();
+      }, NotInGuildException::class);
+    });
+    $this->modifyCharacter(["guild" => $guild, "guildrank" => 1], function() {
+      $this->model->leave();
+      $user = $this->getCharacter();
+      Assert::null($user->guild);
+      Assert::null($user->guildrank);
+    });
+  }
+
+  public function testRename() {
     Assert::exception(function() {
       /** @var GuildEntity $guild */
       $guild = $this->model->view(2);
@@ -109,6 +150,15 @@ final class GuildTest extends \Tester\TestCase {
     $this->model->changeDescription($guild->id, "abc");
     Assert::same("abc", $guild->description);
     $this->model->changeDescription($guild->id, $oldDescription);
+  }
+
+  public function testJoin() {
+    $this->preserveStats(["guild", "guildrank"], function() {
+      $user = $this->getCharacter();
+      $this->model->join($user->id, 2);
+      Assert::same(2, $user->guild->id);
+      Assert::same(1, $user->guildrank->id);
+    });
   }
   
   public function testGetDefaultRankNames() {

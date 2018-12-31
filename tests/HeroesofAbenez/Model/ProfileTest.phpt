@@ -9,11 +9,11 @@ use Nextras\Orm\Collection\ICollection;
 require __DIR__ . "/../../bootstrap.php";
 
 final class ProfileTest extends \Tester\TestCase {
+  use TCharacterControl;
+
   /** @var Profile */
   protected $model;
-  
-  use \Testbench\TCompiledContainer;
-  
+
   public function setUp() {
     $this->model = $this->getService(Profile::class);
   }
@@ -45,8 +45,7 @@ final class ProfileTest extends \Tester\TestCase {
     $this->model->user = $this->getService(\Nette\Security\User::class);
     /** @var \HeroesofAbenez\Orm\Model $orm */
     $orm = $this->getService(\HeroesofAbenez\Orm\Model::class);
-    /** @var \HeroesofAbenez\Orm\Character $user */
-    $user = $orm->characters->getById(1);
+    $user = $this->getCharacter();
     $oldLevel = $user->level;
     $oldSpecialization = $user->specialization;
     Assert::same([], $this->model->getAvailableSpecializations());
@@ -59,6 +58,51 @@ final class ProfileTest extends \Tester\TestCase {
     $orm->characters->persistAndFlush($user);
   }
 
+  public function testLevelUp() {
+    Assert::exception(function() {
+      $this->model->levelUp();
+    }, NotEnoughExperiencesException::class);
+    $statsToPreserve = [
+      "experience", "level", "statPoints", "skillPoints", "strength", "dexterity", "constitution",
+      "intelligence", "charisma",
+    ];
+    $this->preserveStats($statsToPreserve, function() {
+      $user = $this->getCharacter();
+      $user->experience = $this->model->getLevelsRequirements()[$user->level + 1];
+      /** @var \HeroesofAbenez\Orm\Model $orm */
+      $orm = $this->getService(\HeroesofAbenez\Orm\Model::class);
+      $orm->characters->persistAndFlush($user);
+      Assert::exception(function() {
+        $this->model->levelUp(1);
+      }, CannotChooseSpecializationException::class);
+      $user->level = CharacterBuilder::SPECIALIZATION_LEVEL;
+      $user->experience = $this->model->getLevelsRequirements()[$user->level + 1];
+      $orm->characters->persistAndFlush($user);
+      Assert::exception(function() {
+        $this->model->levelUp();
+      }, SpecializationNotChosenException::class);
+      Assert::exception(function() {
+        $this->model->levelUp(1);
+      }, SpecializationNotAvailableException::class);
+    });
+    $this->preserveStats($statsToPreserve, function() {
+      $user = $this->getCharacter();
+      $oldLevel = $user->level;
+      $oldStatPoints = $user->statPoints;
+      $oldSkillPoints = $user->skillPoints;
+      $oldIntelligence = $user->intelligence;
+      $user->experience = $this->model->getLevelsRequirements()[$user->level + 1];
+      /** @var \HeroesofAbenez\Orm\Model $orm */
+      $orm = $this->getService(\HeroesofAbenez\Orm\Model::class);
+      $orm->characters->persistAndFlush($user);
+      $this->model->levelUp();
+      Assert::same($oldLevel + 1, $user->level);
+      Assert::same($oldStatPoints + $user->class->statPointsLevel, $user->statPoints);
+      Assert::same($oldSkillPoints + 1, $user->skillPoints);
+      Assert::same($oldIntelligence + $user->class->intelligenceGrow, $user->intelligence);
+    });
+  }
+
   public function testTrainStat() {
     Assert::exception(function() {
       $this->model->trainStat("abc");
@@ -66,6 +110,13 @@ final class ProfileTest extends \Tester\TestCase {
     Assert::exception(function() {
       $this->model->trainStat("charisma");
     }, NoStatPointsAvailableException::class);
+    $charisma = $this->getCharacterStat("charisma");
+    $this->modifyCharacter(["statPoints" => 1, "charisma" => $charisma, ], function() use($charisma) {
+      $this->model->trainStat("charisma");
+      $user = $this->getCharacter();
+      Assert::same($charisma + 1, $user->charisma);
+      Assert::same(0, (int) $user->statPoints);
+    });
   }
 }
 

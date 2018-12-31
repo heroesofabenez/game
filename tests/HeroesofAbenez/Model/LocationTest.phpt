@@ -11,10 +11,10 @@ use Nextras\Orm\Collection\ICollection;
 require __DIR__ . "/../../bootstrap.php";
 
 final class LocationTest extends \Tester\TestCase {
+  use TCharacterControl;
+
   /** @var Location */
   protected $model;
-  
-  use \Testbench\TCompiledContainer;
   
   public function setUp() {
     $this->model = $this->getService(Location::class);
@@ -25,14 +25,19 @@ final class LocationTest extends \Tester\TestCase {
     Assert::type(QuestStage::class, $stage);
   }
 
-  public function testGetArea() {
-    $stage = $this->model->getArea(1);
-    Assert::type(QuestArea::class, $stage);
-  }
-  
   public function testStageRoutes() {
     $routes = $this->model->stageRoutes($this->model->getArea(1));
     Assert::type(ICollection::class, $routes);
+  }
+
+  public function testAreaRoutes() {
+    $routes = $this->model->areaRoutes();
+    Assert::type(ICollection::class, $routes);
+  }
+
+  public function testGetArea() {
+    $stage = $this->model->getArea(1);
+    Assert::type(QuestArea::class, $stage);
   }
   
   public function testAccessibleStages() {
@@ -71,6 +76,13 @@ final class LocationTest extends \Tester\TestCase {
     Assert::exception(function() {
       $this->model->travelToStage(5000);
     }, StageNotFoundException::class);
+    $this->preserveStats(["currentStage"], function() {
+      $this->model->travelToStage(2);
+      Assert::same(2, $this->getCharacterStat("currentStage")->id);
+    });
+    Assert::exception(function() {
+      $this->model->travelToStage(4);
+    }, CannotTravelToStageException::class);
   }
 
   public function testCanEnterArea() {

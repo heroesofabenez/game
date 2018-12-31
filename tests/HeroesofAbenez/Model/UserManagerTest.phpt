@@ -9,10 +9,10 @@ use Nette\Security\Identity;
 require __DIR__ . "/../../bootstrap.php";
 
 final class UserManagerTest extends \Tester\TestCase {
+  use TCharacterControl;
+
   /** @var UserManager */
   protected $model;
-  
-  use \Testbench\TCompiledContainer;
   
   public function setUp() {
     $this->model = $this->getService(UserManager::class);
@@ -28,7 +28,7 @@ final class UserManagerTest extends \Tester\TestCase {
     /** @var \HeroesofAbenez\Orm\Model $orm */
     $orm = $this->getService(\HeroesofAbenez\Orm\Model::class);
     $oldCount = $orm->characters->findAll()->countStored();
-    $character = $orm->characters->getById(1);
+    $character = $this->getCharacter();
     $data = [
       "name" => $character->name, "gender" => 1, "race" => 1, "class" => 1,
     ];

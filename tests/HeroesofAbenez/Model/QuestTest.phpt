@@ -5,14 +5,15 @@ namespace HeroesofAbenez\Model;
 
 use Tester\Assert;
 use HeroesofAbenez\Orm\Quest as QuestEntity;
+use HeroesofAbenez\Orm\CharacterQuest;
 
 require __DIR__ . "/../../bootstrap.php";
 
 final class QuestTest extends \Tester\TestCase {
+  use TCharacterControl;
+
   /** @var Quest */
   protected $model;
-  
-  use \Testbench\TCompiledContainer;
   
   public function setUp() {
     $this->model = $this->getService(Quest::class);
@@ -35,9 +36,8 @@ final class QuestTest extends \Tester\TestCase {
   }
   
   public function testStatus() {
-    $result = $this->model->status(1);
-    Assert::type("integer", $result);
-    Assert::same(1, $result);
+    Assert::same(CharacterQuest::PROGRESS_STARTED, $this->model->status(1));
+    Assert::same(CharacterQuest::PROGRESS_OFFERED, $this->model->status(5000));
   }
   
   public function testIsFinished() {
@@ -53,8 +53,7 @@ final class QuestTest extends \Tester\TestCase {
     $oldNeededItem = $quest->neededItem;
     /** @var \HeroesofAbenez\Orm\Model $orm */
     $orm = $this->getService(\HeroesofAbenez\Orm\Model::class);
-    /** @var \HeroesofAbenez\Orm\Character $user */
-    $user = $orm->characters->getById(1);
+    $user = $this->getCharacter();
     $quest->neededMoney = $user->money + 1;
     Assert::false($this->model->isCompleted($quest));
     $quest->neededMoney = $oldCostMoney;
@@ -70,6 +69,9 @@ final class QuestTest extends \Tester\TestCase {
       $this->model->finish(5000, 1);
     }, QuestNotFoundException::class);
     Assert::exception(function() {
+      $this->model->finish(2, 1);
+    }, QuestNotStartedException::class);
+    Assert::exception(function() {
       $this->model->finish(1, 2);
     }, CannotFinishQuestHereException::class);
     Assert::exception(function() {
@@ -84,10 +86,7 @@ final class QuestTest extends \Tester\TestCase {
     $oldRequiredClass = $quest->requiredClass;
     $oldRequiredRace = $quest->requiredRace;
     $oldRequiredQuest = $quest->requiredQuest;
-    /** @var \HeroesofAbenez\Orm\Model $orm */
-    $orm = $this->getService(\HeroesofAbenez\Orm\Model::class);
-    /** @var \HeroesofAbenez\Orm\Character $user */
-    $user = $orm->characters->getById(1);
+    $user = $this->getCharacter();
     $quest->requiredLevel = $user->level + 1;
     Assert::false($this->model->isAvailable($quest));
     $quest->requiredLevel = $oldRequiredLevel;
@@ -110,6 +109,12 @@ final class QuestTest extends \Tester\TestCase {
     Assert::exception(function() {
       $this->model->accept(1, 1);
     }, QuestAlreadyStartedException::class);
+    Assert::exception(function() {
+      $this->model->accept(2, 2);
+    }, CannotAcceptQuestHereException::class);
+    Assert::exception(function() {
+      $this->model->accept(2, 1);
+    }, QuestNotAvailableException::class);
   }
 
   public function testGetRequirements() {

@@ -167,9 +167,7 @@ final class Profile {
     $character->skillPoints++;
     foreach($this->stats as $stat) {
       $grow = $class->{$stat . "Grow"};
-      if($grow > 0) {
-        $character->$stat += $grow;
-      }
+      $character->$stat += $grow;
     }
     $this->orm->characters->persistAndFlush($character);
   }
