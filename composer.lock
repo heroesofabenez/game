@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c67db97c450e9fdab0f20bf1f77cabf4",
+    "content-hash": "423b5a4ec3f01a522d531eeceefc798e",
     "packages": [
         {
             "name": "heroesofabenez/chat",
@@ -72,19 +72,19 @@
             "source": {
                 "type": "git",
                 "url": "https://gitlab.com/heroesofabenez/combat.git",
-                "reference": "8291744ee0976d7261ca965ed24bc05b75790617"
+                "reference": "1eed22fac81340c4f3d395cdc83ad5868ca26a04"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://gitlab.com/api/v4/projects/heroesofabenez%2Fcombat/repository/archive.zip?sha=8291744ee0976d7261ca965ed24bc05b75790617",
-                "reference": "8291744ee0976d7261ca965ed24bc05b75790617",
+                "url": "https://gitlab.com/api/v4/projects/heroesofabenez%2Fcombat/repository/archive.zip?sha=1eed22fac81340c4f3d395cdc83ad5868ca26a04",
+                "reference": "1eed22fac81340c4f3d395cdc83ad5868ca26a04",
                 "shasum": ""
             },
             "require": {
                 "latte/latte": "^2.4",
                 "nette/utils": "^2.4",
                 "nexendrie/translation": "^1.1.1",
-                "nexendrie/utils": "^1.5",
+                "nexendrie/utils": "^1.5.1",
                 "php": ">=7.2.0",
                 "symfony/options-resolver": "^4.0"
             },
@@ -120,7 +120,7 @@
             "keywords": [
                 "combat"
             ],
-            "time": "2018-12-30T18:48:24+00:00"
+            "time": "2019-01-01T10:15:57+00:00"
         },
         {
             "name": "kdyby/autowired",
@@ -1225,16 +1225,16 @@
         },
         {
             "name": "nexendrie/menu",
-            "version": "dev-master",
+            "version": "2.1.0",
             "source": {
                 "type": "git",
                 "url": "https://gitlab.com/nexendrie/menu.git",
-                "reference": "c621cf9e2b7a62ae282f88892ac0ac5730b5b168"
+                "reference": "1a190b0f4ab619ab2bdd66cd21b7eae62a2944b6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://gitlab.com/api/v4/projects/nexendrie%2Fmenu/repository/archive.zip?sha=c621cf9e2b7a62ae282f88892ac0ac5730b5b168",
-                "reference": "c621cf9e2b7a62ae282f88892ac0ac5730b5b168",
+                "url": "https://gitlab.com/api/v4/projects/nexendrie%2Fmenu/repository/archive.zip?sha=1a190b0f4ab619ab2bdd66cd21b7eae62a2944b6",
+                "reference": "1a190b0f4ab619ab2bdd66cd21b7eae62a2944b6",
                 "shasum": ""
             },
             "require": {
@@ -1282,7 +1282,7 @@
                 "menu",
                 "nette"
             ],
-            "time": "2018-12-28T15:28:28+00:00"
+            "time": "2019-01-01T10:20:49+00:00"
         },
         {
             "name": "nexendrie/translation",
@@ -1360,16 +1360,16 @@
         },
         {
             "name": "nexendrie/utils",
-            "version": "1.5.0",
+            "version": "1.5.1",
             "source": {
                 "type": "git",
                 "url": "https://gitlab.com/nexendrie/utils.git",
-                "reference": "28b33644eda9608773d123662248260e60b66bc9"
+                "reference": "86e3373ddc7ee7a47ec9e626ee2f7924f094e9db"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://gitlab.com/api/v4/projects/nexendrie%2Futils/repository/archive.zip?sha=28b33644eda9608773d123662248260e60b66bc9",
-                "reference": "28b33644eda9608773d123662248260e60b66bc9",
+                "url": "https://gitlab.com/api/v4/projects/nexendrie%2Futils/repository/archive.zip?sha=86e3373ddc7ee7a47ec9e626ee2f7924f094e9db",
+                "reference": "86e3373ddc7ee7a47ec9e626ee2f7924f094e9db",
                 "shasum": ""
             },
             "require": {
@@ -1412,7 +1412,7 @@
                 "range",
                 "utils"
             ],
-            "time": "2018-12-30T17:55:25+00:00"
+            "time": "2019-01-01T10:09:12+00:00"
         },
         {
             "name": "nextras/dbal",
