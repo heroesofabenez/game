@@ -107,7 +107,10 @@ final class CombatHelper {
     if($npc->level === 1) {
       return [];
     }
-    $skills = [];
+    $skills = new class extends Collection {
+      /** @var string */
+      protected $class = BaseCharacterSkill::class;
+    };
     $skillRows = $this->orm->attackSkills->findByClassAndLevel($npc->class, $npc->level);
     foreach($skillRows as $skillRow) {
       $skills[] = new CharacterAttackSkill($skillRow->toDummy(), 0);
@@ -128,9 +131,7 @@ final class CombatHelper {
         $skillPoints--;
       }
     }
-    return array_values(array_filter($skills, function(BaseCharacterSkill $value) {
-      return ($value->level > 0);
-    }));
+    return $skills->getItems(["level>" => 0]);
   }
 
   /**
