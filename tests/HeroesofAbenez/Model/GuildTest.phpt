@@ -64,7 +64,7 @@ final class GuildTest extends \Tester\TestCase {
     Assert::type(\stdClass::class, $members[0]);
     Assert::type("string", $members[0]->customRankName);
     if($guild === 1) {
-      Assert::same("Sun ruler", $members[0]->customRankName);
+      Assert::true(strlen($members[0]->customRankName) > 0);
       Assert::count(2, $members);
     } else {
       Assert::same("", $members[0]->customRankName);
