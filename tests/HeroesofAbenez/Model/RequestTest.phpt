@@ -20,8 +20,7 @@ final class RequestTest extends \Tester\TestCase {
   
   public function testCanShow() {
     $request = $this->model->show(1);
-    $result = $this->model->canShow($request);
-    Assert::true($result);
+    Assert::true($this->model->canShow($request));
   }
   
   public function testShow() {

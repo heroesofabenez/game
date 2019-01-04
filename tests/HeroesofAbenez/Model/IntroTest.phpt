@@ -36,6 +36,7 @@ final class IntroTest extends \Tester\TestCase {
   }
 
   public function testGetStartingLocation() {
+    \Tester\Environment::lock("database", __DIR__ . "/../../..");
     Assert::same(1, $this->model->getStartingLocation());
     $this->modifyCharacter(["race" => 1, "class" => 1], function() {
       Assert::same(4, $this->model->getStartingLocation());

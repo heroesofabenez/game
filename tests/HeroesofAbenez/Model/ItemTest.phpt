@@ -25,6 +25,7 @@ final class ItemTest extends \Tester\TestCase {
   }
 
   public function testHaveItemGiveItemLoseItem() {
+    \Tester\Environment::lock("database", __DIR__ . "/../../..");
     Assert::false($this->model->haveItem(5000));
     Assert::false($this->model->haveItem(1));
     $this->model->loseItem(1);
