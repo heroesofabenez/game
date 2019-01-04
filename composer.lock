@@ -1887,45 +1887,28 @@
         },
         {
             "name": "kdyby/fake-session",
-            "version": "v2.0.1",
+            "version": "v2.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Kdyby/FakeSession.git",
-                "reference": "62c68e701bbc12d9ae13b5272ee510a03e06f18b"
+                "reference": "d49bbefbcd9ffb3d85f831ff921558dc17fc8328"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Kdyby/FakeSession/zipball/62c68e701bbc12d9ae13b5272ee510a03e06f18b",
-                "reference": "62c68e701bbc12d9ae13b5272ee510a03e06f18b",
+                "url": "https://api.github.com/repos/Kdyby/FakeSession/zipball/d49bbefbcd9ffb3d85f831ff921558dc17fc8328",
+                "reference": "d49bbefbcd9ffb3d85f831ff921558dc17fc8328",
                 "shasum": ""
             },
             "require": {
-                "nette/di": "~2.2@dev",
-                "nette/http": "~2.2@dev"
+                "nette/di": "^2.4.6@dev",
+                "nette/http": "^2.4.7@dev",
+                "php": ">=5.6.0"
             },
             "require-dev": {
-                "latte/latte": "~2.2@dev",
-                "nette/application": "~2.2@dev",
-                "nette/bootstrap": "~2.2@dev",
-                "nette/caching": "~2.2@dev",
-                "nette/component-model": "~2.2@dev",
-                "nette/database": "~2.2@dev",
-                "nette/deprecated": "~2.2@dev",
-                "nette/di": "~2.2@dev",
-                "nette/finder": "~2.2@dev",
-                "nette/forms": "~2.2@dev",
-                "nette/http": "~2.2@dev",
-                "nette/mail": "~2.2@dev",
-                "nette/neon": "~2.2@dev",
-                "nette/php-generator": "~2.2@dev",
-                "nette/reflection": "~2.2@dev",
-                "nette/robot-loader": "~2.2@dev",
-                "nette/safe-stream": "~2.2@dev",
-                "nette/security": "~2.2@dev",
-                "nette/tester": "~1.7",
-                "nette/tokenizer": "~2.2@dev",
-                "nette/utils": "~2.2@dev",
-                "tracy/tracy": "~2.2@dev"
+                "nette/bootstrap": "^2.4@dev",
+                "nette/caching": "^2.5@dev",
+                "nette/tester": "^2.0",
+                "nette/utils": "^2.4.5@dev"
             },
             "type": "library",
             "autoload": {
@@ -1954,7 +1937,7 @@
                 "nette",
                 "session"
             ],
-            "time": "2018-09-05T05:21:56+00:00"
+            "time": "2018-12-07T18:30:27+00:00"
         },
         {
             "name": "mrtnzlml/testbench",
