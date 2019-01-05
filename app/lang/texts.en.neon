@@ -24,6 +24,7 @@ item:
     requires: "Requires"
     level: "level"
     class: "class"
+    specialization: "specialization"
     price: "{1} Price: 1 silver mark|]1,+Inf[ Price: %count% silver marks"
     worn: "(Worn)"
     equip: "Equip item"

@@ -47,6 +47,7 @@ final class ItemTest extends \Tester\TestCase {
     $item = $this->model->view(6);
     $oldLevel = $item->requiredLevel;
     $oldClass = $item->requiredClass;
+    $oldSpecialization =  $item->requiredSpecialization;
     Assert::true($this->model->canEquipItem($item));
     $item->requiredLevel = 999;
     Assert::false($this->model->canEquipItem($item));
@@ -54,6 +55,9 @@ final class ItemTest extends \Tester\TestCase {
     $item->requiredClass = 1;
     Assert::false($this->model->canEquipItem($item));
     $item->requiredClass = $oldClass;
+    $item->requiredSpecialization = 1;
+    Assert::false($this->model->canEquipItem($item));
+    $item->requiredSpecialization = $oldSpecialization;
     $orm->items->persistAndFlush($item);
   }
 }

@@ -24,6 +24,7 @@ item:
     requires: "Vyžaduje"
     level: "úroveň"
     class: "třídu"
+    specialization: "specializaci"
     price: "{0}Cena: 0 stříbrňáků|{1}Cena:  1 stříbrňák|[2,4]Cena: %count% stříbrňáků|[5,+Inf]Cena: %count% stříbrňáků"
     worn: "(Nošeno)"
     equip: "Nasadit věc"

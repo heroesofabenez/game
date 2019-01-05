@@ -77,6 +77,8 @@ final class Item {
       return false;
     } elseif(!is_null($item->requiredClass) AND $item->requiredClass->id !== $this->user->identity->class) {
       return false;
+    } elseif(!is_null($item->requiredSpecialization) AND $item->requiredSpecialization->id !== $this->user->identity->specialization) {
+      return false;
     }
     return true;
   }

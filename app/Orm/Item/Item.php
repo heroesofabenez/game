@@ -17,6 +17,7 @@ use Nexendrie\Utils\Constants;
  * @property string|null $type {enum \HeroesofAbenez\Combat\Weapon::TYPE_*}
  * @property int $requiredLevel {default 1}
  * @property CharacterClass|null $requiredClass {m:1 CharacterClass::$items}
+ * @property CharacterSpecialization|null $requiredSpecialization {m:1 CharacterSpecialization::$items}
  * @property int $price
  * @property int $strength
  * @property int $durability

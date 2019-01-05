@@ -25,6 +25,7 @@ final class ItemPresenter extends BasePresenter {
     $this->template->item = $item;
     $this->template->level = $this->user->identity->level;
     $this->template->class = $this->user->identity->class;
+    $this->template->specialization = $this->user->identity->specialization;
   }
 }
 ?>

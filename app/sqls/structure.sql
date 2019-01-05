@@ -233,16 +233,19 @@ CREATE TABLE `introduction` (
 CREATE TABLE `items` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(30) NOT NULL,
-  `slot` enum('weapon','armor','shield','amulet', 'helmet', 'ring', 'item') NOT NULL,
-  `type` enum('sword','axe','club','dagger','spear','staff','bow','crossbow','throwing knife', 'instrument') DEFAULT NULL,
+  `slot` enum('weapon','armor','shield','amulet','helmet','ring','item') NOT NULL,
+  `type` enum('sword','axe','club','dagger','spear','staff','bow','crossbow','throwing knife','instrument') DEFAULT NULL,
   `required_level` int(11) NOT NULL DEFAULT '1',
   `required_class` int(11) DEFAULT NULL,
+  `required_specialization` int(11) DEFAULT NULL,
   `price` int(11) NOT NULL DEFAULT '0',
   `strength` int(3) NOT NULL DEFAULT '0',
   `durability` int(3) NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`),
   KEY `required_class` (`required_class`),
-  CONSTRAINT `equipment_ibfk_1` FOREIGN KEY (`required_class`) REFERENCES `character_classes` (`id`)
+  KEY `required_specialization` (`required_specialization`),
+  CONSTRAINT `items_ibfk_1` FOREIGN KEY (`required_class`) REFERENCES `character_classes` (`id`),
+  CONSTRAINT `items_ibfk_2` FOREIGN KEY (`required_specialization`) REFERENCES `character_specializations` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `messages` (
