@@ -110,5 +110,38 @@
     name: "Drum"
     description: "Nástroj některých zkušených bardů."
 38:
-    name: "Violet shirt"
+    name: "Fialová košile"
     description: "Košile populární mezi zkušenými bardy."
+39:
+    name: "Požehnaný meč"
+    description: "Meč populární mezi začínajícími paladiny."
+40:
+    name: "Požehnaná palice"
+    description: "Oblíbená zbraň některých začínajících paladinů."
+41:
+    name: "Požehnané brnění"
+    description: "Brnění používané začínajícími paladiny."
+42:
+    name: "Požehnaný štít"
+    description: "Štít používaný začínajícími paladiny."
+43:
+    name: "Požehnaná helma"
+    description: "Helma používaná začínajícími paladiny."
+44:
+    name: "Zkrvavená sekera"
+    description: "Meč populární mezi začínajícími berserky."
+45:
+    name: "Zkrvavený ošťep"
+    description: "Oblíbená zbraň některých začínajících berserků."
+46:
+    name: "Medvědí kožich"
+    description: "Brnění používané začínajícími berserky."
+47:
+    name: "Černokněžníkova hůl"
+    description: "Hůl používaná začínajícími černokněžníky."
+48:
+    name: "Černokněžníkův kabát"
+    description: "Brnění používané začínajícími černokněžníky."
+49:
+    name: "Černokněžníkův klobouk"
+    description: "Červený klobouk pro začínající černokněžníky."

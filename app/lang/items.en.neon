@@ -112,3 +112,36 @@
 38:
     name: "Violet shirt"
     description: "A shirt popular among seasoned bards."
+39:
+    name: "Blessed Sword"
+    description: "A sword popular among novice paladins."
+40:
+    name: "Blessed Maul"
+    description: "Weapon of choice of some novice paladins."
+41:
+    name: "Blessed Armor"
+    description: "Armor used by novice paladins."
+42:
+    name: "Blessed Shield"
+    description: "Schield used by novice paladins."
+43:
+    name: "Blessed Helmet"
+    description: "Helmet used by novice paladins."
+44:
+    name: "Bloody Axe"
+    description: "An axe popular among novice berserkers."
+45:
+    name: "Bloody Spear"
+    description: "Weapon of choice of some novice berserkers."
+46:
+    name: "Bear Coat"
+    description: "Armor used by novice berserkers."
+47:
+    name: "Sorcerer's Staff"
+    description: "Staff used by novice sorcerers."
+48:
+    name: "Sorcerer's Coat"
+    description: "Armor used by novice sorcerers."
+49:
+    name: "Sorcerer's Hat"
+    description: "Red hat for novice sorcerers."

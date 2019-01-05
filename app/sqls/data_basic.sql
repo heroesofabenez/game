@@ -86,7 +86,18 @@ INSERT INTO `items` (`id`, `name`, `slot`, `type`, `required_level`, `required_c
 (35,	'Pipe',	'weapon',	'instrument',	1,	5,	NULL,	0,	1,	10),
 (36,	'Flute',	'weapon',	'instrument',	10,	5,	NULL,	13,	2,	20),
 (37,	'Drum',	'weapon',	'instrument',	10,	5,	NULL,	17,	3,	20),
-(38,	'Violet shirt',	'armor',	NULL,	10,	5,	NULL,	0,	2,	20);
+(38,	'Violet shirt',	'armor',	NULL,	10,	5,	NULL,	0,	2,	20),
+(39,	'Blessed Sword',	'weapon',	'sword',	15,	1,	2,	26,	4,	30),
+(40,	'Blessed Maul',	'weapon',	'club',	15,	1,	2,	28,	4,	35),
+(41,	'Blessed Armor',	'armor',	NULL,	15,	1,	2,	30,	5,	35),
+(42,	'Blessed Shield',	'shield',	NULL,	15,	1,	2,	25,	7,	35),
+(43,	'Blessed Helmet',	'helmet',	NULL,	15,	1,	2,	30,	10,	35),
+(44,	'Bloody Axe',	'weapon',	'axe',	15,	1,	1,	26,	5,	30),
+(45,	'Bloody Spear',	'weapon',	'spear',	15,	1,	1,	26,	5,	30),
+(46,	'Bear Coat',	'armor',	NULL,	15,	1,	1,	26,	4,	30),
+(47,	'Sorcerer\'s Staff',	'weapon',	'staff',	15,	3,	7,	28,	4,	30),
+(48,	'Sorcerer\'s Coat',	'armor',	NULL,	15,	3,	7,	28,	3,	30),
+(49,	'Sorcerer\'s Hat',	'helmet',	NULL,	15,	3,	7,	28,	6,	30);
 
 INSERT INTO `pet_types` (`id`, `name`, `bonus_stat`, `bonus_value`, `image`, `required_level`, `required_class`, `required_race`, `cost`) VALUES
 (1,	'Rescued Lion',	'constitution',	5,	'',	8,	1,	NULL,	0),
@@ -126,7 +137,10 @@ INSERT INTO `pve_arena_opponents` (`id`, `name`, `race`, `gender`, `class`, `spe
   (14,	'Lucia',	3,	'female',	5,	NULL,	5),
   (15,	'Amadeus',	2,	'male',	5,	NULL,	10),
   (16,	'Ra-dah',	5,	'male',	2,	NULL,	14),
-  (17,	'Ignatius',	2,	'male',	4,	NULL,	14);
+  (17,	'Ignatius',	2,	'male',	4,	NULL,	14),
+  (18,	'Albus',	2,	'male',	1,	2,	16),
+  (19,	'Il-Maval',	1,	'male',	1,	1,	16),
+  (20,	'Elena',	3,	'female',	3,	7,	16);
 
 INSERT INTO `quests` (`id`, `name`, `required_level`, `required_class`, `required_race`, `required_quest`, `needed_item`, `item_amount`, `item_lose`, `needed_money`, `reward_money`, `reward_xp`, `reward_item`, `reward_white_karma`, `reward_dark_karma`, `reward_pet`, `npc_start`, `npc_end`) VALUES
   (1,	'Find a book',	1,	3,	NULL,	NULL,	1,	1,	0,	0,	0,	10,	NULL,	0,	0,	NULL,	1,	1),
@@ -206,4 +220,8 @@ INSERT INTO `pve_arena_opponent_equipment` (`id`, `npc`, `item`) VALUES
 (18,	15,	37),
 (19,	17,	31),
 (20,	16,	14),
-(21,	16,	20);
+(21,	16,	20),
+(22,	18,	42),
+(23,	18,	43),
+(24,	18,	40),
+(25,	20,	49);
