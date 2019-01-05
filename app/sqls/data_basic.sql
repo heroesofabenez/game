@@ -7,8 +7,8 @@ INSERT INTO `character_classes` (`id`, `name`, `strength`, `strength_grow`, `dex
 (1,	'fighter',	11,	0.25,	10,	0.1,	12,	0.5,	9,	0.1,	9,	0.1,	1,	'1d5+DEX/4',	1),
 (2,	'rogue',	11,	0.25,	12,	0.5,	8,	0.1,	10,	0.1,	10,	0.1,	1,	'2d3+DEX/4',	1),
 (3,	'wizard',	9,	0,	10,	0.1,	9,	0.1,	12,	0.5,	11,	0.25,	1.1,	'5d2+INT/3',	1),
-(4,	'archer',	9,	0.1,	12,	0.5,	9,	0.1,	11,	0.25,	10,	0.1,	1,	'4d2+DEX/4',	1),
-(5,	'bard',	9,	0.1,	11,	0.25,	9,	0.1,	10,	0.1,	12,	0.5,	1,	'5d2+CHAR/3',	0);
+(4,	'archer',	9,	0,	12,	0.5,	9,	0.1,	11,	0.25,	10,	0.1,	1.1,	'4d2+DEX/4',	1),
+(5,	'bard',	9,	0,	11,	0.25,	9,	0.1,	10,	0.1,	12,	0.5,	1.1,	'5d2+CHAR/3',	0);
 
 INSERT INTO `character_races` (`id`, `name`, `strength`, `dexterity`, `constitution`, `intelligence`, `charisma`, `playable`) VALUES
 (1,	'barbarian',	1,	0,	1,	-1,	-1,	1),
@@ -18,13 +18,13 @@ INSERT INTO `character_races` (`id`, `name`, `strength`, `dexterity`, `constitut
 (5,	'orc',	1,	1,	0,	-1,	-2,	0);
 
 INSERT INTO `character_specializations` (`id`, `name`, `class`, `strength_grow`, `dexterity_grow`, `constitution_grow`, `intelligence_grow`, `charisma_grow`, `stat_points_level`) VALUES
-(1,	'berserker',	1,	0.6,	0.2,	0.3,	0.1,	0.1,	1.2),
-(2,	'paladin',	1,	0.2,	0.1,	0.75,	0.25,	0.2,	1),
+(1,	'berserker',	1,	0.6,	0.2,	0.4,	0.0,	0.1,	1.2),
+(2,	'paladin',	1,	0.2,	0,	0.75,	0.25,	0.3,	1),
 (3,	'executioner',	2,	0.25,	0.75,	0.2,	0.2,	0.1,	1),
 (4,	'spy',	2,	0.25,	0.6,	0.2,	0.25,	0.2,	1),
 (5,	'ranger',	4,	0.1,	0.75,	0.2,	0.35,	0.1,	1),
 (6,	'bowman',	4,	0.3,	0.5,	0.3,	0.2,	0.2,	1),
-(7,	'sorcerer',	3,	0,	0.2,	0.2,	0.75,	0.25,	1.1),
+(7,	'sorcerer',	3,	0,	0.2,	0.2,	0.75,	0.35,	1),
 (8,	'mystic',	3,	0.1,	0.3,	0.3,	0.6,	0.2,	1);
 
 INSERT INTO `guild_privileges` (`id`, `action`, `rank`) VALUES
