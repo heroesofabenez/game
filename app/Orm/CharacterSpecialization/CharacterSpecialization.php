@@ -21,6 +21,8 @@ use Nextras\Orm\Relationships\OneHasMany;
  * @property OneHasMany|Character[] $characters {1:m Character::$specialization}
  * @property OneHasMany|SkillAttack[] $attackSkills {1:m SkillAttack::$neededSpecialization}
  * @property OneHasMany|SkillSpecial[] $specialSkills {1:m SkillSpecial::$neededSpecialization}
+ * @property OneHasMany|PveArenaOpponent[] $arenaNpcs {1:m PveArenaOpponent::$specialization}
+ * @property OneHasMany|Npc[] $npcs {1:m Npc::$specialization}
  * @property-read string $mainStat {virtual}
  */
 final class CharacterSpecialization extends \Nextras\Orm\Entity\Entity {

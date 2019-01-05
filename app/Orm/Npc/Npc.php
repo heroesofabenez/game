@@ -14,6 +14,7 @@ use Nexendrie\Utils\Numbers;
  * @property string $name
  * @property CharacterRace $race {m:1 CharacterRace::$npcs}
  * @property CharacterClass $class {m:1 CharacterClass::$npcs}
+ * @property CharacterSpecialization|null $specialization {m:1 CharacterSpecialization::$npcs}
  * @property-read bool $quests {virtual}
  * @property-read bool $shop {virtual}
  * @property bool $fight {default false}

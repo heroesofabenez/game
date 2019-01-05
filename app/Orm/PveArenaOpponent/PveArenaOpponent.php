@@ -16,6 +16,7 @@ use Nextras\Orm\Relationships\OneHasMany;
  * @property CharacterRace $race {m:1 CharacterRace::$arenaNpcs}
  * @property string $gender {enum self::GENDER_*} {default self::GENDER_MALE}
  * @property CharacterClass $class {m:1 CharacterClass::$arenaNpcs}
+ * @property CharacterSpecialization|null $specialization {m:1 CharacterSpecialization::$arenaNpcs}
  * @property int $level {default 1}
  * @property OneHasMany|PveArenaOpponentEquipment[] $equipment {1:m PveArenaOpponentEquipment::$npc}
  * @property-read Item|null $weapon {virtual}

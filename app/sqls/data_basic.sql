@@ -110,24 +110,24 @@ INSERT INTO `pet_types` (`id`, `name`, `bonus_stat`, `bonus_value`, `image`, `re
 (18,	'Royal Owl',	'intelligence',	20,	'',	45,	3,	NULL,	0),
 (19,	'Royal Hawk',	'dexterity',	20,	'',	45,	4,	NULL,	0);
 
-INSERT INTO `pve_arena_opponents` (`id`, `name`, `race`, `gender`, `class`, `level`) VALUES
-  (1,	'Div Fast-hands',	2,	'male',	2,	2),
-  (2,	'El-Tovil',	4,	'male',	1,	2),
-  (3,	'Valiana',	3,	'female',	3,	2),
-  (4,	'Alinia',	3,	'female',	4,	3),
-  (5,	'Eldan',	1,	'male',	1,	5),
-  (6,	'Remus',	2,	'male',	1,	8),
-  (7,	'Celia',	3,	'female',	2,	8),
-  (8,	'Salazar',	2,	'male',	3,	9),
-  (9,	'Durhana',	4,	'female',	2,	9),
-  (10,	'Il-Salah',	1,	'male',	4,	8),
-  (11,	'Murie',	1,	'female',	1,	10),
-  (12,	'Tharna',	4,	'female',	3,	12),
-  (13,	'Skur-dah',	5,	'male',	1,	12),
-  (14,	'Lucia',	3,	'female',	5,	5),
-  (15,	'Amadeus',	2,	'male',	5,	10),
-  (16,	'Ra-dah',	5,	'male',	2,	14),
-  (17,	'Ignatius',	2,	'male',	4,	14);
+INSERT INTO `pve_arena_opponents` (`id`, `name`, `race`, `gender`, `class`, `specialization`, `level`) VALUES
+  (1,	'Div Fast-hands',	2,	'male',	2,	NULL,	2),
+  (2,	'El-Tovil',	4,	'male',	1,	NULL,	2),
+  (3,	'Valiana',	3,	'female',	3,	NULL,	2),
+  (4,	'Alinia',	3,	'female',	4,	NULL,	3),
+  (5,	'Eldan',	1,	'male',	1,	NULL,	5),
+  (6,	'Remus',	2,	'male',	1,	NULL,	8),
+  (7,	'Celia',	3,	'female',	2,	NULL,	8),
+  (8,	'Salazar',	2,	'male',	3,	NULL,	9),
+  (9,	'Durhana',	4,	'female',	2,	NULL,	9),
+  (10,	'Il-Salah',	1,	'male',	4,	NULL,	8),
+  (11,	'Murie',	1,	'female',	1,	NULL,	10),
+  (12,	'Tharna',	4,	'female',	3,	NULL,	12),
+  (13,	'Skur-dah',	5,	'male',	1,	NULL,	12),
+  (14,	'Lucia',	3,	'female',	5,	NULL,	5),
+  (15,	'Amadeus',	2,	'male',	5,	NULL,	10),
+  (16,	'Ra-dah',	5,	'male',	2,	NULL,	14),
+  (17,	'Ignatius',	2,	'male',	4,	NULL,	14);
 
 INSERT INTO `quests` (`id`, `name`, `required_level`, `required_class`, `required_race`, `required_quest`, `needed_item`, `item_amount`, `item_lose`, `needed_money`, `reward_money`, `reward_xp`, `reward_item`, `reward_white_karma`, `reward_dark_karma`, `reward_pet`, `npc_start`, `npc_end`) VALUES
   (1,	'Find a book',	1,	3,	NULL,	NULL,	1,	1,	0,	0,	0,	10,	NULL,	0,	0,	NULL,	1,	1),
@@ -180,11 +180,11 @@ INSERT INTO `skills_specials` (`id`, `name`, `needed_class`, `needed_specializat
 (9,	'Irksome noise',	5,	NULL,	1,	'debuff',	'enemy',	'damage',	15,	1,	5,	3),
 (10,	'Song of agility',	5,	NULL,	10,	'buff',	'party',	'dodge',	15,	2,	6,	4);
 
-INSERT INTO `npcs` (`id`, `name`, `race`, `class`, `fight`, `smith`, `sprite`, `portrait`, `stage`, `karma`, `personality`, `level`, `pos_x`, `pos_y`) VALUES
-  (1,	'Mentor',	2,	3,	0,	0,	'mentor.jpeg',	'mentor.jpeg',	1,	'neutral',	'teaching',	10,	1,	1),
-  (2,	'Librarian',	2,	3,	0,	1,	'librarian.jpeg',	'librarian.jpeg',	3,	'neutral',	'friendly',	10,	1,	1),
-  (3,	'Instructor',	1,	1,	0,	0,	'instructor.jpeg',	'instructor.jpeg',	4,	'neutral',	'teaching',	10,	1,	1),
-  (4,	'Blacksmith',	1,	1,	0,	1,	'blacksmith.jpeg',	'blacksmith.jpeg',	5,	'neutral',	'friendly',	10,	1,	1);
+INSERT INTO `npcs` (`id`, `name`, `race`, `class`, `specialization`, `fight`, `smith`, `sprite`, `portrait`, `stage`, `karma`, `personality`, `level`, `pos_x`, `pos_y`) VALUES
+  (1,	'Mentor',	2,	3,	NULL,	0,	0,	'mentor.jpeg',	'mentor.jpeg',	1,	'neutral',	'teaching',	10,	1,	1),
+  (2,	'Librarian',	2,	3,	NULL,	0,	1,	'librarian.jpeg',	'librarian.jpeg',	3,	'neutral',	'friendly',	10,	1,	1),
+  (3,	'Instructor',	1,	1,	NULL,	0,	0,	'instructor.jpeg',	'instructor.jpeg',	4,	'neutral',	'teaching',	10,	1,	1),
+  (4,	'Blacksmith',	1,	1,	NULL,	0,	1,	'blacksmith.jpeg',	'blacksmith.jpeg',	5,	'neutral',	'friendly',	10,	1,	1);
 
 INSERT INTO `pve_arena_opponent_equipment` (`id`, `npc`, `item`) VALUES
 (1,	2,	3),

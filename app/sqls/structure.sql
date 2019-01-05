@@ -265,6 +265,7 @@ CREATE TABLE `npcs` (
   `name` varchar(20) NOT NULL,
   `race` int(11) NOT NULL,
   `class` int(11) NOT NULL,
+  `specialization` int(11) DEFAULT NULL,
   `fight` int(1) NOT NULL DEFAULT '0',
   `smith` int(1) NOT NULL DEFAULT '0',
   `sprite` varchar(35) NOT NULL,
@@ -279,9 +280,11 @@ CREATE TABLE `npcs` (
   KEY `stage` (`stage`),
   KEY `race` (`race`),
   KEY `class` (`class`),
+  KEY `specialization` (`specialization`),
   CONSTRAINT `npcs_ibfk_1` FOREIGN KEY (`stage`) REFERENCES `quest_stages` (`id`),
   CONSTRAINT `npcs_ibfk_2` FOREIGN KEY (`race`) REFERENCES `character_races` (`id`),
-  CONSTRAINT `npcs_ibfk_3` FOREIGN KEY (`class`) REFERENCES `character_classes` (`id`)
+  CONSTRAINT `npcs_ibfk_3` FOREIGN KEY (`class`) REFERENCES `character_classes` (`id`),
+  CONSTRAINT `npcs_ibfk_4` FOREIGN KEY (`specialization`) REFERENCES `character_specializations` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `pets` (
@@ -321,12 +324,15 @@ CREATE TABLE `pve_arena_opponents` (
   `race` int(11) NOT NULL,
   `gender` enum('male','female') NOT NULL DEFAULT 'male',
   `class` int(11) NOT NULL,
+  `specialization` int(11) DEFAULT NULL,
   `level` int(3) NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`),
   KEY `class` (`class`),
   KEY `race` (`race`),
+  KEY `specialization` (`specialization`),
   CONSTRAINT `pve_arena_opponents_ibfk_1` FOREIGN KEY (`class`) REFERENCES `character_classes` (`id`),
-  CONSTRAINT `pve_arena_opponents_ibfk_2` FOREIGN KEY (`race`) REFERENCES `character_races` (`id`)
+  CONSTRAINT `pve_arena_opponents_ibfk_2` FOREIGN KEY (`race`) REFERENCES `character_races` (`id`),
+  CONSTRAINT `pve_arena_opponents_ibfk_3` FOREIGN KEY (`specialization`) REFERENCES `character_specializations` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `quests` (

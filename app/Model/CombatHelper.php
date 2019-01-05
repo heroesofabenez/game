@@ -167,9 +167,9 @@ final class CombatHelper {
     if(is_null($npc)) {
       throw new OpponentNotFoundException();
     }
-    $data = $this->cb->create($npc->class, $npc->race, $npc->level);
+    $data = $this->cb->create($npc->class, $npc->race, $npc->level, $npc->specialization);
     $stats = [
-      "name", "level", "race", "gender",
+      "name", "level", "race", "gender", "specialization",
     ];
     foreach($stats as $stat) {
       if($npc->$stat instanceof IEntity) {
@@ -198,9 +198,9 @@ final class CombatHelper {
     if(is_null($npc)) {
       throw new OpponentNotFoundException();
     }
-    $data = $this->cb->create($npc->class, $npc->race, $npc->level);
+    $data = $this->cb->create($npc->class, $npc->race, $npc->level, $npc->specialization);
     $stats = [
-      "name", "level", "race",
+      "name", "level", "race", "specialization",
     ];
     foreach($stats as $stat) {
       if($npc->$stat instanceof IEntity) {
