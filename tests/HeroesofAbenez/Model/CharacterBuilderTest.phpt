@@ -39,14 +39,14 @@ final class CharacterBuilderTest extends \Tester\TestCase {
     Assert::same(8, $result["intelligence"]);
     Assert::same(8, $result["charisma"]);
     Assert::exception(function() use($class, $race,  $orm) {
-      $specialization = $orm->specializations->getById(9);
+      $specialization = $orm->specializations->getById(8);
       $this->model->create($class, $race, CharacterBuilder::SPECIALIZATION_LEVEL - 1, $specialization);
     }, CannotChooseSpecializationException::class);
     Assert::exception(function() use($class, $race) {
       $this->model->create($class, $race, CharacterBuilder::SPECIALIZATION_LEVEL);
     }, SpecializationNotChosenException::class);
     Assert::exception(function() use($class, $race,  $orm) {
-      $specialization = $orm->specializations->getById(9);
+      $specialization = $orm->specializations->getById(8);
       $this->model->create($class, $race, CharacterBuilder::SPECIALIZATION_LEVEL, $specialization);
     }, SpecializationNotAvailableException::class);
     $specialization = $orm->specializations->getById(1);

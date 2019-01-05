@@ -7,12 +7,10 @@
 4:
     name: "spy"
 5:
-    name: "hunter"
+    name: "ranger"
 6:
     name: "bowman"
 7:
-    name: "ranger"
-8:
     name: "sorcerer"
-9:
+8:
     name: "mystic"
