@@ -33,17 +33,35 @@ final class PveArenaOpponent extends \Nextras\Orm\Entity\Entity {
   protected function getterWeapon(): ?Item {
     return $this->class->items->get()->orderBy("requiredLevel", ICollection::DESC)
       ->getBy([
-        "requiredLevel<=" => $this->level,
-        "slot" => Item::SLOT_WEAPON,
+        ICollection::OR,
+        [
+          "requiredLevel<=" => $this->level,
+          "slot" => Item::SLOT_WEAPON,
+          "requiredSpecialization" => null,
+        ],
+        [
+          "requiredLevel<=" => $this->level,
+          "slot" => Item::SLOT_WEAPON,
+          "requiredSpecialization" => $this->specialization,
+        ]
       ]);
   }
 
   protected function getterArmor(): ?Item {
     return $this->class->items->get()->orderBy("requiredLevel", ICollection::DESC)
       ->getBy([
-        "requiredLevel<=" => $this->level,
-        "slot" => Item::SLOT_ARMOR,
-        ]);
+        ICollection::OR,
+        [
+          "requiredLevel<=" => $this->level,
+          "slot" => Item::SLOT_ARMOR,
+          "requiredSpecialization" => null,
+        ],
+        [
+          "requiredLevel<=" => $this->level,
+          "slot" => Item::SLOT_ARMOR,
+          "requiredSpecialization" => $this->specialization,
+        ]
+      ]);
   }
 }
 ?>
