@@ -18,7 +18,7 @@ INSERT INTO `character_races` (`id`, `name`, `strength`, `dexterity`, `constitut
 (5,	'orc',	1,	1,	0,	-1,	-2,	0);
 
 INSERT INTO `character_specializations` (`id`, `name`, `class`, `strength_grow`, `dexterity_grow`, `constitution_grow`, `intelligence_grow`, `charisma_grow`, `stat_points_level`) VALUES
-(1,	'warrior',	1,	0.6,	0.2,	0.3,	0.1,	0.1,	1.2),
+(1,	'berserker',	1,	0.6,	0.2,	0.3,	0.1,	0.1,	1.2),
 (2,	'paladin',	1,	0.2,	0.1,	0.75,	0.25,	0.2,	1),
 (3,	'executioner',	2,	0.25,	0.75,	0.2,	0.2,	0.1,	1),
 (4,	'spy',	2,	0.25,	0.6,	0.2,	0.25,	0.2,	1),
