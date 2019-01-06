@@ -66,6 +66,18 @@ final class Quest {
   public function view(int $id): ?QuestEntity {
     return $this->orm->quests->getById($id);
   }
+
+  public function getCharacterQuest(int $id): CharacterQuest {
+    $row = $this->orm->characterQuests->getByCharacterAndQuest($this->user->id, $id);
+    if(is_null($row)) {
+      $row = new CharacterQuest();
+      $this->orm->characterQuests->attach($row);
+      $row->character = $this->user->id;
+      $row->quest = $id;
+      $row->progress = CharacterQuest::PROGRESS_OFFERED;
+    }
+    return $row;
+  }
   
   /**
    * Get quest's status
@@ -116,8 +128,8 @@ final class Quest {
     if(is_null($quest)) {
       throw new QuestNotFoundException();
     }
-    $status = $this->status($id);
-    if($status === CharacterQuest::PROGRESS_OFFERED OR $status === CharacterQuest::PROGRESS_FINISHED) {
+    $record = $this->getCharacterQuest($id);
+    if($record->progress === CharacterQuest::PROGRESS_OFFERED OR $record->progress === CharacterQuest::PROGRESS_FINISHED) {
       throw new QuestNotStartedException();
     }
     if($quest->npcEnd->id !== $npcId) {
@@ -126,8 +138,6 @@ final class Quest {
     if(!$this->isCompleted($quest)) {
       throw new QuestNotFinishedException();
     }
-    /** @var CharacterQuest $record */
-    $record = $this->orm->characterQuests->getByCharacterAndQuest($this->user->id, $id);
     $record->progress = CharacterQuest::PROGRESS_FINISHED;
     if($quest->itemLose) {
       $this->itemModel->loseItem($quest->neededItem->id, $quest->itemAmount);
@@ -179,8 +189,8 @@ final class Quest {
     if(is_null($quest)) {
       throw new QuestNotFoundException();
     }
-    $status = $this->status($id);
-    if($status !== CharacterQuest::PROGRESS_OFFERED) {
+    $record = $this->getCharacterQuest($id);
+    if($record->progress !== CharacterQuest::PROGRESS_OFFERED) {
       throw new QuestAlreadyStartedException();
     }
     if($quest->npcStart->id !== $npcId) {
@@ -189,10 +199,7 @@ final class Quest {
     if(!$this->isAvailable($quest)) {
       throw new QuestNotAvailableException();
     }
-    $record = new CharacterQuest();
-    $this->orm->characterQuests->attach($record);
-    $record->character = $this->user->id;
-    $record->quest = $id;
+    $record->progress = CharacterQuest::PROGRESS_STARTED;
     $this->orm->characterQuests->persistAndFlush($record);
   }
 

@@ -34,6 +34,15 @@ final class QuestTest extends \Tester\TestCase {
     Assert::type(QuestEntity::class, $quest);
     Assert::null($this->model->view(5000));
   }
+
+  public function testGetCharacterQuest() {
+    $result = $this->model->getCharacterQuest(1);
+    Assert::type(CharacterQuest::class, $result);
+    Assert::same(CharacterQuest::PROGRESS_STARTED, $result->progress);
+    $result = $this->model->getCharacterQuest(2);
+    Assert::type(CharacterQuest::class, $result);
+    Assert::same(CharacterQuest::PROGRESS_OFFERED, $result->progress);
+  }
   
   public function testStatus() {
     Assert::same(CharacterQuest::PROGRESS_STARTED, $this->model->status(1));
