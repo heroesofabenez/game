@@ -18,7 +18,6 @@ CREATE TABLE `characters` (
   `constitution` float NOT NULL,
   `intelligence` float NOT NULL,
   `charisma` float NOT NULL,
-  `description` varchar(150) DEFAULT NULL,
   `guild` int(11) DEFAULT NULL,
   `guildrank` int(1) DEFAULT NULL,
   `owner` int(11) NOT NULL,

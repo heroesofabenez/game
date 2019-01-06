@@ -25,7 +25,6 @@ use Nexendrie\Utils\Numbers;
  * @property float $constitution
  * @property float $intelligence
  * @property float $charisma
- * @property string|null $description
  * @property Guild|null $guild {m:1 Guild::$members} {default null}
  * @property GuildRank|null $guildrank {m:1 GuildRank::$characters} {default null}
  * @property int $owner

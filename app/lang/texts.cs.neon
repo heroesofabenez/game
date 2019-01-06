@@ -174,7 +174,6 @@ profile:
     notInGuild: "Nečlen cechu"
     activePet: "Aktivní mazlíček:"
     noActivePet: "Žádný aktivní mazlíček"
-    moreInfo: "Další info:"
     notFoundTitle: "Postava nenalezena"
     notFound: "Požadovaná postava nebyla nalezena."
     predominantKarma: "Převažující karma:"

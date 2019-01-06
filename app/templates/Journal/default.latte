@@ -7,6 +7,5 @@
   <p>{_"texts.journal.guild"}<br>{if $guild}{_"guildranks.$guildRank.name"|firstUpper} {_"texts.journal.ofGuild"} {$guild}{else}{_"texts.journal.notInGuild"}{/if}</p>
   <p>{_"texts.journal.karma"}<br>{_"texts.journal.white"} {$whiteKarma}, {_"texts.journal.dark"} {$darkKarma}</p>
   <p>{_"texts.journal.position"}<br>{$stageName} {_"texts.journal.at"} {$areaName}</p>
-  <p>{_"texts.profile.moreInfo"}<br>{$description}</p>
   {control menu:chapters journal}
 {/block}

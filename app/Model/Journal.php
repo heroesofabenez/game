@@ -59,8 +59,7 @@ final class Journal {
       "class" => $character->class->id,
       "specialization" => (!is_null($character->specialization)) ? $character->specialization->id : null,
       "level" => $character->level, "whiteKarma" => $character->whiteKarma, "darkKarma" => $character->darkKarma,
-      "experiences" => $character->experience, "description" => $character->description,
-      "stageName" => $stageName, "areaName" => $areaName,
+      "experiences" => $character->experience, "stageName" => $stageName, "areaName" => $areaName,
     ];
     $return["guild"] = false;
     if(!is_null($character->guild)) {

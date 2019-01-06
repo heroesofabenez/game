@@ -174,7 +174,6 @@ profile:
     notInGuild: "Not a member of guild"
     activePet: "Active pet:"
     noActivePet: "No active pet"
-    moreInfo: "More info:"
     notFoundTitle: "Character not found"
     notFound: "Requested character was not found."
     predominantKarma: "Predominant karma:"
