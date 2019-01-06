@@ -25,6 +25,7 @@ use Nexendrie\Utils\Numbers;
  * @property float $constitution
  * @property float $intelligence
  * @property float $charisma
+ * @property-read int $charismaBonus {virtual}
  * @property Guild|null $guild {m:1 Guild::$members} {default null}
  * @property GuildRank|null $guildrank {m:1 GuildRank::$characters} {default null}
  * @property int $owner
@@ -64,6 +65,11 @@ final class Character extends \Nextras\Orm\Entity\Entity {
 
   protected function getterActivePet(): ?Pet {
     return $this->pets->get()->getBy(["deployed" => true]);
+  }
+
+  protected function getterCharismaBonus(): int {
+    $charisma = Numbers::range((int) $this->charisma - 10, 0, 999);
+    return $charisma * 3;
   }
   
   public function onBeforeInsert(): void {

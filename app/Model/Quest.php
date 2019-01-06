@@ -143,7 +143,7 @@ final class Quest {
       $this->itemModel->loseItem($quest->neededItem->id, $quest->itemAmount);
     }
     $record->character->money -= $quest->neededMoney;
-    $record->character->money += $quest->rewardMoney;
+    $record->character->money += $record->rewardMoney;
     $record->character->experience += $quest->rewardXp;
     if(!is_null($quest->rewardItem)) {
       $this->itemModel->giveItem($quest->rewardItem->id);

@@ -37,7 +37,8 @@ final class CharacterItem extends \Nextras\Orm\Entity\Entity {
   protected function getterRepairPrice(): int {
     $price = ($this->item->price > 0) ? $this->item->price : 8;
     $damage = ($this->durability / $this->maxDurability * 100 - 100) * -1;
-    return (int) ($price / 100 * $damage * $this->amount);
+    $repairPrice = ($price / 100 * $damage * $this->amount);
+    return (int) ($repairPrice - $repairPrice / 100 * $this->character->charismaBonus);
   }
 
   public function toCombatEquipment(): ?\HeroesofAbenez\Combat\Equipment {
