@@ -127,9 +127,7 @@ final class NPCQuestsControl extends \Nette\Application\UI\Control {
     }
     $this->presenter->flashMessage("messages.quest.finished");
     $this->user->logout();
-    /** @var QuestEntity $quest */
-    $quest = $this->questModel->view($questId);
-    $this->presenter->redirect("Quest:view", $quest->id);
+    $this->presenter->redirect("Quest:view", $questId);
   }
 }
 ?>
