@@ -286,3 +286,4 @@ skill:
     effectdebuffhit: "Efekt: Snižuje cíli šanci na zásah by %value%% + %valueGrowth%% za úroveň"
     effectdebuffdodge: "Efekt: Snižuje cíli šanci na blokování by %value%% + %valueGrowth%% za úroveň"
     effectdebuffinitiative: "Efekt: Snižuje iniciativu cílu by %value%% + %valueGrowth%% za úroveň"
+    hitRate: "Šance na zásah: %count%"

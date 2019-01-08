@@ -9,5 +9,6 @@
   {_"texts.skill.skillLevels", $skill->levels}<br>
   {_"texts.skill.target$skill->target"}<br>
   {_"texts.skill.skillStrikes", $skill->strikes}
+  {if $skill->hitRate}<br>{_"texts.skill.hitRate", $skill->hitRate}{/if}
   </p>
 {/block}

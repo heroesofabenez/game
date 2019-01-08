@@ -286,3 +286,4 @@ skill:
     effectdebuffhit: "Effect: Decreases target's hit chance by %value%% + %valueGrowth%% per level"
     effectdebuffdodge: "Effect: Decreases target's dodge chance by %value%% + %valueGrowth%% per level"
     effectdebuffinitiative: "Effect: Decreases target's initiative by %value%% + %valueGrowth%% per level"
+    hitRate: "Hit rate: %count%"
