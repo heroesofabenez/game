@@ -468,7 +468,7 @@ CREATE TABLE `skills_attacks` (
   `levels` int(2) NOT NULL,
   `target` enum('single','row','column') NOT NULL DEFAULT 'single',
   `strikes` int(1) NOT NULL DEFAULT '1',
-  `hit_rate` varchar(30) DEFAULT 'NULL',
+  `hit_rate` varchar(30) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `needed_class` (`needed_class`),
   KEY `needed_specialization` (`needed_specialization`),

@@ -179,7 +179,15 @@ INSERT INTO `skills_attacks` (`id`, `name`, `needed_class`, `needed_specializati
 (2,	'Shadow strike',	2,	NULL,	1,	'61%',	'2%',	5,	'single',	2,	NULL),
 (3,	'Blast',	3,	NULL,	1,	'115%',	'5%',	5,	'single',	1,	NULL),
 (4,	'Rain of arrows',	4,	NULL,	1,	'35%',	'2%',	5,	'single',	3,	NULL),
-(5,	'Sound wave',	5,	NULL,	1,	'80%',	'2%',	5,	'row',	1,	'NULL');
+(5,	'Sound wave',	5,	NULL,	1,	'80%',	'2%',	5,	'row',	1,	NULL),
+(6,	'Wrath strike',	1,	1,	15,	'100%',	'5%',	5,	'row',	1,	'80%'),
+(7,	'Light beam',	1,	2,	15,	'40%',	'3%',	5,	'column',	2,	NULL),
+(8,	'Execution',	2,	3,	15,	'140%',	'5%',	5,	'single',	1,	'120%'),
+(9,	'Gas leakage',	2,	4,	15,	'70%',	'5%',	5,	'row',	1,	NULL),
+(10,	'Master shot',	4,	5,	15,	'90%',	'4%',	5,	'row',	1,	'120%'),
+(11,	'Double shot',	4,	6,	15,	'100%',	'4%',	5,	'column',	1,	NULL),
+(12,	'Fireball',	3,	7,	15,	'60%',	'5%',	5,	'single',	2,	NULL),
+(13,	'Freezing point',	3,	8,	15,	'50%',	'3%',	5,	'column',	2,	'120%');
 
 INSERT INTO `skills_specials` (`id`, `name`, `needed_class`, `needed_specialization`, `needed_level`, `type`, `target`, `stat`, `value`, `value_growth`, `levels`, `duration`) VALUES
 (1,	'Shield',	1,	NULL,	1,	'buff',	'self',	'defense',	12,	2,	5,	3),
@@ -191,7 +199,15 @@ INSERT INTO `skills_specials` (`id`, `name`, `needed_class`, `needed_specializat
 (7,	'Entangle',	3,	NULL,	10,	'debuff',	'enemy',	'initiative',	13,	2,	6,	4),
 (8,	'Evasion',	4,	NULL,	10,	'buff',	'party',	'dodge',	10,	1,	6,	4),
 (9,	'Irksome noise',	5,	NULL,	1,	'debuff',	'enemy',	'damage',	15,	1,	5,	3),
-(10,	'Song of agility',	5,	NULL,	10,	'buff',	'party',	'dodge',	15,	2,	6,	4);
+(10,	'Song of agility',	5,	NULL,	10,	'buff',	'party',	'dodge',	15,	2,	6,	4),
+(11,	'Rage',	1,	1,	15,	'buff',	'self',	'damage',	20,	3,	6,	3),
+(12,	'Gaia\'s protection',	1,	2,	15,	'buff',	'party',	'maxHitpoints',	15,	3,	6,	4),
+(13,	'Mark of death',	2,	3,	15,	'debuff',	'enemy',	'dodge',	15,	4,	6,	2),
+(14,	'Stunning strike',	2,	4,	15,	'debuff',	'enemy',	'initiative',	15,	4,	6,	2),
+(15,	'Poisoned arrow',	4,	5,	15,	'poison',	'enemy',	NULL,	3,	1,	6,	4),
+(16,	'Marksman',	4,	6,	15,	'buff',	'party',	'hit',	15,	3,	6,	3),
+(17,	'Weakness',	3,	7,	15,	'debuff',	'enemy',	'defense',	15,	4,	6,	2),
+(18,	'Magic shield',	3,	8,	15,	'buff',	'self',	'defense',	10,	4,	6,	3);
 
 INSERT INTO `npcs` (`id`, `name`, `race`, `class`, `specialization`, `fight`, `smith`, `sprite`, `portrait`, `stage`, `karma`, `personality`, `level`, `pos_x`, `pos_y`) VALUES
   (1,	'Mentor',	2,	3,	NULL,	0,	0,	'mentor.jpeg',	'mentor.jpeg',	1,	'neutral',	'teaching',	10,	1,	1),
