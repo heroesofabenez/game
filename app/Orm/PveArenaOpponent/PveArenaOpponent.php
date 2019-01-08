@@ -6,6 +6,7 @@ namespace HeroesofAbenez\Orm;
 use Nexendrie\Utils\Numbers;
 use Nextras\Orm\Collection\ICollection;
 use Nextras\Orm\Relationships\OneHasMany;
+use HeroesofAbenez\Combat\BaseCharacterSkill;
 
 /**
  * PveArenaOpponent
@@ -21,6 +22,7 @@ use Nextras\Orm\Relationships\OneHasMany;
  * @property OneHasMany|PveArenaOpponentEquipment[] $equipment {1:m PveArenaOpponentEquipment::$npc}
  * @property-read Item|null $weapon {virtual}
  * @property-read Item|null $armor {virtual}
+ * @property-read BaseCharacterSkill[] $skills {virtual}
  */
 final class PveArenaOpponent extends \Nextras\Orm\Entity\Entity {
   public const GENDER_MALE = "male";
@@ -62,6 +64,60 @@ final class PveArenaOpponent extends \Nextras\Orm\Entity\Entity {
           "requiredSpecialization" => $this->specialization,
         ]
       ]);
+  }
+
+  /**
+   * @return BaseCharacterSkill[]
+   */
+  protected function getterSkills(): array {
+    if($this->level === 1) {
+      return [];
+    }
+    $skills = new class extends \Nexendrie\Utils\Collection {
+      /** @var string */
+      protected $class = BaseCharacterSkill::class;
+    };
+    $attackSkills = $this->class->attackSkills->get()->findBy([
+      ICollection::OR,
+      [
+        "neededLevel<=" => $this->level,
+        "neededSpecialization" => null,
+      ],
+      [
+        "neededLevel<=" => $this->level,
+        "neededSpecialization" => $this->specialization,
+      ]
+    ]);
+    foreach($attackSkills as $skill) {
+      $skills[] = new \HeroesofAbenez\Combat\CharacterAttackSkill($skill->toDummy(), 0);
+    }
+    $specialSkills = $this->class->specialSkills->get()->findBy([
+      ICollection::OR,
+      [
+        "neededLevel<=" => $this->level,
+        "neededSpecialization" => null,
+      ],
+      [
+        "neededLevel<=" => $this->level,
+        "neededSpecialization" => $this->specialization,
+      ]
+    ]);
+    foreach($specialSkills as $skill) {
+      $skills[] = new \HeroesofAbenez\Combat\CharacterSpecialSkill($skill->toDummy(), 0);
+    }
+    $skillPoints = $this->level - 1;
+    for($i = 1; $skillPoints > 0; $i++) {
+      foreach($skills as $skill) {
+        if($skillPoints < 1) {
+          break;
+        }
+        if($skill->level + 1 <= $skill->skill->levels) {
+          $skill->level++;
+        }
+        $skillPoints--;
+      }
+    }
+    return $skills->getItems(["level>" => 0]);
   }
 }
 ?>

@@ -4,8 +4,6 @@ declare(strict_types=1);
 namespace HeroesofAbenez\Model;
 
 use HeroesofAbenez\Combat\Character;
-use HeroesofAbenez\Combat\CharacterAttackSkill;
-use HeroesofAbenez\Combat\CharacterSpecialSkill;
 use HeroesofAbenez\Orm\Model as ORM;
 use HeroesofAbenez\Orm\ArenaFightCount;
 use Nextras\Orm\Entity\IEntity;
@@ -99,40 +97,6 @@ final class CombatHelper {
     $player = new Character($data, $equipment, $pets, $skills);
     return $player;
   }
-  
-  /**
-   * @return BaseCharacterSkill[]
-   */
-  protected function getArenaNpcSkills(\HeroesofAbenez\Orm\PveArenaOpponent $npc): array {
-    if($npc->level === 1) {
-      return [];
-    }
-    $skills = new class extends Collection {
-      /** @var string */
-      protected $class = BaseCharacterSkill::class;
-    };
-    $skillRows = $this->orm->attackSkills->findByClassAndLevel($npc->class, $npc->level);
-    foreach($skillRows as $skillRow) {
-      $skills[] = new CharacterAttackSkill($skillRow->toDummy(), 0);
-    }
-    $skillRows = $this->orm->specialSkills->findByClassAndLevel($npc->class, $npc->level);
-    foreach($skillRows as $skillRow) {
-      $skills[] = new CharacterSpecialSkill($skillRow->toDummy(), 0);
-    }
-    $skillPoints = $npc->level - 1;
-    for($i = 1; $skillPoints > 0; $i++) {
-      foreach($skills as $skill) {
-        if($skillPoints < 1) {
-          break;
-        }
-        if($skill->level + 1 <= $skill->skill->levels) {
-          $skill->level++;
-        }
-        $skillPoints--;
-      }
-    }
-    return $skills->getItems(["level>" => 0]);
-  }
 
   /**
    * @return Equipment[]
@@ -179,12 +143,10 @@ final class CombatHelper {
       }
     }
     $data["id"] = "pveArenaNpc" . $npc->id;
-    $class = $npc->class;
-    $data["initiativeFormula"] = $class->initiative;
-    $data["occupation"] = $class->id;
+    $data["initiativeFormula"] = $npc->class->initiative;
+    $data["occupation"] = $npc->class->id;
     $equipment = $this->getArenaNpcEquipment($npc);
-    $skills = $this->getArenaNpcSkills($npc);
-    $npc = new Character($data, $equipment, [], $skills);
+    $npc = new Character($data, $equipment, [], $npc->skills);
     return $npc;
   }
 
