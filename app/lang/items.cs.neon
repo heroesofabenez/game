@@ -145,3 +145,42 @@
 49:
     name: "Čarodějův klobouk"
     description: "Červený klobouk pro začínající čaroději."
+50:
+    name: "Amulet velké rychlosti"
+    description: "Mírně zvyšuje rychlost útoků svého nositele."
+51:
+    name: "Prsten velké přesnosti"
+    description: "Mírně zvyšuje přesnost útoků svého nositele."
+52:
+    name: "Tulákův kabát"
+    description: "Kabát nošený začínajícími mystiky."
+53:
+    name: "Tulákova hůl"
+    description: "Hůl používaná začínajícími mystiky."
+54:
+    name: "Plášť strážce lesa"
+    description: "Plášť nošený začínajícími hraničáři."
+55:
+    name: "Luk strážce lesa"
+    description: "Luk používaný začínajícími hraničáři."
+56:
+    name: "Zabijákův plášť"
+    description: "Plášť nošený začínajícími vrahy."
+57:
+    name: "Zabijákova dýka"
+    description: "Dýka používaný začínajícími vrahy."
+58:
+    name: "Zabijákův nůž"
+    description: "Nůž používaný začínajícími vrahy."
+59:
+    name: "Špionův plášť"
+    description: "Plášť nošený začínajícími špiony."
+60:
+    name: "Špionova dýka"
+    description: "Dýka používaný začínajícími špiony."
+61:
+    name: "Špionova kuše"
+    description: "Kuše používaný začínajícími špiony."
+62:
+    name: "Amulet rychlosti světla"
+    description: "Silně zvyšuje rychlost útoků svého nositele."

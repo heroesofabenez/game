@@ -97,7 +97,20 @@ INSERT INTO `items` (`id`, `name`, `slot`, `type`, `required_level`, `required_c
 (46,	'Bear Coat',	'armor',	NULL,	15,	1,	1,	26,	4,	30),
 (47,	'Sorcerer\'s Staff',	'weapon',	'staff',	15,	3,	7,	28,	4,	30),
 (48,	'Sorcerer\'s Coat',	'armor',	NULL,	15,	3,	7,	28,	3,	30),
-(49,	'Sorcerer\'s Hat',	'helmet',	NULL,	15,	3,	7,	28,	6,	30);
+(49,	'Sorcerer\'s Hat',	'helmet',	NULL,	15,	3,	7,	30,	6,	30),
+(50,	'Amulet of High Speed',	'amulet',	NULL,	16,	NULL,	NULL,	50,	4,	20),
+(51,	'Ring of Great Precision',	'ring',	NULL,	16,	NULL,	NULL,	50,	4,	20),
+(52,	'Wanderer\'s Coat',	'armor',	NULL,	15,	3,	8,	28,	3,	30),
+(53,	'Wanderer\'s Staff',	'weapon',	'staff',	15,	3,	8,	28,	4,	30),
+(54,	'Forest Keeper\'s Cloak',	'armor',	NULL,	15,	4,	5,	28,	3,	30),
+(55,	'Forest Keeper\'s Bow',	'weapon',	'bow',	15,	4,	5,	23,	3,	30),
+(56,	'Slayer\'s Cloak',	'armor',	NULL,	15,	2,	3,	28,	3,	30),
+(57,	'Slayer\'s Dagger',	'weapon',	'dagger',	15,	2,	3,	23,	3,	30),
+(58,	'Slayer\'s Knife',	'weapon',	'throwing knife',	15,	2,	3,	23,	3,	30),
+(59,	'Spy\'s Cloak',	'armor',	NULL,	15,	2,	4,	28,	3,	30),
+(60,	'Spy\'s Dagger',	'weapon',	'dagger',	15,	2,	4,	23,	3,	30),
+(61,	'Spy\'s Crossbow',	'weapon',	'crossbow',	15,	2,	4,	28,	4,	30),
+(62,	'Amulet of Light Speed',	'amulet',	NULL,	30,	NULL,	NULL,	74,	7,	30);
 
 INSERT INTO `pet_types` (`id`, `name`, `bonus_stat`, `bonus_value`, `image`, `required_level`, `required_class`, `required_race`, `cost`) VALUES
 (1,	'Rescued Lion',	'constitution',	5,	'',	8,	1,	NULL,	0),
@@ -140,7 +153,11 @@ INSERT INTO `pve_arena_opponents` (`id`, `name`, `race`, `gender`, `class`, `spe
   (17,	'Ignatius',	2,	'male',	4,	NULL,	14),
   (18,	'Albus',	2,	'male',	1,	2,	16),
   (19,	'Il-Maval',	1,	'male',	1,	1,	16),
-  (20,	'Elena',	3,	'female',	3,	7,	16);
+  (20,	'Elena',	3,	'female',	3,	7,	16),
+  (21,	'Ilvis',	2,	'male',	3,	8,	18),
+  (22,	'Avia',	3,	'female',	4,	5,	18),
+  (23,	'Sar-dah',	5,	'male',	2,	3,	19),
+  (24,	'Ilrin',	4,	'male',	2,	4,	19);
 
 INSERT INTO `quests` (`id`, `name`, `required_level`, `required_class`, `required_race`, `required_quest`, `needed_item`, `item_amount`, `item_lose`, `needed_money`, `reward_money`, `reward_xp`, `reward_item`, `reward_white_karma`, `reward_dark_karma`, `reward_pet`, `npc_start`, `npc_end`) VALUES
   (1,	'Find a book',	1,	3,	NULL,	NULL,	1,	1,	0,	0,	0,	10,	NULL,	0,	0,	NULL,	1,	1),
@@ -240,4 +257,8 @@ INSERT INTO `pve_arena_opponent_equipment` (`id`, `npc`, `item`) VALUES
 (22,	18,	42),
 (23,	18,	43),
 (24,	18,	40),
-(25,	20,	49);
+(25,	20,	49),
+(26,	21,	51),
+(27,	24,	51),
+(28,	23,	58),
+(29,	24,	61);

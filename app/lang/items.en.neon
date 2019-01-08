@@ -145,3 +145,42 @@
 49:
     name: "Sorcerer's Hat"
     description: "Red hat for novice sorcerers."
+50:
+    name: "Amulet of High Speed"
+    description: "Improves the speed of attacks of its bearer a little."
+51:
+    name: "Ring of Great Precision"
+    description: "Improves precision of attacks of its bearer a little."
+52:
+    name: "Wanderer's Coat"
+    description: "Coat worn by novice mystics."
+53:
+    name: "Wanderer's Staff"
+    description: "Staff used by novice mystics."
+54:
+    name: "Forest Keeper's Cloak"
+    description: "Cloak worn by novice rangers."
+55:
+    name: "Forest Keeper's Bow"
+    description: "Bow used by novice rangers."
+56:
+    name: "Slayer's Cloak"
+    description: "Cloak worn by novice executioners."
+57:
+    name: "Slayer's Dagger"
+    description: "Dagger used by novice executioners."
+58:
+    name: "Slayer's Knife"
+    description: "Knife used by novice executioners."
+59:
+    name: "Spy's Cloak"
+    description: "Cloak worn by novice spies."
+60:
+    name: "Spy's Dagger"
+    description: "Dagger used by novice spies."
+61:
+    name: "Spy's Crossbow"
+    description: "Crossbow used by novice spies."
+62:
+    name: "Amulet of Light Speed"
+    description: "Improves the speed of attacks of its bearer quite a lot."
