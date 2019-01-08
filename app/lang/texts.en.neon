@@ -273,7 +273,7 @@ skill:
     skillStrikes: "Strikes : %count%"
     skillDuration: "{1} Duration : %count% round|]1,+Inf[ Duration : %count% rounds"
     effectstun: "Effect: stuns the target"
-    effectpoison: "Effect: the target will lose %count% hitpoint(s) at start of round"
+    effectpoison: "Effect: the target will lose %value% + %valueGrowth% per level hitpoints at start of round"
     effectbuffmaxHitpoints: "Effect: Increases target's max hitpoints by %value%% + %valueGrowth%% per level"
     effectbuffdamage: "Effect: Increases target's damage by %value%% + %valueGrowth%% per level"
     effectbuffdefense: "Effect: Increases target's defense by %value%% + %valueGrowth%% per level"

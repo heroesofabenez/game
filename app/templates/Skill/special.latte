@@ -8,5 +8,5 @@
   {_"texts.skill.skillLevels", $skill->levels}<br>
   {_"texts.skill.target$skill->target"}<br>
   {_"texts.skill.skillDuration", $skill->duration}<br>
-  {if $skill->type === "stun"}{_"texts.skill.effectstun"}{elseif $skill->type === "poison"}{_"texts.skill.effectpoison", $skill->value}{else}{_"texts.skill.effect$skill->type$skill->stat", 0, ["value" => $skill->value, "valueGrowth" => $skill->valueGrowth]}{/if}
+  {if $skill->type === "stun"}{_"texts.skill.effectstun"}{elseif $skill->type === "poison"}{_"texts.skill.effectpoison", 0, ["value" => $skill->value, "valueGrowth" => $skill->valueGrowth]}{else}{_"texts.skill.effect$skill->type$skill->stat", 0, ["value" => $skill->value, "valueGrowth" => $skill->valueGrowth]}{/if}
 {/block}

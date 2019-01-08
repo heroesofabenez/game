@@ -273,7 +273,7 @@ skill:
     skillStrikes: "Útoků : %count%"
     skillDuration: "{0}Trvání: 0 kol|{1}Trvání:  1 kolo|[2,4]Trvání: %count% kola|[5,+Inf]Trvání: %count% kol"
     effectstun: "Efekt: Omráčí cíl"
-    effectpoison: "Effect: Cíl bude ztrácet %count% životů na začátku kola"
+    effectpoison: "Effect: Cíl bude ztrácet %value% + %valueGrowth% za úroveň životů na začátku kola"
     effectbuffmaxHitpoints: "Efekt: Zvyšuje cíli maximum životů by %value%% + %valueGrowth%% za úroveň"
     effectbuffdamage: "Efekt: Zvyšuje poškození cíle by %value%% + %valueGrowth%% za úroveň"
     effectbuffdefense: "Efekt: Zvyšuje obranu cíle by %value%% + %valueGrowth%% za úroveň"
