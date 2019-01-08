@@ -5,8 +5,8 @@
     name: "darebák"
     description: "Darebáci se snaží vyhnout přímému soubojí jak je to jen možné, protože jsou fyzicky veli křehcí, dávají přednost napadání ze stínů (a)nebo používání triků. Když už se ale zapojí do souboje, spolehají se na svou rychlost k vyhnutí se nepřítelovým útokům a prolomení jeho obrany.<br>++OBR, +SÍL, --ODO"
 3:
-    name: "čaroděj"
-    description: "Čarodějové jsou nejmoudřejší ze všech tříd. Většina z nich studovala na Akademii magie, kde se naučili (kromě magických teorií a sesílání několika základních kouzel) číst a psát (něco, co většina lidí neumí). Ohromují ostatní svou zářící inteligencí a charisma, avšak jejich fyziké schránky jsou velmi křehké.++INT, +CHAR, -SÍL, -ODO"
+    name: "kouzelník"
+    description: "Kouzelníci jsou nejmoudřejší ze všech tříd. Většina z nich studovala na Akademii magie, kde se naučili (kromě magických teorií a sesílání několika základních kouzel) číst a psát (něco, co většina lidí neumí). Ohromují ostatní svou zářící inteligencí a charisma, avšak jejich fyziké schránky jsou velmi křehké.<br>++INT, +CHAR, -SÍL, -ODO"
 4:
     name: "lučištník"
     description: "Ač fyzicky slabí, lučištníci jsou velmi obrantní (stejně jako darebáci) a dokonce se jim dostalo základního vzdělání. Nevynikají v souboji na blízko, ale zpacifikovat své nepřátelo luky, kušemi nebo (pokud je situace velmi zoufalá) vrhacími zbraněmi než se k nim vůbec dostanou blízko.<br>++OBR, +INT, -SÍL, -ODO"

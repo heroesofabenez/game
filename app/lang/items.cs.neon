@@ -9,10 +9,10 @@
     description: "Sekera dávaná čerstvým rekrutům. Působí velmi malé poškození."
 4:
     name: "Zelenáčova dýka"
-    #description: "Dagger used by new rogues. Its usefulness in combat is questionable."
+    description: "Dýka používaná novými darebáky. Její užitečnost v souboji je pochybná."
 5:
     name: "Zelenáčův nůž"
-    #description: "Some rogues prefer to use ranged weapons like knives or crossbows. This light knive is used by newcomers."
+    description: "Někteří darebáci dávají přednost zbraním na dálku, jako jsou nože nebo kuše. Tento lehký nůž je používán nováčky."
 6:
     name: "Učedníkova hůlka"
     description: "Hůlka používaná mágy učedníky."
@@ -24,7 +24,7 @@
     description: "Brnění pro rekruty. Nechrání tak dobře před poškozením, ale je lepší než vůbec nic."
 9:
     name: "Zelenáčův plášť"
-    #description: "This cloak identifies a new rogue. It itches a bit but does not slow the rogue down."
+    description: "Tento plášť označuje nového darebáka. Trochu svědí, ale nezpomaluje darebáka."
 10:
     name: "Učedníkova róba"
     description: "Róba mága učedníka. Chrání jen před zimou."
@@ -137,11 +137,11 @@
     name: "Medvědí kožich"
     description: "Brnění používané začínajícími berserky."
 47:
-    name: "Černokněžníkova hůl"
-    description: "Hůl používaná začínajícími černokněžníky."
+    name: "Čarodějova hůl"
+    description: "Hůl používaná začínajícími čaroději."
 48:
-    name: "Černokněžníkův kabát"
-    description: "Brnění používané začínajícími černokněžníky."
+    name: "Čarodějův kabát"
+    description: "Brnění používané začínajícími čaroději."
 49:
-    name: "Černokněžníkův klobouk"
-    description: "Červený klobouk pro začínající černokněžníky."
+    name: "Čarodějův klobouk"
+    description: "Červený klobouk pro začínající čaroději."
