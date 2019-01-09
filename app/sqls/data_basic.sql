@@ -7,7 +7,7 @@ INSERT INTO `character_classes` (`id`, `name`, `strength`, `strength_grow`, `dex
 (1,	'fighter',	11,	0.25,	10,	0.1,	12,	0.5,	9,	0.1,	9,	0.1,	1,	'1d5+DEX/4',	1),
 (2,	'rogue',	11,	0.25,	12,	0.5,	8,	0.1,	10,	0.1,	10,	0.1,	1,	'2d3+DEX/4',	1),
 (3,	'wizard',	9,	0,	10,	0.1,	9,	0.1,	12,	0.5,	11,	0.25,	1.1,	'5d2+INT/3',	1),
-(4,	'archer',	9,	0,	12,	0.5,	9,	0.1,	11,	0.25,	10,	0.1,	1.1,	'4d2+DEX/4',	1),
+(4,	'archer',	9,	0,	12,	0.5,	10,	0.1,	10,	0.25,	10,	0.1,	1.1,	'4d2+DEX/4',	1),
 (5,	'bard',	9,	0,	11,	0.25,	9,	0.1,	10,	0.1,	12,	0.5,	1.1,	'5d2+CHAR/3',	0);
 
 INSERT INTO `character_races` (`id`, `name`, `strength`, `dexterity`, `constitution`, `intelligence`, `charisma`, `playable`) VALUES
