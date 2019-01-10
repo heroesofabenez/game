@@ -52,9 +52,9 @@ final class MapDrawer {
   public function localMap(): void {
     $this->locationModel->user = $this->user;
     $stages = $this->locationModel->accessibleStages();
-    $curr_stage = $stages[$this->user->identity->stage];
-    $routes = $this->locationModel->stageRoutes($curr_stage->area);
-    $this->draw($stages, $routes, "local-{$curr_stage->area->id}", 250, 250);
+    $currentStage = $stages[$this->user->identity->stage];
+    $routes = $this->locationModel->stageRoutes($currentStage->area);
+    $this->draw($stages, $routes, "local-{$currentStage->area->id}", 250, 250);
   }
 }
 ?>

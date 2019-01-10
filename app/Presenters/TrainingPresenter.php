@@ -33,8 +33,8 @@ final class TrainingPresenter extends BasePresenter {
   }
   
   public function renderDefault(): void {
-    $this->template->stat_points = $this->model->getStatPoints();
-    $this->template->skill_points = $this->skillsModel->getSkillPoints();
+    $this->template->statPoints = $this->model->getStatPoints();
+    $this->template->skillPoints = $this->skillsModel->getSkillPoints();
     $this->template->skills = $this->skillsModel->getAvailableSkills();
     $character = $this->combatHelper->getPlayer($this->user->id);
     $this->template->stats = [

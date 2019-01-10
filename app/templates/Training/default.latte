@@ -5,16 +5,16 @@
   <h2>{_"texts.training.stats"}</h2>
   <ul>
     {define damage}{_"texts.profile.damage"}: {$character->damage}{/define}
-    <li>{_"texts.profile.strength"}: {$stats["strength"]} {if $damageStat === "strength"} - {include damage}{/if} {if $stat_points}<a n:href="trainStat! strength">{_"texts.training.train"}</a>{/if}</li>
-    <li>{_"texts.profile.dexterity"}: {$stats["dexterity"]} - {_"texts.profile.hitChance"}: {$character->hit}, {_"texts.profile.dodgeChance"}: {$character->dodge} {if $damageStat === "dexteriry"}, {include damage}{/if} {if $stat_points}<a n:href="trainStat! dexterity">{_"texts.training.train"}</a>{/if}</li>
-    <li>{_"texts.profile.constitution"}: {$stats["constitution"]} - {_"texts.profile.maxHitpoints"}: {$character->maxHitpoints}, {_"texts.profile.defense"}: {$character->defense} {if $damageStat === "constitution"}, {include damage}{/if} {if $stat_points}<a n:href="trainStat! constitution">{_"texts.training.train"}</a>{/if}</li>
-    <li>{_"texts.profile.intelligence"}: {$stats["intelligence"]} {if $damageStat === "intelligence"} - {include damage}{/if} {if $stat_points}<a n:href="trainStat! intelligence">{_"texts.training.train"}</a>{/if}</li>
-    <li>{_"texts.profile.charisma"}: {$stats["charisma"]} {if $damageStat === "charisma"} - {include damage}{/if} {if $stat_points}<a n:href="trainStat! charisma">{_"texts.training.train"}</a>{/if}</li>
+    <li>{_"texts.profile.strength"}: {$stats["strength"]} {if $damageStat === "strength"} - {include damage}{/if} {if $statPoints}<a n:href="trainStat! strength">{_"texts.training.train"}</a>{/if}</li>
+    <li>{_"texts.profile.dexterity"}: {$stats["dexterity"]} - {_"texts.profile.hitChance"}: {$character->hit}, {_"texts.profile.dodgeChance"}: {$character->dodge} {if $damageStat === "dexteriry"}, {include damage}{/if} {if $statPoints}<a n:href="trainStat! dexterity">{_"texts.training.train"}</a>{/if}</li>
+    <li>{_"texts.profile.constitution"}: {$stats["constitution"]} - {_"texts.profile.maxHitpoints"}: {$character->maxHitpoints}, {_"texts.profile.defense"}: {$character->defense} {if $damageStat === "constitution"}, {include damage}{/if} {if $statPoints}<a n:href="trainStat! constitution">{_"texts.training.train"}</a>{/if}</li>
+    <li>{_"texts.profile.intelligence"}: {$stats["intelligence"]} {if $damageStat === "intelligence"} - {include damage}{/if} {if $statPoints}<a n:href="trainStat! intelligence">{_"texts.training.train"}</a>{/if}</li>
+    <li>{_"texts.profile.charisma"}: {$stats["charisma"]} {if $damageStat === "charisma"} - {include damage}{/if} {if $statPoints}<a n:href="trainStat! charisma">{_"texts.training.train"}</a>{/if}</li>
   </ul>
-  <p>{_"texts.training.usableStatPoints", $stat_points}</p>
+  <p>{_"texts.training.usableStatPoints", $statPoints}</p>
   <h2>{_"texts.training.skills"}</h2>
   <ul n:inner-foreach="$skills as $skill">
-    <li><a n:href="Skill:$skill->skillType $skill->skill->id">{_"skills_{$skill->skillType}.{$skill->skill->id}.name"}</a> {_"texts.training.skillCurrentLevel", $skill->level} {if $skill_points and $skill->level < $skill->skill->levels}<a n:href="trainSkill! $skill->skill->id, $skill->skillType">{_"texts.training.train"}</a>{/if}</li>
+    <li><a n:href="Skill:$skill->skillType $skill->skill->id">{_"skills_{$skill->skillType}.{$skill->skill->id}.name"}</a> {_"texts.training.skillCurrentLevel", $skill->level} {if $skillPoints and $skill->level < $skill->skill->levels}<a n:href="trainSkill! $skill->skill->id, $skill->skillType">{_"texts.training.train"}</a>{/if}</li>
   </ul>
-  <p>{_"texts.training.usableSkillPoints", $skill_points}</p>
+  <p>{_"texts.training.usableSkillPoints", $skillPoints}</p>
 {/block}
