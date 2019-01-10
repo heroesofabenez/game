@@ -184,3 +184,27 @@
 62:
     name: "Amulet rychlosti světla"
     description: "Silně zvyšuje rychlost útoků svého nositele."
+63:
+    name: "Kazatelova berla"
+    description: "Berla používaná začínajícími kazateli."
+64:
+    name: "Kazatelovo roucho"
+    description: "Roucho nošené začínajícími kazateli."
+65:
+    name: "Misionářova berla"
+    description: "Berla používaná zkušenými kazateli."
+66:
+    name: "Misionářovo roucho"
+    description: "Roucho nošené zkušenými kazateli."
+67:
+    name: "Knězova berla"
+    description: "Berla používaná začínajícími knězi."
+68:
+    name: "Knězovo roucho"
+    description: "Roucho nošené začínajícími knězi."
+69:
+    name: "Mnichův cep"
+    description: "Zbraň používaná začínajícími mnichy."
+70:
+    name: "Knichova kutna"
+    description: "Brnění nošené začínajícími mnichy."

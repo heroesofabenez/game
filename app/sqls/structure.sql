@@ -59,7 +59,7 @@ CREATE TABLE `character_attack_skills` (
 
 CREATE TABLE `character_classes` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(7) NOT NULL,
+  `name` varchar(8) NOT NULL,
   `strength` int(2) NOT NULL DEFAULT '10',
   `strength_grow` float NOT NULL,
   `dexterity` int(2) NOT NULL DEFAULT '10',
@@ -123,7 +123,7 @@ CREATE TABLE `character_specializations` (
   `constitution_grow` float NOT NULL,
   `intelligence_grow` float NOT NULL,
   `charisma_grow` float NOT NULL,
-  `stat_points_level` float NOT NULL,
+  `stat_points_level` float NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`),
   KEY `class` (`class`),
   CONSTRAINT `character_specializations_ibfk_1` FOREIGN KEY (`class`) REFERENCES `character_classes` (`id`)

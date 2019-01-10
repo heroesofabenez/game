@@ -13,3 +13,6 @@
 5:
     name: "bard"
     description: "Bardi cestují po světě a za peníze baví lidi zpěvem či hrou na hudební nástroje. Jen zřídka se zapojují do soboujů, ale když ano, tak se snaží vyhnout nepřítelovým útokům a zmást jej svýmy nástroji.<br>++CHAR, +OBR, -SÍL, -ODO"
+6:
+    name: "kazatel"
+    description: "Kazatelé jsou charismatičtí a vzdělaní, zasvětili své životy učením ostatních o bozích a šíření víry. Dokaží přesvědčit lidi kouzlem své osobnosti a vědomostmi, ale chybí jim fyzická síla a obratnost.<br>++CHAR, +INT, -SÍL, -OBR"

@@ -8,7 +8,8 @@ INSERT INTO `character_classes` (`id`, `name`, `strength`, `strength_grow`, `dex
 (2,	'rogue',	11,	0.25,	12,	0.5,	8,	0.1,	10,	0.1,	10,	0.1,	1,	'2d3+DEX/4',	1),
 (3,	'wizard',	9,	0,	10,	0.1,	9,	0.1,	12,	0.5,	11,	0.25,	1.1,	'5d2+INT/3',	1),
 (4,	'archer',	9,	0,	12,	0.5,	10,	0.1,	10,	0.25,	10,	0.1,	1.1,	'4d2+DEX/4',	1),
-(5,	'bard',	9,	0,	11,	0.25,	9,	0.1,	10,	0.1,	12,	0.5,	1.1,	'5d2+CHAR/3',	0);
+(5,	'bard',	9,	0,	11,	0.25,	9,	0.1,	10,	0.1,	12,	0.5,	1.1,	'5d2+CHAR/3',	0),
+(6,	'preacher',	9,	0,	9,	0,	10,	0.2,	11,	0.25,	12,	0.5,	1.1,	'5d2+INT/3',	0);
 
 INSERT INTO `character_races` (`id`, `name`, `strength`, `dexterity`, `constitution`, `intelligence`, `charisma`, `playable`) VALUES
 (1,	'barbarian',	1,	0,	1,	-1,	-1,	1),
@@ -25,7 +26,9 @@ INSERT INTO `character_specializations` (`id`, `name`, `class`, `strength_grow`,
 (5,	'ranger',	4,	0.1,	0.75,	0.2,	0.35,	0.1,	1),
 (6,	'bowman',	4,	0.3,	0.5,	0.3,	0.2,	0.2,	1),
 (7,	'sorcerer',	3,	0,	0.2,	0.2,	0.75,	0.35,	1),
-(8,	'mystic',	3,	0.1,	0.3,	0.3,	0.6,	0.2,	1);
+(8,	'mystic',	3,	0.1,	0.3,	0.3,	0.6,	0.2,	1),
+(9,	'priest',	6,	0,	0,	0.25,	0.5,	0.75,	1),
+(10,	'monk',	6,	0,	0,	0.5,	0.75,	0.25,	1);
 
 INSERT INTO `guild_privileges` (`id`, `action`, `rank`) VALUES
 (1,	'manage',	5),
@@ -110,7 +113,15 @@ INSERT INTO `items` (`id`, `name`, `slot`, `type`, `required_level`, `required_c
 (59,	'Spy\'s Cloak',	'armor',	NULL,	15,	2,	4,	28,	3,	30),
 (60,	'Spy\'s Dagger',	'weapon',	'dagger',	15,	2,	4,	23,	3,	30),
 (61,	'Spy\'s Crossbow',	'weapon',	'crossbow',	15,	2,	4,	28,	4,	30),
-(62,	'Amulet of Light Speed',	'amulet',	NULL,	30,	NULL,	NULL,	74,	7,	30);
+(62,	'Amulet of Light Speed',	'amulet',	NULL,	30,	NULL,	NULL,	74,	7,	30),
+(63,	'Preacher\'s Crook',	'weapon',	'staff',	1,	6,	NULL,	0,	1,	10),
+(64,	'Preacher\'s Gown',	'armor',	NULL,	1,	6,	NULL,	0,	1,	10),
+(65,	'Missionary\'s Crook',	'weapon',	'staff',	8,	6,	NULL,	13,	2,	20),
+(66,	'Missionary\'s Gown',	'armor',	NULL,	8,	6,	NULL,	13,	2,	20),
+(67,	'Priest\'s Crook',	'weapon',	'staff',	15,	6,	9,	23,	3,	30),
+(68,	'Priest\'s Gown',	'armor',	NULL,	15,	6,	9,	28,	3,	20),
+(69,	'Monk\'s Flail',	'weapon',	'club',	15,	6,	10,	28,	3,	30),
+(70,	'Monk\'s Cowl',	'armor',	NULL,	15,	6,	10,	28,	3,	20);
 
 INSERT INTO `pet_types` (`id`, `name`, `bonus_stat`, `bonus_value`, `image`, `required_level`, `required_class`, `required_race`, `cost`) VALUES
 (1,	'Rescued Lion',	'constitution',	5,	'',	8,	1,	NULL,	0),
@@ -204,7 +215,10 @@ INSERT INTO `skills_attacks` (`id`, `name`, `needed_class`, `needed_specializati
 (10,	'Master shot',	4,	5,	15,	'90%',	'4%',	5,	'row',	1,	'120%'),
 (11,	'Double shot',	4,	6,	15,	'100%',	'4%',	5,	'column',	1,	NULL),
 (12,	'Fireball',	3,	7,	15,	'60%',	'5%',	5,	'single',	2,	NULL),
-(13,	'Freezing point',	3,	8,	15,	'50%',	'3%',	5,	'column',	2,	'120%');
+(13,	'Freezing point',	3,	8,	15,	'50%',	'3%',	5,	'column',	2,	'120%'),
+(14,	'Touch of faith',	6,	NULL,	1,	'90%',	'4%',	5,	'column',	1,	NULL),
+(15,	'Holy fire',	6,	9,	15,	'70%',	'5%',	5,	'row',	1,	NULL),
+(16,	'Ten fists',	6,	10,	15,	'35%',	'2%',	5,	'single',	3,	'120%');
 
 INSERT INTO `skills_specials` (`id`, `name`, `needed_class`, `needed_specialization`, `needed_level`, `type`, `target`, `stat`, `value`, `value_growth`, `levels`, `duration`) VALUES
 (1,	'Shield',	1,	NULL,	1,	'buff',	'self',	'defense',	12,	2,	5,	3),
@@ -224,7 +238,11 @@ INSERT INTO `skills_specials` (`id`, `name`, `needed_class`, `needed_specializat
 (15,	'Poisoned arrow',	4,	5,	15,	'poison',	'enemy',	NULL,	3,	1,	6,	4),
 (16,	'Marksman',	4,	6,	15,	'buff',	'party',	'hit',	15,	3,	6,	3),
 (17,	'Weakness',	3,	7,	15,	'debuff',	'enemy',	'defense',	15,	4,	6,	2),
-(18,	'Magic shield',	3,	8,	15,	'buff',	'self',	'defense',	10,	4,	6,	3);
+(18,	'Magic shield',	3,	8,	15,	'buff',	'self',	'defense',	10,	4,	6,	3),
+(19,	'Power of confidence',	6,	NULL,	1,	'buff',	'self',	'damage',	15,	2,	5,	2),
+(20,	'Spirit crusher',	6,	NULL,	10,	'debuff',	'enemy_party',	'damage',	14,	1,	6,	3),
+(21,	'Song of faith',	6,	9,	15,	'buff',	'party',	'damage',	15,	3,	6,	3),
+(22,	'Turtle\'s shell',	6,	10,	15,	'buff',	'self',	'defense',	15,	3,	6,	3);
 
 INSERT INTO `npcs` (`id`, `name`, `race`, `class`, `specialization`, `fight`, `smith`, `sprite`, `portrait`, `stage`, `karma`, `personality`, `level`, `pos_x`, `pos_y`) VALUES
   (1,	'Mentor',	2,	3,	NULL,	0,	0,	'mentor.jpeg',	'mentor.jpeg',	1,	'neutral',	'teaching',	10,	1,	1),

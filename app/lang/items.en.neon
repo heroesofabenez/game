@@ -184,3 +184,27 @@
 62:
     name: "Amulet of Light Speed"
     description: "Improves the speed of attacks of its bearer quite a lot."
+63:
+    name: "Preacher's Crook"
+    description: "Crook used by novice preachers."
+64:
+    name: "Preacher's Gown"
+    description: "Gown worn by novice preachers."
+65:
+    name: "Missionary's Crook"
+    description: "Crook used by seasoned preachers."
+66:
+    name: "Missionary's Gown"
+    description: "Gown worn by seasoned preachers."
+67:
+    name: "Priest's Crook"
+    description: "Crook used by novice priests."
+68:
+    name: "Priest's Gown"
+    description: "Gown worn by novice priests."
+69:
+    name: "Monk's Flail"
+    description: "Weapons used by novice monks."
+70:
+    name: "Monk's Cowl"
+    description: "Armor worn by novice monks."

@@ -13,3 +13,6 @@
 5:
     name: "bard"
     description: "Bards travel the world and entertain people with singing and/or playing instruments for money. They seldom engage in combat but when they do, they try to avoid enemy's attacks and confuse them with their musical instruments.<br>++CHAR, +DEX, -STR, -CON"
+6:
+    name: "preacher"
+    description: "Preachers are charismatic and educated, they devoted their lives to teaching other people about gods and spreading the faith. They can persuade people with their personal charm and knowledge but they lack in physical strength and dexterity.<br>++CHAR, +INT, -STR, -DEX"
