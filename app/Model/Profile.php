@@ -182,6 +182,20 @@ final class Profile {
   }
 
   /**
+   * Get user's stats
+   * 
+   * @return int[]
+   */
+  public function getStats(): array {
+    $return = [];
+    $char = $this->orm->characters->getById($this->user->id);
+    foreach($this->stats as $stat) {
+      $return[$stat] = $char->$stat;
+    }
+    return $return;
+  }
+  
+  /**
    * Improve a stat
    *
    * @throws InvalidStatException
