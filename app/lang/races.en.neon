@@ -6,7 +6,7 @@
     description: "Humans are very versatile race, they can survive in almost any environment. They are not really bad in anything but they are masters of nothing either.<br>No modifications to stats"
 3:
     name: "elf"
-    description: "Elves are one obscure race. They mostly dwell in their forests and only seldom interact with other inhabitants of the world. They are told to be very beautiful, intelligent and long living, if not immortal. But their physical shells are much fragile yet nimble.<br>+ INT, ++CHAR, +DEX, -STR, --CON"
+    description: "Elves are one obscure race. They mostly dwell in their forests and only seldom interact with other inhabitants of the world. They are told to be very beautiful, intelligent and long living, if not immortal. Their physical shells are much fragile yet nimble.<br>++CHAR, + INT, +DEX, --CON, -STR"
 4:
     name: "dwarf"
     description: "Dwarves are quite sturdy (given their size). They spend a lot of time in and under mountains crafting weapons or creating artifacts. They have unusually strong bodies but nimbleness, intelligence or charisma definitely do not belong to their fortes.<br>++CON, +STR, -DEX, -INT, -CHAR"
