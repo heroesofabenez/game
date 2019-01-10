@@ -34,7 +34,7 @@ use Nexendrie\Utils\Numbers;
  * @property int $darkKarma {default 0}
  * @property-read string $predominantKarma {virtual}
  * @property int|null $intro {default 1}
- * @property \DateTimeImmutable|null $joined
+ * @property \DateTimeImmutable $joined
  * @property float $statPoints {default 0}
  * @property int $skillPoints {default 0}
  * @property OneHasMany|Request[] $sentRequests {1:m Request::$from}

@@ -25,7 +25,7 @@ CREATE TABLE `characters` (
   `white_karma` int(2) DEFAULT '0',
   `dark_karma` int(2) DEFAULT '0',
   `intro` int(2) DEFAULT '1',
-  `joined` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `joined` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `stat_points` float DEFAULT '0',
   `skill_points` int(11) DEFAULT '0',
   PRIMARY KEY (`id`),
