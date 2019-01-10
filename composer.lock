@@ -72,12 +72,12 @@
             "source": {
                 "type": "git",
                 "url": "https://gitlab.com/heroesofabenez/combat.git",
-                "reference": "f80d3f6d96ea716edc7bd080c0a08356d8f3ce43"
+                "reference": "9f26a1099472dc34915f03dda40924f25d87ab5b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://gitlab.com/api/v4/projects/heroesofabenez%2Fcombat/repository/archive.zip?sha=f80d3f6d96ea716edc7bd080c0a08356d8f3ce43",
-                "reference": "f80d3f6d96ea716edc7bd080c0a08356d8f3ce43",
+                "url": "https://gitlab.com/api/v4/projects/heroesofabenez%2Fcombat/repository/archive.zip?sha=9f26a1099472dc34915f03dda40924f25d87ab5b",
+                "reference": "9f26a1099472dc34915f03dda40924f25d87ab5b",
                 "shasum": ""
             },
             "require": {
@@ -120,7 +120,7 @@
             "keywords": [
                 "combat"
             ],
-            "time": "2019-01-08T14:55:47+00:00"
+            "time": "2019-01-09T08:32:26+00:00"
         },
         {
             "name": "kdyby/autowired",
@@ -2207,12 +2207,12 @@
             "source": {
                 "type": "git",
                 "url": "https://gitlab.com/nexendrie/code-quality.git",
-                "reference": "1e7e2d89693e1c5914907e8a8e0570430094bee1"
+                "reference": "9a74fe0ea2f0d93af575a1ef9044f50d63abe8cd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://gitlab.com/api/v4/projects/nexendrie%2Fcode-quality/repository/archive.zip?sha=1e7e2d89693e1c5914907e8a8e0570430094bee1",
-                "reference": "1e7e2d89693e1c5914907e8a8e0570430094bee1",
+                "url": "https://gitlab.com/api/v4/projects/nexendrie%2Fcode-quality/repository/archive.zip?sha=9a74fe0ea2f0d93af575a1ef9044f50d63abe8cd",
+                "reference": "9a74fe0ea2f0d93af575a1ef9044f50d63abe8cd",
                 "shasum": ""
             },
             "require": {
@@ -2241,7 +2241,7 @@
                 "quality",
                 "testing"
             ],
-            "time": "2018-12-28T13:57:02+00:00"
+            "time": "2019-01-10T14:23:13+00:00"
         },
         {
             "name": "nikic/php-parser",
