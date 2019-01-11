@@ -3,49 +3,49 @@
     description: " "
 2:
     name: "Stínový úder"
-    description: " "
+    description: "Dva údery rychle po sobě, každý působí lehké poškození"
 3:
     name: "Výbuch"
-    description: " "
+    description: "Základní kouzlo kouzelníků"
 4:
     name: "Déšť šípů"
-    description: " "
+    description: "Tři šípy vystřelené rychle po sobě, každý působí lehké poškození"
 5:
     name: "Zvuková vlna"
     description: " "
 6:
     name: "Úder hněvu"
-    description: " "
+    description: "Útok, který způsobuje poškození více nepřátelům za cenu přesnosti"
 7:
     name: "Paprsek světla"
-    description: " "
+    description: "Základní kouzlo světlé magie"
 8:
     name: "Poprava"
-    description: " "
+    description: "Velmi přesný útok, který působí těžké poškození"
 9:
     name: "Únik plynu"
     description: " "
 10:
     name: "Mistrovská střela"
-    description: " "
+    description: "Mnoho šípů vystřelených po sobě na odlišné cíle s vysokou přesností"
 11:
     name: "Dvojitá střela"
-    description: " "
+    description: "Dva šípy vystřelené po sobě na odlišné cíle"
 12:
     name: "Ohnivá koule"
-    description: " "
+    description: "Základní kouzlo ohnivé magie"
 13:
     name: "Bod mrazu"
-    description: " "
+    description: "Základní kouzlo magie chladu"
 14:
     name: "Dotek víry"
     description: " "
 15:
     name: "Svatý oheň"
-    description: " "
+    description: "Základní kouzlo božské magie"
 16:
     name: "Deset pěstí"
-    description: " "
+    description: "Mnoho úderů pěstí v rychlém sledu s vysokou přesností"
 17:
     name: "Dlouhý verš"
     description: " "

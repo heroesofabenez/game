@@ -3,49 +3,49 @@
     description: " "
 2:
     name: "Shadow strike"
-    description: " "
+    description: "Two strikes in quick succession, each deals light damage"
 3:
     name: "Blast"
-    description: " "
+    description: "Basic wizards' spell"
 4:
     name: "Rain of arrows"
-    description: " "
+    description: "Three arrows shot in quick succession, each deals light damage"
 5:
     name: "Sound wave"
     description: " "
 6:
     name: "Wrath strike"
-    description: " "
+    description: "Attack that deals damage to multiple enemies at the cost of accuracy"
 7:
     name: "Light beam"
-    description: " "
+    description: "Basic spell of light magic"
 8:
     name: "Execution"
-    description: " "
+    description: "Highly precise attack that deals heavy damage"
 9:
     name: "Gas leakage"
     description: " "
 10:
     name: "Master shot"
-    description: " "
+    description: "Many arrows shot in succession at different targets with high accuracy"
 11:
     name: "Double shot"
-    description: " "
+    description: "Two arrows shot in succession at different targets"
 12:
     name: "Fireball"
-    description: " "
+    description: "Basic spell of fire magic"
 13:
     name: "Freezing point"
-    description: " "
+    description: "Basic spell of cold magic"
 14:
     name: "Touch of faith"
     description: " "
 15:
     name: "Holy fire"
-    description: " "
+    description: "Basic spell of divine magic"
 16:
     name: "Ten fists"
-    description: " "
+    description: "Many punches in quick succession with high accuracy"
 17:
     name: "Long verse"
     description: " "
