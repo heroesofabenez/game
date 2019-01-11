@@ -28,7 +28,9 @@ INSERT INTO `character_specializations` (`id`, `name`, `class`, `strength_grow`,
 (7,	'sorcerer',	3,	0,	0.2,	0.2,	0.75,	0.35,	1),
 (8,	'mystic',	3,	0.1,	0.3,	0.3,	0.6,	0.2,	1),
 (9,	'priest',	6,	0,	0,	0.25,	0.5,	0.75,	1),
-(10,	'monk',	6,	0,	0,	0.5,	0.75,	0.25,	1);
+(10,	'monk',	6,	0,	0,	0.5,	0.75,	0.25,	1),
+(11,	'troubadour',	5,	0,	0.4,	0.1,	0.25,	0.75,	1),
+(12,	'trickster',	5,	0,	0.4,	0,	0.5,	0.6,	1);
 
 INSERT INTO `guild_privileges` (`id`, `action`, `rank`) VALUES
 (1,	'manage',	5),
@@ -225,7 +227,9 @@ INSERT INTO `skills_attacks` (`id`, `name`, `needed_class`, `needed_specializati
 (13,	'Freezing point',	3,	8,	15,	'50%',	'3%',	5,	'column',	2,	'120%'),
 (14,	'Touch of faith',	6,	NULL,	1,	'90%',	'4%',	5,	'column',	1,	NULL),
 (15,	'Holy fire',	6,	9,	15,	'70%',	'5%',	5,	'row',	1,	NULL),
-(16,	'Ten fists',	6,	10,	15,	'35%',	'2%',	5,	'single',	3,	'120%');
+(16,	'Ten fists',	6,	10,	15,	'35%',	'2%',	5,	'single',	3,	'120%'),
+(17,	'Long verse',	5,	11,	15,	'55%',	'1%',	5,	'column',	2,	NULL),
+(18,	'Rapture',	5,	12,	15,	'100%',	'3%',	5,	'single',	1,	'140%');
 
 INSERT INTO `skills_specials` (`id`, `name`, `needed_class`, `needed_specialization`, `needed_level`, `type`, `target`, `stat`, `value`, `value_growth`, `levels`, `duration`) VALUES
 (1,	'Shield',	1,	NULL,	1,	'buff',	'self',	'defense',	12,	2,	5,	3),
@@ -249,7 +253,9 @@ INSERT INTO `skills_specials` (`id`, `name`, `needed_class`, `needed_specializat
 (19,	'Power of confidence',	6,	NULL,	1,	'buff',	'self',	'damage',	15,	2,	5,	2),
 (20,	'Spirit crusher',	6,	NULL,	10,	'debuff',	'enemy_party',	'damage',	14,	1,	6,	3),
 (21,	'Song of faith',	6,	9,	15,	'buff',	'party',	'damage',	15,	3,	6,	3),
-(22,	'Turtle\'s shell',	6,	10,	15,	'buff',	'self',	'defense',	15,	3,	6,	3);
+(22,	'Turtle\'s shell',	6,	10,	15,	'buff',	'self',	'defense',	15,	3,	6,	3),
+(23,	'Sonic speed',	5,	11,	15,	'buff',	'party',	'initiative',	15,	3,	6,	2),
+(24,	'Trance',	5,	12,	15,	'debuff',	'enemy',	'defense',	15,	3,	6,	3);
 
 INSERT INTO `npcs` (`id`, `name`, `race`, `class`, `specialization`, `fight`, `smith`, `sprite`, `portrait`, `stage`, `karma`, `personality`, `level`, `pos_x`, `pos_y`) VALUES
   (1,	'Mentor',	2,	3,	NULL,	0,	0,	'mentor.jpeg',	'mentor.jpeg',	1,	'neutral',	'teaching',	10,	1,	1),
