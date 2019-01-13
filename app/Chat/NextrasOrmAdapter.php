@@ -48,6 +48,10 @@ final class NextrasOrmAdapter implements IDatabaseAdapter {
    * @param mixed $value
    */
   public function getCharacters(string $column, $value): ChatCharactersCollection {
+    /** @var \HeroesofAbenez\Orm\Character $character */
+    $character = $this->orm->characters->getById($this->user->id);
+    $character->lastActive = new \DateTimeImmutable();
+    $this->orm->characters->persistAndFlush($character);
     $characters = $this->orm->characters->findBy([
       $column => $value
     ]);

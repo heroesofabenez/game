@@ -35,6 +35,7 @@ use Nexendrie\Utils\Numbers;
  * @property-read string $predominantKarma {virtual}
  * @property int|null $intro {default 1}
  * @property \DateTimeImmutable $joined
+ * @property \DateTimeImmutable $lastActive
  * @property float $statPoints {default 0}
  * @property int $skillPoints {default 0}
  * @property OneHasMany|Request[] $sentRequests {1:m Request::$from}
@@ -73,7 +74,8 @@ final class Character extends \Nextras\Orm\Entity\Entity {
   }
   
   public function onBeforeInsert(): void {
-    $this->joined = new \DateTimeImmutable();
+    parent::onBeforeInsert();
+    $this->joined = $this->lastActive = new \DateTimeImmutable();
   }
 }
 ?>

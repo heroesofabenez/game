@@ -90,6 +90,7 @@ final class NPCShopControl extends \Nette\Application\UI\Control {
     }
     $this->itemModel->giveItem($itemId);
     $character->money -= (int) ($item->price - $item->price / 100 * $character->charismaBonus);
+    $character->lastActive = new \DateTimeImmutable();
     $this->orm->characters->persistAndFlush($character);
     $this->presenter->flashMessage("messages.shop.itemBought");
     $this->presenter->redirect("this");

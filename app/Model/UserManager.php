@@ -66,6 +66,8 @@ final class UserManager implements \Nette\Security\IAuthenticator {
       $data["guild"] = $char->guild->id;
       $role = $char->guildrank->name;
     }
+    $char->lastActive = new \DateTimeImmutable();
+    $this->orm->characters->persistAndFlush($char);
     return new Identity($char->id, $role, $data);
   }
   

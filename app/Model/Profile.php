@@ -169,6 +169,7 @@ final class Profile {
       $grow = $class->{$stat . "Grow"};
       $character->$stat += $grow;
     }
+    $character->lastActive = new \DateTimeImmutable();
     $this->orm->characters->persistAndFlush($character);
   }
 
@@ -212,6 +213,7 @@ final class Profile {
     }
     $character->{$stat}++;
     $character->statPoints--;
+    $character->lastActive = new \DateTimeImmutable();
     $this->orm->characters->persistAndFlush($character);
   }
 }

@@ -93,6 +93,7 @@ abstract class ArenaControl extends \Nette\Application\UI\Control {
       $character = $this->orm->characters->getById($this->user->id);
       $character->money += $rewards["money"];
       $character->experience += $rewards["experience"];
+      $character->lastActive = new \DateTimeImmutable();
       $this->orm->characters->persistAndFlush($character);
       $params = ["playerName" => $player->name, "rewardMoney" => $rewards["money"], "rewardExperiences" => $rewards["experience"]];
       $this->combat->log->logText("texts.arena.fightRewards", $params);

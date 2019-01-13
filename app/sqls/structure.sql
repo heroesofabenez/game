@@ -26,6 +26,7 @@ CREATE TABLE `characters` (
   `dark_karma` int(2) DEFAULT '0',
   `intro` int(2) DEFAULT '1',
   `joined` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `last_active` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `stat_points` float DEFAULT '0',
   `skill_points` int(11) DEFAULT '0',
   PRIMARY KEY (`id`),
