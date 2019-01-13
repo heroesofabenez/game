@@ -53,7 +53,7 @@ final class NextrasOrmAdapter implements IDatabaseAdapter {
     $character->lastActive = new \DateTimeImmutable();
     $this->orm->characters->persistAndFlush($character);
     $characters = $this->orm->characters->findBy([
-      $column => $value
+      $column => $value, "lastActive>=" => new \DateTimeImmutable("5 minutes ago")
     ]);
     $collection = new ChatCharactersCollection();
     foreach($characters as $character) {
