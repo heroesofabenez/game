@@ -160,6 +160,7 @@ build:
         postgresql: false
         redis: false
         rabbitmq: false
+    services:
         mariadb: 10
     nodes:
         tests:
