@@ -103,6 +103,7 @@ final class Item {
       throw new ItemAlreadyEquippedException();
     }
     $items = $this->orm->characterItems->findByCharacterAndSlot($this->user->id, $item->item->slot);
+    unset($item);
     foreach($items as $item) {
       $item->worn = ($item->id === $id);
       $this->orm->characterItems->persist($item);

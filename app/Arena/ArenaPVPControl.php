@@ -13,7 +13,6 @@ use Nextras\Orm\Collection\ICollection;
  * @author Jakub Konečný
  */
 final class ArenaPVPControl extends ArenaControl {
-  /** @var string */
   protected $arena = "heroes";
   
   /**

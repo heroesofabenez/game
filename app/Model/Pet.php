@@ -66,6 +66,7 @@ final class Pet {
     } elseif(!$this->canDeployPet($pet)) {
       throw new PetNotDeployableException();
     }
+    unset($pet);
     $pets = $this->orm->pets->findByOwner($this->user->id);
     /** @var PetEntity $pet */
     foreach($pets as $pet) {
