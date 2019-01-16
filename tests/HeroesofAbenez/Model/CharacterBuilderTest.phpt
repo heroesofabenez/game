@@ -53,9 +53,9 @@ final class CharacterBuilderTest extends \Tester\TestCase {
     $result = $this->model->create($class, $race, CharacterBuilder::SPECIALIZATION_LEVEL, $specialization);
     Assert::type("array", $result);
     Assert::same(17, $result["strength"]);
-    Assert::same(11, $result["dexterity"]);
+    Assert::same(12, $result["dexterity"]);
     Assert::same(32, $result["constitution"]);
-    Assert::same(9, $result["intelligence"]);
+    Assert::same(8, $result["intelligence"]);
     Assert::same(9, $result["charisma"]);
   }
 }
