@@ -89,11 +89,10 @@ final class Guild {
   
   /**
    * Creates a guild
-   * 
-   * @param array $data Name and description
+   *
    * @throws NameInUseException
    */
-  public function create($data): void {
+  public function create(array $data): void {
     $guild = $this->orm->guilds->getByName($data["name"]);
     if(!is_null($guild)) {
       throw new NameInUseException();
