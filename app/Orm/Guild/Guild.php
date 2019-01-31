@@ -19,7 +19,7 @@ use Nextras\Orm\Relationships\OneHasMany;
  */
 final class Guild extends \Nextras\Orm\Entity\Entity {
   protected function getterLeader(): ?Character {
-    return $this->members->get()->getBy([
+    return $this->members->get()->limitBy(1)->getBy([
       "guildrank" => 7
     ]);
   }

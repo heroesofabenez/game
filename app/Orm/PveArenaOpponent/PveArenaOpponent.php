@@ -34,6 +34,7 @@ final class PveArenaOpponent extends \Nextras\Orm\Entity\Entity {
 
   protected function getterWeapon(): ?Item {
     return $this->class->items->get()->orderBy("requiredLevel", ICollection::DESC)
+      ->limitBy(1)
       ->getBy([
         ICollection::OR,
         [
@@ -51,6 +52,7 @@ final class PveArenaOpponent extends \Nextras\Orm\Entity\Entity {
 
   protected function getterArmor(): ?Item {
     return $this->class->items->get()->orderBy("requiredLevel", ICollection::DESC)
+      ->limitBy(1)
       ->getBy([
         ICollection::OR,
         [
