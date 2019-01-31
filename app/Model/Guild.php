@@ -118,13 +118,10 @@ final class Guild {
     if(is_null($guild)) {
       throw new GuildNotFoundException();
     }
-    $leader = $this->orm->characters->getBy([
-      "guild" => $gid, "guildrank" => 7,
-    ]);
     $request = new RequestEntity();
     $this->orm->requests->attach($request);
     $request->from = $this->user->id;
-    $request->to = $leader;
+    $request->to = $guild->leader;
     $request->type = RequestEntity::TYPE_GUILD_APP;
     $this->orm->requests->persistAndFlush($request);
   }
