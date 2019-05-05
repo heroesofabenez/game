@@ -18,8 +18,9 @@ final class ItemsRepository extends \Nextras\Orm\Repository\Repository {
   
   /**
    * @param int $id
+   * @return Item|null
    */
-  public function getById($id): ?Item {
+  public function getById($id): ?\Nextras\Orm\Entity\IEntity {
     return $this->getBy([
       "id" => $id
     ]);

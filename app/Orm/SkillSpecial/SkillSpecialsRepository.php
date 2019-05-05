@@ -20,8 +20,9 @@ final class SkillSpecialsRepository extends \Nextras\Orm\Repository\Repository {
   
   /**
    * @param int $id
+   * @return SkillSpecial|null
    */
-  public function getById($id): ?SkillSpecial {
+  public function getById($id): ?\Nextras\Orm\Entity\IEntity {
     return $this->getBy([
       "id" => $id
     ]);

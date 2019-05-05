@@ -363,7 +363,7 @@ final class Guild {
    * @return string[]
    */
   public function getCustomRankNames(int $id): array {
-    return $this->orm->guildRanksCustom->findByGuild($id)->fetchPairs("rank", "name");
+    return $this->orm->guildRanksCustom->findByGuild($id)->fetchPairs("rank->id", "name");
   }
   
   /**

@@ -17,8 +17,9 @@ final class MessagesRepository extends \Nextras\Orm\Repository\Repository {
   
   /**
    * @param int $id
+   * @return Message|null
    */
-  public function getById($id): ?Message {
+  public function getById($id): ?\Nextras\Orm\Entity\IEntity {
     return $this->getBy([
       "id" => $id
     ]);

@@ -20,8 +20,9 @@ final class QuestStagesRepository extends \Nextras\Orm\Repository\Repository {
   
   /**
    * @param int $id
+   * @return QuestStage|null
    */
-  public function getById($id): ?QuestStage {
+  public function getById($id): ?\Nextras\Orm\Entity\IEntity {
     return $this->getBy([
       "id" => $id
     ]);

@@ -20,8 +20,9 @@ final class CharacterSpecializationsRepository extends \Nextras\Orm\Repository\R
   
   /**
    * @param int $id
+   * @return CharacterSpecialization|null
    */
-  public function getById($id): ?CharacterSpecialization {
+  public function getById($id): ?\Nextras\Orm\Entity\IEntity {
     return $this->getBy([
       "id" => $id
     ]);

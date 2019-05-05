@@ -38,6 +38,7 @@ final class Intro {
   public function getIntroPart(int $part): string {
     /** @var \HeroesofAbenez\Orm\Character $character */
     $character = $this->orm->characters->getById($this->user->id);
+    /** @var \HeroesofAbenez\Orm\Introduction $intro */
     $intro = $this->orm->introduction->getBy([
       "race" => $character->race->id,
       "class" => $character->class->id,

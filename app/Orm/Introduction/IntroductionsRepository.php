@@ -18,8 +18,9 @@ final class IntroductionsRepository extends \Nextras\Orm\Repository\Repository {
   
   /**
    * @param int $id
+   * @return Introduction|null
    */
-  public function getById($id): ?Introduction {
+  public function getById($id): ?\Nextras\Orm\Entity\IEntity {
     return $this->getBy([
       "id" => $id
     ]);

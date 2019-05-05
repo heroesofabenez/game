@@ -15,6 +15,5 @@ final class RoutesStagesRepository extends \Nextras\Orm\Repository\Repository {
   public static function getEntityClassNames(): array {
     return [RoutesStage::class];
   }
-  
 }
 ?>

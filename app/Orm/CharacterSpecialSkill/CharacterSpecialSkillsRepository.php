@@ -18,8 +18,9 @@ final class CharacterSpecialSkillsRepository extends \Nextras\Orm\Repository\Rep
   
   /**
    * @param int $id
+   * @return CharacterSpecialSkill|null
    */
-  public function getById($id): ?CharacterSpecialSkill {
+  public function getById($id): ?\Nextras\Orm\Entity\IEntity {
     return $this->getBy([
       "id" => $id
     ]);
