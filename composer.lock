@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "10544b757ea4135c545d8b18951f84cd",
+    "content-hash": "050d21de5a7b9f97cfe7b18d7bf4a05a",
     "packages": [
         {
             "name": "heroesofabenez/chat",
@@ -72,12 +72,12 @@
             "source": {
                 "type": "git",
                 "url": "https://gitlab.com/heroesofabenez/combat.git",
-                "reference": "fb22bde3ababed8d9e322f7c983a1b271e5404e2"
+                "reference": "f67b76fceec95352b1354b3dc80232367fc3e99a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://gitlab.com/api/v4/projects/heroesofabenez%2Fcombat/repository/archive.zip?sha=fb22bde3ababed8d9e322f7c983a1b271e5404e2",
-                "reference": "fb22bde3ababed8d9e322f7c983a1b271e5404e2",
+                "url": "https://gitlab.com/api/v4/projects/heroesofabenez%2Fcombat/repository/archive.zip?sha=f67b76fceec95352b1354b3dc80232367fc3e99a",
+                "reference": "f67b76fceec95352b1354b3dc80232367fc3e99a",
                 "shasum": ""
             },
             "require": {
@@ -89,6 +89,8 @@
                 "symfony/options-resolver": "^4.0"
             },
             "require-dev": {
+                "nette/di": "^2.4.10 || ^3.0",
+                "nette/http": "^2.4.7 || ^3.0",
                 "nexendrie/code-quality": "dev-master",
                 "nexendrie/site-generator": "1.0.x-dev",
                 "phpstan/phpstan-nette": "^0.11"
@@ -120,7 +122,7 @@
             "keywords": [
                 "combat"
             ],
-            "time": "2019-05-05T15:27:59+00:00"
+            "time": "2019-05-11T14:53:06+00:00"
         },
         {
             "name": "kdyby/autowired",
@@ -2136,18 +2138,18 @@
             "source": {
                 "type": "git",
                 "url": "https://gitlab.com/nexendrie/code-quality.git",
-                "reference": "a13f97d0905dac469fdee273c43f3f68b0486195"
+                "reference": "bb216856a2d73e0004daf9b8bdd92ca751985ac4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://gitlab.com/api/v4/projects/nexendrie%2Fcode-quality/repository/archive.zip?sha=a13f97d0905dac469fdee273c43f3f68b0486195",
-                "reference": "a13f97d0905dac469fdee273c43f3f68b0486195",
+                "url": "https://gitlab.com/api/v4/projects/nexendrie%2Fcode-quality/repository/archive.zip?sha=bb216856a2d73e0004daf9b8bdd92ca751985ac4",
+                "reference": "bb216856a2d73e0004daf9b8bdd92ca751985ac4",
                 "shasum": ""
             },
             "require": {
                 "jakub-onderka/php-console-highlighter": "^0.3.2",
                 "jakub-onderka/php-parallel-lint": "^1.0",
-                "nexendrie/testbench": "dev-master",
+                "nexendrie/testbench": "^2.6",
                 "phpstan/phpstan": "^0.11",
                 "phpstan/phpstan-strict-rules": "^0.11",
                 "squizlabs/php_codesniffer": "^3.4"
@@ -2170,20 +2172,20 @@
                 "quality",
                 "testing"
             ],
-            "time": "2019-05-01T11:11:03+00:00"
+            "time": "2019-05-12T12:51:14+00:00"
         },
         {
             "name": "nexendrie/testbench",
-            "version": "dev-master",
+            "version": "v2.6.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nexendrie/testbench.git",
-                "reference": "ee7b78c71e81b4200c63128ef5993184fc9419fa"
+                "reference": "880abce4aab49dfbda714f54e5eafd720c6205f7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nexendrie/testbench/zipball/ee7b78c71e81b4200c63128ef5993184fc9419fa",
-                "reference": "ee7b78c71e81b4200c63128ef5993184fc9419fa",
+                "url": "https://api.github.com/repos/nexendrie/testbench/zipball/880abce4aab49dfbda714f54e5eafd720c6205f7",
+                "reference": "880abce4aab49dfbda714f54e5eafd720c6205f7",
                 "shasum": ""
             },
             "require": {
@@ -2193,7 +2195,7 @@
                 "nette/di": "^2.4 || ^3.0",
                 "nette/safe-stream": "^2.3",
                 "nette/security": "^2.4 || ^3.0",
-                "nette/tester": "^2.0",
+                "nette/tester": "^2.2",
                 "nette/utils": "^2.4 || ^3.0",
                 "php": ">=7.2.0"
             },
@@ -2246,7 +2248,7 @@
                 }
             ],
             "description": "Simple integration testing tool for Nette Framework applications",
-            "time": "2019-05-05T11:44:48+00:00"
+            "time": "2019-05-12T12:32:58+00:00"
         },
         {
             "name": "nikic/php-parser",
@@ -2398,16 +2400,16 @@
         },
         {
             "name": "phpstan/phpstan",
-            "version": "0.11.5",
+            "version": "0.11.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan.git",
-                "reference": "24ce5a566a798b81343138ed5d41d6877554cf9a"
+                "reference": "7af8b9d02b3ab36444dbf4e1b9ca1c1bd5044d81"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/24ce5a566a798b81343138ed5d41d6877554cf9a",
-                "reference": "24ce5a566a798b81343138ed5d41d6877554cf9a",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/7af8b9d02b3ab36444dbf4e1b9ca1c1bd5044d81",
+                "reference": "7af8b9d02b3ab36444dbf4e1b9ca1c1bd5044d81",
                 "shasum": ""
             },
             "require": {
@@ -2467,7 +2469,7 @@
                 "MIT"
             ],
             "description": "PHPStan - PHP Static Analysis Tool",
-            "time": "2019-03-25T16:40:09+00:00"
+            "time": "2019-05-08T16:33:56+00:00"
         },
         {
             "name": "phpstan/phpstan-nette",
@@ -2750,16 +2752,16 @@
         },
         {
             "name": "symfony/contracts",
-            "version": "v1.0.2",
+            "version": "v1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/contracts.git",
-                "reference": "1aa7ab2429c3d594dd70689604b5cf7421254cdf"
+                "reference": "d3636025e8253c6144358ec0a62773cae588395b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/contracts/zipball/1aa7ab2429c3d594dd70689604b5cf7421254cdf",
-                "reference": "1aa7ab2429c3d594dd70689604b5cf7421254cdf",
+                "url": "https://api.github.com/repos/symfony/contracts/zipball/d3636025e8253c6144358ec0a62773cae588395b",
+                "reference": "d3636025e8253c6144358ec0a62773cae588395b",
                 "shasum": ""
             },
             "require": {
@@ -2767,19 +2769,22 @@
             },
             "require-dev": {
                 "psr/cache": "^1.0",
-                "psr/container": "^1.0"
+                "psr/container": "^1.0",
+                "symfony/polyfill-intl-idn": "^1.10"
             },
             "suggest": {
                 "psr/cache": "When using the Cache contracts",
                 "psr/container": "When using the Service contracts",
                 "symfony/cache-contracts-implementation": "",
+                "symfony/event-dispatcher-implementation": "",
+                "symfony/http-client-contracts-implementation": "",
                 "symfony/service-contracts-implementation": "",
                 "symfony/translation-contracts-implementation": ""
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.0-dev"
+                    "dev-master": "1.1-dev"
                 }
             },
             "autoload": {
@@ -2814,7 +2819,7 @@
                 "interoperability",
                 "standards"
             ],
-            "time": "2018-12-05T08:06:11+00:00"
+            "time": "2019-04-27T14:29:50+00:00"
         },
         {
             "name": "symfony/finder",
