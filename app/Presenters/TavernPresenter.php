@@ -58,6 +58,8 @@ final class TavernPresenter extends BasePresenter {
   
   /**
    * Creates form for writing new message
+   *
+   * @throws \Nette\Application\BadRequestException
    */
   protected function createComponentNewMessageForm(NewChatMessageFormFactory $factory): Form {
     switch($this->action) {
@@ -76,6 +78,8 @@ final class TavernPresenter extends BasePresenter {
         $chatFactory = $this->context->getByType(Chat\IGlobalChatControlFactory::class);
         $chat = $this->createComponentGlobalChat($chatFactory);
         break;
+      default:
+        throw new \Nette\Application\BadRequestException();
     }
     return $factory->create($chat);
   }

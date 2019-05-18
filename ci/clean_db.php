@@ -6,7 +6,12 @@ use Nextras\Dbal\QueryException;
 
 require __DIR__ . "/../vendor/autoload.php";
 
-$config = Neon::decode(file_get_contents(__DIR__ . "/../tests/local.neon"));
+$filename = __DIR__ . "/../tests/local.neon";
+$content = file_get_contents($filename);
+if($content === false) {
+  throw new RuntimeException("File $filename does not exist or cannot be read.");
+}
+$config = Neon::decode($content);
 
 $connection = new Nextras\Dbal\Connection($config["dbal"]);
 

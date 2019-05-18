@@ -6,7 +6,12 @@ use Nette\Neon\Neon;
 require __DIR__ . "/../vendor/autoload.php";
 
 $filename = __DIR__ . "/../tests/local.neon";
-$config = Neon::decode(file_get_contents($filename));
+$content = file_get_contents($filename);
+if($content === false) {
+  throw new RuntimeException("File $filename does not exist or cannot be read.");
+}
+$config = Neon::decode($content);
+
 $config["dbal"]["host"] = "localhost";
 unset($config["dbal"]["password"]);
 file_put_contents($filename, Neon::encode($config, Neon::BLOCK));

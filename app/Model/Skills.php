@@ -183,7 +183,7 @@ final class Skills {
       $record->level++;
       $record->character->skillPoints--;
       $this->orm->characterAttackSkills->persistAndFlush($record);
-    } elseif($type === "special") {
+    } else {
       $record = $this->orm->characterSpecialSkills->getByCharacterAndSkill($this->user->id, $id);
       if(is_null($record)) {
         $record = new CharacterSpecialSkill();

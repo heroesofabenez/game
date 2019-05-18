@@ -6,7 +6,6 @@ namespace HeroesofAbenez\Model;
 use HeroesofAbenez\Orm\CharacterRace;
 use HeroesofAbenez\Orm\CharacterClass;
 use HeroesofAbenez\Orm\Model as ORM;
-use Nextras\Orm\Entity\IEntity;
 use Nextras\Orm\Collection\ICollection;
 use HeroesofAbenez\Orm\Character;
 
@@ -66,10 +65,10 @@ final class Profile {
       "class", "specialization", "predominantKarma",
     ];
     foreach($stats as $stat) {
-      if($char->$stat instanceof IEntity) {
-        $return[$stat] = $char->$stat->id;
-      } else {
+      if(is_scalar($char->$stat) OR is_null($char->$stat)) {
         $return[$stat] = $char->$stat;
+      } else {
+        $return[$stat] = $char->$stat->id;
       }
     }
     $return["guild"] = "";

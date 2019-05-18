@@ -31,7 +31,11 @@ final class AuthorizatorFactory {
     
     $roles = $this->model->getRoles();
     $permissions = $this->model->getPermissions();
-    
+
+    /**
+     * @var int $index
+     * @var string $role
+     */
     foreach($roles as $index => $role) {
       $parent = "player";
       if($index !== 1) {

@@ -6,7 +6,6 @@ namespace HeroesofAbenez\Model;
 use HeroesofAbenez\Combat\Character;
 use HeroesofAbenez\Orm\Model as ORM;
 use HeroesofAbenez\Orm\ArenaFightCount;
-use Nextras\Orm\Entity\IEntity;
 use HeroesofAbenez\Combat\BaseCharacterSkill;
 use Nexendrie\Utils\Collection;
 use HeroesofAbenez\Combat\Equipment;
@@ -80,10 +79,10 @@ final class CombatHelper {
       "charisma", "race", "specialization", "gender", "experience",
     ];
     foreach($stats as $stat) {
-      if($character->$stat instanceof IEntity) {
-        $data[$stat] = $character->$stat->id;
-      } else {
+      if(is_scalar($character->$stat) OR is_null($character->$stat)) {
         $data[$stat] = $character->$stat;
+      } else {
+        $data[$stat] = $character->$stat->id;
       }
     }
     $data["occupation"] = $character->class->id;
@@ -136,10 +135,10 @@ final class CombatHelper {
       "name", "level", "race", "gender", "specialization",
     ];
     foreach($stats as $stat) {
-      if($npc->$stat instanceof IEntity) {
-        $data[$stat] = $npc->$stat->id;
-      } else {
+      if(is_scalar($npc->$stat) OR is_null($npc->$stat)) {
         $data[$stat] = $npc->$stat;
+      } else {
+        $data[$stat] = $npc->$stat->id;
       }
     }
     $data["id"] = "pveArenaNpc" . $npc->id;
@@ -165,10 +164,10 @@ final class CombatHelper {
       "name", "level", "race", "specialization",
     ];
     foreach($stats as $stat) {
-      if($npc->$stat instanceof IEntity) {
-        $data[$stat] = $npc->$stat->id;
-      } else {
+      if(is_scalar($npc->$stat) OR is_null($npc->$stat)) {
         $data[$stat] = $npc->$stat;
+      } else {
+        $data[$stat] = $npc->$stat->id;
       }
     }
     $data["id"] = "commonNpc" . $npc->id;

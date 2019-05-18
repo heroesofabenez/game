@@ -51,6 +51,7 @@ final class CharacterBuilder {
 
   public function create(CharacterClass $class, CharacterRace $race, int $level = 1, CharacterSpecialization $specialization = null): array {
     $this->checkSpecialization($level, $class, $specialization);
+    $specializationLevel = 0;
     if(!is_null($specialization)) {
       $specializationLevel = $level - static::SPECIALIZATION_LEVEL + 1;
       $level = static::SPECIALIZATION_LEVEL - 1;

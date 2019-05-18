@@ -6,17 +6,12 @@ parameters:
     universalObjectCratesClasses:
         - Nette\Security\IIdentity
     ignoreErrors:
-        - '#Variable \$[a-zA-Z0-9_]+ might not be defined#'
-        - '#Access to an undefined property Nextras\\Orm\\Entity\\IEntity::\$id#'
         - '#Method Nette\\Localization\\ITranslator::translate\(\) invoked with 3 parameters, 1-2 required#'
         - '#Property HeroesofAbenez\\Orm\\[a-zA-Z0-9_]+::\$[a-zA-Z0-9_]+ \(HeroesofAbenez\\Orm\\[a-zA-Z0-9_]+|null\) does not accept int#'
         - '#Method HeroesofAbenez\\Orm\[a-zA-Z0-9\\_]+::[a-zA-Z0-9_]+ should return HeroesofAbenez\\Orm[a-zA-Z0-9\\_]+|null but returns Nextras\\Orm\\IEntity|null#'
-        - '#Parameter \#1 \$input of static method Nette\\Neon\\Neon::decode\(\) expects string, string\|false given#'
         - '#Method HeroesofAbenez\\Model\\DI\\HOAExtension::getUserToCharacterMapper\(\) should return string but returns HeroesofAbenez\\Model\\IUserToCharacterMapper#'
         - '#Call to an undefined method Nette\\ComponentModel\\IComponent::(getControlPrototype|setDefaultValue)\(\)#'
         - '#Access to an undefined property Nette\\ComponentModel\\IComponent::\$value#'
-        - "#Strict comparison using === between 'special' and 'special' will always evaluate to true#"
-        - '#Binary operation "-" between int\|string and 1 results in an error#'
         - '#Variable property access on [a-zA-Z\\]+#'
         - '#Variable property access on \$this\([a-zA-Z\\]+\)#'
         - '#Variable method call on \$this\(HeroesofAbenez\\Model\\Skills\)#'
