@@ -4,40 +4,40 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b0bde97dc1e808ff3f8b55f40d53b08c",
+    "content-hash": "a2e537ca4c7a5dd69107bdf314bc7c0a",
     "packages": [
         {
             "name": "heroesofabenez/chat",
-            "version": "1.0.0",
+            "version": "1.2.0",
             "source": {
                 "type": "git",
                 "url": "https://gitlab.com/heroesofabenez/chat.git",
-                "reference": "793af2d98593774405e61c045222115832dfe4d2"
+                "reference": "f212dfbb11466bd34d49ed1db1ce38d52f6bfeb4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://gitlab.com/api/v4/projects/heroesofabenez%2Fchat/repository/archive.zip?sha=793af2d98593774405e61c045222115832dfe4d2",
-                "reference": "793af2d98593774405e61c045222115832dfe4d2",
+                "url": "https://gitlab.com/api/v4/projects/heroesofabenez%2Fchat/repository/archive.zip?sha=f212dfbb11466bd34d49ed1db1ce38d52f6bfeb4",
+                "reference": "f212dfbb11466bd34d49ed1db1ce38d52f6bfeb4",
                 "shasum": ""
             },
             "require": {
-                "latte/latte": "^2.4",
-                "nette/application": "^2.4",
-                "nette/di": "^2.4.10",
-                "nette/forms": "^2.4",
-                "nette/utils": "^2.4",
-                "nexendrie/translation": "^1.1.1",
-                "nexendrie/utils": "^1.1",
-                "php": ">=7.1.0"
+                "latte/latte": "^3.0",
+                "nette/application": "^3.0",
+                "nette/di": "^3.0",
+                "nette/forms": "^3.0",
+                "nette/utils": "^3.0",
+                "nexendrie/translation": "^2.0",
+                "nexendrie/utils": "^1.6.1",
+                "php": ">=7.2.0"
             },
             "require-dev": {
                 "nexendrie/code-quality": "dev-master",
-                "nexendrie/site-generator": "1.0.x-dev"
+                "nexendrie/site-generator": "^1.0"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.0.x-dev"
+                    "dev-master": "1.2.x-dev"
                 }
             },
             "autoload": {
@@ -64,7 +64,7 @@
                 "component",
                 "nette"
             ],
-            "time": "2018-06-09T13:58:55+00:00"
+            "time": "2019-06-02T16:25:08+00:00"
         },
         {
             "name": "heroesofabenez/combat",
@@ -125,17 +125,94 @@
             "time": "2019-07-14T13:08:03+00:00"
         },
         {
-            "name": "latte/latte",
-            "version": "v2.5.2",
+            "name": "kdyby/autowired",
+            "version": "dev-nette-3.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/nette/latte.git",
-                "reference": "c41020789756c044deb4d5d535855405c421ad08"
+                "url": "https://github.com/PavelJurasek/Autowired.git",
+                "reference": "41908559bd24774bb0134128651dc4ed0fe4ee80"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nette/latte/zipball/c41020789756c044deb4d5d535855405c421ad08",
-                "reference": "c41020789756c044deb4d5d535855405c421ad08",
+                "url": "https://api.github.com/repos/PavelJurasek/Autowired/zipball/41908559bd24774bb0134128651dc4ed0fe4ee80",
+                "reference": "41908559bd24774bb0134128651dc4ed0fe4ee80",
+                "shasum": ""
+            },
+            "require": {
+                "nette/application": "^3.0",
+                "nette/di": "^3.0",
+                "nette/reflection": "^2.4.2",
+                "php": "^7.1",
+                "tracy/tracy": "^2.6"
+            },
+            "require-dev": {
+                "nette/bootstrap": "^3.0",
+                "nette/robot-loader": "^3.2",
+                "nette/tester": "^2.2",
+                "phpstan/phpstan-nette": "^0.11",
+                "phpstan/phpstan-shim": "^0.11.6"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.6-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Kdyby\\Autowired": "src/"
+                },
+                "classmap": [
+                    "src/Kdyby/Autowired/exceptions.php"
+                ]
+            },
+            "autoload-dev": {
+                "classmap": [
+                    "tests/KdybyTests/ContainerTestCase.php",
+                    "tests/KdybyTests/Autowired/mocks/DatagridComponent.php",
+                    "tests/KdybyTests/Autowired/mocks/IntegrationPresenter.php",
+                    "tests/KdybyTests/Autowired/mocks/LoremService.php"
+                ]
+            },
+            "license": [
+                "BSD-3-Clause",
+                "GPL-2.0",
+                "GPL-3.0"
+            ],
+            "authors": [
+                {
+                    "name": "Filip Procházka",
+                    "homepage": "http://filip-prochazka.com",
+                    "email": "filip@prochazka.su"
+                }
+            ],
+            "description": "Syntax sugar for working with services in Nette Framework",
+            "homepage": "http://kdyby.org",
+            "keywords": [
+                "autowire",
+                "di",
+                "kdyby",
+                "nette"
+            ],
+            "support": {
+                "email": "filip@prochazka.su",
+                "issues": "https://github.com/kdyby/autowired/issues",
+                "source": "https://github.com/PavelJurasek/Autowired/tree/nette-3.0"
+            },
+            "time": "2019-05-09T15:07:01+00:00"
+        },
+        {
+            "name": "latte/latte",
+            "version": "v3.0.0-RC1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/nette/latte.git",
+                "reference": "c728e184820d7945d1981ae347b75b0b1156d11b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/nette/latte/zipball/c728e184820d7945d1981ae347b75b0b1156d11b",
+                "reference": "c728e184820d7945d1981ae347b75b0b1156d11b",
                 "shasum": ""
             },
             "require": {
@@ -158,7 +235,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.5-dev"
+                    "dev-master": "3.0-dev"
                 }
             },
             "autoload": {
@@ -194,44 +271,43 @@
                 "template",
                 "twig"
             ],
-            "time": "2019-07-16T16:19:33+00:00"
+            "time": "2018-10-30T17:35:51+00:00"
         },
         {
             "name": "nette/application",
-            "version": "v2.4.13",
+            "version": "v3.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nette/application.git",
-                "reference": "023acd964383de11fbc32cae8f4dfd8043643a0f"
+                "reference": "d81167866eccf5ae19929aa759967f29989cbcbb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nette/application/zipball/023acd964383de11fbc32cae8f4dfd8043643a0f",
-                "reference": "023acd964383de11fbc32cae8f4dfd8043643a0f",
+                "url": "https://api.github.com/repos/nette/application/zipball/d81167866eccf5ae19929aa759967f29989cbcbb",
+                "reference": "d81167866eccf5ae19929aa759967f29989cbcbb",
                 "shasum": ""
             },
             "require": {
-                "nette/component-model": "^2.3",
-                "nette/http": "^2.2",
-                "nette/reflection": "^2.2",
-                "nette/utils": "^2.4 || ~3.0.0",
-                "php": ">=5.6.0"
+                "nette/component-model": "^3.0",
+                "nette/http": "^3.0.2",
+                "nette/routing": "~3.0.0",
+                "nette/utils": "^3.0",
+                "php": ">=7.1"
             },
             "conflict": {
-                "nette/di": "<2.4",
-                "nette/forms": "<2.4",
-                "nette/latte": "<2.4",
-                "nette/nette": "<2.2"
+                "nette/di": "<3.0-stable",
+                "nette/forms": "<3.0",
+                "nette/latte": "<3.0"
             },
             "require-dev": {
-                "latte/latte": "^2.4.3",
-                "mockery/mockery": "^0.9.5",
-                "nette/di": "^2.4",
-                "nette/forms": "^2.4",
-                "nette/robot-loader": "^2.4.2 || ^3.0",
-                "nette/security": "^2.4",
-                "nette/tester": "^2.0",
-                "tracy/tracy": "^2.4"
+                "latte/latte": "^2.5.1",
+                "mockery/mockery": "^1.0",
+                "nette/di": "^v3.0",
+                "nette/forms": "^3.0",
+                "nette/robot-loader": "^3.2",
+                "nette/security": "^3.0",
+                "nette/tester": "^2.0.1",
+                "tracy/tracy": "^2.6"
             },
             "suggest": {
                 "latte/latte": "Allows using Latte in templates",
@@ -240,7 +316,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.4-dev"
+                    "dev-master": "3.0-dev"
                 }
             },
             "autoload": {
@@ -281,43 +357,40 @@
                 "routing",
                 "seo"
             ],
-            "time": "2018-11-23T22:28:11+00:00"
+            "time": "2019-07-08T10:01:44+00:00"
         },
         {
             "name": "nette/bootstrap",
-            "version": "v2.4.6",
+            "version": "v3.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nette/bootstrap.git",
-                "reference": "268816e3f1bb7426c3a4ceec2bd38a036b532543"
+                "reference": "e1075af05c211915e03e0c86542f3ba5433df4a3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nette/bootstrap/zipball/268816e3f1bb7426c3a4ceec2bd38a036b532543",
-                "reference": "268816e3f1bb7426c3a4ceec2bd38a036b532543",
+                "url": "https://api.github.com/repos/nette/bootstrap/zipball/e1075af05c211915e03e0c86542f3ba5433df4a3",
+                "reference": "e1075af05c211915e03e0c86542f3ba5433df4a3",
                 "shasum": ""
             },
             "require": {
-                "nette/di": "~2.4.7",
-                "nette/utils": "~2.4",
-                "php": ">=5.6.0"
-            },
-            "conflict": {
-                "nette/nette": "<2.2"
+                "nette/di": "^3.0",
+                "nette/utils": "^3.0",
+                "php": ">=7.1"
             },
             "require-dev": {
-                "latte/latte": "~2.2",
-                "nette/application": "~2.3",
-                "nette/caching": "~2.3",
-                "nette/database": "~2.3",
-                "nette/forms": "~2.3",
-                "nette/http": "~2.4.0",
-                "nette/mail": "~2.3",
-                "nette/robot-loader": "^2.4.2 || ^3.0",
-                "nette/safe-stream": "~2.2",
-                "nette/security": "~2.3",
-                "nette/tester": "~2.0",
-                "tracy/tracy": "^2.4.1"
+                "latte/latte": "^2.2",
+                "nette/application": "^3.0",
+                "nette/caching": "^3.0",
+                "nette/database": "^3.0",
+                "nette/forms": "^3.0",
+                "nette/http": "^3.0",
+                "nette/mail": "^3.0",
+                "nette/robot-loader": "^3.0",
+                "nette/safe-stream": "^2.2",
+                "nette/security": "^3.0",
+                "nette/tester": "^2.0",
+                "tracy/tracy": "^2.6"
             },
             "suggest": {
                 "nette/robot-loader": "to use Configurator::createRobotLoader()",
@@ -326,7 +399,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.4-dev"
+                    "dev-master": "3.0-dev"
                 }
             },
             "autoload": {
@@ -357,33 +430,33 @@
                 "configurator",
                 "nette"
             ],
-            "time": "2018-05-17T12:52:20+00:00"
+            "time": "2019-03-26T12:59:07+00:00"
         },
         {
             "name": "nette/caching",
-            "version": "v2.5.8",
+            "version": "v3.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nette/caching.git",
-                "reference": "7fba7c7ab2585fafb7b31152f2595e1551120555"
+                "reference": "d1abc4216f1cd42263c266af1907bbcbda4094c9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nette/caching/zipball/7fba7c7ab2585fafb7b31152f2595e1551120555",
-                "reference": "7fba7c7ab2585fafb7b31152f2595e1551120555",
+                "url": "https://api.github.com/repos/nette/caching/zipball/d1abc4216f1cd42263c266af1907bbcbda4094c9",
+                "reference": "d1abc4216f1cd42263c266af1907bbcbda4094c9",
                 "shasum": ""
             },
             "require": {
-                "nette/finder": "^2.2 || ~3.0.0",
+                "nette/finder": "^2.4 || ~3.0.0",
                 "nette/utils": "^2.4 || ~3.0.0",
-                "php": ">=5.6.0"
+                "php": ">=7.1"
             },
             "conflict": {
                 "nette/nette": "<2.2"
             },
             "require-dev": {
                 "latte/latte": "^2.4",
-                "nette/di": "^2.4 || ~3.0.0",
+                "nette/di": "^v3.0.0-beta2",
                 "nette/tester": "^2.0",
                 "tracy/tracy": "^2.4"
             },
@@ -393,7 +466,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.5-dev"
+                    "dev-master": "3.0-dev"
                 }
             },
             "autoload": {
@@ -426,25 +499,25 @@
                 "nette",
                 "sqlite"
             ],
-            "time": "2018-03-21T11:04:32+00:00"
+            "time": "2019-02-05T21:28:16+00:00"
         },
         {
             "name": "nette/component-model",
-            "version": "v2.4.0",
+            "version": "v3.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nette/component-model.git",
-                "reference": "6e7980f5ddec31f68a39e767799b1b0be9dd1014"
+                "reference": "3153441f3d64bbdac300e75b8e5dde36590f7e01"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nette/component-model/zipball/6e7980f5ddec31f68a39e767799b1b0be9dd1014",
-                "reference": "6e7980f5ddec31f68a39e767799b1b0be9dd1014",
+                "url": "https://api.github.com/repos/nette/component-model/zipball/3153441f3d64bbdac300e75b8e5dde36590f7e01",
+                "reference": "3153441f3d64bbdac300e75b8e5dde36590f7e01",
                 "shasum": ""
             },
             "require": {
-                "nette/utils": "^2.5 || ~3.0.0",
-                "php": ">=5.6.0"
+                "nette/utils": "^2.5 || ^3.0",
+                "php": ">=7.1"
             },
             "conflict": {
                 "nette/application": "<2.4",
@@ -457,7 +530,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.4-dev"
+                    "dev-master": "3.0-dev"
                 }
             },
             "autoload": {
@@ -487,46 +560,50 @@
                 "components",
                 "nette"
             ],
-            "time": "2018-03-20T16:32:50+00:00"
+            "time": "2019-02-20T07:13:15+00:00"
         },
         {
             "name": "nette/di",
-            "version": "v2.4.15",
+            "version": "v3.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nette/di.git",
-                "reference": "d0561b8f77e8ef2ed6d83328860e16c81a5a8649"
+                "reference": "19d83539245aaacb59470828919182411061841f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nette/di/zipball/d0561b8f77e8ef2ed6d83328860e16c81a5a8649",
-                "reference": "d0561b8f77e8ef2ed6d83328860e16c81a5a8649",
+                "url": "https://api.github.com/repos/nette/di/zipball/19d83539245aaacb59470828919182411061841f",
+                "reference": "19d83539245aaacb59470828919182411061841f",
                 "shasum": ""
             },
             "require": {
                 "ext-tokenizer": "*",
-                "nette/neon": "^2.3.3 || ~3.0.0",
-                "nette/php-generator": "^2.6.1 || ^3.0.0",
-                "nette/utils": "^2.5.0 || ~3.0.0",
-                "php": ">=5.6.0"
+                "nette/neon": "^3.0",
+                "nette/php-generator": "^3.2.2",
+                "nette/robot-loader": "^3.2",
+                "nette/schema": "^1.0",
+                "nette/utils": "^3.0",
+                "php": ">=7.1"
             },
             "conflict": {
-                "nette/bootstrap": "<2.4",
-                "nette/nette": "<2.2"
+                "nette/bootstrap": "<3.0"
             },
             "require-dev": {
-                "nette/tester": "^2.0",
+                "nette/tester": "^2.2",
                 "tracy/tracy": "^2.3"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.4-dev"
+                    "dev-master": "3.0-dev"
                 }
             },
             "autoload": {
                 "classmap": [
                     "src/"
+                ],
+                "files": [
+                    "src/compatibility.php"
                 ]
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -556,20 +633,20 @@
                 "nette",
                 "static"
             ],
-            "time": "2019-01-30T13:26:05+00:00"
+            "time": "2019-04-03T19:35:46+00:00"
         },
         {
             "name": "nette/finder",
-            "version": "v2.5.0",
+            "version": "v3.0.0-RC1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nette/finder.git",
-                "reference": "6be1b83ea68ac558aff189d640abe242e0306fe2"
+                "reference": "6e8922ee070fd9fa514141af2edf3c8b7853f410"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nette/finder/zipball/6be1b83ea68ac558aff189d640abe242e0306fe2",
-                "reference": "6be1b83ea68ac558aff189d640abe242e0306fe2",
+                "url": "https://api.github.com/repos/nette/finder/zipball/6e8922ee070fd9fa514141af2edf3c8b7853f410",
+                "reference": "6e8922ee070fd9fa514141af2edf3c8b7853f410",
                 "shasum": ""
             },
             "require": {
@@ -586,7 +663,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.5-dev"
+                    "dev-master": "3.0-dev"
                 }
             },
             "autoload": {
@@ -618,41 +695,41 @@
                 "iterator",
                 "nette"
             ],
-            "time": "2019-02-28T18:13:25+00:00"
+            "time": "2018-10-18T22:57:48+00:00"
         },
         {
             "name": "nette/forms",
-            "version": "v2.4.9",
+            "version": "v3.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nette/forms.git",
-                "reference": "787a924d09f507c44ead60f3822c31d61d909b65"
+                "reference": "b8d3a7c2004ee233f0309ac648980b7ecb3fa5cf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nette/forms/zipball/787a924d09f507c44ead60f3822c31d61d909b65",
-                "reference": "787a924d09f507c44ead60f3822c31d61d909b65",
+                "url": "https://api.github.com/repos/nette/forms/zipball/b8d3a7c2004ee233f0309ac648980b7ecb3fa5cf",
+                "reference": "b8d3a7c2004ee233f0309ac648980b7ecb3fa5cf",
                 "shasum": ""
             },
             "require": {
-                "nette/component-model": "~2.3",
-                "nette/http": "^2.3.8",
-                "nette/utils": "^2.4.6",
-                "php": ">=5.6.0"
+                "nette/component-model": "^3.0",
+                "nette/http": "^3.0",
+                "nette/utils": "^3.0",
+                "php": ">=7.1"
             },
             "conflict": {
-                "nette/nette": "<2.2"
+                "nette/di": "<3.0-stable"
             },
             "require-dev": {
-                "latte/latte": "~2.4",
-                "nette/di": "~2.4",
-                "nette/tester": "~2.0",
+                "latte/latte": "^2.4.1",
+                "nette/di": "^3.0",
+                "nette/tester": "^2.0",
                 "tracy/tracy": "^2.4"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.4-dev"
+                    "dev-master": "3.0-dev"
                 }
             },
             "autoload": {
@@ -686,31 +763,31 @@
                 "nette",
                 "validation"
             ],
-            "time": "2018-09-16T18:32:29+00:00"
+            "time": "2019-07-08T09:57:57+00:00"
         },
         {
             "name": "nette/http",
-            "version": "v2.4.11",
+            "version": "v3.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nette/http.git",
-                "reference": "3d75d11a880fe223bfa6bc7ca9822bdfe789e5a6"
+                "reference": "96d8a7e05e41af89569ddf8ad662c27fcf1a9a9b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nette/http/zipball/3d75d11a880fe223bfa6bc7ca9822bdfe789e5a6",
-                "reference": "3d75d11a880fe223bfa6bc7ca9822bdfe789e5a6",
+                "url": "https://api.github.com/repos/nette/http/zipball/96d8a7e05e41af89569ddf8ad662c27fcf1a9a9b",
+                "reference": "96d8a7e05e41af89569ddf8ad662c27fcf1a9a9b",
                 "shasum": ""
             },
             "require": {
-                "nette/utils": "^2.4 || ~3.0.0",
-                "php": ">=5.6.0"
+                "nette/utils": "^3.0",
+                "php": ">=7.1"
             },
             "conflict": {
-                "nette/nette": "<2.2"
+                "nette/di": "<3.0.0-stable"
             },
             "require-dev": {
-                "nette/di": "^2.4.8 || ~3.0.0",
+                "nette/di": "^3.0",
                 "nette/tester": "^2.0",
                 "tracy/tracy": "^2.4"
             },
@@ -721,7 +798,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.4-dev"
+                    "dev-master": "3.0-dev"
                 }
             },
             "autoload": {
@@ -745,7 +822,7 @@
                     "homepage": "https://nette.org/contributors"
                 }
             ],
-            "description": "? Nette Http: abstraction for HTTP request, response and session. Provides careful data sanitization and utility for URL and cookies manipulation.",
+            "description": "🌐 Nette Http: abstraction for HTTP request, response and session. Provides careful data sanitization and utility for URL and cookies manipulation.",
             "homepage": "https://nette.org",
             "keywords": [
                 "cookies",
@@ -758,7 +835,7 @@
                 "session",
                 "url"
             ],
-            "time": "2019-03-13T19:04:45+00:00"
+            "time": "2019-07-08T20:28:51+00:00"
         },
         {
             "name": "nette/neon",
@@ -945,36 +1022,212 @@
             "time": "2017-07-11T19:28:57+00:00"
         },
         {
-            "name": "nette/security",
-            "version": "v2.4.4",
+            "name": "nette/robot-loader",
+            "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "https://github.com/nette/security.git",
-                "reference": "7b8ac90c9ec405bb3b4dab9214bf122d3620fc65"
+                "url": "https://github.com/nette/robot-loader.git",
+                "reference": "a49e8e83e4eb762d1c0f6b7c13059cf97f493aaf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nette/security/zipball/7b8ac90c9ec405bb3b4dab9214bf122d3620fc65",
-                "reference": "7b8ac90c9ec405bb3b4dab9214bf122d3620fc65",
+                "url": "https://api.github.com/repos/nette/robot-loader/zipball/a49e8e83e4eb762d1c0f6b7c13059cf97f493aaf",
+                "reference": "a49e8e83e4eb762d1c0f6b7c13059cf97f493aaf",
                 "shasum": ""
             },
             "require": {
-                "nette/utils": "~2.4",
-                "php": ">=5.6.0"
-            },
-            "conflict": {
-                "nette/nette": "<2.2"
+                "ext-tokenizer": "*",
+                "nette/finder": "^2.5 || ^3.0",
+                "nette/utils": "^3.0",
+                "php": ">=7.1"
             },
             "require-dev": {
-                "nette/di": "~2.4",
-                "nette/http": "~2.4",
-                "nette/tester": "~2.0",
+                "nette/tester": "^2.0",
+                "tracy/tracy": "^2.3"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.2-dev"
+                }
+            },
+            "autoload": {
+                "classmap": [
+                    "src/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause",
+                "GPL-2.0",
+                "GPL-3.0"
+            ],
+            "authors": [
+                {
+                    "name": "David Grudl",
+                    "homepage": "https://davidgrudl.com"
+                },
+                {
+                    "name": "Nette Community",
+                    "homepage": "https://nette.org/contributors"
+                }
+            ],
+            "description": "🍀 Nette RobotLoader: high performance and comfortable autoloader that will search and autoload classes within your application.",
+            "homepage": "https://nette.org",
+            "keywords": [
+                "autoload",
+                "class",
+                "interface",
+                "nette",
+                "trait"
+            ],
+            "time": "2019-03-31T19:12:28+00:00"
+        },
+        {
+            "name": "nette/routing",
+            "version": "v3.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/nette/routing.git",
+                "reference": "603c697f3df7ed214795d4e8e8c58fbf981232b1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/nette/routing/zipball/603c697f3df7ed214795d4e8e8c58fbf981232b1",
+                "reference": "603c697f3df7ed214795d4e8e8c58fbf981232b1",
+                "shasum": ""
+            },
+            "require": {
+                "nette/http": "^3.0",
+                "nette/utils": "^3.0",
+                "php": ">=7.1"
+            },
+            "require-dev": {
+                "nette/tester": "^2.0",
+                "tracy/tracy": "^2.3"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.0-dev"
+                }
+            },
+            "autoload": {
+                "classmap": [
+                    "src/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause",
+                "GPL-2.0",
+                "GPL-3.0"
+            ],
+            "authors": [
+                {
+                    "name": "David Grudl",
+                    "homepage": "https://davidgrudl.com"
+                },
+                {
+                    "name": "Nette Community",
+                    "homepage": "https://nette.org/contributors"
+                }
+            ],
+            "description": "Nette Routing: two-ways URL conversion",
+            "homepage": "https://nette.org",
+            "keywords": [
+                "nette"
+            ],
+            "time": "2019-02-13T15:57:18+00:00"
+        },
+        {
+            "name": "nette/schema",
+            "version": "v1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/nette/schema.git",
+                "reference": "6241d8d4da39e825dd6cb5bfbe4242912f4d7e4d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/nette/schema/zipball/6241d8d4da39e825dd6cb5bfbe4242912f4d7e4d",
+                "reference": "6241d8d4da39e825dd6cb5bfbe4242912f4d7e4d",
+                "shasum": ""
+            },
+            "require": {
+                "nette/utils": "^3.0.1",
+                "php": ">=7.1"
+            },
+            "require-dev": {
+                "nette/tester": "^2.2",
+                "tracy/tracy": "^2.3"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0-dev"
+                }
+            },
+            "autoload": {
+                "classmap": [
+                    "src/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause",
+                "GPL-2.0",
+                "GPL-3.0"
+            ],
+            "authors": [
+                {
+                    "name": "David Grudl",
+                    "homepage": "https://davidgrudl.com"
+                },
+                {
+                    "name": "Nette Community",
+                    "homepage": "https://nette.org/contributors"
+                }
+            ],
+            "description": "📐 Nette Schema: validating data structures against a given Schema.",
+            "homepage": "https://nette.org",
+            "keywords": [
+                "config",
+                "nette"
+            ],
+            "time": "2019-04-03T15:53:25+00:00"
+        },
+        {
+            "name": "nette/security",
+            "version": "v3.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/nette/security.git",
+                "reference": "d4525fe0bc50f8edd96ffad0c958fb7f657aa1d9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/nette/security/zipball/d4525fe0bc50f8edd96ffad0c958fb7f657aa1d9",
+                "reference": "d4525fe0bc50f8edd96ffad0c958fb7f657aa1d9",
+                "shasum": ""
+            },
+            "require": {
+                "nette/utils": "^2.4 || ^3.0",
+                "php": ">=7.1"
+            },
+            "conflict": {
+                "nette/di": "<3.0-stable"
+            },
+            "require-dev": {
+                "nette/di": "^3.0.0",
+                "nette/http": "^3.0.0",
+                "nette/tester": "^2.0",
                 "tracy/tracy": "^2.4"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.4-dev"
+                    "dev-master": "3.0-dev"
                 }
             },
             "autoload": {
@@ -1006,7 +1259,7 @@
                 "authorization",
                 "nette"
             ],
-            "time": "2018-10-17T15:50:54+00:00"
+            "time": "2019-04-14T20:36:23+00:00"
         },
         {
             "name": "nette/tokenizer",
@@ -1065,23 +1318,20 @@
         },
         {
             "name": "nette/utils",
-            "version": "v2.5.3",
+            "version": "v3.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nette/utils.git",
-                "reference": "17b9f76f2abd0c943adfb556e56f2165460b15ce"
+                "reference": "bd961f49b211997202bda1d0fbc410905be370d4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nette/utils/zipball/17b9f76f2abd0c943adfb556e56f2165460b15ce",
-                "reference": "17b9f76f2abd0c943adfb556e56f2165460b15ce",
+                "url": "https://api.github.com/repos/nette/utils/zipball/bd961f49b211997202bda1d0fbc410905be370d4",
+                "reference": "bd961f49b211997202bda1d0fbc410905be370d4",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.6.0"
-            },
-            "conflict": {
-                "nette/nette": "<2.2"
+                "php": ">=7.1"
             },
             "require-dev": {
                 "nette/tester": "~2.0",
@@ -1090,7 +1340,7 @@
             "suggest": {
                 "ext-gd": "to use Image",
                 "ext-iconv": "to use Strings::webalize() and toAscii()",
-                "ext-intl": "for script transliteration in Strings::webalize() and toAscii()",
+                "ext-intl": "to use Strings::webalize(), toAscii(), normalize() and compare()",
                 "ext-json": "to use Nette\\Utils\\Json",
                 "ext-mbstring": "to use Strings::lower() etc...",
                 "ext-xml": "to use Strings::length() etc. when mbstring is not available"
@@ -1098,15 +1348,12 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.5-dev"
+                    "dev-master": "3.0-dev"
                 }
             },
             "autoload": {
                 "classmap": [
                     "src/"
-                ],
-                "files": [
-                    "src/loader.php"
                 ]
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -1143,28 +1390,28 @@
                 "utility",
                 "validation"
             ],
-            "time": "2018-09-18T10:22:16+00:00"
+            "time": "2019-03-22T01:00:30+00:00"
         },
         {
             "name": "nexendrie/menu",
-            "version": "2.1.0",
+            "version": "2.2.0",
             "source": {
                 "type": "git",
                 "url": "https://gitlab.com/nexendrie/menu.git",
-                "reference": "1a190b0f4ab619ab2bdd66cd21b7eae62a2944b6"
+                "reference": "2efb78c8e72cdea60872fe6f1ea2a44be68987be"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://gitlab.com/api/v4/projects/nexendrie%2Fmenu/repository/archive.zip?sha=1a190b0f4ab619ab2bdd66cd21b7eae62a2944b6",
-                "reference": "1a190b0f4ab619ab2bdd66cd21b7eae62a2944b6",
+                "url": "https://gitlab.com/api/v4/projects/nexendrie%2Fmenu/repository/archive.zip?sha=2efb78c8e72cdea60872fe6f1ea2a44be68987be",
+                "reference": "2efb78c8e72cdea60872fe6f1ea2a44be68987be",
                 "shasum": ""
             },
             "require": {
-                "latte/latte": "^2.4",
-                "nette/application": "^2.4",
-                "nette/di": "^2.4.10",
-                "nette/utils": "^2.4",
-                "nexendrie/utils": "^1.4",
+                "latte/latte": "^3.0",
+                "nette/application": "^3.0",
+                "nette/di": "^3.0",
+                "nette/utils": "^3.0",
+                "nexendrie/utils": "^1.6.1",
                 "php": ">=7.2.0"
             },
             "require-dev": {
@@ -1177,7 +1424,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.1.x-dev"
+                    "dev-master": "2.2.x-dev"
                 }
             },
             "autoload": {
@@ -1204,36 +1451,36 @@
                 "menu",
                 "nette"
             ],
-            "time": "2019-01-01T10:20:49+00:00"
+            "time": "2019-05-05T12:15:27+00:00"
         },
         {
             "name": "nexendrie/translation",
-            "version": "1.2.0",
+            "version": "2.0.1",
             "source": {
                 "type": "git",
                 "url": "https://gitlab.com/nexendrie/translation.git",
-                "reference": "e423b0ddb14c011b459282258079c3e6cf0dcea2"
+                "reference": "c483a44d5318798b12ff5549a26ce8290d1ad014"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://gitlab.com/api/v4/projects/nexendrie%2Ftranslation/repository/archive.zip?sha=e423b0ddb14c011b459282258079c3e6cf0dcea2",
-                "reference": "e423b0ddb14c011b459282258079c3e6cf0dcea2",
+                "url": "https://gitlab.com/api/v4/projects/nexendrie%2Ftranslation/repository/archive.zip?sha=c483a44d5318798b12ff5549a26ce8290d1ad014",
+                "reference": "c483a44d5318798b12ff5549a26ce8290d1ad014",
                 "shasum": ""
             },
             "require": {
-                "nette/finder": "^2.4",
-                "nette/utils": "^2.4",
-                "nexendrie/utils": "^1.0",
+                "nette/finder": "^3.0",
+                "nette/utils": "^3.0",
+                "nexendrie/utils": "^1.6.1",
                 "php": ">=7.2.0"
             },
             "require-dev": {
-                "latte/latte": "^2.4",
-                "nette/di": "^2.4.10",
-                "nette/neon": "^2.4",
+                "latte/latte": "^3.0",
+                "nette/di": "^3.0",
+                "nette/neon": "^3.0",
                 "nexendrie/code-quality": "dev-master",
                 "nexendrie/site-generator": "^1.0",
-                "symfony/yaml": "^3.3 || ^4.0",
-                "tracy/tracy": "^2.4"
+                "symfony/yaml": "^3.4 || ^4.0",
+                "tracy/tracy": "^3.0"
             },
             "suggest": {
                 "ext-json": "To use JsonLoader",
@@ -1247,7 +1494,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.2.x-dev"
+                    "dev-master": "2.0.x-dev"
                 }
             },
             "autoload": {
@@ -1278,7 +1525,7 @@
                 "translation",
                 "yaml"
             ],
-            "time": "2019-02-05T15:46:19+00:00"
+            "time": "2019-05-05T15:14:57+00:00"
         },
         {
             "name": "nexendrie/utils",
@@ -1519,16 +1766,16 @@
         },
         {
             "name": "tracy/tracy",
-            "version": "v2.6.4",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nette/tracy.git",
-                "reference": "cad2ec2c40cee828ce5538a4bc5bbde7045a7c1b"
+                "reference": "42e4939793d799063510b3e91ef735474b9d3f8b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nette/tracy/zipball/cad2ec2c40cee828ce5538a4bc5bbde7045a7c1b",
-                "reference": "cad2ec2c40cee828ce5538a4bc5bbde7045a7c1b",
+                "url": "https://api.github.com/repos/nette/tracy/zipball/42e4939793d799063510b3e91ef735474b9d3f8b",
+                "reference": "42e4939793d799063510b3e91ef735474b9d3f8b",
                 "shasum": ""
             },
             "require": {
@@ -1536,8 +1783,11 @@
                 "ext-session": "*",
                 "php": ">=7.1"
             },
+            "conflict": {
+                "nette/di": "<3.0"
+            },
             "require-dev": {
-                "nette/di": "^2.4 || ~3.0.0",
+                "nette/di": "^3.0",
                 "nette/tester": "^2.2",
                 "nette/utils": "^2.4 || ^3.0",
                 "psr/log": "^1.0"
@@ -1548,7 +1798,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.6-dev"
+                    "dev-master": "3.0-dev"
                 }
             },
             "autoload": {
@@ -1582,7 +1832,7 @@
                 "nette",
                 "profiler"
             ],
-            "time": "2019-07-16T14:23:55+00:00"
+            "time": "2019-07-11T18:33:42+00:00"
         }
     ],
     "packages-dev": [
@@ -1817,28 +2067,28 @@
         },
         {
             "name": "kdyby/fake-session",
-            "version": "v2.1.0",
+            "version": "v3.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Kdyby/FakeSession.git",
-                "reference": "d49bbefbcd9ffb3d85f831ff921558dc17fc8328"
+                "reference": "34a3a0fabdce619fc906d2b8144effcab97b9201"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Kdyby/FakeSession/zipball/d49bbefbcd9ffb3d85f831ff921558dc17fc8328",
-                "reference": "d49bbefbcd9ffb3d85f831ff921558dc17fc8328",
+                "url": "https://api.github.com/repos/Kdyby/FakeSession/zipball/34a3a0fabdce619fc906d2b8144effcab97b9201",
+                "reference": "34a3a0fabdce619fc906d2b8144effcab97b9201",
                 "shasum": ""
             },
             "require": {
-                "nette/di": "^2.4.6@dev",
-                "nette/http": "^2.4.7@dev",
-                "php": ">=5.6.0"
+                "nette/di": "^3.0-RC1@dev",
+                "nette/http": "^3.0@dev",
+                "php": ">=7.1"
             },
             "require-dev": {
-                "nette/bootstrap": "^2.4@dev",
-                "nette/caching": "^2.5@dev",
-                "nette/tester": "^2.0",
-                "nette/utils": "^2.4.5@dev"
+                "nette/bootstrap": "^3.0@dev",
+                "nette/caching": "^3.0@dev",
+                "nette/tester": "^2.1",
+                "nette/utils": "^3.0@dev"
             },
             "type": "library",
             "autoload": {
@@ -1867,72 +2117,7 @@
                 "nette",
                 "session"
             ],
-            "time": "2018-12-07T18:30:27+00:00"
-        },
-        {
-            "name": "nette/robot-loader",
-            "version": "v3.1.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/nette/robot-loader.git",
-                "reference": "3e8d75d6d976e191bdf46752ca40a286671219d2"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/nette/robot-loader/zipball/3e8d75d6d976e191bdf46752ca40a286671219d2",
-                "reference": "3e8d75d6d976e191bdf46752ca40a286671219d2",
-                "shasum": ""
-            },
-            "require": {
-                "ext-tokenizer": "*",
-                "nette/finder": "^2.3 || ^3.0",
-                "nette/utils": "^2.4 || ^3.0",
-                "php": ">=5.6.0"
-            },
-            "conflict": {
-                "nette/nette": "<2.2"
-            },
-            "require-dev": {
-                "nette/tester": "^2.0",
-                "tracy/tracy": "^2.3"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "3.1-dev"
-                }
-            },
-            "autoload": {
-                "classmap": [
-                    "src/"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause",
-                "GPL-2.0",
-                "GPL-3.0"
-            ],
-            "authors": [
-                {
-                    "name": "David Grudl",
-                    "homepage": "https://davidgrudl.com"
-                },
-                {
-                    "name": "Nette Community",
-                    "homepage": "https://nette.org/contributors"
-                }
-            ],
-            "description": "? Nette RobotLoader: high performance and comfortable autoloader that will search and autoload classes within your application.",
-            "homepage": "https://nette.org",
-            "keywords": [
-                "autoload",
-                "class",
-                "interface",
-                "nette",
-                "trait"
-            ],
-            "time": "2019-03-01T20:23:02+00:00"
+            "time": "2019-04-04T18:34:37+00:00"
         },
         {
             "name": "nette/safe-stream",
@@ -2226,35 +2411,34 @@
         },
         {
             "name": "ocramius/package-versions",
-            "version": "1.5.1",
+            "version": "1.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Ocramius/PackageVersions.git",
-                "reference": "1d32342b8c1eb27353c8887c366147b4c2da673c"
+                "reference": "a4d4b60d0e60da2487bd21a2c6ac089f85570dbb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Ocramius/PackageVersions/zipball/1d32342b8c1eb27353c8887c366147b4c2da673c",
-                "reference": "1d32342b8c1eb27353c8887c366147b4c2da673c",
+                "url": "https://api.github.com/repos/Ocramius/PackageVersions/zipball/a4d4b60d0e60da2487bd21a2c6ac089f85570dbb",
+                "reference": "a4d4b60d0e60da2487bd21a2c6ac089f85570dbb",
                 "shasum": ""
             },
             "require": {
                 "composer-plugin-api": "^1.0.0",
-                "php": "^7.3.0"
+                "php": "^7.1.0"
             },
             "require-dev": {
-                "composer/composer": "^1.8.6",
-                "doctrine/coding-standard": "^6.0.0",
+                "composer/composer": "^1.6.3",
+                "doctrine/coding-standard": "^5.0.1",
                 "ext-zip": "*",
-                "infection/infection": "^0.13.4",
-                "phpunit/phpunit": "^8.2.5",
-                "vimeo/psalm": "^3.4.9"
+                "infection/infection": "^0.7.1",
+                "phpunit/phpunit": "^7.0.0"
             },
             "type": "composer-plugin",
             "extra": {
                 "class": "PackageVersions\\Installer",
                 "branch-alias": {
-                    "dev-master": "1.6.x-dev"
+                    "dev-master": "2.0.x-dev"
                 }
             },
             "autoload": {
@@ -2273,7 +2457,7 @@
                 }
             ],
             "description": "Composer plugin that provides efficient querying for installed package versions (no runtime IO)",
-            "time": "2019-07-17T15:49:50+00:00"
+            "time": "2019-02-21T12:16:21+00:00"
         },
         {
             "name": "phpstan/phpdoc-parser",
@@ -2324,16 +2508,16 @@
         },
         {
             "name": "phpstan/phpstan",
-            "version": "0.11.6",
+            "version": "0.11.12",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan.git",
-                "reference": "7af8b9d02b3ab36444dbf4e1b9ca1c1bd5044d81"
+                "reference": "56b3eb2a371b60537fd20794e24af9e7e8ed4e30"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/7af8b9d02b3ab36444dbf4e1b9ca1c1bd5044d81",
-                "reference": "7af8b9d02b3ab36444dbf4e1b9ca1c1bd5044d81",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/56b3eb2a371b60537fd20794e24af9e7e8ed4e30",
+                "reference": "56b3eb2a371b60537fd20794e24af9e7e8ed4e30",
                 "shasum": ""
             },
             "require": {
@@ -2342,10 +2526,11 @@
                 "nette/bootstrap": "^2.4 || ^3.0",
                 "nette/di": "^2.4.7 || ^3.0",
                 "nette/robot-loader": "^3.0.1",
+                "nette/schema": "^1.0",
                 "nette/utils": "^2.4.5 || ^3.0",
                 "nikic/php-parser": "^4.0.2",
                 "php": "~7.1",
-                "phpstan/phpdoc-parser": "^0.3",
+                "phpstan/phpdoc-parser": "^0.3.5",
                 "symfony/console": "~3.2 || ~4.0",
                 "symfony/finder": "~3.2 || ~4.0"
             },
@@ -2358,6 +2543,7 @@
                 "dealerdirect/phpcodesniffer-composer-installer": "^0.4.4",
                 "ext-intl": "*",
                 "ext-mysqli": "*",
+                "ext-simplexml": "*",
                 "ext-soap": "*",
                 "ext-zip": "*",
                 "jakub-onderka/php-parallel-lint": "^1.0",
@@ -2393,26 +2579,26 @@
                 "MIT"
             ],
             "description": "PHPStan - PHP Static Analysis Tool",
-            "time": "2019-05-08T16:33:56+00:00"
+            "time": "2019-07-08T06:55:18+00:00"
         },
         {
             "name": "phpstan/phpstan-nette",
-            "version": "0.11",
+            "version": "0.11.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan-nette.git",
-                "reference": "998e9384ee615cec39eadb0ebae385f7d3d4dad6"
+                "reference": "356ee9e80b07d46ac24f1bdbb8bc469e14bb9965"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan-nette/zipball/998e9384ee615cec39eadb0ebae385f7d3d4dad6",
-                "reference": "998e9384ee615cec39eadb0ebae385f7d3d4dad6",
+                "url": "https://api.github.com/repos/phpstan/phpstan-nette/zipball/356ee9e80b07d46ac24f1bdbb8bc469e14bb9965",
+                "reference": "356ee9e80b07d46ac24f1bdbb8bc469e14bb9965",
                 "shasum": ""
             },
             "require": {
                 "nikic/php-parser": "^4.0",
                 "php": "~7.1",
-                "phpstan/phpstan": "^0.11"
+                "phpstan/phpstan": "^0.11.7"
             },
             "conflict": {
                 "nette/application": "<2.3.0",
@@ -2440,10 +2626,16 @@
                 "satooshi/php-coveralls": "^1.0",
                 "slevomat/coding-standard": "^4.5.2"
             },
-            "type": "library",
+            "type": "phpstan-extension",
             "extra": {
                 "branch-alias": {
                     "dev-master": "0.11-dev"
+                },
+                "phpstan": {
+                    "includes": [
+                        "extension.neon",
+                        "rules.neon"
+                    ]
                 }
             },
             "autoload": {
@@ -2456,7 +2648,7 @@
                 "MIT"
             ],
             "description": "Nette Framework class reflection extension for PHPStan",
-            "time": "2019-01-16T07:56:54+00:00"
+            "time": "2019-05-17T17:49:09+00:00"
         },
         {
             "name": "phpstan/phpstan-strict-rules",
@@ -2956,9 +3148,18 @@
             "time": "2019-06-13T11:15:36+00:00"
         }
     ],
-    "aliases": [],
+    "aliases": [
+        {
+            "alias": "2.6.0",
+            "alias_normalized": "2.6.0.0",
+            "version": "3.0.9999999.9999999-dev",
+            "package": "tracy/tracy"
+        }
+    ],
     "minimum-stability": "dev",
     "stability-flags": {
+        "tracy/tracy": 20,
+        "kdyby/autowired": 20,
         "nexendrie/code-quality": 20
     },
     "prefer-stable": true,

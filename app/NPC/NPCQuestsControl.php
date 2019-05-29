@@ -37,7 +37,6 @@ final class NPCQuestsControl extends \Nette\Application\UI\Control {
   protected $npc;
 
   public function __construct(Model\Quest $questModel, ORM $orm, \Nette\Security\User $user, ITranslator $translator) {
-    parent::__construct();
     $this->questModel = $questModel;
     $this->user = $user;
     $this->orm = $orm;

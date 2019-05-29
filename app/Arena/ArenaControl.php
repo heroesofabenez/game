@@ -39,7 +39,6 @@ abstract class ArenaControl extends \Nette\Application\UI\Control {
   protected $arena;
   
   public function __construct(User $user, CombatHelper $combatHelper, CombatBase $combat, CombatLogManager $log, ORM $orm, ITranslator $translator) {
-    parent::__construct();
     $this->user = $user;
     $this->combatHelper = $combatHelper;
     $this->combat = $combat;

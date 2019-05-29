@@ -22,7 +22,6 @@ final class PostofficeControl extends \Nette\Application\UI\Control {
   protected $profileModel;
   
   public function __construct(ORM $orm, \Nette\Security\User $user, \HeroesofAbenez\Model\Profile $profileModel) {
-    parent::__construct();
     $this->orm = $orm;
     $this->user = $user;
     $this->profileModel = $profileModel;

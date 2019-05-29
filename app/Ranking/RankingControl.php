@@ -23,7 +23,6 @@ abstract class RankingControl extends \Nette\Application\UI\Control {
   protected $paginator = null;
   
   public function __construct(string $name, array $cols, string $presenter, string $lastCol) {
-    parent::__construct();
     $this->name = $name;
     $this->cols = $cols;
     $this->presenterName = $presenter;
