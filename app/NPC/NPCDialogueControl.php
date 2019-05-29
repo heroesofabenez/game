@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace HeroesofAbenez\NPC;
 
 use HeroesofAbenez\Orm\Npc;
-use Nexendrie\Translation\Loaders\ILoader;
+use Nexendrie\Translation\ILoader;
 use Nette\Utils\Strings;
 use HeroesofAbenez\Utils\Karma;
 
