@@ -6,12 +6,13 @@ namespace HeroesofAbenez\Model;
 use Nette\Security\Identity;
 use HeroesofAbenez\Orm\Model as ORM;
 use HeroesofAbenez\Orm\Character;
+use Nette\Security\IIdentity;
 
-  /**
-   * Authenticator for the game
-   * 
-   * @author Jakub Konečný
-   */
+/**
+ * Authenticator for the game
+ *
+ * @author Jakub Konečný
+ */
 final class UserManager implements \Nette\Security\IAuthenticator {
   use \Nette\SmartObject;
   
@@ -44,7 +45,7 @@ final class UserManager implements \Nette\Security\IAuthenticator {
   /**
    * Logins the user
    */
-  public function authenticate(array $credentials): Identity {
+  public function authenticate(array $credentials): IIdentity {
     $uid = $this->getRealId();
     if($uid === 0) {
       return new Identity(0, "guest");

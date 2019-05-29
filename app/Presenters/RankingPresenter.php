@@ -18,11 +18,11 @@ final class RankingPresenter extends BasePresenter {
   /**
    * Set up paginator
    */
-  protected function startup(): void {
-    parent::startup();
+  protected function beforeRender(): void {
+    parent::beforeRender();
     $this->paginator = new \Nette\Utils\Paginator();
     $this->paginator->setItemsPerPage(self::ITEMS_PER_PAGE);
-    $this->paginator->setPage($this->getParameter("page"));
+    $this->paginator->setPage((int) $this->getParameter("page"));
   }
   
   /**
