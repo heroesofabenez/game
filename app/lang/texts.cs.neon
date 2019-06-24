@@ -183,7 +183,9 @@ profile:
     hitChance: "Šance na zásah"
     dodgeChance: "Šance na vyhnutí se zásahu"
     sendMessage: "Poslat zprávu"
-    currentLocation: "Současná poloha:"
+    currentLocation: "Současná poloha:"    
+    male: "muž"
+    female: "žena"
 npc:
     title: "NPC"
     steppedInFront: "Předstoupil jsi před"

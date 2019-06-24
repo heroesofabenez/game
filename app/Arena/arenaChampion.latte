@@ -2,7 +2,7 @@
   <h2>{_"texts.arena.championNotFound"}</h2>
 {else}
   <h1>{$champion->name}</h1>
-  <p>{$champion->gender}, {_"texts.profile.level"} {$champion->level} {_"races.$champion->race.name"} {_"classes.$champion->occupation.name"}{if $champion->specialization}-{_"subclasses.$champion->specialization.name"}{/if}</p>
+  <p>{_"texts.profile.$champion->gender"}, {_"texts.profile.level"} {$champion->level} {_"races.$champion->race.name"} {_"classes.$champion->occupation.name"}{if $champion->specialization}-{_"subclasses.$champion->specialization.name"}{/if}</p>
   <p>{_"texts.profile.combatStats"}</p>
   <ul>
     <li>{_"texts.profile.maxHitpoints"}: {$champion->maxHitpoints}</li>

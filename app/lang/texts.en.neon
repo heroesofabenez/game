@@ -184,6 +184,8 @@ profile:
     dodgeChance: "Dodge chance"
     sendMessage: "Send message"
     currentLocation: "Current location:"
+    male: "male"
+    female: "female"
 npc:
     title: "NPC"
     steppedInFront: "You stepped in front of"
