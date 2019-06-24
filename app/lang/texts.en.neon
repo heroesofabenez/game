@@ -136,6 +136,7 @@ journal:
     deployPet: "Deploy"
     discardPet: "Discard"
     chooseSpecialization: "Choose specialization:"
+    deployed: "Deployed"
 map:
     title: "Map"
     travelTitle: "Travel"

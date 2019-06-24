@@ -135,7 +135,8 @@ journal:
     levelUp: "Povýšit!"
     deployPet: "Nasadit"
     discardPet: "Odložit"
-    chooseSpecialization: "Vyber si specializaci:"
+    chooseSpecialization: "Vyber si specializaci:"                 
+    deployed: "Nasazený/á"
 map:
     title: "Mapa"
     travelTitle: "Cestovat"
