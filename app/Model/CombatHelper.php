@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace HeroesofAbenez\Model;
 
 use HeroesofAbenez\Combat\Character;
+use HeroesofAbenez\Combat\Team;
 use HeroesofAbenez\Orm\Model as ORM;
 use HeroesofAbenez\Orm\ArenaFightCount;
 use HeroesofAbenez\Combat\BaseCharacterSkill;
@@ -225,6 +226,26 @@ final class CombatHelper {
       }
     }
     $this->orm->characterItems->flush();
+  }
+
+  /**
+   * @return string[]
+   */
+  protected function getHealerSpecializations(): array {
+    return ["paladin", "priest",];
+  }
+
+  public function getHealers(Team $team1, Team $team2): Team {
+    $healers = new Team("healers");
+    $healerSpecializations = $this->getHealerSpecializations();
+    /** @var Character[] $characters */
+    $characters = array_merge($team1->toArray(), $team2->toArray());
+    foreach($characters as $character) {
+      if(in_array($character->specialization, $healerSpecializations, true)) {
+        $healers[] = $character;
+      }
+    }
+    return $healers;
   }
 }
 ?>

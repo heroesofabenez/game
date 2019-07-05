@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Model;
 
+use HeroesofAbenez\Combat\Team;
 use Tester\Assert;
 use HeroesofAbenez\Combat\Character;
 use HeroesofAbenez\Orm\Model as ORM;
@@ -77,7 +78,21 @@ final class CombatHelperTest extends \Tester\TestCase {
     $result = $this->model->getNumberOfTodayArenaFights($this->user->id);
     Assert::same(2, $result);
   }
-  
+
+  public function testGetHealers() {
+    $ids = range(1, 31);
+    $characters = new Team("");
+    foreach($ids as $id) {
+      $characters[] = $this->model->getArenaNpc($id);
+    }
+    /** @var Team|Character[] $result */
+    $result = $this->model->getHealers($characters, new Team(""));
+    Assert::type(Team::class, $result);
+    Assert::count(2, $result);
+    Assert::same("pveArenaNpc18", $result[0]->id);
+    Assert::same("pveArenaNpc29", $result[1]->id);
+  }
+
   public function shutDown() {
     $record = $this->orm->arenaFightsCount->getByCharacterAndDay($this->user->id, date("d.m.Y"));
     $this->orm->arenaFightsCount->removeAndFlush($record);
