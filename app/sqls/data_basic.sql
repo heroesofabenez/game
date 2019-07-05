@@ -144,7 +144,7 @@ INSERT INTO `pet_types` (`id`, `name`, `bonus_stat`, `bonus_value`, `image`, `re
 (16,	'Royal Tiger',	'strength',	20,	'',	45,	1,	NULL,	0),
 (17,	'Royal Snake',	'dexterity',	20,	'',	45,	2,	NULL,	0),
 (18,	'Royal Owl',	'intelligence',	20,	'',	45,	3,	NULL,	0),
-(19,	'Royal Hawk',	'dexterity',	25,	'',	60,	4,	NULL,	0),
+(19,	'Royal Hawk',	'dexterity',	25,	'',	45,	4,	NULL,	0),
 (20,	'Imperial Lion',	'constitution',	25,	'',	60,	1,	NULL,	0),
 (21,	'Imperial Tiger',	'strength',	25,	'',	60,	1,	NULL,	0),
 (22,	'Imperial Snake',	'dexterity',	25,	'',	60,	2,	NULL,	0),
