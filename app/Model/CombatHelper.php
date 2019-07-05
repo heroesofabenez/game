@@ -85,7 +85,8 @@ final class CombatHelper {
         $data[$stat] = $character->$stat->id;
       }
     }
-    $data["occupation"] = $character->class->id;
+    $data["occupation"] = $character->class->name;
+    $data["specialization"] = ($character->specialization) ? $character->specialization->name : "";
     $data["initiativeFormula"] = $character->class->initiative;
     $pet = $character->activePet;
     if(!is_null($pet)) {
@@ -132,7 +133,7 @@ final class CombatHelper {
     }
     $data = $this->cb->create($npc->class, $npc->race, $npc->level, $npc->specialization);
     $stats = [
-      "name", "level", "race", "gender", "specialization",
+      "name", "level", "race", "gender",
     ];
     foreach($stats as $stat) {
       if(is_scalar($npc->$stat) OR is_null($npc->$stat)) {
@@ -143,7 +144,8 @@ final class CombatHelper {
     }
     $data["id"] = "pveArenaNpc" . $npc->id;
     $data["initiativeFormula"] = $npc->class->initiative;
-    $data["occupation"] = $npc->class->id;
+    $data["occupation"] = $npc->class->name;
+    $data["specialization"] = ($npc->specialization) ? $npc->specialization->name : "";
     $equipment = $this->getArenaNpcEquipment($npc);
     $npc = new Character($data, $equipment, [], $npc->skills);
     return $npc;
@@ -161,7 +163,7 @@ final class CombatHelper {
     }
     $data = $this->cb->create($npc->class, $npc->race, $npc->level, $npc->specialization);
     $stats = [
-      "name", "level", "race", "specialization",
+      "name", "level", "race",
     ];
     foreach($stats as $stat) {
       if(is_scalar($npc->$stat) OR is_null($npc->$stat)) {
@@ -171,9 +173,9 @@ final class CombatHelper {
       }
     }
     $data["id"] = "commonNpc" . $npc->id;
-    $class = $npc->class;
-    $data["initiativeFormula"] = $class->initiative;
-    $data["occupation"] = $class->id;
+    $data["initiativeFormula"] = $npc->class->initiative;
+    $data["occupation"] = $npc->class->name;
+    $data["specialization"] = ($npc->specialization) ? $npc->specialization->name : "";
     return new Character($data);
   }
   
