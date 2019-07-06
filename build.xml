@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <project name="Heroes of Abenenez" basedir="." default="test">
-  <target name="test" depends="lint,cs,phpstan,sanity-checks,tests,clean-db"/>
+  <target name="test" depends="lint,cs,phpstan,tests,sanity-checks,clean-db"/>
   <target name="test-coverage" depends="lint,cs,phpstan,tests-coverage,sanity-checks,clean-db"/>
   <target name="test-ci" depends="install-ci,test"/>
   <target name="test-ci-coverage" depends="install-ci,test-phpdbg,sanity-checks"/>
