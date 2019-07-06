@@ -14,17 +14,15 @@ $configurator->addParameters([
 $container = $configurator->createContainer();
 $orm = $container->getByType(\HeroesofAbenez\Orm\Model::class);
 
-$errorFound = false;
+$errors = [];
 
 /** @var \Nextras\Orm\Collection\ICollection|\HeroesofAbenez\Orm\CharacterRace[] $races */
 $races = $orm->races->findAll();
 if($races->count() === 0) {
-  echo "No race found\n";
-  $errorFound = true;
+  $errors[] = "No race found";
 }
 if($races->findBy(["playable" => true])->countStored() === 0) {
-  echo "No playable race found\n";
-  $errorFound = true;
+  $errors[] = "No playable race found";
 }
 
 /** @var \Nextras\Orm\Collection\ICollection|\HeroesofAbenez\Orm\CharacterClass[] $races */
@@ -32,40 +30,32 @@ $classes = $orm->classes->findAll();
 $classTotalGrowth = 2.05;
 $petLevels = [8, 15, 30, 45, 60];
 if($classes->count() === 0) {
-  echo "No class found\n";
-  $errorFound = true;
+  $errors[] = "No class found";
 }
 if($classes->findBy(["playable" => true])->countStored() === 0) {
-  echo "No playable class found\n";
-  $errorFound = true;
+  $errors[] = "No playable class found";
 }
 foreach($classes as $class) {
   $totalGrowth = $class->strengthGrow + $class->dexterityGrow + $class->constitutionGrow + $class->intelligenceGrow + $class->charismaGrow + $class->statPointsLevel;
   if($totalGrowth !== $classTotalGrowth) {
-    echo "Total growth for class $class->name (#$class->id) is not $classTotalGrowth but $totalGrowth\n";
-    $errorFound = true;
+    $errors[] = "Total growth for class $class->name (#$class->id) is not $classTotalGrowth but $totalGrowth";
   }
   if($class->specializations->countStored() === 0) {
-    echo "Class $class->name (#$class->id) has no specialization\n";
-    $errorFound = true;
+    $errors[] = "Class $class->name (#$class->id) has no specialization";
   }
   if($class->attackSkills->get()->findBy(["neededLevel" => 1])->countStored() === 0) {
-    echo "Class $class->name (#$class->id) has no attack skill for level 1\n";
-    $errorFound = true;
+    $errors[] = "Class $class->name (#$class->id) has no attack skill for level 1";
   }
   if($class->specialSkills->get()->findBy(["neededLevel" => 1])->countStored() === 0) {
-    echo "Class $class->name (#$class->id) has no special skill for level 1\n";
-    $errorFound = true;
+    $errors[] = "Class $class->name (#$class->id) has no special skill for level 1";
   }
   if($class->specialSkills->get()->findBy(["neededLevel" => 10])->countStored() === 0) {
-    echo "Class $class->name (#$class->id) has no special skill for level 10\n";
-    $errorFound = true;
+    $errors[] = "Class $class->name (#$class->id) has no special skill for level 10";
   }
   if($class->playable) {
     foreach($petLevels as $level) {
       if($class->petTypes->get()->findBy(["requiredLevel" => $level])->countStored() === 0) {
-        echo "Class $class->name (#$class->id) has no pet for level $level\n";
-        $errorFound = true;
+        $errors[] = "Class $class->name (#$class->id) has no pet for level $level";
       }
     }
   }
@@ -75,26 +65,25 @@ foreach($classes as $class) {
 $specializations = $orm->specializations->findAll();
 $specializationTotalGrowth = 2.5;
 if($specializations->count() === 0) {
-  echo "No specialization found\n";
-  $errorFound = true;
+  $errors[] = "No specialization found";
 }
 foreach($specializations as $specialization) {
   $totalGrowth = $specialization->strengthGrow + $specialization->dexterityGrow + $specialization->constitutionGrow + $specialization->intelligenceGrow + $specialization->charismaGrow + $specialization->statPointsLevel;
   if($totalGrowth !== $specializationTotalGrowth) {
-    echo "Total growth for specialization $specialization->name (#$specialization->id) is not $specializationTotalGrowth but $totalGrowth\n";
-    $errorFound = true;
+    $errors[] = "Total growth for specialization $specialization->name (#$specialization->id) is not $specializationTotalGrowth but $totalGrowth";
   }
   if($specialization->attackSkills->get()->findBy(["neededLevel" => 15])->countStored() === 0) {
-    echo "Specialization $specialization->name (#$specialization->id) has no attack skill for level 15\n";
-    $errorFound = true;
+    $errors[] = "Specialization $specialization->name (#$specialization->id) has no attack skill for level 15";
   }
   if($specialization->specialSkills->get()->findBy(["neededLevel" => 15])->countStored() === 0) {
-    echo "Specialization $specialization->name (#$specialization->id) has no special skill for level 15\n";
-    $errorFound = true;
+    $errors[] = "Specialization $specialization->name (#$specialization->id) has no special skill for level 15";
   }
 }
 
-if($errorFound) {
+if(count($errors) > 0) {
+  foreach($errors as $error) {
+    echo $error . "\n";
+  }
   exit(1);
 } else {
   echo "Everything ok";
