@@ -68,7 +68,7 @@
       <arg path="ci"/>
     </exec>
   </target>
-  <target name="sanity-checks" description="Sanity checks for data" depends="setup-db">
+  <target name="sanity-checks" description="Sanity checks for data">
     <exec executable="php" logoutput="true" passthru="true" checkreturn="true">
       <arg path="ci/sanity_checks.php"/>
     </exec>
