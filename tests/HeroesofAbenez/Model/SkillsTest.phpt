@@ -6,9 +6,8 @@ namespace HeroesofAbenez\Model;
 use Tester\Assert;
 use HeroesofAbenez\Orm\SkillAttack;
 use HeroesofAbenez\Orm\SkillSpecial;
-use HeroesofAbenez\Combat\CharacterAttackSkill;
-use HeroesofAbenez\Combat\CharacterSpecialSkill;
-use HeroesofAbenez\Combat\BaseCharacterSkill;
+use HeroesofAbenez\Orm\CharacterAttackSkill;
+use HeroesofAbenez\Orm\CharacterSpecialSkill;
 
 require __DIR__ . "/../../bootstrap.php";
 
@@ -36,17 +35,9 @@ final class SkillsTest extends \Tester\TestCase {
   public function testGetCharacterAttackSkill() {
     $skill = $this->model->getCharacterAttackSkill(3);
     Assert::type(CharacterAttackSkill::class, $skill);
-    Assert::type("int", $skill->damage);
-    Assert::type("int", $skill->hitRate);
-    Assert::same(3, $skill->cooldown);
-    Assert::same("attack", $skill->skillType);
     Assert::same(2, $skill->level);
     $skill = $this->model->getCharacterAttackSkill(1);
     Assert::type(CharacterAttackSkill::class, $skill);
-    Assert::type("int", $skill->damage);
-    Assert::type("int", $skill->hitRate);
-    Assert::same(3, $skill->cooldown);
-    Assert::same("attack", $skill->skillType);
     Assert::same(0, $skill->level);
     Assert::null($this->model->getCharacterAttackSkill(5000));
   }
@@ -65,9 +56,6 @@ final class SkillsTest extends \Tester\TestCase {
   public function testGetCharacterSpecialSkill() {
     $skill = $this->model->getCharacterSpecialSkill(1);
     Assert::type(CharacterSpecialSkill::class, $skill);
-    Assert::type("int", $skill->value);
-    Assert::same(5, $skill->cooldown);
-    Assert::same("special", $skill->skillType);
     Assert::same(0, $skill->level);
     Assert::null($this->model->getCharacterSpecialSkill(5000));
   }
@@ -75,7 +63,7 @@ final class SkillsTest extends \Tester\TestCase {
   public function testGetAvailableSkills() {
     $result = $this->model->getAvailableSkills();
     Assert::type("array", $result);
-    Assert::type(BaseCharacterSkill::class, $result[0]);
+    Assert::type(CharacterAttackSkill::class, $result[0]);
   }
   
   public function testGetSkillPoints() {

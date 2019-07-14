@@ -7,8 +7,6 @@ use HeroesofAbenez\Orm\Model as ORM;
 use HeroesofAbenez\Orm\SkillAttack;
 use HeroesofAbenez\Orm\SkillSpecial;
 use HeroesofAbenez\Combat\BaseCharacterSkill;
-use HeroesofAbenez\Combat\CharacterAttackSkill as CharacterAttackSkillDummy;
-use HeroesofAbenez\Combat\CharacterSpecialSkill as CharacterSpecialSkillDummy;
 use HeroesofAbenez\Orm\CharacterAttackSkill;
 use HeroesofAbenez\Orm\CharacterSpecialSkill;
 
@@ -45,7 +43,7 @@ final class Skills {
     return $this->orm->attackSkills->getById($id);
   }
   
-  public function getCharacterAttackSkill(int $skillId, int $userId = 0): ?CharacterAttackSkillDummy {
+  public function getCharacterAttackSkill(int $skillId, int $userId = 0): ?CharacterAttackSkill {
     if($userId === 0) {
       $userId = $this->user->id;
     }
@@ -54,11 +52,12 @@ final class Skills {
       return null;
     }
     $row = $this->orm->characterAttackSkills->getByCharacterAndSkill($userId, $skillId);
-    $level = 0;
-    if(!is_null($row)) {
-      $level = $row->level;
+    if(is_null($row)) {
+      $row = new CharacterAttackSkill();
+      $row->level = 0;
+      $row->skill = $skill;
     }
-    return new CharacterAttackSkillDummy($skill->toDummy(), $level);
+    return $row;
   }
   
   /**
@@ -76,7 +75,7 @@ final class Skills {
     return $this->orm->specialSkills->getById($id);
   }
   
-  public function getCharacterSpecialSkill(int $skillId, int $userId = 0): ?CharacterSpecialSkillDummy {
+  public function getCharacterSpecialSkill(int $skillId, int $userId = 0): ?CharacterSpecialSkill {
     if($userId === 0) {
       $userId = $this->user->id;
     }
@@ -85,11 +84,12 @@ final class Skills {
       return null;
     }
     $row = $this->orm->characterSpecialSkills->getByCharacterAndSkill($userId, $skillId);
-    $level = 0;
-    if(!is_null($row)) {
-      $level = $row->level;
+    if(is_null($row)) {
+      $row = new CharacterSpecialSkill();
+      $row->level = 0;
+      $row->skill = $skill;
     }
-    return new CharacterSpecialSkillDummy($skill->toDummy(), $level);
+    return $row;
   }
 
   /**
@@ -154,15 +154,16 @@ final class Skills {
       throw new NoSkillPointsAvailableException();
     }
     $method = "getCharacter" . ucfirst($type) . "Skill";
+    /** @var CharacterAttackSkill|CharacterSpecialSkill|null $skill */
     $skill = $this->$method($id);
-    if(!$skill) {
+    if(is_null($skill)) {
       throw new SkillNotFoundException();
     } elseif($skill->level + 1 > $skill->skill->levels) {
       throw new SkillMaxLevelReachedException();
     }
     /** @var \HeroesofAbenez\Orm\Character $character */
     $character = $this->orm->characters->getById($this->user->id);
-    if(!$this->canLearnSkill($skill)) {
+    if(!$this->canLearnSkill($skill->skill)) {
       throw new CannotLearnSkillException();
     }
     if($type === "attack") {
