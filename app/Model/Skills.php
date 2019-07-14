@@ -36,12 +36,9 @@ final class Skills {
    * @return SkillAttack[]
    */
   public function getListOfAttackSkills(): array {
-    $return = [];
-    $skills = $this->orm->attackSkills->findAll();
-    foreach($skills as $skill) {
-      $return[] = $skill;
-    }
-    return $return;
+    /** @var SkillAttack[] $skills */
+    $skills = $this->orm->attackSkills->findAll()->fetchAll();
+    return $skills;
   }
   
   public function getAttackSkill(int $id): ?SkillAttack {
@@ -70,12 +67,9 @@ final class Skills {
    * @return SkillSpecial[]
    */
   public function getListOfSpecialSkills(): array {
-    $return = [];
-    $skills = $this->orm->specialSkills->findAll();
-    foreach($skills as $skill) {
-      $return[] = $skill;
-    }
-    return $return;
+    /** @var SkillSpecial[] $skills */
+    $skills = $this->orm->specialSkills->findAll()->fetchAll();
+    return $skills;
   }
   
   public function getSpecialSkill(int $id): ?SkillSpecial {
