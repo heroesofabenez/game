@@ -21,7 +21,7 @@ final class Guild {
   protected $orm;
   /** @var \Nette\Security\User */
   protected $user;
-  /** Profile */
+  /** @var Profile */
   protected $profileModel;
   /** @var Permissions */
   protected $permissionsModel;
