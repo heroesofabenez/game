@@ -53,7 +53,7 @@ final class ArenaPVEControl extends ArenaControl {
       /** @var PveArenaOpponent $npc */
       $npc = $this->orm->arenaNpcs->getById($id);
       $template->occupation = $npc->class->id;
-      $template->specialization = $npc->specialization ? $npc->specialization->id : null;
+      $template->specialization = ($npc->specialization) ? $npc->specialization->id : null;
     } catch(OpponentNotFoundException $e) {
       $template->champion = false;
     }
