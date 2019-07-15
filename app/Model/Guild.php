@@ -21,9 +21,9 @@ final class Guild {
   protected $orm;
   /** @var \Nette\Security\User */
   protected $user;
-  /** @var \HeroesofAbenez\Model\Profile */
+  /** Profile */
   protected $profileModel;
-  /** @var \HeroesofAbenez\Model\Permissions */
+  /** @var Permissions */
   protected $permissionsModel;
   
   public function __construct(ORM $orm, \Nette\Security\User $user, Profile $profileModel, Permissions $permissionsModel) {

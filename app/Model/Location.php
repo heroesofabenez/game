@@ -24,7 +24,7 @@ final class Location {
   protected $orm;
   /** @var \Nette\Security\User */
   protected $user;
-  /** @var \HeroesofAbenez\Model\NPC */
+  /** @var NPC */
   protected $npcModel;
   
   public function __construct(ORM $orm) {
