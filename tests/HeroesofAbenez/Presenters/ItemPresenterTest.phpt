@@ -3,6 +3,9 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Presenters;
 
+use Nette\Application\BadRequestException;
+use Tester\Assert;
+
 require __DIR__ . "/../../bootstrap.php";
 
 final class ItemPresenterTest extends \Tester\TestCase {
@@ -10,7 +13,9 @@ final class ItemPresenterTest extends \Tester\TestCase {
   
   public function testView() {
     $this->checkAction("Item:view", ["id" => 1]);
-    $this->checkForward("Item:view", "Item:notfound", ["id" => 5000]);
+    Assert::exception(function() {
+      $this->checkAction("Item:view", ["id" => 5000]);
+    }, BadRequestException::class);
   }
 }
 

@@ -23,11 +23,14 @@ final class PostofficePresenter extends BasePresenter {
   public function renderNew(int $id = null): void {
     $this->template->haveForm = true;
   }
-  
+
+  /**
+   * @throws \Nette\Application\BadRequestException
+   */
   public function actionMessage(int $id): void {
     $status = $this->createComponentPostoffice()->messageStatus($id);
     if($status === 0) {
-      $this->forward("notfound");
+      throw new \Nette\Application\BadRequestException();
     } elseif($status === -1) {
       $this->forward("cannotshow");
     }

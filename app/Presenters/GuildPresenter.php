@@ -76,14 +76,14 @@ final class GuildPresenter extends BasePresenter {
     $this->template->canManage = $this->user->isAllowed("guild", "manage");
     $this->template->canInvite = $this->user->isAllowed("guild", "invite");
   }
-  
+
+  /**
+   * @throws \Nette\Application\BadRequestException
+   */
   public function renderView(int $id): void {
-    if($id === 0) {
-      $this->forward("notfound");
-    }
     $data = $this->model->view($id);
     if(is_null($data)) {
-      $this->forward("notfound");
+      throw new \Nette\Application\BadRequestException();
     }
     $this->template->guild = $data;
   }

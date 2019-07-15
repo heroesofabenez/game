@@ -34,19 +34,25 @@ final class SkillPresenter extends BasePresenter {
   public function actionDefault(): void {
     throw new \Nette\Application\BadRequestException();
   }
-  
+
+  /**
+   * @throws \Nette\Application\BadRequestException
+   */
   public function renderAttack(int $id): void {
     $skill = $this->model->getAttackSkill($id);
     if(is_null($skill)) {
-      $this->forward("notfound");
+      throw new \Nette\Application\BadRequestException();
     }
     $this->template->skill = $skill;
   }
-  
+
+  /**
+   * @throws \Nette\Application\BadRequestException
+   */
   public function renderSpecial(int $id): void {
     $skill = $this->model->getSpecialSkill($id);
     if(is_null($skill)) {
-      $this->forward("notfound");
+      throw new \Nette\Application\BadRequestException();
     }
     $this->template->skill = $skill;
   }

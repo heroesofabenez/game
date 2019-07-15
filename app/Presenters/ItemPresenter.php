@@ -16,11 +16,14 @@ final class ItemPresenter extends BasePresenter {
     parent::__construct();
     $this->model = $model;
   }
-  
+
+  /**
+   * @throws \Nette\Application\BadRequestException
+   */
   public function renderView(int $id): void {
     $item = $this->model->view($id);
     if(is_null($item)) {
-      $this->forward("notfound");
+      throw new \Nette\Application\BadRequestException();
     }
     $this->template->item = $item;
     $this->template->level = $this->user->identity->level;

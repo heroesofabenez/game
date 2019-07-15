@@ -31,7 +31,10 @@ final class RequestPresenter extends BasePresenter {
   public function actionDefault(): void {
     throw new \Nette\Application\BadRequestException();
   }
-  
+
+  /**
+   * @throws \Nette\Application\BadRequestException
+   */
   public function renderView(int $id): void {
     try {
       $this->template->request = $this->model->show($id);
@@ -39,7 +42,7 @@ final class RequestPresenter extends BasePresenter {
       $this->flashMessage("errors.request.cannotSee");
       $this->forward("Homepage:");
     } catch(RequestNotFoundException $e) {
-      $this->forward("notfound");
+      throw new \Nette\Application\BadRequestException();
     }
   }
   

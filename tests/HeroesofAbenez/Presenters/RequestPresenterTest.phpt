@@ -19,7 +19,9 @@ final class RequestPresenterTest extends \Tester\TestCase {
   
   public function testView() {
     $this->checkAction("Request:view", ["id" => 1]);
-    $this->checkForward("Request:view", "Request:notfound", ["id" => 5000]);
+    Assert::exception(function() {
+      $this->checkAction("Request:view", ["id" => 5000]);
+    }, BadRequestException::class);
   }
 }
 

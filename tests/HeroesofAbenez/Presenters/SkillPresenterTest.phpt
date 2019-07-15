@@ -19,12 +19,16 @@ final class SkillPresenterTest extends \Tester\TestCase {
   
   public function testAttack() {
     $this->checkAction("Skill:attack", ["id" => 1]);
-    $this->checkForward("Skill:attack", "Skill:notfound", ["id" => 5000]);
+    Assert::exception(function() {
+      $this->checkAction("Skill:attack", ["id" => 5000]);
+    }, BadRequestException::class);
   }
   
   public function testSpecial() {
     $this->checkAction("Skill:special", ["id" => 1]);
-    $this->checkForward("Skill:special", "Skill:notfound", ["id" => 5000]);
+    Assert::exception(function() {
+      $this->checkAction("Skill:special", ["id" => 5000]);
+    }, BadRequestException::class);
   }
 }
 

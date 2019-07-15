@@ -23,11 +23,14 @@ final class ProfilePresenter extends BasePresenter {
   public function actionDefault(): void {
     $this->forward("view", $this->user->id);
   }
-  
+
+  /**
+   * @throws \Nette\Application\BadRequestException
+   */
   public function renderView(int $id): void {
     $data = $this->model->view($id);
     if(is_null($data)) {
-      $this->forward("notfound");
+      throw new \Nette\Application\BadRequestException();
     }
     foreach($data as $key => $value) {
       if($key === "guild" AND is_int($value)) {

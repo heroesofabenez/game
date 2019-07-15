@@ -37,12 +37,15 @@ final class NpcPresenter extends BasePresenter {
     $this->itemModel = $itemModel;
   }
 
+  /**
+   * @throws \Nette\Application\BadRequestException
+   */
   protected function startup(): void {
     parent::startup();
     if($this->action !== "default" AND !in_array($this->action, ["notfound", "unavailable"], true)) {
       $npc = $this->model->view((int) $this->params["id"]);
       if(is_null($npc)) {
-        $this->forward("notfound");
+        throw new \Nette\Application\BadRequestException();
       }
       $this->npc = $npc;
       if($this->npc->stage->id !== $this->user->identity->stage AND $this->action !== "view") {

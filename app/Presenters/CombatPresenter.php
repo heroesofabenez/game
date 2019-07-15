@@ -16,11 +16,14 @@ final class CombatPresenter extends BasePresenter {
     parent::__construct();
     $this->log = $log;
   }
-  
+
+  /**
+   * @throws \Nette\Application\BadRequestException
+   */
   public function actionView(int $id): void {
     $combat = $this->log->read($id);
     if(is_null($combat)) {
-      $this->forward("notfound");
+      throw new \Nette\Application\BadRequestException();
     }
     $this->template->log = $combat->text;
   }

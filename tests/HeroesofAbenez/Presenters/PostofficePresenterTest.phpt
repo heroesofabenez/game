@@ -3,6 +3,9 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Presenters;
 
+use Nette\Application\BadRequestException;
+use Tester\Assert;
+
 require __DIR__ . "/../../bootstrap.php";
 
 final class PostofficePresenterTest extends \Tester\TestCase {
@@ -21,7 +24,9 @@ final class PostofficePresenterTest extends \Tester\TestCase {
   }
   
   public function testMessage() {
-    $this->checkForward("Postoffice:message", "Postoffice:notfound", ["id" => 5000]);
+    Assert::exception(function() {
+      $this->checkAction("Postoffice:message", ["id" => 5000]);
+    }, BadRequestException::class);
     $this->checkAction("Postoffice:message", ["id" => 1]);
   }
 }

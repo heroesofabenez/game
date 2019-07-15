@@ -3,6 +3,9 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Presenters;
 
+use Nette\Application\BadRequestException;
+use Tester\Assert;
+
 require __DIR__ . "/../../bootstrap.php";
 
 final class ProfilePresenterTest extends \Tester\TestCase {
@@ -13,7 +16,9 @@ final class ProfilePresenterTest extends \Tester\TestCase {
   }
   
   public function testView() {
-    $this->checkForward("Profile:view", "Profile:notfound", ["id" => 5000]);
+    Assert::exception(function() {
+      $this->checkAction("Profile:view", ["id" => 5000]);
+    }, BadRequestException::class);
     $this->checkAction("Profile:view", ["id" => 1]);
   }
 }
