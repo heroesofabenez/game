@@ -1,6 +1,6 @@
 {layout "../@layout.latte"}
-{block title}Server Error{/block}
+{block title}{_"errorPages.500.title"}{/block}
 {block content}
-  <h1>Server Error</h1>
-  <p>We're sorry! The server encountered an internal error and was unable to complete your request. Please try again later.</p>
+  <h1>{_"errorPages.500.title"}</h1>
+  <p>{_"errorPages.500.text"}</p>
 {/block}

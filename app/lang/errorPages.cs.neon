@@ -1,0 +1,6 @@
+404:
+    title: "Nenalezeno"
+    text: "Je nám líto, ale nepodařilo se nám najít požadovanou stránku. Pokud jsi následoval odkaz z jiné webové stránky, nahlaš to jejich správci. Pokud jsi sem přišel ze hry / našich stránek, rádi bychom to slyšeli."
+500:
+    title: "Chyba na serveru"
+    text: "Omlouváme se! Server zaznamenal interní chybu a nemohl dokončit tvůj požadavek. Prosím, zkus to znovu později."

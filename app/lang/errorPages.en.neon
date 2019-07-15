@@ -1,0 +1,6 @@
+404:
+    title: "Not found"
+    text: "We're sorry but we couldn't find the page you asked for. If you followed a link from another website, please report it to its webmaster. If you got here from the game/our site, we'd love to hear that."
+500:
+    title: "Server Error"
+    text: "We're sorry! The server encountered an internal error and was unable to complete your request. Please try again later."
