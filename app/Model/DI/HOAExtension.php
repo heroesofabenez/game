@@ -45,7 +45,7 @@ final class HOAExtension extends \Nette\DI\CompilerExtension {
     $config = $this->getConfig($this->defaults);
     Validators::assertField($config, "userToCharacterMapper", "string");
     $mapper = $config["userToCharacterMapper"];
-    if(!class_exists($mapper) OR !is_subclass_of($mapper, IUserToCharacterMapper::class)) {
+    if(!class_exists($mapper) || !is_subclass_of($mapper, IUserToCharacterMapper::class)) {
       throw new \RuntimeException("Invalid user to character mapper $mapper.");
     }
     return $mapper;

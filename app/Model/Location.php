@@ -87,10 +87,10 @@ final class Location {
     if($stage->requiredLevel > $this->user->identity->level) {
       return false;
     }
-    if(!is_null($stage->requiredRace) AND $stage->requiredRace->id !== $this->user->identity->race) {
+    if(!is_null($stage->requiredRace) && $stage->requiredRace->id !== $this->user->identity->race) {
       return false;
     }
-    if(!is_null($stage->requiredClass) AND $stage->requiredClass->id !== $this->user->identity->class) {
+    if(!is_null($stage->requiredClass) && $stage->requiredClass->id !== $this->user->identity->class) {
       return false;
     }
     return true;
@@ -111,15 +111,15 @@ final class Location {
     $foundRoute = false;
     $routes = $this->stageRoutes($stage->area);
     foreach($routes as $route) {
-      if($route->from->id === $id AND $route->to->id === $currentStage) {
+      if($route->from->id === $id && $route->to->id === $currentStage) {
         $foundRoute = true;
         break;
-      } elseif($route->from->id === $currentStage AND $route->to->id === $id) {
+      } elseif($route->from->id === $currentStage && $route->to->id === $id) {
         $foundRoute = true;
         break;
       }
     }
-    if(!$foundRoute OR !$this->canEnterStage($stage)) {
+    if(!$foundRoute || !$this->canEnterStage($stage)) {
       throw new CannotTravelToStageException();
     }
     /** @var \HeroesofAbenez\Orm\Character $character */
@@ -132,10 +132,10 @@ final class Location {
     if($area->requiredLevel > $this->user->identity->level) {
       return false;
     }
-    if(!is_null($area->requiredRace) AND $area->requiredRace->id !== $this->user->identity->race) {
+    if(!is_null($area->requiredRace) && $area->requiredRace->id !== $this->user->identity->race) {
       return false;
     }
-    if(!is_null($area->requiredClass) AND $area->requiredClass->id !== $this->user->identity->class) {
+    if(!is_null($area->requiredClass) && $area->requiredClass->id !== $this->user->identity->class) {
       return false;
     }
     return true;
@@ -158,15 +158,15 @@ final class Location {
     $foundRoute = false;
     $routes = $this->areaRoutes();
     foreach($routes as $route) {
-      if($route->from->id === $id AND $route->to->id === $currentArea) {
+      if($route->from->id === $id && $route->to->id === $currentArea) {
         $foundRoute = true;
         break;
-      } elseif($route->from->id === $currentArea AND $route->to->id === $id) {
+      } elseif($route->from->id === $currentArea && $route->to->id === $id) {
         $foundRoute = true;
         break;
       }
     }
-    if(!$foundRoute OR !$this->canEnterArea($area) OR is_null($area->entryStage)) {
+    if(!$foundRoute || !$this->canEnterArea($area) || is_null($area->entryStage)) {
       throw new CannotTravelToAreaException();
     }
     /** @var \HeroesofAbenez\Orm\Character $character */

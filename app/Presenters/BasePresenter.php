@@ -44,16 +44,16 @@ abstract class BasePresenter extends \Nette\Application\UI\Presenter {
       $this->user->login("");
     }
     $uid = $this->user->id;
-    if($this instanceof CharacterPresenter AND $uid === -1) {
+    if($this instanceof CharacterPresenter && $uid === -1) {
       return;
     }
-    if($this instanceof CharacterPresenter AND is_null($this->user->identity->stage)) {
+    if($this instanceof CharacterPresenter && is_null($this->user->identity->stage)) {
       return;
     }
-    if($this instanceof CharacterPresenter AND $uid > 0) {
+    if($this instanceof CharacterPresenter && $uid > 0) {
       $this->redirect(301, "Homepage:default");
     }
-    if($this instanceof IntroPresenter AND is_null($this->user->identity->stage)) {
+    if($this instanceof IntroPresenter && is_null($this->user->identity->stage)) {
       return;
     }
     switch($uid) {

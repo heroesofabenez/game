@@ -39,9 +39,9 @@ final class Pet {
   public function canDeployPet(PetEntity $pet): bool {
     if($this->user->identity->level < $pet->type->requiredLevel) {
       return false;
-    } elseif(!is_null($pet->type->requiredClass) AND $pet->type->requiredClass->id !== $this->user->identity->class) {
+    } elseif(!is_null($pet->type->requiredClass) && $pet->type->requiredClass->id !== $this->user->identity->class) {
       return false;
-    } elseif(!is_null($pet->type->requiredRace) AND $pet->type->requiredRace->id !== $this->user->identity->race) {
+    } elseif(!is_null($pet->type->requiredRace) && $pet->type->requiredRace->id !== $this->user->identity->race) {
       return false;
     }
     return true;

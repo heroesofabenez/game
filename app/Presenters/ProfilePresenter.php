@@ -33,12 +33,12 @@ final class ProfilePresenter extends BasePresenter {
       throw new \Nette\Application\BadRequestException();
     }
     foreach($data as $key => $value) {
-      if($key === "guild" AND is_int($value)) {
+      if($key === "guild" && is_int($value)) {
         $this->template->guildId = $value;
         $this->template->guildName = $this->guildModel->getGuildName($value);
         $this->template->guildRank = $data["guildrank"];
         continue;
-      } elseif($key === "guild" AND $value === "") {
+      } elseif($key === "guild" && $value === "") {
         $this->template->guildId = 0;
         continue;
       }

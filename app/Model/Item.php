@@ -75,9 +75,9 @@ final class Item {
   public function canEquipItem(ItemEntity $item): bool {
     if($this->user->identity->level < $item->requiredLevel) {
       return false;
-    } elseif(!is_null($item->requiredClass) AND $item->requiredClass->id !== $this->user->identity->class) {
+    } elseif(!is_null($item->requiredClass) && $item->requiredClass->id !== $this->user->identity->class) {
       return false;
-    } elseif(!is_null($item->requiredSpecialization) AND $item->requiredSpecialization->id !== $this->user->identity->specialization) {
+    } elseif(!is_null($item->requiredSpecialization) && $item->requiredSpecialization->id !== $this->user->identity->specialization) {
       return false;
     }
     return true;
@@ -97,7 +97,7 @@ final class Item {
       throw new ItemNotFoundException();
     } elseif($item->character->id !== $this->user->id) {
       throw new ItemNotOwnedException();
-    } elseif(!in_array($item->item->slot, ItemEntity::getEquipmentTypes(), true) OR !$this->canEquipItem($item->item)) {
+    } elseif(!in_array($item->item->slot, ItemEntity::getEquipmentTypes(), true) || !$this->canEquipItem($item->item)) {
       throw new ItemNotEquipableException();
     } elseif($item->worn) {
       throw new ItemAlreadyEquippedException();

@@ -38,21 +38,21 @@ final class Request {
     switch($request->type) {
       case RequestEntity::TYPE_FRIENDSHIP:
       case RequestEntity::TYPE_GROUP_JOIN:
-        return ($request->from->id === $this->user->id OR $request->to->id === $this->user->id);
+        return ($request->from->id === $this->user->id || $request->to->id === $this->user->id);
       case RequestEntity::TYPE_GUILD_JOIN:
         if($request->to->id === $this->user->id) {
           return true;
         }
         $leader = $this->orm->characters->getById($request->from->id);
         $guild = (!is_null($leader->guild)) ? $leader->guild->id : null;
-        return ($this->user->identity->guild === $guild AND $this->user->isAllowed("guild", "invite"));
+        return ($this->user->identity->guild === $guild && $this->user->isAllowed("guild", "invite"));
       case RequestEntity::TYPE_GUILD_APP:
         if($request->from->id === $this->user->id) {
           return true;
         }
         $leader = $this->orm->characters->getById($request->to->id);
         $guild = (!is_null($leader->guild)) ? $leader->guild->id : null;
-        return ($this->user->identity->guild === $guild AND $this->user->isAllowed("guild", "invite"));
+        return ($this->user->identity->guild === $guild && $this->user->isAllowed("guild", "invite"));
     }
     return false;
   }
@@ -69,7 +69,7 @@ final class Request {
     }
     if($request->type === "guild_app") {
       $guild = (!is_null($request->to->guild)) ? $request->to->guild->id : null;
-      return ($this->user->identity->guild === $guild AND $this->user->isAllowed("guild", "invite"));
+      return ($this->user->identity->guild === $guild && $this->user->isAllowed("guild", "invite"));
     }
     return false;
   }

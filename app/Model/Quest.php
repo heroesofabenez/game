@@ -129,7 +129,7 @@ final class Quest {
       throw new QuestNotFoundException();
     }
     $record = $this->getCharacterQuest($id);
-    if($record->progress === CharacterQuest::PROGRESS_OFFERED OR $record->progress === CharacterQuest::PROGRESS_FINISHED) {
+    if($record->progress === CharacterQuest::PROGRESS_OFFERED || $record->progress === CharacterQuest::PROGRESS_FINISHED) {
       throw new QuestNotStartedException();
     }
     if($quest->npcEnd->id !== $npcId) {

@@ -65,7 +65,7 @@ final class Profile {
       "class", "specialization", "predominantKarma",
     ];
     foreach($stats as $stat) {
-      if(is_scalar($char->$stat) OR is_null($char->$stat)) {
+      if(is_scalar($char->$stat) || is_null($char->$stat)) {
         $return[$stat] = $char->$stat;
       } else {
         $return[$stat] = $char->$stat->id;
@@ -107,7 +107,7 @@ final class Profile {
   public function getAvailableSpecializations(): array {
     /** @var Character $character */
     $character = $this->orm->characters->getById($this->user->id);
-    if($character->level + 1 < CharacterBuilder::SPECIALIZATION_LEVEL OR !is_null($character->specialization)) {
+    if($character->level + 1 < CharacterBuilder::SPECIALIZATION_LEVEL || !is_null($character->specialization)) {
       return [];
     }
     return $this->orm->specializations->findByClass($character->class)
@@ -128,11 +128,11 @@ final class Profile {
         throw new CannotChooseSpecializationException();
       }
       return;
-    } elseif(!is_null($character->specialization) AND !is_null($specialization)) {
+    } elseif(!is_null($character->specialization) && !is_null($specialization)) {
       throw new SpecializationAlreadyChosenException();
-    } elseif(is_null($character->specialization) AND is_null($specialization)) {
+    } elseif(is_null($character->specialization) && is_null($specialization)) {
       throw new SpecializationNotChosenException();
-    } elseif(!is_null($specialization) AND !in_array($specialization, $this->getAvailableSpecializations(), true)) {
+    } elseif(!is_null($specialization) && !in_array($specialization, $this->getAvailableSpecializations(), true)) {
       throw new SpecializationNotAvailableException();
     }
   }

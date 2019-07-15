@@ -59,7 +59,7 @@ final class PostofficeControl extends \Nette\Application\UI\Control {
   }
   
   protected function canShow(Message $message): bool {
-    if($message->from->id === $this->user->id OR $message->to->id === $this->user->id) {
+    if($message->from->id === $this->user->id || $message->to->id === $this->user->id) {
       return true;
     }
     return false;

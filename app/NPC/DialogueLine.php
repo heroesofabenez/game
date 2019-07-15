@@ -23,7 +23,7 @@ final class DialogueLine {
   
   public function __construct(string $speaker, string $text, array $names) {
     $speaker = strtolower($speaker);
-    if($speaker === "player" OR $speaker === "npc") {
+    if($speaker === "player" || $speaker === "npc") {
       $this->speaker = $speaker;
     }
     $this->text = $text;

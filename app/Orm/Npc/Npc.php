@@ -43,7 +43,7 @@ final class Npc extends \Nextras\Orm\Entity\Entity {
   public const PERSONALITY_MISOGYNIST = "misogynist";
 
   protected function getterQuests(): bool {
-    return ($this->startQuests->countStored() > 0 OR $this->endQuests->countStored() > 0);
+    return ($this->startQuests->countStored() > 0 || $this->endQuests->countStored() > 0);
   }
 
   protected function getterShop(): bool {

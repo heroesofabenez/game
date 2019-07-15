@@ -22,7 +22,7 @@ final class CharacterBuilder {
     /** @var int $value */
     $value = $class->$stat + $race->$stat;
     $value += $class->{$stat . "Grow"} * ($level - 1);
-    if($level > 1 AND $stat === $class->mainStat) {
+    if($level > 1 && $stat === $class->mainStat) {
       $value += ($level - 1) * $class->statPointsLevel;
     }
     return $value;

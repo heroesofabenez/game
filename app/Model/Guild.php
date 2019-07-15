@@ -264,7 +264,7 @@ final class Guild {
     if(is_null($character)) {
       throw new PlayerNotFoundException();
     }
-    if(is_null($character->guild) OR $character->guild->id !== $admin->identity->guild) {
+    if(is_null($character->guild) || $character->guild->id !== $admin->identity->guild) {
       throw new PlayerNotInGuildException();
     }
     $adminRole = $this->permissionsModel->getRankId($admin->roles[0]);
@@ -315,7 +315,7 @@ final class Guild {
    */
   public function rename(int $id, string $name): void {
     $guild = $this->orm->guilds->getByName($name);
-    if(!is_null($guild) AND $guild->id !== $id) {
+    if(!is_null($guild) && $guild->id !== $id) {
       throw new NameInUseException();
     }
     $guild = $this->orm->guilds->getById($id);

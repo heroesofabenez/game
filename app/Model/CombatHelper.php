@@ -80,7 +80,7 @@ final class CombatHelper {
       "charisma", "race", "specialization", "gender", "experience",
     ];
     foreach($stats as $stat) {
-      if(is_scalar($character->$stat) OR is_null($character->$stat)) {
+      if(is_scalar($character->$stat) || is_null($character->$stat)) {
         $data[$stat] = $character->$stat;
       } else {
         $data[$stat] = $character->$stat->id;
@@ -111,11 +111,11 @@ final class CombatHelper {
       $eq->item->worn = true;
       $equipment[] = $eq->item->toCombatEquipment();
     }
-    if(!$equipment->hasItems(["slot" => Equipment::SLOT_WEAPON]) AND !is_null($npc->weapon)) {
+    if(!$equipment->hasItems(["slot" => Equipment::SLOT_WEAPON]) && !is_null($npc->weapon)) {
       $npc->weapon->worn = true;
       $equipment[] = $npc->weapon->toCombatEquipment();
     }
-    if(!$equipment->hasItems(["slot" => Equipment::SLOT_ARMOR]) AND !is_null($npc->armor)) {
+    if(!$equipment->hasItems(["slot" => Equipment::SLOT_ARMOR]) && !is_null($npc->armor)) {
       $npc->armor->worn = true;
       $equipment[] = $npc->armor->toCombatEquipment();
     }
@@ -137,7 +137,7 @@ final class CombatHelper {
       "name", "level", "race", "gender",
     ];
     foreach($stats as $stat) {
-      if(is_scalar($npc->$stat) OR is_null($npc->$stat)) {
+      if(is_scalar($npc->$stat) || is_null($npc->$stat)) {
         $data[$stat] = $npc->$stat;
       } else {
         $data[$stat] = $npc->$stat->id;
@@ -167,7 +167,7 @@ final class CombatHelper {
       "name", "level", "race",
     ];
     foreach($stats as $stat) {
-      if(is_scalar($npc->$stat) OR is_null($npc->$stat)) {
+      if(is_scalar($npc->$stat) || is_null($npc->$stat)) {
         $data[$stat] = $npc->$stat;
       } else {
         $data[$stat] = $npc->$stat->id;
