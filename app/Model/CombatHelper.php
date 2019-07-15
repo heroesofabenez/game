@@ -232,7 +232,7 @@ final class CombatHelper {
    * @return string[]
    */
   protected function getHealerSpecializations(): array {
-    return ["paladin", "priest",];
+    return ["paladin", "priest", ];
   }
 
   public function getHealers(Team $team1, Team $team2): Team {

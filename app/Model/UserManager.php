@@ -94,7 +94,7 @@ final class UserManager implements \Nette\Security\IAuthenticator {
     
     $character = new Character();
     $this->orm->characters->attach($character);
-    foreach ($data as $key => $value) {
+    foreach($data as $key => $value) {
       $character->$key = $value;
     }
     $this->orm->characters->persistAndFlush($character);

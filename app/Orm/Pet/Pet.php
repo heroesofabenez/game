@@ -26,7 +26,7 @@ final class Pet extends \Nextras\Orm\Entity\Entity {
   
   public function toCombatPet(): \HeroesofAbenez\Combat\Pet {
     $data = [];
-    $stats = ["id", "deployed", "bonusStat", "bonusValue",];
+    $stats = ["id", "deployed", "bonusStat", "bonusValue", ];
     foreach($stats as $stat) {
       $data[$stat] = $this->$stat;
     }
