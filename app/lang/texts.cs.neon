@@ -117,6 +117,7 @@ journal:
     inventory: "Inventář"
     pets: "Mazlíčci"
     quests: "Úkoly"
+    friends: "Přátelé"
     money: "{0} Máš 0 stříbrňáků.|{1} Máš 1 stříbrňák.|[2,4] Máš %count% stříbrňáky.|[5,+Inf] Máš %count% stříbrňáků."
     items: "Věci:"
     noItems: "Žádné věci"
@@ -129,6 +130,7 @@ journal:
     discardPet: "Odložit"
     chooseSpecialization: "Vyber si specializaci:"                 
     deployed: "Nasazený/á"
+    noFriends: "Zatím nemáš žádné přátele."
 map:
     title: "Mapa"
     travelTitle: "Cestovat"
@@ -175,6 +177,7 @@ profile:
     currentLocation: "Současná poloha:"    
     male: "muž"
     female: "žena"
+    lastActive: "Naposledy aktivní:"
 npc:
     title: "NPC"
     steppedInFront: "Předstoupil jsi před"

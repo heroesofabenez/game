@@ -36,6 +36,7 @@ use Nexendrie\Utils\Numbers;
  * @property int|null $intro {default 1}
  * @property \DateTimeImmutable $joined
  * @property \DateTimeImmutable $lastActive
+ * @property-read string $lastActiveS {virtual}
  * @property float $statPoints {default 0}
  * @property int $skillPoints {default 0}
  * @property OneHasMany|Request[] $sentRequests {1:m Request::$from}
@@ -71,6 +72,10 @@ final class Character extends \Nextras\Orm\Entity\Entity {
   protected function getterCharismaBonus(): int {
     $charisma = Numbers::range((int) $this->charisma - 10, 0, 999);
     return $charisma * 3;
+  }
+
+  protected function getterLastActiveS(): string {
+    return $this->lastActive->format("Y-m-d H:i:s");
   }
   
   public function onBeforeInsert(): void {

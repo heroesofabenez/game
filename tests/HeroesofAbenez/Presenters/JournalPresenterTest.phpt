@@ -23,6 +23,10 @@ final class JournalPresenterTest extends \Tester\TestCase {
   public function testPets() {
     $this->checkAction("Journal:pets");
   }
+
+  public function testFriends() {
+    $this->checkAction("Journal:friends");
+  }
 }
 
 $test = new JournalPresenterTest();

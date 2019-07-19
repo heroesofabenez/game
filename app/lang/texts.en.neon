@@ -117,6 +117,7 @@ journal:
     inventory: "Inventory"
     pets: "Pets"
     quests: "Quests"
+    friends: "Friends"
     money: "{1} You have 1 silver mark.|]1,+Inf[ You have %count% silver marks."
     items: "Items:"
     noItems: "No items"
@@ -129,6 +130,7 @@ journal:
     discardPet: "Discard"
     chooseSpecialization: "Choose specialization:"
     deployed: "Deployed"
+    noFriends: "You have no friends yet."
 map:
     title: "Map"
     travelTitle: "Travel"
@@ -175,6 +177,7 @@ profile:
     currentLocation: "Current location:"
     male: "male"
     female: "female"
+    lastActive: "Last active:"
 npc:
     title: "NPC"
     steppedInFront: "You stepped in front of"

@@ -66,6 +66,10 @@ final class JournalPresenter extends BasePresenter {
   public function renderPets(): void {
     $this->template->pets = $this->model->pets();
   }
+
+  public function renderFriends(): void {
+    $this->template->friends = $this->model->friends();
+  }
   
   public function handleEquipItem(int $itemId): void {
     try {

@@ -46,6 +46,16 @@ final class JournalTest extends \Tester\TestCase {
     Assert::count(1, $quests);
     Assert::type("int", $quests[0]);
   }
+
+  public function testFriends() {
+    $friends = $this->model->friends();
+    Assert::type("array", $friends);
+    Assert::count(2, $friends);
+    Assert::type(\HeroesofAbenez\Orm\Character::class, $friends[0]);
+    Assert::same(2, $friends[0]->id);
+    Assert::type(\HeroesofAbenez\Orm\Character::class, $friends[1]);
+    Assert::same(3, $friends[1]->id);
+  }
 }
 
 $test = new JournalTest();
