@@ -178,6 +178,7 @@ profile:
     male: "male"
     female: "female"
     lastActive: "Last active:"
+    befriend: "Befriend"
 npc:
     title: "NPC"
     steppedInFront: "You stepped in front of"

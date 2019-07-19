@@ -71,3 +71,6 @@ pet:
     notDeployed: "Specified pet is not deployed."
     alreadyDeployed: "The pet is already deployed."
     notDeployable: "You cannot deploy this pet."
+friendship:
+    alreadyFriends: "You are already friends with this character."
+    alreadyRequested: "You already sent friendship request to this character."

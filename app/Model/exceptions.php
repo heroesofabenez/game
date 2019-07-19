@@ -234,4 +234,12 @@ class CannotFinishQuestHereException extends AccessDeniedException {
 class CannotAcceptQuestHereException extends AccessDeniedException {
 
 }
+
+class AlreadyFriendsException extends AccessDeniedException {
+
+}
+
+class FriendshipRequestAlreadySentException extends AccessDeniedException {
+
+}
 ?>

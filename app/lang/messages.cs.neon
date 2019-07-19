@@ -9,6 +9,7 @@ travel:
 request:
     accepted: "Požadavek přijat."
     declined: "Požadavek zamítnut."
+    sent: "Požadavek odeslán."
 postoffice:
     messageSent: "Zpráva odeslána."
 guild:

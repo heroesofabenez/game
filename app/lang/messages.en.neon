@@ -9,6 +9,7 @@ travel:
 request:
     accepted: "Request accepted."
     declined: "Request declined."
+    sent: "Request sent."
 postoffice:
     messageSent: "Message sent."
 guild:

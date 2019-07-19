@@ -178,6 +178,7 @@ profile:
     male: "muž"
     female: "žena"
     lastActive: "Naposledy aktivní:"
+    befriend: "Spřátelit se"
 npc:
     title: "NPC"
     steppedInFront: "Předstoupil jsi před"
