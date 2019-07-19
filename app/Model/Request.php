@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Model;
 
+use HeroesofAbenez\Orm\Friendship;
 use HeroesofAbenez\Orm\Request as RequestEntity;
 use Nette\NotImplementedException;
 use HeroesofAbenez\Orm\Model as ORM;
@@ -110,6 +111,12 @@ final class Request {
     }
     switch($request->type) {
       case RequestEntity::TYPE_FRIENDSHIP:
+        $friendship = new Friendship();
+        $this->orm->friendships->attach($friendship);
+        $friendship->character1 = $request->from->id;
+        $friendship->character2 = $request->to->id;
+        $this->orm->friendships->persist($friendship);
+        break;
       case RequestEntity::TYPE_GROUP_JOIN:
         throw new NotImplementedException();
       case RequestEntity::TYPE_GUILD_APP:

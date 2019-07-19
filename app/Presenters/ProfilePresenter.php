@@ -3,6 +3,9 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Presenters;
 
+use HeroesofAbenez\Model\AlreadyFriendsException;
+use HeroesofAbenez\Model\FriendshipRequestAlreadySentException;
+
 /**
  * Presenter Profile
  *
@@ -13,11 +16,20 @@ final class ProfilePresenter extends BasePresenter {
   protected $model;
   /** @var \HeroesofAbenez\Model\Guild */
   protected $guildModel;
-  
-  public function __construct(\HeroesofAbenez\Model\Profile $model, \HeroesofAbenez\Model\Guild $guildModel) {
+  /** @var \HeroesofAbenez\Model\Friends */
+  protected $friendsModel;
+
+  /**
+   * ProfilePresenter constructor.
+   * @param \HeroesofAbenez\Model\Profile $model
+   * @param \HeroesofAbenez\Model\Guild $guildModel
+   * @param \HeroesofAbenez\Model\Friends $friendsModel
+   */
+  public function __construct(\HeroesofAbenez\Model\Profile $model, \HeroesofAbenez\Model\Guild $guildModel, \HeroesofAbenez\Model\Friends $friendsModel) {
     parent::__construct();
     $this->model = $model;
     $this->guildModel = $guildModel;
+    $this->friendsModel = $friendsModel;
   }
   
   public function actionDefault(): void {
@@ -47,6 +59,21 @@ final class ProfilePresenter extends BasePresenter {
       }
       $this->template->$key = $value;
     }
+    $this->template->canBefriend = !$this->friendsModel->isFriendsWith($id);
+  }
+
+  public function handleBefriend(int $id): void {
+    try {
+      $this->friendsModel->befriend($id);
+    } catch(AlreadyFriendsException $e) {
+      $this->flashMessage("errors.friendship.alreadyFriends");
+    } catch(FriendshipRequestAlreadySentException $e) {
+      $this->flashMessage("errors.friendship.alreadyRequested");
+    }
+    if(!isset($e)) {
+      $this->flashMessage("messages.request.sent");
+    }
+    $this->redirect("this");
   }
 }
 ?>

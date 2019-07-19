@@ -51,3 +51,8 @@ INSERT INTO `guild_ranks_custom` (`id`, `guild`, `rank`, `name`) VALUES
   (5,	1,	5,	'Sun noble'),
   (6,	1,	6,	'Sun prince'),
   (7,	1,	7,	'Sun ruler');
+
+INSERT INTO `friendships` (`id`, `character1`, `character2`) VALUES
+  (1,	1,	2),
+  (2,	3,	1),
+  (3,	3,	4);

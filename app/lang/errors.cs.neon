@@ -71,3 +71,7 @@ pet:
     notDeployed: "Zadaný mazlíček není používán."
     alreadyDeployed: "Tento mazlíček je již používán."
     notDeployable: "Nemůžeš použít tohoto mazlíčka."
+friendship:
+    alreadyFriends: "Už se přátelíš s touto postavu."
+    alreadyRequested: "Už jsi poslal(a) požadavek na přátelství této postavě."
+    notFriends: "Nepřátelíš se s touto postavou."

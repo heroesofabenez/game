@@ -9,6 +9,7 @@ travel:
 request:
     accepted: "Požadavek přijat."
     declined: "Požadavek zamítnut."
+    sent: "Požadavek odeslán."
 postoffice:
     messageSent: "Zpráva odeslána."
 guild:
@@ -31,3 +32,5 @@ chat:
 equipment:
     unequiped: "Sundal(a) jsi věc."
     repaired: "Věc opravena."
+friends:
+    removed: "Smazán(a) z přátel."

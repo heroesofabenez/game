@@ -517,3 +517,14 @@ CREATE TABLE `pve_arena_opponent_equipment` (
   CONSTRAINT `pve_arena_opponent_equipment_ibfk_1` FOREIGN KEY (`npc`) REFERENCES `pve_arena_opponents` (`id`),
   CONSTRAINT `pve_arena_opponent_equipment_ibfk_2` FOREIGN KEY (`item`) REFERENCES `items` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `friendships` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `character1` int(11) NOT NULL,
+  `character2` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `character1` (`character1`),
+  KEY `character2` (`character2`),
+  CONSTRAINT `friendships_ibfk_1` FOREIGN KEY (`character1`) REFERENCES `characters` (`id`),
+  CONSTRAINT `friendships_ibfk_2` FOREIGN KEY (`character2`) REFERENCES `characters` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;

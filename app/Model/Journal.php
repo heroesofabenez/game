@@ -112,5 +112,22 @@ final class Journal {
     }
     return $return;
   }
+
+  /**
+   * @return \HeroesofAbenez\Orm\Character[]
+   */
+  public function friends(): array {
+    $userId = $this->user->id;
+    $return = [];
+    $friendships = $this->orm->friendships->findByCharacter($userId);
+    foreach($friendships as $friendship) {
+      if($friendship->character1->id === $userId) {
+        $return[] = $friendship->character2;
+      } else {
+        $return[] = $friendship->character1;
+      }
+    }
+    return $return;
+  }
 }
 ?>
