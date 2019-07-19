@@ -32,3 +32,5 @@ chat:
 equipment:
     unequiped: "Sundal(a) jsi věc."
     repaired: "Věc opravena."
+friends:
+    removed: "Smazán(a) z přátel."

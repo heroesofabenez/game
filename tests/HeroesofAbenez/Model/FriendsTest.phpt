@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Model;
 
+use HeroesofAbenez\Orm\Friendship;
 use HeroesofAbenez\Orm\Model as ORM;
 use Tester\Assert;
 
@@ -43,6 +44,22 @@ final class FriendsTest extends \Tester\TestCase {
       $this->model->befriend(4);
     }, FriendshipRequestAlreadySentException::class);
     $orm->requests->removeAndFlush($request);
+  }
+
+  public function testRemove() {
+    Assert::exception(function() {
+      $this->model->remove(4);
+    }, NotFriendsException::class);
+    /** @var ORM $orm */
+    $orm = $this->getService(ORM::class);
+    $friendship = new Friendship();
+    $orm->friendships->attach($friendship);
+    $friendship->character1 = 1;
+    $friendship->character2 = 4;
+    $orm->friendships->persistAndFlush($friendship);
+    $this->model->remove(4);
+    $friendship = $orm->friendships->getBy(["character1" => 1, "character2" => 4, ]);
+    Assert::null($friendship);
   }
 }
 

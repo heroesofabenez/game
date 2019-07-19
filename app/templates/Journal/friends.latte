@@ -6,7 +6,7 @@
   {_"texts.journal.noFriends"}
   {else}
     {foreach $friends as $friend}
-  {$friend->name} <a n:href="Profile:view $friend->id">{_"texts.common.profile"}</a> {_"texts.profile.lastActive"} {$friend->lastActiveS}<br>
+  {$friend->name} <a n:href="Profile:view $friend->id">{_"texts.common.profile"}</a> {_"texts.profile.lastActive"} {$friend->lastActiveS} <a n:href="removeFriend! $friend->id">{_"texts.journal.removeFriend"}</a><br>
     {/foreach}
   {/if}
   {control menu:chapters journal}

@@ -131,6 +131,7 @@ journal:
     chooseSpecialization: "Vyber si specializaci:"                 
     deployed: "Nasazený/á"
     noFriends: "Zatím nemáš žádné přátele."
+    removeFriend: "Odstranit"
 map:
     title: "Mapa"
     travelTitle: "Cestovat"

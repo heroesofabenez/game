@@ -242,4 +242,8 @@ class AlreadyFriendsException extends AccessDeniedException {
 class FriendshipRequestAlreadySentException extends AccessDeniedException {
 
 }
+
+class NotFriendsException extends AccessDeniedException {
+
+}
 ?>

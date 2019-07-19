@@ -9,6 +9,7 @@ use HeroesofAbenez\Model\ItemNotOwnedException;
 use HeroesofAbenez\Model\ItemNotEquipableException;
 use HeroesofAbenez\Model\ItemAlreadyEquippedException;
 use HeroesofAbenez\Model\ItemNotWornException;
+use HeroesofAbenez\Model\NotFriendsException;
 use HeroesofAbenez\Model\PetNotFoundException;
 use HeroesofAbenez\Model\PetNotOwnedException;
 use HeroesofAbenez\Model\PetNotDeployedException;
@@ -33,13 +34,16 @@ final class JournalPresenter extends BasePresenter {
   protected $itemModel;
   /** @var \HeroesofAbenez\Model\Pet */
   protected $petModel;
+  /** @var \HeroesofAbenez\Model\Friends */
+  protected $friendsModel;
 
-  public function __construct(\HeroesofAbenez\Model\Journal $model, \HeroesofAbenez\Model\Profile $profileModel, \HeroesofAbenez\Model\Item $itemModel, \HeroesofAbenez\Model\Pet $petModel) {
+  public function __construct(\HeroesofAbenez\Model\Journal $model, \HeroesofAbenez\Model\Profile $profileModel, \HeroesofAbenez\Model\Item $itemModel, \HeroesofAbenez\Model\Pet $petModel, \HeroesofAbenez\Model\Friends $friendsModel) {
     parent::__construct();
     $this->model = $model;
     $this->profileModel = $profileModel;
     $this->itemModel = $itemModel;
     $this->petModel = $petModel;
+    $this->friendsModel = $friendsModel;
   }
   
   public function renderDefault(): void {
@@ -148,6 +152,16 @@ final class JournalPresenter extends BasePresenter {
       $this->flashMessage("errors.pet.notDeployed");
     }
     $this->redirect("Journal:pets");
+  }
+
+  public function handleRemoveFriend(int $id): void {
+    try {
+      $this->friendsModel->remove($id);
+      $this->flashMessage("messages.friends.removed");
+    } catch(NotFriendsException $e) {
+      $this->flashMessage("errors.friendship.notFriends");
+    }
+    $this->redirect("Journal:friends");
   }
 }
 ?>

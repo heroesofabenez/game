@@ -74,3 +74,4 @@ pet:
 friendship:
     alreadyFriends: "You are already friends with this character."
     alreadyRequested: "You already sent friendship request to this character."
+    notFriends: "You are not friends with this character."

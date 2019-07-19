@@ -32,3 +32,5 @@ chat:
 equipment:
     unequiped: "Item was taken off."
     repaired: "Item repaired."
+friends:
+    removed: "Removed from friends."

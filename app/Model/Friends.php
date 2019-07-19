@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Model;
 
+use HeroesofAbenez\Orm\Friendship;
 use HeroesofAbenez\Orm\Model as ORM;
 use Nextras\Orm\Collection\ICollection;
 
@@ -24,11 +25,8 @@ final class Friends {
     $this->user = $user;
   }
 
-  public function isFriendsWith(int $character): bool {
-    if($character === $this->user->id) {
-      return true;
-    }
-    return !is_null($this->orm->friendships->getBy([
+  protected function getFriendship(int $character): ?Friendship {
+    return $this->orm->friendships->getBy([
       ICollection::OR,
       [
         "character1" => $this->user->id,
@@ -38,7 +36,14 @@ final class Friends {
         "character1" => $character,
         "character2" => $this->user->id,
       ],
-    ]));
+    ]);
+  }
+
+  public function isFriendsWith(int $character): bool {
+    if($character === $this->user->id) {
+      return true;
+    }
+    return !is_null($this->getFriendship($character));
   }
 
   /**
@@ -72,6 +77,17 @@ final class Friends {
     $request->to = $character;
     $request->type = \HeroesofAbenez\Orm\Request::TYPE_FRIENDSHIP;
     $this->orm->requests->persistAndFlush($request);
+  }
+
+  /**
+   * @throws NotFriendsException
+   */
+  public function remove(int $character): void {
+    $friendship = $this->getFriendship($character);
+    if(is_null($friendship)) {
+      throw new NotFriendsException();
+    }
+    $this->orm->friendships->removeAndFlush($friendship);
   }
 }
 ?>

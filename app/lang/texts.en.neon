@@ -131,6 +131,7 @@ journal:
     chooseSpecialization: "Choose specialization:"
     deployed: "Deployed"
     noFriends: "You have no friends yet."
+    removeFriend: "Remove"
 map:
     title: "Map"
     travelTitle: "Travel"
