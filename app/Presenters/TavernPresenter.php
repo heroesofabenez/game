@@ -13,6 +13,31 @@ use HeroesofAbenez\Chat\NewChatMessageFormFactory;
  * @author Jakub Konečný
  */
 final class TavernPresenter extends BasePresenter {
+  /** @var Chat\IGuildChatControlFactory */
+  protected $guildChatFactory;
+  /** @var Chat\ILocalChatControlFactory */
+  protected $localChatFactory;
+  /** @var Chat\IGlobalChatControlFactory */
+  protected $globalChatFactory;
+  /** @var NewChatMessageFormFactory */
+  protected $newChatMessageFormFactory;
+
+  public function injectGuildChatFactory(Chat\IGuildChatControlFactory $guildChatFactory): void {
+    $this->guildChatFactory = $guildChatFactory;
+  }
+
+  public function injectLocalChatFactory(Chat\ILocalChatControlFactory $localChatFactory): void {
+    $this->localChatFactory = $localChatFactory;
+  }
+
+  public function injectGlobalChatFactory(Chat\IGlobalChatControlFactory $globalChatFactory): void {
+    $this->globalChatFactory = $globalChatFactory;
+  }
+
+  public function injectNewChatMessageFormFactory(NewChatMessageFormFactory $newChatMessageFormFactory): void {
+    $this->newChatMessageFormFactory = $newChatMessageFormFactory;
+  }
+
   protected function startup(): void {
     parent::startup();
     $this->template->haveForm = true;
@@ -44,16 +69,16 @@ final class TavernPresenter extends BasePresenter {
     $this->template->chat = "globalChat";
   }
   
-  protected function createComponentGuildChat(Chat\IGuildChatControlFactory $factory): Chat\GuildChatControl {
-    return $factory->create();
+  protected function createComponentGuildChat(): Chat\GuildChatControl {
+    return $this->guildChatFactory->create();
   }
   
-  protected function createComponentLocalChat(Chat\ILocalChatControlFactory $factory): Chat\LocalChatControl {
-    return $factory->create();
+  protected function createComponentLocalChat(): Chat\LocalChatControl {
+    return $this->localChatFactory->create();
   }
   
-  protected function createComponentGlobalChat(Chat\IGlobalChatControlFactory $factory): Chat\GlobalChatControl {
-    return $factory->create();
+  protected function createComponentGlobalChat(): Chat\GlobalChatControl {
+    return $this->globalChatFactory->create();
   }
   
   /**
@@ -61,27 +86,21 @@ final class TavernPresenter extends BasePresenter {
    *
    * @throws \Nette\Application\BadRequestException
    */
-  protected function createComponentNewMessageForm(NewChatMessageFormFactory $factory): Form {
+  protected function createComponentNewMessageForm(): Form {
     switch($this->action) {
       case "guild":
-        /** @var Chat\IGuildChatControlFactory $chatFactory */
-        $chatFactory = $this->context->getByType(Chat\IGuildChatControlFactory::class);
-        $chat = $this->createComponentGuildChat($chatFactory);
+        $chat = $this->createComponentGuildChat();
         break;
       case "local":
-        /** @var Chat\ILocalChatControlFactory $chatFactory */
-        $chatFactory = $this->context->getByType(Chat\ILocalChatControlFactory::class);
-        $chat = $this->createComponentLocalChat($chatFactory);
+        $chat = $this->createComponentLocalChat();
         break;
       case "global":
-        /** @var Chat\IGlobalChatControlFactory $chatFactory */
-        $chatFactory = $this->context->getByType(Chat\IGlobalChatControlFactory::class);
-        $chat = $this->createComponentGlobalChat($chatFactory);
+        $chat = $this->createComponentGlobalChat();
         break;
       default:
         throw new \Nette\Application\BadRequestException();
     }
-    return $factory->create($chat);
+    return $this->newChatMessageFormFactory->create($chat);
   }
 }
 ?>

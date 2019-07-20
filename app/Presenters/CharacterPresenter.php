@@ -21,11 +21,17 @@ final class CharacterPresenter extends BasePresenter {
   protected $classes;
   /** @var ICollection|\HeroesofAbenez\Orm\CharacterRace[] */
   protected $races;
+  /** @var CreateCharacterFormFactory */
+  protected $createCharacterFormFactory;
   
   public function __construct(\HeroesofAbenez\Model\Profile $model, \HeroesofAbenez\Model\UserManager $userManager) {
     parent::__construct();
     $this->model = $model;
     $this->userManager = $userManager;
+  }
+
+  public function injectCreateCharacterFormFactory(CreateCharacterFormFactory $createCharacterFormFactory): void {
+    $this->createCharacterFormFactory = $createCharacterFormFactory;
   }
   
   /**
@@ -52,8 +58,8 @@ final class CharacterPresenter extends BasePresenter {
   /**
    * Create form for creating character
    */
-  protected function createComponentCreateCharacterForm(CreateCharacterFormFactory $factory): Form {
-    $form = $factory->create($this->races, $this->classes);
+  protected function createComponentCreateCharacterForm(): Form {
+    $form = $this->createCharacterFormFactory->create($this->races, $this->classes);
     $form->onSuccess[] = function(Form $form, array $values) {
       $data = $this->userManager->create($values);
       if($data === null) {

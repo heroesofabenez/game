@@ -13,6 +13,18 @@ use HeroesofAbenez\Arena;
 final class ArenaPresenter extends BasePresenter {
   /** @var int */
   protected $minLevel = 3;
+  /** @var Arena\IArenaPVEControlFactory */
+  protected $arenaPVEFactory;
+  /** @var Arena\IArenaPVPControlFactory */
+  protected $arenaPVPFactory;
+
+  public function injectArenaPVEFactory(Arena\IArenaPVEControlFactory $arenaPVEFactory): void {
+    $this->arenaPVEFactory = $arenaPVEFactory;
+  }
+
+  public function injectArenaPVPFactory(Arena\IArenaPVPControlFactory $arenaPVPFactory): void {
+    $this->arenaPVPFactory = $arenaPVPFactory;
+  }
 
   protected function startup(): void {
     parent::startup();
@@ -26,12 +38,12 @@ final class ArenaPresenter extends BasePresenter {
     $this->template->id = $id;
   }
   
-  protected function createComponentArenaPVE(Arena\IArenaPVEControlFactory $factory): Arena\ArenaPVEControl {
-    return $factory->create();
+  protected function createComponentArenaPVE(): Arena\ArenaPVEControl {
+    return $this->arenaPVEFactory->create();
   }
   
-  protected function createComponentArenaPVP(Arena\IArenaPVPControlFactory $factory): Arena\ArenaPVPControl {
-    return $factory->create();
+  protected function createComponentArenaPVP(): Arena\ArenaPVPControl {
+    return $this->arenaPVPFactory->create();
   }
 }
 ?>

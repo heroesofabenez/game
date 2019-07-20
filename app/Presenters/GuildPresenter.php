@@ -33,13 +33,47 @@ final class GuildPresenter extends BasePresenter {
   protected $model;
   /** @var \HeroesofAbenez\Model\Permissions */
   protected $permissionsModel;
+  /** @var CreateGuildFormFactory */
+  protected $createGuildFormFactory;
+  /** @var DissolveGuildFormFactory */
+  protected $dissolveGuildFormFactory;
+  /** @var RenameGuildFormFactory */
+  protected $renameGuildFormFactory;
+  /** @var GuildDescriptionFormFactory */
+  protected $guildDescriptionFormFactory;
+  /** @var CustomGuildRankNamesFormFactory */
+  protected $customGuildRankNamesFormFactory;
+  /** @var DonateToGuildFormFactory */
+  protected $donateToGuildFormFactory;
   
-  /**
-   */
   public function __construct(\HeroesofAbenez\Model\Guild $model, \HeroesofAbenez\Model\Permissions $permissionsModel) {
     parent::__construct();
     $this->model = $model;
     $this->permissionsModel = $permissionsModel;
+  }
+
+  public function injectCreateGuildFormFactory(CreateGuildFormFactory $createGuildFormFactory): void {
+    $this->createGuildFormFactory = $createGuildFormFactory;
+  }
+
+  public function injectDissolveGuildFormFactory(DissolveGuildFormFactory $dissolveGuildFormFactory): void {
+    $this->dissolveGuildFormFactory = $dissolveGuildFormFactory;
+  }
+
+  public function injectRenameGuildFormFactory(RenameGuildFormFactory $renameGuildFormFactory): void {
+    $this->renameGuildFormFactory = $renameGuildFormFactory;
+  }
+
+  public function injectGuildDescriptionFormFactory(GuildDescriptionFormFactory $guildDescriptionFormFactory): void {
+    $this->guildDescriptionFormFactory = $guildDescriptionFormFactory;
+  }
+
+  public function injectCustomGuildRankNamesFormFactory(CustomGuildRankNamesFormFactory $customGuildRankNamesFormFactory): void {
+    $this->customGuildRankNamesFormFactory = $customGuildRankNamesFormFactory;
+  }
+
+  public function injectDonateToGuildFormFactory(DonateToGuildFormFactory $donateToGuildFormFactory): void {
+    $this->donateToGuildFormFactory = $donateToGuildFormFactory;
   }
   
   /**
@@ -99,12 +133,9 @@ final class GuildPresenter extends BasePresenter {
     $this->template->canKick = $this->user->isAllowed("guild", "kick");
     $this->template->rankId = $this->permissionsModel->getRankId($this->user->roles[0]);
   }
-  
-  /**
-   * Creates form for creating guild
-   */
-  protected function createComponentCreateGuildForm(CreateGuildFormFactory $factory): Form {
-    $form = $factory->create();
+
+  protected function createComponentCreateGuildForm(): Form {
+    $form = $this->createGuildFormFactory->create();
     $form->onSuccess[] = function() {
       $this->user->logout();
       $this->flashMessage("messages.guild.created");
@@ -188,12 +219,9 @@ final class GuildPresenter extends BasePresenter {
     }
     $this->template->haveForm = true;
   }
-  
-  /**
-   * Creates form for dissolving guild
-   */
-  protected function createComponentDissolveGuildForm(DissolveGuildFormFactory $factory): Form {
-    $form = $factory->create();
+
+  protected function createComponentDissolveGuildForm(): Form {
+    $form = $this->dissolveGuildFormFactory->create();
     $form->onSuccess[] = function() {
       $this->flashMessage("messages.guild.dissolved");
       $this->user->logout();
@@ -201,12 +229,9 @@ final class GuildPresenter extends BasePresenter {
     };
     return $form;
   }
-  
-  /**
-   * Creates form for renaming guild
-   */
-  protected function createComponentRenameGuildForm(RenameGuildFormFactory $factory): Form {
-    $form = $factory->create();
+
+  protected function createComponentRenameGuildForm(): Form {
+    $form = $this->renameGuildFormFactory->create();
     $form->onSuccess[] = function() {
       $this->flashMessage("messages.guild.renamed");
       $this->redirect("Guild:");
@@ -286,11 +311,8 @@ final class GuildPresenter extends BasePresenter {
     $this->template->haveForm = true;
   }
 
-  /**
-   * Creates form for changing guild's description
-   */
-  protected function createComponentGuildDescriptionForm(GuildDescriptionFormFactory $factory): Form {
-    $form = $factory->create();
+  protected function createComponentGuildDescriptionForm(): Form {
+    $form = $this->guildDescriptionFormFactory->create();
     $form->onSuccess[] = function() {
       $this->flashMessage("messages.guild.descriptionChanged");
       $this->redirect("Guild:");
@@ -319,8 +341,8 @@ final class GuildPresenter extends BasePresenter {
     $this->template->haveForm = true;
   }
   
-  protected function createComponentCustomGuildRankNamesForm(CustomGuildRankNamesFormFactory $factory): Form {
-    $form = $factory->create();
+  protected function createComponentCustomGuildRankNamesForm(): Form {
+    $form = $this->customGuildRankNamesFormFactory->create();
     $form->onSuccess[] = function() {
       $this->flashMessage("messages.guild.customRankNamesSet");
       $this->redirect("Guild:");
@@ -333,8 +355,8 @@ final class GuildPresenter extends BasePresenter {
     $this->template->haveForm = true;
   }
 
-  protected function createComponentDonateToGuildForm(DonateToGuildFormFactory $factory): Form {
-    $form = $factory->create();
+  protected function createComponentDonateToGuildForm(): Form {
+    $form = $this->donateToGuildFormFactory->create();
     $form->onSuccess[] = function() {
       $this->flashMessage("messages.guild.donationDone");
       $this->redirect("Guild:");

@@ -14,6 +14,18 @@ final class RankingPresenter extends BasePresenter {
   protected const ITEMS_PER_PAGE = 15;
   /** @var \Nette\Utils\Paginator */
   protected $paginator;
+  /** @var Ranking\ICharactersRankingControlFactory */
+  protected $charactersRankingFactory;
+  /** @var Ranking\IGuildsRankingControlFactory */
+  protected $guildRankingFactory;
+
+  public function injectCharactersRankingFactory(Ranking\ICharactersRankingControlFactory $charactersRankingFactory): void {
+    $this->charactersRankingFactory = $charactersRankingFactory;
+  }
+
+  public function injectGuildRankingFactory(Ranking\IGuildsRankingControlFactory $guildRankingFactory): void {
+    $this->guildRankingFactory = $guildRankingFactory;
+  }
   
   /**
    * Set up paginator
@@ -42,14 +54,14 @@ final class RankingPresenter extends BasePresenter {
     $this->template->ranking = "guildsRanking";
   }
   
-  public function createComponentCharactersRanking(Ranking\ICharactersRankingControlFactory $factory): Ranking\CharactersRankingControl {
-    $component = $factory->create();
+  public function createComponentCharactersRanking(): Ranking\CharactersRankingControl {
+    $component = $this->charactersRankingFactory->create();
     $component->paginator = $this->paginator;
     return $component;
   }
   
-  public function createComponentGuildsRanking(Ranking\IGuildsRankingControlFactory $factory): Ranking\GuildsRankingControl {
-    return $factory->create();
+  public function createComponentGuildsRanking(): Ranking\GuildsRankingControl {
+    return $this->guildRankingFactory->create();
   }
 }
 ?>

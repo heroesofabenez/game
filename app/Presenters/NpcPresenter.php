@@ -29,12 +29,30 @@ final class NpcPresenter extends BasePresenter {
   protected $itemModel;
   /** @var Npc */
   protected $npc;
+  /** @var INPCDialogueControlFactory */
+  protected $npcDialogueFactory;
+  /** @var INPCQuestsControlFactory */
+  protected $npcQuestsFactory;
+  /** @var INPCShopControlFactory */
+  protected $npcShopFactory;
 
   public function __construct(\HeroesofAbenez\Model\NPC $model, \HeroesofAbenez\Model\Journal $journalModel, \HeroesofAbenez\Model\Item $itemModel) {
     parent::__construct();
     $this->model = $model;
     $this->journalModel = $journalModel;
     $this->itemModel = $itemModel;
+  }
+
+  public function injectNpcDialogueFactory(INPCDialogueControlFactory $npcDialogueFactory): void {
+    $this->npcDialogueFactory = $npcDialogueFactory;
+  }
+
+  public function injectNpcQuestsFactory(INPCQuestsControlFactory $npcQuestsFactory): void {
+    $this->npcQuestsFactory = $npcQuestsFactory;
+  }
+
+  public function injectNpcShopFactory(INPCShopControlFactory $npcShopFactory): void {
+    $this->npcShopFactory = $npcShopFactory;
   }
 
   /**
@@ -80,8 +98,8 @@ final class NpcPresenter extends BasePresenter {
   public function actionTalk(int $id): void {
   }
   
-  protected function createComponentNpcDialogue(INPCDialogueControlFactory $factory): NPCDialogueControl {
-    $component = $factory->create();
+  protected function createComponentNpcDialogue(): NPCDialogueControl {
+    $component = $this->npcDialogueFactory->create();
     $component->npc = $this->npc;
     return $component;
   }
@@ -97,8 +115,8 @@ final class NpcPresenter extends BasePresenter {
     }
   }
   
-  protected function createComponentNpcQuests(INPCQuestsControlFactory $factory): NPCQuestsControl {
-    $component = $factory->create();
+  protected function createComponentNpcQuests(): NPCQuestsControl {
+    $component = $this->npcQuestsFactory->create();
     $component->npc = $this->npc;
     return $component;
   }
@@ -110,8 +128,8 @@ final class NpcPresenter extends BasePresenter {
     }
   }
   
-  protected function createComponentNpcShop(INPCShopControlFactory $factory): NPCShopControl {
-    $shop = $factory->create();
+  protected function createComponentNpcShop(): NPCShopControl {
+    $shop = $this->npcShopFactory->create();
     $shop->npc = $this->npc;
     return $shop;
   }

@@ -16,8 +16,8 @@ abstract class BasePresenter extends \Nette\Application\UI\Presenter {
   protected $translator;
   /** @var \HeroesofAbenez\Model\SettingsRepository */
   protected $sr;
-  
-  use \Kdyby\Autowired\AutowireComponentFactories;
+  /** @var IMenuControlFactory */
+  protected $menuFactory;
   
   public function injectTranslator(\Nette\Localization\ITranslator $translator): void {
     $this->translator = $translator;
@@ -25,6 +25,10 @@ abstract class BasePresenter extends \Nette\Application\UI\Presenter {
   
   public function injectSettingsRepository(\HeroesofAbenez\Model\SettingsRepository $sr): void {
     $this->sr = $sr;
+  }
+
+  public function injectMenuFactory(IMenuControlFactory $menuFactory): void {
+    $this->menuFactory = $menuFactory;
   }
   
   /**
@@ -68,8 +72,8 @@ abstract class BasePresenter extends \Nette\Application\UI\Presenter {
     }
   }
   
-  protected function createComponentMenu(IMenuControlFactory $factory): MenuControl {
-    return $factory->create();
+  protected function createComponentMenu(): MenuControl {
+    return $this->menuFactory->create();
   }
 
   /**

@@ -24,7 +24,6 @@
         "nette/utils": "~2.5",
         "tracy/tracy": "~2.5",
         "latte/latte": "~2.4",
-        "kdyby/autowired": "^1.5",
         "nexendrie/translation": "^1.1.2",
         "nexendrie/menu": "^2.1",
         "nexendrie/utils": "^1.6.1",
