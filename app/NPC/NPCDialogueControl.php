@@ -25,7 +25,6 @@ final class NPCDialogueControl extends \Nette\Application\UI\Control {
   protected $npc = null;
   
   public function __construct(\Nette\Security\User $user, ILoader $loader) {
-    parent::__construct();
     $this->user = $user;
     $this->loader = $loader;
   }

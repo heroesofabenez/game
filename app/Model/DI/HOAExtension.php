@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace HeroesofAbenez\Model\DI;
 
 use HeroesofAbenez;
-use Nette\Utils\Validators;
+use Nette\Schema\Expect;
 use HeroesofAbenez\Model\IUserToCharacterMapper;
 use HeroesofAbenez\Model\DevelopmentUserToCharacterMapper;
 
@@ -14,14 +14,15 @@ use HeroesofAbenez\Model\DevelopmentUserToCharacterMapper;
  * @author Jakub Konečný
  */
 final class HOAExtension extends \Nette\DI\CompilerExtension {
-  /** @var array */
-  protected $defaults = [
-    "application" => [
-      "server" => "",
-    ],
-    "userToCharacterMapper" => DevelopmentUserToCharacterMapper::class,
-  ];
-  
+  public function getConfigSchema(): \Nette\Schema\Schema {
+    return Expect::structure([
+      "application" => Expect::structure([
+        "server" => Expect::string(""),
+      ])->castTo("array"),
+      "userToCharacterMapper" => Expect::type("class")->default(DevelopmentUserToCharacterMapper::class),
+    ])->castTo("array");
+  }
+
   /**
    * @throws \Nette\Utils\AssertionException
    * @throws \RuntimeException
@@ -38,12 +39,11 @@ final class HOAExtension extends \Nette\DI\CompilerExtension {
   }
   
   /**
-   * @throws \Nette\Utils\AssertionException
    * @throws \RuntimeException
    */
   protected function getUserToCharacterMapper(): string {
-    $config = $this->getConfig($this->defaults);
-    Validators::assertField($config, "userToCharacterMapper", "string");
+    /** @var array $config */
+    $config = $this->getConfig();
     $mapper = $config["userToCharacterMapper"];
     if(!class_exists($mapper) || !is_subclass_of($mapper, IUserToCharacterMapper::class)) {
       throw new \RuntimeException("Invalid user to character mapper $mapper.");
@@ -52,12 +52,11 @@ final class HOAExtension extends \Nette\DI\CompilerExtension {
   }
   
   /**
-   * @throws \Nette\Utils\AssertionException
    * @throws \RuntimeException
    */
   protected function addModels(): void {
     $builder = $this->getContainerBuilder();
-    $config = $this->getConfig($this->defaults);
+    $config = $this->getConfig();
     $builder->addDefinition($this->prefix("model.userToCharacterMapper"))
       ->setType($this->getUserToCharacterMapper());
     $builder->addDefinition($this->prefix("model.settingsRepository"))
@@ -131,9 +130,9 @@ final class HOAExtension extends \Nette\DI\CompilerExtension {
   
   protected function addArena(): void {
     $builder = $this->getContainerBuilder();
-    $builder->addDefinition($this->prefix("arena.pve"))
+    $builder->addFactoryDefinition($this->prefix("arena.pve"))
       ->setImplement(HeroesofAbenez\Arena\IArenaPVEControlFactory::class);
-    $builder->addDefinition($this->prefix("arena.pvp"))
+    $builder->addFactoryDefinition($this->prefix("arena.pvp"))
       ->setImplement(HeroesofAbenez\Arena\IArenaPVPControlFactory::class);
   }
   
@@ -153,25 +152,25 @@ final class HOAExtension extends \Nette\DI\CompilerExtension {
   
   protected function addNpc(): void {
     $builder = $this->getContainerBuilder();
-    $builder->addDefinition($this->prefix("npc.dialogue"))
+    $builder->addFactoryDefinition($this->prefix("npc.dialogue"))
       ->setImplement(HeroesofAbenez\NPC\INPCDialogueControlFactory::class);
-    $builder->addDefinition($this->prefix("npc.shop"))
+    $builder->addFactoryDefinition($this->prefix("npc.shop"))
       ->setImplement(HeroesofAbenez\NPC\INPCShopControlFactory::class);
-    $builder->addDefinition($this->prefix("npc.quests"))
+    $builder->addFactoryDefinition($this->prefix("npc.quests"))
       ->setImplement(HeroesofAbenez\NPC\INPCQuestsControlFactory::class);
   }
   
   protected function addPostOffice(): void {
     $builder = $this->getContainerBuilder();
-    $builder->addDefinition($this->prefix("postoffice.postoffice"))
+    $builder->addFactoryDefinition($this->prefix("postoffice.postoffice"))
       ->setImplement(HeroesofAbenez\Postoffice\IPostofficeControlFactory::class);
   }
   
   protected function addRanking(): void {
     $builder = $this->getContainerBuilder();
-    $builder->addDefinition($this->prefix("ranking.characters"))
+    $builder->addFactoryDefinition($this->prefix("ranking.characters"))
       ->setImplement(HeroesofAbenez\Ranking\ICharactersRankingControlFactory::class);
-    $builder->addDefinition($this->prefix("ranking.guilds"))
+    $builder->addFactoryDefinition($this->prefix("ranking.guilds"))
       ->setImplement(HeroesofAbenez\Ranking\IGuildsRankingControlFactory::class);
   }
   

@@ -28,7 +28,6 @@ final class NPCShopControl extends \Nette\Application\UI\Control {
   protected $translator;
   
   public function __construct(ORM $orm, \HeroesofAbenez\Model\Item $itemModel, \Nette\Security\User $user, ITranslator $translator) {
-    parent::__construct();
     $this->orm = $orm;
     $this->itemModel = $itemModel;
     $this->user = $user;
