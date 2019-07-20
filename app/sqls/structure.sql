@@ -528,3 +528,16 @@ CREATE TABLE `friendships` (
   CONSTRAINT `friendships_ibfk_1` FOREIGN KEY (`character1`) REFERENCES `characters` (`id`),
   CONSTRAINT `friendships_ibfk_2` FOREIGN KEY (`character2`) REFERENCES `characters` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `guild_donations` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `character` int(11) NOT NULL,
+  `guild` int(11) NOT NULL,
+  `amount` int(11) NOT NULL DEFAULT 0,
+  `when` timestamp NOT NULL DEFAULT current_timestamp(),
+  PRIMARY KEY (`id`),
+  KEY `character` (`character`),
+  KEY `guild` (`guild`),
+  CONSTRAINT `guild_donations_ibfk_1` FOREIGN KEY (`character`) REFERENCES `characters` (`id`),
+  CONSTRAINT `guild_donations_ibfk_2` FOREIGN KEY (`guild`) REFERENCES `guilds` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;

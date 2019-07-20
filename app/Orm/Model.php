@@ -41,6 +41,7 @@ namespace HeroesofAbenez\Orm;
  * @property-read CharacterSpecialSkillsRepository $characterSpecialSkills
  * @property-read PveArenaOpponentEquipmentRepository $arenaNpcsEquipment
  * @property-read FriendshipsRepository $friendships
+ * @property-read GuildDonationsRepository $guildDonations
  */
 final class Model extends \Nextras\Orm\Model\Model {
   

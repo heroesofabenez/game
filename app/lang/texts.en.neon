@@ -77,6 +77,7 @@ guild:
     money: "{1} Money: 1 silver mark|]1,+Inf[ Money: %count% silver marks"
     donate: "Donate"
     donateTitle: "Donate to guild"
+    memberContribution: "{1}Donated 1 silver mark|]1,+Inf[ Donated %count% silver marks"
 request:
     title: "Request"
     accept: "Accept"

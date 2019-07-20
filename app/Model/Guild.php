@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Model;
 
+use HeroesofAbenez\Orm\GuildDonation;
 use HeroesofAbenez\Orm\Request as RequestEntity;
 use HeroesofAbenez\Orm\Guild as GuildEntity;
 use HeroesofAbenez\Orm\Model as ORM;
@@ -78,7 +79,10 @@ final class Guild {
     }
     foreach($members as $member) {
       $rank = $member->guildrank;
-      $m = (object) ["id" => $member->id, "name" => $member->name, "rank" => $rank, "rankId" => $member->guildrank->id, "customRankName" => ""];
+      $m = (object) [
+        "id" => $member->id, "name" => $member->name, "rank" => $rank, "rankId" => $member->guildrank->id,
+        "customRankName" => "", "currentGuildContribution" => $member->currentGuildContribution,
+      ];
       if($customRoleNames) {
         $m->customRankName = $this->getCustomRankName($id, $m->rankId);
       }
@@ -409,6 +413,10 @@ final class Guild {
     }
     $character->money -= $amount;
     $character->guild->money += $amount;
+    $donation = new GuildDonation();
+    $donation->guild = $character->guild;
+    $donation->amount = $amount;
+    $character->guildDonations->add($donation);
     $this->orm->characters->persistAndFlush($character);
   }
 }

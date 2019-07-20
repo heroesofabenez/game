@@ -202,6 +202,7 @@ final class GuildTest extends \Tester\TestCase {
     $this->model->donate($donation);
     Assert::same($originalCharacterMoney - $donation, $character->money);
     Assert::same($originalGuildMoney + $donation, $character->guild->money);
+    Assert::same($donation, $character->currentGuildContribution);
     $character->money = $originalCharacterMoney;
     $character->guild->money = $originalGuildMoney;
     /** @var ORM $orm */

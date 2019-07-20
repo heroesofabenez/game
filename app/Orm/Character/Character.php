@@ -52,6 +52,8 @@ use Nexendrie\Utils\Numbers;
  * @property OneHasMany|ChatMessage[] $chatMessages {1:m ChatMessage::$character}
  * @property OneHasMany|CharacterAttackSkill[] $attackSkills {1:m CharacterAttackSkill::$character}
  * @property OneHasMany|CharacterSpecialSkill[] $specialSkills {1:m CharacterSpecialSkill::$character}
+ * @property OneHasMany|GuildDonation[] $guildDonations {1:m GuildDonation::$character}
+ * @property-read int $currentGuildContribution {virtual}
  */
 final class Character extends \Nextras\Orm\Entity\Entity {
   public const GENDER_MALE = "male";
@@ -76,6 +78,19 @@ final class Character extends \Nextras\Orm\Entity\Entity {
 
   protected function getterLastActiveS(): string {
     return $this->lastActive->format("Y-m-d H:i:s");
+  }
+
+  protected function getterCurrentGuildContribution(): int {
+    $amount = 0;
+    if($this->guild === null) {
+      return $amount;
+    }
+    /** @var int[] $donations */
+    $donations = $this->guildDonations->get()->findBy(["guild" => $this->guild])->fetchPairs(null, "amount");
+    foreach($donations as $donation) {
+      $amount += $donation;
+    }
+    return $amount;
   }
   
   public function onBeforeInsert(): void {
