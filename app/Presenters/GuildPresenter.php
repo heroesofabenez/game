@@ -217,6 +217,7 @@ final class GuildPresenter extends BasePresenter {
     try {
       $this->model->promote($id);
       $this->flashMessage("messages.guild.promoted");
+      $this->redirect("Guild:members");
     } catch(NotInGuildException $e) {
       $this->flashMessage("errors.guild.notInGuild");
     } catch(MissingPermissionsException $e) {
@@ -239,6 +240,7 @@ final class GuildPresenter extends BasePresenter {
     try {
       $this->model->demote($id);
       $this->flashMessage("messages.guild.demoted");
+      $this->redirect("Guild:members");
     } catch(NotInGuildException $e) {
       $this->flashMessage("errors.guild.notInGuild");
     } catch(MissingPermissionsException $e) {
@@ -259,6 +261,7 @@ final class GuildPresenter extends BasePresenter {
     try {
       $this->model->kick($id);
       $this->flashMessage("messages.guild.kicked");
+      $this->redirect("Guild:members");
     } catch(NotInGuildException $e) {
       $this->flashMessage("errors.guild.notInGuild");
     } catch(MissingPermissionsException $e) {
