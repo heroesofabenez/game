@@ -60,3 +60,11 @@ postOfficeNewMessage:
 customGuildRankNames:
     sendButton:
         label: "Nastavit"
+donateToGuild:
+    amountField:
+        label: "Částka:"
+        empty: "Musíš zadat částku k darování."
+        errorTooLow: "Musíš darovat alespoň 1 stříbrňák."
+        errorTooHigh: "Nemáš dostatek peněz."
+    donateButton:
+        label: "Přispět"

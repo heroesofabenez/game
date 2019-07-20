@@ -189,6 +189,8 @@ final class HOAExtension extends \Nette\DI\CompilerExtension {
       ->setType(HeroesofAbenez\Forms\DissolveGuildFormFactory::class);
     $builder->addDefinition($this->prefix("form.customGuildRankNames"))
       ->setType(HeroesofAbenez\Forms\CustomGuildRankNamesFormFactory::class);
+    $builder->addDefinition($this->prefix($this->prefix("form.donateToGuild")))
+      ->setType(HeroesofAbenez\Forms\DonateToGuildFormFactory::class);
   }
   
   public function afterCompile(\Nette\PhpGenerator\ClassType $class): void {

@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Model;
 
+use HeroesofAbenez\Orm\Model as ORM;
 use Tester\Assert;
 use HeroesofAbenez\Orm\Guild as GuildEntity;
 use Nextras\Orm\Collection\ICollection;
@@ -77,15 +78,15 @@ final class GuildTest extends \Tester\TestCase {
 
   public function testCreate() {
     \Tester\Environment::lock("database", __DIR__ . "/../../..");
-    /** @var \HeroesofAbenez\Orm\Model $orm */
-    $orm = $this->getService(\HeroesofAbenez\Orm\Model::class);
+    /** @var ORM $orm */
+    $orm = $this->getService(ORM::class);
     Assert::exception(function() use($orm) {
       $guild = $orm->guilds->getById(1);
       $this->model->create(["name" => $guild->name]);
     }, NameInUseException::class);
     $this->preserveStats(["guild", "guildrank"], function() {
-      /** @var \HeroesofAbenez\Orm\Model $orm */
-      $orm = $this->getService(\HeroesofAbenez\Orm\Model::class);
+      /** @var ORM $orm */
+      $orm = $this->getService(ORM::class);
       $user = $this->getCharacter();
       $data = ["name" => "abc", "description" => "."];
       $this->model->create($data);
@@ -183,6 +184,29 @@ final class GuildTest extends \Tester\TestCase {
       Assert::same("Sun ruler", $names[7]);
       Assert::same("Sun observer", $names[1]);
     }
+  }
+
+  public function testDonate() {
+    $this->modifyCharacter(["guild" => null], function() {
+      Assert::exception(function() {
+        $this->model->donate(1);
+      }, NotInGuildException::class);
+    });
+    Assert::exception(function() {
+      $this->model->donate(500000);
+    }, InsufficientFundsException::class);
+    $character = $this->getCharacter();
+    $originalCharacterMoney = $character->money;
+    $originalGuildMoney = $character->guild->money;
+    $donation = 1;
+    $this->model->donate($donation);
+    Assert::same($originalCharacterMoney - $donation, $character->money);
+    Assert::same($originalGuildMoney + $donation, $character->guild->money);
+    $character->money = $originalCharacterMoney;
+    $character->guild->money = $originalGuildMoney;
+    /** @var ORM $orm */
+    $orm = $this->getService(ORM::class);
+    $orm->characters->persistAndFlush($character);
   }
 }
 

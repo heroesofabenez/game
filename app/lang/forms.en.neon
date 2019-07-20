@@ -60,3 +60,11 @@ postOfficeNewMessage:
 customGuildRankNames:
     sendButton:
         label: "Set"
+donateToGuild:
+    amountField:
+        label: "Amount:"
+        empty: "You have to entry amount to donate."
+        errorTooLow: "You have to donate at least 1 silver mark."
+        errorTooHigh: "You do not have enough money."
+    donateButton:
+        label: "Donate"

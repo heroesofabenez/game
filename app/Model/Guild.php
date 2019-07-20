@@ -393,5 +393,23 @@ final class Guild {
     }
     $this->orm->guildRanksCustom->flush();
   }
+
+  /**
+   * @throws NotInGuildException
+   * @throws InsufficientFundsException
+   */
+  public function donate(int $amount): void {
+    if($this->user->identity->guild === 0) {
+      throw new NotInGuildException();
+    }
+    /** @var \HeroesofAbenez\Orm\Character $character */
+    $character = $this->orm->characters->getById($this->user->id);
+    if($character->money < $amount) {
+      throw new InsufficientFundsException();
+    }
+    $character->money -= $amount;
+    $character->guild->money += $amount;
+    $this->orm->characters->persistAndFlush($character);
+  }
 }
 ?>

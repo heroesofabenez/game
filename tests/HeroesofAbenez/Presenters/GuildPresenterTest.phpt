@@ -109,6 +109,13 @@ final class GuildPresenterTest extends \Tester\TestCase {
       $this->checkRedirect("Guild:rankNames", "/guild");
     });
   }
+
+  public function testDonate() {
+    $this->checkAction("Guild:donate");
+    $this->modifyCharacter(["guild" => null], function() {
+      $this->checkForward("Guild:donate", "Guild:noguild");
+    });
+  }
 }
 
 $test = new GuildPresenterTest();

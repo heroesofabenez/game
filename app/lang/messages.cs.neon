@@ -24,6 +24,7 @@ guild:
     kicked: "Člen vyhozen."
     descriptionChanged: "Popis cechu změněn."
     customRankNamesSet: "Vlastní jména pro hodnosti nastavena."
+    donationDone: "Příspěvek proveden."
 pet:
     discarded: "Mazlíček byl odložen."
 chat:

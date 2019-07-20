@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace HeroesofAbenez\Presenters;
 
 use HeroesofAbenez\Forms\CustomGuildRankNamesFormFactory;
+use HeroesofAbenez\Forms\DonateToGuildFormFactory;
 use Nette\Application\UI\Form;
 use HeroesofAbenez\Model\GuildNotFoundException;
 use HeroesofAbenez\Model\NotInGuildException;
@@ -322,6 +323,20 @@ final class GuildPresenter extends BasePresenter {
     $form = $factory->create();
     $form->onSuccess[] = function() {
       $this->flashMessage("messages.guild.customRankNamesSet");
+      $this->redirect("Guild:");
+    };
+    return $form;
+  }
+
+  public function actionDonate(): void {
+    $this->notInGuild();
+    $this->template->haveForm = true;
+  }
+
+  protected function createComponentDonateToGuildForm(DonateToGuildFormFactory $factory): Form {
+    $form = $factory->create();
+    $form->onSuccess[] = function() {
+      $this->flashMessage("messages.guild.donationDone");
       $this->redirect("Guild:");
     };
     return $form;

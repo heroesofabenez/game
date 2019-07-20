@@ -75,6 +75,8 @@ guild:
     noGuildText3: " an existing one."
     changeRankNames: "Change rank names"
     money: "{1} Money: 1 silver mark|]1,+Inf[ Money: %count% silver marks"
+    donate: "Donate"
+    donateTitle: "Donate to guild"
 request:
     title: "Request"
     accept: "Accept"
