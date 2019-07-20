@@ -4,6 +4,7 @@
   <h1>{_"texts.guild.title"} {$guild->name}</h1>
   {_"texts.guild.leader"}: {$guild->leader->name} {_"texts.common.members"}: <a n:href="Guild:members">{$guild->members->countStored()}</a><br>
   {_"texts.common.description"}: {$guild->description}<br>
+  {_"texts.guild.money", $guild->money}<br>
   {if $canManage}<a n:href="Guild:manage">{_"texts.guild.manage"}</a>{/if}
   {if $canInvite}<a n:href="Guild:applications">{_"texts.guild.applications"}</a>{/if}
   <a n:href="Tavern:guild">{_"texts.guild.chat"}</a>

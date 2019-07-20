@@ -74,6 +74,7 @@ guild:
     noGuildJoinLink: "join"
     noGuildText3: " an existing one."
     changeRankNames: "Change rank names"
+    money: "{1} Money: 1 silver mark|]1,+Inf[ Money: %count% silver marks"
 request:
     title: "Request"
     accept: "Accept"

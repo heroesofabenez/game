@@ -74,6 +74,7 @@ guild:
     noGuildJoinLink: "připojit"
     noGuildText3: " k již existujícímu."
     changeRankNames: "Změnit jména hodností"
+    money: "{0} Peníze: 0 stříbrňáků|{1} Máš 1 stříbrňák|[2,4] Peníze: %count% stříbrňáky|[5,+Inf] Peníze: %count% stříbrňáků"
 request:
     title: "Požadavek"
     accept: "Přijmout"
