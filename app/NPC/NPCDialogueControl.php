@@ -39,7 +39,7 @@ final class NPCDialogueControl extends \Nette\Application\UI\Control {
    */
   public function getNames() {
     $npcName = "";
-    if(!is_null($this->npc)) {
+    if($this->npc !== null) {
       $npcName = $this->npc->name;
     }
     $playerName = $this->user->identity->name;

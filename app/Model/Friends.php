@@ -84,7 +84,7 @@ final class Friends {
    */
   public function remove(int $character): void {
     $friendship = $this->getFriendship($character);
-    if(is_null($friendship)) {
+    if($friendship === null) {
       throw new NotFriendsException();
     }
     $this->orm->friendships->removeAndFlush($friendship);

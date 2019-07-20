@@ -66,7 +66,7 @@ final class NPCShopControl extends \Nette\Application\UI\Control {
    */
   public function canBuyItem(int $id): bool {
     $row = $this->orm->shopItems->getByItemAndNpc($id, $this->npc->id);
-    return (!is_null($row));
+    return ($row !== null);
   }
   
   /**
@@ -74,7 +74,7 @@ final class NPCShopControl extends \Nette\Application\UI\Control {
    */
   public function handleBuy(int $itemId): void {
     $item = $this->orm->items->getById($itemId);
-    if(is_null($item)) {
+    if($item === null) {
       $this->presenter->flashMessage("errors.shop.itemDoesNotExist");
       $this->presenter->redirect("this");
     }

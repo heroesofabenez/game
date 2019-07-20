@@ -38,7 +38,7 @@ final class Guild {
    */
   public function getGuildName(int $id): string {
     $guild = $this->view($id);
-    if(is_null($guild)) {
+    if($guild === null) {
       return "";
     }
     return $guild->name;
@@ -56,7 +56,7 @@ final class Guild {
    */
   public function getCustomRankName(int $guild, int $rank): string {
     $customRank = $this->orm->guildRanksCustom->getByGuildAndRank($guild, $rank);
-    if(is_null($customRank)) {
+    if($customRank === null) {
       return "";
     }
     return $customRank->name;
@@ -94,7 +94,7 @@ final class Guild {
    */
   public function create(array $data): void {
     $guild = $this->orm->guilds->getByName($data["name"]);
-    if(!is_null($guild)) {
+    if($guild !== null) {
       throw new NameInUseException();
     }
     $guild = new GuildEntity();
@@ -115,7 +115,7 @@ final class Guild {
    */
   public function sendApplication(int $gid): void {
     $guild = $this->orm->guilds->getById($gid);
-    if(is_null($guild)) {
+    if($guild === null) {
       throw new GuildNotFoundException();
     }
     $request = new RequestEntity();
@@ -135,7 +135,7 @@ final class Guild {
       "type" => RequestEntity::TYPE_GUILD_APP,
       "status" => RequestEntity::STATUS_NEW,
     ]);
-    return (!is_null($app));
+    return ($app !== null);
   }
   
   /**
@@ -178,10 +178,10 @@ final class Guild {
       throw new MissingPermissionsException();
     }
     $character = $this->orm->characters->getById($id);
-    if(is_null($character)) {
+    if($character === null) {
       throw new PlayerNotFoundException();
     }
-    if(is_null($character->guild)) {
+    if($character->guild === null) {
       throw new PlayerNotInGuildException();
     }
     if($character->guild->id !== $admin->identity->guild) {
@@ -223,10 +223,10 @@ final class Guild {
       throw new MissingPermissionsException();
     }
     $character = $this->orm->characters->getById($id);
-    if(is_null($character)) {
+    if($character === null) {
       throw new PlayerNotFoundException();
     }
-    if(is_null($character->guild)) {
+    if($character->guild === null) {
       throw new PlayerNotInGuildException();
     }
     if($character->guild->id !== $admin->identity->guild) {
@@ -261,10 +261,10 @@ final class Guild {
       throw new MissingPermissionsException();
     }
     $character = $this->orm->characters->getById($id);
-    if(is_null($character)) {
+    if($character === null) {
       throw new PlayerNotFoundException();
     }
-    if(is_null($character->guild) || $character->guild->id !== $admin->identity->guild) {
+    if($character->guild === null || $character->guild->id !== $admin->identity->guild) {
       throw new PlayerNotInGuildException();
     }
     $adminRole = $this->permissionsModel->getRankId($admin->roles[0]);
@@ -315,7 +315,7 @@ final class Guild {
    */
   public function rename(int $id, string $name): void {
     $guild = $this->orm->guilds->getByName($name);
-    if(!is_null($guild) && $guild->id !== $id) {
+    if($guild !== null && $guild->id !== $id) {
       throw new NameInUseException();
     }
     $guild = $this->orm->guilds->getById($id);
@@ -330,7 +330,7 @@ final class Guild {
    */
   public function changeDescription(int $id, string $description): void {
     $guild = $this->orm->guilds->getById($id);
-    if(is_null($guild)) {
+    if($guild === null) {
       throw new GuildNotFoundException();
     }
     $guild->description = $description;
@@ -382,7 +382,7 @@ final class Guild {
       }
       $rank = (int) substr($rank, 4, 1);
       $row = $this->orm->guildRanksCustom->getByGuildAndRank($gid, $rank);
-      if(is_null($row)) {
+      if($row === null) {
         $row = new GuildRankCustom();
         $this->orm->guildRanksCustom->attach($row);
         $row->guild = $gid;

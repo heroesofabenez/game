@@ -28,7 +28,7 @@ final class KickCommand extends \HeroesofAbenez\Chat\ChatCommand {
   }
   
   public function execute(int $id = null): string {
-    if(is_null($id)) {
+    if($id === null) {
       return "";
     }
     try {

@@ -37,7 +37,7 @@ final class Item {
    */
   public function haveItem(int $id, int $amount = 1): bool {
     $item = $this->orm->characterItems->getByCharacterAndItem($this->user->id, $id);
-    if(is_null($item)) {
+    if($item === null) {
       return false;
     }
     return ($item->amount >= $amount);
@@ -48,7 +48,7 @@ final class Item {
    */
   public function giveItem(int $id, int $amount = 1): void {
     $item = $this->orm->characterItems->getByCharacterAndItem($this->user->id, $id);
-    if(is_null($item)) {
+    if($item === null) {
       $item = new CharacterItem();
       $this->orm->characterItems->attach($item);
       $item->character = $this->user->id;
@@ -61,7 +61,7 @@ final class Item {
   
   public function loseItem(int $id, int $amount = 1): void {
     $item = $this->orm->characterItems->getByCharacterAndItem($this->user->id, $id);
-    if(is_null($item)) {
+    if($item === null) {
       return;
     }
     $item->amount -= $amount;
@@ -75,9 +75,9 @@ final class Item {
   public function canEquipItem(ItemEntity $item): bool {
     if($this->user->identity->level < $item->requiredLevel) {
       return false;
-    } elseif(!is_null($item->requiredClass) && $item->requiredClass->id !== $this->user->identity->class) {
+    } elseif($item->requiredClass !== null && $item->requiredClass->id !== $this->user->identity->class) {
       return false;
-    } elseif(!is_null($item->requiredSpecialization) && $item->requiredSpecialization->id !== $this->user->identity->specialization) {
+    } elseif($item->requiredSpecialization !== null && $item->requiredSpecialization->id !== $this->user->identity->specialization) {
       return false;
     }
     return true;
@@ -93,7 +93,7 @@ final class Item {
    */
   public function equipItem(int $id): void {
     $item = $this->orm->characterItems->getById($id);
-    if(is_null($item)) {
+    if($item === null) {
       throw new ItemNotFoundException();
     } elseif($item->character->id !== $this->user->id) {
       throw new ItemNotOwnedException();
@@ -120,7 +120,7 @@ final class Item {
    */
   public function unequipItem(int $id): void {
     $item = $this->orm->characterItems->getById($id);
-    if(is_null($item)) {
+    if($item === null) {
       throw new ItemNotFoundException();
     } elseif($item->character->id !== $this->user->id) {
       throw new ItemNotOwnedException();
@@ -141,7 +141,7 @@ final class Item {
    */
   public function repairItem(int $id): void {
     $item = $this->orm->characterItems->getById($id);
-    if(is_null($item)) {
+    if($item === null) {
       throw new ItemNotFoundException();
     } elseif($item->character->id !== $this->user->id) {
       throw new ItemNotOwnedException();

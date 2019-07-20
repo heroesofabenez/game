@@ -44,7 +44,7 @@ final class NpcPresenter extends BasePresenter {
     parent::startup();
     if($this->action !== "default" && !in_array($this->action, ["notfound", "unavailable"], true)) {
       $npc = $this->model->view((int) $this->params["id"]);
-      if(is_null($npc)) {
+      if($npc === null) {
         throw new \Nette\Application\BadRequestException();
       }
       $this->npc = $npc;

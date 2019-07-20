@@ -48,11 +48,11 @@ final class Skills {
       $userId = $this->user->id;
     }
     $skill = $this->getAttackSkill($skillId);
-    if(is_null($skill)) {
+    if($skill === null) {
       return null;
     }
     $row = $this->orm->characterAttackSkills->getByCharacterAndSkill($userId, $skillId);
-    if(is_null($row)) {
+    if($row === null) {
       $row = new CharacterAttackSkill();
       $row->level = 0;
       $row->skill = $skill;
@@ -80,11 +80,11 @@ final class Skills {
       $userId = $this->user->id;
     }
     $skill = $this->getSpecialSkill($skillId);
-    if(is_null($skill)) {
+    if($skill === null) {
       return null;
     }
     $row = $this->orm->characterSpecialSkills->getByCharacterAndSkill($userId, $skillId);
-    if(is_null($row)) {
+    if($row === null) {
       $row = new CharacterSpecialSkill();
       $row->level = 0;
       $row->skill = $skill;
@@ -98,8 +98,8 @@ final class Skills {
   protected function canLearnSkill($skill): bool {
     if($skill->neededClass->id != $this->user->identity->class) {
       return false;
-    } elseif(!is_null($skill->neededSpecialization)) {
-      if(is_null($this->user->identity->specialization)) {
+    } elseif($skill->neededSpecialization !== null) {
+      if($this->user->identity->specialization === null) {
         return false;
       } elseif($skill->neededSpecialization->id != $this->user->identity->specialization) {
         return false;
@@ -156,7 +156,7 @@ final class Skills {
     $method = "getCharacter" . ucfirst($type) . "Skill";
     /** @var CharacterAttackSkill|CharacterSpecialSkill|null $skill */
     $skill = $this->$method($id);
-    if(is_null($skill)) {
+    if($skill === null) {
       throw new SkillNotFoundException();
     } elseif($skill->level + 1 > $skill->skill->levels) {
       throw new SkillMaxLevelReachedException();
@@ -168,7 +168,7 @@ final class Skills {
     }
     if($type === "attack") {
       $record = $this->orm->characterAttackSkills->getByCharacterAndSkill($this->user->id, $id);
-      if(is_null($record)) {
+      if($record === null) {
         $record = new CharacterAttackSkill();
         $this->orm->characterAttackSkills->attach($record);
         $record->character = $character;
@@ -180,7 +180,7 @@ final class Skills {
       $this->orm->characterAttackSkills->persistAndFlush($record);
     } else {
       $record = $this->orm->characterSpecialSkills->getByCharacterAndSkill($this->user->id, $id);
-      if(is_null($record)) {
+      if($record === null) {
         $record = new CharacterSpecialSkill();
         $this->orm->characterSpecialSkills->attach($record);
         $record->character = $character;

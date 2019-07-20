@@ -51,19 +51,19 @@ final class UserManager implements \Nette\Security\IAuthenticator {
       return new Identity(0, "guest");
     }
     $char = $this->orm->characters->getByOwner($uid);
-    if(is_null($char)) {
+    if($char === null) {
       return new Identity(-1, "guest");
     }
     $data = [
       "name" => $char->name, "race" => $char->race->id, "gender" => $char->gender,
       "class" => $char->class->id,
-      "specialization" => (!is_null($char->specialization)) ? $char->specialization->id : null,
+      "specialization" => ($char->specialization !== null) ? $char->specialization->id : null,
       "level" => $char->level, "stage" => $char->currentStage->id,
       "white_karma" => $char->whiteKarma, "dark_karma" => $char->darkKarma,
     ];
     $data["guild"] = 0;
     $role = "player";
-    if(!is_null($char->guild)) {
+    if($char->guild !== null) {
       $data["guild"] = $char->guild->id;
       $role = $char->guildrank->name;
     }
@@ -79,7 +79,7 @@ final class UserManager implements \Nette\Security\IAuthenticator {
    */
   public function create(array $values): ?array {
     $character = $this->orm->characters->getByName($values["name"]);
-    if(!is_null($character)) {
+    if($character !== null) {
       return null;
     }
 

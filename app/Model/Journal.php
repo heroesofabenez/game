@@ -57,12 +57,12 @@ final class Journal {
     $return = [
       "name" => $character->name, "gender" => $character->gender, "race" => $character->race->id,
       "class" => $character->class->id,
-      "specialization" => (!is_null($character->specialization)) ? $character->specialization->id : null,
+      "specialization" => ($character->specialization !== null) ? $character->specialization->id : null,
       "level" => $character->level, "whiteKarma" => $character->whiteKarma, "darkKarma" => $character->darkKarma,
       "experiences" => $character->experience, "stageName" => $stageName, "areaName" => $areaName,
     ];
     $return["guild"] = false;
-    if(!is_null($character->guild)) {
+    if($character->guild !== null) {
       $return["guild"] = $character->guild->name;
       $return["guildRank"] = $character->guildrank->id;
     }

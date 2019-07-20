@@ -82,7 +82,7 @@ final class GuildPresenter extends BasePresenter {
    */
   public function renderView(int $id): void {
     $data = $this->model->view($id);
-    if(is_null($data)) {
+    if($data === null) {
       throw new \Nette\Application\BadRequestException();
     }
     $this->template->guild = $data;
@@ -119,7 +119,7 @@ final class GuildPresenter extends BasePresenter {
   
   public function actionJoin(int $id = null): void {
     $this->inGuild();
-    if(is_null($id)) {
+    if($id === null) {
       return;
     }
     try {

@@ -72,7 +72,7 @@ final class CombatHelper {
   public function getPlayer(int $id): Character {
     $data = $pets = [];
     $character = $this->orm->characters->getById($id);
-    if(is_null($character)) {
+    if($character === null) {
       throw new OpponentNotFoundException();
     }
     $stats = [
@@ -90,7 +90,7 @@ final class CombatHelper {
     $data["specialization"] = ($character->specialization) ? $character->specialization->name : "";
     $data["initiativeFormula"] = $character->class->initiative;
     $pet = $character->activePet;
-    if(!is_null($pet)) {
+    if($pet !== null) {
       $pets[] = $pet->toCombatPet();
     }
     $skills = $this->getPlayerSkills($character);
@@ -111,11 +111,11 @@ final class CombatHelper {
       $eq->item->worn = true;
       $equipment[] = $eq->item->toCombatEquipment();
     }
-    if(!$equipment->hasItems(["slot" => Equipment::SLOT_WEAPON]) && !is_null($npc->weapon)) {
+    if(!$equipment->hasItems(["slot" => Equipment::SLOT_WEAPON]) && $npc->weapon !== null) {
       $npc->weapon->worn = true;
       $equipment[] = $npc->weapon->toCombatEquipment();
     }
-    if(!$equipment->hasItems(["slot" => Equipment::SLOT_ARMOR]) && !is_null($npc->armor)) {
+    if(!$equipment->hasItems(["slot" => Equipment::SLOT_ARMOR]) && $npc->armor !== null) {
       $npc->armor->worn = true;
       $equipment[] = $npc->armor->toCombatEquipment();
     }
@@ -129,7 +129,7 @@ final class CombatHelper {
    */
   public function getArenaNpc(int $id): Character {
     $npc = $this->orm->arenaNpcs->getById($id);
-    if(is_null($npc)) {
+    if($npc === null) {
       throw new OpponentNotFoundException();
     }
     $data = $this->cb->create($npc->class, $npc->race, $npc->level, $npc->specialization);
@@ -159,7 +159,7 @@ final class CombatHelper {
    */
   public function getCommonNpc(int $id): Character {
     $npc = $this->orm->npcs->getById($id);
-    if(is_null($npc)) {
+    if($npc === null) {
       throw new OpponentNotFoundException();
     }
     $data = $this->cb->create($npc->class, $npc->race, $npc->level, $npc->specialization);
@@ -185,7 +185,7 @@ final class CombatHelper {
    */
   public function getNumberOfTodayArenaFights(int $uid): int {
     $row = $this->orm->arenaFightsCount->getByCharacterAndDay($uid, date("d.m.Y"));
-    if(is_null($row)) {
+    if($row === null) {
       return 0;
     }
     return $row->amount;
@@ -197,7 +197,7 @@ final class CombatHelper {
   public function bumpNumberOfTodayArenaFights(int $uid): void {
     $day = date("d.m.Y");
     $row = $this->orm->arenaFightsCount->getByCharacterAndDay($uid, $day);
-    if(is_null($row)) {
+    if($row === null) {
       $row = new ArenaFightCount();
       $this->orm->arenaFightsCount->attach($row);
       $row->character = $uid;

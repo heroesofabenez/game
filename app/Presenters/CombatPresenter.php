@@ -22,7 +22,7 @@ final class CombatPresenter extends BasePresenter {
    */
   public function actionView(int $id): void {
     $combat = $this->log->read($id);
-    if(is_null($combat)) {
+    if($combat === null) {
       throw new \Nette\Application\BadRequestException();
     }
     $this->template->log = $combat->text;

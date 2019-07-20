@@ -39,9 +39,9 @@ final class Pet {
   public function canDeployPet(PetEntity $pet): bool {
     if($this->user->identity->level < $pet->type->requiredLevel) {
       return false;
-    } elseif(!is_null($pet->type->requiredClass) && $pet->type->requiredClass->id !== $this->user->identity->class) {
+    } elseif($pet->type->requiredClass !== null && $pet->type->requiredClass->id !== $this->user->identity->class) {
       return false;
-    } elseif(!is_null($pet->type->requiredRace) && $pet->type->requiredRace->id !== $this->user->identity->race) {
+    } elseif($pet->type->requiredRace !== null && $pet->type->requiredRace->id !== $this->user->identity->race) {
       return false;
     }
     return true;
@@ -57,7 +57,7 @@ final class Pet {
    */
   public function deployPet(int $id): void {
     $pet = $this->orm->pets->getById($id);
-    if(is_null($pet)) {
+    if($pet === null) {
       throw new PetNotFoundException();
     } elseif($pet->owner->id !== $this->user->id) {
       throw new PetNotOwnedException();
@@ -85,7 +85,7 @@ final class Pet {
    */
   public function discardPet(int $id): void {
     $pet = $this->orm->pets->getById($id);
-    if(is_null($pet)) {
+    if($pet === null) {
       throw new PetNotFoundException();
     } elseif($pet->owner->id !== $this->user->id) {
       throw new PetNotOwnedException();
@@ -101,7 +101,7 @@ final class Pet {
    */
   public function givePet(int $type): void {
     $petType = $this->viewType($type);
-    if(is_null($petType)) {
+    if($petType === null) {
       return;
     }
     if(!is_null($this->orm->pets->getByTypeAndOwner($petType, $this->user->id))) {

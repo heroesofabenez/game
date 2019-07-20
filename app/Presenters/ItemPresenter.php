@@ -22,7 +22,7 @@ final class ItemPresenter extends BasePresenter {
    */
   public function renderView(int $id): void {
     $item = $this->model->view($id);
-    if(is_null($item)) {
+    if($item === null) {
       throw new \Nette\Application\BadRequestException();
     }
     $this->template->item = $item;

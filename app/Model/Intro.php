@@ -44,7 +44,7 @@ final class Intro {
       "class" => $character->class->id,
       "part" => $part
     ]);
-    if(is_null($intro)) {
+    if($intro === null) {
       return "";
     }
     return $intro->text;
@@ -65,11 +65,11 @@ final class Intro {
    */
   public function getStartingLocation(): int {
     $classSL = $this->orm->stages->getClassStartingLocation($this->user->identity->class);
-    if(!is_null($classSL)) {
+    if($classSL !== null) {
       return $classSL->id;
     }
     $raceSL = $this->orm->stages->getRaceStartingLocation($this->user->identity->race);
-    if(!is_null($raceSL)) {
+    if($raceSL !== null) {
       return $raceSL->id;
     }
   }

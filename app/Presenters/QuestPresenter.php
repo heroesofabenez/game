@@ -37,7 +37,7 @@ final class QuestPresenter extends BasePresenter {
    */
   public function renderView(int $id): void {
     $quest = $this->model->view($id);
-    if(is_null($quest)) {
+    if($quest === null) {
       throw new \Nette\Application\BadRequestException();
     }
     $this->template->id = $quest->id;
@@ -47,18 +47,18 @@ final class QuestPresenter extends BasePresenter {
     $this->template->requirements = $this->model->getRequirements($quest);
     $this->template->rewardMoney = $quest->rewardMoney;
     $this->template->rewardXp = $quest->rewardXp;
-    $this->template->rewardItem = (!is_null($quest->rewardItem)) ? $quest->rewardItem->id : false;
+    $this->template->rewardItem = ($quest->rewardItem !== null) ? $quest->rewardItem->id : false;
     $this->template->rewardWhiteKarma = $quest->rewardWhiteKarma;
     $this->template->rewardDarkKarma = $quest->rewardDarkKarma;
-    $this->template->rewardPet = (!is_null($quest->rewardPet)) ? $quest->rewardPet->id : null;
+    $this->template->rewardPet = ($quest->rewardPet !== null) ? $quest->rewardPet->id : null;
     $this->template->followupQuests = $quest->children;
     $this->template->requiredQuest = $quest->requiredQuest;
     $this->template->level = $this->user->identity->level;
     $this->template->requiredLevel = $quest->requiredLevel;
     $this->template->class = $this->user->identity->class;
-    $this->template->requiredClass = (!is_null($quest->requiredClass)) ? $quest->requiredClass->id : null;
+    $this->template->requiredClass = ($quest->requiredClass !== null) ? $quest->requiredClass->id : null;
     $this->template->race = $this->user->identity->race;
-    $this->template->requiredRace = (!is_null($quest->requiredRace)) ? $quest->requiredRace->id : null;
+    $this->template->requiredRace = ($quest->requiredRace !== null) ? $quest->requiredRace->id : null;
   }
 }
 ?>

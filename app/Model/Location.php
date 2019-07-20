@@ -87,10 +87,10 @@ final class Location {
     if($stage->requiredLevel > $this->user->identity->level) {
       return false;
     }
-    if(!is_null($stage->requiredRace) && $stage->requiredRace->id !== $this->user->identity->race) {
+    if($stage->requiredRace !== null && $stage->requiredRace->id !== $this->user->identity->race) {
       return false;
     }
-    if(!is_null($stage->requiredClass) && $stage->requiredClass->id !== $this->user->identity->class) {
+    if($stage->requiredClass !== null && $stage->requiredClass->id !== $this->user->identity->class) {
       return false;
     }
     return true;
@@ -104,7 +104,7 @@ final class Location {
    */
   public function travelToStage(int $id): void {
     $stage = $this->getStage($id);
-    if(is_null($stage)) {
+    if($stage === null) {
       throw new StageNotFoundException();
     }
     $currentStage = $this->user->identity->stage;
@@ -132,10 +132,10 @@ final class Location {
     if($area->requiredLevel > $this->user->identity->level) {
       return false;
     }
-    if(!is_null($area->requiredRace) && $area->requiredRace->id !== $this->user->identity->race) {
+    if($area->requiredRace !== null && $area->requiredRace->id !== $this->user->identity->race) {
       return false;
     }
-    if(!is_null($area->requiredClass) && $area->requiredClass->id !== $this->user->identity->class) {
+    if($area->requiredClass !== null && $area->requiredClass->id !== $this->user->identity->class) {
       return false;
     }
     return true;
@@ -149,7 +149,7 @@ final class Location {
    */
   public function travelToArea(int $id): void {
     $area = $this->getArea($id);
-    if(is_null($area)) {
+    if($area === null) {
       throw new AreaNotFoundException();
     }
     /** @var QuestStage $currentStage */
@@ -166,7 +166,7 @@ final class Location {
         break;
       }
     }
-    if(!$foundRoute || !$this->canEnterArea($area) || is_null($area->entryStage)) {
+    if(!$foundRoute || !$this->canEnterArea($area) || $area->entryStage === null) {
       throw new CannotTravelToAreaException();
     }
     /** @var \HeroesofAbenez\Orm\Character $character */

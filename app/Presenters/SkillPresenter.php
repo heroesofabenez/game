@@ -40,7 +40,7 @@ final class SkillPresenter extends BasePresenter {
    */
   public function renderAttack(int $id): void {
     $skill = $this->model->getAttackSkill($id);
-    if(is_null($skill)) {
+    if($skill === null) {
       throw new \Nette\Application\BadRequestException();
     }
     $this->template->skill = $skill;
@@ -51,7 +51,7 @@ final class SkillPresenter extends BasePresenter {
    */
   public function renderSpecial(int $id): void {
     $skill = $this->model->getSpecialSkill($id);
-    if(is_null($skill)) {
+    if($skill === null) {
       throw new \Nette\Application\BadRequestException();
     }
     $this->template->skill = $skill;

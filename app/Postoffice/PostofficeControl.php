@@ -67,7 +67,7 @@ final class PostofficeControl extends \Nette\Application\UI\Control {
   
   public function messageStatus(int $id): int {
     $message = $this->orm->messages->getById($id);
-    if(is_null($message)) {
+    if($message === null) {
       return 0;
     }
     if(!$this->canShow($message)) {
@@ -84,7 +84,7 @@ final class PostofficeControl extends \Nette\Application\UI\Control {
    */
   public function message(int $id): Message {
     $message = $this->orm->messages->getById($id);
-    if(is_null($message)) {
+    if($message === null) {
       throw new MessageNotFoundException();
     }
     if(!$this->canShow($message)) {

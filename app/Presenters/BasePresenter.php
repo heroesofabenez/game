@@ -47,13 +47,13 @@ abstract class BasePresenter extends \Nette\Application\UI\Presenter {
     if($this instanceof CharacterPresenter && $uid === -1) {
       return;
     }
-    if($this instanceof CharacterPresenter && is_null($this->user->identity->stage)) {
+    if($this instanceof CharacterPresenter && $this->user->identity->stage === null) {
       return;
     }
     if($this instanceof CharacterPresenter && $uid > 0) {
       $this->redirect(301, "Homepage:default");
     }
-    if($this instanceof IntroPresenter && is_null($this->user->identity->stage)) {
+    if($this instanceof IntroPresenter && $this->user->identity->stage === null) {
       return;
     }
     switch($uid) {
@@ -63,7 +63,7 @@ abstract class BasePresenter extends \Nette\Application\UI\Presenter {
       case 0:
         $this->redirectUrl("http://heroesofabenez.tk/");
     }
-    if(is_null($this->user->identity->stage)) {
+    if($this->user->identity->stage === null) {
       $this->redirect(302, "Intro:default");
     }
   }

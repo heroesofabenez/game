@@ -45,14 +45,14 @@ final class Request {
           return true;
         }
         $leader = $this->orm->characters->getById($request->from->id);
-        $guild = (!is_null($leader->guild)) ? $leader->guild->id : null;
+        $guild = ($leader->guild !== null) ? $leader->guild->id : null;
         return ($this->user->identity->guild === $guild && $this->user->isAllowed("guild", "invite"));
       case RequestEntity::TYPE_GUILD_APP:
         if($request->from->id === $this->user->id) {
           return true;
         }
         $leader = $this->orm->characters->getById($request->to->id);
-        $guild = (!is_null($leader->guild)) ? $leader->guild->id : null;
+        $guild = ($leader->guild !== null) ? $leader->guild->id : null;
         return ($this->user->identity->guild === $guild && $this->user->isAllowed("guild", "invite"));
     }
     return false;
@@ -69,7 +69,7 @@ final class Request {
       return true;
     }
     if($request->type === "guild_app") {
-      $guild = (!is_null($request->to->guild)) ? $request->to->guild->id : null;
+      $guild = ($request->to->guild !== null) ? $request->to->guild->id : null;
       return ($this->user->identity->guild === $guild && $this->user->isAllowed("guild", "invite"));
     }
     return false;
@@ -83,7 +83,7 @@ final class Request {
    */
   public function show(int $id): RequestEntity {
     $request = $this->orm->requests->getById($id);
-    if(is_null($request)) {
+    if($request === null) {
       throw new RequestNotFoundException();
     }
     if(!$this->canShow($request)) {
@@ -121,12 +121,12 @@ final class Request {
         throw new NotImplementedException();
       case RequestEntity::TYPE_GUILD_APP:
         $uid = $request->from->id;
-        $gid = (!is_null($request->to->guild)) ? $request->to->guild->id : null;
+        $gid = ($request->to->guild !== null) ? $request->to->guild->id : null;
         $this->guildModel->join($uid, $gid);
         break;
       case RequestEntity::TYPE_GUILD_JOIN:
         $uid = $request->to->id;
-        $gid = (!is_null($request->from->guild)) ? $request->from->guild->id : null;
+        $gid = ($request->from->guild !== null) ? $request->from->guild->id : null;
         $this->guildModel->join($uid, $gid);
         break;
     }

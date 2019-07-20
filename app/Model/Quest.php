@@ -69,7 +69,7 @@ final class Quest {
 
   public function getCharacterQuest(int $id): CharacterQuest {
     $row = $this->orm->characterQuests->getByCharacterAndQuest($this->user->id, $id);
-    if(is_null($row)) {
+    if($row === null) {
       $row = new CharacterQuest();
       $this->orm->characterQuests->attach($row);
       $row->character = $this->user->id;
@@ -84,7 +84,7 @@ final class Quest {
    */
   public function status(int $id): int {
     $row = $this->orm->characterQuests->getByCharacterAndQuest($this->user->id, $id);
-    if(is_null($row)) {
+    if($row === null) {
       return CharacterQuest::PROGRESS_OFFERED;
     }
     return $row->progress;
@@ -109,7 +109,7 @@ final class Quest {
         return false;
       }
     }
-    if(!is_null($quest->neededItem)) {
+    if($quest->neededItem !== null) {
       if(!$this->itemModel->haveItem($quest->neededItem->id, $quest->itemAmount)) {
         return false;
       }
@@ -125,7 +125,7 @@ final class Quest {
    */
   public function finish(int $id, int $npcId): void {
     $quest = $this->view($id);
-    if(is_null($quest)) {
+    if($quest === null) {
       throw new QuestNotFoundException();
     }
     $record = $this->getCharacterQuest($id);
@@ -145,10 +145,10 @@ final class Quest {
     $record->character->money -= $quest->neededMoney;
     $record->character->money += $record->rewardMoney;
     $record->character->experience += $quest->rewardXp;
-    if(!is_null($quest->rewardItem)) {
+    if($quest->rewardItem !== null) {
       $this->itemModel->giveItem($quest->rewardItem->id);
     }
-    if(!is_null($quest->rewardPet)) {
+    if($quest->rewardPet !== null) {
       $this->petModel->givePet($quest->rewardPet->id);
     }
     $record->character->whiteKarma += $quest->rewardWhiteKarma;
@@ -160,17 +160,17 @@ final class Quest {
     if($this->user->identity->level < $quest->requiredLevel) {
       return false;
     }
-    if(!is_null($quest->requiredClass)) {
+    if($quest->requiredClass !== null) {
       if($this->user->identity->class !== $quest->requiredClass->id) {
         return false;
       }
     }
-    if(!is_null($quest->requiredRace)) {
+    if($quest->requiredRace !== null) {
       if($this->user->identity->race !== $quest->requiredRace->id) {
         return false;
       }
     }
-    if(!is_null($quest->requiredQuest)) {
+    if($quest->requiredQuest !== null) {
       if(!$this->isFinished($quest->requiredQuest->id)) {
         return false;
       }
@@ -186,7 +186,7 @@ final class Quest {
    */
   public function accept(int $id, int $npcId): void {
     $quest = $this->view($id);
-    if(is_null($quest)) {
+    if($quest === null) {
       throw new QuestNotFoundException();
     }
     $record = $this->getCharacterQuest($id);
@@ -214,7 +214,7 @@ final class Quest {
         "met" => false
       ];
     }
-    if(!is_null($quest->neededItem)) {
+    if($quest->neededItem !== null) {
       $itemName = $this->translator->translate("items.{$quest->neededItem->id}.name");
       $itemLink = $this->linkGenerator->link("Item:view", ["id" => $quest->neededItem->id]);
       $haveItem = $this->itemModel->haveItem($quest->neededItem->id, $quest->itemAmount);

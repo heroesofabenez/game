@@ -57,7 +57,7 @@ final class Profile {
   public function view(int $id): ?array {
     $return = [];
     $char = $this->orm->characters->getById($id);
-    if(is_null($char)) {
+    if($char === null) {
       return null;
     }
     $stats = [
@@ -72,12 +72,12 @@ final class Profile {
       }
     }
     $return["guild"] = "";
-    if(!is_null($char->guild)) {
+    if($char->guild !== null) {
       $return["guild"] = $char->guild->id;
-      $return["guildrank"] = (!is_null($char->guildrank)) ? $char->guildrank->id : null;
+      $return["guildrank"] = ($char->guildrank !== null) ? $char->guildrank->id : null;
     }
     $return["stage"] = $return["area"] = null;
-    if(!is_null($char->currentStage)) {
+    if($char->currentStage !== null) {
       $return["stage"] = $char->currentStage->id;
       $return["area"] = $char->currentStage->area->id;
     }
@@ -107,7 +107,7 @@ final class Profile {
   public function getAvailableSpecializations(): array {
     /** @var Character $character */
     $character = $this->orm->characters->getById($this->user->id);
-    if($character->level + 1 < CharacterBuilder::SPECIALIZATION_LEVEL || !is_null($character->specialization)) {
+    if($character->level + 1 < CharacterBuilder::SPECIALIZATION_LEVEL || $character->specialization !== null) {
       return [];
     }
     return $this->orm->specializations->findByClass($character->class)
@@ -124,15 +124,15 @@ final class Profile {
    */
   protected function checkSpecializationChoice(Character $character, int $specialization = null): void {
     if($character->level + 1 < CharacterBuilder::SPECIALIZATION_LEVEL) {
-      if(!is_null($specialization)) {
+      if($specialization !== null) {
         throw new CannotChooseSpecializationException();
       }
       return;
-    } elseif(!is_null($character->specialization) && !is_null($specialization)) {
+    } elseif($character->specialization !== null && $specialization !== null) {
       throw new SpecializationAlreadyChosenException();
-    } elseif(is_null($character->specialization) && is_null($specialization)) {
+    } elseif($character->specialization === null && $specialization === null) {
       throw new SpecializationNotChosenException();
-    } elseif(!is_null($specialization) && !in_array($specialization, $this->getAvailableSpecializations(), true)) {
+    } elseif($specialization !== null && !in_array($specialization, $this->getAvailableSpecializations(), true)) {
       throw new SpecializationNotAvailableException();
     }
   }
@@ -153,10 +153,10 @@ final class Profile {
       throw new NotEnoughExperiencesException();
     }
     $this->checkSpecializationChoice($character, $specialization);
-    if(!is_null($specialization)) {
+    if($specialization !== null) {
       $character->specialization = $specialization;
     }
-    if(!is_null($character->specialization)) {
+    if($character->specialization !== null) {
       $class = $character->specialization;
     } else {
       $class = $character->class;

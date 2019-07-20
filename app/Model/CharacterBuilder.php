@@ -38,11 +38,11 @@ final class CharacterBuilder {
 
   protected function checkSpecialization(int $level, CharacterClass $class, CharacterSpecialization $specialization = null): void {
     if($level < static::SPECIALIZATION_LEVEL) {
-      if(!is_null($specialization)) {
+      if($specialization !== null) {
         throw new CannotChooseSpecializationException();
       }
       return;
-    } elseif(is_null($specialization)) {
+    } elseif($specialization === null) {
       throw new SpecializationNotChosenException();
     } elseif($specialization->class->id !== $class->id) {
       throw new SpecializationNotAvailableException();
@@ -52,7 +52,7 @@ final class CharacterBuilder {
   public function create(CharacterClass $class, CharacterRace $race, int $level = 1, CharacterSpecialization $specialization = null): array {
     $this->checkSpecialization($level, $class, $specialization);
     $specializationLevel = 0;
-    if(!is_null($specialization)) {
+    if($specialization !== null) {
       $specializationLevel = $level - static::SPECIALIZATION_LEVEL + 1;
       $level = static::SPECIALIZATION_LEVEL - 1;
     }
@@ -62,7 +62,7 @@ final class CharacterBuilder {
     $data["constitution"] = $this->calculateStat("constitution", $class, $race, $level);
     $data["intelligence"] = $this->calculateStat("intelligence", $class, $race, $level);
     $data["charisma"] = $this->calculateStat("charisma", $class, $race, $level);
-    if(!is_null($specialization)) {
+    if($specialization !== null) {
       $data["strength"] += $this->calculateSpecialistStat("strength", $specialization, $specializationLevel);
       $data["dexterity"] += $this->calculateSpecialistStat("dexterity", $specialization, $specializationLevel);
       $data["constitution"] += $this->calculateSpecialistStat("constitution", $specialization, $specializationLevel);

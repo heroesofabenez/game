@@ -41,7 +41,7 @@ final class ProfilePresenter extends BasePresenter {
    */
   public function renderView(int $id): void {
     $data = $this->model->view($id);
-    if(is_null($data)) {
+    if($data === null) {
       throw new \Nette\Application\BadRequestException();
     }
     foreach($data as $key => $value) {

@@ -31,7 +31,7 @@ final class CharactersRankingControl extends RankingControl {
     /** @var \HeroesofAbenez\Orm\Character $character */
     foreach($characters as $character) {
       $guildName = "";
-      if(!is_null($character->guild)) {
+      if($character->guild !== null) {
         $guildName = $character->guild->name;
       }
       $chars[] = (object) [
