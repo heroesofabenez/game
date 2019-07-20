@@ -51,20 +51,20 @@ abstract class BasePresenter extends \Nette\Application\UI\Presenter {
       return;
     }
     if($this instanceof CharacterPresenter && $uid > 0) {
-      $this->redirect(301, "Homepage:default");
+      $this->redirectPermanent("Homepage:default");
     }
     if($this instanceof IntroPresenter && $this->user->identity->stage === null) {
       return;
     }
     switch($uid) {
       case -1:
-        $this->redirect(302, "Character:create");
+        $this->redirect("Character:create");
         break;
       case 0:
         $this->redirectUrl("http://heroesofabenez.tk/");
     }
     if($this->user->identity->stage === null) {
-      $this->redirect(302, "Intro:default");
+      $this->redirect("Intro:default");
     }
   }
   
