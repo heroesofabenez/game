@@ -30,17 +30,17 @@ final class TavernPresenter extends BasePresenter {
     if($this->user->identity->guild === 0) {
       $this->template->canChat = false;
     }
-    $this->template->title = "Guild chat";
+    $this->template->title = $this->translator->translate("texts.tavern.guildChat");
     $this->template->chat = "guildChat";
   }
   
   public function actionLocal(): void {
-    $this->template->title = "Local chat";
+    $this->template->title = $this->translator->translate("texts.tavern.localChat");
     $this->template->chat = "localChat";
   }
   
   public function actionGlobal(): void {
-    $this->template->title = "Global chat";
+    $this->template->title = $this->translator->translate("texts.tavern.globalChat");
     $this->template->chat = "globalChat";
   }
   

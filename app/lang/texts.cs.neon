@@ -36,8 +36,11 @@ tavern:
     title: "Krčma"
     rooms: "Místnosti:"
     localRoom: "Místní"
+    localChat: "Místní chat"
     guildRoom: "Cechovní"
+    guildChat: "Cechovní chat"
     globalRoom: "Globální"
+    globalChat: "Globální chat"
     cannotUseRoom: "Nemůžeš použít tuto místnost."
 guild:
     title: "Cech"

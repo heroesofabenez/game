@@ -36,8 +36,11 @@ tavern:
     title: "Tavern"
     rooms: "Rooms:"
     localRoom: "Local"
+    localChat: "Local chat"
     guildRoom: "Guild"
+    guildChat: "Guild chat"
     globalRoom: "Global"
+    globalChat: "Global chat"
     cannotUseRoom: "You can't use this room."
 guild:
     title: "Guild"
