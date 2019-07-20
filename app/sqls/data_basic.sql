@@ -39,7 +39,7 @@ INSERT INTO `guild_privileges` (`id`, `action`, `rank`) VALUES
 (4,	'rename',	6),
 (5,	'kick',	6),
 (6,	'dissolve',	7),
-(7,	'changeRankNames',	7);
+(7,	'changeRankNames',	6);
 
 INSERT INTO `guild_ranks` (`id`, `name`) VALUES
 (1,	'recruit'),
