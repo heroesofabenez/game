@@ -63,7 +63,7 @@ guild:
     kick: "Vyhodit"
     renameTitle: "Přejmenovat cech"
     applicationsTitle: "Přihlášky do cechu"
-    noApplications: "Žádné nevyřízený přihlášky"
+    noApplications: "Žádné nevyřízené přihlášky"
     wantToJoin: "se chce připojit k tvému cechu."
     createTitle: "Vytvořit cech"
     guilds: "Cechy"
