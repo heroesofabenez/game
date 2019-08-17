@@ -72,12 +72,12 @@
             "source": {
                 "type": "git",
                 "url": "https://gitlab.com/heroesofabenez/combat.git",
-                "reference": "2201363f205938558e600fe423e77ff53fd33a75"
+                "reference": "171c3690e23a85719cd2feb31b6c85447d834c8c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://gitlab.com/api/v4/projects/heroesofabenez%2Fcombat/repository/archive.zip?sha=2201363f205938558e600fe423e77ff53fd33a75",
-                "reference": "2201363f205938558e600fe423e77ff53fd33a75",
+                "url": "https://gitlab.com/api/v4/projects/heroesofabenez%2Fcombat/repository/archive.zip?sha=171c3690e23a85719cd2feb31b6c85447d834c8c",
+                "reference": "171c3690e23a85719cd2feb31b6c85447d834c8c",
                 "shasum": ""
             },
             "require": {
@@ -122,7 +122,7 @@
             "keywords": [
                 "combat"
             ],
-            "time": "2019-07-21T12:27:34+00:00"
+            "time": "2019-08-10T16:06:15+00:00"
         },
         {
             "name": "latte/latte",
@@ -886,12 +886,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/nette/robot-loader.git",
-                "reference": "a49e8e83e4eb762d1c0f6b7c13059cf97f493aaf"
+                "reference": "9ae6fc252631d07189cf74e61a8888429855ea4b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nette/robot-loader/zipball/a49e8e83e4eb762d1c0f6b7c13059cf97f493aaf",
-                "reference": "a49e8e83e4eb762d1c0f6b7c13059cf97f493aaf",
+                "url": "https://api.github.com/repos/nette/robot-loader/zipball/9ae6fc252631d07189cf74e61a8888429855ea4b",
+                "reference": "9ae6fc252631d07189cf74e61a8888429855ea4b",
                 "shasum": ""
             },
             "require": {
@@ -940,7 +940,7 @@
                 "nette",
                 "trait"
             ],
-            "time": "2019-03-31T19:12:28+00:00"
+            "time": "2019-08-11T13:44:02+00:00"
         },
         {
             "name": "nette/routing",
@@ -2038,16 +2038,16 @@
         },
         {
             "name": "nette/tester",
-            "version": "v2.2.0",
+            "version": "v2.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nette/tester.git",
-                "reference": "899c70c53b40dfe4a214e568babb617a9c454071"
+                "reference": "60c71a62c2bd18903729251c0a8483c6c3397891"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nette/tester/zipball/899c70c53b40dfe4a214e568babb617a9c454071",
-                "reference": "899c70c53b40dfe4a214e568babb617a9c454071",
+                "url": "https://api.github.com/repos/nette/tester/zipball/60c71a62c2bd18903729251c0a8483c6c3397891",
+                "reference": "60c71a62c2bd18903729251c0a8483c6c3397891",
                 "shasum": ""
             },
             "require": {
@@ -2059,7 +2059,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.3-dev"
+                    "dev-master": "2.4-dev"
                 }
             },
             "autoload": {
@@ -2083,7 +2083,7 @@
                     "homepage": "https://nette.org/contributors"
                 }
             ],
-            "description": "Nette Tester: enjoyable unit testing in PHP with code coverage reporter. ????",
+            "description": "Nette Tester: enjoyable unit testing in PHP with code coverage reporter. 🍏🍏🍎🍏",
             "homepage": "https://tester.nette.org",
             "keywords": [
                 "Xdebug",
@@ -2097,7 +2097,7 @@
                 "testing",
                 "unit"
             ],
-            "time": "2019-03-11T08:54:30+00:00"
+            "time": "2019-08-11T17:02:47+00:00"
         },
         {
             "name": "nexendrie/code-quality",
@@ -2105,12 +2105,12 @@
             "source": {
                 "type": "git",
                 "url": "https://gitlab.com/nexendrie/code-quality.git",
-                "reference": "dbe1eda527b9550887e8731b9206cf869cadae79"
+                "reference": "64ca706070df64f7a3d6f68ebe37375d9c11c636"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://gitlab.com/api/v4/projects/nexendrie%2Fcode-quality/repository/archive.zip?sha=dbe1eda527b9550887e8731b9206cf869cadae79",
-                "reference": "dbe1eda527b9550887e8731b9206cf869cadae79",
+                "url": "https://gitlab.com/api/v4/projects/nexendrie%2Fcode-quality/repository/archive.zip?sha=64ca706070df64f7a3d6f68ebe37375d9c11c636",
+                "reference": "64ca706070df64f7a3d6f68ebe37375d9c11c636",
                 "shasum": ""
             },
             "require": {
@@ -2139,7 +2139,7 @@
                 "quality",
                 "testing"
             ],
-            "time": "2019-05-19T10:13:17+00:00"
+            "time": "2019-08-17T11:25:37+00:00"
         },
         {
             "name": "nexendrie/testbench",
@@ -2219,16 +2219,16 @@
         },
         {
             "name": "nikic/php-parser",
-            "version": "v4.2.2",
+            "version": "v4.2.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nikic/PHP-Parser.git",
-                "reference": "1bd73cc04c3843ad8d6b0bfc0956026a151fc420"
+                "reference": "e612609022e935f3d0337c1295176505b41188c8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/1bd73cc04c3843ad8d6b0bfc0956026a151fc420",
-                "reference": "1bd73cc04c3843ad8d6b0bfc0956026a151fc420",
+                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/e612609022e935f3d0337c1295176505b41188c8",
+                "reference": "e612609022e935f3d0337c1295176505b41188c8",
                 "shasum": ""
             },
             "require": {
@@ -2236,7 +2236,7 @@
                 "php": ">=7.0"
             },
             "require-dev": {
-                "phpunit/phpunit": "^6.5 || ^7.0"
+                "phpunit/phpunit": "^6.5 || ^7.0 || ^8.0"
             },
             "bin": [
                 "bin/php-parse"
@@ -2266,7 +2266,7 @@
                 "parser",
                 "php"
             ],
-            "time": "2019-05-25T20:07:01+00:00"
+            "time": "2019-08-12T20:17:41+00:00"
         },
         {
             "name": "ocramius/package-versions",
@@ -2368,16 +2368,16 @@
         },
         {
             "name": "phpstan/phpstan",
-            "version": "0.11.12",
+            "version": "0.11.13",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan.git",
-                "reference": "56b3eb2a371b60537fd20794e24af9e7e8ed4e30"
+                "reference": "493d12d4a98ba0d2a0b8e576d80e65c8e8068d08"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/56b3eb2a371b60537fd20794e24af9e7e8ed4e30",
-                "reference": "56b3eb2a371b60537fd20794e24af9e7e8ed4e30",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/493d12d4a98ba0d2a0b8e576d80e65c8e8068d08",
+                "reference": "493d12d4a98ba0d2a0b8e576d80e65c8e8068d08",
                 "shasum": ""
             },
             "require": {
@@ -2388,7 +2388,7 @@
                 "nette/robot-loader": "^3.0.1",
                 "nette/schema": "^1.0",
                 "nette/utils": "^2.4.5 || ^3.0",
-                "nikic/php-parser": "^4.0.2",
+                "nikic/php-parser": "^4.2.3",
                 "php": "~7.1",
                 "phpstan/phpdoc-parser": "^0.3.5",
                 "symfony/console": "~3.2 || ~4.0",
@@ -2398,7 +2398,7 @@
                 "symfony/console": "3.4.16 || 4.1.5"
             },
             "require-dev": {
-                "brianium/paratest": "^2.0",
+                "brianium/paratest": "^2.0 || ^3.0",
                 "consistence/coding-standard": "^3.5",
                 "dealerdirect/phpcodesniffer-composer-installer": "^0.4.4",
                 "ext-intl": "*",
@@ -2413,7 +2413,7 @@
                 "phpstan/phpstan-php-parser": "^0.11",
                 "phpstan/phpstan-phpunit": "^0.11",
                 "phpstan/phpstan-strict-rules": "^0.11",
-                "phpunit/phpunit": "^7.0",
+                "phpunit/phpunit": "^7.5.14 || ^8.0",
                 "slevomat/coding-standard": "^4.7.2",
                 "squizlabs/php_codesniffer": "^3.3.2"
             },
@@ -2439,7 +2439,7 @@
                 "MIT"
             ],
             "description": "PHPStan - PHP Static Analysis Tool",
-            "time": "2019-07-08T06:55:18+00:00"
+            "time": "2019-08-13T13:05:56+00:00"
         },
         {
             "name": "phpstan/phpstan-nette",
