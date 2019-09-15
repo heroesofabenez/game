@@ -3,15 +3,15 @@ image: nexendrie/php:7.3
 stages:
   - test
 
-cache:
-  paths:
-    - vendor/
-
 .test_job: &test_job
   stage: test
 
   services:
     - mariadb
+
+  cache:
+    paths:
+      - vendor/
 
   variables:
     MYSQL_DATABASE: heroesofabenez
