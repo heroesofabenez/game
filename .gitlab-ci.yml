@@ -5,20 +5,20 @@ stages:
 
 cache:
   paths:
-  - vendor/
+    - vendor/
 
-.job_template: &test_job
+.test_job: &test_job
   stage: test
 
   services:
-  - mariadb
+    - mariadb
 
   variables:
     MYSQL_DATABASE: heroesofabenez
     MYSQL_ROOT_PASSWORD: root
 
   script:
-  - phing test-ci
+    - phing test-ci
 
   retry: 2
 
@@ -28,17 +28,17 @@ test:default:
 test:cc:
   <<: *test_job
   script:
-  - phing test-ci-coverage
+    - phing test-ci-coverage
   coverage: '/(\d+\%) covered/'
   artifacts:
     name: "Code coverage"
     paths:
-    - coverage.html
+      - coverage.html
 
 test:css:
   stage: test
   image: node:lts-buster
   before_script:
-  - npm install -g csslint
+    - npm install -g csslint
   script:
-  - csslint styles
+    - csslint styles
