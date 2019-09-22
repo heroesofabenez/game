@@ -40,8 +40,6 @@ test:cc:
 
 test:css:
   stage: test
-  image: node:lts-buster
-  before_script:
-    - npm install -g csslint
+  image: nexendrie/nodejs
   script:
     - csslint styles
