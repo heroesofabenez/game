@@ -1250,29 +1250,33 @@
         },
         {
             "name": "nexendrie/menu",
-            "version": "2.2.0",
+            "version": "2.2.1",
             "source": {
                 "type": "git",
                 "url": "https://gitlab.com/nexendrie/menu.git",
-                "reference": "2efb78c8e72cdea60872fe6f1ea2a44be68987be"
+                "reference": "9e95303e662e1649c00ab13382aeeb892d5607b0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://gitlab.com/api/v4/projects/nexendrie%2Fmenu/repository/archive.zip?sha=2efb78c8e72cdea60872fe6f1ea2a44be68987be",
-                "reference": "2efb78c8e72cdea60872fe6f1ea2a44be68987be",
+                "url": "https://gitlab.com/api/v4/projects/nexendrie%2Fmenu/repository/archive.zip?sha=9e95303e662e1649c00ab13382aeeb892d5607b0",
+                "reference": "9e95303e662e1649c00ab13382aeeb892d5607b0",
                 "shasum": ""
             },
             "require": {
-                "latte/latte": "^3.0",
+                "latte/latte": "^2.5 || ^3.0",
                 "nette/application": "^3.0",
                 "nette/di": "^3.0",
                 "nette/utils": "^3.0",
                 "nexendrie/utils": "^1.6.1",
                 "php": ">=7.2.0"
             },
+            "conflict": {
+                "latte/latte": "2.5.2"
+            },
             "require-dev": {
                 "nexendrie/code-quality": "dev-master",
-                "nexendrie/site-generator": "^1.0"
+                "nexendrie/site-generator": "^0.5",
+                "phpstan/phpstan": "^0.11.6"
             },
             "suggest": {
                 "nette/security": "To use menu item conditions related to user"
@@ -1307,7 +1311,7 @@
                 "menu",
                 "nette"
             ],
-            "time": "2019-05-05T12:15:27+00:00"
+            "time": "2019-09-22T13:37:16+00:00"
         },
         {
             "name": "nexendrie/translation",
