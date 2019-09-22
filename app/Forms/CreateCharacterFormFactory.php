@@ -24,7 +24,7 @@ final class CreateCharacterFormFactory extends BaseFormFactory {
       ->addRule(Form::MAX_LENGTH, "forms.createCharacter.nameField.error", 30);
     $form->addRadioList("gender", "forms.createCharacter.genderRadio.label", [1 => "male", 2 => "female"])
       ->setRequired("forms.createCharacter.genderRadio.error")
-      ->getSeparatorPrototype()->setName(null);
+      ->getSeparatorPrototype()->setName('');
     foreach($races as $value) {
       $racesList[$value->id] = "races.{$value->id}.name";
     }
