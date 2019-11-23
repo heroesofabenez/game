@@ -77,11 +77,10 @@ abstract class BasePresenter extends \Nette\Application\UI\Presenter {
   }
 
   /**
-   * @param string $message
-   * @param string $type
+   * @param mixed $message
    */
-  public function flashMessage($message, $type = "info"): \stdClass {
-    $message = $this->translator->translate($message);
+  public function flashMessage($message, string $type = "info"): \stdClass {
+    $message = $this->translator->translate((string) $message);
     return parent::flashMessage($message, $type);
   }
 }
