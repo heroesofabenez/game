@@ -83,5 +83,9 @@ abstract class BasePresenter extends \Nette\Application\UI\Presenter {
     $message = $this->translator->translate((string) $message);
     return parent::flashMessage($message, $type);
   }
+
+  protected function reloadIdentity(): void {
+    $this->user->logout();
+  }
 }
 ?>

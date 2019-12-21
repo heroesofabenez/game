@@ -108,7 +108,7 @@ final class JournalPresenter extends BasePresenter {
     $this->profileModel->user = $this->user;
     try {
       $this->profileModel->levelUp($specialization);
-      $this->user->logout();
+      $this->reloadIdentity();
     } catch(NotEnoughExperiencesException $e) {
       $this->flashMessage("errors.journal.cannotLevelUp");
     } catch(CannotChooseSpecializationException $e) {

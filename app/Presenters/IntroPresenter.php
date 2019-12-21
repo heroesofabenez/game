@@ -20,7 +20,7 @@ final class IntroPresenter extends BasePresenter {
   }
   
   protected function startup(): void {
-    $this->user->logout();
+    $this->reloadIdentity();
     parent::startup();
     $this->part = $this->template->part = $this->model->getIntroPosition();
   }
@@ -40,7 +40,7 @@ final class IntroPresenter extends BasePresenter {
   
   public function actionEnd(): void {
     $this->model->endIntro();
-    $this->user->logout();
+    $this->reloadIdentity();
     $this->redirect("Homepage:");
   }
 }

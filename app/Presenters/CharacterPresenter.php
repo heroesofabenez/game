@@ -65,7 +65,7 @@ final class CharacterPresenter extends BasePresenter {
       if($data === null) {
         $this->forward("Character:exists");
       }
-      $this->user->logout();
+      $this->reloadIdentity();
       $this->forward("Character:created", ["data" => serialize($data)]);
     };
     return $form;

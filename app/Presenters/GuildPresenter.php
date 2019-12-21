@@ -137,7 +137,7 @@ final class GuildPresenter extends BasePresenter {
   protected function createComponentCreateGuildForm(): Form {
     $form = $this->createGuildFormFactory->create();
     $form->onSuccess[] = function() {
-      $this->user->logout();
+      $this->reloadIdentity();
       $this->flashMessage("messages.guild.created");
       $this->redirect("Guild:");
     };
@@ -177,7 +177,7 @@ final class GuildPresenter extends BasePresenter {
     try {
       $this->model->leave();
       $this->flashMessage("messages.guild.left");
-      $this->user->logout();
+      $this->reloadIdentity();
       $this->forward("default");
     } catch(NotInGuildException $e) {
       $this->flashMessage("errors.guild.notInGuild");
@@ -224,7 +224,7 @@ final class GuildPresenter extends BasePresenter {
     $form = $this->dissolveGuildFormFactory->create();
     $form->onSuccess[] = function() {
       $this->flashMessage("messages.guild.dissolved");
-      $this->user->logout();
+      $this->reloadIdentity();
       $this->redirect("Guild:noguild");
     };
     return $form;
