@@ -2,7 +2,7 @@
 {block title}{_"texts.item.title"}{/block}
 {block content}
   <h1>{_"texts.item.title"} {_"items.$item->id.name"}</h1>
-  <p>{$item->slot|firstUpper}{if $item->type}-{$item->type}{/if}</p>
+  <p>{_"texts.itemSlot.$item->slot"|firstUpper}{if $item->type}-{_"texts.weaponType.$item->type"}{/if}</p>
   <p>{_"items.$item->id.description"}</p>
   <p>{_"texts.item.strength"}: {$item->strength}, {_"texts.item.durability"}: {$item->durability}</p>
   <p>{_"texts.item.requires"}: {_"texts.item.level"} <span class="{if $level >= $item->requiredLevel}green{else}red{/if}">{$item->requiredLevel}</span>{if $item->requiredClass !== null}, {_"texts.item.class"} <span class="{if $class === $item->requiredClass->id}green{else}red{/if}">{_"classes.{$item->requiredClass->id}.name"}</span>{/if}{if $item->requiredSpecialization !== null}, {_"texts.item.specialization"} <span class="{if $specialization === $item->requiredSpecialization->id}green{else}red{/if}">{_"subclasses.{$item->requiredSpecialization->id}.name"}</span>{/if}</p>
