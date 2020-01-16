@@ -193,7 +193,7 @@ npc:
     whatToDo: "Co chceš udělat?"
     talk: "Mluvit"
     askForQuest: "Poptat se po úkolech"
-    trade: "Ochodovat"
+    trade: "Obchodovat"
     repair: "Opravit věci"
     fight: "Bojovat"
     walkAway: "Odejít"
