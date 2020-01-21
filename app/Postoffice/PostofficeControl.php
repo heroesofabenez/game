@@ -105,9 +105,10 @@ final class PostofficeControl extends \Nette\Application\UI\Control {
   }
   
   public function getRecipients(): array {
-    return $this->orm->characters->findAll()
-      ->orderBy("id")
-      ->fetchPairs("id", "name");
+    return $this->orm->characters->findBy(
+        ["id!=" => [$this->user->id]]
+    )->orderBy("id")
+    ->fetchPairs("id", "name");    
   }
   
   public function sendMessage(array $data): void {
