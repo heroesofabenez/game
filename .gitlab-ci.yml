@@ -1,5 +1,7 @@
 include:
-  - template: Dependency-Scanning.gitlab-ci.yml
+  - template: Dependency-Scanning.gitlab-ci.yml 
+  - template: SAST.gitlab-ci.yml
+
 
 image: nexendrie/php:7.3
 
@@ -36,7 +38,14 @@ install:
     - composer install --prefer-dist --no-progress --no-suggest --no-interaction
   cache:
     <<: *default_cache
-    policy: pull-push
+    policy: pull-push   
+
+sast:
+  variables:
+    SAST_DEFAULT_ANALYZERS: "eslint,phpcs-security-audit,pmd-apex,secrets"
+  cache:
+    <<: *default_cache
+
   
 test:default:
   <<: *test_job
