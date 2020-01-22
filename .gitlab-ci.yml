@@ -4,17 +4,22 @@ include:
 image: nexendrie/php:7.3
 
 stages:
-  - test
+  - install
+  - test   
+
+.default_cache: &default_cache
+  policy: pull
+  paths:
+    - vendor/
 
 .test_job: &test_job
   stage: test
 
   services:
     - mariadb
-
+               
   cache:
-    paths:
-      - vendor/
+    <<: *default_cache
 
   variables:
     MYSQL_DATABASE: heroesofabenez
@@ -25,6 +30,14 @@ stages:
 
   retry: 2
 
+install:
+  stage: install
+  script:
+    - composer install --prefer-dist --no-progress --no-suggest --no-interaction
+  cache:
+    <<: *default_cache
+    policy: pull-push
+  
 test:default:
   <<: *test_job
 
