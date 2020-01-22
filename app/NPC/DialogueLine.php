@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\NPC;
 
+use Nexendrie\Utils\Constants;
+
 /**
  * One line of dialogue with a npc
  *
@@ -13,9 +15,12 @@ namespace HeroesofAbenez\NPC;
  */
 final class DialogueLine {
   use \Nette\SmartObject;
-  
+
+  private const SPEAKER_PLAYER = "player";
+  private const SPEAKER_NPC = "npc";
+
   /** @var string */
-  protected $speaker = "player";
+  protected $speaker = self::SPEAKER_PLAYER;
   /** @var string */
   protected $text;
   /** @var string[] */
@@ -23,7 +28,7 @@ final class DialogueLine {
   
   public function __construct(string $speaker, string $text, array $names) {
     $speaker = strtolower($speaker);
-    if($speaker === "player" || $speaker === "npc") {
+    if(in_array($speaker, Constants::getConstantsValues(static::class, "SPEAKER_"), true)) {
       $this->speaker = $speaker;
     }
     $this->text = $text;
