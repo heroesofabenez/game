@@ -72,12 +72,12 @@
             "source": {
                 "type": "git",
                 "url": "https://gitlab.com/heroesofabenez/combat.git",
-                "reference": "0b81b485f62e8e792f108d21f7ed773fb76d2364"
+                "reference": "5a9e9724de53fa16b3e3f9a8864f6beb9c22e742"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://gitlab.com/api/v4/projects/heroesofabenez%2Fcombat/repository/archive.zip?sha=0b81b485f62e8e792f108d21f7ed773fb76d2364",
-                "reference": "0b81b485f62e8e792f108d21f7ed773fb76d2364",
+                "url": "https://gitlab.com/api/v4/projects/heroesofabenez%2Fcombat/repository/archive.zip?sha=5a9e9724de53fa16b3e3f9a8864f6beb9c22e742",
+                "reference": "5a9e9724de53fa16b3e3f9a8864f6beb9c22e742",
                 "shasum": ""
             },
             "require": {
@@ -86,7 +86,7 @@
                 "nexendrie/translation": "^1.1.1 || ^2.0.1",
                 "nexendrie/utils": "^1.6.1",
                 "php": ">=7.2.0",
-                "symfony/options-resolver": "^4.0"
+                "symfony/options-resolver": "^4.0 || ^5.0"
             },
             "require-dev": {
                 "nette/di": "^2.4.10 || ^3.0",
@@ -122,7 +122,7 @@
             "keywords": [
                 "combat"
             ],
-            "time": "2019-12-05T15:16:24+00:00"
+            "time": "2020-02-01T13:51:21+00:00"
         },
         {
             "name": "latte/latte",
@@ -130,12 +130,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/nette/latte.git",
-                "reference": "3f199f3882a69e820e36cfc202d4bd864ebc0ec7"
+                "reference": "3d14ad7c995c32601691d40c32e3d598b7814a91"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nette/latte/zipball/3f199f3882a69e820e36cfc202d4bd864ebc0ec7",
-                "reference": "3f199f3882a69e820e36cfc202d4bd864ebc0ec7",
+                "url": "https://api.github.com/repos/nette/latte/zipball/3d14ad7c995c32601691d40c32e3d598b7814a91",
+                "reference": "3d14ad7c995c32601691d40c32e3d598b7814a91",
                 "shasum": ""
             },
             "require": {
@@ -147,6 +147,7 @@
                 "nette/application": "<3.0"
             },
             "require-dev": {
+                "nette/php-generator": "^3.3.4",
                 "nette/tester": "~2.0",
                 "nette/utils": "^3.0",
                 "phpstan/phpstan": "^0.12",
@@ -155,6 +156,7 @@
             "suggest": {
                 "ext-fileinfo": "to use filter |datastream",
                 "ext-mbstring": "to use filters like lower, upper, capitalize, ...",
+                "nette/php-generator": "to use tag {templatePrint}",
                 "nette/utils": "to use filter |webalize"
             },
             "type": "library",
@@ -196,20 +198,20 @@
                 "template",
                 "twig"
             ],
-            "time": "2020-01-18T17:34:52+00:00"
+            "time": "2020-01-28T17:46:26+00:00"
         },
         {
             "name": "nette/application",
-            "version": "v3.0.3",
+            "version": "v3.0.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nette/application.git",
-                "reference": "aa975f06c6f303512de6399b7320d48750b96832"
+                "reference": "da24ae52e65fe52fa6d26f2181a56ec48958ccb0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nette/application/zipball/aa975f06c6f303512de6399b7320d48750b96832",
-                "reference": "aa975f06c6f303512de6399b7320d48750b96832",
+                "url": "https://api.github.com/repos/nette/application/zipball/da24ae52e65fe52fa6d26f2181a56ec48958ccb0",
+                "reference": "da24ae52e65fe52fa6d26f2181a56ec48958ccb0",
                 "shasum": ""
             },
             "require": {
@@ -220,19 +222,19 @@
                 "php": ">=7.1"
             },
             "conflict": {
-                "latte/latte": "<2.4",
+                "latte/latte": "<2.6",
                 "nette/di": "<3.0-stable",
                 "nette/forms": "<3.0",
                 "tracy/tracy": "<2.5"
             },
             "require-dev": {
-                "latte/latte": "^2.5.1",
+                "latte/latte": "^2.6",
                 "mockery/mockery": "^1.0",
                 "nette/di": "^v3.0",
                 "nette/forms": "^3.0",
                 "nette/robot-loader": "^3.2",
                 "nette/security": "^3.0",
-                "nette/tester": "^2.0.1",
+                "nette/tester": "^2.3.1",
                 "phpstan/phpstan-nette": "^0.12",
                 "tracy/tracy": "^2.6"
             },
@@ -249,16 +251,13 @@
             "autoload": {
                 "classmap": [
                     "src/"
-                ],
-                "files": [
-                    "src/compatibility.php"
                 ]
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "BSD-3-Clause",
-                "GPL-2.0",
-                "GPL-3.0"
+                "GPL-2.0-only",
+                "GPL-3.0-only"
             ],
             "authors": [
                 {
@@ -284,7 +283,7 @@
                 "routing",
                 "seo"
             ],
-            "time": "2020-01-05T22:31:46+00:00"
+            "time": "2020-01-22T21:39:02+00:00"
         },
         {
             "name": "nette/bootstrap",
@@ -1578,7 +1577,7 @@
         },
         {
             "name": "symfony/options-resolver",
-            "version": "v4.4.3",
+            "version": "v4.4.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/options-resolver.git",
@@ -2667,16 +2666,16 @@
         },
         {
             "name": "squizlabs/php_codesniffer",
-            "version": "3.5.3",
+            "version": "3.5.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/squizlabs/PHP_CodeSniffer.git",
-                "reference": "557a1fc7ac702c66b0bbfe16ab3d55839ef724cb"
+                "reference": "dceec07328401de6211037abbb18bda423677e26"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/squizlabs/PHP_CodeSniffer/zipball/557a1fc7ac702c66b0bbfe16ab3d55839ef724cb",
-                "reference": "557a1fc7ac702c66b0bbfe16ab3d55839ef724cb",
+                "url": "https://api.github.com/repos/squizlabs/PHP_CodeSniffer/zipball/dceec07328401de6211037abbb18bda423677e26",
+                "reference": "dceec07328401de6211037abbb18bda423677e26",
                 "shasum": ""
             },
             "require": {
@@ -2714,20 +2713,20 @@
                 "phpcs",
                 "standards"
             ],
-            "time": "2019-12-04T04:46:47+00:00"
+            "time": "2020-01-30T22:20:29+00:00"
         },
         {
             "name": "symfony/console",
-            "version": "v4.4.3",
+            "version": "v4.4.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/console.git",
-                "reference": "e9ee09d087e2c88eaf6e5fc0f5c574f64d100e4f"
+                "reference": "f512001679f37e6a042b51897ed24a2f05eba656"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/console/zipball/e9ee09d087e2c88eaf6e5fc0f5c574f64d100e4f",
-                "reference": "e9ee09d087e2c88eaf6e5fc0f5c574f64d100e4f",
+                "url": "https://api.github.com/repos/symfony/console/zipball/f512001679f37e6a042b51897ed24a2f05eba656",
+                "reference": "f512001679f37e6a042b51897ed24a2f05eba656",
                 "shasum": ""
             },
             "require": {
@@ -2790,11 +2789,11 @@
             ],
             "description": "Symfony Console Component",
             "homepage": "https://symfony.com",
-            "time": "2020-01-10T21:54:01+00:00"
+            "time": "2020-01-25T12:44:29+00:00"
         },
         {
             "name": "symfony/finder",
-            "version": "v4.4.3",
+            "version": "v4.4.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/finder.git",
