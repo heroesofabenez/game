@@ -60,7 +60,7 @@ final class CharacterPresenter extends BasePresenter {
    */
   protected function createComponentCreateCharacterForm(): Form {
     $form = $this->createCharacterFormFactory->create($this->races, $this->classes);
-    $form->onSuccess[] = function(Form $form, array $values) {
+    $form->onSuccess[] = function(Form $form, array $values): void {
       $data = $this->userManager->create($values);
       if($data === null) {
         $this->forward("Character:exists");

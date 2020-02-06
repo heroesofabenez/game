@@ -94,7 +94,7 @@ final class NPCDialogueControl extends \Nette\Application\UI\Control {
     $mood = $this->getNpcMood();
     $texts = $this->loader->getTexts()["dialogues"][$mood];
     $texts = $texts[rand(0, count($texts) - 1)];
-    array_walk($texts, function(&$value) {
+    array_walk($texts, function(&$value): void {
       $speaker = Strings::before($value, ": ");
       $message = Strings::after($value, ": ");
       $value = [

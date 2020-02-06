@@ -69,7 +69,7 @@ final class CharacterBuilder {
       $data["intelligence"] += $this->calculateSpecialistStat("intelligence", $specialization, $specializationLevel);
       $data["charisma"] += $this->calculateSpecialistStat("charisma", $specialization, $specializationLevel);
     }
-    array_walk($data, function(&$value) {
+    array_walk($data, function(&$value): void {
       $value = (int) $value;
     });
     return $data;

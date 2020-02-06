@@ -31,7 +31,7 @@ final class Permissions {
    */
   public function getRoles(): array {
     /** @var string[] $roles */
-    $roles = $this->cache->load("roles", function() {
+    $roles = $this->cache->load("roles", function(): array {
       $rows = $this->orm->guildRanks->findAll()->orderBy("id");
       return $rows->fetchPairs("id", "name");
     });
@@ -55,7 +55,7 @@ final class Permissions {
    */
   public function getPermissions(): array {
     $roles = $this->getRoles();
-    $permissions = $this->cache->load("permissions", function() use($roles) {
+    $permissions = $this->cache->load("permissions", function() use($roles): array {
       $permissions = [];
       $privileges = $this->orm->guildPrivileges->findAll();
       /** @var GuildPrivilege $privilege */

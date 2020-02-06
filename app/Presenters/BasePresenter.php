@@ -63,7 +63,6 @@ abstract class BasePresenter extends \Nette\Application\UI\Presenter {
     switch($uid) {
       case -1:
         $this->redirect("Character:create");
-        break;
       case 0:
         $this->redirectUrl("http://heroesofabenez.tk/");
     }

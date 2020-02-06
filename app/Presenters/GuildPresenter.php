@@ -136,7 +136,7 @@ final class GuildPresenter extends BasePresenter {
 
   protected function createComponentCreateGuildForm(): Form {
     $form = $this->createGuildFormFactory->create();
-    $form->onSuccess[] = function() {
+    $form->onSuccess[] = function(): void {
       $this->reloadIdentity();
       $this->flashMessage("messages.guild.created");
       $this->redirect("Guild:");
@@ -222,7 +222,7 @@ final class GuildPresenter extends BasePresenter {
 
   protected function createComponentDissolveGuildForm(): Form {
     $form = $this->dissolveGuildFormFactory->create();
-    $form->onSuccess[] = function() {
+    $form->onSuccess[] = function(): void {
       $this->flashMessage("messages.guild.dissolved");
       $this->reloadIdentity();
       $this->redirect("Guild:noguild");
@@ -232,7 +232,7 @@ final class GuildPresenter extends BasePresenter {
 
   protected function createComponentRenameGuildForm(): Form {
     $form = $this->renameGuildFormFactory->create();
-    $form->onSuccess[] = function() {
+    $form->onSuccess[] = function(): void {
       $this->flashMessage("messages.guild.renamed");
       $this->redirect("Guild:");
     };
@@ -313,7 +313,7 @@ final class GuildPresenter extends BasePresenter {
 
   protected function createComponentGuildDescriptionForm(): Form {
     $form = $this->guildDescriptionFormFactory->create();
-    $form->onSuccess[] = function() {
+    $form->onSuccess[] = function(): void {
       $this->flashMessage("messages.guild.descriptionChanged");
       $this->redirect("Guild:");
     };
@@ -343,7 +343,7 @@ final class GuildPresenter extends BasePresenter {
   
   protected function createComponentCustomGuildRankNamesForm(): Form {
     $form = $this->customGuildRankNamesFormFactory->create();
-    $form->onSuccess[] = function() {
+    $form->onSuccess[] = function(): void {
       $this->flashMessage("messages.guild.customRankNamesSet");
       $this->redirect("Guild:");
     };
@@ -357,7 +357,7 @@ final class GuildPresenter extends BasePresenter {
 
   protected function createComponentDonateToGuildForm(): Form {
     $form = $this->donateToGuildFormFactory->create();
-    $form->onSuccess[] = function() {
+    $form->onSuccess[] = function(): void {
       $this->flashMessage("messages.guild.donationDone");
       $this->redirect("Guild:");
     };
