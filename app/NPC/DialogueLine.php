@@ -35,12 +35,12 @@ final class DialogueLine {
     $this->names = $names;
   }
   
-  public function getText(): string {
+  protected function getText(): string {
     $replace = ["#npcName#", "#playerName#"];
     return str_replace($replace, $this->names, $this->text);
   }
   
-  public function getSpeaker(): string {
+  protected function getSpeaker(): string {
     if($this->speaker === "npc") {
       return $this->names[0];
     }
@@ -50,7 +50,7 @@ final class DialogueLine {
   /**
    * @return string[]
    */
-  public function getNames(): array {
+  protected function getNames(): array {
     return $this->names;
   }
 }

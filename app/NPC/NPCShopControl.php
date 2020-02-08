@@ -34,7 +34,7 @@ final class NPCShopControl extends \Nette\Application\UI\Control {
     $this->translator = $translator;
   }
   
-  public function setNpc(Npc $npc): void {
+  protected function setNpc(Npc $npc): void {
     $this->npc = $npc;
   }
   

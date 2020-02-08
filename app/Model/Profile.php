@@ -29,7 +29,7 @@ final class Profile {
     $this->orm = $orm;
   }
   
-  public function setUser(\Nette\Security\User $user): void {
+  protected function setUser(\Nette\Security\User $user): void {
     $this->user = $user;
   }
   

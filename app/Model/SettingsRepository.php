@@ -19,7 +19,7 @@ final class SettingsRepository {
     $this->settings = $settings;
   }
   
-  public function getSettings(): array {
+  protected function getSettings(): array {
     return $this->settings;
   }
 }

@@ -29,14 +29,14 @@ final class NPCDialogueControl extends \Nette\Application\UI\Control {
     $this->loader = $loader;
   }
   
-  public function setNpc(Npc $npc): void {
+  protected function setNpc(Npc $npc): void {
     $this->npc = $npc;
   }
   
   /**
    * @return string[]
    */
-  public function getNames() {
+  protected function getNames() {
     $npcName = "";
     if($this->npc !== null) {
       $npcName = $this->npc->name;

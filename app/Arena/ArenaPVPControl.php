@@ -18,7 +18,7 @@ final class ArenaPVPControl extends ArenaControl {
   /**
    * @return ICollection|\HeroesofAbenez\Orm\Character[]
    */
-  public function getOpponents(): ICollection {
+  protected function getOpponents(): ICollection {
     $level = $this->user->identity->level;
     return $this->orm->characters->findBy([
       "currentStage" => $this->user->identity->stage,
