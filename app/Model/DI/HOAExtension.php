@@ -24,7 +24,6 @@ final class HOAExtension extends \Nette\DI\CompilerExtension {
   }
 
   /**
-   * @throws \Nette\Utils\AssertionException
    * @throws \RuntimeException
    */
   public function loadConfiguration(): void {
