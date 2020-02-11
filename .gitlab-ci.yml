@@ -41,7 +41,7 @@ install:
     <<: *default_cache
     policy: pull-push   
    
-license_management:
+license_scanning:
   cache:
     <<: *default_cache
   variables:
