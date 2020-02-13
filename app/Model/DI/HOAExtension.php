@@ -114,7 +114,7 @@ final class HOAExtension extends \Nette\DI\CompilerExtension {
       ->addSetup('$service->onCombatEnd[] = ?', [["@" . $this->prefix("combat.helper"), "wearOutEquipment"]]);
     $builder->addDefinition($this->prefix("combat.logger"))
       ->setType(HeroesofAbenez\Combat\CombatLogger::class)
-      ->addSetup("setTitle", ["Heroes of Abenez -"]);
+      ->addSetup('$service->title = ?', ["Heroes of Abenez -"]);
     $builder->addDefinition($this->prefix("combat.logRender"))
       ->setType(HeroesofAbenez\Combat\TextCombatLogRender::class);
     $builder->addDefinition($this->prefix("combat.logManager"))
