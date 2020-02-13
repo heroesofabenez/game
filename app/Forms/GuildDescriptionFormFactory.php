@@ -12,10 +12,8 @@ use HeroesofAbenez\Model\GuildNotFoundException;
  * @author Jakub Konečný
  */
 final class GuildDescriptionFormFactory extends BaseFormFactory {
-  /** @var \HeroesofAbenez\Model\Guild */
-  protected $model;
-  /** @var \Nette\Security\User */
-  protected $user;
+  protected \HeroesofAbenez\Model\Guild $model;
+  protected \Nette\Security\User $user;
   
   public function __construct(\Nette\Localization\ITranslator $translator, \HeroesofAbenez\Model\Guild $model, \Nette\Security\User $user) {
     $this->model = $model;

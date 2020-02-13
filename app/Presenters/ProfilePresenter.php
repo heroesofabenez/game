@@ -12,12 +12,9 @@ use HeroesofAbenez\Model\FriendshipRequestAlreadySentException;
  * @author Jakub Konečný
  */
 final class ProfilePresenter extends BasePresenter {
-  /** @var \HeroesofAbenez\Model\Profile */
-  protected $model;
-  /** @var \HeroesofAbenez\Model\Guild */
-  protected $guildModel;
-  /** @var \HeroesofAbenez\Model\Friends */
-  protected $friendsModel;
+  protected \HeroesofAbenez\Model\Profile $model;
+  protected \HeroesofAbenez\Model\Guild $guildModel;
+  protected \HeroesofAbenez\Model\Friends $friendsModel;
 
   /**
    * ProfilePresenter constructor.

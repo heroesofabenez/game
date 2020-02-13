@@ -19,12 +19,10 @@ final class DialogueLine {
   private const SPEAKER_PLAYER = "player";
   private const SPEAKER_NPC = "npc";
 
-  /** @var string */
-  protected $speaker = self::SPEAKER_PLAYER;
-  /** @var string */
-  protected $text;
+  protected string $speaker = self::SPEAKER_PLAYER;
+  protected string $text;
   /** @var string[] */
-  protected $names = [];
+  protected array $names = [];
   
   public function __construct(string $speaker, string $text, array $names) {
     $speaker = strtolower($speaker);

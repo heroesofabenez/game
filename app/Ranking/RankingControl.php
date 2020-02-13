@@ -11,16 +11,11 @@ namespace HeroesofAbenez\Ranking;
  * @property-write \Nette\Utils\Paginator $paginator
  */
 abstract class RankingControl extends \Nette\Application\UI\Control {
-  /** @var string */
-  protected $name;
-  /** @var array */
-  protected $cols = [];
-  /** @var string */
-  protected $lastCol;
-  /** @var string */
-  protected $presenterName;
-  /** @var \Nette\Utils\Paginator|null */
-  protected $paginator = null;
+  protected string $name;
+  protected array $cols = [];
+  protected string $lastCol;
+  protected string $presenterName;
+  protected ?\Nette\Utils\Paginator $paginator = null;
   
   public function __construct(string $name, array $cols, string $presenter, string $lastCol) {
     $this->name = $name;

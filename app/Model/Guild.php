@@ -17,15 +17,11 @@ use Nextras\Orm\Collection\ICollection;
    */
 final class Guild {
   use \Nette\SmartObject;
-  
-  /** @var ORM */
-  protected $orm;
-  /** @var \Nette\Security\User */
-  protected $user;
-  /** @var Profile */
-  protected $profileModel;
-  /** @var Permissions */
-  protected $permissionsModel;
+
+  protected ORM $orm;
+  protected \Nette\Security\User $user;
+  protected Profile $profileModel;
+  protected Permissions $permissionsModel;
   
   public function __construct(ORM $orm, \Nette\Security\User $user, Profile $profileModel, Permissions $permissionsModel) {
     $this->orm = $orm;

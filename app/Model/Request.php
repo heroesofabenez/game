@@ -16,14 +16,10 @@ use HeroesofAbenez\Orm\Model as ORM;
 final class Request {
   use \Nette\SmartObject;
 
-  /** @var \Nette\Security\User */
-  protected $user;
-  /** @var ORM */
-  protected $orm;
-  /** @var Profile */
-  protected $profileModel;
-  /** @var Guild */
-  protected $guildModel;
+  protected \Nette\Security\User $user;
+  protected ORM $orm;
+  protected Profile $profileModel;
+  protected Guild $guildModel;
   
   public function __construct(\Nette\Security\User $user, ORM $orm, Profile $profileModel, Guild $guildModel) {
     $this->user = $user;

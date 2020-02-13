@@ -17,12 +17,9 @@ use HeroesofAbenez\Model\CannotLearnSkillException;
  * @author Jakub Konečný
  */
 final class TrainingPresenter extends BasePresenter {
-  /** @var \HeroesofAbenez\Model\Profile */
-  protected $model;
-  /** @var \HeroesofAbenez\Model\Skills */
-  protected $skillsModel;
-  /** @var \HeroesofAbenez\Model\CombatHelper */
-  protected $combatHelper;
+  protected \HeroesofAbenez\Model\Profile $model;
+  protected \HeroesofAbenez\Model\Skills $skillsModel;
+  protected \HeroesofAbenez\Model\CombatHelper $combatHelper;
   
   public function __construct(\HeroesofAbenez\Model\Profile $model, \HeroesofAbenez\Model\Skills $skillsModel, \Nette\Security\User $user, \HeroesofAbenez\Model\CombatHelper $combatHelper) {
     parent::__construct();

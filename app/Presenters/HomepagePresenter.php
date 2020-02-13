@@ -11,8 +11,7 @@ use HeroesofAbenez\Model;
    * @author Jakub Konečný
    */
 final class HomepagePresenter extends BasePresenter {
-  /** @var \HeroesofAbenez\Model\Location */
-  protected $model;
+  protected Model\Location $model;
   
   public function __construct(Model\Location $locationModel, \Nette\Security\User $user, Model\NPC $npcModel) {
     $this->model = $locationModel;

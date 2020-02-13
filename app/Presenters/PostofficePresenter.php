@@ -13,8 +13,7 @@ use HeroesofAbenez\Postoffice\PostofficeControl;
  * @author Jakub Konečný
  */
 final class PostofficePresenter extends BasePresenter {
-  /** @var IPostofficeControlFactory */
-  protected $poFactory;
+  protected IPostofficeControlFactory $poFactory;
   
   public function injectPoFactory(IPostofficeControlFactory $factory): void {
     $this->poFactory = $factory;

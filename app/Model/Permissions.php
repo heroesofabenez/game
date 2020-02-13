@@ -13,11 +13,9 @@ use HeroesofAbenez\Orm\GuildPrivilege;
  */
 final class Permissions {
   use \Nette\SmartObject;
-  
-  /** @var ORM */
-  protected $orm;
-  /** @var \Nette\Caching\Cache */
-  protected $cache;
+
+  protected ORM $orm;
+  protected \Nette\Caching\Cache $cache;
   
   public function __construct(ORM $orm, \Nette\Caching\Cache $cache) {
     $this->orm = $orm;

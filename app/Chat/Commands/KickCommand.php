@@ -17,11 +17,9 @@ use Nette\Localization\ITranslator;
  * @author Jakub Konečný
  */
 final class KickCommand extends \HeroesofAbenez\Chat\ChatCommand {
-  /** @var  Guild */
-  protected $model;
-  /** @var ITranslator */
-  protected $translator;
-  
+  protected Guild $model;
+  protected ITranslator $translator;
+
   public function __construct(Guild $model, ITranslator $translator) {
     $this->model = $model;
     $this->translator = $translator;

@@ -14,12 +14,9 @@ use HeroesofAbenez\Orm\Message;
  * @property-read \Nette\Bridges\ApplicationLatte\Template $template
  */
 final class PostofficeControl extends \Nette\Application\UI\Control {
-  /** @var ORM */
-  protected $orm;
-  /** @var \Nette\Security\User */
-  protected $user;
-  /** @var \HeroesofAbenez\Model\Profile */
-  protected $profileModel;
+  protected ORM $orm;
+  protected \Nette\Security\User $user;
+  protected \HeroesofAbenez\Model\Profile $profileModel;
   
   public function __construct(ORM $orm, \Nette\Security\User $user, \HeroesofAbenez\Model\Profile $profileModel) {
     $this->orm = $orm;

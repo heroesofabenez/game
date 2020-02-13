@@ -15,8 +15,7 @@ use HeroesofAbenez\Model\RequestAlreadyHandledException;
  * @author Jakub Konečný
  */
 final class RequestPresenter extends BasePresenter {
-  /** @var \HeroesofAbenez\Model\Request */
-  protected $model;
+  protected \HeroesofAbenez\Model\Request $model;
   
   public function __construct(\HeroesofAbenez\Model\Request $model) {
     parent::__construct();

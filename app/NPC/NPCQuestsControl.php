@@ -25,16 +25,11 @@ use HeroesofAbenez\Model\QuestNotAvailableException;
  * @property-write Npc $npc
  */
 final class NPCQuestsControl extends \Nette\Application\UI\Control {
-  /** @var \HeroesofAbenez\Model\Quest */
-  protected $questModel;
-  /** @var ORM */
-  protected $orm;
-  /** @var \Nette\Security\User */
-  protected $user;
-  /** @var ITranslator */
-  protected $translator;
-  /** @var Npc */
-  protected $npc;
+  protected Model\Quest $questModel;
+  protected ORM $orm;
+  protected \Nette\Security\User $user;
+  protected ITranslator $translator;
+  protected Npc $npc;
 
   public function __construct(Model\Quest $questModel, ORM $orm, \Nette\Security\User $user, ITranslator $translator) {
     $this->questModel = $questModel;

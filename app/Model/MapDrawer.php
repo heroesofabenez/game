@@ -15,11 +15,9 @@ use HeroesofAbenez\Orm\RoutesStage;
  */
 final class MapDrawer {
   use \Nette\SmartObject;
-  
-  /** @var Location */
-  protected $locationModel;
-  /** @var \Nette\Security\User */
-  protected $user;
+
+  protected Location $locationModel;
+  protected \Nette\Security\User $user;
   
   public function __construct(Location $locationModel, \Nette\Security\User $user) {
     $this->locationModel = $locationModel;

@@ -29,22 +29,14 @@ use HeroesofAbenez\Forms\DissolveGuildFormFactory;
    * @author Jakub Konečný
    */
 final class GuildPresenter extends BasePresenter {
-  /** @var \HeroesofAbenez\Model\Guild */
-  protected $model;
-  /** @var \HeroesofAbenez\Model\Permissions */
-  protected $permissionsModel;
-  /** @var CreateGuildFormFactory */
-  protected $createGuildFormFactory;
-  /** @var DissolveGuildFormFactory */
-  protected $dissolveGuildFormFactory;
-  /** @var RenameGuildFormFactory */
-  protected $renameGuildFormFactory;
-  /** @var GuildDescriptionFormFactory */
-  protected $guildDescriptionFormFactory;
-  /** @var CustomGuildRankNamesFormFactory */
-  protected $customGuildRankNamesFormFactory;
-  /** @var DonateToGuildFormFactory */
-  protected $donateToGuildFormFactory;
+  protected \HeroesofAbenez\Model\Guild $model;
+  protected \HeroesofAbenez\Model\Permissions $permissionsModel;
+  protected CreateGuildFormFactory $createGuildFormFactory;
+  protected DissolveGuildFormFactory $dissolveGuildFormFactory;
+  protected RenameGuildFormFactory $renameGuildFormFactory;
+  protected GuildDescriptionFormFactory $guildDescriptionFormFactory;
+  protected CustomGuildRankNamesFormFactory $customGuildRankNamesFormFactory;
+  protected DonateToGuildFormFactory $donateToGuildFormFactory;
   
   public function __construct(\HeroesofAbenez\Model\Guild $model, \HeroesofAbenez\Model\Permissions $permissionsModel) {
     parent::__construct();

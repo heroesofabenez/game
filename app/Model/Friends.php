@@ -15,10 +15,8 @@ use Nextras\Orm\Collection\ICollection;
 final class Friends {
   use \Nette\SmartObject;
 
-  /** @var ORM */
-  protected $orm;
-  /** @var \Nette\Security\User */
-  protected $user;
+  protected ORM $orm;
+  protected \Nette\Security\User $user;
 
   public function __construct(ORM $orm, \Nette\Security\User $user) {
     $this->orm = $orm;

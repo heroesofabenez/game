@@ -9,8 +9,7 @@ namespace HeroesofAbenez\Presenters;
  * @author Jakub Konečný
  */
 final class MapPresenter extends BasePresenter {
-  /** @var \HeroesofAbenez\Model\Map */
-  protected $model;
+  protected \HeroesofAbenez\Model\Map $model;
   
   public function __construct(\HeroesofAbenez\Model\Map $model) {
     parent::__construct();

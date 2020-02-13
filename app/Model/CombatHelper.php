@@ -18,17 +18,12 @@ use HeroesofAbenez\Combat\Equipment;
  */
 final class CombatHelper {
   use \Nette\SmartObject;
-  
-  /** @var Profile */
-  protected $profileModel;
-  /** @var Item */
-  protected $itemModel;
-  /** @var Skills */
-  protected $skillsModel;
-  /** @var CharacterBuilder */
-  protected $cb;
-  /** @var ORM */
-  protected $orm;
+
+  protected Profile $profileModel;
+  protected Item $itemModel;
+  protected Skills $skillsModel;
+  protected CharacterBuilder $cb;
+  protected ORM $orm;
   
   public function __construct(Profile $profileModel, Item $itemModel, Skills $skillsModel, ORM $orm, CharacterBuilder $cb) {
     $this->profileModel = $profileModel;

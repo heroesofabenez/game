@@ -11,8 +11,7 @@ use Tracy\ILogger;
  * @author Jakub Konečný
  */
 final class ErrorPresenter extends BasePresenter {
-  /** @var ILogger|null */
-  private $logger;
+  private ?ILogger $logger;
   
   public function __construct(ILogger $logger = null) {
     parent::__construct();

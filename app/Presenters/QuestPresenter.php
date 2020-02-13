@@ -9,12 +9,9 @@ namespace HeroesofAbenez\Presenters;
  * @author Jakub Konečný
  */
 final class QuestPresenter extends BasePresenter {
-  /** @var \HeroesofAbenez\Model\Quest */
-  protected $model;
-  /** @var \HeroesofAbenez\Model\Item */
-  protected $itemModel;
-  /** @var \HeroesofAbenez\Model\NPC */
-  protected $npcModel;
+  protected \HeroesofAbenez\Model\Quest $model;
+  protected \HeroesofAbenez\Model\Item $itemModel;
+  protected \HeroesofAbenez\Model\NPC $npcModel;
   
   public function __construct(\HeroesofAbenez\Model\Quest $model, \HeroesofAbenez\Model\Item $itemModel, \HeroesofAbenez\Model\NPC $npcModel) {
     parent::__construct();

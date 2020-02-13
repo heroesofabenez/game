@@ -16,16 +16,11 @@ use HeroesofAbenez\Orm\Model as ORM;
  * @property-write Npc $npc
  */
 final class NPCShopControl extends \Nette\Application\UI\Control {
-  /** @var ORM */
-  protected $orm;
-  /** @var \HeroesofAbenez\Model\Item */
-  protected $itemModel;
-  /** @var Npc */
-  protected $npc;
-  /** @var \Nette\Security\User */
-  protected $user;
-  /** @var ITranslator */
-  protected $translator;
+  protected ORM $orm;
+  protected \HeroesofAbenez\Model\Item $itemModel;
+  protected Npc $npc;
+  protected \Nette\Security\User $user;
+  protected ITranslator $translator;
   
   public function __construct(ORM $orm, \HeroesofAbenez\Model\Item $itemModel, \Nette\Security\User $user, ITranslator $translator) {
     $this->orm = $orm;

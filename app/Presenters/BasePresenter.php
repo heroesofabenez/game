@@ -12,12 +12,9 @@ use Nexendrie\Menu\MenuControl;
    * @author Jakub Konečný
    */
 abstract class BasePresenter extends \Nette\Application\UI\Presenter {
-  /** @var \Nette\Localization\ITranslator */
-  protected $translator;
-  /** @var \HeroesofAbenez\Model\SettingsRepository */
-  protected $sr;
-  /** @var IMenuControlFactory */
-  protected $menuFactory;
+  protected \Nette\Localization\ITranslator $translator;
+  protected \HeroesofAbenez\Model\SettingsRepository $sr;
+  protected IMenuControlFactory $menuFactory;
   
   public function injectTranslator(\Nette\Localization\ITranslator $translator): void {
     $this->translator = $translator;

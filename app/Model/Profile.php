@@ -17,13 +17,11 @@ use HeroesofAbenez\Orm\Character;
    */
 final class Profile {
   use \Nette\SmartObject;
-  
-  /** @var ORM */
-  protected $orm;
-  /** @var \Nette\Security\User */
-  protected $user;
+
+  protected ORM $orm;
+  protected \Nette\Security\User $user;
   /** @var string[] */
-  private $stats = ["strength", "dexterity", "constitution", "intelligence", "charisma"];
+  private array $stats = ["strength", "dexterity", "constitution", "intelligence", "charisma"];
   
   public function __construct(ORM $orm) {
     $this->orm = $orm;

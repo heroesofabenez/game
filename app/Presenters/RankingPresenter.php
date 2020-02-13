@@ -12,12 +12,9 @@ use HeroesofAbenez\Ranking;
  */
 final class RankingPresenter extends BasePresenter {
   protected const ITEMS_PER_PAGE = 15;
-  /** @var \Nette\Utils\Paginator */
-  protected $paginator;
-  /** @var Ranking\ICharactersRankingControlFactory */
-  protected $charactersRankingFactory;
-  /** @var Ranking\IGuildsRankingControlFactory */
-  protected $guildRankingFactory;
+  protected \Nette\Utils\Paginator $paginator;
+  protected Ranking\ICharactersRankingControlFactory $charactersRankingFactory;
+  protected Ranking\IGuildsRankingControlFactory $guildRankingFactory;
 
   public function injectCharactersRankingFactory(Ranking\ICharactersRankingControlFactory $charactersRankingFactory): void {
     $this->charactersRankingFactory = $charactersRankingFactory;

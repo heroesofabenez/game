@@ -12,8 +12,7 @@ use Nette\Localization\ITranslator;
  * @author Jakub Konečný
  */
 abstract class BaseFormFactory {
-  /** @var ITranslator */
-  protected $translator;
+  protected ITranslator $translator;
   
   public function __construct(ITranslator $translator) {
     $this->translator = $translator;

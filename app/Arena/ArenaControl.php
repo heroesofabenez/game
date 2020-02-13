@@ -22,21 +22,14 @@ use Nextras\Orm\Collection\ICollection;
  */
 abstract class ArenaControl extends \Nette\Application\UI\Control {
   protected const DAILY_FIGHTS_LIMIT = 10;
-  
-  /** @var User */
-  protected $user;
-  /** @var CombatHelper */
-  protected $combatHelper;
-  /** @var CombatBase */
-  protected $combat;
-  /** @var CombatLogManager */
-  protected $log;
-  /** @var ORM */
-  protected $orm;
-  /** @var ITranslator */
-  protected $translator;
-  /** @var string */
-  protected $arena;
+
+  protected User $user;
+  protected CombatHelper $combatHelper;
+  protected CombatBase $combat;
+  protected CombatLogManager $log;
+  protected ORM $orm;
+  protected ITranslator $translator;
+  protected string $arena;
   
   public function __construct(User $user, CombatHelper $combatHelper, CombatBase $combat, CombatLogManager $log, ORM $orm, ITranslator $translator) {
     $this->user = $user;

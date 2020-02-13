@@ -14,7 +14,7 @@ use HeroesofAbenez\Orm\PveArenaOpponent;
  * @author Jakub Konečný
  */
 final class ArenaPVEControl extends ArenaControl {
-  protected $arena = "champions";
+  protected string $arena = "champions";
   
   /**
    * @return ICollection|PveArenaOpponent[]

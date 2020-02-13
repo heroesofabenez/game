@@ -17,12 +17,9 @@ use HeroesofAbenez\Utils\Karma;
  * @property-write Npc $npc
  */
 final class NPCDialogueControl extends \Nette\Application\UI\Control {
-  /** @var \Nette\Security\User */
-  protected $user;
-  /** @var ILoader */
-  protected $loader;
-  /** @var Npc|null */
-  protected $npc = null;
+  protected \Nette\Security\User $user;
+  protected ILoader $loader;
+  protected ?Npc $npc = null;
   
   public function __construct(\Nette\Security\User $user, ILoader $loader) {
     $this->user = $user;

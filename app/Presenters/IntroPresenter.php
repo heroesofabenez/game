@@ -9,10 +9,8 @@ namespace HeroesofAbenez\Presenters;
  * @author Jakub Konečný
  */
 final class IntroPresenter extends BasePresenter {
-  /** @var int In which part of intro we are */
-  protected $part;
-  /** @var \HeroesofAbenez\Model\Intro */
-  protected $model;
+  protected int $part;
+  protected \HeroesofAbenez\Model\Intro $model;
   
   public function __construct(\HeroesofAbenez\Model\Intro $model) {
     parent::__construct();

@@ -15,17 +15,12 @@ use Nette\Security\IIdentity;
  */
 final class UserManager implements \Nette\Security\IAuthenticator {
   use \Nette\SmartObject;
-  
-  /** @var ORM */
-  protected $orm;
-  /** @var Permissions */
-  protected $permissionsModel;
-  /** @var Profile */
-  protected $profileModel;
-  /** @var IUserToCharacterMapper */
-  protected $userToCharacterMapper;
-  /** @var CharacterBuilder */
-  protected $cb;
+
+  protected ORM $orm;
+  protected Permissions $permissionsModel;
+  protected Profile $profileModel;
+  protected IUserToCharacterMapper $userToCharacterMapper;
+  protected CharacterBuilder $cb;
   
   public function __construct(ORM $orm, Permissions $permissionsModel, Profile $profileModel, IUserToCharacterMapper $userToCharacterMapper, CharacterBuilder $cb) {
     $this->orm = $orm;

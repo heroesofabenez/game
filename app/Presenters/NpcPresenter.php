@@ -21,20 +21,13 @@ use HeroesofAbenez\Model\ItemNotDamagedException;
  * @author Jakub Konečný
  */
 final class NpcPresenter extends BasePresenter {
-  /** @var \HeroesofAbenez\Model\NPC */
-  protected $model;
-  /** @var \HeroesofAbenez\Model\Journal */
-  protected $journalModel;
-  /** @var \HeroesofAbenez\Model\Item */
-  protected $itemModel;
-  /** @var Npc */
-  protected $npc;
-  /** @var INPCDialogueControlFactory */
-  protected $npcDialogueFactory;
-  /** @var INPCQuestsControlFactory */
-  protected $npcQuestsFactory;
-  /** @var INPCShopControlFactory */
-  protected $npcShopFactory;
+  protected \HeroesofAbenez\Model\NPC $model;
+  protected \HeroesofAbenez\Model\Journal $journalModel;
+  protected \HeroesofAbenez\Model\Item $itemModel;
+  protected Npc $npc;
+  protected INPCDialogueControlFactory $npcDialogueFactory;
+  protected INPCQuestsControlFactory $npcQuestsFactory;
+  protected INPCShopControlFactory $npcShopFactory;
 
   public function __construct(\HeroesofAbenez\Model\NPC $model, \HeroesofAbenez\Model\Journal $journalModel, \HeroesofAbenez\Model\Item $itemModel) {
     parent::__construct();

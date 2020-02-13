@@ -12,11 +12,9 @@ use HeroesofAbenez\Orm\Model as ORM;
  */
 final class Intro {
   use \Nette\SmartObject;
-  
-  /** @var \Nette\Security\User */
-  protected $user;
-  /** @var ORM */
-  protected $orm;
+
+  protected \Nette\Security\User $user;
+  protected ORM $orm;
   
   public function __construct(\Nette\Security\User $user, ORM $orm) {
     $this->user = $user;
