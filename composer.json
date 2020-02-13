@@ -22,14 +22,15 @@
         "nette/forms": "^3.0",
         "nette/security": "^3.0",
         "nette/utils": "^3.0",
-        "tracy/tracy": "^3.0",
-        "latte/latte": "^3.0",
+        "nette/finder": "2.5.2 as 3.0.0",
+        "tracy/tracy": "^2.7.2",
+        "latte/latte": "^2.6",
         "nexendrie/translation": "^2.0.1",
         "nexendrie/menu": "^2.2",
         "nexendrie/utils": "^1.6.1",
         "nextras/orm": "^3.1",
         "symfony/options-resolver": "^4.0",
-        "heroesofabenez/chat": "^1.2",
+        "heroesofabenez/chat": "^2.0.1",
         "heroesofabenez/combat": "^1.0"
     },
     "require-dev": {
