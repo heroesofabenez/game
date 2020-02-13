@@ -18,9 +18,8 @@ final class CharacterClassesRepository extends \Nextras\Orm\Repository\Repositor
   
   /**
    * @param int $id
-   * @return CharacterClass|null
    */
-  public function getById($id): ?\Nextras\Orm\Entity\IEntity {
+  public function getById($id): ?CharacterClass {
     return $this->getBy([
       "id" => $id
     ]);

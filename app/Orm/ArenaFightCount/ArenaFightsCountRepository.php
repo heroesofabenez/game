@@ -18,9 +18,8 @@ final class ArenaFightsCountRepository extends \Nextras\Orm\Repository\Repositor
   
   /**
    * @param int $id
-   * @return ArenaFightCount|null
    */
-  public function getById($id): ?\Nextras\Orm\Entity\IEntity {
+  public function getById($id): ?ArenaFightCount {
     return $this->getBy([
       "id" => $id
     ]);

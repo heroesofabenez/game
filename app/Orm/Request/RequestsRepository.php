@@ -20,9 +20,8 @@ final class RequestsRepository extends \Nextras\Orm\Repository\Repository {
   
   /**
    * @param int $id
-   * @return Request|null
    */
-  public function getById($id): ?\Nextras\Orm\Entity\IEntity {
+  public function getById($id): ?Request {
     return $this->getBy([
       "id" => $id
     ]);

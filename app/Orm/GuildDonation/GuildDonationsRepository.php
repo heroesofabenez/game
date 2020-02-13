@@ -18,9 +18,8 @@ final class GuildDonationsRepository extends \Nextras\Orm\Repository\Repository 
   
   /**
    * @param int $id
-   * @return GuildDonation|null
    */
-  public function getById($id): ?\Nextras\Orm\Entity\IEntity {
+  public function getById($id): ?GuildDonation {
     return $this->getBy([
       "id" => $id
     ]);

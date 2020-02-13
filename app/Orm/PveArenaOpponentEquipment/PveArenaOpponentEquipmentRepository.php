@@ -18,9 +18,8 @@ final class PveArenaOpponentEquipmentRepository extends \Nextras\Orm\Repository\
   
   /**
    * @param int $id
-   * @return PveArenaOpponentEquipment
    */
-  public function getById($id): ?\Nextras\Orm\Entity\IEntity {
+  public function getById($id): ?PveArenaOpponentEquipment {
     return $this->getBy([
       "id" => $id
     ]);

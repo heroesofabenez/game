@@ -20,9 +20,8 @@ final class NpcsRepository extends \Nextras\Orm\Repository\Repository {
   
   /**
    * @param int $id
-   * @return Npc|null
    */
-  public function getById($id): ?\Nextras\Orm\Entity\IEntity {
+  public function getById($id): ?Npc {
     return $this->getBy([
       "id" => $id
     ]);
