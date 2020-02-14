@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "11f299f393a4f1cc93f655e60a134b2a",
+    "content-hash": "b67abad47e99c0b070409054096735ca",
     "packages": [
         {
             "name": "heroesofabenez/chat",
@@ -1324,32 +1324,32 @@
         },
         {
             "name": "nexendrie/translation",
-            "version": "2.0.1",
+            "version": "2.1.0",
             "source": {
                 "type": "git",
                 "url": "https://gitlab.com/nexendrie/translation.git",
-                "reference": "c483a44d5318798b12ff5549a26ce8290d1ad014"
+                "reference": "4bb56ed007375f08438cb60a97eb9cb6926c41b2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://gitlab.com/api/v4/projects/nexendrie%2Ftranslation/repository/archive.zip?sha=c483a44d5318798b12ff5549a26ce8290d1ad014",
-                "reference": "c483a44d5318798b12ff5549a26ce8290d1ad014",
+                "url": "https://gitlab.com/api/v4/projects/nexendrie%2Ftranslation/repository/archive.zip?sha=4bb56ed007375f08438cb60a97eb9cb6926c41b2",
+                "reference": "4bb56ed007375f08438cb60a97eb9cb6926c41b2",
                 "shasum": ""
             },
             "require": {
-                "nette/finder": "^3.0",
+                "nette/finder": "^2.5.2 ||  ^3.0",
                 "nette/utils": "^3.0",
                 "nexendrie/utils": "^1.6.1",
                 "php": ">=7.2.0"
             },
             "require-dev": {
                 "latte/latte": "^3.0",
-                "nette/di": "^3.0",
+                "nette/di": "^3.0.2",
                 "nette/neon": "^3.0",
                 "nexendrie/code-quality": "dev-master",
-                "nexendrie/site-generator": "^1.0",
-                "symfony/yaml": "^3.4 || ^4.0",
-                "tracy/tracy": "^3.0"
+                "nexendrie/site-generator": "^0.6.2",
+                "symfony/yaml": "^4.0 || ^5.0",
+                "tracy/tracy": "^2.6 || ^3.0"
             },
             "suggest": {
                 "ext-json": "To use JsonLoader",
@@ -1363,7 +1363,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.0.x-dev"
+                    "dev-master": "2.1.x-dev"
                 }
             },
             "autoload": {
@@ -1394,7 +1394,7 @@
                 "translation",
                 "yaml"
             ],
-            "time": "2019-05-05T15:14:57+00:00"
+            "time": "2020-02-14T12:58:18+00:00"
         },
         {
             "name": "nexendrie/utils",
@@ -2344,14 +2344,7 @@
             "time": "2020-01-30T22:20:29+00:00"
         }
     ],
-    "aliases": [
-        {
-            "alias": "3.0.0",
-            "alias_normalized": "3.0.0.0",
-            "version": "2.5.2.0",
-            "package": "nette/finder"
-        }
-    ],
+    "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
         "nexendrie/code-quality": 20
