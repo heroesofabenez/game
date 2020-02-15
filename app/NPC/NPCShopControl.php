@@ -13,12 +13,11 @@ use HeroesofAbenez\Orm\Model as ORM;
  *
  * @author Jakub Konečný
  * @property-read \Nette\Bridges\ApplicationLatte\Template $template
- * @property-write Npc $npc
  */
 final class NPCShopControl extends \Nette\Application\UI\Control {
   protected ORM $orm;
   protected \HeroesofAbenez\Model\Item $itemModel;
-  protected Npc $npc;
+  public Npc $npc;
   protected \Nette\Security\User $user;
   protected ITranslator $translator;
   
@@ -27,10 +26,6 @@ final class NPCShopControl extends \Nette\Application\UI\Control {
     $this->itemModel = $itemModel;
     $this->user = $user;
     $this->translator = $translator;
-  }
-  
-  protected function setNpc(Npc $npc): void {
-    $this->npc = $npc;
   }
   
   /**

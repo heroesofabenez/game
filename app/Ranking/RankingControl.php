@@ -8,24 +8,19 @@ namespace HeroesofAbenez\Ranking;
  *
  * @author Jakub Konečný
  * @property-read \Nette\Bridges\ApplicationLatte\Template $template
- * @property-write \Nette\Utils\Paginator $paginator
  */
 abstract class RankingControl extends \Nette\Application\UI\Control {
   protected string $name;
   protected array $cols = [];
   protected string $lastCol;
   protected string $presenterName;
-  protected ?\Nette\Utils\Paginator $paginator = null;
+  public ?\Nette\Utils\Paginator $paginator = null;
   
   public function __construct(string $name, array $cols, string $presenter, string $lastCol) {
     $this->name = $name;
     $this->cols = $cols;
     $this->presenterName = $presenter;
     $this->lastCol = $lastCol;
-  }
-  
-  protected function setPaginator(\Nette\Utils\Paginator $paginator): void {
-    $this->paginator = $paginator;
   }
   
   abstract public function getData(): array;

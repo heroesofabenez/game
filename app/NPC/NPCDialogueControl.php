@@ -15,22 +15,17 @@ use HeroesofAbenez\Utils\Karma;
  * @author Jakub Konečný
  * @property-read \Nette\Bridges\ApplicationLatte\Template $template
  * @property-read string[] $names
- * @property-write Npc $npc
  */
 final class NPCDialogueControl extends \Nette\Application\UI\Control {
   protected \Nette\Security\User $user;
   protected ITranslator $translator;
   protected ILoader $loader;
-  protected ?Npc $npc = null;
+  public ?Npc $npc = null;
   
   public function __construct(\Nette\Security\User $user, ITranslator $translator, ILoader $loader) {
     $this->user = $user;
     $this->translator = $translator;
     $this->loader = $loader;
-  }
-  
-  protected function setNpc(Npc $npc): void {
-    $this->npc = $npc;
   }
   
   /**

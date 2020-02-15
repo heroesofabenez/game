@@ -22,24 +22,19 @@ use HeroesofAbenez\Model\QuestNotAvailableException;
  *
  * @author Jakub Konečný
  * @property-read \Nette\Bridges\ApplicationLatte\Template $template
- * @property-write Npc $npc
  */
 final class NPCQuestsControl extends \Nette\Application\UI\Control {
   protected Model\Quest $questModel;
   protected ORM $orm;
   protected \Nette\Security\User $user;
   protected ITranslator $translator;
-  protected Npc $npc;
+  public Npc $npc;
 
   public function __construct(Model\Quest $questModel, ORM $orm, \Nette\Security\User $user, ITranslator $translator) {
     $this->questModel = $questModel;
     $this->user = $user;
     $this->orm = $orm;
     $this->translator = $translator;
-  }
-
-  protected function setNpc(Npc $npc): void {
-    $this->npc = $npc;
   }
 
   /**
