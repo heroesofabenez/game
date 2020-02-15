@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace HeroesofAbenez\NPC;
 
 use HeroesofAbenez\Orm\Npc;
+use Nette\Localization\ITranslator;
 use Nexendrie\Translation\ILoader;
 use Nette\Utils\Strings;
 use HeroesofAbenez\Utils\Karma;
@@ -18,11 +19,13 @@ use HeroesofAbenez\Utils\Karma;
  */
 final class NPCDialogueControl extends \Nette\Application\UI\Control {
   protected \Nette\Security\User $user;
+  protected ITranslator $translator;
   protected ILoader $loader;
   protected ?Npc $npc = null;
   
-  public function __construct(\Nette\Security\User $user, ILoader $loader) {
+  public function __construct(\Nette\Security\User $user, ITranslator $translator, ILoader $loader) {
     $this->user = $user;
+    $this->translator = $translator;
     $this->loader = $loader;
   }
   
@@ -36,7 +39,7 @@ final class NPCDialogueControl extends \Nette\Application\UI\Control {
   protected function getNames() {
     $npcName = "";
     if($this->npc !== null) {
-      $npcName = $this->npc->name;
+      $npcName = $this->translator->translate("npcs.{$this->npc->id}.name");
     }
     $playerName = $this->user->identity->name;
     return [$npcName, $playerName];
@@ -103,7 +106,8 @@ final class NPCDialogueControl extends \Nette\Application\UI\Control {
   
   public function render(): void {
     $this->template->setFile(__DIR__ . "/npcDialogue.latte");
-    $this->template->npcName = $this->npc->name;
+    $this->template->npc = $this->npc;
+    $this->template->npcName = $this->names[0];
     $this->template->texts = [];
     $texts = $this->getTexts();
     foreach($texts as $text) {
