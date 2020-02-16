@@ -8,7 +8,7 @@
 {_"texts.journal.noItems"}
   {else}
     {foreach $items as $item}
-{$item->amount}x <a n:href="Item:view $item->id">{$item->name}</a> {if $item->worn}{_"texts.item.worn"} <a n:href="unequipItem! $item->eqid">{_"texts.item.unequip"}</a>{else}<a n:href="equipItem! $item->eqid">{_"texts.item.equip"}</a>{/if} {_"texts.item.durability"|firstUpper}: {$item->durability}/{$item->maxDurability}<br>
+{$item->amount}x <a n:href="Item:view $item->id">{$item->name}</a> {if $item->worn}{_"texts.item.worn"} {/if}{if $item->equipable}{if $item->worn}<a n:href="unequipItem! $item->eqid">{_"texts.item.unequip"}</a>{else}<a n:href="equipItem! $item->eqid">{_"texts.item.equip"}</a>{/if}{/if} {_"texts.item.durability"|firstUpper}: {$item->durability}/{$item->maxDurability}<br>
     {/foreach}
   {/if}
   </p>
