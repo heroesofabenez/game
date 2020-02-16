@@ -32,11 +32,11 @@ use Nexendrie\Utils\Numbers;
  * @property bool $progress {virtual}
  */
 final class Quest extends \Nextras\Orm\Entity\Entity {
-  public function setterRewardWhiteKarma(int $value): int {
+  protected function setterRewardWhiteKarma(int $value): int {
     return $this->rewardWhiteKarma = Numbers::range($value, 0, 99);
   }
 
-  public function setterRewardDarkKarma(int $value): int {
+  protected function setterRewardDarkKarma(int $value): int {
     return $this->rewardDarkKarma = Numbers::range($value, 0, 99);
   }
 }
