@@ -293,6 +293,7 @@ itemSlot:
     amulet: "amulet"
     helmet: "helmet"
     ring: "ring"
+    item: "item"
 weaponType:
     sword: "sword"
     axe: "axe"

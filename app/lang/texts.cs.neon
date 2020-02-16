@@ -293,6 +293,7 @@ itemSlot:
     amulet: "amulet"
     helmet: "helma"
     ring: "prsten"
+    item: "předmět"
 weaponType:
     sword: "meč"
     axe: "sekera"
