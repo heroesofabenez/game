@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Orm;
 
+use Nette\Localization\ITranslator;
 use Nextras\Orm\Entity\ToArrayConverter;
 use HeroesofAbenez\Combat\SkillAttack as SkillAttackDummy;
 use Nexendrie\Utils\Numbers;
@@ -12,8 +13,8 @@ use Nexendrie\Utils\Numbers;
  *
  * @author Jakub Konečný
  * @property int $id {primary}
- * @property string $name
- * @property string $description
+ * @property-read string $name {virtual}
+ * @property-read string $description {virtual}
  * @property CharacterClass $neededClass {m:1 CharacterClass::$attackSkills}
  * @property CharacterSpecialization|null $neededSpecialization {m:1 CharacterSpecialization::$attackSkills}
  * @property int $neededLevel
@@ -26,9 +27,23 @@ use Nexendrie\Utils\Numbers;
  */
 final class SkillAttack extends \Nextras\Orm\Entity\Entity {
   public const MAX_STRIKES = 9;
+
+  private ITranslator $translator;
+
+  public function injectTranslator(ITranslator $translator): void {
+    $this->translator = $translator;
+  }
   
   protected function setterStrikes(int $value): int {
     return Numbers::range($value, 1, static::MAX_STRIKES);
+  }
+
+  protected function getterName(): string {
+    return $this->translator->translate("skills_attack.$this->id.name");
+  }
+
+  protected function getterDescription(): string {
+    return $this->translator->translate("skills_attack.$this->id.description");
   }
   
   public function toDummy(): SkillAttackDummy {

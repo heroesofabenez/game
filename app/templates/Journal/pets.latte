@@ -7,7 +7,7 @@
   {else}
   <p>
     {foreach $pets as $pet}
-    {$pet->name} {_"pets.{$pet->type->id}.name"}, +{$pet->bonusValue}% {_"texts.profile.$pet->bonusStat"|lower} {if $pet->deployed}({_"texts.journal.deployed"}) <a n:href="discardPet! $pet->id">{_"texts.journal.discardPet"}</a>{else}<a n:href="deployPet! $pet->id">{_"texts.journal.deployPet"}</a>{/if}<br>
+    {$pet->name} {$pet->type->name}, +{$pet->bonusValue}% {_"texts.profile.$pet->bonusStat"|lower} {if $pet->deployed}({_"texts.journal.deployed"}) <a n:href="discardPet! $pet->id">{_"texts.journal.discardPet"}</a>{else}<a n:href="deployPet! $pet->id">{_"texts.journal.deployPet"}</a>{/if}<br>
     {/foreach}
   </p>
   {/if}

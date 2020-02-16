@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Orm;
 
+use Nette\Localization\ITranslator;
 use Nextras\Orm\Relationships\OneHasMany;
 
 /**
@@ -10,7 +11,7 @@ use Nextras\Orm\Relationships\OneHasMany;
  *
  * @author Jakub Konečný
  * @property int $id {primary}
- * @property string $name
+ * @property-read  string $name {virtual}
  * @property CharacterClass $class {m:1 CharacterClass::$specializations}
  * @property float $strengthGrow
  * @property float $dexterityGrow
@@ -27,6 +28,16 @@ use Nextras\Orm\Relationships\OneHasMany;
  * @property-read string $mainStat {virtual}
  */
 final class CharacterSpecialization extends \Nextras\Orm\Entity\Entity {
+  private ITranslator $translator;
+
+  public function injectTranslator(ITranslator $translator): void {
+    $this->translator = $translator;
+  }
+
+  protected function getterName(): string {
+    return $this->translator->translate("subclasses.$this->id.name");
+  }
+
   protected function getterMainStat(): string {
     $stats = [
       "strength" => $this->strengthGrow, "dexterity" => $this->dexterityGrow, "constitution" => $this->constitutionGrow,

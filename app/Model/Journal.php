@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Model;
 
+use HeroesofAbenez\Orm\CharacterQuest as CharacterQuestEntity;
 use HeroesofAbenez\Orm\Pet as PetEntity;
 use HeroesofAbenez\Orm\Model as ORM;
 use Nextras\Orm\Collection\ICollection;
@@ -92,17 +93,10 @@ final class Journal {
   /**
    * Gets character's quests
    *
-   * @return int[]
+   * @return ICollection|CharacterQuestEntity[]
    */
-  public function quests(): array {
-    $return = [];
-    $quests = $this->orm->characterQuests->findByCharacter($this->user->id);
-    foreach($quests as $quest) {
-      if($quest->progress < \HeroesofAbenez\Orm\CharacterQuest::PROGRESS_FINISHED) {
-        $return[] = $quest->quest->id;
-      }
-    }
-    return $return;
+  public function quests(): ICollection {
+    return $this->orm->characterQuests->findBy(["character" => $this->user->id, "progress<" => CharacterQuestEntity::PROGRESS_FINISHED]);
   }
 
   /**

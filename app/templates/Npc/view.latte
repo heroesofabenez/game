@@ -1,17 +1,17 @@
 {layout "../@layout.latte"}
 {block title}{_"texts.npc.title"}{/block}
 {block content}
-  <h1>{_"npcs.$id.name"}</h1>
-  <p>{if $canInteract}{_"texts.npc.steppedInFront"} {_"npcs.$id.name"}. {/if}{_"npcs.$id.description"}</p>
+  <h1>{$npc->name}</h1>
+  <p>{if $canInteract}{_"texts.npc.steppedInFront"} {$npc->name}. {/if}{$npc->description}</p>
   <p n:if="$canInteract">{_"texts.npc.whatToDo"}<br>
-    <a n:href="Npc:talk $id">{_"texts.npc.talk"}</a><br>
-    {if $quests}<a n:href="Npc:quests $id">{_"texts.npc.askForQuest"}</a><br>{/if}
-    {if $shop}<a n:href="Npc:trade $id">{_"texts.npc.trade"}</a><br>{/if}
-    {if $smith}<a n:href="Npc:repair $id">{_"texts.npc.repair"}</a><br>{/if}
-    {if $fight}<a n:href="Npc:fight $id">{_"texts.npc.fight"}</a><br>{/if}
+    <a n:href="Npc:talk $npc->id">{_"texts.npc.talk"}</a><br>
+    {if $npc->quests}<a n:href="Npc:quests $npc->id">{_"texts.npc.askForQuest"}</a><br>{/if}
+    {if $npc->shop}<a n:href="Npc:trade $npc->id">{_"texts.npc.trade"}</a><br>{/if}
+    {if $npc->smith}<a n:href="Npc:repair $npc->id">{_"texts.npc.repair"}</a><br>{/if}
+    {if $npc->fight}<a n:href="Npc:fight $npc->id">{_"texts.npc.fight"}</a><br>{/if}
     <a n:href="Homepage:default">{_"texts.npc.walkAway"}</a>
   </p>
   <p n:if="!$canInteract">
-    {_"texts.profile.currentLocation"} {_"areas.$area.name"} - {_"stages.$stage.name"}
+    {_"texts.profile.currentLocation"} {_"areas.{$npc->stage->area->id}.name"} - {_"stages.{$npc->stage->id}.name"}
   </p>
 {/block}

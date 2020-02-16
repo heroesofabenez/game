@@ -43,10 +43,10 @@ final class CharacterPresenter extends BasePresenter {
   public function renderCreate(): void {
     $racesIds = $classesIds = [];
     foreach($this->races as $race) {
-      $racesIds[] = $race->id;
+      $racesIds[$race->id] = $race->description;
     }
     foreach($this->classes as $class) {
-      $classesIds[] = $class->id;
+      $classesIds[$class->id] = $class->description;
     }
     $this->template->races = $racesIds;
     $this->template->classes = $classesIds;

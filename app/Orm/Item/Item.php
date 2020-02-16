@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Orm;
 
+use Nette\Localization\ITranslator;
 use Nextras\Orm\Relationships\OneHasMany;
 use Nexendrie\Utils\Numbers;
 use Nexendrie\Utils\Constants;
@@ -12,7 +13,8 @@ use Nexendrie\Utils\Constants;
  *
  * @author Jakub Konečný
  * @property int $id {primary}
- * @property string $name
+ * @property-read string $name {virtual}
+ * @property-read string $description {virtual}
  * @property string $slot {enum static::SLOT_*}
  * @property string|null $type {enum \HeroesofAbenez\Combat\Weapon::TYPE_*}
  * @property int $requiredLevel {default 1}
@@ -34,6 +36,20 @@ final class Item extends \Nextras\Orm\Entity\Entity {
   public const SLOT_AMULET = \HeroesofAbenez\Combat\Equipment::SLOT_AMULET;
   public const SLOT_HELMET = \HeroesofAbenez\Combat\Equipment::SLOT_HELMET;
   public const SLOT_RING = \HeroesofAbenez\Combat\Equipment::SLOT_RING;
+
+  private ITranslator $translator;
+
+  public function injectTranslator(ITranslator $translator): void {
+    $this->translator = $translator;
+  }
+
+  protected function getterName(): string {
+    return $this->translator->translate("items.$this->id.name");
+  }
+
+  protected function getterDescription(): string {
+    return $this->translator->translate("items.$this->id.description");
+  }
 
   protected function setterPrice(int $value): int {
     return Numbers::range($value, 0, 999);

@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Orm;
 
+use Nette\Localization\ITranslator;
 use Nextras\Orm\Relationships\OneHasMany;
 use Nexendrie\Utils\Numbers;
 
@@ -11,7 +12,9 @@ use Nexendrie\Utils\Numbers;
  *
  * @author Jakub Konečný
  * @property int $id {primary}
- * @property string $name
+ * @property-read string $name {virtual}
+ * @property-read string $introduction {virtual}
+ * @property-read string $endText {virtual}
  * @property int $requiredLevel {default 1}
  * @property CharacterClass|null $requiredClass {default null} {m:1 CharacterClass, oneSided=true}
  * @property CharacterRace|null $requiredRace {default null} {m:1 CharacterRace, oneSided=true}
@@ -32,6 +35,24 @@ use Nexendrie\Utils\Numbers;
  * @property bool $progress {virtual}
  */
 final class Quest extends \Nextras\Orm\Entity\Entity {
+  private ITranslator $translator;
+
+  public function injectTranslator(ITranslator $translator): void {
+    $this->translator = $translator;
+  }
+
+  protected function getterName(): string {
+    return $this->translator->translate("quests.$this->id.name");
+  }
+
+  protected function getterIntroduction(): string {
+    return $this->translator->translate("quests.$this->id.introduction");
+  }
+
+  protected function getterEndText(): string {
+    return $this->translator->translate("quests.$this->id.end_text");
+  }
+
   protected function setterRewardWhiteKarma(int $value): int {
     return $this->rewardWhiteKarma = Numbers::range($value, 0, 99);
   }

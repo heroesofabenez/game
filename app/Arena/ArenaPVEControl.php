@@ -45,19 +45,19 @@ final class ArenaPVEControl extends ArenaControl {
    * Show champion's profile
    */
   public function renderChampion(int $id): void {
-    $template = $this->template;
-    $template->setFile(__DIR__ . "/arenaChampion.latte");
+    $this->template->setFile(__DIR__ . "/arenaChampion.latte");
     try {
-      $template->champion = $this->getNpc($id);
-      $template->champion->applyEffectProviders();
+      $this->template->champion = $this->getNpc($id);
+      $this->template->champion->applyEffectProviders();
       /** @var PveArenaOpponent $npc */
       $npc = $this->orm->arenaNpcs->getById($id);
-      $template->occupation = $npc->class->id;
-      $template->specialization = ($npc->specialization) ? $npc->specialization->id : null;
+      $this->template->race = $npc->race->name;
+      $this->template->occupation = $npc->class->name;
+      $this->template->specialization = ($npc->specialization) ? $npc->specialization->name : null;
     } catch(OpponentNotFoundException $e) {
-      $template->champion = false;
+      $this->template->champion = false;
     }
-    $template->render();
+    $this->template->render();
   }
   
   /**

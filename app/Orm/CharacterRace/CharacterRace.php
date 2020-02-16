@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Orm;
 
+use Nette\Localization\ITranslator;
 use Nextras\Orm\Relationships\OneHasMany;
 use Nexendrie\Utils\Numbers;
 
@@ -11,7 +12,8 @@ use Nexendrie\Utils\Numbers;
  *
  * @author Jakub Konečný
  * @property int $id {primary}
- * @property string $name
+ * @property-read string $name {virtual}
+ * @property-read string $description {virtual}
  * @property int $strength {default 0}
  * @property int $dexterity {default 0}
  * @property int $constitution {default 0}
@@ -29,6 +31,20 @@ use Nexendrie\Utils\Numbers;
 final class CharacterRace extends \Nextras\Orm\Entity\Entity {
   protected const MIN_STATS = -5;
   protected const MAX_STATS = 5;
+
+  private ITranslator $translator;
+
+  public function injectTranslator(ITranslator $translator): void {
+    $this->translator = $translator;
+  }
+
+  protected function getterName(): string {
+    return $this->translator->translate("races.$this->id.name");
+  }
+
+  protected function getterDescription(): string {
+    return $this->translator->translate("races.$this->id.description");
+  }
   
   protected function setterStrength(int $value): int {
     return Numbers::range($value, static::MIN_STATS, static::MAX_STATS);

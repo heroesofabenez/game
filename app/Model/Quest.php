@@ -209,7 +209,7 @@ final class Quest {
       ];
     }
     if($quest->neededItem !== null) {
-      $itemName = $this->translator->translate("items.{$quest->neededItem->id}.name");
+      $itemName = $quest->neededItem->name;
       $itemLink = $this->linkGenerator->link("Item:view", ["id" => $quest->neededItem->id]);
       $haveItem = $this->itemModel->haveItem($quest->neededItem->id, $quest->itemAmount);
       $requirements[] = (object) [
@@ -218,7 +218,7 @@ final class Quest {
       ];
     }
     $npcLink = $this->linkGenerator->link("Npc:view", ["id" => $quest->npcEnd->id]);
-    $npcName = $this->translator->translate("npcs.{$quest->npcEnd->id}.name");
+    $npcName = $quest->npcEnd->name;
     if($quest->npcStart->id != $quest->npcEnd->id) {
       $requirements[] = (object) [
         "text" => $this->translator->translate("texts.quest.requirementTalkToNpc", 0, ["npc" => "<a href=\"$npcLink\">{$npcName}</a>"]),

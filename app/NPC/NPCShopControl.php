@@ -28,26 +28,10 @@ final class NPCShopControl extends \Nette\Application\UI\Control {
     $this->translator = $translator;
   }
   
-  /**
-   * Get items in npc's shop
-   * 
-   * @return Item[]
-   */
-  public function getItems(): array {
-    $return = [];
-    $items = $this->npc->items;
-    foreach($items as $item) {
-      $return[] = $item->item;
-    }
-    return $return;
-  }
-  
   public function render(): void {
-    $template = $this->template;
-    $template->setFile(__DIR__ . "/npcShop.latte");
-    $template->npcId = $this->npc->id;
-    $template->items = $this->getItems();
-    $template->render();
+    $this->template->setFile(__DIR__ . "/npcShop.latte");
+    $this->template->npc = $this->npc;
+    $this->template->render();
   }
   
   /**

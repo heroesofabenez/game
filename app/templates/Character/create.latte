@@ -3,8 +3,8 @@
 {block content}
   <script>
     racesDes = new Array("");
-    {foreach $races as $race}
-    racesDes[{$iterator->counter}] = {_"races.$race.description"};
+    {foreach $races as $id => $description}
+    racesDes[{$id}] = {$description};
     {/foreach}
     function changeRaceDescription(race) {
       var raceDiv,description;
@@ -14,8 +14,8 @@
       return;
     }
     classesDes = new Array("");
-    {foreach $classes as $class}
-    classesDes[{$iterator->counter}] = {_"classes.$class.description"};
+    {foreach $classes as $id => $description}
+    classesDes[{$id}] = {$description};
     {/foreach}
     function changeClassDescription(classID) {
       var classDiv,description;

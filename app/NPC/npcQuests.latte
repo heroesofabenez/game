@@ -4,7 +4,7 @@
   {else}
     <ol>
       {foreach $quests as $quest}
-      <li>{_"quests.$quest->id.name"} {if $quest->progress}<b>{_"texts.npcQuests.active"}</b>{else}<a n:href="accept! $quest->id">{_"texts.npcQuests.accept"}</a>{/if} {if $quest->progress and $quest->npcEnd->id === $id}<a n:href="finish! $quest->id">{_"texts.npcQuests.finish"}</a>{/if} <a href="{plink Quest:view $quest->id}">{_"texts.npcQuests.details"}</a></li>
+      <li>{$quest->name} {if $quest->progress}<b>{_"texts.npcQuests.active"}</b>{else}<a n:href="accept! $quest->id">{_"texts.npcQuests.accept"}</a>{/if} {if $quest->progress and $quest->npcEnd->id === $id}<a n:href="finish! $quest->id">{_"texts.npcQuests.finish"}</a>{/if} <a href="{plink Quest:view $quest->id}">{_"texts.npcQuests.details"}</a></li>
       {/foreach}
     </ol>
   {/if}

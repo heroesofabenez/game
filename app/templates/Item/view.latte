@@ -1,22 +1,22 @@
 {layout "../@layout.latte"}
 {block title}{_"texts.item.title"}{/block}
 {block content}
-  <h1>{_"texts.item.title"} {_"items.$item->id.name"}</h1>
+  <h1>{_"texts.item.title"} {$item->name}</h1>
   <p>{_"texts.itemSlot.$item->slot"|firstUpper}{if $item->type}-{_"texts.weaponType.$item->type"}{/if}</p>
-  <p>{_"items.$item->id.description"}</p>
+  <p>{$item->description}</p>
   <p>{_"texts.item.strength"}: {$item->strength}, {_"texts.item.durability"}: {$item->durability}</p>
-  <p>{_"texts.item.requires"}: {_"texts.item.level"} <span class="{if $level >= $item->requiredLevel}green{else}red{/if}">{$item->requiredLevel}</span>{if $item->requiredClass !== null}, {_"texts.item.class"} <span class="{if $class === $item->requiredClass->id}green{else}red{/if}">{_"classes.{$item->requiredClass->id}.name"}</span>{/if}{if $item->requiredSpecialization !== null}, {_"texts.item.specialization"} <span class="{if $specialization === $item->requiredSpecialization->id}green{else}red{/if}">{_"subclasses.{$item->requiredSpecialization->id}.name"}</span>{/if}</p>
+  <p>{_"texts.item.requires"}: {_"texts.item.level"} <span class="{if $level >= $item->requiredLevel}green{else}red{/if}">{$item->requiredLevel}</span>{if $item->requiredClass !== null}, {_"texts.item.class"} <span class="{if $class === $item->requiredClass->id}green{else}red{/if}">{$item->requiredClass->name}</span>{/if}{if $item->requiredSpecialization !== null}, {_"texts.item.specialization"} <span class="{if $specialization === $item->requiredSpecialization->id}green{else}red{/if}">{$item->requiredSpecialization->name}</span>{/if}</p>
   <p>{_"texts.item.price", $item->price}</p>
   {if $item->inShops->count() > 0}<p>
     {_"texts.item.soldBy"}
-    {foreach $item->inShops as $shop}<a n:href="Npc:view $shop->npc->id">{_"npcs.{$shop->npc->id}.name"}</a>{if $iterator->isLast()}.{else}, {/if}{/foreach}
+    {foreach $item->inShops as $shop}<a n:href="Npc:view $shop->npc->id">{$shop->npc->name}</a>{if $iterator->isLast()}.{else}, {/if}{/foreach}
   </p>{/if}
   {if $item->rewardedForQuests->count() > 0}<p>
   {_"texts.item.rewardedForQuests"}
-    {foreach $item->rewardedForQuests as $quest}<a n:href="Quest:view $quest->id">{_"quests.{$quest->id}.name"}</a>{if $iterator->isLast()}.{else}, {/if}{/foreach}
+    {foreach $item->rewardedForQuests as $quest}<a n:href="Quest:view $quest->id">{$quest->name}</a>{if $iterator->isLast()}.{else}, {/if}{/foreach}
     </p>{/if}
   {if $item->neededForQuests->count() > 0}<p>
     {_"texts.item.neededForQuests"}
-    {foreach $item->neededForQuests as $quest}<a n:href="Quest:view $quest->id">{_"quests.{$quest->id}.name"}</a>{if $iterator->isLast()}.{else}, {/if}{/foreach}
+    {foreach $item->neededForQuests as $quest}<a n:href="Quest:view $quest->id">{$quest->name}</a>{if $iterator->isLast()}.{else}, {/if}{/foreach}
   </p>{/if}
 {/block}

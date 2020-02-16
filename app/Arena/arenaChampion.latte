@@ -2,7 +2,7 @@
   <h2>{_"texts.arena.championNotFound"}</h2>
 {else}
   <h1>{$champion->name}</h1>
-  <p>{_"texts.profile.$champion->gender"}, {_"texts.profile.level"} {$champion->level} {_"races.$champion->race.name"} {_"classes.$occupation.name"}{if $specialization}-{_"subclasses.$specialization.name"}{/if}</p>
+  <p>{_"texts.profile.$champion->gender"}, {_"texts.profile.level"} {$champion->level} {$race} {$occupation}{if $specialization}-{$specialization}{/if}</p>
   <p>{_"texts.profile.combatStats"}</p>
   <ul>
     <li>{_"texts.profile.maxHitpoints"}: {$champion->maxHitpoints}</li>
@@ -14,13 +14,13 @@
   {if count($champion->equipment) > 0}
   <p>{_"texts.journal.equipment"}</p>
   <ul n:inner-foreach="$champion->equipment as $equipment">
-    <li><a href="{plink Item:view $equipment->id}">{_"items.$equipment->id.name"}</a></li>
+    <li><a href="{plink Item:view $equipment->id}">{$equipment->name}</a></li>
   </ul>
   {/if}
   {if $champion->skills}
   <p>{_"texts.arena.usesSkills"}</p>
   <ul n:inner-foreach="$champion->skills as $skill">
-    <li><a href="{plink Skill:$skill->skillType $skill->skill->id}">{_"skills_{$skill->skillType}.{$skill->skill->id}.name"}</a> {_"texts.arena.skillOnLevel", $skill->level}</li>
+    <li><a href="{plink Skill:$skill->skillType $skill->skill->id}">{$skill->skill->name}</a> {_"texts.arena.skillOnLevel", $skill->level}</li>
   </ul>
   {/if}
 {/if}

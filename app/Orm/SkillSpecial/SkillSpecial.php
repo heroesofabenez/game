@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Orm;
 
+use Nette\Localization\ITranslator;
 use Nextras\Orm\Entity\ToArrayConverter;
 use HeroesofAbenez\Combat\SkillSpecial as SkillSpecialDummy;
 use HeroesofAbenez\Combat\Character as CharacterDummy;
@@ -12,8 +13,8 @@ use HeroesofAbenez\Combat\Character as CharacterDummy;
  *
  * @author Jakub Konečný
  * @property int $id {primary}
- * @property string $name
- * @property string $description
+ * @property-read string $name {virtual}
+ * @property-read string $description {virtual}
  * @property CharacterClass $neededClass {m:1 CharacterClass::$specialSkills}
  * @property CharacterSpecialization|null $neededSpecialization {m:1 CharacterSpecialization::$specialSkills}
  * @property int $neededLevel
@@ -38,6 +39,20 @@ final class SkillSpecial extends \Nextras\Orm\Entity\Entity {
   public const STAT_DODGE = CharacterDummy::STAT_DODGE;
   /** @internal */
   public const STAT_INITIATIVE = CharacterDummy::STAT_INITIATIVE;
+
+  private ITranslator $translator;
+
+  public function injectTranslator(ITranslator $translator): void {
+    $this->translator = $translator;
+  }
+
+  protected function getterName(): string {
+    return $this->translator->translate("skills_special.$this->id.name");
+  }
+
+  protected function getterDescription(): string {
+    return $this->translator->translate("skills_special.$this->id.description");
+  }
   
   protected function setterStat(?string $value): ?string {
     if(in_array($value, SkillSpecialDummy::NO_STAT_TYPES, true)) {

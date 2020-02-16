@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Orm;
 
+use Nette\Localization\ITranslator;
 use Nextras\Orm\Relationships\OneHasMany;
 use Nexendrie\Utils\Numbers;
 
@@ -11,7 +12,7 @@ use Nexendrie\Utils\Numbers;
  *
  * @author Jakub Konečný
  * @property int $id {primary}
- * @property string $name
+ * @property-read string $name {virtual}
  * @property string $bonusStat {enum self::STAT_*}
  * @property int $bonusValue
  * @property string $image
@@ -27,7 +28,17 @@ final class PetType extends \Nextras\Orm\Entity\Entity {
   public const STAT_DEX = "dexterity";
   public const STAT_CON = "constitution";
   public const STAT_INT = "intelligence";
-  
+
+  private ITranslator $translator;
+
+  public function injectTranslator(ITranslator $translator): void {
+    $this->translator = $translator;
+  }
+
+  protected function getterName(): string {
+    return $this->translator->translate("pets.$this->id.name");
+  }
+
   protected function setterBonusValue(int $value): int {
     return Numbers::range($value, 0, 99);
   }

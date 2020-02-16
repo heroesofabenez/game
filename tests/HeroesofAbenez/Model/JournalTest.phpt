@@ -42,9 +42,8 @@ final class JournalTest extends \Tester\TestCase {
   
   public function testQuests() {
     $quests = $this->model->quests();
-    Assert::type("array", $quests);
+    Assert::type(ICollection::class, $quests);
     Assert::count(1, $quests);
-    Assert::type("int", $quests[0]);
   }
 
   public function testFriends() {
