@@ -11,7 +11,8 @@ use Nextras\Orm\Relationships\OneHasMany;
  *
  * @author Jakub Konečný
  * @property int $id {primary}
- * @property-read string $name {virtual}
+ * @property string $name
+ * @property-read string $nameT {virtual}
  * @property OneHasMany|GuildPrivilege[] $privileges {1:m GuildPrivilege::$rank}
  * @property OneHasMany|Character[] $characters {1:m Character::$guildrank}
  */
@@ -22,7 +23,7 @@ final class GuildRank extends \Nextras\Orm\Entity\Entity {
     $this->translator = $translator;
   }
 
-  protected function getterName(): string {
+  protected function getterNameT(): string {
     return $this->translator->translate("guildranks.$this->id.name");
   }
 }
