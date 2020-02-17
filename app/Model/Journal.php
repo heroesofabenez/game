@@ -96,8 +96,17 @@ final class Journal {
    *
    * @return ICollection|CharacterQuestEntity[]
    */
-  public function quests(): ICollection {
+  public function currentQuests(): ICollection {
     return $this->orm->characterQuests->findBy(["character" => $this->user->id, "progress<" => CharacterQuestEntity::PROGRESS_FINISHED]);
+  }
+
+  /**
+   * Gets character's finished quests
+   *
+   * @return ICollection|CharacterQuestEntity[]
+   */
+  public function finishedQuests(): ICollection {
+    return $this->orm->characterQuests->findBy(["character" => $this->user->id, "progress" => CharacterQuestEntity::PROGRESS_FINISHED]);
   }
 
   /**

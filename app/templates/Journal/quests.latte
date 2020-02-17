@@ -2,8 +2,10 @@
 {block title}{_"texts.journal.questsTitle"}{/block}
 {block content}
   <h1>{_"texts.journal.questsTitle"}</h1>
-  <p>{_"texts.journal.activeQuests", count($quests)}</p>
-  {if count($quests) === 0}
+  {control menu:chapters journalQuests}
+  {default $active = true}
+  {if $active}<p>{_"texts.journal.activeQuests", count($quests)}</p>
+  {/if}{if count($quests) === 0}
   {else}
     {foreach $quests as $quest}
   <a n:href="Quest:view $quest->quest->id">{$quest->quest->name}</a><br>

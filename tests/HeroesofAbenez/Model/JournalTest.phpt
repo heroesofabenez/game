@@ -40,10 +40,15 @@ final class JournalTest extends \Tester\TestCase {
     Assert::type(PetEntity::class, $pets->fetch());
   }
   
-  public function testQuests() {
-    $quests = $this->model->quests();
+  public function testCurrentQuests() {
+    $quests = $this->model->currentQuests();
     Assert::type(ICollection::class, $quests);
     Assert::count(1, $quests);
+  }
+
+  public function testFinishedQuests() {
+    $quests = $this->model->currentQuests();
+    Assert::type(ICollection::class, $quests);
   }
 
   public function testFriends() {

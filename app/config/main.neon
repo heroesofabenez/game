@@ -46,6 +46,12 @@ menu:
             texts.journal.pets: "Journal:pets"
             texts.journal.quests: "Journal:quests"
             texts.journal.friends: "Journal:friends"
+    journalQuests:
+        htmlId: journalQuests
+        translate: true
+        items:
+            texts.journal.currentQuests: "Journal:quests"
+            texts.journal.finishedQuests: "Journal:questsFinished"
     menu_types:
         chapters: %appDir%/templates/menuChapters.latte
 hoa.chat:

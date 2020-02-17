@@ -59,7 +59,13 @@ final class JournalPresenter extends BasePresenter {
   }
   
   public function renderQuests(): void {
-    $this->template->quests = $this->model->quests();
+    $this->template->quests = $this->model->currentQuests();
+  }
+
+  public function renderQuestsFinished(): void {
+    $this->setView("quests");
+    $this->template->active = false;
+    $this->template->quests = $this->model->finishedQuests();
   }
   
   public function renderPets(): void {
