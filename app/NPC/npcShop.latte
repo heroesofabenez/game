@@ -1,4 +1,4 @@
-  <h1>{$npc->name}'s shop</h1>
+  <h1>{_"texts.npcShop.title", [npcName => $npc->name]}</h1>
   {if count($npc->items) === 0}
   <p>{_"texts.npcShop.noItems"}</p>
   {else}
