@@ -75,12 +75,12 @@
             "source": {
                 "type": "git",
                 "url": "https://gitlab.com/heroesofabenez/combat.git",
-                "reference": "39c2a1224a7cd3b237cc6dc1d7df54852a722157"
+                "reference": "2730c7ea144cc75c9c775b6b12e5258a36604be4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://gitlab.com/api/v4/projects/heroesofabenez%2Fcombat/repository/archive.zip?sha=39c2a1224a7cd3b237cc6dc1d7df54852a722157",
-                "reference": "39c2a1224a7cd3b237cc6dc1d7df54852a722157",
+                "url": "https://gitlab.com/api/v4/projects/heroesofabenez%2Fcombat/repository/archive.zip?sha=2730c7ea144cc75c9c775b6b12e5258a36604be4",
+                "reference": "2730c7ea144cc75c9c775b6b12e5258a36604be4",
                 "shasum": ""
             },
             "require": {
@@ -88,7 +88,7 @@
                 "nette/utils": "^2.5 || ^3.0.2",
                 "nexendrie/translation": "^1.1.1 || ^2.0.1",
                 "nexendrie/utils": "^1.6.1",
-                "php": ">=7.2.0",
+                "php": ">=7.3.0",
                 "symfony/options-resolver": "^4.0 || ^5.0"
             },
             "require-dev": {
@@ -125,7 +125,7 @@
             "keywords": [
                 "combat"
             ],
-            "time": "2020-02-08T14:29:00+00:00"
+            "time": "2020-02-14T14:54:17+00:00"
         },
         {
             "name": "latte/latte",
@@ -2135,16 +2135,16 @@
         },
         {
             "name": "phpstan/phpstan",
-            "version": "0.12.10",
+            "version": "0.12.11",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan.git",
-                "reference": "39004edc7fc308752f625b89b70ad1710708f45e"
+                "reference": "ca5f2b7cf81c6d8fba74f9576970399c5817e03b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/39004edc7fc308752f625b89b70ad1710708f45e",
-                "reference": "39004edc7fc308752f625b89b70ad1710708f45e",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/ca5f2b7cf81c6d8fba74f9576970399c5817e03b",
+                "reference": "ca5f2b7cf81c6d8fba74f9576970399c5817e03b",
                 "shasum": ""
             },
             "require": {
@@ -2170,7 +2170,7 @@
                 "MIT"
             ],
             "description": "PHPStan - PHP Static Analysis Tool",
-            "time": "2020-02-12T22:03:42+00:00"
+            "time": "2020-02-16T14:00:29+00:00"
         },
         {
             "name": "phpstan/phpstan-nette",
