@@ -32,12 +32,8 @@ final class NPCDialogueControl extends \Nette\Application\UI\Control {
    * @return string[]
    */
   protected function getNames() {
-    $npcName = "";
-    if($this->npc !== null) {
-      $npcName = $this->translator->translate("npcs.{$this->npc->id}.name");
-    }
     $playerName = $this->user->identity->name;
-    return [$npcName, $playerName];
+    return [$this->npc->name ?? "", $playerName];
   }
 
   protected function getNpcMood(): string {
