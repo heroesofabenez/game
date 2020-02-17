@@ -35,6 +35,7 @@ final class HOAExtension extends \Nette\DI\CompilerExtension {
     $this->addPostOffice();
     $this->addRanking();
     $this->addForms();
+    $this->addNpcPersonalities();
   }
   
   /**
@@ -189,6 +190,23 @@ final class HOAExtension extends \Nette\DI\CompilerExtension {
       ->setType(HeroesofAbenez\Forms\CustomGuildRankNamesFormFactory::class);
     $builder->addDefinition($this->prefix($this->prefix("form.donateToGuild")))
       ->setType(HeroesofAbenez\Forms\DonateToGuildFormFactory::class);
+  }
+
+  protected function addNpcPersonalities(): void {
+    $builder = $this->getContainerBuilder();
+    $builder->addDefinition($this->prefix("npc.personalityChooser"))
+      ->setType(HeroesofAbenez\Model\NpcPersonalityChooser::class);
+    $classes = [
+      HeroesofAbenez\NPC\Personalities\CrazyNpc::class, HeroesofAbenez\NPC\Personalities\ElitistNpc::class,
+      HeroesofAbenez\NPC\Personalities\FriendlyNpc::class, HeroesofAbenez\NPC\Personalities\HostileNpc::class,
+      HeroesofAbenez\NPC\Personalities\MisogynistNpc::class, HeroesofAbenez\NPC\Personalities\RacistNpc::class,
+      HeroesofAbenez\NPC\Personalities\ReservedNpc::class, HeroesofAbenez\NPC\Personalities\ShyNpc::class,
+      HeroesofAbenez\NPC\Personalities\TeachingNpc::class,
+    ];
+    foreach($classes as $index => $class) {
+      $builder->addDefinition($this->prefix("npcPersonality." . ($index + 1)))
+        ->setType($class);
+    }
   }
   
   public function afterCompile(\Nette\PhpGenerator\ClassType $class): void {

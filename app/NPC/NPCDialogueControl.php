@@ -3,11 +3,11 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\NPC;
 
+use HeroesofAbenez\Model\NpcPersonalityChooser;
 use HeroesofAbenez\Orm\Npc;
 use Nette\Localization\ITranslator;
 use Nexendrie\Translation\ILoader;
 use Nette\Utils\Strings;
-use HeroesofAbenez\Utils\Karma;
 
 /**
  * A set of dialogue lines, simplify working with them
@@ -20,12 +20,14 @@ final class NPCDialogueControl extends \Nette\Application\UI\Control {
   protected \Nette\Security\User $user;
   protected ITranslator $translator;
   protected ILoader $loader;
+  protected NpcPersonalityChooser $npcPersonalityChooser;
   public ?Npc $npc = null;
   
-  public function __construct(\Nette\Security\User $user, ITranslator $translator, ILoader $loader) {
+  public function __construct(\Nette\Security\User $user, ITranslator $translator, ILoader $loader, NpcPersonalityChooser $npcPersonalityChooser) {
     $this->user = $user;
     $this->translator = $translator;
     $this->loader = $loader;
+    $this->npcPersonalityChooser = $npcPersonalityChooser;
   }
   
   /**
@@ -37,45 +39,8 @@ final class NPCDialogueControl extends \Nette\Application\UI\Control {
   }
 
   protected function getNpcMood(): string {
-    $userKarma = Karma::getPredominant($this->user->identity->white_karma, $this->user->identity->dark_karma);
-    $userLevel = $this->user->identity->level;
-    $personality = $this->npc->personality;
-    $npcKarma = $this->npc->karma;
-    switch($personality) {
-      case Npc::PERSONALITY_FRIENDLY:
-      case Npc::PERSONALITY_CRAZY:
-        if(Karma::isOpposite($npcKarma, $userKarma)) {
-          return Npc::PERSONALITY_HOSTILE;
-        }
-        return $personality;
-      case Npc::PERSONALITY_SHY:
-        if(Karma::isOpposite($npcKarma, $userKarma)) {
-          return Npc::PERSONALITY_RESERVED;
-        }
-        return $personality;
-      case Npc::PERSONALITY_ELITIST:
-        if($userLevel < $this->npc->level) {
-          return Npc::PERSONALITY_HOSTILE;
-        }
-        return Npc::PERSONALITY_FRIENDLY;
-      case Npc::PERSONALITY_TEACHING:
-        if($userLevel > $this->npc->level) {
-          return Npc::PERSONALITY_FRIENDLY;
-        }
-        return $personality;
-      case Npc::PERSONALITY_RACIST:
-        if($this->user->identity->race !== $this->npc->race->id) {
-          return Npc::PERSONALITY_HOSTILE;
-        }
-        return Npc::PERSONALITY_CRAZY;
-      case Npc::PERSONALITY_MISOGYNIST:
-        if($this->user->identity->gender !== \HeroesofAbenez\Orm\Character::GENDER_MALE) {
-          return Npc::PERSONALITY_HOSTILE;
-        }
-        return Npc::PERSONALITY_CRAZY;
-      default:
-        return $personality;
-    }
+    $personality = $this->npcPersonalityChooser->getPersonality($this->npc);
+    return $personality->getMood($this->user->identity, $this->npc);
   }
 
   /**
