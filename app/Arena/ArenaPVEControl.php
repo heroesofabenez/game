@@ -74,15 +74,17 @@ final class ArenaPVEControl extends ArenaControl {
     }
     return ["money" => $money, "experience" => $experience];
   }
-  
+
   /**
    * Fight a npc
+   *
+   * @throws \Nette\Application\BadRequestException
    */
   public function handleFight(int $npcId): void {
     try {
       $npc = $this->getNpc($npcId);
     } catch(OpponentNotFoundException $e) {
-      $this->presenter->forward("Npc:notfound");
+      throw new \Nette\Application\BadRequestException();
     }
     $this->doDuel($npc);
   }
