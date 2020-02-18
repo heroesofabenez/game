@@ -42,12 +42,12 @@ final class UserManager implements \Nette\Security\IAuthenticator {
    */
   public function authenticate(array $credentials): IIdentity {
     $uid = $this->getRealId();
-    if($uid === 0) {
-      return new Identity(0, "guest");
+    if($uid === IUserToCharacterMapper::USER_ID_NOT_LOGGED_IN) {
+      return new Identity(IUserToCharacterMapper::USER_ID_NOT_LOGGED_IN, "guest");
     }
     $char = $this->orm->characters->getByOwner($uid);
     if($char === null) {
-      return new Identity(-1, "guest");
+      return new Identity(IUserToCharacterMapper::USER_ID_NO_CHARACTER, "guest");
     }
     $data = [
       "name" => $char->name, "race" => $char->race->id, "gender" => $char->gender,

@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Presenters;
 
+use HeroesofAbenez\Model\IUserToCharacterMapper;
 use Nexendrie\Menu\IMenuControlFactory;
 use Nexendrie\Menu\MenuControl;
 
@@ -45,22 +46,22 @@ abstract class BasePresenter extends \Nette\Application\UI\Presenter {
       $this->user->login("");
     }
     $uid = $this->user->id;
-    if($this instanceof CharacterPresenter && $uid === -1) {
+    if($this instanceof CharacterPresenter && $uid === IUserToCharacterMapper::USER_ID_NO_CHARACTER) {
       return;
     }
     if($this instanceof CharacterPresenter && $this->user->identity->stage === null) {
       return;
     }
-    if($this instanceof CharacterPresenter && $uid > 0) {
+    if($this instanceof CharacterPresenter && $uid > IUserToCharacterMapper::USER_ID_NOT_LOGGED_IN) {
       $this->redirectPermanent("Homepage:default");
     }
     if($this instanceof IntroPresenter && $this->user->identity->stage === null) {
       return;
     }
     switch($uid) {
-      case -1:
+      case IUserToCharacterMapper::USER_ID_NO_CHARACTER:
         $this->redirect("Character:create");
-      case 0:
+      case IUserToCharacterMapper::USER_ID_NOT_LOGGED_IN:
         $this->redirectUrl("http://heroesofabenez.tk/");
     }
     if($this->user->identity->stage === null) {
