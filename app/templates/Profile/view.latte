@@ -9,6 +9,6 @@
   <p>{if $stage}{_"texts.profile.currentLocation"} {_"areas.$area.name"} - {_"stages.$stage.name"}{/if}</p>
   <p>{if $pet}{_"texts.profile.activePet"} {$pet->type->name}, +{$pet->bonusValue}% {$pet->bonusStat}
   {else}{_"texts.profile.noActivePet"}{/if}</p>
-  <p><a n:href="Postoffice:new $id">{_"texts.profile.sendMessage"}</a></p>
+  {if $user->id !== $id}<p><a n:href="Postoffice:new $id">{_"texts.profile.sendMessage"}</a></p>{/if}
   {if $canBefriend}<p><a n:href="befriend! $id">{_"texts.profile.befriend"}</a></p>{/if}
 {/block}
