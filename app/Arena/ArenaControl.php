@@ -30,6 +30,7 @@ abstract class ArenaControl extends \Nette\Application\UI\Control {
   protected ORM $orm;
   protected ITranslator $translator;
   protected string $arena;
+  protected string $profileLink;
   
   public function __construct(User $user, CombatHelper $combatHelper, CombatBase $combat, CombatLogManager $log, ORM $orm, ITranslator $translator) {
     $this->user = $user;
@@ -60,6 +61,7 @@ abstract class ArenaControl extends \Nette\Application\UI\Control {
     $this->template->setFile(__DIR__ . "/arena.latte");
     $this->template->opponents = $this->getOpponents();
     $this->template->arena = $this->arena;
+    $this->template->profileLink = $this->profileLink;
     $this->template->render();
   }
   

@@ -14,6 +14,7 @@ use Nextras\Orm\Collection\ICollection;
  */
 final class ArenaPVPControl extends ArenaControl {
   protected string $arena = "heroes";
+  protected string $profileLink = "Profile:view";
   
   /**
    * @return ICollection|\HeroesofAbenez\Orm\Character[]

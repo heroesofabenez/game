@@ -15,6 +15,7 @@ use HeroesofAbenez\Orm\PveArenaOpponent;
  */
 final class ArenaPVEControl extends ArenaControl {
   protected string $arena = "champions";
+  protected string $profileLink = "Arena:champion";
   
   /**
    * @return ICollection|PveArenaOpponent[]
