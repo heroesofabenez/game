@@ -95,8 +95,23 @@ abstract class ArenaControl extends \Nette\Application\UI\Control {
     $combatId = $this->saveCombat($this->combat->log);
     $this->presenter->redirect("Combat:view", ["id" => $combatId]);
   }
-  
-  abstract public function handleFight(int $id): void;
+
+  /**
+   * @throws OpponentNotFoundException
+   */
+  abstract protected function getOpponent(int $id): Character;
+
+  /**
+   * @throws \Nette\Application\BadRequestException
+   */
+  public function handleFight(int $id): void {
+    try {
+      $enemy = $this->getOpponent($id);
+    } catch(OpponentNotFoundException $e) {
+      throw new \Nette\Application\BadRequestException();
+    }
+    $this->doDuel($enemy);
+  }
   
   /**
    * Save log from combat

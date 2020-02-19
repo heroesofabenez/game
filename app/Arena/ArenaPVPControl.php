@@ -45,17 +45,10 @@ final class ArenaPVPControl extends ArenaControl {
   }
 
   /**
-   * Fight a player
-   *
-   * @throws \Nette\Application\BadRequestException
+   * @throws OpponentNotFoundException
    */
-  public function handleFight(int $id): void {
-    try {
-      $enemy = $this->getPlayer($id);
-    } catch(OpponentNotFoundException $e) {
-      throw new \Nette\Application\BadRequestException();
-    }
-    $this->doDuel($enemy);
+  protected function getOpponent(int $id): Character {
+    return $this->getPlayer($id);
   }
 }
 ?>
