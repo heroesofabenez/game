@@ -49,7 +49,7 @@ license_scanning:
 
 sast:
   variables:
-    SAST_DEFAULT_ANALYZERS: "eslint,phpcs-security-audit,pmd-apex,secrets"
+    SAST_DEFAULT_ANALYZERS: "eslint,phpcs-security-audit,secrets"
   cache:
     <<: *default_cache
 
