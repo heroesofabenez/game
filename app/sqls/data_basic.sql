@@ -209,12 +209,19 @@ INSERT INTO `routes_stages` (`id`, `from`, `to`) VALUES
 (3,	2,	3),
 (4,	4,	5);
 
+
 INSERT INTO `shop_items` (`id`, `npc`, `item`, `order`) VALUES
   (1,	2,	1,	1),
-  (2, 2, 6, 2),
-  (3, 2, 10, 3),
+  (2,	2,	6,	2),
+  (3,	2,	10,	3),
   (4,	2,	21,	4),
-  (5,	2,	25,	5);
+  (5,	2,	25,	5),
+  (6,	4,	33,	1),
+  (7,	4,	2,	2),
+  (8,	4,	8,	3),
+  (10,	4,	15,	4),
+  (11,	4,	19,	5),
+  (12,	4,	23,	6);
 
 INSERT INTO `skills_attacks` (`id`, `name`, `needed_class`, `needed_specialization`, `needed_level`, `base_damage`, `damage_growth`, `levels`, `target`, `strikes`, `hit_rate`) VALUES
 (1,	'Assault',	1,	NULL,	1,	'110%',	'5%',	5,	'single',	1,	NULL),
