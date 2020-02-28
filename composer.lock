@@ -888,16 +888,16 @@
         },
         {
             "name": "nette/robot-loader",
-            "version": "v3.2.1",
+            "version": "v3.2.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nette/robot-loader.git",
-                "reference": "d2a100e1f5cab390c78bc88709abbc91249c3993"
+                "reference": "38e8a270567a4ad9fe716b40fcda5a6580afa3c0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nette/robot-loader/zipball/d2a100e1f5cab390c78bc88709abbc91249c3993",
-                "reference": "d2a100e1f5cab390c78bc88709abbc91249c3993",
+                "url": "https://api.github.com/repos/nette/robot-loader/zipball/38e8a270567a4ad9fe716b40fcda5a6580afa3c0",
+                "reference": "38e8a270567a4ad9fe716b40fcda5a6580afa3c0",
                 "shasum": ""
             },
             "require": {
@@ -925,8 +925,8 @@
             "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "BSD-3-Clause",
-                "GPL-2.0",
-                "GPL-3.0"
+                "GPL-2.0-only",
+                "GPL-3.0-only"
             ],
             "authors": [
                 {
@@ -947,7 +947,7 @@
                 "nette",
                 "trait"
             ],
-            "time": "2019-12-26T22:32:02+00:00"
+            "time": "2020-02-20T22:17:50+00:00"
         },
         {
             "name": "nette/routing",
@@ -1454,16 +1454,16 @@
         },
         {
             "name": "nextras/dbal",
-            "version": "v3.1.1",
+            "version": "v3.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nextras/dbal.git",
-                "reference": "3d4bc5adf88a864c655ece8d8d9b67ab4aed6952"
+                "reference": "884431eb074bebab8dd2bdfb7b68055a78ecabbb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nextras/dbal/zipball/3d4bc5adf88a864c655ece8d8d9b67ab4aed6952",
-                "reference": "3d4bc5adf88a864c655ece8d8d9b67ab4aed6952",
+                "url": "https://api.github.com/repos/nextras/dbal/zipball/884431eb074bebab8dd2bdfb7b68055a78ecabbb",
+                "reference": "884431eb074bebab8dd2bdfb7b68055a78ecabbb",
                 "shasum": ""
             },
             "require": {
@@ -1511,7 +1511,7 @@
                 "dbal",
                 "nextras"
             ],
-            "time": "2019-11-30T21:42:33+00:00"
+            "time": "2020-02-26T12:32:09+00:00"
         },
         {
             "name": "nextras/orm",
@@ -1635,16 +1635,16 @@
         },
         {
             "name": "tracy/tracy",
-            "version": "v2.7.2",
+            "version": "v2.7.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nette/tracy.git",
-                "reference": "d28ebdf7ab8d88f231310aef1e8cce965ea0b2ca"
+                "reference": "344c77293038173f49678d9a95c27da6cbdbccd0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nette/tracy/zipball/d28ebdf7ab8d88f231310aef1e8cce965ea0b2ca",
-                "reference": "d28ebdf7ab8d88f231310aef1e8cce965ea0b2ca",
+                "url": "https://api.github.com/repos/nette/tracy/zipball/344c77293038173f49678d9a95c27da6cbdbccd0",
+                "reference": "344c77293038173f49678d9a95c27da6cbdbccd0",
                 "shasum": ""
             },
             "require": {
@@ -1656,7 +1656,9 @@
                 "nette/di": "<3.0"
             },
             "require-dev": {
+                "latte/latte": "^2.5",
                 "nette/di": "^3.0",
+                "nette/mail": "^3.0",
                 "nette/tester": "^2.2",
                 "nette/utils": "^3.0",
                 "phpstan/phpstan": "^0.12",
@@ -1702,7 +1704,7 @@
                 "nette",
                 "profiler"
             ],
-            "time": "2019-12-15T22:48:05+00:00"
+            "time": "2020-02-23T18:40:15+00:00"
         }
     ],
     "packages-dev": [
