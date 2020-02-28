@@ -11,8 +11,7 @@ final class TeachingNpc implements INpcPersonality {
   }
 
   public function getMood(\Nette\Security\IIdentity $user, Npc $npc): string {
-    $userLevel = $user->level;
-    if($userLevel > $npc->level) {
+    if($user->level > $npc->level) {
       return Npc::PERSONALITY_FRIENDLY;
     }
     return $this->getName();
