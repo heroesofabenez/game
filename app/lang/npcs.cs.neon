@@ -10,3 +10,9 @@
 4:
     name: "Kovář"
     description: "Je to vysoký barbar, který vyrábí a opravuje vybavení."
+5:
+    name: "Ošetřovatelka"
+    description: "Je to postarší žena, která se stará o nemocné a zraněné lidi v Akademii a prodává různé lektvary."
+6:
+    name: "Skladník"
+    description: "Je to silný barbar, který spravuje sklad."

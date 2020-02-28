@@ -197,18 +197,27 @@ INSERT INTO `quest_areas` (`id`, `name`, `required_level`, `required_race`, `req
 (4,	'North Great Horde',	30,	NULL,	NULL,	175,	109,	NULL);
 
 INSERT INTO `quest_stages` (`id`, `name`, `required_level`, `required_race`, `required_class`, `area`, `pos_x`, `pos_y`) VALUES
-(1,	'Study Room',	0,	NULL,	3,	1,	215,	65),
-(2,	'Hall',	1,	NULL,	3,	1,	115,	215),
-(3,	'Library',	1,	NULL,	3,	1,	119,	37),
-(4,	'Village 1 - Village Square',	0,	1,	NULL,	2,	100,	70),
-(5,	'Village 1 - Smithy',	1,	1,	NULL,	2,	70,	90);
+  (1,	'Study Room',	0,	NULL,	3,	1,	215,	65),
+  (2,	'Hall',	1,	NULL,	3,	1,	115,	215),
+  (3,	'Library',	1,	NULL,	3,	1,	119,	37),
+  (4,	'Village 1 - Village Square',	0,	1,	NULL,	2,	90,	60),
+  (5,	'Village 1 - Smithy',	1,	1,	NULL,	2,	60,	80),
+  (6,	'Infirmary',	1,	NULL,	3,	1,	60,	62),
+  (7,	'Village 1 - Alchemist\'s hut',	1,	1,	NULL,	2,	55,	18),
+  (8,	'Storehouse',	5,	NULL,	3,	1,	187,	180),
+  (9,	'Village 1 - General store',	1,	1,	NULL,	2,	120,	100);
 
 INSERT INTO `routes_stages` (`id`, `from`, `to`) VALUES
-(1,	1,	2),
-(2,	1,	3),
-(3,	2,	3),
-(4,	4,	5);
-
+  (1,	1,	2),
+  (2,	1,	3),
+  (3,	2,	3),
+  (4,	4,	5),
+  (5,	1,	6),
+  (6,	2,	6),
+  (7,	4,	7),
+  (8,	1,	8),
+  (9,	2,	8),
+  (10,	4,	9);
 
 INSERT INTO `shop_items` (`id`, `npc`, `item`, `order`) VALUES
   (1,	2,	1,	1),
@@ -273,7 +282,9 @@ INSERT INTO `npcs` (`id`, `name`, `race`, `class`, `specialization`, `fight`, `s
   (1,	'Mentor',	2,	3,	NULL,	0,	0,	'mentor.jpeg',	'mentor.jpeg',	1,	'neutral',	'teaching',	10,	1,	1),
   (2,	'Librarian',	2,	3,	NULL,	0,	1,	'librarian.jpeg',	'librarian.jpeg',	3,	'neutral',	'friendly',	10,	1,	1),
   (3,	'Instructor',	1,	1,	NULL,	0,	0,	'instructor.jpeg',	'instructor.jpeg',	4,	'neutral',	'teaching',	10,	1,	1),
-  (4,	'Blacksmith',	1,	1,	NULL,	0,	1,	'blacksmith.jpeg',	'blacksmith.jpeg',	5,	'neutral',	'friendly',	10,	1,	1);
+  (4,	'Blacksmith',	1,	1,	NULL,	0,	1,	'blacksmith.jpeg',	'blacksmith.jpeg',	5,	'neutral',	'friendly',	10,	1,	1),
+  (5,	'Nurse',	2,	6,	NULL,	0,	0,	'nurse.jpeg',	'nurse.jpeg',	6,	'neutral',	'friendly',	5,	1,	1),
+  (6,	'Storeman',	1,	1,	NULL,	0,	0,	'storeman.jpeg',	'storeman.jpeg',	8,	'neutral',	'reserved',	5,	1,	1);
 
 INSERT INTO `pve_arena_opponent_equipment` (`id`, `npc`, `item`) VALUES
 (1,	2,	3),

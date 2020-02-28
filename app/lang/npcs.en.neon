@@ -10,3 +10,9 @@
 4:
     name: "Blacksmith"
     description: "He is a tall barbarian who makes and repairs equipment."
+5:
+    name: "Nurse"
+    description: "She is an elderly woman who takes care of sick and injured people in the Academy and sells various potions."
+6:
+    name: "Storeman"
+    description: "He is a strong barbarian who operate the storehouse."

@@ -44,7 +44,7 @@ final class LocationTest extends \Tester\TestCase {
     $this->model->user = $this->getService(\Nette\Security\User::class);
     $result = $this->model->accessibleStages();
     Assert::type("array", $result);
-    Assert::count(3, $result);
+    Assert::count(5, $result);
     foreach($result as $stage) {
       Assert::type(QuestStage::class, $stage);
     }
