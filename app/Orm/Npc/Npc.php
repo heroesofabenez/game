@@ -27,8 +27,8 @@ use Nexendrie\Utils\Numbers;
  * @property string $karma {enum \HeroesofAbenez\Utils\Karma::KARMA_*}
  * @property string $personality {enum static::PERSONALITY_*}
  * @property int $level {default 1}
- * @property int $posX
- * @property int $posY
+ * @property int $posX {default 1}
+ * @property int $posY {default 1}
  * @property OneHasMany|ShopItem[] $items {1:m ShopItem::$npc, orderBy=order}
  * @property OneHasMany|Quest[] $startQuests {1:m Quest::$npcStart}
  * @property OneHasMany|Quest[] $endQuests {1:m Quest::$npcEnd}

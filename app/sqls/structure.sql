@@ -263,22 +263,23 @@ CREATE TABLE `messages` (
   CONSTRAINT `messages_ibfk_2` FOREIGN KEY (`to`) REFERENCES `characters` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+
 CREATE TABLE `npcs` (
   `id` int(3) NOT NULL AUTO_INCREMENT,
   `name` varchar(20) NOT NULL,
   `race` int(11) NOT NULL,
   `class` int(11) NOT NULL,
   `specialization` int(11) DEFAULT NULL,
-  `fight` int(1) NOT NULL DEFAULT '0',
-  `smith` int(1) NOT NULL DEFAULT '0',
+  `fight` int(1) NOT NULL DEFAULT 0,
+  `smith` int(1) NOT NULL DEFAULT 0,
   `sprite` varchar(35) NOT NULL,
   `portrait` varchar(35) NOT NULL,
   `stage` int(11) NOT NULL,
   `karma` enum('white','neutral','dark') NOT NULL,
   `personality` enum('friendly','crazy','shy','hostile','reserved','elitist','teaching','racist','misogynist') NOT NULL,
-  `level` int(3) NOT NULL DEFAULT '1',
-  `pos_x` int(3) NOT NULL,
-  `pos_y` int(3) NOT NULL,
+  `level` int(3) NOT NULL DEFAULT 1,
+  `pos_x` int(3) NOT NULL DEFAULT 1,
+  `pos_y` int(3) NOT NULL DEFAULT 1,
   PRIMARY KEY (`id`),
   KEY `stage` (`stage`),
   KEY `race` (`race`),
