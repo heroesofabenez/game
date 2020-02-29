@@ -102,7 +102,7 @@ final class Pet {
     if($petType === null) {
       return;
     }
-    if(!is_null($this->orm->pets->getByTypeAndOwner($petType, $this->user->id))) {
+    if($this->orm->pets->getByTypeAndOwner($petType, $this->user->id) !== null) {
       return;
     }
     $pet = new PetEntity();

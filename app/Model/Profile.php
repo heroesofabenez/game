@@ -63,7 +63,7 @@ final class Profile {
       "class", "specialization", "predominantKarma",
     ];
     foreach($stats as $stat) {
-      if(is_scalar($char->$stat) || is_null($char->$stat)) {
+      if(is_scalar($char->$stat) || $char->$stat === null) {
         $return[$stat] = $char->$stat;
       } else {
         $return[$stat] = $char->$stat->id;

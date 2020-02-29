@@ -41,7 +41,7 @@ final class Friends {
     if($character === $this->user->id) {
       return true;
     }
-    return !is_null($this->getFriendship($character));
+    return ($this->getFriendship($character) !== null);
   }
 
   /**
@@ -52,7 +52,7 @@ final class Friends {
     if($this->isFriendsWith($character)) {
       throw new AlreadyFriendsException();
     }
-    if(!is_null($this->orm->requests->getBy([
+    if((null !== $this->orm->requests->getBy([
       ICollection::OR,
       [
         "from" => $this->user->id,

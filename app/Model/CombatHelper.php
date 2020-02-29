@@ -75,7 +75,7 @@ final class CombatHelper {
       "charisma", "race", "specialization", "gender", "experience",
     ];
     foreach($stats as $stat) {
-      if(is_scalar($character->$stat) || is_null($character->$stat)) {
+      if(is_scalar($character->$stat) || $character->$stat === null) {
         $data[$stat] = $character->$stat;
       } else {
         $data[$stat] = $character->$stat->id;
@@ -132,7 +132,7 @@ final class CombatHelper {
       "name", "level", "race", "gender",
     ];
     foreach($stats as $stat) {
-      if(is_scalar($npc->$stat) || is_null($npc->$stat)) {
+      if(is_scalar($npc->$stat) || $npc->$stat === null) {
         $data[$stat] = $npc->$stat;
       } else {
         $data[$stat] = $npc->$stat->id;
@@ -162,7 +162,7 @@ final class CombatHelper {
       "name", "level", "race",
     ];
     foreach($stats as $stat) {
-      if(is_scalar($npc->$stat) || is_null($npc->$stat)) {
+      if(is_scalar($npc->$stat) || $npc->$stat === null) {
         $data[$stat] = $npc->$stat;
       } else {
         $data[$stat] = $npc->$stat->id;
