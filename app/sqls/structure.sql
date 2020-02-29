@@ -61,19 +61,19 @@ CREATE TABLE `character_attack_skills` (
 CREATE TABLE `character_classes` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(8) NOT NULL,
-  `strength` int(2) NOT NULL DEFAULT '10',
+  `strength` int(2) NOT NULL DEFAULT 0,
   `strength_grow` float NOT NULL,
-  `dexterity` int(2) NOT NULL DEFAULT '10',
+  `dexterity` int(2) NOT NULL DEFAULT 0,
   `dexterity_grow` float NOT NULL,
-  `constitution` int(2) NOT NULL DEFAULT '10',
+  `constitution` int(2) NOT NULL DEFAULT 0,
   `constitution_grow` float NOT NULL,
-  `intelligence` int(2) NOT NULL DEFAULT '10',
+  `intelligence` int(2) NOT NULL DEFAULT 0,
   `intelligence_grow` float NOT NULL,
-  `charisma` int(2) NOT NULL DEFAULT '10',
+  `charisma` int(2) NOT NULL DEFAULT 0,
   `charisma_grow` float NOT NULL,
-  `stat_points_level` float NOT NULL DEFAULT '1',
+  `stat_points_level` float NOT NULL DEFAULT 1,
   `initiative` varchar(20) NOT NULL,
-  `playable` int(1) NOT NULL DEFAULT '1',
+  `playable` int(1) NOT NULL DEFAULT 1,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -106,12 +106,12 @@ CREATE TABLE `character_quests` (
 CREATE TABLE `character_races` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(10) NOT NULL,
-  `strength` int(2) NOT NULL DEFAULT '0',
-  `dexterity` int(2) NOT NULL DEFAULT '0',
-  `constitution` int(2) NOT NULL DEFAULT '0',
-  `intelligence` int(2) NOT NULL DEFAULT '0',
-  `charisma` int(2) NOT NULL DEFAULT '0',
-  `playable` int(1) NOT NULL DEFAULT '1',
+  `strength` int(2) NOT NULL DEFAULT 10,
+  `dexterity` int(2) NOT NULL DEFAULT 10,
+  `constitution` int(2) NOT NULL DEFAULT 10,
+  `intelligence` int(2) NOT NULL DEFAULT 10,
+  `charisma` int(2) NOT NULL DEFAULT 10,
+  `playable` int(1) NOT NULL DEFAULT 1,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 

@@ -20,7 +20,7 @@ final class CharacterBuilder {
 
   protected function calculateStat(string $stat, CharacterClass $class, CharacterRace $race, int $level): float {
     /** @var int $value */
-    $value = $class->$stat + $race->$stat;
+    $value = $race->$stat + $class->$stat;
     $value += $class->{$stat . "Grow"} * ($level - 1);
     if($level > 1 && $stat === $class->mainStat) {
       $value += ($level - 1) * $class->statPointsLevel;

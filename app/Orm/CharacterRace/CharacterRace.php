@@ -29,8 +29,8 @@ use Nexendrie\Utils\Numbers;
  * @property OneHasMany|PveArenaOpponent[] $arenaNpcs {1:m PveArenaOpponent::$race}
  */
 final class CharacterRace extends \Nextras\Orm\Entity\Entity {
-  protected const MIN_STATS = -5;
-  protected const MAX_STATS = 5;
+  protected const MIN_STATS = 0;
+  protected const MAX_STATS = 15;
 
   private ITranslator $translator;
 

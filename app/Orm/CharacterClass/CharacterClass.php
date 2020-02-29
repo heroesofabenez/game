@@ -41,7 +41,8 @@ use Nexendrie\Utils\Numbers;
  * @property-read string $mainStat {virtual}
  */
 final class CharacterClass extends \Nextras\Orm\Entity\Entity {
-  protected const MAX_STATS = 99;
+  protected const MIN_STATS = -5;
+  protected const MAX_STATS = 5;
 
   private ITranslator $translator;
 
@@ -58,23 +59,23 @@ final class CharacterClass extends \Nextras\Orm\Entity\Entity {
   }
   
   protected function setterStrength(int $value): int {
-    return Numbers::range($value, 0, static::MAX_STATS);
+    return Numbers::range($value, static::MIN_STATS, static::MAX_STATS);
   }
   
   protected function setterDexterity(int $value): int {
-    return Numbers::range($value, 0, static::MAX_STATS);
+    return Numbers::range($value, static::MIN_STATS, static::MAX_STATS);
   }
   
   protected function setterConstitution(int $value): int {
-    return Numbers::range($value, 0, static::MAX_STATS);
+    return Numbers::range($value, static::MIN_STATS, static::MAX_STATS);
   }
   
   protected function setterIntelligence(int $value): int {
-    return Numbers::range($value, 0, static::MAX_STATS);
+    return Numbers::range($value, static::MIN_STATS, static::MAX_STATS);
   }
   
   protected function setterCharisma(int $value): int {
-    return Numbers::range($value, 0, static::MAX_STATS);
+    return Numbers::range($value, static::MIN_STATS, static::MAX_STATS);
   }
 
   protected function getterMainStat(): string {
