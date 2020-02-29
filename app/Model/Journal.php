@@ -45,14 +45,12 @@ final class Journal {
     /** @var \HeroesofAbenez\Orm\Character $character */
     $character = $this->orm->characters->getById($this->user->id);
     $stage = $character->currentStage;
-    $stageName = $this->translator->translate("stages.{$stage->id}.name");
-    $areaName = $this->translator->translate("areas.{$stage->area->id}.name");
     $return = [
       "name" => $character->name, "gender" => $character->gender, "race" => $character->race->id,
       "class" => $character->class->id,
       "specialization" => ($character->specialization !== null) ? $character->specialization->id : null,
       "level" => $character->level, "whiteKarma" => $character->whiteKarma, "darkKarma" => $character->darkKarma,
-      "experiences" => $character->experience, "stageName" => $stageName, "areaName" => $areaName,
+      "experiences" => $character->experience, "stageName" => $stage->name, "areaName" => $stage->area->name,
       "predominantKarma" => $character->predominantKarma,
     ];
     $return["guild"] = false;

@@ -12,6 +12,6 @@
     <a n:href="Homepage:default">{_"texts.npc.walkAway"}</a>
   </p>
   <p n:if="!$canInteract">
-    {_"texts.profile.currentLocation"} {_"areas.{$npc->stage->area->id}.name"} - {_"stages.{$npc->stage->id}.name"}
+    {_"texts.profile.currentLocation"} {$npc->stage->area->name} - {$npc->stage->name}
   </p>
 {/block}

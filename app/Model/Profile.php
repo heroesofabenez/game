@@ -76,8 +76,8 @@ final class Profile {
     }
     $return["stage"] = $return["area"] = null;
     if($char->currentStage !== null) {
-      $return["stage"] = $char->currentStage->id;
-      $return["area"] = $char->currentStage->area->id;
+      $return["stage"] = $char->currentStage->name;
+      $return["area"] = $char->currentStage->area->name;
     }
     $return["pet"] = $char->activePet;
     return $return;
