@@ -58,6 +58,11 @@
     "config": {
         "classmap-authoritative": true
     },
+    "scripts": {
+        "post-update-cmd": [
+            "php -r \"copy('vendor/nette/forms/src/assets/netteForms.js', 'js/netteForms.js');\""
+        ]
+    },
     "minimum-stability": "dev",
     "prefer-stable": true
 }
