@@ -24,6 +24,7 @@ final class HomepagePresenter extends BasePresenter {
     $stage = $this->model->getStage($this->user->identity->stage);
     $this->template->stage = $stage;
     $this->template->stageName = $this->translator->translate("stages.{$stage->id}.name");
+    $this->template->stageDescription = $this->translator->translate("stages.{$stage->id}.description");
     $this->template->areaName = $this->translator->translate("areas.{$stage->area->id}.name");
   }
 }
