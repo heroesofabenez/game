@@ -1,29 +1,16 @@
 {layout "../@layout.latte"}
 {block title}{_"texts.character.createTitle"}{/block}
+{block head}<script src="{$basePath}/js/createCharacter.js"></script>{/block}
 {block content}
   <script>
     racesDes = new Array("");
     {foreach $races as $id => $description}
     racesDes[{$id}] = {$description};
     {/foreach}
-    function changeRaceDescription(race) {
-      var raceDiv,description;
-      raceDiv = document.getElementById("raceDescription");
-      description = racesDes[race];
-      raceDiv.innerHTML = description;
-      return;
-    }
     classesDes = new Array("");
     {foreach $classes as $id => $description}
     classesDes[{$id}] = {$description};
     {/foreach}
-    function changeClassDescription(classID) {
-      var classDiv,description;
-      classDiv = document.getElementById("classDescription");
-      description = classesDes[classID];
-      classDiv.innerHTML = description;
-      return;
-    }
   </script>
   <h1>{_"texts.character.createTitle"}</h1>
   <p>{_"texts.character.noCharacterFound"}</p>

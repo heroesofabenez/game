@@ -7,6 +7,7 @@
   {default $haveForm = false}
   {if $haveForm}<script src="{$basePath}/js/netteForms.js"></script>
   {else}{/if}<title>{_"texts.common.game"} {$server} - {include #title}</title>
+  {ifset #head}{include #head}{/ifset}
 </head>
 <body>
 {control menu}
