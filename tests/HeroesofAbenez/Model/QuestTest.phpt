@@ -36,28 +36,26 @@ final class QuestTest extends \Tester\TestCase {
   }
 
   public function testGetCharacterQuest() {
-    $result = $this->model->getCharacterQuest(1);
+    $result = $this->model->getCharacterQuest(3);
     Assert::type(CharacterQuest::class, $result);
     Assert::same(CharacterQuest::PROGRESS_STARTED, $result->progress);
-    $result = $this->model->getCharacterQuest(2);
+    $result = $this->model->getCharacterQuest(4);
     Assert::type(CharacterQuest::class, $result);
     Assert::same(CharacterQuest::PROGRESS_OFFERED, $result->progress);
   }
   
   public function testStatus() {
-    Assert::same(CharacterQuest::PROGRESS_STARTED, $this->model->status(1));
+    Assert::same(CharacterQuest::PROGRESS_STARTED, $this->model->status(3));
     Assert::same(CharacterQuest::PROGRESS_OFFERED, $this->model->status(5000));
   }
   
   public function testIsFinished() {
-    $result = $this->model->isFinished(1);
-    Assert::type("bool", $result);
-    Assert::false($result);
+    Assert::false($this->model->isFinished(1));
   }
 
   public function testIsCompleted() {
     /** @var QuestEntity $quest */
-    $quest = $this->model->view(1);
+    $quest = $this->model->view(3);
     $oldCostMoney = $quest->neededMoney;
     $oldNeededItem = $quest->neededItem;
     /** @var \HeroesofAbenez\Orm\Model $orm */
@@ -81,10 +79,10 @@ final class QuestTest extends \Tester\TestCase {
       $this->model->finish(2, 1);
     }, QuestNotStartedException::class);
     Assert::exception(function() {
-      $this->model->finish(1, 2);
+      $this->model->finish(3, 2);
     }, CannotFinishQuestHereException::class);
     Assert::exception(function() {
-      $this->model->finish(1, 1);
+      $this->model->finish(3, 1);
     }, QuestNotFinishedException::class);
   }
 
@@ -116,19 +114,19 @@ final class QuestTest extends \Tester\TestCase {
       $this->model->accept(5000, 1);
     }, QuestNotFoundException::class);
     Assert::exception(function() {
-      $this->model->accept(1, 1);
+      $this->model->accept(3, 1);
     }, QuestAlreadyStartedException::class);
     Assert::exception(function() {
-      $this->model->accept(2, 2);
+      $this->model->accept(4, 2);
     }, CannotAcceptQuestHereException::class);
     Assert::exception(function() {
-      $this->model->accept(2, 1);
+      $this->model->accept(4, 1);
     }, QuestNotAvailableException::class);
   }
 
   public function testGetRequirements() {
     /** @var QuestEntity $quest */
-    $quest = $this->model->view(1);
+    $quest = $this->model->view(3);
     $oldNeededMoney = $quest->neededMoney;
     $oldNpcEnd = $quest->npcEnd;
     /** @var \HeroesofAbenez\Orm\Model $orm */

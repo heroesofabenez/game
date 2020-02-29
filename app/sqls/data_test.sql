@@ -13,7 +13,7 @@ INSERT INTO `character_items` (`id`, `character`, `item`, `amount`, `worn`, `dur
 (1,	1,	6,	1,	1,	10);
 
 INSERT INTO `character_quests` (`id`, `character`, `quest`, `progress`) VALUES
-(1,	1,	1,	1);
+(1,	1,	3,	1);
 
 INSERT INTO `chat_messages` (`id`, `message`, `character`, `area`, `stage`, `guild`, `when`) VALUES
   (1,	'Test message',	1,	NULL,	NULL,	1,	'2015-06-10 16:13:06'),

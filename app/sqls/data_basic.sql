@@ -185,10 +185,12 @@ INSERT INTO `pve_arena_opponents` (`id`, `name`, `race`, `gender`, `class`, `spe
   (31,	'Erdun',	4,	'male',	6,	10,	19);
 
 INSERT INTO `quests` (`id`, `name`, `required_level`, `required_class`, `required_race`, `required_quest`, `needed_item`, `item_amount`, `item_lose`, `needed_money`, `reward_money`, `reward_xp`, `reward_item`, `reward_white_karma`, `reward_dark_karma`, `reward_pet`, `npc_start`, `npc_end`) VALUES
-  (1,	'Find a book',	1,	3,	NULL,	NULL,	1,	1,	0,	0,	0,	10,	NULL,	0,	0,	NULL,	1,	1),
-  (2,	'Get your equipment',	1,	3,	NULL,	1,	6,	1,	0,	0,	0,	5,	10,	0,	0,	NULL,	1,	1),
-  (3,	'Find a book',	1,	1,	1,	NULL,	33,	1,	0,	0,	0,	10,	NULL,	0,	0,	NULL,	3,	3),
-  (4,	'Get your equipment',	1,	1,	1,	3,	2,	1,	0,	0,	0,	5,	8,	0,	0,	NULL,	3,	3);
+  (1,	'Moving around',	1,	3,	NULL,	NULL,	NULL,	0,	0,	0,	0,	20,	NULL,	0,	0,	NULL,	1,	2),
+  (2,	'Moving around',	1,	1,	1,	NULL,	NULL,	0,	0,	0,	0,	20,	NULL,	0,	0,	NULL,	3,	4),
+  (3,	'Find a book',	1,	3,	NULL,	1,	1,	1,	0,	0,	0,	10,	NULL,	0,	0,	NULL,	1,	1),
+  (4,	'Get your equipment',	1,	3,	NULL,	3,	6,	1,	0,	0,	0,	5,	10,	0,	0,	NULL,	1,	1),
+  (5,	'Find a book',	1,	1,	1,	2,	33,	1,	0,	0,	0,	10,	NULL,	0,	0,	NULL,	3,	3),
+  (6,	'Get your equipment',	1,	1,	1,	5,	2,	1,	0,	0,	0,	5,	8,	0,	0,	NULL,	3,	3);
 
 INSERT INTO `quest_areas` (`id`, `name`, `required_level`, `required_race`, `required_class`, `pos_x`, `pos_y`, `entry_stage`) VALUES
 (1,	'Academy of Magic',	0,	NULL,	3,	220,	35,	2),

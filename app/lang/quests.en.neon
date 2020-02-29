@@ -1,16 +1,24 @@
 1:
+    name: "Moving around"
+    introduction: "Ah, finally you are here, my apprentice, so your training can begin. As first thing I want you to meet the librian. You can find her in the library. In order to get there, click Map on the top, then find Library and click it. And after that you will see her."
+    end_text: "Hail. I am the librarian of the Academy. I give apprentices their books and equipment and can too fix their wands if they get damaged. But enough talking for now, I am pretty sure that your mentor has some task for you now."
+2:
+    name: "Moving around"
+    introduction: "Ah, finally you are here, rookie, so your training can begin. As first thing I want you to meet the blacksmith. You can find him in the smithy. In order to get there, click Map on the top, then find Village 1 - Smithy and click it. And after that you will see him."
+    end_text: "Hail. I am the village's blacksmith. I give rookies their books and equipment and can too fix their weapons if they get damaged. But enough talking for now, I am pretty sure that your instructor has some task for you now."
+3:
     name: "Find a book"
     introduction: "To continue in your training, you need to get book Spell casting for dummies. Ask the librarian about it."
     end_text: "Well done, my apprentice. Spells are an important thing for any wizard. Every time you level up, you gain 1 skill point which you can you use in Journal - Train to learn a new skill or improve one you already know."
-2:
+4:
     name: "Get your equipment"
     introduction: "Let's talk about equipment now. It is very important when you get into a fight. You need at least a weapon and an armor. With a good weapon you'll deal a lot of damage and armor abosorb a part of enemy's damage. You can get a weapon for new adventurers from the librarian. Once you return, I'll give you an armor."
     end_text: "Here is your armor. Remember that your equipment wears out a bit in every fight so from time to time you have to take it to a smith to repair it for you."
-3:
+5:
     name: "Find a book"
     introduction: "To continue in your training, you need to get book Advanced combat techniques. Ask the blacksmith about it."
     end_text: "Well done, young fighter. A good fighter does not rely only on their weapon, they also use special moves. Every time you level up, you gain 1 skill point which you can you use in Journal - Train to learn a new skill or improve one you already know."
-4:
+6:
     name: "Get your equipment"
     introduction: "Let's talk about equipment now. It is very important when you get into a fight. You need at least a weapon and an armor. With a good weapon you'll deal a lot of damage and armor abosorb a part of enemy's damage. You can get a weapon for new adventurers from the blacksmith. Once you return, I'll give you an armor."
     end_text: "Here is your armor. Remember that your equipment wears out a bit in every fight so from time to time you have to take it to a smith to repair it for you."
