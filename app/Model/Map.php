@@ -42,9 +42,8 @@ final class Map {
       $c2 = $stage->posY - 15;
       $c3 = $stage->posX + 15;
       $c4 = $stage->posY + 15;
-      $stageName = $this->translator->translate("stages.{$stage->id}.name");
       $return["areas"][] = (object) [
-        "href" => "", "shape" => "rect", "title" => $stageName,
+        "href" => "", "shape" => "rect", "title" => $stage->name,
         "coords" => "$c1,$c2,$c3,$c4", "stage" => $stage->id
       ];
     }

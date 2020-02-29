@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Orm;
 
+use Nette\Localization\ITranslator;
 use Nextras\Orm\Relationships\OneHasMany;
 
 /**
@@ -10,7 +11,8 @@ use Nextras\Orm\Relationships\OneHasMany;
  *
  * @author Jakub Konečný
  * @property int $id {primary}
- * @property string $name
+ * @property-read string $name {virtual}
+ * @property-read string $description {virtual}
  * @property int $requiredLevel {default 0}
  * @property CharacterRace|null $requiredRace {m:1 CharacterRace::$stages}
  * @property CharacterClass|null $requiredClass {m:1 CharacterClass::$stages}
@@ -24,6 +26,18 @@ use Nextras\Orm\Relationships\OneHasMany;
  * @property OneHasMany|Character[] $characters {1:m Character::$currentStage}
  */
 final class QuestStage extends \Nextras\Orm\Entity\Entity {
-  
+  private ITranslator $translator;
+
+  public function injectTranslator(ITranslator $translator): void {
+    $this->translator = $translator;
+  }
+
+  protected function getterName(): string {
+    return $this->translator->translate("stages.$this->id.name");
+  }
+
+  protected function getterDescription(): string {
+    return $this->translator->translate("stages.$this->id.description");
+  }
 }
 ?>

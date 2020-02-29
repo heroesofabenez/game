@@ -5,6 +5,7 @@ namespace HeroesofAbenez\Model;
 
 use Nette\Utils\Image;
 use HeroesofAbenez\Orm\QuestStage;
+use Nexendrie\Translation\ILoader;
 use Nextras\Orm\Collection\ICollection;
 use HeroesofAbenez\Orm\RoutesStage;
 
@@ -18,12 +19,14 @@ final class MapDrawer {
 
   protected Location $locationModel;
   protected \Nette\Security\User $user;
-  
-  public function __construct(Location $locationModel, \Nette\Security\User $user) {
+  protected ILoader $loader;
+
+  public function __construct(Location $locationModel, \Nette\Security\User $user, ILoader $loader) {
     $this->locationModel = $locationModel;
     $this->user = $user;
+    $this->loader = $loader;
   }
-  
+
   /**
    * Draws a map
    * 
@@ -59,7 +62,7 @@ final class MapDrawer {
   }
 
   public function getLocalMapFilename(int $areaId): string {
-    return $this->getMapsFolder() . "/local-$areaId.jpeg";
+    return $this->getMapsFolder() . "/local-$areaId-{$this->loader->getLang()}.jpeg";
   }
 }
 ?>
