@@ -30,7 +30,7 @@ final class MapDrawer {
    * @param QuestStage[] $points
    * @param ICollection|RoutesStage[] $routes
    */
-  public function draw(array $points, ICollection $routes, string $name, int $width, int $height): void {
+  public function draw(array $points, ICollection $routes, string $filename, int $width, int $height): void {
     $image = Image::fromBlank($width, $height, Image::rgb(204, 204, 153));
     $image->rectangle(0, 0, $width - 1, $height - 1, Image::rgb(204, 102, 0));
     foreach($points as $point) {
@@ -40,7 +40,6 @@ final class MapDrawer {
     foreach($routes as $route) {
       $image->line($points[$route->from->id]->posX, $points[$route->from->id]->posY, $points[$route->to->id]->posX, $points[$route->to->id]->posY, Image::rgb(51, 153, 255));
     }
-    $filename = __DIR__ . "/../../images/maps/$name.jpeg";
     $image->save($filename);
   }
   
@@ -52,7 +51,15 @@ final class MapDrawer {
     $stages = $this->locationModel->accessibleStages();
     $currentStage = $stages[$this->user->identity->stage];
     $routes = $this->locationModel->stageRoutes($currentStage->area);
-    $this->draw($stages, $routes, "local-{$currentStage->area->id}", 250, 250);
+    $this->draw($stages, $routes, $this->getLocalMapFilename($currentStage->area->id), 250, 250);
+  }
+
+  private function getMapsFolder(): string {
+    return __DIR__ . "/../../images/maps";
+  }
+
+  public function getLocalMapFilename(int $areaId): string {
+    return $this->getMapsFolder() . "/local-$areaId.jpeg";
   }
 }
 ?>
