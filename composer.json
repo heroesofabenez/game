@@ -23,7 +23,7 @@
         "nette/security": "^3.0",
         "nette/utils": "^3.0",
         "tracy/tracy": "^2.7.2",
-        "latte/latte": "^2.6",
+        "latte/latte": "^2.7",
         "nexendrie/translation": "^2.1.0",
         "nexendrie/menu": "^2.2",
         "nexendrie/utils": "^1.6.1",
