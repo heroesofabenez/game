@@ -1,9 +1,9 @@
 includes:
+    - vendor/nexendrie/code-quality/phpstan.neon
     - vendor/phpstan/phpstan-nette/extension.neon
     - vendor/phpstan/phpstan-nette/rules.neon
     - vendor/phpstan/phpstan-strict-rules/rules.neon
 parameters:
-    checkMissingIterableValueType: false
     universalObjectCratesClasses:
         - Nette\Security\IIdentity
     ignoreErrors:
