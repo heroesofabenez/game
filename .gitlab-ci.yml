@@ -2,7 +2,7 @@ include:
   - template: Dependency-Scanning.gitlab-ci.yml        
   - template: License-Scanning.gitlab-ci.yml
   - template: SAST.gitlab-ci.yml
-
+  - template: Secret-Detection.gitlab-ci.yml
 
 image: nexendrie/php:7.4
 
@@ -49,7 +49,7 @@ license_scanning:
 
 sast:
   variables:
-    SAST_DEFAULT_ANALYZERS: "eslint,phpcs-security-audit,secrets"
+    SAST_DEFAULT_ANALYZERS: "eslint,phpcs-security-audit"
   cache:
     <<: *default_cache
 
