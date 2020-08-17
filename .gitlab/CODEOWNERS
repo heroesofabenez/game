@@ -1,0 +1,36 @@
+*                   @konecnyjakub
+
+[Project Management]
+/.gitlab/           @heroesofabenez/project-management
+/README.md          @heroesofabenez/project-management
+/LICENSE.md         @heroesofabenez/project-management
+/CONTRIBUTING.md    @heroesofabenez/project-management
+/CHANGELOG.md       @heroesofabenez/project-management
+
+[Quality Assurance]
+/phpstan.neon       @heroesofabenez/quality-assurance
+/.csslintrc         @heroesofabenez/quality-assurance
+
+[Devops]
+/migrations/        @heroesofabenez/devops
+/tools/             @heroesofabenez/devops
+/.gitlab-ci.yml     @heroesofabenez/devops
+/.scrutinizer.yml   @heroesofabenez/devops
+/install.sh         @heroesofabenez/devops
+/build.xml          @heroesofabenez/devops
+/phinx.php          @heroesofabenez/devops
+/deployment.ini     @heroesofabenez/devops
+/INSTALL.md         @heroesofabenez/devops
+.gitattributes      @heroesofabenez/devops
+.htaccess           @heroesofabenez/devops
+robots.txt          @heroesofabenez/devops
+
+[PHP Code]
+/app/               @konecnyjakub
+/composer.json      @konecnyjakub
+
+[CSS]
+/www/styles/        @konecnyjakub
+
+[Tests]
+/tests/             @konecnyjakub
