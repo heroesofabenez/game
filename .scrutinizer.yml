@@ -177,4 +177,4 @@ build:
                             file: coverage.xml
                             format: php-clover
                     - php-scrutinizer-run
-                    - csslint-run styles
+                    - csslint-run www/styles
