@@ -14,19 +14,8 @@ Clone the repository with git clone. Alternatively, you can download the source 
 Auto install
 ------------
 
-After cloning the repository, you have to install the dependencies and create certain folders, local configuration file and database with basic data. You can do that by hand if you wish but there is a script which will do that for you.
+After cloning the repository, you have to install the dependencies and create local configuration file and database with basic data. You can do that by hand if you wish but there is a script which will do that for you.
 The scripts is called install.sh (yes, it is only for Unix-like systems). After running it you can skip to part Database.
-
-Creating folders
-----------------
-
-Before you can start working (developing/testing) with the game, you have to create these empty folders:
-
-- /images/maps
-- /temp/cache
-- /temp/sessions
-
-. They are used to store generated data and they have to exist else you won't be able to run the application/use certain functions.
 
 Local configuration
 -------------------

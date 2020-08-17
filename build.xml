@@ -16,9 +16,6 @@
     <echo message="Created tag."/>
   </target>
   <target name="install-ci">
-    <mkdir dir="images/maps"/>
-    <mkdir dir="temp/cache"/>
-    <mkdir dir="temp/sessions"/>
     <mkdir dir="tests/_temp"/>
     <copy file="tests/ci.neon" tofile="tests/local.neon"/>
     <exec executable="composer" logoutput="true" passthru="true" checkreturn="true">

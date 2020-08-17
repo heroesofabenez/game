@@ -1,6 +1,6 @@
 /tests      export-ignore
-.git*       export-ignore
-*.neon      export-ignore
+/.git*      export-ignore
+/*.neon     export-ignore
 /ci         export-ignore
 ci.neon     export-ignore   
-.csslintrc  export-ignore
+/.csslintrc export-ignore
