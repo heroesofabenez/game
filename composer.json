@@ -60,7 +60,7 @@
     },
     "scripts": {
         "post-update-cmd": [
-            "php -r \"copy('vendor/nette/forms/src/assets/netteForms.js', 'js/netteForms.js');\""
+          "php -r \"copy('vendor/nette/forms/src/assets/netteForms.js', 'www/js/netteForms.js');\""
         ]
     },
     "minimum-stability": "dev",

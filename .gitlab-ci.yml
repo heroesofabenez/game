@@ -71,4 +71,4 @@ test:css:
   stage: test
   image: nexendrie/nodejs
   script:
-    - csslint styles
+    - csslint www/styles

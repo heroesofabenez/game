@@ -3,11 +3,10 @@
 /.idea/
 /api/
 /tests/_temp/
-/images/
+/www/images/
 /log/
 local.neon
 /vendor/
-!.htaccess
 output/
 *.output
 coverage.*
