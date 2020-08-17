@@ -7,7 +7,7 @@
   <target name="test-phpdbg" depends="lint,cs,phpstan,sanity-checks,tests-phpdbg,clean-db"/>
   <target name="release">
     <input propertyName="version" message="Enter new version number" promptChar=":"/>
-    <replaceregexp file="CHANGELOG" pattern='Version ([0-9]+\.)+[0-9]+(\+|-)dev' replace='Version ${version}'/>
+    <replaceregexp file="CHANGELOG.md" pattern='Version ([0-9]+\.)+[0-9]+(\+|-)dev' replace='Version ${version}'/>
     <echo message="Written new version number to CHANGELOG."/>
     <exec command="git add CHANGELOG" logoutput="true" passthru="true" checkreturn="true"/>
     <exec command="git commit --message='Version ${version}'" logoutput="true" passthru="true" checkreturn="true"/>
