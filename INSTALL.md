@@ -3,8 +3,8 @@ Installation instructions
 
 Requirements
 ------------
-Obviously, you need PHP. Version 7.4 or later is required. Then you need web server (Apache is a safe bet) and sql server (preferably MySql or MariaDb but PostgreSQL or MS SQL might be also used).
-The game uses Composer to manage its dependencies so you have to have it installed. You also need Git if you want to contribute.
+Obviously, you need PHP. Version 7.4 or later is required. Then you need web server (Apache is a safe bet but nginx or even PHP built-in server should be fine) and sql server (preferably MySql or MariaDb but PostgreSQL or MS SQL might be also used).
+The game uses Composer to manage its dependencies, so you have to have it installed. You also need Git if you want to contribute.
 
 Downloading
 -----------
@@ -50,6 +50,23 @@ Web server
 
 ### Apache
 If you're using Apache, you have little work to do as the repository contains all needed .htaccess files. Just set up a virtual host. No special configuration is needed.
+
+Example of virtual host configuration:
+
+```apacheconfig
+<VirtualHost hoa.local:80>
+    ServerName hoa.local
+    DocumentRoot "/var/www/html/heroesofabenez/www"
+</VirtualHost>
+```
+
+### PHP built-in server
+
+If you do not want to bother with setting up and configuring a web server for development/testing, you can just use PHP built-in server. Just run this command:
+
+```bash
+php -S localhost:8080 -t www
+```
 
 ### Other servers
 If you have any other server, you (currently) have to do all server configuration by yourself as there are no experts on them in the development team. An important thing to have (configured) is something like mod_rewrite on Apache as we use "cool urls". If you have figured things out, please, tell us so we can update this section for other developers/testers who (consider to) use that server.
