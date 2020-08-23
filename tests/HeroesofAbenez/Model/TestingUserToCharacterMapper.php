@@ -12,15 +12,14 @@ namespace HeroesofAbenez\Model;
  */
 final class TestingUserToCharacterMapper implements IUserToCharacterMapper {
   use \Nette\SmartObject;
-  
-  /** @var int */
-  protected $realId = DevelopmentUserToCharacterMapper::USER_ID;
-  
+
+  public int $realId = DevelopmentUserToCharacterMapper::USER_ID;
+
   public function getRealId(): int {
     return $this->realId;
   }
-  
-  public function setRealId(int $realId) {
+
+  public function setRealId(int $realId): void {
     $this->realId = $realId;
   }
 }
