@@ -33,10 +33,10 @@ final class Map {
     $stages = $this->locationModel->accessibleStages();
     $currentStage = $stages[$this->user->identity->stage];
     $filename = $this->drawer->getLocalMapFilename($currentStage->area->id);
-    $return = ["image" => $filename];
     if(!file_exists($filename)) {
       $this->drawer->localMap();
     }
+    $return = ["image" => realpath($filename)];
     foreach($stages as $stage) {
       $c1 = $stage->posX - 15;
       $c2 = $stage->posY - 15;

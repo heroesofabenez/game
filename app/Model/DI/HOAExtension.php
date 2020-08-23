@@ -74,7 +74,7 @@ final class HOAExtension extends \Nette\DI\CompilerExtension {
     $builder->addDefinition($this->prefix("model.map"))
       ->setType(HeroesofAbenez\Model\Map::class);
     $builder->addDefinition($this->prefix("model.mapDrawer"))
-      ->setType(HeroesofAbenez\Model\MapDrawer::class);
+      ->setFactory(HeroesofAbenez\Model\MapDrawer::class, [$builder->parameters['wwwDir']]);
     $builder->addDefinition($this->prefix("model.permissions"))
       ->setType(HeroesofAbenez\Model\Permissions::class);
     $builder->addDefinition($this->prefix("model.pet"))

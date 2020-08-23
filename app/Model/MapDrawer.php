@@ -20,11 +20,13 @@ final class MapDrawer {
   protected Location $locationModel;
   protected \Nette\Security\User $user;
   protected ILoader $loader;
+  protected string $wwwDir;
 
-  public function __construct(Location $locationModel, \Nette\Security\User $user, ILoader $loader) {
+  public function __construct(string $wwwDir, Location $locationModel, \Nette\Security\User $user, ILoader $loader) {
     $this->locationModel = $locationModel;
     $this->user = $user;
     $this->loader = $loader;
+    $this->wwwDir = $wwwDir;
   }
 
   /**
@@ -58,7 +60,7 @@ final class MapDrawer {
   }
 
   private function getMapsFolder(): string {
-    return __DIR__ . "/../../images/maps";
+    return $this->wwwDir . "/images/maps";
   }
 
   public function getLocalMapFilename(int $areaId): string {

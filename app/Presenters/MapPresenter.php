@@ -18,7 +18,7 @@ final class MapPresenter extends BasePresenter {
   
   public function actionLocal(): void {
     $data = $this->model->local();
-    $this->template->wwwDir = realpath(__DIR__ . "/../../");
+    $this->template->wwwDir = $this->getContext()->parameters['wwwDir'];
     foreach($data as $key => $value) {
       if($key === "areas") {
         foreach($value as $area) {
