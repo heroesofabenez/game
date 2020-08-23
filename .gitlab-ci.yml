@@ -1,6 +1,6 @@
 include:
   - template: Dependency-Scanning.gitlab-ci.yml        
-  - template: License-Scanning.gitlab-ci.yml
+  #- template: License-Scanning.gitlab-ci.yml
   - template: SAST.gitlab-ci.yml
   - template: Secret-Detection.gitlab-ci.yml
 
@@ -47,12 +47,11 @@ license_scanning:
   variables:
     LICENSE_MANAGEMENT_SETUP_CMD: composer install --ignore-platform-reqs
 
-sast:
-  variables:
-    SAST_DEFAULT_ANALYZERS: "eslint,phpcs-security-audit"
-  cache:
-    <<: *default_cache
-
+#sast:
+  #variables:
+    #SAST_DEFAULT_ANALYZERS: "eslint,phpcs-security-audit"
+  #cache:
+    #<<: *default_cache
   
 test:default:
   <<: *test_job
