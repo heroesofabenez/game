@@ -41,17 +41,17 @@ install:
     <<: *default_cache
     policy: pull-push   
    
-license_scanning:
-  cache:
-    <<: *default_cache
-  variables:
-    LICENSE_MANAGEMENT_SETUP_CMD: composer install --ignore-platform-reqs
-
-#sast:
-  #variables:
-    #SAST_DEFAULT_ANALYZERS: "eslint,phpcs-security-audit"
+#license_scanning:
   #cache:
     #<<: *default_cache
+  #variables:
+    #LICENSE_MANAGEMENT_SETUP_CMD: composer install --ignore-platform-reqs
+
+sast:
+  variables:
+    SAST_DEFAULT_ANALYZERS: "eslint,phpcs-security-audit"
+  cache:
+    <<: *default_cache
   
 test:default:
   <<: *test_job
