@@ -9,6 +9,10 @@ use Nextras\Orm\Collection\ICollection;
  * PetsRepository
  *
  * @author Jakub Konečný
+ * @method Pet|null getById(int $id)
+ * @method Pet|null getBy(array $conds)
+ * @method ICollection|Pet[] findBy(array $conds)
+ * @method ICollection|Pet[] findAll()
  */
 final class PetsRepository extends \Nextras\Orm\Repository\Repository {
   /**
@@ -16,15 +20,6 @@ final class PetsRepository extends \Nextras\Orm\Repository\Repository {
    */
   public static function getEntityClassNames(): array {
     return [Pet::class];
-  }
-  
-  /**
-   * @param int $id
-   */
-  public function getById($id): ?Pet {
-    return $this->getBy([
-      "id" => $id
-    ]);
   }
   
   /**

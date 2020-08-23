@@ -9,6 +9,10 @@ use Nextras\Orm\Collection\ICollection;
  * RequstsRepository
  *
  * @author Jakub Konečný
+ * @method Request|null getById(int $id)
+ * @method Request|null getBy(array $conds)
+ * @method ICollection|Request[] findBy(array $conds)
+ * @method ICollection|Request[] findAll()
  */
 final class RequestsRepository extends \Nextras\Orm\Repository\Repository {
   /**
@@ -16,15 +20,6 @@ final class RequestsRepository extends \Nextras\Orm\Repository\Repository {
    */
   public static function getEntityClassNames(): array {
     return [Request::class];
-  }
-  
-  /**
-   * @param int $id
-   */
-  public function getById($id): ?Request {
-    return $this->getBy([
-      "id" => $id
-    ]);
   }
   
   /**

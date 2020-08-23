@@ -66,7 +66,6 @@ final class Pet {
     }
     unset($pet);
     $pets = $this->orm->pets->findByOwner($this->user->id);
-    /** @var PetEntity $pet */
     foreach($pets as $pet) {
       $pet->deployed = ($pet->id === $id);
       $this->orm->pets->persist($pet);

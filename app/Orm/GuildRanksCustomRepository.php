@@ -9,6 +9,10 @@ use Nextras\Orm\Collection\ICollection;
  * GuildRanksCustomRepository
  *
  * @author Jakub Konečný
+ * @method GuildRankCustom|null getById(int $id)
+ * @method GuildRankCustom|null getBy(array $conds)
+ * @method ICollection|GuildRankCustom[] findBy(array $conds)
+ * @method ICollection|GuildRankCustom[] findAll()
  */
 final class GuildRanksCustomRepository extends \Nextras\Orm\Repository\Repository {
   /**
@@ -16,15 +20,6 @@ final class GuildRanksCustomRepository extends \Nextras\Orm\Repository\Repositor
    */
   public static function getEntityClassNames(): array {
     return [GuildRankCustom::class];
-  }
-  
-  /**
-   * @param int $id
-   */
-  public function getById($id): ?GuildRankCustom {
-    return $this->getBy([
-      "id" => $id
-    ]);
   }
   
   /**

@@ -14,5 +14,4 @@ parameters:
         - '#Variable property access on [a-zA-Z\\]+#'
         - '#Variable property access on \$this\([a-zA-Z\\]+\)#'
         - '#Variable method call on \$this\(HeroesofAbenez\\Model\\Skills\)#'
-        - '#Parameter \#1 \$id \(int\) of method HeroesofAbenez\\Orm\\[a-zA-Z]+::getById\(\) should be contravariant with parameter (\$id|\$primaryValue) \(mixed\) of method Nextras\\Orm\\Repository\\[I]?Repository::getById\(\)#'
         - '#Method HeroesofAbenez\\Model\\Intro::getStartingLocation\(\) should return int but return statement is missing#'

@@ -3,10 +3,16 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Orm;
 
+use Nextras\Orm\Collection\ICollection;
+
 /**
  * ArenaFightsCountRepository
  *
  * @author Jakub Konečný
+ * @method ArenaFightCount|null getById(int $id)
+ * @method ArenaFightCount|null getBy(array $conds)
+ * @method ICollection|ArenaFightCount[] findBy(array $conds)
+ * @method ICollection|ArenaFightCount[] findAll()
  */
 final class ArenaFightsCountRepository extends \Nextras\Orm\Repository\Repository {
   /**
@@ -14,15 +20,6 @@ final class ArenaFightsCountRepository extends \Nextras\Orm\Repository\Repositor
    */
   public static function getEntityClassNames(): array {
     return [ArenaFightCount::class];
-  }
-  
-  /**
-   * @param int $id
-   */
-  public function getById($id): ?ArenaFightCount {
-    return $this->getBy([
-      "id" => $id
-    ]);
   }
   
   /**

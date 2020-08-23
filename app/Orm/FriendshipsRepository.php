@@ -9,6 +9,10 @@ use Nextras\Orm\Collection\ICollection;
  * FriendshipsRepository
  *
  * @author Jakub Konečný
+ * @method Friendship|null getById(int $id)
+ * @method Friendship|null getBy(array $conds)
+ * @method ICollection|Friendship[] findBy(array $conds)
+ * @method ICollection|Friendship[] findAll()
  */
 final class FriendshipsRepository extends \Nextras\Orm\Repository\Repository {
   /**
@@ -16,15 +20,6 @@ final class FriendshipsRepository extends \Nextras\Orm\Repository\Repository {
    */
   public static function getEntityClassNames(): array {
     return [Friendship::class];
-  }
-  
-  /**
-   * @param int $id
-   */
-  public function getById($id): ?Friendship {
-    return $this->getBy([
-      "id" => $id
-    ]);
   }
 
   /**

@@ -9,6 +9,10 @@ use Nextras\Orm\Collection\ICollection;
  * CharacterSpecializationsRepository
  *
  * @author Jakub Konečný
+ * @method CharacterSpecialization|null getById(int $id)
+ * @method CharacterSpecialization|null getBy(array $conds)
+ * @method ICollection|CharacterSpecialization[] findBy(array $conds)
+ * @method ICollection|CharacterSpecialization[] findAll()
  */
 final class CharacterSpecializationsRepository extends \Nextras\Orm\Repository\Repository {
   /**
@@ -16,15 +20,6 @@ final class CharacterSpecializationsRepository extends \Nextras\Orm\Repository\R
    */
   public static function getEntityClassNames(): array {
     return [CharacterSpecialization::class];
-  }
-  
-  /**
-   * @param int $id
-   */
-  public function getById($id): ?CharacterSpecialization {
-    return $this->getBy([
-      "id" => $id
-    ]);
   }
 
   /**

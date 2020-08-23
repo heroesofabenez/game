@@ -9,6 +9,10 @@ use Nextras\Orm\Collection\ICollection;
  * QuestStagesRepository
  *
  * @author Jakub Konečný
+ * @method QuestStage|null getById(int $id)
+ * @method QuestStage|null getBy(array $conds)
+ * @method ICollection|QuestStage[] findBy(array $conds)
+ * @method ICollection|QuestStage[] findAll()
  */
 final class QuestStagesRepository extends \Nextras\Orm\Repository\Repository {
   /**
@@ -16,15 +20,6 @@ final class QuestStagesRepository extends \Nextras\Orm\Repository\Repository {
    */
   public static function getEntityClassNames(): array {
     return [QuestStage::class];
-  }
-  
-  /**
-   * @param int $id
-   */
-  public function getById($id): ?QuestStage {
-    return $this->getBy([
-      "id" => $id
-    ]);
   }
   
   /**

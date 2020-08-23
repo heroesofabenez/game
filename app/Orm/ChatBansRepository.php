@@ -3,10 +3,16 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Orm;
 
+use Nextras\Orm\Collection\ICollection;
+
 /**
  * ChatBansRepository
  *
  * @author Jakub Konečný
+ * @method ChatBan|null getById(int $id)
+ * @method ChatBan|null getBy(array $conds)
+ * @method ICollection|ChatBan[] findBy(array $conds)
+ * @method ICollection|ChatBan[] findAll()
  */
 final class ChatBansRepository extends \Nextras\Orm\Repository\Repository {
   /**
@@ -14,15 +20,6 @@ final class ChatBansRepository extends \Nextras\Orm\Repository\Repository {
    */
   public static function getEntityClassNames(): array {
     return [ChatBan::class];
-  }
-  
-  /**
-   * @param int $id
-   */
-  public function getById($id): ?ChatBan {
-    return $this->getBy([
-      "id" => $id
-    ]);
   }
 }
 ?>

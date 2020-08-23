@@ -9,6 +9,10 @@ use Nextras\Orm\Collection\ICollection;
  * SkillSpecialsRepository
  *
  * @author Jakub Konečný
+ * @method SkillSpecial|null getById(int $id)
+ * @method SkillSpecial|null getBy(array $conds)
+ * @method ICollection|SkillSpecial[] findBy(array $conds)
+ * @method ICollection|SkillSpecial[] findAll()
  */
 final class SkillSpecialsRepository extends \Nextras\Orm\Repository\Repository {
   /**
@@ -16,15 +20,6 @@ final class SkillSpecialsRepository extends \Nextras\Orm\Repository\Repository {
    */
   public static function getEntityClassNames(): array {
     return [SkillSpecial::class];
-  }
-  
-  /**
-   * @param int $id
-   */
-  public function getById($id): ?SkillSpecial {
-    return $this->getBy([
-      "id" => $id
-    ]);
   }
   
   /**

@@ -12,6 +12,7 @@ use HeroesofAbenez\Model\DevelopmentUserToCharacterMapper;
  * HOA Extension
  *
  * @author Jakub Konečný
+ * @method array getConfig()
  */
 final class HOAExtension extends \Nette\DI\CompilerExtension {
   public function getConfigSchema(): \Nette\Schema\Schema {
@@ -42,7 +43,6 @@ final class HOAExtension extends \Nette\DI\CompilerExtension {
    * @throws \RuntimeException
    */
   protected function getUserToCharacterMapper(): string {
-    /** @var array $config */
     $config = $this->getConfig();
     $mapper = $config["userToCharacterMapper"];
     if(!class_exists($mapper) || !is_subclass_of($mapper, IUserToCharacterMapper::class)) {

@@ -3,10 +3,16 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Orm;
 
+use Nextras\Orm\Collection\ICollection;
+
 /**
  * CharacterSpecialSkillsRepository
  *
  * @author Jakub Konečný
+ * @method CharacterSpecialSkill|null getById(int $id)
+ * @method CharacterSpecialSkill|null getBy(array $conds)
+ * @method ICollection|CharacterSpecialSkill[] findBy(array $conds)
+ * @method ICollection|CharacterSpecialSkill[] findAll()
  */
 final class CharacterSpecialSkillsRepository extends \Nextras\Orm\Repository\Repository {
   /**
@@ -14,15 +20,6 @@ final class CharacterSpecialSkillsRepository extends \Nextras\Orm\Repository\Rep
    */
   public static function getEntityClassNames(): array {
     return [CharacterSpecialSkill::class];
-  }
-  
-  /**
-   * @param int $id
-   */
-  public function getById($id): ?CharacterSpecialSkill {
-    return $this->getBy([
-      "id" => $id
-    ]);
   }
   
   /**

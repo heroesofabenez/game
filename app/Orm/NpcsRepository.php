@@ -9,6 +9,10 @@ use Nextras\Orm\Collection\ICollection;
  * NpcsRepository
  *
  * @author Jakub Konečný
+ * @method Npc|null getById(int $id)
+ * @method Npc|null getBy(array $conds)
+ * @method ICollection|Npc[] findBy(array $conds)
+ * @method ICollection|Npc[] findAll()
  */
 final class NpcsRepository extends \Nextras\Orm\Repository\Repository {
   /**
@@ -16,15 +20,6 @@ final class NpcsRepository extends \Nextras\Orm\Repository\Repository {
    */
   public static function getEntityClassNames(): array {
     return [Npc::class];
-  }
-  
-  /**
-   * @param int $id
-   */
-  public function getById($id): ?Npc {
-    return $this->getBy([
-      "id" => $id
-    ]);
   }
   
   /**

@@ -9,6 +9,10 @@ use Nextras\Orm\Collection\ICollection;
  * SkillAttacksRepository
  *
  * @author Jakub Konečný
+ * @method SkillAttack|null getById(int $id)
+ * @method SkillAttack|null getBy(array $conds)
+ * @method ICollection|SkillAttack[] findBy(array $conds)
+ * @method ICollection|SkillAttack[] findAll()
  */
 final class SkillAttacksRepository extends \Nextras\Orm\Repository\Repository {
   /**
@@ -16,15 +20,6 @@ final class SkillAttacksRepository extends \Nextras\Orm\Repository\Repository {
    */
   public static function getEntityClassNames(): array {
     return [SkillAttack::class];
-  }
-  
-  /**
-   * @param int $id
-   */
-  public function getById($id): ?SkillAttack {
-    return $this->getBy([
-      "id" => $id
-    ]);
   }
   
   /**

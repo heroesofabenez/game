@@ -9,19 +9,14 @@ use Nextras\Orm\Collection\ICollection;
  * MessagesRepository
  *
  * @author Jakub Konečný
+ * @method Message|null getById(int $id)
+ * @method Message|null getBy(array $conds)
+ * @method ICollection|Message[] findBy(array $conds)
+ * @method ICollection|Message[] findAll()
  */
 final class MessagesRepository extends \Nextras\Orm\Repository\Repository {
   public static function getEntityClassNames(): array {
     return [Message::class];
-  }
-  
-  /**
-   * @param int $id
-   */
-  public function getById($id): ?Message {
-    return $this->getBy([
-      "id" => $id
-    ]);
   }
   
   /**
