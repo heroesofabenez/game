@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4fda3db205ca47a8b4e796db4c3c7f33",
+    "content-hash": "44625f9754d0d89f40a85fc825b1ab71",
     "packages": [
         {
             "name": "heroesofabenez/chat",
@@ -75,25 +75,23 @@
             "source": {
                 "type": "git",
                 "url": "https://gitlab.com/heroesofabenez/combat.git",
-                "reference": "2730c7ea144cc75c9c775b6b12e5258a36604be4"
+                "reference": "d0ce8061d994af2119be2e2d42d06c43091122e4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://gitlab.com/api/v4/projects/heroesofabenez%2Fcombat/repository/archive.zip?sha=2730c7ea144cc75c9c775b6b12e5258a36604be4",
-                "reference": "2730c7ea144cc75c9c775b6b12e5258a36604be4",
+                "url": "https://gitlab.com/api/v4/projects/heroesofabenez%2Fcombat/repository/archive.zip?sha=d0ce8061d994af2119be2e2d42d06c43091122e4",
+                "reference": "d0ce8061d994af2119be2e2d42d06c43091122e4",
                 "shasum": ""
             },
             "require": {
-                "latte/latte": "^2.5 || ^3.0",
-                "nette/utils": "^2.5 || ^3.0.2",
-                "nexendrie/translation": "^1.1.1 || ^2.0.1",
+                "latte/latte": "^2.8 || ^3.0",
+                "nette/utils": "^3.1",
+                "nexendrie/translation": "^2.1",
                 "nexendrie/utils": "^1.6.1",
                 "php": ">=7.3.0",
                 "symfony/options-resolver": "^4.0 || ^5.0"
             },
             "require-dev": {
-                "nette/di": "^2.4.10 || ^3.0",
-                "nette/http": "^2.4.7 || ^3.0",
                 "nexendrie/code-quality": "dev-master",
                 "nexendrie/site-generator": "^0.6.2",
                 "phpstan/phpstan-nette": "^0.12"
@@ -125,7 +123,7 @@
             "keywords": [
                 "combat"
             ],
-            "time": "2020-02-14T14:54:17+00:00"
+            "time": "2020-08-29T21:03:14+00:00"
         },
         {
             "name": "latte/latte",
@@ -206,16 +204,16 @@
         },
         {
             "name": "nette/application",
-            "version": "v3.0.5",
+            "version": "v3.0.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nette/application.git",
-                "reference": "2974fbfdaa06ca78b8f9f2c71bf16f91ce13f7a2"
+                "reference": "783ad6fc6444f63314175131885c04b3dd0291dd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nette/application/zipball/2974fbfdaa06ca78b8f9f2c71bf16f91ce13f7a2",
-                "reference": "2974fbfdaa06ca78b8f9f2c71bf16f91ce13f7a2",
+                "url": "https://api.github.com/repos/nette/application/zipball/783ad6fc6444f63314175131885c04b3dd0291dd",
+                "reference": "783ad6fc6444f63314175131885c04b3dd0291dd",
                 "shasum": ""
             },
             "require": {
@@ -287,7 +285,7 @@
                 "routing",
                 "seo"
             ],
-            "time": "2020-04-20T21:43:19+00:00"
+            "time": "2020-08-25T01:52:08+00:00"
         },
         {
             "name": "nette/bootstrap",
@@ -1406,30 +1404,30 @@
         },
         {
             "name": "nexendrie/utils",
-            "version": "1.6.1",
+            "version": "1.7.0",
             "source": {
                 "type": "git",
                 "url": "https://gitlab.com/nexendrie/utils.git",
-                "reference": "67c6efd5f29061d4a5bd5a975d1cd66e48209b43"
+                "reference": "fd21142ab367f2862d4742bb6c0bae6d5e48414e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://gitlab.com/api/v4/projects/nexendrie%2Futils/repository/archive.zip?sha=67c6efd5f29061d4a5bd5a975d1cd66e48209b43",
-                "reference": "67c6efd5f29061d4a5bd5a975d1cd66e48209b43",
+                "url": "https://gitlab.com/api/v4/projects/nexendrie%2Futils/repository/archive.zip?sha=fd21142ab367f2862d4742bb6c0bae6d5e48414e",
+                "reference": "fd21142ab367f2862d4742bb6c0bae6d5e48414e",
                 "shasum": ""
             },
             "require": {
-                "nette/utils": "^2.4 || ^3.0",
-                "php": ">=7.2.0"
+                "nette/utils": "^3.0",
+                "php": ">=7.3.0"
             },
             "require-dev": {
                 "nexendrie/code-quality": "dev-master",
-                "nexendrie/site-generator": "^1.0"
+                "nexendrie/site-generator": "^0.6.1"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.6.x-dev"
+                    "dev-master": "1.7.x-dev"
                 }
             },
             "autoload": {
@@ -1458,7 +1456,7 @@
                 "range",
                 "utils"
             ],
-            "time": "2019-05-01T12:42:27+00:00"
+            "time": "2020-08-30T17:29:08+00:00"
         },
         {
             "name": "nextras/dbal",
@@ -2020,12 +2018,12 @@
             "source": {
                 "type": "git",
                 "url": "https://gitlab.com/nexendrie/code-quality.git",
-                "reference": "46abb4406c5441a1657189eea22967ff41e4d15b"
+                "reference": "c653ca562f4e263096f8181c6be4078042338669"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://gitlab.com/api/v4/projects/nexendrie%2Fcode-quality/repository/archive.zip?sha=46abb4406c5441a1657189eea22967ff41e4d15b",
-                "reference": "46abb4406c5441a1657189eea22967ff41e4d15b",
+                "url": "https://gitlab.com/api/v4/projects/nexendrie%2Fcode-quality/repository/archive.zip?sha=c653ca562f4e263096f8181c6be4078042338669",
+                "reference": "c653ca562f4e263096f8181c6be4078042338669",
                 "shasum": ""
             },
             "require": {
@@ -2054,7 +2052,7 @@
                 "quality",
                 "testing"
             ],
-            "time": "2020-08-08T16:57:29+00:00"
+            "time": "2020-08-30T16:01:38+00:00"
         },
         {
             "name": "nexendrie/testbench",
@@ -2281,16 +2279,16 @@
         },
         {
             "name": "phpstan/phpstan",
-            "version": "0.12.37",
+            "version": "0.12.40",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan.git",
-                "reference": "5e16d83e6eb2dd784fbdaeaece5e2bca72e4f68a"
+                "reference": "dce7293ad7b59fc09a9ab9b0b5b44902c092ca17"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/5e16d83e6eb2dd784fbdaeaece5e2bca72e4f68a",
-                "reference": "5e16d83e6eb2dd784fbdaeaece5e2bca72e4f68a",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/dce7293ad7b59fc09a9ab9b0b5b44902c092ca17",
+                "reference": "dce7293ad7b59fc09a9ab9b0b5b44902c092ca17",
                 "shasum": ""
             },
             "require": {
@@ -2319,20 +2317,20 @@
                 "MIT"
             ],
             "description": "PHPStan - PHP Static Analysis Tool",
-            "time": "2020-08-09T14:32:41+00:00"
+            "time": "2020-08-26T19:06:20+00:00"
         },
         {
             "name": "phpstan/phpstan-nette",
-            "version": "0.12.8",
+            "version": "0.12.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan-nette.git",
-                "reference": "ff3e7c05d7cd1648b1c1bd5f50f5265255a520a9"
+                "reference": "7a3a35b71e4ee131126972be4475da603e74453a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan-nette/zipball/ff3e7c05d7cd1648b1c1bd5f50f5265255a520a9",
-                "reference": "ff3e7c05d7cd1648b1c1bd5f50f5265255a520a9",
+                "url": "https://api.github.com/repos/phpstan/phpstan-nette/zipball/7a3a35b71e4ee131126972be4475da603e74453a",
+                "reference": "7a3a35b71e4ee131126972be4475da603e74453a",
                 "shasum": ""
             },
             "require": {
@@ -2383,20 +2381,20 @@
                 "MIT"
             ],
             "description": "Nette Framework class reflection extension for PHPStan",
-            "time": "2020-07-21T14:47:32+00:00"
+            "time": "2020-08-26T07:54:37+00:00"
         },
         {
             "name": "phpstan/phpstan-strict-rules",
-            "version": "0.12.4",
+            "version": "0.12.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan-strict-rules.git",
-                "reference": "9b86e1eb77c796628e239820a01a2d327d607a5e"
+                "reference": "334898a32217e4605e0f9cfa3d3fc3101bda26be"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan-strict-rules/zipball/9b86e1eb77c796628e239820a01a2d327d607a5e",
-                "reference": "9b86e1eb77c796628e239820a01a2d327d607a5e",
+                "url": "https://api.github.com/repos/phpstan/phpstan-strict-rules/zipball/334898a32217e4605e0f9cfa3d3fc3101bda26be",
+                "reference": "334898a32217e4605e0f9cfa3d3fc3101bda26be",
                 "shasum": ""
             },
             "require": {
@@ -2434,7 +2432,7 @@
                 "MIT"
             ],
             "description": "Extra strict and opinionated rules for PHPStan",
-            "time": "2020-07-21T14:49:47+00:00"
+            "time": "2020-08-30T15:42:06+00:00"
         },
         {
             "name": "squizlabs/php_codesniffer",
