@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Orm;
 
+use HeroesofAbenez\Combat\CharacterSkillsCollection;
 use Nexendrie\Utils\Numbers;
 use Nextras\Orm\Collection\ICollection;
 use Nextras\Orm\Relationships\OneHasMany;
@@ -75,10 +76,7 @@ final class PveArenaOpponent extends \Nextras\Orm\Entity\Entity {
     if($this->level === 1) {
       return [];
     }
-    $skills = new class extends \Nexendrie\Utils\Collection {
-      /** @var string */
-      protected $class = BaseCharacterSkill::class;
-    };
+    $skills = new CharacterSkillsCollection();
     $attackSkills = $this->class->attackSkills->get()->findBy([
       ICollection::OR,
       [

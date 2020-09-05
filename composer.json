@@ -24,12 +24,12 @@
         "nette/utils": "^3.0",
         "tracy/tracy": "^2.7.2",
         "latte/latte": "^2.7",
-        "nexendrie/translation": "^2.1.0",
-        "nexendrie/menu": "^2.2",
-        "nexendrie/utils": "^1.7",
+        "nexendrie/translation": "^2.3.0",
+        "nexendrie/menu": "^2.4",
+        "nexendrie/utils": "^1.8",
         "nextras/orm": "^3.1",
         "symfony/options-resolver": "^5.0",
-        "heroesofabenez/chat": "^2.0.1",
+        "heroesofabenez/chat": "^2.1",
         "heroesofabenez/combat": "^1.0"
     },
     "require-dev": {

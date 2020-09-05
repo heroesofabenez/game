@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "44625f9754d0d89f40a85fc825b1ab71",
+    "content-hash": "45ac7dfe4f382b56caea1353473a4398",
     "packages": [
         {
             "name": "heroesofabenez/chat",
-            "version": "2.0.1",
+            "version": "2.1.0",
             "source": {
                 "type": "git",
                 "url": "https://gitlab.com/heroesofabenez/chat.git",
-                "reference": "508bbd1e8a19cff03879329a12f9ac9863c511dd"
+                "reference": "93e312fd034f98fb268f4fb6274a78f37397bc3f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://gitlab.com/api/v4/projects/heroesofabenez%2Fchat/repository/archive.zip?sha=508bbd1e8a19cff03879329a12f9ac9863c511dd",
-                "reference": "508bbd1e8a19cff03879329a12f9ac9863c511dd",
+                "url": "https://gitlab.com/api/v4/projects/heroesofabenez%2Fchat/repository/archive.zip?sha=93e312fd034f98fb268f4fb6274a78f37397bc3f",
+                "reference": "93e312fd034f98fb268f4fb6274a78f37397bc3f",
                 "shasum": ""
             },
             "require": {
@@ -26,13 +26,14 @@
                 "nette/di": "^3.0.2",
                 "nette/forms": "^3.0.2",
                 "nette/utils": "^3.0",
-                "nexendrie/utils": "^1.6.1",
-                "php": ">=7.2.0"
+                "nexendrie/utils": "^1.8",
+                "php": ">=7.4.0",
+                "symfony/polyfill-php80": "^1.18"
             },
             "require-dev": {
                 "nexendrie/code-quality": "dev-master",
                 "nexendrie/site-generator": "^0.6",
-                "nexendrie/translation": "^2.0.1"
+                "nexendrie/translation": "^2.2"
             },
             "suggest": {
                 "nexendrie/translation": "Translator"
@@ -40,7 +41,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.0.x-dev"
+                    "dev-master": "2.1.x-dev"
                 }
             },
             "autoload": {
@@ -67,7 +68,7 @@
                 "component",
                 "nette"
             ],
-            "time": "2020-02-13T13:25:58+00:00"
+            "time": "2020-09-05T20:21:16+00:00"
         },
         {
             "name": "heroesofabenez/combat",
@@ -75,20 +76,20 @@
             "source": {
                 "type": "git",
                 "url": "https://gitlab.com/heroesofabenez/combat.git",
-                "reference": "d0ce8061d994af2119be2e2d42d06c43091122e4"
+                "reference": "210dba5051ec946e624bb7318905cff492ef0dd7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://gitlab.com/api/v4/projects/heroesofabenez%2Fcombat/repository/archive.zip?sha=d0ce8061d994af2119be2e2d42d06c43091122e4",
-                "reference": "d0ce8061d994af2119be2e2d42d06c43091122e4",
+                "url": "https://gitlab.com/api/v4/projects/heroesofabenez%2Fcombat/repository/archive.zip?sha=210dba5051ec946e624bb7318905cff492ef0dd7",
+                "reference": "210dba5051ec946e624bb7318905cff492ef0dd7",
                 "shasum": ""
             },
             "require": {
                 "latte/latte": "^2.8 || ^3.0",
                 "nette/utils": "^3.1",
-                "nexendrie/translation": "^2.1",
-                "nexendrie/utils": "^1.6.1",
-                "php": ">=7.3.0",
+                "nexendrie/translation": "^2.2",
+                "nexendrie/utils": "^1.8",
+                "php": ">=7.4.0",
                 "symfony/options-resolver": "^4.0 || ^5.0"
             },
             "require-dev": {
@@ -123,7 +124,7 @@
             "keywords": [
                 "combat"
             ],
-            "time": "2020-08-29T21:03:14+00:00"
+            "time": "2020-09-05T17:42:16+00:00"
         },
         {
             "name": "latte/latte",
@@ -1265,33 +1266,30 @@
         },
         {
             "name": "nexendrie/menu",
-            "version": "2.2.1",
+            "version": "2.4.0",
             "source": {
                 "type": "git",
                 "url": "https://gitlab.com/nexendrie/menu.git",
-                "reference": "9e95303e662e1649c00ab13382aeeb892d5607b0"
+                "reference": "9c263328d1fa99fd7129bc228dfd16248d932240"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://gitlab.com/api/v4/projects/nexendrie%2Fmenu/repository/archive.zip?sha=9e95303e662e1649c00ab13382aeeb892d5607b0",
-                "reference": "9e95303e662e1649c00ab13382aeeb892d5607b0",
+                "url": "https://gitlab.com/api/v4/projects/nexendrie%2Fmenu/repository/archive.zip?sha=9c263328d1fa99fd7129bc228dfd16248d932240",
+                "reference": "9c263328d1fa99fd7129bc228dfd16248d932240",
                 "shasum": ""
             },
             "require": {
-                "latte/latte": "^2.5 || ^3.0",
+                "latte/latte": "^2.5.3 || ^3.0",
                 "nette/application": "^3.0",
                 "nette/di": "^3.0",
-                "nette/utils": "^3.0",
-                "nexendrie/utils": "^1.6.1",
-                "php": ">=7.2.0"
-            },
-            "conflict": {
-                "latte/latte": "2.5.2"
+                "nette/utils": "^3.1.1",
+                "nexendrie/utils": "^1.8",
+                "php": ">=7.4.0",
+                "symfony/polyfill-php80": "^1.18"
             },
             "require-dev": {
                 "nexendrie/code-quality": "dev-master",
-                "nexendrie/site-generator": "^0.5",
-                "phpstan/phpstan": "^0.11.6"
+                "nexendrie/site-generator": "^0.6"
             },
             "suggest": {
                 "nette/security": "To use menu item conditions related to user"
@@ -1299,7 +1297,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.2.x-dev"
+                    "dev-master": "2.4.x-dev"
                 }
             },
             "autoload": {
@@ -1326,31 +1324,34 @@
                 "menu",
                 "nette"
             ],
-            "time": "2019-09-22T13:37:16+00:00"
+            "time": "2020-09-05T21:25:12+00:00"
         },
         {
             "name": "nexendrie/translation",
-            "version": "2.1.0",
+            "version": "2.3.0",
             "source": {
                 "type": "git",
                 "url": "https://gitlab.com/nexendrie/translation.git",
-                "reference": "4bb56ed007375f08438cb60a97eb9cb6926c41b2"
+                "reference": "c2c0a766ac4cd16bf359a029b3c3d7f9d5d2ef44"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://gitlab.com/api/v4/projects/nexendrie%2Ftranslation/repository/archive.zip?sha=4bb56ed007375f08438cb60a97eb9cb6926c41b2",
-                "reference": "4bb56ed007375f08438cb60a97eb9cb6926c41b2",
+                "url": "https://gitlab.com/api/v4/projects/nexendrie%2Ftranslation/repository/archive.zip?sha=c2c0a766ac4cd16bf359a029b3c3d7f9d5d2ef44",
+                "reference": "c2c0a766ac4cd16bf359a029b3c3d7f9d5d2ef44",
                 "shasum": ""
             },
             "require": {
                 "nette/finder": "^2.5.2 ||  ^3.0",
                 "nette/utils": "^3.0",
-                "nexendrie/utils": "^1.6.1",
-                "php": ">=7.2.0"
+                "nexendrie/utils": "^1.8",
+                "php": ">=7.4.0",
+                "symfony/polyfill-php80": "^1.18"
             },
             "require-dev": {
+                "ext-simplexml": "*",
                 "latte/latte": "^3.0",
                 "nette/di": "^3.0.2",
+                "nette/http": "^3.0.3",
                 "nette/neon": "^3.0",
                 "nexendrie/code-quality": "dev-master",
                 "nexendrie/site-generator": "^0.6.2",
@@ -1369,7 +1370,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.1.x-dev"
+                    "dev-master": "2.3.x-dev"
                 }
             },
             "autoload": {
@@ -1400,25 +1401,25 @@
                 "translation",
                 "yaml"
             ],
-            "time": "2020-02-14T12:58:18+00:00"
+            "time": "2020-09-05T22:15:23+00:00"
         },
         {
             "name": "nexendrie/utils",
-            "version": "1.7.0",
+            "version": "1.8.0",
             "source": {
                 "type": "git",
                 "url": "https://gitlab.com/nexendrie/utils.git",
-                "reference": "fd21142ab367f2862d4742bb6c0bae6d5e48414e"
+                "reference": "c4dff98ea5d879020d2b591bf6a11be79e2c0111"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://gitlab.com/api/v4/projects/nexendrie%2Futils/repository/archive.zip?sha=fd21142ab367f2862d4742bb6c0bae6d5e48414e",
-                "reference": "fd21142ab367f2862d4742bb6c0bae6d5e48414e",
+                "url": "https://gitlab.com/api/v4/projects/nexendrie%2Futils/repository/archive.zip?sha=c4dff98ea5d879020d2b591bf6a11be79e2c0111",
+                "reference": "c4dff98ea5d879020d2b591bf6a11be79e2c0111",
                 "shasum": ""
             },
             "require": {
                 "nette/utils": "^3.0",
-                "php": ">=7.3.0"
+                "php": ">=7.4.0"
             },
             "require-dev": {
                 "nexendrie/code-quality": "dev-master",
@@ -1427,7 +1428,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.7.x-dev"
+                    "dev-master": "1.8.x-dev"
                 }
             },
             "autoload": {
@@ -1456,7 +1457,7 @@
                 "range",
                 "utils"
             ],
-            "time": "2020-08-30T17:29:08+00:00"
+            "time": "2020-09-05T17:46:32+00:00"
         },
         {
             "name": "nextras/dbal",
@@ -1637,7 +1638,7 @@
         },
         {
             "name": "symfony/options-resolver",
-            "version": "v5.1.3",
+            "version": "v5.1.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/options-resolver.git",
@@ -2018,21 +2019,21 @@
             "source": {
                 "type": "git",
                 "url": "https://gitlab.com/nexendrie/code-quality.git",
-                "reference": "c653ca562f4e263096f8181c6be4078042338669"
+                "reference": "612cfbddb09e9e637931cc6e61bf589c5fc3f344"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://gitlab.com/api/v4/projects/nexendrie%2Fcode-quality/repository/archive.zip?sha=c653ca562f4e263096f8181c6be4078042338669",
-                "reference": "c653ca562f4e263096f8181c6be4078042338669",
+                "url": "https://gitlab.com/api/v4/projects/nexendrie%2Fcode-quality/repository/archive.zip?sha=612cfbddb09e9e637931cc6e61bf589c5fc3f344",
+                "reference": "612cfbddb09e9e637931cc6e61bf589c5fc3f344",
                 "shasum": ""
             },
             "require": {
                 "nexendrie/testbench": "^2.6.1",
                 "php-parallel-lint/php-console-highlighter": "^0.5",
                 "php-parallel-lint/php-parallel-lint": "^1.2",
-                "phpstan/phpstan": "^0.12.36",
-                "phpstan/phpstan-strict-rules": "^0.12.4",
-                "squizlabs/php_codesniffer": "^3.5"
+                "phpstan/phpstan": "^0.12.40",
+                "phpstan/phpstan-strict-rules": "^0.12.5",
+                "squizlabs/php_codesniffer": "^3.5.6"
             },
             "type": "library",
             "notification-url": "https://packagist.org/downloads/",
@@ -2052,7 +2053,7 @@
                 "quality",
                 "testing"
             ],
-            "time": "2020-08-30T16:01:38+00:00"
+            "time": "2020-08-30T20:21:16+00:00"
         },
         {
             "name": "nexendrie/testbench",
@@ -2279,16 +2280,16 @@
         },
         {
             "name": "phpstan/phpstan",
-            "version": "0.12.40",
+            "version": "0.12.42",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan.git",
-                "reference": "dce7293ad7b59fc09a9ab9b0b5b44902c092ca17"
+                "reference": "7c43b7c2d5ca6554f6231e82e342a710163ac5f4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/dce7293ad7b59fc09a9ab9b0b5b44902c092ca17",
-                "reference": "dce7293ad7b59fc09a9ab9b0b5b44902c092ca17",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/7c43b7c2d5ca6554f6231e82e342a710163ac5f4",
+                "reference": "7c43b7c2d5ca6554f6231e82e342a710163ac5f4",
                 "shasum": ""
             },
             "require": {
@@ -2317,7 +2318,7 @@
                 "MIT"
             ],
             "description": "PHPStan - PHP Static Analysis Tool",
-            "time": "2020-08-26T19:06:20+00:00"
+            "time": "2020-09-02T13:14:53+00:00"
         },
         {
             "name": "phpstan/phpstan-nette",

@@ -6,8 +6,7 @@ namespace HeroesofAbenez\Model;
 use HeroesofAbenez\NPC\Personalities\INpcPersonality;
 
 final class NpcPersonalityChooser extends \Nexendrie\Utils\Collection {
-  /** @var string */
-  protected $class = INpcPersonality::class;
+  protected string $class = INpcPersonality::class;
 
   /**
    * @param INpcPersonality[] $items

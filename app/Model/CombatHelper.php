@@ -4,11 +4,11 @@ declare(strict_types=1);
 namespace HeroesofAbenez\Model;
 
 use HeroesofAbenez\Combat\Character;
+use HeroesofAbenez\Combat\EquipmentCollection;
 use HeroesofAbenez\Combat\Team;
 use HeroesofAbenez\Orm\Model as ORM;
 use HeroesofAbenez\Orm\ArenaFightCount;
 use HeroesofAbenez\Combat\BaseCharacterSkill;
-use Nexendrie\Utils\Collection;
 use HeroesofAbenez\Combat\Equipment;
 
 /**
@@ -98,10 +98,7 @@ final class CombatHelper {
    * @return Equipment[]
    */
   protected function getArenaNpcEquipment(\HeroesofAbenez\Orm\PveArenaOpponent $npc): array {
-    $equipment = new class extends Collection {
-      /** @var string */
-      protected $class = Equipment::class;
-    };
+    $equipment = new EquipmentCollection();
     foreach($npc->equipment as $eq) {
       $eq->item->worn = true;
       $equipment[] = $eq->item->toCombatEquipment();
