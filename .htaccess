@@ -1,3 +1,4 @@
-Order Allow,Deny
-Deny from all
-RewriteEngine Off
+RewriteEngine On
+RewriteCond %{THE_REQUEST} /www/([^\s?]*) [NC]
+RewriteRule ^ %1 [L,NE,R=302]
+RewriteRule ^((?!www/).*)$ www/$1 [L,NC]
