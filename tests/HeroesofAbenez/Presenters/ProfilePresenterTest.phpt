@@ -8,6 +8,10 @@ use Tester\Assert;
 
 require __DIR__ . "/../../bootstrap.php";
 
+/**
+ * @author Jakub Konečný
+ * @testCase
+ */
 final class ProfilePresenterTest extends \Tester\TestCase {
   use TPresenter;
   

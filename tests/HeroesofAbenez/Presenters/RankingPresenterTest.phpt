@@ -5,6 +5,10 @@ namespace HeroesofAbenez\Presenters;
 
 require __DIR__ . "/../../bootstrap.php";
 
+/**
+ * @author Jakub Konečný
+ * @testCase
+ */
 final class RankingPresenterTest extends \Tester\TestCase {
   use TPresenter;
   

@@ -8,6 +8,10 @@ use HeroesofAbenez\NPC\Personalities;
 
 require __DIR__ . "/../../bootstrap.php";
 
+/**
+ * @author Jakub Konečný
+ * @testCase
+ */
 final class NpcPersonalityChooserTest extends \Tester\TestCase {
   /** @var NpcPersonalityChooser */
   protected $model;

@@ -9,6 +9,10 @@ use HeroesofAbenez\Orm\CharacterQuest;
 
 require __DIR__ . "/../../bootstrap.php";
 
+/**
+ * @author Jakub Konečný
+ * @testCase
+ */
 final class QuestTest extends \Tester\TestCase {
   use TCharacterControl;
 

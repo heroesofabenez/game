@@ -10,6 +10,10 @@ use Nextras\Orm\Collection\ICollection;
 
 require __DIR__ . "/../../bootstrap.php";
 
+/**
+ * @author Jakub Konečný
+ * @testCase
+ */
 final class LocationTest extends \Tester\TestCase {
   use TCharacterControl;
 
@@ -73,6 +77,7 @@ final class LocationTest extends \Tester\TestCase {
   }
 
   public function testTravelToStage() {
+    $this->model->user = $this->getService(\Nette\Security\User::class);
     Assert::exception(function() {
       $this->model->travelToStage(5000);
     }, StageNotFoundException::class);

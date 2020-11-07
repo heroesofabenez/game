@@ -7,6 +7,10 @@ use Tester\Assert;
 
 require __DIR__ . "/../../bootstrap.php";
 
+/**
+ * @author Jakub Konečný
+ * @testCase
+ */
 final class AuthorizatorFactoryTest extends \Tester\TestCase {
   /** @var \Nette\Security\Permission */
   protected $model;

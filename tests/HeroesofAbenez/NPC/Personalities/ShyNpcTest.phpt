@@ -9,6 +9,10 @@ use HeroesofAbenez\Orm\Npc;
 use HeroesofAbenez\Utils\Karma;
 use Tester\Assert;
 
+/**
+ * @author Jakub Konečný
+ * @testCase
+ */
 final class ShyNpcTest extends \Tester\TestCase {
   use \Testbench\TCompiledContainer;
   

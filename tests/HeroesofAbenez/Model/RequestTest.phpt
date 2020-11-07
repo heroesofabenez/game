@@ -8,6 +8,10 @@ use HeroesofAbenez\Orm\Request as RequestEntity;
 
 require __DIR__ . "/../../bootstrap.php";
 
+/**
+ * @author Jakub Konečný
+ * @testCase
+ */
 final class RequestTest extends \Tester\TestCase {
   /** @var Request */
   protected $model;

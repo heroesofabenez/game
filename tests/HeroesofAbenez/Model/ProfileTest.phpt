@@ -8,6 +8,10 @@ use Nextras\Orm\Collection\ICollection;
 
 require __DIR__ . "/../../bootstrap.php";
 
+/**
+ * @author Jakub Konečný
+ * @testCase
+ */
 final class ProfileTest extends \Tester\TestCase {
   use TCharacterControl;
 
@@ -66,6 +70,7 @@ final class ProfileTest extends \Tester\TestCase {
   }
 
   public function testLevelUp() {
+    $this->model->user = $this->getService(\Nette\Security\User::class);
     Assert::exception(function() {
       $this->model->levelUp();
     }, NotEnoughExperiencesException::class);
@@ -111,6 +116,7 @@ final class ProfileTest extends \Tester\TestCase {
   }
 
   public function testTrainStat() {
+    $this->model->user = $this->getService(\Nette\Security\User::class);
     Assert::exception(function() {
       $this->model->trainStat("abc");
     }, InvalidStatException::class);

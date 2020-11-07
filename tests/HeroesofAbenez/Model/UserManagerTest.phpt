@@ -8,6 +8,10 @@ use Nette\Security\Identity;
 
 require __DIR__ . "/../../bootstrap.php";
 
+/**
+ * @author Jakub Konečný
+ * @testCase
+ */
 final class UserManagerTest extends \Tester\TestCase {
   use TCharacterControl;
 

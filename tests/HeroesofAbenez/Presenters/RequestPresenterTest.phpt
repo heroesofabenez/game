@@ -8,6 +8,10 @@ require __DIR__ . "/../../bootstrap.php";
 use Nette\Application\BadRequestException;
 use Tester\Assert;
 
+/**
+ * @author Jakub Konečný
+ * @testCase
+ */
 final class RequestPresenterTest extends \Tester\TestCase {
   use TPresenter;
   

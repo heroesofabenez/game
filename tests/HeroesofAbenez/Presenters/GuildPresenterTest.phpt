@@ -8,6 +8,10 @@ use Tester\Assert;
 
 require __DIR__ . "/../../bootstrap.php";
 
+/**
+ * @author Jakub Konečný
+ * @testCase
+ */
 final class GuildPresenterTest extends \Tester\TestCase {
   use TPresenter;
   use \HeroesofAbenez\Model\TCharacterControl;

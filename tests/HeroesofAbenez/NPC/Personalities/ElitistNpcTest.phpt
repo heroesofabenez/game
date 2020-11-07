@@ -8,6 +8,10 @@ require __DIR__ . "/../../../bootstrap.php";
 use HeroesofAbenez\Orm\Npc;
 use Tester\Assert;
 
+/**
+ * @author Jakub Konečný
+ * @testCase
+ */
 final class ElitistNpcTest extends \Tester\TestCase {
   use \Testbench\TCompiledContainer;
   

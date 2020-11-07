@@ -1,11 +1,16 @@
 <?php
 declare(strict_types=1);
+
 namespace HeroesofAbenez\Model;
 
 use Nette\Security\User;
 use \HeroesofAbenez\Orm\Model as ORM;
 use HeroesofAbenez\Orm\Character;
 
+/**
+ * @author Jakub Konečný
+ * @testCase
+ */
 trait TCharacterControl {
   use \Testbench\TCompiledContainer;
 

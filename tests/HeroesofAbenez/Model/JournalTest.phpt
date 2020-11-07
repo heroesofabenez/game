@@ -9,6 +9,10 @@ use HeroesofAbenez\Orm\Pet as PetEntity;
 
 require __DIR__ . "/../../bootstrap.php";
 
+/**
+ * @author Jakub Konečný
+ * @testCase
+ */
 final class JournalTest extends \Tester\TestCase {
   use \Testbench\TCompiledContainer;
   

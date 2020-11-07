@@ -9,6 +9,10 @@ use HeroesofAbenez\Orm\PetType;
 
 require __DIR__ . "/../../bootstrap.php";
 
+/**
+ * @author Jakub Konečný
+ * @testCase
+ */
 final class PetTest extends \Tester\TestCase {
   /** @var Pet */
   protected $model;
