@@ -1,6 +1,6 @@
 include:
   - template: Dependency-Scanning.gitlab-ci.yml        
-  #- template: License-Scanning.gitlab-ci.yml
+  - template: License-Scanning.gitlab-ci.yml
   - template: SAST.gitlab-ci.yml
   - template: Secret-Detection.gitlab-ci.yml
 
@@ -41,11 +41,9 @@ install:
     <<: *default_cache
     policy: pull-push   
    
-#license_scanning:
-  #cache:
-    #<<: *default_cache
-  #variables:
-    #LICENSE_MANAGEMENT_SETUP_CMD: composer install --ignore-platform-reqs
+license_scanning:
+  cache:
+    <<: *default_cache
 
 sast:
   variables:
