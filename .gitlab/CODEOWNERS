@@ -6,6 +6,7 @@
 /LICENSE.md         @heroesofabenez/project-management
 /CONTRIBUTING.md    @heroesofabenez/project-management
 /CHANGELOG.md       @heroesofabenez/project-management
+/composer.json      @heroesofabenez/project-management
 
 [Quality Assurance]
 /phpstan.neon       @heroesofabenez/quality-assurance
@@ -27,10 +28,18 @@ robots.txt          @heroesofabenez/devops
 
 [PHP Code]
 /app/               @konecnyjakub
-/composer.json      @konecnyjakub
+/www/index.php      @konecnyjakub
 
 [CSS]
 /www/styles/        @konecnyjakub
 
 [Tests]
 /tests/             @konecnyjakub
+[Graphics]
+*.png                       @konecnyjakub
+*.jpg                       @konecnyjakub
+*.svg                       @konecnyjakub
+*.ico                       @konecnyjakub
+
+[Templates]
+templates/          @konecnyjakub
