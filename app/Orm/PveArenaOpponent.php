@@ -34,7 +34,7 @@ final class PveArenaOpponent extends \Nextras\Orm\Entity\Entity {
   }
 
   protected function getterWeapon(): ?Item {
-    return $this->class->items->get()->orderBy("requiredLevel", ICollection::DESC)
+    return $this->class->items->toCollection()->orderBy("requiredLevel", ICollection::DESC)
       ->limitBy(1)
       ->getBy([
         ICollection::OR,
@@ -52,7 +52,7 @@ final class PveArenaOpponent extends \Nextras\Orm\Entity\Entity {
   }
 
   protected function getterArmor(): ?Item {
-    return $this->class->items->get()->orderBy("requiredLevel", ICollection::DESC)
+    return $this->class->items->toCollection()->orderBy("requiredLevel", ICollection::DESC)
       ->limitBy(1)
       ->getBy([
         ICollection::OR,
@@ -77,7 +77,7 @@ final class PveArenaOpponent extends \Nextras\Orm\Entity\Entity {
       return [];
     }
     $skills = new CharacterSkillsCollection();
-    $attackSkills = $this->class->attackSkills->get()->findBy([
+    $attackSkills = $this->class->attackSkills->toCollection()->findBy([
       ICollection::OR,
       [
         "neededLevel<=" => $this->level,
@@ -91,7 +91,7 @@ final class PveArenaOpponent extends \Nextras\Orm\Entity\Entity {
     foreach($attackSkills as $skill) {
       $skills[] = new \HeroesofAbenez\Combat\CharacterAttackSkill($skill->toDummy(), 0);
     }
-    $specialSkills = $this->class->specialSkills->get()->findBy([
+    $specialSkills = $this->class->specialSkills->toCollection()->findBy([
       ICollection::OR,
       [
         "neededLevel<=" => $this->level,

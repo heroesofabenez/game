@@ -38,10 +38,12 @@ final class Map {
     }
     $return = ["image" => realpath($filename)];
     foreach($stages as $stage) {
-      $c1 = $stage->posX - 15;
-      $c2 = $stage->posY - 15;
-      $c3 = $stage->posX + 15;
-      $c4 = $stage->posY + 15;
+      $posX = $stage->posX ?? 0;
+      $posY = $stage->posY ?? 0;
+      $c1 = $posX - 15;
+      $c2 = $posY - 15;
+      $c3 = $posX + 15;
+      $c4 = $posY + 15;
       $return["areas"][] = (object) [
         "href" => "", "shape" => "rect", "title" => $stage->name,
         "coords" => "$c1,$c2,$c3,$c4", "stage" => $stage->id

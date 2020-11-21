@@ -134,7 +134,7 @@ final class Quest {
     }
     $record->progress = CharacterQuest::PROGRESS_FINISHED;
     if($quest->itemLose) {
-      $this->itemModel->loseItem($quest->neededItem->id, $quest->itemAmount);
+      $this->itemModel->loseItem(($quest->neededItem !== null) ? $quest->neededItem->id : 0, $quest->itemAmount);
     }
     $record->character->money -= $quest->neededMoney;
     $record->character->money += $record->rewardMoney;

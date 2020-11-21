@@ -119,11 +119,18 @@ final class Skills {
         continue;
       }
       if($skill instanceof SkillAttack) {
-        $return[] = $this->getCharacterAttackSkill($skill->id);
+        $s = $this->getCharacterAttackSkill($skill->id);
+        if($s !== null) {
+          $return[] = $s;
+        }
       } else {
-        $return[] = $this->getCharacterSpecialSkill($skill->id);
+        $s = $this->getCharacterSpecialSkill($skill->id);
+        if($s !== null) {
+          $return[] = $s;
+        }
       }
     }
+    /** @var BaseCharacterSkill[] $return */
     return $return;
   }
   

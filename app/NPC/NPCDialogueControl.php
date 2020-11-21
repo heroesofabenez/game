@@ -39,8 +39,10 @@ final class NPCDialogueControl extends \Nette\Application\UI\Control {
   }
 
   protected function getNpcMood(): string {
-    $personality = $this->npcPersonalityChooser->getPersonality($this->npc);
-    return $personality->getMood($this->user->identity, $this->npc);
+    /** @var Npc $npc */
+    $npc = $this->npc;
+    $personality = $this->npcPersonalityChooser->getPersonality($npc);
+    return $personality->getMood($this->user->identity, $npc);
   }
 
   /**

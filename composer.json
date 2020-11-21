@@ -27,14 +27,15 @@
         "nexendrie/translation": "^2.3.1",
         "nexendrie/menu": "^2.4",
         "nexendrie/utils": "^1.8",
-        "nextras/orm": "^3.1.4",
+        "nextras/orm": "^4.0.1",
         "symfony/options-resolver": "^5.0",
         "heroesofabenez/chat": "^2.1",
         "heroesofabenez/combat": "^1.0"
     },
     "require-dev": {
         "nexendrie/code-quality": "dev-master",
-        "phpstan/phpstan-nette": "^0.12"
+        "phpstan/phpstan-nette": "^0.12",
+        "nextras/orm-phpstan": "^v0.6.1"
     },
     "replace": {
         "symfony/polyfill-php73": "*",

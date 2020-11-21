@@ -3,7 +3,9 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Model;
 
+use HeroesofAbenez\Orm\Character as CharacterEntity;
 use HeroesofAbenez\Orm\GuildDonation;
+use HeroesofAbenez\Orm\GuildRank;
 use HeroesofAbenez\Orm\Request as RequestEntity;
 use HeroesofAbenez\Orm\Guild as GuildEntity;
 use HeroesofAbenez\Orm\Model as ORM;
@@ -74,9 +76,10 @@ final class Guild {
       $members = $members->findBy(["guildrank" => $roles]);
     }
     foreach($members as $member) {
+      /** @var GuildRank $rank */
       $rank = $member->guildrank;
       $m = (object) [
-        "id" => $member->id, "name" => $member->name, "rank" => $rank, "rankId" => $member->guildrank->id,
+        "id" => $member->id, "name" => $member->name, "rank" => $rank, "rankId" => $rank->id,
         "customRankName" => "", "currentGuildContribution" => $member->currentGuildContribution,
       ];
       if($customRoleNames) {
@@ -121,7 +124,9 @@ final class Guild {
     $request = new RequestEntity();
     $this->orm->requests->attach($request);
     $request->from = $this->user->id;
-    $request->to = $guild->leader;
+    /** @var CharacterEntity $leader */
+    $leader = $guild->leader;
+    $request->to = $leader;
     $request->type = RequestEntity::TYPE_GUILD_APP;
     $this->orm->requests->persistAndFlush($request);
   }
@@ -145,8 +150,11 @@ final class Guild {
    * @return ICollection|RequestEntity[]
    */
   public function showApplications(int $id): ICollection {
+    /** @var GuildEntity $guild */
     $guild = $this->view($id);
-    return $this->orm->requests->findUnresolvedGuildApplications($guild->leader->id);
+    /** @var CharacterEntity $leader */
+    $leader = $guild->leader;
+    return $this->orm->requests->findUnresolvedGuildApplications($leader->id);
   }
   
   /**
@@ -181,7 +189,7 @@ final class Guild {
     if($character === null) {
       throw new PlayerNotFoundException();
     }
-    if($character->guild === null) {
+    if($character->guild === null || $character->guildrank === null) {
       throw new PlayerNotInGuildException();
     }
     if($character->guild->id !== $admin->identity->guild) {
@@ -229,7 +237,7 @@ final class Guild {
     if($character->guild === null) {
       throw new PlayerNotInGuildException();
     }
-    if($character->guild->id !== $admin->identity->guild) {
+    if($character->guild->id !== $admin->identity->guild || $character->guildrank === null) {
       throw new PlayerNotInGuildException();
     }
     $adminRole = $this->permissionsModel->getRankId($admin->roles[0]);
@@ -264,7 +272,7 @@ final class Guild {
     if($character === null) {
       throw new PlayerNotFoundException();
     }
-    if($character->guild === null || $character->guild->id !== $admin->identity->guild) {
+    if($character->guild === null || $character->guild->id !== $admin->identity->guild || $character->guildrank === null) {
       throw new PlayerNotInGuildException();
     }
     $adminRole = $this->permissionsModel->getRankId($admin->roles[0]);
@@ -298,11 +306,13 @@ final class Guild {
    * Dissolve guild
    */
   public function dissolve(int $id): void {
+    /** @var GuildEntity $guild */
     $guild = $this->orm->guilds->getById($id);
     foreach($guild->members as $member) {
       $member->guild = $member->guildrank = null;
       $this->orm->characters->persist($member);
     }
+    /** @var GuildEntity $guild */
     $guild = $this->orm->guilds->getById($id);
     $this->orm->guilds->remove($guild);
     $this->orm->flush();
@@ -318,6 +328,7 @@ final class Guild {
     if($guild !== null && $guild->id !== $id) {
       throw new NameInUseException();
     }
+    /** @var GuildEntity $guild */
     $guild = $this->orm->guilds->getById($id);
     $guild->name = $name;
     $this->orm->guilds->persistAndFlush($guild);
@@ -399,11 +410,11 @@ final class Guild {
    * @throws InsufficientFundsException
    */
   public function donate(int $amount): void {
-    if($this->user->identity->guild === 0) {
-      throw new NotInGuildException();
-    }
     /** @var \HeroesofAbenez\Orm\Character $character */
     $character = $this->orm->characters->getById($this->user->id);
+    if($character->guild === null) {
+      throw new NotInGuildException();
+    }
     if($character->money < $amount) {
       throw new InsufficientFundsException();
     }

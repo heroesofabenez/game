@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "644fd1eec3159ab577d7d169e52f9628",
+    "content-hash": "e6f2565251ccbeb6d73e93c70bdbb5ec",
     "packages": [
         {
             "name": "heroesofabenez/chat",
@@ -1557,16 +1557,16 @@
         },
         {
             "name": "nextras/dbal",
-            "version": "v3.1.2",
+            "version": "v4.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nextras/dbal.git",
-                "reference": "884431eb074bebab8dd2bdfb7b68055a78ecabbb"
+                "reference": "bb7cac5bd7793229733fc0b997e7cf8a6acb5369"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nextras/dbal/zipball/884431eb074bebab8dd2bdfb7b68055a78ecabbb",
-                "reference": "884431eb074bebab8dd2bdfb7b68055a78ecabbb",
+                "url": "https://api.github.com/repos/nextras/dbal/zipball/bb7cac5bd7793229733fc0b997e7cf8a6acb5369",
+                "reference": "bb7cac5bd7793229733fc0b997e7cf8a6acb5369",
                 "shasum": ""
             },
             "require": {
@@ -1580,21 +1580,27 @@
                 "nette/neon": "~3.0",
                 "nette/tester": "~2.3.1",
                 "nette/utils": "~3.0",
-                "phpstan/phpstan-shim": "0.11.12",
+                "phpstan/extension-installer": "1.0.5",
+                "phpstan/phpstan": "0.12.48",
+                "phpstan/phpstan-deprecation-rules": "0.12.5",
+                "phpstan/phpstan-strict-rules": "0.12.5",
+                "symfony/config": "~4.4 || ~5.0",
+                "symfony/dependency-injection": "~4.4 || ~5.0",
+                "symfony/http-kernel": "~4.4 || ~5.0",
                 "tracy/tracy": "~2.7"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "3.1-dev"
+                    "dev-master": "4.0-dev"
                 }
             },
             "autoload": {
                 "psr-4": {
                     "Nextras\\Dbal\\": "src/"
                 },
-                "classmap": [
-                    "src/exceptions.php"
+                "files": [
+                    "srcCompat/compatibility.php"
                 ]
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -1616,55 +1622,69 @@
             ],
             "support": {
                 "issues": "https://github.com/nextras/dbal/issues",
-                "source": "https://github.com/nextras/dbal/tree/v3.1"
+                "source": "https://github.com/nextras/dbal/tree/v4.0.1"
             },
-            "time": "2020-02-26T12:32:09+00:00"
+            "funding": [
+                {
+                    "url": "https://github.com/hrach",
+                    "type": "github"
+                }
+            ],
+            "time": "2020-10-11T08:35:09+00:00"
         },
         {
             "name": "nextras/orm",
-            "version": "v3.1.4",
+            "version": "v4.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nextras/orm.git",
-                "reference": "d781eb328a345a680f9790c345337a2cb97b1109"
+                "reference": "4e27857df38d4e65b06dd214df2b043174b5bb03"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nextras/orm/zipball/d781eb328a345a680f9790c345337a2cb97b1109",
-                "reference": "d781eb328a345a680f9790c345337a2cb97b1109",
+                "url": "https://api.github.com/repos/nextras/orm/zipball/4e27857df38d4e65b06dd214df2b043174b5bb03",
+                "reference": "4e27857df38d4e65b06dd214df2b043174b5bb03",
                 "shasum": ""
             },
             "require": {
-                "nette/caching": "~2.5 || ~3.0@rc",
-                "nette/tokenizer": "~2.3 || ~3.0@rc",
-                "nette/utils": "~2.5 || ~3.0@rc",
-                "nextras/dbal": "~3.0 || ~3.1@dev",
+                "ext-ctype": "*",
+                "ext-json": "*",
+                "nette/caching": "~2.5 || ~3.0",
+                "nette/tokenizer": "~2.3 || ~3.0",
+                "nette/utils": "~2.5 || ~3.0",
+                "nextras/dbal": "~4.0",
                 "php": ">=7.1"
             },
             "require-dev": {
                 "marc-mabe/php-enum": "~3.0",
+                "marc-mabe/php-enum-phpstan": "dev-master",
                 "mockery/mockery": "~1.2",
-                "nette/bootstrap": "~2.4 || ~3.0@rc",
-                "nette/di": "~2.4 >=2.4.10 || ~3.0@beta",
-                "nette/finder": "~2.4 || ~3.0@rc",
-                "nette/neon": "~2.4 || ~3.0@rc",
-                "nette/tester": "~2.1",
-                "phpstan/phpstan-nette": "0.11",
-                "phpstan/phpstan-shim": "0.11.1",
+                "nette/bootstrap": "~2.4 || ~3.0",
+                "nette/di": "~2.4 >=2.4.10 || ~3.0",
+                "nette/finder": "~2.4 || ~3.0",
+                "nette/neon": "~2.4 || ~3.0",
+                "nette/tester": "~2.3",
+                "nextras/orm-phpstan": "dev-master",
+                "phpstan/extension-installer": "1.0.5",
+                "phpstan/phpstan": "0.12.42",
+                "phpstan/phpstan-deprecation-rules": "0.12.5",
+                "phpstan/phpstan-mockery": "0.12.7",
+                "phpstan/phpstan-nette": "0.12.9",
+                "phpstan/phpstan-strict-rules": "0.12.5",
                 "tracy/tracy": "~2.3"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "3.1-dev"
+                    "dev-master": "4.0-dev"
                 }
             },
             "autoload": {
                 "psr-4": {
                     "Nextras\\Orm\\": "src/"
                 },
-                "classmap": [
-                    "src/exceptions.php"
+                "files": [
+                    "srcCompat/compatibility.php"
                 ]
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -1686,7 +1706,7 @@
             ],
             "support": {
                 "issues": "https://github.com/nextras/orm/issues",
-                "source": "https://github.com/nextras/orm/tree/v3.1.4"
+                "source": "https://github.com/nextras/orm/tree/v4.0.1"
             },
             "funding": [
                 {
@@ -1694,7 +1714,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2020-09-13T20:56:36+00:00"
+            "time": "2020-10-09T17:34:39+00:00"
         },
         {
             "name": "symfony/deprecation-contracts",
@@ -2320,6 +2340,52 @@
                 "source": "https://github.com/nexendrie/testbench/tree/v2.7.1"
             },
             "time": "2020-11-03T18:07:45+00:00"
+        },
+        {
+            "name": "nextras/orm-phpstan",
+            "version": "v0.6.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/nextras/orm-phpstan.git",
+                "reference": "403e9c9baf26777784e597a5468ee19bff3be34c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/nextras/orm-phpstan/zipball/403e9c9baf26777784e597a5468ee19bff3be34c",
+                "reference": "403e9c9baf26777784e597a5468ee19bff3be34c",
+                "shasum": ""
+            },
+            "require": {
+                "nextras/orm": "~4.0",
+                "php": "~7.1 || ~8.0",
+                "phpstan/phpstan": "^0.12.29"
+            },
+            "require-dev": {
+                "nette/tester": "^2.3.1"
+            },
+            "type": "phpstan-extension",
+            "extra": {
+                "phpstan": {
+                    "includes": [
+                        "extension.neon"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Nextras\\OrmPhpStan\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "PHPStan extension for Nextras Orm",
+            "support": {
+                "issues": "https://github.com/nextras/orm-phpstan/issues",
+                "source": "https://github.com/nextras/orm-phpstan/tree/v0.6.1"
+            },
+            "time": "2020-10-26T21:28:28+00:00"
         },
         {
             "name": "php-parallel-lint/php-console-color",

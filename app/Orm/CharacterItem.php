@@ -44,7 +44,9 @@ final class CharacterItem extends \Nextras\Orm\Entity\Entity {
   public function toCombatEquipment(): ?\HeroesofAbenez\Combat\Equipment {
     $this->item->worn = $this->worn;
     $equipment = $this->item->toCombatEquipment();
-    $equipment->durability = $this->durability;
+    if($equipment !== null) {
+      $equipment->durability = $this->durability;
+    }
     return $equipment;
   }
 

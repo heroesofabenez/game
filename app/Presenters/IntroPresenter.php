@@ -20,7 +20,7 @@ final class IntroPresenter extends BasePresenter {
   protected function startup(): void {
     $this->reloadIdentity();
     parent::startup();
-    $this->part = $this->template->part = $this->model->getIntroPosition();
+    $this->part = $this->template->part = (int) $this->model->getIntroPosition();
   }
   
   public function renderDefault(): void {

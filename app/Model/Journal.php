@@ -6,6 +6,7 @@ namespace HeroesofAbenez\Model;
 use HeroesofAbenez\Orm\CharacterQuest as CharacterQuestEntity;
 use HeroesofAbenez\Orm\Pet as PetEntity;
 use HeroesofAbenez\Orm\Model as ORM;
+use HeroesofAbenez\Orm\QuestStage as QuestStageEntity;
 use Nextras\Orm\Collection\ICollection;
 use Nette\Localization\ITranslator;
 
@@ -44,6 +45,7 @@ final class Journal {
   public function basic(): array {
     /** @var \HeroesofAbenez\Orm\Character $character */
     $character = $this->orm->characters->getById($this->user->id);
+    /** @var QuestStageEntity $stage */
     $stage = $character->currentStage;
     $return = [
       "name" => $character->name, "gender" => $character->gender, "race" => $character->race->id,
@@ -56,7 +58,7 @@ final class Journal {
     $return["guild"] = false;
     if($character->guild !== null) {
       $return["guild"] = $character->guild->name;
-      $return["guildRank"] = $character->guildrank->id;
+      $return["guildRank"] = ($character->guildrank !== null) ? $character->guildrank->id : "";
     }
     return $return;
   }

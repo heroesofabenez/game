@@ -20,12 +20,14 @@ final class CharactersRankingControl extends RankingControl {
   }
   
   public function getData(): array {
-    $this->paginator->itemCount = $this->orm->characters->findAll()->countStored();
+    /** @var \Nette\Utils\Paginator $paginator */
+    $paginator = $this->paginator;
+    $paginator->itemCount = $this->orm->characters->findAll()->countStored();
     $characters = $this->orm->characters->findAll()
       ->orderBy("level", ICollection::DESC)
       ->orderBy("experience", ICollection::DESC)
       ->orderBy("id")
-      ->limitBy($this->paginator->getLength(), $this->paginator->getOffset());
+      ->limitBy($paginator->getLength(), $paginator->getOffset());
     $chars = [];
     /** @var \HeroesofAbenez\Orm\Character $character */
     foreach($characters as $character) {

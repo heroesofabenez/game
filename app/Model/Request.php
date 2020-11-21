@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Model;
 
+use HeroesofAbenez\Orm\Character as CharacterEntity;
 use HeroesofAbenez\Orm\Friendship;
 use HeroesofAbenez\Orm\Request as RequestEntity;
 use Nette\NotImplementedException;
@@ -40,6 +41,7 @@ final class Request {
         if($request->to->id === $this->user->id) {
           return true;
         }
+        /** @var CharacterEntity $leader */
         $leader = $this->orm->characters->getById($request->from->id);
         $guild = ($leader->guild !== null) ? $leader->guild->id : null;
         return ($this->user->identity->guild === $guild && $this->user->isAllowed("guild", "invite"));
@@ -47,6 +49,7 @@ final class Request {
         if($request->from->id === $this->user->id) {
           return true;
         }
+        /** @var CharacterEntity $leader */
         $leader = $this->orm->characters->getById($request->to->id);
         $guild = ($leader->guild !== null) ? $leader->guild->id : null;
         return ($this->user->identity->guild === $guild && $this->user->isAllowed("guild", "invite"));
@@ -117,12 +120,12 @@ final class Request {
         throw new NotImplementedException();
       case RequestEntity::TYPE_GUILD_APP:
         $uid = $request->from->id;
-        $gid = ($request->to->guild !== null) ? $request->to->guild->id : null;
+        $gid = ($request->to->guild !== null) ? $request->to->guild->id : 0;
         $this->guildModel->join($uid, $gid);
         break;
       case RequestEntity::TYPE_GUILD_JOIN:
         $uid = $request->to->id;
-        $gid = ($request->from->guild !== null) ? $request->from->guild->id : null;
+        $gid = ($request->from->guild !== null) ? $request->from->guild->id : 0;
         $this->guildModel->join($uid, $gid);
         break;
     }

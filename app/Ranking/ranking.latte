@@ -7,5 +7,5 @@
     {/foreach}
   </table>
   {if $paginator}
-  <p>{if $paginator->pageCount !== 1}Page {$paginator->page}/{$paginator->pageCount}{/if} {if !$paginator->first}<a n:href="Ranking:default $paginator->page-1">{_"texts.ranking.previous"}</a>{/if} {if !$paginator->last}<a n:href="Ranking:default $paginator->page+1">{_"texts.ranking.next"}</a>{/if}</p>
+  <p>{if $paginator->pageCount !== 1}Page {$paginator->page}/{$paginator->pageCount}{/if} {if !$paginator->first}<a href="{plink Ranking:$name $paginator->page-1}">{_"texts.ranking.previous"}</a>{/if} {if !$paginator->last}<a href="{plink Ranking:$name $paginator->page+1}">{_"texts.ranking.next"}</a>{/if}</p>
   {/if}

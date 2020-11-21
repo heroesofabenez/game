@@ -52,9 +52,12 @@ final class CombatHelper {
    */
   protected function getPlayerEquipment(\HeroesofAbenez\Orm\Character $character): array {
     $equipment = [];
-    $items = $character->items->get()->findBy(["worn" => true]);
+    $items = $character->items->toCollection()->findBy(["worn" => true, ]);
     foreach($items as $item) {
-      $equipment[] = $item->toCombatEquipment();
+      $e = $item->toCombatEquipment();
+      if($e !== null) {
+        $equipment[] = $e;
+      }
     }
     return $equipment;
   }
@@ -82,7 +85,7 @@ final class CombatHelper {
       }
     }
     $data["occupation"] = $character->class->name;
-    $data["specialization"] = ($character->specialization) ? $character->specialization->name : "";
+    $data["specialization"] = ($character->specialization !== null) ? $character->specialization->name : "";
     $data["initiativeFormula"] = $character->class->initiative;
     $pet = $character->activePet;
     if($pet !== null) {
@@ -101,15 +104,24 @@ final class CombatHelper {
     $equipment = new EquipmentCollection();
     foreach($npc->equipment as $eq) {
       $eq->item->worn = true;
-      $equipment[] = $eq->item->toCombatEquipment();
+      $e = $eq->item->toCombatEquipment();
+      if($e !== null) {
+        $equipment[] = $e;
+      }
     }
     if(!$equipment->hasItems(["slot" => Equipment::SLOT_WEAPON]) && $npc->weapon !== null) {
       $npc->weapon->worn = true;
-      $equipment[] = $npc->weapon->toCombatEquipment();
+      $e = $npc->weapon->toCombatEquipment();
+      if($e !== null) {
+        $equipment[] = $e;
+      }
     }
     if(!$equipment->hasItems(["slot" => Equipment::SLOT_ARMOR]) && $npc->armor !== null) {
       $npc->armor->worn = true;
-      $equipment[] = $npc->armor->toCombatEquipment();
+      $e = $npc->armor->toCombatEquipment();
+      if($e !== null) {
+        $equipment[] = $e;
+      }
     }
     return $equipment->toArray();
   }
@@ -138,7 +150,7 @@ final class CombatHelper {
     $data["id"] = "pveArenaNpc" . $npc->id;
     $data["initiativeFormula"] = $npc->class->initiative;
     $data["occupation"] = $npc->class->name;
-    $data["specialization"] = ($npc->specialization) ? $npc->specialization->name : "";
+    $data["specialization"] = ($npc->specialization !== null) ? $npc->specialization->name : "";
     $equipment = $this->getArenaNpcEquipment($npc);
     $npc = new Character($data, $equipment, [], $npc->skills);
     return $npc;
@@ -168,7 +180,7 @@ final class CombatHelper {
     $data["id"] = "commonNpc" . $npc->id;
     $data["initiativeFormula"] = $npc->class->initiative;
     $data["occupation"] = $npc->class->name;
-    $data["specialization"] = ($npc->specialization) ? $npc->specialization->name : "";
+    $data["specialization"] = ($npc->specialization !== null) ? $npc->specialization->name : "";
     return new Character($data);
   }
   

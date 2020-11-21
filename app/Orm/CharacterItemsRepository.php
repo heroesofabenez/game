@@ -40,7 +40,7 @@ final class CharacterItemsRepository extends \Nextras\Orm\Repository\Repository 
   public function findByCharacterAndSlot($character, string $slot): ICollection {
     return $this->findBy([
       "character" => $character,
-      "this->item->slot" => $slot
+      "item->slot" => $slot
     ]);
   }
 

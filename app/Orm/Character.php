@@ -33,7 +33,7 @@ use Nexendrie\Utils\Numbers;
  * @property int $whiteKarma {default 0}
  * @property int $darkKarma {default 0}
  * @property-read string $predominantKarma {virtual}
- * @property int|null $intro {default 1}
+ * @property int $intro {default 1}
  * @property \DateTimeImmutable $joined
  * @property \DateTimeImmutable $lastActive
  * @property-read string $lastActiveS {virtual}
@@ -68,7 +68,7 @@ final class Character extends \Nextras\Orm\Entity\Entity {
   }
 
   protected function getterActivePet(): ?Pet {
-    return $this->pets->get()->limitBy(1)->getBy(["deployed" => true]);
+    return $this->pets->toCollection()->limitBy(1)->getBy(["deployed" => true]);
   }
 
   protected function getterCharismaBonus(): int {
@@ -86,7 +86,7 @@ final class Character extends \Nextras\Orm\Entity\Entity {
       return $amount;
     }
     /** @var int[] $donations */
-    $donations = $this->guildDonations->get()->findBy(["guild" => $this->guild])->fetchPairs(null, "amount");
+    $donations = $this->guildDonations->toCollection()->findBy(["guild" => $this->guild])->fetchPairs(null, "amount");
     foreach($donations as $donation) {
       $amount += $donation;
     }

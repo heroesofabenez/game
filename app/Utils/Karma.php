@@ -51,12 +51,12 @@ final class Karma {
   public static function getOpposite(string $karma): ?string {
     static::validateKarma($karma);
     switch($karma) {
-      case static::KARMA_NEUTRAL:
-        return null;
       case static::KARMA_WHITE:
         return static::KARMA_DARK;
       case static::KARMA_DARK:
         return static::KARMA_WHITE;
+      default:
+        return null;
     }
   }
   

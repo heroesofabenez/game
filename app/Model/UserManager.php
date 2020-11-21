@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Model;
 
+use HeroesofAbenez\Orm\CharacterClass;
+use HeroesofAbenez\Orm\CharacterRace;
 use Nette\Security\Identity;
 use HeroesofAbenez\Orm\Model as ORM;
 use HeroesofAbenez\Orm\Character;
@@ -53,14 +55,14 @@ final class UserManager implements \Nette\Security\IAuthenticator {
       "name" => $char->name, "race" => $char->race->id, "gender" => $char->gender,
       "class" => $char->class->id,
       "specialization" => ($char->specialization !== null) ? $char->specialization->id : null,
-      "level" => $char->level, "stage" => $char->currentStage->id,
+      "level" => $char->level, "stage" => ($char->currentStage !== null) ? $char->currentStage->id : null,
       "white_karma" => $char->whiteKarma, "dark_karma" => $char->darkKarma,
     ];
     $data["guild"] = 0;
     $role = "player";
     if($char->guild !== null) {
       $data["guild"] = $char->guild->id;
-      $role = $char->guildrank->name;
+      $role = ($char->guildrank !== null) ? $char->guildrank->name : "";
     }
     $char->lastActive = new \DateTimeImmutable();
     $this->orm->characters->persistAndFlush($char);
@@ -78,7 +80,9 @@ final class UserManager implements \Nette\Security\IAuthenticator {
       return null;
     }
 
+    /** @var CharacterClass $class */
     $class = $this->orm->classes->getById($values["class"]);
+    /** @var CharacterRace $race */
     $race = $this->orm->races->getById($values["race"]);
     $data = $this->cb->create($class, $race);
     $data["name"] = $values["name"];
