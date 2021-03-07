@@ -12,6 +12,7 @@ parameters:
         - ci
     universalObjectCratesClasses:
         - Nette\Security\IIdentity
+    reportUnmatchedIgnoredErrors: false
     ignoreErrors:
         - '#Call to an undefined method Nette\\ComponentModel\\IComponent::(getControlPrototype|setDefaultValue)\(\)#'
         - '#Access to an undefined property Nette\\ComponentModel\\IComponent::\$value#'
@@ -19,3 +20,4 @@ parameters:
         - '#Variable property access on \$this\([a-zA-Z\\]+\)#'
         - '#Variable method call on \$this\(HeroesofAbenez\\Model\\Skills\)#'
         - '#Method HeroesofAbenez\\Model\\Intro::getStartingLocation\(\) should return int but return statement is missing#'
+        - '#Parameter \#1 $handle of function curl_exec expects CurlHandle, resource given#'
