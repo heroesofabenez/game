@@ -20,4 +20,4 @@ parameters:
         - '#Variable property access on \$this\([a-zA-Z\\]+\)#'
         - '#Variable method call on \$this\(HeroesofAbenez\\Model\\Skills\)#'
         - '#Method HeroesofAbenez\\Model\\Intro::getStartingLocation\(\) should return int but return statement is missing#'
-        - '#Parameter \#1 \$handle of function curl_exec expects CurlHandle, resource given#'
+        - '#Parameter \#1 \$handle of function (curl_exec|curl_setopt|curl_close) expects CurlHandle, resource given#'
