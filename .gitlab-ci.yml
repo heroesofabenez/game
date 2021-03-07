@@ -54,6 +54,11 @@ sast:
 test:default:
   <<: *test_job
 
+test:php8.0:
+  <<: *test_job
+  image: nexendrie/php:8.0
+  allow_failure: true
+
 test:cc:
   <<: *test_job
   script:
