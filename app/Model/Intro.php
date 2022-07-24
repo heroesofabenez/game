@@ -69,6 +69,7 @@ final class Intro {
     if($raceSL !== null) {
       return $raceSL->id;
     }
+    return 0;
   }
   
   /**

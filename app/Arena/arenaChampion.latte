@@ -20,7 +20,7 @@
   {if $champion->skills}
   <p>{_"texts.arena.usesSkills"}</p>
   <ul n:inner-foreach="$champion->skills as $skill">
-    <li><a href="{plink Skill:$skill->skillType $skill->skill->id}">{$skill->skill->name}</a> {_"texts.arena.skillOnLevel", $skill->level}</li>
+    <li><a href='{plink "Skill:$skill->skillType" $skill->skill->id}'>{$skill->skill->name}</a> {_"texts.arena.skillOnLevel", $skill->level}</li>
   </ul>
   {/if}
 {/if}

@@ -15,7 +15,7 @@
   <h2>{_"texts.training.skills"}</h2>
   <ul n:inner-foreach="$skills as $skill">
     {capture $skillType}{if $skill instanceof \HeroesofAbenez\Orm\CharacterAttackSkill}attack{elseif $skill instanceof \HeroesofAbenez\Orm\CharacterSpecialSkill}special{else}{/if}{/capture}
-    <li><a n:href="Skill:$skillType $skill->skill->id">{$skill->skill->name}</a> {_"texts.training.skillCurrentLevel", $skill->level} {if $skillPoints and $skill->level < $skill->skill->levels}<a n:href="trainSkill! $skill->skill->id, (string) $skillType">{_"texts.training.train"}</a>{/if}</li>
+    <li><a n:href='"Skill:$skillType" $skill->skill->id'>{$skill->skill->name}</a> {_"texts.training.skillCurrentLevel", $skill->level} {if $skillPoints and $skill->level < $skill->skill->levels}<a n:href="trainSkill! $skill->skill->id, (string) $skillType">{_"texts.training.train"}</a>{/if}</li>
   </ul>
   <p>{_"texts.training.usableSkillPoints", $skillPoints}</p>
 {/block}
