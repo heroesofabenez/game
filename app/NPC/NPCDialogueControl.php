@@ -5,7 +5,6 @@ namespace HeroesofAbenez\NPC;
 
 use HeroesofAbenez\Model\NpcPersonalityChooser;
 use HeroesofAbenez\Orm\Npc;
-use Nette\Localization\ITranslator;
 use Nexendrie\Translation\ILoader;
 use Nette\Utils\Strings;
 
@@ -18,14 +17,12 @@ use Nette\Utils\Strings;
  */
 final class NPCDialogueControl extends \Nette\Application\UI\Control {
   protected \Nette\Security\User $user;
-  protected ITranslator $translator;
   protected ILoader $loader;
   protected NpcPersonalityChooser $npcPersonalityChooser;
   public ?Npc $npc = null;
   
-  public function __construct(\Nette\Security\User $user, ITranslator $translator, ILoader $loader, NpcPersonalityChooser $npcPersonalityChooser) {
+  public function __construct(\Nette\Security\User $user, ILoader $loader, NpcPersonalityChooser $npcPersonalityChooser) {
     $this->user = $user;
-    $this->translator = $translator;
     $this->loader = $loader;
     $this->npcPersonalityChooser = $npcPersonalityChooser;
   }
