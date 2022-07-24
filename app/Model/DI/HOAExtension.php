@@ -74,7 +74,7 @@ final class HOAExtension extends \Nette\DI\CompilerExtension {
     $builder->addDefinition($this->prefix("model.map"))
       ->setType(HeroesofAbenez\Model\Map::class);
     $builder->addDefinition($this->prefix("model.mapDrawer"))
-      ->setFactory(HeroesofAbenez\Model\MapDrawer::class, [$builder->parameters['wwwDir']]);
+      ->setType(HeroesofAbenez\Model\MapDrawer::class);
     $builder->addDefinition($this->prefix("model.permissions"))
       ->setType(HeroesofAbenez\Model\Permissions::class);
     $builder->addDefinition($this->prefix("model.pet"))
@@ -106,6 +106,8 @@ final class HOAExtension extends \Nette\DI\CompilerExtension {
       ->setType(HeroesofAbenez\Model\RouterFactory::class);
     $builder->addDefinition("router")
       ->setFactory("@" . HeroesofAbenez\Model\RouterFactory::class . "::create");
+    $builder->addDefinition($this->prefix("model.applicationDirectories"))
+      ->setFactory(HeroesofAbenez\Model\ApplicationDirectories::class, [$builder->parameters['wwwDir'], $builder->parameters['appDir'],]);
   }
   
   protected function addCombat(): void {

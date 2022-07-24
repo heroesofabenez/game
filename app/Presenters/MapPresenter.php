@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Presenters;
 
+use HeroesofAbenez\Model\ApplicationDirectories;
+
 /**
  * Presenter Map
  *
@@ -10,15 +12,17 @@ namespace HeroesofAbenez\Presenters;
  */
 final class MapPresenter extends BasePresenter {
   protected \HeroesofAbenez\Model\Map $model;
+  private ApplicationDirectories $directories;
   
-  public function __construct(\HeroesofAbenez\Model\Map $model) {
+  public function __construct(\HeroesofAbenez\Model\Map $model, ApplicationDirectories $directories) {
     parent::__construct();
     $this->model = $model;
+    $this->directories = $directories;
   }
   
   public function actionLocal(): void {
     $data = $this->model->local();
-    $this->template->wwwDir = $this->getContext()->parameters['wwwDir'];
+    $this->template->wwwDir = $this->directories->wwwDir;
     foreach($data as $key => $value) {
       if($key === "areas") {
         foreach($value as $area) {
