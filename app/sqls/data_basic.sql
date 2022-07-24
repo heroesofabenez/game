@@ -123,7 +123,8 @@ INSERT INTO `items` (`id`, `name`, `slot`, `type`, `required_level`, `required_c
 (67,	'Priest\'s Crook',	'weapon',	'staff',	15,	6,	9,	23,	3,	30),
 (68,	'Priest\'s Gown',	'armor',	NULL,	15,	6,	9,	28,	3,	20),
 (69,	'Monk\'s Flail',	'weapon',	'club',	15,	6,	10,	28,	3,	30),
-(70,	'Monk\'s Cowl',	'armor',	NULL,	15,	6,	10,	28,	3,	20);
+(70,	'Monk\'s Cowl',	'armor',	NULL,	15,	6,	10,	28,	3,	20),
+(71,    'Treating injuries', 'item', null, 1, null, null, 10, 0, 1);
 
 INSERT INTO `pet_types` (`id`, `name`, `bonus_stat`, `bonus_value`, `image`, `required_level`, `required_class`, `required_race`, `cost`) VALUES
 (1,	'Rescued Lion',	'constitution',	5,	'',	8,	1,	NULL,	0),
@@ -190,7 +191,9 @@ INSERT INTO `quests` (`id`, `name`, `required_level`, `required_class`, `require
   (3,	'Find a book',	1,	3,	NULL,	1,	1,	1,	0,	0,	0,	10,	NULL,	0,	0,	NULL,	1,	1),
   (4,	'Get your equipment',	1,	3,	NULL,	3,	6,	1,	0,	0,	0,	5,	10,	0,	0,	NULL,	1,	1),
   (5,	'Find a book',	1,	1,	1,	2,	33,	1,	0,	0,	0,	10,	NULL,	0,	0,	NULL,	3,	3),
-  (6,	'Get your equipment',	1,	1,	1,	5,	2,	1,	0,	0,	0,	5,	8,	0,	0,	NULL,	3,	3);
+  (6,	'Get your equipment',	1,	1,	1,	5,	2,	1,	0,	0,	0,	5,	8,	0,	0,	NULL,	3,	3),
+  (7,   'Earning money', 1, 3, null, 4, null, 0, 0, 5, 10, 30, null, 0, 0, null, 1, 1),
+  (8,   'New helper', 2, 3, null, 7, 71, 1, 1, 0, 15, 20, null, 0, 0, null, 5, 5);
 
 INSERT INTO `quest_areas` (`id`, `name`, `required_level`, `required_race`, `required_class`, `pos_x`, `pos_y`, `entry_stage`) VALUES
 (1,	'Academy of Magic',	0,	NULL,	3,	220,	35,	2),
@@ -223,16 +226,17 @@ INSERT INTO `routes_stages` (`id`, `from`, `to`) VALUES
 
 INSERT INTO `shop_items` (`id`, `npc`, `item`, `order`) VALUES
   (1,	2,	1,	1),
-  (2,	2,	6,	2),
-  (3,	2,	10,	3),
-  (4,	2,	21,	4),
-  (5,	2,	25,	5),
+  (2,	2,	6,	3),
+  (3,	2,	10,	4),
+  (4,	2,	21,	5),
+  (5,	2,	25,	6),
   (6,	4,	33,	1),
   (7,	4,	2,	2),
   (8,	4,	8,	3),
   (10,	4,	15,	4),
   (11,	4,	19,	5),
-  (12,	4,	23,	6);
+  (12,	4,	23,	6),
+  (13,  2,  71, 2);
 
 INSERT INTO `skills_attacks` (`id`, `name`, `needed_class`, `needed_specialization`, `needed_level`, `base_damage`, `damage_growth`, `levels`, `target`, `strikes`, `hit_rate`) VALUES
 (1,	'Assault',	1,	NULL,	1,	'110%',	'5%',	5,	'single',	1,	NULL),

@@ -22,3 +22,11 @@
     name: "Get your equipment"
     introduction: "Let's talk about equipment now. It is very important when you get into a fight. You need at least a weapon and an armor. With a good weapon you'll deal a lot of damage and armor abosorb a part of enemy's damage. You can get a weapon for new adventurers from the blacksmith. Once you return, I'll give you an armor."
     end_text: "Here is your armor. Remember that your equipment wears out a bit in every fight so from time to time you have to take it to a smith to repair it for you."
+7:
+    name: "Earning money"
+    introduction: "Now I have given you your first equipment for free. But normally when you want to obtain things, you will have to buy them for money. So you need to learn to earn money. There are 2 basic ways. The first one is doing quests - when you help people, they might sometimes pay you for your services. So you can talk to people and see if need something. The other option is fighting in the arena. When you defeat you opponent, you get some money, the exact amount depends on their skill level. So, go now to the arena and try to win some fights."
+    end_text: "Good job. While you were away, Nurse from Infirmary was here looking for you. She needs your help with something and promised to pay you for your trouble."
+8:
+    name: "New helper"
+    introduction: "Thanks gods you are here, it is total chaos here. You see, we got a new helper in the infirmary but they need a lot of training before they are actually any help. I need this book Treating injuries but cannot find any copy here. We need to buy one from the library but there is no way I can leave here. Could you bring me one? Do not worry, I will reimburse you."
+    end_text: "Ah, thank you, that will speed up their training. Here is your reward. Now I have to get back to their training but come back later if you still want to help."
