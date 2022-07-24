@@ -7,10 +7,11 @@ body, p, li, td, article, div { font-family: MS Sans Serif, Geneva, sans-serif; 
 #navigation a:hover { color: #000099; }
 #main a { color: #009933; }
 #main a:hover { color: #000066; }
+#main ul { margin: 0.5em 0; }
 form label { color: #660099; }
 form input, select, textarea { color: #330099; }
 form select option { color: black; }
-h1, h2, h3 { color: green; font-family: Courier New, Courier, monospace; }
+h1, h2, h3 { color: green; font-family: Courier New, Courier, monospace; margin-bottom: 0; }
 footer { width: 100%; max-width: 500px; background-color: gray; position: relative; top: -10px; }
 footer div { height: 20px; }
 #guilds #name { text-align: left; }
