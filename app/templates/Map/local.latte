@@ -2,7 +2,7 @@
 {block title}{_"texts.map.travelTitle"}{/block}
 {block content}
   <h1>{_"texts.map.title"}</h1>
-  <img src="{$image|replace:$wwwDir:$basePath}" usemap="#local_map" alt="{_"texts.map.localMap"}">
+  <img src="{$image|replace,$wwwDir,$basePath}" usemap="#local_map" alt="{_"texts.map.localMap"}">
   <map name="local_map">
   {foreach $areas as $area}
     <area href="{$area->href}" shape="{$area->shape}" coords="{$area->coords}" title="{$area->title}">
