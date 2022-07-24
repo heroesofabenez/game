@@ -189,6 +189,7 @@ profile:
     female: "žena"
     lastActive: "Naposledy aktivní:"
     befriend: "Spřátelit se"
+    charismaBonuses: "Sleva při nákupu a opravách, bonus pro odměnu za úkol:"
 npc:
     title: "NPC"
     steppedInFront: "Předstoupil jsi před"

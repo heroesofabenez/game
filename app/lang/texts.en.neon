@@ -189,6 +189,7 @@ profile:
     female: "female"
     lastActive: "Last active:"
     befriend: "Befriend"
+    charismaBonuses: "Discount on purchase and repair, bonus on quest reward:"
 npc:
     title: "NPC"
     steppedInFront: "You stepped in front of"

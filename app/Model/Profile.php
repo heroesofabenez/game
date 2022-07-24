@@ -179,6 +179,12 @@ final class Profile {
     return (int) $character->statPoints;
   }
 
+  public function getCharismaBonus(): int {
+    /** @var Character $character */
+    $character = $this->orm->characters->getById($this->user->id);
+    return $character->charismaBonus;
+  }
+
   /**
    * Get user's stats
    * 

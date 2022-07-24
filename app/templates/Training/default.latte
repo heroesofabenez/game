@@ -9,7 +9,7 @@
     <li>{_"texts.profile.dexterity"}: {$stats["dexterity"]} - {_"texts.profile.hitChance"}: {$character->hit}, {_"texts.profile.dodgeChance"}: {$character->dodge} {if $damageStat === "dexteriry"}, {include damage}{/if} {if $statPoints}<a n:href="trainStat! dexterity">{_"texts.training.train"}</a>{/if}</li>
     <li>{_"texts.profile.constitution"}: {$stats["constitution"]} - {_"texts.profile.maxHitpoints"}: {$character->maxHitpoints}, {_"texts.profile.defense"}: {$character->defense} {if $damageStat === "constitution"}, {include damage}{/if} {if $statPoints}<a n:href="trainStat! constitution">{_"texts.training.train"}</a>{/if}</li>
     <li>{_"texts.profile.intelligence"}: {$stats["intelligence"]} {if $damageStat === "intelligence"} - {include damage}{/if} {if $statPoints}<a n:href="trainStat! intelligence">{_"texts.training.train"}</a>{/if}</li>
-    <li>{_"texts.profile.charisma"}: {$stats["charisma"]} {if $damageStat === "charisma"} - {include damage}{/if} {if $statPoints}<a n:href="trainStat! charisma">{_"texts.training.train"}</a>{/if}</li>
+    <li>{_"texts.profile.charisma"}: {$stats["charisma"]} - {_"texts.profile.charismaBonuses"} {$charismaBonus} % {if $damageStat === "charisma"} - {include damage}{/if} {if $statPoints}<a n:href="trainStat! charisma">{_"texts.training.train"}</a>{/if}</li>
   </ul>
   <p>{_"texts.training.usableStatPoints", $statPoints}</p>
   <h2>{_"texts.training.skills"}</h2>

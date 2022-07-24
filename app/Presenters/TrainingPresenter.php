@@ -34,6 +34,7 @@ final class TrainingPresenter extends BasePresenter {
     $this->template->skillPoints = $this->skillsModel->getSkillPoints();
     $this->template->stats = $this->model->getStats();
     $this->template->skills = $this->skillsModel->getAvailableSkills();
+    $this->template->charismaBonus = $this->model->getCharismaBonus();
     $character = $this->combatHelper->getPlayer($this->user->id);
     $character->applyEffectProviders();
     $this->template->character = $character;
