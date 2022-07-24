@@ -43,18 +43,18 @@ foreach($classes as $class) {
   if($class->specializations->countStored() === 0) {
     $errors[] = "Class $class->name (#$class->id) has no specialization";
   }
-  if($class->attackSkills->get()->findBy(["neededLevel" => 1])->countStored() === 0) {
+  if($class->attackSkills->toCollection()->findBy(["neededLevel" => 1])->countStored() === 0) {
     $errors[] = "Class $class->name (#$class->id) has no attack skill for level 1";
   }
-  if($class->specialSkills->get()->findBy(["neededLevel" => 1])->countStored() === 0) {
+  if($class->specialSkills->toCollection()->findBy(["neededLevel" => 1])->countStored() === 0) {
     $errors[] = "Class $class->name (#$class->id) has no special skill for level 1";
   }
-  if($class->specialSkills->get()->findBy(["neededLevel" => 10])->countStored() === 0) {
+  if($class->specialSkills->toCollection()->findBy(["neededLevel" => 10])->countStored() === 0) {
     $errors[] = "Class $class->name (#$class->id) has no special skill for level 10";
   }
   if($class->playable) {
     foreach($petLevels as $level) {
-      if($class->petTypes->get()->findBy(["requiredLevel" => $level])->countStored() === 0) {
+      if($class->petTypes->toCollection()->findBy(["requiredLevel" => $level])->countStored() === 0) {
         $errors[] = "Class $class->name (#$class->id) has no pet for level $level";
       }
     }
@@ -72,10 +72,10 @@ foreach($specializations as $specialization) {
   if($totalGrowth !== $specializationTotalGrowth) {
     $errors[] = "Total growth for specialization $specialization->name (#$specialization->id) is not $specializationTotalGrowth but $totalGrowth";
   }
-  if($specialization->attackSkills->get()->findBy(["neededLevel" => 15])->countStored() === 0) {
+  if($specialization->attackSkills->toCollection()->findBy(["neededLevel" => 15])->countStored() === 0) {
     $errors[] = "Specialization $specialization->name (#$specialization->id) has no attack skill for level 15";
   }
-  if($specialization->specialSkills->get()->findBy(["neededLevel" => 15])->countStored() === 0) {
+  if($specialization->specialSkills->toCollection()->findBy(["neededLevel" => 15])->countStored() === 0) {
     $errors[] = "Specialization $specialization->name (#$specialization->id) has no special skill for level 15";
   }
 }
