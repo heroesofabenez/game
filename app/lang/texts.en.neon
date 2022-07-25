@@ -151,6 +151,7 @@ quest:
     requirementsHeader: "For completing this quest you have to:"
     requirementPayMoney: "{1}pay 1 silver mark|[0,+Inf[ pay %count% silver marks"
     requirementGetItem: "get %count%x %item%"
+    requirementArenaWins: "win %count% fights in arena"
     requirementTalkToNpc: "talk to %npc%"
     requirementReportBackToNpc: "report back to %npc%"
     rewards: "Rewards:"

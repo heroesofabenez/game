@@ -24,7 +24,7 @@
     end_text: "Tady je tvá zbroj. Pamatuj, že vybavení se v každém souboji trochu opotřebovává, takže s ním občas budeš muset zajít ke kováři, aby ti jej opravil."
 7:
     name: "Vydělávání peněz"
-    introduction: "Teď jsem ti dal tvé první vybavení zadarmo. Ale normálně když chceš získat věci, musíš si je koupit za peníze. Takže se musíš naučit vydělávat peníze. Jsou 2 základní způsoby. Tou první je plnění úkolů - když pomáháš lidem, někdy ti mohou zaplatit za tvé sluby. Takže můžeš mluvit s lidmi a zjistit, zda něco potřebují. Další možností je bojování v aréně. Když porazíš svého protivníka, dostaneš nějaké peníze, přesná částka závisí na jejich úrovni. Takže teď běž do arény a pokus se vyhrát nějaké souboje."
+    introduction: "Teď jsem ti dal tvé první vybavení zadarmo. Ale normálně když chceš získat věci, musíš si je koupit za peníze. Takže se musíš naučit vydělávat peníze. Jsou 2 základní způsoby. Tou první je plnění úkolů - když pomáháš lidem, někdy ti mohou zaplatit za tvé sluby. Takže můžeš mluvit s lidmi a zjistit, zda něco potřebují. Další možností je bojování v aréně. Když porazíš svého protivníka, dostaneš nějaké peníze, přesná částka závisí na jejich úrovni. Takže teď běž do arény a pokus se vyhrát pár soubojů."
     end_text: "Dobrá práce. Zatímco jsi byl(a) pryč, sháněla se po tobě Ošetřovatelka z Ošetřovny. Potřebuje s něčím pomoc a slíbila, že ti zaplatí za tvou námahu."
 8:
     name: "Nový pomocník"

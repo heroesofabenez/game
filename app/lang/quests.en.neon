@@ -24,7 +24,7 @@
     end_text: "Here is your armor. Remember that your equipment wears out a bit in every fight so from time to time you have to take it to a smith to repair it for you."
 7:
     name: "Earning money"
-    introduction: "Now I have given you your first equipment for free. But normally when you want to obtain things, you will have to buy them for money. So you need to learn to earn money. There are 2 basic ways. The first one is doing quests - when you help people, they might sometimes pay you for your services. So you can talk to people and see if need something. The other option is fighting in the arena. When you defeat you opponent, you get some money, the exact amount depends on their skill level. So, go now to the arena and try to win some fights."
+    introduction: "Now I have given you your first equipment for free. But normally when you want to obtain things, you will have to buy them for money. So you need to learn to earn money. There are 2 basic ways. The first one is doing quests - when you help people, they might sometimes pay you for your services. So you can talk to people and see if need something. The other option is fighting in the arena. When you defeat you opponent, you get some money, the exact amount depends on their skill level. So, go now to the arena and try to win a few fights."
     end_text: "Good job. While you were away, Nurse from Infirmary was here looking for you. She needs your help with something and promised to pay you for your trouble."
 8:
     name: "New helper"

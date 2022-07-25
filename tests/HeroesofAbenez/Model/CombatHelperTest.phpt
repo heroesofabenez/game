@@ -75,10 +75,10 @@ final class CombatHelperTest extends \Tester\TestCase {
   }
   
   public function testBumpNumberOfTodayArenaFights() {
-    $this->model->bumpNumberOfTodayArenaFights($this->user->id);
+    $this->model->bumpNumberOfTodayArenaFights($this->user->id, false);
     $result = $this->model->getNumberOfTodayArenaFights($this->user->id);
     Assert::same(1, $result);
-    $this->model->bumpNumberOfTodayArenaFights($this->user->id);
+    $this->model->bumpNumberOfTodayArenaFights($this->user->id, false);
     $result = $this->model->getNumberOfTodayArenaFights($this->user->id);
     Assert::same(2, $result);
   }

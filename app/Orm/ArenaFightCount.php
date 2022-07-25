@@ -11,6 +11,7 @@ namespace HeroesofAbenez\Orm;
  * @property Character $character {m:1 Character::$arenaFights}
  * @property string $day
  * @property int $amount {default 1}
+ * @property int $won {default 0}
  */
 final class ArenaFightCount extends \Nextras\Orm\Entity\Entity {
   

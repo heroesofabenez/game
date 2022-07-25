@@ -92,7 +92,7 @@ abstract class ArenaControl extends \Nette\Application\UI\Control {
       $params = ["playerName" => $player->name, "rewardMoney" => $rewards["money"], "rewardExperiences" => $rewards["experience"]];
       $this->combat->log->logText("texts.arena.fightRewards", $params);
     }
-    $combatId = $this->saveCombat($this->combat->log);
+    $combatId = $this->saveCombat($this->combat->log, ($winner === 1));
     $this->presenter->redirect("Combat:view", ["id" => $combatId]);
   }
 
@@ -118,8 +118,8 @@ abstract class ArenaControl extends \Nette\Application\UI\Control {
    *
    * @return int Combat's id
    */
-  public function saveCombat(CombatLogger $logger): int {
-    $this->combatHelper->bumpNumberOfTodayArenaFights($this->user->id);
+  public function saveCombat(CombatLogger $logger, bool $won): int {
+    $this->combatHelper->bumpNumberOfTodayArenaFights($this->user->id, $won);
     return $this->log->write((string) $logger);
   }
 }

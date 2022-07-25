@@ -192,7 +192,7 @@ final class CombatHelper {
   /**
    * Increase amount of a player's fights in arena
    */
-  public function bumpNumberOfTodayArenaFights(int $uid): void {
+  public function bumpNumberOfTodayArenaFights(int $uid, bool $won): void {
     $day = date("d.m.Y");
     $row = $this->orm->arenaFightsCount->getByCharacterAndDay($uid, $day);
     if($row === null) {
@@ -201,8 +201,12 @@ final class CombatHelper {
       $row->character = $uid;
       $row->day = $day;
       $row->amount = 0;
+      $row->won = 0;
     }
     $row->amount++;
+    if($won) {
+      $row->won++;
+    }
     $this->orm->arenaFightsCount->persistAndFlush($row);
   }
 

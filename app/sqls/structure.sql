@@ -96,6 +96,7 @@ CREATE TABLE `character_quests` (
   `character` int(11) NOT NULL,
   `quest` int(11) NOT NULL,
   `progress` int(1) NOT NULL DEFAULT '1',
+  `started` TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
   PRIMARY KEY (`id`),
   KEY `character` (`character`),
   KEY `quest` (`quest`),
@@ -350,6 +351,7 @@ CREATE TABLE `quests` (
   `item_amount` int(1) NOT NULL DEFAULT '1',
   `item_lose` int(1) NOT NULL DEFAULT '1',
   `needed_money` int(3) NOT NULL DEFAULT '0',
+  `needed_arena_wins` int(3) NOT NULL DEFAULT 0,
   `reward_money` int(4) NOT NULL,
   `reward_xp` int(4) NOT NULL,
   `reward_item` int(11) DEFAULT NULL,
@@ -503,6 +505,7 @@ CREATE TABLE `arena_fights_count` (
   `character` int(11) NOT NULL,
   `day` varchar(10) NOT NULL,
   `amount` int(2) NOT NULL DEFAULT '1',
+  `won` int(2) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `character` (`character`),
   CONSTRAINT `arena_fights_count_ibfk_1` FOREIGN KEY (`character`) REFERENCES `characters` (`id`)

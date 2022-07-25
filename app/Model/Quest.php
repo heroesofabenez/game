@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Model;
 
+use HeroesofAbenez\Orm\ArenaFightCount;
 use HeroesofAbenez\Orm\Quest as QuestEntity;
 use HeroesofAbenez\Orm\Model as ORM;
 use HeroesofAbenez\Orm\CharacterQuest;
@@ -92,6 +93,18 @@ final class Quest {
     return ($status >= CharacterQuest::PROGRESS_FINISHED);
   }
 
+  private function getArenaWinsCount(CharacterQuest $characterQuest): int {
+    $count = 0;
+    /** @var ArenaFightCount[] $arenaFights */
+    $arenaFights = $characterQuest->character->arenaFights->toCollection()->findBy([
+      'day>=' => $characterQuest->started->format("d.m.Y")
+    ])->fetchAll();
+    foreach($arenaFights as $arenaFight) {
+      $count += $arenaFight->won;
+    }
+    return $count;
+  }
+
   /**
    * Checks if the player accomplished specified quest's goals
    */
@@ -103,6 +116,11 @@ final class Quest {
     }
     if($characterQuest->quest->neededItem !== null) {
       if(!$this->itemModel->haveItem($characterQuest->quest->neededItem->id, $characterQuest->quest->itemAmount)) {
+        return false;
+      }
+    }
+    if($characterQuest->quest->neededArenaWins > 0) {
+      if($this->getArenaWinsCount($characterQuest) < $characterQuest->quest->neededArenaWins) {
         return false;
       }
     }
@@ -200,10 +218,11 @@ final class Quest {
    */
   public function getRequirements(QuestEntity $quest): array {
     $requirements = [];
+    $characterQuest = $this->getCharacterQuest($quest->id);
     if($quest->neededMoney > 0) {
       $requirements[] = (object) [
         "text" => $this->translator->translate("texts.quest.requirementPayMoney", $quest->neededMoney),
-        "met" => false
+        "met" => false,
       ];
     }
     if($quest->neededItem !== null) {
@@ -212,7 +231,13 @@ final class Quest {
       $haveItem = $this->itemModel->haveItem($quest->neededItem->id, $quest->itemAmount);
       $requirements[] = (object) [
         "text" => $this->translator->translate("texts.quest.requirementGetItem", $quest->itemAmount, ["item" => "<a href=\"$itemLink\">$itemName</a>"]),
-        "met" => $haveItem
+        "met" => $haveItem,
+      ];
+    }
+    if($quest->neededArenaWins > 0) {
+      $requirements[] = (object) [
+        "text" => $this->translator->translate("texts.quest.requirementArenaWins", $quest->neededArenaWins),
+        "met" => ($this->getArenaWinsCount($characterQuest) >= $quest->neededArenaWins),
       ];
     }
     $npcLink = $this->linkGenerator->link("Npc:view", ["id" => $quest->npcEnd->id]);
