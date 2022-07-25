@@ -10,7 +10,7 @@ namespace HeroesofAbenez\Model;
  * @property-read array $settings
  */
 final class SettingsRepository {
-  protected array $settings = [];
+  private array $settings = [];
   
   use \Nette\SmartObject;
   

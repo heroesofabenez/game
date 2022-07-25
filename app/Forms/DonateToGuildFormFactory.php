@@ -8,9 +8,7 @@ use HeroesofAbenez\Orm\Model as ORM;
 use Nette\Application\UI\Form;
 
 final class DonateToGuildFormFactory extends BaseFormFactory {
-  protected \HeroesofAbenez\Model\Guild $model;
-  protected \Nette\Security\User $user;
-  protected ORM $orm;
+  private \HeroesofAbenez\Model\Guild $model;
 
   public function __construct(\Nette\Localization\ITranslator $translator, \HeroesofAbenez\Model\Guild $model) {
     $this->model = $model;

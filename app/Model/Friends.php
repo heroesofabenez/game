@@ -15,15 +15,15 @@ use Nextras\Orm\Collection\ICollection;
 final class Friends {
   use \Nette\SmartObject;
 
-  protected ORM $orm;
-  protected \Nette\Security\User $user;
+  private ORM $orm;
+  private \Nette\Security\User $user;
 
   public function __construct(ORM $orm, \Nette\Security\User $user) {
     $this->orm = $orm;
     $this->user = $user;
   }
 
-  protected function getFriendship(int $character): ?Friendship {
+  private function getFriendship(int $character): ?Friendship {
     return $this->orm->friendships->getBy([
       ICollection::OR,
       [

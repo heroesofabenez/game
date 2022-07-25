@@ -15,14 +15,12 @@ use Nextras\Orm\Collection\ICollection;
  * 
  * @author Jakub Konečný
  * @property-write \Nette\Security\User $user
- * @property-write NPC $npcModel
  */
 final class Location {
   use \Nette\SmartObject;
 
-  protected ORM $orm;
-  protected \Nette\Security\User $user;
-  protected NPC $npcModel;
+  private ORM $orm;
+  private \Nette\Security\User $user;
   
   public function __construct(ORM $orm) {
     $this->orm = $orm;
@@ -30,10 +28,6 @@ final class Location {
   
   protected function setUser(\Nette\Security\User $user): void {
     $this->user = $user;
-  }
-  
-  protected function setNpcModel(NPC $npcModel): void {
-    $this->npcModel = $npcModel;
   }
   
   /**

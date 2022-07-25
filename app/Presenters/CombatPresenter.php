@@ -9,7 +9,7 @@ namespace HeroesofAbenez\Presenters;
  * @author Jakub Konečný
  */
 final class CombatPresenter extends BasePresenter {
-  protected \HeroesofAbenez\Model\CombatLogManager $log;
+  private \HeroesofAbenez\Model\CombatLogManager $log;
   
   public function __construct(\HeroesofAbenez\Model\CombatLogManager $log) {
     parent::__construct();

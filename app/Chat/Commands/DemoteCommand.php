@@ -19,8 +19,8 @@ use Nette\Localization\ITranslator;
  * @author Jakub Konečný
  */
 final class DemoteCommand extends \HeroesofAbenez\Chat\ChatCommand {
-  protected Guild $model;
-  protected ITranslator $translator;
+  private Guild $model;
+  private ITranslator $translator;
   
   public function __construct(Guild $model, ITranslator $translator) {
     $this->model = $model;

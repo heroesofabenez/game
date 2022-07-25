@@ -18,8 +18,8 @@ use HeroesofAbenez\Orm\CharacterSpecialSkill;
 final class Skills {
   use \Nette\SmartObject;
 
-  protected ORM $orm;
-  protected \Nette\Security\User $user;
+  private ORM $orm;
+  private \Nette\Security\User $user;
   
   public function __construct(ORM $orm, \Nette\Security\User $user) {
     $this->orm = $orm;
@@ -93,7 +93,7 @@ final class Skills {
   /**
    * @param SkillAttack|SkillSpecial $skill
    */
-  protected function canLearnSkill($skill): bool {
+  private function canLearnSkill($skill): bool {
     if($skill->neededClass->id != $this->user->identity->class) {
       return false;
     } elseif($skill->neededSpecialization !== null) {

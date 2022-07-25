@@ -12,16 +12,10 @@ use HeroesofAbenez\Model\FriendshipRequestAlreadySentException;
  * @author Jakub Konečný
  */
 final class ProfilePresenter extends BasePresenter {
-  protected \HeroesofAbenez\Model\Profile $model;
-  protected \HeroesofAbenez\Model\Guild $guildModel;
-  protected \HeroesofAbenez\Model\Friends $friendsModel;
+  private \HeroesofAbenez\Model\Profile $model;
+  private \HeroesofAbenez\Model\Guild $guildModel;
+  private \HeroesofAbenez\Model\Friends $friendsModel;
 
-  /**
-   * ProfilePresenter constructor.
-   * @param \HeroesofAbenez\Model\Profile $model
-   * @param \HeroesofAbenez\Model\Guild $guildModel
-   * @param \HeroesofAbenez\Model\Friends $friendsModel
-   */
   public function __construct(\HeroesofAbenez\Model\Profile $model, \HeroesofAbenez\Model\Guild $guildModel, \HeroesofAbenez\Model\Friends $friendsModel) {
     parent::__construct();
     $this->model = $model;

@@ -12,7 +12,7 @@ use Nextras\Orm\Collection\ICollection;
  * @author Jakub Konečný
  */
 final class CharactersRankingControl extends RankingControl {
-  protected ORM $orm;
+  private ORM $orm;
   
   public function __construct(ORM $orm) {
     $this->orm = $orm;

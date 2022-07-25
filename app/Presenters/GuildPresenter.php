@@ -29,14 +29,14 @@ use HeroesofAbenez\Forms\DissolveGuildFormFactory;
    * @author Jakub Konečný
    */
 final class GuildPresenter extends BasePresenter {
-  protected \HeroesofAbenez\Model\Guild $model;
-  protected \HeroesofAbenez\Model\Permissions $permissionsModel;
-  protected CreateGuildFormFactory $createGuildFormFactory;
-  protected DissolveGuildFormFactory $dissolveGuildFormFactory;
-  protected RenameGuildFormFactory $renameGuildFormFactory;
-  protected GuildDescriptionFormFactory $guildDescriptionFormFactory;
-  protected CustomGuildRankNamesFormFactory $customGuildRankNamesFormFactory;
-  protected DonateToGuildFormFactory $donateToGuildFormFactory;
+  private \HeroesofAbenez\Model\Guild $model;
+  private \HeroesofAbenez\Model\Permissions $permissionsModel;
+  private CreateGuildFormFactory $createGuildFormFactory;
+  private DissolveGuildFormFactory $dissolveGuildFormFactory;
+  private RenameGuildFormFactory $renameGuildFormFactory;
+  private GuildDescriptionFormFactory $guildDescriptionFormFactory;
+  private CustomGuildRankNamesFormFactory $customGuildRankNamesFormFactory;
+  private DonateToGuildFormFactory $donateToGuildFormFactory;
   
   public function __construct(\HeroesofAbenez\Model\Guild $model, \HeroesofAbenez\Model\Permissions $permissionsModel) {
     parent::__construct();
@@ -71,7 +71,7 @@ final class GuildPresenter extends BasePresenter {
   /**
    * Redirect player to guild page if he is already in guild
    */
-  protected function inGuild(): void {
+  private function inGuild(): void {
     $guild = $this->user->identity->guild;
     if($guild > 0) {
       $this->flashMessage("errors.guild.inGuild");
@@ -84,7 +84,7 @@ final class GuildPresenter extends BasePresenter {
    *
    * @param bool $warning Whatever to print a warning (via flash message)
    */
-  protected function notInGuild(bool $warning = true): void {
+  private function notInGuild(bool $warning = true): void {
     $guild = $this->user->identity->guild;
     if($guild === 0) {
       if($warning) {

@@ -16,9 +16,9 @@ use Nette\Utils\Strings;
  * @property-read string[] $names
  */
 final class NPCDialogueControl extends \Nette\Application\UI\Control {
-  protected \Nette\Security\User $user;
-  protected ILoader $loader;
-  protected NpcPersonalityChooser $npcPersonalityChooser;
+  private \Nette\Security\User $user;
+  private ILoader $loader;
+  private NpcPersonalityChooser $npcPersonalityChooser;
   public ?Npc $npc = null;
   
   public function __construct(\Nette\Security\User $user, ILoader $loader, NpcPersonalityChooser $npcPersonalityChooser) {
@@ -30,12 +30,12 @@ final class NPCDialogueControl extends \Nette\Application\UI\Control {
   /**
    * @return string[]
    */
-  protected function getNames() {
+  protected function getNames(): array {
     $playerName = $this->user->identity->name;
     return [$this->npc->name ?? "", $playerName];
   }
 
-  protected function getNpcMood(): string {
+  private function getNpcMood(): string {
     /** @var Npc $npc */
     $npc = $this->npc;
     $personality = $this->npcPersonalityChooser->getPersonality($npc);
@@ -45,7 +45,7 @@ final class NPCDialogueControl extends \Nette\Application\UI\Control {
   /**
    * Gets texts for current npc
    */
-  protected function getTexts(): array {
+  private function getTexts(): array {
     $mood = $this->getNpcMood();
     $texts = $this->loader->getTexts()["dialogues"][$mood];
     $texts = $texts[rand(0, count($texts) - 1)];

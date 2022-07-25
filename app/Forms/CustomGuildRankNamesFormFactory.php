@@ -12,8 +12,8 @@ use HeroesofAbenez\Model\MissingPermissionsException;
  * @author Jakub Konečný
  */
 final class CustomGuildRankNamesFormFactory extends BaseFormFactory {
-  protected \HeroesofAbenez\Model\Guild $model;
-  protected \Nette\Security\User $user;
+  private \HeroesofAbenez\Model\Guild $model;
+  private \Nette\Security\User $user;
 
   public function __construct(\Nette\Localization\ITranslator $translator, \HeroesofAbenez\Model\Guild $model, \Nette\Security\User $user) {
     parent::__construct($translator);

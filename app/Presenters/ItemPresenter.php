@@ -9,7 +9,7 @@ namespace HeroesofAbenez\Presenters;
  * @author Jakub Konečný
  */
 final class ItemPresenter extends BasePresenter {
-  protected \HeroesofAbenez\Model\Item $model;
+  private \HeroesofAbenez\Model\Item $model;
   
   public function __construct(\HeroesofAbenez\Model\Item $model) {
     parent::__construct();

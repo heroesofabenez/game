@@ -33,7 +33,7 @@ final class ArenaPVEControl extends ArenaControl {
    *
    * @throws OpponentNotFoundException
    */
-  protected function getNpc(int $id): Character {
+  private function getNpc(int $id): Character {
     try {
       $npc = $this->combatHelper->getArenaNpc($id);
     } catch(OpponentNotFoundException $e) {

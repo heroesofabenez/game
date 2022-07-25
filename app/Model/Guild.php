@@ -20,10 +20,10 @@ use Nextras\Orm\Collection\ICollection;
 final class Guild {
   use \Nette\SmartObject;
 
-  protected ORM $orm;
-  protected \Nette\Security\User $user;
-  protected Profile $profileModel;
-  protected Permissions $permissionsModel;
+  private ORM $orm;
+  private \Nette\Security\User $user;
+  private Profile $profileModel;
+  private Permissions $permissionsModel;
   
   public function __construct(ORM $orm, \Nette\Security\User $user, Profile $profileModel, Permissions $permissionsModel) {
     $this->orm = $orm;

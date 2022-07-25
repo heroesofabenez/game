@@ -18,12 +18,12 @@ use Nette\Application\LinkGenerator;
 final class Quest {
   use \Nette\SmartObject;
 
-  protected ORM $orm;
-  protected \Nette\Security\User $user;
-  protected Item $itemModel;
-  protected Pet $petModel;
-  protected ITranslator $translator;
-  protected LinkGenerator $linkGenerator;
+  private ORM $orm;
+  private \Nette\Security\User $user;
+  private Item $itemModel;
+  private Pet $petModel;
+  private ITranslator $translator;
+  private LinkGenerator $linkGenerator;
   
   public function __construct(ORM $orm, \Nette\Security\User $user, Item $itemModel, Pet $petModel, ITranslator $translator, LinkGenerator $linkGenerator) {
     $this->orm = $orm;

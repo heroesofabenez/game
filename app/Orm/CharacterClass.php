@@ -41,8 +41,8 @@ use Nexendrie\Utils\Numbers;
  * @property-read string $mainStat {virtual}
  */
 final class CharacterClass extends \Nextras\Orm\Entity\Entity {
-  protected const MIN_STATS = -5;
-  protected const MAX_STATS = 5;
+  private const MIN_STATS = -5;
+  private const MAX_STATS = 5;
 
   private ITranslator $translator;
 

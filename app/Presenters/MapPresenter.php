@@ -11,7 +11,7 @@ use HeroesofAbenez\Model\ApplicationDirectories;
  * @author Jakub Konečný
  */
 final class MapPresenter extends BasePresenter {
-  protected \HeroesofAbenez\Model\Map $model;
+  private \HeroesofAbenez\Model\Map $model;
   private ApplicationDirectories $directories;
   
   public function __construct(\HeroesofAbenez\Model\Map $model, ApplicationDirectories $directories) {

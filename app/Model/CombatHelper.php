@@ -19,16 +19,10 @@ use HeroesofAbenez\Combat\Equipment;
 final class CombatHelper {
   use \Nette\SmartObject;
 
-  protected Profile $profileModel;
-  protected Item $itemModel;
-  protected Skills $skillsModel;
-  protected CharacterBuilder $cb;
-  protected ORM $orm;
+  private CharacterBuilder $cb;
+  private ORM $orm;
   
-  public function __construct(Profile $profileModel, Item $itemModel, Skills $skillsModel, ORM $orm, CharacterBuilder $cb) {
-    $this->profileModel = $profileModel;
-    $this->itemModel = $itemModel;
-    $this->skillsModel = $skillsModel;
+  public function __construct(ORM $orm, CharacterBuilder $cb) {
     $this->cb = $cb;
     $this->orm = $orm;
   }
@@ -36,7 +30,7 @@ final class CombatHelper {
   /**
    * @return BaseCharacterSkill[]
    */
-  protected function getPlayerSkills(\HeroesofAbenez\Orm\Character $character): array {
+  private function getPlayerSkills(\HeroesofAbenez\Orm\Character $character): array {
     $skills = [];
     foreach($character->attackSkills as $skill) {
       $skills[] = $skill->toCombatSkill();
@@ -50,7 +44,7 @@ final class CombatHelper {
   /**
    * @return Equipment[]
    */
-  protected function getPlayerEquipment(\HeroesofAbenez\Orm\Character $character): array {
+  private function getPlayerEquipment(\HeroesofAbenez\Orm\Character $character): array {
     $equipment = [];
     $items = $character->items->toCollection()->findBy(["worn" => true, ]);
     foreach($items as $item) {
@@ -100,7 +94,7 @@ final class CombatHelper {
   /**
    * @return Equipment[]
    */
-  protected function getArenaNpcEquipment(\HeroesofAbenez\Orm\PveArenaOpponent $npc): array {
+  private function getArenaNpcEquipment(\HeroesofAbenez\Orm\PveArenaOpponent $npc): array {
     $equipment = new EquipmentCollection();
     foreach($npc->equipment as $eq) {
       $eq->item->worn = true;
@@ -235,7 +229,7 @@ final class CombatHelper {
   /**
    * @return string[]
    */
-  protected function getHealerSpecializations(): array {
+  private function getHealerSpecializations(): array {
     return ["paladin", "priest", ];
   }
 

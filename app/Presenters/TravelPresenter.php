@@ -14,7 +14,7 @@ use HeroesofAbenez\Model\CannotTravelToStageException;
    * @author Jakub Konečný
    */
 final class TravelPresenter extends BasePresenter {
-  protected \HeroesofAbenez\Model\Location $model;
+  private \HeroesofAbenez\Model\Location $model;
   
   public function __construct(\HeroesofAbenez\Model\Location $model) {
     parent::__construct();

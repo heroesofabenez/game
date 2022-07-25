@@ -18,8 +18,8 @@ use HeroesofAbenez\Orm\Character;
 final class Profile {
   use \Nette\SmartObject;
 
-  protected ORM $orm;
-  protected \Nette\Security\User $user;
+  private ORM $orm;
+  private \Nette\Security\User $user;
   /** @var string[] */
   private array $stats = ["strength", "dexterity", "constitution", "intelligence", "charisma"];
   

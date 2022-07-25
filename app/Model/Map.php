@@ -13,16 +13,14 @@ use Nette\Localization\ITranslator;
 final class Map {
   use \Nette\SmartObject;
 
-  protected Location $locationModel;
-  protected MapDrawer $drawer;
-  protected \Nette\Security\User $user;
-  protected ITranslator $translator;
+  private Location $locationModel;
+  private MapDrawer $drawer;
+  private \Nette\Security\User $user;
   
-  public function __construct(Location $locationModel, \Nette\Security\User $user, MapDrawer $drawer, ITranslator $translator) {
+  public function __construct(Location $locationModel, \Nette\Security\User $user, MapDrawer $drawer) {
     $this->locationModel = $locationModel;
     $this->drawer = $drawer;
     $this->user = $user;
-    $this->translator = $translator;
   }
   
   /**

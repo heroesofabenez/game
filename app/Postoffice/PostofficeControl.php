@@ -14,14 +14,12 @@ use HeroesofAbenez\Orm\Message;
  * @property-read \Nette\Bridges\ApplicationLatte\Template $template
  */
 final class PostofficeControl extends \Nette\Application\UI\Control {
-  protected ORM $orm;
-  protected \Nette\Security\User $user;
-  protected \HeroesofAbenez\Model\Profile $profileModel;
+  private ORM $orm;
+  private \Nette\Security\User $user;
   
-  public function __construct(ORM $orm, \Nette\Security\User $user, \HeroesofAbenez\Model\Profile $profileModel) {
+  public function __construct(ORM $orm, \Nette\Security\User $user) {
     $this->orm = $orm;
     $this->user = $user;
-    $this->profileModel = $profileModel;
   }
   
   /**
@@ -29,7 +27,7 @@ final class PostofficeControl extends \Nette\Application\UI\Control {
    * 
    * @return ICollection|Message[]
    */
-  protected function getReceivedMessages(): ICollection {
+  private function getReceivedMessages(): ICollection {
     return $this->orm->messages->findByTo($this->user->id);
   }
   
@@ -44,7 +42,7 @@ final class PostofficeControl extends \Nette\Application\UI\Control {
    * 
    * @return ICollection|Message[]
    */
-  protected function getSentMessages(): ICollection {
+  private function getSentMessages(): ICollection {
     return $this->orm->messages->findByFrom($this->user->id);
   }
   
@@ -54,7 +52,7 @@ final class PostofficeControl extends \Nette\Application\UI\Control {
     $this->template->render();
   }
   
-  protected function canShow(Message $message): bool {
+  private function canShow(Message $message): bool {
     if($message->from->id === $this->user->id || $message->to->id === $this->user->id) {
       return true;
     }

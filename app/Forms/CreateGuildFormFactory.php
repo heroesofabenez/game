@@ -12,7 +12,7 @@ use HeroesofAbenez\Model\NameInUseException;
  * @author Jakub Konečný
  */
 final class CreateGuildFormFactory extends BaseFormFactory {
-  protected \HeroesofAbenez\Model\Guild $model;
+  private \HeroesofAbenez\Model\Guild $model;
   
   public function __construct(\Nette\Localization\ITranslator $translator, \HeroesofAbenez\Model\Guild $model) {
     $this->model = $model;

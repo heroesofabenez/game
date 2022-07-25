@@ -18,11 +18,11 @@ use Nette\Security\IIdentity;
 final class UserManager implements \Nette\Security\IAuthenticator {
   use \Nette\SmartObject;
 
-  protected ORM $orm;
-  protected Permissions $permissionsModel;
-  protected Profile $profileModel;
-  protected IUserToCharacterMapper $userToCharacterMapper;
-  protected CharacterBuilder $cb;
+  private ORM $orm;
+  private Permissions $permissionsModel;
+  private Profile $profileModel;
+  private IUserToCharacterMapper $userToCharacterMapper;
+  private CharacterBuilder $cb;
   
   public function __construct(ORM $orm, Permissions $permissionsModel, Profile $profileModel, IUserToCharacterMapper $userToCharacterMapper, CharacterBuilder $cb) {
     $this->orm = $orm;
@@ -35,7 +35,7 @@ final class UserManager implements \Nette\Security\IAuthenticator {
   /**
    * Return real user's id
    */
-  protected function getRealId(): int {
+  private function getRealId(): int {
     return $this->userToCharacterMapper->getRealId();
   }
   

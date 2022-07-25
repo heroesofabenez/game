@@ -16,8 +16,8 @@ use HeroesofAbenez\Orm\Model as ORM;
 final class Pet {
   use \Nette\SmartObject;
 
-  protected ORM $orm;
-  protected \Nette\Security\User $user;
+  private ORM $orm;
+  private \Nette\Security\User $user;
   
   public function __construct(ORM $orm) {
     $this->orm = $orm;

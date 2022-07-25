@@ -28,7 +28,7 @@ final class Karma {
   /**
    * @throws \OutOfBoundsException
    */
-  protected static function validateKarma(string ...$values): void {
+  private static function validateKarma(string ...$values): void {
     $karmas = static::getKarmas();
     foreach($values as $value) {
       if(!in_array($value, $karmas, true)) {

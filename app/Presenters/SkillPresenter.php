@@ -9,7 +9,7 @@ namespace HeroesofAbenez\Presenters;
  * @author Jakub Konečný
  */
 final class SkillPresenter extends BasePresenter {
-  protected \HeroesofAbenez\Model\Skills $model;
+  private \HeroesofAbenez\Model\Skills $model;
   
   public function __construct(\HeroesofAbenez\Model\Skills $model) {
     parent::__construct();

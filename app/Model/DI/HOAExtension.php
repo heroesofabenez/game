@@ -42,7 +42,7 @@ final class HOAExtension extends \Nette\DI\CompilerExtension {
   /**
    * @throws \RuntimeException
    */
-  protected function getUserToCharacterMapper(): string {
+  private function getUserToCharacterMapper(): string {
     $config = $this->getConfig();
     $mapper = $config["userToCharacterMapper"];
     if(!class_exists($mapper) || !is_subclass_of($mapper, IUserToCharacterMapper::class)) {
@@ -54,7 +54,7 @@ final class HOAExtension extends \Nette\DI\CompilerExtension {
   /**
    * @throws \RuntimeException
    */
-  protected function addModels(): void {
+  private function addModels(): void {
     $builder = $this->getContainerBuilder();
     $config = $this->getConfig();
     $builder->addDefinition($this->prefix("model.userToCharacterMapper"))
@@ -110,7 +110,7 @@ final class HOAExtension extends \Nette\DI\CompilerExtension {
       ->setFactory(HeroesofAbenez\Model\ApplicationDirectories::class, [$builder->parameters['wwwDir'], $builder->parameters['appDir'],]);
   }
   
-  protected function addCombat(): void {
+  private function addCombat(): void {
     $builder = $this->getContainerBuilder();
     $builder->addDefinition($this->prefix("combat.combat"))
       ->setType(HeroesofAbenez\Combat\CombatBase::class)
@@ -130,7 +130,7 @@ final class HOAExtension extends \Nette\DI\CompilerExtension {
       ->setType(HeroesofAbenez\Combat\CombatActionSelector::class);
   }
   
-  protected function addArena(): void {
+  private function addArena(): void {
     $builder = $this->getContainerBuilder();
     $builder->addFactoryDefinition($this->prefix("arena.pve"))
       ->setImplement(HeroesofAbenez\Arena\IArenaPVEControlFactory::class);
@@ -138,7 +138,7 @@ final class HOAExtension extends \Nette\DI\CompilerExtension {
       ->setImplement(HeroesofAbenez\Arena\IArenaPVPControlFactory::class);
   }
   
-  protected function addChatCommands(): void {
+  private function addChatCommands(): void {
     $builder = $this->getContainerBuilder();
     $builder->addDefinition($this->prefix("chat.command.time"))
       ->setType(HeroesofAbenez\Chat\Commands\TimeCommand::class);
@@ -152,7 +152,7 @@ final class HOAExtension extends \Nette\DI\CompilerExtension {
       ->setType(HeroesofAbenez\Chat\Commands\KickCommand::class);
   }
   
-  protected function addNpc(): void {
+  private function addNpc(): void {
     $builder = $this->getContainerBuilder();
     $builder->addFactoryDefinition($this->prefix("npc.dialogue"))
       ->setImplement(HeroesofAbenez\NPC\INPCDialogueControlFactory::class);
@@ -162,13 +162,13 @@ final class HOAExtension extends \Nette\DI\CompilerExtension {
       ->setImplement(HeroesofAbenez\NPC\INPCQuestsControlFactory::class);
   }
   
-  protected function addPostOffice(): void {
+  private function addPostOffice(): void {
     $builder = $this->getContainerBuilder();
     $builder->addFactoryDefinition($this->prefix("postoffice.postoffice"))
       ->setImplement(HeroesofAbenez\Postoffice\IPostofficeControlFactory::class);
   }
   
-  protected function addRanking(): void {
+  private function addRanking(): void {
     $builder = $this->getContainerBuilder();
     $builder->addFactoryDefinition($this->prefix("ranking.characters"))
       ->setImplement(HeroesofAbenez\Ranking\ICharactersRankingControlFactory::class);
@@ -176,7 +176,7 @@ final class HOAExtension extends \Nette\DI\CompilerExtension {
       ->setImplement(HeroesofAbenez\Ranking\IGuildsRankingControlFactory::class);
   }
   
-  protected function addForms(): void {
+  private function addForms(): void {
     $builder = $this->getContainerBuilder();
     $builder->addDefinition($this->prefix("form.createCharacter"))
       ->setType(HeroesofAbenez\Forms\CreateCharacterFormFactory::class);
@@ -194,7 +194,7 @@ final class HOAExtension extends \Nette\DI\CompilerExtension {
       ->setType(HeroesofAbenez\Forms\DonateToGuildFormFactory::class);
   }
 
-  protected function addNpcPersonalities(): void {
+  private function addNpcPersonalities(): void {
     $builder = $this->getContainerBuilder();
     $builder->addDefinition($this->prefix("npc.personalityChooser"))
       ->setType(HeroesofAbenez\Model\NpcPersonalityChooser::class);

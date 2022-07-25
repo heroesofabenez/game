@@ -18,7 +18,7 @@ final class CharacterBuilder {
   /** @var int */
   public const SPECIALIZATION_LEVEL = 15;
 
-  protected function calculateStat(string $stat, CharacterClass $class, CharacterRace $race, int $level): float {
+  private function calculateStat(string $stat, CharacterClass $class, CharacterRace $race, int $level): float {
     /** @var int $value */
     $value = $race->$stat + $class->$stat;
     $value += $class->{$stat . "Grow"} * ($level - 1);
@@ -28,7 +28,7 @@ final class CharacterBuilder {
     return $value;
   }
   
-  protected function calculateSpecialistStat(string $stat, CharacterSpecialization $specialization, int $level): float {
+  private function calculateSpecialistStat(string $stat, CharacterSpecialization $specialization, int $level): float {
     $value = ($specialization->{$stat . "Grow"} * ($level));
     if($stat === $specialization->mainStat) {
       $value += ($level * $specialization->statPointsLevel);
@@ -36,7 +36,7 @@ final class CharacterBuilder {
     return $value;
   }
 
-  protected function checkSpecialization(int $level, CharacterClass $class, CharacterSpecialization $specialization = null): void {
+  private function checkSpecialization(int $level, CharacterClass $class, CharacterSpecialization $specialization = null): void {
     if($level < static::SPECIALIZATION_LEVEL) {
       if($specialization !== null) {
         throw new CannotChooseSpecializationException();

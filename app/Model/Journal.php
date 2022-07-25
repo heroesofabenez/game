@@ -18,24 +18,12 @@ use Nette\Localization\ITranslator;
 final class Journal {
   use \Nette\SmartObject;
 
-  protected \Nette\Security\User $user;
-  protected ORM $orm;
-  protected Quest $questModel;
-  protected Location $locationModel;
-  protected Guild $guildModel;
-  protected Pet $petModel;
-  protected Item $itemModel;
-  protected ITranslator $translator;
+  private \Nette\Security\User $user;
+  private ORM $orm;
   
-  public function __construct(\Nette\Security\User $user, ORM $orm, Quest $questModel, Location $locationModel, Guild $guildModel, Pet $petModel, Item $itemModel, ITranslator $translator) {
+  public function __construct(\Nette\Security\User $user, ORM $orm) {
     $this->user = $user;
     $this->orm = $orm;
-    $this->questModel = $questModel;
-    $this->locationModel = $locationModel;
-    $this->guildModel = $guildModel;
-    $this->petModel = $petModel;
-    $this->itemModel = $itemModel;
-    $this->translator = $translator;
   }
 
   

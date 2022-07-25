@@ -13,13 +13,13 @@ use Nextras\Orm\Collection\ICollection;
    * @author Jakub Konečný
    */
 final class CharacterPresenter extends BasePresenter {
-  protected \HeroesofAbenez\Model\Profile $model;
-  protected \HeroesofAbenez\Model\UserManager $userManager;
+  private \HeroesofAbenez\Model\Profile $model;
+  private \HeroesofAbenez\Model\UserManager $userManager;
   /** @var ICollection|\HeroesofAbenez\Orm\CharacterClass[] */
-  protected ICollection $classes;
+  private ICollection $classes;
   /** @var ICollection|\HeroesofAbenez\Orm\CharacterRace[] */
-  protected ICollection $races;
-  protected CreateCharacterFormFactory $createCharacterFormFactory;
+  private ICollection $races;
+  private CreateCharacterFormFactory $createCharacterFormFactory;
   
   public function __construct(\HeroesofAbenez\Model\Profile $model, \HeroesofAbenez\Model\UserManager $userManager) {
     parent::__construct();

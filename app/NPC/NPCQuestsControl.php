@@ -23,9 +23,9 @@ use HeroesofAbenez\Model\QuestNotAvailableException;
  * @property-read \Nette\Bridges\ApplicationLatte\Template $template
  */
 final class NPCQuestsControl extends \Nette\Application\UI\Control {
-  protected Model\Quest $questModel;
-  protected ORM $orm;
-  protected \Nette\Security\User $user;
+  private Model\Quest $questModel;
+  private ORM $orm;
+  private \Nette\Security\User $user;
   public Npc $npc;
 
   public function __construct(Model\Quest $questModel, ORM $orm, \Nette\Security\User $user) {

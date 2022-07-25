@@ -26,11 +26,11 @@ use HeroesofAbenez\Model\SpecializationNotAvailableException;
  * @author Jakub Konečný
  */
 final class JournalPresenter extends BasePresenter {
-  protected \HeroesofAbenez\Model\Journal $model;
-  protected \HeroesofAbenez\Model\Profile $profileModel;
-  protected \HeroesofAbenez\Model\Item $itemModel;
-  protected \HeroesofAbenez\Model\Pet $petModel;
-  protected \HeroesofAbenez\Model\Friends $friendsModel;
+  private \HeroesofAbenez\Model\Journal $model;
+  private \HeroesofAbenez\Model\Profile $profileModel;
+  private \HeroesofAbenez\Model\Item $itemModel;
+  private \HeroesofAbenez\Model\Pet $petModel;
+  private \HeroesofAbenez\Model\Friends $friendsModel;
 
   public function __construct(\HeroesofAbenez\Model\Journal $model, \HeroesofAbenez\Model\Profile $profileModel, \HeroesofAbenez\Model\Item $itemModel, \HeroesofAbenez\Model\Pet $petModel, \HeroesofAbenez\Model\Friends $friendsModel) {
     parent::__construct();

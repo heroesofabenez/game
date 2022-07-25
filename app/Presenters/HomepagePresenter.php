@@ -11,12 +11,11 @@ use HeroesofAbenez\Model;
    * @author Jakub Konečný
    */
 final class HomepagePresenter extends BasePresenter {
-  protected Model\Location $model;
+  private Model\Location $model;
   
-  public function __construct(Model\Location $locationModel, \Nette\Security\User $user, Model\NPC $npcModel) {
+  public function __construct(Model\Location $locationModel, \Nette\Security\User $user) {
     $this->model = $locationModel;
     $this->model->user = $user;
-    $this->model->npcModel = $npcModel;
     parent::__construct();
   }
   
