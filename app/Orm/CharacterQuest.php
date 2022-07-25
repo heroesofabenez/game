@@ -32,7 +32,7 @@ final class CharacterQuest extends \Nextras\Orm\Entity\Entity {
     return (int) ($reward + $reward / 100 * $this->character->charismaBonus);
   }
 
-  protected function getterArenaWins() {
+  protected function getterArenaWins(): int {
     $count = 0;
     if(!isset($this->started)) {
       return 0;
@@ -47,7 +47,7 @@ final class CharacterQuest extends \Nextras\Orm\Entity\Entity {
     return $count;
   }
 
-  protected function getterGuildDonation() {
+  protected function getterGuildDonation(): int {
     $result = 0;
     if(!isset($this->started)) {
       return 0;
