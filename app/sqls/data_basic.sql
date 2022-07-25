@@ -124,7 +124,8 @@ INSERT INTO `items` (`id`, `name`, `slot`, `type`, `required_level`, `required_c
 (68,	'Priest\'s Gown',	'armor',	NULL,	15,	6,	9,	28,	3,	20),
 (69,	'Monk\'s Flail',	'weapon',	'club',	15,	6,	10,	28,	3,	30),
 (70,	'Monk\'s Cowl',	'armor',	NULL,	15,	6,	10,	28,	3,	20),
-(71,    'Treating injuries', 'item', null, 1, null, null, 10, 0, 1);
+(71,    'Treating injuries', 'item', NULL, 1, NULL, NULL, 10, 0, 1),
+(72,    'Bandage', 'item', NULL, 1, NULL, NULL, 3, 0, 1);
 
 INSERT INTO `pet_types` (`id`, `name`, `bonus_stat`, `bonus_value`, `image`, `required_level`, `required_class`, `required_race`, `cost`) VALUES
 (1,	'Rescued Lion',	'constitution',	5,	'',	8,	1,	NULL,	0),
@@ -193,7 +194,9 @@ INSERT INTO `quests` (id, name, required_level, required_class, required_race, r
   (5, 'Find a book', 1, 1, 1, 2, 33, 1, 0, 0, 0, 0, 0, 10, null, 0, 0, null, 3, 3),
   (6, 'Get your equipment', 1, 1, 1, 5, 2, 1, 0, 0, 0, 0, 0, 5, 8, 0, 0, null, 3, 3),
   (7, 'Earning money', 1, 3, null, 4, null, 0, 0, 0, 2, 0, 5, 30, null, 0, 0, null, 1, 1),
-  (8, 'New helper', 2, 3, null, 7, 71, 1, 1, 0, 0, 0, 15, 20, null, 0, 0, null, 5, 5);
+  (8, 'New helper', 1, 3, null, 7, 71, 1, 1, 0, 0, 0, 15, 20, null, 0, 0, null, 5, 5),
+  (9, 'Storehouse', 1, 3, null, 8, 72, 2, 1, 0, 0, 0, 10, 30, null, 0, 0, null, 5, 5),
+  (10, 'Guild', 3, 3, null, 9, null, 1, 1, 0, 0, 10, 0, 30, null, 0, 0, null, 1, 1);
 
 INSERT INTO `quest_areas` (`id`, `name`, `required_level`, `required_race`, `required_class`, `pos_x`, `pos_y`, `entry_stage`) VALUES
 (1,	'Academy of Magic',	0,	NULL,	3,	220,	35,	2),
@@ -209,7 +212,7 @@ INSERT INTO `quest_stages` (`id`, `name`, `required_level`, `required_race`, `re
   (5,	'Village 1 - Smithy',	1,	1,	NULL,	2,	60,	80),
   (6,	'Infirmary',	1,	NULL,	3,	1,	60,	62),
   (7,	'Village 1 - Alchemist\'s hut',	1,	1,	NULL,	2,	55,	18),
-  (8,	'Storehouse',	5,	NULL,	3,	1,	187,	180),
+  (8,	'Storehouse',	3,	NULL,	3,	1,	187,	180),
   (9,	'Village 1 - General store',	1,	1,	NULL,	2,	120,	100);
 
 INSERT INTO `routes_stages` (`id`, `from`, `to`) VALUES
@@ -236,7 +239,8 @@ INSERT INTO `shop_items` (`id`, `npc`, `item`, `order`) VALUES
   (10,	4,	15,	4),
   (11,	4,	19,	5),
   (12,	4,	23,	6),
-  (13,  2,  71, 2);
+  (13,  2,  71, 2),
+  (14,  6,  72, 1);
 
 INSERT INTO `skills_attacks` (`id`, `name`, `needed_class`, `needed_specialization`, `needed_level`, `base_damage`, `damage_growth`, `levels`, `target`, `strikes`, `hit_rate`) VALUES
 (1,	'Assault',	1,	NULL,	1,	'110%',	'5%',	5,	'single',	1,	NULL),

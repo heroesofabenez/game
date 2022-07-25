@@ -67,7 +67,7 @@ guild:
     wantToJoin: "se chce připojit k tvému cechu."
     createTitle: "Vytvořit cech"
     guilds: "Cechy"
-    apply: "Apply"
+    apply: "Podat přihlášku"
     noGuildText1: "Nepatříš k žádnému cechu. Můžeš si "
     noGuildCreateLink: "vytvořit"
     noGuildText2: " svůj vlastní nebo se "

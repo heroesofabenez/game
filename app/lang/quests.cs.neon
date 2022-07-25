@@ -30,3 +30,11 @@
     name: "Nový pomocník"
     introduction: "Diky bohům, že jsi tady, je to úplný blázinec. Víš, dostali jsme do ošetřovny nového pomocníka, ale musí se toho ještě hodně naučit, než tu s nečím pomůže. Potřebuji knihu Ošetřování zranění, ale nemůžu najít žádný výtisk. Musíme si koupit nějaký z knihovny, ale já teď nemůžu odejít. Můžeš mi přinést jeden výtisk?"
     end_text: "Á, děkuji, to zrychlí jeho výcvik. Tady je tvá odměna. Teď se musím vrátit k jeho výcviku, ale pokud chceš ještě s něčím pomoct, vrať se později."
+9:
+    name: "Skladiště"
+    introduction: "Jsi zpět, dobře. Teď potřebuji, aby jsi mi přinesl(a) několik obvazů ze Skladiště. Hmm, oni tě tam ještě nepustím? Ano, musíš být minimálně na úrovní 3, než tam můžeš jít, takže musíš získat nějaké zkušenosti, ať už plněním úkolů nebo bojováním v aréně, a pak uděláš povýšení v Deníku."
+    end_text: "Zvládl(a) jsi to, mnohokrát děkuji. To je zatím vše, co od tebe potřebuji. Měl(a) by jsi se vrátit ke svému mentorovi."
+10:
+    name: "Cech"
+    introduction: "Á, jsi zpět, můj učedníku. Dobrá, budeme pokračovat s tvou výukou. Takže, o čem bych ti dnes řekl? ... Ano, cechy. Jsou to prestižní organizace, které poskytují svým členům nejrůznější výhody. Bylo by dobré, kdyby jsi se k nějakému přidal(a). Jednoduše se podívej v Cechu na seznam existujícíh a podej si přihlášku. Jakmile bude přijata, měl(a) by jsi přispět nějaké peníze, takto cechy rostou."
+    end_text: "Výborně. Teď si běž trochu odpočinout, zítra budeme tvrdě trénovat."

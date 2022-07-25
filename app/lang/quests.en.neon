@@ -30,3 +30,11 @@
     name: "New helper"
     introduction: "Thanks gods you are here, it is total chaos here. You see, we got a new helper in the infirmary but they need a lot of training before they are actually any help. I need this book Treating injuries but cannot find any copy here. We need to buy one from the library but there is no way I can leave here. Could you bring me one? Do not worry, I will reimburse you."
     end_text: "Ah, thank you, that will speed up their training. Here is your reward. Now I have to get back to their training but come back later if you still want to help."
+9:
+    name: "Storehouse"
+    introduction: "You are back, good. Now I need you to bring me a few bandages from Storehouse. Hmm, they do not let you in yet? Yes, you need to be at least on level 3 before you can go there so you need to earn some experiences, either by finishing quests or figthing in the arena, and then do a level up in  Journal."
+    end_text: "You made it, many thanks. That is all I need from you for now. You should return to your mentor."
+10:
+    name: "Guild"
+    introduction: "Ah, you are back, my apprentice. Well, let us continue your lessons. So, what should I tell about today? ... Yes, guilds. They are prestigous organizations that provide various benefits to their members. It would be good for you to join one. Just look in Guild for a list of existing ones and apply for membership. Once your application is accepted, you should make a donation, those money help guilds to grow."
+    end_text: "Excellent. Now go get some rest, we will do some intense training tomorrow."
