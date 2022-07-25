@@ -58,21 +58,21 @@ final class QuestTest extends \Tester\TestCase {
   }
 
   public function testIsCompleted() {
-    /** @var QuestEntity $quest */
-    $quest = $this->model->view(3);
-    $oldCostMoney = $quest->neededMoney;
-    $oldNeededItem = $quest->neededItem;
+    $characterQuest = new CharacterQuest();
+    $characterQuest->quest = $this->model->view(3);
+    $characterQuest->character = $this->getCharacter();
+    $oldCostMoney = $characterQuest->quest->neededMoney;
+    $oldNeededItem = $characterQuest->quest->neededItem;
     /** @var \HeroesofAbenez\Orm\Model $orm */
     $orm = $this->getService(\HeroesofAbenez\Orm\Model::class);
-    $user = $this->getCharacter();
-    $quest->neededMoney = $user->money + 1;
-    Assert::false($this->model->isCompleted($quest));
-    $quest->neededMoney = $oldCostMoney;
-    Assert::false($this->model->isCompleted($quest));
-    $quest->neededItem = null;
-    Assert::true($this->model->isCompleted($quest));
-    $quest->neededItem = $oldNeededItem;
-    $orm->quests->persistAndFlush($quest);
+    $characterQuest->quest->neededMoney = $characterQuest->character->money + 1;
+    Assert::false($this->model->isCompleted($characterQuest));
+    $characterQuest->quest->neededMoney = $oldCostMoney;
+    Assert::false($this->model->isCompleted($characterQuest));
+    $characterQuest->quest->neededItem = null;
+    Assert::true($this->model->isCompleted($characterQuest));
+    $characterQuest->quest->neededItem = $oldNeededItem;
+    $orm->quests->persistAndFlush($characterQuest->quest);
   }
 
   public function testFinish() {

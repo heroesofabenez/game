@@ -95,16 +95,14 @@ final class Quest {
   /**
    * Checks if the player accomplished specified quest's goals
    */
-  public function isCompleted(QuestEntity $quest): bool {
-    if($quest->neededMoney > 0) {
-      /** @var \HeroesofAbenez\Orm\Character $char */
-      $char = $this->orm->characters->getById($this->user->id);
-      if($quest->neededMoney >= $char->money) {
+  public function isCompleted(CharacterQuest $characterQuest): bool {
+    if($characterQuest->quest->neededMoney > 0) {
+      if($characterQuest->quest->neededMoney >= $characterQuest->character->money) {
         return false;
       }
     }
-    if($quest->neededItem !== null) {
-      if(!$this->itemModel->haveItem($quest->neededItem->id, $quest->itemAmount)) {
+    if($characterQuest->quest->neededItem !== null) {
+      if(!$this->itemModel->haveItem($characterQuest->quest->neededItem->id, $characterQuest->quest->itemAmount)) {
         return false;
       }
     }
@@ -129,7 +127,7 @@ final class Quest {
     if($quest->npcEnd->id !== $npcId) {
       throw new CannotFinishQuestHereException();
     }
-    if(!$this->isCompleted($quest)) {
+    if(!$this->isCompleted($record)) {
       throw new QuestNotFinishedException();
     }
     $record->progress = CharacterQuest::PROGRESS_FINISHED;
