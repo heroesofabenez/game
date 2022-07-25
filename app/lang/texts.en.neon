@@ -152,6 +152,7 @@ quest:
     requirementPayMoney: "{1}pay 1 silver mark|[0,+Inf[ pay %count% silver marks"
     requirementGetItem: "get %count%x %item%"
     requirementArenaWins: "win %count% fights in arena"
+    requirementGuildDonation: "{1}donate 1 silver mark to your guild|[0,+Inf[ donate %count% silver marks to your guild"
     requirementTalkToNpc: "talk to %npc%"
     requirementReportBackToNpc: "report back to %npc%"
     rewards: "Rewards:"

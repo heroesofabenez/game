@@ -93,18 +93,6 @@ final class Quest {
     return ($status >= CharacterQuest::PROGRESS_FINISHED);
   }
 
-  private function getArenaWinsCount(CharacterQuest $characterQuest): int {
-    $count = 0;
-    /** @var ArenaFightCount[] $arenaFights */
-    $arenaFights = $characterQuest->character->arenaFights->toCollection()->findBy([
-      'day>=' => $characterQuest->started->format("d.m.Y")
-    ])->fetchAll();
-    foreach($arenaFights as $arenaFight) {
-      $count += $arenaFight->won;
-    }
-    return $count;
-  }
-
   /**
    * Checks if the player accomplished specified quest's goals
    */
@@ -120,7 +108,12 @@ final class Quest {
       }
     }
     if($characterQuest->quest->neededArenaWins > 0) {
-      if($this->getArenaWinsCount($characterQuest) < $characterQuest->quest->neededArenaWins) {
+      if($characterQuest->arenaWins < $characterQuest->quest->neededArenaWins) {
+        return false;
+      }
+    }
+    if($characterQuest->quest->neededGuildDonation > 0) {
+      if($characterQuest->guildDonation < $characterQuest->quest->neededGuildDonation) {
         return false;
       }
     }
@@ -237,7 +230,13 @@ final class Quest {
     if($quest->neededArenaWins > 0) {
       $requirements[] = (object) [
         "text" => $this->translator->translate("texts.quest.requirementArenaWins", $quest->neededArenaWins),
-        "met" => ($this->getArenaWinsCount($characterQuest) >= $quest->neededArenaWins),
+        "met" => ($characterQuest->arenaWins >= $quest->neededArenaWins),
+      ];
+    }
+    if($quest->neededGuildDonation > 0) {
+      $requirements[] = (object) [
+        "text" => $this->translator->translate("texts.quest.requirementGuildDonation", $quest->neededGuildDonation),
+        "met" => ($characterQuest->guildDonation >= $quest->neededGuildDonation),
       ];
     }
     $npcLink = $this->linkGenerator->link("Npc:view", ["id" => $quest->npcEnd->id]);

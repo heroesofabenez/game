@@ -25,6 +25,7 @@ use Nexendrie\Utils\Numbers;
  * @property bool $itemLose {default true}
  * @property int $neededMoney {default 0}
  * @property int $neededArenaWins {default 0}
+ * @property int $neededGuildDonation {default 0}
  * @property int $rewardMoney
  * @property int $rewardXp
  * @property int $rewardWhiteKarma {default 0}

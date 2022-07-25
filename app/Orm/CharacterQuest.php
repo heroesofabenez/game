@@ -15,6 +15,8 @@ use Nexendrie\Utils\Numbers;
  * @property int $progress {default static::PROGRESS_STARTED}
  * @property \DateTimeImmutable $started
  * @property-read int $rewardMoney {virtual}
+ * @property-read int $arenaWins {virtual}
+ * @property-read int $guildDonation {virtual}
  */
 final class CharacterQuest extends \Nextras\Orm\Entity\Entity {
   public const PROGRESS_OFFERED = 0;
@@ -28,6 +30,35 @@ final class CharacterQuest extends \Nextras\Orm\Entity\Entity {
   protected function getterRewardMoney(): int {
     $reward = $this->quest->rewardMoney;
     return (int) ($reward + $reward / 100 * $this->character->charismaBonus);
+  }
+
+  protected function getterArenaWins() {
+    $count = 0;
+    if(!isset($this->started)) {
+      return 0;
+    }
+    /** @var ArenaFightCount[] $arenaFights */
+    $arenaFights = $this->character->arenaFights->toCollection()->findBy([
+      'day>=' => $this->started->format("d.m.Y")
+    ])->fetchAll();
+    foreach($arenaFights as $arenaFight) {
+      $count += $arenaFight->won;
+    }
+    return $count;
+  }
+
+  protected function getterGuildDonation() {
+    $result = 0;
+    if(!isset($this->started)) {
+      return 0;
+    }
+    $donations = $this->character->guildDonations->toCollection()->findBy([
+      'when>=' => $this->started,
+    ])->fetchAll();
+    foreach($donations as $donation) {
+      $result += $donation->amount;
+    }
+    return $result;
   }
 
   public function onBeforeInsert(): void {
