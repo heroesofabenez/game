@@ -57,11 +57,9 @@ final class PostofficePresenter extends BasePresenter {
       ->setRequired("forms.postOfficeNewMessage.messageField.error");
     $form->addSubmit("send", "forms.postOfficeNewMessage.sendButton.label");
     $form->onSuccess[] = [$this, "newMessageFormSucceeded"];
-    try {
-      $uid = $this->getParameter("id", null);
-      $form["to"]->setDefaultValue($uid);
-    } catch(\Nette\InvalidArgumentException $e) {
-
+    $uid = $this->getParameter("id", null);
+    if(is_numeric($uid)) {
+      $form->setDefaults(["to" => (int) $uid,]);
     }
     return $form;
   }

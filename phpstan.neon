@@ -14,8 +14,7 @@ parameters:
         - Nette\Security\IIdentity
     reportUnmatchedIgnoredErrors: false
     ignoreErrors:
-        - '#Call to an undefined method Nette\\ComponentModel\\IComponent::(getControlPrototype|setDefaultValue)\(\)#'
-        - '#Access to an undefined property Nette\\ComponentModel\\IComponent::\$value#'
+        - '#Call to an undefined method Nette\\ComponentModel\\IComponent::getControlPrototype\(\)#'
         - '#Variable property access on [a-zA-Z\\]+#'
         - '#Variable property access on \$this\([a-zA-Z\\]+\)#'
         - '#Variable method call on \$this\(HeroesofAbenez\\Model\\Skills\)#'
