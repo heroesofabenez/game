@@ -4,7 +4,7 @@ include:
   - template: SAST.gitlab-ci.yml
   - template: Secret-Detection.gitlab-ci.yml
 
-image: nexendrie/php:7.4
+image: nexendrie/php:8.0
 
 stages:
   - install
@@ -50,9 +50,6 @@ sast:
     SAST_DEFAULT_ANALYZERS: "eslint,phpcs-security-audit"
   cache:
     <<: *default_cache
-  
-test:default:
-  <<: *test_job
 
 test:php8.0:
   <<: *test_job

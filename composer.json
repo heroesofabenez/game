@@ -12,7 +12,7 @@
         }
     ],
     "require": {
-        "php": ">=7.4.0",
+        "php": ">=8.0.0",
         "ext-curl": "*",
         "ext-spl": "*",
         "nette/application": "^3.1.7",
@@ -40,6 +40,7 @@
     },
     "replace": {
         "symfony/polyfill-php73": "*",
+        "symfony/polyfill-php80": "*",
         "symfony/polyfill-mbstring": "*"
     },
     "autoload": {
