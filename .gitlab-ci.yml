@@ -36,7 +36,7 @@ stages:
 install:
   stage: install
   script:
-    - composer install --prefer-dist --no-progress --no-suggest --no-interaction
+    - composer install --prefer-dist --no-progress --no-interaction
   cache:
     <<: *default_cache
     policy: pull-push   
