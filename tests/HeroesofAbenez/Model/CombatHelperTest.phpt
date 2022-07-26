@@ -12,7 +12,6 @@ require __DIR__ . "/../../bootstrap.php";
 
 /**
  * @author Jakub Konečný
- * @testCase
  */
 final class CombatHelperTest extends \Tester\TestCase {
   /** @var CombatHelper */

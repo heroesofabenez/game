@@ -10,7 +10,6 @@ use Nette\Application\BadRequestException;
 
 /**
  * @author Jakub Konečný
- * @testCase
  */
 final class SkillPresenterTest extends \Tester\TestCase {
   use TPresenter;

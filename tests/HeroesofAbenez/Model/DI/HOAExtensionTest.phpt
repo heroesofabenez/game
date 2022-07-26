@@ -12,7 +12,6 @@ use HeroesofAbenez\Model\DevelopmentUserToCharacterMapper;
 
 /**
  * @author Jakub Konečný
- * @testCase
  */
 final class HOAExtensionTest extends \Tester\TestCase {
   use \Testbench\TCompiledContainer;

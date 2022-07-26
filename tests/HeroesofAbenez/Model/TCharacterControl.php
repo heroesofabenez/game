@@ -9,7 +9,6 @@ use HeroesofAbenez\Orm\Character;
 
 /**
  * @author Jakub Konečný
- * @testCase
  */
 trait TCharacterControl {
   use \Testbench\TCompiledContainer;

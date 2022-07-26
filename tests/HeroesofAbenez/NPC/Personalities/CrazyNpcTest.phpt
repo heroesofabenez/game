@@ -11,7 +11,6 @@ use Tester\Assert;
 
 /**
  * @author Jakub Konečný
- * @testCase
  */
 final class CrazyNpcTest extends \Tester\TestCase {
   use \Testbench\TCompiledContainer;

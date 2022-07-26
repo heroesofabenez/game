@@ -11,7 +11,6 @@ require __DIR__ . "/../../bootstrap.php";
 
 /**
  * @author Jakub Konečný
- * @testCase
  */
 final class FriendsTest extends \Tester\TestCase {
   use \Testbench\TCompiledContainer;

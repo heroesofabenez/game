@@ -10,7 +10,6 @@ use Tester\Assert;
 
 /**
  * @author Jakub Konečný
- * @testCase
  */
 final class ReservedNpcTest extends \Tester\TestCase {
   use \Testbench\TCompiledContainer;

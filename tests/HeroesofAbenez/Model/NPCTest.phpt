@@ -10,7 +10,6 @@ require __DIR__ . "/../../bootstrap.php";
 
 /**
  * @author Jakub Konečný
- * @testCase
  */
 final class NPCTest extends \Tester\TestCase {
   /** @var NPC */

@@ -9,7 +9,6 @@ require __DIR__ . "/../../bootstrap.php";
 
 /**
  * @author Jakub Konečný
- * @testCase
  */
 final class CharacterBuilderTest extends \Tester\TestCase {
   /** @var CharacterBuilder */

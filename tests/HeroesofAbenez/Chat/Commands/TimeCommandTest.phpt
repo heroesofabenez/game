@@ -9,7 +9,6 @@ use Tester\Assert;
 
 /**
  * @author Jakub Konečný
- * @testCase
  */
 final class TimeCommandTest extends \Tester\TestCase {
   use \Testbench\TCompiledContainer;

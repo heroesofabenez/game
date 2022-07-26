@@ -10,7 +10,6 @@ use Tester\Assert;
 
 /**
  * @author Jakub Konečný
- * @testCase
  */
 final class HostileNpcTest extends \Tester\TestCase {
   use \Testbench\TCompiledContainer;

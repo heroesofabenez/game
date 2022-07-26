@@ -9,7 +9,6 @@ use Tester\Assert;
 
 /**
  * @author Jakub Konečný
- * @testCase
  */
 final class KarmaTest extends \Tester\TestCase {
   public function testGetKarmas() {

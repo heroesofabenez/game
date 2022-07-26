@@ -9,7 +9,6 @@ use Tester\Assert;
 
 /**
  * @author Jakub Konečný
- * @testCase
  */
 final class CombatLogManagerTest extends \Tester\TestCase {
   /** @var CombatLogManager */
