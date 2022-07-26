@@ -25,8 +25,11 @@ final class NPCShopControl extends \Nette\Application\UI\Control {
   }
   
   public function render(): void {
+    /** @var \HeroesofAbenez\Orm\Character $character */
+    $character = $this->orm->characters->getById($this->user->id);
     $this->template->setFile(__DIR__ . "/npcShop.latte");
     $this->template->npc = $this->npc;
+    $this->template->money = $character->money;
     $this->template->render();
   }
   

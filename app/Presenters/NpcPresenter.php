@@ -123,7 +123,9 @@ final class NpcPresenter extends BasePresenter {
       $this->flashMessage("errors.npc.notSmith");
       $this->redirect("view", $id);
     }
-    $this->template->items = $this->journalModel->inventory()["items"];
+    $inventory = $this->journalModel->inventory();
+    $this->template->items = $inventory["items"];
+    $this->template->money = $inventory["money"];
   }
 
   public function handleRepair(int $itemId): void {

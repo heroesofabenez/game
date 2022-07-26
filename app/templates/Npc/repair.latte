@@ -2,6 +2,7 @@
 {block title}{_"texts.npc.smithTitle"}{/block}
 {block content}
   <h1>{_"texts.npc.smithTitle"}</h1>
+  <p>{_"texts.journal.money", $money}</p>
   {foreach $items as $item}
   {$item->amount}x <a n:href="Item:view $item->id">{$item->name}</a> {_"texts.item.durability"|firstUpper}: {$item->durability}/{$item->maxDurability} {if $item->durability < $item->maxDurability}<a n:href="repair! $item->eqid">{_"texts.item.repair"}</a> {_"texts.item.repairPrice", $item->repairPrice}{/if}<br>
   {/foreach}
