@@ -3,7 +3,6 @@
   <target name="test" depends="lint,cs,phpstan,sanity-checks,tests,clean-db"/>
   <target name="test-coverage" depends="lint,cs,phpstan,sanity-checks,tests-coverage,clean-db"/>
   <target name="test-ci" depends="install-ci,test"/>
-  <target name="test-ci-coverage" depends="install-ci,test-phpdbg"/>
   <target name="test-phpdbg" depends="lint,cs,phpstan,sanity-checks,tests-phpdbg,clean-db"/>
   <target name="release">
     <input propertyName="version" message="Enter new version number" promptChar=":"/>
