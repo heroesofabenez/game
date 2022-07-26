@@ -13,6 +13,6 @@ if($content === false) {
 $config = Neon::decode($content);
 
 $config["dbal"]["host"] = "127.0.0.1";
-unset($config["dbal"]["password"]);
+$config["dbal"]["password"] = "";
 file_put_contents($filename, Neon::encode($config, Neon::BLOCK));
 ?>
