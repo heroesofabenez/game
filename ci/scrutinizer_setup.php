@@ -14,5 +14,6 @@ $config = Neon::decode($content);
 
 $config["dbal"]["host"] = "127.0.0.1";
 $config["dbal"]["password"] = "";
+$config["dbal"]["port"] = 3306;
 file_put_contents($filename, Neon::encode($config, Neon::BLOCK));
 ?>
