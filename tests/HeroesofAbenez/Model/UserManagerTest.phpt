@@ -14,8 +14,7 @@ require __DIR__ . "/../../bootstrap.php";
 final class UserManagerTest extends \Tester\TestCase {
   use TCharacterControl;
 
-  /** @var UserManager */
-  protected $model;
+  private UserManager $model;
   
   public function setUp() {
     $this->model = $this->getService(UserManager::class);

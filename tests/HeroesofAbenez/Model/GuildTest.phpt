@@ -16,8 +16,7 @@ require __DIR__ . "/../../bootstrap.php";
 final class GuildTest extends \Tester\TestCase {
   use TCharacterControl;
 
-  /** @var Guild */
-  protected $model;
+  private Guild $model;
   
   public function setUp() {
     $this->model = $this->getService(Guild::class);

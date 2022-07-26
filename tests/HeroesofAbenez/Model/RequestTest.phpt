@@ -12,8 +12,7 @@ require __DIR__ . "/../../bootstrap.php";
  * @author Jakub Konečný
  */
 final class RequestTest extends \Tester\TestCase {
-  /** @var Request */
-  protected $model;
+  private Request $model;
   
   use \Testbench\TCompiledContainer;
   

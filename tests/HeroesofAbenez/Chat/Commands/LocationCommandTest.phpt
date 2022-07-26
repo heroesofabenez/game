@@ -12,9 +12,8 @@ use Tester\Assert;
  */
 final class LocationCommandTest extends \Tester\TestCase {
   use \Testbench\TCompiledContainer;
-  
-  /** @var LocationCommand */
-  protected $command;
+
+  protected LocationCommand $command;
   
   protected function setUp() {
     $this->command = $this->getService(LocationCommand::class);

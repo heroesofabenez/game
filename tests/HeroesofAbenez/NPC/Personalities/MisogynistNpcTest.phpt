@@ -11,11 +11,9 @@ use Tester\Assert;
 
 final class MisogynistNpcTest extends \Tester\TestCase {
   use \Testbench\TCompiledContainer;
-  
-  /** @var MisogynistNpc */
-  protected $personality;
-  /** @var \Nette\Security\User */
-  protected $user;
+
+  private MisogynistNpc $personality;
+  private \Nette\Security\User $user;
   
   protected function setUp() {
     $this->personality = $this->getService(MisogynistNpc::class);

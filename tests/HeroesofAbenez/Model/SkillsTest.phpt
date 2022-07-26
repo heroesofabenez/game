@@ -15,8 +15,7 @@ require __DIR__ . "/../../bootstrap.php";
  * @author Jakub Konečný
  */
 final class SkillsTest extends \Tester\TestCase {
-  /** @var Skills */
-  protected $model;
+  private Skills $model;
   
   use \Testbench\TCompiledContainer;
   

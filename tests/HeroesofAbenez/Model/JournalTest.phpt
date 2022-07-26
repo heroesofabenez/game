@@ -14,9 +14,8 @@ require __DIR__ . "/../../bootstrap.php";
  */
 final class JournalTest extends \Tester\TestCase {
   use \Testbench\TCompiledContainer;
-  
-  /** @var Journal */
-  protected $model;
+
+  private Journal $model;
   
   public function setUp() {
     $this->model = $this->getService(Journal::class);

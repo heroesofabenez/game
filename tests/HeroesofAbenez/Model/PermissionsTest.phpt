@@ -11,8 +11,7 @@ require __DIR__ . "/../../bootstrap.php";
  * @author Jakub Konečný
  */
 final class PermissionsTest extends \Tester\TestCase {
-  /** @var Permissions */
-  protected $model;
+  private Permissions $model;
   
   use \Testbench\TCompiledContainer;
   

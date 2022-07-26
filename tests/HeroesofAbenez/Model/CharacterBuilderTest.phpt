@@ -11,8 +11,7 @@ require __DIR__ . "/../../bootstrap.php";
  * @author Jakub Konečný
  */
 final class CharacterBuilderTest extends \Tester\TestCase {
-  /** @var CharacterBuilder */
-  protected $model;
+  private CharacterBuilder $model;
   
   use \Testbench\TCompiledContainer;
   

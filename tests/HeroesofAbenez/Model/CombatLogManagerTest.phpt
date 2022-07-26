@@ -11,8 +11,7 @@ use Tester\Assert;
  * @author Jakub Konečný
  */
 final class CombatLogManagerTest extends \Tester\TestCase {
-  /** @var CombatLogManager */
-  protected $model;
+  private CombatLogManager $model;
   
   use \Testbench\TCompiledContainer;
   

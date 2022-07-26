@@ -15,8 +15,7 @@ require __DIR__ . "/../../bootstrap.php";
 final class QuestTest extends \Tester\TestCase {
   use TCharacterControl;
 
-  /** @var Quest */
-  protected $model;
+  private Quest $model;
   
   public function setUp() {
     $this->model = $this->getService(Quest::class);

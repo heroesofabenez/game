@@ -13,11 +13,9 @@ use Tester\Assert;
  */
 final class TeachingNpcTest extends \Tester\TestCase {
   use \Testbench\TCompiledContainer;
-  
-  /** @var TeachingNpc */
-  protected $personality;
-  /** @var \Nette\Security\User */
-  protected $user;
+
+  private TeachingNpc $personality;
+  private \Nette\Security\User $user;
   
   protected function setUp() {
     $this->personality = $this->getService(TeachingNpc::class);

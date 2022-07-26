@@ -13,11 +13,9 @@ use Tester\Assert;
  */
 final class ReservedNpcTest extends \Tester\TestCase {
   use \Testbench\TCompiledContainer;
-  
-  /** @var ReservedNpc */
-  protected $personality;
-  /** @var \Nette\Security\User */
-  protected $user;
+
+  private ReservedNpc $personality;
+  private \Nette\Security\User $user;
   
   protected function setUp() {
     $this->personality = $this->getService(ReservedNpc::class);

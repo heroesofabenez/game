@@ -13,11 +13,9 @@ use Tester\Assert;
  */
 final class RacistNpcTest extends \Tester\TestCase {
   use \Testbench\TCompiledContainer;
-  
-  /** @var RacistNpc */
-  protected $personality;
-  /** @var \Nette\Security\User */
-  protected $user;
+
+  private RacistNpc $personality;
+  private \Nette\Security\User $user;
   
   protected function setUp() {
     $this->personality = $this->getService(RacistNpc::class);

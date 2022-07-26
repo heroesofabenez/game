@@ -12,11 +12,9 @@ use Tester\Assert;
  */
 final class NextrasOrmAdapterTest extends \Tester\TestCase {
   use \Testbench\TCompiledContainer;
-  
-  /** @var NextrasOrmAdapter */
-  protected $model;
-  /** @var \HeroesofAbenez\Orm\Model */
-  protected $orm;
+
+  private NextrasOrmAdapter $model;
+  private \HeroesofAbenez\Orm\Model $orm;
   
   protected function setUp() {
     $this->model = $this->getService(NextrasOrmAdapter::class);

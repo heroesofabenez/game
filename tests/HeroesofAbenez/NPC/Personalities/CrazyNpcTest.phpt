@@ -14,11 +14,9 @@ use Tester\Assert;
  */
 final class CrazyNpcTest extends \Tester\TestCase {
   use \Testbench\TCompiledContainer;
-  
-  /** @var CrazyNpc */
-  protected $personality;
-  /** @var \Nette\Security\User */
-  protected $user;
+
+  private CrazyNpc $personality;
+  private \Nette\Security\User $user;
   
   protected function setUp() {
     $this->personality = $this->getService(CrazyNpc::class);

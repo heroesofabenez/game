@@ -14,8 +14,7 @@ require __DIR__ . "/../../bootstrap.php";
 final class ProfileTest extends \Tester\TestCase {
   use TCharacterControl;
 
-  /** @var Profile */
-  protected $model;
+  private Profile $model;
 
   public function setUp() {
     $this->model = $this->getService(Profile::class);

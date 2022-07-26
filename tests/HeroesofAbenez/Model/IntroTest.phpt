@@ -13,8 +13,7 @@ require __DIR__ . "/../../bootstrap.php";
 final class IntroTest extends \Tester\TestCase {
   use TCharacterControl;
 
-  /** @var Intro */
-  protected $model;
+  private Intro $model;
   
   public function setUp() {
     $this->model = $this->getService(Intro::class);

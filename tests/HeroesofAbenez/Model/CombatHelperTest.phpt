@@ -14,12 +14,9 @@ require __DIR__ . "/../../bootstrap.php";
  * @author Jakub Konečný
  */
 final class CombatHelperTest extends \Tester\TestCase {
-  /** @var CombatHelper */
-  protected $model;
-  /** @var \Nette\Security\User */
-  protected $user;
-  /** @var ORM */
-  protected $orm;
+  private CombatHelper $model;
+  private \Nette\Security\User $user;
+  private ORM $orm;
   
   use \Testbench\TCompiledContainer;
   

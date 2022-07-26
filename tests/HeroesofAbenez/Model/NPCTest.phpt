@@ -12,8 +12,7 @@ require __DIR__ . "/../../bootstrap.php";
  * @author Jakub Konečný
  */
 final class NPCTest extends \Tester\TestCase {
-  /** @var NPC */
-  protected $model;
+  private NPC $model;
   
   use \Testbench\TCompiledContainer;
   

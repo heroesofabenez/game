@@ -14,9 +14,8 @@ require __DIR__ . "/../../bootstrap.php";
  */
 final class FriendsTest extends \Tester\TestCase {
   use \Testbench\TCompiledContainer;
-  
-  /** @var Friends */
-  protected $model;
+
+  private Friends $model;
   
   public function setUp() {
     $this->model = $this->getService(Friends::class);

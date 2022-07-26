@@ -14,8 +14,7 @@ require __DIR__ . "/../../bootstrap.php";
  * @author Jakub Konečný
  */
 final class RouterTest extends \Tester\TestCase {
-  /** @var RouteList */
-  protected $router;
+  private RouteList $router;
   
   use \Testbench\TCompiledContainer;
   

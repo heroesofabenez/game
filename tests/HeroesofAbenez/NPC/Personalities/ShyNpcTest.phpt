@@ -14,11 +14,9 @@ use Tester\Assert;
  */
 final class ShyNpcTest extends \Tester\TestCase {
   use \Testbench\TCompiledContainer;
-  
-  /** @var ShyNpc */
-  protected $personality;
-  /** @var \Nette\Security\User */
-  protected $user;
+
+  private ShyNpc $personality;
+  private \Nette\Security\User $user;
   
   protected function setUp() {
     $this->personality = $this->getService(ShyNpc::class);

@@ -16,8 +16,7 @@ require __DIR__ . "/../../bootstrap.php";
 final class LocationTest extends \Tester\TestCase {
   use TCharacterControl;
 
-  /** @var Location */
-  protected $model;
+  private Location $model;
   
   public function setUp() {
     $this->model = $this->getService(Location::class);

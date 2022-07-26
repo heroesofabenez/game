@@ -13,8 +13,7 @@ require __DIR__ . "/../../bootstrap.php";
  * @author Jakub Konečný
  */
 final class PetTest extends \Tester\TestCase {
-  /** @var Pet */
-  protected $model;
+  private Pet $model;
   
   use \Testbench\TCompiledContainer;
   

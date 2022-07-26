@@ -13,11 +13,9 @@ use Tester\Assert;
  */
 final class ElitistNpcTest extends \Tester\TestCase {
   use \Testbench\TCompiledContainer;
-  
-  /** @var ElitistNpc */
-  protected $personality;
-  /** @var \Nette\Security\User */
-  protected $user;
+
+  private ElitistNpc $personality;
+  private \Nette\Security\User $user;
   
   protected function setUp() {
     $this->personality = $this->getService(ElitistNpc::class);

@@ -11,8 +11,7 @@ require __DIR__ . "/../../bootstrap.php";
  * @author Jakub Konečný
  */
 final class AuthorizatorFactoryTest extends \Tester\TestCase {
-  /** @var \Nette\Security\Permission */
-  protected $model;
+  private \Nette\Security\Permission $model;
   
   use \Testbench\TCompiledContainer;
   

@@ -12,9 +12,8 @@ use Tester\Assert;
  */
 final class TimeCommandTest extends \Tester\TestCase {
   use \Testbench\TCompiledContainer;
-  
-  /** @var TimeCommand */
-  protected $command;
+
+  private TimeCommand $command;
   
   protected function setUp() {
     $this->command = $this->getService(TimeCommand::class);
