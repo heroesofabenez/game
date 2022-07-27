@@ -3,27 +3,11 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Model;
 
-/**
- * @property-read string $wwwDir
- * @property-read string $appDir
- */
 final class ApplicationDirectories {
   use \Nette\SmartObject;
 
-  private string $wwwDir;
-  private string $appDir;
-
-  public function __construct(string $wwwDir, string $appDir) {
-    $this->wwwDir = $wwwDir;
-    $this->appDir = $appDir;
-  }
-
-  protected function getWwwDir(): string {
-    return $this->wwwDir;
-  }
-
-  protected function getAppDir(): string {
-    return $this->appDir;
+  // TODO: make the properties readonly once we drop support for PHP 8.0
+  public function __construct(public string $wwwDir, public string $appDir) {
   }
 }
 ?>
