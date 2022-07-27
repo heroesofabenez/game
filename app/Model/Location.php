@@ -43,7 +43,7 @@ final class Location {
    * @return ICollection|RoutesStage[]
    */
   public function stageRoutes(QuestArea $area): ICollection {
-    return $this->orm->stageRoutes->findBy(["from->area" => $area]);
+    return $this->orm->stageRoutes->findBy(["from->area" => $area])->orderBy("id");
   }
 
   /**

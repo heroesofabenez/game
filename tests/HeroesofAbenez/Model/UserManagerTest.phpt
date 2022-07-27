@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Model;
 
+use HeroesofAbenez\Orm\Character;
 use Tester\Assert;
 use Nette\Security\Identity;
 
@@ -24,6 +25,17 @@ final class UserManagerTest extends \Tester\TestCase {
     $identity = $this->model->authenticate([]);
     Assert::type(Identity::class, $identity);
     Assert::same(1, $identity->id);
+    Assert::same(["grandmaster", ], $identity->roles);
+    Assert::same("James The Invisible", $identity->name);
+    Assert::same(2, $identity->race);
+    Assert::same(Character::GENDER_MALE, $identity->gender);
+    Assert::same(3, $identity->class);
+    Assert::null($identity->specialization);
+    Assert::same(3, $identity->level);
+    Assert::same(1, $identity->stage);
+    Assert::same(0, $identity->white_karma);
+    Assert::same(0, $identity->dark_karma);
+    Assert::same(1, $identity->guild);
   }
   
   public function testCreate() {
@@ -40,6 +52,9 @@ final class UserManagerTest extends \Tester\TestCase {
     $result = $this->model->create($data);
     Assert::type("array", $result);
     Assert::same($oldCount + 1, $orm->characters->findAll()->countStored());
+    Assert::same($data["name"], $result["name"]);
+    Assert::same($data["class"], $result["class"]);
+    Assert::same($data["race"], $result["race"]);
     Assert::same("male", $result["gender"]);
     Assert::same(12, $result["strength"]);
     Assert::same(10, $result["dexterity"]);

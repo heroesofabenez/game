@@ -24,7 +24,6 @@ final class RouterTest extends \Tester\TestCase {
   
   public function testRoutes() {
     foreach($this->router->getRouters() as $route) {
-      Assert::type(IRouter::class, $route);
       Assert::type(Route::class, $route);
     }
   }

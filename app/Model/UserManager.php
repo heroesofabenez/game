@@ -33,17 +33,10 @@ final class UserManager implements \Nette\Security\IAuthenticator {
   }
   
   /**
-   * Return real user's id
-   */
-  private function getRealId(): int {
-    return $this->userToCharacterMapper->getRealId();
-  }
-  
-  /**
    * Logins the user
    */
   public function authenticate(array $credentials): IIdentity {
-    $uid = $this->getRealId();
+    $uid = $this->userToCharacterMapper->getRealId();
     if($uid === IUserToCharacterMapper::USER_ID_NOT_LOGGED_IN) {
       return new Identity(IUserToCharacterMapper::USER_ID_NOT_LOGGED_IN, "guest");
     }
@@ -86,7 +79,7 @@ final class UserManager implements \Nette\Security\IAuthenticator {
     $race = $this->orm->races->getById($values["race"]);
     $data = $this->cb->create($class, $race);
     $data["name"] = $values["name"];
-    $data["owner"] = $this->getRealId();
+    $data["owner"] = $this->userToCharacterMapper->getRealId();
     $data["gender"] = ($values["gender"] === 1) ? "male" : "female";
     $data["class"] = $class;
     $data["race"] = $race;

@@ -24,12 +24,15 @@ final class GuildTest extends \Tester\TestCase {
   
   public function testGetGuildName() {
     Assert::same("", $this->model->getGuildName(5000));
-    Assert::notSame("", $this->model->getGuildName(1));
+    Assert::same("Dawn", $this->model->getGuildName(1));
   }
   
   public function testView() {
     Assert::null($this->model->view(5000));
-    Assert::type(GuildEntity::class, $this->model->view(1));
+    $guild = $this->model->view(1);
+    Assert::type(GuildEntity::class, $guild);
+    Assert::same(1, $guild->id);
+    Assert::same("Dawn", $guild->name);
   }
   
   public function testCustomRankName() {

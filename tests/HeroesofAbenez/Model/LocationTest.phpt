@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Model;
 
+use HeroesofAbenez\Orm\CharacterClass;
+use HeroesofAbenez\Orm\RoutesStage;
 use Tester\Assert;
 use HeroesofAbenez\Orm\QuestArea;
 use HeroesofAbenez\Orm\QuestStage;
@@ -23,23 +25,80 @@ final class LocationTest extends \Tester\TestCase {
   }
   
   public function testGetStage() {
+    Assert::null($this->model->getStage(5000));
     $stage = $this->model->getStage(1);
     Assert::type(QuestStage::class, $stage);
+    Assert::same(1, $stage->id);
+    Assert::same("Study Room", $stage->name);
+    Assert::same(0, $stage->requiredLevel);
+    Assert::null($stage->requiredRace);
+    Assert::type(CharacterClass::class, $stage->requiredClass);
+    Assert::same(3, $stage->requiredClass->id);
+    Assert::type(QuestArea::class, $stage->area);
+    Assert::same(1, $stage->area->id);
+    Assert::same(215, $stage->posX);
+    Assert::same(65, $stage->posY);
   }
 
   public function testStageRoutes() {
     $routes = $this->model->stageRoutes($this->model->getArea(1));
     Assert::type(ICollection::class, $routes);
+    Assert::count(7, $routes);
+    /** @var RoutesStage $route */
+    $route = $routes->fetch();
+    Assert::same(1, $route->id);
+    Assert::same(1, $route->from->id);
+    Assert::same(2, $route->to->id);
+    /** @var RoutesStage $route */
+    $route = $routes->fetch();
+    Assert::same(2, $route->id);
+    Assert::same(1, $route->from->id);
+    Assert::same(3, $route->to->id);
+    /** @var RoutesStage $route */
+    $route = $routes->fetch();
+    Assert::same(3, $route->id);
+    Assert::same(2, $route->from->id);
+    Assert::same(3, $route->to->id);
+    /** @var RoutesStage $route */
+    $route = $routes->fetch();
+    Assert::same(5, $route->id);
+    Assert::same(1, $route->from->id);
+    Assert::same(6, $route->to->id);
+    /** @var RoutesStage $route */
+    $route = $routes->fetch();
+    Assert::same(6, $route->id);
+    Assert::same(2, $route->from->id);
+    Assert::same(6, $route->to->id);
+    /** @var RoutesStage $route */
+    $route = $routes->fetch();
+    Assert::same(8, $route->id);
+    Assert::same(1, $route->from->id);
+    Assert::same(8, $route->to->id);
+    /** @var RoutesStage $route */
+    $route = $routes->fetch();
+    Assert::same(9, $route->id);
+    Assert::same(2, $route->from->id);
+    Assert::same(8, $route->to->id);
   }
 
   public function testAreaRoutes() {
     $routes = $this->model->areaRoutes();
     Assert::type(ICollection::class, $routes);
+    Assert::count(0, $routes);
   }
 
   public function testGetArea() {
-    $stage = $this->model->getArea(1);
-    Assert::type(QuestArea::class, $stage);
+    Assert::null($this->model->getArea(5000));
+    $area = $this->model->getArea(1);
+    Assert::type(QuestArea::class, $area);
+    Assert::same(1, $area->id);
+    Assert::same("Academy of Magic", $area->name);
+    Assert::same(0, $area->requiredLevel);
+    Assert::null($area->requiredRace);
+    Assert::type(CharacterClass::class, $area->requiredClass);
+    Assert::same(3, $area->requiredClass->id);
+    Assert::same(220, $area->posX);
+    Assert::same(35, $area->posY);
   }
   
   public function testAccessibleStages() {
@@ -47,9 +106,21 @@ final class LocationTest extends \Tester\TestCase {
     $result = $this->model->accessibleStages();
     Assert::type("array", $result);
     Assert::count(5, $result);
-    foreach($result as $stage) {
-      Assert::type(QuestStage::class, $stage);
-    }
+    $stage = $result[1];
+    Assert::type(QuestStage::class, $stage);
+    Assert::same(1, $stage->id);
+    $stage = $result[2];
+    Assert::type(QuestStage::class, $stage);
+    Assert::same(2, $stage->id);
+    $stage = $result[3];
+    Assert::type(QuestStage::class, $stage);
+    Assert::same(3, $stage->id);
+    $stage = $result[6];
+    Assert::type(QuestStage::class, $stage);
+    Assert::same(6, $stage->id);
+    $stage = $result[8];
+    Assert::type(QuestStage::class, $stage);
+    Assert::same(8, $stage->id);
   }
 
   public function testCanEnterStage() {

@@ -118,16 +118,14 @@ final class Skills {
       if(!$this->canLearnSkill($skill)) {
         continue;
       }
+      $s = null;
       if($skill instanceof SkillAttack) {
         $s = $this->getCharacterAttackSkill($skill->id);
-        if($s !== null) {
-          $return[] = $s;
-        }
       } else {
         $s = $this->getCharacterSpecialSkill($skill->id);
-        if($s !== null) {
-          $return[] = $s;
-        }
+      }
+      if($s !== null) {
+        $return[] = $s;
       }
     }
     /** @var BaseCharacterSkill[] $return */

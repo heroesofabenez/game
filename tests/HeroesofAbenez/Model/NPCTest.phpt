@@ -21,6 +21,7 @@ final class NPCTest extends \Tester\TestCase {
   }
   
   public function testView() {
+    Assert::null($this->model->view(5000));
     $npc = $this->model->view(1);
     Assert::type(NpcEntity::class, $npc);
     Assert::same("Mentor", $npc->name);
