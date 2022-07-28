@@ -3,7 +3,6 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Model;
 
-use HeroesofAbenez\Orm\ArenaFightCount;
 use HeroesofAbenez\Orm\Quest as QuestEntity;
 use HeroesofAbenez\Orm\Model as ORM;
 use HeroesofAbenez\Orm\CharacterQuest;
@@ -114,6 +113,16 @@ final class Quest {
     }
     if($characterQuest->quest->neededGuildDonation > 0) {
       if($characterQuest->guildDonation < $characterQuest->quest->neededGuildDonation) {
+        return false;
+      }
+    }
+    if($characterQuest->quest->neededActiveSkillsLevel > 0) {
+      if($characterQuest->activeSkillsLevel < $characterQuest->quest->neededActiveSkillsLevel) {
+        return false;
+      }
+    }
+    if($characterQuest->quest->neededFriends > 0) {
+      if($characterQuest->friends < $characterQuest->quest->neededFriends) {
         return false;
       }
     }
@@ -239,17 +248,29 @@ final class Quest {
         "met" => ($characterQuest->guildDonation >= $quest->neededGuildDonation),
       ];
     }
+    if($quest->neededActiveSkillsLevel > 0) {
+      $requirements[] = (object) [
+        "text" => $this->translator->translate("texts.quest.requirementActiveSKillsLevel", $quest->neededActiveSkillsLevel),
+        "met" => ($characterQuest->activeSkillsLevel >= $quest->neededActiveSkillsLevel),
+      ];
+    }
+    if($quest->neededFriends > 0) {
+      $requirements[] = (object) [
+        "text" => $this->translator->translate("texts.quest.requirementFriends", $quest->neededFriends),
+        "met" => ($characterQuest->friends >= $quest->neededFriends),
+      ];
+    }
     $npcLink = $this->linkGenerator->link("Npc:view", ["id" => $quest->npcEnd->id]);
     $npcName = $quest->npcEnd->name;
     if($quest->npcStart->id != $quest->npcEnd->id) {
       $requirements[] = (object) [
         "text" => $this->translator->translate("texts.quest.requirementTalkToNpc", 0, ["npc" => "<a href=\"$npcLink\">{$npcName}</a>"]),
-        "met" => false
+        "met" => false,
       ];
     } else {
       $requirements[] = (object) [
         "text" => $this->translator->translate("texts.quest.requirementReportBackToNpc", 0, ["npc" => "<a href=\"$npcLink\">{$npcName}</a>"]),
-        "met" => false
+        "met" => false,
       ];
     }
     return $requirements;

@@ -26,6 +26,8 @@ use Nexendrie\Utils\Numbers;
  * @property int $neededMoney {default 0}
  * @property int $neededArenaWins {default 0}
  * @property int $neededGuildDonation {default 0}
+ * @property int $neededActiveSkillsLevel {default 0}
+ * @property int $neededFriends {default 0}
  * @property int $rewardMoney
  * @property int $rewardXp
  * @property int $rewardWhiteKarma {default 0}
@@ -53,6 +55,30 @@ final class Quest extends \Nextras\Orm\Entity\Entity {
 
   protected function getterEndText(): string {
     return $this->translator->translate("quests.$this->id.end_text");
+  }
+
+  protected function setterNeededMoney(int $value): int {
+    return Numbers::range($value, 0, 999);
+  }
+
+  protected function setterNeededArenaWins(int $value): int {
+    return Numbers::range($value, 0, 999);
+  }
+
+  protected function setterNeededActiveSkillsLevel(int $value): int {
+    return Numbers::range($value, 0, 999);
+  }
+
+  protected function setterNeededFriends(int $value): int {
+    return Numbers::range($value, 0, 99);
+  }
+
+  protected function setterRewardMoney(int $value): int {
+    return Numbers::range($value, 0, 9999);
+  }
+
+  protected function setterRewardXp(int $value): int {
+    return Numbers::range($value, 0, 9999);
   }
 
   protected function setterRewardWhiteKarma(int $value): int {

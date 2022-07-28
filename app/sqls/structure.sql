@@ -353,6 +353,8 @@ CREATE TABLE `quests` (
   `needed_money` int(3) NOT NULL DEFAULT '0',
   `needed_arena_wins` int(3) NOT NULL DEFAULT '0',
   `needed_guild_donation` int(11) NOT NULL DEFAULT '0',
+  `needed_active_skills_level` int(3) NOT NULL DEFAULT '0',
+  `needed_friends` int(2) NOT NULL DEFAULT '0',
   `reward_money` int(4) NOT NULL,
   `reward_xp` int(4) NOT NULL,
   `reward_item` int(11) DEFAULT NULL,

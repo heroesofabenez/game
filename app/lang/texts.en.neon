@@ -153,6 +153,8 @@ quest:
     requirementGetItem: "get %count%x %item%"
     requirementArenaWins: "win %count% fights in arena"
     requirementGuildDonation: "{1}donate 1 silver mark to your guild|[0,+Inf[ donate %count% silver marks to your guild"
+    requirementActiveSKillsLevel: "have active skills at least at level %count%"
+    requirementFriends: "{1}have 1 friend|[0,+Inf[ have %count% friends"
     requirementTalkToNpc: "talk to %npc%"
     requirementReportBackToNpc: "report back to %npc%"
     rewards: "Rewards:"
