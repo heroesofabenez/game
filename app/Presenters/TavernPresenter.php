@@ -83,19 +83,12 @@ final class TavernPresenter extends BasePresenter {
    * @throws \Nette\Application\BadRequestException
    */
   protected function createComponentNewMessageForm(): Form {
-    switch($this->action) {
-      case "guild":
-        $chat = $this->createComponentGuildChat();
-        break;
-      case "local":
-        $chat = $this->createComponentLocalChat();
-        break;
-      case "global":
-        $chat = $this->createComponentGlobalChat();
-        break;
-      default:
-        throw new \Nette\Application\BadRequestException();
-    }
+    $chat = match ($this->action) {
+      "guild" => $this->createComponentGuildChat(),
+      "local" => $this->createComponentLocalChat(),
+      "global" => $this->createComponentGlobalChat(),
+      default => throw new \Nette\Application\BadRequestException(),
+    };
     return $this->newChatMessageFormFactory->create($chat);
   }
 }
