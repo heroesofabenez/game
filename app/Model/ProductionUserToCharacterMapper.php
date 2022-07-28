@@ -11,7 +11,7 @@ namespace HeroesofAbenez\Model;
  */
 final class ProductionUserToCharacterMapper implements IUserToCharacterMapper {
   public function getRealId(): int {
-    /** @var resource $ch */
+    /** @var \CurlHandle $ch */
     $ch = curl_init("http://heroesofabenez.tk/auth.php");
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     $uid = curl_exec($ch);
