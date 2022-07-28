@@ -26,6 +26,7 @@ final class JournalTest extends \Tester\TestCase {
   }
   
   public function testBasic() {
+    \Tester\Environment::lock("database", __DIR__ . "/../../..");
     $result = $this->model->basic();
     Assert::type("array", $result);
     Assert::same("James The Invisible", $result["name"]);

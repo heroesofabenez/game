@@ -39,6 +39,7 @@ final class PetTest extends \Tester\TestCase {
   }
 
   public function testCanDeployPet() {
+    \Tester\Environment::lock("database", __DIR__ . "/../../..");
     /** @var \HeroesofAbenez\Orm\Model $orm */
     $orm = $this->getService(\HeroesofAbenez\Orm\Model::class);
     /** @var PetEntity $pet */

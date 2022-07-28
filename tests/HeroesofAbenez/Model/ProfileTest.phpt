@@ -149,6 +149,7 @@ final class ProfileTest extends \Tester\TestCase {
   }
   
   public function testView() {
+    \Tester\Environment::lock("database", __DIR__ . "/../../..");
     Assert::null($this->model->view(5000));
     $result = $this->model->view(1);
     Assert::type("array", $result);
