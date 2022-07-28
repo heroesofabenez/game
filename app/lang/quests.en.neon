@@ -38,3 +38,15 @@
     name: "Guild"
     introduction: "Ah, you are back, my apprentice. Well, let us continue your lessons. So, what should I tell about today? ... Yes, guilds. They are prestigous organizations that provide various benefits to their members. It would be good for you to join one. Just look in Guild for a list of existing ones and apply for membership. Once your application is accepted, you should make a donation, those money help guilds to grow."
     end_text: "Excellent. Now go get some rest, we will do some intense training tomorrow."
+11:
+    name: "Skills"
+    introduction: "Come, my apprentice, we have a lot to do today. If you want to win fights, you need to learn attack and/or special skills. I once told you that you can learn them from Journal using skill points. Now you should have at least 2 of them. So go on, use them."
+    end_text: "Good job. Now winning fights should be easier for you. Do not forget to also use your stat points there to improve your basic stats."
+12:
+    name: "Hour of glory"
+    introduction: "Now it is the time to see the results of your training. I want you to go to the arena and defeat 5 opponents."
+    end_text: "Excellent work, my apprentice. I think your combat training is coming along nicely but there are still a few things I need to teach before you are ready to leave the Academy. Come back once you are at least on level 4."
+13:
+    name: "Friends"
+    introduction: "Even if one is very strong, sometimes you need other people's help with completing your quests or defating an enemy so you should make some friends. To do that, go to that person's profile - e. g. from Ranking - and click Befriend. Then they have to actually acdept your request."
+    end_text: "Good job. Once someone accepts your friend request (or you accept theirs), you will see that person's name and time of their last activity in Journal - Friends."

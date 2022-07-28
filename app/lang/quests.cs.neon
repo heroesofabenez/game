@@ -38,3 +38,15 @@
     name: "Cech"
     introduction: "Á, jsi zpět, můj učedníku. Dobrá, budeme pokračovat s tvou výukou. Takže, o čem bych ti dnes řekl? ... Ano, cechy. Jsou to prestižní organizace, které poskytují svým členům nejrůznější výhody. Bylo by dobré, kdyby jsi se k nějakému přidal(a). Jednoduše se podívej v Cechu na seznam existujícíh a podej si přihlášku. Jakmile bude přijata, měl(a) by jsi přispět nějaké peníze, takto cechy rostou."
     end_text: "Výborně. Teď si běž trochu odpočinout, zítra budeme tvrdě trénovat."
+11:
+    name: "Dovednosti"
+    introduction: "Pojď, můj učedníku, máme toho dnes hodně na práci. Pokud chceš vyhrávat souboje, musíš se naučit útočné (a)nebo speciální dovednosti. Před nějakou dobou jsem ti řekl, že se je můžeš naučit z Deníku s využitím bodů dovedností. Teď by jsi měl(a) mít alespoň 2. Tak jdi je použít."
+    end_text: "Dobrá práce. Teď by pro tebe mělo být jednodušší vyhrávat souboje. Nezapomeň tam také používat body vlastností k vylepšení svých základních vlastností."
+12:
+    name: "Hodina slávy"
+    introduction: "Je čas podívat se na výsledky tvého tréninku. Chci, aby jsi šel/šla do arény a porazil(a) 5 protivníků."
+    end_text: "Výborná práce, můj učedníku. Myslím, že tvůj bojový trénink jde dobře, ale je ještě pár věcí, které tě musím naučit, než budeš připraven(a) opustit Akademii. Vrať se, až budeš minimálně na úrovni 4."
+13:
+    name: "Přátelé"
+    introduction: "I když je někdo velmi silný, někdy potřebuje pomoc od ostatních s dokončením úkolů nebo poražením nepřítele, takže by jsi si si měl(a) najít nějaké přátele. To uděláš tak, že si otevřeš profil dané osoby - např. z Hodnocení - a klikneš na Spřátelit se. Potom musí ještě přijmout tvůj požadavek."
+    end_text: "Dobrá práce. Jakmile někdo přijme tvůj požadavek na přátelství (nebo ty přijmeš jejich), uvidíš jejich jméno a čas poslední aktivity v Deník - Přátelé."
