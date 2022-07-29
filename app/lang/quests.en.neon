@@ -70,3 +70,11 @@
     name: "Graduation"
     introduction: "This is it, your graduation. You have passed your exams and from this moment you are no longer an apprentice but fully trained wizard in your own right. Come and claim your certificate"
     end_text: "Good job, now you are ready to leave the Academy. Accept this money as your gradutaion gift."
+19:
+    name: "Broken sword"
+    introduction: "Welcome, traveler, I hope you like our little town. Could I ask a favor of you? My sword just broke and I need to replace it but I can't leave my post. Could you go to the next town and buy me a new one? I'll of course reimburse you."
+    end_text: "Many thanks, traveler. Here you go some money for your trouble."
+20:
+    name: "Broken crossbow"
+    introduction: "Howdy, troublemaker. Would you mind helping a colleague? You see, last night I was escaping the guards, wanted to shoot from my crossbow but it broke. Could you bring me a new one from next town?"
+    end_text: "Ah, thanks. Here's a little something for your trouble."

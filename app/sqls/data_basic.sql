@@ -188,31 +188,36 @@ INSERT INTO `pve_arena_opponents` (`id`, `name`, `race`, `gender`, `class`, `spe
   (30,	'El-Madin',	4,	'male',	5,	NULL,	14),
   (31,	'Erdun',	4,	'male',	6,	10,	19);
 
-INSERT INTO `quests` (id, name, required_level, required_class, required_race, required_quest, conflicts_quest, needed_item, item_amount, item_lose, needed_money, needed_arena_wins, needed_guild_donation, needed_active_skills_level, needed_friends, reward_money, reward_xp, reward_item, reward_white_karma, reward_dark_karma, reward_pet, npc_start, npc_end) VALUES
-  (1, 'Moving around', 1, 3, null, null, null, null, 0, 0, 0, 0, 0, 0, 0, 0, 20, null, 0, 0, null, 1, 2),
-  (2, 'Moving around', 1, 1, 1, null, null, null, 0, 0, 0, 0, 0, 0, 0, 0, 20, null, 0, 0, null, 3, 4),
-  (3, 'Find a book', 1, 3, null, 1, null, 1, 1, 0, 0, 0, 0, 0, 0, 0, 10, null, 0, 0, null, 1, 1),
-  (4, 'Get your equipment', 1, 3, null, 3, null, 6, 1, 0, 0, 0, 0, 0, 0, 0, 5, 10, 0, 0, null, 1, 1),
-  (5, 'Find a book', 1, 1, 1, 2, null, 33, 1, 0, 0, 0, 0, 0, 0, 0, 10, null, 0, 0, null, 3, 3),
-  (6, 'Get your equipment', 1, 1, 1, 5, null, 2, 1, 0, 0, 0, 0, 0, 0, 0, 5, 8, 0, 0, null, 3, 3),
-  (7, 'Earning money', 1, 3, null, 4, null, null, 0, 0, 0, 2, 0, 0, 0, 5, 30, null, 0, 0, null, 1, 1),
-  (8, 'New helper', 1, 3, null, 7, null, 71, 1, 1, 0, 0, 0, 0, 0, 15, 20, null, 0, 0, null, 5, 5),
-  (9, 'Storehouse', 1, 3, null, 8, null, 72, 2, 1, 0, 0, 0, 0, 0, 10, 30, null, 0, 0, null, 5, 5),
-  (10, 'Guild', 3, 3, null, 9, null, null, 0, 0, 0, 0, 10, 0, 0, 0, 30, null, 0, 0, null, 1, 1),
-  (11, 'Skills', 3, 3, null, 10, null, null, 0, 0, 0, 0, 0, 2, 0, 0, 30, null, 0, 0, null, 1, 1),
-  (12, 'Hour of glory', 3, 3, null, 11, null, null, 0, 0, 0, 5, 0, 0, 0, 15, 40, null, 0, 0, null, 1, 1),
-  (13, 'Friends', 4, 3, null, 12, null, null, 0, 0, 0, 0, 0, 0, 2, 0, 20, null, 0, 0, null, 1, 1),
-  (14, 'Karma', 4, 3, null, 13, null, null, 0, 0, 0, 0, 0, 0, 0, 0, 20, null, 0, 0, null, 1, 1),
-  (15, 'White karma', 1, 3, null, 14, 16, null, 0, 0, 0, 0, 5, 0, 0, 0, 30, null, 1, 0, null, 1, 1),
-  (16, 'Dark karma', 1, 3, null, 14, 15, null, 0, 0, 5, 0, 0, 0, 0, 0, 30, null, 0, 1, null, 1, 1),
-  (17, 'Final exam', 4, 3, null, 14, null, null, 0, 0, 0, 5, 0, 4, 0, 10, 40, 73, 0, 0, null, 1, 1),
-  (18, 'Graduation', 5, 3, null, 17, null, 73, 1, 0, 0, 0, 0, 0, 0, 10, 30, 74, 0, 0, null, 1, 1);
+INSERT INTO `quests` (id, name, required_level, required_class, required_race, required_quest, required_white_karma, required_dark_karma, conflicts_quest, needed_item, item_amount, item_lose, needed_money, needed_arena_wins, needed_guild_donation, needed_active_skills_level, needed_friends, reward_money, reward_xp, reward_item, reward_white_karma, reward_dark_karma, reward_pet, npc_start, npc_end) VALUES
+  (1, 'Moving around', 1, 3, null, null, 0, 0, null, null, 0, 0, 0, 0, 0, 0, 0, 0, 20, null, 0, 0, null, 1, 2),
+  (2, 'Moving around', 1, 1, 1, null, 0, 0, null, null, 0, 0, 0, 0, 0, 0, 0, 0, 20, null, 0, 0, null, 3, 4),
+  (3, 'Find a book', 1, 3, null, 1, 0, 0, null, 1, 1, 0, 0, 0, 0, 0, 0, 0, 10, null, 0, 0, null, 1, 1),
+  (4, 'Get your equipment', 1, 3, null, 3, 0, 0, null, 6, 1, 0, 0, 0, 0, 0, 0, 0, 5, 10, 0, 0, null, 1, 1),
+  (5, 'Find a book', 1, 1, 1, 2, 0, 0, null, 33, 1, 0, 0, 0, 0, 0, 0, 0, 10, null, 0, 0, null, 3, 3),
+  (6, 'Get your equipment', 1, 1, 1, 5, 0, 0, null, 2, 1, 0, 0, 0, 0, 0, 0, 0, 5, 8, 0, 0, null, 3, 3),
+  (7, 'Earning money', 1, 3, null, 4, 0, 0, null, null, 0, 0, 0, 2, 0, 0, 0, 5, 30, null, 0, 0, null, 1, 1),
+  (8, 'New helper', 1, 3, null, 7, 0, 0, null, 71, 1, 1, 0, 0, 0, 0, 0, 15, 20, null, 0, 0, null, 5, 5),
+  (9, 'Storehouse', 1, 3, null, 8, 0, 0, null, 72, 2, 1, 0, 0, 0, 0, 0, 10, 30, null, 0, 0, null, 5, 5),
+  (10, 'Guild', 3, 3, null, 9, 0, 0, null, null, 0, 0, 0, 0, 10, 0, 0, 0, 30, null, 0, 0, null, 1, 1),
+  (11, 'Skills', 3, 3, null, 10, 0, 0, null, null, 0, 0, 0, 0, 0, 2, 0, 0, 30, null, 0, 0, null, 1, 1),
+  (12, 'Hour of glory', 3, 3, null, 11, 0, 0, null, null, 0, 0, 0, 5, 0, 0, 0, 15, 40, null, 0, 0, null, 1, 1),
+  (13, 'Friends', 4, 3, null, 12, 0, 0, null, null, 0, 0, 0, 0, 0, 0, 2, 0, 20, null, 0, 0, null, 1, 1),
+  (14, 'Karma', 4, 3, null, 13, 0, 0, null, null, 0, 0, 0, 0, 0, 0, 0, 0, 20, null, 0, 0, null, 1, 1),
+  (15, 'White karma', 1, 3, null, 14, 0, 0, 16, null, 0, 0, 0, 0, 5, 0, 0, 0, 30, null, 1, 0, null, 1, 1),
+  (16, 'Dark karma', 1, 3, null, 14, 0, 0, 15, null, 0, 0, 5, 0, 0, 0, 0, 0, 30, null, 0, 1, null, 1, 1),
+  (17, 'Final exam', 4, 3, null, 14, 0, 0, null, null, 0, 0, 0, 5, 0, 4, 0, 10, 40, 73, 0, 0, null, 1, 1),
+  (18, 'Graduation', 5, 3, null, 17, 0, 0, null, 73, 1, 0, 0, 0, 0, 0, 0, 10, 30, 74, 0, 0, null, 1, 1),
+  (19, 'Broken sword', 5, null, null, null, 1, 0, null, 15, 1, 1, 0, 0, 0, 0, 0, 18, 25, null, 1, 0, null, 7, 7),
+  (20, 'Broken crossbow', 5, null, null, null, 0, 1, null, 20, 1, 1, 0, 0, 0, 0, 0, 22, 25, null, 0, 1, null, 9, 9);
 
 INSERT INTO `quest_areas` (`id`, `name`, `required_level`, `required_race`, `required_class`, `pos_x`, `pos_y`, `entry_stage`) VALUES
-(1,	'Academy of Magic',	0,	NULL,	3,	220,	35,	2),
-(2,	'Sands of Ramir - borderlands',	0,	1,	NULL,	220,	153,	4),
+(1,	'Academy of Magic',	0,	NULL,	3,	250,	35,	2),
+(2,	'Sands of Ramir - northwest',	0,	1,	NULL,	246,	153,	4),
 (3,	'Border woods',	25,	NULL,	NULL,	80,	165,	NULL),
-(4,	'North Great Horde',	30,	NULL,	NULL,	175,	109,	NULL);
+(4,	'North Great Horde',	30,	NULL,	NULL,	205,	109,	NULL),
+(5, 'Sands of Ramir - coastline', 5, NULL, NULL, 305, 190, 10),
+(6, 'Sands of Ramir - borderlands', 20, NULL, NULL, 280, 168, NULL),
+(7, 'Southeast Great Horde', 25, NULL, NULL, 264, 135, NULL);
 
 INSERT INTO `quest_stages` (`id`, `name`, `required_level`, `required_race`, `required_class`, `area`, `pos_x`, `pos_y`) VALUES
   (1,	'Study Room',	0,	NULL,	3,	1,	215,	65),
@@ -223,7 +228,9 @@ INSERT INTO `quest_stages` (`id`, `name`, `required_level`, `required_race`, `re
   (6,	'Infirmary',	1,	NULL,	3,	1,	60,	62),
   (7,	'Village 1 - Alchemist\'s hut',	1,	1,	NULL,	2,	55,	18),
   (8,	'Storehouse',	3,	NULL,	3,	1,	187,	180),
-  (9,	'Village 1 - General store',	1,	1,	NULL,	2,	120,	100);
+  (9,	'Village 1 - General store',	1,	1,	NULL,	2,	120,	100),
+  (10, 'Port', 5, NULL, NULL, 5, 215, 23),
+  (11, 'Town of Aldun', 5, NULL, NULL, 5, 188, 35);
 
 INSERT INTO `routes_stages` (`id`, `from`, `to`) VALUES
   (1,	1,	2),
@@ -235,7 +242,16 @@ INSERT INTO `routes_stages` (`id`, `from`, `to`) VALUES
   (7,	4,	7),
   (8,	1,	8),
   (9,	2,	8),
-  (10,	4,	9);
+  (10,	4,	9),
+  (11,	10,	11);
+
+INSERT INTO `routes_areas` (`id`, `from`, `to`) VALUES
+  (1, 1, 5),
+  (2, 2, 5),
+  (3, 5, 6),
+  (4, 6, 7),
+  (5, 2, 6),
+  (6, 4, 7);
 
 INSERT INTO `shop_items` (`id`, `npc`, `item`, `order`) VALUES
   (1,	2,	1,	1),
@@ -250,7 +266,20 @@ INSERT INTO `shop_items` (`id`, `npc`, `item`, `order`) VALUES
   (11,	4,	19,	5),
   (12,	4,	23,	6),
   (13,  2,  71, 2),
-  (14,  6,  72, 1);
+  (14,  6,  72, 1),
+  (15, 8, 15, 1),
+  (16, 8, 16, 2),
+  (17, 8, 19, 3),
+  (18, 8, 30, 4),
+  (19, 8, 17, 5),
+  (20, 8, 18, 6),
+  (21, 8, 20, 7),
+  (22, 8, 21, 8),
+  (23, 8, 22, 9),
+  (24, 8, 23, 10),
+  (25, 8, 24, 11),
+  (26, 8, 25, 12),
+  (27, 8, 26, 13);
 
 INSERT INTO `skills_attacks` (`id`, `name`, `needed_class`, `needed_specialization`, `needed_level`, `base_damage`, `damage_growth`, `levels`, `target`, `strikes`, `hit_rate`) VALUES
 (1,	'Assault',	1,	NULL,	1,	'110%',	'5%',	5,	'single',	1,	NULL),
@@ -304,7 +333,10 @@ INSERT INTO `npcs` (`id`, `name`, `race`, `class`, `specialization`, `fight`, `s
   (3,	'Instructor',	1,	1,	NULL,	0,	0,	'instructor.jpeg',	'instructor.jpeg',	4,	'neutral',	'teaching',	10,	1,	1),
   (4,	'Blacksmith',	1,	1,	NULL,	0,	1,	'blacksmith.jpeg',	'blacksmith.jpeg',	5,	'neutral',	'friendly',	10,	1,	1),
   (5,	'Nurse',	2,	6,	NULL,	0,	0,	'nurse.jpeg',	'nurse.jpeg',	6,	'neutral',	'friendly',	5,	1,	1),
-  (6,	'Storeman',	1,	1,	NULL,	0,	0,	'storeman.jpeg',	'storeman.jpeg',	8,	'neutral',	'reserved',	5,	1,	1);
+  (6,	'Storeman',	1,	1,	NULL,	0,	0,	'storeman.jpeg',	'storeman.jpeg',	8,	'neutral',	'reserved',	5,	1,	1),
+  (7,   'Port manager', 1, 1, 1, 0, 0, 'port-manager.jpeg', 'port-manager.jpeg', 10, 'neutral', 'friendly', 15, 1, 1),
+  (8,   'Blacksmith', 1, 1, NULL, 0, 1, 'blacksmith.jpeg', 'blacksmith.jpeg', 11, 'neutral', 'friendly', 10, 1, 1),
+  (9,   'Shady person', 1, 2, NULL, 0, 0, 'shady-person.jpeg', 'shady-person.jpeg', 10, 'dark', 'crazy', 12, 1, 1);
 
 INSERT INTO `pve_arena_opponent_equipment` (`id`, `npc`, `item`) VALUES
 (1,	2,	3),

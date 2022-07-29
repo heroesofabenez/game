@@ -2,11 +2,20 @@
     name: "Akademie magie"
     description: " "
 2:
-    name: "Písky Ramiru - pohraničí"
+    name: "Písky Ramiru - severozápad"
     description: " "
 3:
-    name: "Hraniční les"
+    name: "Pohraniční les"
     description: " "
 4:
     name: "Serverní Velká horda"
+    description: " "
+5:
+    name: "Písky Ramiru - pobřeží"
+    description: " "
+6:
+    name: "Písky Ramiru - pohraničí"
+    description: " "
+7:
+    name: "Jihovýchodní Velká horda"
     description: " "

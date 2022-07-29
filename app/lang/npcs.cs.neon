@@ -16,3 +16,12 @@
 6:
     name: "Skladník"
     description: "Je to silný barbar, který spravuje sklad."
+7:
+    name: "Správce přístavu"
+    description: "Je to velký, zavalitý barbar, který spravuje místní přístav. Vypadá docela přátelsky, na barbara."
+8:
+    name: "Kovář"
+    description: "Je to vysoký barbar, který vyrábí a opravuje vybavení."
+9:
+    name: "Podezřelá osoba"
+    description: "Je to průměrně vysoká osoba, pravděpodbně muž, v tmavé kápě. Možná jde o zloděje nebo vraha."

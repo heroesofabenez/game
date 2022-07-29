@@ -2,11 +2,20 @@
     name: "Academy of Magic"
     description: " "
 2:
-    name: "Sands of Ramir - borderlands"
+    name: "Sands of Ramir - northwest"
     description: " "
 3:
     name: "Border woods"
     description: " "
 4:
     name: "North Great Horde"
+    description: " "
+5:
+    name: "Sands of Ramir - coastline"
+    description: " "
+6:
+    name: "Sands of Ramir - borderlands"
+    description: " "
+7:
+    name: "Southeast Great Horde"
     description: " "

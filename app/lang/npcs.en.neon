@@ -16,3 +16,12 @@
 6:
     name: "Storeman"
     description: "He is a strong barbarian who operate the storehouse."
+7:
+    name: "Port manager"
+    description: "He is a big stout barbarian and is in charge of the local port. He looks quite friendly, for a barbarian."
+8:
+    name: "Blacksmith"
+    description: "He is a tall barbarian who makes and repairs equipment."
+9:
+    name: "Shady person"
+    description: "They are an average-sized person, probably a man, wearing a dark hood. They might be a thief or an assassin."

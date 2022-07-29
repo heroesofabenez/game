@@ -28,7 +28,7 @@
     end_text: "Dobrá práce. Zatímco jsi byl(a) pryč, sháněla se po tobě Ošetřovatelka z Ošetřovny. Potřebuje s něčím pomoc a slíbila, že ti zaplatí za tvou námahu."
 8:
     name: "Nový pomocník"
-    introduction: "Diky bohům, že jsi tady, je to úplný blázinec. Víš, dostali jsme do ošetřovny nového pomocníka, ale musí se toho ještě hodně naučit, než tu s nečím pomůže. Potřebuji knihu Ošetřování zranění, ale nemůžu najít žádný výtisk. Musíme si koupit nějaký z knihovny, ale já teď nemůžu odejít. Můžeš mi přinést jeden výtisk?"
+    introduction: "Diky bohům, že jsi tady, je to úplný blázinec. Víš, dostali jsme do ošetřovny nového pomocníka, ale musí se toho ještě hodně naučit, než tu s nečím pomůže. Potřebuji knihu Ošetřování zranění, ale nemůžu najít žádný výtisk. Musíme si koupit nějaký z knihovny, ale já teď nemůžu odejít. Můžeš mi přinést jeden výtisk? Neboj se, proplatím ti to."
     end_text: "Á, děkuji, to zrychlí jeho výcvik. Tady je tvá odměna. Teď se musím vrátit k jeho výcviku, ale pokud chceš ještě s něčím pomoct, vrať se později."
 9:
     name: "Skladiště"
@@ -70,3 +70,11 @@
     name: "Promoce"
     introduction: "Je to tady, tvá promoce. Zvládl(a) jsi všechny své zkoušky a od tohoto okamžiku už nejsi učedník, ale plně vycvičený čaroděj. Přistup a přijmi svůj certifikát."
     end_text: "Dobrá práce, nyní jsi připraven(a) opustit Akademii. Přijmi tyto peníze jako dárek k tvé promoci."
+19:
+    name: "Zlomený meč"
+    introduction: "Vítej, cestovateli, doufám, že ti se naše městečko líbí. Můžu tě požádat o laskavost? Právě se mi zlomil meč a potřebuju nový, ale nemůžu opustit své stanoviště. Mohl(a) by si jít do sousedního město a koupit mi nový? Proplatím ti ho?"
+    end_text: "Mnohokrát díky, cestovateli. Tady máš nějaké peníze za svou námahu."
+20:
+    name: "Zlomená kuše"
+    introduction: "Nazdar, potížisto. Mohl(a) bys pomoct kolegovi? Víš, minulou noc jsem utíkal strážím, chtěl jsem vystřelit ze své kuše, ale ta se rozbila. Můžeš mi přinést novou ze sousedního města?"
+    end_text: "Á, díky. Tady je něco málo za tvou námahu."
