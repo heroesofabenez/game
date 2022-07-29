@@ -169,7 +169,7 @@ final class ProfileTest extends \Tester\TestCase {
     Assert::same(7, $result["guildrank"]);
     Assert::same("Study Room", $result["stage"]);
     Assert::same("Academy of Magic", $result["area"]);
-    Assert::type(\HeroesofAbenez\Orm\Pet::class, $result["pet"]);
+    //Assert::type(\HeroesofAbenez\Orm\Pet::class, $result["pet"]);
   }
 
   public function testGetAvailableSpecializations() {
