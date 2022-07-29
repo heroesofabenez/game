@@ -125,7 +125,9 @@ INSERT INTO `items` (`id`, `name`, `slot`, `type`, `required_level`, `required_c
 (69,	'Monk\'s Flail',	'weapon',	'club',	15,	6,	10,	28,	3,	30),
 (70,	'Monk\'s Cowl',	'armor',	NULL,	15,	6,	10,	28,	3,	20),
 (71,    'Treating injuries', 'item', NULL, 1, NULL, NULL, 10, 0, 1),
-(72,    'Bandage', 'item', NULL, 1, NULL, NULL, 3, 0, 1);
+(72,    'Bandage', 'item', NULL, 1, NULL, NULL, 3, 0, 1),
+(73,    'Graduate\'s gown', 'armor', NULL, 5, 3, NULL, 0, 2, 15),
+(74,    'Graduation certificate', 'item', NULL, 5, 3, NULL, 0, 0, 1);
 
 INSERT INTO `pet_types` (`id`, `name`, `bonus_stat`, `bonus_value`, `image`, `required_level`, `required_class`, `required_race`, `cost`) VALUES
 (1,	'Rescued Lion',	'constitution',	5,	'',	8,	1,	NULL,	0),
@@ -186,20 +188,25 @@ INSERT INTO `pve_arena_opponents` (`id`, `name`, `race`, `gender`, `class`, `spe
   (30,	'El-Madin',	4,	'male',	5,	NULL,	14),
   (31,	'Erdun',	4,	'male',	6,	10,	19);
 
-INSERT INTO `quests` (id, name, required_level, required_class, required_race, required_quest, needed_item, item_amount, item_lose, needed_money, needed_arena_wins, needed_guild_donation, needed_active_skills_level, needed_friends, reward_money, reward_xp, reward_item, reward_white_karma, reward_dark_karma, reward_pet, npc_start, npc_end) VALUES
-  (1, 'Moving around', 1, 3, null, null, null, 0, 0, 0, 0, 0, 0, 0, 0, 20, null, 0, 0, null, 1, 2),
-  (2, 'Moving around', 1, 1, 1, null, null, 0, 0, 0, 0, 0, 0, 0, 0, 20, null, 0, 0, null, 3, 4),
-  (3, 'Find a book', 1, 3, null, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 10, null, 0, 0, null, 1, 1),
-  (4, 'Get your equipment', 1, 3, null, 3, 6, 1, 0, 0, 0, 0, 0, 0, 0, 5, 10, 0, 0, null, 1, 1),
-  (5, 'Find a book', 1, 1, 1, 2, 33, 1, 0, 0, 0, 0, 0, 0, 0, 10, null, 0, 0, null, 3, 3),
-  (6, 'Get your equipment', 1, 1, 1, 5, 2, 1, 0, 0, 0, 0, 0, 0, 0, 5, 8, 0, 0, null, 3, 3),
-  (7, 'Earning money', 1, 3, null, 4, null, 0, 0, 0, 2, 0, 0, 0, 5, 30, null, 0, 0, null, 1, 1),
-  (8, 'New helper', 1, 3, null, 7, 71, 1, 1, 0, 0, 0, 0, 0, 15, 20, null, 0, 0, null, 5, 5),
-  (9, 'Storehouse', 1, 3, null, 8, 72, 2, 1, 0, 0, 0, 0, 0, 10, 30, null, 0, 0, null, 5, 5),
-  (10, 'Guild', 3, 3, null, 9, null, 1, 1, 0, 0, 10, 0, 0, 0, 30, null, 0, 0, null, 1, 1),
-  (11, 'Skills', 3, 3, null, 10, null, 1, 1, 0, 0, 0, 2, 0, 0, 30, null, 0, 0, null, 1, 1),
-  (12, 'Hour of glory', 3, 3, null, 11, null, 1, 1, 0, 5, 0, 0, 0, 15, 40, null, 0, 0, null, 1, 1),
-  (13, 'Friends', 4, 3, null, 12, null, 1, 1, 0, 0, 0, 0, 2, 0, 20, null, 0, 0, null, 1, 1);
+INSERT INTO `quests` (id, name, required_level, required_class, required_race, required_quest, conflicts_quest, needed_item, item_amount, item_lose, needed_money, needed_arena_wins, needed_guild_donation, needed_active_skills_level, needed_friends, reward_money, reward_xp, reward_item, reward_white_karma, reward_dark_karma, reward_pet, npc_start, npc_end) VALUES
+  (1, 'Moving around', 1, 3, null, null, null, null, 0, 0, 0, 0, 0, 0, 0, 0, 20, null, 0, 0, null, 1, 2),
+  (2, 'Moving around', 1, 1, 1, null, null, null, 0, 0, 0, 0, 0, 0, 0, 0, 20, null, 0, 0, null, 3, 4),
+  (3, 'Find a book', 1, 3, null, 1, null, 1, 1, 0, 0, 0, 0, 0, 0, 0, 10, null, 0, 0, null, 1, 1),
+  (4, 'Get your equipment', 1, 3, null, 3, null, 6, 1, 0, 0, 0, 0, 0, 0, 0, 5, 10, 0, 0, null, 1, 1),
+  (5, 'Find a book', 1, 1, 1, 2, null, 33, 1, 0, 0, 0, 0, 0, 0, 0, 10, null, 0, 0, null, 3, 3),
+  (6, 'Get your equipment', 1, 1, 1, 5, null, 2, 1, 0, 0, 0, 0, 0, 0, 0, 5, 8, 0, 0, null, 3, 3),
+  (7, 'Earning money', 1, 3, null, 4, null, null, 0, 0, 0, 2, 0, 0, 0, 5, 30, null, 0, 0, null, 1, 1),
+  (8, 'New helper', 1, 3, null, 7, null, 71, 1, 1, 0, 0, 0, 0, 0, 15, 20, null, 0, 0, null, 5, 5),
+  (9, 'Storehouse', 1, 3, null, 8, null, 72, 2, 1, 0, 0, 0, 0, 0, 10, 30, null, 0, 0, null, 5, 5),
+  (10, 'Guild', 3, 3, null, 9, null, null, 0, 0, 0, 0, 10, 0, 0, 0, 30, null, 0, 0, null, 1, 1),
+  (11, 'Skills', 3, 3, null, 10, null, null, 0, 0, 0, 0, 0, 2, 0, 0, 30, null, 0, 0, null, 1, 1),
+  (12, 'Hour of glory', 3, 3, null, 11, null, null, 0, 0, 0, 5, 0, 0, 0, 15, 40, null, 0, 0, null, 1, 1),
+  (13, 'Friends', 4, 3, null, 12, null, null, 0, 0, 0, 0, 0, 0, 2, 0, 20, null, 0, 0, null, 1, 1),
+  (14, 'Karma', 4, 3, null, 13, null, null, 0, 0, 0, 0, 0, 0, 0, 0, 20, null, 0, 0, null, 1, 1),
+  (15, 'White karma', 1, 3, null, 14, 16, null, 0, 0, 0, 0, 5, 0, 0, 0, 30, null, 1, 0, null, 1, 1),
+  (16, 'Dark karma', 1, 3, null, 14, 15, null, 0, 0, 5, 0, 0, 0, 0, 0, 30, null, 0, 1, null, 1, 1),
+  (17, 'Final exam', 4, 3, null, 14, null, null, 0, 0, 0, 5, 0, 4, 0, 10, 40, 73, 0, 0, null, 1, 1),
+  (18, 'Graduation', 5, 3, null, 17, null, 73, 1, 0, 0, 0, 0, 0, 0, 10, 30, 74, 0, 0, null, 1, 1);
 
 INSERT INTO `quest_areas` (`id`, `name`, `required_level`, `required_race`, `required_class`, `pos_x`, `pos_y`, `entry_stage`) VALUES
 (1,	'Academy of Magic',	0,	NULL,	3,	220,	35,	2),

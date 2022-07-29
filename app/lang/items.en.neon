@@ -214,3 +214,9 @@
 72:
     name: "Bandage"
     description: "Is used by nurses to dress wounds."
+73:
+    name: "Graduate's gown"
+    description: "A gown given to graduates from Academy of Magic."
+74:
+    name: "Graduation certificate"
+    description: "A certificate with your name certifying that you graduated from Academy of Magic."

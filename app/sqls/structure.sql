@@ -82,7 +82,7 @@ CREATE TABLE `character_items` (
   `character` int(11) NOT NULL,
   `item` int(11) NOT NULL,
   `amount` int(11) NOT NULL DEFAULT '1',
-  `worn` int(1) NOT NULL,
+  `worn` int(1) NOT NULL DEFAULT '0',
   `durability` int(3) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `character_item` (`character`,`item`),

@@ -50,3 +50,23 @@
     name: "Přátelé"
     introduction: "I když je někdo velmi silný, někdy potřebuje pomoc od ostatních s dokončením úkolů nebo poražením nepřítele, takže by jsi si si měl(a) najít nějaké přátele. To uděláš tak, že si otevřeš profil dané osoby - např. z Hodnocení - a klikneš na Spřátelit se. Potom musí ještě přijmout tvůj požadavek."
     end_text: "Dobrá práce. Jakmile někdo přijme tvůj požadavek na přátelství (nebo ty přijmeš jejich), uvidíš jejich jméno a čas poslední aktivity v Deník - Přátelé."
+14:
+    name: "Karma"
+    introduction: "Teď bych tě měl seznámit s důležitým konceptem v tomto světě - karmou. Ta vyjadřuje tvou reputaci, jak tě ostatní vidí. Je rozdělená na bílou karmu a temnou karma. Za dokončení úkou můžeš jednu z nich dostat. V určitém okamžiku by sis měl(a) vybrat, kterou z nich chceš mít (pokud vůbec nějakou). Po dokončení tohoto úkolu ti nabídnu 2, které ti přidají 1 bod bílé nebo temné karmy. Můžeš dokončit jen jeden z nich. Ale nemusíš přijmout ani jeden z nich, pokud nechceš."
+    end_text: "Teď si můžeš vybrat. A pamatuj, ostatní mohou vidět tvou převažující karmu na tvém profilu."
+15:
+    name: "Bílá karma"
+    introduction: "Teď ti dám nějakou karmu, ale vše má svou cenu."
+    end_text: "Velmi dobře, teď všem řeknu, jaký/á jsi."
+16:
+    name: "Temná karma"
+    introduction: "Teď ti dám nějakou karmu, ale vše má svou cenu."
+    end_text: "Velmi dobře, teď všem řeknu, jaký/á jsi."
+17:
+    name: "Závěrečná zkouška"
+    introduction: "Už jsi téměř dokončil(a) svá studia na Akademii, už jen musíš zvládnout svou závěrečnou zkoušku. Ať jsem pyšný."
+    end_text: "Výborná práce, můj učedníku. Teď je čas na tvou promoci. Vem si svůj nový talár."
+18:
+    name: "Promoce"
+    introduction: "Je to tady, tvá promoce. Zvládl(a) jsi všechny své zkoušky a od tohoto okamžiku už nejsi učedník, ale plně vycvičený čaroděj. Přistup a přijmi svůj certifikát."
+    end_text: "Dobrá práce, nyní jsi připraven(a) opustit Akademii. Přijmi tyto peníze jako dárek k tvé promoci."

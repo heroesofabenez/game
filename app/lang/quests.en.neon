@@ -50,3 +50,23 @@
     name: "Friends"
     introduction: "Even if one is very strong, sometimes you need other people's help with completing your quests or defating an enemy so you should make some friends. To do that, go to that person's profile - e. g. from Ranking - and click Befriend. Then they have to actually acdept your request."
     end_text: "Good job. Once someone accepts your friend request (or you accept theirs), you will see that person's name and time of their last activity in Journal - Friends."
+14:
+    name: "Karma"
+    introduction: "Now I should introduce you an important concept in this world - karma. It expresses your reputation, how other people view you. It is divided into white karma and dark karma. You may get one of them for completing a quest. At some point you should make a choice which one you want to have (if any). After finishing this quest, I will offer you 2 which will give 1 point of white or dark karma. You can finish only one of them. But you do not have to take any of them if you do not want to."
+    end_text: "Now you can make your choice. And remember, other people can see your predominant karma on your profile."
+15:
+    name: "White karma"
+    introduction: "I am going to give you some karma now but everything has its price."
+    end_text: "Very well, I will tell everyone what kind of person you are."
+16:
+    name: "Dark karma"
+    introduction: "I am going to give you some karma now but everything has its price."
+    end_text: "Very well, I will tell everyone what kind of person you are."
+17:
+    name: "Final exam"
+    introduction: "You have almost finished your studies at the Academy, you only need to pass your final exam. Make me proud."
+    end_text: "Excellent work, my apprentice. Now it is the time for your graduation. Wear your new gown."
+18:
+    name: "Graduation"
+    introduction: "This is it, your graduation. You have passed your exams and from this moment you are no longer an apprentice but fully trained wizard in your own right. Come and claim your certificate"
+    end_text: "Good job, now you are ready to leave the Academy. Accept this money as your gradutaion gift."
