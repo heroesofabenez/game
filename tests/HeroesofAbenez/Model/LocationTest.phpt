@@ -100,7 +100,7 @@ final class LocationTest extends \Tester\TestCase {
     Assert::null($area->requiredRace);
     Assert::type(CharacterClass::class, $area->requiredClass);
     Assert::same(3, $area->requiredClass->id);
-    Assert::same(220, $area->posX);
+    Assert::same(250, $area->posX);
     Assert::same(35, $area->posY);
   }
   
