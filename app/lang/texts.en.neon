@@ -169,6 +169,8 @@ quest:
     level: "level"
     class: "class"
     race: "race"
+    whiteKarma: "%count% white karma"
+    darkKarma: "%count% dark karma"
 profile: 
     title: "Profile"
     level: "level"

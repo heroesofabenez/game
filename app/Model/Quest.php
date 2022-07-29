@@ -199,6 +199,16 @@ final class Quest {
         return false;
       }
     }
+    if($quest->requiredWhiteKarma > 0) {
+      if($this->user->identity->white_karma < $quest->requiredWhiteKarma) {
+        return false;
+      }
+    }
+    if($quest->requiredDarkKarma > 0) {
+      if($this->user->identity->dark_karma < $quest->requiredDarkKarma) {
+        return false;
+      }
+    }
     return true;
   }
 

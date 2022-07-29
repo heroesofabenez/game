@@ -169,6 +169,8 @@ quest:
     level: "úroveň"
     class: "třídu"
     race: "rasu"
+    whiteKarma: "%count% bílé karmy"
+    darkKarma: "%count% temné karmy"
 profile: 
     title: "Profil"
     level: "úroveň"

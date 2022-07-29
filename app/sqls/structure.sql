@@ -347,6 +347,8 @@ CREATE TABLE `quests` (
   `required_class` int(11) DEFAULT NULL,
   `required_race` int(11) DEFAULT NULL,
   `required_quest` int(3) DEFAULT NULL,
+  `required_white_karma` int(2) NOT NULL DEFAULT '0',
+  `required_dark_karma` int(2) NOT NULL DEFAULT '0',
   `conflicts_quest` int(11) DEFAULT NULL,
   `needed_item` int(11) DEFAULT NULL,
   `item_amount` int(1) NOT NULL DEFAULT '1',

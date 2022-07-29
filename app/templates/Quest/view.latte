@@ -3,7 +3,7 @@
 {block content}
   <h1>{$quest->name}</h1>
   <p>{_"texts.quest.from"} <a n:href="Npc:view $quest->npcStart->id">{$quest->npcStart->name}</a></p>
-  <p>{_"texts.quest.for"} {_"texts.quest.level"} <span class="{if $level >= $quest->requiredLevel}green{else}red{/if}">{$quest->requiredLevel}</span>{if $quest->requiredClass}, {_"texts.quest.class"} <span class="{if $class === $quest->requiredClass->id}green{else}red{/if}">{$quest->requiredClass->name}</span>{/if}{if $quest->requiredRace}, {_"texts.quest.race"} <span class="{if $race === $quest->requiredRace->id}green{else}red{/if}">{$quest->requiredRace->name}</span>{/if}</p>
+  <p>{_"texts.quest.for"} {_"texts.quest.level"} <span class="{if $level >= $quest->requiredLevel}green{else}red{/if}">{$quest->requiredLevel}</span>{if $quest->requiredClass}, {_"texts.quest.class"} <span class="{if $class === $quest->requiredClass->id}green{else}red{/if}">{$quest->requiredClass->name}</span>{/if}{if $quest->requiredRace}, {_"texts.quest.race"} <span class="{if $race === $quest->requiredRace->id}green{else}red{/if}">{$quest->requiredRace->name}</span>{/if}{if $quest->requiredWhiteKarma > 0}, {_"texts.quest.whiteKarma", $quest->requiredWhiteKarma}{/if}{if $quest->requiredDarkKarma > 0}, {_"texts.quest.darkKarma", $quest->requiredDarkKarma}{/if}</p>
   <p n:class="$finished ? crossout">{$quest->introduction}</p>
   <p n:class="$finished ? crossout">{_"texts.quest.requirementsHeader"}</p>
   <ul n:inner-foreach="$requirements as $requirement">
