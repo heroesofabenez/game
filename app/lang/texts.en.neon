@@ -257,7 +257,7 @@ training:
    train: "Train"
    stats: "Your stats:"
    usableStatPoints: "Usable stat points: %count%"
-   skills: "Skills"
+   activeSkills: "Active skills:"
    skillCurrentLevel: "Current level: %count%"
    usableSkillPoints: "Usable skill points: %count%"
 skill:

@@ -12,7 +12,7 @@
     <li>{_"texts.profile.charisma"}: {$stats["charisma"]} - {_"texts.profile.charismaBonuses"} {$charismaBonus} % {if $damageStat === "charisma"} - {include damage}{/if} {if $statPoints}<a n:href="trainStat! charisma">{_"texts.training.train"}</a>{/if}</li>
   </ul>
   <p>{_"texts.training.usableStatPoints", $statPoints}</p>
-  <h2>{_"texts.training.skills"}</h2>
+  <h2>{_"texts.training.activeSkills"}</h2>
   <ul n:inner-foreach="$skills as $skill">
     {capture $skillType}{if $skill instanceof \HeroesofAbenez\Orm\CharacterAttackSkill}attack{elseif $skill instanceof \HeroesofAbenez\Orm\CharacterSpecialSkill}special{else}{/if}{/capture}
     <li><a n:href='"Skill:$skillType" $skill->skill->id'>{$skill->skill->name}</a> {_"texts.training.skillCurrentLevel", $skill->level} {if $skillPoints and $skill->level < $skill->skill->levels}<a n:href="trainSkill! $skill->skill->id, (string) $skillType">{_"texts.training.train"}</a>{/if}</li>
