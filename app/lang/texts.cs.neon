@@ -163,6 +163,7 @@ quest:
     rewardKarma: "%whiteKarma% bílé karma, %darkKarma% temné karmy"
     followupQuests: "Navazující úkoly:"
     followsIn: "Navazuje na"
+    conflictsWith: "Vylučuje se s"
     for: "Pro:"
     level: "úroveň"
     class: "třídu"

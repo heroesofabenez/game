@@ -13,4 +13,5 @@
   <p n:class="$finished ? crossout">{_"texts.quest.rewards"} {_"texts.quest.rewardMoney", $quest->rewardMoney}, {_"texts.quest.rewardXP", $quest->rewardXp}{if $quest->rewardItem}, <a n:href="Item:view $quest->rewardItem->id">{$quest->rewardItem->name}</a>{/if}, {_"texts.quest.rewardKarma", 0, ["whiteKarma" => $quest->rewardWhiteKarma, "darkKarma" => $quest->rewardDarkKarma]}{if $quest->rewardPet}, {$quest->rewardPet->name}{/if}.</p>
   {if $quest->children->count() > 0}{_"texts.quest.followupQuests"} {foreach $quest->children as $followupQuest}<a n:href="Quest:view $followupQuest->id">{_"quests.$followupQuest->id.name"}</a>{if $iterator->last}.{else}, {/if}{/foreach}{/if}
   {if $quest->requiredQuest}{_"texts.quest.followsIn"} <a n:href="Quest:view $quest->requiredQuest->id">{$quest->requiredQuest->name}</a>.{/if}
+  {if $quest->conflictsQuest}{_"texts.quest.conflictsWith"} <a n:href="Quest:view $quest->conflictsQuest->id">{$quest->conflictsQuest->name}</a>.{/if}
 {/block}

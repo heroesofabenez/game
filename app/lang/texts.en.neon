@@ -163,6 +163,7 @@ quest:
     rewardKarma: "%whiteKarma% white karma, %darkKarma% dark karma"
     followupQuests: "Follow-up quests:"
     followsIn: "Follows in"
+    conflictsWith: "Conflicts with"
     for: "For:"
     level: "level"
     class: "class"

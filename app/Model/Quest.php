@@ -165,7 +165,14 @@ final class Quest {
     }
     $record->character->whiteKarma += $quest->rewardWhiteKarma;
     $record->character->darkKarma += $quest->rewardDarkKarma;
-    $this->orm->characterQuests->persistAndFlush($record);
+    if($quest->conflictsQuest !== null) {
+      $conflictingCharacterQuest = $this->getCharacterQuest($quest->conflictsQuest->id);
+      if($conflictingCharacterQuest->progress > CharacterQuest::PROGRESS_OFFERED && $conflictingCharacterQuest->progress < CharacterQuest::PROGRESS_FINISHED) {
+        $this->orm->remove($conflictingCharacterQuest);
+      }
+    }
+    $this->orm->characterQuests->persist($record);
+    $this->orm->flush();
   }
 
   public function isAvailable(QuestEntity $quest): bool {
@@ -184,6 +191,11 @@ final class Quest {
     }
     if($quest->requiredQuest !== null) {
       if(!$this->isFinished($quest->requiredQuest->id)) {
+        return false;
+      }
+    }
+    if($quest->conflictsQuest !== null) {
+      if($this->isFinished($quest->conflictsQuest->id)) {
         return false;
       }
     }
