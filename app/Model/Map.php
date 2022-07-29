@@ -44,7 +44,29 @@ final class Map {
       $c4 = $posY + 15;
       $return["areas"][] = (object) [
         "href" => "", "shape" => "rect", "title" => $stage->name,
-        "coords" => "$c1,$c2,$c3,$c4", "stage" => $stage->id
+        "coords" => "$c1,$c2,$c3,$c4", "stage" => $stage->id,
+      ];
+    }
+    return $return;
+  }
+
+  public function global(): array {
+    $areas = $this->locationModel->accessibleAreas();
+    $filename = $this->drawer->getGlobalMapFilename();
+    if(!file_exists($filename)) {
+      $this->drawer->globalMap();
+    }
+    $return = ["image" => realpath($filename)];
+    foreach($areas as $area) {
+      $posX = $area->posX ?? 0;
+      $posY = $area->posY ?? 0;
+      $c1 = $posX - 15;
+      $c2 = $posY - 15;
+      $c3 = $posX + 15;
+      $c4 = $posY + 15;
+      $return["areas"][] = (object) [
+        "href" => "", "shape" => "rect", "title" => $area->name,
+        "coords" => "$c1,$c2,$c3,$c4", "area" => $area->id,
       ];
     }
     return $return;

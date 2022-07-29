@@ -19,7 +19,7 @@ use Nexendrie\Utils\Numbers;
  * @property CharacterClass|null $requiredClass {m:1 CharacterClass::$areas}
  * @property int|null $posX
  * @property int|null $posY
- * @property QuestStage|null $entryStage
+ * @property QuestStage|null $entryStage {m:1 QuestStage, oneSided=true}
  * @property OneHasMany|QuestStage[] $stages {1:m QuestStage::$area}
  * @property OneHasMany|RoutesArea[] $routesOutgoing {1:m RoutesArea::$from}
  * @property OneHasMany|RoutesArea[] $routesIncoming {1:m RoutesArea::$to}

@@ -73,6 +73,15 @@ final class Location {
     $stages = $this->orm->stages->findByArea($currentStage->area->id);
     return $stages->fetchPairs("id", null);
   }
+  /**
+   * Returns list of accessible areas
+   *
+   * @return QuestArea[]
+   */
+
+  public function accessibleAreas(): array {
+    return $this->orm->areas->findAll()->fetchPairs("id", null);
+  }
 
   public function canEnterStage(QuestStage $stage): bool {
     if($stage->requiredLevel > $this->user->identity->level) {

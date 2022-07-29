@@ -145,6 +145,7 @@ map:
     title: "Mapa"
     travelTitle: "Cestovat"
     localMap: "Místní mapa"
+    globalMap: "Globální mapa"
 quest:
     title: "Úkol"
     from: "Od:"

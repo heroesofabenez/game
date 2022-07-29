@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace HeroesofAbenez\Model;
 
 use HeroesofAbenez\Orm\CharacterClass;
+use HeroesofAbenez\Orm\RoutesArea;
 use HeroesofAbenez\Orm\RoutesStage;
 use Tester\Assert;
 use HeroesofAbenez\Orm\QuestArea;
@@ -84,7 +85,9 @@ final class LocationTest extends \Tester\TestCase {
   public function testAreaRoutes() {
     $routes = $this->model->areaRoutes();
     Assert::type(ICollection::class, $routes);
-    Assert::count(0, $routes);
+    foreach($routes as $route) {
+      Assert::type(RoutesArea::class, $route);
+    }
   }
 
   public function testGetArea() {
@@ -121,6 +124,15 @@ final class LocationTest extends \Tester\TestCase {
     $stage = $result[8];
     Assert::type(QuestStage::class, $stage);
     Assert::same(8, $stage->id);
+  }
+
+  public function testAccessibleAreas() {
+    $result = $this->model->accessibleAreas();
+    Assert::type("array", $result);
+    foreach($result as $key => $area) {
+      Assert::type("int", $key);
+      Assert::type(QuestArea::class, $area);
+    }
   }
 
   public function testCanEnterStage() {

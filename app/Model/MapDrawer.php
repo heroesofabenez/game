@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Model;
 
+use HeroesofAbenez\Orm\QuestArea;
+use HeroesofAbenez\Orm\RoutesArea;
 use Nette\Utils\Image;
 use HeroesofAbenez\Orm\QuestStage;
 use Nexendrie\Translation\ILoader;
@@ -32,10 +34,10 @@ final class MapDrawer {
   /**
    * Draws a map
    * 
-   * @param QuestStage[] $points
-   * @param ICollection|RoutesStage[] $routes
+   * @param QuestStage[]|QuestArea[] $points
+   * @param ICollection|RoutesStage[]|RoutesArea[] $routes
    */
-  public function draw(array $points, ICollection $routes, string $filename, int $width, int $height): void {
+  private function draw(array $points, ICollection $routes, string $filename, int $width, int $height): void {
     $image = Image::fromBlank($width, $height, Image::rgb(204, 204, 153));
     $image->rectangle(0, 0, $width - 1, $height - 1, Image::rgb(204, 102, 0));
     foreach($points as $point) {
@@ -61,12 +63,25 @@ final class MapDrawer {
     $this->draw($stages, $routes, $this->getLocalMapFilename($currentStage->area->id), 250, 250);
   }
 
+  /**
+   * Draw global map
+   */
+  public function globalMap(): void {
+    $areas = $this->locationModel->accessibleAreas();
+    $routes = $this->locationModel->areaRoutes();
+    $this->draw($areas, $routes, $this->getGlobalMapFilename(), 450, 350);
+  }
+
   private function getMapsFolder(): string {
     return $this->directories->wwwDir . "/images/maps";
   }
 
   public function getLocalMapFilename(int $areaId): string {
     return $this->getMapsFolder() . "/local-$areaId-{$this->loader->getLang()}.jpeg";
+  }
+
+  public function getGlobalMapFilename(): string {
+    return $this->getMapsFolder() . "/global-{$this->loader->getLang()}.jpeg";
   }
 }
 ?>

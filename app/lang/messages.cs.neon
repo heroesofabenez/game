@@ -5,7 +5,7 @@ shop:
     itemBought: "Věc koupena."
 travel:
     movedToStage: "Přesunul jsi se do %stageName%."
-    movedToSArea: "Přesunul jsi se do %areaName%."
+    movedToArea: "Přesunul jsi se do %areaName%."
 request:
     accepted: "Požadavek přijat."
     declined: "Požadavek zamítnut."

@@ -145,6 +145,7 @@ map:
     title: "Map"
     travelTitle: "Travel"
     localMap: "Local map"
+    globalMap: "Global map"
 quest:
     title: "Quest"
     from: "From:"
