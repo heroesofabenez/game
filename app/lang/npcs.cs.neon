@@ -25,3 +25,6 @@
 9:
     name: "Podezřelá osoba"
     description: "Je to průměrně vysoká osoba, pravděpodbně muž, v tmavé kápě. Možná jde o zloděje nebo vraha."
+10:
+    name: "Strážný"
+    description: "Je to vysoký, fyzicky zdatný barbar, který je členem stráže."

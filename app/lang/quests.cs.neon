@@ -78,3 +78,35 @@
     name: "Zlomená kuše"
     introduction: "Nazdar, potížisto. Mohl(a) bys pomoct kolegovi? Víš, minulou noc jsem utíkal strážím, chtěl jsem vystřelit ze své kuše, ale ta se rozbila. Můžeš mi přinést novou ze sousedního města?"
     end_text: "Á, díky. Tady je něco málo za tvou námahu."
+21:
+    name: "Potíže v přístavu"
+    introduction: "Jsi zpět, cestovateli. Hledáš další práci? No, něco bych pro tebe mohl mít. Před pár nocemi nějací zloději začali chodit do přístavu krást zboží z lodí. Hodila by se mi nějaká pomoc, abych si nima dneska poradil. Myslíš, že to zvládneš?"
+    end_text: "Dobrá práce. To by je mělo naučit."
+22:
+    name: "Potíže se strážemi"
+    introduction: "Znova zdravím. Hledáš potíže? Mám dneska v noci tuhle prácičku, ale stráže posilují své řády a hodila by se pomoc. Jdeš do toho?"
+    end_text: "To nebylo vůbec špatné. Mohl(a) bys mít budoucnost u zločinu."
+23:
+    name: "Stráž"
+    introduction: "Vítej zpět, kamaráde. Ještě jednou díky za tvou pomoc oné noci. Zdá se ale, že to ty zloděje doopravdy nezastavilo. Budeme muset posílit stráž. Máš přátele, kteří by se připojili?"
+    end_text: "Skvělé, díky. Teď bychom si nimi měli být schopní poradit."
+24:
+    name: "Podsvětí"
+    introduction: "Čau, kámo. Ještě jednou díky za tvou pomoc oné noci. Ale pořád to vypadá, že je tu trochu moc stráží, asi budeme potřebovat víc lidí, abychom je brzdili. Máš přátele, kteří by mohli pomoct?"
+    end_text: "Díky, to by nám mělo s nima pomoct."
+25:
+    name: "Noví rekruti"
+    introduction: "Zdravím. Děkuji ti za pomoc se zloději v přístavu. Věci se zlepšují, nabíráme nové rekruty, ale ti potřebují trochu tréninku. Můžeš nám, prosím, pomoct?"
+    end_text: "Skvělé. Brzy budou připravení na potížisty."
+26:
+    name: "Noví rekruti"
+    introduction: "Vítej zpátky, kámo. Věci se pro nás zlepšují díky tobě. Máme teď dost lidí, ale někteří naši noví rekruti potřebují trochu tréninku. Můžeš nám pomoct?"
+    end_text: "To nebylo vůbec špatně. Budou schopni si poradit se strážnými."
+27:
+    name: "Velký zátah"
+    introduction: "Jdeš právě včas. Během obchůzky stráž našla základnu lupičů, takže teď připravujeme velký zátah. Myslíš, že by jsi nám mohl(a) pomoct? Skvělé, ó a můžeš přinést i pár zbraní? Se všemi těmi novými rekruty jich máme trochu málo."
+    end_text: "Skvělá práce. Teď už nebudou krást zboží. Tady máš něco za tvou pomoc."
+28:
+    name: "Velká loupež"
+    introduction: "Jdeš právě včas, kámo. Velká zásilka zboží připluje dneska v noci. Tvoje pomoc by byla nedocenitelná. Nezapomeň přinést pár dýk."
+    end_text: "To šlo skvěle, tady je tvůj podíl."

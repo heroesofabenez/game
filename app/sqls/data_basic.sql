@@ -208,7 +208,15 @@ INSERT INTO `quests` (id, name, required_level, required_class, required_race, r
   (17, 'Final exam', 4, 3, null, 14, 0, 0, null, null, 0, 0, 0, 5, 0, 4, 0, 10, 40, 73, 0, 0, null, 1, 1),
   (18, 'Graduation', 5, 3, null, 17, 0, 0, null, 73, 1, 0, 0, 0, 0, 0, 0, 10, 30, 74, 0, 0, null, 1, 1),
   (19, 'Broken sword', 5, null, null, null, 1, 0, null, 15, 1, 1, 0, 0, 0, 0, 0, 18, 25, null, 1, 0, null, 7, 7),
-  (20, 'Broken crossbow', 5, null, null, null, 0, 1, null, 20, 1, 1, 0, 0, 0, 0, 0, 22, 25, null, 0, 1, null, 9, 9);
+  (20, 'Broken crossbow', 5, null, null, null, 0, 1, null, 20, 1, 1, 0, 0, 0, 0, 0, 22, 25, null, 0, 1, null, 9, 9),
+  (21, 'Troubles in port', 5, null, null, 19, 1, 0, null, null, 0, 0, 0, 3, 0, 0, 0, 30, 40, null, 1, 0, null, 7, 7),
+  (22, 'Troubles with guards', 5, null, null, 20, 0, 1, null, null, 0, 0, 0, 3, 0, 0, 0, 30, 40, null, 0, 1, null, 9, 9),
+  (23, 'Guard', 5, null, null, 21, 1, 0, null, null, 0, 0, 0, 0, 0, 0, 2, 10, 20, null, 0, 0, null, 7, 7),
+  (24, 'Underworld', 5, null, null, 22, 0, 1, null, null, 0, 0, 0, 0, 0, 0, 2, 10, 20, null, 0, 0, null, 9, 9),
+  (25, 'New recruits', 6, null, null, 23, 2, 0, null, null, 0, 0, 0, 3, 0, 5, 0, 15, 35, null, 1, 0, null, 10, 10),
+  (26, 'New recruits', 6, null, null, 24, 0, 2, null, null, 0, 0, 0, 3, 0, 5, 0, 15, 35, null, 0, 1, null, 9, 9),
+  (27, 'Big raid', 6, null, null, 25, 4, 0, null, 16, 2, 1, 0, 6, 0, 0, 0, 30, 50, 31, 2, 0, null, 10, 10),
+  (28, 'Grand theft', 6, null, null, 25, 0, 4, null, 17, 2, 1, 0, 6, 0, 0, 0, 30, 50, 31, 0, 2, null, 9, 9);
 
 INSERT INTO `quest_areas` (`id`, `name`, `required_level`, `required_race`, `required_class`, `pos_x`, `pos_y`, `entry_stage`) VALUES
 (1,	'Academy of Magic',	0,	NULL,	3,	250,	35,	2),
@@ -332,11 +340,12 @@ INSERT INTO `npcs` (`id`, `name`, `race`, `class`, `specialization`, `fight`, `s
   (2,	'Librarian',	2,	3,	NULL,	0,	1,	'librarian.jpeg',	'librarian.jpeg',	3,	'neutral',	'friendly',	10,	1,	1),
   (3,	'Instructor',	1,	1,	NULL,	0,	0,	'instructor.jpeg',	'instructor.jpeg',	4,	'neutral',	'teaching',	10,	1,	1),
   (4,	'Blacksmith',	1,	1,	NULL,	0,	1,	'blacksmith.jpeg',	'blacksmith.jpeg',	5,	'neutral',	'friendly',	10,	1,	1),
-  (5,	'Nurse',	2,	6,	NULL,	0,	0,	'nurse.jpeg',	'nurse.jpeg',	6,	'neutral',	'friendly',	5,	1,	1),
+  (5,	'Nurse',	2,	6,	NULL,	0,	0,	'nurse.jpeg',	'nurse.jpeg',	6,	'white',	'friendly',	5,	1,	1),
   (6,	'Storeman',	1,	1,	NULL,	0,	0,	'storeman.jpeg',	'storeman.jpeg',	8,	'neutral',	'reserved',	5,	1,	1),
-  (7,   'Port manager', 1, 1, 1, 0, 0, 'port-manager.jpeg', 'port-manager.jpeg', 10, 'neutral', 'friendly', 15, 1, 1),
+  (7,   'Port manager', 1, 1, 1, 0, 0, 'port-manager.jpeg', 'port-manager.jpeg', 10, 'white', 'friendly', 15, 1, 1),
   (8,   'Blacksmith', 1, 1, NULL, 0, 1, 'blacksmith.jpeg', 'blacksmith.jpeg', 11, 'neutral', 'friendly', 10, 1, 1),
-  (9,   'Shady person', 1, 2, NULL, 0, 0, 'shady-person.jpeg', 'shady-person.jpeg', 10, 'dark', 'crazy', 12, 1, 1);
+  (9,   'Shady person', 1, 2, NULL, 0, 0, 'shady-person.jpeg', 'shady-person.jpeg', 10, 'dark', 'crazy', 12, 1, 1),
+  (10,  'Guard', 1, 1, NULL, 0, 0, 'barbarian-guard.jpeg', 'barbarian-guard.jpeg', 10, 'white', 'friendly', 12, 1, 1);
 
 INSERT INTO `pve_arena_opponent_equipment` (`id`, `npc`, `item`) VALUES
 (1,	2,	3),

@@ -78,3 +78,35 @@
     name: "Broken crossbow"
     introduction: "Howdy, troublemaker. Would you mind helping a colleague? You see, last night I was escaping the guards, wanted to shoot from my crossbow but it broke. Could you bring me a new one from next town?"
     end_text: "Ah, thanks. Here's a little something for your trouble."
+21:
+    name: "Troubles in port"
+    introduction: "You're back, traveler. Looking for another job? Well, I might have something for you. A few nights ago, some thieves started coming to the port to steal goods from ships. I could use some help to deal with them tonight. Are you for it?"
+    end_text: "Good job. That should teach them a lesson."
+22:
+    name: "Troubles with guards"
+    introduction: "Hey there, again. Looking for trobule? I have this job tonight but the guard is increasing their numbers, I could use some help. Want in?"
+    end_text: "That wasn't bad at all. You might have a future in crime."
+23:
+    name: "Guard"
+    introduction: "Welcome back, my friend. Thanks again for your help the other night. But it seems it didn't really stop the thieves. We might need more people in the guard. Do you have some friends who could join?"
+    end_text: "Great, thanks. Now we should be able to properly deal with them."
+24:
+    name: "Underworld"
+    introduction: "Hi, buddy. Thanks again for your help the other night. But it still looks like there are a bit too much guards, we might need more people to hinder them. Do you have some friends who could help?"
+    end_text: "Thanks, that should help us to deal with them."
+25:
+    name: "New recruits"
+    introduction: "Greetings. Thank you for your help with the thieves in port. Things are getting better, we are getting new recruits but they could use some training. Could you help us, please?"
+    end_text: "Excellent. They will be ready for troublemakers in no time."
+26:
+    name: "New recruits"
+    introduction: "Welcome back, buddy. Things are getting better for us thanks to you. We have good numbers now but some of our new recruits could use some training. Can you help us?"
+    end_text: "Not bad at all. They'll be able to handle the guards."
+27:
+    name: "Big raid"
+    introduction: "You are just in time. On the patrol, the guard has found the thieves' base so we're now preparing a big raid. Think you could help us? Great, oh, could you also bring a few weapons? We're a bit short on them with all the new recruits."
+    end_text: "Excellent work. Now they won't steal goods anymore. Here's something for your help."
+28:
+    name: "Grand theft"
+    introduction: "You are just in time, buddy. A large shipment of goods is coming tonight. Your help would be invaluable. Don't forget to bring a couple of daggers."
+    end_text: "That went great, here's your share."
