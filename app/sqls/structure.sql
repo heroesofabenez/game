@@ -342,7 +342,7 @@ CREATE TABLE `pve_arena_opponents` (
 
 CREATE TABLE `quests` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(25) NOT NULL,
+  `name` varchar(25) NOT NULL DEFAULT '',
   `required_level` int(3) NOT NULL DEFAULT '1',
   `required_class` int(11) DEFAULT NULL,
   `required_race` int(11) DEFAULT NULL,
@@ -358,8 +358,8 @@ CREATE TABLE `quests` (
   `needed_guild_donation` int(11) NOT NULL DEFAULT '0',
   `needed_active_skills_level` int(3) NOT NULL DEFAULT '0',
   `needed_friends` int(2) NOT NULL DEFAULT '0',
-  `reward_money` int(4) NOT NULL,
-  `reward_xp` int(4) NOT NULL,
+  `reward_money` int(4) NOT NULL DEFAULT '0',
+  `reward_xp` int(4) NOT NULL DEFAULT '0',
   `reward_item` int(11) DEFAULT NULL,
   `reward_white_karma` int(2) NOT NULL DEFAULT '0',
   `reward_dark_karma` int(2) NOT NULL DEFAULT '0',

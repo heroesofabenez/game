@@ -31,8 +31,8 @@ use Nexendrie\Utils\Numbers;
  * @property int $neededGuildDonation {default 0}
  * @property int $neededActiveSkillsLevel {default 0}
  * @property int $neededFriends {default 0}
- * @property int $rewardMoney
- * @property int $rewardXp
+ * @property int $rewardMoney {default 0}
+ * @property int $rewardXp {default 0}
  * @property int $rewardWhiteKarma {default 0}
  * @property int $rewardDarkKarma {default 0}
  * @property Item|null $rewardItem {m:1 Item::$rewardedForQuests}

@@ -97,7 +97,7 @@ final class Quest {
    */
   public function isCompleted(CharacterQuest $characterQuest): bool {
     if($characterQuest->quest->neededMoney > 0) {
-      if($characterQuest->quest->neededMoney >= $characterQuest->character->money) {
+      if($characterQuest->character->money < $characterQuest->quest->neededMoney) {
         return false;
       }
     }

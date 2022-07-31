@@ -72,7 +72,7 @@
     end_text: "Dobrá práce, nyní jsi připraven(a) opustit Akademii. Přijmi tyto peníze jako dárek k tvé promoci."
 19:
     name: "Zlomený meč"
-    introduction: "Vítej, cestovateli, doufám, že ti se naše městečko líbí. Můžu tě požádat o laskavost? Právě se mi zlomil meč a potřebuju nový, ale nemůžu opustit své stanoviště. Mohl(a) by si jít do sousedního město a koupit mi nový? Proplatím ti ho?"
+    introduction: "Vítej, cestovateli, doufám, že ti se naše městečko líbí. Můžu tě požádat o laskavost? Právě se mi zlomil meč a potřebuju nový, ale nemůžu opustit své stanoviště. Mohl(a) by si jít do sousedního město a koupit mi nový? Proplatím ti ho."
     end_text: "Mnohokrát díky, cestovateli. Tady máš nějaké peníze za svou námahu."
 20:
     name: "Zlomená kuše"
