@@ -88,6 +88,10 @@ request:
     guildApp: "%from% wants to join %to%'s guild."
     invitedToGroup: "%from% invited %to% to his/her group."
     friendship: "%from% wants to be friend with %to%."
+requestStatus:
+    new: "new"
+    accepted: "accepted"
+    declined: "declined"
 postoffice:
     title: "Post office"
     messages: "Messages:"

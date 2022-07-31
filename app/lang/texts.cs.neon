@@ -88,6 +88,10 @@ request:
     guildApp: "%from% se chce připojit k cechu %to%."
     invitedToGroup: "%from% pozval(a) %to% do své skupiny."
     friendship: "%from% se chce přátelit s %to%."
+requestStatus:
+    new: "nový"
+    accepted: "přijatý"
+    declined: "odmítnutý"
 postoffice:
     title: "Pošta"
     messages: "Zprávy"
