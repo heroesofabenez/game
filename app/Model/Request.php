@@ -8,6 +8,7 @@ use HeroesofAbenez\Orm\Friendship;
 use HeroesofAbenez\Orm\Request as RequestEntity;
 use Nette\NotImplementedException;
 use HeroesofAbenez\Orm\Model as ORM;
+use Nextras\Orm\Collection\ICollection;
 
 /**
  * Request Model
@@ -149,6 +150,21 @@ final class Request {
     }
     $request->status = RequestEntity::STATUS_DECLINED;
     $this->orm->requests->persistAndFlush($request);
+  }
+
+  /**
+   * @return ICollection|RequestEntity[]
+   */
+  public function listOfRequests(): ICollection {
+    return $this->orm->requests->findBy([
+      ICollection::AND,
+      ["status" => RequestEntity::STATUS_NEW],
+      [
+        ICollection::OR,
+        "from" => $this->user->id,
+        "to" => $this->user->id,
+      ],
+    ])->orderBy("sent", ICollection::DESC);
   }
 }
 ?>

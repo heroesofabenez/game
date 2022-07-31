@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace HeroesofAbenez\Model;
 
 use Nette\NotImplementedException;
+use Nextras\Orm\Collection\ICollection;
 use Tester\Assert;
 use HeroesofAbenez\Orm\Request as RequestEntity;
 
@@ -164,6 +165,49 @@ final class RequestTest extends \Tester\TestCase {
     $this->model->decline($request->id);
     Assert::same(RequestEntity::STATUS_DECLINED, $request->status);
     $orm->removeAndFlush($request);
+  }
+
+  public function testListOfRequest() {
+    /** @var \HeroesofAbenez\Orm\Model $orm */
+    $orm = $this->getService(\HeroesofAbenez\Orm\Model::class);
+    $character = $this->getCharacter();
+    $request1 = new RequestEntity();
+    $request1->from = $character;
+    $request1->to = $orm->characters->getById(2);
+    $request1->status = RequestEntity::STATUS_NEW;
+    $request1->type = RequestEntity::TYPE_FRIENDSHIP;
+    $orm->requests->persist($request1);
+    $request2 = new RequestEntity();
+    $request2->from = $orm->characters->getById(2);
+    $request2->to = $character;
+    $request2->status = RequestEntity::STATUS_NEW;
+    $request2->type = RequestEntity::TYPE_FRIENDSHIP;
+    $orm->requests->persist($request2);
+    $request3 = new RequestEntity();
+    $request3->from = $character;
+    $request3->to = $orm->characters->getById(2);
+    $request3->status = RequestEntity::STATUS_ACCEPTED;
+    $request3->type = RequestEntity::TYPE_FRIENDSHIP;
+    $orm->requests->persist($request3);
+    $request4 = new RequestEntity();
+    $request4->from = $orm->characters->getById(2);
+    $request4->to = $character;
+    $request4->status = RequestEntity::STATUS_DECLINED;
+    $request4->type = RequestEntity::TYPE_FRIENDSHIP;
+    $orm->requests->persist($request4);
+    $orm->flush();
+    $result = $this->model->listOfRequests();
+    Assert::type(ICollection::class, $result);
+    Assert::count(2, $result);
+    foreach($result as $request) {
+      Assert::type(RequestEntity::class, $request);
+      Assert::same(RequestEntity::STATUS_NEW, $request->status);
+    }
+    $orm->requests->remove($request1);
+    $orm->requests->remove($request2);
+    $orm->requests->remove($request3);
+    $orm->requests->remove($request4);
+    $orm->flush();
   }
 }
 

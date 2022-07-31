@@ -35,6 +35,7 @@ menu:
             texts.postoffice.title: "Postoffice:"
             texts.arena.title: "Arena:"
             texts.ranking.title: "Ranking:characters"
+            texts.request.titleList: "Request:"
             texts.map.title: "Map:local"
     journal:
         htmlId: journalChapters

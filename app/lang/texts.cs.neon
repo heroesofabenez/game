@@ -7,6 +7,7 @@ common:
     grandmaster: "Velmistr"
     profile: "Profil"
     back: "Zpět"
+    details: "Detaily"
 homepage:
     greeting: "Vítej, %characterName%. Právě jsi v %stageName% v %areaName%."
     noOneToSee: "Nikoho nevidíš."
@@ -80,6 +81,7 @@ guild:
     memberContribution: "{0} Přispěl(a) 0 stříbrňáků|{1} Máš 1 stříbrňák|[2,4] Přispěl(a) %count% stříbrňáky|[5,+Inf] Přispěl(a) %count% stříbrňáků"
 request:
     title: "Požadavek"
+    titleList: "Požadavky"
     accept: "Přijmout"
     decline: "Odmítnout"
     sent: "Odeslán"

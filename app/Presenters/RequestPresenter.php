@@ -21,14 +21,9 @@ final class RequestPresenter extends BasePresenter {
     parent::__construct();
     $this->model = $model;
   }
-  
-  /**
-   * Page /request does not exist
-   *
-   * @throws \Nette\Application\BadRequestException
-   */
-  public function actionDefault(): void {
-    throw new \Nette\Application\BadRequestException();
+
+  public function renderDefault(): void {
+    $this->template->requests = $this->model->listOfRequests();
   }
 
   /**

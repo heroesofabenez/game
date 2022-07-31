@@ -15,9 +15,7 @@ final class RequestPresenterTest extends \Tester\TestCase {
   use TPresenter;
   
   public function testDefault() {
-    Assert::exception(function() {
-      $this->checkAction("Request:default");
-    }, BadRequestException::class);
+    $this->checkAction("Request:default");
   }
   
   public function testView() {

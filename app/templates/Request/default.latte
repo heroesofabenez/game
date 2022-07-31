@@ -1,0 +1,14 @@
+{layout "../@layout.latte"}
+{block title}{_"texts.request.titleList"}{/block}
+{block content}
+  <h1>{_"texts.request.titleList"}</h1>
+  {foreach $requests as $request}
+  {switch $request->type}
+    {case \HeroesofAbenez\Orm\Request::TYPE_GUILD_JOIN}{_"texts.request.invitedToGuild", 0, [from => $request->from->name, to => $request->to->name]}
+    {case \HeroesofAbenez\Orm\Request::TYPE_GUILD_APP}{_"texts.request.guildApp", 0, [from => $request->from->name, to => $request->to->name]}
+    {case \HeroesofAbenez\Orm\Request::TYPE_GROUP_JOIN}{_"texts.request.invitedToGroup", 0, [from => $request->from->name, to => $request->to->name]}
+    {case \HeroesofAbenez\Orm\Request::TYPE_FRIENDSHIP}{_"texts.request.friendship", 0, [from => $request->from->name, to => $request->to->name]}
+  {/switch}
+  <a n:href="Request:view $request->id">{_"texts.common.details"}</a><br>
+  {/foreach}
+{/block}

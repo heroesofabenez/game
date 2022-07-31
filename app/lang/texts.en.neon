@@ -7,6 +7,7 @@ common:
     grandmaster: "Grandmaster"
     profile: "Profile"
     back: "Back"
+    details: "Details"
 homepage:
     greeting: "Welcome, %characterName%. You're currently in %stageName% at %areaName%."
     noOneToSee: "You can't see anyone."
@@ -80,6 +81,7 @@ guild:
     memberContribution: "{1}Donated 1 silver mark|]1,+Inf[ Donated %count% silver marks"
 request:
     title: "Request"
+    titleList: "Requests"
     accept: "Accept"
     decline: "Decline"
     sent: "Sent"
