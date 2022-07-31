@@ -3,8 +3,6 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Model;
 
-use Nette\Localization\ITranslator;
-
 /**
  * Map Model
  *
@@ -16,11 +14,13 @@ final class Map {
   private Location $locationModel;
   private MapDrawer $drawer;
   private \Nette\Security\User $user;
+  private bool $alwaysDraw = false;
   
-  public function __construct(Location $locationModel, \Nette\Security\User $user, MapDrawer $drawer) {
+  public function __construct(Location $locationModel, \Nette\Security\User $user, MapDrawer $drawer, SettingsRepository $sr) {
     $this->locationModel = $locationModel;
     $this->drawer = $drawer;
     $this->user = $user;
+    $this->alwaysDraw = $sr->settings["application"]["alwaysDrawMaps"];
   }
   
   /**
@@ -31,7 +31,7 @@ final class Map {
     $stages = $this->locationModel->accessibleStages();
     $currentStage = $stages[$this->user->identity->stage];
     $filename = $this->drawer->getLocalMapFilename($currentStage->area->id);
-    if(!file_exists($filename)) {
+    if($this->alwaysDraw || !file_exists($filename)) {
       $this->drawer->localMap();
     }
     $return = ["image" => realpath($filename)];
@@ -53,7 +53,7 @@ final class Map {
   public function global(): array {
     $areas = $this->locationModel->accessibleAreas();
     $filename = $this->drawer->getGlobalMapFilename();
-    if(!file_exists($filename)) {
+    if($this->alwaysDraw || !file_exists($filename)) {
       $this->drawer->globalMap();
     }
     $return = ["image" => realpath($filename)];

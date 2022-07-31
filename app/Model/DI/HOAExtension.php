@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace HeroesofAbenez\Model\DI;
 
 use HeroesofAbenez;
+use Nette\DI\Helpers;
 use Nette\Schema\Expect;
 use HeroesofAbenez\Model\IUserToCharacterMapper;
 use HeroesofAbenez\Model\DevelopmentUserToCharacterMapper;
@@ -16,9 +17,11 @@ use HeroesofAbenez\Model\DevelopmentUserToCharacterMapper;
  */
 final class HOAExtension extends \Nette\DI\CompilerExtension {
   public function getConfigSchema(): \Nette\Schema\Schema {
+    $params = $this->getContainerBuilder()->parameters;
     return Expect::structure([
       "application" => Expect::structure([
         "server" => Expect::string(""),
+        "alwaysDrawMaps" => Expect::bool(Helpers::expand("%debugMode%", $params)),
       ])->castTo("array"),
       "userToCharacterMapper" => Expect::type("class")->default(DevelopmentUserToCharacterMapper::class),
     ])->castTo("array");
