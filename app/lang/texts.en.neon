@@ -250,8 +250,6 @@ ranking:
     members: "Members"
     profile: "Profile"
     details: "Details"
-    previous: "Previous"
-    next: "Next"
 arena:
     title: "Arena"
     localChampions: "Local champions"
@@ -323,3 +321,7 @@ weaponType:
     crossbow: "crossbow"
     "throwing knife": "throwing knife"
     instrument: "instrument"
+paginator:
+    page: "Page"
+    previous: "Previous"
+    next: "Next"

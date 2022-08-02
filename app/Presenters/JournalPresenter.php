@@ -62,10 +62,16 @@ final class JournalPresenter extends BasePresenter {
     $this->template->quests = $this->model->currentQuests();
   }
 
-  public function renderQuestsFinished(): void {
+  public function renderQuestsFinished(int $page = 1): void {
     $this->setView("quests");
     $this->template->active = false;
-    $this->template->quests = $this->model->finishedQuests();
+    $quests = $this->model->finishedQuests();
+    $paginator = new \Nette\Utils\Paginator();
+    $paginator->page = $page;
+    $paginator->itemsPerPage = 20;
+    $paginator->itemCount = $quests->countStored();
+    $this->template->quests = $quests->limitBy($paginator->getLength(), $paginator->getOffset());
+    $this->template->paginator = $paginator;
   }
   
   public function renderPets(): void {

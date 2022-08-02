@@ -250,8 +250,6 @@ ranking:
     members: "Členové"
     profile: "Profil"
     details: "Detaily"
-    previous: "Předchozí"
-    next: "Následující"
 arena:
     title: "Aréna"
     localChampions: "Místní šampióni"
@@ -323,3 +321,7 @@ weaponType:
     crossbow: "kuše"
     "throwing knife": "vrhací nůž"
     instrument: "nástroj"
+paginator:
+    page: "Strana"
+    previous: "Předchozí"
+    next: "Následující"

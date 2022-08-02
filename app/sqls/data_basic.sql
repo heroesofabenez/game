@@ -216,7 +216,7 @@ INSERT INTO `quests` (id, name, required_level, required_class, required_race, r
   (25, 'New recruits', 6, null, null, 23, 2, 0, null, null, 0, 0, 0, 3, 0, 5, 0, 15, 35, null, 1, 0, null, 10, 10),
   (26, 'New recruits', 6, null, null, 24, 0, 2, null, null, 0, 0, 0, 3, 0, 5, 0, 15, 35, null, 0, 1, null, 9, 9),
   (27, 'Big raid', 6, null, null, 25, 4, 0, null, 16, 2, 1, 0, 6, 0, 0, 0, 30, 50, 31, 2, 0, null, 10, 10),
-  (28, 'Grand theft', 6, null, null, 25, 0, 4, null, 17, 2, 1, 0, 6, 0, 0, 0, 30, 50, 31, 0, 2, null, 9, 9);
+  (28, 'Grand theft', 6, null, null, 26, 0, 4, null, 17, 2, 1, 0, 6, 0, 0, 0, 30, 50, 31, 0, 2, null, 9, 9);
 
 INSERT INTO `quest_areas` (`id`, `name`, `required_level`, `required_race`, `required_class`, `pos_x`, `pos_y`, `entry_stage`) VALUES
 (1,	'Academy of Magic',	0,	NULL,	3,	250,	35,	2),

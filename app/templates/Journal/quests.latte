@@ -11,5 +11,9 @@
   <a n:href="Quest:view $quest->quest->id">{$quest->quest->name}</a><br>
     {/foreach}
   {/if}
+  {default $paginator = null}
+  {if $paginator}
+    <p>{if $paginator->pageCount !== 1}{_"texts.paginator.page"} {$paginator->page}/{$paginator->pageCount}{/if} {if !$paginator->first}<a href='{plink this $paginator->page-1}'>{_"texts.paginator.previous"}</a>{/if} {if !$paginator->last}<a href='{plink this $paginator->page+1}'>{_"texts.paginator.next"}</a>{/if}</p>
+  {/if}
   {control menu:chapters journal}
 {/block}
