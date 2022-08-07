@@ -78,6 +78,11 @@ trait TCharacterControl {
       foreach($oldStats as $stat => $oldValue) {
         $data->$stat = $oldValue;
       }
+      foreach($data->items as $item) {
+        if(!isset($item->id)) {
+          $data->items->remove($item);
+        }
+      }
       $orm->characters->persistAndFlush($data);
       $user->login("");
     }
