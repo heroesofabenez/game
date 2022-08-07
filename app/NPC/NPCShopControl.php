@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\NPC;
 
+use HeroesofAbenez\Orm\CharacterItem;
 use HeroesofAbenez\Orm\Npc;
 use HeroesofAbenez\Orm\Model as ORM;
 
@@ -29,6 +30,14 @@ final class NPCShopControl extends \Nette\Application\UI\Control {
     $character = $this->orm->characters->getById($this->user->id);
     $this->template->setFile(__DIR__ . "/npcShop.latte");
     $this->template->npc = $this->npc;
+    $items = [];
+    foreach($this->npc->items as $item) {
+      $characterItem = new CharacterItem();
+      $characterItem->item = $item->item;
+      $characterItem->character = $character;
+      $items[] = $characterItem;
+    }
+    $this->template->items = $items;
     $this->template->money = $character->money;
     $this->template->render();
   }

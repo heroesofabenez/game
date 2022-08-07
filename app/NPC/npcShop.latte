@@ -4,7 +4,7 @@
   {else}
   <p>{_"texts.journal.money", $money}</p>
   <p>{_"texts.npcShop.offer"}</p>
-  {foreach $npc->items as $item}
-  <a href="{plink Item:view $item->item->id}">{$item->item->name}</a> {_"texts.npcShop.itemPrice", $item->item->price}. <a n:href="buy! $item->item->id">{_"texts.npcShop.buy"}</a><br>
+  {foreach $items as $item}
+  <a href="{plink Item:view $item->item->id}">{$item->item->name}</a> {_"texts.npcShop.itemPrice", $item->buyPrice}. <a n:href="buy! $item->item->id">{_"texts.npcShop.buy"}</a><br>
   {/foreach}
   {/if}
