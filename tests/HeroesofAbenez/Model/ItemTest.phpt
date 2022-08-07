@@ -41,6 +41,15 @@ final class ItemTest extends \Tester\TestCase {
     Assert::true($this->model->haveItem(1, 1));
     $this->model->loseItem(1);
     Assert::false($this->model->haveItem(1));
+    $this->preserveStats(["money", ], function() {
+      $character = $this->getCharacter();
+      $oldMoney = $character->money;
+      $this->model->giveItem(12, 2, true);
+      Assert::true($this->model->haveItem(12, 2));
+      $newMoney = $character->money;
+      Assert::same($oldMoney - 8, $newMoney);
+      $this->model->loseItem(1, 2);
+    });
   }
 
   public function testCanEquipItem() {

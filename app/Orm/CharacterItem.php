@@ -16,6 +16,7 @@ use Nexendrie\Utils\Numbers;
  * @property bool $worn {default 0}
  * @property int $durability
  * @property-read int $maxDurability {virtual}
+ * @property-read int $buyPrice {virtual}
  * @property-read int $repairPrice {virtual}
  */
 final class CharacterItem extends \Nextras\Orm\Entity\Entity {
@@ -32,6 +33,10 @@ final class CharacterItem extends \Nextras\Orm\Entity\Entity {
 
   protected function getterMaxDurability(): int {
     return $this->item->durability;
+  }
+
+  protected function getterBuyPrice(): int {
+    return (int) ($this->item->price - ($this->item->price / 100 * $this->character->charismaBonus));
   }
 
   protected function getterRepairPrice(): int {

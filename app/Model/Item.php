@@ -44,7 +44,7 @@ final class Item {
   /**
    * Give the player item(s)
    */
-  public function giveItem(int $id, int $amount = 1): void {
+  public function giveItem(int $id, int $amount = 1, bool $pay = false): void {
     $item = $this->orm->characterItems->getByCharacterAndItem($this->user->id, $id);
     if($item === null) {
       $item = new CharacterItem();
@@ -52,6 +52,10 @@ final class Item {
       $item->character = $this->user->id;
       $item->item = $id;
       $item->amount = 0;
+    }
+    if($pay) {
+      $item->character->money -= $item->buyPrice * $amount;
+      $item->character->lastActive = new \DateTimeImmutable();
     }
     $item->amount += $amount;
     $this->orm->characterItems->persistAndFlush($item);
