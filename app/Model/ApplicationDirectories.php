@@ -6,8 +6,7 @@ namespace HeroesofAbenez\Model;
 final class ApplicationDirectories {
   use \Nette\SmartObject;
 
-  // TODO: make the properties readonly once we drop support for PHP 8.0
-  public function __construct(public string $wwwDir, public string $appDir) {
+  public function __construct(public readonly string $wwwDir, public readonly string $appDir) {
   }
 }
 ?>
