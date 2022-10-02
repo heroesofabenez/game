@@ -21,7 +21,7 @@
         "nette/di": "^3.0.13",
         "nette/forms": "^3.1.7",
         "nette/security": "^3.1",
-        "nette/utils": "^3.2.7",
+        "nette/utils": "^3.2.8",
         "tracy/tracy": "^2.9.4",
         "latte/latte": "^2.11.4",
         "nexendrie/translation": "^2.3.2",
@@ -35,7 +35,7 @@
     },
     "require-dev": {
         "nexendrie/code-quality": "dev-master",
-        "phpstan/phpstan-nette": "^1.0",
+        "phpstan/phpstan-nette": "^1.1",
         "nextras/orm-phpstan": "^1.0.1"
     },
     "replace": {
