@@ -1,4 +1,4 @@
-Copyright (c) 2013-2022, Jakub Konečný
+Copyright (c) 2013-2023, Jakub Konečný
 All rights reserved.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of

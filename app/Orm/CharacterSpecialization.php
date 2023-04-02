@@ -43,7 +43,7 @@ final class CharacterSpecialization extends \Nextras\Orm\Entity\Entity {
       "strength" => $this->strengthGrow, "dexterity" => $this->dexterityGrow, "constitution" => $this->constitutionGrow,
       "intelligence" => $this->intelligenceGrow, "charisma" => $this->charismaGrow,
     ];
-    return array_search(max($stats), $stats, true);
+    return (string) array_search(max($stats), $stats, true);
   }
 }
 ?>

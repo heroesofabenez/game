@@ -83,7 +83,7 @@ final class CharacterClass extends \Nextras\Orm\Entity\Entity {
       "strength" => $this->strength, "dexterity" => $this->dexterity, "constitution" => $this->constitution,
       "intelligence" => $this->intelligence, "charisma" => $this->charisma,
     ];
-    return array_search(max($stats), $stats, true);
+    return (string) array_search(max($stats), $stats, true);
   }
 }
 ?>
