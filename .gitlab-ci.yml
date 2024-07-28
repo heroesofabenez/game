@@ -1,6 +1,5 @@
 include:
-  - template: Dependency-Scanning.gitlab-ci.yml        
-  - template: License-Scanning.gitlab-ci.yml
+  - template: Dependency-Scanning.gitlab-ci.yml
   - template: SAST.gitlab-ci.yml
   - template: Secret-Detection.gitlab-ci.yml
 
@@ -41,10 +40,6 @@ install:
     <<: *default_cache
     policy: pull-push   
    
-license_scanning:
-  cache:
-    <<: *default_cache
-
 sast:
   variables:
     SAST_DEFAULT_ANALYZERS: "eslint,phpcs-security-audit"
