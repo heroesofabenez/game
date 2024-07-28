@@ -3,6 +3,7 @@ Installation instructions
 
 Requirements
 ------------
+
 Obviously, you need PHP. Version 8.1 or later is required. Then you need web server (Apache is a safe bet but nginx or even PHP built-in server should be fine) and sql server (preferably MySql or MariaDb but PostgreSQL or MS SQL might be also used).
 The game uses Composer to manage its dependencies, so you have to have it installed. You also need Git if you want to contribute.
 
@@ -23,6 +24,7 @@ Local configuration
 After that, you need to create file /app/config/local.neon with local settings for database and application. Use app/config/local.sample.neon as template.
 
 On live servers add the following lines at the end of the file:
+
 ```
 application:
     errorPresenter: "Error"
@@ -49,6 +51,7 @@ Web server
 ----------
 
 ### Apache
+
 If you're using Apache, you have little work to do as the repository contains all needed .htaccess files. Just set up a simple virtual host, no special configuration is needed.
 
 Example of virtual host configuration:
@@ -71,6 +74,51 @@ The document root for that virtual host (or its parent directory if it is within
 </Directory>
 ```
 
+### Nginx
+
+With nginx, you just need to add a new server configuration:
+
+```nginx
+server {
+    listen 80;
+    index index.php;
+    server_name hoa.localhost;
+    root /var/www/html/heroesofabenez/www;
+
+    location / {
+        try_files $uri /index.php?$args;
+    }
+
+    location ~ \.php$ {
+        fastcgi_split_path_info ^(.+\.php)(/.+)$;
+        fastcgi_pass localhost:9000;
+        fastcgi_index index.php;
+        rewrite_log on;
+        include fastcgi_params;
+        fastcgi_param SCRIPT_FILENAME /var/www/html/nexendrie/www/$fastcgi_script_name;
+        fastcgi_param PATH_INFO $fastcgi_path_info;
+        fastcgi_param REMOTE_ADDR 127.0.0.1;
+        fastcgi_pass_header Authorization;
+    }
+}
+```
+
+. Then you only need a running instance of php-fpm.
+
+### Caddy
+
+With Caddy, the setup is like with nginx (simple server configuration + php-fpm) but the server configuration is even simpler:
+
+```
+hoa.localhost {
+    root * /var/www/html/heroesofabenez/www
+    php_fastcgi php-fpm:9000
+    file_server
+}
+```
+
+.
+
 ### PHP built-in server
 
 If you do not want to bother with setting up and configuring a web server for development/testing, you can just use PHP built-in server. Just run this command:
@@ -80,4 +128,5 @@ php -S localhost:8080 -t www
 ```
 
 ### Other servers
+
 If you have any other server, you (currently) have to do all server configuration by yourself as there are no experts on them in the development team. An important thing to have (configured) is something like mod_rewrite on Apache as we use "cool urls". If you have figured things out, please, tell us so we can update this section for other developers/testers who (consider to) use that server.
