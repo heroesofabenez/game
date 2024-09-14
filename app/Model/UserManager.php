@@ -5,7 +5,7 @@ namespace HeroesofAbenez\Model;
 
 use HeroesofAbenez\Orm\CharacterClass;
 use HeroesofAbenez\Orm\CharacterRace;
-use Nette\Security\Identity;
+use Nette\Security\SimpleIdentity;
 use HeroesofAbenez\Orm\Model as ORM;
 use HeroesofAbenez\Orm\Character;
 use Nette\Security\IIdentity;
@@ -15,7 +15,7 @@ use Nette\Security\IIdentity;
  *
  * @author Jakub Konečný
  */
-final class UserManager implements \Nette\Security\IAuthenticator {
+final class UserManager implements \Nette\Security\Authenticator {
   use \Nette\SmartObject;
 
   private ORM $orm;
@@ -35,14 +35,14 @@ final class UserManager implements \Nette\Security\IAuthenticator {
   /**
    * Logins the user
    */
-  public function authenticate(array $credentials): IIdentity {
+  public function authenticate(string $user, string $password): IIdentity {
     $uid = $this->userToCharacterMapper->getRealId();
     if($uid === IUserToCharacterMapper::USER_ID_NOT_LOGGED_IN) {
-      return new Identity(IUserToCharacterMapper::USER_ID_NOT_LOGGED_IN, "guest");
+      return new SimpleIdentity(IUserToCharacterMapper::USER_ID_NOT_LOGGED_IN, "guest");
     }
     $char = $this->orm->characters->getByOwner($uid);
     if($char === null) {
-      return new Identity(IUserToCharacterMapper::USER_ID_NO_CHARACTER, "guest");
+      return new SimpleIdentity(IUserToCharacterMapper::USER_ID_NO_CHARACTER, "guest");
     }
     $data = [
       "name" => $char->name, "race" => $char->race->id, "gender" => $char->gender,
@@ -59,7 +59,7 @@ final class UserManager implements \Nette\Security\IAuthenticator {
     }
     $char->lastActive = new \DateTimeImmutable();
     $this->orm->characters->persistAndFlush($char);
-    return new Identity($char->id, $role, $data);
+    return new SimpleIdentity($char->id, $role, $data);
   }
   
   /**
