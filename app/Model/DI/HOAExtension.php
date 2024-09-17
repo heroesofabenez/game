@@ -217,7 +217,7 @@ final class HOAExtension extends \Nette\DI\CompilerExtension {
   public function afterCompile(\Nette\PhpGenerator\ClassType $class): void {
     $this->initialization->addBody('$user = $this->getByType(?);
 $user->authenticatedRole = "player";
-if(!$user->isLoggedIn()) $user->login("");', [\Nette\Security\User::class]);
+if(!$user->isLoggedIn()) $user->login("", "");', [\Nette\Security\User::class]);
   }
 }
 ?>
