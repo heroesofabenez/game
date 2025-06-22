@@ -1,18 +1,13 @@
-* { color: #FFFF00; }
-body, p, li, td, article, div { font-family: MS Sans Serif, Geneva, sans-serif; }
-#main { width: 100%; max-width: 550px; height: 560px; background-color: #9999CC;
-    position: relative; top: -16px; padding-left: 5px; }
-#navigation { width: 100%; max-width: 550px; background-color: gray; padding-left: 5px; }
-#navigation a { color: white; text-decoration: none; }
-#navigation a:hover { color: #000099; }
-#main a { color: #009933; }
-#main a:hover { color: #000066; }
+:root { color-scheme: light dark; font-family: MS Sans Serif, Geneva, sans-serif; }
+#main { width: 100%; max-width: 550px; height: 550px; padding-left: 5px; }
+#navigation { width: 100%; max-width: 550px; background-color: light-dark(AccentColor, Field); padding-left: 5px; }
+#navigation a { text-decoration: none; }
+a { color: LinkText; }
+a:hover { color: HighlightText; }
 #main ul { margin: 0.5em 0; }
-form label { color: #660099; }
-form input, select, textarea { color: #330099; }
-form select option { color: black; }
-h1, h2, h3 { color: green; font-family: Courier New, Courier, monospace; margin-bottom: 0; }
-footer { width: 100%; max-width: 500px; background-color: gray; position: relative; top: -10px; }
+form label { color: ButtonText; }
+h1, h2, h3 { font-family: Courier New, Courier, monospace; margin-bottom: 0; }
+footer { width: 100%; max-width: 500px; background-color: light-dark(AccentColor, Field); }
 footer div { height: 20px; }
 #guilds #name { text-align: left; }
 #guilds .members { text-align: right; }
