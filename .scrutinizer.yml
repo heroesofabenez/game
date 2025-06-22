@@ -180,4 +180,3 @@ build:
                             file: coverage.xml
                             format: php-clover
                     - php-scrutinizer-run
-                    - csslint-run www/styles

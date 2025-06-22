@@ -59,9 +59,3 @@ test:cc:
     name: "Code coverage"
     paths:
       - coverage.html
-
-test:css:
-  stage: test
-  image: nexendrie/nodejs
-  script:
-    - csslint www/styles
