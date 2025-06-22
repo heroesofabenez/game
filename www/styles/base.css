@@ -1,10 +1,10 @@
 :root { color-scheme: light dark; font-family: MS Sans Serif, Geneva, sans-serif; }
-#main { width: 100%; max-width: 550px; height: 550px; padding-left: 5px; }
+main { width: 100%; max-width: 550px; height: 550px; padding-left: 5px; }
 #navigation { width: 100%; max-width: 550px; background-color: light-dark(AccentColor, Field); padding-left: 5px; }
 #navigation a { text-decoration: none; }
 a { color: LinkText; }
 a:hover { color: HighlightText; }
-#main ul { margin: 0.5em 0; }
+main ul { margin: 0.5em 0; }
 form label { color: ButtonText; }
 h1, h2, h3 { font-family: Courier New, Courier, monospace; margin-bottom: 0; }
 footer { width: 100%; max-width: 500px; background-color: light-dark(AccentColor, Field); }

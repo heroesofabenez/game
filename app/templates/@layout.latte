@@ -11,8 +11,8 @@
 </head>
 <body>
 {control menu}
-<article id="main">
-{include #content}</article>
+<main>
+{include #content}</main>
 <footer>
   {foreach $flashes as $flash}
     <div class="flash {$flash->type}">{$flash->message}</div>
