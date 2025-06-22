@@ -50,6 +50,27 @@ After that, do not forget to write access data (name of database, username and p
 Web server
 ----------
 
+The game can run theoretically on any server but some might require more configuration than others. Below is the minimal required configuration to run the game on some popular servers, tested by the development team.
+
+Whatever server you use, we strongly advise that the server name ends with .localhost, so it is considered a secure context by web browsers (that is required for some features).
+
+### FrankenPHP
+
+FrankenPHP is the recommended server as it was specifically created as a PHP app server and requires the least amount of configuration. In its configuration you only need to enable FrankenPHP, then use it for your server and define the root directory.
+
+```
+{
+    frankenphp
+}
+
+hoa.localhost {
+    root /var/www/html/heroesofabenez/www
+    php_server
+}
+```
+
+You will need to install a few PHP extensions: intl, xml and mysqli.
+
 ### Apache
 
 If you're using Apache, you have little work to do as the repository contains all needed .htaccess files. Just set up a simple virtual host, no special configuration is needed.
@@ -62,8 +83,6 @@ Example of virtual host configuration:
     DocumentRoot "/var/www/html/heroesofabenez/www"
 </VirtualHost>
 ```
-
-(We strongly advise that the server name ends with .localhost, so it is considered a secure context by web browsers.)
 
 The document root for that virtual host (or its parent directory if it is withing /var/www/html) needs to have these settings:
 
@@ -117,7 +136,7 @@ hoa.localhost {
 }
 ```
 
-.
+. But it is better to use FrankenPHP which still runs Caddy under the hood and already contains everything needed to use PHP.
 
 ### PHP built-in server
 
