@@ -6,10 +6,12 @@ namespace HeroesofAbenez\Model;
 use HeroesofAbenez\Combat\Character;
 use HeroesofAbenez\Combat\EquipmentCollection;
 use HeroesofAbenez\Combat\Team;
+use HeroesofAbenez\Orm\CharacterItem;
 use HeroesofAbenez\Orm\Model as ORM;
 use HeroesofAbenez\Orm\ArenaFightCount;
 use HeroesofAbenez\Combat\BaseCharacterSkill;
 use HeroesofAbenez\Combat\Equipment;
+use Nextras\Orm\Collection\ICollection;
 
 /**
  * Combat Helper
@@ -46,6 +48,7 @@ final class CombatHelper {
    */
   private function getPlayerEquipment(\HeroesofAbenez\Orm\Character $character): array {
     $equipment = [];
+    /** @var ICollection|CharacterItem[] $items */
     $items = $character->items->toCollection()->findBy(["worn" => true, ]);
     foreach($items as $item) {
       $e = $item->toCombatEquipment();

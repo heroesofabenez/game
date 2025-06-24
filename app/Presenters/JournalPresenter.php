@@ -69,7 +69,7 @@ final class JournalPresenter extends BasePresenter {
     $paginator = new \Nette\Utils\Paginator();
     $paginator->page = $page;
     $paginator->itemsPerPage = 20;
-    $paginator->itemCount = $quests->countStored();
+    $paginator->itemCount = $quests->countStored(); // @phpstan-ignore assign.propertyType
     $this->template->quests = $quests->limitBy($paginator->getLength(), $paginator->getOffset());
     $this->template->paginator = $paginator;
   }

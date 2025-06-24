@@ -2,7 +2,6 @@
 declare(strict_types=1);
 
 use Nette\Neon\Neon;
-use Nextras\Dbal\Utils\FileImporter;
 
 require __DIR__ . "/../vendor/autoload.php";
 
@@ -18,10 +17,13 @@ $config = Neon::decode($content);
 $connection = new Nextras\Dbal\Connection($config["dbal"]);
 $sqlsFolder = __DIR__ . "/../app/sqls";
 $files = ["structure", "data_basic", "data_test"];
+$parser = $connection->getPlatform()->createMultiQueryParser();
 foreach($files as $file) {
   echo "Executing file: $file.sql ... ";
   Tracy\Debugger::timer($file);
-  FileImporter::executeFile($connection, "$sqlsFolder/$file.sql");
+  foreach ($parser->parseFile("$sqlsFolder/$file.sql") as $sql) {
+    $connection->query("%raw", $sql);
+  }
   $time = round(Tracy\Debugger::timer($file), 2);
   echo "Done in $time second(s)\n";
 }

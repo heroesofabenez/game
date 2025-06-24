@@ -18,3 +18,11 @@ parameters:
         - '#Variable property access on \$this\([a-zA-Z\\]+\)#'
         - '#Variable method call on \$this\(HeroesofAbenez\\Model\\Skills\)#'
         - '#Constant HeroesofAbenez\\NPC\\DialogueLine::SPEAKER_NPC is unused#'
+        -
+            identifier: missingType.generics
+        -
+            identifier: varTag.nativeType
+        -
+            identifier: varTag.type
+        -
+            identifier: trait.unused

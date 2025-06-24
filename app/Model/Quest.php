@@ -284,7 +284,7 @@ final class Quest {
     }
     $npcLink = $this->linkGenerator->link("Npc:view", ["id" => $quest->npcEnd->id]);
     $npcName = $quest->npcEnd->name;
-    if($quest->npcStart->id != $quest->npcEnd->id) {
+    if($quest->npcStart->id !== $quest->npcEnd->id) {
       $requirements[] = (object) [
         "text" => $this->translator->translate("texts.quest.requirementTalkToNpc", 0, ["npc" => "<a href=\"$npcLink\">{$npcName}</a>"]),
         "met" => false,

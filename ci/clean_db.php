@@ -2,7 +2,7 @@
 declare(strict_types=1);
 
 use Nette\Neon\Neon;
-use Nextras\Dbal\QueryException;
+use Nextras\Dbal\Drivers\Exception\QueryException;
 
 require __DIR__ . "/../vendor/autoload.php";
 
@@ -20,7 +20,7 @@ try {
   /** @var \Nextras\Dbal\Result\Result $tables */
   $tables = $connection->query("SHOW TABLES");
   while($table = $tables->fetchField(0)) {
-    $connection->query("DROP TABLE $table");
+    $connection->query("DROP TABLE $table"); // @phpstan-ignore argument.type
   }
 } catch(QueryException $e) { // @codingStandardsIgnoreLine
 

@@ -38,6 +38,7 @@ final class MapDrawer {
    * @param ICollection|RoutesStage[]|RoutesArea[] $routes
    */
   private function draw(array $points, ICollection $routes, string $filename, int $width, int $height): void {
+    // @phpstan-ignore argument.type, argument.type
     $image = Image::fromBlank($width, $height, Image::rgb(204, 204, 153));
     $image->rectangle(0, 0, $width - 1, $height - 1, Image::rgb(204, 102, 0));
     foreach($points as $point) {

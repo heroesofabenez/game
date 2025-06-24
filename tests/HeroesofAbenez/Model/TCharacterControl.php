@@ -44,7 +44,7 @@ trait TCharacterControl {
       $oldStats[$stat] = $data->$stat;
     }
     $orm->characters->persistAndFlush($data);
-    $user->login("");
+    $user->login("", "");
     try {
       $callback();
     } finally {
@@ -52,7 +52,7 @@ trait TCharacterControl {
         $data->$stat = $oldValue;
       }
       $orm->characters->persistAndFlush($data);
-      $user->login("");
+      $user->login("", "");
     }
   }
 
@@ -71,7 +71,7 @@ trait TCharacterControl {
       $data->$stat = $newValue;
     }
     $orm->characters->persistAndFlush($data);
-    $user->login("");
+    $user->login("", "");
     try {
       $callback();
     } finally {
@@ -84,7 +84,7 @@ trait TCharacterControl {
         }
       }
       $orm->characters->persistAndFlush($data);
-      $user->login("");
+      $user->login("", "");
     }
   }
 }

@@ -24,6 +24,7 @@ final class Intro {
   /**
    * Check in which part of intro the player is
    */
+  // @phpstan-ignore return.unusedType
   public function getIntroPosition(): ?int {
     /** @var \HeroesofAbenez\Orm\Character $character */
     $character = $this->orm->characters->getById($this->user->id);

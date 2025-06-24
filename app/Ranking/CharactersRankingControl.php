@@ -22,7 +22,7 @@ final class CharactersRankingControl extends RankingControl {
   public function getData(): array {
     /** @var \Nette\Utils\Paginator $paginator */
     $paginator = $this->paginator;
-    $paginator->itemCount = $this->orm->characters->findAll()->countStored();
+    $paginator->itemCount = $this->orm->characters->findAll()->countStored(); // @phpstan-ignore assign.propertyType
     $characters = $this->orm->characters->findAll()
       ->orderBy("level", ICollection::DESC)
       ->orderBy("experience", ICollection::DESC)

@@ -8,7 +8,7 @@ namespace HeroesofAbenez\Orm;
  *
  * @author Jakub Konečný
  */
-final class ChatBansMapper extends \Nextras\Orm\Mapper\Mapper {
+final class ChatBansMapper extends \Nextras\Orm\Mapper\Dbal\DbalMapper {
   
 }
 ?>

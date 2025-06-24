@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace HeroesofAbenez\Orm;
 
 use Nexendrie\Utils\Numbers;
+use Nextras\Orm\Collection\ICollection;
 
 /**
  * CharacterQuest
@@ -60,6 +61,7 @@ final class CharacterQuest extends \Nextras\Orm\Entity\Entity {
     if(!isset($this->started)) {
       return 0;
     }
+    /** @var ICollection|GuildDonation[] $donations */
     $donations = $this->character->guildDonations->toCollection()->findBy([
       'when>=' => $this->started,
     ])->fetchAll();
@@ -74,10 +76,12 @@ final class CharacterQuest extends \Nextras\Orm\Entity\Entity {
     if(!isset($this->started)) {
       return 0;
     }
+    /** @var ICollection|CharacterAttackSkill[] $attackSkills */
     $attackSkills = $this->character->attackSkills->toCollection()->fetchAll();
     foreach($attackSkills as $skill) {
       $totalLevel += $skill->level;
     }
+    /** @var ICollection|CharacterSpecialSkill[] $specialSkills */
     $specialSkills = $this->character->specialSkills->toCollection()->fetchAll();
     foreach($specialSkills as $skill) {
       $totalLevel += $skill->level;

@@ -18,7 +18,7 @@ final class SkillPresenter extends BasePresenter {
   
   protected function startup(): void {
     parent::startup();
-    if($this->action != "default") {
+    if($this->action !== "default") {
       $this->template->level = $this->user->identity->level;
       $this->template->class = $this->user->identity->class;
       $this->template->specialization = $this->user->identity->specialization;

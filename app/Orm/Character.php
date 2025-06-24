@@ -68,7 +68,7 @@ final class Character extends \Nextras\Orm\Entity\Entity {
   }
 
   protected function getterActivePet(): ?Pet {
-    return $this->pets->toCollection()->limitBy(1)->getBy(["deployed" => true]);
+    return $this->pets->toCollection()->limitBy(1)->getBy(["deployed" => true]); // @phpstan-ignore return.type
   }
 
   protected function getterCharismaBonus(): int {

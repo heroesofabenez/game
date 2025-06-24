@@ -27,7 +27,8 @@
         "nexendrie/translation": "^2.3.2",
         "nexendrie/menu": "^2.4",
         "nexendrie/utils": "^1.8.1",
-        "nextras/orm": "^4.0.5",
+        "nextras/orm": "^5.0",
+        "nextras/multi-query-parser": "^1.0",
         "symfony/options-resolver": "^5.4",
         "heroesofabenez/chat": "^2.1",
         "heroesofabenez/combat": "^1.0",
@@ -35,8 +36,8 @@
     },
     "require-dev": {
         "nexendrie/code-quality": "dev-master",
-        "phpstan/phpstan-nette": "^1.2.4",
-        "nextras/orm-phpstan": "^1.0.1"
+        "phpstan/phpstan-nette": "^2.0",
+        "nextras/orm-phpstan": "^2.0"
     },
     "replace": {
         "symfony/polyfill-php73": "*",

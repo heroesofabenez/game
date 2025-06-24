@@ -8,7 +8,7 @@ namespace HeroesofAbenez\Orm;
  *
  * @author Jakub Konečný
  */
-final class CharactersMapper extends \Nextras\Orm\Mapper\Mapper {
+final class CharactersMapper extends \Nextras\Orm\Mapper\Dbal\DbalMapper {
   
 }
 ?>

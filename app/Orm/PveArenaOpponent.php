@@ -34,6 +34,7 @@ final class PveArenaOpponent extends \Nextras\Orm\Entity\Entity {
   }
 
   protected function getterWeapon(): ?Item {
+    // @phpstan-ignore return.type
     return $this->class->items->toCollection()->orderBy("requiredLevel", ICollection::DESC)
       ->limitBy(1)
       ->getBy([
@@ -52,6 +53,7 @@ final class PveArenaOpponent extends \Nextras\Orm\Entity\Entity {
   }
 
   protected function getterArmor(): ?Item {
+    // @phpstan-ignore return.type
     return $this->class->items->toCollection()->orderBy("requiredLevel", ICollection::DESC)
       ->limitBy(1)
       ->getBy([
@@ -77,6 +79,7 @@ final class PveArenaOpponent extends \Nextras\Orm\Entity\Entity {
       return [];
     }
     $skills = new CharacterSkillsCollection();
+    /** @var ICollection|SkillAttack[] $attackSkills */
     $attackSkills = $this->class->attackSkills->toCollection()->findBy([
       ICollection::OR,
       [
@@ -91,6 +94,7 @@ final class PveArenaOpponent extends \Nextras\Orm\Entity\Entity {
     foreach($attackSkills as $skill) {
       $skills[] = new \HeroesofAbenez\Combat\CharacterAttackSkill($skill->toDummy(), 0);
     }
+    /** @var ICollection|SkillSpecial[] $specialSkills */
     $specialSkills = $this->class->specialSkills->toCollection()->findBy([
       ICollection::OR,
       [

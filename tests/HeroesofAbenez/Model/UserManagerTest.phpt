@@ -22,7 +22,7 @@ final class UserManagerTest extends \Tester\TestCase {
   }
   
   public function testAuthenticate() {
-    $identity = $this->model->authenticate([]);
+    $identity = $this->model->authenticate("", "");
     Assert::type(Identity::class, $identity);
     Assert::same(1, $identity->id);
     Assert::same(["grandmaster", ], $identity->roles);

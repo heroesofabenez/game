@@ -94,12 +94,12 @@ final class Skills {
    * @param SkillAttack|SkillSpecial $skill
    */
   private function canLearnSkill($skill): bool {
-    if($skill->neededClass->id != $this->user->identity->class) {
+    if($skill->neededClass->id !== $this->user->identity->class) {
       return false;
     } elseif($skill->neededSpecialization !== null) {
       if($this->user->identity->specialization === null) {
         return false;
-      } elseif($skill->neededSpecialization->id != $this->user->identity->specialization) {
+      } elseif($skill->neededSpecialization->id !== $this->user->identity->specialization) {
         return false;
       }
     } elseif($skill->neededLevel > $this->user->identity->level) {
