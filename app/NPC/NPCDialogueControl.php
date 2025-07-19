@@ -16,15 +16,9 @@ use Nette\Utils\Strings;
  * @property-read string[] $names
  */
 final class NPCDialogueControl extends \Nette\Application\UI\Control {
-  private \Nette\Security\User $user;
-  private ILoader $loader;
-  private NpcPersonalityChooser $npcPersonalityChooser;
   public ?Npc $npc = null;
   
-  public function __construct(\Nette\Security\User $user, ILoader $loader, NpcPersonalityChooser $npcPersonalityChooser) {
-    $this->user = $user;
-    $this->loader = $loader;
-    $this->npcPersonalityChooser = $npcPersonalityChooser;
+  public function __construct(private \Nette\Security\User $user, private ILoader $loader, private NpcPersonalityChooser $npcPersonalityChooser) {
   }
   
   /**

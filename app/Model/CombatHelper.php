@@ -20,13 +20,8 @@ use Nextras\Orm\Collection\ICollection;
  */
 final class CombatHelper {
   use \Nette\SmartObject;
-
-  private CharacterBuilder $cb;
-  private ORM $orm;
   
-  public function __construct(ORM $orm, CharacterBuilder $cb) {
-    $this->cb = $cb;
-    $this->orm = $orm;
+  public function __construct(private ORM $orm, private CharacterBuilder $cb) {
   }
   
   /**

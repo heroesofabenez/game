@@ -19,16 +19,7 @@ use HeroesofAbenez\Orm\RoutesStage;
 final class MapDrawer {
   use \Nette\SmartObject;
 
-  private Location $locationModel;
-  private \Nette\Security\User $user;
-  private ILoader $loader;
-  private ApplicationDirectories $directories;
-
-  public function __construct(Location $locationModel, \Nette\Security\User $user, ILoader $loader, ApplicationDirectories $directories) {
-    $this->locationModel = $locationModel;
-    $this->user = $user;
-    $this->loader = $loader;
-    $this->directories = $directories;
+  public function __construct(private Location $locationModel, private \Nette\Security\User $user, private ILoader $loader, private ApplicationDirectories $directories) {
   }
 
   /**

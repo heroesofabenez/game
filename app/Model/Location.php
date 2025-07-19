@@ -19,11 +19,9 @@ use Nextras\Orm\Collection\ICollection;
 final class Location {
   use \Nette\SmartObject;
 
-  private ORM $orm;
   private \Nette\Security\User $user;
   
-  public function __construct(ORM $orm) {
-    $this->orm = $orm;
+  public function __construct(private ORM $orm) {
   }
   
   protected function setUser(\Nette\Security\User $user): void {

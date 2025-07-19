@@ -17,19 +17,8 @@ use Nette\Security\IIdentity;
  */
 final class UserManager implements \Nette\Security\Authenticator {
   use \Nette\SmartObject;
-
-  private ORM $orm;
-  private Permissions $permissionsModel;
-  private Profile $profileModel;
-  private IUserToCharacterMapper $userToCharacterMapper;
-  private CharacterBuilder $cb;
   
-  public function __construct(ORM $orm, Permissions $permissionsModel, Profile $profileModel, IUserToCharacterMapper $userToCharacterMapper, CharacterBuilder $cb) {
-    $this->orm = $orm;
-    $this->permissionsModel = $permissionsModel;
-    $this->profileModel = $profileModel;
-    $this->userToCharacterMapper = $userToCharacterMapper;
-    $this->cb = $cb;
+  public function __construct(private ORM $orm, private Permissions $permissionsModel, private Profile $profileModel, private IUserToCharacterMapper $userToCharacterMapper, private CharacterBuilder $cb) {
   }
   
   /**

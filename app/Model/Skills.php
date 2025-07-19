@@ -17,13 +17,8 @@ use HeroesofAbenez\Orm\CharacterSpecialSkill;
  */
 final class Skills {
   use \Nette\SmartObject;
-
-  private ORM $orm;
-  private \Nette\Security\User $user;
   
-  public function __construct(ORM $orm, \Nette\Security\User $user) {
-    $this->orm = $orm;
-    $this->user = $user;
+  public function __construct(private ORM $orm, private \Nette\Security\User $user) {
   }
   
   /**

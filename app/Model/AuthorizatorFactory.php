@@ -12,11 +12,8 @@ use Nette\Security\Permission;
  */
 final class AuthorizatorFactory {
   use \Nette\SmartObject;
-
-  private Permissions $model;
   
-  public function __construct(Permissions $model) {
-    $this->model = $model;
+  public function __construct(private Permissions $model) {
   }
 
   /**

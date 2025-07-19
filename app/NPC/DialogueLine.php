@@ -20,17 +20,15 @@ final class DialogueLine {
   private const SPEAKER_NPC = "npc";
 
   private string $speaker = self::SPEAKER_PLAYER;
-  private string $text;
-  /** @var string[] */
-  private array $names;
-  
-  public function __construct(string $speaker, string $text, array $names) {
+
+  /**
+   * @param string[] $names
+   */
+  public function __construct(string $speaker, private string $text, private array $names) {
     $speaker = strtolower($speaker);
     if(in_array($speaker, Constants::getConstantsValues(static::class, "SPEAKER_"), true)) {
       $this->speaker = $speaker;
     }
-    $this->text = $text;
-    $this->names = $names;
   }
   
   protected function getText(): string {

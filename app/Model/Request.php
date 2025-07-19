@@ -17,15 +17,8 @@ use Nextras\Orm\Collection\ICollection;
  */
 final class Request {
   use \Nette\SmartObject;
-
-  private \Nette\Security\User $user;
-  private ORM $orm;
-  private Guild $guildModel;
   
-  public function __construct(\Nette\Security\User $user, ORM $orm, Guild $guildModel) {
-    $this->user = $user;
-    $this->orm = $orm;
-    $this->guildModel = $guildModel;
+  public function __construct(private \Nette\Security\User $user, private ORM $orm, private Guild $guildModel) {
   }
   
   /**

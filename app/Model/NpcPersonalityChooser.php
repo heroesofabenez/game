@@ -23,10 +23,7 @@ final class NpcPersonalityChooser extends \Nexendrie\Utils\Collection {
     $personality = $this->getItem(["getName()" => $npc->personality]);
     if($personality === null) {
       $personality = new class($npc->personality) implements INpcPersonality {
-        private string $personality;
-
-        public function __construct(string $personality) {
-          $this->personality = $personality;
+        public function __construct(private string $personality) {
         }
 
         public function getName(): string {
