@@ -7,7 +7,7 @@ a:hover { color: HighlightText; }
 main ul { margin: 0.5em 0; }
 form label { color: ButtonText; }
 h1, h2, h3 { font-family: Courier New, Courier, monospace; margin-bottom: 0; }
-footer { width: 100%; max-width: 500px; background-color: light-dark(AccentColor, Field); }
+footer { width: 100%; max-width: 550px; background-color: light-dark(AccentColor, Field); }
 footer div { height: 20px; }
 #guilds #name { text-align: left; }
 #guilds .members { text-align: right; }
