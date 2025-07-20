@@ -49,6 +49,9 @@ final class CharacterBuilder {
     }
   }
 
+  /**
+   * @return array{strength: float, dexterity: float, constitution: float, intelligence: float, charisma: float}
+   */
   public function create(CharacterClass $class, CharacterRace $race, int $level = 1, CharacterSpecialization $specialization = null): array {
     $this->checkSpecialization($level, $class, $specialization);
     $specializationLevel = 0;

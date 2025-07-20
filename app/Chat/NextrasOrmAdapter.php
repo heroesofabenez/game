@@ -20,10 +20,7 @@ final class NextrasOrmAdapter implements IDatabaseAdapter {
     $this->user = $user;
   }
 
-  /**
-   * @param mixed $value
-   */
-  public function getTexts(string $column, $value, int $limit): ChatMessagesCollection {
+  public function getTexts(string $column, mixed $value, int $limit): ChatMessagesCollection {
     $count = $this->orm->chatMessages->findBy([
       $column => $value,
     ])->countStored();
@@ -42,10 +39,7 @@ final class NextrasOrmAdapter implements IDatabaseAdapter {
     return $collection;
   }
 
-  /**
-   * @param mixed $value
-   */
-  public function getCharacters(string $column, $value): ChatCharactersCollection {
+  public function getCharacters(string $column, mixed $value): ChatCharactersCollection {
     /** @var \HeroesofAbenez\Orm\Character $character */
     $character = $this->orm->characters->getById($this->user->id);
     $character->lastActive = new \DateTimeImmutable();

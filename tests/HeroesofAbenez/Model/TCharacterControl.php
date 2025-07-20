@@ -18,7 +18,9 @@ trait TCharacterControl {
     $user = $this->getService(User::class);
     /** @var ORM $orm */
     $orm = $this->getService(ORM::class);
-    return $orm->characters->getById($user->id);
+    /** @var Character $result */
+    $result = $orm->characters->getById($user->id);
+    return $result;
   }
 
   /**

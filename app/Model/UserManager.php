@@ -18,7 +18,7 @@ use Nette\Security\IIdentity;
 final class UserManager implements \Nette\Security\Authenticator {
   use \Nette\SmartObject;
   
-  public function __construct(private ORM $orm, private Permissions $permissionsModel, private Profile $profileModel, private IUserToCharacterMapper $userToCharacterMapper, private CharacterBuilder $cb) {
+  public function __construct(private ORM $orm, private IUserToCharacterMapper $userToCharacterMapper, private CharacterBuilder $cb) {
   }
   
   /**
@@ -54,7 +54,7 @@ final class UserManager implements \Nette\Security\Authenticator {
   /**
    * Creates new character
    *
-   * @return array|null Stats of new character
+   * @return array{name: string, owner: int, gender: string, class: int, race: int, strength: int, dexterity: int, constitution: int, intelligence: int, charisma: int}|null Stats of new character
    */
   public function create(array $values): ?array {
     $character = $this->orm->characters->getByName($values["name"]);
@@ -67,6 +67,11 @@ final class UserManager implements \Nette\Security\Authenticator {
     /** @var CharacterRace $race */
     $race = $this->orm->races->getById($values["race"]);
     $data = $this->cb->create($class, $race);
+    $data["strength"] = (int) $data["strength"];
+    $data["dexterity"] = (int) $data["dexterity"];
+    $data["constitution"] = (int) $data["constitution"];
+    $data["intelligence"] = (int) $data["intelligence"];
+    $data["charisma"] = (int) $data["charisma"];
     $data["name"] = $values["name"];
     $data["owner"] = $this->userToCharacterMapper->getRealId();
     $data["gender"] = ($values["gender"] === 1) ? "male" : "female";

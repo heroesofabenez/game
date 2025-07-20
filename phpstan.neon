@@ -24,5 +24,3 @@ parameters:
             identifier: varTag.nativeType
         -
             identifier: varTag.type
-        -
-            identifier: trait.unused

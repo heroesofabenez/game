@@ -14,13 +14,13 @@ use Nette\Application\Responses\ForwardResponse;
 trait TPresenter {
   use \Testbench\TPresenter;
   
-  protected function checkForward(string $destination, string $to = "", array $params = [], array $post = []) {
+  protected function checkForward(string $destination, string $to = "", array $params = [], array $post = []): ForwardResponse {
     /** @var ForwardResponse $response */
     $response = $this->check($destination, $params, $post);
-    if(!$this->testbench_exception) {
+    if($this->testbench_exception === null) {
       Assert::same(200, $this->getReturnCode());
       Assert::type(ForwardResponse::class, $response);
-      if($to) {
+      if($to !== "") {
         $target = $response->getRequest()->presenterName . ":" . $response->getRequest()->parameters["action"];
         if($to !== $target) {
           Assert::fail("does not forward to $to, but {$target}");
