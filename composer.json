@@ -29,7 +29,7 @@
         "nexendrie/utils": "^1.8.1",
         "nextras/orm": "^5.0",
         "nextras/multi-query-parser": "^1.0",
-        "symfony/options-resolver": "^5.4",
+        "symfony/options-resolver": "^6.4",
         "heroesofabenez/chat": "^2.1",
         "heroesofabenez/combat": "^1.0",
         "nette/http": "3.1.2"
