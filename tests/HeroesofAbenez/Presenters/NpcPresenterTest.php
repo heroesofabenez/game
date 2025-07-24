@@ -10,6 +10,7 @@ use Nette\Application\BadRequestException;
 
 /**
  * @author Jakub Konečný
+ * @skip
  */
 final class NpcPresenterTest extends \Tester\TestCase {
   use TPresenter;

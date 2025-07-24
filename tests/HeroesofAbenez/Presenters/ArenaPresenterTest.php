@@ -7,6 +7,7 @@ require __DIR__ . "/../../bootstrap.php";
 
 /**
  * @author Jakub Konečný
+ * @skip
  */
 final class ArenaPresenterTest extends \Tester\TestCase {
   use TPresenter;

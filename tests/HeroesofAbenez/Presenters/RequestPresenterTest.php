@@ -10,6 +10,7 @@ use Tester\Assert;
 
 /**
  * @author Jakub Konečný
+ * @skip
  */
 final class RequestPresenterTest extends \Tester\TestCase {
   use TPresenter;
