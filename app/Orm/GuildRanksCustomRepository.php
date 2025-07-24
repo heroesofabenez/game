@@ -21,22 +21,17 @@ final class GuildRanksCustomRepository extends \Nextras\Orm\Repository\Repositor
   public static function getEntityClassNames(): array {
     return [GuildRankCustom::class];
   }
-  
-  /**
-   * @param Guild|int $guild
-   * @param GuildRank|int $rank
-   */
-  public function getByGuildAndRank($guild, $rank): ?GuildRankCustom {
+
+  public function getByGuildAndRank(Guild|int $guild, GuildRank|int $rank): ?GuildRankCustom {
     return $this->getBy([
       "guild" => $guild, "rank" => $rank
     ]);
   }
   
   /**
-   * @param Guild|int $guild
    * @return ICollection|GuildRankCustom[]
    */
-  public function findByGuild($guild): ICollection {
+  public function findByGuild(Guild|int $guild): ICollection {
     return $this->findBy([
       "guild" => $guild
     ]);

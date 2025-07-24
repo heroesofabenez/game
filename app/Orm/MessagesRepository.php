@@ -20,20 +20,18 @@ final class MessagesRepository extends \Nextras\Orm\Repository\Repository {
   }
   
   /**
-   * @param Character|int $user
    * @return ICollection|Message[]
    */
-  public function findByFrom($user): ICollection {
+  public function findByFrom(Character|int $user): ICollection {
     return $this->findBy([
       "from" => $user
     ]);
   }
   
   /**
-   * @param Character|int $user
    * @return ICollection|Message[]
    */
-  public function findByTo($user): ICollection {
+  public function findByTo(Character|int $user): ICollection {
     return $this->findBy([
       "to" => $user
     ]);

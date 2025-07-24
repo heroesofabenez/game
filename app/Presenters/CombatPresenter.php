@@ -3,17 +3,16 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Presenters;
 
+use HeroesofAbenez\Model\CombatLogManager;
+
 /**
  * Presenter Combat
  *
  * @author Jakub Konečný
  */
 final class CombatPresenter extends BasePresenter {
-  private \HeroesofAbenez\Model\CombatLogManager $log;
-  
-  public function __construct(\HeroesofAbenez\Model\CombatLogManager $log) {
+  public function __construct(private readonly CombatLogManager $log) {
     parent::__construct();
-    $this->log = $log;
   }
 
   /**

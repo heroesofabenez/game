@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Presenters;
 
+use HeroesofAbenez\Model\Request;
 use HeroesofAbenez\Model\RequestNotFoundException;
 use HeroesofAbenez\Model\CannotSeeRequestException;
 use HeroesofAbenez\Model\CannotAcceptRequestException;
@@ -15,11 +16,8 @@ use HeroesofAbenez\Model\RequestAlreadyHandledException;
  * @author Jakub Konečný
  */
 final class RequestPresenter extends BasePresenter {
-  private \HeroesofAbenez\Model\Request $model;
-  
-  public function __construct(\HeroesofAbenez\Model\Request $model) {
+  public function __construct(private readonly Request $model) {
     parent::__construct();
-    $this->model = $model;
   }
 
   public function renderDefault(): void {
@@ -32,50 +30,50 @@ final class RequestPresenter extends BasePresenter {
   public function renderView(int $id): void {
     try {
       $this->template->request = $this->model->show($id);
-    } catch(CannotSeeRequestException $e) {
+    } catch(CannotSeeRequestException) {
       $this->flashMessage("errors.request.cannotSee");
       $this->forward("Homepage:");
-    } catch(RequestNotFoundException $e) {
+    } catch(RequestNotFoundException) {
       throw new \Nette\Application\BadRequestException();
     }
   }
   
-  public function actionAccept(int $id): void {
+  public function actionAccept(int $id): never {
     try {
       $this->model->accept($id);
       $this->flashMessage("messages.request.accepted");
       $this->redirect("Homepage:");
-    } catch(RequestNotFoundException $e) {
+    } catch(RequestNotFoundException) {
       $this->forward("notfound");
-    } catch(CannotSeeRequestException $e) {
+    } catch(CannotSeeRequestException) {
       $this->flashMessage("errors.request.cannotSee");
       $this->forward("Homepage:");
-    } catch(CannotAcceptRequestException $e) {
+    } catch(CannotAcceptRequestException) {
       $this->flashMessage("errors.request.cannotAccept");
       $this->forward("Homepage:");
-    } catch(RequestAlreadyHandledException $e) {
+    } catch(RequestAlreadyHandledException) {
       $this->flashMessage("errors.request.handled");
       $this->forward("Homepage:");
-    } catch(\Nette\NotImplementedException $e) {
+    } catch(\Nette\NotImplementedException) {
       $this->flashMessage("errors.request.typeNotImplemented");
       $this->forward("Homepage:");
     }
   }
   
-  public function actionDecline(int $id): void {
+  public function actionDecline(int $id): never {
     try {
       $this->model->decline($id);
       $this->flashMessage("messages.request.declined");
       $this->redirect("Homepage:");
-    } catch(RequestNotFoundException $e) {
+    } catch(RequestNotFoundException) {
       $this->forward("notfound");
-    } catch(CannotSeeRequestException $e) {
+    } catch(CannotSeeRequestException) {
       $this->flashMessage("errors.request.cannotSee");
       $this->forward("Homepage:");
-    } catch(CannotDeclineRequestException $e) {
+    } catch(CannotDeclineRequestException) {
       $this->flashMessage("errors.request.cannotDecline");
       $this->forward("Homepage:");
-    } catch(RequestAlreadyHandledException $e) {
+    } catch(RequestAlreadyHandledException) {
       $this->flashMessage("errors.request.handled");
       $this->forward("Homepage:");
     }

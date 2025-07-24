@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Forms;
 
+use HeroesofAbenez\Model\Guild;
 use Nette\Application\UI\Form;
 use HeroesofAbenez\Model\NameInUseException;
 use Nette\Localization\Translator;
@@ -13,10 +14,7 @@ use Nette\Localization\Translator;
  * @author Jakub Konečný
  */
 final class CreateGuildFormFactory extends BaseFormFactory {
-  private \HeroesofAbenez\Model\Guild $model;
-  
-  public function __construct(Translator $translator, \HeroesofAbenez\Model\Guild $model) {
-    $this->model = $model;
+  public function __construct(Translator $translator, private readonly Guild $model) {
     parent::__construct($translator);
   }
   
@@ -39,7 +37,7 @@ final class CreateGuildFormFactory extends BaseFormFactory {
     ];
     try {
       $this->model->create($data);
-    } catch(NameInUseException $e) {
+    } catch(NameInUseException) {
       $form->addError($this->translator->translate("errors.guild.nameTaken"));
     }
   }

@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Forms;
 
+use HeroesofAbenez\Model\Guild;
 use Nette\Application\UI\Form;
 use HeroesofAbenez\Model\MissingPermissionsException;
 use Nette\Localization\Translator;
@@ -13,13 +14,8 @@ use Nette\Localization\Translator;
  * @author Jakub Konečný
  */
 final class CustomGuildRankNamesFormFactory extends BaseFormFactory {
-  private \HeroesofAbenez\Model\Guild $model;
-  private \Nette\Security\User $user;
-
-  public function __construct(Translator $translator, \HeroesofAbenez\Model\Guild $model, \Nette\Security\User $user) {
+  public function __construct(Translator $translator, private readonly Guild $model, private readonly \Nette\Security\User $user) {
     parent::__construct($translator);
-    $this->model = $model;
-    $this->user = $user;
   }
   
   public function create(): Form {
@@ -39,7 +35,7 @@ final class CustomGuildRankNamesFormFactory extends BaseFormFactory {
   public function process(Form $form, array $values): void {
     try {
       $this->model->setCustomRankNames($values);
-    } catch(MissingPermissionsException $e) {
+    } catch(MissingPermissionsException) {
       $form->addError($this->translator->translate("errors.guild.missingPermissions"));
     }
   }

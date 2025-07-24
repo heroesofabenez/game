@@ -3,13 +3,16 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Presenters;
 
+use HeroesofAbenez\Model\Item;
+use HeroesofAbenez\Model\Journal;
+use HeroesofAbenez\Model\NPC;
 use HeroesofAbenez\NPC\INPCDialogueControlFactory;
 use HeroesofAbenez\NPC\NPCDialogueControl;
 use HeroesofAbenez\NPC\INPCQuestsControlFactory;
 use HeroesofAbenez\NPC\NPCQuestsControl;
 use HeroesofAbenez\NPC\INPCShopControlFactory;
 use HeroesofAbenez\NPC\NPCShopControl;
-use HeroesofAbenez\Orm\Npc;
+use HeroesofAbenez\Orm\Npc as NpcEntity;
 use HeroesofAbenez\Model\ItemNotFoundException;
 use HeroesofAbenez\Model\ItemNotOwnedException;
 use HeroesofAbenez\Model\InsufficientFundsException;
@@ -21,19 +24,13 @@ use HeroesofAbenez\Model\ItemNotDamagedException;
  * @author Jakub Konečný
  */
 final class NpcPresenter extends BasePresenter {
-  private \HeroesofAbenez\Model\NPC $model;
-  private \HeroesofAbenez\Model\Journal $journalModel;
-  private \HeroesofAbenez\Model\Item $itemModel;
-  private Npc $npc;
+  private NpcEntity $npc;
   private INPCDialogueControlFactory $npcDialogueFactory;
   private INPCQuestsControlFactory $npcQuestsFactory;
   private INPCShopControlFactory $npcShopFactory;
 
-  public function __construct(\HeroesofAbenez\Model\NPC $model, \HeroesofAbenez\Model\Journal $journalModel, \HeroesofAbenez\Model\Item $itemModel) {
+  public function __construct(private readonly NPC $model, private readonly Journal $journalModel, private readonly Item $itemModel) {
     parent::__construct();
-    $this->model = $model;
-    $this->journalModel = $journalModel;
-    $this->itemModel = $itemModel;
   }
 
   public function injectNpcDialogueFactory(INPCDialogueControlFactory $npcDialogueFactory): void {
@@ -70,7 +67,7 @@ final class NpcPresenter extends BasePresenter {
    *
    * @throws \Nette\Application\BadRequestException
    */
-  public function actionDefault(): void {
+  public function actionDefault(): never {
     throw new \Nette\Application\BadRequestException();
   }
   
@@ -132,11 +129,11 @@ final class NpcPresenter extends BasePresenter {
     try {
       $this->itemModel->repairItem($itemId);
       $this->flashMessage("messages.equipment.repaired");
-    } catch(ItemNotFoundException | ItemNotOwnedException $e) {
+    } catch(ItemNotFoundException | ItemNotOwnedException) {
       $this->redirect("Item:notfound");
-    } catch(ItemNotDamagedException $e) {
+    } catch(ItemNotDamagedException) {
       $this->flashMessage("errors.equipment.notDamaged");
-    } catch(InsufficientFundsException $e) {
+    } catch(InsufficientFundsException) {
       $this->flashMessage("errors.equipment.notEnoughMoney");
     }
     $this->redirect("this");

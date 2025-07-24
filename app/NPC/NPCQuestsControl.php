@@ -25,7 +25,7 @@ use HeroesofAbenez\Model\QuestNotAvailableException;
 final class NPCQuestsControl extends \Nette\Application\UI\Control {
   public Npc $npc;
 
-  public function __construct(private Model\Quest $questModel, private ORM $orm, private \Nette\Security\User $user) {
+  public function __construct(private readonly Model\Quest $questModel, private readonly ORM $orm, private readonly \Nette\Security\User $user) {
   }
 
   /**
@@ -67,17 +67,17 @@ final class NPCQuestsControl extends \Nette\Application\UI\Control {
   public function handleAccept(int $questId): void {
     try {
       $this->questModel->accept($questId, $this->npc->id);
-    } catch(QuestNotFoundException $e) {
+    } catch(QuestNotFoundException) {
       $this->presenter->forward("notfound");
-    } catch(QuestAlreadyStartedException $e) {
+    } catch(QuestAlreadyStartedException) {
       /** @var QuestEntity $quest */
       $quest = $this->questModel->view($questId);
       $this->presenter->flashMessage("errors.quest.workingOn");
       $this->presenter->redirect("Npc:quests", $quest->npcStart->id);
-    } catch(CannotAcceptQuestHereException $e) {
+    } catch(CannotAcceptQuestHereException) {
       $this->presenter->flashMessage("errors.quest.cannotAcceptHere");
       $this->presenter->redirect("Homepage:default");
-    } catch(QuestNotAvailableException $e) {
+    } catch(QuestNotAvailableException) {
       $this->presenter->flashMessage("errors.quest.questNotAvailable");
       $this->presenter->redirect("Homepage:default");
     }
@@ -91,17 +91,17 @@ final class NPCQuestsControl extends \Nette\Application\UI\Control {
   public function handleFinish(int $questId): void {
     try {
       $this->questModel->finish($questId, $this->npc->id);
-    } catch(QuestNotFoundException $e) {
+    } catch(QuestNotFoundException) {
       $this->presenter->forward("notfound");
-    } catch(QuestNotStartedException $e) {
+    } catch(QuestNotStartedException) {
       /** @var QuestEntity $quest */
       $quest = $this->questModel->view($questId);
       $this->presenter->flashMessage("errors.quest.notWorkingOn");
       $this->presenter->redirect("Npc:quests", $quest->npcStart->id);
-    } catch(CannotFinishQuestHereException $e) {
+    } catch(CannotFinishQuestHereException) {
       $this->presenter->flashMessage("errors.quest.cannotFinishHere");
       $this->presenter->redirect("Homepage:default");
-    } catch(QuestNotFinishedException $e) {
+    } catch(QuestNotFinishedException) {
       $this->presenter->flashMessage("errors.quest.requirementsNotMet");
       $this->presenter->redirect("Homepage:default");
     }

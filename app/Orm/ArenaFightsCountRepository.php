@@ -21,11 +21,8 @@ final class ArenaFightsCountRepository extends \Nextras\Orm\Repository\Repositor
   public static function getEntityClassNames(): array {
     return [ArenaFightCount::class];
   }
-  
-  /**
-   * @param Character|int $character
-   */
-  public function getByCharacterAndDay($character, string $day): ?ArenaFightCount {
+
+  public function getByCharacterAndDay(Character|int $character, string $day): ?ArenaFightCount {
     return $this->getBy([
       "character" => $character,
       "day" => $day

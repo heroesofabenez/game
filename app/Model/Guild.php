@@ -12,15 +12,15 @@ use HeroesofAbenez\Orm\Model as ORM;
 use HeroesofAbenez\Orm\GuildRankCustom;
 use Nextras\Orm\Collection\ICollection;
 
-  /**
-   * Model Guild
-   * 
-   * @author Jakub Konečný
-   */
+/**
+ * Model Guild
+ *
+ * @author Jakub Konečný
+ */
 final class Guild {
   use \Nette\SmartObject;
   
-  public function __construct(private ORM $orm, private \Nette\Security\User $user, private Profile $profileModel, private Permissions $permissionsModel) {
+  public function __construct(private readonly ORM $orm, private readonly \Nette\Security\User $user, private readonly Profile $profileModel, private readonly Permissions $permissionsModel) {
   }
   
   /**

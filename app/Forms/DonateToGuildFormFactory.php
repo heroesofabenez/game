@@ -3,15 +3,13 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Forms;
 
+use HeroesofAbenez\Model\Guild;
 use HeroesofAbenez\Model\InsufficientFundsException;
 use Nette\Application\UI\Form;
 use Nette\Localization\Translator;
 
 final class DonateToGuildFormFactory extends BaseFormFactory {
-  private \HeroesofAbenez\Model\Guild $model;
-
-  public function __construct(Translator $translator, \HeroesofAbenez\Model\Guild $model) {
-    $this->model = $model;
+  public function __construct(Translator $translator, private readonly Guild $model) {
     parent::__construct($translator);
   }
 
@@ -29,7 +27,7 @@ final class DonateToGuildFormFactory extends BaseFormFactory {
   public function process(Form $form, array $values): void {
     try {
       $this->model->donate($values["amount"]);
-    } catch(InsufficientFundsException $e) {
+    } catch(InsufficientFundsException) {
       $form->addError("forms.donateToGuild.amountField.errorTooHigh");
     }
   }

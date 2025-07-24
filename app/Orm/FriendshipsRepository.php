@@ -23,10 +23,9 @@ final class FriendshipsRepository extends \Nextras\Orm\Repository\Repository {
   }
 
   /**
-   * @param Character|int $character
    * @return ICollection|Friendship[]
    */
-  public function findByCharacter($character): ICollection {
+  public function findByCharacter(Character|int $character): ICollection {
     return $this->findBy([
       ICollection::OR,
       "character1" => $character,

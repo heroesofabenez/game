@@ -3,17 +3,16 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Presenters;
 
+use HeroesofAbenez\Model\Item;
+
 /**
  * Presenter Item
  *
  * @author Jakub Konečný
  */
 final class ItemPresenter extends BasePresenter {
-  private \HeroesofAbenez\Model\Item $model;
-  
-  public function __construct(\HeroesofAbenez\Model\Item $model) {
+  public function __construct(private readonly Item $model) {
     parent::__construct();
-    $this->model = $model;
   }
 
   /**

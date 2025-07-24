@@ -18,7 +18,7 @@ use Nette\Application\LinkGenerator;
 final class Quest {
   use \Nette\SmartObject;
   
-  public function __construct(private ORM $orm, private \Nette\Security\User $user, private Item $itemModel, private Pet $petModel, private Translator $translator, private LinkGenerator $linkGenerator) {
+  public function __construct(private readonly ORM $orm, private readonly \Nette\Security\User $user, private readonly Item $itemModel, private readonly Pet $petModel, private readonly Translator $translator, private readonly LinkGenerator $linkGenerator) {
     $this->petModel->user = $user;
   }
   

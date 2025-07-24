@@ -22,7 +22,7 @@ final class Profile {
   /** @var string[] */
   private array $stats = ["strength", "dexterity", "constitution", "intelligence", "charisma"];
   
-  public function __construct(private ORM $orm) {
+  public function __construct(private readonly ORM $orm) {
   }
   
   protected function setUser(\Nette\Security\User $user): void {

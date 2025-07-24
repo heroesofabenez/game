@@ -14,7 +14,7 @@ use HeroesofAbenez\Orm\GuildPrivilege;
 final class Permissions {
   use \Nette\SmartObject;
   
-  public function __construct(private ORM $orm, private \Nette\Caching\Cache $cache) {
+  public function __construct(private readonly ORM $orm, private readonly \Nette\Caching\Cache $cache) {
   }
   
   /**

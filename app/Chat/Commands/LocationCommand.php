@@ -12,14 +12,7 @@ use Nette\Localization\Translator;
  * @author Jakub Konečný
  */
 final class LocationCommand extends \HeroesofAbenez\Chat\ChatCommand {
-  private \Nette\Security\User $user;
-  private ORM $orm;
-  private Translator $translator;
-  
-  public function __construct(\Nette\Security\User $user, ORM $orm, Translator $translator) {
-    $this->user = $user;
-    $this->orm = $orm;
-    $this->translator = $translator;
+  public function __construct(private readonly \Nette\Security\User $user, private readonly ORM $orm, private readonly Translator $translator) {
   }
   
   public function execute(): string {

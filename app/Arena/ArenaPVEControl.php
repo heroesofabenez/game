@@ -55,7 +55,7 @@ final class ArenaPVEControl extends ArenaControl {
       $this->template->race = $npc->race->name;
       $this->template->occupation = $npc->class->name;
       $this->template->specialization = ($npc->specialization !== null) ? $npc->specialization->name : null;
-    } catch(OpponentNotFoundException $e) {
+    } catch(OpponentNotFoundException) {
       $this->template->champion = false;
     }
     $this->template->render();

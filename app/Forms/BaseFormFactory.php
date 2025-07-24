@@ -12,10 +12,7 @@ use Nette\Localization\Translator;
  * @author Jakub Konečný
  */
 abstract class BaseFormFactory {
-  protected Translator $translator;
-  
-  public function __construct(Translator $translator) {
-    $this->translator = $translator;
+  public function __construct(protected readonly Translator $translator) {
   }
   
   public function createBase(): Form {

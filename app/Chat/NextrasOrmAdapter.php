@@ -12,12 +12,7 @@ use HeroesofAbenez\Orm\ChatMessage as ChatMessageEntity;
  * @author Jakub Konečný
  */
 final class NextrasOrmAdapter implements IDatabaseAdapter {
-  private ORM $orm;
-  private \Nette\Security\User $user;
-  
-  public function __construct(ORM $orm, \Nette\Security\User $user) {
-    $this->orm = $orm;
-    $this->user = $user;
+  public function __construct(private readonly ORM $orm, private readonly \Nette\Security\User $user) {
   }
 
   public function getTexts(string $column, mixed $value, int $limit): ChatMessagesCollection {

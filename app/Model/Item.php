@@ -15,7 +15,7 @@ use HeroesofAbenez\Orm\CharacterItem;
 final class Item {
   use \Nette\SmartObject;
   
-  public function __construct(private ORM $orm, private \Nette\Security\User $user) {
+  public function __construct(private readonly ORM $orm, private readonly \Nette\Security\User $user) {
   }
   
   /**

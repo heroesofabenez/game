@@ -3,18 +3,15 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Presenters;
 
-use HeroesofAbenez\Model;
+use HeroesofAbenez\Model\Location;
 
-  /**
-   * Presenter Homepage
-   * 
-   * @author Jakub Konečný
-   */
+/**
+ * Presenter Homepage
+ *
+ * @author Jakub Konečný
+ */
 final class HomepagePresenter extends BasePresenter {
-  private Model\Location $model;
-  
-  public function __construct(Model\Location $locationModel, \Nette\Security\User $user) {
-    $this->model = $locationModel;
+  public function __construct(private readonly Location $model, \Nette\Security\User $user) {
     $this->model->user = $user;
     parent::__construct();
   }

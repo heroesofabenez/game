@@ -3,17 +3,16 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Presenters;
 
+use HeroesofAbenez\Model\Skills;
+
 /**
  * Presenter Skill
  *
  * @author Jakub Konečný
  */
 final class SkillPresenter extends BasePresenter {
-  private \HeroesofAbenez\Model\Skills $model;
-  
-  public function __construct(\HeroesofAbenez\Model\Skills $model) {
+  public function __construct(private readonly Skills $model) {
     parent::__construct();
-    $this->model = $model;
   }
   
   protected function startup(): void {
@@ -30,7 +29,7 @@ final class SkillPresenter extends BasePresenter {
    *
    * @throws \Nette\Application\BadRequestException
    */
-  public function actionDefault(): void {
+  public function actionDefault(): never {
     throw new \Nette\Application\BadRequestException();
   }
 

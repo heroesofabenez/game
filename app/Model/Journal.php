@@ -18,7 +18,7 @@ use Nette\Localization\ITranslator;
 final class Journal {
   use \Nette\SmartObject;
   
-  public function __construct(private \Nette\Security\User $user, private ORM $orm) {
+  public function __construct(private readonly \Nette\Security\User $user, private readonly ORM $orm) {
   }
 
   

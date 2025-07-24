@@ -18,7 +18,7 @@ use Nette\Utils\Strings;
 final class NPCDialogueControl extends \Nette\Application\UI\Control {
   public ?Npc $npc = null;
   
-  public function __construct(private \Nette\Security\User $user, private ILoader $loader, private NpcPersonalityChooser $npcPersonalityChooser) {
+  public function __construct(private readonly \Nette\Security\User $user, private readonly ILoader $loader, private readonly NpcPersonalityChooser $npcPersonalityChooser) {
   }
   
   /**

@@ -91,9 +91,9 @@ final class PostofficeControl extends \Nette\Application\UI\Control {
     $this->template->setFile(__DIR__ . "/postofficeMessage.latte");
     try {
       $this->template->message = $this->message($id);
-    } catch(CannotShowMessageException $e) {
+    } catch(CannotShowMessageException) {
       $this->presenter->forward("cannotshow");
-    } catch(MessageNotFoundException $e) {
+    } catch(MessageNotFoundException) {
       $this->presenter->forward("notfound");
     }
     $this->template->render();

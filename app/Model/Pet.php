@@ -18,7 +18,7 @@ final class Pet {
 
   private \Nette\Security\User $user;
   
-  public function __construct(private ORM $orm) {
+  public function __construct(private readonly ORM $orm) {
   }
   
   protected function setUser(\Nette\Security\User $user): void {

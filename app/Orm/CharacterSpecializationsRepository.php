@@ -23,10 +23,9 @@ final class CharacterSpecializationsRepository extends \Nextras\Orm\Repository\R
   }
 
   /**
-   * @param int|CharacterClass $class
    * @return ICollection|CharacterSpecialization[]
    */
-  public function findByClass($class): ICollection {
+  public function findByClass(int|CharacterClass $class): ICollection {
     return $this->findBy(["class" => $class]);
   }
 }

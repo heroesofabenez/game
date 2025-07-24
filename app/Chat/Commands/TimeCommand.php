@@ -11,10 +11,7 @@ use Nette\Localization\Translator;
  * @author Jakub Konečný
  */
 final class TimeCommand extends \HeroesofAbenez\Chat\ChatCommand {
-  private Translator $translator;
-
-  public function __construct(Translator $translator) {
-    $this->translator = $translator;
+  public function __construct(private readonly Translator $translator) {
   }
   
   public function execute(): string {

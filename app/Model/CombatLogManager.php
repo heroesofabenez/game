@@ -14,7 +14,7 @@ use HeroesofAbenez\Orm\Combat as CombatEntity;
 final class CombatLogManager {
   use \Nette\SmartObject;
   
-  public function __construct(private ORM $orm) {
+  public function __construct(private readonly ORM $orm) {
   }
   
   /**

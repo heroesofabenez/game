@@ -21,12 +21,8 @@ final class CharacterItemsRepository extends \Nextras\Orm\Repository\Repository 
   public static function getEntityClassNames(): array {
     return [CharacterItem::class];
   }
-  
-  /**
-   * @param Character|int $character
-   * @param Item|int $item
-   */
-  public function getByCharacterAndItem($character, $item): ?CharacterItem {
+
+  public function getByCharacterAndItem(Character|int $character, Item|int $item): ?CharacterItem {
     return $this->getBy([
       "character" => $character,
       "item" => $item
@@ -34,10 +30,9 @@ final class CharacterItemsRepository extends \Nextras\Orm\Repository\Repository 
   }
 
   /**
-   * @param Character|int $character
    * @return ICollection|CharacterItem[]
    */
-  public function findByCharacterAndSlot($character, string $slot): ICollection {
+  public function findByCharacterAndSlot(Character|int $character, string $slot): ICollection {
     return $this->findBy([
       "character" => $character,
       "item->slot" => $slot
@@ -45,10 +40,9 @@ final class CharacterItemsRepository extends \Nextras\Orm\Repository\Repository 
   }
 
   /**
-   * @param Character|int $character
    * @return ICollection|CharacterItem[]
    */
-  public function findCharactersEquipment($character): ICollection {
+  public function findCharactersEquipment(Character|int $character): ICollection {
     return $this->findBy([
       "character" => $character,
       "worn" => true

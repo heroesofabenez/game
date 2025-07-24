@@ -16,7 +16,7 @@ use HeroesofAbenez\Orm\Model as ORM;
 final class NPCShopControl extends \Nette\Application\UI\Control {
   public Npc $npc;
   
-  public function __construct(private ORM $orm, private \HeroesofAbenez\Model\Item $itemModel, private \Nette\Security\User $user) {
+  public function __construct(private readonly ORM $orm, private readonly \HeroesofAbenez\Model\Item $itemModel, private readonly \Nette\Security\User $user) {
   }
   
   public function render(): void {

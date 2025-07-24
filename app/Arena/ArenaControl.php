@@ -23,22 +23,10 @@ use Nextras\Orm\Collection\ICollection;
 abstract class ArenaControl extends \Nette\Application\UI\Control {
   protected const DAILY_FIGHTS_LIMIT = 10;
 
-  protected User $user;
-  protected CombatHelper $combatHelper;
-  protected CombatBase $combat;
-  protected CombatLogManager $log;
-  protected ORM $orm;
-  protected Translator $translator;
   protected string $arena;
   protected string $profileLink;
   
-  public function __construct(User $user, CombatHelper $combatHelper, CombatBase $combat, CombatLogManager $log, ORM $orm, Translator $translator) {
-    $this->user = $user;
-    $this->combatHelper = $combatHelper;
-    $this->combat = $combat;
-    $this->log = $log;
-    $this->orm = $orm;
-    $this->translator = $translator;
+  public function __construct(protected readonly User $user, protected readonly CombatHelper $combatHelper, protected readonly CombatBase $combat, protected readonly CombatLogManager $log, protected readonly ORM $orm, protected readonly Translator $translator) {
   }
   
   /**
@@ -107,7 +95,7 @@ abstract class ArenaControl extends \Nette\Application\UI\Control {
   public function handleFight(int $id): void {
     try {
       $enemy = $this->getOpponent($id);
-    } catch(OpponentNotFoundException $e) {
+    } catch(OpponentNotFoundException) {
       throw new \Nette\Application\BadRequestException();
     }
     $this->doDuel($enemy);

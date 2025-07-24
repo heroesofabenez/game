@@ -14,15 +14,8 @@ use HeroesofAbenez\Orm\QuestStage;
  * @author Jakub Konečný
  */
 final class MapPresenter extends BasePresenter {
-  private Map $model;
-  private Location $locationModel;
-  private ApplicationDirectories $directories;
-  
-  public function __construct(Map $model, Location $locationModel, ApplicationDirectories $directories) {
+  public function __construct(private readonly Map $model, private readonly Location $locationModel, private readonly ApplicationDirectories $directories) {
     parent::__construct();
-    $this->model = $model;
-    $this->locationModel = $locationModel;
-    $this->directories = $directories;
   }
   
   public function actionLocal(): void {

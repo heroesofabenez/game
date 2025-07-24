@@ -3,13 +3,16 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Presenters;
 
+use HeroesofAbenez\Model\CombatHelper;
 use HeroesofAbenez\Model\InvalidStatException;
 use HeroesofAbenez\Model\NoStatPointsAvailableException;
 use HeroesofAbenez\Model\InvalidSkillTypeException;
 use HeroesofAbenez\Model\NoSkillPointsAvailableException;
+use HeroesofAbenez\Model\Profile;
 use HeroesofAbenez\Model\SkillNotFoundException;
 use HeroesofAbenez\Model\SkillMaxLevelReachedException;
 use HeroesofAbenez\Model\CannotLearnSkillException;
+use HeroesofAbenez\Model\Skills;
 
 /**
  * Presenter Training
@@ -17,16 +20,8 @@ use HeroesofAbenez\Model\CannotLearnSkillException;
  * @author Jakub Konečný
  */
 final class TrainingPresenter extends BasePresenter {
-  private \HeroesofAbenez\Model\Profile $model;
-  private \HeroesofAbenez\Model\Skills $skillsModel;
-  private \HeroesofAbenez\Model\CombatHelper $combatHelper;
-  
-  public function __construct(\HeroesofAbenez\Model\Profile $model, \HeroesofAbenez\Model\Skills $skillsModel, \Nette\Security\User $user, \HeroesofAbenez\Model\CombatHelper $combatHelper) {
+  public function __construct(private readonly Profile $model, private readonly Skills $skillsModel, private readonly \Nette\Security\User $user, private readonly CombatHelper $combatHelper) {
     parent::__construct();
-    $this->model = $model;
-    $this->model->user = $user;
-    $this->skillsModel = $skillsModel;
-    $this->combatHelper = $combatHelper;
   }
   
   public function renderDefault(): void {
@@ -44,9 +39,9 @@ final class TrainingPresenter extends BasePresenter {
   public function handleTrainStat(string $stat): void {
     try {
       $this->model->trainStat($stat);
-    } catch(NoStatPointsAvailableException $e) {
+    } catch(NoStatPointsAvailableException) {
       $this->flashMessage("errors.training.noStatPointsAvailable");
-    } catch(InvalidStatException $e) {
+    } catch(InvalidStatException) {
       
     }
     $this->redirect("Training:");
@@ -55,16 +50,14 @@ final class TrainingPresenter extends BasePresenter {
   public function handleTrainSkill(int $skillId, string $skillType): void {
     try {
       $this->skillsModel->trainSkill($skillId, $skillType);
-    } catch(NoSkillPointsAvailableException $e) {
+    } catch(NoSkillPointsAvailableException) {
       $this->flashMessage("errors.training.noSkillPointsAvailable");
-    } catch(SkillMaxLevelReachedException $e) {
+    } catch(SkillMaxLevelReachedException) {
       $this->flashMessage("errors.training.skillMaxLevelReached");
-    } catch(CannotLearnSkillException $e) {
+    } catch(CannotLearnSkillException) {
       $this->flashMessage("errors.training.cannotLearnSkill");
-    } catch(InvalidSkillTypeException $e) {
-      
-    } catch(SkillNotFoundException $e) {
-      
+    } catch(InvalidSkillTypeException) {
+    } catch(SkillNotFoundException) {
     }
     $this->redirect("Training:");
   }

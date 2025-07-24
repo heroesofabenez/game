@@ -11,7 +11,6 @@ use Nexendrie\Utils\Constants;
  * @author Jakub Konečný
  * @property-read string $speaker
  * @property-read string $text
- * @property-read string[] $names
  */
 final class DialogueLine {
   use \Nette\SmartObject;
@@ -24,7 +23,7 @@ final class DialogueLine {
   /**
    * @param string[] $names
    */
-  public function __construct(string $speaker, private string $text, private array $names) {
+  public function __construct(string $speaker, private readonly string $text, public readonly array $names) {
     $speaker = strtolower($speaker);
     if(in_array($speaker, Constants::getConstantsValues(static::class, "SPEAKER_"), true)) {
       $this->speaker = $speaker;
@@ -41,13 +40,6 @@ final class DialogueLine {
       return $this->names[0];
     }
     return $this->names[1];
-  }
-  
-  /**
-   * @return string[]
-   */
-  protected function getNames(): array {
-    return $this->names;
   }
 }
 ?>

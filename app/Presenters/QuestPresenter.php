@@ -3,17 +3,16 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Presenters;
 
+use HeroesofAbenez\Model\Quest;
+
 /**
  * Presenter Quest
  *
  * @author Jakub Konečný
  */
 final class QuestPresenter extends BasePresenter {
-  private \HeroesofAbenez\Model\Quest $model;
-  
-  public function __construct(\HeroesofAbenez\Model\Quest $model) {
+  public function __construct(private readonly Quest $model) {
     parent::__construct();
-    $this->model = $model;
   }
   
   /**
@@ -21,7 +20,7 @@ final class QuestPresenter extends BasePresenter {
    *
    * @throws \Nette\Application\BadRequestException
    */
-  public function actionDefault(): void {
+  public function actionDefault(): never {
     throw new \Nette\Application\BadRequestException();
   }
 

@@ -3,19 +3,23 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Presenters;
 
+use HeroesofAbenez\Model\Friends;
+use HeroesofAbenez\Model\Item;
+use HeroesofAbenez\Model\Journal;
 use HeroesofAbenez\Model\NotEnoughExperiencesException;
 use HeroesofAbenez\Model\ItemNotFoundException;
-use HeroesofAbenez\Model\ItemNotOwnedException;
 use HeroesofAbenez\Model\ItemNotEquipableException;
 use HeroesofAbenez\Model\ItemAlreadyEquippedException;
 use HeroesofAbenez\Model\ItemNotWornException;
 use HeroesofAbenez\Model\NotFriendsException;
+use HeroesofAbenez\Model\Pet;
 use HeroesofAbenez\Model\PetNotFoundException;
 use HeroesofAbenez\Model\PetNotOwnedException;
 use HeroesofAbenez\Model\PetNotDeployedException;
 use HeroesofAbenez\Model\PetAlreadyDeployedException;
 use HeroesofAbenez\Model\PetNotDeployableException;
 use HeroesofAbenez\Model\CannotChooseSpecializationException;
+use HeroesofAbenez\Model\Profile;
 use HeroesofAbenez\Model\SpecializationAlreadyChosenException;
 use HeroesofAbenez\Model\SpecializationNotChosenException;
 use HeroesofAbenez\Model\SpecializationNotAvailableException;
@@ -26,19 +30,8 @@ use HeroesofAbenez\Model\SpecializationNotAvailableException;
  * @author Jakub Konečný
  */
 final class JournalPresenter extends BasePresenter {
-  private \HeroesofAbenez\Model\Journal $model;
-  private \HeroesofAbenez\Model\Profile $profileModel;
-  private \HeroesofAbenez\Model\Item $itemModel;
-  private \HeroesofAbenez\Model\Pet $petModel;
-  private \HeroesofAbenez\Model\Friends $friendsModel;
-
-  public function __construct(\HeroesofAbenez\Model\Journal $model, \HeroesofAbenez\Model\Profile $profileModel, \HeroesofAbenez\Model\Item $itemModel, \HeroesofAbenez\Model\Pet $petModel, \HeroesofAbenez\Model\Friends $friendsModel) {
+  public function __construct(private readonly Journal $model, private readonly Profile $profileModel, private readonly Item $itemModel, private readonly Pet $petModel, private readonly Friends $friendsModel) {
     parent::__construct();
-    $this->model = $model;
-    $this->profileModel = $profileModel;
-    $this->itemModel = $itemModel;
-    $this->petModel = $petModel;
-    $this->friendsModel = $friendsModel;
   }
   
   public function renderDefault(): void {
@@ -82,86 +75,82 @@ final class JournalPresenter extends BasePresenter {
     $this->template->friends = $this->model->friends();
   }
   
-  public function handleEquipItem(int $itemId): void {
+  public function handleEquipItem(int $itemId): never {
     try {
       $this->itemModel->equipItem($itemId);
-    } catch(ItemNotFoundException $e) {
+    } catch(ItemNotFoundException) {
       $this->redirect("Item:notfound");
-    } catch(ItemNotOwnedException $e) {
-      $this->redirect("Item:notfound");
-    } catch(ItemNotEquipableException $e) {
+    } catch(ItemNotEquipableException) {
       $this->flashMessage("errors.equipment.notEquipable");
-    } catch(ItemAlreadyEquippedException $e) {
+    } catch(ItemAlreadyEquippedException) {
       $this->flashMessage("errors.equipment.alreadyWorn");
     }
     $this->redirect("Journal:inventory");
   }
   
-  public function handleUnequipItem(int $itemId): void {
+  public function handleUnequipItem(int $itemId): never {
     try {
       $this->itemModel->unequipItem($itemId);
       $this->flashMessage("messages.equipment.unequiped");
-    } catch(ItemNotFoundException $e) {
+    } catch(ItemNotFoundException) {
       $this->redirect("Item:notfound");
-    } catch(ItemNotOwnedException $e) {
-      $this->redirect("Item:notfound");
-    } catch(ItemNotWornException $e) {
+    } catch(ItemNotWornException) {
       $this->flashMessage("errors.equipment.notWorn");
     }
     $this->redirect("Journal:inventory");
   }
   
-  public function handleLevelUp(int $specialization = null): void {
+  public function handleLevelUp(int $specialization = null): never {
     $this->profileModel->user = $this->user;
     try {
       $this->profileModel->levelUp($specialization);
       $this->reloadIdentity();
-    } catch(NotEnoughExperiencesException $e) {
+    } catch(NotEnoughExperiencesException) {
       $this->flashMessage("errors.journal.cannotLevelUp");
-    } catch(CannotChooseSpecializationException $e) {
+    } catch(CannotChooseSpecializationException) {
       $this->flashMessage("errors.journal.cannotChooseSpecialization");
-    } catch(SpecializationAlreadyChosenException $e) {
+    } catch(SpecializationAlreadyChosenException) {
       $this->flashMessage("errors.journal.specializationAlreadyChosen");
-    } catch(SpecializationNotChosenException $e) {
+    } catch(SpecializationNotChosenException) {
       $this->flashMessage("errors.journal.specializationNotChosen");
-    } catch(SpecializationNotAvailableException $e) {
+    } catch(SpecializationNotAvailableException) {
       $this->flashMessage("errors.journal.specializationNotAvailable");
     }
     $this->redirect("Journal:");
   }
   
-  public function handleDeployPet(int $petId): void {
+  public function handleDeployPet(int $petId): never {
     try {
       $this->petModel->user = $this->user;
       $this->petModel->deployPet($petId);
-    } catch(PetNotFoundException $e) {
+    } catch(PetNotFoundException) {
       $this->flashMessage("errors.pet.notFound");
-    } catch(PetNotOwnedException $e) {
+    } catch(PetNotOwnedException) {
       $this->flashMessage("errors.pet.notOwned");
-    } catch(PetAlreadyDeployedException $e) {
+    } catch(PetAlreadyDeployedException) {
       $this->flashMessage("errors.pet.alreadyDeployed");
-    } catch(PetNotDeployableException $e) {
+    } catch(PetNotDeployableException) {
       $this->flashMessage("errors.pet.notDeployable");
     }
     $this->redirect("Journal:pets");
   }
   
-  public function handleDiscardPet(int $petId): void {
+  public function handleDiscardPet(int $petId): never {
     try {
       $this->petModel->user = $this->user;
       $this->petModel->discardPet($petId);
       $this->flashMessage("messages.pet.discarded");
-    } catch(PetNotFoundException $e) {
+    } catch(PetNotFoundException) {
       $this->flashMessage("errors.pet.notFound");
-    } catch(PetNotOwnedException $e) {
+    } catch(PetNotOwnedException) {
       $this->flashMessage("errors.pet.notOwned");
-    } catch(PetNotDeployedException $e) {
+    } catch(PetNotDeployedException) {
       $this->flashMessage("errors.pet.notDeployed");
     }
     $this->redirect("Journal:pets");
   }
 
-  public function handleRemoveFriend(int $id): void {
+  public function handleRemoveFriend(int $id): never {
     try {
       $this->friendsModel->remove($id);
       $this->flashMessage("messages.friends.removed");

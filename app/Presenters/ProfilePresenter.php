@@ -4,7 +4,10 @@ declare(strict_types=1);
 namespace HeroesofAbenez\Presenters;
 
 use HeroesofAbenez\Model\AlreadyFriendsException;
+use HeroesofAbenez\Model\Friends;
 use HeroesofAbenez\Model\FriendshipRequestAlreadySentException;
+use HeroesofAbenez\Model\Guild;
+use HeroesofAbenez\Model\Profile;
 
 /**
  * Presenter Profile
@@ -12,18 +15,11 @@ use HeroesofAbenez\Model\FriendshipRequestAlreadySentException;
  * @author Jakub Konečný
  */
 final class ProfilePresenter extends BasePresenter {
-  private \HeroesofAbenez\Model\Profile $model;
-  private \HeroesofAbenez\Model\Guild $guildModel;
-  private \HeroesofAbenez\Model\Friends $friendsModel;
-
-  public function __construct(\HeroesofAbenez\Model\Profile $model, \HeroesofAbenez\Model\Guild $guildModel, \HeroesofAbenez\Model\Friends $friendsModel) {
+  public function __construct(private readonly Profile $model, private readonly Guild $guildModel, private readonly Friends $friendsModel) {
     parent::__construct();
-    $this->model = $model;
-    $this->guildModel = $guildModel;
-    $this->friendsModel = $friendsModel;
   }
   
-  public function actionDefault(): void {
+  public function actionDefault(): never {
     $this->forward("view", $this->user->id);
   }
 
@@ -53,7 +49,7 @@ final class ProfilePresenter extends BasePresenter {
     $this->template->canBefriend = !$this->friendsModel->isFriendsWith($id);
   }
 
-  public function handleBefriend(int $id): void {
+  public function handleBefriend(int $id): never {
     try {
       $this->friendsModel->befriend($id);
     } catch(AlreadyFriendsException $e) {

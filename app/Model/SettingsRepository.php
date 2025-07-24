@@ -12,11 +12,7 @@ namespace HeroesofAbenez\Model;
 final class SettingsRepository {
   use \Nette\SmartObject;
   
-  public function __construct(private array $settings) {
-  }
-  
-  protected function getSettings(): array {
-    return $this->settings;
+  public function __construct(public readonly array $settings) {
   }
 }
 ?>

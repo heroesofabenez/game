@@ -22,12 +22,7 @@ final class ShopItemsRepository extends \Nextras\Orm\Repository\Repository {
     return [ShopItem::class];
   }
 
-  /**
-   * @param Item|int $item
-   * @param Npc|int $npc
-   * @return ShopItem|null
-   */
-  public function getByItemAndNpc($item, $npc): ?ShopItem {
+  public function getByItemAndNpc(Item|int $item, Npc|int $npc): ?ShopItem {
     return $this->getBy([
       "item" => $item,
       "npc" => $npc,

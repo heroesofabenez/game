@@ -23,20 +23,15 @@ final class PetsRepository extends \Nextras\Orm\Repository\Repository {
   }
   
   /**
-   * @param Character|int $owner
    * @return ICollection|Pet[]
    */
-  public function findByOwner($owner): ICollection {
+  public function findByOwner(Character|int $owner): ICollection {
     return $this->findBy([
       "owner" => $owner
     ]);
   }
 
-  /**
-   * @param PetType|int $type
-   * @param Character|int $owner
-   */
-  public function getByTypeAndOwner($type, $owner): ?Pet {
+  public function getByTypeAndOwner(PetType|int $type, Character|int $owner): ?Pet {
     return $this->getBy([
       "type" => $type,
       "owner" => $owner

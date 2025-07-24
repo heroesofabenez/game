@@ -23,29 +23,22 @@ final class QuestStagesRepository extends \Nextras\Orm\Repository\Repository {
   }
   
   /**
-   * @param QuestArea|int $area
    * @return ICollection|QuestStage[]
    */
-  public function findByArea($area): ICollection {
+  public function findByArea(QuestArea|int $area): ICollection {
     return $this->findBy([
       "area" => $area
     ]);
   }
-  
-  /**
-   * @param CharacterClass|int $class
-   */
-  public function getClassStartingLocation($class): ?QuestStage {
+
+  public function getClassStartingLocation(CharacterClass|int $class): ?QuestStage {
     return $this->getBy([
       "requiredLevel" => 0,
       "requiredClass" => $class
     ]);
   }
-  
-  /**
-   * @param CharacterRace|int $race
-   */
-  public function getRaceStartingLocation($race): ?QuestStage {
+
+  public function getRaceStartingLocation(CharacterRace|int $race): ?QuestStage {
     return $this->getBy([
       "requiredLevel" => 0,
       "requiredRace" => $race

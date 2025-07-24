@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Ranking;
 
+use HeroesofAbenez\Model\Guild;
 use HeroesofAbenez\Utils\Arrays;
 
 /**
@@ -11,10 +12,7 @@ use HeroesofAbenez\Utils\Arrays;
  * @author Jakub Konečný
  */
 final class GuildsRankingControl extends RankingControl {
-  private \HeroesofAbenez\Model\Guild $model;
-  
-  public function __construct(\HeroesofAbenez\Model\Guild $model) {
-    $this->model = $model;
+  public function __construct(private readonly Guild $model) {
     parent::__construct("Guilds", ["name", "members"], "Guild", "details");
   }
   

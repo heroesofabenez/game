@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Presenters;
 
+use HeroesofAbenez\Model\Intro;
+
 /**
  * Presenter Intro
  *
@@ -10,11 +12,9 @@ namespace HeroesofAbenez\Presenters;
  */
 final class IntroPresenter extends BasePresenter {
   private int $part;
-  private \HeroesofAbenez\Model\Intro $model;
   
-  public function __construct(\HeroesofAbenez\Model\Intro $model) {
+  public function __construct(private readonly Intro $model) {
     parent::__construct();
-    $this->model = $model;
   }
   
   protected function startup(): void {
@@ -31,12 +31,12 @@ final class IntroPresenter extends BasePresenter {
     $this->template->intro = $text;
   }
   
-  public function actionNext(): void {
+  public function actionNext(): never {
     $this->model->moveToNextPart();
     $this->redirect("Intro:");
   }
   
-  public function actionEnd(): void {
+  public function actionEnd(): never {
     $this->model->endIntro();
     $this->reloadIdentity();
     $this->redirect("Homepage:");

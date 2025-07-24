@@ -21,12 +21,8 @@ final class CharacterAttackSkillsRepository extends \Nextras\Orm\Repository\Repo
   public static function getEntityClassNames(): array {
     return [CharacterAttackSkill::class];
   }
-  
-  /**
-   * @param Character|int $character
-   * @param SkillAttack|int $skill
-   */
-  public function getByCharacterAndSkill($character, $skill): ?CharacterAttackSkill {
+
+  public function getByCharacterAndSkill(Character|int $character, SkillAttack|int $skill): ?CharacterAttackSkill {
     return $this->getBy([
       "character" => $character,
       "skill" => $skill

@@ -35,10 +35,9 @@ final class CharactersRepository extends \Nextras\Orm\Repository\Repository {
   }
   
   /**
-   * @param Guild|int $guild
    * @return ICollection|Character[]
    */
-  public function findByGuild($guild): ICollection {
+  public function findByGuild(Guild|int $guild): ICollection {
     return $this->findBy([
       "guild" => $guild
     ])->orderBy("guildrank", ICollection::DESC)

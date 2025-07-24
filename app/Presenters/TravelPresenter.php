@@ -5,23 +5,21 @@ namespace HeroesofAbenez\Presenters;
 
 use HeroesofAbenez\Model\AreaNotFoundException;
 use HeroesofAbenez\Model\CannotTravelToAreaException;
+use HeroesofAbenez\Model\Location;
 use HeroesofAbenez\Model\StageNotFoundException;
 use HeroesofAbenez\Model\CannotTravelToStageException;
 
-  /**
-   * Presenter Travel
-   * 
-   * @author Jakub Konečný
-   */
+/**
+ * Presenter Travel
+ *
+ * @author Jakub Konečný
+ */
 final class TravelPresenter extends BasePresenter {
-  private \HeroesofAbenez\Model\Location $model;
-  
-  public function __construct(\HeroesofAbenez\Model\Location $model) {
+  public function __construct(private readonly Location $model) {
     parent::__construct();
-    $this->model = $model;
   }
   
-  public function renderDefault(): void {
+  public function renderDefault(): never {
     $this->redirect("Map:local");
   }
   
@@ -32,9 +30,9 @@ final class TravelPresenter extends BasePresenter {
       $areaName = $this->translator->translate("areas.$id.name");
       $this->reloadIdentity();
       $this->flashMessage($this->translator->translate("messages.travel.movedToArea", 0, ["areaName" => $areaName]));
-    } catch(CannotTravelToAreaException $e) {
+    } catch(CannotTravelToAreaException) {
       $this->flashMessage("errors.travel.cannotTravelToArea");
-    } catch(AreaNotFoundException $e) {
+    } catch(AreaNotFoundException) {
       $this->flashMessage("errors.travel.areaDoesNotExist");
     }
     $this->redirect("Homepage:");
@@ -47,9 +45,9 @@ final class TravelPresenter extends BasePresenter {
       $stageName = $this->translator->translate("stages.$id.name");
       $this->reloadIdentity();
       $this->flashMessage($this->translator->translate("messages.travel.movedToStage", 0, ["stageName" => $stageName]));
-    } catch(CannotTravelToStageException $e) {
+    } catch(CannotTravelToStageException) {
       $this->flashMessage("errors.travel.cannotTravelToStage");
-    } catch(StageNotFoundException $e) {
+    } catch(StageNotFoundException) {
       $this->flashMessage("errors.travel.stageDoesNotExist");
     }
     $this->redirect("Homepage:");

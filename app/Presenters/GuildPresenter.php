@@ -5,6 +5,8 @@ namespace HeroesofAbenez\Presenters;
 
 use HeroesofAbenez\Forms\CustomGuildRankNamesFormFactory;
 use HeroesofAbenez\Forms\DonateToGuildFormFactory;
+use HeroesofAbenez\Model\Guild;
+use HeroesofAbenez\Model\Permissions;
 use Nette\Application\UI\Form;
 use HeroesofAbenez\Model\GuildNotFoundException;
 use HeroesofAbenez\Model\NotInGuildException;
@@ -23,14 +25,12 @@ use HeroesofAbenez\Forms\RenameGuildFormFactory;
 use HeroesofAbenez\Forms\GuildDescriptionFormFactory;
 use HeroesofAbenez\Forms\DissolveGuildFormFactory;
 
-  /**
-   * Presenter Guild
-   * 
-   * @author Jakub Konečný
-   */
+/**
+ * Presenter Guild
+ *
+ * @author Jakub Konečný
+ */
 final class GuildPresenter extends BasePresenter {
-  private \HeroesofAbenez\Model\Guild $model;
-  private \HeroesofAbenez\Model\Permissions $permissionsModel;
   private CreateGuildFormFactory $createGuildFormFactory;
   private DissolveGuildFormFactory $dissolveGuildFormFactory;
   private RenameGuildFormFactory $renameGuildFormFactory;
@@ -38,10 +38,8 @@ final class GuildPresenter extends BasePresenter {
   private CustomGuildRankNamesFormFactory $customGuildRankNamesFormFactory;
   private DonateToGuildFormFactory $donateToGuildFormFactory;
   
-  public function __construct(\HeroesofAbenez\Model\Guild $model, \HeroesofAbenez\Model\Permissions $permissionsModel) {
+  public function __construct(private readonly Guild $model, private readonly Permissions $permissionsModel) {
     parent::__construct();
-    $this->model = $model;
-    $this->permissionsModel = $permissionsModel;
   }
 
   public function injectCreateGuildFormFactory(CreateGuildFormFactory $createGuildFormFactory): void {
@@ -150,7 +148,7 @@ final class GuildPresenter extends BasePresenter {
       $this->model->sendApplication($id);
       $this->flashMessage("messages.guild.applicationSent");
       $this->redirect("Guild:");
-    } catch(GuildNotFoundException $e) {
+    } catch(GuildNotFoundException) {
       $this->forward("notfound");
     }
   }
@@ -164,17 +162,17 @@ final class GuildPresenter extends BasePresenter {
     }
   }
   
-  public function actionLeave(): void {
+  public function actionLeave(): never {
     $this->notInGuild();
     try {
       $this->model->leave();
       $this->flashMessage("messages.guild.left");
       $this->reloadIdentity();
       $this->forward("default");
-    } catch(NotInGuildException $e) {
+    } catch(NotInGuildException) {
       $this->flashMessage("errors.guild.notInGuild");
       $this->redirect("Guild:");
-    } catch(GrandmasterCannotLeaveGuildException $e) {
+    } catch(GrandmasterCannotLeaveGuildException) {
       $this->flashMessage("errors.guild.grandmasterCannotLeave");
       $this->redirect("Guild:");
     }
@@ -224,71 +222,71 @@ final class GuildPresenter extends BasePresenter {
 
   protected function createComponentRenameGuildForm(): Form {
     $form = $this->renameGuildFormFactory->create();
-    $form->onSuccess[] = function(): void {
+    $form->onSuccess[] = function(): never {
       $this->flashMessage("messages.guild.renamed");
       $this->redirect("Guild:");
     };
     return $form;
   }
   
-  public function actionPromote(int $id): void {
+  public function actionPromote(int $id): never {
     try {
       $this->model->promote($id);
       $this->flashMessage("messages.guild.promoted");
       $this->redirect("Guild:members");
-    } catch(NotInGuildException $e) {
+    } catch(NotInGuildException) {
       $this->flashMessage("errors.guild.notInGuild");
-    } catch(MissingPermissionsException $e) {
+    } catch(MissingPermissionsException) {
       $this->flashMessage("errors.guild.missingPermissions");
-    } catch(PlayerNotFoundException $e) {
+    } catch(PlayerNotFoundException) {
       $this->flashMessage("errors.guild.playerDoesNotExist");
-    } catch(PlayerNotInGuildException $e) {
+    } catch(PlayerNotInGuildException) {
       $this->flashMessage("errors.guild.playerNotInGuild");
-    } catch(CannotPromoteHigherRanksException $e) {
+    } catch(CannotPromoteHigherRanksException) {
       $this->flashMessage("errors.guild.cannotPromoteHigherRanks");
-    } catch(CannotPromoteToGrandmasterException $e) {
+    } catch(CannotPromoteToGrandmasterException) {
       $this->flashMessage("errors.guild.cannotPromoteToGrandmaster");
-    } catch(CannotHaveMoreDeputiesException $e) {
+    } catch(CannotHaveMoreDeputiesException) {
       $this->flashMessage("errors.guild.cannotHaveMoreDeputies");
     }
     $this->redirect("Guild:");
   }
   
-  public function actionDemote(int $id): void {
+  public function actionDemote(int $id): never {
     try {
       $this->model->demote($id);
       $this->flashMessage("messages.guild.demoted");
       $this->redirect("Guild:members");
-    } catch(NotInGuildException $e) {
+    } catch(NotInGuildException) {
       $this->flashMessage("errors.guild.notInGuild");
-    } catch(MissingPermissionsException $e) {
+    } catch(MissingPermissionsException) {
       $this->flashMessage("errors.guild.missingPermissions");
-    } catch(PlayerNotFoundException $e) {
+    } catch(PlayerNotFoundException) {
       $this->flashMessage("errors.guild.playerDoesNotExist");
-    } catch(PlayerNotInGuildException $e) {
+    } catch(PlayerNotInGuildException) {
       $this->flashMessage("errors.guild.playerNotInGuild");
-    } catch(CannotDemoteHigherRanksException $e) {
+    } catch(CannotDemoteHigherRanksException) {
       $this->flashMessage("errors.guild.cannotDemoteHigherRanks");
-    } catch(CannotDemoteLowestRankException $e) {
+    } catch(CannotDemoteLowestRankException) {
       $this->flashMessage("errors.guild.cannotDemoteLowestRank");
     }
     $this->redirect("Guild:");
   }
   
-  public function actionKick(int $id): void {
+  public function actionKick(int $id): never {
     try {
       $this->model->kick($id);
       $this->flashMessage("messages.guild.kicked");
       $this->redirect("Guild:members");
-    } catch(NotInGuildException $e) {
+    } catch(NotInGuildException) {
       $this->flashMessage("errors.guild.notInGuild");
-    } catch(MissingPermissionsException $e) {
+    } catch(MissingPermissionsException) {
       $this->flashMessage("errors.guild.missingPermissions");
-    } catch(PlayerNotFoundException $e) {
+    } catch(PlayerNotFoundException) {
       $this->flashMessage("errors.guild.playerDoesNotExist");
-    } catch(PlayerNotInGuildException $e) {
+    } catch(PlayerNotInGuildException) {
       $this->flashMessage("errors.guild.playerNotInGuild");
-    } catch(CannotKickHigherRanksException $e) {
+    } catch(CannotKickHigherRanksException) {
       $this->flashMessage("errors.guild.cannotKickHigherRanks");
     }
     $this->redirect("Guild:");
@@ -305,7 +303,7 @@ final class GuildPresenter extends BasePresenter {
 
   protected function createComponentGuildDescriptionForm(): Form {
     $form = $this->guildDescriptionFormFactory->create();
-    $form->onSuccess[] = function(): void {
+    $form->onSuccess[] = function(): never {
       $this->flashMessage("messages.guild.descriptionChanged");
       $this->redirect("Guild:");
     };

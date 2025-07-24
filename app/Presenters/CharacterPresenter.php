@@ -4,27 +4,25 @@ declare(strict_types=1);
 namespace HeroesofAbenez\Presenters;
 
 use HeroesofAbenez\Forms\CreateCharacterFormFactory;
+use HeroesofAbenez\Model\Profile;
+use HeroesofAbenez\Model\UserManager;
 use Nette\Application\UI\Form;
 use Nextras\Orm\Collection\ICollection;
 
-  /**
-   * Presenter Character
-   * 
-   * @author Jakub Konečný
-   */
+/**
+ * Presenter Character
+ *
+ * @author Jakub Konečný
+ */
 final class CharacterPresenter extends BasePresenter {
-  private \HeroesofAbenez\Model\Profile $model;
-  private \HeroesofAbenez\Model\UserManager $userManager;
   /** @var ICollection|\HeroesofAbenez\Orm\CharacterClass[] */
   private ICollection $classes;
   /** @var ICollection|\HeroesofAbenez\Orm\CharacterRace[] */
   private ICollection $races;
   private CreateCharacterFormFactory $createCharacterFormFactory;
   
-  public function __construct(\HeroesofAbenez\Model\Profile $model, \HeroesofAbenez\Model\UserManager $userManager) {
+  public function __construct(private readonly Profile $model, private readonly UserManager $userManager) {
     parent::__construct();
-    $this->model = $model;
-    $this->userManager = $userManager;
   }
 
   public function injectCreateCharacterFormFactory(CreateCharacterFormFactory $createCharacterFormFactory): void {
@@ -57,7 +55,7 @@ final class CharacterPresenter extends BasePresenter {
    */
   protected function createComponentCreateCharacterForm(): Form {
     $form = $this->createCharacterFormFactory->create($this->races, $this->classes);
-    $form->onSuccess[] = function(Form $form, array $values): void {
+    $form->onSuccess[] = function(Form $form, array $values): never {
       $data = $this->userManager->create($values);
       if($data === null) {
         $this->forward("Character:exists");

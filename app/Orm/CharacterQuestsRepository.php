@@ -21,12 +21,8 @@ final class CharacterQuestsRepository extends \Nextras\Orm\Repository\Repository
   public static function getEntityClassNames(): array {
     return [CharacterQuest::class];
   }
-  
-  /**
-   * @param Character|int $character
-   * @param Quest|int $quest
-   */
-  public function getByCharacterAndQuest($character, $quest): ?CharacterQuest {
+
+  public function getByCharacterAndQuest(Character|int $character, Quest|int $quest): ?CharacterQuest {
     return $this->getBy([
       "character" => $character,
       "quest" => $quest
@@ -34,10 +30,9 @@ final class CharacterQuestsRepository extends \Nextras\Orm\Repository\Repository
   }
   
   /**
-   * @param Character|int $character
    * @return ICollection|CharacterQuest[]
    */
-  public function findByCharacter($character): ICollection {
+  public function findByCharacter(Character|int $character): ICollection {
     return $this->findBy([
       "character" => $character
     ]);

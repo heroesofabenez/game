@@ -10,17 +10,9 @@ namespace HeroesofAbenez\Ranking;
  * @property-read \Nette\Bridges\ApplicationLatte\Template $template
  */
 abstract class RankingControl extends \Nette\Application\UI\Control {
-  protected string $name;
-  protected array $cols = [];
-  protected string $lastCol;
-  protected string $presenterName;
   public ?\Nette\Utils\Paginator $paginator = null;
   
-  public function __construct(string $name, array $cols, string $presenter, string $lastCol) {
-    $this->name = $name;
-    $this->cols = $cols;
-    $this->presenterName = $presenter;
-    $this->lastCol = $lastCol;
+  public function __construct(protected readonly string $name, protected readonly array $cols, protected readonly string $presenterName, protected readonly string $lastCol) {
   }
   
   abstract public function getData(): array;

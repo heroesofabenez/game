@@ -11,9 +11,9 @@ namespace HeroesofAbenez\Model;
 final class Map {
   use \Nette\SmartObject;
 
-  private bool $alwaysDraw = false;
+  private readonly bool $alwaysDraw;
   
-  public function __construct(private Location $locationModel, private \Nette\Security\User $user, private MapDrawer $drawer, SettingsRepository $sr) {
+  public function __construct(private readonly Location $locationModel, private readonly \Nette\Security\User $user, private readonly MapDrawer $drawer, SettingsRepository $sr) {
     $this->alwaysDraw = $sr->settings["application"]["alwaysDrawMaps"];
   }
   

@@ -23,10 +23,9 @@ final class NpcsRepository extends \Nextras\Orm\Repository\Repository {
   }
   
   /**
-   * @param QuestStage|int $stage
    * @return ICollection|Npc[]
    */
-  public function findByStage($stage): ICollection {
+  public function findByStage(QuestStage|int $stage): ICollection {
     return $this->findBy([
       "stage" => $stage
     ]);

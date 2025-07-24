@@ -13,7 +13,7 @@ use Nette\Security\Permission;
 final class AuthorizatorFactory {
   use \Nette\SmartObject;
   
-  public function __construct(private Permissions $model) {
+  public function __construct(private readonly Permissions $model) {
   }
 
   /**

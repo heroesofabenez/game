@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Forms;
 
+use HeroesofAbenez\Model\Guild;
 use Nette\Application\UI\Form;
 use Nette\Localization\Translator;
 
@@ -12,12 +13,7 @@ use Nette\Localization\Translator;
  * @author Jakub Konečný
  */
 final class DissolveGuildFormFactory extends BaseFormFactory {
-  private \HeroesofAbenez\Model\Guild $model;
-  private \Nette\Security\User $user;
-  
-  public function __construct(Translator $translator, \HeroesofAbenez\Model\Guild $model, \Nette\Security\User $user) {
-    $this->model = $model;
-    $this->user = $user;
+  public function __construct(Translator $translator, private readonly Guild $model, private readonly \Nette\Security\User $user) {
     parent::__construct($translator);
   }
   

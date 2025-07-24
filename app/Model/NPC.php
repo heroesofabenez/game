@@ -14,7 +14,7 @@ use HeroesofAbenez\Orm\Model as ORM;
 final class NPC {
   use \Nette\SmartObject;
   
-  public function __construct(private ORM $orm) {
+  public function __construct(private readonly ORM $orm) {
   }
   
   /**
