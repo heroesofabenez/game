@@ -1,45 +1,47 @@
-*                   @konecnyjakub
+* @konecnyjakub
 
-[Project Management]
-/.gitlab/           @heroesofabenez/project-management
-/README.md          @heroesofabenez/project-management
-/LICENSE.md         @heroesofabenez/project-management
-/CONTRIBUTING.md    @heroesofabenez/project-management
-/CHANGELOG.md       @heroesofabenez/project-management
-/composer.json      @heroesofabenez/project-management
+[Project Management] @heroesofabenez/project-management
+/.gitlab/
+/README.md
+/LICENSE.md
+/CONTRIBUTING.md
+/CHANGELOG.md
+/composer.json
 
-[Quality Assurance]
-/phpstan.neon       @heroesofabenez/quality-assurance
-/.csslintrc         @heroesofabenez/quality-assurance
+[Quality Assurance] @heroesofabenez/quality-assurance
+/phpstan.neon
 
-[Devops]
-/migrations/        @heroesofabenez/devops
-/tools/             @heroesofabenez/devops
-/.gitlab-ci.yml     @heroesofabenez/devops
-/.scrutinizer.yml   @heroesofabenez/devops
-/install.sh         @heroesofabenez/devops
-/build.xml          @heroesofabenez/devops
-/phinx.php          @heroesofabenez/devops
-/deployment.ini     @heroesofabenez/devops
-/INSTALL.md         @heroesofabenez/devops
-.gitattributes      @heroesofabenez/devops
-.htaccess           @heroesofabenez/devops
-robots.txt          @heroesofabenez/devops
+[Devops] @heroesofabenez/devops
+/migrations/
+/tools/
+/.gitlab-ci.yml
+/.scrutinizer.yml
+/install.sh
+/build.xml
+/phinx.php
+/deployment.ini
+/INSTALL.md
+.gitattributes
+.htaccess
+robots.txt
 
-[PHP Code]
-/app/               @konecnyjakub
-/www/index.php      @konecnyjakub
+[PHP Code] @konecnyjakub
+/app/**/*.php
+/www/index.php
 
-[CSS]
-/www/styles/        @konecnyjakub
+[CSS] @konecnyjakub
+/www/styles/
+*.css
 
-[Tests]
-/tests/             @konecnyjakub
-[Graphics]
-*.png                       @konecnyjakub
-*.jpg                       @konecnyjakub
-*.svg                       @konecnyjakub
-*.ico                       @konecnyjakub
+[Tests] @konecnyjakub
+/tests/
 
-[Templates]
-templates/          @konecnyjakub
+[Graphics] @konecnyjakub
+/www/images/
+*.png
+*.jpg
+*.svg
+*.ico
+
+[Templates] @konecnyjakub
+*.latte
