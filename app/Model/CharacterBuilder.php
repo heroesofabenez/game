@@ -37,7 +37,7 @@ final class CharacterBuilder {
   }
 
   private function checkSpecialization(int $level, CharacterClass $class, CharacterSpecialization $specialization = null): void {
-    if($level < static::SPECIALIZATION_LEVEL) {
+    if($level < self::SPECIALIZATION_LEVEL) {
       if($specialization !== null) {
         throw new CannotChooseSpecializationException();
       }
@@ -56,8 +56,8 @@ final class CharacterBuilder {
     $this->checkSpecialization($level, $class, $specialization);
     $specializationLevel = 0;
     if($specialization !== null) {
-      $specializationLevel = $level - static::SPECIALIZATION_LEVEL + 1;
-      $level = static::SPECIALIZATION_LEVEL - 1;
+      $specializationLevel = $level - self::SPECIALIZATION_LEVEL + 1;
+      $level = self::SPECIALIZATION_LEVEL - 1;
     }
     $data = [];
     $data["strength"] = $this->calculateStat("strength", $class, $race, $level);

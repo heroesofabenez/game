@@ -22,14 +22,14 @@ final class Karma {
    * @return string[]
    */
   public static function getKarmas(): array {
-    return Constants::getConstantsValues(static::class, "KARMA_");
+    return Constants::getConstantsValues(self::class, "KARMA_");
   }
   
   /**
    * @throws \OutOfBoundsException
    */
   private static function validateKarma(string ...$values): void {
-    $karmas = static::getKarmas();
+    $karmas = self::getKarmas();
     foreach($values as $value) {
       if(!in_array($value, $karmas, true)) {
         throw new \OutOfBoundsException("Invalid karma $value.");
@@ -41,7 +41,7 @@ final class Karma {
    * @throws \OutOfBoundsException
    */
   public static function isSame(string $karma1, string $karma2): bool {
-    static::validateKarma($karma1, $karma2);
+    self::validateKarma($karma1, $karma2);
     return ($karma1 === $karma2);
   }
   
@@ -49,10 +49,10 @@ final class Karma {
    * @throws \OutOfBoundsException
    */
   public static function getOpposite(string $karma): ?string {
-    static::validateKarma($karma);
+    self::validateKarma($karma);
     return match ($karma) {
-      static::KARMA_WHITE => static::KARMA_DARK,
-      static::KARMA_DARK => static::KARMA_WHITE,
+      self::KARMA_WHITE => self::KARMA_DARK,
+      self::KARMA_DARK => self::KARMA_WHITE,
       default => null,
     };
   }
@@ -61,15 +61,15 @@ final class Karma {
    * @throws \OutOfBoundsException
    */
   public static function isOpposite(string $karma1, string $karma2): bool {
-    static::validateKarma($karma1, $karma2);
-    return ($karma2 === static::getOpposite($karma1));
+    self::validateKarma($karma1, $karma2);
+    return ($karma2 === self::getOpposite($karma1));
   }
   
   public static function getPredominant(int $white, int $dark): string {
     return match (true) {
-      $white > $dark + static::THRESHOLD => static::KARMA_WHITE,
-      $dark > $white + static::THRESHOLD => static::KARMA_DARK,
-      default => static::KARMA_NEUTRAL,
+      $white > $dark + self::THRESHOLD => self::KARMA_WHITE,
+      $dark > $white + self::THRESHOLD => self::KARMA_DARK,
+      default => self::KARMA_NEUTRAL,
     };
   }
 }

@@ -59,23 +59,23 @@ final class CharacterClass extends \Nextras\Orm\Entity\Entity {
   }
   
   protected function setterStrength(int $value): int {
-    return Numbers::range($value, static::MIN_STATS, static::MAX_STATS);
+    return Numbers::range($value, self::MIN_STATS, self::MAX_STATS);
   }
   
   protected function setterDexterity(int $value): int {
-    return Numbers::range($value, static::MIN_STATS, static::MAX_STATS);
+    return Numbers::range($value, self::MIN_STATS, self::MAX_STATS);
   }
   
   protected function setterConstitution(int $value): int {
-    return Numbers::range($value, static::MIN_STATS, static::MAX_STATS);
+    return Numbers::range($value, self::MIN_STATS, self::MAX_STATS);
   }
   
   protected function setterIntelligence(int $value): int {
-    return Numbers::range($value, static::MIN_STATS, static::MAX_STATS);
+    return Numbers::range($value, self::MIN_STATS, self::MAX_STATS);
   }
   
   protected function setterCharisma(int $value): int {
-    return Numbers::range($value, static::MIN_STATS, static::MAX_STATS);
+    return Numbers::range($value, self::MIN_STATS, self::MAX_STATS);
   }
 
   protected function getterMainStat(): string {

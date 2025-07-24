@@ -53,7 +53,7 @@ final class Item extends \Nextras\Orm\Entity\Entity {
   }
 
   protected function getterEquipable(): bool {
-    return in_array($this->slot, static::getEquipmentTypes(), true);
+    return in_array($this->slot, self::getEquipmentTypes(), true);
   }
 
   protected function setterPrice(int $value): int {
@@ -72,7 +72,7 @@ final class Item extends \Nextras\Orm\Entity\Entity {
   }
 
   public function toCombatEquipment(): ?\HeroesofAbenez\Combat\Equipment {
-    if(!in_array($this->slot, static::getEquipmentTypes(), true)) {
+    if(!in_array($this->slot, self::getEquipmentTypes(), true)) {
       return null;
     }
     $data = [];

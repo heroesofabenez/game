@@ -13,7 +13,7 @@ final class DevelopmentUserToCharacterMapper implements IUserToCharacterMapper {
   public const USER_ID = 1;
   
   public function getRealId(): int {
-    return static::USER_ID;
+    return self::USER_ID;
   }
 }
 ?>

@@ -118,12 +118,11 @@ final class Profile {
    * @throws SpecializationNotChosenException
    * @throws SpecializationNotAvailableException
    */
-  protected function checkSpecializationChoice(Character $character, int $specialization = null): void {
+  private function checkSpecializationChoice(Character $character, int $specialization = null): void {
     if($character->level + 1 < CharacterBuilder::SPECIALIZATION_LEVEL) {
       if($specialization !== null) {
         throw new CannotChooseSpecializationException();
       }
-      return;
     } elseif($character->specialization !== null && $specialization !== null) {
       throw new SpecializationAlreadyChosenException();
     } elseif($character->specialization === null && $specialization === null) {
