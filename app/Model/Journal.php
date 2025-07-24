@@ -16,12 +16,9 @@ use Nette\Localization\ITranslator;
  * @author Jakub Konečný
  */
 final class Journal {
-  use \Nette\SmartObject;
-  
   public function __construct(private readonly \Nette\Security\User $user, private readonly ORM $orm) {
   }
 
-  
   /**
    * Gets basic info for character's journal
    */

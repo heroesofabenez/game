@@ -13,8 +13,6 @@ use HeroesofAbenez\Orm\CharacterSpecialization;
  * @author Jakub Konečný
  */
 final class CharacterBuilder {
-  use \Nette\SmartObject;
-
   /** @var int */
   public const SPECIALIZATION_LEVEL = 15;
 

@@ -18,9 +18,7 @@ use Nextras\Orm\Collection\ICollection;
  * @author Jakub Konečný
  */
 final class Guild {
-  use \Nette\SmartObject;
-  
-  public function __construct(private readonly ORM $orm, private readonly \Nette\Security\User $user, private readonly Profile $profileModel, private readonly Permissions $permissionsModel) {
+  public function __construct(private readonly ORM $orm, private readonly \Nette\Security\User $user, private readonly Permissions $permissionsModel) {
   }
   
   /**

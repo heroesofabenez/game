@@ -11,8 +11,6 @@ use HeroesofAbenez\Orm\Model as ORM;
  * @author Jakub Konečný
  */
 final class Intro {
-  use \Nette\SmartObject;
-  
   public function __construct(private readonly \Nette\Security\User $user, private readonly ORM $orm) {
   }
   

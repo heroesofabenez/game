@@ -16,8 +16,6 @@ use Nette\Security\IIdentity;
  * @author Jakub Konečný
  */
 final class UserManager implements \Nette\Security\Authenticator {
-  use \Nette\SmartObject;
-  
   public function __construct(private readonly ORM $orm, private readonly IUserToCharacterMapper $userToCharacterMapper, private readonly CharacterBuilder $cb) {
   }
   
