@@ -3,8 +3,6 @@ include:
   - template: SAST.gitlab-ci.yml
   - template: Secret-Detection.gitlab-ci.yml
 
-image: nexendrie/php:8.1
-
 stages:
   - install
   - test   
@@ -34,6 +32,7 @@ stages:
 
 install:
   stage: install
+  image: nexendrie/php:8.1
   script:
     - composer install --prefer-dist --no-progress --no-interaction
   cache:
@@ -52,6 +51,7 @@ test:php8.1:
 
 test:cc:
   <<: *test_job
+  image: nexendrie/php:8.1
   script:
     - phing test-ci-coverage
   coverage: '/(\d+\%) covered/'
