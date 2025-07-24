@@ -7,7 +7,7 @@ use Nette\Security\User;
 use HeroesofAbenez\Orm\Model as ORM;
 use HeroesofAbenez\Model\CombatLogManager;
 use HeroesofAbenez\Combat\CombatLogger;
-use Nette\Localization\ITranslator;
+use Nette\Localization\Translator;
 use HeroesofAbenez\Combat\Character;
 use HeroesofAbenez\Combat\CombatBase;
 use HeroesofAbenez\Model\CombatHelper;
@@ -28,11 +28,11 @@ abstract class ArenaControl extends \Nette\Application\UI\Control {
   protected CombatBase $combat;
   protected CombatLogManager $log;
   protected ORM $orm;
-  protected ITranslator $translator;
+  protected Translator $translator;
   protected string $arena;
   protected string $profileLink;
   
-  public function __construct(User $user, CombatHelper $combatHelper, CombatBase $combat, CombatLogManager $log, ORM $orm, ITranslator $translator) {
+  public function __construct(User $user, CombatHelper $combatHelper, CombatBase $combat, CombatLogManager $log, ORM $orm, Translator $translator) {
     $this->user = $user;
     $this->combatHelper = $combatHelper;
     $this->combat = $combat;

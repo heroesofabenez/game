@@ -7,7 +7,7 @@ use HeroesofAbenez\Orm\Quest as QuestEntity;
 use HeroesofAbenez\Orm\Model as ORM;
 use HeroesofAbenez\Orm\CharacterQuest;
 use Nextras\Orm\Collection\ICollection;
-use Nette\Localization\ITranslator;
+use Nette\Localization\Translator;
 use Nette\Application\LinkGenerator;
 
 /**
@@ -18,7 +18,7 @@ use Nette\Application\LinkGenerator;
 final class Quest {
   use \Nette\SmartObject;
   
-  public function __construct(private ORM $orm, private \Nette\Security\User $user, private Item $itemModel, private Pet $petModel, private ITranslator $translator, private LinkGenerator $linkGenerator) {
+  public function __construct(private ORM $orm, private \Nette\Security\User $user, private Item $itemModel, private Pet $petModel, private Translator $translator, private LinkGenerator $linkGenerator) {
     $this->petModel->user = $user;
   }
   

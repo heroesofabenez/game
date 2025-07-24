@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Orm;
 
-use Nette\Localization\ITranslator;
+use Nette\Localization\Translator;
 use Nextras\Orm\Relationships\OneHasMany;
 use Nexendrie\Utils\Numbers;
 
@@ -29,9 +29,9 @@ final class PetType extends \Nextras\Orm\Entity\Entity {
   public const STAT_CON = "constitution";
   public const STAT_INT = "intelligence";
 
-  private ITranslator $translator;
+  private Translator $translator;
 
-  public function injectTranslator(ITranslator $translator): void {
+  public function injectTranslator(Translator $translator): void {
     $this->translator = $translator;
   }
 

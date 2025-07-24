@@ -5,6 +5,7 @@ namespace HeroesofAbenez\Forms;
 
 use Nette\Application\UI\Form;
 use HeroesofAbenez\Model\NameInUseException;
+use Nette\Localization\Translator;
 
 /**
  * Factory for form CreateGuild
@@ -14,7 +15,7 @@ use HeroesofAbenez\Model\NameInUseException;
 final class CreateGuildFormFactory extends BaseFormFactory {
   private \HeroesofAbenez\Model\Guild $model;
   
-  public function __construct(\Nette\Localization\ITranslator $translator, \HeroesofAbenez\Model\Guild $model) {
+  public function __construct(Translator $translator, \HeroesofAbenez\Model\Guild $model) {
     $this->model = $model;
     parent::__construct($translator);
   }

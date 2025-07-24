@@ -37,7 +37,8 @@
     "require-dev": {
         "nexendrie/code-quality": "dev-master",
         "phpstan/phpstan-nette": "^2.0",
-        "nextras/orm-phpstan": "^2.0"
+        "nextras/orm-phpstan": "^2.0",
+        "phpstan/phpstan-deprecation-rules": "^2.0"
     },
     "replace": {
         "symfony/polyfill-php73": "*",

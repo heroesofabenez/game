@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Orm;
 
-use Nette\Localization\ITranslator;
+use Nette\Localization\Translator;
 use Nextras\Orm\Relationships\OneHasMany;
 
 /**
@@ -17,9 +17,9 @@ use Nextras\Orm\Relationships\OneHasMany;
  * @property OneHasMany|Character[] $characters {1:m Character::$guildrank}
  */
 final class GuildRank extends \Nextras\Orm\Entity\Entity {
-  private ITranslator $translator;
+  private Translator $translator;
 
-  public function injectTranslator(ITranslator $translator): void {
+  public function injectTranslator(Translator $translator): void {
     $this->translator = $translator;
   }
 

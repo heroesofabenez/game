@@ -4,13 +4,13 @@ declare(strict_types=1);
 namespace HeroesofAbenez\Forms;
 
 use HeroesofAbenez\Model\InsufficientFundsException;
-use HeroesofAbenez\Orm\Model as ORM;
 use Nette\Application\UI\Form;
+use Nette\Localization\Translator;
 
 final class DonateToGuildFormFactory extends BaseFormFactory {
   private \HeroesofAbenez\Model\Guild $model;
 
-  public function __construct(\Nette\Localization\ITranslator $translator, \HeroesofAbenez\Model\Guild $model) {
+  public function __construct(Translator $translator, \HeroesofAbenez\Model\Guild $model) {
     $this->model = $model;
     parent::__construct($translator);
   }

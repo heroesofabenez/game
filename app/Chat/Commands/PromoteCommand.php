@@ -11,7 +11,7 @@ use HeroesofAbenez\Model\PlayerNotInGuildException;
 use HeroesofAbenez\Model\CannotPromoteHigherRanksException;
 use HeroesofAbenez\Model\CannotPromoteToGrandmasterException;
 use HeroesofAbenez\Model\CannotHaveMoreDeputiesException;
-use Nette\Localization\ITranslator;
+use Nette\Localization\Translator;
 
 /**
  * Chat Command Promote
@@ -20,9 +20,9 @@ use Nette\Localization\ITranslator;
  */
 final class PromoteCommand extends \HeroesofAbenez\Chat\ChatCommand {
   private Guild $model;
-  private ITranslator $translator;
+  private Translator $translator;
   
-  public function __construct(Guild $model, ITranslator $translator) {
+  public function __construct(Guild $model, Translator $translator) {
     $this->model = $model;
     $this->translator = $translator;
   }

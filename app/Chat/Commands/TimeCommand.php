@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Chat\Commands;
 
-use Nette\Localization\ITranslator;
+use Nette\Localization\Translator;
 
 /**
  * Chat Command Time
@@ -11,9 +11,9 @@ use Nette\Localization\ITranslator;
  * @author Jakub Konečný
  */
 final class TimeCommand extends \HeroesofAbenez\Chat\ChatCommand {
-  private ITranslator $translator;
+  private Translator $translator;
 
-  public function __construct(ITranslator $translator) {
+  public function __construct(Translator $translator) {
     $this->translator = $translator;
   }
   

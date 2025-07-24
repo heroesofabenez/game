@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Orm;
 
-use Nette\Localization\ITranslator;
+use Nette\Localization\Translator;
 use Nextras\Orm\Entity\ToArrayConverter;
 use HeroesofAbenez\Combat\SkillAttack as SkillAttackDummy;
 use Nexendrie\Utils\Numbers;
@@ -28,9 +28,9 @@ use Nexendrie\Utils\Numbers;
 final class SkillAttack extends \Nextras\Orm\Entity\Entity {
   public const MAX_STRIKES = 9;
 
-  private ITranslator $translator;
+  private Translator $translator;
 
-  public function injectTranslator(ITranslator $translator): void {
+  public function injectTranslator(Translator $translator): void {
     $this->translator = $translator;
   }
   

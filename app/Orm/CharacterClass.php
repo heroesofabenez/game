@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Orm;
 
-use Nette\Localization\ITranslator;
+use Nette\Localization\Translator;
 use Nextras\Orm\Relationships\OneHasMany;
 use Nexendrie\Utils\Numbers;
 
@@ -44,9 +44,9 @@ final class CharacterClass extends \Nextras\Orm\Entity\Entity {
   private const MIN_STATS = -5;
   private const MAX_STATS = 5;
 
-  private ITranslator $translator;
+  private Translator $translator;
 
-  public function injectTranslator(ITranslator $translator): void {
+  public function injectTranslator(Translator $translator): void {
     $this->translator = $translator;
   }
 

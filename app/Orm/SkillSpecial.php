@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Orm;
 
-use Nette\Localization\ITranslator;
+use Nette\Localization\Translator;
 use Nextras\Orm\Entity\ToArrayConverter;
 use HeroesofAbenez\Combat\SkillSpecial as SkillSpecialDummy;
 use HeroesofAbenez\Combat\Character as CharacterDummy;
@@ -40,9 +40,9 @@ final class SkillSpecial extends \Nextras\Orm\Entity\Entity {
   /** @internal */
   public const STAT_INITIATIVE = CharacterDummy::STAT_INITIATIVE;
 
-  private ITranslator $translator;
+  private Translator $translator;
 
-  public function injectTranslator(ITranslator $translator): void {
+  public function injectTranslator(Translator $translator): void {
     $this->translator = $translator;
   }
 

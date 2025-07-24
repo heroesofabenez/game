@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace HeroesofAbenez\Presenters;
 
 use HeroesofAbenez\Model\IUserToCharacterMapper;
+use Nette\Localization\Translator;
 use Nexendrie\Menu\IMenuControlFactory;
 use Nexendrie\Menu\MenuControl;
 
@@ -13,11 +14,11 @@ use Nexendrie\Menu\MenuControl;
    * @author Jakub Konečný
    */
 abstract class BasePresenter extends \Nette\Application\UI\Presenter {
-  protected \Nette\Localization\ITranslator $translator;
+  protected Translator $translator;
   protected \HeroesofAbenez\Model\SettingsRepository $sr;
   protected IMenuControlFactory $menuFactory;
   
-  public function injectTranslator(\Nette\Localization\ITranslator $translator): void {
+  public function injectTranslator(Translator $translator): void {
     $this->translator = $translator;
   }
   

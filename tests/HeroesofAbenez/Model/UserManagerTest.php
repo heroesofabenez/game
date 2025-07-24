@@ -5,7 +5,7 @@ namespace HeroesofAbenez\Model;
 
 use HeroesofAbenez\Orm\Character;
 use Tester\Assert;
-use Nette\Security\Identity;
+use Nette\Security\SimpleIdentity;
 
 require __DIR__ . "/../../bootstrap.php";
 
@@ -23,7 +23,7 @@ final class UserManagerTest extends \Tester\TestCase {
   
   public function testAuthenticate(): void {
     $identity = $this->model->authenticate("", "");
-    Assert::type(Identity::class, $identity);
+    Assert::type(SimpleIdentity::class, $identity);
     Assert::same(1, $identity->id);
     Assert::same(["grandmaster", ], $identity->roles);
     Assert::same("James The Invisible", $identity->name);

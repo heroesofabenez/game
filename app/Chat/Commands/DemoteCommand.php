@@ -11,7 +11,7 @@ use HeroesofAbenez\Model\PlayerNotInGuildException;
 use HeroesofAbenez\Model\CannotDemoteHigherRanksException;
 use HeroesofAbenez\Model\CannotDemoteLowestRankException;
 use HeroesofAbenez\Model\CannotPromoteToGrandmasterException;
-use Nette\Localization\ITranslator;
+use Nette\Localization\Translator;
 
 /**
  * Chat Command Demote
@@ -20,9 +20,9 @@ use Nette\Localization\ITranslator;
  */
 final class DemoteCommand extends \HeroesofAbenez\Chat\ChatCommand {
   private Guild $model;
-  private ITranslator $translator;
+  private Translator $translator;
   
-  public function __construct(Guild $model, ITranslator $translator) {
+  public function __construct(Guild $model, Translator $translator) {
     $this->model = $model;
     $this->translator = $translator;
   }

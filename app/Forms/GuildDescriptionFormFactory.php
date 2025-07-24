@@ -5,6 +5,7 @@ namespace HeroesofAbenez\Forms;
 
 use Nette\Application\UI\Form;
 use HeroesofAbenez\Model\GuildNotFoundException;
+use Nette\Localization\Translator;
 
 /**
  * Factory for form GuildDescription
@@ -15,7 +16,7 @@ final class GuildDescriptionFormFactory extends BaseFormFactory {
   private \HeroesofAbenez\Model\Guild $model;
   private \Nette\Security\User $user;
   
-  public function __construct(\Nette\Localization\ITranslator $translator, \HeroesofAbenez\Model\Guild $model, \Nette\Security\User $user) {
+  public function __construct(Translator $translator, \HeroesofAbenez\Model\Guild $model, \Nette\Security\User $user) {
     $this->model = $model;
     $this->user = $user;
     parent::__construct($translator);

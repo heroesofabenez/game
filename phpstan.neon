@@ -4,6 +4,7 @@ includes:
     - vendor/phpstan/phpstan-strict-rules/rules.neon
     - vendor/nextras/orm-phpstan/extension.neon
     - vendor/nexendrie/code-quality/phpstan.neon
+    - vendor/phpstan/phpstan-deprecation-rules/rules.neon
 parameters:
     level: 8
     paths:

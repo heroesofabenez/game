@@ -9,7 +9,7 @@ use HeroesofAbenez\Model\MissingPermissionsException;
 use HeroesofAbenez\Model\PlayerNotFoundException;
 use HeroesofAbenez\Model\PlayerNotInGuildException;
 use HeroesofAbenez\Model\CannotKickHigherRanksException;
-use Nette\Localization\ITranslator;
+use Nette\Localization\Translator;
 
 /**
  * Chat Command Kick
@@ -18,9 +18,9 @@ use Nette\Localization\ITranslator;
  */
 final class KickCommand extends \HeroesofAbenez\Chat\ChatCommand {
   private Guild $model;
-  private ITranslator $translator;
+  private Translator $translator;
 
-  public function __construct(Guild $model, ITranslator $translator) {
+  public function __construct(Guild $model, Translator $translator) {
     $this->model = $model;
     $this->translator = $translator;
   }
