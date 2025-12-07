@@ -25,6 +25,7 @@ final class TrainingPresenter extends BasePresenter {
   }
   
   public function renderDefault(): void {
+    $this->model->user = $this->user;
     $this->template->statPoints = $this->model->getStatPoints();
     $this->template->skillPoints = $this->skillsModel->getSkillPoints();
     $this->template->stats = $this->model->getStats();
@@ -38,6 +39,7 @@ final class TrainingPresenter extends BasePresenter {
   
   public function handleTrainStat(string $stat): void {
     try {
+      $this->model->user = $this->user;
       $this->model->trainStat($stat);
     } catch(NoStatPointsAvailableException) {
       $this->flashMessage("errors.training.noStatPointsAvailable");
@@ -49,6 +51,7 @@ final class TrainingPresenter extends BasePresenter {
   
   public function handleTrainSkill(int $skillId, string $skillType): void {
     try {
+      $this->model->user = $this->user;
       $this->skillsModel->trainSkill($skillId, $skillType);
     } catch(NoSkillPointsAvailableException) {
       $this->flashMessage("errors.training.noSkillPointsAvailable");
