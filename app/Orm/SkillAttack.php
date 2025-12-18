@@ -25,31 +25,36 @@ use Nexendrie\Utils\Numbers;
  * @property int $strikes {default 1}
  * @property string|null $hitRate
  */
-final class SkillAttack extends \Nextras\Orm\Entity\Entity {
-  public const MAX_STRIKES = 9;
+final class SkillAttack extends \Nextras\Orm\Entity\Entity
+{
+    public const MAX_STRIKES = 9;
 
-  private Translator $translator;
+    private Translator $translator;
 
-  public function injectTranslator(Translator $translator): void {
-    $this->translator = $translator;
-  }
-  
-  protected function setterStrikes(int $value): int {
-    return Numbers::range($value, 1, self::MAX_STRIKES);
-  }
+    public function injectTranslator(Translator $translator): void
+    {
+        $this->translator = $translator;
+    }
 
-  protected function getterName(): string {
-    return $this->translator->translate("skills_attack.$this->id.name");
-  }
+    protected function setterStrikes(int $value): int
+    {
+        return Numbers::range($value, 1, self::MAX_STRIKES);
+    }
 
-  protected function getterDescription(): string {
-    return $this->translator->translate("skills_attack.$this->id.description");
-  }
-  
-  public function toDummy(): SkillAttackDummy {
-    $data = $this->toArray(ToArrayConverter::RELATIONSHIP_AS_ID);
-    unset($data["characterSkills"], $data["description"], $data["neededClass"], $data["neededSpecialization"], $data["neededLevel"]);
-    return new SkillAttackDummy($data);
-  }
+    protected function getterName(): string
+    {
+        return $this->translator->translate("skills_attack.$this->id.name");
+    }
+
+    protected function getterDescription(): string
+    {
+        return $this->translator->translate("skills_attack.$this->id.description");
+    }
+
+    public function toDummy(): SkillAttackDummy
+    {
+        $data = $this->toArray(ToArrayConverter::RELATIONSHIP_AS_ID);
+        unset($data["characterSkills"], $data["description"], $data["neededClass"], $data["neededSpecialization"], $data["neededLevel"]);
+        return new SkillAttackDummy($data);
+    }
 }
-?>

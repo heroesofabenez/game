@@ -14,12 +14,13 @@ use Nextras\Orm\Collection\ICollection;
  * @method ICollection|RoutesStage[] findBy(array $conds)
  * @method ICollection|RoutesStage[] findAll()
  */
-final class RoutesStagesRepository extends \Nextras\Orm\Repository\Repository {
-  /**
-   * @return string[]
-   */
-  public static function getEntityClassNames(): array {
-    return [RoutesStage::class];
-  }
+final class RoutesStagesRepository extends \Nextras\Orm\Repository\Repository
+{
+    /**
+     * @return string[]
+     */
+    public static function getEntityClassNames(): array
+    {
+        return [RoutesStage::class];
+    }
 }
-?>

@@ -11,7 +11,6 @@ namespace HeroesofAbenez\Orm;
  * @property QuestArea $from {m:1 QuestArea::$routesOutgoing}
  * @property QuestArea $to {m:1 QuestArea::$routesIncoming}
  */
-final class RoutesArea extends \Nextras\Orm\Entity\Entity {
-  
+final class RoutesArea extends \Nextras\Orm\Entity\Entity
+{
 }
-?>

@@ -14,21 +14,23 @@ use Nextras\Orm\Collection\ICollection;
  * @method ICollection|Npc[] findBy(array $conds)
  * @method ICollection|Npc[] findAll()
  */
-final class NpcsRepository extends \Nextras\Orm\Repository\Repository {
-  /**
-   * @return string[]
-   */
-  public static function getEntityClassNames(): array {
-    return [Npc::class];
-  }
-  
-  /**
-   * @return ICollection|Npc[]
-   */
-  public function findByStage(QuestStage|int $stage): ICollection {
-    return $this->findBy([
-      "stage" => $stage
-    ]);
-  }
+final class NpcsRepository extends \Nextras\Orm\Repository\Repository
+{
+    /**
+     * @return string[]
+     */
+    public static function getEntityClassNames(): array
+    {
+        return [Npc::class];
+    }
+
+    /**
+     * @return ICollection|Npc[]
+     */
+    public function findByStage(QuestStage|int $stage): ICollection
+    {
+        return $this->findBy([
+            "stage" => $stage
+        ]);
+    }
 }
-?>

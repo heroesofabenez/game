@@ -11,15 +11,17 @@ use HeroesofAbenez\Orm\Model as ORM;
  *
  * @author Jakub Konečný
  */
-final class NPC {
-  public function __construct(private readonly ORM $orm) {
-  }
-  
-  /**
-   * Get info about specified npc
-   */
-  public function view(int $id): ?NPCEntity {
-    return $this->orm->npcs->getById($id);
-  }
+final class NPC
+{
+    public function __construct(private readonly ORM $orm)
+    {
+    }
+
+    /**
+     * Get info about specified npc
+     */
+    public function view(int $id): ?NPCEntity
+    {
+        return $this->orm->npcs->getById($id);
+    }
 }
-?>

@@ -11,7 +11,6 @@ namespace HeroesofAbenez\Orm;
  * @property Character $character1 {m:1 Character, oneSided=true}
  * @property Character $character2 {m:1 Character, oneSided=true}
  */
-final class Friendship extends \Nextras\Orm\Entity\Entity {
-
+final class Friendship extends \Nextras\Orm\Entity\Entity
+{
 }
-?>

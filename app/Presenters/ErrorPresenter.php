@@ -10,20 +10,22 @@ use Tracy\ILogger;
  *
  * @author Jakub Konečný
  */
-final class ErrorPresenter extends BasePresenter {
-  public function __construct(private readonly ?ILogger $logger = null) {
-    parent::__construct();
-  }
-  
-  public function actionDefault(\Throwable $exception): void {
-    if($exception instanceof \Nette\Application\BadRequestException) {
-      $this->setView("404");
-    } else {
-      $this->setView("500");
-      if($this->logger !== null) {
-        $this->logger->log($exception, ILogger::EXCEPTION);
-      }
+final class ErrorPresenter extends BasePresenter
+{
+    public function __construct(private readonly ?ILogger $logger = null)
+    {
+        parent::__construct();
     }
-  }
+
+    public function actionDefault(\Throwable $exception): void
+    {
+        if ($exception instanceof \Nette\Application\BadRequestException) {
+            $this->setView("404");
+        } else {
+            $this->setView("500");
+            if ($this->logger !== null) {
+                $this->logger->log($exception, ILogger::EXCEPTION);
+            }
+        }
+    }
 }
-?>

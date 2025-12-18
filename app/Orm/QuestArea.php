@@ -25,23 +25,27 @@ use Nexendrie\Utils\Numbers;
  * @property OneHasMany|RoutesArea[] $routesIncoming {1:m RoutesArea::$to}
  * @property OneHasMany|ChatMessage[] $chatMessages {1:m ChatMessage::$area}
  */
-final class QuestArea extends \Nextras\Orm\Entity\Entity {
-  private Translator $translator;
+final class QuestArea extends \Nextras\Orm\Entity\Entity
+{
+    private Translator $translator;
 
-  public function injectTranslator(Translator $translator): void {
-    $this->translator = $translator;
-  }
+    public function injectTranslator(Translator $translator): void
+    {
+        $this->translator = $translator;
+    }
 
-  protected function getterName(): string {
-    return $this->translator->translate("areas.$this->id.name");
-  }
+    protected function getterName(): string
+    {
+        return $this->translator->translate("areas.$this->id.name");
+    }
 
-  protected function getterDescription(): string {
-    return $this->translator->translate("areas.$this->id.description");
-  }
+    protected function getterDescription(): string
+    {
+        return $this->translator->translate("areas.$this->id.description");
+    }
 
-  protected function setterRequiredLevel(int $value): int {
-    return Numbers::range($value, 0, 99);
-  }
+    protected function setterRequiredLevel(int $value): int
+    {
+        return Numbers::range($value, 0, 99);
+    }
 }
-?>

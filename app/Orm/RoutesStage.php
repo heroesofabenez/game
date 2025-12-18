@@ -11,7 +11,6 @@ namespace HeroesofAbenez\Orm;
  * @property QuestStage $from {m:1 QuestStage::$routesOutgoing}
  * @property QuestStage $to {m:1 QuestStage::$routesIncoming}
  */
-final class RoutesStage extends \Nextras\Orm\Entity\Entity {
-  
+final class RoutesStage extends \Nextras\Orm\Entity\Entity
+{
 }
-?>

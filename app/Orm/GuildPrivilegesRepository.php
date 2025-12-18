@@ -14,12 +14,13 @@ use Nextras\Orm\Collection\ICollection;
  * @method ICollection|GuildPrivilege[] findBy(array $conds)
  * @method ICollection|GuildPrivilege[] findAll()
  */
-final class GuildPrivilegesRepository extends \Nextras\Orm\Repository\Repository {
-  /**
-   * @return string[]
-   */
-  public static function getEntityClassNames(): array {
-    return [GuildPrivilege::class];
-  }
+final class GuildPrivilegesRepository extends \Nextras\Orm\Repository\Repository
+{
+    /**
+     * @return string[]
+     */
+    public static function getEntityClassNames(): array
+    {
+        return [GuildPrivilege::class];
+    }
 }
-?>

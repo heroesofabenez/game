@@ -16,13 +16,15 @@ namespace HeroesofAbenez\Orm;
  * @property \DateTimeImmutable $when
  * @property string $whenS {virtual}
  */
-final class ChatMessage extends \Nextras\Orm\Entity\Entity {
-  protected function getterWhenS(): string {
-    return $this->when->format("Y-m-d H:i:s");
-  }
-  
-  public function onBeforeInsert(): void {
-    $this->when = new \DateTimeImmutable();
-  }
+final class ChatMessage extends \Nextras\Orm\Entity\Entity
+{
+    protected function getterWhenS(): string
+    {
+        return $this->when->format("Y-m-d H:i:s");
+    }
+
+    public function onBeforeInsert(): void
+    {
+        $this->when = new \DateTimeImmutable();
+    }
 }
-?>

@@ -14,19 +14,21 @@ use Nextras\Orm\Collection\ICollection;
  * @method ICollection|ShopItem[] findBy(array $conds)
  * @method ICollection|ShopItem[] findAll()
  */
-final class ShopItemsRepository extends \Nextras\Orm\Repository\Repository {
-  /**
-   * @return string[]
-   */
-  public static function getEntityClassNames(): array {
-    return [ShopItem::class];
-  }
+final class ShopItemsRepository extends \Nextras\Orm\Repository\Repository
+{
+    /**
+     * @return string[]
+     */
+    public static function getEntityClassNames(): array
+    {
+        return [ShopItem::class];
+    }
 
-  public function getByItemAndNpc(Item|int $item, Npc|int $npc): ?ShopItem {
-    return $this->getBy([
-      "item" => $item,
-      "npc" => $npc,
-    ]);
-  }
+    public function getByItemAndNpc(Item|int $item, Npc|int $npc): ?ShopItem
+    {
+        return $this->getBy([
+            "item" => $item,
+            "npc" => $npc,
+        ]);
+    }
 }
-?>

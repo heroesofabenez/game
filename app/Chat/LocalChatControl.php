@@ -8,10 +8,11 @@ namespace HeroesofAbenez\Chat;
  *
  * @author Jakub Konečný
  */
-final class LocalChatControl extends ChatControl {
-  public function __construct(IDatabaseAdapter $databaseAdapter, \Nette\Security\User $user) {
-    $stage = $user->identity->stage;
-    parent::__construct($databaseAdapter, "stage", $stage, "currentStage");
-  }
+final class LocalChatControl extends ChatControl
+{
+    public function __construct(IDatabaseAdapter $databaseAdapter, \Nette\Security\User $user)
+    {
+        $stage = $user->identity->stage;
+        parent::__construct($databaseAdapter, "stage", $stage, "currentStage");
+    }
 }
-?>

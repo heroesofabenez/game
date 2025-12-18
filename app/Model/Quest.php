@@ -12,275 +12,286 @@ use Nette\Application\LinkGenerator;
 
 /**
  * Quest Model
- * 
+ *
  * @author Jakub Konečný
  */
-final class Quest {
-  public function __construct(private readonly ORM $orm, private readonly \Nette\Security\User $user, private readonly Item $itemModel, private readonly Pet $petModel, private readonly Translator $translator, private readonly LinkGenerator $linkGenerator) {
-    $this->petModel->user = $user;
-  }
-  
-  /**
-   * Gets list of quests
-   * 
-   * @param int $npc Return quests only from certain npc, 0 = all npcs
-   * @return QuestEntity[]
-   */
-  public function listOfQuests(int $npc = 0): array {
-    if($npc === 0) {
-      $quests = $this->orm->quests->findAll();
-    } else {
-      $quests = $this->orm->quests->findBy([
-        ICollection::OR,
-        "npcStart" => $npc,
-        "npcEnd" => $npc,
-      ]);
+final class Quest
+{
+    public function __construct(private readonly ORM $orm, private readonly \Nette\Security\User $user, private readonly Item $itemModel, private readonly Pet $petModel, private readonly Translator $translator, private readonly LinkGenerator $linkGenerator)
+    {
+        $this->petModel->user = $user;
     }
-    return $quests->fetchPairs("id", null);
-  }
-  
-  /**
-   * Gets info about specified quest
-   */
-  public function view(int $id): ?QuestEntity {
-    return $this->orm->quests->getById($id);
-  }
 
-  public function getCharacterQuest(int $id): CharacterQuest {
-    $row = $this->orm->characterQuests->getByCharacterAndQuest($this->user->id, $id);
-    if($row === null) {
-      $row = new CharacterQuest();
-      $this->orm->characterQuests->attach($row);
-      $row->character = $this->user->id;
-      $row->quest = $id;
-      $row->progress = CharacterQuest::PROGRESS_OFFERED;
+    /**
+     * Gets list of quests
+     *
+     * @param int $npc Return quests only from certain npc, 0 = all npcs
+     * @return QuestEntity[]
+     */
+    public function listOfQuests(int $npc = 0): array
+    {
+        if ($npc === 0) {
+            $quests = $this->orm->quests->findAll();
+        } else {
+            $quests = $this->orm->quests->findBy([
+                ICollection::OR,
+                "npcStart" => $npc,
+                "npcEnd" => $npc,
+            ]);
+        }
+        return $quests->fetchPairs("id", null);
     }
-    return $row;
-  }
-  
-  /**
-   * Get quest's status
-   */
-  public function status(int $id): int {
-    $row = $this->orm->characterQuests->getByCharacterAndQuest($this->user->id, $id);
-    if($row === null) {
-      return CharacterQuest::PROGRESS_OFFERED;
-    }
-    return $row->progress;
-  }
-  
-  /**
-   * Checks if the player finished specified quest
-   */
-  public function isFinished(int $id): bool {
-    $status = $this->status($id);
-    return ($status >= CharacterQuest::PROGRESS_FINISHED);
-  }
 
-  /**
-   * Checks if the player accomplished specified quest's goals
-   */
-  public function isCompleted(CharacterQuest $characterQuest): bool {
-    if($characterQuest->quest->neededMoney > 0) {
-      if($characterQuest->character->money < $characterQuest->quest->neededMoney) {
-        return false;
-      }
+    /**
+     * Gets info about specified quest
+     */
+    public function view(int $id): ?QuestEntity
+    {
+        return $this->orm->quests->getById($id);
     }
-    if($characterQuest->quest->neededItem !== null) {
-      if(!$this->itemModel->haveItem($characterQuest->quest->neededItem->id, $characterQuest->quest->itemAmount)) {
-        return false;
-      }
-    }
-    if($characterQuest->quest->neededArenaWins > 0) {
-      if($characterQuest->arenaWins < $characterQuest->quest->neededArenaWins) {
-        return false;
-      }
-    }
-    if($characterQuest->quest->neededGuildDonation > 0) {
-      if($characterQuest->guildDonation < $characterQuest->quest->neededGuildDonation) {
-        return false;
-      }
-    }
-    if($characterQuest->quest->neededActiveSkillsLevel > 0) {
-      if($characterQuest->activeSkillsLevel < $characterQuest->quest->neededActiveSkillsLevel) {
-        return false;
-      }
-    }
-    if($characterQuest->quest->neededFriends > 0) {
-      if($characterQuest->friends < $characterQuest->quest->neededFriends) {
-        return false;
-      }
-    }
-    return true;
-  }
 
-  /**
-   * @throws QuestNotFoundException
-   * @throws QuestNotStartedException
-   * @throws CannotFinishQuestHereException
-   * @throws QuestNotFinishedException
-   */
-  public function finish(int $id, int $npcId): void {
-    $quest = $this->view($id);
-    if($quest === null) {
-      throw new QuestNotFoundException();
+    public function getCharacterQuest(int $id): CharacterQuest
+    {
+        $row = $this->orm->characterQuests->getByCharacterAndQuest($this->user->id, $id);
+        if ($row === null) {
+            $row = new CharacterQuest();
+            $this->orm->characterQuests->attach($row);
+            $row->character = $this->user->id;
+            $row->quest = $id;
+            $row->progress = CharacterQuest::PROGRESS_OFFERED;
+        }
+        return $row;
     }
-    $record = $this->getCharacterQuest($id);
-    if($record->progress === CharacterQuest::PROGRESS_OFFERED || $record->progress === CharacterQuest::PROGRESS_FINISHED) {
-      throw new QuestNotStartedException();
-    }
-    if($quest->npcEnd->id !== $npcId) {
-      throw new CannotFinishQuestHereException();
-    }
-    if(!$this->isCompleted($record)) {
-      throw new QuestNotFinishedException();
-    }
-    $record->progress = CharacterQuest::PROGRESS_FINISHED;
-    if($quest->itemLose) {
-      $this->itemModel->loseItem(($quest->neededItem !== null) ? $quest->neededItem->id : 0, $quest->itemAmount);
-    }
-    $record->character->money -= $quest->neededMoney;
-    $record->character->money += $record->rewardMoney;
-    $record->character->experience += $quest->rewardXp;
-    if($quest->rewardItem !== null) {
-      $this->itemModel->giveItem($quest->rewardItem->id);
-    }
-    if($quest->rewardPet !== null) {
-      $this->petModel->givePet($quest->rewardPet->id);
-    }
-    $record->character->whiteKarma += $quest->rewardWhiteKarma;
-    $record->character->darkKarma += $quest->rewardDarkKarma;
-    if($quest->conflictsQuest !== null) {
-      $conflictingCharacterQuest = $this->getCharacterQuest($quest->conflictsQuest->id);
-      if($conflictingCharacterQuest->progress > CharacterQuest::PROGRESS_OFFERED && $conflictingCharacterQuest->progress < CharacterQuest::PROGRESS_FINISHED) {
-        $this->orm->remove($conflictingCharacterQuest);
-      }
-    }
-    $this->orm->characterQuests->persist($record);
-    $this->orm->flush();
-  }
 
-  public function isAvailable(QuestEntity $quest): bool {
-    if($this->user->identity->level < $quest->requiredLevel) {
-      return false;
+    /**
+     * Get quest's status
+     */
+    public function status(int $id): int
+    {
+        $row = $this->orm->characterQuests->getByCharacterAndQuest($this->user->id, $id);
+        if ($row === null) {
+            return CharacterQuest::PROGRESS_OFFERED;
+        }
+        return $row->progress;
     }
-    if($quest->requiredClass !== null) {
-      if($this->user->identity->class !== $quest->requiredClass->id) {
-        return false;
-      }
-    }
-    if($quest->requiredRace !== null) {
-      if($this->user->identity->race !== $quest->requiredRace->id) {
-        return false;
-      }
-    }
-    if($quest->requiredQuest !== null) {
-      if(!$this->isFinished($quest->requiredQuest->id)) {
-        return false;
-      }
-    }
-    if($quest->conflictsQuest !== null) {
-      if($this->isFinished($quest->conflictsQuest->id)) {
-        return false;
-      }
-    }
-    if($quest->requiredWhiteKarma > 0) {
-      if($this->user->identity->white_karma < $quest->requiredWhiteKarma) {
-        return false;
-      }
-    }
-    if($quest->requiredDarkKarma > 0) {
-      if($this->user->identity->dark_karma < $quest->requiredDarkKarma) {
-        return false;
-      }
-    }
-    return true;
-  }
 
-  /**
-   * @throws QuestNotFoundException
-   * @throws QuestAlreadyStartedException
-   * @throws CannotAcceptQuestHereException
-   * @throws QuestNotAvailableException
-   */
-  public function accept(int $id, int $npcId): void {
-    $quest = $this->view($id);
-    if($quest === null) {
-      throw new QuestNotFoundException();
+    /**
+     * Checks if the player finished specified quest
+     */
+    public function isFinished(int $id): bool
+    {
+        $status = $this->status($id);
+        return ($status >= CharacterQuest::PROGRESS_FINISHED);
     }
-    $record = $this->getCharacterQuest($id);
-    if($record->progress !== CharacterQuest::PROGRESS_OFFERED) {
-      throw new QuestAlreadyStartedException();
-    }
-    if($quest->npcStart->id !== $npcId) {
-      throw new CannotAcceptQuestHereException();
-    }
-    if(!$this->isAvailable($quest)) {
-      throw new QuestNotAvailableException();
-    }
-    $record->progress = CharacterQuest::PROGRESS_STARTED;
-    $this->orm->characterQuests->persistAndFlush($record);
-  }
 
-  /**
-   * @return \stdClass[]
-   */
-  public function getRequirements(QuestEntity $quest): array {
-    $requirements = [];
-    $characterQuest = $this->getCharacterQuest($quest->id);
-    if($quest->neededMoney > 0) {
-      $requirements[] = (object) [
-        "text" => $this->translator->translate("texts.quest.requirementPayMoney", $quest->neededMoney),
-        "met" => false,
-      ];
+    /**
+     * Checks if the player accomplished specified quest's goals
+     */
+    public function isCompleted(CharacterQuest $characterQuest): bool
+    {
+        if ($characterQuest->quest->neededMoney > 0) {
+            if ($characterQuest->character->money < $characterQuest->quest->neededMoney) {
+                return false;
+            }
+        }
+        if ($characterQuest->quest->neededItem !== null) {
+            if (!$this->itemModel->haveItem($characterQuest->quest->neededItem->id, $characterQuest->quest->itemAmount)) {
+                return false;
+            }
+        }
+        if ($characterQuest->quest->neededArenaWins > 0) {
+            if ($characterQuest->arenaWins < $characterQuest->quest->neededArenaWins) {
+                return false;
+            }
+        }
+        if ($characterQuest->quest->neededGuildDonation > 0) {
+            if ($characterQuest->guildDonation < $characterQuest->quest->neededGuildDonation) {
+                return false;
+            }
+        }
+        if ($characterQuest->quest->neededActiveSkillsLevel > 0) {
+            if ($characterQuest->activeSkillsLevel < $characterQuest->quest->neededActiveSkillsLevel) {
+                return false;
+            }
+        }
+        if ($characterQuest->quest->neededFriends > 0) {
+            if ($characterQuest->friends < $characterQuest->quest->neededFriends) {
+                return false;
+            }
+        }
+        return true;
     }
-    if($quest->neededItem !== null) {
-      $itemName = $quest->neededItem->name;
-      $itemLink = $this->linkGenerator->link("Item:view", ["id" => $quest->neededItem->id]);
-      $haveItem = $this->itemModel->haveItem($quest->neededItem->id, $quest->itemAmount);
-      $requirements[] = (object) [
-        "text" => $this->translator->translate("texts.quest.requirementGetItem", $quest->itemAmount, ["item" => "<a href=\"$itemLink\">$itemName</a>"]),
-        "met" => $haveItem,
-      ];
+
+    /**
+     * @throws QuestNotFoundException
+     * @throws QuestNotStartedException
+     * @throws CannotFinishQuestHereException
+     * @throws QuestNotFinishedException
+     */
+    public function finish(int $id, int $npcId): void
+    {
+        $quest = $this->view($id);
+        if ($quest === null) {
+            throw new QuestNotFoundException();
+        }
+        $record = $this->getCharacterQuest($id);
+        if ($record->progress === CharacterQuest::PROGRESS_OFFERED || $record->progress === CharacterQuest::PROGRESS_FINISHED) {
+            throw new QuestNotStartedException();
+        }
+        if ($quest->npcEnd->id !== $npcId) {
+            throw new CannotFinishQuestHereException();
+        }
+        if (!$this->isCompleted($record)) {
+            throw new QuestNotFinishedException();
+        }
+        $record->progress = CharacterQuest::PROGRESS_FINISHED;
+        if ($quest->itemLose) {
+            $this->itemModel->loseItem(($quest->neededItem !== null) ? $quest->neededItem->id : 0, $quest->itemAmount);
+        }
+        $record->character->money -= $quest->neededMoney;
+        $record->character->money += $record->rewardMoney;
+        $record->character->experience += $quest->rewardXp;
+        if ($quest->rewardItem !== null) {
+            $this->itemModel->giveItem($quest->rewardItem->id);
+        }
+        if ($quest->rewardPet !== null) {
+            $this->petModel->givePet($quest->rewardPet->id);
+        }
+        $record->character->whiteKarma += $quest->rewardWhiteKarma;
+        $record->character->darkKarma += $quest->rewardDarkKarma;
+        if ($quest->conflictsQuest !== null) {
+            $conflictingCharacterQuest = $this->getCharacterQuest($quest->conflictsQuest->id);
+            if ($conflictingCharacterQuest->progress > CharacterQuest::PROGRESS_OFFERED && $conflictingCharacterQuest->progress < CharacterQuest::PROGRESS_FINISHED) {
+                $this->orm->remove($conflictingCharacterQuest);
+            }
+        }
+        $this->orm->characterQuests->persist($record);
+        $this->orm->flush();
     }
-    if($quest->neededArenaWins > 0) {
-      $requirements[] = (object) [
-        "text" => $this->translator->translate("texts.quest.requirementArenaWins", $quest->neededArenaWins),
-        "met" => ($characterQuest->arenaWins >= $quest->neededArenaWins),
-      ];
+
+    public function isAvailable(QuestEntity $quest): bool
+    {
+        if ($this->user->identity->level < $quest->requiredLevel) {
+            return false;
+        }
+        if ($quest->requiredClass !== null) {
+            if ($this->user->identity->class !== $quest->requiredClass->id) {
+                return false;
+            }
+        }
+        if ($quest->requiredRace !== null) {
+            if ($this->user->identity->race !== $quest->requiredRace->id) {
+                return false;
+            }
+        }
+        if ($quest->requiredQuest !== null) {
+            if (!$this->isFinished($quest->requiredQuest->id)) {
+                return false;
+            }
+        }
+        if ($quest->conflictsQuest !== null) {
+            if ($this->isFinished($quest->conflictsQuest->id)) {
+                return false;
+            }
+        }
+        if ($quest->requiredWhiteKarma > 0) {
+            if ($this->user->identity->white_karma < $quest->requiredWhiteKarma) {
+                return false;
+            }
+        }
+        if ($quest->requiredDarkKarma > 0) {
+            if ($this->user->identity->dark_karma < $quest->requiredDarkKarma) {
+                return false;
+            }
+        }
+        return true;
     }
-    if($quest->neededGuildDonation > 0) {
-      $requirements[] = (object) [
-        "text" => $this->translator->translate("texts.quest.requirementGuildDonation", $quest->neededGuildDonation),
-        "met" => ($characterQuest->guildDonation >= $quest->neededGuildDonation),
-      ];
+
+    /**
+     * @throws QuestNotFoundException
+     * @throws QuestAlreadyStartedException
+     * @throws CannotAcceptQuestHereException
+     * @throws QuestNotAvailableException
+     */
+    public function accept(int $id, int $npcId): void
+    {
+        $quest = $this->view($id);
+        if ($quest === null) {
+            throw new QuestNotFoundException();
+        }
+        $record = $this->getCharacterQuest($id);
+        if ($record->progress !== CharacterQuest::PROGRESS_OFFERED) {
+            throw new QuestAlreadyStartedException();
+        }
+        if ($quest->npcStart->id !== $npcId) {
+            throw new CannotAcceptQuestHereException();
+        }
+        if (!$this->isAvailable($quest)) {
+            throw new QuestNotAvailableException();
+        }
+        $record->progress = CharacterQuest::PROGRESS_STARTED;
+        $this->orm->characterQuests->persistAndFlush($record);
     }
-    if($quest->neededActiveSkillsLevel > 0) {
-      $requirements[] = (object) [
-        "text" => $this->translator->translate("texts.quest.requirementActiveSKillsLevel", $quest->neededActiveSkillsLevel),
-        "met" => ($characterQuest->activeSkillsLevel >= $quest->neededActiveSkillsLevel),
-      ];
+
+    /**
+     * @return \stdClass[]
+     */
+    public function getRequirements(QuestEntity $quest): array
+    {
+        $requirements = [];
+        $characterQuest = $this->getCharacterQuest($quest->id);
+        if ($quest->neededMoney > 0) {
+            $requirements[] = (object) [
+                "text" => $this->translator->translate("texts.quest.requirementPayMoney", $quest->neededMoney),
+                "met" => false,
+            ];
+        }
+        if ($quest->neededItem !== null) {
+            $itemName = $quest->neededItem->name;
+            $itemLink = $this->linkGenerator->link("Item:view", ["id" => $quest->neededItem->id]);
+            $haveItem = $this->itemModel->haveItem($quest->neededItem->id, $quest->itemAmount);
+            $requirements[] = (object) [
+                "text" => $this->translator->translate("texts.quest.requirementGetItem", $quest->itemAmount, ["item" => "<a href=\"$itemLink\">$itemName</a>"]),
+                "met" => $haveItem,
+            ];
+        }
+        if ($quest->neededArenaWins > 0) {
+            $requirements[] = (object) [
+                "text" => $this->translator->translate("texts.quest.requirementArenaWins", $quest->neededArenaWins),
+                "met" => ($characterQuest->arenaWins >= $quest->neededArenaWins),
+            ];
+        }
+        if ($quest->neededGuildDonation > 0) {
+            $requirements[] = (object) [
+                "text" => $this->translator->translate("texts.quest.requirementGuildDonation", $quest->neededGuildDonation),
+                "met" => ($characterQuest->guildDonation >= $quest->neededGuildDonation),
+            ];
+        }
+        if ($quest->neededActiveSkillsLevel > 0) {
+            $requirements[] = (object) [
+                "text" => $this->translator->translate("texts.quest.requirementActiveSKillsLevel", $quest->neededActiveSkillsLevel),
+                "met" => ($characterQuest->activeSkillsLevel >= $quest->neededActiveSkillsLevel),
+            ];
+        }
+        if ($quest->neededFriends > 0) {
+            $requirements[] = (object) [
+                "text" => $this->translator->translate("texts.quest.requirementFriends", $quest->neededFriends),
+                "met" => ($characterQuest->friends >= $quest->neededFriends),
+            ];
+        }
+        $npcLink = $this->linkGenerator->link("Npc:view", ["id" => $quest->npcEnd->id]);
+        $npcName = $quest->npcEnd->name;
+        if ($quest->npcStart->id !== $quest->npcEnd->id) {
+            $requirements[] = (object) [
+                "text" => $this->translator->translate("texts.quest.requirementTalkToNpc", 0, ["npc" => "<a href=\"$npcLink\">{$npcName}</a>"]),
+                "met" => false,
+            ];
+        } else {
+            $requirements[] = (object) [
+                "text" => $this->translator->translate("texts.quest.requirementReportBackToNpc", 0, ["npc" => "<a href=\"$npcLink\">{$npcName}</a>"]),
+                "met" => false,
+            ];
+        }
+        return $requirements;
     }
-    if($quest->neededFriends > 0) {
-      $requirements[] = (object) [
-        "text" => $this->translator->translate("texts.quest.requirementFriends", $quest->neededFriends),
-        "met" => ($characterQuest->friends >= $quest->neededFriends),
-      ];
-    }
-    $npcLink = $this->linkGenerator->link("Npc:view", ["id" => $quest->npcEnd->id]);
-    $npcName = $quest->npcEnd->name;
-    if($quest->npcStart->id !== $quest->npcEnd->id) {
-      $requirements[] = (object) [
-        "text" => $this->translator->translate("texts.quest.requirementTalkToNpc", 0, ["npc" => "<a href=\"$npcLink\">{$npcName}</a>"]),
-        "met" => false,
-      ];
-    } else {
-      $requirements[] = (object) [
-        "text" => $this->translator->translate("texts.quest.requirementReportBackToNpc", 0, ["npc" => "<a href=\"$npcLink\">{$npcName}</a>"]),
-        "met" => false,
-      ];
-    }
-    return $requirements;
-  }
 }
-?>

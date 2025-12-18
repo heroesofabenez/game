@@ -28,42 +28,50 @@ use Nexendrie\Utils\Numbers;
  * @property OneHasMany|Introduction[] $intro {1:m Introduction::$race}
  * @property OneHasMany|PveArenaOpponent[] $arenaNpcs {1:m PveArenaOpponent::$race}
  */
-final class CharacterRace extends \Nextras\Orm\Entity\Entity {
-  private const MIN_STATS = 0;
-  private const MAX_STATS = 15;
+final class CharacterRace extends \Nextras\Orm\Entity\Entity
+{
+    private const MIN_STATS = 0;
+    private const MAX_STATS = 15;
 
-  private Translator $translator;
+    private Translator $translator;
 
-  public function injectTranslator(Translator $translator): void {
-    $this->translator = $translator;
-  }
+    public function injectTranslator(Translator $translator): void
+    {
+        $this->translator = $translator;
+    }
 
-  protected function getterName(): string {
-    return $this->translator->translate("races.$this->id.name");
-  }
+    protected function getterName(): string
+    {
+        return $this->translator->translate("races.$this->id.name");
+    }
 
-  protected function getterDescription(): string {
-    return $this->translator->translate("races.$this->id.description");
-  }
-  
-  protected function setterStrength(int $value): int {
-    return Numbers::range($value, self::MIN_STATS, self::MAX_STATS);
-  }
-  
-  protected function setterDexterity(int $value): int {
-    return Numbers::range($value, self::MIN_STATS, self::MAX_STATS);
-  }
-  
-  protected function setterConstitution(int $value): int {
-    return Numbers::range($value, self::MIN_STATS, self::MAX_STATS);
-  }
-  
-  protected function setterIntelligence(int $value): int {
-    return Numbers::range($value, self::MIN_STATS, self::MAX_STATS);
-  }
-  
-  protected function setterCharisma(int $value): int {
-    return Numbers::range($value, self::MIN_STATS, self::MAX_STATS);
-  }
+    protected function getterDescription(): string
+    {
+        return $this->translator->translate("races.$this->id.description");
+    }
+
+    protected function setterStrength(int $value): int
+    {
+        return Numbers::range($value, self::MIN_STATS, self::MAX_STATS);
+    }
+
+    protected function setterDexterity(int $value): int
+    {
+        return Numbers::range($value, self::MIN_STATS, self::MAX_STATS);
+    }
+
+    protected function setterConstitution(int $value): int
+    {
+        return Numbers::range($value, self::MIN_STATS, self::MAX_STATS);
+    }
+
+    protected function setterIntelligence(int $value): int
+    {
+        return Numbers::range($value, self::MIN_STATS, self::MAX_STATS);
+    }
+
+    protected function setterCharisma(int $value): int
+    {
+        return Numbers::range($value, self::MIN_STATS, self::MAX_STATS);
+    }
 }
-?>

@@ -13,7 +13,6 @@ namespace HeroesofAbenez\Orm;
  * @property int $amount {default 0}
  * @property \DateTimeImmutable $when {default now}
  */
-final class GuildDonation extends \Nextras\Orm\Entity\Entity {
-
+final class GuildDonation extends \Nextras\Orm\Entity\Entity
+{
 }
-?>

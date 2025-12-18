@@ -55,47 +55,54 @@ use Nexendrie\Utils\Numbers;
  * @property OneHasMany|GuildDonation[] $guildDonations {1:m GuildDonation::$character}
  * @property-read int $currentGuildContribution {virtual}
  */
-final class Character extends \Nextras\Orm\Entity\Entity {
-  public const GENDER_MALE = "male";
-  public const GENDER_FEMALE = "female";
-  
-  protected function setterLevel(int $value): int {
-    return Numbers::range($value, 1, 999);
-  }
-  
-  protected function getterPredominantKarma(): string {
-    return Karma::getPredominant($this->whiteKarma, $this->darkKarma);
-  }
+final class Character extends \Nextras\Orm\Entity\Entity
+{
+    public const GENDER_MALE = "male";
+    public const GENDER_FEMALE = "female";
 
-  protected function getterActivePet(): ?Pet {
-    return $this->pets->toCollection()->limitBy(1)->getBy(["deployed" => true]); // @phpstan-ignore return.type
-  }
-
-  protected function getterCharismaBonus(): int {
-    $charisma = Numbers::range((int) $this->charisma - 10, 0, 999);
-    return $charisma * 3;
-  }
-
-  protected function getterLastActiveS(): string {
-    return $this->lastActive->format("Y-m-d H:i:s");
-  }
-
-  protected function getterCurrentGuildContribution(): int {
-    $amount = 0;
-    if($this->guild === null) {
-      return $amount;
+    protected function setterLevel(int $value): int
+    {
+        return Numbers::range($value, 1, 999);
     }
-    /** @var int[] $donations */
-    $donations = $this->guildDonations->toCollection()->findBy(["guild" => $this->guild])->fetchPairs(null, "amount");
-    foreach($donations as $donation) {
-      $amount += $donation;
+
+    protected function getterPredominantKarma(): string
+    {
+        return Karma::getPredominant($this->whiteKarma, $this->darkKarma);
     }
-    return $amount;
-  }
-  
-  public function onBeforeInsert(): void {
-    parent::onBeforeInsert();
-    $this->joined = $this->lastActive = new \DateTimeImmutable();
-  }
+
+    protected function getterActivePet(): ?Pet
+    {
+        return $this->pets->toCollection()->limitBy(1)->getBy(["deployed" => true]); // @phpstan-ignore return.type
+    }
+
+    protected function getterCharismaBonus(): int
+    {
+        $charisma = Numbers::range((int) $this->charisma - 10, 0, 999);
+        return $charisma * 3;
+    }
+
+    protected function getterLastActiveS(): string
+    {
+        return $this->lastActive->format("Y-m-d H:i:s");
+    }
+
+    protected function getterCurrentGuildContribution(): int
+    {
+        $amount = 0;
+        if ($this->guild === null) {
+            return $amount;
+        }
+        /** @var int[] $donations */
+        $donations = $this->guildDonations->toCollection()->findBy(["guild" => $this->guild])->fetchPairs(null, "amount");
+        foreach ($donations as $donation) {
+            $amount += $donation;
+        }
+        return $amount;
+    }
+
+    public function onBeforeInsert(): void
+    {
+        parent::onBeforeInsert();
+        $this->joined = $this->lastActive = new \DateTimeImmutable();
+    }
 }
-?>

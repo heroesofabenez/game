@@ -30,328 +30,364 @@ use HeroesofAbenez\Forms\DissolveGuildFormFactory;
  *
  * @author Jakub Konečný
  */
-final class GuildPresenter extends BasePresenter {
-  private CreateGuildFormFactory $createGuildFormFactory;
-  private DissolveGuildFormFactory $dissolveGuildFormFactory;
-  private RenameGuildFormFactory $renameGuildFormFactory;
-  private GuildDescriptionFormFactory $guildDescriptionFormFactory;
-  private CustomGuildRankNamesFormFactory $customGuildRankNamesFormFactory;
-  private DonateToGuildFormFactory $donateToGuildFormFactory;
-  
-  public function __construct(private readonly Guild $model, private readonly Permissions $permissionsModel) {
-    parent::__construct();
-  }
+final class GuildPresenter extends BasePresenter
+{
+    private CreateGuildFormFactory $createGuildFormFactory;
+    private DissolveGuildFormFactory $dissolveGuildFormFactory;
+    private RenameGuildFormFactory $renameGuildFormFactory;
+    private GuildDescriptionFormFactory $guildDescriptionFormFactory;
+    private CustomGuildRankNamesFormFactory $customGuildRankNamesFormFactory;
+    private DonateToGuildFormFactory $donateToGuildFormFactory;
 
-  public function injectCreateGuildFormFactory(CreateGuildFormFactory $createGuildFormFactory): void {
-    $this->createGuildFormFactory = $createGuildFormFactory;
-  }
+    public function __construct(private readonly Guild $model, private readonly Permissions $permissionsModel)
+    {
+        parent::__construct();
+    }
 
-  public function injectDissolveGuildFormFactory(DissolveGuildFormFactory $dissolveGuildFormFactory): void {
-    $this->dissolveGuildFormFactory = $dissolveGuildFormFactory;
-  }
+    public function injectCreateGuildFormFactory(CreateGuildFormFactory $createGuildFormFactory): void
+    {
+        $this->createGuildFormFactory = $createGuildFormFactory;
+    }
 
-  public function injectRenameGuildFormFactory(RenameGuildFormFactory $renameGuildFormFactory): void {
-    $this->renameGuildFormFactory = $renameGuildFormFactory;
-  }
+    public function injectDissolveGuildFormFactory(DissolveGuildFormFactory $dissolveGuildFormFactory): void
+    {
+        $this->dissolveGuildFormFactory = $dissolveGuildFormFactory;
+    }
 
-  public function injectGuildDescriptionFormFactory(GuildDescriptionFormFactory $guildDescriptionFormFactory): void {
-    $this->guildDescriptionFormFactory = $guildDescriptionFormFactory;
-  }
+    public function injectRenameGuildFormFactory(RenameGuildFormFactory $renameGuildFormFactory): void
+    {
+        $this->renameGuildFormFactory = $renameGuildFormFactory;
+    }
 
-  public function injectCustomGuildRankNamesFormFactory(CustomGuildRankNamesFormFactory $customGuildRankNamesFormFactory): void {
-    $this->customGuildRankNamesFormFactory = $customGuildRankNamesFormFactory;
-  }
+    public function injectGuildDescriptionFormFactory(GuildDescriptionFormFactory $guildDescriptionFormFactory): void
+    {
+        $this->guildDescriptionFormFactory = $guildDescriptionFormFactory;
+    }
 
-  public function injectDonateToGuildFormFactory(DonateToGuildFormFactory $donateToGuildFormFactory): void {
-    $this->donateToGuildFormFactory = $donateToGuildFormFactory;
-  }
-  
-  /**
-   * Redirect player to guild page if he is already in guild
-   */
-  private function inGuild(): void {
-    $guild = $this->user->identity->guild;
-    if($guild > 0) {
-      $this->flashMessage("errors.guild.inGuild");
-      $this->forward("default");
+    public function injectCustomGuildRankNamesFormFactory(CustomGuildRankNamesFormFactory $customGuildRankNamesFormFactory): void
+    {
+        $this->customGuildRankNamesFormFactory = $customGuildRankNamesFormFactory;
     }
-  }
 
-  /**
-   * Redirect player to noguild if he is not in guild
-   *
-   * @param bool $warning Whatever to print a warning (via flash message)
-   */
-  private function notInGuild(bool $warning = true): void {
-    $guild = $this->user->identity->guild;
-    if($guild === 0) {
-      if($warning) {
-        $this->flashMessage("errors.guild.notInGuild");
-      }
-      $this->forward("noguild");
+    public function injectDonateToGuildFormFactory(DonateToGuildFormFactory $donateToGuildFormFactory): void
+    {
+        $this->donateToGuildFormFactory = $donateToGuildFormFactory;
     }
-  }
-  
-  public function actionDefault(): void {
-    $this->notInGuild(false);
-  }
-  
-  public function renderDefault(): void {
-    $this->template->guild = $this->model->view($this->user->identity->guild);
-    $this->template->canManage = $this->user->isAllowed("guild", "manage");
-    $this->template->canInvite = $this->user->isAllowed("guild", "invite");
-  }
 
-  /**
-   * @throws \Nette\Application\BadRequestException
-   */
-  public function renderView(int $id): void {
-    $data = $this->model->view($id);
-    if($data === null) {
-      throw new \Nette\Application\BadRequestException();
+    /**
+     * Redirect player to guild page if he is already in guild
+     */
+    private function inGuild(): void
+    {
+        $guild = $this->user->identity->guild;
+        if ($guild > 0) {
+            $this->flashMessage("errors.guild.inGuild");
+            $this->forward("default");
+        }
     }
-    $this->template->guild = $data;
-  }
-  
-  public function actionMembers(): void {
-    $this->notInGuild();
-  }
-  
-  public function renderMembers(): void {
-    $this->template->members = $this->model->guildMembers($this->user->identity->guild, [], true);
-    $this->template->canPromote = $this->user->isAllowed("guild", "promote");
-    $this->template->canKick = $this->user->isAllowed("guild", "kick");
-    $this->template->rankId = $this->permissionsModel->getRankId($this->user->roles[0]);
-  }
 
-  protected function createComponentCreateGuildForm(): Form {
-    $form = $this->createGuildFormFactory->create();
-    $form->onSuccess[] = function(): void {
-      $this->reloadIdentity();
-      $this->flashMessage("messages.guild.created");
-      $this->redirect("Guild:");
-    };
-    return $form;
-  }
-  
-  public function actionCreate(): void {
-    $this->inGuild();
-    $this->template->haveForm = true;
-  }
-  
-  public function actionJoin(int $id = null): void {
-    $this->inGuild();
-    if($id === null) {
-      return;
+    /**
+     * Redirect player to noguild if he is not in guild
+     *
+     * @param bool $warning Whatever to print a warning (via flash message)
+     */
+    private function notInGuild(bool $warning = true): void
+    {
+        $guild = $this->user->identity->guild;
+        if ($guild === 0) {
+            if ($warning) {
+                $this->flashMessage("errors.guild.notInGuild");
+            }
+            $this->forward("noguild");
+        }
     }
-    try {
-      $this->model->sendApplication($id);
-      $this->flashMessage("messages.guild.applicationSent");
-      $this->redirect("Guild:");
-    } catch(GuildNotFoundException) {
-      $this->forward("notfound");
-    }
-  }
-  
-  public function renderJoin(int $id = null): void {
-    $guilds = $this->model->listOfGuilds();
-    $this->template->guilds = $guilds;
-    $apps = $this->model->haveUnresolvedApplication();
-    if($apps) {
-      $this->flashMessage("messages.guild.unresolvedApplication");
-    }
-  }
-  
-  public function actionLeave(): never {
-    $this->notInGuild();
-    try {
-      $this->model->leave();
-      $this->flashMessage("messages.guild.left");
-      $this->reloadIdentity();
-      $this->forward("default");
-    } catch(NotInGuildException) {
-      $this->flashMessage("errors.guild.notInGuild");
-      $this->redirect("Guild:");
-    } catch(GrandmasterCannotLeaveGuildException) {
-      $this->flashMessage("errors.guild.grandmasterCannotLeave");
-      $this->redirect("Guild:");
-    }
-  }
-  
-  public function actionManage(): void {
-    $this->notInGuild();
-    if(!$this->user->isAllowed("guild", "manage")) {
-      $this->flashMessage("errors.guild.cannotManage");
-      $this->redirect("Guild:");
-    }
-  }
-  
-  public function renderManage(): void {
-    $this->template->canRename = $this->user->isAllowed("guild", "rename");
-    $this->template->canDissolve = $this->user->isAllowed("guild", "dissolve");
-    $this->template->canChangeRankNames = $this->user->isAllowed("guild", "changeRankNames");
-  }
-  
-  public function actionRename(): void {
-    $this->notInGuild();
-    if(!$this->user->isAllowed("guild", "rename")) {
-      $this->flashMessage("errors.guild.cannotRename");
-      $this->redirect("Guild:");
-    }
-    $this->template->haveForm = true;
-  }
-  
-  public function actionDissolve(): void {
-    $this->notInGuild();
-    if(!$this->user->isAllowed("guild", "dissolve")) {
-      $this->flashMessage("errors.guild.cannotDissolve");
-      $this->redirect("Guild:");
-    }
-    $this->template->haveForm = true;
-  }
 
-  protected function createComponentDissolveGuildForm(): Form {
-    $form = $this->dissolveGuildFormFactory->create();
-    $form->onSuccess[] = function(): void {
-      $this->flashMessage("messages.guild.dissolved");
-      $this->reloadIdentity();
-      $this->redirect("Guild:noguild");
-    };
-    return $form;
-  }
+    public function actionDefault(): void
+    {
+        $this->notInGuild(false);
+    }
 
-  protected function createComponentRenameGuildForm(): Form {
-    $form = $this->renameGuildFormFactory->create();
-    $form->onSuccess[] = function(): never {
-      $this->flashMessage("messages.guild.renamed");
-      $this->redirect("Guild:");
-    };
-    return $form;
-  }
-  
-  public function actionPromote(int $id): never {
-    try {
-      $this->model->promote($id);
-      $this->flashMessage("messages.guild.promoted");
-      $this->redirect("Guild:members");
-    } catch(NotInGuildException) {
-      $this->flashMessage("errors.guild.notInGuild");
-    } catch(MissingPermissionsException) {
-      $this->flashMessage("errors.guild.missingPermissions");
-    } catch(PlayerNotFoundException) {
-      $this->flashMessage("errors.guild.playerDoesNotExist");
-    } catch(PlayerNotInGuildException) {
-      $this->flashMessage("errors.guild.playerNotInGuild");
-    } catch(CannotPromoteHigherRanksException) {
-      $this->flashMessage("errors.guild.cannotPromoteHigherRanks");
-    } catch(CannotPromoteToGrandmasterException) {
-      $this->flashMessage("errors.guild.cannotPromoteToGrandmaster");
-    } catch(CannotHaveMoreDeputiesException) {
-      $this->flashMessage("errors.guild.cannotHaveMoreDeputies");
+    public function renderDefault(): void
+    {
+        $this->template->guild = $this->model->view($this->user->identity->guild);
+        $this->template->canManage = $this->user->isAllowed("guild", "manage");
+        $this->template->canInvite = $this->user->isAllowed("guild", "invite");
     }
-    $this->redirect("Guild:");
-  }
-  
-  public function actionDemote(int $id): never {
-    try {
-      $this->model->demote($id);
-      $this->flashMessage("messages.guild.demoted");
-      $this->redirect("Guild:members");
-    } catch(NotInGuildException) {
-      $this->flashMessage("errors.guild.notInGuild");
-    } catch(MissingPermissionsException) {
-      $this->flashMessage("errors.guild.missingPermissions");
-    } catch(PlayerNotFoundException) {
-      $this->flashMessage("errors.guild.playerDoesNotExist");
-    } catch(PlayerNotInGuildException) {
-      $this->flashMessage("errors.guild.playerNotInGuild");
-    } catch(CannotDemoteHigherRanksException) {
-      $this->flashMessage("errors.guild.cannotDemoteHigherRanks");
-    } catch(CannotDemoteLowestRankException) {
-      $this->flashMessage("errors.guild.cannotDemoteLowestRank");
-    }
-    $this->redirect("Guild:");
-  }
-  
-  public function actionKick(int $id): never {
-    try {
-      $this->model->kick($id);
-      $this->flashMessage("messages.guild.kicked");
-      $this->redirect("Guild:members");
-    } catch(NotInGuildException) {
-      $this->flashMessage("errors.guild.notInGuild");
-    } catch(MissingPermissionsException) {
-      $this->flashMessage("errors.guild.missingPermissions");
-    } catch(PlayerNotFoundException) {
-      $this->flashMessage("errors.guild.playerDoesNotExist");
-    } catch(PlayerNotInGuildException) {
-      $this->flashMessage("errors.guild.playerNotInGuild");
-    } catch(CannotKickHigherRanksException) {
-      $this->flashMessage("errors.guild.cannotKickHigherRanks");
-    }
-    $this->redirect("Guild:");
-  }
-  
-  public function actionDescription(): void {
-    $this->notInGuild();
-    if(!$this->user->isAllowed("guild", "manage")) {
-      $this->flashMessage("errors.guild.cannotChangeDescription");
-      $this->redirect("Guild:");
-    }
-    $this->template->haveForm = true;
-  }
 
-  protected function createComponentGuildDescriptionForm(): Form {
-    $form = $this->guildDescriptionFormFactory->create();
-    $form->onSuccess[] = function(): never {
-      $this->flashMessage("messages.guild.descriptionChanged");
-      $this->redirect("Guild:");
-    };
-    return $form;
-  }
-  
-  public function actionApplications(): void {
-    $this->notInGuild();
-    if(!$this->user->isAllowed("guild", "invite")) {
-      $this->flashMessage("errors.guild.cannotManageApps");
-      $this->redirect("Guild:");
+    /**
+     * @throws \Nette\Application\BadRequestException
+     */
+    public function renderView(int $id): void
+    {
+        $data = $this->model->view($id);
+        if ($data === null) {
+            throw new \Nette\Application\BadRequestException();
+        }
+        $this->template->guild = $data;
     }
-  }
-  
-  public function renderApplications(): void {
-    $this->template->apps = $this->model->showApplications($this->user->identity->guild);
-  }
-  
-  public function actionRankNames(): void {
-    $this->notInGuild();
-    if(!$this->user->isAllowed("guild", "changeRankNames")) {
-      $this->flashMessage("errors.guild.cannotChangeRankNames");
-      $this->redirect("Guild:");
+
+    public function actionMembers(): void
+    {
+        $this->notInGuild();
     }
-    $this->template->haveForm = true;
-  }
-  
-  protected function createComponentCustomGuildRankNamesForm(): Form {
-    $form = $this->customGuildRankNamesFormFactory->create();
-    $form->onSuccess[] = function(): void {
-      $this->flashMessage("messages.guild.customRankNamesSet");
-      $this->redirect("Guild:");
-    };
-    return $form;
-  }
 
-  public function actionDonate(): void {
-    $this->notInGuild();
-    $this->template->haveForm = true;
-  }
+    public function renderMembers(): void
+    {
+        $this->template->members = $this->model->guildMembers($this->user->identity->guild, [], true);
+        $this->template->canPromote = $this->user->isAllowed("guild", "promote");
+        $this->template->canKick = $this->user->isAllowed("guild", "kick");
+        $this->template->rankId = $this->permissionsModel->getRankId($this->user->roles[0]);
+    }
 
-  protected function createComponentDonateToGuildForm(): Form {
-    $form = $this->donateToGuildFormFactory->create();
-    $form->onSuccess[] = function(): void {
-      $this->flashMessage("messages.guild.donationDone");
-      $this->redirect("Guild:");
-    };
-    return $form;
-  }
+    protected function createComponentCreateGuildForm(): Form
+    {
+        $form = $this->createGuildFormFactory->create();
+        $form->onSuccess[] = function (): void {
+            $this->reloadIdentity();
+            $this->flashMessage("messages.guild.created");
+            $this->redirect("Guild:");
+        };
+        return $form;
+    }
+
+    public function actionCreate(): void
+    {
+        $this->inGuild();
+        $this->template->haveForm = true;
+    }
+
+    public function actionJoin(int $id = null): void
+    {
+        $this->inGuild();
+        if ($id === null) {
+            return;
+        }
+        try {
+            $this->model->sendApplication($id);
+            $this->flashMessage("messages.guild.applicationSent");
+            $this->redirect("Guild:");
+        } catch (GuildNotFoundException) {
+            $this->forward("notfound");
+        }
+    }
+
+    public function renderJoin(int $id = null): void
+    {
+        $guilds = $this->model->listOfGuilds();
+        $this->template->guilds = $guilds;
+        $apps = $this->model->haveUnresolvedApplication();
+        if ($apps) {
+            $this->flashMessage("messages.guild.unresolvedApplication");
+        }
+    }
+
+    public function actionLeave(): never
+    {
+        $this->notInGuild();
+        try {
+            $this->model->leave();
+            $this->flashMessage("messages.guild.left");
+            $this->reloadIdentity();
+            $this->forward("default");
+        } catch (NotInGuildException) {
+            $this->flashMessage("errors.guild.notInGuild");
+            $this->redirect("Guild:");
+        } catch (GrandmasterCannotLeaveGuildException) {
+            $this->flashMessage("errors.guild.grandmasterCannotLeave");
+            $this->redirect("Guild:");
+        }
+    }
+
+    public function actionManage(): void
+    {
+        $this->notInGuild();
+        if (!$this->user->isAllowed("guild", "manage")) {
+            $this->flashMessage("errors.guild.cannotManage");
+            $this->redirect("Guild:");
+        }
+    }
+
+    public function renderManage(): void
+    {
+        $this->template->canRename = $this->user->isAllowed("guild", "rename");
+        $this->template->canDissolve = $this->user->isAllowed("guild", "dissolve");
+        $this->template->canChangeRankNames = $this->user->isAllowed("guild", "changeRankNames");
+    }
+
+    public function actionRename(): void
+    {
+        $this->notInGuild();
+        if (!$this->user->isAllowed("guild", "rename")) {
+            $this->flashMessage("errors.guild.cannotRename");
+            $this->redirect("Guild:");
+        }
+        $this->template->haveForm = true;
+    }
+
+    public function actionDissolve(): void
+    {
+        $this->notInGuild();
+        if (!$this->user->isAllowed("guild", "dissolve")) {
+            $this->flashMessage("errors.guild.cannotDissolve");
+            $this->redirect("Guild:");
+        }
+        $this->template->haveForm = true;
+    }
+
+    protected function createComponentDissolveGuildForm(): Form
+    {
+        $form = $this->dissolveGuildFormFactory->create();
+        $form->onSuccess[] = function (): void {
+            $this->flashMessage("messages.guild.dissolved");
+            $this->reloadIdentity();
+            $this->redirect("Guild:noguild");
+        };
+        return $form;
+    }
+
+    protected function createComponentRenameGuildForm(): Form
+    {
+        $form = $this->renameGuildFormFactory->create();
+        $form->onSuccess[] = function (): never {
+            $this->flashMessage("messages.guild.renamed");
+            $this->redirect("Guild:");
+        };
+        return $form;
+    }
+
+    public function actionPromote(int $id): never
+    {
+        try {
+            $this->model->promote($id);
+            $this->flashMessage("messages.guild.promoted");
+            $this->redirect("Guild:members");
+        } catch (NotInGuildException) {
+            $this->flashMessage("errors.guild.notInGuild");
+        } catch (MissingPermissionsException) {
+            $this->flashMessage("errors.guild.missingPermissions");
+        } catch (PlayerNotFoundException) {
+            $this->flashMessage("errors.guild.playerDoesNotExist");
+        } catch (PlayerNotInGuildException) {
+            $this->flashMessage("errors.guild.playerNotInGuild");
+        } catch (CannotPromoteHigherRanksException) {
+            $this->flashMessage("errors.guild.cannotPromoteHigherRanks");
+        } catch (CannotPromoteToGrandmasterException) {
+            $this->flashMessage("errors.guild.cannotPromoteToGrandmaster");
+        } catch (CannotHaveMoreDeputiesException) {
+            $this->flashMessage("errors.guild.cannotHaveMoreDeputies");
+        }
+        $this->redirect("Guild:");
+    }
+
+    public function actionDemote(int $id): never
+    {
+        try {
+            $this->model->demote($id);
+            $this->flashMessage("messages.guild.demoted");
+            $this->redirect("Guild:members");
+        } catch (NotInGuildException) {
+            $this->flashMessage("errors.guild.notInGuild");
+        } catch (MissingPermissionsException) {
+            $this->flashMessage("errors.guild.missingPermissions");
+        } catch (PlayerNotFoundException) {
+            $this->flashMessage("errors.guild.playerDoesNotExist");
+        } catch (PlayerNotInGuildException) {
+            $this->flashMessage("errors.guild.playerNotInGuild");
+        } catch (CannotDemoteHigherRanksException) {
+            $this->flashMessage("errors.guild.cannotDemoteHigherRanks");
+        } catch (CannotDemoteLowestRankException) {
+            $this->flashMessage("errors.guild.cannotDemoteLowestRank");
+        }
+        $this->redirect("Guild:");
+    }
+
+    public function actionKick(int $id): never
+    {
+        try {
+            $this->model->kick($id);
+            $this->flashMessage("messages.guild.kicked");
+            $this->redirect("Guild:members");
+        } catch (NotInGuildException) {
+            $this->flashMessage("errors.guild.notInGuild");
+        } catch (MissingPermissionsException) {
+            $this->flashMessage("errors.guild.missingPermissions");
+        } catch (PlayerNotFoundException) {
+            $this->flashMessage("errors.guild.playerDoesNotExist");
+        } catch (PlayerNotInGuildException) {
+            $this->flashMessage("errors.guild.playerNotInGuild");
+        } catch (CannotKickHigherRanksException) {
+            $this->flashMessage("errors.guild.cannotKickHigherRanks");
+        }
+        $this->redirect("Guild:");
+    }
+
+    public function actionDescription(): void
+    {
+        $this->notInGuild();
+        if (!$this->user->isAllowed("guild", "manage")) {
+            $this->flashMessage("errors.guild.cannotChangeDescription");
+            $this->redirect("Guild:");
+        }
+        $this->template->haveForm = true;
+    }
+
+    protected function createComponentGuildDescriptionForm(): Form
+    {
+        $form = $this->guildDescriptionFormFactory->create();
+        $form->onSuccess[] = function (): never {
+            $this->flashMessage("messages.guild.descriptionChanged");
+            $this->redirect("Guild:");
+        };
+        return $form;
+    }
+
+    public function actionApplications(): void
+    {
+        $this->notInGuild();
+        if (!$this->user->isAllowed("guild", "invite")) {
+            $this->flashMessage("errors.guild.cannotManageApps");
+            $this->redirect("Guild:");
+        }
+    }
+
+    public function renderApplications(): void
+    {
+        $this->template->apps = $this->model->showApplications($this->user->identity->guild);
+    }
+
+    public function actionRankNames(): void
+    {
+        $this->notInGuild();
+        if (!$this->user->isAllowed("guild", "changeRankNames")) {
+            $this->flashMessage("errors.guild.cannotChangeRankNames");
+            $this->redirect("Guild:");
+        }
+        $this->template->haveForm = true;
+    }
+
+    protected function createComponentCustomGuildRankNamesForm(): Form
+    {
+        $form = $this->customGuildRankNamesFormFactory->create();
+        $form->onSuccess[] = function (): void {
+            $this->flashMessage("messages.guild.customRankNamesSet");
+            $this->redirect("Guild:");
+        };
+        return $form;
+    }
+
+    public function actionDonate(): void
+    {
+        $this->notInGuild();
+        $this->template->haveForm = true;
+    }
+
+    protected function createComponentDonateToGuildForm(): Form
+    {
+        $form = $this->donateToGuildFormFactory->create();
+        $form->onSuccess[] = function (): void {
+            $this->flashMessage("messages.guild.donationDone");
+            $this->redirect("Guild:");
+        };
+        return $form;
+    }
 }
-?>

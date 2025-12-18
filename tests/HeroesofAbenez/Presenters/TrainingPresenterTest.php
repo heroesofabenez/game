@@ -9,14 +9,15 @@ require __DIR__ . "/../../bootstrap.php";
  * @author Jakub Konečný
  * @skip
  */
-final class TrainingPresenterTest extends \Tester\TestCase {
-  use TPresenter;
-  
-  public function testDefault(): void {
-    $this->checkAction("Training:default");
-  }
+final class TrainingPresenterTest extends \Tester\TestCase
+{
+    use TPresenter;
+
+    public function testDefault(): void
+    {
+        $this->checkAction("Training:default");
+    }
 }
 
 $test = new TrainingPresenterTest();
 $test->run();
-?>

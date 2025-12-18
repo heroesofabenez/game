@@ -27,23 +27,26 @@ use Nextras\Orm\Relationships\OneHasMany;
  * @property OneHasMany|Item[] $items {1:m Item::$requiredSpecialization}
  * @property-read string $mainStat {virtual}
  */
-final class CharacterSpecialization extends \Nextras\Orm\Entity\Entity {
-  private Translator $translator;
+final class CharacterSpecialization extends \Nextras\Orm\Entity\Entity
+{
+    private Translator $translator;
 
-  public function injectTranslator(Translator $translator): void {
-    $this->translator = $translator;
-  }
+    public function injectTranslator(Translator $translator): void
+    {
+        $this->translator = $translator;
+    }
 
-  protected function getterName(): string {
-    return $this->translator->translate("subclasses.$this->id.name");
-  }
+    protected function getterName(): string
+    {
+        return $this->translator->translate("subclasses.$this->id.name");
+    }
 
-  protected function getterMainStat(): string {
-    $stats = [
-      "strength" => $this->strengthGrow, "dexterity" => $this->dexterityGrow, "constitution" => $this->constitutionGrow,
-      "intelligence" => $this->intelligenceGrow, "charisma" => $this->charismaGrow,
-    ];
-    return (string) array_search(max($stats), $stats, true);
-  }
+    protected function getterMainStat(): string
+    {
+        $stats = [
+            "strength" => $this->strengthGrow, "dexterity" => $this->dexterityGrow, "constitution" => $this->constitutionGrow,
+            "intelligence" => $this->intelligenceGrow, "charisma" => $this->charismaGrow,
+        ];
+        return (string) array_search(max($stats), $stats, true);
+    }
 }
-?>

@@ -14,12 +14,13 @@ use Nextras\Orm\Collection\ICollection;
  * @method ICollection|Item[] findBy(array $conds)
  * @method ICollection|Item[] findAll()
  */
-final class ItemsRepository extends \Nextras\Orm\Repository\Repository {
-  /**
-   * @return string[]
-   */
-  public static function getEntityClassNames(): array {
-    return [Item::class];
-  }
+final class ItemsRepository extends \Nextras\Orm\Repository\Repository
+{
+    /**
+     * @return string[]
+     */
+    public static function getEntityClassNames(): array
+    {
+        return [Item::class];
+    }
 }
-?>

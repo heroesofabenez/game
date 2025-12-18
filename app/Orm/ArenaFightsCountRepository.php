@@ -14,19 +14,21 @@ use Nextras\Orm\Collection\ICollection;
  * @method ICollection|ArenaFightCount[] findBy(array $conds)
  * @method ICollection|ArenaFightCount[] findAll()
  */
-final class ArenaFightsCountRepository extends \Nextras\Orm\Repository\Repository {
-  /**
-   * @return string[]
-   */
-  public static function getEntityClassNames(): array {
-    return [ArenaFightCount::class];
-  }
+final class ArenaFightsCountRepository extends \Nextras\Orm\Repository\Repository
+{
+    /**
+     * @return string[]
+     */
+    public static function getEntityClassNames(): array
+    {
+        return [ArenaFightCount::class];
+    }
 
-  public function getByCharacterAndDay(Character|int $character, string $day): ?ArenaFightCount {
-    return $this->getBy([
-      "character" => $character,
-      "day" => $day
-    ]);
-  }
+    public function getByCharacterAndDay(Character|int $character, string $day): ?ArenaFightCount
+    {
+        return $this->getBy([
+            "character" => $character,
+            "day" => $day
+        ]);
+    }
 }
-?>

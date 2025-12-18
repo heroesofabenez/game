@@ -14,28 +14,31 @@ use Nextras\Orm\Collection\ICollection;
  * @method ICollection|Pet[] findBy(array $conds)
  * @method ICollection|Pet[] findAll()
  */
-final class PetsRepository extends \Nextras\Orm\Repository\Repository {
-  /**
-   * @return string[]
-   */
-  public static function getEntityClassNames(): array {
-    return [Pet::class];
-  }
-  
-  /**
-   * @return ICollection|Pet[]
-   */
-  public function findByOwner(Character|int $owner): ICollection {
-    return $this->findBy([
-      "owner" => $owner
-    ]);
-  }
+final class PetsRepository extends \Nextras\Orm\Repository\Repository
+{
+    /**
+     * @return string[]
+     */
+    public static function getEntityClassNames(): array
+    {
+        return [Pet::class];
+    }
 
-  public function getByTypeAndOwner(PetType|int $type, Character|int $owner): ?Pet {
-    return $this->getBy([
-      "type" => $type,
-      "owner" => $owner
-    ]);
-  }
+    /**
+     * @return ICollection|Pet[]
+     */
+    public function findByOwner(Character|int $owner): ICollection
+    {
+        return $this->findBy([
+            "owner" => $owner
+        ]);
+    }
+
+    public function getByTypeAndOwner(PetType|int $type, Character|int $owner): ?Pet
+    {
+        return $this->getBy([
+            "type" => $type,
+            "owner" => $owner
+        ]);
+    }
 }
-?>

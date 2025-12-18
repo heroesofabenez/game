@@ -12,73 +12,64 @@ use Nextras\Orm\Collection\ICollection;
  *
  * @author Jakub Konečný
  */
-final class Friends {
-  public function __construct(private readonly ORM $orm, private readonly \Nette\Security\User $user) {
-  }
-
-  private function getFriendship(int $character): ?Friendship {
-    return $this->orm->friendships->getBy([
-      ICollection::OR,
-      [
-        "character1" => $this->user->id,
-        "character2" => $character,
-      ],
-      [
-        "character1" => $character,
-        "character2" => $this->user->id,
-      ],
-    ]);
-  }
-
-  public function isFriendsWith(int $character): bool {
-    if($character === $this->user->id) {
-      return true;
+final class Friends
+{
+    public function __construct(private readonly ORM $orm, private readonly \Nette\Security\User $user)
+    {
     }
-    return ($this->getFriendship($character) !== null);
-  }
 
-  /**
-   * @throws AlreadyFriendsException
-   * @throws FriendshipRequestAlreadySentException
-   */
-  public function befriend(int $character): void {
-    if($this->isFriendsWith($character)) {
-      throw new AlreadyFriendsException();
+    private function getFriendship(int $character): ?Friendship
+    {
+        return $this->orm->friendships->getBy([
+            ICollection::OR,
+            [
+                "character1" => $this->user->id,
+                "character2" => $character,
+            ],
+            [
+                "character1" => $character,
+                "character2" => $this->user->id,
+            ],
+        ]);
     }
-    if((null !== $this->orm->requests->getBy([
-      ICollection::OR,
-      [
-        "from" => $this->user->id,
-        "to" => $character,
-        "type" => \HeroesofAbenez\Orm\Request::TYPE_FRIENDSHIP,
-        "status" => \HeroesofAbenez\Orm\Request::STATUS_NEW,
-      ],
-      [
-        "from" => $character,
-        "to" => $this->user->id,
-        "type" => \HeroesofAbenez\Orm\Request::TYPE_FRIENDSHIP,
-        "status" => \HeroesofAbenez\Orm\Request::STATUS_NEW,
-      ],
-    ]))) {
-      throw new FriendshipRequestAlreadySentException();
-    }
-    $request = new \HeroesofAbenez\Orm\Request();
-    $this->orm->requests->attach($request);
-    $request->from = $this->user->id;
-    $request->to = $character;
-    $request->type = \HeroesofAbenez\Orm\Request::TYPE_FRIENDSHIP;
-    $this->orm->requests->persistAndFlush($request);
-  }
 
-  /**
-   * @throws NotFriendsException
-   */
-  public function remove(int $character): void {
-    $friendship = $this->getFriendship($character);
-    if($friendship === null) {
-      throw new NotFriendsException();
+    public function isFriendsWith(int $character): bool
+    {
+        if ($character === $this->user->id) {
+            return true;
+        }
+        return ($this->getFriendship($character) !== null);
     }
-    $this->orm->friendships->removeAndFlush($friendship);
-  }
+
+    /**
+     * @throws AlreadyFriendsException
+     * @throws FriendshipRequestAlreadySentException
+     */
+    public function befriend(int $character): void
+    {
+        if ($this->isFriendsWith($character)) {
+            throw new AlreadyFriendsException();
+        }
+        if ($this->orm->requests->getUnresolvedFriendshipRequest($this->user->id, $character) !== null) {
+            throw new FriendshipRequestAlreadySentException();
+        }
+        $request = new \HeroesofAbenez\Orm\Request();
+        $this->orm->requests->attach($request);
+        $request->from = $this->user->id;
+        $request->to = $character;
+        $request->type = \HeroesofAbenez\Orm\Request::TYPE_FRIENDSHIP;
+        $this->orm->requests->persistAndFlush($request);
+    }
+
+    /**
+     * @throws NotFriendsException
+     */
+    public function remove(int $character): void
+    {
+        $friendship = $this->getFriendship($character);
+        if ($friendship === null) {
+            throw new NotFriendsException();
+        }
+        $this->orm->friendships->removeAndFlush($friendship);
+    }
 }
-?>

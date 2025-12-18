@@ -43,7 +43,6 @@ namespace HeroesofAbenez\Orm;
  * @property-read FriendshipsRepository $friendships
  * @property-read GuildDonationsRepository $guildDonations
  */
-final class Model extends \Nextras\Orm\Model\Model {
-  
+final class Model extends \Nextras\Orm\Model\Model
+{
 }
-?>

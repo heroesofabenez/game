@@ -9,11 +9,12 @@ namespace HeroesofAbenez\Model;
  *
  * @author Jakub Konečný
  */
-final class DevelopmentUserToCharacterMapper implements IUserToCharacterMapper {
-  public const USER_ID = 1;
-  
-  public function getRealId(): int {
-    return self::USER_ID;
-  }
+final class DevelopmentUserToCharacterMapper implements IUserToCharacterMapper
+{
+    public const USER_ID = 1;
+
+    public function getRealId(): int
+    {
+        return self::USER_ID;
+    }
 }
-?>

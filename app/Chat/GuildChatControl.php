@@ -8,10 +8,11 @@ namespace HeroesofAbenez\Chat;
  *
  * @author Jakub Konečný
  */
-final class GuildChatControl extends ChatControl {
-  public function __construct(IDatabaseAdapter $databaseAdapter, \Nette\Security\User $user) {
-    $gid = $user->identity->guild;
-    parent::__construct($databaseAdapter, "guild", $gid);
-  }
+final class GuildChatControl extends ChatControl
+{
+    public function __construct(IDatabaseAdapter $databaseAdapter, \Nette\Security\User $user)
+    {
+        $gid = $user->identity->guild;
+        parent::__construct($databaseAdapter, "guild", $gid);
+    }
 }
-?>

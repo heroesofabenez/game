@@ -14,22 +14,24 @@ use Nextras\Orm\Collection\ICollection;
  * @method ICollection|SkillSpecial[] findBy(array $conds)
  * @method ICollection|SkillSpecial[] findAll()
  */
-final class SkillSpecialsRepository extends \Nextras\Orm\Repository\Repository {
-  /**
-   * @return string[]
-   */
-  public static function getEntityClassNames(): array {
-    return [SkillSpecial::class];
-  }
-  
-  /**
-   * @return ICollection|SkillSpecial[]
-   */
-  public function findByClassAndLevel(CharacterClass|int $class, int $level): ICollection {
-    return $this->findBy([
-      "neededClass" => $class,
-      "neededLevel<=" => $level
-    ]);
-  }
+final class SkillSpecialsRepository extends \Nextras\Orm\Repository\Repository
+{
+    /**
+     * @return string[]
+     */
+    public static function getEntityClassNames(): array
+    {
+        return [SkillSpecial::class];
+    }
+
+    /**
+     * @return ICollection|SkillSpecial[]
+     */
+    public function findByClassAndLevel(CharacterClass|int $class, int $level): ICollection
+    {
+        return $this->findBy([
+            "neededClass" => $class,
+            "neededLevel<=" => $level
+        ]);
+    }
 }
-?>

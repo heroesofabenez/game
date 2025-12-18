@@ -45,7 +45,7 @@
     <exec executable="vendor/bin/phpcs" logoutput="true" passthru="true" checkreturn="true">
       <arg value="--extensions=php,phpt"/>
       <arg value="."/>
-      <arg value="--standard=vendor/nexendrie/code-quality/ruleset.xml"/>
+      <arg value="--standard=vendor/nexendrie/code-quality/phpcs.xml"/>
       <arg value="--colors"/>
       <arg value="-p"/>
     </exec>
@@ -102,7 +102,7 @@
     <exec executable="vendor/bin/phpcs" logoutput="true" passthru="true" checkreturn="true">
       <arg value="--extensions=php,phpt"/>
       <arg value="."/>
-      <arg value="--standard=vendor/nexendrie/code-quality/ruleset.xml"/>
+      <arg value="--standard=vendor/nexendrie/code-quality/phpcs.xml"/>
       <arg value="--report=checkstyle"/>
       <arg value="--report-file=codesniffer.cs"/>
     </exec>

@@ -12,17 +12,18 @@ require __DIR__ . "/../../bootstrap.php";
  * @author Jakub Konečný
  * @skip
  */
-final class ItemPresenterTest extends \Tester\TestCase {
-  use TPresenter;
-  
-  public function testView(): void {
-    $this->checkAction("Item:view", ["id" => 1]);
-    Assert::exception(function() {
-      $this->checkAction("Item:view", ["id" => 5000]);
-    }, BadRequestException::class);
-  }
+final class ItemPresenterTest extends \Tester\TestCase
+{
+    use TPresenter;
+
+    public function testView(): void
+    {
+        $this->checkAction("Item:view", ["id" => 1]);
+        Assert::exception(function () {
+            $this->checkAction("Item:view", ["id" => 5000]);
+        }, BadRequestException::class);
+    }
 }
 
 $test = new ItemPresenterTest();
 $test->run();
-?>

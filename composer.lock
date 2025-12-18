@@ -2192,19 +2192,19 @@
             "source": {
                 "type": "git",
                 "url": "https://gitlab.com/nexendrie/code-quality.git",
-                "reference": "d4ee6e811c7ab00129e99dbb266583bc67390c1b"
+                "reference": "0c0ef447dbbb4a9c3619cb7911720947f99d0c76"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://gitlab.com/api/v4/projects/nexendrie%2Fcode-quality/repository/archive.zip?sha=d4ee6e811c7ab00129e99dbb266583bc67390c1b",
-                "reference": "d4ee6e811c7ab00129e99dbb266583bc67390c1b",
+                "url": "https://gitlab.com/api/v4/projects/nexendrie%2Fcode-quality/repository/archive.zip?sha=0c0ef447dbbb4a9c3619cb7911720947f99d0c76",
+                "reference": "0c0ef447dbbb4a9c3619cb7911720947f99d0c76",
                 "shasum": ""
             },
             "require": {
                 "nexendrie/testbench": "^2.7.1",
                 "php-parallel-lint/php-console-highlighter": "^0.5",
                 "php-parallel-lint/php-parallel-lint": "^1.4",
-                "phpstan/phpstan": "^2.0",
+                "phpstan/phpstan-deprecation-rules": "^2.0",
                 "phpstan/phpstan-strict-rules": "^2.0",
                 "squizlabs/php_codesniffer": "^3.13"
             },
@@ -2232,7 +2232,7 @@
                 "issues": "https://gitlab.com/nexendrie/code-quality/-/issues",
                 "source": "https://gitlab.com/nexendrie/code-quality/"
             },
-            "time": "2025-06-07T15:37:40+00:00"
+            "time": "2025-12-16T13:35:43+00:00"
         },
         {
             "name": "nexendrie/testbench",

@@ -10,21 +10,22 @@ use Tester\Assert;
 /**
  * @author Jakub Konečný
  */
-final class DevelopmentUserToCharacterMapperTest extends \Tester\TestCase {
-  use \Testbench\TCompiledContainer;
-  
-  public function testGetRealId(): void {
-    $this->refreshContainer([
-      "hoa" => [
-        "userToCharacterMapper" => DevelopmentUserToCharacterMapper::class
-      ]
-    ]);
-    /** @var DevelopmentUserToCharacterMapper $mapper */
-    $mapper = $this->getService(DevelopmentUserToCharacterMapper::class);
-    Assert::same(1, $mapper->getRealId());
-  }
+final class DevelopmentUserToCharacterMapperTest extends \Tester\TestCase
+{
+    use \Testbench\TCompiledContainer;
+
+    public function testGetRealId(): void
+    {
+        $this->refreshContainer([
+            "hoa" => [
+                "userToCharacterMapper" => DevelopmentUserToCharacterMapper::class
+            ]
+        ]);
+        /** @var DevelopmentUserToCharacterMapper $mapper */
+        $mapper = $this->getService(DevelopmentUserToCharacterMapper::class);
+        Assert::same(1, $mapper->getRealId());
+    }
 }
 
 $test = new DevelopmentUserToCharacterMapperTest();
 $test->run();
-?>

@@ -12,7 +12,6 @@ namespace HeroesofAbenez\Orm;
  * @property GuildRank $rank {m:1 GuildRank, oneSided=true}
  * @property string $name
  */
-final class GuildRankCustom extends \Nextras\Orm\Entity\Entity {
-
+final class GuildRankCustom extends \Nextras\Orm\Entity\Entity
+{
 }
-?>

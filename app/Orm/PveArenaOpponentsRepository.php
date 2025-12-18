@@ -14,12 +14,13 @@ use Nextras\Orm\Collection\ICollection;
  * @method ICollection|PveArenaOpponent[] findBy(array $conds)
  * @method ICollection|PveArenaOpponent[] findAll()
  */
-final class PveArenaOpponentsRepository extends \Nextras\Orm\Repository\Repository {
-  /**
-   * @return string[]
-   */
-  public static function getEntityClassNames(): array {
-    return [PveArenaOpponent::class];
-  }
+final class PveArenaOpponentsRepository extends \Nextras\Orm\Repository\Repository
+{
+    /**
+     * @return string[]
+     */
+    public static function getEntityClassNames(): array
+    {
+        return [PveArenaOpponent::class];
+    }
 }
-?>

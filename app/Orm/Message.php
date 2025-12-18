@@ -16,13 +16,15 @@ namespace HeroesofAbenez\Orm;
  * @property-read string $sentAt {virtual}
  * @property bool $read {default false}
  */
-final class Message extends \Nextras\Orm\Entity\Entity {
-  protected function getterSentAt(): string {
-    return $this->sent->format("Y-m-d H:i:s");
-  }
-  
-  public function onBeforeInsert(): void {
-    $this->sent = new \DateTimeImmutable();
-  }
+final class Message extends \Nextras\Orm\Entity\Entity
+{
+    protected function getterSentAt(): string
+    {
+        return $this->sent->format("Y-m-d H:i:s");
+    }
+
+    public function onBeforeInsert(): void
+    {
+        $this->sent = new \DateTimeImmutable();
+    }
 }
-?>

@@ -14,12 +14,13 @@ use Nextras\Orm\Collection\ICollection;
  * @method ICollection|PetType[] findBy(array $conds)
  * @method ICollection|PetType[] findAll()
  */
-final class PetTypesRepository extends \Nextras\Orm\Repository\Repository {
-  /**
-   * @return string[]
-   */
-  public static function getEntityClassNames(): array {
-    return [PetType::class];
-  }
+final class PetTypesRepository extends \Nextras\Orm\Repository\Repository
+{
+    /**
+     * @return string[]
+     */
+    public static function getEntityClassNames(): array
+    {
+        return [PetType::class];
+    }
 }
-?>

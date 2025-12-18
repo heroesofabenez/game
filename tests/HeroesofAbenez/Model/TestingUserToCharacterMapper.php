@@ -10,17 +10,19 @@ namespace HeroesofAbenez\Model;
  * @author Jakub Konečný
  * @property int $realId
  */
-final class TestingUserToCharacterMapper implements IUserToCharacterMapper {
-  use \Nette\SmartObject;
+final class TestingUserToCharacterMapper implements IUserToCharacterMapper
+{
+    use \Nette\SmartObject;
 
-  public int $realId = DevelopmentUserToCharacterMapper::USER_ID;
+    public int $realId = DevelopmentUserToCharacterMapper::USER_ID;
 
-  public function getRealId(): int {
-    return $this->realId;
-  }
+    public function getRealId(): int
+    {
+        return $this->realId;
+    }
 
-  public function setRealId(int $realId): void {
-    $this->realId = $realId;
-  }
+    public function setRealId(int $realId): void
+    {
+        $this->realId = $realId;
+    }
 }
-?>

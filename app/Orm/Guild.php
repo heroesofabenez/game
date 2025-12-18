@@ -18,11 +18,12 @@ use Nextras\Orm\Relationships\OneHasMany;
  * @property OneHasMany|GuildDonation[] $donations {1:m GuildDonation::$guild}
  * @property-read Character|null $leader {virtual}
  */
-final class Guild extends \Nextras\Orm\Entity\Entity {
-  protected function getterLeader(): ?Character {
-    return $this->members->toCollection()->limitBy(1)->getBy([ // @phpstan-ignore return.type
-      "guildrank" => 7
-    ]);
-  }
+final class Guild extends \Nextras\Orm\Entity\Entity
+{
+    protected function getterLeader(): ?Character
+    {
+        return $this->members->toCollection()->limitBy(1)->getBy([ // @phpstan-ignore return.type
+            "guildrank" => 7
+        ]);
+    }
 }
-?>

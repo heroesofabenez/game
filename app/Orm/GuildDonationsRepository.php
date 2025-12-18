@@ -14,12 +14,13 @@ use Nextras\Orm\Collection\ICollection;
  * @method ICollection|GuildDonation[] findBy(array $conds)
  * @method ICollection|GuildDonation[] findAll()
  */
-final class GuildDonationsRepository extends \Nextras\Orm\Repository\Repository {
-  /**
-   * @return string[]
-   */
-  public static function getEntityClassNames(): array {
-    return [GuildDonation::class];
-  }
+final class GuildDonationsRepository extends \Nextras\Orm\Repository\Repository
+{
+    /**
+     * @return string[]
+     */
+    public static function getEntityClassNames(): array
+    {
+        return [GuildDonation::class];
+    }
 }
-?>

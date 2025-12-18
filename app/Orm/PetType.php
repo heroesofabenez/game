@@ -23,28 +23,32 @@ use Nexendrie\Utils\Numbers;
  * @property OneHasMany|Pet[] $pets {1:m Pet::$type}
  * @property OneHasMany|Quest[] $rewardedForQuests {1:m Quest::$rewardPet}
  */
-final class PetType extends \Nextras\Orm\Entity\Entity {
-  public const STAT_STR = "strength";
-  public const STAT_DEX = "dexterity";
-  public const STAT_CON = "constitution";
-  public const STAT_INT = "intelligence";
+final class PetType extends \Nextras\Orm\Entity\Entity
+{
+    public const STAT_STR = "strength";
+    public const STAT_DEX = "dexterity";
+    public const STAT_CON = "constitution";
+    public const STAT_INT = "intelligence";
 
-  private Translator $translator;
+    private Translator $translator;
 
-  public function injectTranslator(Translator $translator): void {
-    $this->translator = $translator;
-  }
+    public function injectTranslator(Translator $translator): void
+    {
+        $this->translator = $translator;
+    }
 
-  protected function getterName(): string {
-    return $this->translator->translate("pets.$this->id.name");
-  }
+    protected function getterName(): string
+    {
+        return $this->translator->translate("pets.$this->id.name");
+    }
 
-  protected function setterBonusValue(int $value): int {
-    return Numbers::range($value, 0, 99);
-  }
-  
-  protected function setterRequiredLevel(int $value): int {
-    return Numbers::range($value, 0, 99);
-  }
+    protected function setterBonusValue(int $value): int
+    {
+        return Numbers::range($value, 0, 99);
+    }
+
+    protected function setterRequiredLevel(int $value): int
+    {
+        return Numbers::range($value, 0, 99);
+    }
 }
-?>

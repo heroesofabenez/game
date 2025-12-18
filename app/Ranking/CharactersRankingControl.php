@@ -8,36 +8,38 @@ use Nextras\Orm\Collection\ICollection;
 
 /**
  * Characters Ranking Control
- * 
+ *
  * @author Jakub Konečný
  */
-final class CharactersRankingControl extends RankingControl {
-  public function __construct(private readonly ORM $orm) {
-    parent::__construct("Characters", ["name", "level", "guild"], "Profile", "profile");
-  }
-  
-  public function getData(): array {
-    /** @var \Nette\Utils\Paginator $paginator */
-    $paginator = $this->paginator;
-    $paginator->itemCount = $this->orm->characters->findAll()->countStored(); // @phpstan-ignore assign.propertyType
-    $characters = $this->orm->characters->findAll()
-      ->orderBy("level", ICollection::DESC)
-      ->orderBy("experience", ICollection::DESC)
-      ->orderBy("id")
-      ->limitBy($paginator->getLength(), $paginator->getOffset());
-    $chars = [];
-    /** @var \HeroesofAbenez\Orm\Character $character */
-    foreach($characters as $character) {
-      $guildName = "";
-      if($character->guild !== null) {
-        $guildName = $character->guild->name;
-      }
-      $chars[] = (object) [
-        "name" => $character->name, "level" => $character->level,
-        "guild" => $guildName, "id" => $character->id
-      ];
+final class CharactersRankingControl extends RankingControl
+{
+    public function __construct(private readonly ORM $orm)
+    {
+        parent::__construct("Characters", ["name", "level", "guild"], "Profile", "profile");
     }
-    return $chars;
-  }
+
+    public function getData(): array
+    {
+        /** @var \Nette\Utils\Paginator $paginator */
+        $paginator = $this->paginator;
+        $paginator->itemCount = $this->orm->characters->findAll()->countStored(); // @phpstan-ignore assign.propertyType
+        $characters = $this->orm->characters->findAll()
+            ->orderBy("level", ICollection::DESC)
+            ->orderBy("experience", ICollection::DESC)
+            ->orderBy("id")
+            ->limitBy($paginator->getLength(), $paginator->getOffset());
+        $chars = [];
+        /** @var \HeroesofAbenez\Orm\Character $character */
+        foreach ($characters as $character) {
+            $guildName = "";
+            if ($character->guild !== null) {
+                $guildName = $character->guild->name;
+            }
+            $chars[] = (object) [
+                "name" => $character->name, "level" => $character->level,
+                "guild" => $guildName, "id" => $character->id
+            ];
+        }
+        return $chars;
+    }
 }
-?>

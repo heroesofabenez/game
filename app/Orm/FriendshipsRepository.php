@@ -14,23 +14,25 @@ use Nextras\Orm\Collection\ICollection;
  * @method ICollection|Friendship[] findBy(array $conds)
  * @method ICollection|Friendship[] findAll()
  */
-final class FriendshipsRepository extends \Nextras\Orm\Repository\Repository {
-  /**
-   * @return string[]
-   */
-  public static function getEntityClassNames(): array {
-    return [Friendship::class];
-  }
+final class FriendshipsRepository extends \Nextras\Orm\Repository\Repository
+{
+    /**
+     * @return string[]
+     */
+    public static function getEntityClassNames(): array
+    {
+        return [Friendship::class];
+    }
 
-  /**
-   * @return ICollection|Friendship[]
-   */
-  public function findByCharacter(Character|int $character): ICollection {
-    return $this->findBy([
-      ICollection::OR,
-      "character1" => $character,
-      "character2" => $character,
-    ]);
-  }
+    /**
+     * @return ICollection|Friendship[]
+     */
+    public function findByCharacter(Character|int $character): ICollection
+    {
+        return $this->findBy([
+            ICollection::OR,
+            "character1" => $character,
+            "character2" => $character,
+        ]);
+    }
 }
-?>

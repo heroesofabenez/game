@@ -9,8 +9,9 @@ namespace HeroesofAbenez\Model;
  * @author Jakub Konečný
  * @property-read array $settings
  */
-final class SettingsRepository {
-  public function __construct(public readonly array $settings) {
-  }
+final class SettingsRepository
+{
+    public function __construct(public readonly array $settings)
+    {
+    }
 }
-?>

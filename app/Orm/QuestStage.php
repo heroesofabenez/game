@@ -25,19 +25,22 @@ use Nextras\Orm\Relationships\OneHasMany;
  * @property OneHasMany|ChatMessage[] $chatMessages {1:m ChatMessage::$stage}
  * @property OneHasMany|Character[] $characters {1:m Character::$currentStage}
  */
-final class QuestStage extends \Nextras\Orm\Entity\Entity {
-  private Translator $translator;
+final class QuestStage extends \Nextras\Orm\Entity\Entity
+{
+    private Translator $translator;
 
-  public function injectTranslator(Translator $translator): void {
-    $this->translator = $translator;
-  }
+    public function injectTranslator(Translator $translator): void
+    {
+        $this->translator = $translator;
+    }
 
-  protected function getterName(): string {
-    return $this->translator->translate("stages.$this->id.name");
-  }
+    protected function getterName(): string
+    {
+        return $this->translator->translate("stages.$this->id.name");
+    }
 
-  protected function getterDescription(): string {
-    return $this->translator->translate("stages.$this->id.description");
-  }
+    protected function getterDescription(): string
+    {
+        return $this->translator->translate("stages.$this->id.description");
+    }
 }
-?>

@@ -14,9 +14,10 @@ use Nexendrie\Utils\Numbers;
  * @property Item $item {m:1 Item::$inShops}
  * @property int $order
  */
-final class ShopItem extends \Nextras\Orm\Entity\Entity {
-  protected function setterOrder(int $value): int {
-    return Numbers::range($value, 0, 99);
-  }
+final class ShopItem extends \Nextras\Orm\Entity\Entity
+{
+    protected function setterOrder(int $value): int
+    {
+        return Numbers::range($value, 0, 99);
+    }
 }
-?>

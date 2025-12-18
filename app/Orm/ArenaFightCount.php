@@ -13,7 +13,6 @@ namespace HeroesofAbenez\Orm;
  * @property int $amount {default 1}
  * @property int $won {default 0}
  */
-final class ArenaFightCount extends \Nextras\Orm\Entity\Entity {
-  
+final class ArenaFightCount extends \Nextras\Orm\Entity\Entity
+{
 }
-?>

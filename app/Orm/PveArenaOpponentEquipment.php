@@ -11,7 +11,6 @@ namespace HeroesofAbenez\Orm;
  * @property PveArenaOpponent $npc {m:1 PveArenaOpponent::$equipment}
  * @property Item $item {m:1 Item, oneSided=true}
  */
-final class PveArenaOpponentEquipment extends \Nextras\Orm\Entity\Entity {
-
+final class PveArenaOpponentEquipment extends \Nextras\Orm\Entity\Entity
+{
 }
-?>

@@ -14,34 +14,38 @@ use Nextras\Orm\Collection\ICollection;
  * @method ICollection|Character[] findBy(array $conds)
  * @method ICollection|Character[] findAll()
  */
-final class CharactersRepository extends \Nextras\Orm\Repository\Repository {
-  /**
-   * @return string[]
-   */
-  public static function getEntityClassNames(): array {
-    return [Character::class];
-  }
-  
-  public function getByName(string $name): ?Character {
-    return $this->getBy([
-      "name" => $name
-    ]);
-  }
-  
-  public function getByOwner(int $owner): ?Character {
-    return $this->getBy([
-      "owner" => $owner
-    ]);
-  }
-  
-  /**
-   * @return ICollection|Character[]
-   */
-  public function findByGuild(Guild|int $guild): ICollection {
-    return $this->findBy([
-      "guild" => $guild
-    ])->orderBy("guildrank", ICollection::DESC)
-      ->orderBy("id");
-  }
+final class CharactersRepository extends \Nextras\Orm\Repository\Repository
+{
+    /**
+     * @return string[]
+     */
+    public static function getEntityClassNames(): array
+    {
+        return [Character::class];
+    }
+
+    public function getByName(string $name): ?Character
+    {
+        return $this->getBy([
+            "name" => $name
+        ]);
+    }
+
+    public function getByOwner(int $owner): ?Character
+    {
+        return $this->getBy([
+            "owner" => $owner
+        ]);
+    }
+
+    /**
+     * @return ICollection|Character[]
+     */
+    public function findByGuild(Guild|int $guild): ICollection
+    {
+        return $this->findBy([
+            "guild" => $guild
+        ])->orderBy("guildrank", ICollection::DESC)
+            ->orderBy("id");
+    }
 }
-?>

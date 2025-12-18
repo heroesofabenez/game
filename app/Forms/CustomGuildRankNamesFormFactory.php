@@ -13,31 +13,34 @@ use Nette\Localization\Translator;
  *
  * @author Jakub Konečný
  */
-final class CustomGuildRankNamesFormFactory extends BaseFormFactory {
-  public function __construct(Translator $translator, private readonly Guild $model, private readonly \Nette\Security\User $user) {
-    parent::__construct($translator);
-  }
-  
-  public function create(): Form {
-    $form = $this->createBase();
-    $defaults = $this->model->getDefaultRankNames();
-    $custom = $this->model->getCustomRankNames($this->user->identity->guild);
-    $defaultsCount = count($defaults);
-    for($i = 1; $i <= $defaultsCount; $i++) {
-      $fieldName = "rank{$i}name";
-      $form->addText($fieldName, "guildranks.$i.name")->value = $custom[$i] ?? "";
+final class CustomGuildRankNamesFormFactory extends BaseFormFactory
+{
+    public function __construct(Translator $translator, private readonly Guild $model, private readonly \Nette\Security\User $user)
+    {
+        parent::__construct($translator);
     }
-    $form->addSubmit("submit", "forms.customGuildRankNames.sendButton.label");
-    $form->onSuccess[] = [$this, "process"];
-    return $form;
-  }
-  
-  public function process(Form $form, array $values): void {
-    try {
-      $this->model->setCustomRankNames($values);
-    } catch(MissingPermissionsException) {
-      $form->addError($this->translator->translate("errors.guild.missingPermissions"));
+
+    public function create(): Form
+    {
+        $form = $this->createBase();
+        $defaults = $this->model->getDefaultRankNames();
+        $custom = $this->model->getCustomRankNames($this->user->identity->guild);
+        $defaultsCount = count($defaults);
+        for ($i = 1; $i <= $defaultsCount; $i++) {
+            $fieldName = "rank{$i}name";
+            $form->addText($fieldName, "guildranks.$i.name")->value = $custom[$i] ?? "";
+        }
+        $form->addSubmit("submit", "forms.customGuildRankNames.sendButton.label");
+        $form->onSuccess[] = [$this, "process"];
+        return $form;
     }
-  }
+
+    public function process(Form $form, array $values): void
+    {
+        try {
+            $this->model->setCustomRankNames($values);
+        } catch (MissingPermissionsException) {
+            $form->addError($this->translator->translate("errors.guild.missingPermissions"));
+        }
+    }
 }
-?>

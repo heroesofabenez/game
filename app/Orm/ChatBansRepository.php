@@ -14,12 +14,13 @@ use Nextras\Orm\Collection\ICollection;
  * @method ICollection|ChatBan[] findBy(array $conds)
  * @method ICollection|ChatBan[] findAll()
  */
-final class ChatBansRepository extends \Nextras\Orm\Repository\Repository {
-  /**
-   * @return string[]
-   */
-  public static function getEntityClassNames(): array {
-    return [ChatBan::class];
-  }
+final class ChatBansRepository extends \Nextras\Orm\Repository\Repository
+{
+    /**
+     * @return string[]
+     */
+    public static function getEntityClassNames(): array
+    {
+        return [ChatBan::class];
+    }
 }
-?>

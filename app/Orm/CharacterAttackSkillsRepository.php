@@ -14,19 +14,21 @@ use Nextras\Orm\Collection\ICollection;
  * @method ICollection|CharacterAttackSkill[] findBy(array $conds)
  * @method ICollection|CharacterAttackSkill[] findAll()
  */
-final class CharacterAttackSkillsRepository extends \Nextras\Orm\Repository\Repository {
-  /**
-   * @return string[]
-   */
-  public static function getEntityClassNames(): array {
-    return [CharacterAttackSkill::class];
-  }
+final class CharacterAttackSkillsRepository extends \Nextras\Orm\Repository\Repository
+{
+    /**
+     * @return string[]
+     */
+    public static function getEntityClassNames(): array
+    {
+        return [CharacterAttackSkill::class];
+    }
 
-  public function getByCharacterAndSkill(Character|int $character, SkillAttack|int $skill): ?CharacterAttackSkill {
-    return $this->getBy([
-      "character" => $character,
-      "skill" => $skill
-    ]);
-  }
+    public function getByCharacterAndSkill(Character|int $character, SkillAttack|int $skill): ?CharacterAttackSkill
+    {
+        return $this->getBy([
+            "character" => $character,
+            "skill" => $skill
+        ]);
+    }
 }
-?>

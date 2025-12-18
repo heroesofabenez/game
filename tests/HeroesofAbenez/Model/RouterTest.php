@@ -12,22 +12,24 @@ require __DIR__ . "/../../bootstrap.php";
 /**
  * @author Jakub Konečný
  */
-final class RouterTest extends \Tester\TestCase {
-  private RouteList $router;
-  
-  use \Testbench\TCompiledContainer;
-  
-  public function setUp(): void {
-    $this->router = $this->getService(RouteList::class); // @phpstan-ignore assign.propertyType
-  }
-  
-  public function testRoutes(): void {
-    foreach($this->router->getRouters() as $route) {
-      Assert::type(Route::class, $route);
+final class RouterTest extends \Tester\TestCase
+{
+    use \Testbench\TCompiledContainer;
+
+    private RouteList $router;
+
+    public function setUp(): void
+    {
+        $this->router = $this->getService(RouteList::class); // @phpstan-ignore assign.propertyType
     }
-  }
+
+    public function testRoutes(): void
+    {
+        foreach ($this->router->getRouters() as $route) {
+            Assert::type(Route::class, $route);
+        }
+    }
 }
 
 $test = new RouterTest();
 $test->run();
-?>

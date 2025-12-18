@@ -8,9 +8,10 @@ namespace HeroesofAbenez\Orm;
  *
  * @author Jakub Konečný
  */
-final class PveArenaOpponentEquipmentMapper extends \Nextras\Orm\Mapper\Dbal\DbalMapper {
-  public function getTableName(): string {
-    return "pve_arena_opponent_equipment";
-  }
+final class PveArenaOpponentEquipmentMapper extends \Nextras\Orm\Mapper\Dbal\DbalMapper
+{
+    public function getTableName(): string
+    {
+        return "pve_arena_opponent_equipment";
+    }
 }
-?>

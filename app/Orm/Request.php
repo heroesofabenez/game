@@ -15,21 +15,23 @@ namespace HeroesofAbenez\Orm;
  * @property-read string $sentAt {virtual}
  * @property string $status {enum self::STATUS_*} {default self::STATUS_NEW}
  */
-final class Request extends \Nextras\Orm\Entity\Entity {
-  public const TYPE_GUILD_JOIN = "guild_join";
-  public const TYPE_GUILD_APP = "guild_app";
-  public const TYPE_GROUP_JOIN = "group_join";
-  public const TYPE_FRIENDSHIP = "friendship";
-  public const STATUS_NEW = "new";
-  public const STATUS_ACCEPTED = "accepted";
-  public const STATUS_DECLINED = "declined";
-  
-  protected function getterSentAt(): string {
-    return $this->sent->format("Y-m-d H:i:s");
-  }
-  
-  public function onBeforeInsert(): void {
-    $this->sent = new \DateTimeImmutable();
-  }
+final class Request extends \Nextras\Orm\Entity\Entity
+{
+    public const TYPE_GUILD_JOIN = "guild_join";
+    public const TYPE_GUILD_APP = "guild_app";
+    public const TYPE_GROUP_JOIN = "group_join";
+    public const TYPE_FRIENDSHIP = "friendship";
+    public const STATUS_NEW = "new";
+    public const STATUS_ACCEPTED = "accepted";
+    public const STATUS_DECLINED = "declined";
+
+    protected function getterSentAt(): string
+    {
+        return $this->sent->format("Y-m-d H:i:s");
+    }
+
+    public function onBeforeInsert(): void
+    {
+        $this->sent = new \DateTimeImmutable();
+    }
 }
-?>

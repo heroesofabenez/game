@@ -12,34 +12,37 @@ use Nexendrie\Utils\Constants;
  * @property-read string $speaker
  * @property-read string $text
  */
-final class DialogueLine {
-  use \Nette\SmartObject;
+final class DialogueLine
+{
+    use \Nette\SmartObject;
 
-  private const SPEAKER_PLAYER = "player";
-  private const SPEAKER_NPC = "npc";
+    private const SPEAKER_PLAYER = "player";
+    private const SPEAKER_NPC = "npc";
 
-  private string $speaker = self::SPEAKER_PLAYER;
+    private string $speaker = self::SPEAKER_PLAYER;
 
-  /**
-   * @param string[] $names
-   */
-  public function __construct(string $speaker, private readonly string $text, public readonly array $names) {
-    $speaker = strtolower($speaker);
-    if(in_array($speaker, Constants::getConstantsValues(self::class, "SPEAKER_"), true)) {
-      $this->speaker = $speaker;
+    /**
+     * @param string[] $names
+     */
+    public function __construct(string $speaker, private readonly string $text, public readonly array $names)
+    {
+        $speaker = strtolower($speaker);
+        if (in_array($speaker, Constants::getConstantsValues(self::class, "SPEAKER_"), true)) {
+            $this->speaker = $speaker;
+        }
     }
-  }
-  
-  protected function getText(): string {
-    $replace = ["#npcName#", "#playerName#"];
-    return str_replace($replace, $this->names, $this->text);
-  }
-  
-  protected function getSpeaker(): string {
-    if($this->speaker === "npc") {
-      return $this->names[0];
+
+    protected function getText(): string
+    {
+        $replace = ["#npcName#", "#playerName#"];
+        return str_replace($replace, $this->names, $this->text);
     }
-    return $this->names[1];
-  }
+
+    protected function getSpeaker(): string
+    {
+        if ($this->speaker === "npc") {
+            return $this->names[0];
+        }
+        return $this->names[1];
+    }
 }
-?>

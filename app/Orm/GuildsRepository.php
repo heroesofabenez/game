@@ -14,18 +14,20 @@ use Nextras\Orm\Collection\ICollection;
  * @method ICollection|Guild[] findBy(array $conds)
  * @method ICollection|Guild[] findAll()
  */
-final class GuildsRepository extends \Nextras\Orm\Repository\Repository {
-  /**
-   * @return string[]
-   */
-  public static function getEntityClassNames(): array {
-    return [Guild::class];
-  }
-  
-  public function getByName(string $name): ?Guild {
-    return $this->getBy([
-      "name" => $name
-    ]);
-  }
+final class GuildsRepository extends \Nextras\Orm\Repository\Repository
+{
+    /**
+     * @return string[]
+     */
+    public static function getEntityClassNames(): array
+    {
+        return [Guild::class];
+    }
+
+    public function getByName(string $name): ?Guild
+    {
+        return $this->getBy([
+            "name" => $name
+        ]);
+    }
 }
-?>

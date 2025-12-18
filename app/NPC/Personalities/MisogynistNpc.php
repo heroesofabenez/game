@@ -5,16 +5,18 @@ namespace HeroesofAbenez\NPC\Personalities;
 
 use HeroesofAbenez\Orm\Npc;
 
-final class MisogynistNpc implements INpcPersonality {
-  public function getName(): string {
-    return Npc::PERSONALITY_MISOGYNIST;
-  }
-
-  public function getMood(\Nette\Security\IIdentity $user, Npc $npc): string {
-    if($user->gender !== \HeroesofAbenez\Orm\Character::GENDER_MALE) {
-      return Npc::PERSONALITY_HOSTILE;
+final class MisogynistNpc implements INpcPersonality
+{
+    public function getName(): string
+    {
+        return Npc::PERSONALITY_MISOGYNIST;
     }
-    return Npc::PERSONALITY_CRAZY;
-  }
+
+    public function getMood(\Nette\Security\IIdentity $user, Npc $npc): string
+    {
+        if ($user->gender !== \HeroesofAbenez\Orm\Character::GENDER_MALE) {
+            return Npc::PERSONALITY_HOSTILE;
+        }
+        return Npc::PERSONALITY_CRAZY;
+    }
 }
-?>

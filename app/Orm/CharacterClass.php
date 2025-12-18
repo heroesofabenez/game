@@ -40,50 +40,59 @@ use Nexendrie\Utils\Numbers;
  * @property OneHasMany|Npc[] $npcs {1:m Npc::$class}
  * @property-read string $mainStat {virtual}
  */
-final class CharacterClass extends \Nextras\Orm\Entity\Entity {
-  private const MIN_STATS = -5;
-  private const MAX_STATS = 5;
+final class CharacterClass extends \Nextras\Orm\Entity\Entity
+{
+    private const MIN_STATS = -5;
+    private const MAX_STATS = 5;
 
-  private Translator $translator;
+    private Translator $translator;
 
-  public function injectTranslator(Translator $translator): void {
-    $this->translator = $translator;
-  }
+    public function injectTranslator(Translator $translator): void
+    {
+        $this->translator = $translator;
+    }
 
-  protected function getterName(): string {
-    return $this->translator->translate("classes.$this->id.name");
-  }
+    protected function getterName(): string
+    {
+        return $this->translator->translate("classes.$this->id.name");
+    }
 
-  protected function getterDescription(): string {
-    return $this->translator->translate("classes.$this->id.description");
-  }
-  
-  protected function setterStrength(int $value): int {
-    return Numbers::range($value, self::MIN_STATS, self::MAX_STATS);
-  }
-  
-  protected function setterDexterity(int $value): int {
-    return Numbers::range($value, self::MIN_STATS, self::MAX_STATS);
-  }
-  
-  protected function setterConstitution(int $value): int {
-    return Numbers::range($value, self::MIN_STATS, self::MAX_STATS);
-  }
-  
-  protected function setterIntelligence(int $value): int {
-    return Numbers::range($value, self::MIN_STATS, self::MAX_STATS);
-  }
-  
-  protected function setterCharisma(int $value): int {
-    return Numbers::range($value, self::MIN_STATS, self::MAX_STATS);
-  }
+    protected function getterDescription(): string
+    {
+        return $this->translator->translate("classes.$this->id.description");
+    }
 
-  protected function getterMainStat(): string {
-    $stats = [
-      "strength" => $this->strength, "dexterity" => $this->dexterity, "constitution" => $this->constitution,
-      "intelligence" => $this->intelligence, "charisma" => $this->charisma,
-    ];
-    return (string) array_search(max($stats), $stats, true);
-  }
+    protected function setterStrength(int $value): int
+    {
+        return Numbers::range($value, self::MIN_STATS, self::MAX_STATS);
+    }
+
+    protected function setterDexterity(int $value): int
+    {
+        return Numbers::range($value, self::MIN_STATS, self::MAX_STATS);
+    }
+
+    protected function setterConstitution(int $value): int
+    {
+        return Numbers::range($value, self::MIN_STATS, self::MAX_STATS);
+    }
+
+    protected function setterIntelligence(int $value): int
+    {
+        return Numbers::range($value, self::MIN_STATS, self::MAX_STATS);
+    }
+
+    protected function setterCharisma(int $value): int
+    {
+        return Numbers::range($value, self::MIN_STATS, self::MAX_STATS);
+    }
+
+    protected function getterMainStat(): string
+    {
+        $stats = [
+            "strength" => $this->strength, "dexterity" => $this->dexterity, "constitution" => $this->constitution,
+            "intelligence" => $this->intelligence, "charisma" => $this->charisma,
+        ];
+        return (string) array_search(max($stats), $stats, true);
+    }
 }
-?>

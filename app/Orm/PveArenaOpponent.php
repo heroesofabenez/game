@@ -25,103 +25,107 @@ use HeroesofAbenez\Combat\BaseCharacterSkill;
  * @property-read Item|null $armor {virtual}
  * @property-read BaseCharacterSkill[] $skills {virtual}
  */
-final class PveArenaOpponent extends \Nextras\Orm\Entity\Entity {
-  public const GENDER_MALE = "male";
-  public const GENDER_FEMALE = "female";
+final class PveArenaOpponent extends \Nextras\Orm\Entity\Entity
+{
+    public const GENDER_MALE = "male";
+    public const GENDER_FEMALE = "female";
 
-  protected function setterLevel(int $value): int {
-    return Numbers::range($value, 1, 999);
-  }
-
-  protected function getterWeapon(): ?Item {
-    // @phpstan-ignore return.type
-    return $this->class->items->toCollection()->orderBy("requiredLevel", ICollection::DESC)
-      ->limitBy(1)
-      ->getBy([
-        ICollection::OR,
-        [
-          "requiredLevel<=" => $this->level,
-          "slot" => Item::SLOT_WEAPON,
-          "requiredSpecialization" => null,
-        ],
-        [
-          "requiredLevel<=" => $this->level,
-          "slot" => Item::SLOT_WEAPON,
-          "requiredSpecialization" => $this->specialization,
-        ]
-      ]);
-  }
-
-  protected function getterArmor(): ?Item {
-    // @phpstan-ignore return.type
-    return $this->class->items->toCollection()->orderBy("requiredLevel", ICollection::DESC)
-      ->limitBy(1)
-      ->getBy([
-        ICollection::OR,
-        [
-          "requiredLevel<=" => $this->level,
-          "slot" => Item::SLOT_ARMOR,
-          "requiredSpecialization" => null,
-        ],
-        [
-          "requiredLevel<=" => $this->level,
-          "slot" => Item::SLOT_ARMOR,
-          "requiredSpecialization" => $this->specialization,
-        ]
-      ]);
-  }
-
-  /**
-   * @return BaseCharacterSkill[]
-   */
-  protected function getterSkills(): array {
-    if($this->level === 1) {
-      return [];
+    protected function setterLevel(int $value): int
+    {
+        return Numbers::range($value, 1, 999);
     }
-    $skills = new CharacterSkillsCollection();
-    /** @var ICollection|SkillAttack[] $attackSkills */
-    $attackSkills = $this->class->attackSkills->toCollection()->findBy([
-      ICollection::OR,
-      [
-        "neededLevel<=" => $this->level,
-        "neededSpecialization" => null,
-      ],
-      [
-        "neededLevel<=" => $this->level,
-        "neededSpecialization" => $this->specialization,
-      ]
-    ]);
-    foreach($attackSkills as $skill) {
-      $skills[] = new \HeroesofAbenez\Combat\CharacterAttackSkill($skill->toDummy(), 0);
+
+    protected function getterWeapon(): ?Item
+    {
+        // @phpstan-ignore return.type
+        return $this->class->items->toCollection()->orderBy("requiredLevel", ICollection::DESC)
+            ->limitBy(1)
+            ->getBy([
+                ICollection::OR,
+                [
+                    "requiredLevel<=" => $this->level,
+                    "slot" => Item::SLOT_WEAPON,
+                    "requiredSpecialization" => null,
+                ],
+                [
+                    "requiredLevel<=" => $this->level,
+                    "slot" => Item::SLOT_WEAPON,
+                    "requiredSpecialization" => $this->specialization,
+                ]
+            ]);
     }
-    /** @var ICollection|SkillSpecial[] $specialSkills */
-    $specialSkills = $this->class->specialSkills->toCollection()->findBy([
-      ICollection::OR,
-      [
-        "neededLevel<=" => $this->level,
-        "neededSpecialization" => null,
-      ],
-      [
-        "neededLevel<=" => $this->level,
-        "neededSpecialization" => $this->specialization,
-      ]
-    ]);
-    foreach($specialSkills as $skill) {
-      $skills[] = new \HeroesofAbenez\Combat\CharacterSpecialSkill($skill->toDummy(), 0);
+
+    protected function getterArmor(): ?Item
+    {
+        // @phpstan-ignore return.type
+        return $this->class->items->toCollection()->orderBy("requiredLevel", ICollection::DESC)
+            ->limitBy(1)
+            ->getBy([
+                ICollection::OR,
+                [
+                    "requiredLevel<=" => $this->level,
+                    "slot" => Item::SLOT_ARMOR,
+                    "requiredSpecialization" => null,
+                ],
+                [
+                    "requiredLevel<=" => $this->level,
+                    "slot" => Item::SLOT_ARMOR,
+                    "requiredSpecialization" => $this->specialization,
+                ]
+            ]);
     }
-    $skillPoints = $this->level - 1;
-    for($i = 1; $skillPoints > 0; $i++) {
-      foreach($skills as $skill) {
-        if($skillPoints < 1) {
-          break;
+
+    /**
+     * @return BaseCharacterSkill[]
+     */
+    protected function getterSkills(): array
+    {
+        if ($this->level === 1) {
+            return [];
         }
-        if($skill->level + 1 <= $skill->skill->levels) {
-          $skill->level++;
+        $skills = new CharacterSkillsCollection();
+        /** @var ICollection|SkillAttack[] $attackSkills */
+        $attackSkills = $this->class->attackSkills->toCollection()->findBy([
+            ICollection::OR,
+            [
+                "neededLevel<=" => $this->level,
+                "neededSpecialization" => null,
+            ],
+            [
+                "neededLevel<=" => $this->level,
+                "neededSpecialization" => $this->specialization,
+            ]
+        ]);
+        foreach ($attackSkills as $skill) {
+            $skills[] = new \HeroesofAbenez\Combat\CharacterAttackSkill($skill->toDummy(), 0);
         }
-        $skillPoints--;
-      }
+        /** @var ICollection|SkillSpecial[] $specialSkills */
+        $specialSkills = $this->class->specialSkills->toCollection()->findBy([
+            ICollection::OR,
+            [
+                "neededLevel<=" => $this->level,
+                "neededSpecialization" => null,
+            ],
+            [
+                "neededLevel<=" => $this->level,
+                "neededSpecialization" => $this->specialization,
+            ]
+        ]);
+        foreach ($specialSkills as $skill) {
+            $skills[] = new \HeroesofAbenez\Combat\CharacterSpecialSkill($skill->toDummy(), 0);
+        }
+        $skillPoints = $this->level - 1;
+        for ($i = 1; $skillPoints > 0; $i++) {
+            foreach ($skills as $skill) {
+                if ($skillPoints < 1) {
+                    break;
+                }
+                if ($skill->level + 1 <= $skill->skill->levels) {
+                    $skill->level++;
+                }
+                $skillPoints--;
+            }
+        }
+        return $skills->getItems(["level>" => 0]);
     }
-    return $skills->getItems(["level>" => 0]);
-  }
 }
-?>

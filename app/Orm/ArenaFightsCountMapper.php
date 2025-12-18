@@ -8,9 +8,10 @@ namespace HeroesofAbenez\Orm;
  *
  * @author Jakub Konečný
  */
-final class ArenaFightsCountMapper extends \Nextras\Orm\Mapper\Dbal\DbalMapper {
-  public function getTableName(): string {
-    return "arena_fights_count";
-  }
+final class ArenaFightsCountMapper extends \Nextras\Orm\Mapper\Dbal\DbalMapper
+{
+    public function getTableName(): string
+    {
+        return "arena_fights_count";
+    }
 }
-?>

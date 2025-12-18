@@ -16,15 +16,17 @@ use Nextras\Orm\Relationships\OneHasMany;
  * @property OneHasMany|GuildPrivilege[] $privileges {1:m GuildPrivilege::$rank}
  * @property OneHasMany|Character[] $characters {1:m Character::$guildrank}
  */
-final class GuildRank extends \Nextras\Orm\Entity\Entity {
-  private Translator $translator;
+final class GuildRank extends \Nextras\Orm\Entity\Entity
+{
+    private Translator $translator;
 
-  public function injectTranslator(Translator $translator): void {
-    $this->translator = $translator;
-  }
+    public function injectTranslator(Translator $translator): void
+    {
+        $this->translator = $translator;
+    }
 
-  protected function getterNameT(): string {
-    return $this->translator->translate("guildranks.$this->id.name");
-  }
+    protected function getterNameT(): string
+    {
+        return $this->translator->translate("guildranks.$this->id.name");
+    }
 }
-?>

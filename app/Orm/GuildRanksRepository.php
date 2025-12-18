@@ -14,12 +14,13 @@ use Nextras\Orm\Collection\ICollection;
  * @method ICollection|GuildRank[] findBy(array $conds)
  * @method ICollection|GuildRank[] findAll()
  */
-final class GuildRanksRepository extends \Nextras\Orm\Repository\Repository {
-  /**
-   * @return string[]
-   */
-  public static function getEntityClassNames(): array {
-    return [GuildRank::class];
-  }
+final class GuildRanksRepository extends \Nextras\Orm\Repository\Repository
+{
+    /**
+     * @return string[]
+     */
+    public static function getEntityClassNames(): array
+    {
+        return [GuildRank::class];
+    }
 }
-?>

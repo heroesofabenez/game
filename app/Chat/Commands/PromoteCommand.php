@@ -18,33 +18,35 @@ use Nette\Localization\Translator;
  *
  * @author Jakub Konečný
  */
-final class PromoteCommand extends \HeroesofAbenez\Chat\ChatCommand {
-  public function __construct(private readonly Guild $model, private readonly Translator $translator) {
-  }
-  
-  public function execute(int $id = null): string {
-    if($id === null) {
-      return "";
+final class PromoteCommand extends \HeroesofAbenez\Chat\ChatCommand
+{
+    public function __construct(private readonly Guild $model, private readonly Translator $translator)
+    {
     }
-    try {
-      $this->model->promote($id);
-      $message = $this->translator->translate("messages.guild.promoted");
-    } catch(NotInGuildException) {
-      $message = $this->translator->translate("errors.guild.notInGuild");
-    } catch(MissingPermissionsException) {
-      $message = $this->translator->translate("errors.guild.missingPermissions");
-    } catch(PlayerNotFoundException) {
-      $message = $this->translator->translate("errors.guild.playerDoesNotExist");
-    } catch(PlayerNotInGuildException) {
-      $message = $this->translator->translate("errors.guild.playerNotInGuild");
-    } catch(CannotPromoteHigherRanksException) {
-      $message = $this->translator->translate("errors.guild.cannotPromoteHigherRanks");
-    } catch(CannotPromoteToGrandmasterException) {
-      $message = $this->translator->translate("errors.guild.cannotPromoteToGrandmaster");
-    } catch(CannotHaveMoreDeputiesException) {
-      $message = $this->translator->translate("errors.guild.cannotHaveMoreDeputies");
+
+    public function execute(int $id = null): string
+    {
+        if ($id === null) {
+            return "";
+        }
+        try {
+            $this->model->promote($id);
+            $message = $this->translator->translate("messages.guild.promoted");
+        } catch (NotInGuildException) {
+            $message = $this->translator->translate("errors.guild.notInGuild");
+        } catch (MissingPermissionsException) {
+            $message = $this->translator->translate("errors.guild.missingPermissions");
+        } catch (PlayerNotFoundException) {
+            $message = $this->translator->translate("errors.guild.playerDoesNotExist");
+        } catch (PlayerNotInGuildException) {
+            $message = $this->translator->translate("errors.guild.playerNotInGuild");
+        } catch (CannotPromoteHigherRanksException) {
+            $message = $this->translator->translate("errors.guild.cannotPromoteHigherRanks");
+        } catch (CannotPromoteToGrandmasterException) {
+            $message = $this->translator->translate("errors.guild.cannotPromoteToGrandmaster");
+        } catch (CannotHaveMoreDeputiesException) {
+            $message = $this->translator->translate("errors.guild.cannotHaveMoreDeputies");
+        }
+        return $message;
     }
-    return $message;
-  }
 }
-?>

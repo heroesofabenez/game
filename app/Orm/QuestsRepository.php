@@ -14,9 +14,10 @@ use Nextras\Orm\Collection\ICollection;
  * @method ICollection|Quest[] findBy(array $conds)
  * @method ICollection|Quest[] findAll()
  */
-final class QuestsRepository extends \Nextras\Orm\Repository\Repository {
-  public static function getEntityClassNames(): array {
-    return [Quest::class];
-  }
+final class QuestsRepository extends \Nextras\Orm\Repository\Repository
+{
+    public static function getEntityClassNames(): array
+    {
+        return [Quest::class];
+    }
 }
-?>

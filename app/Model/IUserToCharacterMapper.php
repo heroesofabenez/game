@@ -10,10 +10,10 @@ namespace HeroesofAbenez\Model;
  *
  * @author Jakub Konečný
  */
-interface IUserToCharacterMapper {
-  public const USER_ID_NOT_LOGGED_IN = 0;
-  public const USER_ID_NO_CHARACTER = -1;
+interface IUserToCharacterMapper
+{
+    public const USER_ID_NOT_LOGGED_IN = 0;
+    public const USER_ID_NO_CHARACTER = -1;
 
-  public function getRealId(): int;
+    public function getRealId(): int;
 }
-?>

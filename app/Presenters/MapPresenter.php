@@ -13,43 +13,46 @@ use HeroesofAbenez\Orm\QuestStage;
  *
  * @author Jakub Konečný
  */
-final class MapPresenter extends BasePresenter {
-  public function __construct(private readonly Map $model, private readonly Location $locationModel, private readonly ApplicationDirectories $directories) {
-    parent::__construct();
-  }
-  
-  public function actionLocal(): void {
-    $data = $this->model->local();
-    $this->template->wwwDir = $this->directories->wwwDir;
-    foreach($data as $key => $value) {
-      if($key === "areas") {
-        foreach($value as $area) {
-          $area->href = "";
-          if($area->stage !== $this->user->identity->stage) {
-            $area->href = $this->link("Travel:stage", $area->stage);
-          }
-        }
-      }
-      $this->template->$key = $value;
+final class MapPresenter extends BasePresenter
+{
+    public function __construct(private readonly Map $model, private readonly Location $locationModel, private readonly ApplicationDirectories $directories)
+    {
+        parent::__construct();
     }
-  }
 
-  public function actionGlobal(): void {
-    $data = $this->model->global();
-    $this->template->wwwDir = $this->directories->wwwDir;
-    /** @var QuestStage $currentStage */
-    $currentStage = $this->locationModel->getStage($this->user->identity->stage);
-    foreach($data as $key => $value) {
-      if($key === "areas") {
-        foreach($value as $area) {
-          $area->href = "";
-          if($area->area !== $currentStage->area->id) {
-            $area->href = $this->link("Travel:area", $area->area);
-          }
+    public function actionLocal(): void
+    {
+        $data = $this->model->local();
+        $this->template->wwwDir = $this->directories->wwwDir;
+        foreach ($data as $key => $value) {
+            if ($key === "areas") {
+                foreach ($value as $area) {
+                    $area->href = "";
+                    if ($area->stage !== $this->user->identity->stage) {
+                        $area->href = $this->link("Travel:stage", $area->stage);
+                    }
+                }
+            }
+            $this->template->$key = $value;
         }
-      }
-      $this->template->$key = $value;
     }
-  }
+
+    public function actionGlobal(): void
+    {
+        $data = $this->model->global();
+        $this->template->wwwDir = $this->directories->wwwDir;
+        /** @var QuestStage $currentStage */
+        $currentStage = $this->locationModel->getStage($this->user->identity->stage);
+        foreach ($data as $key => $value) {
+            if ($key === "areas") {
+                foreach ($value as $area) {
+                    $area->href = "";
+                    if ($area->area !== $currentStage->area->id) {
+                        $area->href = $this->link("Travel:area", $area->area);
+                    }
+                }
+            }
+            $this->template->$key = $value;
+        }
+    }
 }
-?>

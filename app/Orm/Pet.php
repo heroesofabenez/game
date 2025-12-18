@@ -15,23 +15,26 @@ namespace HeroesofAbenez\Orm;
  * @property-read string $bonusStat {virtual}
  * @property-read int $bonusValue {virtual}
  */
-final class Pet extends \Nextras\Orm\Entity\Entity {
-  protected function getterBonusStat(): string {
-    return $this->type->bonusStat;
-  }
-  
-  protected function getterBonusValue(): int {
-    return $this->type->bonusValue;
-  }
-  
-  public function toCombatPet(): \HeroesofAbenez\Combat\Pet {
-    $data = [];
-    $stats = ["id", "deployed", "bonusStat", "bonusValue", ];
-    foreach($stats as $stat) {
-      $data[$stat] = $this->$stat;
+final class Pet extends \Nextras\Orm\Entity\Entity
+{
+    protected function getterBonusStat(): string
+    {
+        return $this->type->bonusStat;
     }
-    
-    return new \HeroesofAbenez\Combat\Pet($data);
-  }
+
+    protected function getterBonusValue(): int
+    {
+        return $this->type->bonusValue;
+    }
+
+    public function toCombatPet(): \HeroesofAbenez\Combat\Pet
+    {
+        $data = [];
+        $stats = ["id", "deployed", "bonusStat", "bonusValue",];
+        foreach ($stats as $stat) {
+            $data[$stat] = $this->$stat;
+        }
+
+        return new \HeroesofAbenez\Combat\Pet($data);
+    }
 }
-?>

@@ -15,9 +15,10 @@ use Nexendrie\Utils\Numbers;
  * @property int $part
  * @property string $text
  */
-final class Introduction extends \Nextras\Orm\Entity\Entity {
-  protected function setterPart(int $value): int {
-    return Numbers::range($value, 1, 9);
-  }
+final class Introduction extends \Nextras\Orm\Entity\Entity
+{
+    protected function setterPart(int $value): int
+    {
+        return Numbers::range($value, 1, 9);
+    }
 }
-?>

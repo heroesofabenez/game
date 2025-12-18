@@ -8,9 +8,10 @@ namespace HeroesofAbenez\Orm;
  *
  * @author Jakub Konečný
  */
-final class SkillSpecialsMapper extends \Nextras\Orm\Mapper\Dbal\DbalMapper {
-  public function getTableName(): string {
-    return "skills_specials";
-  }
+final class SkillSpecialsMapper extends \Nextras\Orm\Mapper\Dbal\DbalMapper
+{
+    public function getTableName(): string
+    {
+        return "skills_specials";
+    }
 }
-?>

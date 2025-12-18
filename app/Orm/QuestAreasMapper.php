@@ -8,7 +8,6 @@ namespace HeroesofAbenez\Orm;
  *
  * @author Jakub Konečný
  */
-final class QuestAreasMapper extends \Nextras\Orm\Mapper\Dbal\DbalMapper {
-  
+final class QuestAreasMapper extends \Nextras\Orm\Mapper\Dbal\DbalMapper
+{
 }
-?>

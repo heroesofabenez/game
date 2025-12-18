@@ -12,71 +12,78 @@ use Nette\Application\BadRequestException;
  * @author Jakub Konečný
  * @skip
  */
-final class NpcPresenterTest extends \Tester\TestCase {
-  use TPresenter;
-  use \HeroesofAbenez\Model\TCharacterControl;
-  
-  public function testDefault(): void {
-    Assert::exception(function() {
-      $this->checkAction("Npc:default");
-    }, BadRequestException::class);
-  }
-  
-  public function testView(): void {
-    $this->checkAction("Npc:view", ["id" => 1]);
-    $this->checkAction("Npc:view", ["id" => 2]);
-    Assert::exception(function() {
-      $this->checkAction("Npc:view", ["id" => 5000]);
-    }, BadRequestException::class);
-  }
-  
-  public function testTalk(): void {
-    $this->checkAction("Npc:talk", ["id" => 1]);
-    $this->checkForward("Npc:talk", "Npc:unavailable", ["id" => 2]);
-    Assert::exception(function() {
-      $this->checkAction("Npc:talk", ["id" => 5000]);
-    }, BadRequestException::class);
-  }
-  
-  public function testQuests(): void {
-    $this->checkAction("Npc:quests", ["id" => 1]);
-    $this->checkForward("Npc:quests", "Npc:unavailable", ["id" => 2]);
-    Assert::exception(function() {
-      $this->checkAction("Npc:quests", ["id" => 5000]);
-    }, BadRequestException::class);
-  }
-  
-  public function testTrade(): void {
-    $this->checkRedirect("Npc:trade", "/npc/1", ["id" => 1]);
-    $this->checkForward("Npc:trade", "Npc:unavailable", ["id" => 2]);
-    Assert::exception(function() {
-      $this->checkAction("Npc:trade", ["id" => 5000]);
-    }, BadRequestException::class);
-    $this->modifyCharacter(["currentStage" => 3], function() {
-      $this->checkAction("Npc:trade", ["id" => 2]);
-    });
-  }
-  
-  public function testFight(): void {
-    $this->checkRedirect("Npc:fight", "/npc/1", ["id" => 1]);
-    $this->checkForward("Npc:fight", "Npc:unavailable", ["id" => 2]);
-    Assert::exception(function() {
-      $this->checkAction("Npc:fight", ["id" => 5000]);
-    }, BadRequestException::class);
-  }
+final class NpcPresenterTest extends \Tester\TestCase
+{
+    use TPresenter;
+    use \HeroesofAbenez\Model\TCharacterControl;
 
-  public function testRepair(): void {
-    $this->checkRedirect("Npc:repair", "/npc/1", ["id" => 1]);
-    $this->checkForward("Npc:repair", "Npc:unavailable", ["id" => 2]);
-    Assert::exception(function() {
-      $this->checkAction("Npc:repair", ["id" => 5000]);
-    }, BadRequestException::class);
-    $this->modifyCharacter(["currentStage" => 3], function() {
-      $this->checkAction("Npc:repair", ["id" => 2]);
-    });
-  }
+    public function testDefault(): void
+    {
+        Assert::exception(function () {
+            $this->checkAction("Npc:default");
+        }, BadRequestException::class);
+    }
+
+    public function testView(): void
+    {
+        $this->checkAction("Npc:view", ["id" => 1]);
+        $this->checkAction("Npc:view", ["id" => 2]);
+        Assert::exception(function () {
+            $this->checkAction("Npc:view", ["id" => 5000]);
+        }, BadRequestException::class);
+    }
+
+    public function testTalk(): void
+    {
+        $this->checkAction("Npc:talk", ["id" => 1]);
+        $this->checkForward("Npc:talk", "Npc:unavailable", ["id" => 2]);
+        Assert::exception(function () {
+            $this->checkAction("Npc:talk", ["id" => 5000]);
+        }, BadRequestException::class);
+    }
+
+    public function testQuests(): void
+    {
+        $this->checkAction("Npc:quests", ["id" => 1]);
+        $this->checkForward("Npc:quests", "Npc:unavailable", ["id" => 2]);
+        Assert::exception(function () {
+            $this->checkAction("Npc:quests", ["id" => 5000]);
+        }, BadRequestException::class);
+    }
+
+    public function testTrade(): void
+    {
+        $this->checkRedirect("Npc:trade", "/npc/1", ["id" => 1]);
+        $this->checkForward("Npc:trade", "Npc:unavailable", ["id" => 2]);
+        Assert::exception(function () {
+            $this->checkAction("Npc:trade", ["id" => 5000]);
+        }, BadRequestException::class);
+        $this->modifyCharacter(["currentStage" => 3], function () {
+            $this->checkAction("Npc:trade", ["id" => 2]);
+        });
+    }
+
+    public function testFight(): void
+    {
+        $this->checkRedirect("Npc:fight", "/npc/1", ["id" => 1]);
+        $this->checkForward("Npc:fight", "Npc:unavailable", ["id" => 2]);
+        Assert::exception(function () {
+            $this->checkAction("Npc:fight", ["id" => 5000]);
+        }, BadRequestException::class);
+    }
+
+    public function testRepair(): void
+    {
+        $this->checkRedirect("Npc:repair", "/npc/1", ["id" => 1]);
+        $this->checkForward("Npc:repair", "Npc:unavailable", ["id" => 2]);
+        Assert::exception(function () {
+            $this->checkAction("Npc:repair", ["id" => 5000]);
+        }, BadRequestException::class);
+        $this->modifyCharacter(["currentStage" => 3], function () {
+            $this->checkAction("Npc:repair", ["id" => 2]);
+        });
+    }
 }
 
 $test = new NpcPresenterTest();
 $test->run();
-?>

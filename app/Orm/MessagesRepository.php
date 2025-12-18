@@ -14,27 +14,30 @@ use Nextras\Orm\Collection\ICollection;
  * @method ICollection|Message[] findBy(array $conds)
  * @method ICollection|Message[] findAll()
  */
-final class MessagesRepository extends \Nextras\Orm\Repository\Repository {
-  public static function getEntityClassNames(): array {
-    return [Message::class];
-  }
-  
-  /**
-   * @return ICollection|Message[]
-   */
-  public function findByFrom(Character|int $user): ICollection {
-    return $this->findBy([
-      "from" => $user
-    ]);
-  }
-  
-  /**
-   * @return ICollection|Message[]
-   */
-  public function findByTo(Character|int $user): ICollection {
-    return $this->findBy([
-      "to" => $user
-    ]);
-  }
+final class MessagesRepository extends \Nextras\Orm\Repository\Repository
+{
+    public static function getEntityClassNames(): array
+    {
+        return [Message::class];
+    }
+
+    /**
+     * @return ICollection|Message[]
+     */
+    public function findByFrom(Character|int $user): ICollection
+    {
+        return $this->findBy([
+            "from" => $user
+        ]);
+    }
+
+    /**
+     * @return ICollection|Message[]
+     */
+    public function findByTo(Character|int $user): ICollection
+    {
+        return $this->findBy([
+            "to" => $user
+        ]);
+    }
 }
-?>

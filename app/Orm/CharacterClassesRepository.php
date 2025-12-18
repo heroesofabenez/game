@@ -14,12 +14,13 @@ use Nextras\Orm\Collection\ICollection;
  * @method ICollection|CharacterClass[] findBy(array $conds)
  * @method ICollection|CharacterClass[] findAll()
  */
-final class CharacterClassesRepository extends \Nextras\Orm\Repository\Repository {
-  /**
-   * @return string[]
-   */
-  public static function getEntityClassNames(): array {
-    return [CharacterClass::class];
-  }
+final class CharacterClassesRepository extends \Nextras\Orm\Repository\Repository
+{
+    /**
+     * @return string[]
+     */
+    public static function getEntityClassNames(): array
+    {
+        return [CharacterClass::class];
+    }
 }
-?>

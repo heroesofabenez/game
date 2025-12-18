@@ -14,12 +14,13 @@ use Nextras\Orm\Collection\ICollection;
  * @method ICollection|RoutesArea[] findBy(array $conds)
  * @method ICollection|RoutesArea[] findAll()
  */
-final class RoutesAreasRepository extends \Nextras\Orm\Repository\Repository {
-  /**
-   * @return string[]
-   */
-  public static function getEntityClassNames(): array {
-    return [RoutesArea::class];
-  }
+final class RoutesAreasRepository extends \Nextras\Orm\Repository\Repository
+{
+    /**
+     * @return string[]
+     */
+    public static function getEntityClassNames(): array
+    {
+        return [RoutesArea::class];
+    }
 }
-?>

@@ -9,14 +9,15 @@ require __DIR__ . "/../../bootstrap.php";
  * @author Jakub Konečný
  * @skip
  */
-final class HomepagePresenterTest extends \Tester\TestCase {
-  use TPresenter;
-  
-  public function testDefault(): void {
-    $this->checkAction("Homepage:default");
-  }
+final class HomepagePresenterTest extends \Tester\TestCase
+{
+    use TPresenter;
+
+    public function testDefault(): void
+    {
+        $this->checkAction("Homepage:default");
+    }
 }
 
 $test = new HomepagePresenterTest();
 $test->run();
-?>
