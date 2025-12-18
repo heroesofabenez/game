@@ -2,6 +2,8 @@ build:
     environment:
         php:
             version: 8.1
+            pecl_extensions:
+                - pcov
         postgresql: false
         redis: false
         rabbitmq: false
