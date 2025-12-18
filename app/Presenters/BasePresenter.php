@@ -68,10 +68,10 @@ abstract class BasePresenter extends \Nette\Application\UI\Presenter
         switch ($uid) {
             case IUserToCharacterMapper::USER_ID_NO_CHARACTER:
                 $this->redirect("Character:create");
-                break;
+                break; // @phpstan-ignore deadCode.unreachable
             case IUserToCharacterMapper::USER_ID_NOT_LOGGED_IN:
                 $this->redirectUrl("http://heroesofabenez.tk/");
-                break;
+                break; // @phpstan-ignore deadCode.unreachable
         }
         if ($this->user->identity->stage === null) {
             $this->redirect("Intro:default");

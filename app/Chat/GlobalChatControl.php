@@ -12,7 +12,7 @@ use HeroesofAbenez\Orm\Model as ORM;
  */
 final class GlobalChatControl extends ChatControl
 {
-    public function __construct(ORM $orm, IDatabaseAdapter $databaseAdapter, \Nette\Security\User $user)
+    public function __construct(ORM $orm, DatabaseAdapter $databaseAdapter, \Nette\Security\User $user)
     {
         /** @var \HeroesofAbenez\Orm\QuestStage $stage */
         $stage = $orm->stages->getById($user->identity->stage);

@@ -11,7 +11,7 @@ use Nette\Localization\Translator;
  *
  * @author Jakub Konečný
  */
-final class LocationCommand extends \HeroesofAbenez\Chat\ChatCommand
+final class LocationCommand extends \HeroesofAbenez\Chat\BaseChatCommand
 {
     public function __construct(private readonly \Nette\Security\User $user, private readonly ORM $orm, private readonly Translator $translator)
     {

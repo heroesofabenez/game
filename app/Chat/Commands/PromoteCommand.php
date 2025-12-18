@@ -18,7 +18,7 @@ use Nette\Localization\Translator;
  *
  * @author Jakub Konečný
  */
-final class PromoteCommand extends \HeroesofAbenez\Chat\ChatCommand
+final class PromoteCommand extends \HeroesofAbenez\Chat\BaseChatCommand
 {
     public function __construct(private readonly Guild $model, private readonly Translator $translator)
     {
