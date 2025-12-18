@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace HeroesofAbenez\Presenters;
 
 use Nette\Application\UI\Form;
-use HeroesofAbenez\Postoffice\IPostofficeControlFactory;
+use HeroesofAbenez\Postoffice\PostofficeControlFactory;
 use HeroesofAbenez\Postoffice\PostofficeControl;
 
 /**
@@ -14,9 +14,9 @@ use HeroesofAbenez\Postoffice\PostofficeControl;
  */
 final class PostofficePresenter extends BasePresenter
 {
-    private IPostofficeControlFactory $poFactory;
+    private PostofficeControlFactory $poFactory;
 
-    public function injectPoFactory(IPostofficeControlFactory $factory): void
+    public function injectPoFactory(PostofficeControlFactory $factory): void
     {
         $this->poFactory = $factory;
     }

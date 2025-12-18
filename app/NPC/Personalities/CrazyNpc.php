@@ -6,7 +6,7 @@ namespace HeroesofAbenez\NPC\Personalities;
 use HeroesofAbenez\Orm\Npc;
 use HeroesofAbenez\Utils\Karma;
 
-final class CrazyNpc implements INpcPersonality
+final class CrazyNpc implements NpcPersonality
 {
     public function getName(): string
     {

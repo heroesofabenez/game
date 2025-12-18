@@ -6,7 +6,7 @@ namespace HeroesofAbenez\NPC\Personalities;
 use HeroesofAbenez\Orm\Npc;
 use HeroesofAbenez\Utils\Karma;
 
-final class ShyNpc implements INpcPersonality
+final class ShyNpc implements NpcPersonality
 {
     public function getName(): string
     {

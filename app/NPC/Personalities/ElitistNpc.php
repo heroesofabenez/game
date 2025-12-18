@@ -5,7 +5,7 @@ namespace HeroesofAbenez\NPC\Personalities;
 
 use HeroesofAbenez\Orm\Npc;
 
-final class ElitistNpc implements INpcPersonality
+final class ElitistNpc implements NpcPersonality
 {
     public function getName(): string
     {

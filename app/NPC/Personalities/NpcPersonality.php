@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\NPC\Personalities;
 
-interface INpcPersonality
+interface NpcPersonality
 {
     public function getName(): string;
 

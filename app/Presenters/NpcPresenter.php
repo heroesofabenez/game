@@ -6,11 +6,11 @@ namespace HeroesofAbenez\Presenters;
 use HeroesofAbenez\Model\Item;
 use HeroesofAbenez\Model\Journal;
 use HeroesofAbenez\Model\NPC;
-use HeroesofAbenez\NPC\INPCDialogueControlFactory;
+use HeroesofAbenez\NPC\NPCDialogueControlFactory;
 use HeroesofAbenez\NPC\NPCDialogueControl;
-use HeroesofAbenez\NPC\INPCQuestsControlFactory;
+use HeroesofAbenez\NPC\NPCQuestsControlFactory;
 use HeroesofAbenez\NPC\NPCQuestsControl;
-use HeroesofAbenez\NPC\INPCShopControlFactory;
+use HeroesofAbenez\NPC\NPCShopControlFactory;
 use HeroesofAbenez\NPC\NPCShopControl;
 use HeroesofAbenez\Orm\Npc as NpcEntity;
 use HeroesofAbenez\Model\ItemNotFoundException;
@@ -26,26 +26,26 @@ use HeroesofAbenez\Model\ItemNotDamagedException;
 final class NpcPresenter extends BasePresenter
 {
     private NpcEntity $npc;
-    private INPCDialogueControlFactory $npcDialogueFactory;
-    private INPCQuestsControlFactory $npcQuestsFactory;
-    private INPCShopControlFactory $npcShopFactory;
+    private NPCDialogueControlFactory $npcDialogueFactory;
+    private NPCQuestsControlFactory $npcQuestsFactory;
+    private NPCShopControlFactory $npcShopFactory;
 
     public function __construct(private readonly NPC $model, private readonly Journal $journalModel, private readonly Item $itemModel)
     {
         parent::__construct();
     }
 
-    public function injectNpcDialogueFactory(INPCDialogueControlFactory $npcDialogueFactory): void
+    public function injectNpcDialogueFactory(NPCDialogueControlFactory $npcDialogueFactory): void
     {
         $this->npcDialogueFactory = $npcDialogueFactory;
     }
 
-    public function injectNpcQuestsFactory(INPCQuestsControlFactory $npcQuestsFactory): void
+    public function injectNpcQuestsFactory(NPCQuestsControlFactory $npcQuestsFactory): void
     {
         $this->npcQuestsFactory = $npcQuestsFactory;
     }
 
-    public function injectNpcShopFactory(INPCShopControlFactory $npcShopFactory): void
+    public function injectNpcShopFactory(NPCShopControlFactory $npcShopFactory): void
     {
         $this->npcShopFactory = $npcShopFactory;
     }

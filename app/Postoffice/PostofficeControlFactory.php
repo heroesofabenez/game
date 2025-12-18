@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Postoffice;
 
-interface IPostofficeControlFactory
+interface PostofficeControlFactory
 {
     public function create(): PostofficeControl;
 }

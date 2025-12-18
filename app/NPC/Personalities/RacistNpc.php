@@ -5,7 +5,7 @@ namespace HeroesofAbenez\NPC\Personalities;
 
 use HeroesofAbenez\Orm\Npc;
 
-final class RacistNpc implements INpcPersonality
+final class RacistNpc implements NpcPersonality
 {
     public function getName(): string
     {

@@ -6,7 +6,7 @@ namespace HeroesofAbenez\Model\DI;
 require __DIR__ . "/../../../bootstrap.php";
 
 use Tester\Assert;
-use HeroesofAbenez\Model\IUserToCharacterMapper;
+use HeroesofAbenez\Model\UserToCharacterMapper;
 use HeroesofAbenez\Model\TestingUserToCharacterMapper;
 use HeroesofAbenez\Model\DevelopmentUserToCharacterMapper;
 
@@ -19,13 +19,13 @@ final class HOAExtensionTest extends \Tester\TestCase
 
     public function testUserToCharacterMapper(): void
     {
-        Assert::type(TestingUserToCharacterMapper::class, $this->getService(IUserToCharacterMapper::class));
+        Assert::type(TestingUserToCharacterMapper::class, $this->getService(UserToCharacterMapper::class));
         $this->refreshContainer([
             "hoa" => [
                 "userToCharacterMapper" => DevelopmentUserToCharacterMapper::class
             ]
         ]);
-        Assert::type(DevelopmentUserToCharacterMapper::class, $this->getService(IUserToCharacterMapper::class));
+        Assert::type(DevelopmentUserToCharacterMapper::class, $this->getService(UserToCharacterMapper::class));
         Assert::exception(function () {
             $this->refreshContainer([
                 "hoa" => [

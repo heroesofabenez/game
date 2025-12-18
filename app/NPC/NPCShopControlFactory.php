@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\NPC;
 
-interface INPCShopControlFactory
+interface NPCShopControlFactory
 {
     public function create(): NPCShopControl;
 }

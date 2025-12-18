@@ -3,14 +3,14 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Model;
 
-use HeroesofAbenez\NPC\Personalities\INpcPersonality;
+use HeroesofAbenez\NPC\Personalities\NpcPersonality;
 
 final class NpcPersonalityChooser extends \Nexendrie\Utils\Collection
 {
-    protected string $class = INpcPersonality::class;
+    protected string $class = NpcPersonality::class;
 
     /**
-     * @param INpcPersonality[] $items
+     * @param NpcPersonality[] $items
      */
     public function __construct(array $items)
     {
@@ -20,12 +20,12 @@ final class NpcPersonalityChooser extends \Nexendrie\Utils\Collection
         }
     }
 
-    public function getPersonality(\HeroesofAbenez\Orm\Npc $npc): INpcPersonality
+    public function getPersonality(\HeroesofAbenez\Orm\Npc $npc): NpcPersonality
     {
-        /** @var INpcPersonality|null $personality */
+        /** @var NpcPersonality|null $personality */
         $personality = $this->getItem(["getName()" => $npc->personality]);
         if ($personality === null) {
-            $personality = new class ($npc->personality) implements INpcPersonality {
+            $personality = new class ($npc->personality) implements NpcPersonality {
                 public function __construct(private string $personality)
                 {
                 }

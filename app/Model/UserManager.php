@@ -17,7 +17,7 @@ use Nette\Security\IIdentity;
  */
 final class UserManager implements \Nette\Security\Authenticator
 {
-    public function __construct(private readonly ORM $orm, private readonly IUserToCharacterMapper $userToCharacterMapper, private readonly CharacterBuilder $cb)
+    public function __construct(private readonly ORM $orm, private readonly UserToCharacterMapper $userToCharacterMapper, private readonly CharacterBuilder $cb)
     {
     }
 
@@ -27,12 +27,12 @@ final class UserManager implements \Nette\Security\Authenticator
     public function authenticate(string $user, string $password): IIdentity
     {
         $uid = $this->userToCharacterMapper->getRealId();
-        if ($uid === IUserToCharacterMapper::USER_ID_NOT_LOGGED_IN) {
-            return new SimpleIdentity(IUserToCharacterMapper::USER_ID_NOT_LOGGED_IN, "guest");
+        if ($uid === UserToCharacterMapper::USER_ID_NOT_LOGGED_IN) {
+            return new SimpleIdentity(UserToCharacterMapper::USER_ID_NOT_LOGGED_IN, "guest");
         }
         $char = $this->orm->characters->getByOwner($uid);
         if ($char === null) {
-            return new SimpleIdentity(IUserToCharacterMapper::USER_ID_NO_CHARACTER, "guest");
+            return new SimpleIdentity(UserToCharacterMapper::USER_ID_NO_CHARACTER, "guest");
         }
         $data = [
             "name" => $char->name, "race" => $char->race->id, "gender" => $char->gender,

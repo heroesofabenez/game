@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Presenters;
 
-use HeroesofAbenez\Model\IUserToCharacterMapper;
+use HeroesofAbenez\Model\UserToCharacterMapper;
 use Nette\Localization\Translator;
 use Nexendrie\Menu\IMenuControlFactory;
 use Nexendrie\Menu\MenuControl;
@@ -53,23 +53,23 @@ abstract class BasePresenter extends \Nette\Application\UI\Presenter
             $this->user->login("");
         }
         $uid = $this->user->id;
-        if ($this instanceof CharacterPresenter && $uid === IUserToCharacterMapper::USER_ID_NO_CHARACTER) {
+        if ($this instanceof CharacterPresenter && $uid === UserToCharacterMapper::USER_ID_NO_CHARACTER) {
             return;
         }
         if ($this instanceof CharacterPresenter && $this->user->identity->stage === null) {
             return;
         }
-        if ($this instanceof CharacterPresenter && $uid > IUserToCharacterMapper::USER_ID_NOT_LOGGED_IN) {
+        if ($this instanceof CharacterPresenter && $uid > UserToCharacterMapper::USER_ID_NOT_LOGGED_IN) {
             $this->redirectPermanent("Homepage:default");
         }
         if ($this instanceof IntroPresenter && $this->user->identity->stage === null) {
             return;
         }
         switch ($uid) {
-            case IUserToCharacterMapper::USER_ID_NO_CHARACTER:
+            case UserToCharacterMapper::USER_ID_NO_CHARACTER:
                 $this->redirect("Character:create");
                 break; // @phpstan-ignore deadCode.unreachable
-            case IUserToCharacterMapper::USER_ID_NOT_LOGGED_IN:
+            case UserToCharacterMapper::USER_ID_NOT_LOGGED_IN:
                 $this->redirectUrl("http://heroesofabenez.tk/");
                 break; // @phpstan-ignore deadCode.unreachable
         }

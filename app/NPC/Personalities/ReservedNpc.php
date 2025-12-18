@@ -5,7 +5,7 @@ namespace HeroesofAbenez\NPC\Personalities;
 
 use HeroesofAbenez\Orm\Npc;
 
-final class ReservedNpc implements INpcPersonality
+final class ReservedNpc implements NpcPersonality
 {
     public function getName(): string
     {

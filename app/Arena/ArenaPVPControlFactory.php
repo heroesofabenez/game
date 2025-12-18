@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Arena;
 
-interface IArenaPVPControlFactory
+interface ArenaPVPControlFactory
 {
     public function create(): ArenaPVPControl;
 }

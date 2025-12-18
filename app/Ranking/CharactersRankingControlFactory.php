@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Ranking;
 
-interface ICharactersRankingControlFactory
+interface CharactersRankingControlFactory
 {
     public function create(): CharactersRankingControl;
 }

@@ -5,7 +5,7 @@ namespace HeroesofAbenez\NPC\Personalities;
 
 use HeroesofAbenez\Orm\Npc;
 
-final class MisogynistNpc implements INpcPersonality
+final class MisogynistNpc implements NpcPersonality
 {
     public function getName(): string
     {

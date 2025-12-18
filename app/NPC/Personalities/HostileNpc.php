@@ -5,7 +5,7 @@ namespace HeroesofAbenez\NPC\Personalities;
 
 use HeroesofAbenez\Orm\Npc;
 
-final class HostileNpc implements INpcPersonality
+final class HostileNpc implements NpcPersonality
 {
     public function getName(): string
     {

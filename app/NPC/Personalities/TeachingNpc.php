@@ -5,7 +5,7 @@ namespace HeroesofAbenez\NPC\Personalities;
 
 use HeroesofAbenez\Orm\Npc;
 
-final class TeachingNpc implements INpcPersonality
+final class TeachingNpc implements NpcPersonality
 {
     public function getName(): string
     {

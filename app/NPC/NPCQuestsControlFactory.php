@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\NPC;
 
-interface INPCQuestsControlFactory
+interface NPCQuestsControlFactory
 {
     public function create(): NPCQuestsControl;
 }

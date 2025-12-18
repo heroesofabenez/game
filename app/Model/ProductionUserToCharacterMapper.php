@@ -9,7 +9,7 @@ namespace HeroesofAbenez\Model;
  *
  * @author Jakub Konečný
  */
-final class ProductionUserToCharacterMapper implements IUserToCharacterMapper
+final class ProductionUserToCharacterMapper implements UserToCharacterMapper
 {
     public function getRealId(): int
     {

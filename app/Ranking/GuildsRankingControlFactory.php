@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Ranking;
 
-interface IGuildsRankingControlFactory
+interface GuildsRankingControlFactory
 {
     public function create(): GuildsRankingControl;
 }

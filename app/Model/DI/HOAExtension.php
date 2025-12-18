@@ -6,7 +6,7 @@ namespace HeroesofAbenez\Model\DI;
 use HeroesofAbenez;
 use Nette\DI\Helpers;
 use Nette\Schema\Expect;
-use HeroesofAbenez\Model\IUserToCharacterMapper;
+use HeroesofAbenez\Model\UserToCharacterMapper;
 use HeroesofAbenez\Model\DevelopmentUserToCharacterMapper;
 
 /**
@@ -52,7 +52,7 @@ final class HOAExtension extends \Nette\DI\CompilerExtension
     {
         $config = $this->getConfig();
         $mapper = $config["userToCharacterMapper"];
-        if (!class_exists($mapper) || !is_subclass_of($mapper, IUserToCharacterMapper::class)) {
+        if (!class_exists($mapper) || !is_subclass_of($mapper, UserToCharacterMapper::class)) {
             throw new \RuntimeException("Invalid user to character mapper $mapper.");
         }
         return $mapper;
@@ -143,9 +143,9 @@ final class HOAExtension extends \Nette\DI\CompilerExtension
     {
         $builder = $this->getContainerBuilder();
         $builder->addFactoryDefinition($this->prefix("arena.pve"))
-            ->setImplement(HeroesofAbenez\Arena\IArenaPVEControlFactory::class);
+            ->setImplement(HeroesofAbenez\Arena\ArenaPVEControlFactory::class);
         $builder->addFactoryDefinition($this->prefix("arena.pvp"))
-            ->setImplement(HeroesofAbenez\Arena\IArenaPVPControlFactory::class);
+            ->setImplement(HeroesofAbenez\Arena\ArenaPVPControlFactory::class);
     }
 
     private function addChatCommands(): void
@@ -167,27 +167,27 @@ final class HOAExtension extends \Nette\DI\CompilerExtension
     {
         $builder = $this->getContainerBuilder();
         $builder->addFactoryDefinition($this->prefix("npc.dialogue"))
-            ->setImplement(HeroesofAbenez\NPC\INPCDialogueControlFactory::class);
+            ->setImplement(HeroesofAbenez\NPC\NPCDialogueControlFactory::class);
         $builder->addFactoryDefinition($this->prefix("npc.shop"))
-            ->setImplement(HeroesofAbenez\NPC\INPCShopControlFactory::class);
+            ->setImplement(HeroesofAbenez\NPC\NPCShopControlFactory::class);
         $builder->addFactoryDefinition($this->prefix("npc.quests"))
-            ->setImplement(HeroesofAbenez\NPC\INPCQuestsControlFactory::class);
+            ->setImplement(HeroesofAbenez\NPC\NPCQuestsControlFactory::class);
     }
 
     private function addPostOffice(): void
     {
         $builder = $this->getContainerBuilder();
         $builder->addFactoryDefinition($this->prefix("postoffice.postoffice"))
-            ->setImplement(HeroesofAbenez\Postoffice\IPostofficeControlFactory::class);
+            ->setImplement(HeroesofAbenez\Postoffice\PostofficeControlFactory::class);
     }
 
     private function addRanking(): void
     {
         $builder = $this->getContainerBuilder();
         $builder->addFactoryDefinition($this->prefix("ranking.characters"))
-            ->setImplement(HeroesofAbenez\Ranking\ICharactersRankingControlFactory::class);
+            ->setImplement(HeroesofAbenez\Ranking\CharactersRankingControlFactory::class);
         $builder->addFactoryDefinition($this->prefix("ranking.guilds"))
-            ->setImplement(HeroesofAbenez\Ranking\IGuildsRankingControlFactory::class);
+            ->setImplement(HeroesofAbenez\Ranking\GuildsRankingControlFactory::class);
     }
 
     private function addForms(): void

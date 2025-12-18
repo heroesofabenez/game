@@ -10,7 +10,7 @@ namespace HeroesofAbenez\Model;
  * @author Jakub Konečný
  * @property int $realId
  */
-final class TestingUserToCharacterMapper implements IUserToCharacterMapper
+final class TestingUserToCharacterMapper implements UserToCharacterMapper
 {
     use \Nette\SmartObject;
 

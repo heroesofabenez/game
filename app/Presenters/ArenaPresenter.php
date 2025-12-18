@@ -13,15 +13,15 @@ use HeroesofAbenez\Arena;
 final class ArenaPresenter extends BasePresenter
 {
     private int $minLevel = 3;
-    private Arena\IArenaPVEControlFactory $arenaPVEFactory;
-    private Arena\IArenaPVPControlFactory $arenaPVPFactory;
+    private Arena\ArenaPVEControlFactory $arenaPVEFactory;
+    private Arena\ArenaPVPControlFactory $arenaPVPFactory;
 
-    public function injectArenaPVEFactory(Arena\IArenaPVEControlFactory $arenaPVEFactory): void
+    public function injectArenaPVEFactory(Arena\ArenaPVEControlFactory $arenaPVEFactory): void
     {
         $this->arenaPVEFactory = $arenaPVEFactory;
     }
 
-    public function injectArenaPVPFactory(Arena\IArenaPVPControlFactory $arenaPVPFactory): void
+    public function injectArenaPVPFactory(Arena\ArenaPVPControlFactory $arenaPVPFactory): void
     {
         $this->arenaPVPFactory = $arenaPVPFactory;
     }

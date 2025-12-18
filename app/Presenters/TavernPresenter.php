@@ -14,22 +14,22 @@ use HeroesofAbenez\Chat\NewChatMessageFormFactory;
  */
 final class TavernPresenter extends BasePresenter
 {
-    private Chat\IGuildChatControlFactory $guildChatFactory;
-    private Chat\ILocalChatControlFactory $localChatFactory;
-    private Chat\IGlobalChatControlFactory $globalChatFactory;
+    private Chat\GuildChatControlFactory $guildChatFactory;
+    private Chat\LocalChatControlFactory $localChatFactory;
+    private Chat\GlobalChatControlFactory $globalChatFactory;
     private NewChatMessageFormFactory $newChatMessageFormFactory;
 
-    public function injectGuildChatFactory(Chat\IGuildChatControlFactory $guildChatFactory): void
+    public function injectGuildChatFactory(Chat\GuildChatControlFactory $guildChatFactory): void
     {
         $this->guildChatFactory = $guildChatFactory;
     }
 
-    public function injectLocalChatFactory(Chat\ILocalChatControlFactory $localChatFactory): void
+    public function injectLocalChatFactory(Chat\LocalChatControlFactory $localChatFactory): void
     {
         $this->localChatFactory = $localChatFactory;
     }
 
-    public function injectGlobalChatFactory(Chat\IGlobalChatControlFactory $globalChatFactory): void
+    public function injectGlobalChatFactory(Chat\GlobalChatControlFactory $globalChatFactory): void
     {
         $this->globalChatFactory = $globalChatFactory;
     }

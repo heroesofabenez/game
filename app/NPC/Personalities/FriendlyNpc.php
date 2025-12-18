@@ -6,7 +6,7 @@ namespace HeroesofAbenez\NPC\Personalities;
 use HeroesofAbenez\Orm\Npc;
 use HeroesofAbenez\Utils\Karma;
 
-final class FriendlyNpc implements INpcPersonality
+final class FriendlyNpc implements NpcPersonality
 {
     public function getName(): string
     {

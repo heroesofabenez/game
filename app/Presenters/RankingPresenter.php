@@ -14,15 +14,15 @@ final class RankingPresenter extends BasePresenter
 {
     private const ITEMS_PER_PAGE = 15;
     private \Nette\Utils\Paginator $paginator;
-    private Ranking\ICharactersRankingControlFactory $charactersRankingFactory;
-    private Ranking\IGuildsRankingControlFactory $guildRankingFactory;
+    private Ranking\CharactersRankingControlFactory $charactersRankingFactory;
+    private Ranking\GuildsRankingControlFactory $guildRankingFactory;
 
-    public function injectCharactersRankingFactory(Ranking\ICharactersRankingControlFactory $charactersRankingFactory): void
+    public function injectCharactersRankingFactory(Ranking\CharactersRankingControlFactory $charactersRankingFactory): void
     {
         $this->charactersRankingFactory = $charactersRankingFactory;
     }
 
-    public function injectGuildRankingFactory(Ranking\IGuildsRankingControlFactory $guildRankingFactory): void
+    public function injectGuildRankingFactory(Ranking\GuildsRankingControlFactory $guildRankingFactory): void
     {
         $this->guildRankingFactory = $guildRankingFactory;
     }
