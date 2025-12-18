@@ -42,16 +42,35 @@
     </exec>
   </target>
   <target name="tests" description="Unit tests" depends="setup-db">
-    <exec executable="vendor/bin/run-tests" logoutput="true" passthru="true" checkreturn="true">
-      <arg value="-p"/>
-      <arg value="php"/>
-      <arg path="tests"/>
-      <arg value="--coverage"/>
-      <arg path="./coverage.html"/>
-      <arg value="--coverage-src"/>
-      <arg path="./app"/>
-      <arg value="-s"/>
-    </exec>
+    <if>
+      <isset property="env.REPORTS"/>
+      <then>
+        <exec executable="vendor/bin/run-tests" logoutput="true" passthru="true" checkreturn="true">
+          <arg value="-p"/>
+          <arg value="php"/>
+          <arg path="tests"/>
+          <arg value="--coverage"/>
+          <arg path="./coverage.html"/>
+          <arg value="--coverage-src"/>
+          <arg path="./app"/>
+          <arg value="-s"/>
+          <arg value="-o"/>
+          <arg value="junit:junit.xml"/>
+        </exec>
+      </then>
+      <else>
+        <exec executable="vendor/bin/run-tests" logoutput="true" passthru="true" checkreturn="true">
+          <arg value="-p"/>
+          <arg value="php"/>
+          <arg path="tests"/>
+          <arg value="--coverage"/>
+          <arg path="./coverage.html"/>
+          <arg value="--coverage-src"/>
+          <arg path="./app"/>
+          <arg value="-s"/>
+        </exec>
+      </else>
+    </if>
   </target>
   <target name="clean-db">
     <exec executable="php" logoutput="true" passthru="true" checkreturn="true">

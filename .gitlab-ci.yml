@@ -49,11 +49,14 @@ test:php8.1:
   <<: *test_job
   image: nexendrie/php:8.1
 
-test:cc:
-  <<: *test_job
-  image: nexendrie/php:8.1
-  coverage: '/(\d+\%) covered/'
-  artifacts:
-    name: "Code coverage"
-    paths:
-      - coverage.html
+test:reports:
+    extends:
+        - .test_job
+    variables:
+        REPORTS: 1
+    coverage: '/(\d+\%) covered/'
+    artifacts:
+        paths:
+            - coverage.html
+        reports:
+            junit: junit.xml

@@ -11,3 +11,4 @@ output/
 *.output
 coverage.*
 !.gitkeep
+/junit.xml
