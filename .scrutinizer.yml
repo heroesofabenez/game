@@ -174,7 +174,7 @@ build:
                     -
                         command: ./phing scrutinizer
                         analysis:
-                            file: codesniffer.cs
+                            file: codesniffer.xml
                             format: 'general-checkstyle'
                         coverage:
                             file: coverage.xml
