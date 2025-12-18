@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <project name="Heroes of Abenenez" basedir="." default="test">
   <target name="test" depends="lint,cs,phpstan,sanity-checks,tests,clean-db"/>
-  <target name="test-coverage" depends="lint,cs,phpstan,sanity-checks,tests-coverage,clean-db"/>
   <target name="test-ci" depends="install-ci,test"/>
-  <target name="test-ci-coverage" depends="install-ci,test-coverage"/>
   <target name="install-ci">
     <mkdir dir="tests/_temp"/>
     <copy file="tests/ci.neon" tofile="tests/local.neon"/>
@@ -44,14 +42,6 @@
     </exec>
   </target>
   <target name="tests" description="Unit tests" depends="setup-db">
-    <exec executable="vendor/bin/run-tests" logoutput="true" passthru="true" checkreturn="true">
-      <arg value="-p"/>
-      <arg value="php"/>
-      <arg path="tests"/>
-      <arg value="-s"/>
-    </exec>
-  </target>
-  <target name="tests-coverage" description="Unit tests with code coverage (XDebug)" depends="setup-db">
     <exec executable="vendor/bin/run-tests" logoutput="true" passthru="true" checkreturn="true">
       <arg value="-p"/>
       <arg value="php"/>

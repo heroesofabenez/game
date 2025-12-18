@@ -52,8 +52,6 @@ test:php8.1:
 test:cc:
   <<: *test_job
   image: nexendrie/php:8.1
-  script:
-    - phing test-ci-coverage
   coverage: '/(\d+\%) covered/'
   artifacts:
     name: "Code coverage"
