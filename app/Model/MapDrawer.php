@@ -18,8 +18,12 @@ use HeroesofAbenez\Orm\RoutesStage;
  */
 final class MapDrawer
 {
-    public function __construct(private readonly Location $locationModel, private readonly \Nette\Security\User $user, private readonly Loader $loader, private readonly ApplicationDirectories $directories)
-    {
+    public function __construct(
+        private readonly Location $locationModel,
+        private readonly \Nette\Security\User $user,
+        private readonly Loader $loader,
+        private readonly ApplicationDirectories $directories
+    ) {
     }
 
     /**
@@ -37,10 +41,24 @@ final class MapDrawer
             $posX = $point->posX ?? 0;
             $posY = $point->posY ?? 0;
             $image->filledEllipse($posX, $posY, 4, 4, Image::rgb(51, 102, 0));
-            $image->ttfText(8, 0, $posX - 18, $posY + 11, Image::rgb(51, 51, 0), __DIR__ . "/../arial.ttf", $point->name);
+            $image->ttfText(
+                8,
+                0,
+                $posX - 18,
+                $posY + 11,
+                Image::rgb(51, 51, 0),
+                __DIR__ . "/../arial.ttf",
+                $point->name
+            );
         }
         foreach ($routes as $route) {
-            $image->line($points[$route->from->id]->posX, $points[$route->from->id]->posY, $points[$route->to->id]->posX, $points[$route->to->id]->posY, Image::rgb(51, 153, 255));
+            $image->line(
+                $points[$route->from->id]->posX,
+                $points[$route->from->id]->posY,
+                $points[$route->to->id]->posX,
+                $points[$route->to->id]->posY,
+                Image::rgb(51, 153, 255)
+            );
         }
         $image->save($filename);
     }

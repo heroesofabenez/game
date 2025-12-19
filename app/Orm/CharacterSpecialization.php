@@ -44,8 +44,9 @@ final class CharacterSpecialization extends \Nextras\Orm\Entity\Entity
     protected function getterMainStat(): string
     {
         $stats = [
-            "strength" => $this->strengthGrow, "dexterity" => $this->dexterityGrow, "constitution" => $this->constitutionGrow,
-            "intelligence" => $this->intelligenceGrow, "charisma" => $this->charismaGrow,
+            "strength" => $this->strengthGrow, "dexterity" => $this->dexterityGrow,
+            "constitution" => $this->constitutionGrow, "intelligence" => $this->intelligenceGrow,
+            "charisma" => $this->charismaGrow,
         ];
         return (string) array_search(max($stats), $stats, true);
     }

@@ -19,8 +19,11 @@ use Nextras\Orm\Collection\ICollection;
  */
 final class Guild
 {
-    public function __construct(private readonly ORM $orm, private readonly \Nette\Security\User $user, private readonly Permissions $permissionsModel)
-    {
+    public function __construct(
+        private readonly ORM $orm,
+        private readonly \Nette\Security\User $user,
+        private readonly Permissions $permissionsModel
+    ) {
     }
 
     /**

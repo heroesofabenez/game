@@ -12,8 +12,12 @@ final class Map
 {
     private readonly bool $alwaysDraw;
 
-    public function __construct(private readonly Location $locationModel, private readonly \Nette\Security\User $user, private readonly MapDrawer $drawer, SettingsRepository $sr)
-    {
+    public function __construct(
+        private readonly Location $locationModel,
+        private readonly \Nette\Security\User $user,
+        private readonly MapDrawer $drawer,
+        SettingsRepository $sr
+    ) {
         $this->alwaysDraw = $sr->settings["application"]["alwaysDrawMaps"];
     }
 

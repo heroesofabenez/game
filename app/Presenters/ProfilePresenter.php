@@ -16,8 +16,11 @@ use HeroesofAbenez\Model\Profile;
  */
 final class ProfilePresenter extends BasePresenter
 {
-    public function __construct(private readonly Profile $model, private readonly Guild $guildModel, private readonly Friends $friendsModel)
-    {
+    public function __construct(
+        private readonly Profile $model,
+        private readonly Guild $guildModel,
+        private readonly Friends $friendsModel
+    ) {
         parent::__construct();
     }
 

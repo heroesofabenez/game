@@ -15,8 +15,11 @@ use Nette\Localization\Translator;
  */
 final class CustomGuildRankNamesFormFactory extends BaseFormFactory
 {
-    public function __construct(Translator $translator, private readonly Guild $model, private readonly \Nette\Security\User $user)
-    {
+    public function __construct(
+        Translator $translator,
+        private readonly Guild $model,
+        private readonly \Nette\Security\User $user
+    ) {
         parent::__construct($translator);
     }
 

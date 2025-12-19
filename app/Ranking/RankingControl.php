@@ -13,8 +13,12 @@ abstract class RankingControl extends \Nette\Application\UI\Control
 {
     public ?\Nette\Utils\Paginator $paginator = null;
 
-    public function __construct(protected readonly string $name, protected readonly array $cols, protected readonly string $presenterName, protected readonly string $lastCol)
-    {
+    public function __construct(
+        protected readonly string $name,
+        protected readonly array $cols,
+        protected readonly string $presenterName,
+        protected readonly string $lastCol
+    ) {
     }
 
     abstract public function getData(): array;

@@ -37,8 +37,11 @@ final class CharacterBuilder
         return $value;
     }
 
-    private function checkSpecialization(int $level, CharacterClass $class, CharacterSpecialization $specialization = null): void
-    {
+    private function checkSpecialization(
+        int $level,
+        CharacterClass $class,
+        CharacterSpecialization $specialization = null
+    ): void {
         if ($level < self::SPECIALIZATION_LEVEL) {
             if ($specialization !== null) {
                 throw new CannotChooseSpecializationException();
@@ -54,8 +57,12 @@ final class CharacterBuilder
     /**
      * @return array{strength: float, dexterity: float, constitution: float, intelligence: float, charisma: float}
      */
-    public function create(CharacterClass $class, CharacterRace $race, int $level = 1, CharacterSpecialization $specialization = null): array
-    {
+    public function create(
+        CharacterClass $class,
+        CharacterRace $race,
+        int $level = 1,
+        CharacterSpecialization $specialization = null
+    ): array {
         $this->checkSpecialization($level, $class, $specialization);
         $specializationLevel = 0;
         if ($specialization !== null) {
@@ -71,8 +78,16 @@ final class CharacterBuilder
         if ($specialization !== null) {
             $data["strength"] += $this->calculateSpecialistStat("strength", $specialization, $specializationLevel);
             $data["dexterity"] += $this->calculateSpecialistStat("dexterity", $specialization, $specializationLevel);
-            $data["constitution"] += $this->calculateSpecialistStat("constitution", $specialization, $specializationLevel);
-            $data["intelligence"] += $this->calculateSpecialistStat("intelligence", $specialization, $specializationLevel);
+            $data["constitution"] += $this->calculateSpecialistStat(
+                "constitution",
+                $specialization,
+                $specializationLevel
+            );
+            $data["intelligence"] += $this->calculateSpecialistStat(
+                "intelligence",
+                $specialization,
+                $specializationLevel
+            );
             $data["charisma"] += $this->calculateSpecialistStat("charisma", $specialization, $specializationLevel);
         }
         array_walk($data, function (&$value): void {

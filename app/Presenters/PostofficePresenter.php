@@ -73,7 +73,8 @@ final class PostofficePresenter extends BasePresenter
     public function newMessageFormSucceeded(Form $form, array $values): void
     {
         $data = [
-            "from" => $this->user->id, "to" => $values["to"], "subject" => $values["subject"], "text" => $values["message"]
+            "from" => $this->user->id, "to" => $values["to"], "subject" => $values["subject"],
+            "text" => $values["message"],
         ];
         $this->createComponentPostoffice()->sendMessage($data);
         $this->flashMessage("messages.postoffice.messageSent");

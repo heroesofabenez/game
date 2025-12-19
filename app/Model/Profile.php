@@ -63,8 +63,8 @@ final class Profile
             return null;
         }
         $stats = [
-            "id", "name", "gender", "level", "race", "strength", "dexterity", "constitution", "intelligence", "charisma",
-            "class", "specialization", "predominantKarma",
+            "id", "name", "gender", "level", "race", "strength", "dexterity", "constitution", "intelligence",
+            "charisma", "class", "specialization", "predominantKarma",
         ];
         foreach ($stats as $stat) {
             if (is_scalar($char->$stat) || $char->$stat === null) {

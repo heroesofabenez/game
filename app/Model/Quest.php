@@ -17,8 +17,14 @@ use Nette\Application\LinkGenerator;
  */
 final class Quest
 {
-    public function __construct(private readonly ORM $orm, private readonly \Nette\Security\User $user, private readonly Item $itemModel, private readonly Pet $petModel, private readonly Translator $translator, private readonly LinkGenerator $linkGenerator)
-    {
+    public function __construct(
+        private readonly ORM $orm,
+        private readonly \Nette\Security\User $user,
+        private readonly Item $itemModel,
+        private readonly Pet $petModel,
+        private readonly Translator $translator,
+        private readonly LinkGenerator $linkGenerator
+    ) {
         $this->petModel->user = $user;
     }
 

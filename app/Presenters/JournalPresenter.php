@@ -31,8 +31,13 @@ use HeroesofAbenez\Model\SpecializationNotAvailableException;
  */
 final class JournalPresenter extends BasePresenter
 {
-    public function __construct(private readonly Journal $model, private readonly Profile $profileModel, private readonly Item $itemModel, private readonly Pet $petModel, private readonly Friends $friendsModel)
-    {
+    public function __construct(
+        private readonly Journal $model,
+        private readonly Profile $profileModel,
+        private readonly Item $itemModel,
+        private readonly Pet $petModel,
+        private readonly Friends $friendsModel
+    ) {
         parent::__construct();
     }
 

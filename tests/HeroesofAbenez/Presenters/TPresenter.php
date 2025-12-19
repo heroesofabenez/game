@@ -15,8 +15,12 @@ trait TPresenter
 {
     use \Testbench\TPresenter;
 
-    protected function checkForward(string $destination, string $to = "", array $params = [], array $post = []): ForwardResponse
-    {
+    protected function checkForward(
+        string $destination,
+        string $to = "",
+        array $params = [],
+        array $post = []
+    ): ForwardResponse {
         /** @var ForwardResponse $response */
         $response = $this->check($destination, $params, $post);
         if ($this->testbench_exception === null) {

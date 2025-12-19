@@ -59,9 +59,9 @@ final class Journal
         foreach ($character->items as $item) {
             $i = $item->item;
             $return["items"][] = (object) [
-                "id" => $i->id, "name" => $i->name, "amount" => $item->amount, "worn" => $item->worn, "eqid" => $item->id,
-                "durability" => $item->durability, "maxDurability" => $item->maxDurability, "repairPrice" => $item->repairPrice,
-                "equipable" => $item->item->equipable,
+                "id" => $i->id, "name" => $i->name, "amount" => $item->amount, "worn" => $item->worn,
+                "eqid" => $item->id, "durability" => $item->durability, "maxDurability" => $item->maxDurability,
+                "repairPrice" => $item->repairPrice, "equipable" => $item->item->equipable,
             ];
         }
         return $return;
@@ -84,7 +84,9 @@ final class Journal
      */
     public function currentQuests(): ICollection
     {
-        return $this->orm->characterQuests->findBy(["character" => $this->user->id, "progress<" => CharacterQuestEntity::PROGRESS_FINISHED]);
+        return $this->orm->characterQuests->findBy(
+            ["character" => $this->user->id, "progress<" => CharacterQuestEntity::PROGRESS_FINISHED]
+        );
     }
 
     /**

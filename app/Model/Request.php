@@ -17,8 +17,11 @@ use Nextras\Orm\Collection\ICollection;
  */
 final class Request
 {
-    public function __construct(private readonly \Nette\Security\User $user, private readonly ORM $orm, private readonly Guild $guildModel)
-    {
+    public function __construct(
+        private readonly \Nette\Security\User $user,
+        private readonly ORM $orm,
+        private readonly Guild $guildModel
+    ) {
     }
 
     /**

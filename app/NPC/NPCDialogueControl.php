@@ -19,8 +19,11 @@ final class NPCDialogueControl extends \Nette\Application\UI\Control
 {
     public ?Npc $npc = null;
 
-    public function __construct(private readonly \Nette\Security\User $user, private readonly Loader $loader, private readonly NpcPersonalityChooser $npcPersonalityChooser)
-    {
+    public function __construct(
+        private readonly \Nette\Security\User $user,
+        private readonly Loader $loader,
+        private readonly NpcPersonalityChooser $npcPersonalityChooser
+    ) {
     }
 
     /**

@@ -27,8 +27,14 @@ abstract class ArenaControl extends \Nette\Application\UI\Control
     protected string $arena;
     protected string $profileLink;
 
-    public function __construct(protected readonly User $user, protected readonly CombatHelper $combatHelper, protected readonly CombatBase $combat, protected readonly CombatLogManager $log, protected readonly ORM $orm, protected readonly Translator $translator)
-    {
+    public function __construct(
+        protected readonly User $user,
+        protected readonly CombatHelper $combatHelper,
+        protected readonly CombatBase $combat,
+        protected readonly CombatLogManager $log,
+        protected readonly ORM $orm,
+        protected readonly Translator $translator
+    ) {
     }
 
     /**
@@ -68,7 +74,9 @@ abstract class ArenaControl extends \Nette\Application\UI\Control
     protected function doDuel(Character $opponent): void
     {
         if ($this->combatHelper->getNumberOfTodayArenaFights($this->user->id) >= self::DAILY_FIGHTS_LIMIT) {
-            $this->presenter->flashMessage($this->translator->translate("errors.arena.cannotFightToday", self::DAILY_FIGHTS_LIMIT));
+            $this->presenter->flashMessage(
+                $this->translator->translate("errors.arena.cannotFightToday", self::DAILY_FIGHTS_LIMIT)
+            );
             $this->presenter->redirect("this");
         }
         $player = $this->getPlayer($this->user->id);

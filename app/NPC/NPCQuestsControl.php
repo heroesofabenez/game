@@ -26,8 +26,11 @@ final class NPCQuestsControl extends \Nette\Application\UI\Control
 {
     public Npc $npc;
 
-    public function __construct(private readonly Model\Quest $questModel, private readonly ORM $orm, private readonly \Nette\Security\User $user)
-    {
+    public function __construct(
+        private readonly Model\Quest $questModel,
+        private readonly ORM $orm,
+        private readonly \Nette\Security\User $user
+    ) {
     }
 
     /**

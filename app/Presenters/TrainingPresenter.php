@@ -21,8 +21,12 @@ use HeroesofAbenez\Model\Skills;
  */
 final class TrainingPresenter extends BasePresenter
 {
-    public function __construct(private readonly Profile $model, private readonly Skills $skillsModel, private readonly \Nette\Security\User $user, private readonly CombatHelper $combatHelper)
-    {
+    public function __construct(
+        private readonly Profile $model,
+        private readonly Skills $skillsModel,
+        private readonly \Nette\Security\User $user,
+        private readonly CombatHelper $combatHelper
+    ) {
         parent::__construct();
     }
 

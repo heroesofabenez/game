@@ -64,8 +64,9 @@ final class GuildPresenter extends BasePresenter
         $this->guildDescriptionFormFactory = $guildDescriptionFormFactory;
     }
 
-    public function injectCustomGuildRankNamesFormFactory(CustomGuildRankNamesFormFactory $customGuildRankNamesFormFactory): void
-    {
+    public function injectCustomGuildRankNamesFormFactory(
+        CustomGuildRankNamesFormFactory $customGuildRankNamesFormFactory
+    ): void {
         $this->customGuildRankNamesFormFactory = $customGuildRankNamesFormFactory;
     }
 

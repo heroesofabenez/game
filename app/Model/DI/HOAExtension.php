@@ -115,7 +115,10 @@ final class HOAExtension extends \Nette\DI\CompilerExtension
         $builder->addDefinition("router")
             ->setFactory("@" . HeroesofAbenez\Model\RouterFactory::class . "::create");
         $builder->addDefinition($this->prefix("model.applicationDirectories"))
-            ->setFactory(HeroesofAbenez\Model\ApplicationDirectories::class, [$builder->parameters['wwwDir'], $builder->parameters['appDir'],]);
+            ->setFactory(
+                HeroesofAbenez\Model\ApplicationDirectories::class,
+                [$builder->parameters['wwwDir'], $builder->parameters['appDir'],]
+            );
     }
 
     private function addCombat(): void

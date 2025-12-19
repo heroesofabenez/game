@@ -30,8 +30,11 @@ final class NpcPresenter extends BasePresenter
     private NPCQuestsControlFactory $npcQuestsFactory;
     private NPCShopControlFactory $npcShopFactory;
 
-    public function __construct(private readonly NPC $model, private readonly Journal $journalModel, private readonly Item $itemModel)
-    {
+    public function __construct(
+        private readonly NPC $model,
+        private readonly Journal $journalModel,
+        private readonly Item $itemModel
+    ) {
         parent::__construct();
     }
 

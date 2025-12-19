@@ -93,7 +93,9 @@ final class Character extends \Nextras\Orm\Entity\Entity
             return $amount;
         }
         /** @var int[] $donations */
-        $donations = $this->guildDonations->toCollection()->findBy(["guild" => $this->guild])->fetchPairs(null, "amount");
+        $donations = $this->guildDonations->toCollection()
+            ->findBy(["guild" => $this->guild])
+            ->fetchPairs(null, "amount");
         foreach ($donations as $donation) {
             $amount += $donation;
         }

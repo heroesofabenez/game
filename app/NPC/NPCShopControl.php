@@ -17,8 +17,11 @@ final class NPCShopControl extends \Nette\Application\UI\Control
 {
     public Npc $npc;
 
-    public function __construct(private readonly ORM $orm, private readonly \HeroesofAbenez\Model\Item $itemModel, private readonly \Nette\Security\User $user)
-    {
+    public function __construct(
+        private readonly ORM $orm,
+        private readonly \HeroesofAbenez\Model\Item $itemModel,
+        private readonly \Nette\Security\User $user
+    ) {
     }
 
     public function render(): void
