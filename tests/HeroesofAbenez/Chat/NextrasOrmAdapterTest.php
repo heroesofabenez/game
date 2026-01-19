@@ -43,7 +43,8 @@ final class NextrasOrmAdapterTest extends \Tester\TestCase
         $this->model->addMessage("test", "guild", 1);
         $texts = $this->model->getTexts("guild", 1, 25);
         Assert::count(5, $texts);
-        $this->orm->chatMessages->removeAndFlush($this->orm->chatMessages->getById($texts[0]->id)); // @phpstan-ignore property.notFound, argument.type
+        // @phpstan-ignore property.notFound, argument.type
+        $this->orm->chatMessages->removeAndFlush($this->orm->chatMessages->getById($texts[0]->id));
     }
 }
 

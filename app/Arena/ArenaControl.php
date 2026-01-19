@@ -90,7 +90,10 @@ abstract class ArenaControl extends \Nette\Application\UI\Control
             $character->experience += $rewards["experience"];
             $character->lastActive = new \DateTimeImmutable();
             $this->orm->characters->persistAndFlush($character);
-            $params = ["playerName" => $player->name, "rewardMoney" => $rewards["money"], "rewardExperiences" => $rewards["experience"]];
+            $params = [
+                "playerName" => $player->name, "rewardMoney" => $rewards["money"],
+                "rewardExperiences" => $rewards["experience"],
+            ];
             $this->combat->log->logText("texts.arena.fightRewards", $params);
         }
         $combatId = $this->saveCombat($this->combat->log, ($winner === 1));

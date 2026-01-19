@@ -26,7 +26,10 @@ final class GuildsRankingControl extends RankingControl
         $return = $data = [];
         $result = $this->model->listOfGuilds();
         foreach ($result as $row) {
-            $data[] = ["id" => $row->id, "name" => $row->name, "description" => $row->description, "members" => $row->members->countStored(),];
+            $data[] = [
+                "id" => $row->id,"name" => $row->name, "description" => $row->description,
+                "members" => $row->members->countStored(),
+            ];
         }
         $data2 = Arrays::orderby($data, "members", SORT_DESC, "id", SORT_ASC);
         foreach ($data2 as $row2) {

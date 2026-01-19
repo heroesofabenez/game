@@ -257,7 +257,11 @@ final class Quest
             $itemLink = $this->linkGenerator->link("Item:view", ["id" => $quest->neededItem->id]);
             $haveItem = $this->itemModel->haveItem($quest->neededItem->id, $quest->itemAmount);
             $requirements[] = (object) [
-                "text" => $this->translator->translate("texts.quest.requirementGetItem", $quest->itemAmount, ["item" => "<a href=\"$itemLink\">$itemName</a>"]),
+                "text" => $this->translator->translate(
+                    "texts.quest.requirementGetItem",
+                    $quest->itemAmount,
+                    ["item" => "<a href=\"$itemLink\">$itemName</a>"]
+                ),
                 "met" => $haveItem,
             ];
         }
@@ -269,13 +273,19 @@ final class Quest
         }
         if ($quest->neededGuildDonation > 0) {
             $requirements[] = (object) [
-                "text" => $this->translator->translate("texts.quest.requirementGuildDonation", $quest->neededGuildDonation),
+                "text" => $this->translator->translate(
+                    "texts.quest.requirementGuildDonation",
+                    $quest->neededGuildDonation
+                ),
                 "met" => ($characterQuest->guildDonation >= $quest->neededGuildDonation),
             ];
         }
         if ($quest->neededActiveSkillsLevel > 0) {
             $requirements[] = (object) [
-                "text" => $this->translator->translate("texts.quest.requirementActiveSKillsLevel", $quest->neededActiveSkillsLevel),
+                "text" => $this->translator->translate(
+                    "texts.quest.requirementActiveSKillsLevel",
+                    $quest->neededActiveSkillsLevel
+                ),
                 "met" => ($characterQuest->activeSkillsLevel >= $quest->neededActiveSkillsLevel),
             ];
         }
@@ -289,12 +299,20 @@ final class Quest
         $npcName = $quest->npcEnd->name;
         if ($quest->npcStart->id !== $quest->npcEnd->id) {
             $requirements[] = (object) [
-                "text" => $this->translator->translate("texts.quest.requirementTalkToNpc", 0, ["npc" => "<a href=\"$npcLink\">{$npcName}</a>"]),
+                "text" => $this->translator->translate(
+                    "texts.quest.requirementTalkToNpc",
+                    0,
+                    ["npc" => "<a href=\"$npcLink\">{$npcName}</a>"]
+                ),
                 "met" => false,
             ];
         } else {
             $requirements[] = (object) [
-                "text" => $this->translator->translate("texts.quest.requirementReportBackToNpc", 0, ["npc" => "<a href=\"$npcLink\">{$npcName}</a>"]),
+                "text" => $this->translator->translate(
+                    "texts.quest.requirementReportBackToNpc",
+                    0,
+                    ["npc" => "<a href=\"$npcLink\">{$npcName}</a>"]
+                ),
                 "met" => false,
             ];
         }

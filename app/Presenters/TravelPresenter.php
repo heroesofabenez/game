@@ -33,7 +33,9 @@ final class TravelPresenter extends BasePresenter
             $this->model->travelToArea($id);
             $areaName = $this->translator->translate("areas.$id.name");
             $this->reloadIdentity();
-            $this->flashMessage($this->translator->translate("messages.travel.movedToArea", 0, ["areaName" => $areaName]));
+            $this->flashMessage(
+                $this->translator->translate("messages.travel.movedToArea", 0, ["areaName" => $areaName])
+            );
         } catch (CannotTravelToAreaException) {
             $this->flashMessage("errors.travel.cannotTravelToArea");
         } catch (AreaNotFoundException) {
@@ -49,7 +51,9 @@ final class TravelPresenter extends BasePresenter
             $this->model->travelToStage($id);
             $stageName = $this->translator->translate("stages.$id.name");
             $this->reloadIdentity();
-            $this->flashMessage($this->translator->translate("messages.travel.movedToStage", 0, ["stageName" => $stageName]));
+            $this->flashMessage(
+                $this->translator->translate("messages.travel.movedToStage", 0, ["stageName" => $stageName])
+            );
         } catch (CannotTravelToStageException) {
             $this->flashMessage("errors.travel.cannotTravelToStage");
         } catch (StageNotFoundException) {
