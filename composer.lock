@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "9466428e98ecbae6c0e8d31989c40a5a",
+    "content-hash": "dbdd83ed3db10e1f4fe5e5db255f9ee0",
     "packages": [
         {
             "name": "heroesofabenez/chat",
@@ -81,25 +81,25 @@
             "source": {
                 "type": "git",
                 "url": "https://gitlab.com/heroesofabenez/combat.git",
-                "reference": "d0f71fa71d10138a3bfa01f51f46bde4dfaf37cd"
+                "reference": "797dff59446c913ff5daaa4710e8efa9f60d976e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://gitlab.com/api/v4/projects/heroesofabenez%2Fcombat/repository/archive.zip?sha=d0f71fa71d10138a3bfa01f51f46bde4dfaf37cd",
-                "reference": "d0f71fa71d10138a3bfa01f51f46bde4dfaf37cd",
+                "url": "https://gitlab.com/api/v4/projects/heroesofabenez%2Fcombat/repository/archive.zip?sha=797dff59446c913ff5daaa4710e8efa9f60d976e",
+                "reference": "797dff59446c913ff5daaa4710e8efa9f60d976e",
                 "shasum": ""
             },
             "require": {
                 "latte/latte": "^2.8",
                 "nette/utils": "^3.2.2",
-                "nexendrie/translation": "^2.3.1",
-                "nexendrie/utils": "^1.9",
+                "nexendrie/translation": "^2.4",
+                "nexendrie/utils": "^1.10",
                 "php": ">=8.1.0",
-                "symfony/options-resolver": "^6.4"
+                "symfony/options-resolver": "^6.4 || ^7.4"
             },
             "require-dev": {
                 "nexendrie/code-quality": "dev-master",
-                "nexendrie/site-generator": "^0.8",
+                "nexendrie/site-generator": "^0.9",
                 "phpstan/phpstan-nette": "^2.0"
             },
             "default-branch": true,
@@ -133,9 +133,9 @@
             "support": {
                 "docs": "https://heroesofabenez.gitlab.io/combat",
                 "issues": "https://gitlab.com/heroesofabenez/combat/-/issues",
-                "source": "https://gitlab.com/heroesofabenez/combat/"
+                "source": "https://gitlab.com/heroesofabenez/combat/-/tree/master"
             },
-            "time": "2025-08-30T13:20:58+00:00"
+            "time": "2026-01-18T21:09:20+00:00"
         },
         {
             "name": "latte/latte",
@@ -667,6 +667,7 @@
                 "issues": "https://github.com/nette/finder/issues",
                 "source": "https://github.com/nette/finder/tree/v2.6.0"
             },
+            "abandoned": true,
             "time": "2022-10-13T01:31:15+00:00"
         },
         {
@@ -826,16 +827,16 @@
         },
         {
             "name": "nette/neon",
-            "version": "v3.4.6",
+            "version": "v3.4.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nette/neon.git",
-                "reference": "36e3f4f89fd8a7b89ada74c7a678baa9f7cc7719"
+                "reference": "cc96bf5264d721d0c102bb976272d3d001a23e65"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nette/neon/zipball/36e3f4f89fd8a7b89ada74c7a678baa9f7cc7719",
-                "reference": "36e3f4f89fd8a7b89ada74c7a678baa9f7cc7719",
+                "url": "https://api.github.com/repos/nette/neon/zipball/cc96bf5264d721d0c102bb976272d3d001a23e65",
+                "reference": "cc96bf5264d721d0c102bb976272d3d001a23e65",
                 "shasum": ""
             },
             "require": {
@@ -891,9 +892,9 @@
             ],
             "support": {
                 "issues": "https://github.com/nette/neon/issues",
-                "source": "https://github.com/nette/neon/tree/v3.4.6"
+                "source": "https://github.com/nette/neon/tree/v3.4.7"
             },
-            "time": "2025-11-25T13:12:06+00:00"
+            "time": "2026-01-04T08:39:50+00:00"
         },
         {
             "name": "nette/php-generator",
@@ -1464,16 +1465,16 @@
         },
         {
             "name": "nexendrie/utils",
-            "version": "1.9.1",
+            "version": "1.10.0",
             "source": {
                 "type": "git",
                 "url": "https://gitlab.com/nexendrie/utils.git",
-                "reference": "60c44fd3684b53f43204ce12283c714be5c388a7"
+                "reference": "86a61d1ed8efaf4405bb28d32b05b4b2173118e0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://gitlab.com/api/v4/projects/nexendrie%2Futils/repository/archive.zip?sha=60c44fd3684b53f43204ce12283c714be5c388a7",
-                "reference": "60c44fd3684b53f43204ce12283c714be5c388a7",
+                "url": "https://gitlab.com/api/v4/projects/nexendrie%2Futils/repository/archive.zip?sha=86a61d1ed8efaf4405bb28d32b05b4b2173118e0",
+                "reference": "86a61d1ed8efaf4405bb28d32b05b4b2173118e0",
                 "shasum": ""
             },
             "require": {
@@ -1486,7 +1487,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.9.x-dev"
+                    "dev-master": "1.10.x-dev"
                 }
             },
             "autoload": {
@@ -1518,9 +1519,9 @@
             "support": {
                 "docs": "https://nexendrie.gitlab.io/utils",
                 "issues": "https://gitlab.com/nexendrie/utils/-/issues",
-                "source": "https://gitlab.com/nexendrie/utils/-/tree/1.9.1"
+                "source": "https://gitlab.com/nexendrie/utils/-/tree/1.10.0"
             },
-            "time": "2025-08-29T18:16:06+00:00"
+            "time": "2026-01-18T20:21:49+00:00"
         },
         {
             "name": "nextras/dbal",
@@ -1735,16 +1736,16 @@
         },
         {
             "name": "phpstan/phpdoc-parser",
-            "version": "2.3.0",
+            "version": "2.3.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpdoc-parser.git",
-                "reference": "1e0cd5370df5dd2e556a36b9c62f62e555870495"
+                "reference": "16dbf9937da8d4528ceb2145c9c7c0bd29e26374"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpdoc-parser/zipball/1e0cd5370df5dd2e556a36b9c62f62e555870495",
-                "reference": "1e0cd5370df5dd2e556a36b9c62f62e555870495",
+                "url": "https://api.github.com/repos/phpstan/phpdoc-parser/zipball/16dbf9937da8d4528ceb2145c9c7c0bd29e26374",
+                "reference": "16dbf9937da8d4528ceb2145c9c7c0bd29e26374",
                 "shasum": ""
             },
             "require": {
@@ -1776,9 +1777,9 @@
             "description": "PHPDoc parser with support for nullable, intersection and generic types",
             "support": {
                 "issues": "https://github.com/phpstan/phpdoc-parser/issues",
-                "source": "https://github.com/phpstan/phpdoc-parser/tree/2.3.0"
+                "source": "https://github.com/phpstan/phpdoc-parser/tree/2.3.1"
             },
-            "time": "2025-08-30T15:50:23+00:00"
+            "time": "2026-01-12T11:33:04+00:00"
         },
         {
             "name": "symfony/deprecation-contracts",
@@ -2055,6 +2056,59 @@
             "time": "2019-04-04T18:34:37+00:00"
         },
         {
+            "name": "micheh/phpcs-gitlab",
+            "version": "2.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/micheh/phpcs-gitlab.git",
+                "reference": "465874d545c29855fcf102351eada8b95bf7eb2c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/micheh/phpcs-gitlab/zipball/465874d545c29855fcf102351eada8b95bf7eb2c",
+                "reference": "465874d545c29855fcf102351eada8b95bf7eb2c",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*"
+            },
+            "require-dev": {
+                "phpstan/phpstan": "^2.0",
+                "phpunit/phpunit": "^9.3 || ^10.0",
+                "squizlabs/php_codesniffer": "^3.5.0 || ^4.0.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Micheh\\PhpCodeSniffer\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Michel Hunziker",
+                    "email": "info@michelhunziker.com"
+                }
+            ],
+            "description": "GitLab Report for PHP_CodeSniffer (display the violations in the GitLab CI/CD Code Quality Report)",
+            "keywords": [
+                "PHP_CodeSniffer",
+                "code climate",
+                "code quality",
+                "gitlab",
+                "phpcs",
+                "report"
+            ],
+            "support": {
+                "issues": "https://github.com/micheh/phpcs-gitlab/issues",
+                "source": "https://github.com/micheh/phpcs-gitlab/tree/2.1.0"
+            },
+            "time": "2025-09-17T09:43:27+00:00"
+        },
+        {
             "name": "nette/safe-stream",
             "version": "v2.5.1",
             "source": {
@@ -2203,15 +2257,16 @@
             "source": {
                 "type": "git",
                 "url": "https://gitlab.com/nexendrie/code-quality.git",
-                "reference": "61c3cf9885c011dc591c136b3895ed4f12f8e474"
+                "reference": "b5b1e011c118e8aba846b0199d3052507ff65ad8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://gitlab.com/api/v4/projects/nexendrie%2Fcode-quality/repository/archive.zip?sha=61c3cf9885c011dc591c136b3895ed4f12f8e474",
-                "reference": "61c3cf9885c011dc591c136b3895ed4f12f8e474",
+                "url": "https://gitlab.com/api/v4/projects/nexendrie%2Fcode-quality/repository/archive.zip?sha=b5b1e011c118e8aba846b0199d3052507ff65ad8",
+                "reference": "b5b1e011c118e8aba846b0199d3052507ff65ad8",
                 "shasum": ""
             },
             "require": {
+                "micheh/phpcs-gitlab": "^2.1",
                 "nexendrie/testbench": "^2.7.1",
                 "php-parallel-lint/php-console-highlighter": "^0.5",
                 "php-parallel-lint/php-parallel-lint": "^1.4",
@@ -2241,9 +2296,9 @@
             "support": {
                 "docs": "https://nexendrie.gitlab.io/code-quality",
                 "issues": "https://gitlab.com/nexendrie/code-quality/-/issues",
-                "source": "https://gitlab.com/nexendrie/code-quality/"
+                "source": "https://gitlab.com/nexendrie/code-quality/-/tree/master"
             },
-            "time": "2025-12-19T20:19:59+00:00"
+            "time": "2026-01-18T13:56:10+00:00"
         },
         {
             "name": "nexendrie/testbench",
@@ -2552,11 +2607,11 @@
         },
         {
             "name": "phpstan/phpstan",
-            "version": "2.1.33",
+            "version": "2.1.34",
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/9e800e6bee7d5bd02784d4c6069b48032d16224f",
-                "reference": "9e800e6bee7d5bd02784d4c6069b48032d16224f",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/070ba754a949fcade788e16e8dc5a5935b7cf2ee",
+                "reference": "070ba754a949fcade788e16e8dc5a5935b7cf2ee",
                 "shasum": ""
             },
             "require": {
@@ -2601,7 +2656,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-12-05T10:24:31+00:00"
+            "time": "2026-01-19T19:52:16+00:00"
         },
         {
             "name": "phpstan/phpstan-deprecation-rules",
@@ -2853,5 +2908,5 @@
         "ext-spl": "*"
     },
     "platform-dev": {},
-    "plugin-api-version": "2.6.0"
+    "plugin-api-version": "2.9.0"
 }

@@ -19,6 +19,6 @@ final class Introduction extends \Nextras\Orm\Entity\Entity
 {
     protected function setterPart(int $value): int
     {
-        return Numbers::range($value, 1, 9);
+        return Numbers::clamp($value, 1, 9);
     }
 }

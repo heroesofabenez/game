@@ -62,7 +62,7 @@ final class Character extends \Nextras\Orm\Entity\Entity
 
     protected function setterLevel(int $value): int
     {
-        return Numbers::range($value, 1, 999);
+        return Numbers::clamp($value, 1, 999);
     }
 
     protected function getterPredominantKarma(): string
@@ -77,7 +77,7 @@ final class Character extends \Nextras\Orm\Entity\Entity
 
     protected function getterCharismaBonus(): int
     {
-        $charisma = Numbers::range((int) $this->charisma - 10, 0, 999);
+        $charisma = Numbers::clamp((int) $this->charisma - 10, 0, 999);
         return $charisma * 3;
     }
 

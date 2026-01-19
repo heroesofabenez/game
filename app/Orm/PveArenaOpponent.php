@@ -32,7 +32,7 @@ final class PveArenaOpponent extends \Nextras\Orm\Entity\Entity
 
     protected function setterLevel(int $value): int
     {
-        return Numbers::range($value, 1, 999);
+        return Numbers::clamp($value, 1, 999);
     }
 
     protected function getterWeapon(): ?Item

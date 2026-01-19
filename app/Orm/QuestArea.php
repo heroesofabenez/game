@@ -46,6 +46,6 @@ final class QuestArea extends \Nextras\Orm\Entity\Entity
 
     protected function setterRequiredLevel(int $value): int
     {
-        return Numbers::range($value, 0, 99);
+        return Numbers::clamp($value, 0, 99);
     }
 }

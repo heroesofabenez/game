@@ -63,7 +63,7 @@ final class Item extends \Nextras\Orm\Entity\Entity
 
     protected function setterPrice(int $value): int
     {
-        return Numbers::range($value, 0, 999);
+        return Numbers::clamp($value, 0, 999);
     }
 
     protected function setterType(string $value): ?string

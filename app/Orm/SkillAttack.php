@@ -38,7 +38,7 @@ final class SkillAttack extends \Nextras\Orm\Entity\Entity
 
     protected function setterStrikes(int $value): int
     {
-        return Numbers::range($value, 1, self::MAX_STRIKES);
+        return Numbers::clamp($value, 1, self::MAX_STRIKES);
     }
 
     protected function getterName(): string

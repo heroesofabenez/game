@@ -31,7 +31,7 @@ final class CharacterItem extends \Nextras\Orm\Entity\Entity
 
     protected function setterDurability(int $value): int
     {
-        return Numbers::range($value, 0, $this->maxDurability);
+        return Numbers::clamp($value, 0, $this->maxDurability);
     }
 
     protected function getterMaxDurability(): int

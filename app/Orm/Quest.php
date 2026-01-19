@@ -67,41 +67,41 @@ final class Quest extends \Nextras\Orm\Entity\Entity
 
     protected function setterNeededMoney(int $value): int
     {
-        return Numbers::range($value, 0, 999);
+        return Numbers::clamp($value, 0, 999);
     }
 
     protected function setterNeededArenaWins(int $value): int
     {
-        return Numbers::range($value, 0, 999);
+        return Numbers::clamp($value, 0, 999);
     }
 
     protected function setterNeededActiveSkillsLevel(int $value): int
     {
-        return Numbers::range($value, 0, 999);
+        return Numbers::clamp($value, 0, 999);
     }
 
     protected function setterNeededFriends(int $value): int
     {
-        return Numbers::range($value, 0, 99);
+        return Numbers::clamp($value, 0, 99);
     }
 
     protected function setterRewardMoney(int $value): int
     {
-        return Numbers::range($value, 0, 9999);
+        return Numbers::clamp($value, 0, 9999);
     }
 
     protected function setterRewardXp(int $value): int
     {
-        return Numbers::range($value, 0, 9999);
+        return Numbers::clamp($value, 0, 9999);
     }
 
     protected function setterRewardWhiteKarma(int $value): int
     {
-        return $this->rewardWhiteKarma = Numbers::range($value, 0, 99);
+        return $this->rewardWhiteKarma = Numbers::clamp($value, 0, 99);
     }
 
     protected function setterRewardDarkKarma(int $value): int
     {
-        return $this->rewardDarkKarma = Numbers::range($value, 0, 99);
+        return $this->rewardDarkKarma = Numbers::clamp($value, 0, 99);
     }
 }

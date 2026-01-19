@@ -18,6 +18,6 @@ final class ShopItem extends \Nextras\Orm\Entity\Entity
 {
     protected function setterOrder(int $value): int
     {
-        return Numbers::range($value, 0, 99);
+        return Numbers::clamp($value, 0, 99);
     }
 }

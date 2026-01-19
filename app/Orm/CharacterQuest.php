@@ -36,7 +36,7 @@ final class CharacterQuest extends \Nextras\Orm\Entity\Entity
 
     protected function setterProgress(int $value): int
     {
-        return Numbers::range($value, self::PROGRESS_OFFERED, self::PROGRESS_FINISHED);
+        return Numbers::clamp($value, self::PROGRESS_OFFERED, self::PROGRESS_FINISHED);
     }
 
     protected function getterRewardMoney(): int
