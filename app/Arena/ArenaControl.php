@@ -71,7 +71,7 @@ abstract class ArenaControl extends \Nette\Application\UI\Control
     /**
      * Execute the duel
      */
-    protected function doDuel(Character $opponent): void
+    protected function doDuel(Character $opponent): never
     {
         if ($this->combatHelper->getNumberOfTodayArenaFights($this->user->id) >= self::DAILY_FIGHTS_LIMIT) {
             $this->presenter->flashMessage(

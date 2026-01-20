@@ -71,7 +71,7 @@ final class NPCQuestsControl extends \Nette\Application\UI\Control
     /**
      * Accept a quest
      */
-    public function handleAccept(int $questId): void
+    public function handleAccept(int $questId): never
     {
         try {
             $this->questModel->accept($questId, $this->npc->id);
@@ -96,7 +96,7 @@ final class NPCQuestsControl extends \Nette\Application\UI\Control
     /**
      * Finish a quest
      */
-    public function handleFinish(int $questId): void
+    public function handleFinish(int $questId): never
     {
         try {
             $this->questModel->finish($questId, $this->npc->id);

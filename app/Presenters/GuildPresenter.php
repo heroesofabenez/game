@@ -143,7 +143,7 @@ final class GuildPresenter extends BasePresenter
     protected function createComponentCreateGuildForm(): Form
     {
         $form = $this->createGuildFormFactory->create();
-        $form->onSuccess[] = function (): void {
+        $form->onSuccess[] = function (): never {
             $this->reloadIdentity();
             $this->flashMessage("messages.guild.created");
             $this->redirect("Guild:");
@@ -238,7 +238,7 @@ final class GuildPresenter extends BasePresenter
     protected function createComponentDissolveGuildForm(): Form
     {
         $form = $this->dissolveGuildFormFactory->create();
-        $form->onSuccess[] = function (): void {
+        $form->onSuccess[] = function (): never {
             $this->flashMessage("messages.guild.dissolved");
             $this->reloadIdentity();
             $this->redirect("Guild:noguild");
@@ -369,7 +369,7 @@ final class GuildPresenter extends BasePresenter
     protected function createComponentCustomGuildRankNamesForm(): Form
     {
         $form = $this->customGuildRankNamesFormFactory->create();
-        $form->onSuccess[] = function (): void {
+        $form->onSuccess[] = function (): never {
             $this->flashMessage("messages.guild.customRankNamesSet");
             $this->redirect("Guild:");
         };
@@ -385,7 +385,7 @@ final class GuildPresenter extends BasePresenter
     protected function createComponentDonateToGuildForm(): Form
     {
         $form = $this->donateToGuildFormFactory->create();
-        $form->onSuccess[] = function (): void {
+        $form->onSuccess[] = function (): never {
             $this->flashMessage("messages.guild.donationDone");
             $this->redirect("Guild:");
         };

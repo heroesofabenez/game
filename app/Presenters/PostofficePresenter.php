@@ -70,7 +70,7 @@ final class PostofficePresenter extends BasePresenter
         return $form;
     }
 
-    public function newMessageFormSucceeded(Form $form, array $values): void
+    public function newMessageFormSucceeded(Form $form, array $values): never
     {
         $data = [
             "from" => $this->user->id, "to" => $values["to"], "subject" => $values["subject"],

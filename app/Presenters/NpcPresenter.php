@@ -144,7 +144,7 @@ final class NpcPresenter extends BasePresenter
         $this->template->money = $inventory["money"];
     }
 
-    public function handleRepair(int $itemId): void
+    public function handleRepair(int $itemId): never
     {
         try {
             $this->itemModel->repairItem($itemId);

@@ -44,7 +44,7 @@ final class TrainingPresenter extends BasePresenter
         $this->template->damageStat = $character->damageStat();
     }
 
-    public function handleTrainStat(string $stat): void
+    public function handleTrainStat(string $stat): never
     {
         try {
             $this->model->user = $this->user;
@@ -56,7 +56,7 @@ final class TrainingPresenter extends BasePresenter
         $this->redirect("Training:");
     }
 
-    public function handleTrainSkill(int $skillId, string $skillType): void
+    public function handleTrainSkill(int $skillId, string $skillType): never
     {
         try {
             $this->model->user = $this->user;

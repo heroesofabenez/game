@@ -54,7 +54,7 @@ final class NPCShopControl extends \Nette\Application\UI\Control
     /**
      * Buy an item in the shop
      */
-    public function handleBuy(int $itemId): void
+    public function handleBuy(int $itemId): never
     {
         $item = $this->orm->items->getById($itemId);
         if ($item === null) {

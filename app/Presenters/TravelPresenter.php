@@ -26,7 +26,7 @@ final class TravelPresenter extends BasePresenter
         $this->redirect("Map:local");
     }
 
-    public function actionArea(int $id): void
+    public function actionArea(int $id): never
     {
         $this->model->user = $this->user;
         try {
@@ -44,7 +44,7 @@ final class TravelPresenter extends BasePresenter
         $this->redirect("Homepage:");
     }
 
-    public function actionStage(int $id): void
+    public function actionStage(int $id): never
     {
         $this->model->user = $this->user;
         try {
