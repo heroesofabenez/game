@@ -5,7 +5,9 @@ namespace HeroesofAbenez\Utils;
 
 final class Arrays
 {
-    use \Nette\StaticClass;
+    private function __construct()
+    {
+    }
 
     /**
      * @author jimpoz jimpoz@jimpoz.com

@@ -12,7 +12,9 @@ use Nexendrie\Utils\Constants;
  */
 final class Karma
 {
-    use \Nette\StaticClass;
+    private function __construct()
+    {
+    }
 
     public const string KARMA_WHITE = "white";
     public const string KARMA_NEUTRAL = "neutral";
