@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <project name="Heroes of Abenenez" basedir="." default="test">
-  <target name="test" depends="lint,cs,phpstan,sanity-checks,tests,clean-db"/>
+  <target name="test" depends="apply-dev-patches,lint,cs,phpstan,sanity-checks,tests,clean-db"/>
   <target name="test-ci" depends="install-ci,test"/>
+  <target name="apply-dev-patches">
+    <exec executable="ci/apply-dev-patches.sh" logoutput="true" passthru="true" checkreturn="true"/>
+  </target>
   <target name="install-ci">
     <mkdir dir="tests/_temp"/>
     <copy file="tests/ci.neon" tofile="tests/local.neon"/>

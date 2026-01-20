@@ -12,7 +12,7 @@
         }
     ],
     "require": {
-        "php": ">=8.1.0",
+        "php": ">=8.3.0",
         "ext-curl": "*",
         "ext-spl": "*",
         "nette/application": "^3.1.10",
@@ -31,8 +31,7 @@
         "nextras/multi-query-parser": "^1.0",
         "symfony/options-resolver": "^6.4",
         "heroesofabenez/chat": "^2.1",
-        "heroesofabenez/combat": "^1.0",
-        "nette/http": "3.1.2"
+        "heroesofabenez/combat": "^1.0"
     },
     "require-dev": {
         "nexendrie/code-quality": "dev-master",

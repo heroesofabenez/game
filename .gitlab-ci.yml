@@ -32,7 +32,7 @@ stages:
 
 install:
   stage: install
-  image: nexendrie/php:8.1
+  image: nexendrie/php:8.3
   script:
     - composer install --prefer-dist --no-progress --no-interaction
   cache:
@@ -45,13 +45,14 @@ sast:
   cache:
     <<: *default_cache
 
-test:php8.1:
+test:php8.3:
   <<: *test_job
-  image: nexendrie/php:8.1
+  image: nexendrie/php:8.3
 
 test:reports:
     extends:
         - .test_job
+    image: nexendrie/php:8.3
     variables:
         REPORTS: 1
     coverage: '/(\d+\%) covered/'
