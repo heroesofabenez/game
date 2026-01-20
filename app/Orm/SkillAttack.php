@@ -27,7 +27,7 @@ use Nexendrie\Utils\Numbers;
  */
 final class SkillAttack extends \Nextras\Orm\Entity\Entity
 {
-    public const MAX_STRIKES = 9;
+    public const int MAX_STRIKES = 9;
 
     private Translator $translator;
 

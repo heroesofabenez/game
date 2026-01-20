@@ -11,9 +11,9 @@ use HeroesofAbenez\Orm\GuildPrivilege;
  *
  * @author Jakub Konečný
  */
-final class Permissions
+final readonly class Permissions
 {
-    public function __construct(private readonly ORM $orm, private readonly \Nette\Caching\Cache $cache)
+    public function __construct(private ORM $orm, private \Nette\Caching\Cache $cache)
     {
     }
 

@@ -18,9 +18,9 @@ use Nextras\Orm\Collection\ICollection;
  *
  * @author Jakub Konečný
  */
-final class CombatHelper
+final readonly class CombatHelper
 {
-    public function __construct(private readonly ORM $orm, private readonly CharacterBuilder $cb)
+    public function __construct(private ORM $orm, private CharacterBuilder $cb)
     {
     }
 

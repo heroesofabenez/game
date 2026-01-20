@@ -3,9 +3,9 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Model;
 
-final class ApplicationDirectories
+final readonly class ApplicationDirectories
 {
-    public function __construct(public readonly string $wwwDir, public readonly string $appDir)
+    public function __construct(public string $wwwDir, public string $appDir)
     {
     }
 }

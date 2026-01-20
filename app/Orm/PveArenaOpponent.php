@@ -27,8 +27,8 @@ use HeroesofAbenez\Combat\BaseCharacterSkill;
  */
 final class PveArenaOpponent extends \Nextras\Orm\Entity\Entity
 {
-    public const GENDER_MALE = "male";
-    public const GENDER_FEMALE = "female";
+    public const string GENDER_MALE = "male";
+    public const string GENDER_FEMALE = "female";
 
     protected function setterLevel(int $value): int
     {

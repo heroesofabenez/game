@@ -11,9 +11,9 @@ use HeroesofAbenez\Orm\ChatMessage as ChatMessageEntity;
  *
  * @author Jakub Konečný
  */
-final class NextrasOrmAdapter implements DatabaseAdapter
+final readonly class NextrasOrmAdapter implements DatabaseAdapter
 {
-    public function __construct(private readonly ORM $orm, private readonly \Nette\Security\User $user)
+    public function __construct(private ORM $orm, private \Nette\Security\User $user)
     {
     }
 

@@ -11,9 +11,9 @@ use HeroesofAbenez\Orm\Combat as CombatEntity;
  *
  * @author Jakub Konečný
  */
-final class CombatLogManager
+final readonly class CombatLogManager
 {
-    public function __construct(private readonly ORM $orm)
+    public function __construct(private ORM $orm)
     {
     }
 

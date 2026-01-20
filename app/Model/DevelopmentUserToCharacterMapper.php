@@ -11,7 +11,7 @@ namespace HeroesofAbenez\Model;
  */
 final class DevelopmentUserToCharacterMapper implements UserToCharacterMapper
 {
-    public const USER_ID = 1;
+    public const int USER_ID = 1;
 
     public function getRealId(): int
     {

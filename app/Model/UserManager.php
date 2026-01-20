@@ -15,12 +15,12 @@ use Nette\Security\IIdentity;
  *
  * @author Jakub Konečný
  */
-final class UserManager implements \Nette\Security\Authenticator
+final readonly class UserManager implements \Nette\Security\Authenticator
 {
     public function __construct(
-        private readonly ORM $orm,
-        private readonly UserToCharacterMapper $userToCharacterMapper,
-        private readonly CharacterBuilder $cb
+        private ORM $orm,
+        private UserToCharacterMapper $userToCharacterMapper,
+        private CharacterBuilder $cb
     ) {
     }
 

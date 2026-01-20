@@ -14,10 +14,10 @@ final class Karma
 {
     use \Nette\StaticClass;
 
-    public const KARMA_WHITE = "white";
-    public const KARMA_NEUTRAL = "neutral";
-    public const KARMA_DARK = "dark";
-    public const THRESHOLD = 5;
+    public const string KARMA_WHITE = "white";
+    public const string KARMA_NEUTRAL = "neutral";
+    public const string KARMA_DARK = "dark";
+    public const int THRESHOLD = 5;
 
     /**
      * @return string[]

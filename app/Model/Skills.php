@@ -15,9 +15,9 @@ use HeroesofAbenez\Orm\CharacterSpecialSkill;
  *
  * @author Jakub Konečný
  */
-final class Skills
+final readonly class Skills
 {
-    public function __construct(private readonly ORM $orm, private readonly \Nette\Security\User $user)
+    public function __construct(private ORM $orm, private \Nette\Security\User $user)
     {
     }
 

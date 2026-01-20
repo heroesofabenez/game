@@ -10,9 +10,9 @@ use HeroesofAbenez\Orm\Model as ORM;
  *
  * @author Jakub Konečný
  */
-final class Intro
+final readonly class Intro
 {
-    public function __construct(private readonly \Nette\Security\User $user, private readonly ORM $orm)
+    public function __construct(private \Nette\Security\User $user, private ORM $orm)
     {
     }
 

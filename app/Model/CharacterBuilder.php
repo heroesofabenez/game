@@ -14,8 +14,7 @@ use HeroesofAbenez\Orm\CharacterSpecialization;
  */
 final class CharacterBuilder
 {
-    /** @var int */
-    public const SPECIALIZATION_LEVEL = 15;
+    public const int SPECIALIZATION_LEVEL = 15;
 
     private function calculateStat(string $stat, CharacterClass $class, CharacterRace $race, int $level): float
     {

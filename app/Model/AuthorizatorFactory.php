@@ -10,9 +10,9 @@ use Nette\Security\Permission;
  *
  * @author Jakub Konečný
  */
-final class AuthorizatorFactory
+final readonly class AuthorizatorFactory
 {
-    public function __construct(private readonly Permissions $model)
+    public function __construct(private Permissions $model)
     {
     }
 

@@ -8,14 +8,14 @@ namespace HeroesofAbenez\Model;
  *
  * @author Jakub Konečný
  */
-final class Map
+final readonly class Map
 {
-    private readonly bool $alwaysDraw;
+    private bool $alwaysDraw;
 
     public function __construct(
-        private readonly Location $locationModel,
-        private readonly \Nette\Security\User $user,
-        private readonly MapDrawer $drawer,
+        private Location $locationModel,
+        private \Nette\Security\User $user,
+        private MapDrawer $drawer,
         SettingsRepository $sr
     ) {
         $this->alwaysDraw = $sr->settings["application"]["alwaysDrawMaps"];

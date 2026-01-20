@@ -31,13 +31,13 @@ use Nexendrie\Utils\Constants;
  */
 final class Item extends \Nextras\Orm\Entity\Entity
 {
-    public const SLOT_ITEM = "item";
-    public const SLOT_WEAPON = \HeroesofAbenez\Combat\Equipment::SLOT_WEAPON;
-    public const SLOT_ARMOR = \HeroesofAbenez\Combat\Equipment::SLOT_ARMOR;
-    public const SLOT_SHIELD = \HeroesofAbenez\Combat\Equipment::SLOT_SHIELD;
-    public const SLOT_AMULET = \HeroesofAbenez\Combat\Equipment::SLOT_AMULET;
-    public const SLOT_HELMET = \HeroesofAbenez\Combat\Equipment::SLOT_HELMET;
-    public const SLOT_RING = \HeroesofAbenez\Combat\Equipment::SLOT_RING;
+    public const string SLOT_ITEM = "item";
+    public const string SLOT_WEAPON = \HeroesofAbenez\Combat\Equipment::SLOT_WEAPON;
+    public const string SLOT_ARMOR = \HeroesofAbenez\Combat\Equipment::SLOT_ARMOR;
+    public const string SLOT_SHIELD = \HeroesofAbenez\Combat\Equipment::SLOT_SHIELD;
+    public const string SLOT_AMULET = \HeroesofAbenez\Combat\Equipment::SLOT_AMULET;
+    public const string SLOT_HELMET = \HeroesofAbenez\Combat\Equipment::SLOT_HELMET;
+    public const string SLOT_RING = \HeroesofAbenez\Combat\Equipment::SLOT_RING;
 
     private Translator $translator;
 

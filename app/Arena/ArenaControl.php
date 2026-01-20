@@ -22,7 +22,7 @@ use Nextras\Orm\Collection\ICollection;
  */
 abstract class ArenaControl extends \Nette\Application\UI\Control
 {
-    protected const DAILY_FIGHTS_LIMIT = 10;
+    protected const int DAILY_FIGHTS_LIMIT = 10;
 
     protected string $arena;
     protected string $profileLink;

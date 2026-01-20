@@ -11,9 +11,9 @@ use HeroesofAbenez\Orm\Model as ORM;
  *
  * @author Jakub Konečný
  */
-final class NPC
+final readonly class NPC
 {
-    public function __construct(private readonly ORM $orm)
+    public function __construct(private ORM $orm)
     {
     }
 

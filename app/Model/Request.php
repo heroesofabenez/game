@@ -15,12 +15,12 @@ use Nextras\Orm\Collection\ICollection;
  *
  * @author Jakub Konečný
  */
-final class Request
+final readonly class Request
 {
     public function __construct(
-        private readonly \Nette\Security\User $user,
-        private readonly ORM $orm,
-        private readonly Guild $guildModel
+        private \Nette\Security\User $user,
+        private ORM $orm,
+        private Guild $guildModel
     ) {
     }
 

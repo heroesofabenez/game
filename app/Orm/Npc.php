@@ -35,15 +35,15 @@ use Nexendrie\Utils\Numbers;
  */
 final class Npc extends \Nextras\Orm\Entity\Entity
 {
-    public const PERSONALITY_FRIENDLY = "friendly";
-    public const PERSONALITY_CRAZY = "crazy";
-    public const PERSONALITY_SHY = "shy";
-    public const PERSONALITY_HOSTILE = "hostile";
-    public const PERSONALITY_RESERVED = "reserved";
-    public const PERSONALITY_ELITIST = "elitist";
-    public const PERSONALITY_TEACHING = "teaching";
-    public const PERSONALITY_RACIST = "racist";
-    public const PERSONALITY_MISOGYNIST = "misogynist";
+    public const string PERSONALITY_FRIENDLY = "friendly";
+    public const string PERSONALITY_CRAZY = "crazy";
+    public const string PERSONALITY_SHY = "shy";
+    public const string PERSONALITY_HOSTILE = "hostile";
+    public const string PERSONALITY_RESERVED = "reserved";
+    public const string PERSONALITY_ELITIST = "elitist";
+    public const string PERSONALITY_TEACHING = "teaching";
+    public const string PERSONALITY_RACIST = "racist";
+    public const string PERSONALITY_MISOGYNIST = "misogynist";
 
     private Translator $translator;
 

@@ -12,9 +12,9 @@ use HeroesofAbenez\Orm\CharacterItem;
  *
  * @author Jakub Konečný
  */
-final class Item
+final readonly class Item
 {
-    public function __construct(private readonly ORM $orm, private readonly \Nette\Security\User $user)
+    public function __construct(private ORM $orm, private \Nette\Security\User $user)
     {
     }
 

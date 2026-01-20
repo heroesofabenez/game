@@ -12,8 +12,8 @@ namespace HeroesofAbenez\Model;
  */
 interface UserToCharacterMapper
 {
-    public const USER_ID_NOT_LOGGED_IN = 0;
-    public const USER_ID_NO_CHARACTER = -1;
+    public const int USER_ID_NOT_LOGGED_IN = 0;
+    public const int USER_ID_NO_CHARACTER = -1;
 
     public function getRealId(): int;
 }

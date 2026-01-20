@@ -30,8 +30,8 @@ use Nexendrie\Utils\Numbers;
  */
 final class CharacterRace extends \Nextras\Orm\Entity\Entity
 {
-    private const MIN_STATS = 0;
-    private const MAX_STATS = 15;
+    private const int MIN_STATS = 0;
+    private const int MAX_STATS = 15;
 
     private Translator $translator;
 

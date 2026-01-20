@@ -15,15 +15,15 @@ use Nette\Application\LinkGenerator;
  *
  * @author Jakub Konečný
  */
-final class Quest
+final readonly class Quest
 {
     public function __construct(
-        private readonly ORM $orm,
-        private readonly \Nette\Security\User $user,
-        private readonly Item $itemModel,
-        private readonly Pet $petModel,
-        private readonly Translator $translator,
-        private readonly LinkGenerator $linkGenerator
+        private ORM $orm,
+        private \Nette\Security\User $user,
+        private Item $itemModel,
+        private Pet $petModel,
+        private Translator $translator,
+        private LinkGenerator $linkGenerator
     ) {
         $this->petModel->user = $user;
     }

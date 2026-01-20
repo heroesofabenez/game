@@ -16,8 +16,8 @@ final class DialogueLine
 {
     use \Nette\SmartObject;
 
-    private const SPEAKER_PLAYER = "player";
-    private const SPEAKER_NPC = "npc";
+    private const string SPEAKER_PLAYER = "player";
+    private const string SPEAKER_NPC = "npc";
 
     private string $speaker = self::SPEAKER_PLAYER;
 

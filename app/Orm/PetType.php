@@ -25,10 +25,10 @@ use Nexendrie\Utils\Numbers;
  */
 final class PetType extends \Nextras\Orm\Entity\Entity
 {
-    public const STAT_STR = "strength";
-    public const STAT_DEX = "dexterity";
-    public const STAT_CON = "constitution";
-    public const STAT_INT = "intelligence";
+    public const string STAT_STR = "strength";
+    public const string STAT_DEX = "dexterity";
+    public const string STAT_CON = "constitution";
+    public const string STAT_INT = "intelligence";
 
     private Translator $translator;
 

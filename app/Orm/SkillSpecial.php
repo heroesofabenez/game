@@ -29,17 +29,17 @@ use HeroesofAbenez\Combat\Character as CharacterDummy;
 final class SkillSpecial extends \Nextras\Orm\Entity\Entity
 {
     /** @internal */
-    public const STAT_MAX_HITPOINTS = CharacterDummy::STAT_MAX_HITPOINTS;
+    public const string STAT_MAX_HITPOINTS = CharacterDummy::STAT_MAX_HITPOINTS;
     /** @internal */
-    public const STAT_DAMAGE = CharacterDummy::STAT_DAMAGE;
+    public const string STAT_DAMAGE = CharacterDummy::STAT_DAMAGE;
     /** @internal */
-    public const STAT_DEFENSE = CharacterDummy::STAT_DEFENSE;
+    public const string STAT_DEFENSE = CharacterDummy::STAT_DEFENSE;
     /** @internal */
-    public const STAT_HIT = CharacterDummy::STAT_HIT;
+    public const string STAT_HIT = CharacterDummy::STAT_HIT;
     /** @internal */
-    public const STAT_DODGE = CharacterDummy::STAT_DODGE;
+    public const string STAT_DODGE = CharacterDummy::STAT_DODGE;
     /** @internal */
-    public const STAT_INITIATIVE = CharacterDummy::STAT_INITIATIVE;
+    public const string STAT_INITIATIVE = CharacterDummy::STAT_INITIATIVE;
 
     private Translator $translator;
 

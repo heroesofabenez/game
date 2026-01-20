@@ -23,9 +23,9 @@ use Nextras\Orm\Collection\ICollection;
  */
 final class CharacterQuest extends \Nextras\Orm\Entity\Entity
 {
-    public const PROGRESS_OFFERED = 0;
-    public const PROGRESS_STARTED = 1;
-    public const PROGRESS_FINISHED = 3;
+    public const int PROGRESS_OFFERED = 0;
+    public const int PROGRESS_STARTED = 1;
+    public const int PROGRESS_FINISHED = 3;
 
     private FriendshipsRepository $friendshipsRepository;
 

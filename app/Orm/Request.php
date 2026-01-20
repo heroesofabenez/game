@@ -17,13 +17,13 @@ namespace HeroesofAbenez\Orm;
  */
 final class Request extends \Nextras\Orm\Entity\Entity
 {
-    public const TYPE_GUILD_JOIN = "guild_join";
-    public const TYPE_GUILD_APP = "guild_app";
-    public const TYPE_GROUP_JOIN = "group_join";
-    public const TYPE_FRIENDSHIP = "friendship";
-    public const STATUS_NEW = "new";
-    public const STATUS_ACCEPTED = "accepted";
-    public const STATUS_DECLINED = "declined";
+    public const string TYPE_GUILD_JOIN = "guild_join";
+    public const string TYPE_GUILD_APP = "guild_app";
+    public const string TYPE_GROUP_JOIN = "group_join";
+    public const string TYPE_FRIENDSHIP = "friendship";
+    public const string STATUS_NEW = "new";
+    public const string STATUS_ACCEPTED = "accepted";
+    public const string STATUS_DECLINED = "declined";
 
     protected function getterSentAt(): string
     {
