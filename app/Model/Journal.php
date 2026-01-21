@@ -8,7 +8,6 @@ use HeroesofAbenez\Orm\Pet as PetEntity;
 use HeroesofAbenez\Orm\Model as ORM;
 use HeroesofAbenez\Orm\QuestStage as QuestStageEntity;
 use Nextras\Orm\Collection\ICollection;
-use Nette\Localization\ITranslator;
 
 /**
  * Journal Model
