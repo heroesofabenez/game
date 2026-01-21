@@ -84,33 +84,4 @@
       <arg path="ci/clean_db.php"/>
     </exec>
   </target>
-  <target name="scrutinizer">
-    <phingcall target="install-ci"/>
-    <exec executable="vendor/bin/phpcs" logoutput="true" passthru="true" checkreturn="true">
-      <arg value="--extensions=php,phpt"/>
-      <arg value="."/>
-      <arg value="--standard=vendor/nexendrie/code-quality/phpcs.xml"/>
-      <arg value="--report=checkstyle"/>
-      <arg value="--report-file=codesniffer.xml"/>
-    </exec>
-    <exec executable="php" logoutput="true" passthru="true" checkreturn="true">
-      <arg path="ci/scrutinizer_setup.php"/>
-    </exec>
-    <exec executable="mysql" logoutput="true" passthru="true" checkreturn="true">
-      <arg line="-uroot -e 'CREATE DATABASE heroesofabenez'"/>
-    </exec>
-    <exec executable="mysql_tzinfo_to_sql" logoutput="true" passthru="true" checkreturn="true">
-      <arg line="/usr/share/zoneinfo | mysql -u root mysql"/>
-    </exec>
-    <phingcall target="setup-db"/>
-    <exec executable="vendor/bin/run-tests" logoutput="true" passthru="true" checkreturn="true">
-      <arg value="-p"/>
-      <arg value="php"/>
-      <arg path="tests"/>
-      <arg value="--coverage"/>
-      <arg path="./coverage.xml"/>
-      <arg value="--coverage-src"/>
-      <arg path="./app"/>
-    </exec>
-  </target>
 </project>
