@@ -375,7 +375,7 @@ final readonly class Guild
      *
      * @return string[]
      */
-    public function getDefaultRankNames()
+    public function getDefaultRankNames(): array
     {
         return $this->orm->guildRanks->findAll()->fetchPairs("id", "name");
     }

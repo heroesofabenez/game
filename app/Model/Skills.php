@@ -91,10 +91,7 @@ final readonly class Skills
         return $row;
     }
 
-    /**
-     * @param SkillAttack|SkillSpecial $skill
-     */
-    private function canLearnSkill($skill): bool
+    private function canLearnSkill(SkillAttack|SkillSpecial $skill): bool
     {
         if ($skill->neededClass->id !== $this->user->identity->class) {
             return false;
