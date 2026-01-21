@@ -23,9 +23,7 @@ final class ErrorPresenter extends BasePresenter
             $this->setView("404");
         } else {
             $this->setView("500");
-            if ($this->logger !== null) {
-                $this->logger->log($exception, ILogger::EXCEPTION);
-            }
+            $this->logger?->log($exception, ILogger::EXCEPTION);
         }
     }
 }
