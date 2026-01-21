@@ -45,7 +45,6 @@ final class CharacterBuilder
             if ($specialization !== null) {
                 throw new CannotChooseSpecializationException();
             }
-            return;
         } elseif ($specialization === null) {
             throw new SpecializationNotChosenException();
         } elseif ($specialization->class->id !== $class->id) {
