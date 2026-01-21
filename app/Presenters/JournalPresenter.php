@@ -173,7 +173,7 @@ final class JournalPresenter extends BasePresenter
         try {
             $this->friendsModel->remove($id);
             $this->flashMessage("messages.friends.removed");
-        } catch (NotFriendsException $e) {
+        } catch (NotFriendsException) {
             $this->flashMessage("errors.friendship.notFriends");
         }
         $this->redirect("Journal:friends");

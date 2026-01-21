@@ -51,7 +51,7 @@ final readonly class Permissions
     public function getPermissions(): array
     {
         $roles = $this->getRoles();
-        $permissions = $this->cache->load("permissions", function () use ($roles): array {
+        return $this->cache->load("permissions", function () use ($roles): array {
             $permissions = [];
             $privileges = $this->orm->guildPrivileges->findAll();
             /** @var GuildPrivilege $privilege */
@@ -61,6 +61,5 @@ final readonly class Permissions
             }
             return $permissions;
         });
-        return $permissions;
     }
 }

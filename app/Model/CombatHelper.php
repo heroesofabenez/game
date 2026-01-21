@@ -88,8 +88,7 @@ final readonly class CombatHelper
         }
         $skills = $this->getPlayerSkills($character);
         $equipment = $this->getPlayerEquipment($character);
-        $player = new Character($data, $equipment, $pets, $skills);
-        return $player;
+        return new Character($data, $equipment, $pets, $skills);
     }
 
     /**
@@ -149,8 +148,7 @@ final readonly class CombatHelper
         $data["occupation"] = $npc->class->name;
         $data["specialization"] = ($npc->specialization !== null) ? $npc->specialization->name : "";
         $equipment = $this->getArenaNpcEquipment($npc);
-        $npc = new Character($data, $equipment, [], $npc->skills);
-        return $npc;
+        return new Character($data, $equipment, [], $npc->skills);
     }
 
     /**
