@@ -103,7 +103,7 @@ final readonly class Guild
         foreach ($data as $key => $value) {
             $guild->$key = $value;
         }
-        /** @var \HeroesofAbenez\Orm\Character $character */
+        /** @var CharacterEntity $character */
         $character = $this->orm->characters->getById($this->user->id);
         $character->guild = $guild;
         $character->guildrank = 7;
@@ -303,7 +303,7 @@ final readonly class Guild
         if ($this->user->isInRole("grandmaster")) {
             throw new GrandmasterCannotLeaveGuildException();
         }
-        /** @var \HeroesofAbenez\Orm\Character $character */
+        /** @var CharacterEntity $character */
         $character = $this->orm->characters->getById($this->user->id);
         $character->guild = $character->guildrank = null;
         $this->orm->characters->persistAndFlush($character);
@@ -363,7 +363,7 @@ final readonly class Guild
      */
     public function join(int $uid, int $gid): void
     {
-        /** @var \HeroesofAbenez\Orm\Character $character */
+        /** @var CharacterEntity $character */
         $character = $this->orm->characters->getById($uid);
         $character->guild = $gid;
         $character->guildrank = 1;
@@ -425,7 +425,7 @@ final readonly class Guild
      */
     public function donate(int $amount): void
     {
-        /** @var \HeroesofAbenez\Orm\Character $character */
+        /** @var CharacterEntity $character */
         $character = $this->orm->characters->getById($this->user->id);
         if ($character->guild === null) {
             throw new NotInGuildException();

@@ -228,7 +228,7 @@ final readonly class CombatHelper
                 if (!$equipment->worn) {
                     continue;
                 }
-                /** @var \HeroesofAbenez\Orm\CharacterItem $item */
+                /** @var CharacterItem $item */
                 $item = $this->orm->characterItems->getByCharacterAndItem($character->id, $equipment->id);
                 $item->durability--;
                 $this->orm->characterItems->persist($item);
