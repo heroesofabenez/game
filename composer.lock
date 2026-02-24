@@ -8,16 +8,16 @@
     "packages": [
         {
             "name": "heroesofabenez/chat",
-            "version": "2.2.0",
+            "version": "2.3.0",
             "source": {
                 "type": "git",
                 "url": "https://gitlab.com/heroesofabenez/chat.git",
-                "reference": "18581edce365457818f0a6c285b43ad2ad551631"
+                "reference": "2ba17c40ed02c4a8a771d4653b1d5b21b4f1527f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://gitlab.com/api/v4/projects/heroesofabenez%2Fchat/repository/archive.zip?sha=18581edce365457818f0a6c285b43ad2ad551631",
-                "reference": "18581edce365457818f0a6c285b43ad2ad551631",
+                "url": "https://gitlab.com/api/v4/projects/heroesofabenez%2Fchat/repository/archive.zip?sha=2ba17c40ed02c4a8a771d4653b1d5b21b4f1527f",
+                "reference": "2ba17c40ed02c4a8a771d4653b1d5b21b4f1527f",
                 "shasum": ""
             },
             "require": {
@@ -25,16 +25,15 @@
                 "nette/application": "^3.1.2",
                 "nette/di": "^3.1",
                 "nette/forms": "^3.1.7",
-                "nette/utils": "^3.2.7",
+                "nette/utils": "^3.2.7 || ^4.0",
                 "nexendrie/utils": "^1.9",
-                "php": ">=8.1.0"
+                "php": ">=8.3.0"
             },
             "require-dev": {
                 "latte/latte": "^2.6",
                 "nexendrie/code-quality": "dev-master",
-                "nexendrie/site-generator": "^0.7",
-                "nexendrie/translation": "^2.3.1",
-                "phpstan/phpstan-deprecation-rules": "^2.0"
+                "nexendrie/site-generator": "^0.9",
+                "nexendrie/translation": "^2.4"
             },
             "suggest": {
                 "nexendrie/translation": "Translator"
@@ -42,7 +41,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.2.x-dev"
+                    "dev-master": "2.3.x-dev"
                 }
             },
             "autoload": {
@@ -71,9 +70,9 @@
             ],
             "support": {
                 "issues": "https://gitlab.com/heroesofabenez/chat/-/issues",
-                "source": "https://gitlab.com/heroesofabenez/chat/-/tree/2.2.0"
+                "source": "https://gitlab.com/heroesofabenez/chat/-/tree/2.3.0"
             },
-            "time": "2025-08-03T16:16:21+00:00"
+            "time": "2026-02-05T20:46:37+00:00"
         },
         {
             "name": "heroesofabenez/combat",
@@ -81,12 +80,12 @@
             "source": {
                 "type": "git",
                 "url": "https://gitlab.com/heroesofabenez/combat.git",
-                "reference": "797dff59446c913ff5daaa4710e8efa9f60d976e"
+                "reference": "77d6a4e7cf4ad11762682eabba768691941d7811"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://gitlab.com/api/v4/projects/heroesofabenez%2Fcombat/repository/archive.zip?sha=797dff59446c913ff5daaa4710e8efa9f60d976e",
-                "reference": "797dff59446c913ff5daaa4710e8efa9f60d976e",
+                "url": "https://gitlab.com/api/v4/projects/heroesofabenez%2Fcombat/repository/archive.zip?sha=77d6a4e7cf4ad11762682eabba768691941d7811",
+                "reference": "77d6a4e7cf4ad11762682eabba768691941d7811",
                 "shasum": ""
             },
             "require": {
@@ -94,12 +93,11 @@
                 "nette/utils": "^3.2.2",
                 "nexendrie/translation": "^2.4",
                 "nexendrie/utils": "^1.10",
-                "php": ">=8.1.0",
+                "php": ">=8.3.0",
                 "symfony/options-resolver": "^6.4 || ^7.4"
             },
             "require-dev": {
                 "nexendrie/code-quality": "dev-master",
-                "nexendrie/site-generator": "^0.9",
                 "phpstan/phpstan-nette": "^2.0"
             },
             "default-branch": true,
@@ -135,7 +133,7 @@
                 "issues": "https://gitlab.com/heroesofabenez/combat/-/issues",
                 "source": "https://gitlab.com/heroesofabenez/combat/-/tree/master"
             },
-            "time": "2026-01-18T21:09:20+00:00"
+            "time": "2026-02-24T19:38:49+00:00"
         },
         {
             "name": "latte/latte",
@@ -1741,16 +1739,16 @@
         },
         {
             "name": "phpstan/phpdoc-parser",
-            "version": "2.3.1",
+            "version": "2.3.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpdoc-parser.git",
-                "reference": "16dbf9937da8d4528ceb2145c9c7c0bd29e26374"
+                "reference": "a004701b11273a26cd7955a61d67a7f1e525a45a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpdoc-parser/zipball/16dbf9937da8d4528ceb2145c9c7c0bd29e26374",
-                "reference": "16dbf9937da8d4528ceb2145c9c7c0bd29e26374",
+                "url": "https://api.github.com/repos/phpstan/phpdoc-parser/zipball/a004701b11273a26cd7955a61d67a7f1e525a45a",
+                "reference": "a004701b11273a26cd7955a61d67a7f1e525a45a",
                 "shasum": ""
             },
             "require": {
@@ -1782,9 +1780,9 @@
             "description": "PHPDoc parser with support for nullable, intersection and generic types",
             "support": {
                 "issues": "https://github.com/phpstan/phpdoc-parser/issues",
-                "source": "https://github.com/phpstan/phpdoc-parser/tree/2.3.1"
+                "source": "https://github.com/phpstan/phpdoc-parser/tree/2.3.2"
             },
-            "time": "2026-01-12T11:33:04+00:00"
+            "time": "2026-01-25T14:56:51+00:00"
         },
         {
             "name": "symfony/deprecation-contracts",
@@ -1926,16 +1924,16 @@
         },
         {
             "name": "tracy/tracy",
-            "version": "v2.11.0",
+            "version": "v2.11.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nette/tracy.git",
-                "reference": "eec57bcf2ff11d79f519a19da9d7ae1e2c63c42e"
+                "reference": "9b265515240a6768347525d463ef04207b4e7d98"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nette/tracy/zipball/eec57bcf2ff11d79f519a19da9d7ae1e2c63c42e",
-                "reference": "eec57bcf2ff11d79f519a19da9d7ae1e2c63c42e",
+                "url": "https://api.github.com/repos/nette/tracy/zipball/9b265515240a6768347525d463ef04207b4e7d98",
+                "reference": "9b265515240a6768347525d463ef04207b4e7d98",
                 "shasum": ""
             },
             "require": {
@@ -1951,9 +1949,11 @@
                 "nette/di": "^3.0",
                 "nette/http": "^3.0",
                 "nette/mail": "^3.0 || ^4.0",
-                "nette/tester": "^2.2",
+                "nette/phpstan-rules": "^1.0",
+                "nette/tester": "^2.6",
                 "nette/utils": "^3.0 || ^4.0",
-                "phpstan/phpstan-nette": "^2.0@stable",
+                "phpstan/extension-installer": "^1.4@stable",
+                "phpstan/phpstan": "^2.1@stable",
                 "psr/log": "^1.0 || ^2.0 || ^3.0"
             },
             "type": "library",
@@ -1998,9 +1998,9 @@
             ],
             "support": {
                 "issues": "https://github.com/nette/tracy/issues",
-                "source": "https://github.com/nette/tracy/tree/v2.11.0"
+                "source": "https://github.com/nette/tracy/tree/v2.11.2"
             },
-            "time": "2025-10-31T00:12:50+00:00"
+            "time": "2026-02-20T05:56:23+00:00"
         }
     ],
     "packages-dev": [
@@ -2183,16 +2183,16 @@
         },
         {
             "name": "nette/tester",
-            "version": "v2.5.7",
+            "version": "v2.6.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nette/tester.git",
-                "reference": "dc02e7811f3491a72e87538044586cee2f483d58"
+                "reference": "0d416a3715ee7547f5e286aa7e65180f35467624"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nette/tester/zipball/dc02e7811f3491a72e87538044586cee2f483d58",
-                "reference": "dc02e7811f3491a72e87538044586cee2f483d58",
+                "url": "https://api.github.com/repos/nette/tester/zipball/0d416a3715ee7547f5e286aa7e65180f35467624",
+                "reference": "0d416a3715ee7547f5e286aa7e65180f35467624",
                 "shasum": ""
             },
             "require": {
@@ -2200,7 +2200,7 @@
             },
             "require-dev": {
                 "ext-simplexml": "*",
-                "phpstan/phpstan-nette": "^2.0@stable"
+                "phpstan/phpstan": "^2.0@stable"
             },
             "bin": [
                 "src/tester"
@@ -2208,7 +2208,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.5-dev"
+                    "dev-master": "2.6-dev"
                 }
             },
             "autoload": {
@@ -2255,9 +2255,9 @@
             ],
             "support": {
                 "issues": "https://github.com/nette/tester/issues",
-                "source": "https://github.com/nette/tester/tree/v2.5.7"
+                "source": "https://github.com/nette/tester/tree/v2.6.0"
             },
-            "time": "2025-11-22T18:50:53+00:00"
+            "time": "2026-01-22T08:39:16+00:00"
         },
         {
             "name": "nexendrie/code-quality",
@@ -2265,12 +2265,12 @@
             "source": {
                 "type": "git",
                 "url": "https://gitlab.com/nexendrie/code-quality.git",
-                "reference": "b5b1e011c118e8aba846b0199d3052507ff65ad8"
+                "reference": "01be079608adfb55876b3b4e3fcf19055976d036"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://gitlab.com/api/v4/projects/nexendrie%2Fcode-quality/repository/archive.zip?sha=b5b1e011c118e8aba846b0199d3052507ff65ad8",
-                "reference": "b5b1e011c118e8aba846b0199d3052507ff65ad8",
+                "url": "https://gitlab.com/api/v4/projects/nexendrie%2Fcode-quality/repository/archive.zip?sha=01be079608adfb55876b3b4e3fcf19055976d036",
+                "reference": "01be079608adfb55876b3b4e3fcf19055976d036",
                 "shasum": ""
             },
             "require": {
@@ -2306,7 +2306,7 @@
                 "issues": "https://gitlab.com/nexendrie/code-quality/-/issues",
                 "source": "https://gitlab.com/nexendrie/code-quality/-/tree/master"
             },
-            "time": "2026-01-18T13:56:10+00:00"
+            "time": "2026-02-07T16:25:36+00:00"
         },
         {
             "name": "nexendrie/testbench",
@@ -2615,11 +2615,11 @@
         },
         {
             "name": "phpstan/phpstan",
-            "version": "2.1.35",
+            "version": "2.1.40",
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/72f843c7f59d3aac0b7510f5e70913a9b72a8e88",
-                "reference": "72f843c7f59d3aac0b7510f5e70913a9b72a8e88",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/9b2c7aeb83a75d8680ea5e7c9b7fca88052b766b",
+                "reference": "9b2c7aeb83a75d8680ea5e7c9b7fca88052b766b",
                 "shasum": ""
             },
             "require": {
@@ -2664,25 +2664,25 @@
                     "type": "github"
                 }
             ],
-            "time": "2026-01-20T17:33:48+00:00"
+            "time": "2026-02-23T15:04:35+00:00"
         },
         {
             "name": "phpstan/phpstan-deprecation-rules",
-            "version": "2.0.3",
+            "version": "2.0.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan-deprecation-rules.git",
-                "reference": "468e02c9176891cc901143da118f09dc9505fc2f"
+                "reference": "6b5571001a7f04fa0422254c30a0017ec2f2cacc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan-deprecation-rules/zipball/468e02c9176891cc901143da118f09dc9505fc2f",
-                "reference": "468e02c9176891cc901143da118f09dc9505fc2f",
+                "url": "https://api.github.com/repos/phpstan/phpstan-deprecation-rules/zipball/6b5571001a7f04fa0422254c30a0017ec2f2cacc",
+                "reference": "6b5571001a7f04fa0422254c30a0017ec2f2cacc",
                 "shasum": ""
             },
             "require": {
                 "php": "^7.4 || ^8.0",
-                "phpstan/phpstan": "^2.1.15"
+                "phpstan/phpstan": "^2.1.39"
             },
             "require-dev": {
                 "php-parallel-lint/php-parallel-lint": "^1.2",
@@ -2707,24 +2707,27 @@
                 "MIT"
             ],
             "description": "PHPStan rules for detecting usage of deprecated classes, methods, properties, constants and traits.",
+            "keywords": [
+                "static analysis"
+            ],
             "support": {
                 "issues": "https://github.com/phpstan/phpstan-deprecation-rules/issues",
-                "source": "https://github.com/phpstan/phpstan-deprecation-rules/tree/2.0.3"
+                "source": "https://github.com/phpstan/phpstan-deprecation-rules/tree/2.0.4"
             },
-            "time": "2025-05-14T10:56:57+00:00"
+            "time": "2026-02-09T13:21:14+00:00"
         },
         {
             "name": "phpstan/phpstan-nette",
-            "version": "2.0.7",
+            "version": "2.0.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan-nette.git",
-                "reference": "488d326408740b28c364849316ec065c13799568"
+                "reference": "abd2b295fac8258fb294fd5dc17c5e024c6e3c89"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan-nette/zipball/488d326408740b28c364849316ec065c13799568",
-                "reference": "488d326408740b28c364849316ec065c13799568",
+                "url": "https://api.github.com/repos/phpstan/phpstan-nette/zipball/abd2b295fac8258fb294fd5dc17c5e024c6e3c89",
+                "reference": "abd2b295fac8258fb294fd5dc17c5e024c6e3c89",
                 "shasum": ""
             },
             "require": {
@@ -2771,27 +2774,27 @@
             "description": "Nette Framework class reflection extension for PHPStan",
             "support": {
                 "issues": "https://github.com/phpstan/phpstan-nette/issues",
-                "source": "https://github.com/phpstan/phpstan-nette/tree/2.0.7"
+                "source": "https://github.com/phpstan/phpstan-nette/tree/2.0.9"
             },
-            "time": "2025-12-08T10:39:26+00:00"
+            "time": "2026-02-11T12:41:39+00:00"
         },
         {
             "name": "phpstan/phpstan-strict-rules",
-            "version": "2.0.7",
+            "version": "2.0.10",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan-strict-rules.git",
-                "reference": "d6211c46213d4181054b3d77b10a5c5cb0d59538"
+                "reference": "1aba28b697c1e3b6bbec8a1725f8b11b6d3e5a5f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan-strict-rules/zipball/d6211c46213d4181054b3d77b10a5c5cb0d59538",
-                "reference": "d6211c46213d4181054b3d77b10a5c5cb0d59538",
+                "url": "https://api.github.com/repos/phpstan/phpstan-strict-rules/zipball/1aba28b697c1e3b6bbec8a1725f8b11b6d3e5a5f",
+                "reference": "1aba28b697c1e3b6bbec8a1725f8b11b6d3e5a5f",
                 "shasum": ""
             },
             "require": {
                 "php": "^7.4 || ^8.0",
-                "phpstan/phpstan": "^2.1.29"
+                "phpstan/phpstan": "^2.1.39"
             },
             "require-dev": {
                 "php-parallel-lint/php-parallel-lint": "^1.2",
@@ -2817,11 +2820,14 @@
                 "MIT"
             ],
             "description": "Extra strict and opinionated rules for PHPStan",
+            "keywords": [
+                "static analysis"
+            ],
             "support": {
                 "issues": "https://github.com/phpstan/phpstan-strict-rules/issues",
-                "source": "https://github.com/phpstan/phpstan-strict-rules/tree/2.0.7"
+                "source": "https://github.com/phpstan/phpstan-strict-rules/tree/2.0.10"
             },
-            "time": "2025-09-26T11:19:08+00:00"
+            "time": "2026-02-11T14:17:32+00:00"
         },
         {
             "name": "squizlabs/php_codesniffer",

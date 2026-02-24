@@ -16,7 +16,6 @@ parameters:
     ignoreErrors:
         - '#Call to an undefined method Nette\\ComponentModel\\IComponent::getControlPrototype\(\)#'
         - '#Variable property access on [a-zA-Z\\]+#'
-        - '#Variable property access on \$this\([a-zA-Z\\]+\)#'
         - '#Variable method call on \$this\(HeroesofAbenez\\Model\\Skills\)#'
         - '#Constant HeroesofAbenez\\NPC\\DialogueLine::SPEAKER_NPC is unused#'
         -
