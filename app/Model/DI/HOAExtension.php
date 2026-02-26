@@ -139,7 +139,7 @@ final class HOAExtension extends \Nette\DI\CompilerExtension
         $builder->addDefinition($this->prefix("combat.successCalculator"))
             ->setType(HeroesofAbenez\Combat\RandomSuccessCalculator::class);
         $builder->addDefinition($this->prefix("combat.actionSelector"))
-            ->setType(HeroesofAbenez\Combat\CombatActionSelector::class);
+            ->setType(HeroesofAbenez\Combat\DefaultCombatActionSelector::class);
     }
 
     private function addArena(): void
