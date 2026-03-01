@@ -80,12 +80,12 @@
             "source": {
                 "type": "git",
                 "url": "https://gitlab.com/heroesofabenez/combat.git",
-                "reference": "8e46a7a9c83dfc8c0572a9594f2dcc7da8b3e10c"
+                "reference": "5670a76c06bb89ed46d43bfbb9f5991a3cf8f9fb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://gitlab.com/api/v4/projects/heroesofabenez%2Fcombat/repository/archive.zip?sha=8e46a7a9c83dfc8c0572a9594f2dcc7da8b3e10c",
-                "reference": "8e46a7a9c83dfc8c0572a9594f2dcc7da8b3e10c",
+                "url": "https://gitlab.com/api/v4/projects/heroesofabenez%2Fcombat/repository/archive.zip?sha=5670a76c06bb89ed46d43bfbb9f5991a3cf8f9fb",
+                "reference": "5670a76c06bb89ed46d43bfbb9f5991a3cf8f9fb",
                 "shasum": ""
             },
             "require": {
@@ -133,7 +133,7 @@
                 "issues": "https://gitlab.com/heroesofabenez/combat/-/issues",
                 "source": "https://gitlab.com/heroesofabenez/combat/-/tree/master"
             },
-            "time": "2026-02-26T22:55:52+00:00"
+            "time": "2026-03-01T13:59:36+00:00"
         },
         {
             "name": "latte/latte",
