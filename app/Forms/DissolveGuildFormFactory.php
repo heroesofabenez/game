@@ -30,7 +30,7 @@ final class DissolveGuildFormFactory extends BaseFormFactory
             ->addRule(Form::EQUAL, "forms.dissolveGuild.nameField.error", $currentName)
             ->setRequired();
         $form->addSubmit("dissolve", "forms.dissolveGuild.dissolveButton.label");
-        $form->onSuccess[] = [$this, "process"];
+        $form->onSuccess[] = $this->process(...);
         return $form;
     }
 

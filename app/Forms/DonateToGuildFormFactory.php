@@ -23,7 +23,7 @@ final class DonateToGuildFormFactory extends BaseFormFactory
             ->setRequired("forms.donateToGuild.amountField.empty")
             ->addRule(Form::MIN, "forms.donateToGuild.amountField.errorTooLow", 1);
         $form->addSubmit("donate", "forms.donateToGuild.donateButton.label");
-        $form->onSuccess[] = [$this, "process"];
+        $form->onSuccess[] = $this->process(...);
         return $form;
     }
 

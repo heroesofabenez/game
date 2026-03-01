@@ -30,7 +30,7 @@ final class CreateGuildFormFactory extends BaseFormFactory
             ->addRule(Form::MAX_LENGTH, "forms.createGuild.descriptionField.error", 200)
             ->setRequired();
         $form->addSubmit("create", "forms.createGuild.createButton.label");
-        $form->onSuccess[] = [$this, "process"];
+        $form->onSuccess[] = $this->process(...);
         return $form;
     }
 

@@ -31,7 +31,7 @@ final class GuildDescriptionFormFactory extends BaseFormFactory
         $form->addTextArea("description", "forms.guildDescription.descriptionField.label")
             ->setDefaultValue($guild->description);
         $form->addSubmit("change", "forms.guildDescription.changeButton.label");
-        $form->onSuccess[] = [$this, "process"];
+        $form->onSuccess[] = $this->process(...);
         return $form;
     }
 

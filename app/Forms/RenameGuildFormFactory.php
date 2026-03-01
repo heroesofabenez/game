@@ -32,7 +32,7 @@ final class RenameGuildFormFactory extends BaseFormFactory
             ->setDefaultValue($currentName)
             ->setRequired();
         $form->addSubmit("rename", "forms.renameGuild.renameButton.label");
-        $form->onSuccess[] = [$this, "process"];
+        $form->onSuccess[] = $this->process(...);
         return $form;
     }
 
