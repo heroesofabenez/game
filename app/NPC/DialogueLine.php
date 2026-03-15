@@ -27,7 +27,7 @@ final class DialogueLine
     public function __construct(string $speaker, private readonly string $text, public readonly array $names)
     {
         $speaker = strtolower($speaker);
-        if (in_array($speaker, Constants::getConstantsValues(self::class, "SPEAKER_"), true)) {
+        if (in_array($speaker, Constants::getValues(self::class, "SPEAKER_"), true)) {
             $this->speaker = $speaker;
         }
     }

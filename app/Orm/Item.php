@@ -76,7 +76,7 @@ final class Item extends \Nextras\Orm\Entity\Entity
 
     public static function getEquipmentTypes(): array
     {
-        return Constants::getConstantsValues(\HeroesofAbenez\Combat\Equipment::class, "SLOT_");
+        return Constants::getValues(\HeroesofAbenez\Combat\Equipment::class, "SLOT_");
     }
 
     public function toCombatEquipment(): ?\HeroesofAbenez\Combat\Equipment

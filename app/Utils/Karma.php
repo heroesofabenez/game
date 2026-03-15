@@ -26,7 +26,7 @@ final class Karma
      */
     public static function getKarmas(): array
     {
-        return Constants::getConstantsValues(self::class, "KARMA_");
+        return Constants::getValues(self::class, "KARMA_");
     }
 
     /**
