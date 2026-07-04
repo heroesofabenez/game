@@ -26,7 +26,7 @@
         "latte/latte": "^3.0",
         "nexendrie/translation": "^2.5",
         "nexendrie/menu": "^2.4",
-        "nexendrie/utils": "^1.11",
+        "nexendrie/utils": "^1.12",
         "nextras/orm": "^5.0",
         "nextras/multi-query-parser": "^1.0",
         "symfony/options-resolver": "^7.4",
@@ -35,6 +35,7 @@
     },
     "require-dev": {
         "nexendrie/code-quality": "dev-master",
+        "nexendrie/testbench": "dev-master as v2.7.1",
         "phpstan/phpstan-nette": "^2.0",
         "nextras/orm-phpstan": "^2.0"
     },
