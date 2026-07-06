@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "633230ade251755d7afd29f053abb305",
+    "content-hash": "8ed117d8cc31f7c8136057e70c74600b",
     "packages": [
         {
             "name": "heroesofabenez/chat",
@@ -1326,30 +1326,28 @@
         },
         {
             "name": "nexendrie/menu",
-            "version": "2.4.0",
+            "version": "2.5.0",
             "source": {
                 "type": "git",
                 "url": "https://gitlab.com/nexendrie/menu.git",
-                "reference": "9c263328d1fa99fd7129bc228dfd16248d932240"
+                "reference": "af411ddd9d9d851eb65a9609a5299e3eb495e318"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://gitlab.com/api/v4/projects/nexendrie%2Fmenu/repository/archive.zip?sha=9c263328d1fa99fd7129bc228dfd16248d932240",
-                "reference": "9c263328d1fa99fd7129bc228dfd16248d932240",
+                "url": "https://gitlab.com/api/v4/projects/nexendrie%2Fmenu/repository/archive.zip?sha=af411ddd9d9d851eb65a9609a5299e3eb495e318",
+                "reference": "af411ddd9d9d851eb65a9609a5299e3eb495e318",
                 "shasum": ""
             },
             "require": {
                 "latte/latte": "^2.5.3 || ^3.0",
-                "nette/application": "^3.0",
-                "nette/di": "^3.0",
-                "nette/utils": "^3.1.1",
-                "nexendrie/utils": "^1.8",
-                "php": ">=7.4.0",
-                "symfony/polyfill-php80": "^1.18"
+                "nette/application": "^3.1.5",
+                "nette/di": "^3.0.9",
+                "nette/utils": "^3.2.7 || ^4.0",
+                "nexendrie/utils": "^1.11",
+                "php": ">=8.3.0"
             },
             "require-dev": {
-                "nexendrie/code-quality": "dev-master",
-                "nexendrie/site-generator": "^0.6"
+                "nexendrie/code-quality": "dev-master"
             },
             "suggest": {
                 "nette/security": "To use menu item conditions related to user"
@@ -1357,7 +1355,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.4.x-dev"
+                    "dev-master": "2.5.x-dev"
                 }
             },
             "autoload": {
@@ -1386,10 +1384,10 @@
             ],
             "support": {
                 "docs": "https://nexendrie.gitlab.io/menu",
-                "issues": "https://gitlab.com/nexendrie/menu/issues",
-                "source": "https://gitlab.com/nexendrie/menu/"
+                "issues": "https://gitlab.com/nexendrie/menu/-/issues",
+                "source": "https://gitlab.com/nexendrie/menu/-/tree/2.5.0"
             },
-            "time": "2020-09-05T21:25:12+00:00"
+            "time": "2026-07-05T17:52:39+00:00"
         },
         {
             "name": "nexendrie/translation",
@@ -2683,11 +2681,11 @@
         },
         {
             "name": "phpstan/phpstan",
-            "version": "2.2.4",
+            "version": "2.2.5",
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/f0fe3fb03bb53ce68cc2416785b260e62226ec27",
-                "reference": "f0fe3fb03bb53ce68cc2416785b260e62226ec27",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/909c1e5fef7989ac0d0c1c5c42e32a5c4f6198a0",
+                "reference": "909c1e5fef7989ac0d0c1c5c42e32a5c4f6198a0",
                 "shasum": ""
             },
             "require": {
@@ -2743,7 +2741,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2026-07-03T07:00:23+00:00"
+            "time": "2026-07-05T06:31:06+00:00"
         },
         {
             "name": "phpstan/phpstan-deprecation-rules",

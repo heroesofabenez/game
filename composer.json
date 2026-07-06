@@ -25,12 +25,12 @@
         "tracy/tracy": "^2.11",
         "latte/latte": "^3.0",
         "nexendrie/translation": "^2.5",
-        "nexendrie/menu": "^2.4",
+        "nexendrie/menu": "^2.5",
         "nexendrie/utils": "^1.12",
         "nextras/orm": "^5.0",
         "nextras/multi-query-parser": "^1.0",
         "symfony/options-resolver": "^7.4",
-        "heroesofabenez/chat": "^2.2",
+        "heroesofabenez/chat": "^2.3",
         "heroesofabenez/combat": "^1.0"
     },
     "require-dev": {
