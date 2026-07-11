@@ -9,10 +9,7 @@ use Nextras\Orm\Collection\ICollection;
  * GuildRanksCustomRepository
  *
  * @author Jakub Konečný
- * @method GuildRankCustom|null getById(int $id)
- * @method GuildRankCustom|null getBy(array $conds)
- * @method ICollection|GuildRankCustom[] findBy(array $conds)
- * @method ICollection|GuildRankCustom[] findAll()
+ * @extends \Nextras\Orm\Repository\Repository<GuildRankCustom>
  */
 final class GuildRanksCustomRepository extends \Nextras\Orm\Repository\Repository
 {
@@ -32,7 +29,7 @@ final class GuildRanksCustomRepository extends \Nextras\Orm\Repository\Repositor
     }
 
     /**
-     * @return ICollection|GuildRankCustom[]
+     * @return ICollection<GuildRankCustom>
      */
     public function findByGuild(Guild|int $guild): ICollection
     {

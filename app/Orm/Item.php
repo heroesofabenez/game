@@ -25,9 +25,9 @@ use Nexendrie\Utils\Constants;
  * @property int $durability
  * @property bool $worn Is the item worn? {virtual}
  * @property-read bool $equipable Can the item be equipped? {virtual}
- * @property OneHasMany|ShopItem[] $inShops {1:m ShopItem::$item}
- * @property OneHasMany|Quest[] $neededForQuests {1:m Quest::$neededItem}
- * @property OneHasMany|Quest[] $rewardedForQuests {1:m Quest::$rewardItem}
+ * @property OneHasMany<ShopItem> $inShops {1:m ShopItem::$item}
+ * @property OneHasMany<Quest> $neededForQuests {1:m Quest::$neededItem}
+ * @property OneHasMany<Quest> $rewardedForQuests {1:m Quest::$rewardItem}
  */
 final class Item extends \Nextras\Orm\Entity\Entity
 {

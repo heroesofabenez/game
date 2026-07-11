@@ -9,10 +9,7 @@ use Nextras\Orm\Collection\ICollection;
  * SkillAttacksRepository
  *
  * @author Jakub Konečný
- * @method SkillAttack|null getById(int $id)
- * @method SkillAttack|null getBy(array $conds)
- * @method ICollection|SkillAttack[] findBy(array $conds)
- * @method ICollection|SkillAttack[] findAll()
+ * @extends \Nextras\Orm\Repository\Repository<SkillAttack>
  */
 final class SkillAttacksRepository extends \Nextras\Orm\Repository\Repository
 {
@@ -25,7 +22,7 @@ final class SkillAttacksRepository extends \Nextras\Orm\Repository\Repository
     }
 
     /**
-     * @return ICollection|SkillAttack[]
+     * @return ICollection<SkillAttack>
      */
     public function findByClassAndLevel(CharacterClass|int $class, int $level): ICollection
     {

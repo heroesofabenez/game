@@ -18,7 +18,7 @@ final class ArenaPVPControl extends ArenaControl
     protected string $profileLink = "Profile:view";
 
     /**
-     * @return ICollection|\HeroesofAbenez\Orm\Character[]
+     * @return ICollection<\HeroesofAbenez\Orm\Character>
      */
     protected function getOpponents(): ICollection
     {

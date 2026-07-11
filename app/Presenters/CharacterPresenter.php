@@ -16,9 +16,9 @@ use Nextras\Orm\Collection\ICollection;
  */
 final class CharacterPresenter extends BasePresenter
 {
-    /** @var ICollection|\HeroesofAbenez\Orm\CharacterClass[] */
+    /** @var ICollection<\HeroesofAbenez\Orm\CharacterClass> */
     private ICollection $classes;
-    /** @var ICollection|\HeroesofAbenez\Orm\CharacterRace[] */
+    /** @var ICollection<\HeroesofAbenez\Orm\CharacterRace> */
     private ICollection $races;
     private CreateCharacterFormFactory $createCharacterFormFactory;
 

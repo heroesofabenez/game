@@ -3,16 +3,11 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Orm;
 
-use Nextras\Orm\Collection\ICollection;
-
 /**
  * GuildsRepository
  *
  * @author Jakub Konečný
- * @method Guild|null getById(int $id)
- * @method Guild|null getBy(array $conds)
- * @method ICollection|Guild[] findBy(array $conds)
- * @method ICollection|Guild[] findAll()
+ * @extends \Nextras\Orm\Repository\Repository<Guild>
  */
 final class GuildsRepository extends \Nextras\Orm\Repository\Repository
 {

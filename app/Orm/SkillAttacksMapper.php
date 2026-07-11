@@ -7,6 +7,7 @@ namespace HeroesofAbenez\Orm;
  * SkillAttacksMapper
  *
  * @author Jakub Konečný
+ * @extends \Nextras\Orm\Mapper\Dbal\DbalMapper<SkillAttack>
  */
 final class SkillAttacksMapper extends \Nextras\Orm\Mapper\Dbal\DbalMapper
 {

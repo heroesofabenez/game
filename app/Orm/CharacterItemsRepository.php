@@ -9,10 +9,7 @@ use Nextras\Orm\Collection\ICollection;
  * CharacterItemsRepository
  *
  * @author Jakub Konečný
- * @method CharacterItem|null getById(int $id)
- * @method CharacterItem|null getBy(array $conds)
- * @method ICollection|CharacterItem[] findBy(array $conds)
- * @method ICollection|CharacterItem[] findAll()
+ * @extends \Nextras\Orm\Repository\Repository<CharacterItem>
  */
 final class CharacterItemsRepository extends \Nextras\Orm\Repository\Repository
 {
@@ -33,7 +30,7 @@ final class CharacterItemsRepository extends \Nextras\Orm\Repository\Repository
     }
 
     /**
-     * @return ICollection|CharacterItem[]
+     * @return ICollection<CharacterItem>
      */
     public function findByCharacterAndSlot(Character|int $character, string $slot): ICollection
     {
@@ -44,7 +41,7 @@ final class CharacterItemsRepository extends \Nextras\Orm\Repository\Repository
     }
 
     /**
-     * @return ICollection|CharacterItem[]
+     * @return ICollection<CharacterItem>
      */
     public function findCharactersEquipment(Character|int $character): ICollection
     {

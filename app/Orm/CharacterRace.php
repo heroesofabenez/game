@@ -20,13 +20,13 @@ use Nexendrie\Utils\Numbers;
  * @property int $intelligence {default 0}
  * @property int $charisma {default 0}
  * @property bool $playable {default true}
- * @property OneHasMany|PetType[] $petTypes {1:m PetType::$requiredRace}
- * @property OneHasMany|QuestArea[] $areas {1:m QuestArea::$requiredRace}
- * @property OneHasMany|QuestStage[] $stages {1:m QuestStage::$requiredRace}
- * @property OneHasMany|Npc[] $npcs {1:m Npc::$race}
- * @property OneHasMany|Character[] $characters {1:m Character::$race}
- * @property OneHasMany|Introduction[] $intro {1:m Introduction::$race}
- * @property OneHasMany|PveArenaOpponent[] $arenaNpcs {1:m PveArenaOpponent::$race}
+ * @property OneHasMany<PetType> $petTypes {1:m PetType::$requiredRace}
+ * @property OneHasMany<QuestArea> $areas {1:m QuestArea::$requiredRace}
+ * @property OneHasMany<QuestStage> $stages {1:m QuestStage::$requiredRace}
+ * @property OneHasMany<Npc> $npcs {1:m Npc::$race}
+ * @property OneHasMany<Character> $characters {1:m Character::$race}
+ * @property OneHasMany<Introduction> $intro {1:m Introduction::$race}
+ * @property OneHasMany<PveArenaOpponent> $arenaNpcs {1:m PveArenaOpponent::$race}
  */
 final class CharacterRace extends \Nextras\Orm\Entity\Entity
 {

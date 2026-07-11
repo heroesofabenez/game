@@ -9,10 +9,7 @@ use Nextras\Orm\Collection\ICollection;
  * SkillSpecialsRepository
  *
  * @author Jakub Konečný
- * @method SkillSpecial|null getById(int $id)
- * @method SkillSpecial|null getBy(array $conds)
- * @method ICollection|SkillSpecial[] findBy(array $conds)
- * @method ICollection|SkillSpecial[] findAll()
+ * @extends \Nextras\Orm\Repository\Repository<SkillSpecial>
  */
 final class SkillSpecialsRepository extends \Nextras\Orm\Repository\Repository
 {
@@ -25,7 +22,7 @@ final class SkillSpecialsRepository extends \Nextras\Orm\Repository\Repository
     }
 
     /**
-     * @return ICollection|SkillSpecial[]
+     * @return ICollection<SkillSpecial>
      */
     public function findByClassAndLevel(CharacterClass|int $class, int $level): ICollection
     {

@@ -45,7 +45,7 @@ final readonly class CombatHelper
     private function getPlayerEquipment(\HeroesofAbenez\Orm\Character $character): array
     {
         $equipment = [];
-        /** @var ICollection|CharacterItem[] $items */
+        /** @var ICollection<CharacterItem> $items */
         $items = $character->items->toCollection()->findBy(["worn" => true,]);
         foreach ($items as $item) {
             $e = $item->toCombatEquipment();

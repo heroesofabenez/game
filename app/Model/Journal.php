@@ -69,7 +69,7 @@ final readonly class Journal
     /**
      * Gets character's pets
      *
-     * @return ICollection|PetEntity[]
+     * @return ICollection<PetEntity>
      */
     public function pets(): ICollection
     {
@@ -79,7 +79,7 @@ final readonly class Journal
     /**
      * Gets character's quests
      *
-     * @return ICollection|CharacterQuestEntity[]
+     * @return ICollection<CharacterQuestEntity>
      */
     public function currentQuests(): ICollection
     {
@@ -91,7 +91,7 @@ final readonly class Journal
     /**
      * Gets character's finished quests
      *
-     * @return ICollection|CharacterQuestEntity[]
+     * @return ICollection<CharacterQuestEntity>
      */
     public function finishedQuests(): ICollection
     {

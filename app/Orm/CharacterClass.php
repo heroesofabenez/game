@@ -27,17 +27,17 @@ use Nexendrie\Utils\Numbers;
  * @property float $statPointsLevel
  * @property string $initiative
  * @property bool $playable {default true}
- * @property OneHasMany|CharacterSpecialization[] $specializations {1:m CharacterSpecialization::$class}
- * @property OneHasMany|PetType[] $petTypes {1:m PetType::$requiredClass}
- * @property OneHasMany|QuestArea[] $areas {1:m QuestArea::$requiredClass}
- * @property OneHasMany|QuestStage[] $stages {1:m QuestStage::$requiredClass}
- * @property OneHasMany|Character[] $characters {1:m Character::$class}
- * @property OneHasMany|Introduction[] $intro {1:m Introduction::$class}
- * @property OneHasMany|PveArenaOpponent[] $arenaNpcs {1:m PveArenaOpponent::$class}
- * @property OneHasMany|Item[] $items {1:m Item::$requiredClass}
- * @property OneHasMany|SkillAttack[] $attackSkills {1:m SkillAttack::$neededClass}
- * @property OneHasMany|SkillSpecial[] $specialSkills {1:m SkillSpecial::$neededClass}
- * @property OneHasMany|Npc[] $npcs {1:m Npc::$class}
+ * @property OneHasMany<CharacterSpecialization> $specializations {1:m CharacterSpecialization::$class}
+ * @property OneHasMany<PetType> $petTypes {1:m PetType::$requiredClass}
+ * @property OneHasMany<QuestArea> $areas {1:m QuestArea::$requiredClass}
+ * @property OneHasMany<QuestStage> $stages {1:m QuestStage::$requiredClass}
+ * @property OneHasMany<Character> $characters {1:m Character::$class}
+ * @property OneHasMany<Introduction> $intro {1:m Introduction::$class}
+ * @property OneHasMany<PveArenaOpponent> $arenaNpcs {1:m PveArenaOpponent::$class}
+ * @property OneHasMany<Item> $items {1:m Item::$requiredClass}
+ * @property OneHasMany<SkillAttack> $attackSkills {1:m SkillAttack::$neededClass}
+ * @property OneHasMany<SkillSpecial> $specialSkills {1:m SkillSpecial::$neededClass}
+ * @property OneHasMany<Npc> $npcs {1:m Npc::$class}
  * @property-read string $mainStat {virtual}
  */
 final class CharacterClass extends \Nextras\Orm\Entity\Entity

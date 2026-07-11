@@ -20,7 +20,7 @@ use HeroesofAbenez\Combat\BaseCharacterSkill;
  * @property CharacterClass $class {m:1 CharacterClass::$arenaNpcs}
  * @property CharacterSpecialization|null $specialization {m:1 CharacterSpecialization::$arenaNpcs}
  * @property int $level {default 1}
- * @property OneHasMany|PveArenaOpponentEquipment[] $equipment {1:m PveArenaOpponentEquipment::$npc}
+ * @property OneHasMany<PveArenaOpponentEquipment> $equipment {1:m PveArenaOpponentEquipment::$npc}
  * @property-read Item|null $weapon {virtual}
  * @property-read Item|null $armor {virtual}
  * @property-read BaseCharacterSkill[] $skills {virtual}
@@ -37,7 +37,6 @@ final class PveArenaOpponent extends \Nextras\Orm\Entity\Entity
 
     protected function getterWeapon(): ?Item
     {
-        // @phpstan-ignore return.type
         return $this->class->items->toCollection()->orderBy("requiredLevel", ICollection::DESC)
             ->limitBy(1)
             ->getBy([
@@ -57,7 +56,6 @@ final class PveArenaOpponent extends \Nextras\Orm\Entity\Entity
 
     protected function getterArmor(): ?Item
     {
-        // @phpstan-ignore return.type
         return $this->class->items->toCollection()->orderBy("requiredLevel", ICollection::DESC)
             ->limitBy(1)
             ->getBy([
@@ -84,7 +82,7 @@ final class PveArenaOpponent extends \Nextras\Orm\Entity\Entity
             return [];
         }
         $skills = new CharacterSkillsCollection();
-        /** @var ICollection|SkillAttack[] $attackSkills */
+        /** @var ICollection<SkillAttack> $attackSkills */
         $attackSkills = $this->class->attackSkills->toCollection()->findBy([
             ICollection::OR,
             [
@@ -99,7 +97,7 @@ final class PveArenaOpponent extends \Nextras\Orm\Entity\Entity
         foreach ($attackSkills as $skill) {
             $skills[] = new \HeroesofAbenez\Combat\CharacterAttackSkill($skill->toDummy(), 0);
         }
-        /** @var ICollection|SkillSpecial[] $specialSkills */
+        /** @var ICollection<SkillSpecial> $specialSkills */
         $specialSkills = $this->class->specialSkills->toCollection()->findBy([
             ICollection::OR,
             [

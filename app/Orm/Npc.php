@@ -29,9 +29,9 @@ use Nexendrie\Utils\Numbers;
  * @property int $level {default 1}
  * @property int $posX {default 1}
  * @property int $posY {default 1}
- * @property OneHasMany|ShopItem[] $items {1:m ShopItem::$npc, orderBy=order}
- * @property OneHasMany|Quest[] $startQuests {1:m Quest::$npcStart}
- * @property OneHasMany|Quest[] $endQuests {1:m Quest::$npcEnd}
+ * @property OneHasMany<ShopItem> $items {1:m ShopItem::$npc, orderBy=order}
+ * @property OneHasMany<Quest> $startQuests {1:m Quest::$npcStart}
+ * @property OneHasMany<Quest> $endQuests {1:m Quest::$npcEnd}
  */
 final class Npc extends \Nextras\Orm\Entity\Entity
 {

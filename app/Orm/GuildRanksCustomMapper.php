@@ -7,6 +7,7 @@ namespace HeroesofAbenez\Orm;
  * GuildRanksCustomMapper
  *
  * @author Jakub Konečný
+ * @extends \Nextras\Orm\Mapper\Dbal\DbalMapper<GuildRankCustom>
  */
 final class GuildRanksCustomMapper extends \Nextras\Orm\Mapper\Dbal\DbalMapper
 {

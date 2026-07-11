@@ -9,10 +9,7 @@ use Nextras\Orm\Collection\ICollection;
  * CharacterSpecializationsRepository
  *
  * @author Jakub Konečný
- * @method CharacterSpecialization|null getById(int $id)
- * @method CharacterSpecialization|null getBy(array $conds)
- * @method ICollection|CharacterSpecialization[] findBy(array $conds)
- * @method ICollection|CharacterSpecialization[] findAll()
+ * @extends \Nextras\Orm\Repository\Repository<CharacterSpecialization>
  */
 final class CharacterSpecializationsRepository extends \Nextras\Orm\Repository\Repository
 {
@@ -25,7 +22,7 @@ final class CharacterSpecializationsRepository extends \Nextras\Orm\Repository\R
     }
 
     /**
-     * @return ICollection|CharacterSpecialization[]
+     * @return ICollection<CharacterSpecialization>
      */
     public function findByClass(int|CharacterClass $class): ICollection
     {

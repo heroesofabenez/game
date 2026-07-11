@@ -9,10 +9,7 @@ use Nextras\Orm\Collection\ICollection;
  * RequstsRepository
  *
  * @author Jakub Konečný
- * @method Request|null getById(int $id)
- * @method Request|null getBy(array $conds)
- * @method ICollection|Request[] findBy(array $conds)
- * @method ICollection|Request[] findAll()
+ * @extends \Nextras\Orm\Repository\Repository<Request>
  */
 final class RequestsRepository extends \Nextras\Orm\Repository\Repository
 {
@@ -44,7 +41,7 @@ final class RequestsRepository extends \Nextras\Orm\Repository\Repository
     }
 
     /**
-     * @return ICollection|Request[]
+     * @return ICollection<Request>
      */
     public function findUnresolvedGuildApplications(Character|int $guildLeader): ICollection
     {

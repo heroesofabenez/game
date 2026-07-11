@@ -7,6 +7,7 @@ namespace HeroesofAbenez\Orm;
  * PveArenaOpponentEquipmentMapper
  *
  * @author Jakub Konečný
+ * @extends \Nextras\Orm\Mapper\Dbal\DbalMapper<PveArenaOpponentEquipment>
  */
 final class PveArenaOpponentEquipmentMapper extends \Nextras\Orm\Mapper\Dbal\DbalMapper
 {

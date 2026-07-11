@@ -148,7 +148,7 @@ final readonly class Guild
      * Get unresolved applications to specified guild
      *
      * @param int $id Guild's id
-     * @return ICollection|RequestEntity[]
+     * @return ICollection<RequestEntity>
      */
     public function showApplications(int $id): ICollection
     {
@@ -162,7 +162,7 @@ final readonly class Guild
     /**
      * Gets list of guilds
      *
-     * @return ICollection|GuildEntity[] list of guilds (id, name, description, leader)
+     * @return ICollection<GuildEntity> list of guilds (id, name, description, leader)
      */
     public function listOfGuilds(): ICollection
     {

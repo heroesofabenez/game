@@ -9,10 +9,7 @@ use Nextras\Orm\Collection\ICollection;
  * NpcsRepository
  *
  * @author Jakub Konečný
- * @method Npc|null getById(int $id)
- * @method Npc|null getBy(array $conds)
- * @method ICollection|Npc[] findBy(array $conds)
- * @method ICollection|Npc[] findAll()
+ * @extends \Nextras\Orm\Repository\Repository<Npc>
  */
 final class NpcsRepository extends \Nextras\Orm\Repository\Repository
 {
@@ -25,7 +22,7 @@ final class NpcsRepository extends \Nextras\Orm\Repository\Repository
     }
 
     /**
-     * @return ICollection|Npc[]
+     * @return ICollection<Npc>
      */
     public function findByStage(QuestStage|int $stage): ICollection
     {

@@ -19,7 +19,7 @@ final class ArenaPVEControl extends ArenaControl
     protected string $profileLink = "Arena:champion";
 
     /**
-     * @return ICollection|PveArenaOpponent[]
+     * @return ICollection<PveArenaOpponent>
      */
     protected function getOpponents(): ICollection
     {

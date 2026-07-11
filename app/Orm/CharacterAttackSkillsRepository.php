@@ -3,16 +3,11 @@ declare(strict_types=1);
 
 namespace HeroesofAbenez\Orm;
 
-use Nextras\Orm\Collection\ICollection;
-
 /**
  * CharacterAttackSkillsRepository
  *
  * @author Jakub Konečný
- * @method CharacterAttackSkill|null getById(int $id)
- * @method CharacterAttackSkill|null getBy(array $conds)
- * @method ICollection|CharacterAttackSkill[] findBy(array $conds)
- * @method ICollection|CharacterAttackSkill[] findAll()
+ * @extends \Nextras\Orm\Repository\Repository<CharacterAttackSkill>
  */
 final class CharacterAttackSkillsRepository extends \Nextras\Orm\Repository\Repository
 {

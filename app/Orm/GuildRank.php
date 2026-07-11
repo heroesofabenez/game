@@ -13,8 +13,8 @@ use Nextras\Orm\Relationships\OneHasMany;
  * @property int $id {primary}
  * @property string $name
  * @property-read string $nameT {virtual}
- * @property OneHasMany|GuildPrivilege[] $privileges {1:m GuildPrivilege::$rank}
- * @property OneHasMany|Character[] $characters {1:m Character::$guildrank}
+ * @property OneHasMany<GuildPrivilege> $privileges {1:m GuildPrivilege::$rank}
+ * @property OneHasMany<Character> $characters {1:m Character::$guildrank}
  */
 final class GuildRank extends \Nextras\Orm\Entity\Entity
 {

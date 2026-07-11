@@ -9,10 +9,7 @@ use Nextras\Orm\Collection\ICollection;
  * QuestStagesRepository
  *
  * @author Jakub Konečný
- * @method QuestStage|null getById(int $id)
- * @method QuestStage|null getBy(array $conds)
- * @method ICollection|QuestStage[] findBy(array $conds)
- * @method ICollection|QuestStage[] findAll()
+ * @extends \Nextras\Orm\Repository\Repository<QuestStage>
  */
 final class QuestStagesRepository extends \Nextras\Orm\Repository\Repository
 {
@@ -25,7 +22,7 @@ final class QuestStagesRepository extends \Nextras\Orm\Repository\Repository
     }
 
     /**
-     * @return ICollection|QuestStage[]
+     * @return ICollection<QuestStage>
      */
     public function findByArea(QuestArea|int $area): ICollection
     {

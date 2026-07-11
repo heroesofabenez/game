@@ -30,7 +30,7 @@ final readonly class MapDrawer
      * Draws a map
      *
      * @param QuestStage[]|QuestArea[] $points
-     * @param ICollection|RoutesStage[]|RoutesArea[] $routes
+     * @param ICollection<RoutesStage>|ICollection<RoutesArea> $routes
      */
     private function draw(array $points, ICollection $routes, string $filename, int $width, int $height): void
     {

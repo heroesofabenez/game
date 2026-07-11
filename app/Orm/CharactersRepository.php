@@ -9,10 +9,7 @@ use Nextras\Orm\Collection\ICollection;
  * CharactersRepository
  *
  * @author Jakub Konečný
- * @method Character|null getById(int $id)
- * @method Character|null getBy(array $conds)
- * @method ICollection|Character[] findBy(array $conds)
- * @method ICollection|Character[] findAll()
+ * @extends \Nextras\Orm\Repository\Repository<Character>
  */
 final class CharactersRepository extends \Nextras\Orm\Repository\Repository
 {
@@ -39,7 +36,7 @@ final class CharactersRepository extends \Nextras\Orm\Repository\Repository
     }
 
     /**
-     * @return ICollection|Character[]
+     * @return ICollection<Character>
      */
     public function findByGuild(Guild|int $guild): ICollection
     {

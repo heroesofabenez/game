@@ -35,7 +35,7 @@ final class Profile
     /**
      * Get list of races
      *
-     * @return ICollection|CharacterRace[]
+     * @return ICollection<CharacterRace>
      */
     public function getRacesList(): ICollection
     {
@@ -45,7 +45,7 @@ final class Profile
     /**
      * Get list of classes
      *
-     * @return ICollection|CharacterClass[]
+     * @return ICollection<CharacterClass>
      */
     public function getClassesList(): ICollection
     {

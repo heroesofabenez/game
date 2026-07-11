@@ -7,6 +7,7 @@ namespace HeroesofAbenez\Orm;
  * GuildDonationsMapper
  *
  * @author Jakub Konečný
+ * @extends \Nextras\Orm\Mapper\Dbal\DbalMapper<GuildDonation>
  */
 final class GuildDonationsMapper extends \Nextras\Orm\Mapper\Dbal\DbalMapper
 {

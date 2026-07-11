@@ -9,10 +9,7 @@ use Nextras\Orm\Collection\ICollection;
  * PetsRepository
  *
  * @author Jakub Konečný
- * @method Pet|null getById(int $id)
- * @method Pet|null getBy(array $conds)
- * @method ICollection|Pet[] findBy(array $conds)
- * @method ICollection|Pet[] findAll()
+ * @extends \Nextras\Orm\Repository\Repository<Pet>
  */
 final class PetsRepository extends \Nextras\Orm\Repository\Repository
 {
@@ -25,7 +22,7 @@ final class PetsRepository extends \Nextras\Orm\Repository\Repository
     }
 
     /**
-     * @return ICollection|Pet[]
+     * @return ICollection<Pet>
      */
     public function findByOwner(Character|int $owner): ICollection
     {

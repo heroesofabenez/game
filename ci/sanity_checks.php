@@ -16,7 +16,6 @@ $orm = $container->getByType(\HeroesofAbenez\Orm\Model::class);
 
 $errors = [];
 
-/** @var \Nextras\Orm\Collection\ICollection|\HeroesofAbenez\Orm\CharacterRace[] $races */
 $races = $orm->races->findAll();
 if ($races->count() === 0) {
     $errors[] = "No race found";
@@ -25,7 +24,6 @@ if ($races->findBy(["playable" => true])->countStored() === 0) {
     $errors[] = "No playable race found";
 }
 
-/** @var \Nextras\Orm\Collection\ICollection|\HeroesofAbenez\Orm\CharacterClass[] $races */
 $classes = $orm->classes->findAll();
 $classTotalGrowth = 2.05;
 $petLevels = [8, 15, 30, 45, 60];
@@ -61,7 +59,6 @@ foreach ($classes as $class) {
     }
 }
 
-/** @var \Nextras\Orm\Collection\ICollection|\HeroesofAbenez\Orm\CharacterSpecialization[] $races */
 $specializations = $orm->specializations->findAll();
 $specializationTotalGrowth = 2.5;
 if ($specializations->count() === 0) {

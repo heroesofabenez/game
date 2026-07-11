@@ -52,6 +52,7 @@ abstract class ArenaControl extends \Nette\Application\UI\Control
         return $player;
     }
 
+    // @phpstan-ignore missingType.generics
     abstract protected function getOpponents(): ICollection;
 
     public function render(): void

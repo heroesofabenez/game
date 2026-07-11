@@ -154,7 +154,7 @@ final readonly class Request
     }
 
     /**
-     * @return ICollection|RequestEntity[]
+     * @return ICollection<RequestEntity>
      */
     public function listOfRequests(): ICollection
     {

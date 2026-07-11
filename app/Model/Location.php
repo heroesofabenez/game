@@ -42,7 +42,7 @@ final class Location
     /**
      * Gets routes between stages
      *
-     * @return ICollection|RoutesStage[]
+     * @return ICollection<RoutesStage>
      */
     public function stageRoutes(QuestArea $area): ICollection
     {
@@ -52,7 +52,7 @@ final class Location
     /**
      * Gets routes between areas
      *
-     * @return ICollection|RoutesArea[]
+     * @return ICollection<RoutesArea>
      */
     public function areaRoutes(): ICollection
     {

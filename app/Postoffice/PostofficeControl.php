@@ -27,7 +27,7 @@ final class PostofficeControl extends \Nette\Application\UI\Control
     /**
      * Gets list of received messages
      *
-     * @return ICollection|Message[]
+     * @return ICollection<Message>
      */
     private function getReceivedMessages(): ICollection
     {
@@ -44,7 +44,7 @@ final class PostofficeControl extends \Nette\Application\UI\Control
     /**
      * Gets list of sent messages
      *
-     * @return ICollection|Message[]
+     * @return ICollection<Message>
      */
     private function getSentMessages(): ICollection
     {

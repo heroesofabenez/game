@@ -22,7 +22,7 @@ use Nexendrie\Utils\Numbers;
  * @property int $requiredWhiteKarma {default 0}
  * @property int $requiredDarkKarma {default 0}
  * @property Quest|null $conflictsQuest {m:1 Quest, oneSided=true}
- * @property OneHasMany|Quest[] $children {1:m Quest::$requiredQuest}
+ * @property OneHasMany<Quest> $children {1:m Quest::$requiredQuest}
  * @property Item|null $neededItem {m:1 Item::$neededForQuests}
  * @property int $itemAmount {default 1}
  * @property bool $itemLose {default true}

@@ -14,8 +14,8 @@ use Nextras\Orm\Collection\ICollection;
 final class CreateCharacterFormFactory extends BaseFormFactory
 {
     /**
-     * @param ICollection|\HeroesofAbenez\Orm\CharacterRace[] $races
-     * @param ICollection|\HeroesofAbenez\Orm\CharacterClass[] $classes
+     * @param ICollection<\HeroesofAbenez\Orm\CharacterRace> $races
+     * @param ICollection<\HeroesofAbenez\Orm\CharacterClass> $classes
      */
     public function create(ICollection $races, ICollection $classes): Form
     {

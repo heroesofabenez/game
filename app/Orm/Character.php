@@ -39,20 +39,20 @@ use Nexendrie\Utils\Numbers;
  * @property-read string $lastActiveS {virtual}
  * @property float $statPoints {default 0}
  * @property int $skillPoints {default 0}
- * @property OneHasMany|Request[] $sentRequests {1:m Request::$from}
- * @property OneHasMany|Request[] $receivedRequests {1:m Request::$to}
- * @property OneHasMany|Message[] $sentMessages {1:m Message::$from}
- * @property OneHasMany|Message[] $receivedMessages {1:m Message::$to}
- * @property OneHasMany|Pet[] $pets {1:m Pet::$owner}
+ * @property OneHasMany<Request> $sentRequests {1:m Request::$from}
+ * @property OneHasMany<Request> $receivedRequests {1:m Request::$to}
+ * @property OneHasMany<Message> $sentMessages {1:m Message::$from}
+ * @property OneHasMany<Message> $receivedMessages {1:m Message::$to}
+ * @property OneHasMany<Pet> $pets {1:m Pet::$owner}
  * @property-read Pet|null $activePet {virtual}
- * @property OneHasMany|ArenaFightCount[] $arenaFights {1:m ArenaFightCount::$character}
- * @property OneHasMany|CharacterItem[] $items {1:m CharacterItem::$character}
- * @property OneHasMany|CharacterQuest[] $quests {1:m CharacterQuest::$character}
- * @property OneHasMany|ChatBan[] $chatBans {1:m ChatBan::$character}
- * @property OneHasMany|ChatMessage[] $chatMessages {1:m ChatMessage::$character}
- * @property OneHasMany|CharacterAttackSkill[] $attackSkills {1:m CharacterAttackSkill::$character}
- * @property OneHasMany|CharacterSpecialSkill[] $specialSkills {1:m CharacterSpecialSkill::$character}
- * @property OneHasMany|GuildDonation[] $guildDonations {1:m GuildDonation::$character}
+ * @property OneHasMany<ArenaFightCount> $arenaFights {1:m ArenaFightCount::$character}
+ * @property OneHasMany<CharacterItem> $items {1:m CharacterItem::$character}
+ * @property OneHasMany<CharacterQuest> $quests {1:m CharacterQuest::$character}
+ * @property OneHasMany<ChatBan> $chatBans {1:m ChatBan::$character}
+ * @property OneHasMany<ChatMessage> $chatMessages {1:m ChatMessage::$character}
+ * @property OneHasMany<CharacterAttackSkill> $attackSkills {1:m CharacterAttackSkill::$character}
+ * @property OneHasMany<CharacterSpecialSkill> $specialSkills {1:m CharacterSpecialSkill::$character}
+ * @property OneHasMany<GuildDonation> $guildDonations {1:m GuildDonation::$character}
  * @property-read int $currentGuildContribution {virtual}
  */
 final class Character extends \Nextras\Orm\Entity\Entity
@@ -72,7 +72,7 @@ final class Character extends \Nextras\Orm\Entity\Entity
 
     protected function getterActivePet(): ?Pet
     {
-        return $this->pets->toCollection()->limitBy(1)->getBy(["deployed" => true]); // @phpstan-ignore return.type
+        return $this->pets->toCollection()->limitBy(1)->getBy(["deployed" => true]);
     }
 
     protected function getterCharismaBonus(): int

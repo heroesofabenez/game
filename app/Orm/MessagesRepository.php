@@ -9,10 +9,7 @@ use Nextras\Orm\Collection\ICollection;
  * MessagesRepository
  *
  * @author Jakub Konečný
- * @method Message|null getById(int $id)
- * @method Message|null getBy(array $conds)
- * @method ICollection|Message[] findBy(array $conds)
- * @method ICollection|Message[] findAll()
+ * @extends \Nextras\Orm\Repository\Repository<Message>
  */
 final class MessagesRepository extends \Nextras\Orm\Repository\Repository
 {
@@ -22,7 +19,7 @@ final class MessagesRepository extends \Nextras\Orm\Repository\Repository
     }
 
     /**
-     * @return ICollection|Message[]
+     * @return ICollection<Message>
      */
     public function findByFrom(Character|int $user): ICollection
     {
@@ -32,7 +29,7 @@ final class MessagesRepository extends \Nextras\Orm\Repository\Repository
     }
 
     /**
-     * @return ICollection|Message[]
+     * @return ICollection<Message>
      */
     public function findByTo(Character|int $user): ICollection
     {

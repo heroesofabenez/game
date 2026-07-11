@@ -20,10 +20,10 @@ use Nexendrie\Utils\Numbers;
  * @property int|null $posX
  * @property int|null $posY
  * @property QuestStage|null $entryStage {m:1 QuestStage, oneSided=true}
- * @property OneHasMany|QuestStage[] $stages {1:m QuestStage::$area}
- * @property OneHasMany|RoutesArea[] $routesOutgoing {1:m RoutesArea::$from}
- * @property OneHasMany|RoutesArea[] $routesIncoming {1:m RoutesArea::$to}
- * @property OneHasMany|ChatMessage[] $chatMessages {1:m ChatMessage::$area}
+ * @property OneHasMany<QuestStage> $stages {1:m QuestStage::$area}
+ * @property OneHasMany<RoutesArea> $routesOutgoing {1:m RoutesArea::$from}
+ * @property OneHasMany<RoutesArea> $routesIncoming {1:m RoutesArea::$to}
+ * @property OneHasMany<ChatMessage> $chatMessages {1:m ChatMessage::$area}
  */
 final class QuestArea extends \Nextras\Orm\Entity\Entity
 {
