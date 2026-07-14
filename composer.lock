@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8ed117d8cc31f7c8136057e70c74600b",
+    "content-hash": "8e2cf58e7e6e2c785fdb36eb88d2909c",
     "packages": [
         {
             "name": "heroesofabenez/chat",
-            "version": "2.3.0",
+            "version": "2.4.0",
             "source": {
                 "type": "git",
                 "url": "https://gitlab.com/heroesofabenez/chat.git",
-                "reference": "2ba17c40ed02c4a8a771d4653b1d5b21b4f1527f"
+                "reference": "592f4d0bb43f351bcfa349ae6ffe2dc503e06db5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://gitlab.com/api/v4/projects/heroesofabenez%2Fchat/repository/archive.zip?sha=2ba17c40ed02c4a8a771d4653b1d5b21b4f1527f",
-                "reference": "2ba17c40ed02c4a8a771d4653b1d5b21b4f1527f",
+                "url": "https://gitlab.com/api/v4/projects/heroesofabenez%2Fchat/repository/archive.zip?sha=592f4d0bb43f351bcfa349ae6ffe2dc503e06db5",
+                "reference": "592f4d0bb43f351bcfa349ae6ffe2dc503e06db5",
                 "shasum": ""
             },
             "require": {
@@ -26,14 +26,13 @@
                 "nette/di": "^3.1",
                 "nette/forms": "^3.1.7",
                 "nette/utils": "^3.2.7 || ^4.0",
-                "nexendrie/utils": "^1.9",
+                "nexendrie/utils": "^1.9 || ^2.0",
                 "php": ">=8.3.0"
             },
             "require-dev": {
-                "latte/latte": "^2.6",
-                "nexendrie/code-quality": "dev-master",
-                "nexendrie/site-generator": "^0.9",
-                "nexendrie/translation": "^2.4"
+                "nette/bootstrap": "^3.2",
+                "nexendrie/code-quality": "dev-mytester",
+                "nexendrie/translation": "^2.5"
             },
             "suggest": {
                 "nexendrie/translation": "Translator"
@@ -41,7 +40,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.3.x-dev"
+                    "dev-master": "2.4.x-dev"
                 }
             },
             "autoload": {
@@ -70,9 +69,9 @@
             ],
             "support": {
                 "issues": "https://gitlab.com/heroesofabenez/chat/-/issues",
-                "source": "https://gitlab.com/heroesofabenez/chat/-/tree/2.3.0"
+                "source": "https://gitlab.com/heroesofabenez/chat/-/tree/2.4.0"
             },
-            "time": "2026-02-05T20:46:37+00:00"
+            "time": "2026-07-14T12:42:41+00:00"
         },
         {
             "name": "heroesofabenez/combat",
@@ -80,21 +79,21 @@
             "source": {
                 "type": "git",
                 "url": "https://gitlab.com/heroesofabenez/combat.git",
-                "reference": "a493121c5a52c2bd8c3089b27a7d858e52d43be0"
+                "reference": "16337ef418ccf4018e58e544cfdcbc714860af63"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://gitlab.com/api/v4/projects/heroesofabenez%2Fcombat/repository/archive.zip?sha=a493121c5a52c2bd8c3089b27a7d858e52d43be0",
-                "reference": "a493121c5a52c2bd8c3089b27a7d858e52d43be0",
+                "url": "https://gitlab.com/api/v4/projects/heroesofabenez%2Fcombat/repository/archive.zip?sha=16337ef418ccf4018e58e544cfdcbc714860af63",
+                "reference": "16337ef418ccf4018e58e544cfdcbc714860af63",
                 "shasum": ""
             },
             "require": {
-                "latte/latte": "^2.8 || ^3.0",
+                "latte/latte": "^3.0",
                 "nette/utils": "^3.2.2 || ^4.0",
                 "nexendrie/translation": "^2.5",
-                "nexendrie/utils": "^1.11",
+                "nexendrie/utils": "^1.11 || ^2.0",
                 "php": ">=8.3.0",
-                "symfony/options-resolver": "^6.4 || ^7.4"
+                "symfony/options-resolver": "^6.4 || ^7.4 || ^8.0"
             },
             "require-dev": {
                 "nette/application": "^3.1",
@@ -135,7 +134,7 @@
                 "issues": "https://gitlab.com/heroesofabenez/combat/-/issues",
                 "source": "https://gitlab.com/heroesofabenez/combat/-/tree/master"
             },
-            "time": "2026-06-15T21:45:20+00:00"
+            "time": "2026-07-14T12:35:49+00:00"
         },
         {
             "name": "latte/latte",
@@ -1326,16 +1325,16 @@
         },
         {
             "name": "nexendrie/menu",
-            "version": "2.5.0",
+            "version": "2.5.1",
             "source": {
                 "type": "git",
                 "url": "https://gitlab.com/nexendrie/menu.git",
-                "reference": "af411ddd9d9d851eb65a9609a5299e3eb495e318"
+                "reference": "ba3926c46d94f46f0be37063acd29f54ac252f0c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://gitlab.com/api/v4/projects/nexendrie%2Fmenu/repository/archive.zip?sha=af411ddd9d9d851eb65a9609a5299e3eb495e318",
-                "reference": "af411ddd9d9d851eb65a9609a5299e3eb495e318",
+                "url": "https://gitlab.com/api/v4/projects/nexendrie%2Fmenu/repository/archive.zip?sha=ba3926c46d94f46f0be37063acd29f54ac252f0c",
+                "reference": "ba3926c46d94f46f0be37063acd29f54ac252f0c",
                 "shasum": ""
             },
             "require": {
@@ -1343,7 +1342,7 @@
                 "nette/application": "^3.1.5",
                 "nette/di": "^3.0.9",
                 "nette/utils": "^3.2.7 || ^4.0",
-                "nexendrie/utils": "^1.11",
+                "nexendrie/utils": "^1.11 || ^2.0",
                 "php": ">=8.3.0"
             },
             "require-dev": {
@@ -1385,28 +1384,28 @@
             "support": {
                 "docs": "https://nexendrie.gitlab.io/menu",
                 "issues": "https://gitlab.com/nexendrie/menu/-/issues",
-                "source": "https://gitlab.com/nexendrie/menu/-/tree/2.5.0"
+                "source": "https://gitlab.com/nexendrie/menu/-/tree/2.5.1"
             },
-            "time": "2026-07-05T17:52:39+00:00"
+            "time": "2026-07-14T12:44:59+00:00"
         },
         {
             "name": "nexendrie/translation",
-            "version": "2.7.0",
+            "version": "2.7.1",
             "source": {
                 "type": "git",
                 "url": "https://gitlab.com/nexendrie/translation.git",
-                "reference": "2f3a8bf58223ba1b60564cbbfe2535e4dd834596"
+                "reference": "91b8a06d1dccc7650535d36ada6a68f2526573d9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://gitlab.com/api/v4/projects/nexendrie%2Ftranslation/repository/archive.zip?sha=2f3a8bf58223ba1b60564cbbfe2535e4dd834596",
-                "reference": "2f3a8bf58223ba1b60564cbbfe2535e4dd834596",
+                "url": "https://gitlab.com/api/v4/projects/nexendrie%2Ftranslation/repository/archive.zip?sha=91b8a06d1dccc7650535d36ada6a68f2526573d9",
+                "reference": "91b8a06d1dccc7650535d36ada6a68f2526573d9",
                 "shasum": ""
             },
             "require": {
                 "nette/finder": "^2.6 || ^3.0",
                 "nette/utils": "^3.2.10 || ^4.0",
-                "nexendrie/utils": "^1.9",
+                "nexendrie/utils": "^1.9 || ^2.0",
                 "php": ">=8.3.0",
                 "psr/event-dispatcher": "^1.0",
                 "symfony/polyfill-php84": "^1.31"
@@ -1421,16 +1420,16 @@
                 "tracy/tracy": "<2.6"
             },
             "require-dev": {
-                "circli/event-dispatcher": "^3.0",
                 "devium/toml": "^1.0",
                 "ext-simplexml": "*",
                 "latte/latte": "^3.0",
                 "nette/application": "^3.1.5",
+                "nette/bootstrap": "^3.2",
                 "nette/di": "^3.1.3",
                 "nette/http": "^3.2",
                 "nette/neon": "^3.4.1",
-                "nexendrie/code-quality": "dev-master",
-                "symfony/yaml": "^6.0",
+                "nexendrie/code-quality": "dev-mytester",
+                "symfony/yaml": "^7.0",
                 "tracy/tracy": "^2.6"
             },
             "suggest": {
@@ -1481,26 +1480,27 @@
             "support": {
                 "docs": "https://nexendrie.gitlab.io/translation",
                 "issues": "https://gitlab.com/nexendrie/translation/-/issues",
-                "source": "https://gitlab.com/nexendrie/translation/-/tree/2.7.0"
+                "source": "https://gitlab.com/nexendrie/translation/-/tree/2.7.1"
             },
-            "time": "2026-04-05T14:03:53+00:00"
+            "time": "2026-07-13T18:58:01+00:00"
         },
         {
             "name": "nexendrie/utils",
-            "version": "1.12.0",
+            "version": "2.0.1",
             "source": {
                 "type": "git",
                 "url": "https://gitlab.com/nexendrie/utils.git",
-                "reference": "31fd71b9e16489a1c5e2dab8d4d21ecc34e60c9b"
+                "reference": "5682d105c880175c0db0efc80606b22189d213ab"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://gitlab.com/api/v4/projects/nexendrie%2Futils/repository/archive.zip?sha=31fd71b9e16489a1c5e2dab8d4d21ecc34e60c9b",
-                "reference": "31fd71b9e16489a1c5e2dab8d4d21ecc34e60c9b",
+                "url": "https://gitlab.com/api/v4/projects/nexendrie%2Futils/repository/archive.zip?sha=5682d105c880175c0db0efc80606b22189d213ab",
+                "reference": "5682d105c880175c0db0efc80606b22189d213ab",
                 "shasum": ""
             },
             "require": {
-                "php": ">=8.3.0"
+                "php": ">=8.3.0",
+                "symfony/polyfill-php84": "^1.30"
             },
             "require-dev": {
                 "nexendrie/code-quality": "dev-mytester"
@@ -1508,7 +1508,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.12.x-dev"
+                    "dev-master": "2.0.x-dev"
                 }
             },
             "autoload": {
@@ -1540,9 +1540,9 @@
             "support": {
                 "docs": "https://nexendrie.gitlab.io/utils",
                 "issues": "https://gitlab.com/nexendrie/utils/-/issues",
-                "source": "https://gitlab.com/nexendrie/utils/-/tree/1.12.0"
+                "source": "https://gitlab.com/nexendrie/utils/-/tree/2.0.1"
             },
-            "time": "2026-06-13T14:29:26+00:00"
+            "time": "2026-07-13T21:07:47+00:00"
         },
         {
             "name": "nextras/dbal",

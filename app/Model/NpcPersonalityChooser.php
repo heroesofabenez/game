@@ -5,16 +5,18 @@ namespace HeroesofAbenez\Model;
 
 use HeroesofAbenez\NPC\Personalities\NpcPersonality;
 
+/**
+ * @extends \Nexendrie\Utils\Collection<NpcPersonality>
+ */
 final class NpcPersonalityChooser extends \Nexendrie\Utils\Collection
 {
-    protected string $class = NpcPersonality::class;
-
     /**
      * @param NpcPersonality[] $items
      */
     public function __construct(array $items)
     {
         parent::__construct();
+        $this->class = NpcPersonality::class;
         foreach ($items as $item) {
             $this[] = $item;
         }

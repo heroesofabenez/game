@@ -25,7 +25,7 @@ final readonly class CombatHelper
     }
 
     /**
-     * @return BaseCharacterSkill[]
+     * @return list<BaseCharacterSkill>
      */
     private function getPlayerSkills(\HeroesofAbenez\Orm\Character $character): array
     {
@@ -40,7 +40,7 @@ final readonly class CombatHelper
     }
 
     /**
-     * @return Equipment[]
+     * @return list<Equipment>
      */
     private function getPlayerEquipment(\HeroesofAbenez\Orm\Character $character): array
     {
@@ -92,7 +92,7 @@ final readonly class CombatHelper
     }
 
     /**
-     * @return Equipment[]
+     * @return list<Equipment>
      */
     private function getArenaNpcEquipment(\HeroesofAbenez\Orm\PveArenaOpponent $npc): array
     {

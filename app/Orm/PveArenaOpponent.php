@@ -23,7 +23,7 @@ use HeroesofAbenez\Combat\BaseCharacterSkill;
  * @property OneHasMany<PveArenaOpponentEquipment> $equipment {1:m PveArenaOpponentEquipment::$npc}
  * @property-read Item|null $weapon {virtual}
  * @property-read Item|null $armor {virtual}
- * @property-read BaseCharacterSkill[] $skills {virtual}
+ * @property-read list<BaseCharacterSkill> $skills {virtual}
  */
 final class PveArenaOpponent extends \Nextras\Orm\Entity\Entity
 {
