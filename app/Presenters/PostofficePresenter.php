@@ -58,7 +58,7 @@ final class PostofficePresenter extends BasePresenter
             ->setRequired("forms.postOfficeNewMessage.toSelect.error");
         $form->addText("subject", "forms.postOfficeNewMessage.subjectField.label")
             ->setRequired("forms.postOfficeNewMessage.subjectField.empty")
-            ->addRule(Form::MAX_LENGTH, "forms.postOfficeNewMessage.subjectField.error", 35);
+            ->addRule(Form::MaxLength, "forms.postOfficeNewMessage.subjectField.error", 35);
         $form->addTextArea("message", "forms.postOfficeNewMessage.messageField.label")
             ->setRequired("forms.postOfficeNewMessage.messageField.error");
         $form->addSubmit("send", "forms.postOfficeNewMessage.sendButton.label");

@@ -97,7 +97,7 @@ final class TavernPresenter extends BasePresenter
      */
     protected function createComponentNewMessageForm(): Form
     {
-        $chat = match ($this->action) {
+        $chat = match ($this->getAction()) {
             "guild" => $this->createComponentGuildChat(),
             "local" => $this->createComponentLocalChat(),
             "global" => $this->createComponentGlobalChat(),

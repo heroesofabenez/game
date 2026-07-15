@@ -59,13 +59,13 @@ final class NpcPresenter extends BasePresenter
     protected function startup(): void
     {
         parent::startup();
-        if ($this->action !== "default" && !in_array($this->action, ["notfound", "unavailable"], true)) {
+        if ($this->getAction() !== "default" && !in_array($this->getAction(), ["notfound", "unavailable"], true)) {
             $npc = $this->model->view((int) $this->params["id"]);
             if ($npc === null) {
                 throw new \Nette\Application\BadRequestException();
             }
             $this->npc = $npc;
-            if ($this->npc->stage->id !== $this->user->identity->stage && $this->action !== "view") {
+            if ($this->npc->stage->id !== $this->user->identity->stage && $this->getAction() !== "view") {
                 $this->forward("unavailable");
             }
         }

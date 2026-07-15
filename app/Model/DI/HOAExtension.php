@@ -46,6 +46,7 @@ final class HOAExtension extends \Nette\DI\CompilerExtension
     }
 
     /**
+     * @return class-string
      * @throws \RuntimeException
      */
     private function getUserToCharacterMapper(): string

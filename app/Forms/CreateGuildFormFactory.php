@@ -25,9 +25,9 @@ final class CreateGuildFormFactory extends BaseFormFactory
         $form = $this->createBase();
         $form->addText("name", "forms.createGuild.nameField.label")
             ->setRequired("forms.createGuild.nameField.empty")
-            ->addRule(Form::MAX_LENGTH, "forms.createGuild.nameField.error", 20);
+            ->addRule(Form::MaxLength, "forms.createGuild.nameField.error", 20);
         $form->addTextArea("description", "forms.createGuild.descriptionField.label")
-            ->addRule(Form::MAX_LENGTH, "forms.createGuild.descriptionField.error", 200)
+            ->addRule(Form::MaxLength, "forms.createGuild.descriptionField.error", 200)
             ->setRequired();
         $form->addSubmit("create", "forms.createGuild.createButton.label");
         $form->onSuccess[] = $this->process(...);

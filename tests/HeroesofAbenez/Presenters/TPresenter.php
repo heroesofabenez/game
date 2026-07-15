@@ -27,7 +27,7 @@ trait TPresenter
             Assert::same(200, $this->getReturnCode());
             Assert::type(ForwardResponse::class, $response);
             if ($to !== "") {
-                $target = $response->getRequest()->presenterName . ":" . $response->getRequest()->parameters["action"];
+                $target = $response->getRequest()->getPresenterName() . ":" . $response->getRequest()->getParameter("action");
                 if ($to !== $target) {
                     Assert::fail("does not forward to $to, but {$target}");
                 }
