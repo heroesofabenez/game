@@ -110,3 +110,31 @@
     name: "Velká loupež"
     introduction: "Jdeš právě včas, kámo. Velká zásilka zboží připluje dneska v noci. Tvoje pomoc by byla nedocenitelná. Nezapomeň přinést pár dýk."
     end_text: "To šlo skvěle, tady je tvůj podíl."
+29:
+    name: "Nový/á čaroděj(ka) ve městě"
+    introduction: "Čerstvý absolvent Akademie, co? Dám ti radu, mladíku/mladá dámo. V Ramiru uznáváme jedinou věc, sílu. Ukaž, že nejsi slaboch, a pak si můžeme promluvit."
+    end_text: "No, to byla podívaná. Vezmi si tohle a všichni uvidí, že jsi velký/á kouzelník/kouzelnice."
+30:
+    name: "Hledání práce"
+    introduction: "Vítej zpět. Jelikož jsi právě dokončil(a) studium, hledáš práci? Možná mám pro tebe pár tipů, ovšem za úplatu."
+    end_text: "Nech mě přemýšlet ... v přístavu máme potíže se zloději. Muži v tmavých kápích kradou v noci zboží z lodí. Jestli máš zájem, stav se za mnou později. Ó, a bylinkářka v sousedním městě potřebuje ve svém krámku trochu pomoct."
+31:
+    name: "Nebezpečný les"
+    introduction: "Vítej v mém obchodě, cestovali. Mohu ti nabídnou bylinky, nebo snad lektvary? Ty hledáš práci? No, potřebuji další bylinky na své lektvary, ale v lesích, kde je obvykle sbírám, se usadily příšery. Pokud mi nasbíráš bylinky, zaplatím ti. Ale pro jistotu by sis sebou měl(a) vzít kamaráda."
+    end_text: "Ano, vy dva byste měli ty příšery zvládnout. Přijďte později a řeknu vám podrobnosti."
+32:
+    name: "Sběr bylinek"
+    introduction: "Takže ty bylinky ... potřebuji 10 červených a 15 modrých. Najdeš je v jihozápadní části lesa. Příprav se na to, že budeš muset bojovat s nějakými příšerami."
+    end_text: "Ano, to jsou ty bylinky, které potřebuji. Tady máš něco za svou námahu. Přijď zítra, pokud chceš další práci."
+33:
+    name: "Nový kuchyňský nůž"
+    introduction: "Vítej zpět. Hledáš další práci? No, můj kuchyňský nůž zrezivěl a potřebuji za něj náhradu. Můžeš mi přinést jeden od kováře. Samozřejmě ti to proplatím."
+    end_text: "Děkuji, tady je tvá odměna. Teď se můžu vrátit k práci."
+34:
+    name: "Nový válečník ve městě"
+    introduction: "Mladý/á válečník/válečnice, co? Čerstvá krev se nám tu vždycky hodí. Nejdřív ale budeš muset prokázat, že za něco stojíš."
+    end_text: "Vidím, že tam, okdud pocházíš, je vychovávají tak, aby byli silní. Tady máš něco, co ti pomůže v budoucích bojích."
+35:
+    name: "Hledání práce"
+    introduction: "Vítej zpět. Chceš si něco přivydělat? Možná mám pro tebe pár tipů, ovšem za úplatu."
+    end_text: "Nech mě přemýšlet ... v přístavu máme potíže se zloději. Muži v tmavých kápích kradou v noci zboží z lodí. Jestli máš zájem, stav se za mnou později. Ó, a bylinkářka v sousedním městě potřebuje ve svém krámku trochu pomoct."

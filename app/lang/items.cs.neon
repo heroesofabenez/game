@@ -220,3 +220,6 @@
 74:
     name: "Certifikát absolventa"
     description: "Certifikát s tvým jménem potvrzující, že jsi úspěšně absolvoval(a) Akademii magie."
+75:
+    name: "Kuchyňský nůž"
+    description: "Nůž používaný v kuchyni ke krájení surovin."

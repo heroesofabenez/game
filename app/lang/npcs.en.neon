@@ -28,3 +28,6 @@
 10:
     name: "Guard"
     description: "He is a tall, athletic barbarian who is a member of the guard."
+11:
+    name: "Herbalist"
+    description: "She is an average-sized middle aged barbarian woman who sells herbs and potions."

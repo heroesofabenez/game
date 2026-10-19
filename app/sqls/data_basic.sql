@@ -127,7 +127,8 @@ INSERT INTO `items` (`id`, `name`, `slot`, `type`, `required_level`, `required_c
 (71,    'Treating injuries', 'item', NULL, 1, NULL, NULL, 10, 0, 1),
 (72,    'Bandage', 'item', NULL, 1, NULL, NULL, 3, 0, 1),
 (73,    'Graduate\'s gown', 'armor', NULL, 5, 3, NULL, 0, 2, 15),
-(74,    'Graduation certificate', 'item', NULL, 5, 3, NULL, 0, 0, 1);
+(74,    'Graduation certificate', 'item', NULL, 5, 3, NULL, 0, 0, 1),
+(75, 'Kitchen knife', 'item', NULL, 1, NULL, NULL, 4, 0, 1);
 
 INSERT INTO `pet_types` (`id`, `name`, `bonus_stat`, `bonus_value`, `image`, `required_level`, `required_class`, `required_race`, `cost`) VALUES
 (1,	'Rescued Lion',	'constitution',	5,	'',	8,	1,	NULL,	0),
@@ -216,7 +217,14 @@ INSERT INTO `quests` (id, name, required_level, required_class, required_race, r
   (25, 'New recruits', 6, null, null, 23, 2, 0, null, null, 0, 0, 0, 3, 0, 5, 0, 15, 35, null, 1, 0, null, 10, 10),
   (26, 'New recruits', 6, null, null, 24, 0, 2, null, null, 0, 0, 0, 3, 0, 5, 0, 15, 35, null, 0, 1, null, 9, 9),
   (27, 'Big raid', 6, null, null, 25, 4, 0, null, 16, 2, 1, 0, 6, 0, 0, 0, 30, 50, 31, 2, 0, null, 10, 10),
-  (28, 'Grand theft', 6, null, null, 26, 0, 4, null, 17, 2, 1, 0, 6, 0, 0, 0, 30, 50, 31, 0, 2, null, 9, 9);
+  (28, 'Grand theft', 6, null, null, 26, 0, 4, null, 17, 2, 1, 0, 6, 0, 0, 0, 30, 50, 31, 0, 2, null, 9, 9),
+  (29, 'New wizard in town', 5, 3, NULL, NULL, 0, 0, NULL, 74, 1, 0, 0, 2, 0, 0, 0, 0, 30, 25, 0, 0, NULL, 7, 7),
+  (30, 'Finding work', 5, 3, NULL, 29, 0, 0, NULL, NULL, 0, 0, 5, 0, 0, 4, 0, 0, 10, NULL, 0, 0, NULL, 7, 7),
+  (31, 'Dangerous woods', 5, NULL, NULL, NULL, 0, 0, NULL, NULL, 0, 0, 0, 0, 0, 4, 1, 0, 10, NULL, 0, 0, NULL, 11, 11),
+  (32, 'Gathering herbs', 6, NULL, NULL, 31, 0, 0, NULL, NULL, 0, 0, 0, 3, 0, 0, 0, 30, 40, NULL, 0, 0, NULL, 11, 11),
+  (33, 'New kitchen knife', 6, NULL, NULL, NULL, 0, 0, NULL, 75, 1, 1, 0, 0, 0, 0, 0, 6, 15, NULL, 0, 0, NULL, 11, 11),
+  (34, 'New warrior in town', 5, 1, NULL, NULL, 0, 0, NULL, NULL, 0, 0, 0, 2, 0, 0, 0, 0, 30, 23, 0, 0, NULL, 7, 7),
+  (35, 'Finding work', 5, 1, NULL, 34, 0, 0, NULL, NULL, 0, 0, 5, 0, 0, 4, 0, 0, 10, NULL, 0, 0, NULL, 7, 7);
 
 INSERT INTO `quest_areas` (`id`, `name`, `required_level`, `required_race`, `required_class`, `pos_x`, `pos_y`, `entry_stage`) VALUES
 (1,	'Academy of Magic',	0,	NULL,	3,	250,	35,	2),
@@ -287,7 +295,8 @@ INSERT INTO `shop_items` (`id`, `npc`, `item`, `order`) VALUES
   (24, 8, 23, 10),
   (25, 8, 24, 11),
   (26, 8, 25, 12),
-  (27, 8, 26, 13);
+  (27, 8, 26, 13),
+  (28, 8, 75, 14);
 
 INSERT INTO `skills_attacks` (`id`, `name`, `needed_class`, `needed_specialization`, `needed_level`, `base_damage`, `damage_growth`, `levels`, `target`, `strikes`, `hit_rate`) VALUES
 (1,	'Assault',	1,	NULL,	1,	'110%',	'5%',	5,	'single',	1,	NULL),
@@ -345,7 +354,8 @@ INSERT INTO `npcs` (`id`, `name`, `race`, `class`, `specialization`, `fight`, `s
   (7,   'Port manager', 1, 1, 1, 0, 0, 'port-manager.jpeg', 'port-manager.jpeg', 10, 'white', 'friendly', 15, 1, 1),
   (8,   'Blacksmith', 1, 1, NULL, 0, 1, 'blacksmith.jpeg', 'blacksmith.jpeg', 11, 'neutral', 'friendly', 10, 1, 1),
   (9,   'Shady person', 1, 2, NULL, 0, 0, 'shady-person.jpeg', 'shady-person.jpeg', 10, 'dark', 'crazy', 12, 1, 1),
-  (10,  'Guard', 1, 1, NULL, 0, 0, 'barbarian-guard.jpeg', 'barbarian-guard.jpeg', 10, 'white', 'friendly', 12, 1, 1);
+  (10,  'Guard', 1, 1, NULL, 0, 0, 'barbarian-guard.jpeg', 'barbarian-guard.jpeg', 10, 'white', 'friendly', 12, 1, 1),
+  (11, 'Herbalist', 1, 3, NULL, 0, 0, 'barbarian-herbalist.jpeg', 'barbarian-herbalist.jpeg', 11, 'neutral', 'friendly', 14, 1, 1);
 
 INSERT INTO `pve_arena_opponent_equipment` (`id`, `npc`, `item`) VALUES
 (1,	2,	3),

@@ -110,3 +110,31 @@
     name: "Grand theft"
     introduction: "You are just in time, buddy. A large shipment of goods is coming tonight. Your help would be invaluable. Don't forget to bring a couple of daggers."
     end_text: "That went great, here's your share."
+29:
+    name: "New wizard in town"
+    introduction: "A new graduate from the Academy, eh? Let me give you an advice, young (wo)man, in Ramir we respect one thing: strength. Show me that you are not weak and then we can talk."
+    end_text: "Well, that was something else. Take this and everyone will see that you are a great wizard."
+30:
+    name: "Finding work"
+    introduction: "Welcome back. Since you just graduated, are you looking for work? I might have a few tips for you, for a price."
+    end_text: "Let me think ... we have troubles with thieves in the port. Men in dark hoods steal goods from ships at the night. Come talk to me later, if you are interested. Oh, and the herbalist in the next town needs some help in her shop."
+31:
+    name: "Dangerous woods"
+    introduction: "Welcome to my shop, traveler. Can I offer you any herbs or perhaps potions? You are looking for work? Well, I need more herbs for my potions, but the woods where I usuall get them, became home to some monsters recently. If you gather the herbs for me, I will pay you. But you should bring a friend with you, just in case."
+    end_text: "Yes, you two should be able to handle the monsters. Come back later and I will tell you the details."
+32:
+    name: "Gathering herbs"
+    introduction: "So, those herbs ... I need 10 red and 15 blue ones. You can find them in south west of the woods. Be prepared to fight some monsters."
+    end_text: "Yes, those are the herbs that I need. Here is something for your trobules. Come back tomorrow if you want more work."
+33:
+    name: "New kitchen knife"
+    introduction: "Welcome back. Are you looking for more work? Well, my kitchen knife got rusty and I need a replacement. Can you get me one from blacksmith? I will reimburse you of course."
+    end_text: "Thank you, here is your reward. Now I can get back to work."
+34:
+    name: "New warrior in town"
+    introduction: "A young warrior, huh? We could always use fresh blood here but you will have to prove worthy first."
+    end_text: "I see that they grow them strong, wherever you are from. Here is something that will help you in your future fights."
+35:
+    name: "Finding work"
+    introduction: "Welcome back. Are you looking for extra income? I might have a few tips for you, for a price."
+    end_text: "Let me think ... we have troubles with thieves in the port. Men in dark hoods steal goods from ships at the night. Come talk to me later, if you are interested. Oh, and the herbalist in the next town needs some help in her shop."
