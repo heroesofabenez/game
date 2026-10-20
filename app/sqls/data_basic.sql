@@ -224,7 +224,8 @@ INSERT INTO `quests` (id, name, required_level, required_class, required_race, r
   (32, 'Gathering herbs', 6, NULL, NULL, 31, 0, 0, NULL, NULL, 0, 0, 0, 3, 0, 0, 0, 30, 40, NULL, 0, 0, NULL, 11, 11),
   (33, 'New kitchen knife', 6, NULL, NULL, NULL, 0, 0, NULL, 75, 1, 1, 0, 0, 0, 0, 0, 6, 15, NULL, 0, 0, NULL, 11, 11),
   (34, 'New warrior in town', 5, 1, NULL, NULL, 0, 0, NULL, NULL, 0, 0, 0, 2, 0, 0, 0, 0, 30, 23, 0, 0, NULL, 7, 7),
-  (35, 'Finding work', 5, 1, NULL, 34, 0, 0, NULL, NULL, 0, 0, 5, 0, 0, 4, 0, 0, 10, NULL, 0, 0, NULL, 7, 7);
+  (35, 'Finding work', 5, 1, NULL, 34, 0, 0, NULL, NULL, 0, 0, 5, 0, 0, 4, 0, 0, 10, NULL, 0, 0, NULL, 7, 7),
+  (36, 'Wizard\'s best friend', 6, 3, NULL, 33, 0, 0, NULL, NULL, 0, 0, 0, 1, 0, 0, 1, 15, 20, NULL, 0, 0, 3, 11, 11);
 
 INSERT INTO `quest_areas` (`id`, `name`, `required_level`, `required_race`, `required_class`, `pos_x`, `pos_y`, `entry_stage`) VALUES
 (1,	'Academy of Magic',	0,	NULL,	3,	250,	35,	2),

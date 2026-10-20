@@ -138,3 +138,7 @@
     name: "Finding work"
     introduction: "Welcome back. Are you looking for extra income? I might have a few tips for you, for a price."
     end_text: "Let me think ... we have troubles with thieves in the port. Men in dark hoods steal goods from ships at the night. Come talk to me later, if you are interested. Oh, and the herbalist in the next town needs some help in her shop."
+36:
+    name: "Wizard's best friend"
+    introduction: "You are planning to go to the woods again? Can you bring me another batch of herbs? Same place, 8 purple ones this time."
+    end_text: "Thank you for the herbs. ... What is that adorable thing? You found the owl in the woods? You should keep it, it might help in fights."
