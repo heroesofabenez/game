@@ -25,7 +25,7 @@ After that, you need to create file /app/config/local.neon with local settings f
 
 On live servers add the following lines at the end of the file:
 
-```
+```neon
 application:
     errorPresenter: "Error"
     catchExceptions: true
@@ -58,7 +58,7 @@ Whatever server you use, we strongly advise that the server name ends with .loca
 
 FrankenPHP is the recommended server as it was specifically created as a PHP app server and requires the least amount of configuration. In its configuration you only need to enable FrankenPHP, then use it for your server and define the root directory.
 
-```
+```caddyfile
 {
     frankenphp
 }
@@ -77,7 +77,7 @@ If you're using Apache, you have little work to do as the repository contains al
 
 Example of virtual host configuration:
 
-```apacheconfig
+```apacheconf
 <VirtualHost hoa.localhost:80>
     ServerName hoa.localhost
     DocumentRoot "/var/www/html/heroesofabenez/www"
@@ -97,7 +97,7 @@ The document root for that virtual host (or its parent directory if it is within
 
 With nginx, you just need to add a new server configuration:
 
-```nginx
+```nginx configuration
 server {
     listen 80;
     index index.php;
@@ -128,7 +128,7 @@ server {
 
 With Caddy, the setup is like with nginx (simple server configuration + php-fpm) but the server configuration is even simpler:
 
-```
+```caddyfile
 hoa.localhost {
     root * /var/www/html/heroesofabenez/www
     php_fastcgi php-fpm:9000
